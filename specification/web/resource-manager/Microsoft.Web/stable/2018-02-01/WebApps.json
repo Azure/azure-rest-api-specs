@@ -5103,13 +5103,76 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraceOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/start": {
       "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Start capturing network packets for the site.",
-        "description": "Start capturing network packets for the site.",
+        "summary": "Start capturing network packets for the site (To be deprecated).",
+        "description": "Start capturing network packets for the site (To be deprecated).",
         "operationId": "WebApps_StartWebSiteNetworkTrace",
         "parameters": [
           {
@@ -5165,6 +5228,83 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/startOperation": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start capturing network packets for the site.",
+        "description": "Start capturing network packets for the site.",
+        "operationId": "WebApps_StartWebSiteNetworkTraceOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "durationInSeconds",
+            "in": "query",
+            "description": "The duration to keep capturing in seconds.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/stop": {
       "post": {
         "tags": [
@@ -5193,9 +5333,60 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Stopped."
+          },
+          "204": {
+            "description": "Stopped."
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraces",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "default": {
@@ -5203,6 +5394,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
           }
         }
       }
@@ -12248,13 +12444,83 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraceOperationSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get an operation for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/start": {
       "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Start capturing network packets for the site.",
-        "description": "Start capturing network packets for the site.",
+        "summary": "Start capturing network packets for the site (To be deprecated).",
+        "description": "Start capturing network packets for the site (To be deprecated).",
         "operationId": "WebApps_StartWebSiteNetworkTraceSlot",
         "parameters": [
           {
@@ -12317,6 +12583,90 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/startOperation": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start capturing network packets for the site.",
+        "description": "Start capturing network packets for the site.",
+        "operationId": "WebApps_StartWebSiteNetworkTraceOperationSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "durationInSeconds",
+            "in": "query",
+            "description": "The duration to keep capturing in seconds.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for this web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/stop": {
       "post": {
         "tags": [
@@ -12352,9 +12702,67 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Stopped."
+          },
+          "204": {
+            "description": "Stopped."
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTracesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get an operation for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "default": {
@@ -12362,6 +12770,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
           }
         }
       }
@@ -18323,6 +18736,24 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkTrace": {
+      "description": "Network trace",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "Local file path for the captured network trace file.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Current status of the network trace operation, same as Operation.Status (InProgress/Succeeded/Failed).",
+          "type": "string"
+        },
+        "message": {
+          "description": "Detailed message of a network trace operation, e.g. error message in case of failure.",
+          "type": "string"
         }
       }
     },
