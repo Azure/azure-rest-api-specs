@@ -56,8 +56,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_data_box']
 ```
 
 
@@ -128,7 +126,7 @@ batch:
 ### Tag: package-2018-01 and java
 
 These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
