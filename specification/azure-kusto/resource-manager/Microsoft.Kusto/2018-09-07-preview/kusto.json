@@ -1524,7 +1524,6 @@
         },
         "hotCachePeriodInDays": {
           "type": "integer",
-          "default": 3650,
           "description": "The number of days of data that should be kept in cache for fast queries."
         },
         "statistics": {
@@ -1614,6 +1613,18 @@
     },
     "ClusterUpdate": {
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
         "location": {
           "type": "string",
           "description": "Resource location"
@@ -1633,7 +1644,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "Class representing an update to a Kusto cluster."
@@ -1659,6 +1670,18 @@
     },
     "DatabaseUpdate": {
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
         "location": {
           "type": "string",
           "description": "Resource location"
@@ -1675,7 +1698,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "Class representing an update to a Kusto database."
