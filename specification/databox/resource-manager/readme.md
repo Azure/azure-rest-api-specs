@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DataBox.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DataBox, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,6 +15,7 @@ To build the SDK for DataBox, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
@@ -30,11 +31,12 @@ tag: package-2018-01
 ```
 
 ### Tag: package-2018-01
+
 These settings apply only when `--tag=package-2018-01 is specified on the command line. 
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.DataBox/preview/2018-01-01/databox.json
+- Microsoft.DataBox/stable/2018-01-01/databox.json
 ```
 
 ---
@@ -49,9 +51,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-node
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
+  - repo: azure-sdk-for-node    
 ```
 
 
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-2018-01 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/databox/mgmt/2018-01-01/databox
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-01-01/$(namespace)
 ```
 
 
