@@ -656,6 +656,7 @@
             "Ambiguous"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "AddressValidationStatus",
             "modelAsExtensible": true,
@@ -680,7 +681,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ShippingAddress"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -870,21 +872,25 @@
       "properties": {
         "storageAccountName": {
           "description": "Name of the storage account where the data needs to be uploaded.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "accountId": {
           "description": "Id of the account where the data needs to be uploaded.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "bytesSentToCloud": {
           "format": "int64",
           "description": "Amount of data uploaded by the job as of now.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "totalBytesToProcess": {
           "format": "int64",
           "description": "Total amount of data to be processed by the job.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -1289,11 +1295,13 @@
       "properties": {
         "destinationLocation": {
           "description": "Location of the destination.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "serviceLocation": {
           "description": "Location of the service.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1315,18 +1323,17 @@
     },
     "Error": {
       "description": "Top level error for the job.",
-      "required": [
-        "code"
-      ],
       "type": "object",
       "properties": {
         "code": {
           "description": "Error code that can be used to programmatically identify the error.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Describes the error in detail and provides debugging information.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1444,20 +1451,24 @@
       "properties": {
         "errorMessage": {
           "description": "Message for the error.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "errorCode": {
           "format": "int32",
           "description": "Code for the error.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "recommendedAction": {
           "description": "Recommended action for the error.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "exceptionMessage": {
           "description": "Contains the non localized exception message",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1575,7 +1586,8 @@
         },
         "cancellationReason": {
           "description": "Reason for cancellation.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1685,10 +1697,6 @@
     },
     "JobStages": {
       "description": "Job stages.",
-      "required": [
-        "stageName",
-        "stageStatus"
-      ],
       "type": "object",
       "properties": {
         "stageName": {
@@ -1709,6 +1717,7 @@
             "Aborted"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "StageName",
             "modelAsExtensible": true,
@@ -1770,7 +1779,8 @@
         },
         "displayName": {
           "description": "Display name of the job stage.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "stageStatus": {
           "description": "Status of the job stage.",
@@ -1784,6 +1794,7 @@
             "SucceededWithErrors"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "StageStatus",
             "modelAsExtensible": true,
@@ -1822,18 +1833,21 @@
         "stageTime": {
           "format": "date-time",
           "description": "Time for the job stage in UTC ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "jobStageDetails": {
           "description": "Job Stage Details",
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "errorDetails": {
           "description": "Error details for the stage.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorDetails"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1971,15 +1985,18 @@
       "properties": {
         "carrierName": {
           "description": "Name of the carrier.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "trackingId": {
           "description": "Tracking Id of shipment.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "trackingUrl": {
           "description": "Url where shipment can be tracked.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2272,19 +2289,17 @@
     },
     "SkuCapacity": {
       "description": "Capacity of the sku.",
-      "required": [
-        "usable",
-        "maximum"
-      ],
       "type": "object",
       "properties": {
         "usable": {
           "description": "Usable capacity in TB.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "maximum": {
           "description": "Maximum capacity in TB.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },

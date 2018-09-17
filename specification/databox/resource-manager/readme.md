@@ -29,12 +29,18 @@ openapi-type: arm
 tag: package-2018-01
 ```
 
+
 ### Tag: package-2018-01
-These settings apply only when `--tag=package-2018-01 is specified on the command line. 
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line. 
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.DataBox/preview/2018-01-01/databox.json
+- Microsoft.DataBox/stable/2018-01-01/databox.json
+directive:
+  - suppress:
+    - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
+    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
 ```
 
 ---
@@ -50,8 +56,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
 ```
 
 
@@ -69,6 +73,7 @@ csharp:
   clear-output-folder: true
 ```
 
+
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -84,15 +89,16 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  -tag: package-2018-01
+  - tag: package-2018-01
 ```
 
 ### Tag: package-2018-01 and go
+
 These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/databox/mgmt/2018-01-01/databox
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-01-01/$(namespace)
 ```
 
 
@@ -102,19 +108,19 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.databox
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databox
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.databox
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databox
 ```
+
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  -tag: package-2018-01
+  - tag: package-2018-01
 ```
 
 ### Tag: package-2018-01 and java
