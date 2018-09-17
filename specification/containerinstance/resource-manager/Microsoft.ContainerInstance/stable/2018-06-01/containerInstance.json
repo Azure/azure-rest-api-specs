@@ -259,6 +259,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart": {
+      "post": {
+        "operationId": "ContainerGroups_Restart",
+        "x-ms-examples": {
+          "ContainerRestart": {
+            "$ref": "./examples/ContainerGroupsRestart.json"
+          }
+        },
+        "summary": "Restarts all containers in a container group.",
+        "description": "Restarts all containers in a contaienr group in place. If container image has updates, new image will be downloaded.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/stop": {
+      "post": {
+        "operationId": "ContainerGroups_Stop",
+        "x-ms-examples": {
+          "ContainerStop": {
+            "$ref": "./examples/ContainerGroupsStop.json"
+          }
+        },
+        "summary": "Stops all containers in a container group.",
+        "description": "Stops all containers in a contaienr group. Compute resources will be deallocated and billing will stop.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ContainerInstance/operations": {
       "get": {
         "tags": [

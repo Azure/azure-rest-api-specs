@@ -232,6 +232,34 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListBySubscription",
+        "description": "Lists all availability sets in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
       "get": {
         "tags": [
@@ -263,7 +291,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1034,7 +1062,7 @@
           "VirtualMachineSizes"
         ],
         "operationId": "VirtualMachineSizes_List",
-        "description": "Lists all available virtual machine sizes for a subscription in a location.",
+        "description": "This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list)",
         "parameters": [
           {
             "name": "location",
@@ -2191,6 +2219,9 @@
           },
           "Create a custom-image scale set from an unmanaged generalized os image.": {
             "$ref": "./examples/CreateACustomImageScaleSetFromAnUnmanagedGeneralizedOsImage.json"
+          },
+          "Create a scale set with virtual machines in different zones.": {
+            "$ref": "./examples/CreateAScaleSetWithVMsInDifferentZones.json"
           }
         }
       },
@@ -3009,7 +3040,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_PerformMaintenance",
-        "description": "Perform maintenance on one or more virtual machines in a VM scale set.",
+        "description": "Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3277,6 +3308,51 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetRollingUpgrades"
+        ],
+        "operationId": "VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade",
+        "description": "Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start an extension rolling upgrade.": {
+            "$ref": "./examples/VMScaleSetExtensionRollingUpgrade.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest": {
@@ -4055,7 +4131,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via":"azure-async-operation"
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests": {
@@ -4109,7 +4185,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via":"azure-async-operation"
-        }        
+        }
       }
     }
   },
@@ -4280,8 +4356,15 @@
             "$ref": "#/definitions/AvailabilitySet"
           },
           "description": "The list of availability sets"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Availability Set operation response."
     },
     "VirtualMachineSize": {
@@ -5081,10 +5164,12 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS.",
+      "description": "Specifies the storage account type for the managed disk. UltraSSD_LRS can only be used for data disks.",
       "enum": [
         "Standard_LRS",
-        "Premium_LRS"
+        "Premium_LRS",
+        "StandardSSD_LRS",
+        "UltraSSD_LRS"
       ],
       "x-ms-enum": {
         "name": "StorageAccountTypes",
@@ -5095,7 +5180,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. UltraSSD_LRS can only be used for data disks."
         }
       },
       "allOf": [
@@ -5150,7 +5235,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -5196,7 +5281,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -5228,6 +5313,15 @@
         }
       },
       "description": "Specifies the storage settings for the virtual machine disks."
+    },
+    "AdditionalCapabilities": {
+        "properties": {
+            "ultraSSDEnabled": {
+                "type": "boolean",
+                "description": "Enables or disables a capability to have 1 or more managed data disks with UltraSSD_LRS storage account on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
+            }
+        },
+        "description": "Enables or disables a capability on the virtual machine or virtual machine scale set"
     },
     "AdditionalUnattendContent": {
       "properties": {
@@ -5603,12 +5697,24 @@
             "modelAsString": false
           }
         },
-        "identityIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
           },
-          "description": "The list of user identities associated with the Virtual Machine. The user identity references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the virtual machine."
@@ -5734,6 +5840,10 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
+		"additionalCapabilities": {
+		  "$ref": "#/definitions/AdditionalCapabilities",
+		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+		},
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the virtual machine."
@@ -6002,7 +6112,7 @@
         },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "required": [
@@ -6050,7 +6160,7 @@
         },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "required": [
@@ -6169,12 +6279,24 @@
             "modelAsString": false
           }
         },
-        "identityIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
           },
-          "description": "The list of user identities associated with the virtual machine scale set. The user identity references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          "description": "The list of user identities associated with the virtual machine scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the virtual machine scale set."
@@ -6243,7 +6365,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "description": "Describes the parameters of a ScaleSet managed disk."
@@ -6265,6 +6387,11 @@
         "createOption": {
           "$ref": "#/definitions/CreateOption",
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "osType": {
           "type": "string",
@@ -6308,6 +6435,11 @@
         "writeAcceleratorEnabled": {
           "type": "boolean",
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
@@ -6353,7 +6485,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -6448,6 +6580,13 @@
           },
           "description": "Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway."
         },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to application security group."
+        },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
@@ -6497,6 +6636,13 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "The application gateway backend address pools."
+        },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to application security group."
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
@@ -6695,8 +6841,8 @@
           "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
         }
       },
-      "description": "Contains the IP tag associated with the public IP address." 
-    }, 
+      "description": "Contains the IP tag associated with the public IP address."
+    },
     "VirtualMachineScaleSetPublicIPAddressConfiguration": {
       "properties": {
         "name": {
@@ -6740,9 +6886,13 @@
         "ipTags": {
           "type": "array",
           "items": {
-          "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
+            "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
           },
-        "description": "The list of IP tags associated with the public IP address."
+          "description": "The list of IP tags associated with the public IP address."
+        },
+        "publicIPPrefix" : {
+          "$ref":"#/definitions/SubResource",
+          "description": "The PublicIPPrefix from which to allocate publicIP addresses."
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
@@ -6886,6 +7036,10 @@
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
+		"additionalCapabilities": {
+		  "$ref": "#/definitions/AdditionalCapabilities",
+		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+		},		
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
           "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
@@ -7440,7 +7594,7 @@
           "description": "Azure VM unique ID."
         },
         "instanceView": {
-          "$ref": "#/definitions/VirtualMachineInstanceView",
+          "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView",
           "readOnly": true,
           "description": "The virtual machine instance view."
         },
@@ -7452,6 +7606,10 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
+		"additionalCapabilities": {
+		  "$ref": "#/definitions/AdditionalCapabilities",
+		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+		},	
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the virtual machine."
@@ -7507,6 +7665,14 @@
             "$ref": "#/definitions/VirtualMachineExtension"
           },
           "description": "The virtual machine child extension resources."
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine zones."
         }
       },
       "allOf": [

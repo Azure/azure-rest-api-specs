@@ -62,10 +62,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Annotation"
-              }
+              "$ref": "#/definitions/AnnotationsListResult"
             }
           },
           "default": {
@@ -245,6 +242,19 @@
           "default": "null"
         }
       }
+    },
+    "AnnotationsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Annotation"
+          },
+          "description": "An array of annotations."
+        }
+      },
+      "description": "Annotations list result."
     },
     "InnerError": {
       "type": "object",
