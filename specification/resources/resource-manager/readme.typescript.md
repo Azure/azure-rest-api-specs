@@ -8,9 +8,6 @@ typescript:
   azure-arm: true
   batch: true
   package-name: arm-resource
-  generate-license-txt: true
-  generate-package-json: false
-  generate-readme-md: false
   output-folder: $(typescript-sdks-folder)/packages/arm-resource
 batch:
   - package-features: true
