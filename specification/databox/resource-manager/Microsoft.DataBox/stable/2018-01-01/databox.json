@@ -756,6 +756,36 @@
         "location": {
           "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
           "type": "string"
+        },
+        "skuNames": {
+          "description": "Sku Names to filter for available skus",
+          "type": "array",
+          "items": {
+            "enum": [
+              "DataBox",
+              "DataBoxDisk",
+              "DataBoxHeavy"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SkuName",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "DataBox",
+                  "description": "Databox."
+                },
+                {
+                  "value": "DataBoxDisk",
+                  "description": "DataboxDisk."
+                },
+                {
+                  "value": "DataBoxHeavy",
+                  "description": "DataboxHeavy."
+                }
+              ]
+            }
+          }
         }
       }
     },
