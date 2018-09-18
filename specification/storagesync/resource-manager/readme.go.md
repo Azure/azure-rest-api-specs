@@ -5,7 +5,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: storagesyncmanagement
+  namespace: storagesync
   clear-output-folder: true
 ```
 
@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-2018-07-01 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-07-01' && $(go)
-output-folder: $(go-sdk-folder)/services/storagesync/mgmt/2018-07-01/storagesync
+output-folder: $(go-sdk-folder)/services/preview/storagesync/mgmt/2018-07-01/storagesync
 ```
 
 ### Tag: package-2018-04-02 and go
