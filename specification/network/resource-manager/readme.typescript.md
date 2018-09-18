@@ -8,7 +8,6 @@ typescript:
   azure-arm: true
   package-name: arm-network
   output-folder: $(typescript-sdks-folder)/packages/arm-network
-  generate-license-txt: true
-  generate-package-json: true
+  generate-metadata: true
   generate-readme-md: false
 ```
