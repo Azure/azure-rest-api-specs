@@ -26,7 +26,7 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07-01
+tag: package-2018-04-02
 ```
 
 
@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2018-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-07-01'
 input-file:
-- Microsoft.StorageSync/2018-07-01/storagesync.json
+- Microsoft.StorageSync/preview/2018-07-01/storagesync.json
 ```
 
 
