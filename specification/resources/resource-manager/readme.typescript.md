@@ -19,37 +19,37 @@ batch:
   - package-managedapplications: true
 ```
 
-```yaml $(nodejs) && $(package-features)
+```yaml $(typescript) && $(package-features)
 nodejs:
   source-code-folder-path: lib/feature
 ```
 
-```yaml $(nodejs) && $(package-locks)
+```yaml $(typescript) && $(package-locks)
 nodejs:
   source-code-folder-path: lib/lock
 ```
 
-```yaml $(nodejs) && $(package-policy)
+```yaml $(typescript) && $(package-policy)
 nodejs:
   source-code-folder-path: lib/policy
 ```
 
-```yaml $(nodejs) && $(package-resources)
+```yaml $(typescript) && $(package-resources)
 nodejs:
   source-code-folder-path: lib/resource
 ```
 
-```yaml $(nodejs) && $(package-subscriptions)
+```yaml $(typescript) && $(package-subscriptions)
 nodejs:
   source-code-folder-path: lib/subscription
 ```
 
-```yaml $(nodejs) && $(package-links)
+```yaml $(typescript) && $(package-links)
 nodejs:
   source-code-folder-path: lib/link
 ```
 
-```yaml $(nodejs) && $(package-management)
+```yaml $(typescript) && $(package-management)
 nodejs:
   source-code-folder-path: lib/management
   override-client-name: ManagementGroupsClient
