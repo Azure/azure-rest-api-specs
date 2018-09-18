@@ -689,7 +689,13 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "The degree of parallelism used for this job."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the degree of parallelism in percentage used for this job."
         },
         "priority": {
           "type": "integer",
@@ -1853,7 +1859,12 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "The degree of parallelism to use for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
         },
         "priority": {
           "type": "integer",
@@ -1979,7 +1990,12 @@
         "degreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "description": "The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "The degree of parallelism used for this job."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job."
         },
         "priority": {
           "type": "integer",
