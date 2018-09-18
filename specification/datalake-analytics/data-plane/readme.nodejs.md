@@ -11,9 +11,9 @@ nodejs:
   generate-license-txt: false
   generate-package-json: false
   generate-readme-md: false
-  batch:
-    - tag: package-catalog
-    - tag: package-job
+batch:
+  - package-catalog: true
+  - package-job: true
 ```
 
 ``` yaml $(nodejs) && $(tag) == 'package-catalog'
