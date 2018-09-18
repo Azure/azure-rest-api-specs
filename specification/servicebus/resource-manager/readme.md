@@ -29,6 +29,14 @@ openapi-type: arm
 tag: package-2017-04
 ```
 
+### Tag: package-2018-01-preview
+
+These settings apply only when `--tag=package-2018-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2018-01-01-preview/servicebus-preview.json
+```
 
 ### Tag: package-2017-04
 
@@ -53,7 +61,6 @@ These settings apply only when `--tag=package-2015-08` is specified on the comma
 input-file:
 - Microsoft.ServiceBus/stable/2015-08-01/servicebus.json
 ```
-
 
 ---
 # Code Generation

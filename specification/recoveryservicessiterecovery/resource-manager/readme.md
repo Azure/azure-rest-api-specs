@@ -76,7 +76,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ```yaml $(csharp)
 csharp:
   azure-arm: true
-  payload-flattening-threshold: 1
+  payload-flattening-threshold: 0
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
   output-folder: $(csharp-sdks-folder)/RecoveryServices.SiteRecovery/Management.RecoveryServices.SiteRecovery/Generated

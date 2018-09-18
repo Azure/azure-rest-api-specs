@@ -673,6 +673,10 @@
             "operation": {
               "description": "Type of operation: get, read, delete, etc.",
               "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
             }
           }
         },
@@ -830,7 +834,7 @@
             "name": "ReasonCode",
             "modelAsString": true
           },
-          "description": "The reason for the restriction. As of now this can be “QuotaId” or “NotAvailableForSubscription”. Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The “NotAvailableForSubscription” is related to capacity at DC."
+          "description": "The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The \"NotAvailableForSubscription\" is related to capacity at DC."
         }
       },
       "description": "The restriction because of which SKU cannot be used."
@@ -1921,8 +1925,7 @@
         }
       },
       "required": [
-        "canonicalizedResource",
-        "signedResource"
+        "canonicalizedResource"
       ],
       "description": "The parameters to list service SAS credentials of a speicific resource."
     },
