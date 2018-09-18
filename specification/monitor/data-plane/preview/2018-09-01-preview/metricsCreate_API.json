@@ -37,6 +37,7 @@
             "in": "header",
             "name": "Content-Type",
             "description": "Supports application/json and application/x-ndjson",
+            "required": true,
             "type": "string"
           },
           {
@@ -44,12 +45,14 @@
             "name": "Content-Length",
             "description": "Content length of the payload",
             "type": "integer",
+            "required": true,
             "format": "int32"
           },
           {
             "in": "header",
             "name": "Authorization",
-            "description": "Authorization token issue for issued for audience https:\\\\monitoring.azure.com",
+            "description": "Authorization token issue for issued for audience \"https:\\\\monitoring.azure.com\\\"",
+            "required": true,
             "type": "string"
           },
           {
@@ -130,7 +133,11 @@
         "data": {
           "$ref": "#/definitions/AzureMetricsData"
         }
-      }
+      },
+      "required": [
+        "time",
+        "data"
+      ]
     },
     "AzureMetricsData": {
       "type": "object",
@@ -138,7 +145,10 @@
         "baseData": {
           "$ref": "#/definitions/AzureMetricsBaseData"
         }
-      }
+      },
+      "required": [
+        "baseData"
+      ]
     },
     "AzureMetricsBaseData": {
       "type": "object",
@@ -165,7 +175,12 @@
             "$ref": "#/definitions/AzureTimeSeriesData"
           }
         }
-      }
+      },
+      "required":[
+        "metric",
+        "namespace",
+        "series"
+      ]
     },
     "AzureTimeSeriesData": {
       "type": "object",
@@ -197,7 +212,13 @@
           "description": "Gets or sets Count value",
           "type": "integer"
         }
-      }
+      },
+      "required" : [
+        "min",
+        "max",
+        "sum",
+        "count"
+      ]
     },
     "AzureMetricsResult": {
       "type": "object",
