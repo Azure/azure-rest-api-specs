@@ -12,6 +12,7 @@
     "description": "# Introduction\n\nThe Microsoft Translator Text API provides a JSON-based Web API. It provides:\n\n  * Translation between any supported languages to any other supported language.\n  * Translation to multiple languages in one request.\n  * Transliteration to convert text from one script to another script of the same language.\n  * Language detection, translation, and transliteration in one request.\n  * Dictionary to lookup alternative translations of a term, to find back-translations and examples showing terms used in context.\n  * Rich language detection.\n# Base URLs\n\nThe Translator Text API is available in the following clouds:\n\n| Description | Region    | Base URL                                |\n| -------     | --------  | -------                                 |\n| Azure       | Global    | api.cognitive.microsofttranslator.com   |\n| Azure       | Europe    | api-eur.cognitive.microsofttranslator.com |\n\n\n# Authentication\n\nSubscribe to the Translator Text API, part of Azure Cognitive Services, and use your subscription key from the Azure portal to authenticate. You can follow the steps in https://docs.microsoft.com/en-us/azure/cognitive-services/translator/translator-text-how-to-signup.\n\n\nThe simplest way is to pass your Azure secret key to the Translator service using the http request header `Ocp-Apim-Subscription-Key`.\n\nIf you prefer using a short-lived authentication, you may use your secret key to obtain an authorization token from the token service. In that case you pass the authorization token to the Translator service using the `Authorization` request header. To obtain an authorization token, make a `POST` request to the following URL:\n\n| Environment | Authentication service URL                                |\n| ----------  | ----------                                                |\n| Azure       | `https://api.cognitive.microsoft.com/sts/v1.0/issueToken` |\n\nHere are example requests to obtain a token with a lifetime of 10 minutes, given a secret key:\n\n```python\n// Pass secret key using header\ncurl --header 'Ocp-Apim-Subscription-Key: <your-key>' --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken'\n// Pass secret key using query string parameter\ncurl --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key=<your-key>'\n```\n\nA successful request returns the encoded access token as plain text in the response body. The valid token is passed to the Translator service as a bearer token in the Authorization. \n\n```\nAuthorization: Bearer <Base64-access_token>\n```\n\nAn authentication token is valid for 10 minutes. The token should be re-used when making multiple calls to the Translator APIs. If you make requests to the Translator API over an extended period of time,  you  must request a new access token at regular intervals beforethe token expires, for instance every 9 minutes.\n\nTo summarize, a client request to the Translator API will include one authorization header taken from the following table:\n\n| Headers       | Description  |\n| ----------    | ----------   |\n| Ocp-Apim-Subscription-key    | Use with Cognitive Services subscription if you are passing your secret key.                               The value is the Azure secret key for your subscription to Translator Text API.                         |\n| Authorization                | Use with Cognitive Services subscription if you are passing an authentication token. The value is the Bearer token: `Bearer <token>`.       |\n\n# Errors\n\nA standard error response is a JSON object with name/value pair named `error`. The value is also a JSON object with properties:\n  * `code`: A server-defined error code.\n  * `message`: A string giving a human-readable representation of the error.\n\nFor example, a customer with a free trial subscription receives the following error once the free quota is exhausted:\n\n```json\n{\n  \"error\": {\n  \"code\":403000,\n  \"message\":\"The subscription has exceeded its free quota.\"\n  }\n}\n```\n"
   },
   "host": "api.cognitive.microsofttranslator.com",
+  "basePath": "/TranslatorText/v3.0",
   "schemes": [
     "https"
   ],
@@ -93,7 +94,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BreakSentenceSuccess"
+            }
           },
           "400": {
             "description": "One of the query parameters is missing or not valid. Please correct the request parameters before retrying.",
@@ -192,7 +196,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DetectSuccess"
+            }
           },
           "400": {
             "description": "One of the query parameters is missing or not valid. Correct request parameters before retrying.",
@@ -305,7 +312,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DictionaryLookupSuccess"
+            }
           },
           "400": {
             "description": "One of the query parameters is missing or not valid. Correct request parameters before retrying.",
@@ -418,7 +428,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DictionaryExampleSuccess"
+            }
           },
           "400": {
             "description": "One of the query parameters is missing or not valid. Correct request parameters before retrying.",
@@ -503,7 +516,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LanguageExampleSuccess"
+            }
           },
           "304": {
             "description": "The resource has not been modified since the version specified by request headers If-None-Match."
@@ -676,7 +692,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TranslateSuccess"
+            }
           },
           "400": {
             "description": "One of the query parameters is missing or not valid. Please correct the request parameters before retrying.",
@@ -796,7 +815,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransliterateSuccess"
+            }
           },
           "400": {
             "description": "One of the query parameters is missing or not valid. Correct request parameters before retrying.",
@@ -840,6 +862,283 @@
     }
   },
   "definitions": {
+    "LanguageExampleSuccess": {
+      "type": "object",
+      "properties": {
+        "translation": {
+          "type": "object",
+          "properties": {
+            "languageCode": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "nativeName": {
+                  "type": "string"
+                },
+                "dir": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "transliteration": {
+          "type": "object",
+          "properties": {
+            "languageCode": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "nativeName": {
+                  "type": "string"
+                },
+                "scripts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "nativeName": {
+                        "type": "string"
+                      },
+                      "dir": {
+                        "type": "string"
+                      },
+                      "toScripts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "nativeName": {
+                              "type": "string"
+                            },
+                            "dir": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "dictionary": {
+          "type": "object",
+          "properties": {
+            "languageCode": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "nativeName": {
+                  "type": "string"
+                },
+                "dir": {
+                  "type": "string"
+                },
+                "translations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "nativeName": {
+                        "type": "string"
+                      },
+                      "dir": {
+                        "type": "string"
+                      },
+                      "code": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DictionaryExampleSuccess": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "normalizedSource": {
+            "type": "string"
+          },
+          "normalizedTarget": {
+            "type": "string"
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sourcePrefix": {
+                  "type": "string"
+                },
+                "sourceTerm": {
+                  "type": "string"
+                },
+                "sourceSuffix": {
+                  "type": "string"
+                },
+                "targetPrefix": {
+                  "type": "string"
+                },
+                "targetTerm": {
+                  "type": "string"
+                },
+                "targetSuffix": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DictionaryLookupSuccess": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "normalizedSource": {
+            "type": "string"
+          },
+          "displaySource": {
+            "type": "string"
+          },
+          "translations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "normalizedTarget": {
+                  "type": "string"
+                },
+                "displayTarget": {
+                  "type": "string"
+                },
+                "posTag": {
+                  "type": "string"
+                },
+                "confidence": {
+                  "type": "number"
+                },
+                "prefixWord": {
+                  "type": "string"
+                },
+                "backTranslations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "normalizedText": {
+                        "type": "string"
+                      },
+                      "displayText": {
+                        "type": "string"
+                      },
+                      "numExamples": {
+                        "type": "integer"
+                      },
+                      "frequencyCount": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "TranslateSuccess": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "translation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "BreakSentenceSuccess": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sentLen": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "TransliterateSuccess": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "script": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DetectSuccess": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "BreakSentenceTextInput": {
       "required": [
         "Text"
