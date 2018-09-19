@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2018-08-31",
-    "billingAccountId": "100",
+    "managementGroupId": "MyMgId",
     "$expand": "properties/data",
     "$top": "5",
     "$filter": "properties/category eq 'resourceId'"
@@ -11,7 +11,7 @@
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/100/providers/microsoft.consumption/dimensions_ResourceId_2018-05-01_2018-05-31_5",
+            "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/microsoft.consumption/dimensions_ResourceId_2018-05-01_2018-05-31_5",
             "name": "dimensions_ResourceId_2018-05-01_2018-05-31_5",
             "type": "microsoft.consumption/dimensions",
             "properties": {
@@ -25,11 +25,11 @@
                 "total": 1409,
                 "category": "ResourceId",
                 "usageStart": "2018-05-01T00:00:00-07:00",
-                "usageEnd": "2018-05-31T00:00:00-07:00",
+                "usageEnd": "2018-05-31T00:00:00-07:00",                
                 "description": "Resource Id",
                 "filterEnabled": true,
                 "groupingEnabled": true,
-                "nextLink": "http://management.azure.com/ccmapi/providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.Consumption/Dimensions?$filter=properties/category eq 'resourceId'&$top=5&api-version=2018-08-31&$expand=properties/data&$skiptoken=AQAAAA%3D%3D"
+                "nextLink": "http://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.Consumption/Dimensions?$filter=properties/category eq 'resourceId'&$top=5&api-version=2018-08-31&$expand=properties/data&$skiptoken=AQAAAA%3D%3D"
             }
         }
         ]
