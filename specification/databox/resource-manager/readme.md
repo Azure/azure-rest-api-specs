@@ -52,8 +52,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
 ```
@@ -100,23 +100,6 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-databox
-```
-
-## Node
-
-These settings apply only when `--nodejs` is specified on the command line.
-Please also specify `--node-sdks-folder=<path to the root directory of your azure-sdk-for-node clone>`.
-
-``` yaml $(nodejs)
-nodejs:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-arm-databox
-  output-folder: $(node-sdks-folder)/lib/services/databoxManagement
-  generate-license-txt: true
-  generate-package-json: true
-  generate-readme-md: false
 ```
 
 ## Go
