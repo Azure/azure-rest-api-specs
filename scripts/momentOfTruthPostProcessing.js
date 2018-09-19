@@ -5,7 +5,8 @@
 
 const fs = require('fs'),
       utils = require('../test/util/utils'),
-      path = require('path');
+      path = require('path'),
+      gitHubPost = require('./postToGitHub');
 
 let pullRequestNumber = utils.getPullRequestNumber();
 let targetBranch = utils.getTargetBranch();
@@ -52,6 +53,7 @@ let potentialNewWarningErrorSummaryPlain = (count, warning_error_id, warning_err
 let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reach out to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
+let sdkFileSummariesPostToGitHub = '', armFileSummariesPostToGitHub = '';
 
 let data = undefined;
 let jsonData = undefined;
@@ -356,6 +358,7 @@ function postProcessing() {
         console.log("Existing ARM Errors: ", existingARMErrors.length);
         console.log("Existing ARM Warnings: ", existingARMWarnings.length);
         console.log();
+
         if (newSDKErrors.length > 0) {
             console.log(`Potential new SDK errors`)
             console.log("========================");
@@ -386,6 +389,20 @@ function postProcessing() {
 
         sdkFileSummaries += getFileSummary("SDK", fileName, existingSDKWarnings, existingSDKErrors, newSDKWarnings, newSDKErrors);
         armFileSummaries += getFileSummary("ARM", fileName, existingARMWarnings, existingARMErrors, newARMWarnings, newARMErrors);
+
+        if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
+            let fileSummaryCopyPostToGitHub = gitHubPost.getFileSummaryPostToGitHub(fileName, beforeWarningsSDKArray, afterWarningsSDKArray, beforeErrorsSDKArray, afterErrorsSDKArray, newSDKWarnings, newSDKErrors, pullRequestNumber);
+            sdkFileSummariesPostToGitHub = sdkFileSummariesPostToGitHub.concat(fileSummaryCopyPostToGitHub);
+            fileSummaryCopyPostToGitHub = gitHubPost.getFileSummaryPostToGitHub(fileName, beforeWarningsARMArray, afterWarningsARMArray, beforeErrorsARMArray, afterErrorsARMArray, newARMWarnings, newARMErrors, pullRequestNumber);
+            armFileSummariesPostToGitHub = sdkFileSummariesPostToGitHub.concat(fileSummaryCopyPostToGitHub);
+        }
+    }
+
+    if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
+        let slug = process.env.TRAVIS_REPO_SLUG;
+        slug = slug.split("/")[1];
+        gitHubPost.postSummariesToGithub("SDK Related Validation Errors/Warnings", sdkFileSummariesPostToGitHub, "Azure", slug, pullRequestNumber, sdkContactMessage);
+        gitHubPost.postSummariesToGithub("ARM Related Validation Errors/Warnings", armFileSummariesPostToGitHub, "Azure", slug, pullRequestNumber, armContactMessage);
     }
 
     const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
