@@ -1217,7 +1217,14 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the HTTP listener resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
-        }
+        },
+        "CustomErrorConfiguration": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayCustomError"
+          },
+          "description": "Custom error configurations of the HTTP listener."
+         }
       },
       "description": "Properties of HTTP listener of an application gateway."
     },
@@ -1683,7 +1690,14 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the application gateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
-        }
+        },
+        "CustomErrorConfiguration": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayCustomError"
+          },
+          "description": "Custom error configurations of the application gateway resource."
+         }
       },
       "description": "Properties of the application gateway."
     },
@@ -2084,6 +2098,27 @@
         }
       },
       "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
+    },
+	"ApplicationGatewayCustomError": {
+      "properties": {
+        "StatusCode": {
+          "type": "string",
+          "description": "Status code of the application gateway customer error.",
+          "enum": [
+            "403",
+            "502"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayCustomErrorStatusCode",
+            "modelAsString": true
+          }
+        },
+        "CustomErrorPageUrl": {
+          "type": "string",
+          "description": "Error page URL of the application gateway customer error."
+        }
+      },
+      "description": "Customer error of an application gateway."
     },
     "PolicyNameEnum": {
       "type": "string",
