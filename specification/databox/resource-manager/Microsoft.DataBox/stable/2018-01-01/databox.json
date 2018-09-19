@@ -45,8 +45,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
+          "OperationsGet": {
+            "$ref": "./examples/OperationsGet.json"
           }
         }
       }
@@ -142,8 +142,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ServiceListAvailableSkus": {
-            "$ref": "./examples/ServiceListAvailableSkus.json"
+          "AvailableSkusPost": {
+            "$ref": "./examples/AvailableSkusPost.json"
           }
         }
       }
@@ -190,8 +190,8 @@
           }
         },
         "x-ms-examples": {
-          "ServiceValidateAddress": {
-            "$ref": "./examples/ServiceValidateAddress.json"
+          "ValidateAddressPost": {
+            "$ref": "./examples/ValidateAddressPost.json"
           }
         }
       }
@@ -290,6 +290,21 @@
         "x-ms-examples": {
           "JobsGet": {
             "$ref": "./examples/JobsGet.json"
+          },
+          "JobsGet1": {
+            "$ref": "./examples/JobsGet1.json"
+          },
+          "JobsGet2": {
+            "$ref": "./examples/JobsGet2.json"
+          },
+          "JobsGet3": {
+            "$ref": "./examples/JobsGet3.json"
+          },
+          "JobsGet4": {
+            "$ref": "./examples/JobsGet4.json"
+          },
+          "JobsGet5": {
+            "$ref": "./examples/JobsGet5.json"
           }
         }
       },
@@ -373,16 +388,20 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted request for delete Job."
+          },
           "204": {
             "description": "Job deleted."
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "JobsDelete": {
-            "$ref": "./examples/JobsDelete.json"
+            "JobsDelete": {
+              "$ref": "./examples/JobsDelete.json"
+            }
           }
-        }
-      },
+        },
       "patch": {
         "tags": [
           "Jobs"
@@ -436,11 +455,11 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "JobsUpdate": {
-            "$ref": "./examples/JobsUpdate.json"
+        "x-ms-examples": {          
+            "JobsPatch": {
+              "$ref": "./examples/JobsPatch.json"
+            }
           }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/bookShipmentPickUp": {
@@ -488,8 +507,8 @@
           }
         },
         "x-ms-examples": {
-          "JobsBookShipmentPickUp": {
-            "$ref": "./examples/JobsBookShipmentPickUp.json"
+          "BookShipmentPickupPost": {
+            "$ref": "./examples/BookShipmentPickupPost.json"
           }
         }
       }
@@ -536,103 +555,19 @@
           }
         },
         "x-ms-examples": {
-          "JobsCancel": {
-            "$ref": "./examples/JobsCancel.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/copyLogsUri": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Provides list of copy logs uri.",
-        "operationId": "Jobs_GetCopyLogsUri",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/jobNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Copy logs uri.",
-            "schema": {
-              "$ref": "#/definitions/GetCopyLogsUriOutput"
+            "JobsCancelPost": {
+              "$ref": "./examples/JobsCancelPost.json"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobsGetCopyLogsUri": {
-            "$ref": "./examples/JobsGetCopyLogsUri.json"
-          }
-        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/downloadShippingLabel": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Get shipping label sas uri.",
-        "operationId": "Jobs_DownloadShippingLabelUri",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/jobNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Shipping label sas uri.",
-            "schema": {
-              "$ref": "#/definitions/ShippingLabelDetails"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "JobsDownloadShippingLabelUri": {
-            "$ref": "./examples/JobsDownloadShippingLabelUri.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials": {
       "post": {
         "tags": [
           "Jobs"
         ],
         "description": "This method gets the unencrypted secrets related to the job.",
-        "operationId": "Jobs_ListSecrets",
+        "operationId": "Jobs_ListCredentials",
         "consumes": [
           "application/json"
         ],
@@ -655,9 +590,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The unencrypted secrets of the job.",
+            "description": "List of unencrypted credentials of the job.",
             "schema": {
-              "$ref": "#/definitions/UnencryptedSecrets"
+              "$ref": "#/definitions/UnencryptedCredentialsList"
             }
           }
         },
@@ -665,103 +600,35 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "JobsListSecrets": {
-            "$ref": "./examples/JobsListSecrets.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/reportIssue": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Reports an issue.",
-        "operationId": "Jobs_ReportIssue",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/jobNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "reportIssueDetails",
-            "in": "body",
-            "description": "Details of reported issue.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportIssueDetails"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Accepted issue report."
-          }
-        },
-        "x-ms-examples": {
-          "JobsReportIssue": {
-            "$ref": "./examples/JobsReportIssue.json"
+          "JobsListCredentials": {
+            "$ref": "./examples/JobsListCredentials.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AccountCopyLogDetails": {
-      "description": "Copy log details for an storage account",
-      "required": [
-        "accountName",
-        "copyLogLink"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CopyLogDetails"
-        }
-      ],
-      "properties": {
-        "accountName": {
-          "description": "Destination account name.",
-          "type": "string"
-        },
-        "copyLogLink": {
-          "description": "Link for copy logs.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "Pod"
-    },
     "AccountCredentialDetails": {
       "description": "Credential details of the account.",
-      "required": [
-        "shareCredentialDetails"
-      ],
       "type": "object",
       "properties": {
         "accountName": {
           "description": "Name of the account.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "accountConnectionString": {
+          "description": "Connection string of the account endpoint to use the account as a storage endpoint on the device.",
+          "type": "string",
+          "readOnly": true
         },
         "shareCredentialDetails": {
           "description": "Per share level unencrypted access credentials.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ShareCredentialDetails"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -772,6 +639,7 @@
         "properties": {
           "$ref": "#/definitions/AddressValidationProperties",
           "description": "The address validation properties.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
@@ -788,9 +656,24 @@
             "Ambiguous"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "AddressValidationStatus",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Address provided is valid."
+              },
+              {
+                "value": "Invalid",
+                "description": "Address provided is invalid or not supported."
+              },
+              {
+                "value": "Ambiguous",
+                "description": "Address provided is ambiguous, please choose one of the alternate addresses returned."
+              }
+            ]
           }
         },
         "alternateAddresses": {
@@ -798,7 +681,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ShippingAddress"
-          }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ApplianceNetworkConfiguration": {
+      "description": "The Network Adapter configuration of a DataBox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the network.",
+          "type": "string",
+          "readOnly": true
+        },
+        "macAddress": {
+          "description": "Mac Address.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -840,7 +740,13 @@
           "type": "string",
           "x-ms-enum": {
             "name": "TransferType",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              }
+            ]
           }
         },
         "country": {
@@ -850,14 +756,41 @@
         "location": {
           "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
           "type": "string"
+        },
+        "skuNames": {
+          "description": "Sku Names to filter for available skus",
+          "type": "array",
+          "items": {
+            "enum": [
+              "DataBox",
+              "DataBoxDisk",
+              "DataBoxHeavy"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SkuName",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "DataBox",
+                  "description": "Databox."
+                },
+                {
+                  "value": "DataBoxDisk",
+                  "description": "DataboxDisk."
+                },
+                {
+                  "value": "DataBoxHeavy",
+                  "description": "DataboxHeavy."
+                }
+              ]
+            }
+          }
         }
       }
     },
     "AvailableSkusResult": {
       "description": "The available skus operation response.",
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "value": {
@@ -865,51 +798,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuInformation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link for the next set of skus.",
           "type": "string"
-        }
-      }
-    },
-    "CabinetJobSecrets": {
-      "description": "The secrets related to a cabinet job.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobSecrets"
-        }
-      ],
-      "properties": {
-        "cabinetPodSecrets": {
-          "description": "Contains the list of secret objects for a cabinet job.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CabinetPodSecret"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Cabinet"
-    },
-    "CabinetPodSecret": {
-      "description": "The secrets related to a cabinet pod.",
-      "type": "object",
-      "properties": {
-        "deviceSerialNumber": {
-          "description": "Serial number of the assigned device.",
-          "type": "string"
-        },
-        "devicePassword": {
-          "description": "Password for out of the box experience on device.",
-          "type": "string"
-        },
-        "accountCredentialDetails": {
-          "description": "Per account level access credentials.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccountCredentialDetails"
-          }
         }
       }
     },
@@ -929,6 +823,7 @@
     "ContactDetails": {
       "description": "Contact Details.",
       "required": [
+        "contactName",
         "phone",
         "emailList"
       ],
@@ -973,14 +868,29 @@
         "copyLogDetailsType": {
           "description": "Indicates the type of job details.",
           "enum": [
-            "Pod",
-            "Disk",
-            "Cabinet"
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ClassDiscriminator",
-            "modelAsString": false
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy orders."
+              }
+            ]
           }
         }
       },
@@ -992,17 +902,407 @@
       "properties": {
         "storageAccountName": {
           "description": "Name of the storage account where the data needs to be uploaded.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "accountId": {
+          "description": "Id of the account where the data needs to be uploaded.",
+          "type": "string",
+          "readOnly": true
         },
         "bytesSentToCloud": {
           "format": "int64",
           "description": "Amount of data uploaded by the job as of now.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "totalBytesToProcess": {
           "format": "int64",
           "description": "Total amount of data to be processed by the job.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "DataBoxAccountCopyLogDetails": {
+      "description": "Copy log details for a storage account of a DataBox job",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "description": "Destination account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copyLogLink": {
+          "description": "Link for copy logs.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBox"
+    },
+    "DataBoxDiskCopyLogDetails": {
+      "description": "Copy Log Details for a disk",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "diskSerialNumber": {
+          "description": "Disk Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorLogLink": {
+          "description": "Link for copy error logs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "verboseLogLink": {
+          "description": "Link for copy verbose logs.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxDisk"
+    },
+    "DataBoxDiskCopyProgress": {
+      "description": "DataBox Disk Copy Progress",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "The serial number of the disk",
+          "type": "string",
+          "readOnly": true
+        },
+        "bytesCopied": {
+          "format": "int64",
+          "description": "Bytes copied during the copy of disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Indicates the percentage completed for the copy of the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The Status of the copy",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "CompletedWithErrors",
+            "Failed",
+            "NotReturned"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CopyStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "Data copy hasnt started yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Data copy is in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "Data copy completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Data copy completed with errors."
+              },
+              {
+                "value": "Failed",
+                "description": "Data copy failed. No data was copied."
+              },
+              {
+                "value": "NotReturned",
+                "description": "No copy triggered as device was not returned."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DataBoxDiskJobDetails": {
+      "description": "DataBox Disk Job Details.",
+      "required": [
+        "contactDetails",
+        "shippingAddress",
+        "destinationAccountDetails",
+        "jobDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "preferredDisks": {
+          "description": "User preference on what size disks are needed for the job. The map is from the disk size in TB to the count. Eg. {2,5} means 5 disks of 2 TB size. Key is string but will be checked against an int.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "copyProgress": {
+          "description": "Copy progress per disk.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxDiskCopyProgress"
+          },
+          "readOnly": true
+        },
+        "disksAndSizeDetails": {
+          "description": "Contains the map of disk serial number to the disk size being used for the job. Is returned only after the disks are shipped to the customer.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        },
+        "passkey": {
+          "description": "User entered passkey for DataBox Disk job.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxDisk"
+    },
+    "DataBoxDiskJobSecrets": {
+      "description": "The secrets related to disk job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobSecrets"
+        }
+      ],
+      "properties": {
+        "diskSecrets": {
+          "description": "Contains the list of secrets object for that device.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskSecret"
+          },
+          "readOnly": true
+        },
+        "passKey": {
+          "description": "PassKey for the disk Job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isPasskeyUserDefined": {
+          "description": "Whether passkey was provided by user.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxDisk"
+    },
+    "DataBoxHeavyAccountCopyLogDetails": {
+      "description": "Copy log details for a storage account for Databox heavy",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "description": "Destination account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copyLogLink": {
+          "description": "Link for copy logs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "DataBoxHeavyJobDetails": {
+      "description": "Databox Heavy Device Job Details",
+      "required": [
+        "contactDetails",
+        "shippingAddress",
+        "destinationAccountDetails",
+        "jobDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "copyProgress": {
+          "description": "Copy progress per account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyProgress"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "DataBoxHeavyJobSecrets": {
+      "description": "The secrets related to a databox heavy job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobSecrets"
+        }
+      ],
+      "properties": {
+        "cabinetPodSecrets": {
+          "description": "Contains the list of secret objects for a databox heavy job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxHeavySecret"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "DataBoxHeavySecret": {
+      "description": "The secrets related to a databox heavy.",
+      "type": "object",
+      "properties": {
+        "deviceSerialNumber": {
+          "description": "Serial number of the assigned device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "devicePassword": {
+          "description": "Password for out of the box experience on device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkConfigurations": {
+          "description": "Network configuration of the appliance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceNetworkConfiguration"
+          },
+          "readOnly": true
+        },
+        "encodedValidationCertPubKey": {
+          "description": "The base 64 encoded public key to authenticate with the device",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountCredentialDetails": {
+          "description": "Per account level access credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountCredentialDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DataBoxJobDetails": {
+      "description": "Databox Job Details",
+      "required": [
+        "contactDetails",
+        "shippingAddress",
+        "destinationAccountDetails",
+        "jobDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "copyProgress": {
+          "description": "Copy progress per storage account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyProgress"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBox"
+    },
+    "DataboxJobSecrets": {
+      "description": "The secrets related to a databox job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobSecrets"
+        }
+      ],
+      "properties": {
+        "podSecrets": {
+          "description": "Contains the list of secret objects for a job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxSecret"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "DataBox"
+    },
+    "DataBoxSecret": {
+      "description": "The secrets related to a DataBox.",
+      "type": "object",
+      "properties": {
+        "deviceSerialNumber": {
+          "description": "Serial number of the assigned device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "devicePassword": {
+          "description": "Password for out of the box experience on device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkConfigurations": {
+          "description": "Network configuration of the appliance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceNetworkConfiguration"
+          },
+          "readOnly": true
+        },
+        "encodedValidationCertPubKey": {
+          "description": "The base 64 encoded public key to authenticate with the device",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountCredentialDetails": {
+          "description": "Per account level access credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountCredentialDetails"
+          },
+          "readOnly": true
         }
       }
     },
@@ -1025,130 +1325,15 @@
       "properties": {
         "destinationLocation": {
           "description": "Location of the destination.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "serviceLocation": {
           "description": "Location of the service.",
-          "type": "string"
-        }
-      }
-    },
-    "DiskCopyLogDetails": {
-      "description": "Copy Log Details for a disk",
-      "required": [
-        "diskSerialNumber",
-        "errorLogLink",
-        "verboseLogLink"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CopyLogDetails"
-        }
-      ],
-      "properties": {
-        "diskSerialNumber": {
-          "description": "Disk Serial Number.",
-          "type": "string"
-        },
-        "errorLogLink": {
-          "description": "Link for copy error logs.",
-          "type": "string"
-        },
-        "verboseLogLink": {
-          "description": "Link for copy verbose logs.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "Disk"
-    },
-    "DiskCopyProgress": {
-      "description": "Disk Copy Progress",
-      "type": "object",
-      "properties": {
-        "serialNumber": {
-          "description": "The serial number of the disk",
-          "type": "string"
-        },
-        "percentComplete": {
-          "format": "int32",
-          "description": "Indicates the percentage completed for the copy of the disk.",
-          "type": "integer"
-        },
-        "status": {
-          "description": "The Status of the copy",
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Completed",
-            "CompletedWithErrors",
-            "Failed"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "name": "CopyStatus",
-            "modelAsString": false
-          }
+          "readOnly": true
         }
       }
-    },
-    "DiskJobDetails": {
-      "description": "Disk Job Details.",
-      "required": [
-        "contactDetails",
-        "shippingAddress"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobDetails"
-        }
-      ],
-      "properties": {
-        "preferredDisks": {
-          "description": "User preference on what size disks are needed for the job. The map is from the disk size in TB to the count. Eg. {2,5} means 5 disks of 2 TB size. Key is string but will be checked against an int.",
-          "type": "object",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "copyProgress": {
-          "description": "Copy progress per disk.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiskCopyProgress"
-          }
-        },
-        "disksAndSizeDetails": {
-          "description": "Contains the map of disk serial number to the disk size being used for the job. Is returned only after the disks are shipped to the customer.",
-          "type": "object",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Disk"
-    },
-    "DiskJobSecrets": {
-      "description": "The secrets related to disk job.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobSecrets"
-        }
-      ],
-      "properties": {
-        "diskSecrets": {
-          "description": "Contains the list of secrets object for that device.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiskSecret"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Disk"
     },
     "DiskSecret": {
       "description": "Contains all the secrets of a Disk.",
@@ -1156,45 +1341,29 @@
       "properties": {
         "diskSerialNumber": {
           "description": "Serial number of the assigned disk.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "bitLockerKey": {
           "description": "Bit Locker key of the disk which can be used to unlock the disk to copy data.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "Error": {
       "description": "Top level error for the job.",
-      "required": [
-        "code"
-      ],
       "type": "object",
       "properties": {
         "code": {
           "description": "Error code that can be used to programmatically identify the error.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Describes the error in detail and provides debugging information.",
-          "type": "string"
-        }
-      }
-    },
-    "GetCopyLogsUriOutput": {
-      "description": "Output for the GetCopyLogsUri.",
-      "type": "object",
-      "properties": {
-        "logType": {
-          "description": "Type/Level of the log.",
-          "type": "string"
-        },
-        "copyLogDetails": {
-          "description": "List of copy log details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CopyLogDetails"
-          }
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1202,7 +1371,9 @@
       "description": "Job details.",
       "required": [
         "contactDetails",
-        "shippingAddress"
+        "shippingAddress",
+        "destinationAccountDetails",
+        "jobDetailsType"
       ],
       "type": "object",
       "properties": {
@@ -1216,7 +1387,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobStages"
-          }
+          },
+          "readOnly": true
         },
         "contactDetails": {
           "$ref": "#/definitions/ContactDetails",
@@ -1226,25 +1398,79 @@
           "$ref": "#/definitions/ShippingAddress",
           "description": "Shipping address of the customer."
         },
+        "deliveryPackage": {
+          "$ref": "#/definitions/PackageShippingDetails",
+          "description": "Delivery package shipping details.",
+          "readOnly": true
+        },
+        "returnPackage": {
+          "$ref": "#/definitions/PackageShippingDetails",
+          "description": "Return package shipping details.",
+          "readOnly": true
+        },
+        "destinationAccountDetails": {
+          "description": "Destination account details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DestinationAccountDetails"
+          }
+        },
         "errorDetails": {
           "description": "Error details for failure. This is optional.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorDetails"
-          }
+          },
+          "readOnly": true
         },
         "jobDetailsType": {
           "description": "Indicates the type of job details.",
           "enum": [
-            "Pod",
-            "Disk",
-            "Cabinet"
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassDiscriminator",
-            "modelAsString": false
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy orders."
+              }
+            ]
           }
+        },
+        "preferences": {
+          "$ref": "#/definitions/Preferences",
+          "description": "Preferences for the order."
+        },
+        "copyLogDetails": {
+          "description": "List of copy log details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyLogDetails"
+          },
+          "readOnly": true
+        },
+        "reverseShipmentLabelSasKey": {
+          "description": "Shared access key to download the return shipment label",
+          "type": "string",
+          "readOnly": true
+        },
+        "chainOfCustodySasKey": {
+          "description": "Shared access key to download the chain of custody logs",
+          "type": "string",
+          "readOnly": true
         }
       },
       "discriminator": "jobDetailsType"
@@ -1255,50 +1481,45 @@
       "properties": {
         "errorMessage": {
           "description": "Message for the error.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "errorCode": {
           "format": "int32",
           "description": "Code for the error.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "recommendedAction": {
           "description": "Recommended action for the error.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "exceptionMessage": {
           "description": "Contains the non localized exception message",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "JobProperties": {
       "description": "Job Properties",
-      "required": [
-        "destinationAccountDetails"
-      ],
       "type": "object",
       "properties": {
-        "deviceType": {
-          "description": "Type of the device to be used for the job.",
-          "enum": [
-            "Pod",
-            "Disk",
-            "Cabinet"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeviceType",
-            "modelAsString": false
-          }
-        },
         "isCancellable": {
           "description": "Describes whether the job is cancellable or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isDeletable": {
+          "description": "Describes whether the job is deletable or not.",
+          "type": "boolean",
+          "readOnly": true
         },
         "isShippingAddressEditable": {
           "description": "Describes whether the shipping address is editable or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "status": {
           "description": "Name of the stage which is in progress.",
@@ -1318,34 +1539,76 @@
             "Aborted"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "StageName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Device has been dispatched to the user of the order."
+              },
+              {
+                "value": "Delivered",
+                "description": "Device has been delivered to the user of the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Failed_IssueReportedAtCustomer",
+                "description": "Order has failed due to issue reported by user."
+              },
+              {
+                "value": "Failed_IssueDetectedAtAzureDC",
+                "description": "Order has failed due to issue detected at azure datacenter."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              }
+            ]
           }
         },
         "startTime": {
           "format": "date-time",
           "description": "Time at which the job was started in UTC ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/Error",
-          "description": "Top level error for the job."
-        },
-        "deliveryPackage": {
-          "$ref": "#/definitions/PackageShippingDetails",
-          "description": "Delivery package shipping details."
-        },
-        "returnPackage": {
-          "$ref": "#/definitions/PackageShippingDetails",
-          "description": "Return package shipping details."
-        },
-        "destinationAccountDetails": {
-          "description": "Destination account details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DestinationAccountDetails"
-          }
+          "description": "Top level error for the job.",
+          "readOnly": true
         },
         "details": {
           "$ref": "#/definitions/JobDetails",
@@ -1353,7 +1616,8 @@
         },
         "cancellationReason": {
           "description": "Reason for cancellation.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1433,14 +1697,29 @@
         "jobSecretsType": {
           "description": "Used to indicate what type of job secrets object.",
           "enum": [
-            "Pod",
-            "Disk",
-            "Cabinet"
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ClassDiscriminator",
-            "modelAsString": false
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy orders."
+              }
+            ]
           }
         }
       },
@@ -1448,10 +1727,6 @@
     },
     "JobStages": {
       "description": "Job stages.",
-      "required": [
-        "stageName",
-        "stageStatus"
-      ],
       "type": "object",
       "properties": {
         "stageName": {
@@ -1472,14 +1747,70 @@
             "Aborted"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "StageName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Device has been dispatched to the user of the order."
+              },
+              {
+                "value": "Delivered",
+                "description": "Device has been delivered to the user of the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Failed_IssueReportedAtCustomer",
+                "description": "Order has failed due to issue reported by user."
+              },
+              {
+                "value": "Failed_IssueDetectedAtAzureDC",
+                "description": "Order has failed due to issue detected at azure datacenter."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              }
+            ]
           }
         },
         "displayName": {
           "description": "Display name of the job stage.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "stageStatus": {
           "description": "Status of the job stage.",
@@ -1493,26 +1824,60 @@
             "SucceededWithErrors"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "StageStatus",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No status available yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Stage is in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Stage has succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Stage has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Stage has been cancelled."
+              },
+              {
+                "value": "Cancelling",
+                "description": "Stage is cancelling."
+              },
+              {
+                "value": "SucceededWithErrors",
+                "description": "Stage has succeeded with errors."
+              }
+            ]
           }
         },
         "stageTime": {
           "format": "date-time",
           "description": "Time for the job stage in UTC ISO 8601 format.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "jobStageDetails": {
           "description": "Job Stage Details",
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "errorDetails": {
           "description": "Error details for the stage.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorDetails"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1537,7 +1902,33 @@
           "type": "string",
           "x-ms-enum": {
             "name": "NotificationStageName",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DevicePrepared",
+                "description": "Notification at device prepared stage."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Notification at device dispatched stage."
+              },
+              {
+                "value": "Delivered",
+                "description": "Notification at device delivered stage."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Notification at device picked up from user stage."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Notification at device received at azure datacenter stage."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Notification at data copy started stage."
+              }
+            ]
           }
         },
         "sendNotification": {
@@ -1548,30 +1939,28 @@
     },
     "Operation": {
       "description": "Operation entity.",
-      "required": [
-        "name",
-        "display",
-        "properties",
-        "origin"
-      ],
       "type": "object",
       "properties": {
         "name": {
           "description": "Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
-          "description": "Operation display values."
+          "description": "Operation display values.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/OperationProperties",
           "description": "Operation properties.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         },
         "origin": {
           "description": "Origin of the operation. Can be : user|system|user,system",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1606,7 +1995,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "Link for the next set of operations.",
@@ -1625,112 +2015,29 @@
       "properties": {
         "carrierName": {
           "description": "Name of the carrier.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "trackingId": {
           "description": "Tracking Id of shipment.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "trackingUrl": {
           "description": "Url where shipment can be tracked.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "PodJobDetails": {
-      "description": "Pod Job Details",
-      "required": [
-        "contactDetails",
-        "shippingAddress"
-      ],
+    "Preferences": {
+      "description": "Preferences related to the order",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobDetails"
-        }
-      ],
       "properties": {
-        "copyProgress": {
-          "description": "Copy progress per account.",
+        "preferredDataCenterRegion": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CopyProgress"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Pod"
-    },
-    "PodJobSecrets": {
-      "description": "The secrets related to a pod job.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobSecrets"
-        }
-      ],
-      "properties": {
-        "podSecrets": {
-          "description": "Contains the list of secret objects for a job.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PodSecret"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Pod"
-    },
-    "PodSecret": {
-      "description": "The secrets related to a Pod.",
-      "type": "object",
-      "properties": {
-        "deviceSerialNumber": {
-          "description": "Serial number of the assigned device.",
-          "type": "string"
-        },
-        "devicePassword": {
-          "description": "Password for out of the box experience on device.",
-          "type": "string"
-        },
-        "accountCredentialDetails": {
-          "description": "Per account level access credentials.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AccountCredentialDetails"
-          }
-        }
-      }
-    },
-    "ReportIssueDetails": {
-      "description": "Details of the reported issue.",
-      "type": "object",
-      "properties": {
-        "issueType": {
-          "description": "Issue Type.",
-          "enum": [
-            "DeviceMismatch",
-            "ValidationStringMismatch",
-            "CredentialNotWorking",
-            "DeviceFailure"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IssueType",
-            "modelAsString": false
-          }
-        },
-        "deviceIssueType": {
-          "description": "Device Issue Type. Only used for Device failure issue.",
-          "enum": [
-            "DeviceTampering",
-            "DeviceNotBootingUp",
-            "DeviceHealthCheckShowFailures",
-            "NICsAreNotWorking",
-            "Misc"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeviceIssueType",
-            "modelAsString": false
+            "type": "string"
           }
         }
       }
@@ -1771,20 +2078,92 @@
       "properties": {
         "shareName": {
           "description": "Name of the share.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "shareType": {
+          "description": "Type of the share.",
+          "enum": [
+            "UnknownType",
+            "HCS",
+            "BlockBlob",
+            "PageBlob",
+            "AzureFile"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ShareDestinationFormatType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "UnknownType",
+                "description": "Unknown format."
+              },
+              {
+                "value": "HCS",
+                "description": "Storsimple data format."
+              },
+              {
+                "value": "BlockBlob",
+                "description": "Azure storage block blob format."
+              },
+              {
+                "value": "PageBlob",
+                "description": "Azure storage page blob format."
+              },
+              {
+                "value": "AzureFile",
+                "description": "Azure storage file format."
+              }
+            ]
+          }
         },
         "userName": {
           "description": "User name for the share.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "password": {
           "description": "Password for the share.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedAccessProtocols": {
+          "description": "Access protocols supported on the device.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "SMB",
+              "NFS"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AccessProtocol",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "SMB",
+                  "description": "Server Message Block protocol(SMB)."
+                },
+                {
+                  "value": "NFS",
+                  "description": "Network File System protocol(NFS)."
+                }
+              ]
+            }
+          },
+          "readOnly": true
         }
       }
     },
     "ShipmentPickUpRequest": {
       "description": "Shipment pick up request details.",
+      "required": [
+        "startTime",
+        "endTime",
+        "shipmentLocation"
+      ],
       "type": "object",
       "properties": {
         "startTime": {
@@ -1809,12 +2188,14 @@
       "properties": {
         "confirmationNumber": {
           "description": "Confirmation number for the pick up request.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "readyByTime": {
           "format": "date-time",
           "description": "Time by which shipment should be ready for pick up, this is in local time of pick up area.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1873,21 +2254,22 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AddressType",
-            "modelAsString": false
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Address type not known."
+              },
+              {
+                "value": "Residential",
+                "description": "Residential Address."
+              },
+              {
+                "value": "Commercial",
+                "description": "Commercial Address."
+              }
+            ]
           }
-        }
-      }
-    },
-    "ShippingLabelDetails": {
-      "description": "Details for the shipping label.",
-      "required": [
-        "shippingLabelSasUri"
-      ],
-      "type": "object",
-      "properties": {
-        "shippingLabelSasUri": {
-          "description": "Sas uri for accessing the shipping label.",
-          "type": "string"
         }
       }
     },
@@ -1900,7 +2282,30 @@
       "properties": {
         "name": {
           "description": "The sku name.",
-          "type": "string"
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy."
+              }
+            ]
+          }
         },
         "displayName": {
           "description": "The display name of the sku.",
@@ -1914,71 +2319,60 @@
     },
     "SkuCapacity": {
       "description": "Capacity of the sku.",
-      "required": [
-        "usable",
-        "maximum"
-      ],
       "type": "object",
       "properties": {
         "usable": {
           "description": "Usable capacity in TB.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "maximum": {
           "description": "Maximum capacity in TB.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "SkuCost": {
       "description": "Describes metadata for retrieving price info.",
-      "required": [
-        "meterId",
-        "meterType"
-      ],
       "type": "object",
       "properties": {
         "meterId": {
           "description": "Meter id of the Sku.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "meterType": {
           "description": "The type of the meter.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "SkuInformation": {
       "description": "Information of the sku.",
-      "required": [
-        "sku",
-        "enabled",
-        "properties"
-      ],
       "type": "object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The Sku."
+          "description": "The Sku.",
+          "readOnly": true
         },
         "enabled": {
           "description": "The sku is enabled or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/SkuProperties",
           "description": "Properties of the sku.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
     },
     "SkuProperties": {
       "description": "Properties of the sku.",
-      "required": [
-        "capacity",
-        "costs",
-        "apiVersions"
-      ],
       "type": "object",
       "properties": {
         "destinationToServiceLocationMap": {
@@ -1986,59 +2380,110 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DestinationToServiceLocationMap"
-          }
+          },
+          "readOnly": true
         },
         "capacity": {
           "$ref": "#/definitions/SkuCapacity",
-          "description": "Capacity of the Sku."
+          "description": "Capacity of the Sku.",
+          "readOnly": true
         },
         "costs": {
           "description": "Cost of the Sku.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCost"
-          }
+          },
+          "readOnly": true
         },
         "apiVersions": {
           "description": "Api versions that support this Sku.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "disabledReason": {
           "description": "Reason why the Sku is disabled.",
-          "type": "string"
+          "enum": [
+            "None",
+            "Country",
+            "Region",
+            "Feature",
+            "OfferType"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SkuDisabledReason",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "SKU is not disabled."
+              },
+              {
+                "value": "Country",
+                "description": "SKU is not available in the requested country."
+              },
+              {
+                "value": "Region",
+                "description": "SKU is not available to push data to the requested storage account region."
+              },
+              {
+                "value": "Feature",
+                "description": "Required features are not enabled for the SKU."
+              },
+              {
+                "value": "OfferType",
+                "description": "Subscription does not have required offer types for the SKU."
+              }
+            ]
+          }
+        },
+        "disabledReasonMessage": {
+          "description": "Message for why the Sku is disabled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredFeature": {
+          "description": "Required feature to access the sku.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "UnencryptedSecrets": {
-      "description": "Unencrypted secrets for accessing device.",
-      "required": [
-        "jobName"
-      ],
+    "UnencryptedCredentials": {
+      "description": "Unencrypted credentials for accessing device.",
       "type": "object",
       "properties": {
         "jobName": {
           "description": "Name of the job.",
-          "type": "string"
-        },
-        "deviceType": {
-          "description": "The Device Type used in the job.",
-          "enum": [
-            "Pod",
-            "Disk",
-            "Cabinet"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "name": "DeviceType",
-            "modelAsString": false
-          }
+          "readOnly": true
         },
         "jobSecrets": {
           "$ref": "#/definitions/JobSecrets",
-          "description": "Secrets related to this job."
+          "description": "Secrets related to this job.",
+          "readOnly": true
+        }
+      }
+    },
+    "UnencryptedCredentialsList": {
+      "description": "List of unencrypted credentials for accessing device.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of unencrypted credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnencryptedCredentials"
+          }
+        },
+        "nextLink": {
+          "description": "Link for the next set of unencrypted credentials.",
+          "type": "string"
         }
       }
     },
@@ -2058,19 +2503,27 @@
     },
     "UpdateJobProperties": {
       "description": "Job Properties for update",
-      "required": [
-        "details"
-      ],
       "type": "object",
       "properties": {
         "details": {
           "$ref": "#/definitions/UpdateJobDetails",
           "description": "Details of a job to be updated."
+        },
+        "destinationAccountDetails": {
+          "description": "Destination account details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DestinationAccountDetails"
+          }
         }
       }
     },
     "ValidateAddress": {
       "description": "The requirements to validate customer address where the device needs to be shipped.",
+      "required": [
+        "shippingAddress",
+        "deviceType"
+      ],
       "type": "object",
       "properties": {
         "shippingAddress": {
@@ -2080,14 +2533,28 @@
         "deviceType": {
           "description": "Device type to be used for the job.",
           "enum": [
-            "Pod",
-            "Disk",
-            "Cabinet"
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "DeviceType",
-            "modelAsString": false
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Databox."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "DataboxDisk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "DataboxHeavy."
+              }
+            ]
           }
         }
       }
