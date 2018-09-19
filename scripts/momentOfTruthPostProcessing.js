@@ -66,7 +66,10 @@ try {
 }
 
 function compareJsonRef(beforeJsonRef, afterJsonRef) {
-    return (beforeJsonRef.replace(/json:\d+:\d+/, '') == afterJsonRef.replace(/json:\d+:\d+/, ''));
+    beforeJsonRef = beforeJsonRef.replace(/.*\.json:\d+:\d+/, '')
+    afterJsonRef = afterJsonRef.replace(/.*\.json:\d+:\d+/, '')
+
+    return (beforeJsonRef == afterJsonRef);
 }
 
 function getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount) {
@@ -405,7 +408,7 @@ function postProcessing() {
     console.log(JSON.stringify(output, null, 2));
     console.log("---");
 
-    if(process.env.TRAVIS_REPO_SLUG != undefined && !process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
+    if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
         let slug = process.env.TRAVIS_REPO_SLUG;
         slug = slug.split("/")[1];
         gitHubPost.postGithubComment("Azure", slug, pullRequestNumber, output.text);
