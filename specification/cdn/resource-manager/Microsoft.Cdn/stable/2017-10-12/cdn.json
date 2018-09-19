@@ -1750,6 +1750,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailabilityWithSubscription"
+        ],
+        "description": "Check the availability of a resource name. This is needed for resources where name is globally unique, such as a CDN endpoint.",
+        "operationId": "CheckNameAvailabilityWithSubscription",
+        "x-ms-examples": {
+          "CheckNameAvailabilityWithSubscription": {
+            "$ref": "./examples/CheckNameAvailabilityWithSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "checkNameAvailabilityInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/validateProbe": {
       "post": {
         "tags": [
@@ -3113,7 +3158,8 @@
             "Premium_Verizon",
             "Custom_Verizon",
             "Standard_Akamai",
-            "Standard_ChinaCdn"
+            "Standard_ChinaCdn",
+            "Standard_Microsoft"
           ],
           "type": "string",
           "x-ms-enum": {

@@ -1059,8 +1059,7 @@
           "description": "The mode to create a new server.",
           "enum": [
             "Default",
-            "PointInTimeRestore",
-            "GeoRestore"
+            "PointInTimeRestore"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1118,24 +1117,6 @@
       ],
       "description": "The properties to a new server by restoring from a backup."
     },
-    "ServerPropertiesForGeoRestore": {
-      "x-ms-discriminator-value": "GeoRestore",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerPropertiesForCreate"
-        }
-      ],
-      "properties": {
-        "sourceServerId": {
-          "type": "string",
-          "description": "The source server id to restore from."
-        }
-      },
-      "required": [
-        "sourceServerId"
-      ],
-      "description": "The properties to a new server by restoring from a geo replicated backup."
-    },
     "Sku": {
       "properties": {
         "name": {
@@ -1147,7 +1128,8 @@
           "description": "The tier of the particular SKU, e.g. Basic.",
           "enum": [
             "Basic",
-            "Standard"
+            "GeneralPurpose",
+            "MemoryOptimized"
           ],
           "x-ms-enum": {
             "name": "SkuTier",

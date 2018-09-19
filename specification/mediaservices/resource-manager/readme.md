@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-10
+tag: package-2018-06-preview
 ```
 
 
@@ -37,6 +37,34 @@ These settings apply only when `--tag=package-2015-10` is specified on the comma
 ``` yaml $(tag) == 'package-2015-10'
 input-file:
 - Microsoft.Media/stable/2015-10-01/media.json
+```
+
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview'
+input-file:
+- Microsoft.Media/preview/2018-03-30-preview/Accounts.json
+- Microsoft.Media/preview/2018-03-30-preview/Assets.json
+- Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
+- Microsoft.Media/preview/2018-03-30-preview/Encoding.json
+- Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
+- Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
+```
+
+### Tag: package-2018-06-preview
+
+These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-preview'
+input-file:
+- Microsoft.Media/preview/2018-06-01-preview/Accounts.json
+- Microsoft.Media/preview/2018-06-01-preview/Assets.json
+- Microsoft.Media/preview/2018-06-01-preview/ContentKeyPolicies.json
+- Microsoft.Media/preview/2018-06-01-preview/Encoding.json
+- Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
+- Microsoft.Media/preview/2018-06-01-preview/streamingservice.json
 ```
 
 ---
@@ -51,8 +79,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_media_services']
 ```
 
 
@@ -116,6 +148,8 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2015-10
+  - tag: package-2018-03-preview
+  - tag: package-2018-06-preview
 ```
 
 ### Tag: package-2015-10 and go
@@ -126,6 +160,23 @@ Please also specify the `--go-sdk-folder=<path to the root directory of your azu
 ``` yaml $(tag) == 'package-2015-10' && $(go)
 output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2015-10-01/media
 ```
+### Tag: package-2018-03-preview and go
+
+These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
+Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-03-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-03-30-preview/media
+```
+
+### Tag: package-2018-06-preview and go
+
+These settings apply only when `--tag=package-2018-06-preview --go` is specified on the command line.
+Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-06-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-06-01-preview/media
+```
 
 
 ## Java
@@ -134,11 +185,57 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.mediaservices
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mediaservices
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-10
+  - tag: package-2018-03-preview
+  - tag: package-2018-06-preview
+```
+
+### Tag: package-2015-10 and java
+
+These settings apply only when `--tag=package-2015-10 --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-10' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.mediaservices
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mediaservices
+  namespace: com.microsoft.azure.management.mediaservices.v2015_10_01
+  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2015_10_01
+regenerate-manager: true
+generate-interface: true
+```
+### Tag: package-2018-03-preview and java
+
+These settings apply only when `--tag=package-2018-03-preview --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.mediaservices.v2018_03_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_03_30_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-06-preview and java
+
+These settings apply only when `--tag=package-2018-06-preview --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.mediaservices.v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_06_01_preview
+regenerate-manager: true
+generate-interface: true
 ```

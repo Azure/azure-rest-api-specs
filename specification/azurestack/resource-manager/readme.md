@@ -71,7 +71,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
 ```
 
@@ -91,7 +91,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -100,6 +99,23 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+  namespace: azurestack
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2017-06-01
+```
+
+### Tag: package-2017-06-01 and go
+
+These settings apply only when `--tag=package-2017-06-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2017-06-01' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-06-01/$(namespace)
 ```
 
 ## Python
@@ -122,11 +138,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.azurestack
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestack
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.azurestack
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestack
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-06-01
+```
+
+### Tag: package-2017-06-01 and java
+
+These settings apply only when `--tag=package-2017-06-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-06-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azurestack.v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/azurestack/resource-manager/v2017_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

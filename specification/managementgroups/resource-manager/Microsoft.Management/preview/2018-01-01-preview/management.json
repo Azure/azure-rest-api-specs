@@ -433,9 +433,6 @@
             "$ref": "#/parameters/GroupNameParameter"
           },
           {
-            "$ref": "#/parameters/EntityViewParameter"
-          },
-          {
             "$ref": "#/parameters/CacheControlHeader"
           }
         ],
@@ -1128,14 +1125,14 @@
         "type": {
           "type": "string",
           "enum": [
-            "/providers/Microsoft.Management/managementGroup"
+            "/providers/Microsoft.Management/managementGroups"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false,
             "values": [
               {
-                "value": "/providers/Microsoft.Management/managementGroup"
+                "value": "/providers/Microsoft.Management/managementGroups"
               }
             ]
           },
@@ -1202,7 +1199,8 @@
       "description": "Management group creation parameters.",
       "schema": {
         "$ref": "#/definitions/CreateManagementGroupRequest"
-      }
+      },
+      "x-ms-parameter-location": "client"
     },
     "PatchGroupRequestParameter": {
       "name": "patchGroupRequest",
@@ -1211,7 +1209,8 @@
       "description": "Management group patch parameters.",
       "schema": {
         "$ref": "#/definitions/PatchManagementGroupRequest"
-      }
+      },
+      "x-ms-parameter-location": "client"
     },
     "FilterParameter": {
       "name": "$filter",
@@ -1238,7 +1237,8 @@
         "create",
         "delete"
       ],
-      "description": "The id of the operation result."
+      "description": "The id of the operation result.",
+      "x-ms-parameter-location": "client"
     },
     "CheckNameAvailabilityParameter": {
       "name": "checkNameAvailabilityRequest",
@@ -1247,14 +1247,16 @@
       "description": "Management group name availability check parameters.",
       "schema": {
         "$ref": "#/definitions/CheckNameAvailabilityRequest"
-      }
+      },
+      "x-ms-parameter-location": "client"
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Page continuation token is only used if a previous operation returned a partial result. \nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.\n"
+      "description": "Page continuation token is only used if a previous operation returned a partial result. \nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.\n",
+      "x-ms-parameter-location": "client"
     },
     "CacheControlHeader": {
       "name": "Cache-Control",

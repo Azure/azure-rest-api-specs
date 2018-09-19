@@ -971,6 +971,10 @@
         "roleName": {
           "type": "string",
           "description": "Returns role definition with the specific name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Returns role definition with the specific type."
         }
       },
       "description": "Role Definitions filter"
@@ -1138,6 +1142,10 @@
           "description": "The delgation flag used for creating a role assignment"
         }
       },
+      "required": [
+        "roleDefinitionId",
+        "principalId"
+      ],
       "description": "Role assignment properties."
     },
     "RoleAssignmentCreateParameters": {
@@ -1148,6 +1156,9 @@
           "description": "Role assignment properties."
         }
       },
+      "required": [
+        "properties"
+      ],
       "description": "Role assignment create parameters."
     },
     "Permission": {

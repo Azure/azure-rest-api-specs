@@ -2013,6 +2013,7 @@
     "DeploymentExtended": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The ID of the deployment."
         },
@@ -2028,6 +2029,7 @@
       "required": [
         "name"
       ],
+      "x-ms-azure-resource": true,
       "description": "Deployment information."
     },
     "DeploymentListResult": {
@@ -2221,6 +2223,7 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true,
       "description": "Resource group information."
     },
     "ResourceGroupProperties": {
@@ -2300,6 +2303,7 @@
     "TagValue": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The tag ID."
         },
@@ -2312,11 +2316,13 @@
           "description": "The tag value count."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "Tag information."
     },
     "TagDetails": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "The tag ID."
         },
@@ -2536,7 +2542,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The ID of the target subscription."
     },
     "ApiVersionParameter": {
       "name": "api-version",

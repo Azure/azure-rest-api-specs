@@ -1,5 +1,5 @@
 # ApplicationInsights
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for ApplicationInsights.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for ApplicationInsights.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the ApplicationInsights API.
 
 ``` yaml
@@ -29,14 +29,18 @@ title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
 tag: package-2015-05
-azure-validator: true
 ```
 
 ## Suppression
 ``` yaml
 directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge"].post
+    reason: Original creation of the service did not comply with current ARM schema standards. The team is aware of it and any future updates should rectify the issue.
+    
   - suppress: TrackedResourceListByImmediateParent
-    where: 
+    where:
       - $.definitions
     reason:
       - we do have list operations available for our operations on individual instances of objects returned. False positives.
@@ -44,26 +48,26 @@ directive:
   - suppress: PutRequestResponseScheme
     reason: This api was existing there from 2015, it will break existing client if we change the request/response format
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}"].put
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put
 
   - suppress: ListInOperationName
     reason: The return value is an object, not an array. Looks like a false positive of the validation tool.
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/currentbillingfeatures"].get.operationId
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].get.operationId
 
   - suppress: PutInOperationName
     reason: We are not doing create on this api, it is only doing update in this PUT api call.
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}"].put.operationId
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/currentbillingfeatures"].put.operationId
-  
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put.operationId
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].put.operationId
+
   - suppress: XmsResourceInPutResponse
     reason: This api was existing there from 2015, it will break existing client if we change the request/response format
     #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/exportconfiguration/{exportId}"].put
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/currentbillingfeatures"].put 
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}"].put
+    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures"].put
 
-  - suppress: RequiredPropertiesMissingInResourceModel  
+  - suppress: RequiredPropertiesMissingInResourceModel
     reason: This api was existing there from 2015, it will break existing client if we change the response format
     #where:
     #  - $.definitions.ApplicationInsightsComponentExportConfiguration
@@ -100,7 +104,7 @@ directive:
     reason: The response for 200 does define a schema in place. The test likely expects a 'ref' member. False failure.
     from: componentAnnotations_API.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations"].put.responses["200"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations"].put.responses["200"]
 
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This api was existing there from 2015, it will break existing client if we change the name
@@ -126,7 +130,7 @@ directive:
     #  - $.definitions.WebTestProperties.properties.RetryEnabled
     #  - $.definitions.WebTestProperties.properties.Locations
     #  - $.definitions.WebTestProperties.properties.Configuration
-    #  - $.definitions.WebTestGeolocation.properties.Id 
+    #  - $.definitions.WebTestGeolocation.properties.Id
     #  - $.definitions.ApplicationInsightsComponentExportRequest.properties.RecordTypes
     #  - $.definitions.ApplicationInsightsComponentExportRequest.properties.DestinationType
     #  - $.definitions.ApplicationInsightsComponentExportRequest.properties.DestinationAddress
@@ -219,6 +223,15 @@ directive:
     #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.ProactiveDetection
     #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.AnalyticsIntegration
     #  - $.definitions.ApplicationInsightsComponentFeatureCapabilities.properties.MultipleStepWebTest
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Id
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Name
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Content
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Version
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Scope
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Type
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.TimeCreated
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.TimeModified
+    #  - $.definitions.ApplicationInsightsComponentAnalyticsItem.properties.Properties
 
   - suppress: R2066
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
@@ -230,17 +243,38 @@ These settings apply only when `--tag=package-2015-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-05'
 input-file:
-- microsoft.insights/stable/2015-05-01/aiOperations_API.json
-- microsoft.insights/stable/2015-05-01/componentAnnotations_API.json
-- microsoft.insights/stable/2015-05-01/componentApiKeys_API.json
-- microsoft.insights/stable/2015-05-01/componentContinuousExport_API.json
-- microsoft.insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
-- microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json
-- microsoft.insights/stable/2015-05-01/components_API.json
-- microsoft.insights/stable/2015-05-01/componentWorkItemConfigs_API.json
-- microsoft.insights/stable/2015-05-01/favorites_API.json
-- microsoft.insights/stable/2015-05-01/webTestLocations_API.json
-- microsoft.insights/stable/2015-05-01/webTests_API.json
+- Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+- Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+- Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+- Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+- Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+- Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+- Microsoft.Insights/stable/2015-05-01/components_API.json
+- Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+- Microsoft.Insights/stable/2015-05-01/favorites_API.json
+- Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+- Microsoft.Insights/stable/2015-05-01/webTests_API.json
+- microsoft.insights/stable/2015-05-01/analyticsItems_API.json
+- Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+```
+
+### Tag: package-2017-10
+
+These settings apply only when `--tag=package-2017-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-10'
+input-file:
+- Microsoft.Insights/preview/2017-10-01/eaSubscriptionMigration_API.json
+- Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
+```
+
+### Tag: package-2018-06-17-preview
+
+These settings apply only when `--tag=package-2018-06-17-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-17-preview'
+input-file:
+- Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 ---
 # Code Generation
@@ -254,8 +288,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -288,7 +323,7 @@ python:
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -329,6 +364,26 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/appinsights/mgmt/2015-05-01/insights
 ```
 
+### Tag: schema-2015-05-preview
+
+These settings apply only when `--tag=schema-2015-05-01` is specified on the
+command line.
+
+This section contains the input swagger files that are used when generating
+resource manager schemas for version 2015-05-01. Note that many of our
+pre-existing APIs are note currently compatible with ARM schemas, upon any
+updates applied to our services we will bring them up to compliance.
+
+``` yaml $(tag) == 'schema-2015-05-01'
+input-file:
+ - ./Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/components_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/webTests_API.json
+ - ./Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+
+override-info:
+  title: ApplicationInsightsManagementClient
+```
 
 ## Java
 
@@ -336,11 +391,39 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
   azure-arm: true
   fluent: true
   namespace: com.microsoft.azure.management.applicationinsights
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-applicationinsights
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-05
+```
+
+### Tag: package-2015-05 and java
+
+These settings apply only when `--tag=package-2015-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.applicationinsights.v2015_05_01
+  output-folder: $(azure-libraries-for-java-folder)/applicationinsights/resource-manager/v2015_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: schema-2018-06-17-preview
+
+These settings apply only when `--tag=schema-2018-06-17-preview` is specified on the command line.
+
+``` yaml $(tag) == 'schema-2018-06-17-preview'
+input-file:
+- Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```

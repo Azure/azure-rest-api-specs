@@ -1,5 +1,5 @@
 # RecoveryServices
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for RecoveryServices.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for RecoveryServices.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for RecoveryServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the RecoveryServices API.
 
 ``` yaml
@@ -30,7 +30,7 @@ description: Recovery Services Client
 openapi-type: arm
 tag: package-2016-06
 ```
- 
+
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
@@ -56,12 +56,16 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services']
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -137,11 +141,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.recoveryservices
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservices
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.recoveryservices
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservices
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2016-06
+```
+
+### Tag: package-2016-06 and java
+
+These settings apply only when `--tag=package-2016-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.recoveryservices.v2016_06_01
+  output-folder: $(azure-libraries-for-java-folder)/recoveryservices/resource-manager/v2016_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

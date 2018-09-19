@@ -1,5 +1,5 @@
 # Batch
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Batch.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Batch.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,12 +21,30 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2017-09.6.0
+tag: package-2018-08.7.0
+```
+
+### Tag: package-2018-08.7.0
+
+These settings apply only when `--tag=package-2018-08.7.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08.7.0'
+input-file:
+- Microsoft.Batch/stable/2018-08-01.7.0/BatchService.json
+```
+
+### Tag: package-2018-03.6.1
+
+These settings apply only when `--tag=package-2018-03.6.1` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03.6.1'
+input-file:
+- Microsoft.Batch/stable/2018-03-01.6.1/BatchService.json
 ```
 
 ### Tag: package-2017-09.6.0
@@ -171,7 +189,7 @@ These settings apply only when `--tag=package-2017-01.4.0` is specified on the c
 input-file:
 - Microsoft.Batch/stable/2017-01-01.4.0/BatchService.json
 ```
- 
+
 ### Tag: package-2016-07.3.1
 
 These settings apply only when `--tag=package-2016-07.3.1` is specified on the command line.
@@ -180,7 +198,7 @@ These settings apply only when `--tag=package-2016-07.3.1` is specified on the c
 input-file:
 - Microsoft.Batch/stable/2016-07-01.3.1/BatchService.json
 ```
- 
+
 ### Tag: package-2016-02.3.0
 
 These settings apply only when `--tag=package-2016-02.3.0` is specified on the command line.
@@ -189,7 +207,7 @@ These settings apply only when `--tag=package-2016-02.3.0` is specified on the c
 input-file:
 - Microsoft.Batch/stable/2016-02-01.3.0/BatchService.json
 ```
- 
+
 ### Tag: package-2015-12.2.2
 
 These settings apply only when `--tag=package-2015-12.2.2` is specified on the command line.
@@ -212,9 +230,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -227,6 +246,7 @@ csharp:
   namespace: Microsoft.Azure.Batch.Protocol
   output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
   clear-output-folder: true
+  client-side-validation: false
 ```
 
 ## Python
@@ -256,6 +276,22 @@ python:
   output-folder: $(python-sdks-folder)/azure-batch
 ```
 
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--node-sdks-folder=<path to root folder of your azure-batch-sdk-for-java clone>`.
+
+``` yaml $(java)
+nodejs:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: com.microsoft.azure.batch.protocol
+  output-folder: $(node-sdks-folder)/src/main/java
+  payload-flattening-threshold: 1
+  generate-license-txt: true
+  clear-output-folder: true
+```
+
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
@@ -272,6 +308,26 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-05.5.0
+  - tag: package-2018-03.6.1
+  - tag: package-2018-08.7.0
+```
+
+### Tag: package-2018-08.7.0 and go
+
+These settings apply only when `--tag=package-2018-08.7.0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-08.7.0' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/2018-08-01.7.0/batch
+```
+
+### Tag: package-2018-03.6.1 and go
+
+These settings apply only when `--tag=package-2018-03.6.1 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2018-03.6.1' && $(go)
+output-folder: $(go-sdk-folder)/services/batch/2018-03-01.6.1/batch
 ```
 
 ### Tag: package-2017-09.6.0 and go

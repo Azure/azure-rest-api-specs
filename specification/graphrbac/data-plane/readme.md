@@ -1,5 +1,5 @@
 # GraphRbac
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for GraphRbac.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for GraphRbac.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for GraphRbac, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the GraphRbac API.
 
 ``` yaml
@@ -51,8 +51,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_graph_rbac']
 ```
 
 

@@ -395,10 +395,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/messagingplan": {
       "get": {
         "tags": [
-          "MessagingPlan"
+          "Namespaces"
         ],
-        "operationId": "MessagingPlan_Get",
-        "description": "Gets a description for the specified namespace.",
+        "operationId": "Namespaces_GetMessagingPlan",
+        "x-ms-examples": {
+          "GetNamespaceMessagingPlan": { "$ref": "./examples/NameSpaces/EHNameSpaceGetMessagningPlan.json" }
+        },
+        "description": "Gets messaging plan for specified namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -419,11 +422,17 @@
             "schema": {
               "$ref": "#/definitions/MessagingPlan"
             }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
       "get": {
         "tags": [
           "Namespaces"
@@ -1161,6 +1170,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1774,6 +1789,12 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1795,12 +1816,16 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions": {
       "get": {
         "tags": [
           "Regions"
         ],
         "operationId": "Regions_ListBySku",
+        "x-ms-examples": {
+          "RegionsListBySkuBasic": { "$ref": "./examples/EHRegionsListBySkuBasic.json" },
+          "RegionsListBySkuStandard": { "$ref": "./examples/EHRegionsListBySkuStandard.json" }
+        },
         "description": "Gets the available Regions for a given sku",
         "parameters": [
           {
@@ -2465,6 +2490,12 @@
                 "name": "RoleDisasterRecovery",
                 "modelAsString": false
               }
+            },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
             }
           },
           "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
@@ -2494,7 +2525,7 @@
       },
       "description": "The result of the List Alias(Disaster Recovery configuration) operation."
     },
-	"MessagingRegions": {
+    "MessagingRegions": {
       "properties": {
         "properties": {
           "properties": {
@@ -2535,38 +2566,36 @@
       },
       "description": "The response of the List MessagingRegions operation."
     },
-	"MessagingPlanproperties": {
-      "properties": {
-        "sku": {
-          "format": "int32",
-          "type": "integer",
-          "description": "Sku type"
-        },
-        "selectedEventHubUnit": {
-          "format": "int32",
-          "type": "integer",
-          "description": "Selected event hub unit"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The exact time the messaging plan was updated."
-        },
-        "revision": {
-          "format": "int64",
-          "type": "integer",
-          "description": "revision number"
-        }
-      },
-      "description": "Messaging Region"
-    },
     "MessagingPlan": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MessagingPlanproperties"
+          "properties": {
+            "sku": {
+              "format": "int32",
+              "readOnly": true,
+              "type": "integer",
+              "description": "Sku type"
+            },
+            "selectedEventHubUnit": {
+              "format": "int32",
+              "readOnly": true,
+              "type": "integer",
+              "description": "Selected event hub unit"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true,
+              "description": "The exact time the messaging plan was updated."
+            },
+            "revision": {
+              "format": "int64",
+              "readOnly": true,
+              "type": "integer",
+              "description": "revision number"
+            }
+          }
         }
       },
       "allOf": [
@@ -2574,7 +2603,7 @@
           "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "Messaging"
+      "description": "Messaging Plan for the namespace"
     }
   },
   "parameters": {
@@ -2650,7 +2679,7 @@
       "x-ms-parameter-location": "method",
       "description": "The consumer group name"
     },
-	"skuNameParameter": {
+    "skuNameParameter": {
       "name": "sku",
       "in": "path",
       "required": true,
@@ -2659,6 +2688,26 @@
       "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The sku type."
+    },
+    "SkipParameter": {
+      "name": "$skip",
+      "description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results to the most recent N usageDetails.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
     }
   }
 }

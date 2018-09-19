@@ -1,5 +1,5 @@
 # DataLakeStore
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for DataLakeStore.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for DataLakeStore.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for DataLakeStore, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the DataLakeStore API.
 
 ``` yaml
@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2016-11` is specified on the comma
 input-file:
 - Microsoft.DataLakeStore/stable/2016-11-01/account.json
 ```
- 
+
 ### Tag: package-2015-10-preview
 
 These settings apply only when `--tag=package-2015-10-preview` is specified on the command line.
@@ -76,12 +76,16 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_store']
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -157,7 +161,7 @@ These settings apply only when `--tag=package-2015-10-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/datalake/store/mgmt/2015-10-01-preview/account
+output-folder: $(go-sdk-folder)/services/preview/datalake/store/mgmt/2015-10-01-preview/account
 ```
 
 
@@ -173,3 +177,39 @@ java:
   license-header: MICROSOFT_MIT_NO_CODEGEN
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datalake/store
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-10-preview
+  - tag: package-2016-11
+```
+
+### Tag: package-2015-10-preview and java
+
+These settings apply only when `--tag=package-2015-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.datalakestore.v2015_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/datalakestore/resource-manager/v2015_10_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2016-11 and java
+
+These settings apply only when `--tag=package-2016-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.datalakestore.v2016_11_01
+  output-folder: $(azure-libraries-for-java-folder)/datalakestore/resource-manager/v2016_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

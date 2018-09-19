@@ -1,5 +1,5 @@
 # StorageImportExport
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for StorageImportExport.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for StorageImportExport.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for StorageImportExport, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the StorageImportExport API.
 
 ``` yaml
@@ -50,6 +50,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go
 ```
 
@@ -87,11 +88,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.storageimportexport
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storageimportexport
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.storageimportexport
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storageimportexport
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2016-11
+```
+
+### Tag: package-2016-11 and java
+
+These settings apply only when `--tag=package-2016-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storageimportexport.v2016_11_01
+  output-folder: $(azure-libraries-for-java-folder)/storageimportexport/resource-manager/v2016_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
