@@ -446,6 +446,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataplaneReadOnlyToken": {
+      "post": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_GetDataplaneReadOnlyToken",
+        "x-ms-examples": {
+          "Factories_GetDataplaneReadOnlyToken": {
+            "$ref": "./examples/Factories_GetDataplaneReadOnlyToken.json"
+          }
+        },
+        "description": "Get Dataplane read only token.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "dataplaneReadOnlyTokenRequest",
+            "description": "Dataplane read only access token request definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataplaneReadOnlyTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DataplaneReadOnlyTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes": {
       "get": {
         "tags": [
@@ -3254,6 +3305,40 @@
       "properties": {
         "gitHubAccessToken": {
           "description": "GitHub access token.",
+          "type": "string"
+        }
+      }
+    },
+    "DataplaneReadOnlyTokenRequest": {
+      "description": "Get Dataplane read only token request definition.",
+      "properties": {
+        "startTime": {
+          "description": "Start time for the token. If not specified the current time will be used.",
+          "type": "string"
+        },
+        "expireTime": {
+          "description": "Expiration time for the token. Maximum duration for the token is eight hours and by default the token will expire in eight hours.",
+          "type": "string"
+        }
+      }
+    },
+    "DataplaneReadOnlyTokenResponse": {
+      "description": "Get Dataplane read only token response definition.",
+      "properties": {
+        "startTime": {
+          "description": "Start time for the token. If not specified the current time will be used.",
+          "type": "string"
+        },
+        "expireTime": {
+          "description": "Expiration time for the token. Maximum duration for the token is eight hours and by default the token will expire in eight hours.",
+          "type": "string"
+        },
+        "accessToken": {
+          "description": "Dataplane read only access token.",
+          "type": "string"
+        },
+        "dataPlaneUrl": {
+          "description": "Dataplane service base URL.",
           "type": "string"
         }
       }
