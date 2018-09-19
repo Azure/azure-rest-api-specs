@@ -32,7 +32,7 @@ let githubFooter = `[AutoRest Linter Guidelines](https://github.com/Azure/azure-
     `\n\nThanks for your co-operation.`;
 
 let fileSummaryHeader = (file_name, file_href) => `## Config file: [${file_name}](${file_href})\n`;
-let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `### <a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}\n\n${issue_table}\n`;
+let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `<details><summary><a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}</summary>\n\n${issue_table}\n</details>`;
 let fileSummaryExistingTemplate = (issue_type, issue_count, issue_table) => `<details><summary>${iconFor(issue_type)} ${issue_count} existing ${pluralize(issue_type, issue_count)}</summary><br>\n\n${issue_table}\n</details>\n\n`;
 
 let potentialNewWarningErrorSummaryHeader = `
@@ -53,7 +53,6 @@ let potentialNewWarningErrorSummaryPlain = (count, warning_error_id, warning_err
 let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reach out to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
-let sdkFileSummariesPostToGitHub = '', armFileSummariesPostToGitHub = '';
 
 let data = undefined;
 let jsonData = undefined;
@@ -388,21 +387,7 @@ function postProcessing() {
         newARMWarningsCount += newARMWarnings.length;
 
         sdkFileSummaries += getFileSummary("SDK", fileName, existingSDKWarnings, existingSDKErrors, newSDKWarnings, newSDKErrors);
-        armFileSummaries += getFileSummary("ARM", fileName, existingARMWarnings, existingARMErrors, newARMWarnings, newARMErrors);
-
-        if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
-            let fileSummaryCopyPostToGitHub = gitHubPost.getFileSummaryPostToGitHub(fileName, beforeWarningsSDKArray, afterWarningsSDKArray, beforeErrorsSDKArray, afterErrorsSDKArray, newSDKWarnings, newSDKErrors, pullRequestNumber);
-            sdkFileSummariesPostToGitHub = sdkFileSummariesPostToGitHub.concat(fileSummaryCopyPostToGitHub);
-            fileSummaryCopyPostToGitHub = gitHubPost.getFileSummaryPostToGitHub(fileName, beforeWarningsARMArray, afterWarningsARMArray, beforeErrorsARMArray, afterErrorsARMArray, newARMWarnings, newARMErrors, pullRequestNumber);
-            armFileSummariesPostToGitHub = sdkFileSummariesPostToGitHub.concat(fileSummaryCopyPostToGitHub);
-        }
-    }
-
-    if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
-        let slug = process.env.TRAVIS_REPO_SLUG;
-        slug = slug.split("/")[1];
-        gitHubPost.postSummariesToGithub("SDK Related Validation Errors/Warnings", sdkFileSummariesPostToGitHub, "Azure", slug, pullRequestNumber, sdkContactMessage);
-        gitHubPost.postSummariesToGithub("ARM Related Validation Errors/Warnings", armFileSummariesPostToGitHub, "Azure", slug, pullRequestNumber, armContactMessage);
+        armFileSummaries += getFileSummary("ARM", fileName, existingARMWarnings, existingARMErrors, newARMWarnings, newARMErrors);        
     }
 
     const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
@@ -419,6 +404,12 @@ function postProcessing() {
     console.log("---output");
     console.log(JSON.stringify(output, null, 2));
     console.log("---");
+
+    if(process.env.TRAVIS_REPO_SLUG != undefined && !process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
+        let slug = process.env.TRAVIS_REPO_SLUG;
+        slug = slug.split("/")[1];
+        gitHubPost.postGithubComment("Azure", slug, pullRequestNumber, output.text);
+    }
 
     if (newSDKErrorsCount > 0 || newARMErrorsCount > 0) {
         process.exitCode = 1;
