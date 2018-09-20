@@ -537,22 +537,34 @@
     },
     "ErrorDetails": {
       "description": "Error details.",
-      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Details of error response.",
+      "x-ms-external": true,
       "properties": {
         "code": {
-          "description": "The error code.",
           "type": "string",
-          "readOnly": true
+          "description": "Error code, intended to be consumed programmatically."
         },
         "message": {
-          "description": "The error message.",
           "type": "string",
-          "readOnly": true
+          "description": "Description of the error, intended for display in user interface."
         },
         "target": {
-          "description": "The target of the particular error.",
           "type": "string",
-          "readOnly": true
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
         }
       }
     },
@@ -639,6 +651,11 @@
         "name": {
           "description": "The name of the IoT Central application instance to check.",
           "type": "string"
+        },
+        "type": {
+          "description": "The name of the IoT Central resource name to query.",
+          "type": "string",
+          "default": "IoTApps"
         }
       },
       "required": [
