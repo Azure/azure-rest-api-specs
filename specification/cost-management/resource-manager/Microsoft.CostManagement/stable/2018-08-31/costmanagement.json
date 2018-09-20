@@ -497,6 +497,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
             "$ref": "#/parameters/enrollmentAccountIdParameter"
           },
           {
@@ -574,6 +577,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/departmentIdParameter"
@@ -1032,6 +1038,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
             "$ref": "#/parameters/enrollmentAccountIdParameter"
           },
           {
@@ -1129,7 +1138,7 @@
         },
         "x-ms-examples": {
           "ManagmentGroupQuery": {
-            "$ref": "./examples/ManagmentGroupQuery.json"
+            "$ref": "./examples/ManagementGroupQuery.json"
           }
         },
         "parameters": [
@@ -1618,7 +1627,8 @@
           "description": "The operator to use for comparison.",
           "type": "string",
           "enum": [
-            "In"
+            "In",
+            "Contains"
           ],
           "x-ms-enum": {
             "name": "OperatorType",
