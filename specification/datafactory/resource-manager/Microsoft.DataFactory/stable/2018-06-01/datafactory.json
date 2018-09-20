@@ -446,18 +446,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataplaneReadOnlyToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneReadOnlyToken": {
       "post": {
         "tags": [
           "factories"
         ],
-        "operationId": "Factories_GetDataplaneReadOnlyToken",
+        "operationId": "Factories_GetDataPlaneReadOnlyToken",
         "x-ms-examples": {
-          "Factories_GetDataplaneReadOnlyToken": {
-            "$ref": "./examples/Factories_GetDataplaneReadOnlyToken.json"
+          "Factories_GetDataPlaneReadOnlyToken": {
+            "$ref": "./examples/Factories_GetDataPlaneReadOnlyToken.json"
           }
         },
-        "description": "Get Dataplane read only token.",
+        "description": "Get Data Plane read only token.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -472,12 +472,12 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "dataplaneReadOnlyTokenRequest",
-            "description": "Dataplane read only access token request definition.",
+            "name": "dataPlaneReadOnlyTokenRequest",
+            "description": "Data Plane read only access token request definition.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataplaneReadOnlyTokenRequest"
+              "$ref": "#/definitions/DataPlaneReadOnlyTokenRequest"
             }
           }
         ],
@@ -485,7 +485,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/DataplaneReadOnlyTokenResponse"
+              "$ref": "#/definitions/DataPlaneReadOnlyTokenResponse"
             }
           },
           "default": {
@@ -3309,8 +3309,8 @@
         }
       }
     },
-    "DataplaneReadOnlyTokenRequest": {
-      "description": "Get Dataplane read only token request definition.",
+    "DataPlaneReadOnlyTokenRequest": {
+      "description": "Get Data Plane read only token request definition.",
       "properties": {
         "startTime": {
           "description": "Start time for the token. If not specified the current time will be used.",
@@ -3322,8 +3322,8 @@
         }
       }
     },
-    "DataplaneReadOnlyTokenResponse": {
-      "description": "Get Dataplane read only token response definition.",
+    "DataPlaneReadOnlyTokenResponse": {
+      "description": "Get Data Plane read only token response definition.",
       "properties": {
         "startTime": {
           "description": "Start time for the token. If not specified the current time will be used.",
@@ -3334,11 +3334,11 @@
           "type": "string"
         },
         "accessToken": {
-          "description": "Dataplane read only access token.",
+          "description": "Data Plane read only access token.",
           "type": "string"
         },
         "dataPlaneUrl": {
-          "description": "Dataplane service base URL.",
+          "description": "Data Plane service base URL.",
           "type": "string"
         }
       }
