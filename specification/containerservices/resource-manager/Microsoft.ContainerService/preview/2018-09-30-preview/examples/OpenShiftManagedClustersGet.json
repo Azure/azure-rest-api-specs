@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-03-31",
+    "api-version": "2018-09-30-preview",
     "subscriptionId": "subid1",
     "resourceGroupName": "rg1",
     "resourceName": "clustername1"
@@ -18,40 +18,45 @@
         "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "openShiftVersion": "1.9.6",
-          "fqdn": "rg1.eastus.cloudapp.azure.com",
-          "publicHostname": "openshift.rg1.openshift.com",
+          "openShiftVersion": "v3.10",
+          "fqdn": "clustername1.location1.cloudapp.azure.com",
           "masterPoolProfile": {
-              "name": "master",
               "count": 3,
-              "vmSize": "Standard_D2s_v3",
-              "osType": "Linux"
+              "vmSize": "Standard_D2s_v3"
           },
           "agentPoolProfiles": [
             {
               "name": "infra",
               "role": "infra",
-              "count": 1,
-              "vmSize": "Standard_D2s_v3",
+              "count": 2,
+              "vmSize": "Standard_D4s_v3",
               "osType": "Linux"
             },
             {
               "name": "compute",
               "role": "compute",
-              "count": 3,
-              "vmSize": "Standard_D2s_v3",
+              "count": 4,
+              "vmSize": "Standard_D4s_v3",
               "osType": "Linux"
             }
           ],
           "routerProfiles": [
             {
-              "fqdn": "rg1-router.location1.cloudapp.azure.com",
+              "fqdn": "dce5faa189c841b99f8a.location1.cloudapp.azure.com",
               "name": "default",
-              "publicSubdomain": "rg1.openshift.com"
+              "publicSubdomain": "b788fade68d345da9b77.location1.int.aksapp.io"
             }
           ],
-          "servicePrincipalProfile": {
-            "clientId": "clientid"
+          "authProfile": {
+            "identityProviders": [
+                {
+                    "name": "Azure AD",
+                    "provider": {
+                        "kind": "AADIdentityProvider",
+                        "clientId": "clientId",
+                        "tenantId": "tenantId"
+                    }
+                }]
           }
         }
       }
