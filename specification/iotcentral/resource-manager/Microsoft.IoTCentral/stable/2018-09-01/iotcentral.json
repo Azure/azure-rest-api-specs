@@ -537,6 +537,7 @@
     },
     "ErrorDetails": {
       "description": "Error details.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorResponseBody"
@@ -546,18 +547,22 @@
     "ErrorResponseBody": {
       "description": "Details of error response.",
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
-          "description": "Error code, intended to be consumed programmatically."
+          "description": "Error code, intended to be consumed programmatically.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "Description of the error, intended for display in user interface."
+          "description": "Description of the error, intended for display in user interface.",
+          "readOnly": true
         },
         "target": {
           "type": "string",
-          "description": "Target of the particular error, for example name of the property."
+          "description": "Target of the particular error, for example name of the property.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
