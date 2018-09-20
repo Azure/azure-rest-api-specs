@@ -259,6 +259,18 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-datalake/analytics
 ```
 
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-job-2017-09-preview
+  - tag: package-catalog-2016-11
+  - tag: package-job-2016-11
+  - tag: package-job-2016-03-preview
+  - tag: package-job-2015-11-preview
+  - tag: package-catalog-2015-10-preview
+```
+
 # Validation
 
 Since this RP has no unique default package, iterate over all of them for validation:
