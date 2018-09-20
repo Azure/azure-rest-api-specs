@@ -537,7 +537,7 @@
     },
     "ErrorDetails": {
       "description": "Error details.",
-      "type": "object",
+      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorResponseBody"
@@ -655,7 +655,8 @@
       "properties": {
         "name": {
           "description": "The name of the IoT Central application instance to check.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,63}$"
         },
         "type": {
           "description": "The name of the IoT Central resource name to query.",
