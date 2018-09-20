@@ -8,7 +8,5 @@ typescript:
   azure-arm: true
   package-name: arm-dns
   output-folder: $(typescript-sdks-folder)/packages/arm-dns
-  generate-license-txt: true
-  generate-package-json: true
-  generate-readme-md: true
+  generate-metadata: true
 ```

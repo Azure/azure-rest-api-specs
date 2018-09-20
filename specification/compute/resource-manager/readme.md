@@ -445,6 +445,7 @@ swagger-to-sdk:
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-compute
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby

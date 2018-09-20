@@ -870,12 +870,10 @@
         },
         "script": {
           "type": "string",
-          "readOnly": true,
           "description": "the script to run. Please note that the maximum script size is 3 MB."
         },
         "type": {
           "type": "string",
-          "readOnly": true,
           "description": "the job type of the current job (i.e. Hive or USql)."
         }
       },
@@ -1468,12 +1466,10 @@
         },
         "name": {
           "type": "string",
-          "readOnly": true,
           "description": "the friendly name of the job."
         },
         "type": {
           "type": "string",
-          "readOnly": true,
           "description": "the job type of the current job (Hive or USql).",
           "enum": [
             "USql",
@@ -1494,13 +1490,13 @@
           "default": 1,
           "format": "int32",
           "readOnly": true,
-          "description": "the degree of parallelism used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used."
+          "description": "the degree of parallelism used for this job."
         },
         "degreeOfParallelismPercent": {
           "type": "number",
           "format": "double",
           "readOnly": true,
-          "description": "the degree of parallelism in percentage used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
+          "description": "the degree of parallelism in percentage used for this job."
         },
         "priority": {
           "type": "integer",
@@ -1578,6 +1574,11 @@
         "related": {
           "$ref": "#/definitions/JobRelationshipProperties",
           "description": "the recurring job relationship information properties."
+        },
+        "hierarchyQueueNode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of hierarchy queue node this job is assigned to, null if job has not been assigned yet or the account doesn't have hierarchy queue."
         }
       },
       "required": [
@@ -1653,7 +1654,8 @@
       "type": "string",
       "default": "azuredatalakeanalytics.net",
       "x-ms-skip-url-encoding": true,
-      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
+      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests.",
+      "x-ms-parameter-location":"client"
     }
   }
 }
