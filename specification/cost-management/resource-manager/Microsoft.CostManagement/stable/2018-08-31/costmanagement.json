@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-05-31",
+    "version": "2018-08-31",
     "title": "CostManagementClient"
   },
   "host": "management.azure.com",
@@ -397,7 +397,7 @@
           "Dimensions"
         ],
         "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "BillingAccountDimensions_List",
+        "operationId": "Dimensions_ListByBillingAccount",
         "description": "Lists the dimensions by billingAccount Id.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -470,13 +470,250 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "Dimensions_ListByEnrollmentAccount",
+        "description": "Lists the dimensions by Enrollment Account Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "EnrollmentAccountDimensionsList": {
+            "$ref": "./examples/EnrollmentAccountDimensionsList.json"
+          },
+          "EnrollmentAccountDimensionsListExpandAndTop": {
+            "$ref": "./examples/EnrollmentAccountDimensionsListExpandAndTop.json"
+          },
+          "EnrollmentAccountDimensionsListWithFilter": {
+            "$ref": "./examples/EnrollmentAccountDimensionsListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "Dimensions_ListByDepartment",
+        "description": "Lists the dimensions by Department Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DepartmentDimensionsList": {
+            "$ref": "./examples/DepartmentDimensionsList.json"
+          },
+          "DepartmentDimensionsListExpandAndTop": {
+            "$ref": "./examples/DepartmentDimensionsListExpandAndTop.json"
+          },
+          "DepartmentDimensionsListWithFilter": {
+            "$ref": "./examples/DepartmentDimensionsListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "Dimensions_ListByManagementGroup",
+        "description": "Lists the dimensions by managementGroup Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ManagementGroupDimensionsList": {
+            "$ref": "./examples/ManagementGroupDimensionsList.json"
+          },
+          "ManagementGroupDimensionsListExpandAndTop": {
+            "$ref": "./examples/ManagementGroupDimensionsListExpandAndTop.json"
+          },
+          "ManagementGroupDimensionsListWithFilter": {
+            "$ref": "./examples/ManagementGroupDimensionsListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/dimensions": {
       "get": {
         "tags": [
           "Dimensions"
         ],
         "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "SubscriptionDimensions_List",
+        "operationId": "Dimensions_ListBySubscription",
         "description": "Lists the dimensions by subscription Id.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -549,7 +786,7 @@
           "Dimensions"
         ],
         "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "ResourceGroupDimensions_List",
+        "operationId": "Dimensions_ListByResourceGroup",
         "description": "Lists the dimensions by resource group Id.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -624,8 +861,8 @@
         "tags": [
           "Query"
         ],
-        "operationId": "QuerySubscription",
-        "description": "Lists the usage data for subscriptionId.",
+        "operationId": "Query_UsageBySubscription",
+        "description": "Query the usage data for subscriptionId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -675,8 +912,8 @@
         "tags": [
           "Query"
         ],
-        "operationId": "QueryResourceGroup",
-        "description": "Lists the usage data for subscriptionId and resource group.",
+        "operationId": "Query_UsageByResourceGroup",
+        "description": "Query the usage data for subscriptionId and resource group.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -729,8 +966,8 @@
         "tags": [
           "Query"
         ],
-        "operationId": "QueryBillingAccount",
-        "description": "Lists the usage data for billing account.",
+        "operationId": "Query_UsageByBillingAccount",
+        "description": "Query the usage data for billing account.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -745,6 +982,162 @@
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_UsageByEnrollmentAccount",
+        "description": "Query the usage data for an enrollment account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "EnrollmentAccountQuery": {
+            "$ref": "./examples/EnrollmentAccountQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },    
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_UsageByDepartment",
+        "description": "Query the usage data for department.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DepartmentQuery": {
+            "$ref": "./examples/DepartmentQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_UsageByManagmentGroup",
+        "description": "Lists the usage data for managment group.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ManagmentGroupQuery": {
+            "$ref": "./examples/ManagmentGroupQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
           },
           {
             "name": "parameters",
@@ -1279,6 +1672,15 @@
     "DimensionProperties": {
       "type": "object",
       "properties": {
+        "description": {
+          "type": "string"
+        },
+        "filterEnabled": {
+          "type": "boolean"
+        },
+        "groupingEnabled": {
+          "type": "boolean"
+        },
         "data": {
           "type": "array",
           "items": {
@@ -1444,6 +1846,30 @@
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "description": "ManagementGroup ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentIdParameter": {
+      "name": "departmentId",
+      "in": "path",
+      "description": "Department ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountIdParameter": {
+      "name": "enrollmentAccountId",
+      "in": "path",
+      "description": "Enrollment Account ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
