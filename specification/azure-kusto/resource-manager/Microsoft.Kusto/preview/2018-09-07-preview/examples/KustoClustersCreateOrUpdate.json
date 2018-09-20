@@ -1,11 +1,16 @@
-﻿{
+{
   "parameters": {
     "subscriptionId": "12345678-1234-1234-1234-123456789098",
     "resourceGroupName": "kustorptest",
     "clusterName": "KustoClusterRPTest4",
-    "api-version": "2017-09-07-privatepreview",
+    "api-version": "2018-09-07-preview",
     "parameters": {
-      "location": "westus"
+      "location": "westus",
+      "sku": {
+        "name": "L8",
+        "capacity": 2,
+        "tier": "Standard"
+      }
     }
   },
   "responses": {
@@ -18,6 +23,11 @@
         "location": "westus",
         "properties": {
           "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "L8",
+          "capacity": 2,
+          "tier": "Standard"
         }
       }
     },
