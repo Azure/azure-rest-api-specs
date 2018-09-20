@@ -199,7 +199,7 @@ batch:
 These settings apply only when `--tag=package-2018-07 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-04' && $(go)
+``` yaml $(tag) == 'package-2018-07' && $(go)
 output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2018-07-01-preview/policyinsights
 ```
 
@@ -267,7 +267,7 @@ batch:
 These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-04' && $(java)
+``` yaml $(tag) == 'package-2018-07' && $(java)
 java:
   namespace: com.microsoft.azure.management.policyinsights.v2018_07_01_preview
   output-folder: $(azure-libraries-for-java-folder)/policyinsights/resource-manager/v2018_07_01_preview
