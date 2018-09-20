@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2018-06
+tag: package-2018-06-preview
 ```
 
 ### Tag: package-2015-10
@@ -121,11 +121,11 @@ input-file:
 - Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
 ```
 
-### Tag: package-2018-06
+### Tag: package-2018-06-preview
 
-These settings apply only when `--tag=package-2018-06` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06'
+``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
 - Microsoft.Automation/stable/2015-10-31/account.json
 - Microsoft.Automation/stable/2015-10-31/certificate.json
@@ -137,8 +137,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
 - Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
 - Microsoft.Automation/stable/2015-10-31/module.json
-- Microsoft.Automation/stable/2018-06-30/python2package.json
-- Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
@@ -154,6 +152,8 @@ input-file:
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
 - Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
+- Microsoft.Automation/stable/2018-06-30/runbook.json
+- Microsoft.Automation/stable/2018-06-30/python2package.json
 ```
 
 ---
@@ -178,6 +178,9 @@ directive:
   - suppress: LongRunningResponseStatusCode
     from: runbook.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/publish"].post["x-ms-long-running-operation"]
+  - suppress: LongRunningResponseStatusCode
+    from: runbook.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/publish"].post["x-ms-long-running-operation"]
 ```
 
 ---
@@ -227,7 +230,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.automation
   package-name: azure-mgmt-automation
-  package-version: 0.2.0
+  package-version: 0.3.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -259,7 +262,7 @@ batch:
   - tag: package-2015-10
   - tag: package-2017-05-preview
   - tag: package-2018-01-preview
-  - tag: package-2018-06
+  - tag: package-2018-06-preview
 ```
 
 ### Tag: package-2015-10 and go
@@ -289,13 +292,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2018-01-preview/automation
 ```
 
-### Tag: package-2018-06 and go
+### Tag: package-2018-06-preview and go
 
-These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-06' && $(go)
-output-folder: $(go-sdk-folder)/services/automation/mgmt/2018-06-30/automation
+``` yaml $(tag) == 'package-2018-06-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/automation/mgmt/2018-06-preview/automation
 ```
 
 ## Java

@@ -26,7 +26,17 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05-preview
+tag: package-2018-09-preview
+```
+
+
+### Tag: package-2018-09-preview
+
+These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-preview'
+input-file:
+- Microsoft.EventGrid/preview/2018-09-15-preview/EventGrid.json
 ```
 
 
@@ -149,10 +159,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-09-preview
   - tag: package-2018-05-preview
   - tag: package-2018-01
   - tag: package-2017-09-preview
   - tag: package-2017-06-preview
+```
+
+### Tag: package-2018-09-preview and go
+
+These settings apply only when `--tag=package-2018-09-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-09-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/eventgrid/mgmt/2018-09-15-preview/eventgrid
 ```
 
 ### Tag: package-2018-05-preview and go
@@ -210,8 +230,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventgrid
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-09-preview
   - tag: package-2018-05-preview
   - tag: package-2018-01
+```
+
+### Tag: package-2018-09-preview and java
+
+These settings apply only when `--tag=package-2018-09-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-09-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.eventgrid.v2018_09_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_09_15_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-05-preview and java

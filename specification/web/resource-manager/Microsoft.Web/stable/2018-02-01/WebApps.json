@@ -911,6 +911,99 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the Azure storage account configurations of an app.",
+        "description": "Updates the Azure storage account configurations of an app.",
+        "operationId": "WebApps_UpdateAzureStorageAccounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "azureStorageAccounts",
+            "in": "body",
+            "description": "Azure storage accounts of the app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Azure storage account configurations of an app.",
+        "description": "Gets the Azure storage account configurations of an app.",
+        "operationId": "WebApps_ListAzureStorageAccounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/backup": {
       "put": {
         "tags": [
@@ -4781,7 +4874,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -5172,7 +5265,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -7566,6 +7659,113 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SiteAuthSettings"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/azurestorageaccounts": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the Azure storage account configurations of an app.",
+        "description": "Updates the Azure storage account configurations of an app.",
+        "operationId": "WebApps_UpdateAzureStorageAccountsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "azureStorageAccounts",
+            "in": "body",
+            "description": "Azure storage accounts of the app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the Azure storage account configurations for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/azurestorageaccounts/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Azure storage account configurations of an app.",
+        "description": "Gets the Azure storage account configurations of an app.",
+        "operationId": "WebApps_ListAzureStorageAccountsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the Azure storage account configurations for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
             }
           },
           "default": {
@@ -11916,7 +12116,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -12238,7 +12438,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -14788,7 +14988,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -15659,7 +15859,7 @@
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
-	  "default": {
+          "default": {
             "description": "App Service error response.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
@@ -16198,7 +16398,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -16817,6 +17017,25 @@
         }
       }
     },
+    "AzureStoragePropertyDictionaryResource": {
+      "description": "AzureStorageInfo dictionary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Azure storage accounts.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "./CommonDefinitions.json#/definitions/AzureStorageInfoValue"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "AzureTableStorageApplicationLogsConfig": {
       "description": "Application logs to Azure table storage configuration.",
       "required": [
@@ -16994,6 +17213,10 @@
             "storageAccountUrl"
           ],
           "properties": {
+            "backupName": {
+              "description": "Name of the backup.",
+              "type": "string"
+            },
             "enabled": {
               "description": "True if the backup schedule is enabled (must be included in that case), false if the backup schedule should be disabled.",
               "type": "boolean"
@@ -17241,6 +17464,10 @@
             "name": "PublishingProfileFormat",
             "modelAsString": true
           }
+        },
+        "includeDisasterRecoveryEndpoints": {
+          "description": "Include the DisasterRecover endpoint if true",
+          "type": "boolean"
         }
       }
     },
@@ -19474,6 +19701,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "Hyper-V sandbox.",
               "default": false,
               "type": "boolean",
@@ -19689,7 +19925,7 @@
       }
     },
     "SlotConfigNames": {
-      "description": "Names for connection strings and application settings to be marked as sticky to the deployment slot and not moved during a swap operation.\nThis is valid for all deployment slots in an app.",
+      "description": "Names for connection strings, application settings, and external Azure storage account configuration\nidentifiers to be marked as sticky to the deployment slot and not moved during a swap operation.\nThis is valid for all deployment slots in an app.",
       "type": "object",
       "properties": {
         "connectionStringNames": {
@@ -19701,6 +19937,13 @@
         },
         "appSettingNames": {
           "description": "List of application settings names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureStorageConfigNames": {
+          "description": "List of external Azure storage account identifiers.",
           "type": "array",
           "items": {
             "type": "string"

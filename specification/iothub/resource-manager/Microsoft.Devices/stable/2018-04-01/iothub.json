@@ -3118,6 +3118,32 @@
         "message": {
           "description": "Routing message",
           "$ref": "#/definitions/RoutingMessage"
+        },
+        "twin": {
+          "description": "Routing Twin Reference",
+          "$ref": "#/definitions/RoutingTwin"
+        }
+      }
+    },
+    "RoutingTwin": {
+      "description": "Twin reference input parameter. This is an optional parameter",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Twin Tags",
+          "type": "object"
+        },
+        "properties": {
+          "properties": {
+            "desiredProperties" : {
+              "description": "Twin desired properties",
+              "type": "object"
+            },
+            "reportedProperties" : {
+              "description": "Twin desired properties",
+              "type": "object"
+            }
+          }
         }
       }
     },
@@ -3182,6 +3208,10 @@
         "route": {
           "description": "Route properties",
           "$ref": "#/definitions/RouteProperties"
+        },
+        "twin": {
+          "description": "Routing Twin Reference",
+          "$ref": "#/definitions/RoutingTwin"
         }
       }
     },
