@@ -32,7 +32,7 @@ let githubFooter = `[AutoRest Linter Guidelines](https://github.com/Azure/azure-
     `\n\nThanks for your co-operation.`;
 
 let fileSummaryHeader = (file_name, file_href) => `## Config file: [${file_name}](${file_href})\n`;
-let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `<details><summary><a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}</summary>\n\n${issue_table}\n</details>`;
+let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `<details><summary><h3 style="display: inline"><a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}</h3></summary><br>\n\n${issue_table}\n</details>`;
 let fileSummaryExistingTemplate = (issue_type, issue_count, issue_table) => `<details><summary>${iconFor(issue_type)} ${issue_count} existing ${pluralize(issue_type, issue_count)}</summary><br>\n\n${issue_table}\n</details>\n\n`;
 
 let potentialNewWarningErrorSummaryHeader = `
