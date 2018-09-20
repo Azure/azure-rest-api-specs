@@ -300,7 +300,7 @@ function postProcessing() {
 
         let beforeErrorsAndWarningsArray = jsonData['files'][fileName]['before'];
         beforeErrorsAndWarningsArray.forEach(beforeErrorOrWarning => {
-            if(beforeErrorOrWarning.type.toLowerCase() == 'warning'){
+            if(beforeErrorOrWarning.type != undefined && beforeErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(beforeErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     beforeWarningsSDKArray.push(beforeErrorOrWarning);
                 } else {
@@ -308,7 +308,7 @@ function postProcessing() {
                 }
             }
 
-            if(beforeErrorOrWarning.type.toLowerCase() == 'error'){
+            if(beforeErrorOrWarning.type != undefined && beforeErrorOrWarning.type.toLowerCase() == 'error'){
                 if(beforeErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     beforeErrorsSDKArray.push(beforeErrorOrWarning);
                 } else {
@@ -319,7 +319,7 @@ function postProcessing() {
 
         let afterErrorsAndWarningsArray = jsonData['files'][fileName]['after'];
         afterErrorsAndWarningsArray.forEach(afterErrorOrWarning => {
-            if(afterErrorOrWarning.type.toLowerCase() == 'warning'){
+            if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     afterWarningsSDKArray.push(afterErrorOrWarning);
                 } else {
@@ -327,7 +327,7 @@ function postProcessing() {
                 }
             }
 
-            if(afterErrorOrWarning.type.toLowerCase() == 'error'){
+            if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'error'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     afterErrorsSDKArray.push(afterErrorOrWarning);
                 } else {
