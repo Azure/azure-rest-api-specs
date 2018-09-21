@@ -41,8 +41,8 @@ input-file:
 - Microsoft.Network/preview/2018-08-01-preview/network.json
 - Microsoft.Network/preview/2018-08-01-preview/webapplicationfirewall.json
 directive:
-    - where:
-        - $.paths
+  - where:
+      - $.paths
     suppress:
       - OperationsAPIImplementation
 ```
