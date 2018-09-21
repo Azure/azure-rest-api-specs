@@ -2222,6 +2222,9 @@
           },
           "Create a scale set with virtual machines in different zones.": {
             "$ref": "./examples/CreateAScaleSetWithVMsInDifferentZones.json"
+          },
+          "Create a scale set with differencing os disks.": {
+            "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
           }
         }
       },
@@ -5195,7 +5198,7 @@
         "Local"
       ],
       "x-ms-enum": {
-        "name": "DiffDiskOption",
+        "name": "DiffDiskOptions",
         "modelAsString": true
       }
     },
@@ -5206,7 +5209,7 @@
           "description": "Specifies the differencing disk settings for operating system disk."
         }
       },
-      "description": "The parameters of a DiffDiskSettings for operating system disk."
+      "description": "Describes the parameters of differencing disk settings that can be be specified for operating system disk. <br><br> NOTE: The differencing disk settings can only be specified for managed disk."
     },
     "ManagedDiskParameters": {
       "properties": {
