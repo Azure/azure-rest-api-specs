@@ -42,9 +42,9 @@
         "tags": [
           "ServiceTopologies"
         ],
-        "operationId": "ServiceTopologies_Create",
-        "summary": "Creates a new service topology.",
-        "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
+        "operationId": "ServiceTopologies_CreateOrUpdate",
+        "summary": "Creates or updates a service topology.",
+        "description": "Synchronously creates a new service topology or updates an existing service topology.",
         "x-ms-examples": {
           "Create a topology with Artifact Source": {
             "$ref": "./examples/servicetopology_createorupdate.json"
@@ -165,9 +165,9 @@
         "tags": [
           "Services"
         ],
-        "operationId": "Services_Create",
+        "operationId": "Services_CreateOrUpdate",
         "summary": "Creates or updates a service in the topology.",
-        "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
+        "description": "Synchronously creates a new service or updates an existing service.",
         "x-ms-examples": {
           "Create service": {
             "$ref": "./examples/service_createorupdate.json"
@@ -306,7 +306,7 @@
         "tags": [
           "ServiceUnits"
         ],
-        "operationId": "ServiceUnits_Create",
+        "operationId": "ServiceUnits_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "summary": "Creates or updates a service unit in the service within the referenced topology resource.",
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
@@ -466,9 +466,9 @@
         "tags": [
           "Steps"
         ],
-        "operationId": "Steps_Create",
-        "summary": "Creates a new deployment step.",
-        "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
+        "operationId": "Steps_CreateOrUpdate",
+        "summary": "Creates or updates a deployment step.",
+        "description": "Synchronously creates a new step or updates an existing step.",
         "x-ms-examples": {
           "Create deployment step": {
             "$ref": "./examples/step_createorupdate.json"
@@ -597,12 +597,12 @@
         "tags": [
           "Rollouts"
         ],
-        "operationId": "Rollouts_Create",
+        "operationId": "Rollouts_CreateOrUpdate",
         "x-ms-long-running-operation": true,
-        "summary": "Creates a new rollout.",
-        "description": "This is an asynchronous operation and can be polled to completion using the rollout identifier returned by this operation.",
+        "summary": "Creates or updates a rollout.",
+        "description": "This is an asynchronous operation and can be polled to completion using the location header returned by this operation.",
         "x-ms-examples": {
-          "Create rollout": {
+          "Create or update rollout": {
             "$ref": "./examples/rollout_createorupdate.json"
           }
         },
@@ -832,9 +832,9 @@
         "tags": [
           "ArtifactSources"
         ],
-        "operationId": "ArtifactSources_Create",
-        "summary": "Creates a new Artifact source.",
-        "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
+        "operationId": "ArtifactSources_CreateOrUpdate",
+        "summary": "Creates or updates an Artifact source.",
+        "description": "Synchronously creates a new artifact source or updates an existing artifact source.",
         "x-ms-examples": {
           "Create artifact source": {
             "$ref": "./examples/artifactsource_createorupdate.json"
