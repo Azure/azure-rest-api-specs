@@ -906,118 +906,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "ReportConfigListResult": {
-      "description": "Result of listing report configs. It contains a list of available report configurations in the scope provided.",
-      "properties": {
-        "value": {
-          "description": "The list of report configs.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ReportConfig"
-          }
-        }
-      }
-    },
-    "ReportConfig": {
-      "description": "A report config resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReportConfigProperties",
-          "title": "Report config properties"
-        }
-      }
-    },
-    "ReportConfigProperties": {
-      "description": "The properties of the report config.",
-      "properties": {
-        "schedule": {
-          "description": "Has schedule information for the report config.",
-          "$ref": "#/definitions/ReportConfigSchedule"
-        },
-        "format": {
-          "description": "The format of the report being delivered.",
-          "type": "string",
-          "enum": [
-            "Csv"
-          ],
-          "x-ms-enum": {
-            "name": "FormatType",
-            "modelAsString": true
-          }
-        },
-        "deliveryInfo": {
-          "description": "Has delivery information for the report config.",
-          "$ref": "#/definitions/ReportConfigDeliveryInfo"
-        },
-        "definition": {
-          "description": "Has definition for the report config.",
-          "$ref": "#/definitions/ReportConfigDefinition"
-        }
-      },
-      "required": [
-        "deliveryInfo",
-        "definition"
-      ]
-    },
-    "ReportConfigSchedule": {
-      "description": "The schedule associated with a report config.",
-      "properties": {
-        "status": {
-          "description": "The status of the schedule. Whether active or not. If inactive, the report's scheduled execution is paused.",
-          "type": "string",
-          "enum": [
-            "Active",
-            "Inactive"
-          ],
-          "x-ms-enum": {
-            "name": "StatusType",
-            "modelAsString": true
-          }
-        },
-        "recurrence": {
-          "description": "The schedule recurrence.",
-          "type": "string",
-          "enum": [
-            "Daily",
-            "Weekly",
-            "Monthly",
-            "Annually"
-          ],
-          "x-ms-enum": {
-            "name": "RecurrenceType",
-            "modelAsString": true
-          }
-        },
-        "recurrencePeriod": {
-          "description": "Has start and end date of the recurrence. The start date must be in future. If present, the end date must be greater than start date.",
-          "$ref": "#/definitions/ReportConfigRecurrencePeriod"
-        }
-      },
-      "required": [
-        "recurrence",
-        "recurrencePeriod"
-      ]
-    },
-    "ReportConfigDeliveryInfo": {
-      "description": "The delivery information associated with a report config.",
-      "properties": {
-        "destination": {
-          "description": "Has destination for the report being delivered.",
-          "$ref": "#/definitions/ReportConfigDeliveryDestination"
-        }
-      },
-      "required": [
-        "destination"
-      ]
-    },
     "ReportConfigDefinition": {
       "description": "The definition of a report config.",
       "properties": {
@@ -1058,45 +946,6 @@
       "required": [
         "type",
         "timeframe"
-      ]
-    },
-    "ReportConfigRecurrencePeriod": {
-      "description": "The start and end date for recurrence schedule.",
-      "properties": {
-        "from": {
-          "description": "The start date of recurrence.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "to": {
-          "description": "The end date of recurrence. If not provided, we default this to 10 years from the start date.",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "from"
-      ]
-    },
-    "ReportConfigDeliveryDestination": {
-      "description": "The destination information for the delivery of the report.",
-      "properties": {
-        "resourceId": {
-          "description": "The resource id of the storage account where reports will be delivered.",
-          "type": "string"
-        },
-        "container": {
-          "description": "The name of the container where reports will be uploaded.",
-          "type": "string"
-        },
-        "rootFolderPath": {
-          "description": "The name of the directory where reports will be uploaded.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "resourceId",
-        "container"
       ]
     },
     "ReportConfigTimePeriod": {
@@ -1522,14 +1371,6 @@
       "name": "enrollmentAccountId",
       "in": "path",
       "description": "Enrollment Account ID",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "reportConfigNameParameter": {
-      "name": "reportConfigName",
-      "in": "path",
-      "description": "Report Config Name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
