@@ -5,7 +5,8 @@
 
 const fs = require('fs'),
       utils = require('../test/util/utils'),
-      path = require('path');
+      path = require('path'),
+      gitHubPost = require('./postToGitHub');
 
 let pullRequestNumber = utils.getPullRequestNumber();
 let targetBranch = utils.getTargetBranch();
@@ -31,7 +32,7 @@ let githubFooter = `[AutoRest Linter Guidelines](https://github.com/Azure/azure-
     `\n\nThanks for your co-operation.`;
 
 let fileSummaryHeader = (file_name, file_href) => `## Config file: [${file_name}](${file_href})\n`;
-let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `### <a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}\n\n${issue_table}\n`;
+let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `<details><summary><h3 style="display: inline"><a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}</h3></summary><br>\n\n${issue_table}\n</details>`;
 let fileSummaryExistingTemplate = (issue_type, issue_count, issue_table) => `<details><summary>${iconFor(issue_type)} ${issue_count} existing ${pluralize(issue_type, issue_count)}</summary><br>\n\n${issue_table}\n</details>\n\n`;
 
 let potentialNewWarningErrorSummaryHeader = `
@@ -65,7 +66,10 @@ try {
 }
 
 function compareJsonRef(beforeJsonRef, afterJsonRef) {
-    return (beforeJsonRef.replace(/json:\d+:\d+/, '') == afterJsonRef.replace(/json:\d+:\d+/, ''));
+    beforeJsonRef = beforeJsonRef.replace(/.*\.json:\d+:\d+/, '')
+    afterJsonRef = afterJsonRef.replace(/.*\.json:\d+:\d+/, '')
+
+    return (beforeJsonRef == afterJsonRef);
 }
 
 function getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount) {
@@ -296,7 +300,7 @@ function postProcessing() {
 
         let beforeErrorsAndWarningsArray = jsonData['files'][fileName]['before'];
         beforeErrorsAndWarningsArray.forEach(beforeErrorOrWarning => {
-            if(beforeErrorOrWarning.type.toLowerCase() == 'warning'){
+            if(beforeErrorOrWarning.type != undefined && beforeErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(beforeErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     beforeWarningsSDKArray.push(beforeErrorOrWarning);
                 } else {
@@ -304,7 +308,7 @@ function postProcessing() {
                 }
             }
 
-            if(beforeErrorOrWarning.type.toLowerCase() == 'error'){
+            if(beforeErrorOrWarning.type != undefined && beforeErrorOrWarning.type.toLowerCase() == 'error'){
                 if(beforeErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     beforeErrorsSDKArray.push(beforeErrorOrWarning);
                 } else {
@@ -315,7 +319,7 @@ function postProcessing() {
 
         let afterErrorsAndWarningsArray = jsonData['files'][fileName]['after'];
         afterErrorsAndWarningsArray.forEach(afterErrorOrWarning => {
-            if(afterErrorOrWarning.type.toLowerCase() == 'warning'){
+            if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     afterWarningsSDKArray.push(afterErrorOrWarning);
                 } else {
@@ -323,7 +327,7 @@ function postProcessing() {
                 }
             }
 
-            if(afterErrorOrWarning.type.toLowerCase() == 'error'){
+            if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'error'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     afterErrorsSDKArray.push(afterErrorOrWarning);
                 } else {
@@ -356,6 +360,7 @@ function postProcessing() {
         console.log("Existing ARM Errors: ", existingARMErrors.length);
         console.log("Existing ARM Warnings: ", existingARMWarnings.length);
         console.log();
+
         if (newSDKErrors.length > 0) {
             console.log(`Potential new SDK errors`)
             console.log("========================");
@@ -402,6 +407,12 @@ function postProcessing() {
     console.log("---output");
     console.log(JSON.stringify(output, null, 2));
     console.log("---");
+
+    if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
+        let slug = process.env.TRAVIS_REPO_SLUG;
+        slug = slug.split("/")[1];
+        gitHubPost.postGithubComment("Azure", slug, pullRequestNumber, output.text);
+    }
 
     if (newSDKErrorsCount > 0 || newARMErrorsCount > 0) {
         process.exitCode = 1;
