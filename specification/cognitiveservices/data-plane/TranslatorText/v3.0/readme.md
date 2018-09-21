@@ -102,7 +102,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'release_1_0' && $(go)
 output-folder: $(go-sdk-folder)/services/cognitiveservices/translatortext/v3.0/translatortext
-
+```
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
