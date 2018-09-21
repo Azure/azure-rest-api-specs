@@ -19,27 +19,27 @@ typescript:
 
 ``` yaml $(typescript) && $(default-api-version) == '2018-02-01'
 typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/lib
+  output-folder: $(js-sdks-folder)/packages/arm-storage
 ```
 
 ``` yaml $(typescript) && $(tag) == 'package-2016-01'
 typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2016-01-01/lib
+  output-folder: $(js-sdks-folder)/packages/arm-storage/2016-01-01
 ```
 
 ``` yaml $(typescript) && $(tag) == 'package-2017-10'
 typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2017-10-01/lib
+  output-folder: $(js-sdks-folder)/packages/arm-storage/2017-10-01
 ```
 
 ``` yaml $(typescript) && $(tag) == 'package-2018-02'
 typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2018-02-01/lib
+  output-folder: $(js-sdks-folder)/packages/arm-storage/2018-02-01
 ```
 
 ``` yaml $(typescript) && $(tag) == 'package-2018-03'
 typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2018-03-01-preview/lib
+  output-folder: $(js-sdks-folder)/packages/arm-storage/2018-03-01-preview
 ```
 
 ``` yaml $(typescript) && $(multiapi)
