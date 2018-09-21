@@ -57,6 +57,16 @@ directive:
 
 ```
 
+### Tag: package-2018-07
+
+These settings apply only when `--tag=package-2018-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07'
+input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+```
+
+
 ### Tag: package-2018-04
 
 These settings apply only when `--tag=package-2018-04` is specified on the command line.

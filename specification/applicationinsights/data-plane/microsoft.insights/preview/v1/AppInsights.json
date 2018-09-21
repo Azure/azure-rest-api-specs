@@ -338,6 +338,41 @@
             }
           }
         }
+      },
+      "get": {
+        "operationId": "Query_Get",
+        "summary": "Execute an Analytics query",
+        "description": "Executes an Analytics query for data",
+        "x-ms-examples": {
+          "queryGet": {
+            "$ref": "examples/query-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/queryTimespan"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
       }
     }
   },

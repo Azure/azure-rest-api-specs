@@ -31,6 +31,16 @@ tag: package-2018-04-02
 
 
 
+### Tag: package-2018-07-01
+
+These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-01'
+input-file:
+- Microsoft.StorageSync/preview/2018-07-01/storagesync.json
+```
+
+
 ### Tag: package-2018-04-02
 
 These settings apply only when `--tag=package-2018-04-02` is specified on the command line.
@@ -62,7 +72,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
 ```
 
@@ -76,8 +87,8 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorageSync
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Storage/Management.StorageSync/Generated
+  payload-flattening-threshold: 1
+  output-folder: $(csharp-sdks-folder)/StorageSync/Management.StorageSync/Generated
   clear-output-folder: true
 ```
 

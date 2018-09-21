@@ -403,7 +403,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes": {
       "get": {
         "tags": [
           "OperationalizationClusters",
@@ -450,7 +450,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}": {
       "get": {
         "tags": [
           "OperationalizationClusters",
@@ -500,8 +500,8 @@
           "MachineLearningComputes"
         ],
         "operationId": "MachineLearningCompute_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
         "description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a BatchAI Compute": { "$ref": "./examples/createBasicBatchAICompute.json" },
           "Create AKS Compute": { "$ref": "./examples/createBasicAKSCompute.json" },
@@ -562,8 +562,8 @@
           "MachineLearningComputes"
         ],
         "operationId": "MachineLearningCompute_Delete",
-        "x-ms-long-running-operation": true,
         "description": "Deletes specified Machine Learning compute.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Compute": { "$ref": "./examples/deleteCompute.json" }
         },
@@ -608,15 +608,68 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys": {
+      },
       "post": {
         "tags": [
           "OperationalizationClusters",
           "MachineLearningComputes"
         ],
-        "operationId": "MachineLearningCompute_GetKeys",
+        "operationId": "MachineLearningCompute_SystemUpdate",
+        "description": "System Update On Machine Learning compute.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "System Update Compute": { "$ref": "./examples/systemUpdateCompute.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compute System updated."
+          },
+          "202": {
+            "description": "Compute System Update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_ListKeys",
         "description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).",
         "x-ms-examples": {
           "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" },
@@ -820,6 +873,10 @@
           "description": "The creation time of the machine learning workspace in ISO8601 format.",
           "type": "string",
           "readOnly": true
+        },
+        "batchaiWorkspace": {
+          "description": "ARM id of the Batch AI workspace associated with this workspace. This cannot be changed once the workspace has been created",
+          "type": "string"
         },
         "keyVault": {
           "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
@@ -1067,6 +1124,10 @@
           "description": "The type of compute",
           "$ref": "#/definitions/ComputeType"
         },
+        "computeLocation": {
+          "description": "Location for the underlying compute",
+          "type": "string"
+        },
         "provisioningState": {
           "type": "string",
           "description": "The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.",
@@ -1210,6 +1271,14 @@
                   "description": "Virtual Machine size",
                   "type": "string"
                 },
+                "sshPort": {
+                  "description": "Port open for ssh connections.",
+                  "type": "integer"
+                },
+                "address": {
+                  "description": "Public IP address of the virtual machine.",
+                  "type": "string"
+                },
                 "administratorAccount": {
                   "description": "Admin credentials for virtual machine",
                   "$ref": "#/definitions/VirtualMachineSshCredentials"
@@ -1220,6 +1289,37 @@
         }
       ],
       "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "HDInsight": {
+      "description": "A HDInsight compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "sshPort": {
+                  "description": "Port open for ssh connections on the master node of the cluster.",
+                  "type": "integer"
+                },
+                "address": {
+                  "description": "Public IP address of the master node of the cluster.",
+                  "type": "string"
+                },
+                "administratorAccount": {
+                  "description": "Admin credentials for master node of the cluster",
+                  "$ref": "#/definitions/VirtualMachineSshCredentials"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "HDInsight"
     },
     "DataFactory": {
       "description": "A DataFactory compute.",
@@ -1400,7 +1500,8 @@
         "AKS",
         "BatchAI",
         "DataFactory",
-        "VirtualMachine"
+        "VirtualMachine",
+        "HDInsight"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
