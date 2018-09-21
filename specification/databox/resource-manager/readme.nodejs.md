@@ -6,11 +6,9 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
   package-name: azure-arm-databox
-  output-folder: $(node-sdks-folder)/lib/services/databoxManagement
+  output-folder: $(node-sdks-folder)/lib/services/databox
   generate-license-txt: true
   generate-package-json: true
-  generate-readme-md: false
+  generate-readme-md: true
 ```

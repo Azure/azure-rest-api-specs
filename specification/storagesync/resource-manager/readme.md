@@ -31,16 +31,6 @@ tag: package-2018-04-02
 
 
 
-### Tag: package-2018-07-01
-
-These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-07-01'
-input-file:
-- Microsoft.StorageSync/preview/2018-07-01/storagesync.json
-```
-
-
 ### Tag: package-2018-04-02
 
 These settings apply only when `--tag=package-2018-04-02` is specified on the command line.
@@ -72,8 +62,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-libraries-for-java
   - repo: azure-sdk-for-node
 ```
 
