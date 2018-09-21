@@ -3,11 +3,7 @@
   "info": {
     "version": "2018-09-01-preview",
     "title": "AzureDeploymentManager",
-    "description": "REST APIs for orchestrating deployments using the Azure Deployment Manager (ADM).",
-    "contact": {
-      "name": "Ev2Dev",
-      "email": "ev2dev@microsoft.com"
-    }
+    "description": "REST APIs for orchestrating deployments using the Azure Deployment Manager (ADM)."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -50,11 +46,11 @@
         "summary": "Creates a new service topology.",
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
-          "Create a topology": {
+          "Create a topology with Artifact Source": {
             "$ref": "./examples/servicetopology_createorupdate.json"
           },
-          "Update a topology": {
-            "$ref": "./examples/servicetopology_createorupdate.json"
+          "Create a topology without Artifact Source": {
+            "$ref": "./examples/servicetopology_createorupdate_noartifactsource.json"
           }
         },
         "parameters": [
@@ -315,8 +311,11 @@
         "summary": "Creates or updates a service unit in the service within the referenced topology resource.",
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
-          "Create service unit": {
+          "Create service unit using relative paths into the artifact source": {
             "$ref": "./examples/serviceunit_createorupdate.json"
+          },
+          "Create service unit using SAS URIs": {
+            "$ref": "./examples/serviceunit_createorupdate_noartifactsource.json"
           }
         },
         "parameters": [
@@ -834,11 +833,14 @@
           "ArtifactSources"
         ],
         "operationId": "ArtifactSources_Create",
-        "summary": "Creates a new Artifact store.",
+        "summary": "Creates a new Artifact source.",
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
           "Create artifact source": {
             "$ref": "./examples/artifactsource_createorupdate.json"
+          },
+          "Create artifact source with artifact root, an offset into the storage container": {
+            "$ref": "./examples/artifactsource_createorupdate_artifactroot.json"
           }
         },
         "parameters": [
@@ -923,7 +925,7 @@
           "ArtifactSources"
         ],
         "operationId": "ArtifactSources_Delete",
-        "summary": "Deletes an artifact store resource.",
+        "summary": "Deletes an artifact source resource.",
         "x-ms-examples": {
           "Delete artifact source": {
             "$ref": "./examples/artifactsource_delete.json"
@@ -945,10 +947,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The artifact store was successfully deleted"
+            "description": "The artifact source was successfully deleted"
           },
           "204": {
-            "description": "The artifact store was not found and the operation is considered success."
+            "description": "The artifact source was not found and the operation is considered success."
           },
           "default": {
             "description": "All non-success conditions are handled using the standard error contract.",
@@ -1454,6 +1456,21 @@
           },
           "description": "Describes the type of ARM deployment to be performed on the resource."
         },
+        "artifacts": {
+          "type": "object",
+          "description": "The artifacts for the service unit.",
+          "$ref": "#/definitions/ServiceUnitArtifacts"
+          }
+      },
+      "required": [
+        "targetResourceGroup",
+        "deploymentMode"
+      ]
+    },
+    "ServiceUnitArtifacts":
+    {
+      "description": "Defines the artifacts of a service unit.",
+      "properties":{
         "templateUri": {
           "type": "string",
           "description": "The full URI of the ARM template file with the SAS token.",
@@ -1466,19 +1483,15 @@
         },
         "templateArtifactSourceRelativePath": {
           "type": "string",
-          "description": "The path to the ARM template file relative to the artifact store.",
+          "description": "The path to the ARM template file relative to the artifact source.",
           "example": "/templates/resource1.template.json"
         },
         "parametersArtifactSourceRelativePath": {
           "type": "string",
-          "description": "The path to the ARM parameters file relative to the artifact store.",
+          "description": "The path to the ARM parameters file relative to the artifact source.",
           "example": "/parameters/resource1.parameters.json"
         }
-      },
-      "required": [
-        "targetResourceGroup",
-        "deploymentMode"
-      ]
+      }
     },
     "RolloutStep": {
       "description": "Defines a specific step on a target service unit.",
@@ -1703,38 +1716,62 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "description": "The properties for the resource.",
           "$ref": "#/definitions/StepProperties"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "StepProperties": {
-      "description": "The properties of a deployment step.",
+      "description": "The properties of a step resource.",
+      "type": "object",
+      "discriminator": "stepType",
       "properties": {
         "stepType": {
           "type": "string",
           "description": "The type of step.",
-          "example": "HealthCheck"
-        },
-        "attributes": {
-          "description": "Provides the input parameters that correspond to the stepType.",
-          "$ref": "#/definitions/StepAttributes"
+          "example": "Wait"
         }
       },
       "required": [
-        "stepType",
-        "attributes"
+        "stepType"
       ]
     },
-    "StepAttributes": {
+    "WaitStepProperties": {
+      "x-ms-discriminator-value": "Wait",
       "type": "object",
-      "description": "The parameters for the deployment step."
+      "description": "Defines the properties of a Wait step.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepProperties"
+        }
+      ],
+      "properties": {
+        "attributes": {
+          "description": "The Wait attributes",
+          "$ref": "#/definitions/WaitStepAttributes"
+        }
+      }
+    },
+    "WaitStepAttributes": {
+      "type": "object",
+      "description": "The parameters for the wait step.",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "The duration in ISO 8601 format of how long the wait should be."
+        }
+      },
+      "required": [
+        "duration"
+      ]
     }
   },
   "parameters": {
     "artifactSourceName": {
-      "description": "The name of the artifact store.",
+      "description": "The name of the artifact source.",
       "name": "artifactSourceName",
       "type": "string",
       "in": "path",
