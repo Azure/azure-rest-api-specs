@@ -2222,6 +2222,9 @@
           },
           "Create a scale set with virtual machines in different zones.": {
             "$ref": "./examples/CreateAScaleSetWithVMsInDifferentZones.json"
+          },
+          "Create a scale set with differencing os disks.": {
+            "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
           }
         }
       },
@@ -5188,6 +5191,26 @@
         "modelAsString": true
       }
     },
+    "DiffDiskOption": {
+      "type": "string",
+      "description": "Specifies the differencing disk option for operating system disk.",
+      "enum": [
+        "Local"
+      ],
+      "x-ms-enum": {
+        "name": "DiffDiskOptions",
+        "modelAsString": true
+      }
+    },
+    "DiffDiskSettings": {
+      "properties": {
+        "option": {
+          "$ref": "#/definitions/DiffDiskOption",
+          "description": "Specifies the differencing disk settings for operating system disk."
+        }
+      },
+      "description": "Describes the parameters of differencing disk settings that can be be specified for operating system disk. <br><br> NOTE: The differencing disk settings can only be specified for managed disk."
+    },
     "ManagedDiskParameters": {
       "properties": {
         "storageAccountType": {
@@ -5239,6 +5262,10 @@
         "writeAcceleratorEnabled": {
           "type": "boolean",
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
+        "diffDiskSettings": {
+         "$ref": "#/definitions/DiffDiskSettings",
+          "description": "Specifies the differencing Disk Settings for the operating system disk used by the virtual machine."
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
@@ -6399,6 +6426,10 @@
         "createOption": {
           "$ref": "#/definitions/CreateOption",
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+        },
+        "diffDiskSettings": {
+         "$ref": "#/definitions/DiffDiskSettings",
+          "description": "Specifies the differencing Disk Settings for the operating system disk used by the virtual machine scale set."
         },
         "diskSizeGB": {
           "type": "integer",
