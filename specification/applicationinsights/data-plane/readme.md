@@ -41,7 +41,6 @@ input-file:
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
-directive:
   - from: swagger-document
     where: $.definitions.table.properties.rows.items.items.type
     transform: $ = "object"
@@ -53,7 +52,6 @@ input-file:
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
-directive:
   - from: swagger-document
     where: $.definitions.table.properties.rows.items.items.type
     transform: $ = "object"
