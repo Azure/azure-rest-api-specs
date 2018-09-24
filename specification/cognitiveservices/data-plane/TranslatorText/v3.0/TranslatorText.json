@@ -1145,9 +1145,13 @@
       ],
       "type": "object",
       "properties": {
-        "Text": {
-          "type": "string"
+        "text": {
+          "type": "string",
+          "maximum": 10000
         }
+      },
+      "example": {
+        "text": "Today is a good day."
       }
     },
     "ErrorMessage": {
@@ -1172,9 +1176,13 @@
       ],
       "type": "object",
       "properties": {
-        "Text": {
-          "type": "string"
+        "text": {
+          "type": "string",
+          "maximum": 10000
         }
+      },
+      "example": {
+        "text": "What language is this? I am not sure, nein"
       }
     },
     "DictionaryLookupTextInput": {
@@ -1183,9 +1191,13 @@
       ],
       "type": "object",
       "properties": {
-        "Text": {
-          "type": "string"
+        "text": {
+          "type": "string",
+          "maximum": 100
         }
+      },
+      "example": {
+        "text": "Bug"
       }
     },
     "DictionaryExampleTextInput": {
@@ -1195,12 +1207,17 @@
       ],
       "type": "object",
       "properties": {
-        "Text": {
-          "type": "string"
+        "text": {
+          "type": "string",
+          "maximum": 100
         },
-        "Translation": {
+        "translation": {
           "type": "string"
         }
+      },
+      "example": {
+        "text": "bug",
+        "translation": "bicho"
       }
     },
     "TranslateTextInput": {
@@ -1209,9 +1226,13 @@
       ],
       "type": "object",
       "properties": {
-        "Text": {
-          "type": "string"
+        "text": {
+          "type": "string",
+          "maximum": 5000
         }
+      },
+      "example": {
+        "text": "How are you today?"
       }
     },
     "TransliterateTextInput": {
@@ -1220,9 +1241,13 @@
       ],
       "type": "object",
       "properties": {
-        "Text": {
-          "type": "string"
+        "text": {
+          "type": "string",
+          "maximum": 5000
         }
+      },
+      "example": {
+        "text": "Good morning, how are you today?"
       }
     }
   }
