@@ -8,5 +8,7 @@ nodejs:
   azure-arm: true
   package-name: azure-arm-deploymentmanager
   output-folder: $(node-sdks-folder)/lib/services/deploymentmanagerManagement
-  generate-metadata: true
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: true
 ```
