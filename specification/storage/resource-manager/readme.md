@@ -26,7 +26,32 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2018-07
+```
+
+### Tag: package-2018-07
+
+These settings apply only when `--tag=package-2018-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07'
+input-file:
+- Microsoft.Storage/stable/2018-07-01/storage.json
+- Microsoft.Storage/stable/2018-07-01/blob.json
+- Microsoft.Storage/preview/2018-03-01-preview/managementpolicy.json
+
+directive:
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+
 ```
 
 ### Tag: package-2018-03
@@ -269,112 +294,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-05-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/storage/mgmt/2015-05-01-preview/storage
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-```yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-storage
-  clear-output-folder: true
-  no-namespace-folders: true
-```
-
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
-batch:
-  - tag: package-2018-03
-  - tag: package-2018-02
-  - tag: package-2017-10
-  - tag: package-2017-06
-  - tag: package-2016-12
-  - tag: package-2016-01
-  - tag: package-2015-06
-```
-
-### Tag: package-2018-03 and python
-
-These settings apply only when `--tag=package-2018-03 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(python)
-python:
-  namespace: azure.mgmt.storage.v2018_03_01_preview
-  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2018_03_01_preview
-```
-
-### Tag: package-2018-02 and python
-
-These settings apply only when `--tag=package-2018-02 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(python)
-python:
-  namespace: azure.mgmt.storage.v2018_02_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2018_02_01
-```
-
-### Tag: package-2017-10 and python
-
-These settings apply only when `--tag=package-2017-10 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(python)
-python:
-  namespace: azure.mgmt.storage.v2017_10_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2017_10_01
-```
-
-### Tag: package-2017-06 and python
-
-These settings apply only when `--tag=package-2017-06 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2017-06' && $(python)
-python:
-  namespace: azure.mgmt.storage.v2017_06_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2017_06_01
-```
-
-### Tag: package-2016-12 and python
-
-These settings apply only when `--tag=package-2016-12 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2016-12' && $(python)
-python:
-  namespace: azure.mgmt.storage.v2016_12_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2016_12_01
-```
-
-### Tag: package-2016-01 and python
-
-These settings apply only when `--tag=package-2016-01 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2016-01' && $(python)
-python:
-  namespace: azure.mgmt.storage.v2016_01_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2016_01_01
-```
-
-### Tag: package-2015-06 and python
-
-These settings apply only when `--tag=package-2015-06 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2015-06' && $(python)
-python:
-  namespace: azure.mgmt.storage.v2015_06_15
-  output-folder: $(python-sdks-folder)/azure-mgmt-storage/azure/mgmt/storage/v2015_06_15
 ```
 
 
