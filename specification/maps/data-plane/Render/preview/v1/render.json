@@ -217,7 +217,7 @@
     "/map/static/{format}": {
       "get": {
         "x-publish": true,
-        "description": "The static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20.\n\nThe supported resolution range for the map image is from 1x1 to 8192x8192.\n\nIf you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice.\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the API.",
+        "description": "The static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20.\n\nThe supported resolution range for the map image is from 1x1 to 8192x8192.\n\nIf you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice.\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the API.\nThe supported Lat and Lon ranges when using the **bbox** parameter, are as follows:\nZoom Level | Max Lon Range | Max Lat Range\n-----------|---------------|--------------\n0 | 360.0 | 170.0\n1 | 360.0 | 170.0\n2 | 360.0 | 170.0\n3 | 360.0 | 170.0\n4 | 360.0 | 170.0\n5 | 180.0 | 85.0\n6 | 90.0 | 42.5\n7 | 45.0 | 21.25\n8 | 22.5 | 10.625\n9 | 11.25 | 5.3125\n10 | 5.625 | 2.62625\n11 | 2.8125 | 1.328125\n12 | 1.40625 | 0.6640625\n13 | 0.703125 | 0.33203125\n14 | 0.3515625 | 0.166015625\n15 | 0.17578125 | 0.0830078125\n16 | 0.087890625 | 0.0415039063\n17 | 0.0439453125 | 0.0207519531\n18 | 0.0219726563 | 0.0103759766\n19 | 0.0109863281 | 0.0051879883\n20 | 0.0054931641 | 0.0025939941",
         "operationId": "Render_GetMapImage",
         "x-ms-examples": {
           "GetMapStaticImage": {
@@ -296,7 +296,7 @@
           {
             "name": "bbox",
             "in": "query",
-            "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'. Note: Either bbox or center are required parameters. They are mutually exclusive. It shouldn’t be used with height or width.",
+            "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'. Note: Either bbox or center are required parameters. They are mutually exclusive. It shouldn’t be used with height or width. \nThe maximum allowed ranges for Lat and Lon are defined for each zoom level in the table at the top of this page. ",
             "required": false,
             "type": "string"
           },

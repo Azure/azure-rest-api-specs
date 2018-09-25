@@ -1,21 +1,221 @@
 {
-    "parameters": {
-        "format": "json",
-        "api-version": "1.0",
-        "subscription-key": "[subscription-key]",
-        "searchAddressBatchRequestBody": {
-            "queries": [
-                "?query=400 Broad St, Seattle, WA 98109&limit=3",
-                "?query=One, Microsoft Way, Redmond, WA 98052&limit=3",
-                "?query=350 5th Ave, New York, NY 10118&limit=1",
-                "?query=Pike Pl, Seattle, WA 98101&lat=47.610970&lon=-122.342469&radius=1000",
-                "?query=Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France&limit=1"                
-            ]
-        }
-    },
-
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "searchAddressBatchRequestBody": {
+      "queries": [
+        "?query=400 Broad St, Seattle, WA 98109&limit=3",
+        "?query=One, Microsoft Way, Redmond, WA 98052&limit=3",
+        "?query=350 5th Ave, New York, NY 10118&limit=1"
+      ]
+    }
+  },
   "responses": {
-    
+    "200": {
+      "headers": {},
+      "body": {
+        "summary": {
+          "successfulRequests": 3,
+          "totalRequests": 3
+        },
+        "batchResults": [
+          {
+            "summary": {
+              "query": "400 broad st seattle wa 98109",
+              "queryType": "NON_NEAR",
+              "queryTime": 30,
+              "numResults": 1,
+              "offset": 0,
+              "totalResults": 1,
+              "fuzzyLevel": 1
+            },
+            "results": [
+              {
+                "type": "Point Address",
+                "id": "US/PAD/p1/3585457",
+                "score": 13.4,
+                "address": {
+                  "streetNumber": "400",
+                  "streetName": "Broad St",
+                  "municipalitySubdivision": "Seattle, South Lake Union, Lower Queen Anne",
+                  "municipality": "Seattle, Queen Anne",
+                  "countrySecondarySubdivision": "King",
+                  "countryTertiarySubdivision": "Seattle",
+                  "countrySubdivision": "WA",
+                  "postalCode": "98109",
+                  "countryCode": "US",
+                  "country": "United States Of America",
+                  "countryCodeISO3": "USA",
+                  "freeformAddress": "400 Broad St, Seattle, WA 98109",
+                  "countrySubdivisionName": "Washington"
+                },
+                "position": {
+                  "lat": 47.62039,
+                  "lon": -122.34928
+                },
+                "viewport": {
+                  "topLeftPoint": {
+                    "lat": 47.62129,
+                    "lon": -122.35061
+                  },
+                  "btmRightPoint": {
+                    "lat": 47.61949,
+                    "lon": -122.34795
+                  }
+                },
+                "entryPoints": [
+                  {
+                    "type": "main",
+                    "position": {
+                      "lat": 47.61982,
+                      "lon": -122.34886
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "summary": {
+              "query": "one microsoft way redmond wa 98052",
+              "queryType": "NON_NEAR",
+              "queryTime": 9,
+              "numResults": 2,
+              "offset": 0,
+              "totalResults": 1692,
+              "fuzzyLevel": 2
+            },
+            "results": [
+              {
+                "type": "Street",
+                "id": "US/STR/p0/4918633",
+                "score": 5.421,
+                "address": {
+                  "streetName": "Microsoft Way",
+                  "municipalitySubdivision": "Redmond",
+                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
+                  "countrySecondarySubdivision": "King",
+                  "countryTertiarySubdivision": "Seattle East",
+                  "countrySubdivision": "WA",
+                  "postalCode": "98052",
+                  "extendedPostalCode": "980526399,980528300",
+                  "countryCode": "US",
+                  "country": "United States Of America",
+                  "countryCodeISO3": "USA",
+                  "freeformAddress": "Microsoft Way, Redmond, WA 98052",
+                  "countrySubdivisionName": "Washington"
+                },
+                "position": {
+                  "lat": 47.63989,
+                  "lon": -122.12509
+                },
+                "viewport": {
+                  "topLeftPoint": {
+                    "lat": 47.63748,
+                    "lon": -122.12309
+                  },
+                  "btmRightPoint": {
+                    "lat": 47.64223,
+                    "lon": -122.13061
+                  }
+                }
+              },
+              {
+                "type": "Cross Street",
+                "id": "US/XSTR/p0/2587039",
+                "score": 5.421,
+                "address": {
+                  "streetName": "Microsoft Way & NE 36th Way",
+                  "municipalitySubdivision": "Redmond",
+                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
+                  "countrySecondarySubdivision": "King",
+                  "countryTertiarySubdivision": "Seattle East",
+                  "countrySubdivision": "WA",
+                  "postalCode": "98052",
+                  "countryCode": "US",
+                  "country": "United States Of America",
+                  "countryCodeISO3": "USA",
+                  "freeformAddress": "Microsoft Way & NE 36th Way, Redmond, WA 98052",
+                  "countrySubdivisionName": "Washington"
+                },
+                "position": {
+                  "lat": 47.64223,
+                  "lon": -122.12531
+                },
+                "viewport": {
+                  "topLeftPoint": {
+                    "lat": 47.64313,
+                    "lon": -122.12664
+                  },
+                  "btmRightPoint": {
+                    "lat": 47.64133,
+                    "lon": -122.12398
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "summary": {
+              "query": "350 5th ave new york ny 10118",
+              "queryType": "NON_NEAR",
+              "queryTime": 8,
+              "numResults": 1,
+              "offset": 0,
+              "totalResults": 1,
+              "fuzzyLevel": 1
+            },
+            "results": [
+              {
+                "type": "Point Address",
+                "id": "US/PAD/p1/23936626",
+                "score": 15.1,
+                "address": {
+                  "streetNumber": "350",
+                  "streetName": "5th Ave",
+                  "municipalitySubdivision": "New York, New York City, NYC, Midtown South",
+                  "municipality": "New York, New York City, NY, NY City, NYC, Manhattan, Macys Finance, Greeley Square, Gpo, Empire State",
+                  "countrySecondarySubdivision": "New York",
+                  "countryTertiarySubdivision": "Manhattan",
+                  "countrySubdivision": "NY",
+                  "postalCode": "10118",
+                  "extendedPostalCode": "101182212",
+                  "countryCode": "US",
+                  "country": "United States Of America",
+                  "countryCodeISO3": "USA",
+                  "freeformAddress": "350 5th Ave, NYC, NY 10118",
+                  "countrySubdivisionName": "New York"
+                },
+                "position": {
+                  "lat": 40.74817,
+                  "lon": -73.985
+                },
+                "viewport": {
+                  "topLeftPoint": {
+                    "lat": 40.74907,
+                    "lon": -73.98619
+                  },
+                  "btmRightPoint": {
+                    "lat": 40.74727,
+                    "lon": -73.98381
+                  }
+                },
+                "entryPoints": [
+                  {
+                    "type": "main",
+                    "position": {
+                      "lat": 40.74808,
+                      "lon": -73.98482
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
     "202": {
       "headers": {
         "Location": "URL to download the results of the long-running batch request."

@@ -38,14 +38,12 @@
     "202": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
       "schema": {
-        "type": "object",
-        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.",
-        "properties": {
-          "Location": {
-            "type": "string",
-            "readOnly": true,
-            "description": "New URL to check for the results of the long running process."
-          }
+        "$ref": "#/definitions/Redirect"
+      },
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
         }
       }
     },
@@ -708,7 +706,7 @@
     "ComputeBestOrder": {
       "name": "computeBestOrder",
       "in": "query",
-      "description": "Re-order the route waypoints to reduce the route length. Yields best results when used in conjunction with routeType _shortest_. Possible values are true or false. True computes a better order if possible, but is not allowed to be used in conjunction with maxAlternatives value greater than 0 or in conjunction with circle waypoints. The response will include the optimized waypoint indices and can be used with a maximum of 20 route waypoints. False will use the locations in the given order and not allowed to be used in conjunction with routeRepresentation _none_.",
+      "description": "Re-order the route waypoints to reduce the route length. Yields best results when used in conjunction with routeType _shortest_. Possible values are true or false. True computes a better order if possible, but is not allowed to be used in conjunction with maxAlternatives value greater than 0 or in conjunction with circle waypoints. False will use the locations  in the given order and not allowed to be used in conjunction with routeRepresentation\n _none_.",
       "required": false,
       "type": "boolean",
       "default": false,
@@ -856,59 +854,14 @@
   },
   "paths": {
     "/route/matrix/{format}": {
-      "get": {
-        "x-publish": true,
-        "description": "This service allows users to query for the results of the asynchronous [matrix POST request](./postroutematrixpreview).\n\nIf the request has not been completed, this call returns a 202 response with the location header identical to the current call. It should be tried again.\n\nThe response for the known requestId can be queried for 14 days.",
-        "operationId": "Route_GetRouteMatrixPreview",
-        "x-ms-examples": {
-          "MatrixRoute": {
-            "$ref": "./examples/GetMatrixRouteCalculate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/JsonFormat"
-          },
-          {
-            "name": "matrixRequestId",
-            "description": "Matrix request Id returned from the asynchronous call. The Location header of the 202 response from the POST has this as one of the query parameters.",
-            "type": "string",
-            "in": "query",
-            "required": true,
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "responses": {
-          "202": {
-            "$ref": "#/responses/202"
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      },
       "post": {
         "x-publish": true,
         "description": "The Matrix Routing service allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations. For every given origin, this service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. For each route, the travel times and distances are calculated. You can use the computed costs to determine which routes to calculate using the Routing Directions API. If the computation takes longer than 20 seconds or forceAsyn parameter in the request is set to true, this API returns a 202 response code along a redirect URL in the Location field of the response header. This URL should be checked periodically until the response data or error information is available. \n\nThe asynchronous responses are stored for 14 days. The redirect URL returns a 400 response if used after the expiration period.",
         "operationId": "Route_PostRouteMatrixPreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "MatrixRoute": {
             "$ref": "./examples/PostMatrixRouteCalculate.json"
@@ -993,6 +946,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteMatrixResponse"
+            }
+          },
           "202": {
             "$ref": "#/responses/202"
           },
@@ -1037,7 +996,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "The Coordinates through which the route is calculated, delimited by a colon.  A minimum of two coordinates is required.  The first one is the origin and the last is the destination of the route. Optional coordinates in-between act as WayPoints in the route.  You can pass up to 50 WayPoints unless computeBestOrder is set to true, in which case the limit is reduced to 20.",
+            "description": "The Coordinates through which the route is calculated, delimited by a colon.  A minimum of two coordinates is required.  The first one is the origin and the last is the destination of the route. Optional coordinates in-between act as WayPoints in the route.  You can pass up to 150 WayPoints.",
             "required": true,
             "type": "string"
           },
@@ -1412,7 +1371,7 @@
     "/route/range/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Route Range (Isochrone) API__\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  or time budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/en-us/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.",
+        "description": "__Route Range (Isochrone) API__\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  or time budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchinsidegeometry) to  search for POIs within the provided Isochrone.",
         "operationId": "Route_GetRouteRangePreview",
         "x-ms-examples": {
           "GetRouteRange": {
@@ -1570,8 +1529,8 @@
         "description": "\n## Route Directions Batch API\nThe Route Directions Batch API allows the caller to batch up to 1,000 [Route Directions API](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _route directions_ queries you will use a `POST` request where the request body will contain the `queries` array in `JSON` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _route directions_ queries:  \n<br>\n```json\n{\n    \"queries\": [\n        \"?query=47.639987,-122.128384:47.621252,-122.184408:47.596437,-122.332000&routeType=fastest&travelMode=car\",\n        \"?query=47.620659,-122.348934:47.610101,-122.342015&travelMode=bicycle&routeType=eco&traffic=false\",\n        \"?query=40.759856,-73.985108:40.771136,-73.973506&travelMode=pedestrian&routeType=shortest\"\n    ]\n}\n```\n<br> A _route directions_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _route directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#uri-parameters). The string values in the _route directions_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.     \n<br>\nThe maximum number of queries that can be specified in the batch is **1,000** and the batch should contain at least **1** query.    \n<br>\nPlease note that the Route Directions Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Route Directions Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n    \n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n<br> Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`RouteDirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#routedirectionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n\n<br> Here's a sample Batch Response with 1 _successful_ and 1 _failed_ result:\n<br>\n```json            \n{\n    \"summary\": {\n        \"successfulRequests\": 1,\n        \"totalRequests\": 2\n    },\n    \"batchResults\": [\n        {\n            \"routes\": [\n                {\n                    \"summary\": {\n                        \"lengthInMeters\": 1758,\n                        \"travelTimeInSeconds\": 387,\n                        \"trafficDelayInSeconds\": 0,\n                        \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                        \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                    },\n                    \"legs\": [\n                        {\n                            \"summary\": {\n                                \"lengthInMeters\": 1758,\n                                \"travelTimeInSeconds\": 387,\n                                \"trafficDelayInSeconds\": 0,\n                                \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                                \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                            },\n                            \"points\": [\n                                {\n                                    \"latitude\": 47.62094,\n                                    \"longitude\": -122.34892\n                                },\n                                {\n                                    \"latitude\": 47.62094,\n                                    \"longitude\": -122.3485\n                                },\n                                {\n                                    \"latitude\": 47.62095,\n                                    \"longitude\": -122.3476\n                                }\n                            ]\n                        }\n                    ],\n                    \"sections\": [\n                        {\n                            \"startPointIndex\": 0,\n                            \"endPointIndex\": 40,\n                            \"sectionType\": \"TRAVEL_MODE\",\n                            \"travelMode\": \"bicycle\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
         "operationId": "Route_PostRouteDirectionsBatchPreview",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "A Route Directions Batch API call containing 3 Route Directions API queries": {
@@ -1599,6 +1558,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BatchResponse"
+            }
+          },
           "202": {
             "$ref": "#/responses/202"
           },
@@ -1644,6 +1609,41 @@
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        }
+      }
+    },
+    "Redirect": {
+      "type": "object",
+      "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.      "
+    },
+    "BatchResponse": {
+      "description": "This object is returned from a successful Batch service call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary for the batch request",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "successfulRequests": {
+              "description": "Number of successful requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            },
+            "totalRequests": {
+              "description": "Total number of requests in the batch",
+              "type": "integer",
+              "readOnly": true
+            }
+          }
+        },
+        "batchResults": {
+          "description": "Array containing the batch results",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object"
+          }
         }
       }
     },
@@ -1760,7 +1760,7 @@
       }
     },
     "GeoJSONPosition": {
-      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, , precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
       "type": "array",
       "items": {
         "type": "number",
@@ -1840,7 +1840,7 @@
           }
         },
         "optimizedWaypoints": {
-          "description": "Optimized way points array",
+          "description": "Optimized sequence of waypoints. It shows the index from the user provided waypoint sequence for the original and optimized list. For instance, a response: \n\n```\n<optimizedWaypoints>\n<waypoint providedIndex=\"0\" optimizedIndex=\"1\"/>\n<waypoint providedIndex=\"1\" optimizedIndex=\"2\"/>\n<waypoint providedIndex=\"2\" optimizedIndex=\"0\"/>\n</optimizedWaypoints>\n```\n\nmeans that the original sequence is [0, 1, 2] and optimized sequence is [1, 2, 0]. Since the index starts by 0 the original is \"first, second, third\" while the optimized is \"second, third, first\".",
           "type": "array",
           "readOnly": true,
           "items": {

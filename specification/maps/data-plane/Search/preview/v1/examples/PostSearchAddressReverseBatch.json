@@ -1,21 +1,118 @@
 {
-    "parameters": {
-        "format": "json",
-        "api-version": "1.0",
-        "subscription-key": "[subscription-key]",
-        "searchAddressReverseBatchRequestBody": {
-            "queries": [
-                "?query=48.858561,2.294911",
-                "?query=47.639765,-122.127896&radius=5000&limit=2",
-                "?query=47.621028,-122.348170",
-                "?query=43.722990,10.396695",
-                "?query=40.750958,-73.982336"                
-            ]
-        }
-    },
-
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "searchAddressReverseBatchRequestBody": {
+      "queries": [
+        "?query=48.858561,2.294911",
+        "?query=47.639765,-122.127896&radius=5000&limit=2",
+        "?query=47.621028,-122.348170"
+      ]
+    }
+  },
   "responses": {
-    
+    "200": {
+      "headers": {},
+      "body": {
+        "summary": {
+          "successfulRequests": 3,
+          "totalRequests": 3
+        },
+        "batchResults": [
+          {
+            "summary": {
+              "queryTime": 1,
+              "numResults": 1
+            },
+            "addresses": [
+              {
+                "address": {
+                  "routeNumbers": [],
+                  "street": "Avenue Anatole France",
+                  "streetName": "Avenue Anatole France",
+                  "countryCode": "FR",
+                  "municipality": "Paris",
+                  "postalCode": "75007",
+                  "municipalitySubdivision": "7e Arrondissement",
+                  "country": "France",
+                  "countryCodeISO3": "FRA",
+                  "freeformAddress": "Avenue Anatole France, 75007 Paris",
+                  "boundingBox": {
+                    "northEast": "48.862990,2.301650",
+                    "southWest": "48.853990,2.287990",
+                    "entity": "position"
+                  }
+                },
+                "position": "48.858490,2.294820"
+              }
+            ]
+          },
+          {
+            "summary": {
+              "queryTime": 1,
+              "numResults": 1
+            },
+            "addresses": [
+              {
+                "address": {
+                  "routeNumbers": [],
+                  "street": "157th Pl NE",
+                  "streetName": "157th Pl NE",
+                  "countryCode": "US",
+                  "countrySubdivision": "WA",
+                  "countrySubdivisionName": "Washington",
+                  "municipality": "Redmond",
+                  "postalCode": "98052",
+                  "country": "United States of America",
+                  "countryCodeISO3": "USA",
+                  "freeformAddress": "157th Pl NE, Redmond WA 98052",
+                  "boundingBox": {
+                    "northEast": "47.644970,-122.122760",
+                    "southWest": "47.635970,-122.136100",
+                    "entity": "position"
+                  }
+                },
+                "position": "47.640470,-122.129430"
+              }
+            ]
+          },
+          {
+            "summary": {
+              "queryTime": 1,
+              "numResults": 1
+            },
+            "addresses": [
+              {
+                "address": {
+                  "buildingNumber": "442",
+                  "streetNumber": "442",
+                  "routeNumbers": [],
+                  "street": "Thomas St",
+                  "streetName": "Thomas St",
+                  "streetNameAndNumber": "442 Thomas St",
+                  "countryCode": "US",
+                  "countrySubdivision": "WA",
+                  "countrySubdivisionName": "Washington",
+                  "municipality": "Seattle",
+                  "postalCode": "98109",
+                  "municipalitySubdivision": "Lower Queen Anne",
+                  "country": "United States of America",
+                  "countryCodeISO3": "USA",
+                  "freeformAddress": "442 Thomas St, Seattle WA 98109",
+                  "boundingBox": {
+                    "northEast": "47.625440,-122.341470",
+                    "southWest": "47.616440,-122.354810",
+                    "entity": "position"
+                  }
+                },
+                "position": "47.620940,-122.348140"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "202": {
       "headers": {
         "Location": "URL to download the results of the long-running batch request."
