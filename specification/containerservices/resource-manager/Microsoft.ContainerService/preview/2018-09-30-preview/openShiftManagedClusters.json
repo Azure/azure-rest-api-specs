@@ -237,64 +237,6 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationValue"
-          },
-          "description": "The list of compute operations"
-        }
-      },
-      "description": "The List Compute Operation operation response."
-    },
-    "OperationValue": {
-      "properties": {
-        "origin": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The origin of the compute operation."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the compute operation."
-        },
-        "display": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OperationValueDisplay",
-          "description": "Describes the properties of a Compute Operation Value Display."
-        }
-      },
-      "description": "Describes the properties of a Compute Operation value."
-    },
-    "OperationValueDisplay": {
-      "properties": {
-        "operation": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the compute operation."
-        },
-        "resource": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the resource the operation applies to."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The description of the operation."
-        },
-        "provider": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource provider for the operation."
-        }
-      },
-      "description": "Describes the properties of a Compute Operation Value Display."
-    },
     "Resource": {
       "description": "The Resource model definition.",
       "properties": {
@@ -458,8 +400,8 @@
           "format": "int32",
           "maximum": 5,
           "minimum": 1,
-          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 5 (inclusive). The default value is 1. ",
-          "default": 1
+          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 5 (inclusive). The default value is 2. ",
+          "default": 2
         },
         "vmSize": {
           "$ref": "#/definitions/OpenShiftContainerServiceVMSize",
@@ -483,7 +425,7 @@
         "count",
         "vmSize"
       ],
-      "description": "OpenShiftManagedClusterAgentPoolProfile represents configuration of OpenShift cluster VMs."
+      "description": "Defines the configuration of the OpenShift cluster VMs."
     },
     "OpenShiftManagedClusterIdentityProviders": {
       "properties": {
@@ -496,7 +438,7 @@
           "description": "Configuration of the provider."
         }
       },
-      "description": "OpenShiftManagedClusterIdentityProvider is heavily cut down equivalent to IdentityProvider in the upstream."
+      "description": "Defines the configuration of the identity providers to be used in the OpenShift cluster."
     },
     "OpenShiftManagedClusterAuthProfile": {
       "properties": {
@@ -508,7 +450,7 @@
           "description": "Type of authentication profile to use."
         }
       },
-      "description": "OpenShiftManagedClusterAuthProfile defines all possible authentication profiles for the OpenShift cluster."
+      "description": "Defines all possible authentication profiles for the OpenShift cluster."
     },
     "OpenShiftManagedClusterProperties": {
       "properties": {
@@ -610,23 +552,6 @@
         }
       },
       "description": "Tags object for patch operations."
-    },
-    "OpenShiftManagedClusterListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OpenShiftManagedCluster"
-          },
-          "description": "The list of openshift managed clusters."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of openshift managed cluster results.",
-          "readOnly": true
-        }
-      },
-      "description": "The response from the List OpenShift Managed Clusters operation."
     }
   },
   "parameters": {
