@@ -39,7 +39,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "ListOperations",
+        "operationId": "Operations_List",
         "description": "Lists all of the available Microsoft.Resources REST API operations.",
         "parameters": [
           {
@@ -2814,11 +2814,6 @@
           "type": "string",
           "description": "The name of the deployment."
         },
-        "type": {
-          "readOnly": true,
-          "type":"object",
-          "description": "The deployment extension object."
-        },
         "location": {
           "type": "string",
           "description": "the location of the deployment."
@@ -3032,11 +3027,6 @@
           "type": "string",
           "description": "The name of the resource group."
         },
-        "type": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The resource group object."
-        },
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties"
         },
@@ -3201,7 +3191,6 @@
           "description": "The list of tag values."
         }
       },
-      "x-ms-azure-resource": true,
       "description": "Tag details."
     },
     "TagsListResult": {
@@ -3430,6 +3419,10 @@
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
               "type": "string"
             }
           }
