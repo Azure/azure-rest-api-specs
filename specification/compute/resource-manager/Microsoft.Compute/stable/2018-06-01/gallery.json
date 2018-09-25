@@ -53,7 +53,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Shared Image Gallery. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+            "description": "The name of the Shared Image Gallery. The allowed characters are alphabets and numbers with dots and periods allowed in the middle. The maximum length is 80 characters."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1081,6 +1081,9 @@
           "description": "The number of replicas of the Image Version to be created per region. This property is updateable."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Describes the target region information."
     },
     "GalleryArtifactSource": {
