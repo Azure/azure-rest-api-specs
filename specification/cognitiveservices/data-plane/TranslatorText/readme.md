@@ -97,10 +97,10 @@ batch:
 
 ### Tag: release_1_0 and go
 
-These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
+These settings apply only when `--tag=release_3_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'release_1_0' && $(go)
+``` yaml $(tag) == 'release_3_0' && $(go)
 output-folder: $(go-sdk-folder)/services/cognitiveservices/translatortext/v3.0/translatortext
 ```
 ## Java
