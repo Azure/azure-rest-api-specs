@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   batch: true
   package-name: arm-resource
+  generate-metadata: false
   output-folder: $(typescript-sdks-folder)/packages/arm-resource
 batch:
   - package-features: true
@@ -20,37 +21,36 @@ batch:
 ```
 
 ```yaml $(typescript) && $(package-features)
-nodejs:
+typescript:
   source-code-folder-path: lib/feature
 ```
 
 ```yaml $(typescript) && $(package-locks)
-nodejs:
+typescript:
   source-code-folder-path: lib/lock
 ```
 
 ```yaml $(typescript) && $(package-policy)
-nodejs:
+typescript:
   source-code-folder-path: lib/policy
 ```
 
 ```yaml $(typescript) && $(package-resources)
-nodejs:
+typescript:
   source-code-folder-path: lib/resource
 ```
 
 ```yaml $(typescript) && $(package-subscriptions)
-nodejs:
+typescript:
   source-code-folder-path: lib/subscription
 ```
 
 ```yaml $(typescript) && $(package-links)
-nodejs:
+typescript:
   source-code-folder-path: lib/link
 ```
 
-```yaml $(typescript) && $(package-management)
-nodejs:
-  source-code-folder-path: lib/management
-  override-client-name: ManagementGroupsClient
+```yaml $(typescript) && $(package-managedapplications)
+typescript:
+  source-code-folder-path: lib/managedapplications
 ```
