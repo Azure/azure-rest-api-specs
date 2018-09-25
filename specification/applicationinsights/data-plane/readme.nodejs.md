@@ -6,7 +6,6 @@ Please also specify `--node-sdks-folder=<path to the root directory of your azur
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-applicationinsights-query
-  package-version: 1.0.0-Preview-1
   output-folder: $(node-sdks-folder)/lib/services/applicationinsights-query
   generate-license-txt: true
   generate-package-json: true
