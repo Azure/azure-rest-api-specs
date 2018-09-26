@@ -364,6 +364,52 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/checkSubdomainAvailability": {
+      "post": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Check if an IoT Central application subdomain is available.",
+        "operationId": "Apps_CheckSubdomainAvailability",
+        "x-ms-examples": {
+          "Apps_SubdomainAvailability": {
+            "$ref": "./examples/Apps_CheckSubdomainAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "operationInputs",
+            "in": "body",
+            "description": "Set the subdomain parameter in the OperationInputs structure to the subdomain of the IoT Central application to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationInputs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT Central application subdomain is available. If the subdomain is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/AppAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/providers/Microsoft.IoTCentral/operations": {
       "get": {
         "tags": [
