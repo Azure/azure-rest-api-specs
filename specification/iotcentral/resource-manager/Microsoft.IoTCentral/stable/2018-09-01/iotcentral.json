@@ -338,12 +338,12 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "operationInputs",
+            "name": "nameAvailabilityInputs",
             "in": "body",
-            "description": "Set the name parameter in the OperationInputs structure to the name of the IoT Central application to check.",
+            "description": "Set the name parameter in the NameAvailabilityInputs structure to the name of the IoT Central application to check.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperationInputs"
+              "$ref": "#/definitions/NameAvailabilityInputs"
             }
           }
         ],
@@ -384,12 +384,12 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "operationInputs",
+            "name": "subdomainAvailabilityInputs",
             "in": "body",
-            "description": "Set the subdomain parameter in the OperationInputs structure to the subdomain of the IoT Central application to check.",
+            "description": "Set the subdomain parameter in the SubdomainAvailabilityInputs structure to the subdomain of the IoT Central application to check.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperationInputs"
+              "$ref": "#/definitions/SubdomainAvailabilityInputs"
             }
           }
         ],
@@ -693,7 +693,7 @@
         }
       }
     },
-    "OperationInputs": {
+    "NameAvailabilityInputs": {
       "description": "Input values.",
       "type": "object",
       "properties": {
@@ -702,6 +702,17 @@
           "type": "string",
           "pattern": "^[a-z0-9-]{1,63}$"
         },
+        "type": {
+          "description": "The name of the IoT Central resource name to query.",
+          "type": "string",
+          "default": "IoTApps"
+        }
+      }
+    },
+    "SubdomainAvailabilityInputs": {
+      "description": "Input values.",
+      "type": "object",
+      "properties": {
         "subdomain": {
           "description": "The subdomain of the IoT Central application instance to check.",
           "type": "string",
