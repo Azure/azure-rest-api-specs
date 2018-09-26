@@ -346,7 +346,7 @@
           }
         }
       }
-    },    
+    },
     "/{tenantID}/applications/{applicationObjectId}/keyCredentials": {
       "get": {
         "tags": [
@@ -831,7 +831,7 @@
             }
           }
         }
-      }      
+      }
     },
     "/{tenantID}/groups/{objectId}/getMemberGroups": {
       "post": {
@@ -1003,7 +1003,7 @@
           "ServicePrincipal"
         ],
         "operationId": "ServicePrincipals_Get",
-        "description": "Gets service principal information from the directory.",
+        "description": "Gets service principal information from the directory. Query by objectId or pass a filter to query by appId",
         "parameters": [
           {
             "name": "objectId",
@@ -1592,6 +1592,78 @@
           }
         }
       }
+    },
+    "/{tenantID}/oauth2PermissionGrants" : {
+      "get" : {
+       "tags": [
+         "OAuth2Permissions_get"
+       ],
+        "operationId": "OAuth2_Get",
+        "description": "Queries OAuth2 permissions for the relevant SP ObjectId of an app.",
+        "produces" : [ "application/json" ],
+        "parameters" : [
+        {
+          "name" : "$filter",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "clientId+eq+'61ed44c3-5a1d-4639-a215-07f25129c6c3'",
+          "description": "This is the Service Principal ObjectId associated with the app"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/tenantIDInPath"
+        }
+       ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/Permissions"
+            }
+          }
+        }
+      },
+      "post" : {
+       "tags": [
+         "OAuth2Permissions_Grant"
+       ],
+        "consumes" : [ "application/json" ],
+        "operationId": "OAuth2_Post",
+        "description": "Grants OAuth2 permissions for the relevant resource Ids of an app.",
+        "produces" : [ "application/json" ],
+        "parameters" : [
+          {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "description": "The relevant app Service Principal Object Id and the Service Principal Objecit Id you want to grant.",
+          "schema" : {
+            "$ref" : "#/definitions/Permissions"
+              },
+              "x-examples" : {
+                  "application/json" : "{\n\t\"odata.type\": \"Microsoft.DirectoryServices.OAuth2PermissionGrant\",\n\t\"clientId\": \"39afbaa2-4a5c-4f5b-9ee3-2c83f09bbc87\", \n\t\"consentType\": \"AllPrincipals\",\n\t\"principalId\": null,\n\t\"resourceId\": \"d3247842-c517-4520-80a7-332690ae2fe4\",\n\t\"scope\": \"user_impersonation\",\n    \"startTime\": \"0001-01-01T00:00:00\",\n    \"expiryTime\": \"9000-01-01T00:00:00\"\n}",
+                  "description": "These are the values required to grant permission to a resourceId for an app, only one operation is allowed per request"
+                }
+          },
+          {
+          "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+              "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses" : {
+          "201" : {
+            "description" : "OK. The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/Permissions"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -2155,7 +2227,7 @@
         {
           "$ref": "#/definitions/DirectoryObject"
         }
-      ],            
+      ],
       "properties": {
         "appId": {
           "type": "string",
@@ -2233,7 +2305,7 @@
         "type": "object"
       },
       "description": "Request parameters for adding a owner to an application."
-    },    
+    },
     "KeyCredentialListResult": {
       "type": "object",
       "properties": {
@@ -2478,7 +2550,7 @@
         {
           "$ref": "#/definitions/DirectoryObject"
         }
-      ],            
+      ],
       "properties": {
         "displayName": {
           "type": "string",
@@ -2617,7 +2689,7 @@
           "$ref": "#/definitions/DirectoryObject"
         }
       ],
-      "type": "object",     
+      "type": "object",
       "properties": {
         "displayName": {
           "type": "string",
@@ -2818,7 +2890,7 @@
             "name": "UserType",
             "modelAsString": true
           }
-        },        
+        },
         "accountEnabled": {
           "type": "boolean",
           "description": "Whether the account is enabled."
@@ -2985,6 +3057,52 @@
         }
       },
       "description": "Server response for Get tenant domains API call."
+    },
+    "Permissions" : {
+      "properties" : {
+        "odata.type" : {
+          "type" : "string",
+          "description": "Microsoft.DirectoryServices.OAuth2PermissionGrant"
+        },
+        "clientId" : {
+          "type" : "string",
+          "description": "The objectId of the Service Principal associated with the app"
+        },
+        "consentType" : {
+          "type" : "string",
+          "description": "Typically set to AllPrincipals"
+        },
+        "principalId" : {
+          "type" : "object",
+          "description": "Set to null if AllPrincipals is set"
+        },
+        "resourceId" : {
+          "type" : "string",
+          "description" : "Service Principal Id of the resource you want to grant"
+        },
+        "scope" : {
+          "type" : "string",
+          "description": "Typically set to user_impersonation"
+        },
+        "startTime" : {
+          "type" : "string",
+          "description" : "Start time for TTL"
+        },
+        "expiryTime" : {
+          "type" : "string",
+          "description" : "Expiry time for TTL"
+        }
+      },
+      "example" : {
+        "odata.type" : "odata.type",
+        "resourceId" : "resourceId",
+        "clientId" : "clientId",
+        "scope" : "scope",
+        "expiryTime" : "expiryTime",
+        "consentType" : "consentType",
+        "principalId" : "",
+        "startTime" : "startTime"
+      }
     }
   },
   "parameters": {

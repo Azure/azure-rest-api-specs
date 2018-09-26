@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -36,7 +36,17 @@
           "items": {
             "type": "object"
           }
-        } 
+        },
+        "folder": {
+          "description": "The folder that this Pipeline is in. If not specified, Pipeline will appear at the root level.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The name of the folder that this Pipeline is in.",
+              "type": "string"
+            }
+          }
+        }
       }
     },
     "Activity": {
@@ -177,6 +187,10 @@
           "description": "Interval between each retry attempt (in seconds). The default is 30 sec.",
           "minimum": 30,
           "maximum": 86400
+        },
+        "secureInput": {
+          "type": "boolean",
+          "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring."
         },
         "secureOutput": {
           "type": "boolean",
@@ -2844,7 +2858,7 @@
       ]
     },
     "FilterActivityTypeProperties": {
-      "description": "Fitler activity properties.",
+      "description": "Filter activity properties.",
       "properties": {
         "items": {
           "description": "Input array on which filter should be applied.",

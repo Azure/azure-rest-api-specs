@@ -16,6 +16,112 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/currentSensitivityLabels": {
+      "get": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity labels of a given database",
+        "operationId": "SensitivityLabels_ListCurrentByDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity labels.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
+        },
+        "x-ms-odata": "#/definitions/SensitivityLabel",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the current sensitivity labels of a given database": {
+            "$ref": "./examples/SensitivityLabelsListByDatabaseWithSourceCurrent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/recommendedSensitivityLabels": {
+      "get": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity labels of a given database",
+        "operationId": "SensitivityLabels_ListRecommendedByDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity labels.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
+        },
+        "x-ms-odata": "#/definitions/SensitivityLabel",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the recommended sensitivity labels of a given database": {
+            "$ref": "./examples/SensitivityLabelsListByDatabaseWithSourceRecommended.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sensitivityLabels": {
       "get": {
         "tags": [
@@ -63,11 +169,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets the current sensitivity labels of a given database": {
-            "$ref": "./examples/SensitivityLabelsListByDatabaseMax.json"
-          },
-          "Gets the sensitivity labels of a given database": {
-            "$ref": "./examples/SensitivityLabelsListByDatabaseMin.json"
+          "Gets the current and recommended sensitivity labels of a given database": {
+            "$ref": "./examples/SensitivityLabelsListByDatabase.json"
           }
         }
       }
@@ -145,7 +248,7 @@
         },
         "x-ms-examples": {
           "Gets the sensitivity label of a given column": {
-            "$ref": "./examples/ColumnSensitivtyLabelGet.json"
+            "$ref": "./examples/ColumnSensitivityLabelGet.json"
           }
         }
       },
@@ -235,7 +338,7 @@
         },
         "x-ms-examples": {
           "Updates the sensitivity label of a given column with all parameters": {
-            "$ref": "./examples/ColumnSensitivtyLabelCreateMax.json"
+            "$ref": "./examples/ColumnSensitivityLabelCreateMax.json"
           }
         }
       },
@@ -307,7 +410,7 @@
         },
         "x-ms-examples": {
           "Deletes the sensitivity label of a given column": {
-            "$ref": "./examples/ColumnSensitivtyLabelDelete.json"
+            "$ref": "./examples/ColumnSensitivityLabelDelete.json"
           }
         }
       }
