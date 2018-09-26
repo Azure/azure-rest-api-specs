@@ -386,7 +386,7 @@
           {
             "name": "operationInputs",
             "in": "body",
-            "description": "Set the subdomain parameter in the OperationInputs structure to the subdomain of the IoT Central application to check.",
+            "description": "Set the subdomain parameter in the OperationInputs model to the subdomain of the IoT Central application to check.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/OperationInputs"
@@ -701,6 +701,16 @@
           "description": "The name of the IoT Central application instance to check.",
           "type": "string",
           "pattern": "^[a-z0-9-]{1,63}$"
+        },
+        "subdomain": {
+          "description": "The subdomain of the IoT Central application instance to check.",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,63}$"
+        },
+        "type": {
+          "description": "The name of the IoT Central resource name to query.",
+          "type": "string",
+          "default": "IoTApps"
         }
       }
     },
@@ -711,6 +721,11 @@
         "nameAvailable": {
           "description": "The value which indicates whether the provided name is available.",
           "type": "boolean",
+          "readOnly": true
+        },
+        "subdomain": {
+          "description": "The value which indicates whether the provided subdomain is available.",
+          "type": "string",
           "readOnly": true
         },
         "reason": {
