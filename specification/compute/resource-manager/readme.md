@@ -177,6 +177,12 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase
 
+
+  - where:
+    - $.definitions.InGuestSoftwareItem
+    suppress:
+    - TrackedResourcePatchOperation
+
 ```
 ### Tag: package-2018-10-01
 
