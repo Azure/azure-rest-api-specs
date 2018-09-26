@@ -351,53 +351,7 @@
           "200": {
             "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT Central application name is available. If the name is not available, the body contains the reason.",
             "schema": {
-              "$ref": "#/definitions/AppAvailabilityInfo"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/checkSubdomainAvailability": {
-      "post": {
-        "tags": [
-          "Apps"
-        ],
-        "description": "Check if an IoT Central application subdomain is available.",
-        "operationId": "Apps_CheckSubdomainAvailability",
-        "x-ms-examples": {
-          "Apps_SubdomainAvailability": {
-            "$ref": "./examples/Apps_CheckSubdomainAvailability.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "operationInputs",
-            "in": "body",
-            "description": "Set the subdomain parameter in the OperationInputs structure to the subdomain of the IoT Central application to check.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OperationInputs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT Central application subdomain is available. If the subdomain is not available, the body contains the reason.",
-            "schema": {
-              "$ref": "#/definitions/AppAvailabilityInfo"
+              "$ref": "#/definitions/AppNameAvailabilityInfo"
             }
           },
           "default": {
@@ -583,37 +537,22 @@
     },
     "ErrorDetails": {
       "description": "Error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody"
-        }
-      }
-    },
-    "ErrorResponseBody": {
-      "description": "Details of error response.",
       "type": "object",
       "properties": {
         "code": {
+          "description": "The error code.",
           "type": "string",
-          "description": "Error code, intended to be consumed programmatically.",
           "readOnly": true
         },
         "message": {
+          "description": "The error message.",
           "type": "string",
-          "description": "Description of the error, intended for display in user interface.",
           "readOnly": true
         },
         "target": {
+          "description": "The target of the particular error.",
           "type": "string",
-          "description": "Target of the particular error, for example name of the property.",
           "readOnly": true
-        },
-        "details": {
-          "type": "array",
-          "description": "A list of additional details about the error.",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          }
         }
       }
     },
@@ -699,23 +638,15 @@
       "properties": {
         "name": {
           "description": "The name of the IoT Central application instance to check.",
-          "type": "string",
-          "pattern": "^[a-z0-9-]{1,63}$"
-        },
-        "subdomain": {
-          "description": "The subdomain of the IoT Central application instance to check.",
-          "type": "string",
-          "pattern": "^[a-z0-9-]{1,63}$"
-        },
-        "type": {
-          "description": "The name of the IoT Central resource name to query.",
-          "type": "string",
-          "default": "IoTApps"
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
-    "AppAvailabilityInfo": {
-      "description": "The properties indicating whether a given IoT Central application information is available.",
+    "AppNameAvailabilityInfo": {
+      "description": "The properties indicating whether a given IoT Central application name is available.",
       "type": "object",
       "properties": {
         "nameAvailable": {
@@ -723,20 +654,22 @@
           "type": "boolean",
           "readOnly": true
         },
-        "subdomain": {
-          "description": "The value which indicates whether the provided subdomain is available.",
-          "type": "string",
-          "readOnly": true
-        },
         "reason": {
           "description": "The reason for unavailability.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AppNameUnavailabilityReason",
+            "modelAsString": false
+          }
         },
         "message": {
           "description": "The detailed reason message.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     }
