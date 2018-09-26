@@ -537,22 +537,37 @@
     },
     "ErrorDetails": {
       "description": "Error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Details of error response.",
       "type": "object",
       "properties": {
         "code": {
-          "description": "The error code.",
           "type": "string",
+          "description": "Error code, intended to be consumed programmatically.",
           "readOnly": true
         },
         "message": {
-          "description": "The error message.",
           "type": "string",
+          "description": "Description of the error, intended for display in user interface.",
           "readOnly": true
         },
         "target": {
-          "description": "The target of the particular error.",
           "type": "string",
+          "description": "Target of the particular error, for example name of the property.",
           "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
         }
       }
     },
