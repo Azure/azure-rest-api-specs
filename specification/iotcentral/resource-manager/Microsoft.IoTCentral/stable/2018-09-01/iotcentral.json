@@ -654,8 +654,7 @@
         "name": {
           "description": "The name of the IoT Central application instance to check.",
           "type": "string",
-          "pattern": "^[a-z0-9-]{1,63}$",
-          "default": "abc"
+          "pattern": "^[a-z0-9-]{1,63}$"
         }
       }
     },
@@ -670,20 +669,13 @@
         },
         "reason": {
           "description": "The reason for unavailability.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
           "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AppNameUnavailabilityReason",
-            "modelAsString": false
-          }
+          "readOnly": true
         },
         "message": {
           "description": "The detailed reason message.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     }
