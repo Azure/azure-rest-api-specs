@@ -10,4 +10,5 @@ typescript:
   output-folder: $(typescript-sdks-folder)/packages/keyvault
   generate-metadata: true
   generate-readme-md: false
+  generate-package-json: false
 ```
