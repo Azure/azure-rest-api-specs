@@ -726,7 +726,10 @@
           "type": "string",
           "default": "IoTApps"
         }
-      }
+      },
+      "required": [
+        "subdomain"
+      ]
     },
     "AppAvailabilityInfo": {
       "description": "The properties indicating whether a given IoT Central application name or subdomain is available.",
@@ -739,20 +742,13 @@
         },
         "reason": {
           "description": "The reason for unavailability.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
           "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AppNameUnavailabilityReason",
-            "modelAsString": false
-          }
+          "readOnly": true
         },
         "message": {
           "description": "The detailed reason message.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     }
