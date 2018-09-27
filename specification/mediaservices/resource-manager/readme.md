@@ -201,7 +201,7 @@ These settings apply only when `--tag=package-2018-07 --go` is specified on the 
 Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-07' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-07-01/media
+output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2018-07-01/media
 ```
 
 ## Java
