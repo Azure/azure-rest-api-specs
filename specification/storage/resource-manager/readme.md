@@ -54,6 +54,16 @@ directive:
 
 ```
 
+### Tag: package-2018-07-only
+
+These settings apply only when `--tag=package-2018-07-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-only'
+input-file:
+- Microsoft.Storage/stable/2018-07-01/storage.json
+- Microsoft.Storage/stable/2018-07-01/blob.json
+```
+
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
@@ -315,11 +325,26 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storage
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-07-only
   - tag: package-2018-03
   - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2016-01
 ```
+
+### Tag: package-2018-07-only and java
+
+These settings apply only when `--tag=package-2018-07-only --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07-only' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storage.v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/storage/resource-manager/v2018_07_01
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2018-03 and java
 
 These settings apply only when `--tag=package-2018-03 --java` is specified on the command line.
