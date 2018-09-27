@@ -831,6 +831,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemResource"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -5929,10 +5935,6 @@
             "name": "CreateMode",
             "modelAsString": true
           }
-        },
-        "vaultId": {
-          "description": "ID of the vault which protects this item",
-          "type": "string"
         }
       },
       "discriminator": "protectedItemType"
