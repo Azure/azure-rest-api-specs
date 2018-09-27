@@ -3968,7 +3968,7 @@
           "description": "Specifies the size of the Zoo Keeper node for the HDInsight cluster."
         },
         "scriptActions": {
-          "description": "Custom script action to run on HDI ondemand cluster once it's up.",
+          "description": "Custom script actions to run on HDI ondemand cluster once it's up. Please refer to https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux?toc=%2Fen-us%2Fazure%2Fhdinsight%2Fr-server%2FTOC.json&bc=%2Fen-us%2Fazure%2Fbread%2Ftoc.json#understanding-script-actions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScriptAction"
@@ -3995,7 +3995,7 @@
         },
         "uri": {
           "type": "string",
-          "description": "The URI for the script action. Please refer to https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux?toc=%2Fen-us%2Fazure%2Fhdinsight%2Fr-server%2FTOC.json&bc=%2Fen-us%2Fazure%2Fbread%2Ftoc.json#understanding-script-actions."
+          "description": "The URI for the script action."
         },
         "roles": {
           "x-ms-enum": {
@@ -4009,6 +4009,10 @@
           ],
           "type": "object",
           "description": "The node types on which the script action should be executed."
+        },
+        "parameters": {
+          "type": "string",
+          "description": "The parameters for the script action."
         }
       },
       "required": [
