@@ -364,6 +364,52 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/checkSubdomainAvailability": {
+      "post": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Check if an IoT Central application subdomain is available.",
+        "operationId": "Apps_CheckSubdomainAvailability",
+        "x-ms-examples": {
+          "Apps_SubdomainAvailability": {
+            "$ref": "./examples/Apps_CheckSubdomainAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "subdomainAvailabilityInputs",
+            "in": "body",
+            "description": "Set the subdomain parameter in the SubdomainAvailabilityInputs structure to the subdomain of the IoT Central application to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubdomainAvailabilityInputs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT Central application subdomain is available. If the subdomain is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/AppAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/providers/Microsoft.IoTCentral/operations": {
       "get": {
         "tags": [
@@ -657,7 +703,7 @@
           "pattern": "^[a-z0-9-]{1,63}$"
         },
         "type": {
-          "description": "The name of the IoT Central resource name to query.",
+          "description": "The type of the IoT Central resource to query.",
           "type": "string",
           "default": "IoTApps"
         }
@@ -665,6 +711,22 @@
       "required": [
         "name"
       ]
+    },
+    "SubdomainAvailabilityInputs": {
+      "description": "Input values.",
+      "type": "object",
+      "properties": {
+        "subdomain": {
+          "description": "The subdomain of the IoT Central application instance to check.",
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,63}$"
+        },
+        "type": {
+          "description": "The type of the IoT Central resource to query.",
+          "type": "string",
+          "default": "IoTApps"
+        }
+      }
     },
     "AppAvailabilityInfo": {
       "description": "The properties indicating whether a given IoT Central application name or subdomain is available.",
