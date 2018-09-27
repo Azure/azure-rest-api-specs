@@ -537,6 +537,14 @@
     },
     "ErrorDetails": {
       "description": "Error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Details of error response.",
       "type": "object",
       "properties": {
         "code": {
@@ -553,6 +561,13 @@
           "description": "The target of the particular error.",
           "type": "string",
           "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
         }
       }
     },
