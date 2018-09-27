@@ -338,12 +338,12 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "name": "operationInputs",
+            "name": "nameAvailabilityInputs",
             "in": "body",
-            "description": "Set the name parameter in the OperationInputs structure to the name of the IoT Central application to check.",
+            "description": "Set the name parameter in the NameAvailabilityInputs structure to the name of the IoT Central application to check.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperationInputs"
+              "$ref": "#/definitions/NameAvailabilityInputs"
             }
           }
         ],
@@ -351,7 +351,7 @@
           "200": {
             "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the IoT Central application name is available. If the name is not available, the body contains the reason.",
             "schema": {
-              "$ref": "#/definitions/AppNameAvailabilityInfo"
+              "$ref": "#/definitions/AppAvailabilityInfo"
             }
           },
           "default": {
@@ -647,21 +647,27 @@
         }
       }
     },
-    "OperationInputs": {
+    "NameAvailabilityInputs": {
       "description": "Input values.",
       "type": "object",
       "properties": {
         "name": {
           "description": "The name of the IoT Central application instance to check.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,63}$"
+        },
+        "type": {
+          "description": "The name of the IoT Central resource name to query.",
+          "type": "string",
+          "default": "IoTApps"
         }
       },
       "required": [
         "name"
       ]
     },
-    "AppNameAvailabilityInfo": {
-      "description": "The properties indicating whether a given IoT Central application name is available.",
+    "AppAvailabilityInfo": {
+      "description": "The properties indicating whether a given IoT Central application name or subdomain is available.",
       "type": "object",
       "properties": {
         "nameAvailable": {
