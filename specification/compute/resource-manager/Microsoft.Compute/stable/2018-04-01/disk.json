@@ -323,7 +323,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/endGetAccess": {
@@ -355,7 +358,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}": {
@@ -638,7 +644,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/endGetAccess": {
@@ -670,7 +679,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
@@ -783,7 +795,8 @@
           "type": "string",
           "enum": [
             "Standard_LRS",
-            "Premium_LRS"
+            "Premium_LRS",
+            "StandardSSD_LRS"
           ],
           "x-ms-enum": {
             "name": "StorageAccountTypes",
@@ -798,7 +811,7 @@
           "description": "The sku tier."
         }
       },
-      "description": "The disks sku name. Can be Standard_LRS or Premium_LRS."
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, or StandardSSD_LRS."
     },
     "SnapshotSku": {
       "properties": {
@@ -998,7 +1011,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "A relative uri containing either a Platform Imgage Repository or user image reference."
+          "description": "A relative uri containing either a Platform Image Repository or user image reference."
         },
         "lun": {
           "type": "integer",

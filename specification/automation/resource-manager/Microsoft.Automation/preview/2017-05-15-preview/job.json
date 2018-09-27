@@ -82,7 +82,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
@@ -101,9 +101,6 @@
         ],
         "operationId": "Job_GetRunbookContent",
         "description": "Retrieve the runbook content of the job identified by job name.",
-        "produces": [
-          "text/powershell"
-        ],
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/joboperations"
         },
@@ -140,7 +137,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
@@ -636,8 +633,8 @@
         "time": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
-          "description": "Gets or sets the creation time of the job."
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
         },
         "streamType": {
           "type": "string",
@@ -672,6 +669,7 @@
           "description": "Gets or sets the values of the job stream."
         }
       },
+      "x-ms-client-flatten": true,
       "description": "Definition of the job stream."
     },
     "JobStreamListResult": {

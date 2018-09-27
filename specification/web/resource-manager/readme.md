@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2016-09
+tag: package-2018-02
 ```
 
 ### Tag: package-2018-02
@@ -58,6 +58,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/WebApps.json
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+- Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.Identifier.properties
@@ -282,6 +283,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
@@ -392,6 +394,13 @@ namespace: com.microsoft.azure.management.appservice
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appservice
+directive:
+  from: WebApps.json
+  where: $.definitions.MSDeploy.properties.properties
+  transform: >
+    delete $.$ref;
+    $['allOf'] = [{'$ref':'#/definitions/MSDeployCore'}];
+    return $;
 ```
 
 ### Java multi-api

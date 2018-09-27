@@ -56,10 +56,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WorkItemConfiguration"
-              }
+              "$ref": "#/definitions/WorkItemConfigurationsListResult"
             }
           },
           "default": {
@@ -149,9 +146,6 @@
             "WorkItemConfigurationsGetDefault": {
               "$ref": "./examples/WorkItemConfigDefaultGet.json"
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": null
           }
         }
       },
@@ -217,6 +211,19 @@
           "description": "Serialized JSON object for detailed properties"
         }
       }
+    },
+    "WorkItemConfigurationsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/WorkItemConfiguration"
+          },
+          "description": "An array of work item configurations."
+        }
+      },
+      "description": "Work item configuration list result."
     },
     "WorkItemCreateConfiguration": {
       "type": "object",
