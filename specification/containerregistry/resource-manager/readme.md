@@ -34,6 +34,12 @@ tag: package-2018-09
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-09'
+
+csharp:
+  # stop the simplifier from making Task conflict:
+  skip-simplifier-on-namespace: 
+    - System.Threading.Tasks
+
 input-file:
 - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
 - Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
