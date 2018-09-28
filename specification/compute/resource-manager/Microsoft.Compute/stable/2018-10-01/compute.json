@@ -4748,6 +4748,18 @@
       },
       "description": "Contains the data disk images information."
     },
+    "AutomaticOSUpgradeProperties": {
+      "properties": {
+        "automaticOSUpgradeSupported": {
+           "type": "boolean",
+           "description": "Specifies whether automatic OS upgrade is supported on the image."
+        }
+      },
+      "required": [
+        "automaticOSUpgradeSupported"
+      ],
+      "description": "Describes automatic OS upgrade properties on the image."
+    },
     "VirtualMachineImageProperties": {
       "properties": {
         "plan": {
@@ -4761,6 +4773,9 @@
           "items": {
             "$ref": "#/definitions/DataDiskImage"
           }
+        },
+        "automaticOSUpgradeProperties": {
+          "$ref": "#/definitions/AutomaticOSUpgradeProperties"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
