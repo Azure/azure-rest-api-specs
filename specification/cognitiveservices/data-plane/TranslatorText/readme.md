@@ -70,7 +70,7 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-face/azure/cognitiveservices/translatortext
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-translatortext/azure/cognitiveservices/translatortext
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
@@ -93,10 +93,10 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: release_3_0
+  - tag: release_3_0 and go
 ```
 
-### Tag: release_1_0 and go
+### Tag: release_3_0 and go
 
 These settings apply only when `--tag=release_3_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
@@ -125,7 +125,7 @@ java:
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-newssearch
-  package-version: 1.0.0
+  package-version: 3.0.0
   output-folder: $(node-sdks-folder)/lib/services/translatorText
   override-client-name: TranslatorTextAPIClient
   azure-arm: false
