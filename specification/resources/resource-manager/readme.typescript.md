@@ -18,12 +18,6 @@ batch:
   - package-managedapplications: true
 ```
 
-```yaml $(typescript) && $(package-resources)
-typescript:
-  package-name: arm-resources
-  output-folder: $(typescript-sdks-folder)/packages/arm-resources
-```
-
 ```yaml $(typescript) && $(package-features)
 typescript:
   package-name: arm-features
@@ -40,6 +34,12 @@ typescript:
 typescript:
   package-name: arm-policy
   output-folder: $(typescript-sdks-folder)/packages/arm-policy
+```
+
+```yaml $(typescript) && $(package-resources)
+typescript:
+  package-name: arm-resources
+  output-folder: $(typescript-sdks-folder)/packages/arm-resources
 ```
 
 ```yaml $(typescript) && $(package-subscriptions)
