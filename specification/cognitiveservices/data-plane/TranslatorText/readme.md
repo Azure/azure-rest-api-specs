@@ -32,8 +32,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-nodejs
+ 
+  
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_translatortext']
 ```
@@ -117,4 +118,18 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/translatortext
   with-optional-parameters: true
   with-single-async-method: true
+```
+
+## Node.js
+
+``` yaml $(nodejs)
+nodejs:
+  package-name: azure-cognitiveservices-newssearch
+  package-version: 1.0.0
+  output-folder: $(node-sdks-folder)/lib/services/translatorText
+  override-client-name: TranslatorTextAPIClient
+  azure-arm: false
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: false
 ```
