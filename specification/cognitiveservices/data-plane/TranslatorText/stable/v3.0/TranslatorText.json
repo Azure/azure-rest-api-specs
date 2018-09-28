@@ -143,8 +143,15 @@ info:
     }
 
     ```
+
+x-ms-parameterized-host:
+  hostTemplate: '{Endpoint}'
+  useSchemePrefix: false
+  parameters:
+    - $ref: '#/parameters/Endpoint'
+
 host: api.cognitive.microsofttranslator.com
-basePath: "/TranslatorText/v3.0"
+
 schemes:
   - https
 consumes:
@@ -1309,7 +1316,8 @@ paths:
             $ref: '#/definitions/TranslateSuccess'
       x-ms-examples:
         Translate success example:
-          $ref: ./Examples/TranslateSuccess.json
+          $ref: ./examples/TranslateSuccess.json
+          
         '400':
           description: >-
             One of the query parameters is missing or not valid. Please correct
@@ -1759,4 +1767,13 @@ definitions:
         maximum: 5000
     example:
       text: Good morning, how are you today?
+parameters:
+  Endpoint:
+    name: Endpoint
+    description: Supported Cognitive Services endpoints
+    x-ms-parameter-location: client
+    required: true
+    type: string
+    in: path
+    x-ms-skip-url-encoding: true
       
