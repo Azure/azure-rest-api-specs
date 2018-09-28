@@ -117,6 +117,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2063](#R2063) | [OperationIdNounConflictingModelNames](#R2063) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2064](#R2064) | [LROStatusCodesReturnTypeSchema](#R2064) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2023](#R2023) | [SummaryAndDescriptionMustNotBeSame](#R2023) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2010](#R2010) | [LongRunningOperationsOptionsValidator](#R2010) | ARM and Data plane OpenAPI(swagger) specs |
 
 ### Documentation
 
@@ -1803,5 +1804,25 @@ or
 ``` json
 "x-ms-parameter-location":"client"
 ```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="R2010" ></a>R2010 LongRunningOperationsOptionsValidator
+
+**Category** : SDK Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : A LRO Post operation with return schema must have "x-ms-long-running-operation-options" extension enabled.
+
+**Description** : This is a rule introduced to make the understanding of Long Running Operations more clear. A LRO has the following steps:
+
+1. An Initial call is made to the service.
+2. A response is received.
+3. The response is validated and its headers are read. The header azure-async-operation header/location header is used for further polling until a terminal status is met.
+
+Now, the issue is what happens if both the values are provided? In such cases, it is the responsibility of the service team to tell us if we want to use the location header finally to retrieve the values. Such a retrieval will be used as step 4 and not during the polling.
+
+**How to fix the violation**: For a Post LRO operation, add "x-ms-long-running-operation-options" extension with "final-state-via" property.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
