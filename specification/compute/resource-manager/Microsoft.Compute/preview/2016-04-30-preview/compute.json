@@ -1892,6 +1892,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/guestResourceTypes/software/items":{
+      "get": {
+        "tags": [
+          "InGuestResource"
+        ],
+        "operationId": "VirtualMachines_ListInGuestSoftwareItems",
+        "description": "Lists all of the In-Guest software items of virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of items.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InGuestSoftwareItemsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get the InGuest software items.": {
+            "$ref": "./examples/ListInGuestSoftwareItems.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/guestResourceTypes/software/items/{itemId}":{
+      "get": {
+        "tags": [
+          "InGuestResource"
+        ],
+        "operationId": "VirtualMachines_GetInGuestSoftwareItem",
+        "description": "Get the In-Guest software item of the virtual machine in the specified subscription",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the In-Guest resource type."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InGuestSoftwareItem"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an InGuest software item.": {
+            "$ref": "./examples/GetInGuestSoftwareItem.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
       "put": {
         "tags": [
@@ -5730,6 +5828,58 @@
         }
       },
       "description": "Operation status response"
+    },
+    "InGuestSoftwareItemsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InGuestSoftwareItem"
+          },
+          "description": "The list of InGuest software items on the VM."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The uri to fetch the next page of InGuest software items on the VM. Call ListNext() with this to fetch the next page of items."
+        }
+      },
+      "description": "The List of Software items operation response."
+    },
+    "InGuestSoftwareItemProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the name of the software."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the version of the software."
+        },
+        "publisher": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the publisher of the software."
+        }
+      },
+      "description": "Describes the properties of an InGuest software item."
+    },
+    "InGuestSoftwareItem": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InGuestSoftwareItemProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a InGuest software item."
     }
   },
   "parameters": {

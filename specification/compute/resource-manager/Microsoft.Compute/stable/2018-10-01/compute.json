@@ -8312,6 +8312,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/InGuestSoftwareItem"
           },
@@ -8319,26 +8320,27 @@
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "The uri to fetch the next page of InGuest software items on the VM. Call ListNext() with this to fetch the next page of items."
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "The List of Software items operation response."
     },
     "InGuestSoftwareItemProperties": {
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Specifies the name of the software."
         },
         "version": {
           "type": "string",
+          "readOnly": true,
           "description": "Specifies the version of the software."
         },
         "publisher": {
           "type": "string",
+          "readOnly": true,
           "description": "Specifies the publisher of the software."
         }
       },
@@ -8348,7 +8350,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InGuestSoftwareItemProperties"
+          "$ref": "#/definitions/InGuestSoftwareItemProperties",
+          "description": "Describes the properties of an InGuest software item."
         }
       },
       "allOf": [
