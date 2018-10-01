@@ -26,7 +26,7 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-04-02
+tag: package-2018-07-01
 ```
 
 
