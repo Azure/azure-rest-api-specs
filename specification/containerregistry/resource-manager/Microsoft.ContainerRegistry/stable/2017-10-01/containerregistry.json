@@ -1201,11 +1201,31 @@
           "type": "string"
         },
         "registryUri": {
-          "description": "The address of the source registry.",
+          "description": "The address of the source registry (e.g. 'mcr.microsoft.com').",
           "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/ImportSourceCredentials",
+          "description": "Credentials used when importing from a registry uri."
         },
         "sourceImage": {
           "description": "Repository name of the source image.\r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "type": "string"
+        }
+      }
+    },
+    "ImportSourceCredentials": {
+      "required": [
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username to authenticate with the source registry.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password used to authenticate with the source registry.",
           "type": "string"
         }
       }
