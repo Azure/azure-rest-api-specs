@@ -11,10 +11,10 @@ typescript:
   override-client-name: StorageManagementClient
   generate-metadata: true
   api-versions:
-    - "2016-01-01"
-    - "2017-10-01"
-    - "2018-02-01"
     - 2018-03-01-preview
+    - "2018-02-01"
+    - "2017-10-01"
+    - "2016-01-01"
 ```
 
 ``` yaml $(typescript) && $(multiapi)
@@ -31,6 +31,6 @@ batch:
   - tag: package-2018-03
     api-version: 2018-03-01-preview
     output-folder: $(js-sdks-folder)/packages/arm-storage-2018-03-01-preview
-  - default-api-version-package: "@azure/arm-storage-2018-03-01-preview"
+  - multiapi-latest: true
     output-folder: $(js-sdks-folder)/packages/arm-storage
 ```
