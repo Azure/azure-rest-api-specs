@@ -2323,6 +2323,47 @@
             "$ref": "./examples/RegisteredServers_TriggerRollover.json"
           }
         },
+        "responses": {
+          "200": {
+            "description": "Trigger Rollover success status",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronuous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows/{workflowId}": {
       "get": {
         "parameters": [
