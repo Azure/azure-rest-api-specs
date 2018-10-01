@@ -9,6 +9,6 @@ nodejs:
   package-name: azure-keyvault
   output-folder: $(node-sdks-folder)/lib/services/keyvault
   generate-license-txt: true
-  generate-package-json: true
+  generate-package-json: false
   generate-readme-md: false
 ```
