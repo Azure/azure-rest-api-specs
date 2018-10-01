@@ -521,7 +521,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputCanceled",
       "allOf": [
         {
-          "$ref": "#/definitions/JobOutputStateChange"
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
         }
       ],
       "properties": {},
@@ -532,7 +532,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputCanceling",
       "allOf": [
         {
-          "$ref": "#/definitions/JobOutputStateChange"
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
         }
       ],
       "properties": {},
@@ -543,7 +543,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputErrored",
       "allOf": [
         {
-          "$ref": "#/definitions/JobOutputStateChange"
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
         }
       ],
       "properties": {},
@@ -554,7 +554,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputFinished",
       "allOf": [
         {
-          "$ref": "#/definitions/JobOutputStateChange"
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
         }
       ],
       "properties": {},
@@ -565,7 +565,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputProcessing",
       "allOf": [
         {
-          "$ref": "#/definitions/JobOutputStateChange"
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
         }
       ],
       "properties": {},
@@ -576,7 +576,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputScheduled",
       "allOf": [
         {
-          "$ref": "#/definitions/JobOutputStateChange"
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
         }
       ],
       "properties": {},
@@ -721,9 +721,6 @@
         }
       },
       "type": "object",
-      "required": [
-        "bitrate"
-      ],
       "description": "Encoder connect event data."
     },
     "MediaLiveEventIncomingStreamsOutOfSyncEventData": {
@@ -828,9 +825,6 @@
         }
       },
       "type": "object",
-      "required": [
-        "bitrate"
-      ],
       "description": "Ingest fragment dropped event event data."
     },
     "MediaLiveEventIngestHeartbeatEventData": {
@@ -902,15 +896,6 @@
         }
       },
       "type": "object",
-      "required": [
-        "bitrate",
-        "incomingBitrate",
-        "overlapCount",
-        "discontinuityCount",
-        "nonincreasingCount",
-        "unexpectedBitrate",
-        "healthy"
-      ],
       "description": "Ingest fragment dropped event event data."
     },
     "MediaLiveEventTrackDiscontinuityDetectedEventData": {
@@ -953,9 +938,6 @@
         }
       },
       "type": "object",
-      "required": [
-        "bitrate"
-      ],
       "description": "Ingest track discontinuity detected event data."
     }
   }
