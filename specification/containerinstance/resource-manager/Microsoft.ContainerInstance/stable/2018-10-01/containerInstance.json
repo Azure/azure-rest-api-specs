@@ -475,6 +475,43 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
+      "delete": {
+        "operationId": "ServiceAssociationLink_Delete",
+        "x-ms-examples": {
+          "ContainerGroupsDelete": {
+            "$ref": "./examples/ServiceAssociationLink_Delete.json"
+          }
+        },
+        "summary": "Delete the container instance service association link for the subnet.",
+        "description": "Delete the container instance service association link for the subnet. This operation unblocks user from deleting subnet.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubnetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content - the specified service association link was not found."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -892,6 +929,10 @@
           "required": [
             "properties"
           ],
+          "identity": {
+            "$ref": "#/definitions/ContainerGroupIdentity",
+            "description": "The identity of the container group, if configured."
+          },
           "properties": {
             "properties": {
               "x-ms-client-flatten": true,
@@ -990,6 +1031,54 @@
         }
       ]
     },
+    "ContainerGroupIdentity": {
+      "description": "Identity for the container group.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the container group identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the container group. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the container group. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the container group.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          }
+        }
+      }
+    },
     "ImageRegistryCredential": {
       "description": "Image registry credential.",
       "type": "object",
@@ -1085,7 +1174,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Specifies if the IP is exposed to the public internet.",
+          "description": "Specifies if the IP is exposed to the public internet or private VNET.",
           "enum": [
             "Public",
             "Private"
@@ -1433,6 +1522,22 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualNetworkNameParameter": {
+      "name": "virtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual network.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubnetNameParameter": {
+      "name": "subnetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the subnet.",
       "x-ms-parameter-location": "method"
     },
     "ContainerGroupNameParameter": {
