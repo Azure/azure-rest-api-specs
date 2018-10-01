@@ -2292,6 +2292,15 @@
             "description": "Server Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Trigger Rollover request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerRolloverRequest"
+            }
           }
         ],
         "tags": [
@@ -2612,6 +2621,16 @@
             "description": "Server Endpoint properties."
          }
       }
+    },
+    "TriggerRolloverRequest": {
+      "type": "object",
+      "description": "Trigger Rollover Request.",
+      "properties": {
+        "certificateData": {
+          "type": "string",
+          "description": "Certificate Data"
+        }
+      },
     },
     "RegisteredServer": {
       "type": "object",
