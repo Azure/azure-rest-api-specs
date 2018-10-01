@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2018-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-07-01'
 input-file:
-- Microsoft.StorageSync/preview/2018-07-01/storagesync.json
+- Microsoft.StorageSync/stable/2018-07-01/storagesync.json
 ```
 
 
