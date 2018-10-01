@@ -315,9 +315,19 @@
       },
       "description": "Represents an OpenShift router"
     },
-    "ContainerServiceVnetSubnetID": {
-      "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier."
+    "NetworkProfile": {
+      "properties": {
+        "vnetCIDR": {
+          "type": "string",
+          "description": "CIDR for the OpenShift Vnet.",
+          "default": "10.0.0.0/8"
+        },
+        "peerVnetID" : {
+          "type": "string",
+          "description": "CIDR of the Vnet to peer."
+        }
+      },
+      "description": "Represents the OpenShift networking configuration"
     },
     "OSType": {
       "type": "string",
@@ -374,9 +384,9 @@
           "$ref": "#/definitions/OpenShiftContainerServiceVMSize",
           "description": "Size of agent VMs."
         },
-        "vnetSubnetID": {
-          "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier."
+        "subnetCIDR": {
+          "type": "string",
+          "description": "Subnet CIDR for the peering."
         },
         "osType": {
           "$ref": "#/definitions/OSType",
@@ -407,9 +417,10 @@
           "$ref": "#/definitions/OpenShiftContainerServiceVMSize",
           "description": "Size of agent VMs."
         },
-        "vnetSubnetID": {
-          "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier."
+        "subnetCIDR": {
+          "type": "string",
+          "description": "Subnet CIDR for the peering.",
+          "default": "10.0.0.0/24"
         },
         "osType": {
           "$ref": "#/definitions/OSType",
@@ -470,6 +481,10 @@
         "fqdn": {
           "type": "string",
           "description": "User-specified FQDN for OpenShift API server loadbalancer internal hostname."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Configuration for OpenShift networking."
         },
         "routerProfiles": {
           "type": "array",

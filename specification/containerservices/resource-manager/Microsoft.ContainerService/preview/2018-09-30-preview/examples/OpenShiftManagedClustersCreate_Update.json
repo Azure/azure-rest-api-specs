@@ -13,11 +13,15 @@
       "properties": {
         "openShiftVersion": "v3.10",
         "fqdn": "clustername1.location1.cloudapp.azure.com",
+        "networkProfile":{
+          "vnetCIDR":"10.0.0.0/8"
+        },
         "masterPoolProfile": {
           "name": "master",
           "count": 3,
           "vmSize": "Standard_D2s_v3",
-          "osType": "Linux"
+          "osType": "Linux",
+          "subnetCidr": "10.0.0.0/24"
         },
         "agentPoolProfiles": [
           {
@@ -25,14 +29,16 @@
             "role": "infra",
             "count": 2,
             "vmSize": "Standard_D4s_v3",
-            "osType": "Linux"
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
           },
           {
             "name": "compute",
             "role": "compute",
             "count": 4,
             "vmSize": "Standard_D4s_v3",
-            "osType": "Linux"
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
           }
         ],
         "routerProfiles": [
@@ -69,9 +75,13 @@
           "provisioningState": "Succeeded",
           "openShiftVersion": "v3.10",
           "fqdn": "clustername1.location1.cloudapp.azure.com",
+          "networkProfile":{
+            "vnetCIDR":"10.0.0.0/8"
+          },
           "masterPoolProfile": {
               "count": 3,
-              "vmSize": "Standard_D2s_v3"
+              "vmSize": "Standard_D2s_v3",
+              "subnetCidr": "10.0.0.0/24"
           },
           "agentPoolProfiles": [
             {
@@ -79,14 +89,16 @@
               "role": "infra",
               "count": 2,
               "vmSize": "Standard_D4s_v3",
-              "osType": "Linux"
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
             },
             {
               "name": "compute",
               "role": "compute",
               "count": 4,
               "vmSize": "Standard_D4s_v3",
-              "osType": "Linux"
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
             }
           ],
           "routerProfiles": [
@@ -123,11 +135,15 @@
           "provisioningState": "Creating",
           "openShiftVersion": "v3.10",
           "fqdn": "clustername1.location1.cloudapp.azure.com",
+          "networkProfile":{
+            "vnetCIDR":"10.0.0.0/8"
+          },
           "masterPoolProfile": {
               "name": "master",
               "count": 3,
               "vmSize": "Standard_D2s_v3",
-              "osType": "Linux"
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
           },
           "agentPoolProfiles": [
             {
@@ -135,14 +151,16 @@
               "role": "infra",
               "count": 2,
               "vmSize": "Standard_D4s_v3",
-              "osType": "Linux"
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
             },
             {
               "name": "compute",
               "role": "compute",
               "count": 4,
               "vmSize": "Standard_D4s_v3",
-              "osType": "Linux"
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
             }
           ],
           "routerProfiles": [
