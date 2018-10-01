@@ -3300,7 +3300,7 @@
         },
         "properties": {
           "description": "The list of properties which are included in the additional information.",
-          "type": "object",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
           }
@@ -4050,17 +4050,11 @@
         },
         "passwordManagementSettings": {
           "description": "The password management settings of the connector.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/PasswordManagementSettings"
-          }
+          "$ref": "#/definitions/PasswordManagementSettings"
         },
         "passwordHashSyncConfiguration": {
           "description": "The password hash synchronization configuration of the connector.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/PasswordHashSyncConfiguration"
-          }
+          "$ref": "#/definitions/PasswordHashSyncConfiguration"
         },
         "timeCreated": {
           "description": "The date and time when this connector was created.",
@@ -4144,7 +4138,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The time when the connection error occured.",
+          "description": "The time when the connection error occurred.",
           "type": "string",
           "format": "date-time"
         },
@@ -4208,7 +4202,7 @@
           "type": "integer"
         },
         "dn": {
-          "description": "The distingished name of the object.",
+          "description": "The distinguished name of the object.",
           "type": "string"
         },
         "anchor": {
@@ -4313,7 +4307,7 @@
         },
         "simpleProperties": {
           "description": "List of service specific configuration properties.",
-          "type": "object",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/Item"
           }
@@ -4482,7 +4476,7 @@
           "type": "string"
         },
         "timeFirstOccured": {
-          "description": "The date and time when the export error first occured.",
+          "description": "The date and time when the export error first occurred.",
           "type": "string",
           "format": "date-time"
         },
@@ -4563,7 +4557,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The date and time of occurance.",
+          "description": "The date and time of occurrance.",
           "type": "string",
           "format": "date-time"
         },
@@ -4601,7 +4595,7 @@
           "format": "date-time"
         },
         "modifiedAttributeValue": {
-          "description": "The modified atttribute value.",
+          "description": "The modified attribute value.",
           "type": "string"
         }
       }
@@ -4956,7 +4950,7 @@
           "type": "string"
         },
         "consecutiveFailureCount": {
-          "description": "The number of consecutive faulire counts.",
+          "description": "The number of consecutive failure counts.",
           "type": "integer"
         },
         "namingContext": {
@@ -5106,7 +5100,7 @@
           "$ref": "#/definitions/AssociatedObject"
         },
         "modifiedOrRemovedAttributeValue": {
-          "description": "The modified or removed attribute vlaue.",
+          "description": "The modified or removed attribute value.",
           "type": "string"
         },
         "runStepResultId": {
@@ -5355,7 +5349,7 @@
       }
     },
     "ObjectWithSyncError": {
-      "description": "The objects withg sync errors.",
+      "description": "The objects with sync errors.",
       "type": "object",
       "properties": {
         "sourceOfAuthority": {
@@ -5391,7 +5385,7 @@
           "type": "string"
         },
         "attributeMultiValues": {
-          "description": "Indicates if the atttibute is multi-valued or not.",
+          "description": "Indicates if the attribute is multi-valued or not.",
           "type": "boolean"
         },
         "minLimit": {
@@ -5411,7 +5405,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The date and time of occurance.",
+          "description": "The date and time of occurrance.",
           "type": "string",
           "format": "date-time"
         },
@@ -5452,7 +5446,7 @@
           "readOnly": true
         },
         "value": {
-          "description": "List of operations supported by the Microsoft.ADHybridhHealthService resource provider.",
+          "description": "List of operations supported by the Microsoft.ADHybridHealthService resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -5460,7 +5454,7 @@
           }
         },
         "totalCount": {
-          "description": "The total count of opertaions.",
+          "description": "The total count of operations.",
           "type": "integer"
         },
         "continuationToken": {
@@ -5564,7 +5558,7 @@
           "type": "string"
         },
         "connectionTimeout": {
-          "description": "Connection timeoit for password extension.",
+          "description": "Connection timeout for password extension.",
           "type": "integer"
         },
         "user": {
@@ -5597,7 +5591,7 @@
           "type": "boolean"
         },
         "unlockAccount": {
-          "description": "Indicates if accounts should be unloacked when resetting password.",
+          "description": "Indicates if accounts should be unlocked when resetting password.",
           "type": "boolean"
         }
       }
@@ -5879,7 +5873,7 @@
           "format": "date-time"
         },
         "customNotificationEmails": {
-          "description": "The list of additional emails that are configured to recieve notifications about the service.",
+          "description": "The list of additional emails that are configured to receive notifications about the service.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6027,7 +6021,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -6069,7 +6063,7 @@
           "format": "date-time"
         },
         "lastUpdated": {
-          "description": "The date and time, in UTC, when the server proeprties were last updated.",
+          "description": "The date and time, in UTC, when the server properties were last updated.",
           "type": "string",
           "format": "date-time"
         },
@@ -6216,7 +6210,7 @@
         },
         "alertSuppressionTimeInMins": {
           "type": "integer",
-          "description": "The time in minutues after which an alert will be autosupressed."
+          "description": "The time in minutes after which an alert will be autosupressed."
         },
         "consentedToMicrosoftDevOps": {
           "type": "boolean",
@@ -6245,11 +6239,11 @@
           "description": "The reason due to which the tenant was disabled in Azure Active Directory Connect Health."
         },
         "globalAdminsEmail": {
-          "type": "object",
+          "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The list of golbal administrators for the tenant."
+          "description": "The list of global administrators for the tenant."
         },
         "initialDomain": {
           "type": "string",
