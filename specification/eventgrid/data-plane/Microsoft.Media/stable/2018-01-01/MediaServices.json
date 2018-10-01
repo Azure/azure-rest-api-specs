@@ -362,7 +362,7 @@
       "description": "The event data for a Job output asset."
     },
     "MediaJobOutputStateChangeEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.",
       "type": "object",
       "properties": {
         "previousState": {
@@ -431,7 +431,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobScheduled",
       "allOf": [
         {
-          "$ref": "#/definitions/JobStateChange"
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
         }
       ],
       "properties": {},
@@ -442,7 +442,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobProcessing",
       "allOf": [
         {
-          "$ref": "#/definitions/JobStateChange"
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
         }
       ],
       "properties": {},
@@ -453,7 +453,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobCanceling",
       "allOf": [
         {
-          "$ref": "#/definitions/JobStateChange"
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
         }
       ],
       "properties": {},
@@ -464,7 +464,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobFinished",
       "allOf": [
         {
-          "$ref": "#/definitions/JobStateChange"
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
         }
       ],
       "properties": {
@@ -483,7 +483,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobCanceled",
       "allOf": [
         {
-          "$ref": "#/definitions/JobStateChange"
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
         }
       ],
       "properties": {
@@ -502,7 +502,7 @@
       "x-ms-discriminator-value": "#Microsoft.Media.JobErrored",
       "allOf": [
         {
-          "$ref": "#/definitions/JobStateChange"
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
         }
       ],
       "properties": {
