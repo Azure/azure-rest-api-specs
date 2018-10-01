@@ -25,6 +25,10 @@
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
           "description": "List of parameters for pipeline."
         },
+        "variables": {
+          "$ref": "../datafactory.json#/definitions/VariableDefinitionSpecification",
+          "description": "List of variables for pipeline."
+        },
         "concurrency": {
           "type": "integer",
           "minimum": 1,
@@ -3023,6 +3027,70 @@
       "required": [
         "pythonFile"
       ]
+    },
+    "SetVariableActivity": {
+      "x-ms-discriminator-value": "SetVariable",
+      "description": "Set value for a Variable.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Set Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SetVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SetVariableActivityTypeProperties": {
+      "description": "SetVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be set. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
+    },
+    "AppendVariableActivity": {
+      "x-ms-discriminator-value": "AppendVariable",
+      "description": "Append value for a Variable of type Array.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Append Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppendVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AppendVariableActivityTypeProperties": {
+      "description": "AppendVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be appended to.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be appended. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
     }
   }
 }
