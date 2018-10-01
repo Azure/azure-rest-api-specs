@@ -17,36 +17,20 @@ typescript:
     - 2018-03-01-preview
 ```
 
-``` yaml $(typescript) && $(default-api-version) == '2018-02-01'
-typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage
-```
-
-``` yaml $(typescript) && $(tag) == 'package-2016-01'
-typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2016-01-01
-```
-
-``` yaml $(typescript) && $(tag) == 'package-2017-10'
-typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2017-10-01
-```
-
-``` yaml $(typescript) && $(tag) == 'package-2018-02'
-typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2018-02-01
-```
-
-``` yaml $(typescript) && $(tag) == 'package-2018-03'
-typescript:
-  output-folder: $(js-sdks-folder)/packages/arm-storage/2018-03-01-preview
-```
-
 ``` yaml $(typescript) && $(multiapi)
 batch:
   - tag: package-2016-01
+    api-version: "2016-01-01"
+    output-folder: $(js-sdks-folder)/packages/arm-storage-2016-01-01
   - tag: package-2017-10
+    api-version: "2017-10-01"
+    output-folder: $(js-sdks-folder)/packages/arm-storage-2017-10-01
   - tag: package-2018-02
+    api-version: "2018-02-01"
+    output-folder: $(js-sdks-folder)/packages/arm-storage-2018-02-01
   - tag: package-2018-03
-  - default-api-version: "2018-02-01"
+    api-version: 2018-03-01-preview
+    output-folder: $(js-sdks-folder)/packages/arm-storage-2018-03-01-preview
+  - default-api-version-package: "@azure/arm-storage-2018-03-01-preview"
+    output-folder: $(js-sdks-folder)/packages/arm-storage
 ```
