@@ -2596,7 +2596,7 @@
       "description": "Sync Group object.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
 	  ],
       "properties": {
@@ -2612,7 +2612,7 @@
       "description": "Cloud Endpoint object.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
 	  ],
       "properties": {
@@ -2637,22 +2637,23 @@
       "description": "The parameters used when calling recall action on server endpoint."
     },
     "StorageSyncServiceCreateParameters": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
+	  ],
+      "properties": {
       },
       "description": "The parameters used when creating a storage sync service."
     },
     "SyncGroupCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+	  ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2669,6 +2670,12 @@
        }
     },
     "CloudEndpointCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+	  ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2696,6 +2703,12 @@
       }
     },
     "ServerEndpointCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+	  ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2749,19 +2762,24 @@
       }
     },
     "RegisteredServerCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+	  ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RegisteredServerCreateParametersProperties",
-          "description": "The parameters used to create the storage sync service."
+          "description": "The parameters used to create the registered server."
         }
       },
-      "description": "The parameters used when creating a storage sync service."
+      "description": "The parameters used when creating a registered server."
     },
     "RegisteredServerCreateParametersProperties": {
-      "description": "RegisteredServer Properties object.",
       "properties": {
-        "serverCertificate": {
+          "serverCertificate": {
           "type": "string",
           "description": "Registered Server Certificate"
         },
@@ -2797,8 +2815,8 @@
           "type": "string",
           "description": "Friendly Name"
         }
-      }
-    },
+        }
+      },
     "ServerEndpointUpdateParameters": {
       "properties": {
         "properties": {
@@ -2814,7 +2832,7 @@
       "description": "Server Endpoint object.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
 	  ],
       "properties": {
@@ -2830,7 +2848,7 @@
       "description": "Registered Server resource.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
 	  ],
       "properties": {
@@ -2863,7 +2881,7 @@
       "description": "Workflow resource.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
 	  ],
       "properties": {
