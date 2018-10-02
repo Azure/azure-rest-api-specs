@@ -103,6 +103,14 @@ input-file:
 - Microsoft.ContainerInstance/preview/2017-08-01-preview/containerInstance.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: UniqueResourcePaths
+    from: containerInstance.json
+    reason: false positive, see https://github.com/Azure/azure-openapi-validator/issues/176
+```
 
 ---
 # Code Generation
