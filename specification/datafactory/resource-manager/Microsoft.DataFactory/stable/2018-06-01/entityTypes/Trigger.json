@@ -275,7 +275,7 @@
         "typeProperties"
       ]
     },
-    "BlobEventsTrigger":
+    "BlobEventsTrigger": 
     {
       "description": "Trigger that runs everytime a Blob event occurs.",
       "type": "object",
@@ -285,7 +285,7 @@
         }
       ],
       "properties": {
-        "typeProperties":
+        "typeProperties": 
         {
           "description": "Blob Events Trigger properties.",
           "x-ms-client-flatten": true,
@@ -350,7 +350,7 @@
           "x-ms-client-flatten": true,
           "properties": {
             "frequency": {
-              "$ref": "#/definitions/TumblingWindowFrequency", 
+              "$ref": "#/definitions/TumblingWindowFrequency",
               "description": "The frequency of the time windows."
             },
             "interval": {
@@ -430,7 +430,7 @@
         }
       }
     },
-	  "TriggerReference": {
+    "TriggerReference": {
       "description": "Trigger reference type.",
       "type": "object",
       "properties": {
@@ -534,6 +534,51 @@
       },
       "required": [
         "offset"
+      ]
+    },
+    "RerunTumblingWindowTrigger": {
+      "description": "Trigger?that?schedules?pipeline?reruns?for?all?fixed?time?interval?windows?from?a?requested?start?time?to?requested?end?time.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Rerun?Trigger?properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "parentTrigger": {
+              "type": "object",
+              "description": "The parent trigger reference."
+            },
+            "requestedStartTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The?start?time?for?the?time?period?for?which?restatement?is?initiated. Only?UTC?time?is?currently?supported."
+            },
+            "requestedEndTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The?end?time?for?the?time?period?for?which?restatement?is?initiated. Only?UTC?time?is?currently?supported."
+            },
+            "maxConcurrency": {
+              "description": "The?max?number?of?parallel?time?windows?(ready?for?execution)?for?which?a?rerun?is?triggered.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          },
+          "required": [
+            "requestedStartTime",
+            "requestedEndTime",
+            "maxConcurrency"
+          ]
+        }
+      },
+      "required": [
+        "typeProperties"
       ]
     }
   }
