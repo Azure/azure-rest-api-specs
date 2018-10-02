@@ -113,17 +113,17 @@ namespace ConsoleApp1
 
 > see https://aka.ms/autorest
 
-The current release is `release_2_0`.
+The current release is `release_2_1`.
 ``` yaml
-tag: release_2_0
+tag: release_2_1
 add-credentials: true
 ```
 
-### Release 2.0
-These settings apply only when `--tag=release_2_0` is specified on the command line.
+### Release 2.1
+These settings apply only when `--tag=release_2_1` is specified on the command line.
 
-``` yaml $(tag) == 'release_2_0'
-input-file: stable/v2.0/TextAnalytics.json
+``` yaml $(tag) == 'release_2_1'
+input-file: preview/v2.1/TextAnalytics.json
 log-file: logs/log.txt
 ```
 
@@ -198,16 +198,16 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: release_2_0
+  - tag: release_2_1
 ```
 
-### Tag: release_2_0 and go
+### Tag: release_2_1 and go
 
-These settings apply only when `--tag=release_2_0 --go` is specified on the command line.
+These settings apply only when `--tag=release_2_1 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'release_2_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/textanalytics
+``` yaml $(tag) == 'release_2_1' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.1/textanalytics
 ```
 
 
