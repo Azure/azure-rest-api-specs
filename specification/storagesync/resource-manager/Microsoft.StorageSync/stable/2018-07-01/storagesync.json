@@ -2364,6 +2364,65 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow Resource"
+        ],
+        "operationId": "Workflows_ListByStorageSyncService",
+        "description": "Get a Workflow List",
+        "x-ms-examples": {
+          "Workflows_ListByStorageSyncService": {
+            "$ref": "./examples/Workflows_ListByStorageSyncService.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of Workflow resources in Storage Sync Service",
+            "schema": {
+              "$ref": "#/definitions/WorkflowArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows/{workflowId}": {
       "get": {
         "parameters": [
