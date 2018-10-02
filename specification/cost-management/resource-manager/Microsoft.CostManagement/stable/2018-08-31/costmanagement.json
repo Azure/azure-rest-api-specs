@@ -517,6 +517,9 @@
         "x-ms-examples": {
           "SubscriptionQuery": {
             "$ref": "./examples/SubscriptionQuery.json"
+          },
+           "SubscriptionQueryGrouping": {
+            "$ref": "./examples/SubscriptionQueryGrouping.json"
           }
         },
         "parameters": [
@@ -568,6 +571,9 @@
         "x-ms-examples": {
           "ResourceGroupQuery": {
             "$ref": "./examples/ResourceGroupQuery.json"
+          },
+          "ResourceGroupQueryGrouping": {
+            "$ref": "./examples/ResourceGroupQueryGrouping.json"
           }
         },
         "parameters": [
@@ -622,6 +628,9 @@
         "x-ms-examples": {
           "BillingAccountQuery": {
             "$ref": "./examples/BillingAccountQuery.json"
+          },
+          "BillingAccountQueryGrouping": {
+            "$ref": "./examples/BillingAccountQueryGrouping.json"
           }
         },
         "parameters": [
@@ -673,6 +682,9 @@
         "x-ms-examples": {
           "EnrollmentAccountQuery": {
             "$ref": "./examples/EnrollmentAccountQuery.json"
+          },
+          "EnrollmentAccountQueryGrouping": {
+            "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
           }
         },
         "parameters": [
@@ -727,6 +739,9 @@
         "x-ms-examples": {
           "DepartmentQuery": {
             "$ref": "./examples/DepartmentQuery.json"
+          },
+          "DepartmentQueryGrouping": {
+            "$ref": "./examples/DepartmentQueryGrouping.json"
           }
         },
         "parameters": [
@@ -779,8 +794,11 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "ManagmentGroupQuery": {
+          "ManagementGroupQuery": {
             "$ref": "./examples/ManagementGroupQuery.json"
+          },
+          "ManagementGroupQueryGrouping": {
+            "$ref": "./examples/ManagementGroupQueryGrouping.json"
           }
         },
         "parameters": [
@@ -1002,6 +1020,13 @@
           },
           "maxItems": 2
         },
+        "sorting": {
+          "description": "Array of order by expression to use in the report.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigSorting"
+          }
+        },
         "filter": {
           "type": "object",
           "description": "Has filter expression to use in the report.",
@@ -1044,11 +1069,31 @@
         "name",
         "function"
       ]
+    },    
+    "ReportConfigSorting": {
+      "description": "The order by expression to be used in the report.",
+      "properties": {
+        "direction": {
+          "description": "Direction of sort.",
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        "name": {
+          "description": "The name of the column to sort.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ReportConfigGrouping": {
       "description": "The group by expression to be used in the report.",
       "properties": {
-        "columnType": {
+        "type": {
           "description": "Has type of the column to group.",
           "$ref": "#/definitions/ReportConfigColumnType"
         },
@@ -1058,7 +1103,7 @@
         }
       },
       "required": [
-        "columnType",
+        "type",
         "name"
       ]
     },
