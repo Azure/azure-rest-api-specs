@@ -1824,5 +1824,26 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 Now, the issue is what happens if both the values are provided? In such cases, it is the responsibility of the service team to tell us if we want to use the location header finally to retrieve the values. Such a retrieval will be used as step 4 and not during the polling.
 
 **How to fix the violation**: For a Post LRO operation, add "x-ms-long-running-operation-options" extension with "final-state-via" property.
+``` json
+"x-ms-long-running-operation-options": {
+  "final-state-via": "location"
+}
+```
+
+or
+
+``` json
+"x-ms-long-running-operation-options": {
+  "final-state-via": "azure-async-operation"
+}
+```
+
+or
+
+``` json
+"x-ms-long-running-operation-options": {
+  "final-state-via": "original-uri"
+}
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
