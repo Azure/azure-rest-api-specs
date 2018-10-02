@@ -51,7 +51,8 @@
           "Get Operations": {
             "$ref": "./examples/GetOperations.json"
           }
-        }
+        },
+        "x-ms-pageable": {}
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
@@ -343,7 +344,8 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+		  "x-ms-mutability":["read", "create"]
         },
         "tags": {
           "type": "object",
@@ -414,6 +416,50 @@
           "$ref": "#/definitions/LdapsSettings",
           "description": "Secure LDAP Settings"
         },
+        "healthLastEvaluated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last domain evaluation run DateTime"
+        },
+        "healthMonitors": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthMonitor",
+            "description": "Domain Health Monitors"
+          },
+          "description": "List of Domain Health Monitors"
+        },
+        "healthAlerts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthAlert",
+            "description": "Domain Health Alerts"
+          },
+          "description": "List of Domain Health Alerts"
+        },
+        "notificationSettings": {
+          "$ref": "#/definitions/NotificationSettings",
+          "description": "Notification Settings"
+        },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "filteredSync": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Enabled or Disabled flag to turn on Group-based filtered sync",
+          "x-ms-enum": {
+            "name": "filteredSync",
+            "modelAsString": true
+          }
+        },
         "domainControllerIpAddress": {
           "readOnly": true,
           "type": "array",
@@ -441,6 +487,26 @@
         "ldapsSettings": {
           "$ref": "#/definitions/LdapsSettings",
           "description": "Secure LDAP Settings"
+        },
+        "notificationSettings": {
+          "$ref": "#/definitions/NotificationSettings",
+          "description": "Notification Settings"
+        },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "filteredSync": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Enabled or Disabled flag to turn on Group-based filtered sync",
+          "x-ms-enum": {
+            "name": "filteredSync",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -499,6 +565,146 @@
           "readOnly": true,
           "type": "string",
           "description": "External access ip address."
+        }
+      }
+    },
+    "HealthMonitor": {
+      "description": "Health Monitor Description",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Name"
+        },
+        "details": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Details"
+        }
+      }
+    },
+    "HealthAlert": {
+      "description": "Health Alert Description",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Name"
+        },
+        "issue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Issue"
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Severity"
+        },
+        "raised": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Raised DateTime"
+        },
+        "lastDetected": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Last Detected DateTime"
+        },
+        "resolutionUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert TSG Link"
+        }
+      }
+    },
+    "NotificationSettings": {
+      "description": "Settings for notification",
+      "properties": {
+        "notifyGlobalAdmins": {
+          "type": "string",
+		  "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Should global admins be notified",
+		  "x-ms-enum": {
+            "name": "notifyGlobalAdmins",
+            "modelAsString": true
+          }
+        },
+        "notifyDcAdmins": {
+          "type": "string",
+		  "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Should domain controller admins be notified",
+		  "x-ms-enum": {
+            "name": "notifyDcAdmins",
+            "modelAsString": true
+          }
+        },
+        "additionalRecipients": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Email address for additional recipient"
+          },
+          "description": "The list of additional recipients"
+        }
+      }
+    },
+    "DomainSecuritySettings": {
+      "description": "Domain Security Settings",
+      "properties": {
+        "ntlmV1": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "NtlmV1",
+            "modelAsString": true
+          }
+        },
+        "tlsV1": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "TlsV1",
+            "modelAsString": true
+          }
+        },
+        "syncNtlmPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
         }
       }
     },
