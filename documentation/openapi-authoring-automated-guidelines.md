@@ -1821,7 +1821,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 2. A response is received.
 3. The response is validated and its headers are read. The header azure-async-operation header/location header is used for further polling until a terminal status is met.
 
-Now, the issue is what happens if both the values are provided? In such cases, it is the responsibility of the service team to tell us if we want to use the location header finally to retrieve the values. Such a retrieval will be used as step 4 and not during the polling.
+Now, the issue is what happens if both the values are provided? In such cases, it is the responsibility of the service team to tell us if we want to use the location header finally to retrieve the values. Such a retrieval will be used as step 4 and not during the polling. More details on LRO operation could be found [here](https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md)
 
 **How to fix the violation**: For a Post LRO operation, add "x-ms-long-running-operation-options" extension with "final-state-via" property.
 ``` json
