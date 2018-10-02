@@ -1754,7 +1754,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter alerts by status, costEntity, category, fromDate. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "description": "May be used to filter alerts by properties/definition/costEntity, properties/definition/category, properties/definition/alertType, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1819,7 +1819,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter alerts by status, costEntity, category, fromDate. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "description": "May be used to filter alerts by properties/definition/costEntity, properties/definition/category, properties/definition/alertType, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1865,7 +1865,7 @@
         "tags": [
           "Alerts"
         ],
-        "operationId": "Alert_GetBySubscription",
+        "operationId": "Alerts_GetBySubscription",
         "description": "Gets the alert for a subscription by alert ID.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -1907,7 +1907,7 @@
         "tags": [
           "Alerts"
         ],
-        "operationId": "Alert_GetByResourceGroupName",
+        "operationId": "Alerts_GetByResourceGroupName",
         "description": "Gets the alert for a resource group under a subscription by alert ID.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -2903,6 +2903,7 @@
           "readOnly": true
         },
         "definition": {
+          "description": "The definition (type) of an Alert",
           "$ref": "#/definitions/AlertDefinition"
         },
         "description": {
@@ -2929,6 +2930,7 @@
           "readOnly": true
         },
         "details": {
+          "description": "Specific details of an alert - key-value dictionary.",
           "x-ms-client-flatten": true,
           "type": "object",
           "additionalProperties": {
