@@ -498,6 +498,51 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/availableBalance": {
+      "get": {
+       "tags": [
+          "Credits"
+        ],
+        "operationId": "AvailableBalanceByBillingProfile_List",
+        "description": "The latest available credit balance for a given billingAccountId and billingProfileId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "AvailableBalanceByBillingProfile": {
+            "$ref": "./examples/AvailableBalanceByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+         }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AvailableBalance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -886,6 +931,42 @@
       "billingProfileName": {
         "description": "Billing profile name associated for thsi product",
         "type" : "string"
+      },
+      "parentProductId": {
+        "description": "Product id of the parent of this product",
+        "type": "string"
+      }
+    }
+  },
+  "AvailableBalance": {
+    "description": " The latest available credit balance for a given billingAccountId and billingProfileId.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/AvailableBalanceProperties",
+        "title": "Available balance properties"
+      }
+    }
+  },
+  "AvailableBalanceProperties": {
+    "description": "The properties of available balance.",
+    "properties": {
+      "amount": {
+        "description": "Balance Amount.",
+        "type": "number",
+        "format": "decimal",
+        "readOnly": true
+      },
+      "currency": {
+        "description": "Currency Code",
+        "type": "string",
+        "readOnly": true
       }
     }
   }
