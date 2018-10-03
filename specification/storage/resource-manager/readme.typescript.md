@@ -1,7 +1,7 @@
 ## TypeScript
 
 These settings apply only when `--typescript` is specified on the command line.
-Please also specify `--js-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
+Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
 
 ``` yaml $(typescript)
 typescript:
@@ -21,16 +21,16 @@ typescript:
 batch:
   - tag: package-2016-01
     api-version: "2016-01-01"
-    output-folder: $(js-sdks-folder)/packages/arm-storage-2016-01-01
+    output-folder: $(typescript-sdks-folder)/packages/arm-storage-2016-01-01
   - tag: package-2017-10
     api-version: "2017-10-01"
-    output-folder: $(js-sdks-folder)/packages/arm-storage-2017-10-01
+    output-folder: $(typescript-sdks-folder)/packages/arm-storage-2017-10-01
   - tag: package-2018-02
     api-version: "2018-02-01"
-    output-folder: $(js-sdks-folder)/packages/arm-storage-2018-02-01
+    output-folder: $(typescript-sdks-folder)/packages/arm-storage-2018-02-01
   - tag: package-2018-03
     api-version: 2018-03-01-preview
-    output-folder: $(js-sdks-folder)/packages/arm-storage-2018-03-01-preview
+    output-folder: $(typescript-sdks-folder)/packages/arm-storage-2018-03-01-preview
   - multiapi-latest: true
-    output-folder: $(js-sdks-folder)/packages/arm-storage
+    output-folder: $(typescript-sdks-folder)/packages/arm-storage
 ```
