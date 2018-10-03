@@ -4,47 +4,27 @@
     "billingAccountId": "70664866",
     "enrollmentAccountId": "456",
     "parameters":{
-      "type": "Usage",
-      "timeframe": "MonthToDate",
-      "dataset": {
-        "granularity": "Daily",               
-        "filter":{
-          "and": [
-            {
-              "or":[
-                {
-                  "dimension": {
-                    "name": "ResourceLocation",
-                    "operator": "In",
-                    "values": [
-                      "East US",
-                      "West Europe"
-                    ]
-                  }
-                },
-                {
-                  "tag": {
-                    "name": "Environment",
-                    "operator": "In",
-                    "values": [
-                      "UAT",
-                      "Prod"
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "dimension": {
-                "name": "ResourceGroup",
-                "operator": "In",
-                "values": [
-                  "API"
-                ]
-              }
+        "type": "Usage",
+        "timeframe": "TheLastMonth",
+        "dataset": {
+          "granularity": "Daily",
+          "aggregation": {
+            "totalCost": {
+              "name": "PreTaxCost",
+              "function": "Sum"
             }
-          ]                      
-        }
+          },
+          "grouping": [
+            {
+              "type": "Dimension",
+              "name": "ResourceGroup"
+            }
+          ],
+          "sorting": [
+            {
+              "name": "ResourceGroup"
+            }
+          ]      
       }
     }    
   },
@@ -92,12 +72,6 @@
                 [
                   20.359416562625452,
                   "VSTSHOL-1595322048000",
-                  20180331,
-                  "USD"
-                ],
-                [
-                  0.16677720329728665,
-                  "gs-stms-dev",
                   20180331,
                   "USD"
                 ]
