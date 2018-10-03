@@ -266,52 +266,23 @@ paths:
             type: array
             items:
               $ref: '#/definitions/BreakSentenceTextInput'
+              
       responses:
         '200':
-          description: OK
+          description: Success
           schema:
             $ref: '#/definitions/BreakSentenceSuccess'
-        '400':
-          description: >-
-            One of the query parameters is missing or not valid. Please correct
-            the request parameters before retrying.
+        default:
+          description: Error response.
           schema:
             $ref: '#/definitions/ErrorMessage'
-        '401':
-          description: >-
-            The request could not be authenticated. Check that credentials are
-            specified and valid.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '403':
-          description: >-
-            The request is not authorized. Check the detailed error message.
-            This error often indicates that all free translations provided with
-            a trial subscription have been used up.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '429':
-          description: The caller is sending too many requests.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
-          description: >-
-            An unexpected error occurred. If the error persists, report it with
-            - date and time of the failure, request identifier from response
-            header X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: >-
-            Server temporarily unavailable. Please retry the request after a
-            second of sleep. If the error persists, report it with - date and
-            time of the failure, request identifier from response header
-            X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
+      x-ms-examples:
+        Translate success example:
+          $ref: ./examples/breakSentenceSuccess.json
+      
       deprecated: false
+      
+      
   /Detect:
     post:
       description: |
@@ -408,51 +379,23 @@ paths:
             type: array
             items:
               $ref: '#/definitions/DetectTextInput'
+              
       responses:
         '200':
-          description: OK
+          description: Success
           schema:
             $ref: '#/definitions/DetectSuccess'
-        '400':
-          description: >-
-            One of the query parameters is missing or not valid. Correct request
-            parameters before retrying.
+        default:
+          description: Error response.
           schema:
             $ref: '#/definitions/ErrorMessage'
-        '401':
-          description: >-
-            The request could not be authenticated. Check that credentials are
-            specified and valid.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '403':
-          description: >-
-            The request is not authorized. Check the detailed error message.
-            This often indicates that all free translations provided with a
-            trial subscription have been used up.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '429':
-          description: The caller is sending too many requests.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
-          description: >-
-            An unexpected error occurred. If the error persists, report it with-
-            date and time of the failure, request identifier from response
-            header X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: >-
-            Server temporarily unavailable. Please retry the request. If the
-            error persists, report it with -  date and time of the failure,
-            request identifier from response header X-RequestId, and client
-            identifier from request header X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
+      x-ms-examples:
+        Translate success example:
+          $ref: ./examples/detectSuccess.json
+      
       deprecated: false
+      
+      
   /Dictionary/Lookup:
     post:
       description: >
@@ -588,51 +531,23 @@ paths:
             type: array
             items:
               $ref: '#/definitions/DictionaryLookupTextInput'
+              
       responses:
         '200':
-          description: OK
+          description: Success
           schema:
             $ref: '#/definitions/DictionaryLookupSuccess'
-        '400':
-          description: >-
-            One of the query parameters is missing or not valid. Correct request
-            parameters before retrying.
+        default:
+          description: Error response.
           schema:
             $ref: '#/definitions/ErrorMessage'
-        '401':
-          description: >-
-            The request could not be authenticated. Check that credentials are
-            specified and valid.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '403':
-          description: >-
-            The request is not authorized. Check the details error message. This
-            often indicates that all free translations provided with a trial
-            subscription have been used up.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '429':
-          description: The caller is sending too many requests.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
-          description: >-
-            An unexpected error occurred. If the error persists, report it with-
-            date and time of the failure, request identifier from response
-            header X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: >-
-            Server temporarily unavailable. Retry the request. If the error
-            persists, report it with -  date and time of the failure, request
-            identifier from response header X-RequestId, and client identifier
-            from request header X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
+      x-ms-examples:
+        Translate success example:
+          $ref: ./examples/dictionaryLookupSuccess.json
+      
       deprecated: false
+      
+      
   /Dictionary/Examples:
     post:
       description: >
@@ -756,51 +671,23 @@ paths:
             type: array
             items:
               $ref: '#/definitions/DictionaryExampleTextInput'
+              
       responses:
         '200':
-          description: OK
+          description: Success
           schema:
             $ref: '#/definitions/DictionaryExampleSuccess'
-        '400':
-          description: >-
-            One of the query parameters is missing or not valid. Correct request
-            parameters before retrying.
+        default:
+          description: Error response.
           schema:
             $ref: '#/definitions/ErrorMessage'
-        '401':
-          description: >-
-            The request could not be authenticated. Check that credentials are
-            specified and valid.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '403':
-          description: >-
-            The request is not authorized. Check the details error message. This
-            often indicates that all free translations provided with a trial
-            subscription have been used up.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '429':
-          description: The caller is sending too many requests.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
-          description: >-
-            An unexpected error occurred. If the error persists, report it with-
-            date and time of the failure, request identifier from response
-            header X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: >-
-            Server temporarily unavailable. Retry the request. If the error
-            persists, report it with -  date and time of the failure, request
-            identifier from response header X-RequestId, and client identifier
-            from request header X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
+      x-ms-examples:
+        Translate success example:
+          $ref: ./examples/dictionaryExampleSuccess.json
+      
       deprecated: false
+      
+      
   /Languages:
     get:
       description: >
@@ -1024,42 +911,23 @@ paths:
           in: header
           required: false
           type: string
+          
       responses:
         '200':
-          description: OK
+          description: Success
           schema:
             $ref: '#/definitions/LanguageExampleSuccess'
-        '304':
-          description: >-
-            The resource has not been modified since the version specified by
-            request headers If-None-Match.
-        '400':
-          description: >-
-            One of the query parameters is missing or not valid. Correct the
-            request parameters before retrying.
+        default:
+          description: Error response.
           schema:
             $ref: '#/definitions/ErrorMessage'
-        '429':
-          description: The caller is sending too many requests.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
-          description: >-
-            An unexpected error occurred. If the error persists, report it with-
-            date and time of the failure, request identifier from response
-            header X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: >-
-            Server temporarily unavailable. Retry the request. If the error
-            persists, report it with -  date and time of the failure, request
-            identifier from response header X-RequestId, and client identifier
-            from request header X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
+      x-ms-examples:
+        Translate success example:
+          $ref: ./examples/LanguagesSuccess.json
+      
       deprecated: false
+      
+      
   /translate:
     post:
       description: |
@@ -1309,55 +1177,24 @@ paths:
             type: array
             items:
               $ref: '#/definitions/TranslateTextInput'
+
+
       responses:
         '200':
-          description: OK
+          description: Success
           schema:
             $ref: '#/definitions/TranslateSuccess'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/ErrorMessage'
       x-ms-examples:
         Translate success example:
           $ref: ./examples/TranslateSuccess.json
-          
-        '400':
-          description: >-
-            One of the query parameters is missing or not valid. Please correct
-            the request parameters before retrying.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '401':
-          description: >-
-            The request could not be authenticated. Check that credentials are
-            specified and valid.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '403':
-          description: >-
-            The request is not authorized. Check the details error message. This
-            often indicates that all free translations provided with a trial
-            subscription have been used up.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '429':
-          description: The caller is sending too many requests.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
-          description: >-
-            An unexpected error occurred. If the error persists, report it with-
-            date and time of the failure, request identifier from response
-            header X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: >-
-            Server temporarily unavailable. Retry the request. If the error
-            persists, report it with -  date and time of the failure, request
-            identifier from response header X-RequestId, and client identifier
-            from request header X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
+      
       deprecated: false
+      
+      
   /transliterate:
     post:
       description: >
@@ -1448,50 +1285,20 @@ paths:
             type: array
             items:
               $ref: '#/definitions/TransliterateTextInput'
+              
       responses:
         '200':
-          description: OK
+          description: Success
           schema:
             $ref: '#/definitions/TransliterateSuccess'
-        '400':
-          description: >-
-            One of the query parameters is missing or not valid. Correct request
-            parameters before retrying.
+        default:
+          description: Error response.
           schema:
             $ref: '#/definitions/ErrorMessage'
-        '401':
-          description: >-
-            The request could not be authenticated. Check that credentials are
-            specified and valid.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '403':
-          description: >-
-            The request is not authorized. Check the details error message. This
-            often indicates that all free translations provided with a trial
-            subscription have been used up.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '429':
-          description: The caller is sending too many requests.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
-          description: >-
-            An unexpected error occurred. If the error persists, report it with-
-            date and time of the failure, request identifier from response
-            header X-RequestId, and client identifier from request header
-            X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: >-
-            Server temporarily unavailable. Retry the request. If the error
-            persists, report it with -  date and time of the failure, request
-            identifier from response header X-RequestId, and client identifier
-            from request header X-ClientTraceId.
-          schema:
-            $ref: '#/definitions/ErrorMessage'
+      x-ms-examples:
+        Translate success example:
+          $ref: ./examples/transliterateSuccess.json
+      
       deprecated: false
 definitions:
 
