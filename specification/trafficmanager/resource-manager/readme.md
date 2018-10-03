@@ -51,6 +51,10 @@ directive:
     reason: This will cause breaking changes in .NET SDK
     from: trafficmanager.json
     where: $.definitions.Endpoint
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.UserMetricsModel
 ```
 
 ### Tag: package-2018-04

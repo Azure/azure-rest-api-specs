@@ -10,6 +10,7 @@ typescript:
   payload-flattening-threshold: 2
   override-client-name: StorageManagementClient
   generate-metadata: true
+  generate-readme-md: false
   api-versions:
     - 2018-03-01-preview
     - "2018-02-01"

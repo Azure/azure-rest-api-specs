@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-network"
   generate-metadata: true
+  generate-readme-md: false
   api-versions:
     - "2018-07-01"
     - "2018-06-01"
