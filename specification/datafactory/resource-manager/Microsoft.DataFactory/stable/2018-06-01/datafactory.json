@@ -2593,7 +2593,7 @@
             "$ref": "./examples/RerunTriggers_Create.json"
           }
         },
-        "description": "Creates?a?rerun?trigger.",
+        "description": "Creates a rerun trigger.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2615,7 +2615,7 @@
           },
           {
             "name": "rerunTumblingWindowTriggerActionParameters",
-            "description": "Rerun?tumbling?window?trigger?action?parameters.",
+            "description": "Rerun tumbling window trigger action parameters.",
             "in": "body",
             "required": true,
             "schema": {
@@ -2631,7 +2631,7 @@
             }
           },
           "default": {
-            "description": "An?error?response?received?from?the?Azure?Data?Factory?service.",
+            "description": "An error response received from the Azure Data Factory service.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -2814,7 +2814,7 @@
             }
           },
           "default": {
-            "description": "An?error?response?received?from?the?Azure?Data?Factory?service.",
+            "description": "An error response received from the Azure Data Factory service.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4180,21 +4180,21 @@
       }
     },
     "RerunTumblingWindowTriggerActionParameters": {
-      "description": "Rerun?tumbling?window?trigger?Parameters.",
+      "description": "Rerun tumbling window trigger Parameters.",
       "type": "object",
       "properties": {
         "startTime": {
-          "description": "The?start?time?for?the?time?period?for?which?restatement?is?initiated. Only?UTC?time?is?currently?supported.",
+          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
           "type": "string",
           "format": "date-time"
         },
         "endTime": {
-          "description": "The?end?time?for?the?time?period?for?which?restatement?is?initiated. Only?UTC?time?is?currently?supported.",
+          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
           "type": "string",
           "format": "date-time"
         },
         "maxConcurrency": {
-          "description": "The?max?number?of?parallel?time?windows?(ready?for?execution)?for?which a?rerun?is?triggered.",
+          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
           "type": "integer",
           "minimum": 1,
           "maximum": 50
@@ -4222,7 +4222,8 @@
         },
         "nextLink": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },

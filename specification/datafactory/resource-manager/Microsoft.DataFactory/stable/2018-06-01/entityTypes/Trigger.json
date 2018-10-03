@@ -537,7 +537,7 @@
       ]
     },
     "RerunTumblingWindowTrigger": {
-      "description": "Trigger?that?schedules?pipeline?reruns?for?all?fixed?time?interval?windows?from?a?requested?start?time?to?requested?end?time.",
+      "description": "Trigger that schedules pipeline reruns for all fixed time interval windows from a requested start time to requested end time.",
       "type": "object",
       "allOf": [
         {
@@ -546,7 +546,7 @@
       ],
       "properties": {
         "typeProperties": {
-          "description": "Rerun?Trigger?properties.",
+          "description": "Rerun Trigger properties.",
           "x-ms-client-flatten": true,
           "properties": {
             "parentTrigger": {
@@ -556,15 +556,15 @@
             "requestedStartTime": {
               "type": "string",
               "format": "date-time",
-              "description": "The?start?time?for?the?time?period?for?which?restatement?is?initiated. Only?UTC?time?is?currently?supported."
+              "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported."
             },
             "requestedEndTime": {
               "type": "string",
               "format": "date-time",
-              "description": "The?end?time?for?the?time?period?for?which?restatement?is?initiated. Only?UTC?time?is?currently?supported."
+              "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported."
             },
             "maxConcurrency": {
-              "description": "The?max?number?of?parallel?time?windows?(ready?for?execution)?for?which?a?rerun?is?triggered.",
+              "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
               "type": "integer",
               "minimum": 1,
               "maximum": 50
