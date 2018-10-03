@@ -73,7 +73,7 @@ script:
   - >-
     if [[ $MODE == 'model' ]]; then
       npm install
-      node scripts/modelValidation.js
+      node --max-old-space-size=16384 scripts/modelValidation.js
     fi
   - >-
     if [[ $MODE == 'BreakingChange' ]]; then
