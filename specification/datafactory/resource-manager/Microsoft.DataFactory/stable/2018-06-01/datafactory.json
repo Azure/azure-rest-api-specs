@@ -3101,6 +3101,39 @@
         "message"
       ]
     },
+    "VariableDefinitionSpecification": {
+      "description": "Definition of variable for a Pipeline.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/VariableSpecification"
+      }
+    },
+    "VariableSpecification": {
+      "description": "Definition of a single variable for a Pipeline.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Variable type.",
+          "enum": [
+            "String",
+            "Bool",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "VariableType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of variable."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "ParameterDefinitionSpecification": {
       "description": "Definition of all parameters for an entity.",
       "type": "object",

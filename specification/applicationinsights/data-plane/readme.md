@@ -41,6 +41,9 @@ input-file:
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 
 ``` yaml $(tag) == '20180420'
@@ -49,6 +52,9 @@ input-file:
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 
 # Code Generation
@@ -71,14 +77,10 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ``` yaml $(csharp)
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.ApplicationInsights
+  namespace: Microsoft.Azure.ApplicationInsights.Query
   output-folder: $(csharp-sdks-folder)/ApplicationInsights/DataPlane/ApplicationInsights/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
-directive:
-  - from: swagger-document
-    where: $.definitions.table.properties.rows.items.items.type
-    transform: $ = "object"
 ```
 
 ``` yaml $(python)
@@ -86,8 +88,8 @@ python-mode: create
 python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.applicationinsights
-  package-name: azure-applicationinsights
+  namespace: azure.applicationinsights.query
+  package-name: azure-applicationinsights-query
   package-version: 0.1.0
 directive:
   - from: swagger-document
