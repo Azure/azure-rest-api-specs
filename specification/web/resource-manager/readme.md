@@ -465,7 +465,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2016-09
+### Tag: package-2018-03-01-hybrid
 
 These settings apply only when `--tag=package-2018-03-01-hybrid` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile for csharp code generation.
