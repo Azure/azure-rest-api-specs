@@ -1815,13 +1815,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : A LRO Post operation with return schema must have "x-ms-long-running-operation-options" extension enabled.
 
-**Description** : This is a rule introduced to make the understanding of Long Running Operations more clear. A LRO has the following steps:
+**Description** : This is a rule introduced to make the understanding of Long Running Operations more clear. 
 
-1. An Initial call is made to the service.
-2. A response is received.
-3. The response is validated and its headers are read. The header azure-async-operation header/location header is used for further polling until a terminal status is met.
+In case of LRO Post operation with return schema, it MAY be ambiguous for the SDK to understand automatically what the return schema is modeling. To avoid any confusion that would lead SDK to incorrectly instantiate the return type, service team needs to explain if the return schema is modeling a result from a "Location" header, or from an "Azure-AsyncOperation" header.
 
-Now, the issue is what happens if both the values are provided? In such cases, it is the responsibility of the service team to tell us if we want to use the location header finally to retrieve the values. Such a retrieval will be used as step 4 and not during the polling. More details on LRO operation could be found [here](https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md)
+More details on LRO operation could be found [here](https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md)
 
 **How to fix the violation**: For a Post LRO operation, add "x-ms-long-running-operation-options" extension with "final-state-via" property.
 ``` json
@@ -1835,14 +1833,6 @@ or
 ``` json
 "x-ms-long-running-operation-options": {
   "final-state-via": "azure-async-operation"
-}
-```
-
-or
-
-``` json
-"x-ms-long-running-operation-options": {
-  "final-state-via": "original-uri"
 }
 ```
 
