@@ -403,6 +403,13 @@
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -442,6 +449,13 @@
           },
           {
             "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -481,6 +495,13 @@
           },
           {
             "$ref": "#/parameters/projectIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -866,75 +887,122 @@
     "description": "The properties of products",
     "properties": {
       "displayName": {
-        "description": "Product name.",
-        "type": "string"
+        "description": "The display name of the product.",
+        "type": "string",
+        "readOnly": true
       },
       "purchaseDate": {
-        "description": "Date of purchase of this product",
-        "type" : "string",
-        "format": "date-time"
+        "description": "The date of purchase.",
+        "type": "string",
+        "format": "date-time",
+        "readOnly": true
       },
-      "productType" : {
-        "description": "Type of product",
-        "type" : "string"
+      "productType": {
+        "description": "The type of product.",
+        "type": "string",
+        "enum": [
+          "RI",
+          "SupportPlan"
+        ]
       },
-      "status" : {
-        "description": "Status of product",
-        "type" : "string"
+      "status": {
+        "description": "Product status.",
+        "type": "string",
+        "enum": [
+          "Active",
+          "Inactive",
+          "PastDue",
+          "Expiring",
+          "Expired",
+          "Disabled",
+          "Cancelled",
+          "AutoRenew"
+        ],
+        "x-ms-enum": {
+          "name": "StatusType",
+          "modelAsString": true
+        }
       },
-      "endDate" : {
-        "description": "End date of this product",
-        "type" : "string",
-        "format": "date-time"
+      "endDate": {
+        "description": "end date.",
+        "type": "string",
+        "format": "date-time",
+        "readOnly": true
       },
-      "billingFrequency" : {
-        "description": "Frequency of billing this product",
-        "type" : "string"
+      "billingFrequency": {
+        "description": "Billing frequency.",
+        "type": "string",
+        "enum": [
+          "OneTime",
+          "Monthly",
+          "UsageBased"
+        ],
+        "x-ms-enum": {
+          "name": "BillingFrequency",
+          "modelAsString": true
+        }
       },
       "lastCharge": {
-        "description": "Last charge for this product",
-        "type" : "integer"
+        "description": "Last month charges.",
+        "type": "number",
+        "format": "decimal",
+        "readOnly": true
       },
-      "lastChargeDate" : {
-        "description": "Date of last charge of this product",
-        "type" : "string",
-        "format": "date-time"
+      "lastChargeDate": {
+        "description": "The date of the last charge.",
+        "type": "string",
+        "format": "date-time",
+        "readOnly": true
       },
-      "currency": {
-        "description": "Currency of the last charge",
-        "type" : "string"
+      "quantity": {
+        "description": "Currency Code",
+        "type": "number",
+        "readOnly": true
       },
       "skuId": {
-        "description": "SKU ID of this product",
-        "type" : "string"
+        "description": "Sku Id.",
+        "type": "string",
+        "readOnly": true
       },
       "skuDescription": {
-        "description": "SKU Description of this product",
-        "type" : "string"
+        "description": "Sku description.",
+        "type": "string",
+        "readOnly": true
       },
-      "availabilityId" : {
-        "description": "Availability Id of this product",
-        "type" : "string"
+      "availabilityId": {
+        "description": "Availability Id.",
+        "type": "string",
+        "readOnly": true
       },
-      "projectId" : {
-        "description": "Project Id this product is assigned to",
-        "type" : "string"
-      },
-      "projectName": {
-        "description": "Name of the project associated to",
-        "type" : "string"
-      },
-      "billingProfileId": {
-        "description": "Billing profile this product is associated to",
-        "type" : "string"
-      },
-      "billingProfileName": {
-        "description": "Billing profile name associated for thsi product",
-        "type" : "string"
+      "currency": {
+        "description": "Currency Code",
+        "type": "string",
+        "readOnly": true
       },
       "parentProductId": {
-        "description": "Product id of the parent of this product",
-        "type": "string"
+        "description": "Parent Product Id.",
+        "type": "string",
+        "readOnly": true
+      },
+      "projectId": {
+        "description": "Project id to which this product belongs.",
+        "type": "string",
+        "readOnly": true
+      },
+      "projectName": {
+        "description": "Project name to which this product belongs.",
+        "type": "string",
+        "readOnly": true
+      },
+      "billingProfileId": {
+        "description": "Billing Profile id to which this product belongs.",
+        "type": "string",
+        "readOnly": true
+      },
+      "billingProfileName": {
+        "description": "Billing Profile name to which this product belongs.",
+        "type": "string",
+        "readOnly": true
       }
     }
   },
