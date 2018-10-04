@@ -30,6 +30,16 @@ tag: package-2018-05-preview
 ```
 
 
+### Tag: package-2018-09-preview
+
+These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-preview'
+input-file:
+- Microsoft.EventGrid/preview/2018-09-15-preview/EventGrid.json
+```
+
+
 ### Tag: package-2018-05-preview
 
 These settings apply only when `--tag=package-2018-05-preview` is specified on the command line.

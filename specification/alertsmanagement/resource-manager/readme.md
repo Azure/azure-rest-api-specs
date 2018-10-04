@@ -26,7 +26,16 @@ These are the global settings for the AlertManagement API.
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2018-05-preview
+tag: package-2018-05
+```
+
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05'
+input-file:
+- Microsoft.AlertsManagement/stable/2018-05-05/AlertsManagement.json
 ```
 
 ### Tag: package-2018-05-preview
