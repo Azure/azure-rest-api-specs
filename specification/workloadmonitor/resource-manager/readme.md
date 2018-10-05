@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2018-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- microsoft.workloadmonitor/2018-08-31-preview/Microsoft.WorkloadMonitor.json
+- microsoft.workloadmonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
 ```
 
 ``` yaml
