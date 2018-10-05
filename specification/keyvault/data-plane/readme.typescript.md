@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: keyvault
+  package-name: @azure/keyvault
   output-folder: $(typescript-sdks-folder)/packages/keyvault
   generate-metadata: true
   generate-readme-md: false

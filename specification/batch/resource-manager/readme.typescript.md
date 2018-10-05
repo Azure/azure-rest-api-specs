@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-batch
+  package-name: @azure/arm-batch
   output-folder: $(typescript-sdks-folder)/packages/arm-batch
   payload-flattening-threshold: 1
   generate-metadata: true

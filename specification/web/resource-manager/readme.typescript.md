@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-appservice
+  package-name: @azure/arm-appservice
   output-folder: $(typescript-sdks-folder)/packages/arm-appservice
   payload-flattening-threshold: 1
   generate-metadata: true
