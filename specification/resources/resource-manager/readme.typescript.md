@@ -7,50 +7,48 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   batch: true
-  package-name: arm-resource
-  generate-metadata: false
-  output-folder: $(typescript-sdks-folder)/packages/arm-resource
+  generate-metadata: true
 batch:
+  - package-resources: true
   - package-features: true
   - package-locks: true
   - package-policy: true
-  - package-resources: true
-  - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
 ```
 
 ```yaml $(typescript) && $(package-features)
 typescript:
-  source-code-folder-path: lib/feature
+  package-name: arm-features
+  output-folder: $(typescript-sdks-folder)/packages/arm-features
 ```
 
 ```yaml $(typescript) && $(package-locks)
 typescript:
-  source-code-folder-path: lib/lock
+  package-name: arm-locks
+  output-folder: $(typescript-sdks-folder)/packages/arm-locks
 ```
 
 ```yaml $(typescript) && $(package-policy)
 typescript:
-  source-code-folder-path: lib/policy
+  package-name: arm-policy
+  output-folder: $(typescript-sdks-folder)/packages/arm-policy
 ```
 
 ```yaml $(typescript) && $(package-resources)
 typescript:
-  source-code-folder-path: lib/resource
-```
-
-```yaml $(typescript) && $(package-subscriptions)
-typescript:
-  source-code-folder-path: lib/subscription
+  package-name: arm-resources
+  output-folder: $(typescript-sdks-folder)/packages/arm-resources
 ```
 
 ```yaml $(typescript) && $(package-links)
 typescript:
-  source-code-folder-path: lib/link
+  package-name: arm-links
+  output-folder: $(typescript-sdks-folder)/packages/arm-links
 ```
 
 ```yaml $(typescript) && $(package-managedapplications)
 typescript:
-  source-code-folder-path: lib/managedapplications
+  package-name: arm-managedapplications
+  output-folder: $(typescript-sdks-folder)/packages/arm-managedapplications
 ```

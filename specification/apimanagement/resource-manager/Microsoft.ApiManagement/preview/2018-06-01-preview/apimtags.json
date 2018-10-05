@@ -71,6 +71,13 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Scope like 'apis', 'products' or 'apis/{apiId}"
           }
         ],
         "responses": {
@@ -1211,6 +1218,14 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "includeNotTaggedOperations",
+            "in": "query",
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Include not tagged operations in response"
           }
         ],
         "responses": {

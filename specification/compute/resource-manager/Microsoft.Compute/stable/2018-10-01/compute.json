@@ -1478,7 +1478,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"location"
+          "final-state-via": "location"
         }
       }
     },
@@ -4177,7 +4177,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4231,7 +4231,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -4748,6 +4748,18 @@
       },
       "description": "Contains the data disk images information."
     },
+    "AutomaticOSUpgradeProperties": {
+      "properties": {
+        "automaticOSUpgradeSupported": {
+           "type": "boolean",
+           "description": "Specifies whether automatic OS upgrade is supported on the image."
+        }
+      },
+      "required": [
+        "automaticOSUpgradeSupported"
+      ],
+      "description": "Describes automatic OS upgrade properties on the image."
+    },
     "VirtualMachineImageProperties": {
       "properties": {
         "plan": {
@@ -4761,6 +4773,9 @@
           "items": {
             "$ref": "#/definitions/DataDiskImage"
           }
+        },
+        "automaticOSUpgradeProperties": {
+          "$ref": "#/definitions/AutomaticOSUpgradeProperties"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
@@ -5398,12 +5413,12 @@
       "description": "Specifies the storage settings for the virtual machine disks."
     },
     "AdditionalCapabilities": {
-        "properties": {
-            "ultraSSDEnabled": {
-                "type": "boolean",
+      "properties": {
+        "ultraSSDEnabled": {
+          "type": "boolean",
           "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
-            }
-        },
+        }
+      },
       "description": "Enables or disables a capability on the virtual machine or virtual machine scale set."
     },
     "AdditionalUnattendContent": {
@@ -5930,10 +5945,10 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
-		"additionalCapabilities": {
-		  "$ref": "#/definitions/AdditionalCapabilities",
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
           "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
-		},
+        },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the virtual machine."
@@ -6273,7 +6288,7 @@
         },
         "zoneResilient": {
           "type": "boolean",
-          "description":  "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
+          "description": "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
         }
       },
       "description": "Describes a storage profile."
@@ -6984,8 +6999,8 @@
           },
           "description": "The list of IP tags associated with the public IP address."
         },
-        "publicIPPrefix" : {
-          "$ref":"#/definitions/SubResource",
+        "publicIPPrefix": {
+          "$ref": "#/definitions/SubResource",
           "description": "The PublicIPPrefix from which to allocate publicIP addresses."
         }
       },
@@ -7130,10 +7145,10 @@
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
-		"additionalCapabilities": {
-		  "$ref": "#/definitions/AdditionalCapabilities",
-		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
-		},		
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+        },
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
           "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
@@ -7539,20 +7554,20 @@
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "RollbackStatusInfo": {
-      "properties":{
-        "successfullyRolledbackInstanceCount" : {
+      "properties": {
+        "successfullyRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which have been successfully rolled back."
         },
-        "failedRolledbackInstanceCount" : {
+        "failedRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which failed to rollback."
         },
-        "rollbackError" : {
+        "rollbackError": {
           "$ref": "#/definitions/ApiError",
           "readOnly": true,
           "description": "Error details if OS rollback failed."
@@ -7700,10 +7715,10 @@
           "$ref": "#/definitions/StorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
-		"additionalCapabilities": {
-		  "$ref": "#/definitions/AdditionalCapabilities",
-		  "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
-		},	
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+        },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the virtual machine."

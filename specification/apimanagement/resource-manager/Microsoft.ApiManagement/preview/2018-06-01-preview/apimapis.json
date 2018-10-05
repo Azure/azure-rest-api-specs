@@ -2053,6 +2053,14 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "includeNotTaggedApis",
+            "in": "query",
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Include not tagged apis in response"
           }
         ],
         "responses": {
@@ -3685,7 +3693,7 @@
         },
         "apiRevisionDescription": {
           "type": "string",
-          "description": "Description of the Api Revision.",          
+          "description": "Description of the Api Revision.",
           "maxLength": 256
         },
         "apiVersionDescription": {
@@ -3696,6 +3704,10 @@
         "apiVersionSetId": {
           "type": "string",
           "description": "A resource identifier for the related ApiVersionSet."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Specifies whether an API or Product subscription is required for accessing the API."
         }
       },
       "description": "API base contract details."

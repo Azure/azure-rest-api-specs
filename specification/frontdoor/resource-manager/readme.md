@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Network.
 
 ---
 ## Getting Started
-To build the SDK for Frontdoor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for FrontDoor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,11 +22,11 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the Frontdoor API.
+These are the global settings for the FrontDoor API.
 
 ``` yaml
-title: FrontdoorManagementClient
-description: Frontdoor Client
+title: FrontDoorManagementClient
+description: FrontDoor Client
 openapi-type: arm
 tag: package-2018-08-preview
 ```
@@ -74,8 +74,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Frontdoor
-  output-folder: $(csharp-sdks-folder)/Frontdoor/Management.Frontdoor/Generated
+  namespace: Microsoft.Azure.Management.FrontDoor
+  output-folder: $(csharp-sdks-folder)/FrontDoor/Management.FrontDoor/Generated
   clear-output-folder: true
 ```
 

@@ -116,6 +116,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ``` yaml $(csharp)
 csharp:
+  # stop the simplifier from making Task conflict:
+  skip-simplifier-on-namespace: 
+    - System.Threading.Tasks
   # last generated using AutoRest.1.0.0-Nightly20170212 with commit 3b0b26b4b6e3bc5e7cf3610b0866d310abb5b814
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
