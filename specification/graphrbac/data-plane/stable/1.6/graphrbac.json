@@ -148,6 +148,104 @@
         }
       }
     },
+    "/{tenantID}/deletedApplications/{objectId}/restore": {
+      "post": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_Restore",
+        "description": "Restores the deleted application in the directory.",
+        "parameters": [
+    	  {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application was restored successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/deletedApplications": {
+      "get": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_Get",
+        "description": "Gets a list of deleted applications in the directory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The applications were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/deletedApplications/{applicationObjectId}": {
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_HardDelete",
+        "description": "Hard-delete an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/applications/{applicationObjectId}": {
       "delete": {
         "tags": [
