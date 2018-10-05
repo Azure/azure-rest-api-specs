@@ -56,7 +56,7 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Gener
 batch:
   - tag: package-2018-05
   - tag: package-2017-10
-  - tag: package-2016-04-dns
+  - tag: package-dns-2016-04
 ```
 
 ### Profile: profile_2017_03_09
@@ -69,5 +69,5 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Gener
 
 batch:
  - tag: package-2015-06split
- - tag: package-2016-04-dns
+ - tag: package-dns-2016-04
  ```
