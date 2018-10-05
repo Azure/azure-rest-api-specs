@@ -29,6 +29,10 @@ batch:
     ApiVersionName: Api2016_10_01
 ```
 
+### Profile: hybrid_2018_03_01
+
+These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+
 ```yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).KeyVault
 output-folder: $(csharp-sdks-folder)/$(profile)/KeyVault/Management.KeyVault/Generated
@@ -37,6 +41,10 @@ batch:
   - tag: package-2016-10
   - tag: package-2015-06
 ```
+
+### Profile: profile_2017_03_09
+
+These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
 
 ``` yaml $(profile)=='profile_2017_03_09'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).KeyVault
