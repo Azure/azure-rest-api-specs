@@ -13,7 +13,6 @@ batch:
   - package-features: true
   - package-locks: true
   - package-policy: true
-  - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
 ```
@@ -40,12 +39,6 @@ typescript:
 typescript:
   package-name: arm-resources
   output-folder: $(typescript-sdks-folder)/packages/arm-resources
-```
-
-```yaml $(typescript) && $(package-subscriptions)
-typescript:
-  package-name: arm-subscriptions
-  output-folder: $(typescript-sdks-folder)/packages/arm-subscriptions
 ```
 
 ```yaml $(typescript) && $(package-links)
