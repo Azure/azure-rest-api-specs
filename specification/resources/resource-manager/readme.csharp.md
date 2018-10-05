@@ -12,7 +12,7 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiApi)
+``` yaml $(csharp) && !$(multiapi) && !(profile)
 namespace: Microsoft.Azure.Management.ResourceManager  
 output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
 
@@ -26,20 +26,11 @@ batch:
 #  - package-managedapplications: true
 ```
 
-
-
-
-
-
-
-
-
-
-
 ## Azure Stack Batch settings
-These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
+These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
-``` yaml $(multiApi)
+
+``` yaml $(multiapi)
 namespace: Microsoft.Azure.Management.ResourceManager.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
@@ -269,3 +260,27 @@ input-file:
 input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```
+
+```yaml $(profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
+
+batch:
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-policy-2018-03
+  - tag: package-policy-2016-12
+  - tag: package-resources-2018-02
+  - tag: package-resources-2016-09
+  - tag: package-subscriptions-2016-06
+```
+
+``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
+
+batch:
+ - tag: package-resources-2016-02
+ - tag: package-links-2016-09
+ - tag: package-subscriptions-2016-06
+ ```
