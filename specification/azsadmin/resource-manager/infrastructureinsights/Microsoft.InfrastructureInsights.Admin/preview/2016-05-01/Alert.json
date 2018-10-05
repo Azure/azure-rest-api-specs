@@ -152,6 +152,52 @@
                     "application/json"
                 ]
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}/remediate": {
+            "post": {
+                "x-ms-examples": {
+                    "Repairs an alert.": {
+                        "$ref": "./examples/Alert/Repair.json"
+                    }
+                },
+                "tags": [
+                    "Alerts"
+                ],
+                "x-ms-long-running-operation": true,
+                "description": "Repairs an alert.",
+                "operationId": "Alerts_Repair",
+                "parameters": [
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertNameParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                      "description": "OK"
+                    },
+                    "202": {
+                      "description": "ACCEPTED"
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ]
+            }
         }
     },
     "definitions": {
