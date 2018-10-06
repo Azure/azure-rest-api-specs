@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts": {
             "get": {
@@ -50,13 +56,7 @@
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
                 },
-                "x-ms-odata": "#/definitions/Alert",
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                "x-ms-odata": "#/definitions/Alert"
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}": {
@@ -95,13 +95,7 @@
                             "$ref": "#/definitions/Alert"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             },
             "put": {
                 "x-ms-examples": {
@@ -144,16 +138,10 @@
                             "$ref": "#/definitions/Alert"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}/remediate": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}/repair": {
             "post": {
                 "x-ms-examples": {
                     "Repairs an alert.": {
@@ -190,13 +178,7 @@
                     "202": {
                       "description": "ACCEPTED"
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             }
         }
     },
