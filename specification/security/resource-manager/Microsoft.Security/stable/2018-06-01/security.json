@@ -66,7 +66,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configuration in the subscription",
-                "operationId": "Pricings_GetSubscriptionPricing",
+                "operationId": "Pricings_Get",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -97,7 +97,7 @@
                 },
                 "tags": ["Pricings"],
                 "description": "Security pricing configuration in the subscription",
-                "operationId": "Pricings_UpdateSubscriptionPricing",
+                "operationId": "Pricings_Update",
                 "parameters": [{
                     "$ref": "#/parameters/ApiVersion"
                 }, {
@@ -150,6 +150,28 @@
                     "description": "A message describing the error, intended to be suitable for display in a user interface."
                 }
             }
+        },
+        "Resource": {
+            "type": "object",
+            "description": "Describes an Azure resource.",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                }
+            },
+            "x-ms-azure-resource": true
         },
         "PricingList": {
             "description": "List of pricing configurations response",
