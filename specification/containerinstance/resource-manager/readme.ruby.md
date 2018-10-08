@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2018-10
   - tag: package-2018-09
   - tag: package-2018-06
   - tag: package-2018-04
@@ -23,11 +24,21 @@ batch:
 
 ### Tag: package-2018-09 and ruby
 
+These settings apply only when `--tag=package-2018-10 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2018-10' && $(ruby)
+namespace: "Azure::ContainerInstance::Mgmt::V2018_10_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_instance/lib
+```
+
+### Tag: package-2018-09 and ruby
+
 These settings apply only when `--tag=package-2018-09 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2018-09' && $(ruby)
-namespace: "Azure::ContainerInstance::Mgmt::V2018_02_01_preview"
+namespace: "Azure::ContainerInstance::Mgmt::V2018_09_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_instance/lib
 ```
 
@@ -37,7 +48,7 @@ These settings apply only when `--tag=package-2018-06 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2018-06' && $(ruby)
-namespace: "Azure::ContainerInstance::Mgmt::V2018_02_01_preview"
+namespace: "Azure::ContainerInstance::Mgmt::V2018_06_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_instance/lib
 ```
 
@@ -47,7 +58,7 @@ These settings apply only when `--tag=package-2018-04 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2018-04' && $(ruby)
-namespace: "Azure::ContainerInstance::Mgmt::V2018_02_01_preview"
+namespace: "Azure::ContainerInstance::Mgmt::V2018_04_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_instance/lib
 ```
 
