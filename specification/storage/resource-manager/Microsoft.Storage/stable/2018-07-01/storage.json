@@ -555,6 +555,79 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_Failover",
+        "description": "Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account's primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover.",
+        "x-ms-examples": {
+          "StorageAccountCreate": {
+            "$ref": "./examples/StorageAccountFailover.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the storage account failover is completed, and the secondary cluster has become primary."
+          },
+          "202": {
+            "description": "Accepted -- Failover request accepted; operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/lastSyncTime": {      
+      "get": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_GetLastSyncTime",
+        "description": "Retrieve last sync time for his or her RA-GRS and GRS accounts.",
+        "x-ms-examples": {
+          "StorageAccountGetProperties": {
+            "$ref": "./examples/StorageAccountGetLastSyncTime.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- last sync time retrieved successfully for the storage account.",
+            "schema": {
+              "$ref": "#/definitions/GetLastSyncTimeResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1375,8 +1448,14 @@
         },
         "isHnsEnabled": {
           "type": "boolean",
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
+        },
+        "failoverInProgress": {
+          "type": "boolean",
+          "x-ms-client-name": "FailoverInProgress ",
+          "description": "If the failover is in progress, the value will be true, otherwise, it will be null.",
+          "readOnly": true
         }
       },
       "description": "Properties of the storage account."
@@ -1876,6 +1955,31 @@
         }
       },
       "description": "The List service SAS credentials operation response."
+    },
+    "GetLastSyncTimeResult": {
+      "properties": {        
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the secondary location of the Storage Account. Live: Indicates that the secondary location is active and operational; Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress, this typically occurs when replication is first enabled; Unavailable: Indicates that the secondary location is temporarily unavailable. ",
+          "enum": [
+            "Live",
+            "Bootstrap",
+            "Unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationStatus",
+            "modelAsString": true
+          }
+        },           
+        "lastSyncTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "All primary writes preceding this value are guaranteed to be replicated to secondary. Primary writes after this point in time may or may not be replicated. It is the minimum last sync time of the account’s Blob/Table/Queue/File endpoints. The value may be account’s creation time if LastSyncTime is not available. This can happen if the replication status is bootstrap or unavailable. "
+        }
+      },
+      "description": "The response from the get last synctime operation."
     }
   },
   "parameters": {
