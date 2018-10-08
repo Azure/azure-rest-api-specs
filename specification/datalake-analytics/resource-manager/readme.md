@@ -159,11 +159,11 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  namespace: com.microsoft.azure.management.datalake.analytics
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datalake/analytics
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.datalake.analytics
+license-header: MICROSOFT_MIT_NO_CODEGEN
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datalake/analytics
 ```
 
 ### Java multi-api
