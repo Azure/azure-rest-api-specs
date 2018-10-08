@@ -300,6 +300,14 @@ directive:
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
   - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.TagDetails.properties
+    reason: TagDetails is a top level property
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.TagValue.properties
+    reason: TagValue is a top level property
+  - suppress: BodyTopLevelProperties
     from: managedapplications.json
     where: $.definitions.Appliance.properties
     reason: managedBy is a top level property

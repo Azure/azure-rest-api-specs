@@ -31,6 +31,16 @@ tag: package-2018-07-01
 
 
 
+### Tag: package-2018-10-01
+
+These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10-01'
+input-file:
+- Microsoft.StorageSync/preview/2018-10-01/storagesync.json
+```
+
+
 ### Tag: package-2018-07-01
 
 These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
