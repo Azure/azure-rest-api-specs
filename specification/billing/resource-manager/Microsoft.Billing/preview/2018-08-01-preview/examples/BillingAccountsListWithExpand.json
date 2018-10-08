@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2018-05-31-preview",
+    "$filter": "permission eq 'createProject'",
+    "$expand": "projects, billingProfiles"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/2000100",
+            "name": "2000100",
+            "type": "Microsoft.Billing/billingAccounts",
+            "properties": {
+              "displayName": "Test Account1",
+              "accountType": "CommerceRoot",
+              "address": "Test address1",
+              "currency": "USD",
+              "country": "United States",
+              "projects": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId1",
+                  "name": "ProjectId1",
+                  "type": "Microsoft.Billing/projects",
+                  "properties": {
+                    "displayName": "ProjectName1",
+                    "costCenter": "1376"
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId2",
+                  "name": "ProjectId2",
+                  "type": "Microsoft.Billing/projects",
+                  "properties": {
+                    "displayName": "ProjectName2",
+                    "costCenter": "1376"
+                  }
+                }
+              ],
+              "billingProfiles": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
+                  "name": "BillingProfileId1",
+                  "type": "Microsoft.Billing/billingProfiles",
+                  "properties": {
+                    "displayName": "BillingProfileName1",
+                    "poNumber": "ABC12345"
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
+                  "name": "BillingProfileId2",
+                  "type": "Microsoft.Billing/billingProfiles",
+                  "properties": {
+                    "displayName": "BillingProfileName2",
+                    "poNumber": "ABC12345"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/2000200",
+            "name": "2000200",
+            "type": "Microsoft.Billing/billingAccounts",
+            "properties": {
+              "displayName": "Test Account2",
+              "accountType": "CommerceRoot",
+              "address": "",
+              "currency": "",
+              "country": "",
+              "projects": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId3",
+                  "name": "ProjectId3",
+                  "type": "Microsoft.Billing/projects",
+                  "properties": {
+                    "displayName": "ProjectName3",
+                    "costCenter": "1376"
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId4",
+                  "name": "ProjectId4",
+                  "type": "Microsoft.Billing/projects",
+                  "properties": {
+                    "displayName": "ProjectName4",
+                    "costCenter": "1376"
+                  }
+                }
+              ],
+              "billingProfiles": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId3",
+                  "name": "BillingProfileId3",
+                  "type": "Microsoft.Billing/billingProfiles",
+                  "properties": {
+                    "displayName": "BillingProfileName3",
+                    "poNumber": "ABC12345"
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId4",
+                  "name": "BillingProfileId4",
+                  "type": "Microsoft.Billing/billingProfiles",
+                  "properties": {
+                    "displayName": "BillingProfileName4",
+                    "poNumber": "ABC12345"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

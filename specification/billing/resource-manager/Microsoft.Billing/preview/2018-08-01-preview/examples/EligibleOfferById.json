@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2018-05-31-preview",
+    "eligibleOfferId": "{eligibleOfferId}",
+    "billingAccountId": "{billingAccountId}",
+    "projectId": "{projectId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/eligibleOffers/{eligibleOfferId}",
+        "name": "{eligibleOfferId}",
+        "type": "Microsoft.Billing/eligibleOffers",
+        "properties": {
+          "displayName": "AssetSummaryDescription",
+          "parentAssetId": "eligibleOffer2",
+          "owningProjectId": "12345",
+          "startDate": "2017-02-01",
+          "endDate": "2019-02-01",
+          "billingProfiles": {
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
+            "name": "BillingProfileId1",
+            "type": "Microsoft.Billing/billingProfiles",
+            "properties": {
+              "displayName": "BillingProfileName1",
+              "poNumber": "ABC12345"
+            }
+          },
+          "productDetails": {
+            "productName": "ProductName1",
+            "skuId": "SKU12345",
+            "availabilityId": "AvailabilityId1",
+            "legacyId": "LegacyId1"
+          }
+        }
+      }
+    }
+  }
+}

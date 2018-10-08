@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2018-05-31-preview",
+    "billingAccountId": "{billingAccountId}",
+    "parameters": {
+      "properties": {
+        "displayName": "ProjectName1",
+        "eligibleOffers": [
+            "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/eligibleOffers/DirectAssetId1",           
+            "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/eligibleOffers/DirectAssetId2"           
+        ],
+        "costCenter": "1376"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingOperations/ed2975a8-8f77-43bb-a717-ace54326b14b?api-version=2018-05-31-preview",
+        "Retry-After": "60"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/ProjectId1",
+        "name": "ProjectId1",
+        "type": "Microsoft.Billing/projects",
+        "properties": {
+          "displayName": "ProjectName1",
+          "costCenter": "1376"
+        }
+      }
+    }
+  }
+}
