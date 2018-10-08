@@ -2864,7 +2864,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to fetch the next page of Alerts."
+          "description": "The URI to fetch the next page of Alerts.",
+          "readOnly": true
         }
       }
     },
@@ -2904,7 +2905,8 @@
         },
         "definition": {
           "description": "The definition (type) of an Alert",
-          "$ref": "#/definitions/AlertDefinition"
+          "$ref": "#/definitions/AlertDefinition",
+          "readOnly": true
         },
         "description": {
           "description": "Description of an alert.",
@@ -2938,12 +2940,14 @@
           }
         },
         "creationTime": {
+          "format": "date-time",
           "description": "The time when the alert was created.",
           "type": "string",
           "readOnly": true
         },
         "closeTime": {
-          "description": "The time when the alert was closed (resolved / acknowledged).",
+          "format": "date-time",
+          "description": "The time when the alert was closed (resolved / overriden).",
           "type": "string",
           "readOnly": true
         },
@@ -2952,7 +2956,6 @@
           "type": "string",
           "enum": [
             "Active",
-            "Acknowledged",
             "Overridden",
             "Resolved"
           ],
@@ -2960,6 +2963,11 @@
             "name": "AlertStatus",
             "modelAsString": true
           },
+          "readOnly": true
+        },
+        "acknowledged": {
+          "description": "Determines whether the alert has been acknowledged.",
+          "type": "boolean",
           "readOnly": true
         }
       }
