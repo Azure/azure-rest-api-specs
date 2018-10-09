@@ -55,7 +55,6 @@ namespace: Microsoft.Azure.Management.Profiles.$(profile).Network
 output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Generated
 batch:
   - tag: package-2017-10
-    apiVersion: package-2017-10
 ```
 
 ### Profile: profile_2017_03_09
@@ -68,5 +67,4 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Gener
 
 batch:
  - tag: package-2015-06split
-   apiVersion: package-2015-06split
  ```

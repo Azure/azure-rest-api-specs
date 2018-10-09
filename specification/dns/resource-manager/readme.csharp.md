@@ -32,7 +32,6 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Dns/Management.Dns/Generated
 
 batch:
  - tag: package-dns-2016-04
-   apiVersion: package-dns-2016-04
 
 skip-simplifier-on-namespace: 
   - System.Net
@@ -48,7 +47,6 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Dns/Management.Dns/Generated
 
 batch:
   - tag: package-dns-2016-04
-    apiVersion: package-dns-2016-04
 
 skip-simplifier-on-namespace: 
   - System.Net

@@ -42,5 +42,4 @@ namespace: Microsoft.Azure.Management.Profiles.$(profile).WebSites
 output-folder: $(csharp-sdks-folder)/$(profile)/Websites/Management.Websites/Generated
 batch:
   - tag: package-2018-03-01-hybrid-csharp
-    apiVersion: package-2018-03-01-hybrid-csharp
 ```

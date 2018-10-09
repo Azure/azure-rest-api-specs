@@ -80,11 +80,8 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authori
 
 batch:
  - tag: package-2015-07
-   apiVersion: package-2015-07
  - tag: package-locks-2016-09
-   apiVersion: package-locks-2016-09
  - tag: package-policy-2016-12
-   apiVersion: package-policy-2016-12
  ```
 
 ### Profile: profile_2017_03_09
@@ -97,9 +94,6 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authori
 
 batch:
  - tag: package-2015-07-authorization-only
-   apiVersion: package-2015-07-authorization-only
  - tag: package-locks-2015-01
-   apiVersion: package-locks-2015-01
  - tag: package-policy-2015-10-01-preview
-   apiVersion: package-policy-2015-10-01-preview
  ```

@@ -62,5 +62,4 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Compute/Management.Compute/Gener
 
 batch:
  - tag: package-compute-2016-03
-   apiVersion: package-compute-2016-03
  ```

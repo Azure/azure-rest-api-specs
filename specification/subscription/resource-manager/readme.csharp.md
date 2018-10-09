@@ -43,5 +43,4 @@ namespace: Microsoft.Azure.Management.Profiles.$(profile).Subscription
 output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscription/Generated
 batch:
   - tag: package-2017-11-preview
-    apiVersion: package-2017-11-preview
 ```
