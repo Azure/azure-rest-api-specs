@@ -140,6 +140,10 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-logic
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.

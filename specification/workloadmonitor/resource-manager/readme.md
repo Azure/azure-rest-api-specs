@@ -43,7 +43,6 @@ directive:
     - R3026 # Create/Update/Delete operations are not exposed.
 ```
 
-
 ---
 # Code Generation
 

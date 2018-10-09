@@ -1,13 +1,13 @@
 # MediaServices
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for MediaServices.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for MediaServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,36 @@ To build the SDK for MediaServices, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06-preview
+tag: package-2018-07
 ```
 
 
+### Tag: package-2018-07
+
+These settings apply only when `--tag=package-2018-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-07'
+input-file:
+  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2018-07-01/Common.json
+  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+```
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
@@ -68,8 +83,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -87,8 +102,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_media_services']
 ```
 
-
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -120,64 +134,22 @@ python:
   package-name: azure-mgmt-media
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-media/azure/mgmt/media
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-media
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: media
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-10
-  - tag: package-2018-03-preview
-  - tag: package-2018-06-preview
-```
-
-### Tag: package-2015-10 and go
-
-These settings apply only when `--tag=package-2015-10 --go` is specified on the command line.
-Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-10' && $(go)
-output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2015-10-01/media
-```
-### Tag: package-2018-03-preview and go
-
-These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
-Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-03-30-preview/media
-```
-
-### Tag: package-2018-06-preview and go
-
-These settings apply only when `--tag=package-2018-06-preview --go` is specified on the command line.
-Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-06-01-preview/media
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -200,6 +172,7 @@ batch:
   - tag: package-2015-10
   - tag: package-2018-03-preview
   - tag: package-2018-06-preview
+  - tag: package-2018-07
 ```
 
 ### Tag: package-2015-10 and java
@@ -214,6 +187,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2018-03-preview and java
 
 These settings apply only when `--tag=package-2018-03-preview --java` is specified on the command line.
@@ -236,6 +210,19 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_06_01_preview
   output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_06_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-07 and java
+
+These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.mediaservices.v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
 regenerate-manager: true
 generate-interface: true
 ```
