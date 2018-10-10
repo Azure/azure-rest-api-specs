@@ -1,0 +1,254 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Live Validation Service Client",
+        "description": "Client that can be used to access Live Validation Service.",
+        "version": "1.0"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "host": "localhost:5002",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/validate": {
+            "post": {
+                "tags": [
+                    "LiveValidation", "Validate"
+                ],
+                "operationId": "Tools_LiveValidationValidate",
+                "description": "Process non-prod canary environment ARM calls.",
+                "parameters": [
+                  {
+                    "name": "liveValidationParameter",
+                    "in": "body",
+                    "description": "Live Validation Parameter",
+                    "required": true,
+                    "schema": {
+                      "$ref": "#/definitions/liveValidationParameter"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/liveValidationResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/prod/validate": {
+            "post": {
+                "tags": [
+                    "LiveValidation", "Prod_Validate"
+                ],
+                "operationId": "Tools_LiveValidationProdValidate",
+                "description": "Process Prod environment ARM calls.",
+                "parameters": [
+                    {
+                    "name": "liveValidationParameter",
+                    "in": "body",
+                    "description": "Live Validation Parameter",
+                    "required": true,
+                    "schema": {
+                      "$ref": "#/definitions/liveValidationParameter"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/liveValidationResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/whitelist": {
+            "get": {
+                "tags": [
+                    "LiveValidation", "Whitelist"
+                ],
+                "description": "Get list of safe properties in non-prod canary environments.",
+                "operationId": "Tools_LiveValidationWhiteList",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/liveValidationWhiteListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/prod/whitelist": {
+            "get": {
+                "tags": [
+                    "LiveValidation", "Whitelist"
+                ],
+                "description": "Get list of safe properties is prod environments.",
+                "operationId": "Tools_LiveValidationProdWhiteList",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/liveValidationWhiteListResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "liveValidationParameter": {
+          "description": "Live Validation Parameter",
+          "properties": {
+            "liveRequest": {
+              "description": "Live Request",
+              "$ref": "#/definitions/liveRequest"
+            },
+            "liveResponse": {
+              "description": "Live Response",
+              "$ref": "#/definitions/liveResponse"
+            }
+          },
+          "required": [
+              "liveRequest", "liveResponse"
+          ]
+        },
+        "liveRequest":{
+            "description": "Live Request",
+            "properties": {
+                "method": {
+                    "type": "string",
+                    "description": "Method of the Live Request."
+                },
+                "url": {
+                    "type": "string",
+                    "description": "Url of the Live Request."
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Body of the Live Request"
+                },
+                "headers": {
+                    "type": "object",
+                    "description": "Headers of the Live Request"
+                },
+                "query": {
+                    "type": "object",
+                    "description": "Query Parameters of the Live Request"
+                }
+            },
+            "required": [
+                "method", "url", "headers"
+            ]
+        },
+        "liveResponse": {
+            "description": "Live Response",
+            "properties": {
+                "statusCode": {
+                    "type": "string",
+                    "description": "Status code of the Response."
+                },
+                "headers": {
+                    "type": "object",
+                    "description": "Headers of the Live Response."
+                },
+                "body": {
+                    "type": "object",
+                    "description": "Body of the Live Response."
+                }
+            },
+            "required": [
+                "statusCode", "headers"
+            ]
+        },
+        "liveValidationResponse": {
+            "description": "Live Validation response",
+            "properties": {
+                "requestValidationResult": {
+                    "description": "Validation result of the live request",
+                    "$ref": "#/definitions/requestValidationResult"
+                },
+                "responseValidationResult": {
+                    "description": "Validation result of the live response",
+                    "$ref": "#/definitions/responseValidationResult"
+                },
+                "errors": {
+                    "description": "List of Errors.",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "requestValidationResult": {
+            "description": "Validation result of the live request",
+            "properties": {
+                "successfulRequest": {
+                    "description": "Indicates if the request is successful",
+                    "type": "object"
+                },
+                "errors": {
+                    "description": "List of Errors.",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "operationInfo": {
+                    "description": "Operation Info",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "responseValidationResult": {
+            "description": "Validation result of the live response",
+            "properties": {
+                "successfulResponse": {
+                    "description": "Indicates if the response is successful",
+                    "type": "object"
+                },
+                "errors": {
+                    "description": "List of Errors.",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "operationInfo": {
+                    "description": "Operation Info",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "liveValidationWhiteListResponse": {
+            "description": "White List Response",
+            "properties": {
+                "safeProperties": {
+                    "type": "object",
+                    "description": "Object that consists of several key/values. Keys will be namespaces. Values will be array of resource types."
+                }
+            }
+        }
+    },
+    "parameters": {
+    }
+}
