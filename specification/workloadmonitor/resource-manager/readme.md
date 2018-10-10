@@ -24,15 +24,15 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2018-08-31-preview
 ```
 
 
-### Tag: package-2018-08-preview
+### Tag: package-2018-08-31-preview
 
-These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-31-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-08-preview'
+``` yaml $(tag) == 'package-2018-08-31-preview'
 input-file:
 - microsoft.workloadmonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
 ```
