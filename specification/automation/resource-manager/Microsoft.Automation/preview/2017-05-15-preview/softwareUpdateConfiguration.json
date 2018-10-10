@@ -448,6 +448,10 @@
             "type": "string",
             "description": "Name of Non-Azure OMS Computer."
           }
+        },
+        "targets": {
+          "description": "group informations that will be patched during run time.",
+          "$ref": "#/definitions/TargetProperties"
         }
       },
       "required": [
@@ -748,6 +752,75 @@
           "format": "date-time",
           "x-nullable": true,
           "description": "ext run time of the update."
+        }
+      }
+    },
+    "TargetProperties": {
+      "type": "object",
+      "description": "Group specific of update configuration.",
+      "properties": {
+        "azureQueries": {
+          "description": "List of Azure queries in software update configuration.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/AzureQueryProperties"
+          }
+        }
+      }
+    },
+    "AzureQueryProperties": {
+      "type": "object",
+      "description": "Azure query specific to the group of machines for update configuration.",
+      "properties": {
+        "scope": {
+          "type": "array",
+          "description": "List of Subscription or Resource group arm Id.",
+          "items": {
+            "type": "string",
+            "description": "Subscription or Resource group arm Id."
+          }
+        },
+        "location": {
+          "type": "array",
+          "description": "list of locations for the VM filter .",
+          "items": {
+            "type": "string",
+            "description": "Location for the VM."
+          }
+        },
+        "tagSettings": {
+          "type": "object",
+          "description": "tag filter information of the Vm.",
+          "$ref": "#/definitions/TagSettingsProperties"
+        }
+      }
+    },
+    "TagSettingsProperties": {
+      "type": "object",
+      "description": "Tag filter Information of the VM.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "dictionary of tags with its list of value",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "list of tag value for a tag"
+            }
+          }
+        },
+        "filterOperator": {
+          "type": "string",
+          "enum": [
+            "All",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "TagOperators",
+            "modelAsString": true
+          }
         }
       }
     }
