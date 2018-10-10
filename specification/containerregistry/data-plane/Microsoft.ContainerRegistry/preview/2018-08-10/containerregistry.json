@@ -35,6 +35,9 @@
     "security": [{
         "registry_auth": []
     }],
+    "produces": [
+        "application/json"
+    ],
     "paths": {
         "/v2/": {
             "get": {
@@ -44,7 +47,6 @@
                     "Check Docker Registry V2 Support": { "$ref": "./examples/GetDockerRegistryV2Support.json" }
                 },
                 "operationId": "GetDockerRegistryV2Support",
-                "produces": ["application/json"],
                 "responses": {
                     "200": {
                         "description": "Successful response. API v2 supported"
@@ -63,10 +65,9 @@
                 "tags": ["Tag"],
                 "description": "Fetch the tags under the repository identified by 'name'",
                 "x-ms-examples": {
-                    "List tags": { "$ref": "./examples/GetTag_List.json" }
+                    "List tags": { "$ref": "./examples/GetTagList.json" }
                 },
-                "operationId": "GetTag_List",
-                "produces": ["application/json"],
+                "operationId": "GetTagList",
                 "parameters": [{
                     "name": "name",
                     "in": "path",
@@ -141,7 +142,6 @@
                 "x-ms-examples": {
                     "Get repositories in a registry": { "$ref": "./examples/GetRepositories.json" }
                 },
-                "produces": ["application/json"],
                 "parameters": [{
                     "name": "last",
                     "in": "query",
@@ -176,7 +176,6 @@
                 "tags": ["AcrRepository"],
                 "description": "List respositories",
                 "operationId": "GetAcrRepositories",
-                "produces": ["application/json"],
                 "x-ms-examples": {
                     "Get repositories in a registry": { "$ref": "./examples/GetRepositories.json" }
                 },
@@ -217,7 +216,6 @@
                 "x-ms-examples": {
                     "Get details of repository": { "$ref": "./examples/GetAcrRepositoryAttributes.json" }
                 },
-                "produces": ["application/json"],
                 "parameters": [{
                     "name": "name",
                     "in": "path",
@@ -248,7 +246,7 @@
                 "description": "Delete a respository",
                 "operationId": "DeleteAcrRepository",
                 "x-ms-examples": {
-                    "Delete a repository": { "$ref": "./examples/DeleteRepository.json" }
+                    "Delete a repository": { "$ref": "./examples/DeleteAcrRepository.json" }
                 },
                 "parameters": [{
                     "name": "name",
@@ -280,7 +278,7 @@
                 "description": "Update attributes of a repository",
                 "operationId": "UpdateAcrRepositoryAttributes",
                 "x-ms-examples": {
-                    "Update repository attributes": { "$ref": "./examples/UpdateRepository.json" }
+                    "Update repository attributes": { "$ref": "./examples/UpdateAcrRepository.json" }
                 },
                 "consumes": ["application/json"],
                 "parameters": [{
@@ -377,7 +375,6 @@
                 "tags": ["AcrTag", "AcrMetadata"],
                 "description": "Get manifest attributes by tag",
                 "operationId": "GetAcrTagAttributes",
-                "produces": ["application/json"],
                 "x-ms-examples": {
                     "Get manifest attributes": { "$ref": "./examples/GetAcrTagAttributes.json" }
                 },
@@ -395,7 +392,7 @@
                     "type": "string"
                 }],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Tag attributes",
                         "schema": {
                             "$ref": "#/definitions/AcrTagAttributes"
@@ -550,7 +547,6 @@
                 "tags": ["AcrManifest", "AcrMetadata"],
                 "description": "Get manifest attributes",
                 "operationId": "GetAcrManifestAttributes",
-                "produces": ["application/json"],
                 "x-ms-examples": {
                     "Get manifest attributes": { "$ref": "./examples/GetAcrManifestAttributes.json" }
                 },
@@ -1094,7 +1090,6 @@
             "description": "Signature of a signed manifest",
             "properties": {
                 "header": {
-                    "type": "string",
                     "description": "A JSON web signature",
                     "$ref": "#/definitions/JWK"
                 },
@@ -1128,6 +1123,10 @@
             "properties": {
                 "jwk": {
                     "$ref": "#/definitions/JWKHeader"
+                },
+                "alg": {
+                    "type": "string",
+                    "description": "The algorithm used to sign or encrypt the JWT"
                 }
             }
         },
