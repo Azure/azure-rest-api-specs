@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-scheduler
+  package-name: "@azure/arm-scheduler"
   output-folder: $(typescript-sdks-folder)/packages/arm-scheduler
   generate-metadata: true
 ```
