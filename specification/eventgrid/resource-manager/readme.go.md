@@ -25,7 +25,7 @@ These settings apply only when `--tag=package-2018-05-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/eventgrid/mgmt/2018-05-01-preview/eventgrid
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-05-01-preview/$(namespace)
 ```
 
 ### Tag: package-2018-01 and go
@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2018-01 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/eventgrid/mgmt/2018-01-01/eventgrid
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-01-01/$(namespace)
 ```
 
 ### Tag: package-2017-09-preview and go
@@ -43,7 +43,7 @@ These settings apply only when `--tag=package-2017-09-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/eventgrid/mgmt/2017-09-15-preview/eventgrid
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-09-15-preview/$(namespace)
 ```
 
 ### Tag: package-2017-06-preview and go
@@ -52,5 +52,5 @@ These settings apply only when `--tag=package-2017-06-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/eventgrid/mgmt/2017-06-15-preview/eventgrid
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-06-15-preview/$(namespace)
 ```

@@ -21,5 +21,5 @@ These settings apply only when `--tag=package-2017-11 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/hanaonazure/mgmt/2017-11-03-preview/hanaonazure
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-11-03-preview/$(namespace)
 ```
