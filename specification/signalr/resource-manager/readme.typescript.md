@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-signalr"
-  output-folder: $(typescript-sdks-folder)/packages/arm-signlar
+  output-folder: $(typescript-sdks-folder)/packages/arm-signalr
   generate-metadata: true
 ```
