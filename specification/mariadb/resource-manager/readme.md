@@ -31,14 +31,14 @@ openapi-type: arm
 tag: package-2018-06-01-preview
 ```
 
-### Tag: package-2018-06-01-preview 
+### Tag: package-2018-06-01-preview
 
-These settings apply only when `--tag=package-2018-06-01-preview` is specified on the command line. 
+These settings apply only when `--tag=package-2018-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-01-preview' 
-input-file: 
-- Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json 
-``` 
+``` yaml $(tag) == 'package-2018-06-01-preview'
+input-file:
+- Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
+```
 
 
 ---
@@ -100,6 +100,10 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

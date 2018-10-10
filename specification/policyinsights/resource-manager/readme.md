@@ -1,5 +1,5 @@
 # PolicyInsights
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for PolicyInsights.
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the PolicyInsights API.
 
 ``` yaml
@@ -131,7 +131,7 @@ swagger-to-sdk:
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -171,6 +171,10 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
