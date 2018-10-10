@@ -31,7 +31,7 @@ namespace: Microsoft.Azure.Management.Profiles.$(profile).Dns
 output-folder: $(csharp-sdks-folder)/$(profile)/Dns/Management.Dns/Generated
 
 batch:
- - tag: package-dns-2016-04
+  - tag: package-2016-04
 
 skip-simplifier-on-namespace: 
   - System.Net
@@ -46,7 +46,7 @@ namespace: Microsoft.Azure.Management.Profiles.$(profile).Dns
 output-folder: $(csharp-sdks-folder)/$(profile)/Dns/Management.Dns/Generated
 
 batch:
-  - tag: package-dns-2016-04
+  - tag: package-2016-04
 
 skip-simplifier-on-namespace: 
   - System.Net
