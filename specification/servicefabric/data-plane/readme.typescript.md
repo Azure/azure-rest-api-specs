@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: false
-  package-name: "@azure/servicefabric"
-  output-folder: $(typescript-sdks-folder)/packages/@azure/servicefabric"
+  package-name: "@azure/arm-servicefabric"
+  output-folder: $(typescript-sdks-folder)/packages/arm-servicefabric"
   override-client-name: ServiceFabricClient
   generate-metadata: true
 ```
