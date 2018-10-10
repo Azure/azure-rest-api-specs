@@ -72,7 +72,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned."
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -133,7 +136,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned."
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -189,7 +195,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -236,7 +245,10 @@
             "description": "NoContent"
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -287,6 +299,40 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Container service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Container service."
     },
     "PurchasePlan": {
       "properties": {
