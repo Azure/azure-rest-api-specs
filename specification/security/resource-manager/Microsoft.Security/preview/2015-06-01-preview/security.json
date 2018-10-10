@@ -1519,7 +1519,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionsType}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}": {
             "get": {
                 "x-ms-examples": {
                     "Get allowed connections": {
@@ -1542,7 +1542,7 @@
                         "$ref": "#/parameters/AscLocation"
                     },
                     {
-                        "$ref": "#/parameters/ConnectionsType"
+                        "$ref": "#/parameters/ConnectionType"
                     },
                     {
                         "$ref": "#/parameters/ApiVersion"
@@ -2682,12 +2682,12 @@
                 "id": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "The azure resource id"
+                    "description": "The Azure resource id"
                 },
                 "inboundConnectedResources": {
                     "type": "array",
                     "readOnly": true,
-                    "description": "The list of azure resources that the resource has inbound allowed connection from",
+                    "description": "The list of Azure resources that the resource has inbound allowed connection from",
                     "items": {
                         "$ref": "#/definitions/ConnectedResource"
                     }
@@ -2695,7 +2695,7 @@
                 "outboundConnectedResources": {
                     "type": "array",
                     "readOnly": true,
-                    "description": "The list of azure resources that the resource has outbound allowed connection to",
+                    "description": "The list of Azure resources that the resource has outbound allowed connection to",
                     "items": {
                         "$ref": "#/definitions/ConnectedResource"
                     }
@@ -2709,7 +2709,7 @@
                 "connectedResourceId": {
                     "type": "string",
                     "readOnly": true,
-                    "description": "The azure resource id of the connected resource"
+                    "description": "The Azure resource id of the connected resource"
                 },
                 "tcpPorts": {
                     "type": "string",
@@ -2906,16 +2906,28 @@
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "ConnectionsType": {
-            "name": "connectionsType",
+        "ConnectionType": {
+            "name": "connectionType",
             "type": "string",
             "in": "path",
-            "description": "The type of allowed connections.",
+            "description": "The type of allowed connections (Internal, External)",
             "required": true,
             "enum": [
                 "Internal",
                 "External"
             ],
+            "x-ms-enum": {
+                "name": "connectionType",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "value": "Internal"
+                    },
+                    {
+                        "value": "External"
+                    }
+                ]
+            },
             "x-ms-parameter-location": "method"
         }
     }
