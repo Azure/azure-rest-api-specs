@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: '"@azure/arm-servicefabricmesh"'
-  output-folder: $(typescript-sdks-folder)/packages/"@azure/arm-servicefabricmesh"
+  package-name: "@azure/arm-servicefabricmesh"
+  output-folder: $(typescript-sdks-folder)/packages/arm-servicefabricmesh
   generate-metadata: true
 ```
