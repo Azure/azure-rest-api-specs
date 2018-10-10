@@ -1,11 +1,11 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2.1",
-        "title": "TrainingApi"
+        "version": "2.2",
+        "title": "Custom Vision Training Client"
     },
     "host": "southcentralus.api.cognitive.microsoft.com",
-    "basePath": "/customvision/v2.1/Training",
+    "basePath": "/customvision/v2.2/Training",
     "schemes": [
         "https"
     ],
@@ -87,6 +87,351 @@
                 "x-ms-examples": {
                     "Successful GetDomain request": {
                         "$ref": "./examples/GetDomain.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/images/tagged/count": {
+            "get": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Gets the number of images tagged with the provided {tagIds}",
+                "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+                "operationId": "GetTaggedImageCount",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "iterationId",
+                        "in": "query",
+                        "description": "The iteration id. Defaults to workspace",
+                        "required": false,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": true
+                    },
+                    {
+                        "name": "tagIds",
+                        "in": "query",
+                        "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "x-nullable": false
+                        },
+                        "collectionFormat": "csv",
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer",
+                            "x-nullable": false
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful GetTaggedImageCount request": {
+                        "$ref": "./examples/GetTaggedImageCount.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/images/untagged/count": {
+            "get": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Gets the number of untagged images",
+                "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
+                "operationId": "GetUntaggedImageCount",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "iterationId",
+                        "in": "query",
+                        "description": "The iteration id. Defaults to workspace",
+                        "required": false,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer",
+                            "x-nullable": false
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful GetUntaggedImageCount request": {
+                        "$ref": "./examples/GetUntaggedImageCount.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/images/tags": {
+            "post": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Associate a set of images with a set of tags",
+                "operationId": "CreateImageTags",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "batch",
+                        "in": "body",
+                        "description": "Batch of image tags. Limited to 128 tags per batch",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ImageTagCreateBatch"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImageTagCreateSummary"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful CreateImageTags request": {
+                        "$ref": "./examples/CreateImageTags.json"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Remove a set of tags from a set of images",
+                "operationId": "DeleteImageTags",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "imageIds",
+                        "in": "query",
+                        "description": "Image ids. Limited to 64 images",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "x-nullable": false
+                        },
+                        "collectionFormat": "csv",
+                        "x-nullable": true
+                    },
+                    {
+                        "name": "tagIds",
+                        "in": "query",
+                        "description": "Tags to be deleted from the specified images. Limted to 20 tags",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "x-nullable": false
+                        },
+                        "collectionFormat": "csv",
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful DeleteImageTags request": {
+                        "$ref": "./examples/DeleteImageTags.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/images/regions": {
+            "post": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Create a set of image regions",
+                "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.",
+                "operationId": "CreateImageRegions",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "batch",
+                        "in": "body",
+                        "description": "Batch of image regions which include a tag and bounding box. Limited to 64",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ImageRegionCreateBatch"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImageRegionCreateSummary"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful CreateImageRegions request": {
+                        "$ref": "./examples/CreateImageRegions.json"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Delete a set of image regions",
+                "operationId": "DeleteImageRegions",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "regionIds",
+                        "in": "query",
+                        "description": "Regions to delete. Limited to 64",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "x-nullable": false
+                        },
+                        "collectionFormat": "csv",
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful DeleteImageRegions request": {
+                        "$ref": "./examples/DeleteImageRegions.json"
                     }
                 }
             }
@@ -274,129 +619,6 @@
                 "x-ms-examples": {
                     "Successful GetUntaggedImages request": {
                         "$ref": "./examples/GetUntaggedImages.json"
-                    }
-                }
-            }
-        },
-        "/projects/{projectId}/images/tagged/count": {
-            "get": {
-                "tags": [
-                    "ImageApi"
-                ],
-                "summary": "Gets the number of images tagged with the provided {tagIds}",
-                "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-                "operationId": "GetTaggedImageCount",
-                "consumes": [],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
-                        "required": false,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "tagIds",
-                        "in": "query",
-                        "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "x-nullable": false
-                        },
-                        "collectionFormat": "csv",
-                        "x-nullable": true
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer",
-                            "x-nullable": false
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful GetTaggedImageCount request": {
-                        "$ref": "./examples/GetTaggedImageCount.json"
-                    }
-                }
-            }
-        },
-        "/projects/{projectId}/images/untagged/count": {
-            "get": {
-                "tags": [
-                    "ImageApi"
-                ],
-                "summary": "Gets the number of untagged images",
-                "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
-                "operationId": "GetUntaggedImageCount",
-                "consumes": [],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
-                        "required": false,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": true
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer",
-                            "x-nullable": false
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful GetUntaggedImageCount request": {
-                        "$ref": "./examples/GetUntaggedImageCount.json"
                     }
                 }
             }
@@ -760,228 +982,6 @@
                 }
             }
         },
-        "/projects/{projectId}/images/tags": {
-            "post": {
-                "tags": [
-                    "ImageApi"
-                ],
-                "summary": "Associate a set of images with a set of tags",
-                "operationId": "CreateImageTags",
-                "consumes": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml",
-                    "application/x-www-form-urlencoded"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "batch",
-                        "in": "body",
-                        "description": "Batch of image tags. Limited to 128 tags per batch",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ImageTagCreateBatch"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImageTagCreateSummary"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful CreateImageTags request": {
-                        "$ref": "./examples/CreateImageTags.json"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "ImageApi"
-                ],
-                "summary": "Remove a set of tags from a set of images",
-                "operationId": "DeleteImageTags",
-                "consumes": [],
-                "produces": [],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "imageIds",
-                        "in": "query",
-                        "description": "Image ids. Limited to 64 images",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "x-nullable": false
-                        },
-                        "collectionFormat": "csv",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "tagIds",
-                        "in": "query",
-                        "description": "Tags to be deleted from the specified images. Limted to 20 tags",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "x-nullable": false
-                        },
-                        "collectionFormat": "csv",
-                        "x-nullable": true
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No Content"
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful DeleteImageTags request": {
-                        "$ref": "./examples/DeleteImageTags.json"
-                    }
-                }
-            }
-        },
-        "/projects/{projectId}/images/regions": {
-            "post": {
-                "tags": [
-                    "ImageApi"
-                ],
-                "summary": "Create a set of image regions",
-                "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.",
-                "operationId": "CreateImageRegions",
-                "consumes": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml",
-                    "application/x-www-form-urlencoded"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "batch",
-                        "in": "body",
-                        "description": "Batch of image regions which include a tag and bounding box. Limited to 64",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ImageRegionCreateBatch"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImageRegionCreateSummary"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful CreateImageRegions request": {
-                        "$ref": "./examples/CreateImageRegions.json"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "ImageApi"
-                ],
-                "summary": "Delete a set of image regions",
-                "operationId": "DeleteImageRegions",
-                "consumes": [],
-                "produces": [],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "regionIds",
-                        "in": "query",
-                        "description": "Regions to delete. Limited to 64",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "x-nullable": false
-                        },
-                        "collectionFormat": "csv",
-                        "x-nullable": true
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No Content"
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful DeleteImageRegions request": {
-                        "$ref": "./examples/DeleteImageRegions.json"
-                    }
-                }
-            }
-        },
         "/{projectId}/images/{imageId}/regionproposals": {
             "post": {
                 "tags": [
@@ -1077,64 +1077,6 @@
                 "x-ms-examples": {
                     "Successful DeletePrediction request": {
                         "$ref": "./examples/DeletePrediction.json"
-                    }
-                }
-            }
-        },
-        "/projects/{projectId}/predictions/query": {
-            "post": {
-                "tags": [
-                    "PredictionsApi"
-                ],
-                "summary": "Get images that were sent to your prediction endpoint",
-                "operationId": "QueryPredictions",
-                "consumes": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml",
-                    "application/x-www-form-urlencoded"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "query",
-                        "in": "body",
-                        "description": "Parameters used to query the predictions. Limited to combining 2 tags",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/PredictionQueryToken"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/PredictionQueryResult"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful QueryPredictions request": {
-                        "$ref": "./examples/QueryPredictions.json"
                     }
                 }
             }
@@ -1267,13 +1209,140 @@
                 }
             }
         },
-        "/projects/{projectId}/train": {
+        "/projects/{projectId}/predictions/query": {
             "post": {
+                "tags": [
+                    "PredictionsApi"
+                ],
+                "summary": "Get images that were sent to your prediction endpoint",
+                "operationId": "QueryPredictions",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "query",
+                        "in": "body",
+                        "description": "Parameters used to query the predictions. Limited to combining 2 tags",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PredictionQueryToken"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PredictionQueryResult"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful QueryPredictions request": {
+                        "$ref": "./examples/QueryPredictions.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/iterations/{iterationId}/performance": {
+            "get": {
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Queues project for training",
-                "operationId": "TrainProject",
+                "summary": "Get detailed performance information about an iteration",
+                "operationId": "GetIterationPerformance",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The id of the project the iteration belongs to",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "iterationId",
+                        "in": "path",
+                        "description": "The id of the iteration to get",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "threshold",
+                        "in": "query",
+                        "description": "The threshold used to determine true predictions",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "overlapThreshold",
+                        "in": "query",
+                        "description": "If applicable, the bounding box overlap threshold used to determine true predictions",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IterationPerformance"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful GetIterationPerformance request": {
+                        "$ref": "./examples/GetIterationPerformance.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/iterations/{iterationId}/performance/images": {
+            "get": {
+                "tags": [
+                    "ProjectApi"
+                ],
+                "summary": "Get image with its prediction for a given project iteration",
+                "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+                "operationId": "GetImagePerformances",
                 "consumes": [],
                 "produces": [
                     "application/json",
@@ -1292,6 +1361,58 @@
                         "x-nullable": false
                     },
                     {
+                        "name": "iterationId",
+                        "in": "path",
+                        "description": "The iteration id. Defaults to workspace",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "tagIds",
+                        "in": "query",
+                        "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "x-nullable": false
+                        },
+                        "collectionFormat": "csv",
+                        "x-nullable": true
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "The ordering. Defaults to newest",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "Newest",
+                            "Oldest"
+                        ],
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "take",
+                        "in": "query",
+                        "description": "Maximum number of images to return. Defaults to 50, limited to 256",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 50
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "description": "Number of images to skip before beginning the image batch. Defaults to 0",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 0
+                    },
+                    {
                         "$ref": "#/parameters/ApiKey"
                     }
                 ],
@@ -1299,13 +1420,85 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Iteration"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ImagePerformance"
+                            },
+                            "x-nullable": true
                         }
                     }
                 },
                 "x-ms-examples": {
-                    "Successful TrainProject request": {
-                        "$ref": "./examples/TrainProject.json"
+                    "Successful GetImagePerformances request": {
+                        "$ref": "./examples/GetImagePerformances.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
+            "get": {
+                "tags": [
+                    "ProjectApi"
+                ],
+                "summary": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}",
+                "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+                "operationId": "GetImagePerformanceCount",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "iterationId",
+                        "in": "path",
+                        "description": "The iteration id. Defaults to workspace",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "tagIds",
+                        "in": "query",
+                        "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "x-nullable": false
+                        },
+                        "collectionFormat": "csv",
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer",
+                            "x-nullable": false
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful GetImagePerformanceCount request": {
+                        "$ref": "./examples/GetImagePerformanceCount.json"
                     }
                 }
             }
@@ -1755,82 +1948,13 @@
                 }
             }
         },
-        "/projects/{projectId}/iterations/{iterationId}/performance": {
-            "get": {
+        "/projects/{projectId}/train": {
+            "post": {
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get detailed performance information about an iteration",
-                "operationId": "GetIterationPerformance",
-                "consumes": [],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The id of the project the iteration belongs to",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "path",
-                        "description": "The id of the iteration to get",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "threshold",
-                        "in": "query",
-                        "description": "The threshold used to determine true predictions",
-                        "required": false,
-                        "type": "number",
-                        "format": "float"
-                    },
-                    {
-                        "name": "overlapThreshold",
-                        "in": "query",
-                        "description": "If applicable, the bounding box overlap threshold used to determine true predictions",
-                        "required": false,
-                        "type": "number",
-                        "format": "float"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/IterationPerformance"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful GetIterationPerformance request": {
-                        "$ref": "./examples/GetIterationPerformance.json"
-                    }
-                }
-            }
-        },
-        "/projects/{projectId}/iterations/{iterationId}/performance/images": {
-            "get": {
-                "tags": [
-                    "ProjectApi"
-                ],
-                "summary": "Get image with its prediction for a given project iteration",
-                "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-                "operationId": "GetImagePerformances",
+                "summary": "Queues project for training",
+                "operationId": "TrainProject",
                 "consumes": [],
                 "produces": [
                     "application/json",
@@ -1849,58 +1973,6 @@
                         "x-nullable": false
                     },
                     {
-                        "name": "iterationId",
-                        "in": "path",
-                        "description": "The iteration id. Defaults to workspace",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "tagIds",
-                        "in": "query",
-                        "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "x-nullable": false
-                        },
-                        "collectionFormat": "csv",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "orderBy",
-                        "in": "query",
-                        "description": "The ordering. Defaults to newest",
-                        "required": false,
-                        "type": "string",
-                        "enum": [
-                            "Newest",
-                            "Oldest"
-                        ],
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "take",
-                        "in": "query",
-                        "description": "Maximum number of images to return. Defaults to 50, limited to 256",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32",
-                        "default": 50
-                    },
-                    {
-                        "name": "skip",
-                        "in": "query",
-                        "description": "Number of images to skip before beginning the image batch. Defaults to 0",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32",
-                        "default": 0
-                    },
-                    {
                         "$ref": "#/parameters/ApiKey"
                     }
                 ],
@@ -1908,85 +1980,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ImagePerformance"
-                            },
-                            "x-nullable": true
+                            "$ref": "#/definitions/Iteration"
                         }
                     }
                 },
                 "x-ms-examples": {
-                    "Successful GetImagePerformances request": {
-                        "$ref": "./examples/GetImagePerformances.json"
-                    }
-                }
-            }
-        },
-        "/projects/{projectId}/iterations/{iterationId}/performance/images/count": {
-            "get": {
-                "tags": [
-                    "ProjectApi"
-                ],
-                "summary": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}",
-                "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
-                "operationId": "GetImagePerformanceCount",
-                "consumes": [],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "path",
-                        "description": "The iteration id. Defaults to workspace",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "tagIds",
-                        "in": "query",
-                        "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "x-nullable": false
-                        },
-                        "collectionFormat": "csv",
-                        "x-nullable": true
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer",
-                            "x-nullable": false
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful GetImagePerformanceCount request": {
-                        "$ref": "./examples/GetImagePerformanceCount.json"
+                    "Successful TrainProject request": {
+                        "$ref": "./examples/TrainProject.json"
                     }
                 }
             }
@@ -2100,7 +2100,9 @@
                         "type": "string",
                         "enum": [
                             "Linux",
-                            "Windows"
+                            "Windows",
+                            "ONNX10",
+                            "ONNX12"
                         ],
                         "x-nullable": true
                     },
@@ -2386,6 +2388,18 @@
                         "x-nullable": true
                     },
                     {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Optional type for the tag",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "Regular",
+                            "Negative"
+                        ],
+                        "x-nullable": false
+                    },
+                    {
                         "$ref": "#/parameters/ApiKey"
                     }
                 ],
@@ -2442,370 +2456,6 @@
                     "type": "boolean",
                     "readOnly": true,
                     "x-nullable": false
-                }
-            },
-            "x-nullable": true
-        },
-        "Image": {
-            "description": "Image model to be sent as JSON",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "created": {
-                    "format": "date-time",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "width": {
-                    "format": "int32",
-                    "type": "integer",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "height": {
-                    "format": "int32",
-                    "type": "integer",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "imageUri": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "thumbnailUri": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "tags": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageTag"
-                    },
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "regions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageRegion"
-                    },
-                    "readOnly": true,
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageTag": {
-            "type": "object",
-            "properties": {
-                "tagId": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "tagName": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "created": {
-                    "format": "date-time",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageRegion": {
-            "type": "object",
-            "properties": {
-                "regionId": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "tagName": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "created": {
-                    "format": "date-time",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "tagId": {
-                    "format": "uuid",
-                    "type": "string",
-                    "x-nullable": false
-                },
-                "left": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                },
-                "top": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                },
-                "width": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                },
-                "height": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageCreateSummary": {
-            "type": "object",
-            "properties": {
-                "isBatchSuccessful": {
-                    "type": "boolean",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "images": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageCreateResult"
-                    },
-                    "readOnly": true,
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageCreateResult": {
-            "type": "object",
-            "properties": {
-                "sourceUrl": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "status": {
-                    "enum": [
-                        "OK",
-                        "OKDuplicate",
-                        "ErrorSource",
-                        "ErrorImageFormat",
-                        "ErrorImageSize",
-                        "ErrorStorage",
-                        "ErrorLimitExceed",
-                        "ErrorTagLimitExceed",
-                        "ErrorRegionLimitExceed",
-                        "ErrorUnknown"
-                    ],
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false,
-                    "x-ms-enum": {
-                        "name": "ImageUploadStatus",
-                        "modelAsString": true
-                    }
-                },
-                "image": {
-                    "$ref": "#/definitions/Image",
-                    "readOnly": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageFileCreateBatch": {
-            "type": "object",
-            "properties": {
-                "images": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageFileCreateEntry"
-                    },
-                    "x-nullable": true
-                },
-                "tagIds": {
-                    "type": "array",
-                    "items": {
-                        "format": "uuid",
-                        "type": "string",
-                        "x-nullable": false
-                    },
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageFileCreateEntry": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "x-nullable": true
-                },
-                "contents": {
-                    "format": "byte",
-                    "type": "string",
-                    "x-nullable": true
-                },
-                "tagIds": {
-                    "type": "array",
-                    "items": {
-                        "format": "uuid",
-                        "type": "string",
-                        "x-nullable": false
-                    },
-                    "x-nullable": true
-                },
-                "regions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Region"
-                    },
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "Region": {
-            "type": "object",
-            "properties": {
-                "tagId": {
-                    "format": "uuid",
-                    "type": "string",
-                    "x-nullable": false
-                },
-                "left": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                },
-                "top": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                },
-                "width": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                },
-                "height": {
-                    "format": "float",
-                    "type": "number",
-                    "x-nullable": false
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageUrlCreateBatch": {
-            "type": "object",
-            "properties": {
-                "images": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageUrlCreateEntry"
-                    },
-                    "x-nullable": true
-                },
-                "tagIds": {
-                    "type": "array",
-                    "items": {
-                        "format": "uuid",
-                        "type": "string",
-                        "x-nullable": false
-                    },
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageUrlCreateEntry": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string",
-                    "x-nullable": true
-                },
-                "tagIds": {
-                    "type": "array",
-                    "items": {
-                        "format": "uuid",
-                        "type": "string",
-                        "x-nullable": false
-                    },
-                    "x-nullable": true
-                },
-                "regions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Region"
-                    },
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageIdCreateBatch": {
-            "type": "object",
-            "properties": {
-                "images": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageIdCreateEntry"
-                    },
-                    "x-nullable": true
-                },
-                "tagIds": {
-                    "type": "array",
-                    "items": {
-                        "format": "uuid",
-                        "type": "string",
-                        "x-nullable": false
-                    },
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageIdCreateEntry": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "type": "string",
-                    "x-nullable": false
-                },
-                "tagIds": {
-                    "type": "array",
-                    "items": {
-                        "format": "uuid",
-                        "type": "string",
-                        "x-nullable": false
-                    },
-                    "x-nullable": true
-                },
-                "regions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Region"
-                    },
-                    "x-nullable": true
                 }
             },
             "x-nullable": true
@@ -2997,6 +2647,379 @@
             },
             "x-nullable": true
         },
+        "Image": {
+            "description": "Image model to be sent as JSON",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "created": {
+                    "format": "date-time",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "width": {
+                    "format": "int32",
+                    "type": "integer",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "height": {
+                    "format": "int32",
+                    "type": "integer",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "resizedImageUri": {
+                    "description": "The Uri to the (resized) image used for training",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "thumbnailUri": {
+                    "description": "The Uri to the thumbnail of the original image",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "originalImageUri": {
+                    "description": "The Uri to the original uploaded image",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageTag"
+                    },
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageRegion"
+                    },
+                    "readOnly": true,
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageTag": {
+            "type": "object",
+            "properties": {
+                "tagId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "tagName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "created": {
+                    "format": "date-time",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageRegion": {
+            "type": "object",
+            "properties": {
+                "regionId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "tagName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "created": {
+                    "format": "date-time",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "tagId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "x-nullable": false
+                },
+                "left": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "top": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "width": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "height": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageCreateSummary": {
+            "type": "object",
+            "properties": {
+                "isBatchSuccessful": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageCreateResult"
+                    },
+                    "readOnly": true,
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageCreateResult": {
+            "type": "object",
+            "properties": {
+                "sourceUrl": {
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "status": {
+                    "enum": [
+                        "OK",
+                        "OKDuplicate",
+                        "ErrorSource",
+                        "ErrorImageFormat",
+                        "ErrorImageSize",
+                        "ErrorStorage",
+                        "ErrorLimitExceed",
+                        "ErrorTagLimitExceed",
+                        "ErrorRegionLimitExceed",
+                        "ErrorUnknown",
+                        "ErrorNegativeAndRegularTagOnSameImage"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false,
+                    "x-ms-enum": {
+                        "name": "ImageCreateStatus",
+                        "modelAsString": true
+                    }
+                },
+                "image": {
+                    "$ref": "#/definitions/Image",
+                    "readOnly": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageFileCreateBatch": {
+            "type": "object",
+            "properties": {
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageFileCreateEntry"
+                    },
+                    "x-nullable": true
+                },
+                "tagIds": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageFileCreateEntry": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "x-nullable": true
+                },
+                "contents": {
+                    "format": "byte",
+                    "type": "string",
+                    "x-nullable": true
+                },
+                "tagIds": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "x-nullable": true
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Region"
+                    },
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "Region": {
+            "type": "object",
+            "properties": {
+                "tagId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "x-nullable": false
+                },
+                "left": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "top": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "width": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                },
+                "height": {
+                    "format": "float",
+                    "type": "number",
+                    "x-nullable": false
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageUrlCreateBatch": {
+            "type": "object",
+            "properties": {
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageUrlCreateEntry"
+                    },
+                    "x-nullable": true
+                },
+                "tagIds": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageUrlCreateEntry": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "x-nullable": true
+                },
+                "tagIds": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "x-nullable": true
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Region"
+                    },
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageIdCreateBatch": {
+            "type": "object",
+            "properties": {
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageIdCreateEntry"
+                    },
+                    "x-nullable": true
+                },
+                "tagIds": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageIdCreateEntry": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "x-nullable": false
+                },
+                "tagIds": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "x-nullable": true
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Region"
+                    },
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
         "ImageRegionProposal": {
             "type": "object",
             "properties": {
@@ -3061,6 +3084,81 @@
                     "format": "float",
                     "type": "number",
                     "x-nullable": false
+                }
+            },
+            "x-nullable": true
+        },
+        "ImageUrl": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ImagePrediction": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "project": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "iteration": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "created": {
+                    "format": "date-time",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "predictions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Prediction"
+                    },
+                    "readOnly": true,
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "Prediction": {
+            "type": "object",
+            "properties": {
+                "probability": {
+                    "format": "float",
+                    "type": "number",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "tagId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "tagName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "boundingBox": {
+                    "$ref": "#/definitions/BoundingBox",
+                    "readOnly": true
                 }
             },
             "x-nullable": true
@@ -3169,12 +3267,20 @@
             "description": "result of an image classification request",
             "type": "object",
             "properties": {
-                "imageUri": {
+                "resizedImageUri": {
+                    "description": "The Uri to the (resized) prediction image",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "thumbnailUri": {
+                    "description": "The Uri to the thumbnail of the original prediction image",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "originalImageUri": {
+                    "description": "The Uri to the original prediction image",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
@@ -3216,240 +3322,6 @@
                     },
                     "readOnly": true,
                     "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "Prediction": {
-            "type": "object",
-            "properties": {
-                "probability": {
-                    "format": "float",
-                    "type": "number",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "tagId": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "tagName": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "boundingBox": {
-                    "$ref": "#/definitions/BoundingBox",
-                    "readOnly": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageUrl": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string",
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImagePrediction": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "project": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "iteration": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "created": {
-                    "format": "date-time",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "predictions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Prediction"
-                    },
-                    "readOnly": true,
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "Iteration": {
-            "description": "Iteration model to be sent over JSON",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "description": "Gets the id of the iteration",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "name": {
-                    "description": "Gets or sets the name of the iteration",
-                    "type": "string",
-                    "x-nullable": true
-                },
-                "isDefault": {
-                    "description": "Gets or sets a value indicating whether the iteration is the default iteration for the project",
-                    "type": "boolean",
-                    "x-nullable": false
-                },
-                "status": {
-                    "description": "Gets the current iteration status",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "created": {
-                    "format": "date-time",
-                    "description": "Gets the time this iteration was completed",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "lastModified": {
-                    "format": "date-time",
-                    "description": "Gets the time this iteration was last modified",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "trainedAt": {
-                    "format": "date-time",
-                    "description": "Gets the time this iteration was last modified",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "projectId": {
-                    "format": "uuid",
-                    "description": "Gets the project id of the iteration",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "exportable": {
-                    "description": "Whether the iteration can be exported to another format for download",
-                    "type": "boolean",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "domainId": {
-                    "format": "uuid",
-                    "description": "Get or sets a guid of the domain the iteration has been trained on",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "classificationType": {
-                    "description": "Gets the classification type of the project",
-                    "enum": [
-                        "Multiclass",
-                        "Multilabel"
-                    ],
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true,
-                    "x-ms-enum": {
-                        "name": "Classifier",
-                        "modelAsString": true
-                    }
-                }
-            },
-            "x-nullable": true
-        },
-        "Project": {
-            "description": "Represents a project",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "description": "Gets the project id",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "name": {
-                    "description": "Gets or sets the name of the project",
-                    "type": "string",
-                    "x-nullable": true
-                },
-                "description": {
-                    "description": "Gets or sets the description of the project",
-                    "type": "string",
-                    "x-nullable": true
-                },
-                "settings": {
-                    "$ref": "#/definitions/ProjectSettings",
-                    "description": "Gets or sets the project settings"
-                },
-                "created": {
-                    "format": "date-time",
-                    "description": "Gets the date this project was created",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "lastModified": {
-                    "format": "date-time",
-                    "description": "Gets the date this project was last modifed",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "thumbnailUri": {
-                    "description": "Gets the thumbnail url representing the project",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ProjectSettings": {
-            "description": "Represents settings associated with a project",
-            "type": "object",
-            "properties": {
-                "domainId": {
-                    "format": "uuid",
-                    "description": "Gets or sets the id of the Domain to use with this project",
-                    "type": "string",
-                    "x-nullable": false
-                },
-                "classificationType": {
-                    "description": "Gets or sets the classification type of the project",
-                    "enum": [
-                        "Multiclass",
-                        "Multilabel"
-                    ],
-                    "type": "string",
-                    "x-nullable": true,
-                    "x-ms-enum": {
-                        "name": "Classifier",
-                        "modelAsString": true
-                    }
                 }
             },
             "x-nullable": true
@@ -3623,6 +3495,165 @@
             },
             "x-nullable": true
         },
+        "Project": {
+            "description": "Represents a project",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "description": "Gets the project id",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "name": {
+                    "description": "Gets or sets the name of the project",
+                    "type": "string",
+                    "x-nullable": true
+                },
+                "description": {
+                    "description": "Gets or sets the description of the project",
+                    "type": "string",
+                    "x-nullable": true
+                },
+                "settings": {
+                    "$ref": "#/definitions/ProjectSettings",
+                    "description": "Gets or sets the project settings"
+                },
+                "created": {
+                    "format": "date-time",
+                    "description": "Gets the date this project was created",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "lastModified": {
+                    "format": "date-time",
+                    "description": "Gets the date this project was last modifed",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "thumbnailUri": {
+                    "description": "Gets the thumbnail url representing the project",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                }
+            },
+            "x-nullable": true
+        },
+        "ProjectSettings": {
+            "description": "Represents settings associated with a project",
+            "type": "object",
+            "properties": {
+                "domainId": {
+                    "format": "uuid",
+                    "description": "Gets or sets the id of the Domain to use with this project",
+                    "type": "string",
+                    "x-nullable": false
+                },
+                "classificationType": {
+                    "description": "Gets or sets the classification type of the project",
+                    "enum": [
+                        "Multiclass",
+                        "Multilabel"
+                    ],
+                    "type": "string",
+                    "x-nullable": true,
+                    "x-ms-enum": {
+                        "name": "Classifier",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "x-nullable": true
+        },
+        "Iteration": {
+            "description": "Iteration model to be sent over JSON",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "description": "Gets the id of the iteration",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "name": {
+                    "description": "Gets or sets the name of the iteration",
+                    "type": "string",
+                    "x-nullable": true
+                },
+                "isDefault": {
+                    "description": "Gets or sets a value indicating whether the iteration is the default iteration for the project",
+                    "type": "boolean",
+                    "x-nullable": false
+                },
+                "status": {
+                    "description": "Gets the current iteration status",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "created": {
+                    "format": "date-time",
+                    "description": "Gets the time this iteration was completed",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "lastModified": {
+                    "format": "date-time",
+                    "description": "Gets the time this iteration was last modified",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "trainedAt": {
+                    "format": "date-time",
+                    "description": "Gets the time this iteration was last modified",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "projectId": {
+                    "format": "uuid",
+                    "description": "Gets the project id of the iteration",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "exportable": {
+                    "description": "Whether the iteration can be exported to another format for download",
+                    "type": "boolean",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "domainId": {
+                    "format": "uuid",
+                    "description": "Get or sets a guid of the domain the iteration has been trained on",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "classificationType": {
+                    "description": "Gets the classification type of the project",
+                    "enum": [
+                        "Multiclass",
+                        "Multilabel"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": true,
+                    "x-ms-enum": {
+                        "name": "Classifier",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "x-nullable": true
+        },
         "Export": {
             "type": "object",
             "properties": {
@@ -3637,7 +3668,7 @@
                     "readOnly": true,
                     "x-nullable": false,
                     "x-ms-enum": {
-                        "name": "ExportPlatform",
+                        "name": "ExportPlatformModel",
                         "modelAsString": true
                     }
                 },
@@ -3663,13 +3694,15 @@
                 "flavor": {
                     "enum": [
                         "Linux",
-                        "Windows"
+                        "Windows",
+                        "ONNX10",
+                        "ONNX12"
                     ],
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true,
                     "x-ms-enum": {
-                        "name": "ExportFlavor",
+                        "name": "ExportFlavorModel",
                         "modelAsString": true
                     }
                 },
@@ -3702,6 +3735,19 @@
                     "type": "string",
                     "x-nullable": true
                 },
+                "type": {
+                    "description": "Gets or sets the type of the tag",
+                    "enum": [
+                        "Regular",
+                        "Negative"
+                    ],
+                    "type": "string",
+                    "x-nullable": false,
+                    "x-ms-enum": {
+                        "name": "TagType",
+                        "modelAsString": true
+                    }
+                },
                 "imageCount": {
                     "format": "int32",
                     "description": "Gets the number of images with this tag",
@@ -3721,6 +3767,24 @@
             "type": "string",
             "x-ms-client-name": "ApiKey",
             "x-ms-parameter-location": "client"
+        },
+        "Endpoint": {
+            "name": "Endpoint",
+            "in": "path",
+            "description": "Supported Cognitive Services endpoints",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "client",
+            "x-ms-skip-url-encoding": true
         }
+    },
+    "x-ms-parameterized-host": {
+        "hostTemplate": "{Endpoint}",
+        "useSchemePrefix": false,
+        "parameters": [
+            {
+                "$ref": "#/parameters/Endpoint"
+            }
+        ]
     }
 }
