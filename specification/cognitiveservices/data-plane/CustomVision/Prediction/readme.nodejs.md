@@ -6,7 +6,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-customvision-prediction
-  package-version: 1.0.0-preview
   output-folder: $(node-sdks-folder)/lib/services/customVision/prediction
   override-client-name: PredictionAPIClient
   azure-arm: false

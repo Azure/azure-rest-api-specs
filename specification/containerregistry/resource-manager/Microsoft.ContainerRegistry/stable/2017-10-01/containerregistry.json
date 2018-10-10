@@ -1201,11 +1201,31 @@
           "type": "string"
         },
         "registryUri": {
-          "description": "The address of the source registry.",
+          "description": "The address of the source registry (e.g. 'mcr.microsoft.com').",
           "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/ImportSourceCredentials",
+          "description": "Credentials used when importing from a registry uri."
         },
         "sourceImage": {
           "description": "Repository name of the source image.\r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "type": "string"
+        }
+      }
+    },
+    "ImportSourceCredentials": {
+      "required": [
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username to authenticate with the source registry.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password used to authenticate with the source registry.",
           "type": "string"
         }
       }
@@ -1387,6 +1407,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
         },
+        "identity": {
+          "$ref": "#/definitions/RegistryIdentity",
+          "description": "The identity of the container registry."
+        },
         "properties": {
           "$ref": "#/definitions/RegistryProperties",
           "description": "The properties of the container registry.",
@@ -1429,6 +1453,24 @@
             "name": "SkuTier",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "RegistryIdentity": {
+      "description": "The identity of the container registry.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of identity used for the registry.",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "The principal ID of registry identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID associated with the registry.",
+          "type": "string"
         }
       }
     },
@@ -1529,6 +1571,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
+        },
+        "identity": {
+          "$ref": "#/definitions/RegistryIdentity",
+          "description": "The identity of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",

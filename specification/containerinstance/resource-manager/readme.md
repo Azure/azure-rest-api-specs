@@ -26,7 +26,25 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06
+tag: package-2018-10
+```
+
+### Tag: package-2018-10
+
+These settings apply only when `--tag=package-2018-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10'
+input-file:
+- Microsoft.ContainerInstance/stable/2018-10-01/containerInstance.json
+```
+
+### Tag: package-2018-09
+
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09'
+input-file:
+- Microsoft.ContainerInstance/stable/2018-09-01/containerInstance.json
 ```
 
 ### Tag: package-2018-06
@@ -85,6 +103,14 @@ input-file:
 - Microsoft.ContainerInstance/preview/2017-08-01-preview/containerInstance.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: UniqueResourcePaths
+    from: containerInstance.json
+    reason: false positive, see https://github.com/Azure/azure-openapi-validator/issues/176
+```
 
 ---
 # Code Generation
@@ -151,84 +177,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-containerinstance
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: containerinstance
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-06
-  - tag: package-2018-04
-  - tag: package-2018-02-preview
-  - tag: package-2017-12-preview
-  - tag: package-2017-10-preview
-  - tag: package-2017-08-preview
-```
-
-### Tag: package-2018-06 and go
-
-These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-04' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-06-01/containerinstance
-```
-
-### Tag: package-2018-04 and go
-
-These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-04' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-04-01/containerinstance
-```
-
-### Tag: package-2018-02-preview and go
-
-These settings apply only when `--tag=package-2018-02-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2018-02-01-preview/containerinstance
-```
-
-### Tag: package-2017-12-preview and go
-
-These settings apply only when `--tag=package-2017-12-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-12-01-preview/containerinstance
-```
-
-### Tag: package-2017-10-preview and go
-
-These settings apply only when `--tag=package-2017-10-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-10-01-preview/containerinstance
-```
-
-### Tag: package-2017-08-preview and go
-
-These settings apply only when `--tag=package-2017-08-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-08-01-preview/containerinstance
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -248,48 +199,23 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerinstance
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2017-08-preview
-  - tag: package-2018-02-preview
-  - tag: package-2017-10-preview
+  - tag: package-2018-10
   - tag: package-2018-04
+  - tag: package-2018-02-preview
   - tag: package-2017-12-preview
+  - tag: package-2017-10-preview
+  - tag: package-2017-08-preview
 ```
 
-### Tag: package-2017-08-preview and java
+### Tag: package-2018-10 and java
 
-These settings apply only when `--tag=package-2017-08-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-10 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2017-08-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.containerinstance.v2017_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2017_08_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-02-preview and java
-
-These settings apply only when `--tag=package-2018-02-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-02-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2018_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2018_02_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-10-preview and java
-
-These settings apply only when `--tag=package-2017-10-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerinstance.v2017_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2017_10_01_preview
+  namespace: com.microsoft.azure.management.containerinstance.v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2018_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -307,6 +233,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2018-02-preview and java
+
+These settings apply only when `--tag=package-2018-02-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerinstance.v2018_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2018_02_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2017-12-preview and java
 
 These settings apply only when `--tag=package-2017-12-preview --java` is specified on the command line.
@@ -320,4 +259,28 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2017-10-preview and java
 
+These settings apply only when `--tag=package-2017-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerinstance.v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2017_10_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-08-preview and java
+
+These settings apply only when `--tag=package-2017-08-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-08-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerinstance.v2017_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/containerinstance/resource-manager/v2017_08_01_preview
+regenerate-manager: true
+generate-interface: true
+```

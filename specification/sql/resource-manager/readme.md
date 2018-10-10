@@ -88,7 +88,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
-- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
@@ -99,10 +98,15 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/databases.json
 - Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
 
 
 # Needed when there is more than one input file
@@ -165,7 +169,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
-- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
@@ -173,10 +176,15 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -232,7 +240,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
-- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
@@ -240,10 +247,15 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
 - Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -300,7 +312,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
-- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
@@ -402,6 +413,9 @@ input-file:
  - ./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/databases.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
@@ -409,6 +423,8 @@ input-file:
  - ./Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -438,7 +454,6 @@ input-file:
  - ./Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
- - ./Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
@@ -593,62 +608,7 @@ python:
 
 ### Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: sql
-  clear-output-folder: true
-```
-
-#### Go multi-api
-
-From api-version 2017-10 and onwards, only pure package versions should be used. Composite package versions are used for earlier api-versions (2017-03 and earlier) in order to ensure backwards compatibility with previously released versions of Go SDK,
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-pure-2017-10-preview
-  - tag: package-2017-03-preview
-  - tag: package-2015-05-preview
-  - tag: package-2014-04
-```
-
-#### Tag: package-pure-2017-10-preview and go
-
-These settings apply only when `--tag=package-2017-10-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-pure-2017-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/sql/mgmt/2017-10-01-preview/sql
-```
-
-#### Tag: package-2017-03-preview and go
-
-These settings apply only when `--tag=package-2017-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/sql/mgmt/2017-03-01-preview/sql
-```
-
-#### Tag: package-2015-05-preview and go
-
-These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/sql/mgmt/2015-05-01-preview/sql
-```
-
-#### Tag: package-2014-04 and go
-
-These settings apply only when `--tag=package-2014-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2014-04' && $(go)
-output-folder: $(go-sdk-folder)/services/sql/mgmt/2014-04-01/sql
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ### Java
 
