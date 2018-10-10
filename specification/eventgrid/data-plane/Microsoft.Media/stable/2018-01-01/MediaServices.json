@@ -118,7 +118,7 @@
         }
       }
     },
-    "JobError": {
+    "MediaJobError": {
       "properties": {
         "code": {
           "type": "string",
@@ -250,7 +250,7 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobErrorDetail"
+            "$ref": "#/definitions/MediaJobErrorDetail"
           },
           "description": "An array of details about specific errors that led to this reported error.",
           "readOnly": true
@@ -259,7 +259,7 @@
       "type": "object",
       "description": "Details of JobOutput errors."
     },
-    "JobErrorDetail": {
+    "MediaJobErrorDetail": {
       "properties": {
         "code": {
           "type": "string",
@@ -275,10 +275,10 @@
       "type": "object",
       "description": "Details of JobOutput errors."
     },
-    "JobOutput": {
+    "MediaJobOutput": {
       "properties": {
         "error": {
-          "$ref": "#/definitions/JobError",
+          "$ref": "#/definitions/MediaJobError",
           "description": "Gets the Job output error."
         },
         "label": {
@@ -345,11 +345,11 @@
       ],
       "description": "The event data for a Job output."
     },
-    "JobOutputAsset": {
+    "MediaJobOutputAsset": {
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputAsset",
       "allOf": [
         {
-          "$ref": "#/definitions/JobOutput"
+          "$ref": "#/definitions/MediaJobOutput"
         }
       ],
       "properties": {
@@ -415,7 +415,7 @@
           "x-nullable": false
         },
         "output": {
-          "$ref": "#/definitions/JobOutput",
+          "$ref": "#/definitions/MediaJobOutput",
           "description": "Gets the output."
         },
         "jobCorrelationData": {
@@ -471,7 +471,7 @@
         "outputs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/MediaJobOutput"
           },
           "description": "Gets the Job outputs."
         }
@@ -490,7 +490,7 @@
         "outputs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/MediaJobOutput"
           },
           "description": "Gets the Job outputs."
         }
@@ -509,7 +509,7 @@
         "outputs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/MediaJobOutput"
           },
           "description": "Gets the Job outputs."
         }
