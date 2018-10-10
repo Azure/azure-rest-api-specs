@@ -14,7 +14,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-08
-  - tag: package-2017-08-beta
   - tag: package-2017-07
   - tag: package-2016-05
 ```
@@ -26,15 +25,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2017-08' && $(go)
 output-folder: $(go-sdk-folder)/services/analysisservices/mgmt/2017-08-01/analysisservices
-```
-
-### Tag: package-2017-08-beta and go
-
-These settings apply only when `--tag=package-2017-08-beta --go` is specifined on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-08-beta' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/analysisservices/preview/mgmt/2017-08-01-beta/analysisservices
 ```
 
 ### Tag: package-2017-07 and go
