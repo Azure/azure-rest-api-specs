@@ -34,7 +34,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2018-10-01' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2018-10-01/compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-10-01/$(namespace)
 ```
 
 ### Tag: package-2018-06 and go
@@ -44,7 +44,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2018-06' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2018-06-01/compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-06-01/$(namespace)
 ```
 
 ### Tag: package-compute-2018-04 and go
@@ -54,7 +54,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2018-04' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2018-04-01/compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-04-01/$(namespace)
 ```
 
 ### Tag: package-compute-only-2017-12 and go
@@ -64,7 +64,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-only-2017-12' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-12-01/compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-12-01/$(namespace)
 ```
 
 ### Tag: package-compute-2017-03 and go
@@ -74,7 +74,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2017-03' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-03-30/compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-03-30/$(namespace)
 ```
 
 ### Tag: package-compute-2016-04-preview and go
@@ -84,7 +84,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2016-04-preview' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/preview/compute/mgmt/2016-04-30-preview/compute
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2016-04-30-preview/$(namespace)
 ```
 
 ### Tag: package-compute-2016-03 and go
@@ -94,7 +94,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2016-03' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2016-03-30/compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2016-03-30/$(namespace)
 ```
 
 ### Tag: package-compute-2015-06 and go
@@ -104,7 +104,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-compute-2015-06' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2015-06-15/compute
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2015-06-15/$(namespace)
 ```
 
 ### Tag: package-skus-2017-09 and go
@@ -114,7 +114,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-skus-2017-09' && $(go)
 namespace: skus
-output-folder: $(go-sdk-folder)/services/compute/mgmt/2017-09-01/skus
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-09-01/skus
 ```
 
 ### Tag: package-container-service-2017-01 and go

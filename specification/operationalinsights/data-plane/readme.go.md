@@ -22,5 +22,5 @@ These settings apply only when `--tag=v1 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='v1' && $(go)
-output-folder: $(go-sdk-folder)/services/operationalinsights/v1/operationalinsights
+output-folder: $(go-sdk-folder)/services/$(namespace)/v1/$(namespace)
 ```

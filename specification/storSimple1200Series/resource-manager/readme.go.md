@@ -22,5 +22,5 @@ These settings apply only when `--tag=package-2016-10 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-10' && $(go)
-output-folder: $(go-sdk-folder)/services/storsimple1200series/mgmt/2016-10-01/storsimple
+output-folder: $(go-sdk-folder)/services/$(namespace)1200series/mgmt/2016-10-01/$(namespace)
 ```
