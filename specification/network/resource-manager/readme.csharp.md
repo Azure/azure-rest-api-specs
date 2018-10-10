@@ -37,15 +37,6 @@ batch:
     ApiVersionName: Api2016_06_15
 ```
 
-### Tag: package-dns-2016-04
-
-These settings apply only when `--tag=package-dns-2016-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-dns-2016-04'
-input-file:
-- ../../dns/resource-manager/Microsoft.Network/stable/2016-04-01/dns.json
-```
-
 ### Profile: hybrid_2018_03_01
 
 These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
