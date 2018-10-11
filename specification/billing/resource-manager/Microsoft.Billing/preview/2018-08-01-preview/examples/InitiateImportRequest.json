@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01-preview",
+    "billingAccountId": "billingAccountId",
+    "projectId": "projectId",
+    "body": {
+      "properties": {
+        "devTestUsageContext": "devTestUsageContextId",
+        "standardUsageContext": "standardUsageContext",
+        "recipientEmailId": "user@contoso.com"
+
+      }
+    }
+  },
+
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/billingAccountId/projects/projectId/importRequests/importRequestId",
+        "type": "Microsoft.Billing/importRequests",
+        "name": "importRequestId",
+        "properties": {
+          "creationTime": "10/10/2018 9:40:01 PM",
+          "expirationTime": "11/5/2018 4:47:08 AM",
+          "projectId": "projectId",
+          "billingAccountId": "billingAccountId",
+          "devTestUsageContext": "devTestUsageContextId",
+          "standardUsageContext": "standardUsageContext",
+          "importRequestStatus": "Pending",
+          "recipientEmailId": "user@contoso.com",
+          "initiatorEmailId": "user@contoso.com",
+          "lastModifiedTime": "10/10/2018 9:40:01 PM"
+        }
+      }
+    }
+  }
+}
