@@ -13,49 +13,42 @@ batch:
   - package-features: true
   - package-locks: true
   - package-policy: true
-  - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
 ```
 
 ```yaml $(typescript) && $(package-features)
 typescript:
-  package-name: arm-features
+  package-name: "@azure/arm-features"
   output-folder: $(typescript-sdks-folder)/packages/arm-features
 ```
 
 ```yaml $(typescript) && $(package-locks)
 typescript:
-  package-name: arm-locks
+  package-name: "@azure/arm-locks"
   output-folder: $(typescript-sdks-folder)/packages/arm-locks
 ```
 
 ```yaml $(typescript) && $(package-policy)
 typescript:
-  package-name: arm-policy
+  package-name: "@azure/arm-policy"
   output-folder: $(typescript-sdks-folder)/packages/arm-policy
 ```
 
 ```yaml $(typescript) && $(package-resources)
 typescript:
-  package-name: arm-resources
+  package-name: "@azure/arm-resources"
   output-folder: $(typescript-sdks-folder)/packages/arm-resources
-```
-
-```yaml $(typescript) && $(package-subscriptions)
-typescript:
-  package-name: arm-subscriptions
-  output-folder: $(typescript-sdks-folder)/packages/arm-subscriptions
 ```
 
 ```yaml $(typescript) && $(package-links)
 typescript:
-  package-name: arm-links
+  package-name: "@azure/arm-links"
   output-folder: $(typescript-sdks-folder)/packages/arm-links
 ```
 
 ```yaml $(typescript) && $(package-managedapplications)
 typescript:
-  package-name: arm-managedapplications
+  package-name: "@azure/arm-managedapplications"
   output-folder: $(typescript-sdks-folder)/packages/arm-managedapplications
 ```

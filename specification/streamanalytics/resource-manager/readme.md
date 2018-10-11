@@ -60,6 +60,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_stream_analytics']
@@ -80,34 +81,9 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: streamanalytics
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2016-03
-```
-
-### Tag: package-2016-03 and go
-
-These settings apply only when `--tag=package-2016-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-03' && $(go)
-output-folder: $(go-sdk-folder)/services/streamanalytics/mgmt/2016-03-01/streamanalytics
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

@@ -157,6 +157,58 @@
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/backupProtectionIntent/{intentObjectName}": {
+      "get": {
+        "tags": [
+          "ProtectionIntent"
+        ],
+        "description": "Provides the details of the protection intent up item. This is an asynchronous operation. To know the status of the operation,\r\n            call the GetItemOperationResult API.",
+        "operationId": "ProtectionIntent_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intentObjectName",
+            "in": "path",
+            "description": "Backed up item name whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionIntentResource"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get ProtectionIntent for an item": {
+            "$ref": "./examples/AzureWorkload/BackupProtectionIntent_Get.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "ProtectionIntent"
@@ -215,6 +267,55 @@
         "x-ms-examples": {
           "Create or Update Azure Vm Protection Intent": {
             "$ref": "./examples/AzureIaasVm/ProtectionIntent_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProtectionIntent"
+        ],
+        "description": "Used to remove intent from an item",
+        "operationId": "ProtectionIntent_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the intent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "intentObjectName",
+            "in": "path",
+            "description": "Intent to be deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Delete Protection intent from item": {
+            "$ref": "./examples/AzureWorkload/BackupProtectionIntent_Delete.json"
           }
         }
       }
@@ -540,6 +641,64 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionIntents": {
+      "get": {
+        "tags": [
+          "BackupProtectionIntent"
+        ],
+        "description": "Provides a pageable list of all intents that are present within a vault.",
+        "operationId": "BackupProtectionIntent_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionIntentResourceList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/ProtectionIntentQueryObject",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List protection intent with backupManagementType filter": {
+            "$ref": "./examples/AzureWorkload/BackupProtectionIntent_List.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries": {
       "get": {
         "tags": [
@@ -604,7 +763,7 @@
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperation": {
       "post": {
         "tags": [
-          "Validate"
+          "Operation"
         ],
         "description": "Validate operation for specified backed up item. This is a synchronous operation.",
         "operationId": "Operation_Validate",
@@ -756,7 +915,27 @@
       "properties": {
         "workLoadType": {
           "description": "Type of workload for the backup management",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         },
         "schedulePolicy": {
           "$ref": "#/definitions/SchedulePolicy",
@@ -1545,7 +1724,27 @@
       "properties": {
         "workLoadType": {
           "description": "Type of workload for the backup management",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         },
         "settings": {
           "$ref": "#/definitions/Settings",
@@ -2074,10 +2273,6 @@
             "name": "ProtectionStatus",
             "modelAsString": true
           }
-        },
-        "vaultId": {
-          "description": "Specifies the arm resource id of the vault",
-          "type": "string"
         },
         "fabricName": {
           "description": "Specifies the fabric name - Azure or AD",
@@ -3339,10 +3534,6 @@
           "description": "ARM Virtual Machine Id",
           "type": "string"
         },
-        "vaultId": {
-          "description": "ARM id of the Recovery Services Vault",
-          "type": "string"
-        },
         "properties": {
           "description": "Configuration of VM if any needs to be validated like OS type etc",
           "type": "string"
@@ -3652,6 +3843,52 @@
       },
       "discriminator": "protectionIntentItemType"
     },
+    "ProtectionIntentQueryObject": {
+      "description": "Filters to list protection intent.",
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "description": "Backup management type for the backed up item",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "itemType": {
+          "description": "Type of workload this item represents",
+          "enum": [
+            "Invalid",
+            "SQLInstance",
+            "SQLAvailabilityGroupContainer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IntentItemType",
+            "modelAsString": true
+          }
+        },
+        "parentName": {
+          "description": "Parent name of the intent",
+          "type": "string"
+        },
+        "itemName": {
+          "description": "Item name of the intent",
+          "type": "string"
+        }
+      }
+    },
     "ProtectionIntentResource": {
       "description": "Base class for backup ProtectionIntent.",
       "allOf": [
@@ -3663,6 +3900,24 @@
         "properties": {
           "$ref": "#/definitions/ProtectionIntent",
           "description": "ProtectionIntentResource properties"
+        }
+      }
+    },
+    "ProtectionIntentResourceList": {
+      "description": "List of ProtectionIntent resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProtectionIntentResource"
+          }
         }
       }
     },
@@ -4032,7 +4287,18 @@
       "properties": {
         "policyType": {
           "description": "Type of backup policy type",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "Full",
+            "Differential",
+            "Log",
+            "CopyOnlyFull"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyType",
+            "modelAsString": true
+          }
         },
         "schedulePolicy": {
           "$ref": "#/definitions/SchedulePolicy",

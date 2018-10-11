@@ -13,8 +13,18 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2018-10-01
   - tag: package-2018-07-01
   - tag: package-2018-04-02
+```
+
+### Tag: package-2018-10-01 and go
+
+These settings apply only when `--tag=package-2018-10-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2018-10-01' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-10-01/$(namespace)
 ```
 
 ### Tag: package-2018-07-01 and go
@@ -23,7 +33,7 @@ These settings apply only when `--tag=package-2018-07-01 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-07-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/storagesync/mgmt/2018-07-01/storagesync
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-07-01/$(namespace)
 ```
 
 ### Tag: package-2018-04-02 and go
@@ -32,5 +42,5 @@ These settings apply only when `--tag=package-2018-04-02 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-04-02' && $(go)
-output-folder: $(go-sdk-folder)/services/storagesync/mgmt/2018-04-02/storagesync
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-04-02/$(namespace)
 ```
