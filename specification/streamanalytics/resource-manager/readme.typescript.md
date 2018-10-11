@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-streamanalytics"
-  output-folder: $(typescript-sdks-folder)/packages/arm-streamanalytics
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-streamanalytics"
   generate-metadata: true
 ```
