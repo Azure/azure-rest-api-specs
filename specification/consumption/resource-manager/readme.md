@@ -403,3 +403,16 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2018-10 and java
+
+These settings apply only when `--tag=package-2018-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
