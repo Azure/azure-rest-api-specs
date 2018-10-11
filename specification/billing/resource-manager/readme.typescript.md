@@ -9,6 +9,5 @@ typescript:
   package-name: "@azure/arm-billing"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-billing"
   payload-flattening-threshold: 1
-  generate-readme.md: true
   generate-metadata: true
 ```
