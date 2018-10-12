@@ -496,14 +496,14 @@
       ],
       "description": "Defines the configuration of the OpenShift cluster VMs."
     },
-    "OpenShiftManagedClusterIdentityProviders": {
+    "OpenShiftManagedClusterIdentityProvider": {
       "properties": {
         "name": {
           "type": "string",
           "description": "Name of the provider."
         },
         "provider": {
-          "type": "object",
+          "$ref": "#/definitions/OpenShiftManagedClusterBaseIdentityProvider",
           "description": "Configuration of the provider."
         }
       },
@@ -514,7 +514,7 @@
         "identityProviders": {
           "type": "array",
           "items" : {
-            "$ref": "#/definitions/OpenShiftManagedClusterIdentityProviders"
+            "$ref": "#/definitions/OpenShiftManagedClusterIdentityProvider"
           },
           "description": "Type of authentication profile to use."
         }
@@ -593,32 +593,42 @@
       ],
       "description": "OpenShift Managed cluster."
     },
-    "OpenShiftManagedClusterServiceAADIdentityProvider": {
+    "OpenShiftManagedClusterBaseIdentityProvider":
+    {
+      "discriminator": "kind",
+      "required": ["kind"],
       "properties": {
-        "kind": {
-          "type": "string",
-          "enum": [
-            "AADIdentityProvider"
-          ],
-          "description": "The kind of the provider."
+          "kind": {
+            "type": "string",
+            "description": "The kind of the provider."
+          }
         },
-        "clientId": {
-          "type": "string",
-          "description": "The clientId password associated with the provider."
-        },
-        "secret": {
-          "type": "string",
-          "description": "The secret password associated with the provider."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenantId associated with the provider."
-        }
+        "description": "Structure for any Identity provider."
+    },
+    "OpenShiftManagedClusterAADIdentityProvider": {
+      "x-ms-discriminator-value": "AADIdentityProvider",
+      "allOf": [
+      { 
+          "$ref": "#/definitions/OpenShiftManagedClusterBaseIdentityProvider"
       },
-      "required": [
-        "kind"
+      {
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "description": "The clientId password associated with the provider."
+          },
+          "secret": {
+            "type": "string",
+            "description": "The secret password associated with the provider."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "The tenantId associated with the provider."
+          }
+        }
+      }
       ],
-      "description": "AADIdentityProvider defines Identity provider for MS AAD."
+      "description": "Defines the Identity provider for MS AAD."
     },
     "TagsObject": {
       "properties": {
