@@ -564,6 +564,48 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subcriptionId}/providers/Microsoft.Billing/usagePlan": {
+      "get": {
+        "tags": [
+          "UsagePlan"
+        ],
+        "operationId": "UsagePlan_Get",
+        "description": "Get Usage Plan by subscription Id",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingContext": {
+            "$ref": "./examples/UsagePlan.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsagePlanSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1035,6 +1077,81 @@
         "description": "Currency Code",
         "type": "string",
         "readOnly": true
+      }
+    }
+  },
+  "UsagePlanSummary": {
+    "description": "A usage plan summary resource.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/UsagePlanProperties",
+        "title": "Usage plan properties"
+      }
+    }
+  },
+  "UsagePlanProperties": {
+    "description": "The usage plan properties.",
+    "properties": {
+      "productId": {
+        "description": "Product Id.",
+        "type": "string",
+        "readOnly": true
+      }, 
+      "productName": {
+        "description": "Display name.",
+        "type": "string",
+        "readOnly": true
+      },       
+      "billingTenantId": {
+        "description": "billing tenant Id.",
+        "type": "string",
+        "readOnly": true
+      },
+      "billingAccountId": {
+        "description": "billing account Id.",
+        "type": "string",
+        "readOnly": true
+      },
+      "billingAccountName": {
+        "description": "billing account display name.",
+        "type": "string",
+        "readOnly": true
+      },
+      "projectId": {
+        "description": "project Id.",
+        "type": "string",
+        "readOnly": true
+      },
+      "projectName": {
+        "description": "project display name.",
+        "type": "string",
+        "readOnly": true
+      },
+      "billingProfileId": {
+        "description": "billing profile Id.",
+        "type": "string",
+        "readOnly": true
+      },
+      "billingProflieName": {
+        "description": "billing proflie display name.",
+        "type": "string",
+        "readOnly": true
+      },
+      "OfferName": {
+        "description": "Offer name.",
+        "type": "string",
+        "readOnly": true
+      },
+      "OfferId": {
+        "description": "Offer ID",
+        "type": "string"
       }
     }
   }
