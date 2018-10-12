@@ -1218,7 +1218,7 @@
           "type": "string",
           "description": "Provisioning state of the HTTP listener resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         },
-        "customErrorConfiguration": {
+        "customErrorConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayCustomError"
@@ -1691,7 +1691,7 @@
           "type": "string",
           "description": "Provisioning state of the application gateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         },
-        "customErrorConfiguration": {
+        "customErrorConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayCustomError"
@@ -2152,8 +2152,8 @@
           "type": "string",
           "description": "Status code of the application gateway customer error.",
           "enum": [
-            "403",
-            "502"
+            "HttpStatus403",
+            "HttpStatus502"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayCustomErrorStatusCode",
