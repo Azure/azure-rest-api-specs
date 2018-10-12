@@ -24,7 +24,7 @@ These settings apply only when `--tag=package-2017-04 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-04' && $(go)
-output-folder: $(go-sdk-folder)/services/advisor/mgmt/2017-04-19/advisor
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-04-19/$(namespace)
 ```
 
 ### Tag: package-2017-03 and go
@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2017-03 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-03' && $(go)
-output-folder: $(go-sdk-folder)/services/advisor/mgmt/2017-03-31/advisor
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-03-31/$(namespace)
 ```
 
 ### Tag: package-2016-07-preview and go
@@ -42,5 +42,5 @@ These settings apply only when `--tag=package-2016-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/advisor/mgmt/2016-07-12-preview/advisor
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2016-07-12-preview/$(namespace)
 ```

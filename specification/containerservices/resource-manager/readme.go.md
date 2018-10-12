@@ -36,7 +36,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2018-03' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2018-03-31/containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-03-31/$(namespace)
 ```
 
 ### Tag: package-2017-09 and go
@@ -46,7 +46,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2017-09' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-09-30/containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-09-30/$(namespace)
 ```
 
 ### Tag: package-2017-08 and go
@@ -56,7 +56,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2017-08' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-08-31/containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-08-31/$(namespace)
 ```
 
 ### Tag: package-2017-07 and go
@@ -66,5 +66,5 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2017-07' && $(go)
 namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-07-01/containerservice
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-07-01/$(namespace)
 ```

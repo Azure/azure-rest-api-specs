@@ -22,7 +22,7 @@ batch:
 These settings apply only when `--tag=6.2 --go` is specified on the command line.
 
 ``` yaml $(tag) == '6.2' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.2/servicefabric
+output-folder: $(go-sdk-folder)/services/$(namespace)/6.2/$(namespace)
 ```
 
 
@@ -31,5 +31,5 @@ output-folder: $(go-sdk-folder)/services/servicefabric/6.2/servicefabric
 These settings apply only when `--tag=6.3 --go` is specified on the command line.
 
 ``` yaml $(tag) == '6.2' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.3/servicefabric
+output-folder: $(go-sdk-folder)/services/$(namespace)/6.3/$(namespace)
 ```

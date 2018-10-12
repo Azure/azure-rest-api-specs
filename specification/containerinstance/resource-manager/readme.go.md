@@ -29,7 +29,7 @@ These settings apply only when `--tag=package-2018-10 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-10' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-10-01/containerinstance
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-10-01/$(namespace)
 ```
 
 ### Tag: package-2018-09 and go
@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2018-09 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-09' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-09-01/containerinstance
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-09-01/$(namespace)
 ```
 
 ### Tag: package-2018-06 and go
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2018-06 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-06' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-06-01/containerinstance
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-06-01/$(namespace)
 ```
 
 ### Tag: package-2018-04 and go
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2018-04 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-04' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-04-01/containerinstance
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-04-01/$(namespace)
 ```
 
 ### Tag: package-2018-02-preview and go
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2018-02-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2018-02-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-02-01-preview/$(namespace)
 ```
 
 ### Tag: package-2017-12-preview and go
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2017-12-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-12-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-12-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-12-01-preview/$(namespace)
 ```
 
 ### Tag: package-2017-10-preview and go
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2017-10-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-10-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-10-01-preview/$(namespace)
 ```
 
 ### Tag: package-2017-08-preview and go
@@ -92,5 +92,5 @@ These settings apply only when `--tag=package-2017-08-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-08-01-preview/containerinstance
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-08-01-preview/$(namespace)
 ```

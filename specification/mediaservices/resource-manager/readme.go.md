@@ -2,7 +2,7 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+```yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: media
@@ -11,7 +11,7 @@ go:
 
 ### Go multi-api
 
-``` yaml $(go) && $(multiapi)
+```yaml $(go) && $(multiapi)
 batch:
   - tag: package-2015-10
   - tag: package-2018-03-preview
@@ -24,8 +24,8 @@ batch:
 These settings apply only when `--tag=package-2015-10 --go` is specified on the command line.
 Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2015-10' && $(go)
-output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2015-10-01/media
+```yaml $(tag) == 'package-2015-10' && $(go)
+output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2015-10-01/$(namespace)
 ```
 
 ### Tag: package-2018-03-preview and go
@@ -33,8 +33,8 @@ output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2015-10-01/media
 These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
 Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-03-30-preview/media
+```yaml $(tag) == 'package-2018-03-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-03-30-preview/$(namespace)
 ```
 
 ### Tag: package-2018-06-preview and go
@@ -42,8 +42,8 @@ output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-03-30-p
 These settings apply only when `--tag=package-2018-06-preview --go` is specified on the command line.
 Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-06-01-preview/media
+```yaml $(tag) == 'package-2018-06-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-06-01-preview/$(namespace)
 ```
 
 ### Tag: package-2018-07 and go
@@ -51,6 +51,6 @@ output-folder: $(go-sdk-folder)/services/preview/mediaservices/mgmt/2018-06-01-p
 These settings apply only when `--tag=package-2018-07 --go` is specified on the command line.
 Please also specify the `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2018-07' && $(go)
-output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2018-07-01/media
+```yaml $(tag) == 'package-2018-07' && $(go)
+output-folder: $(go-sdk-folder)/services/mediaservices/mgmt/2018-07-01/$(namespace)
 ```

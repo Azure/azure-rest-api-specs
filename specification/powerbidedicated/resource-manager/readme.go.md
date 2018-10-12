@@ -22,5 +22,5 @@ These settings apply only when `--tag=package-2017-10-01 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2017-10-01' && $(go)
-output-folder: $(go-sdk-folder)/services/powerbidedicated/mgmt/2017-10-01/powerbidedicated
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-10-01/$(namespace)
 ```

@@ -43,7 +43,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-features-2015-12' && $(go)
 namespace: features
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-12-01/features
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-12-01/$(namespace)
 ```
 
 ### Tag: package-locks-2016-09 and go

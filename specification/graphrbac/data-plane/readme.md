@@ -89,6 +89,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.graphrbac
   package-name: azure-graphrbac
+  package-version: 0.50.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
