@@ -1,5 +1,5 @@
-# Azure Migrate 
-    
+# Azure Migrate
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Azure Migrate.
@@ -27,7 +27,7 @@ generate-interface: true
 ```
 
 
-## Getting Started 
+## Getting Started
 To build the SDK for Migrate, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -41,7 +41,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the API.
 
 ``` yaml
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.Migrate/stable/2018-02-02/migrate.json 
+- Microsoft.Migrate/stable/2018-02-02/migrate.json
 ```
 
 # Code Generation
@@ -69,31 +69,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: migrate
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-02
-```
-
-### Tag: package-2018-02 and go
-
-These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-02' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-02-02/$(namespace)
-```
+See configuration in [readme.go.md](./readme.go.md)

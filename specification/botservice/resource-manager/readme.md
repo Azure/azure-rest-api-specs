@@ -1,5 +1,5 @@
 # BotService
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for BotService.
@@ -41,7 +41,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## Getting Started 
+## Getting Started
 To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -55,7 +55,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the BotService API.
 
 ``` yaml
@@ -120,7 +120,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -133,6 +133,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/BotService/Microsoft.Azure.Management.BotService/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
