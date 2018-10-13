@@ -140,6 +140,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -189,10 +190,11 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
 
-
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ``` yaml $(go)
 go:
