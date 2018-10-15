@@ -450,7 +450,7 @@
           }
         },
         "targets": {
-          "description": "group informations that will be patched during run time.",
+          "description": "Group information that will be patched during run time.",
           "$ref": "#/definitions/TargetProperties"
         }
       },
@@ -757,7 +757,7 @@
     },
     "TargetProperties": {
       "type": "object",
-      "description": "Group specific of update configuration.",
+      "description": "Group specific to the update configuration.",
       "properties": {
         "azureQueries": {
           "description": "List of Azure queries in software update configuration.",
@@ -771,19 +771,19 @@
     },
     "AzureQueryProperties": {
       "type": "object",
-      "description": "Azure query specific to the group of machines for update configuration.",
+      "description": "Azure query for the update configuration.",
       "properties": {
         "scope": {
           "type": "array",
-          "description": "List of Subscription or Resource Group ARM Id.",
+          "description": "List of Subscription or Resource Group ARM Ids.",
           "items": {
             "type": "string",
-            "description": "Subscription or Resource group arm Id."
+            "description": "Subscription or Resource Group ARM Id."
           }
         },
         "location": {
           "type": "array",
-          "description": "list of locations for the VM filter .",
+          "description": "List of locations for the VM.",
           "items": {
             "type": "string",
             "description": "Location for the VM."
@@ -791,28 +791,29 @@
         },
         "tagSettings": {
           "type": "object",
-          "description": "tag filter information of the Vm.",
+          "description": "Tag settings for the VM.",
           "$ref": "#/definitions/TagSettingsProperties"
         }
       }
     },
     "TagSettingsProperties": {
       "type": "object",
-      "description": "Tag filter information of the VM.",
+      "description": "Tag filter information for the VM.",
       "properties": {
         "tags": {
           "type": "object",
-          "description": "dictionary of tags with its list of value",
+          "description": "Dictionary of tags with its list of values",
           "additionalProperties": {
             "type": "array",
             "items": {
               "type": "string",
-              "description": "list of tag value for a tag"
+              "description": "List of tag values for a tag"
             }
           }
         },
         "filterOperator": {
           "type": "string",
+          "description": "Filter VMs by Any or All specified tags.",
           "enum": [
             "All",
             "Any"
