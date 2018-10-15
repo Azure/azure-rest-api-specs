@@ -3,7 +3,7 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "vmScaleSetName": "{vmss-name}",
-    "api-version": "2017-12-01",
+    "api-version": "2018-06-01",
     "parameters": {
       "sku": {
         "tier": "Standard",
@@ -26,7 +26,8 @@
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               },
-              "createOption": "FromImage"
+              "createOption": "FromImage",
+              "diskSizeGB": 512
             },
             "dataDisks": [
               {
@@ -100,7 +101,8 @@
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS"
                 },
-                "createOption": "FromImage"
+                "createOption": "FromImage",
+                "diskSizeGB": 512
               },
               "dataDisks": [
                 {
@@ -162,7 +164,7 @@
           "upgradePolicy": {
             "mode": "Manual"
           },
-          "provisioningState": "Creating"
+          "provisioningState": "Succeeded"
         },
         "location": "westus",
         "type": "Microsoft.Compute/virtualMachineScaleSets",
@@ -194,7 +196,8 @@
                 "managedDisk": {
                   "storageAccountType": "Standard_LRS"
                 },
-                "createOption": "FromImage"
+                "createOption": "FromImage",
+                "diskSizeGB": 512
               },
               "dataDisks": [
                 {

@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DNS.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DNS, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,48 @@ To build the SDK for DNS, simply [Install AutoRest](https://aka.ms/autorest/inst
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2018-05
 ```
 
+
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-05'
+input-file:
+  - Microsoft.Network/stable/2018-05-01/dns.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+  - where:
+      - $.definitions.RecordSetProperties.properties.TTL
+      - $.definitions.RecordSetProperties.properties.ARecords
+      - $.definitions.RecordSetProperties.properties.AAAARecords
+      - $.definitions.RecordSetProperties.properties.MXRecords
+      - $.definitions.RecordSetProperties.properties.NSRecords
+      - $.definitions.RecordSetProperties.properties.PTRRecords
+      - $.definitions.RecordSetProperties.properties.SRVRecords
+      - $.definitions.RecordSetProperties.properties.TXTRecords
+      - $.definitions.RecordSetProperties.properties.CNAMERecord
+      - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetUpdateParameters.properties.RecordSet
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase  
+```
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
@@ -112,9 +140,7 @@ input-file:
 - Microsoft.Network/preview/2015-05-04-preview/dns.json
 ```
 
-
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -129,11 +155,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-typescript
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_dns']
 ```
-
 
 ## C#
 
@@ -149,7 +176,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Dns/Management.Dns/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
@@ -171,7 +197,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dns
 
 ### Java multi-api
 
-```yaml $(java) && $(multiapi)
+``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2017-10
   - tag: package-2016-04

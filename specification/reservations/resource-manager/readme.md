@@ -1,5 +1,5 @@
 # Reservations
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Reservations RP.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Reservations RP.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Reservations, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Reservations API.
 
 ``` yaml
@@ -59,11 +59,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -91,7 +92,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.reservations
   package-name: azure-mgmt-reservations
-  package-version: 0.2.0
+  package-version: 0.2.2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -105,77 +106,6 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-reservations
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: reservations
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-06
-  - tag: package-2017-11
-```
-
-### Tag: package-2018-06 and go
-
-These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-06' && $(go)
-output-folder: $(go-sdk-folder)/services/reservations/mgmt/2018-06-01/reservations
-```
-
-### Tag: package-2017-11 and go
-
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/reservations/mgmt/2017-11-01/reservations
-```
-
-
-## Java
-
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.reservations
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-reservations
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-11
-```
-
-### Tag: package-2017-11 and java
-
-These settings apply only when `--tag=package-2017-11 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.reservations.v2017_11_01
-  output-folder: $(azure-libraries-for-java-folder)/reservations/resource-manager/v2017_11_01
-regenerate-manager: true
-generate-interface: true
-```
-
-
+See configuration in [readme.go.md](./readme.go.md)
