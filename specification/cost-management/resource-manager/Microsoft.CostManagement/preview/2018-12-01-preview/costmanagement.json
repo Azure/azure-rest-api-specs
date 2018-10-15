@@ -485,6 +485,142 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "Dimensions_ListByResourceGroup",
+        "description": "Lists the dimensions by resource group Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupDimensionsList": {
+            "$ref": "./examples/ResourceGroupDimensionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_UsageByResourceGroup",
+        "description": "Query the usage data for subscriptionId and resource group.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupQuery": {
+            "$ref": "./examples/ResourceGroupQuery.json"
+          },
+          "ResourceGroupQueryGroupingUsage": {
+            "$ref": "./examples/ResourceGroupQueryUsage.json"
+          },
+          "ResourceGroupQueryGroupingForecast": {
+            "$ref": "./examples/ResourceGroupQueryForecast.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query": {
       "post": {
         "tags": [
@@ -498,10 +634,7 @@
         "x-ms-examples": {
           "BillingAccountQuery": {
             "$ref": "./examples/BillingAccountQuery.json"
-          },
-          "BillingAccountQueryGrouping": {
-            "$ref": "./examples/BillingAccountQueryGrouping.json"
-          },
+          },          
           "BillingAccountQueryUsage": {
             "$ref": "./examples/BillingAccountQueryUsage.json"
           },
@@ -510,10 +643,7 @@
           },
           "BillingAccountQueryForecast": {
             "$ref": "./examples/BillingAccountQueryForecast.json"
-          },
-          "BillingAccountQueryGroupingForecast": {
-            "$ref": "./examples/BillingAccountQueryGroupingForecast.json"
-          }
+          }         
         },
         "parameters": [
           {
@@ -564,10 +694,7 @@
         "x-ms-examples": {
           "EnrollmentAccountQuery": {
             "$ref": "./examples/EnrollmentAccountQuery.json"
-          },
-          "EnrollmentAccountQueryGrouping": {
-            "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
-          },
+          },          
           "EnrollmentAccountQueryUsage": {
             "$ref": "./examples/EnrollmentAccountQueryUsage.json"
           },
@@ -576,10 +703,7 @@
           },
           "EnrollmentAccountQueryForecast": {
             "$ref": "./examples/EnrollmentAccountQueryForecast.json"
-          },
-          "EnrollmentAccountQueryGroupingForecast": {
-            "$ref": "./examples/EnrollmentAccountQueryGroupingForecast.json"
-          }
+          }          
         },
         "parameters": [
           {
@@ -633,10 +757,7 @@
         "x-ms-examples": {
           "DepartmentQuery": {
             "$ref": "./examples/DepartmentQuery.json"
-          },
-          "DepartmentQueryGrouping": {
-            "$ref": "./examples/DepartmentQueryGrouping.json"
-          },
+          },          
           "DepartmentQueryUsage": {
             "$ref": "./examples/DepartmentQueryUsage.json"
           },
@@ -645,10 +766,7 @@
           },
           "DepartmentQueryForecast": {
             "$ref": "./examples/DepartmentQueryForecast.json"
-          },
-          "DepartmentQueryGroupingForecast": {
-            "$ref": "./examples/DepartmentQueryGroupingForecast.json"
-          }
+          }          
         },
         "parameters": [
           {
@@ -702,10 +820,7 @@
         "x-ms-examples": {
           "ManagementGroupQuery": {
             "$ref": "./examples/ManagementGroupQuery.json"
-          },
-          "ManagementGroupQueryGrouping": {
-            "$ref": "./examples/ManagementGroupQueryGrouping.json"
-          },
+          },          
           "ManagementGroupQueryUsage": {
             "$ref": "./examples/ManagementGroupQueryUsage.json"
           },
@@ -714,9 +829,6 @@
           },
           "ManagementGroupQueryForecast": {
             "$ref": "./examples/ManagementGroupQueryForecast.json"
-          },
-          "ManagementGroupQueryGroupingForecast": {
-            "$ref": "./examples/ManagementGroupQueryGroupingForecast.json"
           }
         },
         "parameters": [
@@ -1328,6 +1440,14 @@
       "name": "enrollmentAccountId",
       "in": "path",
       "description": "Enrollment Account ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Azure Resource Group Name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

@@ -1,29 +1,28 @@
 {
   "parameters": {
-    "api-version": "2018-12-01-preview",
-    "billingAccountId": "70664866",
-    "departmentId": "123",
+    "api-version": "2018-08-31",
+    "subscriptionId": "55312978-ba1b-415c-9304-c4b9c43c0481",
+    "resourceGroupName": "ScreenSharingTest-peer",
     "parameters":{
       "type": "Usage",
       "timeframe": "Custom",
       "timePeriod": {
         "from": "2018-10-01T00:00:00.000Z",
-        "to": "2018-12-31T00:00:00.000Z"
+        "to": "2019-12-31T00:00:00.000Z"
       },
       "dataset": {
-        "granularity": "Daily",        
+        "granularity": "Daily",       
         "filter":{
           "and": [
             {
               "or":[
                 {
                   "dimension": {
-                    "name": "SubscriptionName",
+                    "name": "ResourceLocation",
                     "operator": "In",
                     "values": [
-                      "Azure Dev Subscription",
-                      "Azure Prod Subscription",
-                      "Azure PPE Subscription"
+                      "East US",
+                      "West Europe"
                     ]
                   }
                 },
@@ -32,8 +31,7 @@
                     "name": "Environment",
                     "operator": "In",
                     "values": [
-                      "Dev",
-                      "PPE",
+                      "UAT",
                       "Prod"
                     ]
                   }
@@ -42,37 +40,45 @@
             },
             {
               "dimension": {
-                "name": "AccountName",
+                "name": "ResourceGroup",
                 "operator": "In",
                 "values": [
-                  "Azure Account"
+                  "API"
                 ]
               }
             }
           ]                      
         }
-      } 
-    }     
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
-            "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "id": "subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
             "type": "microsoft.costmanagement/Query",
             "properties": {
-              "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query?api-version=2018-12-31-preview&$skiptoken=AQAAAA%3D%3D",
+              "nextLink": null,
               "columns": [
                 {
                   "name": "PreTaxCost",
                   "type": "Number"
-                },               
+                },             
                 {
                   "name": "UsageDate",
                   "type": "Number"
-                },               
+                },
+                {
+                  "name": "ConfidenceLevelsLower",
+                  "type": "String"
+                },
+                {
+                  "name": "ConfidenceLevelsUpper",
+                  "type": "Number"
+                },
                 {
                   "name": "Currency",
                   "type": "String"
@@ -80,20 +86,33 @@
               ],
               "rows": [
                 [
-                  19.545363672276512,                  
-                  20181031,                
+                  2.10333307059661,                  
+                  20180417,
+                  0,
+                  0,
                   "USD"
                 ],
                 [
-                  173.41979241290323,                  
-                  20181031,                  
+                  20.10333307059661,                  
+                  20180418,
+                  0,
+                  0,
                   "USD"
                 ],
                 [
-                  20.359416562625452,                  
-                  20181031,                 
+                  0,                  
+                  20190417,
+                  1.2087,
+                  4.35788,  
                   "USD"
-                ]              
+                ],
+                [
+                  0,                  
+                  20190418,
+                  10.44657,
+                  43.565767,
+                  "USD"
+                ]
               ]
             }
           }
