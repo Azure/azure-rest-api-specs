@@ -1,0 +1,1058 @@
+
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Tooling Service Client",
+      "description": "Client that can be used to access Tooling services to run linter, static and api validations.",
+      "version": "1.0"
+    },
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "host": "localhost:5050",
+    "basePath": "/api/",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/tools/validation/lint": {
+        "post": {
+          "tags": [
+            "Linter"
+          ],
+          "operationId":"Tools_ListLinterValidationResults",
+          "description":"Get Linter Validation results",
+          "parameters": [
+            {
+              "name":"repository",
+              "in":"query",
+              "type":"string",
+              "required":true,
+              "description":"Name of the repository"
+            },
+            {
+              "name":"branch",
+              "in":"query",
+              "type":"string",
+              "required":true,
+              "description":"Name of the specific reference(Branch/Commit) in the repository."
+            },
+            {
+              "name":"configPath",
+              "in":"query",
+              "type":"string",
+              "required":true,
+              "description":"Configuration path of the file."
+            },
+            {
+              "name":"apiTag",
+              "in":"query",
+              "type":"string",
+              "required":true,
+              "description":"API Tag to be validated."
+            },
+            {
+              "name":"commitHash",
+              "in":"query",
+              "type":"string",
+              "required":true,
+              "description":"Commit Hash to be validated."
+            },
+            {
+              "name":"mode",
+              "in":"query",
+              "type":"string",
+              "description":"Type of filter(ARM/SDK,etc)"
+            },
+            {
+              "name":"githubToken",
+              "in":"query",
+              "type":"string",
+              "description":"Github Token to access private repositories."
+            }
+          ],
+          "responses": {
+            "default": {
+              "description":"Error object",
+              "schema": {
+                "$ref":"#/definitions/ErrorObject",
+                "description":"Error object"
+              }
+            },
+            "201": {
+              "description":"Initial response for the Long Running Operation: Tools_GetLinterValidationResults",
+              "schema": {
+                "$ref":"#/definitions/LinterValidationResult",
+                "description":"Linter Result"
+              }
+            },
+            "200": {
+              "description":"Final Response that contains the Linter Validation results.",
+              "schema": {
+                "$ref":"#/definitions/LinterValidationResult",
+                "description":"Linter Result"
+              }
+            }
+          },
+          "x-ms-long-running-operation":true
+        }      
+      },
+      "/tools/validation/lint/result": {
+        "get": {
+          "tags": [
+            "Linter Results"
+          ],
+          "operationId": "Tools_ListLinterValidationResultsForValidationId",
+          "description": "Get Linter Validation results for the specific validation id.",
+          "parameters": [
+            {
+              "name":"validationId",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Validation Id for which the results must be retrieved."
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetLinterValidationResultsForValidationId",
+              "schema": {
+                "$ref": "#/definitions/LinterValidationResult",
+                "description": "Linter Result"
+              }
+            },
+            "200": {
+              "description": "Final Response that contains the Linter Validation results.",
+              "schema": {
+                "$ref": "#/definitions/LinterValidationResult",
+                "description": "Linter Result"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
+      "/tools/validation/semantic": {
+        "post": {
+          "tags": [
+            "semantic"
+          ],
+          "operationId": "Tools_ListSemanticValidationResults",
+          "description": "Get Semantic validation result.",
+          "parameters": [
+            {
+              "name":"files",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": "List of files.File URLs must be an absolute path."
+            },
+            {
+              "name":"githubToken",
+              "in": "query",
+              "type": "string",
+              "description": "Github Token"
+            }          
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetSemanticValidationResults",
+              "schema": {
+                "$ref": "#/definitions/SemanticValidationResult",
+                "description": "Semantic Result"
+              }
+            },
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/SemanticValidationResult",
+                "description": "Semantic Result"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
+      "/tools/validation/semantic/result": {
+        "get": {
+          "tags": [
+            "semantic results"
+          ],
+          "operationId": "Tools_ListSemanticValidationResultsForValidationId",
+          "description": "Get Semantic validation results for the specific validation id.",
+          "parameters": [
+            {
+              "name":"validationId",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Validation Id for which the results must be retrieved."
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetSemanticValidationResultsForValidationId",
+              "schema": {
+                "$ref": "#/definitions/SemanticValidationResult",
+                "description": "Semantic Result"
+              }
+            },
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/SemanticValidationResult",
+                "description": "Semantic Result"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
+      "/tools/validation/model": {
+        "post": {
+          "tags": [
+            "model"
+          ],
+          "operationId": "Tools_ListModelValidationResults",
+          "description": "Get Model validation result.",
+          "parameters": [
+            {
+              "name":"files",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": "List of files."
+            },
+            {
+              "name":"validationId",
+              "in": "query",
+              "type": "string",
+              "description": "Validation Id."
+            },
+            {
+              "name":"githubToken",
+              "in": "query",
+              "type": "string",
+              "description": "Github Token"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetModelValidationResults",
+              "schema": {
+                "$ref": "#/definitions/ModelValidationResult",
+                "description": "Semantic Result"
+              }
+            },
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/ModelValidationResult",
+                "description": "Semantic Result"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
+      "/tools/validation/model/result": {
+        "get": {
+          "tags": [
+            "model results"
+          ],
+          "operationId": "Tools_ListModelValidationResultsForValidationId",
+          "description": "Get Model validation results for the specific validation id.",
+          "parameters": [
+            {
+              "name":"validationId",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Validation Id for which the results must be retrieved."
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetModelValidationResultsForValidationId",
+              "schema": {
+                "$ref": "#/definitions/ModelValidationResult",
+                "description": "Semantic Result"
+              }
+            },
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/ModelValidationResult",
+                "description": "Semantic Result"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+  
+        }
+      },    
+      "/tools/validation/trace": {
+        "post": {
+          "tags": [
+            "semantic"
+          ],
+          "operationId": "Tools_ListTraceValidationResults",
+          "description": "Get Trace validation result.",
+          "parameters": [
+            {
+              "name":"repository",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Name of the repository"
+            },
+            {
+              "name":"commitRef",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Name of the specific branch in the repository."
+            },
+            {
+              "name":"resourceProvider",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Name of the resource provider."
+            },
+            {
+              "name":"apiVersion",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "API Version to be validated."
+            },
+            {
+              "name":"startDate",
+              "in": "query",
+              "type": "string",
+              "format": "date-time",
+              "required": true,
+              "description": "Start Date"
+            },
+            {
+              "name":"endDate",
+              "in": "query",
+              "type": "string",
+              "format": "date-time",
+              "required": true,
+              "description": "End Date"
+            },
+            {
+              "name":"githubToken",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Github Token"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetTraceValidationResults",
+              "schema": {
+                "$ref": "#/definitions/TraceValidationSummary",
+                "description": "Api Validation Summary"
+              }
+            },
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/TraceValidationSummary",
+                "description": "Api Validation Summary"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
+      "/tools/validation/trace/result": {
+        "get": {
+          "tags": [
+            "api results"
+          ],
+          "operationId": "Tools_ListTraceValidationResultsForValidationId",
+          "description": "Get Trace validation results for the specific validation id.",
+          "parameters": [
+            {
+              "name":"validationId",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "Validation Id for which the results must be retrieved."
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetTraceValidationResultsForValidationId",
+              "schema": {
+                "$ref": "#/definitions/TraceValidationSummary",
+                "description": "Api Validation Summary"
+              }
+            },
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/TraceValidationSummary",
+                "description": "Api Validation Summary"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+  
+        }
+      },
+      "/tools/validation/trace/details": {
+        "get": {
+          "operationId": "Tools_ListTraceValidationDetailsForValidationId",
+          "description": "Get Trace validation result details.",
+          "parameters": [
+            {
+              "name":"validationId",
+              "in": "query",
+              "type": "string",
+              "description": "Validation Id",
+              "required": true
+            }          
+          ],
+          "responses": {
+            "default": {
+              "description": "Default Error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorObject",
+                "description": "Default Error."
+              }
+            },
+            "201": {
+              "description": "Initial response for the Long Running Operation: Tools_GetTraceValidationDetailsForValidationId",
+              "schema": {
+                "$ref": "#/definitions/TraceValidationDetails",
+                "description": "Api Validation Summary"
+              }
+            },
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/TraceValidationDetails",
+                "description": "Api Validation Summary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "BaseValidationError": {
+        "type": "object",
+        "description": "Structure of Base Validation error object",
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "Error",
+              "Warning",
+              "Information",
+              "Verbose"
+            ],
+            "x-ms-enum": {
+              "name": "severity"
+            },
+            "description": "Severity of the error"
+          },
+          "code":{
+            "type": "string",
+            "description": "Error code"
+          },
+          "details": {
+            "type": "object",
+            "description": "Error details"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "response",
+              "request",
+              "global"
+            ],
+            "x-ms-enum": {
+              "name": "source"
+            },
+            "description": "Source of the error"
+          }
+        }
+      },
+      "TraceValidationError": {
+        "type": "object",
+        "description": "Structure of trace validation error object",
+        "properties": {
+          "occurence": {
+            "type": "integer",
+            "description": "Number of occurences"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseValidationError"
+          }
+        ]
+      },
+      "LinterValidationResult": {
+        "type": "object",
+        "description": "Linter Validation Result Object.",
+        "properties": {
+          "repository": {
+            "type": "string",
+            "description": "Name of the repository."
+          },
+          "commitRef": {
+            "type": "string",
+            "description": "Name of the specific reference(Branch/Commit) in the repository."
+          },
+          "configPath": {
+            "type": "string",
+            "description": "Config Path"
+          },
+          "apiTag": {
+            "type": "string",
+            "description": "API Tag"
+          },
+          "filterType": {
+            "type": "string",
+            "description": "Type of filter(ARM/SDK,etc)"
+          },
+          "validationResults": {
+            "type": "array",
+            "description": "Validation results from Linter",
+            "items": {
+              "$ref": "#/definitions/LinterValidationResultsIssue"
+            }
+          }
+        }
+      },
+      "LinterValidationResultsIssue": {
+        "type": "object",
+        "description": "Issue object of the Linter Validation result",
+        "properties": {
+          "details": {
+            "$ref": "#/definitions/LinterValidationResultsIssueDetails",
+            "description": "Details of the Linter Validation result"
+          },
+          "source": {
+            "type": "array",
+            "description": "Source of the Linter Validation result",
+            "items": {
+              "$ref": "#/definitions/LinterValidationResultsIssueSource"
+            }          
+          },
+          "severity": {
+            "type": "string",
+            "description": "Severity of the issue"
+          }
+        }
+      },
+      "LinterValidationResultsIssueDetails": {
+        "type": "object",
+        "description": "Details of the Linter Validation Issue",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of the issue"
+          },
+          "code": {
+            "type": "string",
+            "description": "Code of the issue"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message of the issue"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id of the issue"
+          },
+          "validationCategory": {
+            "type": "string",
+            "description": "Validation category of the issue"
+          },
+          "providerNamespace": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "providerNamespace"
+            },
+            "description": "Namespace of the provider"
+          },
+          "resourceType": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "resourceType"
+            },
+            "description": "Resource Type"
+          }
+        }
+      },
+      "LinterValidationResultsIssueSource": {
+        "type": "object",
+        "description": "Document/Position of the Linter Validation result",
+        "properties": {
+          "document": {
+            "type": "string",
+            "description": "Name of the document"
+          },
+          "position": {
+            "$ref": "#/definitions/LinterValidationResultsIssueSourcePosition",
+            "description": "Position of the Linter Validation result"
+          }
+        }
+      },
+      "LinterValidationResultsIssueSourcePosition": {
+        "type": "object",
+        "description": "Position of the Linter Validation Result",
+        "properties": {
+          "column": {
+            "type": "integer",
+            "description": "Column value"
+          },
+          "line": {
+            "type": "integer",
+            "description": "Line value"
+          },
+          "path": {
+            "type": "array",
+            "description": "List of path",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SemanticValidationResult": {
+        "type": "object",
+        "description": "Semantic Validation Result.",
+        "properties": {
+          "fileUrls": {
+            "type": "array",
+            "description": "List of file urls",
+            "items": {
+              "type": "string"
+            }
+          },
+          "validationResults": {
+            "type": "array",
+            "description": "Validation results from Semantic Validator",
+            "items": {
+              "$ref": "#/definitions/SemanticValidationResultsObject"
+            }
+          }
+        }
+      },
+      "SemanticValidationResultsObject": {
+        "type": "object",
+        "description": "Static Validation Results Object.",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Name of the file"
+          },
+          "errors": {
+            "type": "array",
+            "description": "List of errors",
+            "items": {
+              "$ref": "#/definitions/SemanticValidationError"
+            }
+          }
+        }
+      },
+      "SemanticValidationError": {
+        "type": "object",
+        "description": "Structure of the semantic validation error object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path name"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseValidationError"
+          }
+        ]
+      },
+      "ModelValidationResult": {
+        "type": "object",
+        "description": "Model Validation Result.",
+        "properties": {
+          "fileUrls": {
+            "type": "array",
+            "description": "List of file urls",
+            "items": {
+              "type": "string"
+            }
+          },
+          "validationResults": {
+            "type": "array",          
+            "description": "Validation results from Model Validator",
+            "items": {
+              "$ref": "#/definitions/ModelValidationResultsObject"
+            }
+          }
+        }
+      },
+      "ModelValidationResultsObject": {
+        "type": "object",
+        "description": "Static Validation Results Object.",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Name of the file"
+          },
+          "errors": {
+            "type": "array",
+            "description": "List of Model Validation errors",
+            "items": {
+              "$ref": "#/definitions/ModelValidationError"
+            }
+          }
+        }
+      },
+      "ModelValidationError": { 
+        "type": "object",
+        "description": "Need to check all of on this one",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Operation Id of the Model Validation error"
+          },
+          "scenario": {
+            "type": "string",
+            "description": "Scenario of the Model Validation error"
+          },
+          "responseCode": {
+            "type": "string",
+            "description": "Response code"
+          },
+          "innerErrors": {
+            "type": "array",
+            "description": "List of inner errors",
+            "items": {
+              "$ref": "#/definitions/ModelValidationError"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "Model validation error code"
+          },
+          "path": {
+            "type": "array",
+            "description": "List of paths",
+            "items": {
+              "type": "string"
+            }
+          },
+          "similarPaths": {
+            "type": "array",
+            "description": "List of similar paths",
+            "items": {
+              "type": "string"
+            }
+          },
+          "errors": {
+            "type": "array",
+            "description": "List of model validation errors",
+            "items": {
+              "$ref": "#/definitions/ModelValidationError"
+            }
+          },
+          "in": {
+            "type": "string",
+            "description": "Location of the error"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the error"
+          },
+          "params": {
+            "type": "array",
+            "description": "List of parameters",
+            "items": {
+              "type": "object"
+            }
+          },
+          "title": {
+            "type": "string",
+            "description": "Error title"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "url": {
+            "type": "string",
+            "description": "Url value"
+          },
+          "position": {
+            "type": "object",
+            "description": "Position(line/column) of the Model validation error",
+            "properties": {
+              "line": {
+                "type": "integer",
+                "description": "Line value"
+              },
+              "column": {
+                "type": "integer",
+                "description": "Column value"
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/BaseValidationError"
+          }
+        ]
+      },
+      "TraceValidationDetails": {
+        "type": "object",
+        "description": "Details of the trace validation",
+        "properties": {
+          "repository": {
+            "type": "string",
+            "description": "Name of the repository"
+          },
+          "commitRef": {
+            "type": "string",
+            "description": "Commit reference"
+          },
+          "resourceProvider": {
+            "type": "string",
+            "description": "Name of the resource provider"
+          },
+          "apiVersion": {
+            "type": "string",
+            "description": "Api Version"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start Date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "End Date"
+          },
+          "validationResults": {
+            "type": "array",
+            "description": "List of validation results",
+            "items": {
+              "$ref": "#/definitions/TraceValidationError"
+            }
+          },
+          "operationsNotFound": {
+            "type": "array",
+            "description": "List of operations not found.",
+            "items": {
+              "$ref": "#/definitions/TraceValidationResult"
+            }
+          }
+        }
+      },
+      "TraceValidationSummary": {
+        "type": "object",
+        "description": "Summary of the trace validation",
+        "properties": {
+          "traceSummaryObject": {
+            "type": "array",
+            "description": "Summary of the Trace Validation object",
+            "items": {
+              "$ref": "#/definitions/TraceSummaryObject"
+            }
+          }
+        }
+      },
+      "TraceSummaryObject": {
+        "type": "object",
+        "description": "Result object of the Trace Summary",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Id of the operation"
+          },
+          "environment": {
+            "type": "string",
+            "description": "Name of the environment"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total Count"
+          },
+          "uniqueErrorsCount": {
+            "type": "integer",
+            "description": "Unique errors count"
+          },
+          "failingCount": {
+            "type": "integer",
+            "description": "Failing Count"
+          },
+          "passingCount": {
+            "type": "integer",
+            "description": "Passing Count"
+          }
+        }
+      },
+      "TraceValidationResult": {
+        "type": "object",
+        "description": "Result object of the trace validation",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Id of the operation"
+          },
+          "originalCorrelationId": {
+            "type": "string",
+            "description": "Original Correlation Id"
+          },
+          "isAggregateSuccess": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "isAggregateSuccess"
+            },
+            "description": "Identifies of the aggregate success"
+          },
+          "path": {
+            "type": "string",
+            "description": "Path of the error"
+          },
+          "operationSeverity": {
+            "type": "string",
+            "description": "Severity of the operation",
+            "enum": [
+              "Critical",
+              "Error",
+              "Warning",
+              "Information",
+              "Verbose"
+            ],
+            "x-ms-enum": {
+              "name": "operationSeverity"
+            }
+  
+          },
+          "errors": {
+            "type": "array",
+            "description": "List of errors",
+            "items": {
+              "$ref": "#/definitions/TraceValidationError"
+            }
+          },
+          "environment": {
+            "type": "string",
+            "description": "Name of the environment",
+            "enum": [
+              "canary",
+              "prod"
+            ],
+            "x-ms-enum": {
+              "name": "environment"
+            }
+          }
+        }
+      },
+      "ErrorObject":{
+        "type": "object",
+        "description": "Structure of the error object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "innererror": {
+            "type": "object",
+            "description": "Inner Error to provide additional details."
+          }
+        }
+      }
+    }
+  }
