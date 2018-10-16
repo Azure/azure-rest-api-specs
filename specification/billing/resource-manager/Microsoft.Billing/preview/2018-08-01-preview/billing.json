@@ -2387,6 +2387,97 @@
                     }
                 }
             }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/policy/latest": {
+            "get": {
+                "tags": [
+                    "Policy"
+                ],
+                "operationId": "PolicyByBillingProfile_Get",
+                "description": "The policy for a given billingAccountId and billingProfileId.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+                },
+                "x-ms-examples": {
+                    "PolicyByBillingProfile": {
+                        "$ref": "./examples/Policy.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/billingAccountIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/Policy"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            },
+            "put": {
+                "tags": [
+                    "Policy"
+                ],
+                "operationId": "Policy_Update",
+                "description": "The operation to update a policy.",
+                "x-ms-examples": {
+                    "UpdateBillingProfile": {
+                        "$ref": "./examples/UpdatePolicy.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileIdParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Policy"
+                        },
+                        "description": "Parameters supplied to the update policy operation."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/Policy"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -3096,6 +3187,35 @@
                     "description": "The legacy id of the product.",
                     "type": "string",
                     "readOnly": true
+                }
+            }
+        },
+        "Policy": {
+            "description": "The Policy.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/PolicyProperties",
+                    "title": "Policy properties"
+                }
+            }
+        },
+        "PolicyProperties": {
+            "description": "The properties of policy.",
+            "properties": {
+                "reservationPurchasesAllowed": {
+                    "description": "The reservationPurchasesAllowed flag.",
+                    "type": "boolean"
+                },
+                "marketplacePurchasesAllowed": {
+                    "description": "The marketplacePurchasesAllowed flag.",
+                    "type": "boolean"
                 }
             }
         },
