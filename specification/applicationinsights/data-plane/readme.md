@@ -100,7 +100,7 @@ directive:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-applicationinsights-query
+  output-folder: $(python-sdks-folder)/azure-applicationinsights-query/azure/applicationinsights/query
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
