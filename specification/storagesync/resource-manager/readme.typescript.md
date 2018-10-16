@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-storagesync"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-storagesync"
+  package-name: arm-storagesync
+  output-folder: $(typescript-sdks-folder)/packages/arm-storagesync
   generate-metadata: true
 ```

@@ -5,7 +5,7 @@
         "storageSyncServiceName": "SampleStorageSyncService_1",
         "syncGroupName": "SampleSyncGroup_1",
         "serverEndpointName": "SampleServerEndpoint_1",
-        "api-version": "2018-07-01"
+        "api-version": "2018-10-01"
     },
     "responses": {
         "200": {
@@ -16,11 +16,11 @@
             "body": {
                 "name": "SampleServerEndpoint_1",
                 "properties": {
-                    "serverLocalPath": "C:\\data_quota",
+                    "serverLocalPath": "D:\\SampleServerEndpoint_1",
                     "cloudTiering": "off",
-                    "volumeFreeSpacePercent": 20,
+                    "volumeFreeSpacePercent": 100,
                     "friendlyName": "somemachine.redmond.corp.microsoft.com",
-                    "serverResourceId": "/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/anpintDemoRG/providers/kailanitest07.one.microsoft.com/storageSyncServices/healthdemo1/registeredServers/f94e2944-b48d-4e5b-bdc7-c48ab3712659",
+                    "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
                     "provisioningState": "Succeeded",
                     "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/569afb5c-7172-4cf8-a8ea-d987f727f11a",
                     "lastOperationName": "ICreateServerEndpointWorkflow",
@@ -43,9 +43,11 @@
                             "lastSyncPerItemErrorCount": 0
                         },
                         "currentProgress": null
-                    }
+                    },
+                    "cloudSeededData": "on",
+                    "cloudSeededDataFileShareUri" : "https://storageaccountname.file.core.windows.net/filesharename"
                 },
-                "id": "/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SyncGroup_Restore_08-08_Test112/serverEndpoints/SampleServerEndpoint_1",
+                "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
                 "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
             }
         }
