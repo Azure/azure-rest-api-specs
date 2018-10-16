@@ -1448,7 +1448,7 @@
                 "tags": [
                     "AllowedConnections"
                 ],
-                "description": "Gets a list of allowed connections for the subscription.",
+                "description": "Gets the list of all possible traffic between resources for the subscription",
                 "operationId": "AllowedConnections_List",
                 "parameters": [
                     {
@@ -1487,7 +1487,7 @@
                 "tags": [
                     "AllowedConnections"
                 ],
-                "description": "Gets a list of allowed connections for the subscription and location.",
+                "description": "Gets the list of all possible traffic between resources for the subscription and location.",
                 "operationId": "AllowedConnections_ListByHomeRegion",
                 "parameters": [
                     {
@@ -1529,7 +1529,7 @@
                 "tags": [
                     "AllowedConnections"
                 ],
-                "description": "Gets a specific allowed connections component.",
+                "description": "Gets the list of all possible traffic between resources for the subscription and location, based on connection type.",
                 "operationId": "AllowedConnections_Get",
                 "parameters": [
                     {
@@ -2614,7 +2614,7 @@
         },
         "AllowedConnectionsList": {
             "type": "object",
-            "description": "List of allowed connections",
+            "description": "List of all possible traffic between Azure resources",
             "properties": {
                 "value": {
                     "type": "array",
@@ -2632,7 +2632,7 @@
         },
         "AllowedConnectionsResource": {
             "type": "object",
-            "description": "Describes an allowed connections resource",
+            "description": "The resource whose properties describes the allowed traffic between Azure resources",
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
@@ -2651,7 +2651,7 @@
         },
         "AllowedConnectionsResourceProperties": {
             "type": "object",
-            "description": "Describes properties of an allowed connections resource",
+            "description": "Describes the allowed traffic between Azure resources",
             "properties": {
                 "calculatedDateTime": {
                     "type": "string",
@@ -2671,7 +2671,7 @@
         },
         "ConnectableResource": {
             "type": "object",
-            "description": "Describes properties of a connectable resource",
+            "description": "Describes the allowed inbound and outbound traffic of an Azure resource",
             "properties": {
                 "id": {
                     "type": "string",
