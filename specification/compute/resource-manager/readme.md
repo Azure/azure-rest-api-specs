@@ -487,6 +487,9 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_compute']
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

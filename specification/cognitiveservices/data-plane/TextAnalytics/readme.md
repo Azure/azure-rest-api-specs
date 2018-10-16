@@ -109,21 +109,34 @@ namespace ConsoleApp1
     }
 }
 ```
-# Releases
+
+## Releases
 
 > see https://aka.ms/autorest
 
 The current release is `release_2_0`.
+A preview release `release_2_1` is also available.
+
 ``` yaml
 tag: release_2_0
 add-credentials: true
 ```
 
 ### Release 2.0
+
 These settings apply only when `--tag=release_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_0'
 input-file: stable/v2.0/TextAnalytics.json
+log-file: logs/log.txt
+```
+
+### Release 2.1-Preview
+
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file: preview/v2.1/TextAnalytics.json
 log-file: logs/log.txt
 ```
 
@@ -143,9 +156,10 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_textanalytics']
 ```
 
-
 ## CSharp Settings
+
 These settings apply only when `--csharp` is specified on the command line.
+
 ``` yaml $(csharp)
 csharp:
   sync-methods: None
@@ -172,11 +186,13 @@ python:
   package-name: azure-cognitiveservices-language-textanalytics
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-textanalytics/azure/cognitiveservices/language/textanalytics
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -185,31 +201,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: textanalytics
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_2_0
-```
-
-### Tag: release_2_0 and go
-
-These settings apply only when `--tag=release_2_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_2_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/textanalytics
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

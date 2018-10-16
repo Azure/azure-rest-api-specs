@@ -22,5 +22,5 @@ These settings apply only when `--tag=package-2018-06-01-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`. 
 
 ``` yaml $(tag) == 'package-2018-06-01-preview' && $(go) 
-output-folder: $(go-sdk-folder)/services/preview/mariadb/mgmt/2018-06-01-preview/mariadb
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-06-01-preview/$(namespace)
 ```
