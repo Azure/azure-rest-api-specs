@@ -1754,7 +1754,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter alerts by properties/definition/costEntity, properties/definition/category, properties/definition/alertType, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "description": "May be used to filter alerts by properties/definition/alertType, properties/definition/category, properties/definition/alertCriteria, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1819,7 +1819,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter alerts by properties/definition/costEntity, properties/definition/category, properties/definition/alertType, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "description": "May be used to filter alerts by properties/definition/alertType, properties/definition/category, properties/definition/alertCriteria, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2899,12 +2899,12 @@
       "description": "The properties of an Alert.",
       "properties": {
         "costEntityId": {
-          "description": "The id of the creating cost-entity (budget, invoice, etc.).",
+          "description": "The id of the creating cost-entity (budget, invoice, credit).",
           "type": "string",
           "readOnly": true
         },
         "definition": {
-          "description": "The definition (type) of an Alert",
+          "description": "The definition (rule) of an Alert",
           "$ref": "#/definitions/AlertDefinition",
           "readOnly": true
         },
@@ -2987,38 +2987,32 @@
             "modelAsString": true
           }
         },
-        "costEntity": {
-          "description": "Monitored entity of the alert.",
+        "alertType": {
+          "description": "The type of entity the alert is defined on.",
           "type": "string",
           "readOnly": true,
           "enum": [
             "Budget",
             "Invoice",
-            "MonetaryCommitment"
+            "Credit"
           ],
           "x-ms-enum": {
-            "name": "AlertCostEntity",
+            "name": "AlertType",
             "modelAsString": true
           }
         },
-        "alertType": {
-          "description": "Type of the alert.",
+        "alertCriteria": {
+          "description": "Criteria (condition) of the alert.",
           "type": "string",
           "readOnly": true,
           "enum": [
             "CostThresholdExceeded",
-            "ThresholdExceeded",
-            "BudgetExceeded",
-            "UsageThresholdExceeded_Hours",
-            "UsageThresholdExceeded_Storage",
-            "UsageThresholdExceeded_Network",
-            "NewInvoiceReceived",
-            "UnpaidInvoice",
-            "ReservationEnd",
-            "UntaggedInstances"
+            "UsageThresholdExceeded",
+            "MonetaryCommitmentThresholdApproaching",
+            "MonetaryCommitmentThresholdReached"
           ],
           "x-ms-enum": {
-            "name": "AlertType",
+            "name": "AlertCriteria",
             "modelAsString": true
           }
         }
