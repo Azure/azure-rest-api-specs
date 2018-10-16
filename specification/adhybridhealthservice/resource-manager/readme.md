@@ -126,4 +126,14 @@ namespace: com.microsoft.azure.management.adhybridhealthservice
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-adhybridhealthservice
+directive:
+  - from: ADHybridHealthService.json
+    where: $.paths["/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}"].get
+    transform: $['operationId'] = 'addsServices_getMetrics'
+  - from: ADHybridHealthService.json
+    where: $.paths["/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}"].get
+    transform: $['operationId'] = 'services_getMetrics'
+  - rename-model: 
+      from: AddsServiceMembers
+      to: AddsServiceMembersList
 ```
