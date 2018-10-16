@@ -26,6 +26,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-09-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-09-15-preview/$(namespace)
+```
 
 ### Tag: package-2018-05-preview and go
 
