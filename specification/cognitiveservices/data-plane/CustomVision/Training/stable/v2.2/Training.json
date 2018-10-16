@@ -15,7 +15,7 @@
                 "tags": [
                     "DomainsApi"
                 ],
-                "summary": "Get a list of the available domains",
+                "summary": "Get a list of the available domains.",
                 "operationId": "GetDomains",
                 "consumes": [],
                 "produces": [
@@ -53,7 +53,7 @@
                 "tags": [
                     "DomainsApi"
                 ],
-                "summary": "Get information about a specific domain",
+                "summary": "Get information about a specific domain.",
                 "operationId": "GetDomain",
                 "consumes": [],
                 "produces": [
@@ -66,7 +66,7 @@
                     {
                         "name": "domainId",
                         "in": "path",
-                        "description": "The id of the domain to get information about",
+                        "description": "The id of the domain to get information about.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -96,7 +96,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Gets the number of images tagged with the provided {tagIds}",
+                "summary": "Gets the number of images tagged with the provided {tagIds}.",
                 "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
                 "operationId": "GetTaggedImageCount",
                 "consumes": [],
@@ -110,7 +110,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -119,7 +119,7 @@
                     {
                         "name": "iterationId",
                         "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -164,7 +164,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Gets the number of untagged images",
+                "summary": "Gets the number of untagged images.",
                 "description": "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used.",
                 "operationId": "GetUntaggedImageCount",
                 "consumes": [],
@@ -178,7 +178,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -187,7 +187,7 @@
                     {
                         "name": "iterationId",
                         "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -219,7 +219,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Associate a set of images with a set of tags",
+                "summary": "Associate a set of images with a set of tags.",
                 "operationId": "CreateImageTags",
                 "consumes": [
                     "application/json",
@@ -238,7 +238,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -247,7 +247,7 @@
                     {
                         "name": "batch",
                         "in": "body",
-                        "description": "Batch of image tags. Limited to 128 tags per batch",
+                        "description": "Batch of image tags. Limited to 128 tags per batch.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/ImageTagCreateBatch"
@@ -275,7 +275,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Remove a set of tags from a set of images",
+                "summary": "Remove a set of tags from a set of images.",
                 "operationId": "DeleteImageTags",
                 "consumes": [],
                 "produces": [],
@@ -283,7 +283,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -292,7 +292,7 @@
                     {
                         "name": "imageIds",
                         "in": "query",
-                        "description": "Image ids. Limited to 64 images",
+                        "description": "Image ids. Limited to 64 images.",
                         "required": true,
                         "type": "array",
                         "items": {
@@ -305,7 +305,7 @@
                     {
                         "name": "tagIds",
                         "in": "query",
-                        "description": "Tags to be deleted from the specified images. Limted to 20 tags",
+                        "description": "Tags to be deleted from the specified images. Limted to 20 tags.",
                         "required": true,
                         "type": "array",
                         "items": {
@@ -336,7 +336,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Create a set of image regions",
+                "summary": "Create a set of image regions.",
                 "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.",
                 "operationId": "CreateImageRegions",
                 "consumes": [
@@ -356,7 +356,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -365,7 +365,7 @@
                     {
                         "name": "batch",
                         "in": "body",
-                        "description": "Batch of image regions which include a tag and bounding box. Limited to 64",
+                        "description": "Batch of image regions which include a tag and bounding box. Limited to 64.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/ImageRegionCreateBatch"
@@ -393,7 +393,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Delete a set of image regions",
+                "summary": "Delete a set of image regions.",
                 "operationId": "DeleteImageRegions",
                 "consumes": [],
                 "produces": [],
@@ -401,7 +401,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -410,7 +410,7 @@
                     {
                         "name": "regionIds",
                         "in": "query",
-                        "description": "Regions to delete. Limited to 64",
+                        "description": "Regions to delete. Limited to 64.",
                         "required": true,
                         "type": "array",
                         "items": {
@@ -441,7 +441,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Get tagged images for a given project iteration",
+                "summary": "Get tagged images for a given project iteration.",
                 "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
                 "operationId": "GetTaggedImages",
                 "consumes": [],
@@ -455,7 +455,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -464,7 +464,7 @@
                     {
                         "name": "iterationId",
                         "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -473,7 +473,7 @@
                     {
                         "name": "tagIds",
                         "in": "query",
-                        "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20",
+                        "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.",
                         "required": false,
                         "type": "array",
                         "items": {
@@ -486,7 +486,7 @@
                     {
                         "name": "orderBy",
                         "in": "query",
-                        "description": "The ordering. Defaults to newest",
+                        "description": "The ordering. Defaults to newest.",
                         "required": false,
                         "type": "string",
                         "enum": [
@@ -498,7 +498,7 @@
                     {
                         "name": "take",
                         "in": "query",
-                        "description": "Maximum number of images to return. Defaults to 50, limited to 256",
+                        "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -507,7 +507,7 @@
                     {
                         "name": "skip",
                         "in": "query",
-                        "description": "Number of images to skip before beginning the image batch. Defaults to 0",
+                        "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -541,7 +541,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Get untagged images for a given project iteration",
+                "summary": "Get untagged images for a given project iteration.",
                 "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.",
                 "operationId": "GetUntaggedImages",
                 "consumes": [],
@@ -555,7 +555,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -564,7 +564,7 @@
                     {
                         "name": "iterationId",
                         "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -573,7 +573,7 @@
                     {
                         "name": "orderBy",
                         "in": "query",
-                        "description": "The ordering. Defaults to newest",
+                        "description": "The ordering. Defaults to newest.",
                         "required": false,
                         "type": "string",
                         "enum": [
@@ -585,7 +585,7 @@
                     {
                         "name": "take",
                         "in": "query",
-                        "description": "Maximum number of images to return. Defaults to 50, limited to 256",
+                        "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -594,7 +594,7 @@
                     {
                         "name": "skip",
                         "in": "query",
-                        "description": "Number of images to skip before beginning the image batch. Defaults to 0",
+                        "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -628,7 +628,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Get images by id for a given project iteration",
+                "summary": "Get images by id for a given project iteration.",
                 "description": "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used.",
                 "operationId": "GetImagesByIds",
                 "consumes": [],
@@ -642,7 +642,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -651,7 +651,7 @@
                     {
                         "name": "imageIds",
                         "in": "query",
-                        "description": "The list of image ids to retrieve. Limited to 256",
+                        "description": "The list of image ids to retrieve. Limited to 256.",
                         "required": false,
                         "type": "array",
                         "items": {
@@ -664,7 +664,7 @@
                     {
                         "name": "iterationId",
                         "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -698,7 +698,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Add the provided images to the set of training images",
+                "summary": "Add the provided images to the set of training images.",
                 "description": "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files",
                 "operationId": "CreateImagesFromData",
                 "consumes": [
@@ -715,7 +715,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -724,7 +724,7 @@
                     {
                         "name": "tagIds",
                         "in": "query",
-                        "description": "The tags ids with which to tag each image. Limited to 20",
+                        "description": "The tags ids with which to tag each image. Limited to 20.",
                         "required": false,
                         "type": "array",
                         "items": {
@@ -737,6 +737,7 @@
                     {
                         "name": "imageData",
                         "in": "formData",
+                        "description": "Binary image data.",
                         "required": true,
                         "type": "file"
                     },
@@ -762,7 +763,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Delete images from the set of training images",
+                "summary": "Delete images from the set of training images.",
                 "operationId": "DeleteImages",
                 "consumes": [],
                 "produces": [],
@@ -770,7 +771,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -779,7 +780,7 @@
                     {
                         "name": "imageIds",
                         "in": "query",
-                        "description": "Ids of the images to be deleted. Limted to 256 images per batch",
+                        "description": "Ids of the images to be deleted. Limted to 256 images per batch.",
                         "required": true,
                         "type": "array",
                         "items": {
@@ -810,7 +811,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Add the provided batch of images to the set of training images",
+                "summary": "Add the provided batch of images to the set of training images.",
                 "description": "This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.",
                 "operationId": "CreateImagesFromFiles",
                 "consumes": [
@@ -830,7 +831,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -839,7 +840,7 @@
                     {
                         "name": "batch",
                         "in": "body",
-                        "description": "The batch of image files to add. Limited to 64 images and 20 tags per batch",
+                        "description": "The batch of image files to add. Limited to 64 images and 20 tags per batch.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/ImageFileCreateBatch"
@@ -869,7 +870,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Add the provided images urls to the set of training images",
+                "summary": "Add the provided images urls to the set of training images.",
                 "description": "This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.",
                 "operationId": "CreateImagesFromUrls",
                 "consumes": [
@@ -889,7 +890,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -898,7 +899,7 @@
                     {
                         "name": "batch",
                         "in": "body",
-                        "description": "Image urls and tag ids. Limited to 64 images and 20 tags per batch",
+                        "description": "Image urls and tag ids. Limited to 64 images and 20 tags per batch.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/ImageUrlCreateBatch"
@@ -928,7 +929,7 @@
                 "tags": [
                     "ImageApi"
                 ],
-                "summary": "Add the specified predicted images to the set of training images",
+                "summary": "Add the specified predicted images to the set of training images.",
                 "description": "This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.",
                 "operationId": "CreateImagesFromPredictions",
                 "consumes": [
@@ -948,7 +949,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -957,7 +958,7 @@
                     {
                         "name": "batch",
                         "in": "body",
-                        "description": "Image and tag ids. Limted to 64 images and 20 tags per batch",
+                        "description": "Image and tag ids. Limted to 64 images and 20 tags per batch.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/ImageIdCreateBatch"
@@ -999,7 +1000,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1008,7 +1009,7 @@
                     {
                         "name": "imageId",
                         "in": "path",
-                        "description": "The image id",
+                        "description": "The image id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1038,7 +1039,7 @@
                 "tags": [
                     "PredictionsApi"
                 ],
-                "summary": "Delete a set of predicted images and their associated prediction results",
+                "summary": "Delete a set of predicted images and their associated prediction results.",
                 "operationId": "DeletePrediction",
                 "consumes": [],
                 "produces": [],
@@ -1046,7 +1047,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1055,7 +1056,7 @@
                     {
                         "name": "ids",
                         "in": "query",
-                        "description": "The prediction ids. Limited to 64",
+                        "description": "The prediction ids. Limited to 64.",
                         "required": true,
                         "type": "array",
                         "items": {
@@ -1086,7 +1087,7 @@
                 "tags": [
                     "PredictionsApi"
                 ],
-                "summary": "Quick test an image url",
+                "summary": "Quick test an image url.",
                 "operationId": "QuickTestImageUrl",
                 "consumes": [
                     "application/json",
@@ -1105,7 +1106,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project to evaluate against",
+                        "description": "The project to evaluate against.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1114,7 +1115,7 @@
                     {
                         "name": "imageUrl",
                         "in": "body",
-                        "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated",
+                        "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/ImageUrl"
@@ -1153,7 +1154,7 @@
                 "tags": [
                     "PredictionsApi"
                 ],
-                "summary": "Quick test an image",
+                "summary": "Quick test an image.",
                 "operationId": "QuickTestImage",
                 "consumes": [
                     "multipart/form-data",
@@ -1169,7 +1170,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1187,6 +1188,7 @@
                     {
                         "name": "imageData",
                         "in": "formData",
+                        "description": "Binary image data.",
                         "required": true,
                         "type": "file"
                     },
@@ -1214,7 +1216,7 @@
                 "tags": [
                     "PredictionsApi"
                 ],
-                "summary": "Get images that were sent to your prediction endpoint",
+                "summary": "Get images that were sent to your prediction endpoint.",
                 "operationId": "QueryPredictions",
                 "consumes": [
                     "application/json",
@@ -1233,7 +1235,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1242,7 +1244,7 @@
                     {
                         "name": "query",
                         "in": "body",
-                        "description": "Parameters used to query the predictions. Limited to combining 2 tags",
+                        "description": "Parameters used to query the predictions. Limited to combining 2 tags.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/PredictionQueryToken"
@@ -1272,7 +1274,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get detailed performance information about an iteration",
+                "summary": "Get detailed performance information about an iteration.",
                 "operationId": "GetIterationPerformance",
                 "consumes": [],
                 "produces": [
@@ -1285,7 +1287,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The id of the project the iteration belongs to",
+                        "description": "The id of the project the iteration belongs to.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1294,7 +1296,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "The id of the iteration to get",
+                        "description": "The id of the iteration to get.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1303,7 +1305,7 @@
                     {
                         "name": "threshold",
                         "in": "query",
-                        "description": "The threshold used to determine true predictions",
+                        "description": "The threshold used to determine true predictions.",
                         "required": false,
                         "type": "number",
                         "format": "float"
@@ -1311,7 +1313,7 @@
                     {
                         "name": "overlapThreshold",
                         "in": "query",
-                        "description": "If applicable, the bounding box overlap threshold used to determine true predictions",
+                        "description": "If applicable, the bounding box overlap threshold used to determine true predictions.",
                         "required": false,
                         "type": "number",
                         "format": "float"
@@ -1340,7 +1342,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get image with its prediction for a given project iteration",
+                "summary": "Get image with its prediction for a given project iteration.",
                 "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
                 "operationId": "GetImagePerformances",
                 "consumes": [],
@@ -1354,7 +1356,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1363,7 +1365,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1372,7 +1374,7 @@
                     {
                         "name": "tagIds",
                         "in": "query",
-                        "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20",
+                        "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.",
                         "required": false,
                         "type": "array",
                         "items": {
@@ -1385,7 +1387,7 @@
                     {
                         "name": "orderBy",
                         "in": "query",
-                        "description": "The ordering. Defaults to newest",
+                        "description": "The ordering. Defaults to newest.",
                         "required": false,
                         "type": "string",
                         "enum": [
@@ -1397,7 +1399,7 @@
                     {
                         "name": "take",
                         "in": "query",
-                        "description": "Maximum number of images to return. Defaults to 50, limited to 256",
+                        "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -1406,7 +1408,7 @@
                     {
                         "name": "skip",
                         "in": "query",
-                        "description": "Number of images to skip before beginning the image batch. Defaults to 0",
+                        "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -1440,7 +1442,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}",
+                "summary": "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}.",
                 "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
                 "operationId": "GetImagePerformanceCount",
                 "consumes": [],
@@ -1454,7 +1456,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1463,7 +1465,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1508,7 +1510,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get your projects",
+                "summary": "Get your projects.",
                 "operationId": "GetProjects",
                 "consumes": [],
                 "produces": [
@@ -1544,7 +1546,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Create a project",
+                "summary": "Create a project.",
                 "operationId": "CreateProject",
                 "consumes": [],
                 "produces": [
@@ -1557,7 +1559,7 @@
                     {
                         "name": "name",
                         "in": "query",
-                        "description": "Name of the project",
+                        "description": "Name of the project.",
                         "required": true,
                         "type": "string",
                         "x-nullable": true
@@ -1565,7 +1567,7 @@
                     {
                         "name": "description",
                         "in": "query",
-                        "description": "The description of the project",
+                        "description": "The description of the project.",
                         "required": false,
                         "type": "string",
                         "x-nullable": true
@@ -1573,7 +1575,7 @@
                     {
                         "name": "domainId",
                         "in": "query",
-                        "description": "The id of the domain to use for this project. Defaults to General",
+                        "description": "The id of the domain to use for this project. Defaults to General.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -1582,7 +1584,7 @@
                     {
                         "name": "classificationType",
                         "in": "query",
-                        "description": "The type of classifier to create for this project",
+                        "description": "The type of classifier to create for this project.",
                         "required": false,
                         "type": "string",
                         "enum": [
@@ -1615,7 +1617,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get a specific project",
+                "summary": "Get a specific project.",
                 "operationId": "GetProject",
                 "consumes": [],
                 "produces": [
@@ -1628,7 +1630,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The id of the project to get",
+                        "description": "The id of the project to get.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1656,7 +1658,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Delete a specific project",
+                "summary": "Delete a specific project.",
                 "operationId": "DeleteProject",
                 "consumes": [],
                 "produces": [],
@@ -1664,7 +1666,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1689,7 +1691,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Update a specific project",
+                "summary": "Update a specific project.",
                 "operationId": "UpdateProject",
                 "consumes": [
                     "application/json",
@@ -1708,7 +1710,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The id of the project to update",
+                        "description": "The id of the project to update.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1717,7 +1719,7 @@
                     {
                         "name": "updatedProject",
                         "in": "body",
-                        "description": "The updated project model",
+                        "description": "The updated project model.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Project"
@@ -1747,7 +1749,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get iterations for the project",
+                "summary": "Get iterations for the project.",
                 "operationId": "GetIterations",
                 "consumes": [],
                 "produces": [
@@ -1760,7 +1762,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1794,7 +1796,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get a specific iteration",
+                "summary": "Get a specific iteration.",
                 "operationId": "GetIteration",
                 "consumes": [],
                 "produces": [
@@ -1807,7 +1809,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The id of the project the iteration belongs to",
+                        "description": "The id of the project the iteration belongs to.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1816,7 +1818,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "The id of the iteration to get",
+                        "description": "The id of the iteration to get.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1844,7 +1846,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Delete a specific iteration of a project",
+                "summary": "Delete a specific iteration of a project.",
                 "operationId": "DeleteIteration",
                 "consumes": [],
                 "produces": [],
@@ -1852,7 +1854,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1861,7 +1863,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "The iteration id",
+                        "description": "The iteration id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1886,7 +1888,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Update a specific iteration",
+                "summary": "Update a specific iteration.",
                 "operationId": "UpdateIteration",
                 "consumes": [
                     "application/json",
@@ -1905,7 +1907,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "Project id",
+                        "description": "Project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1914,7 +1916,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "Iteration id",
+                        "description": "Iteration id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1923,7 +1925,7 @@
                     {
                         "name": "updatedIteration",
                         "in": "body",
-                        "description": "The updated iteration model",
+                        "description": "The updated iteration model.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Iteration"
@@ -1953,7 +1955,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Queues project for training",
+                "summary": "Queues project for training.",
                 "operationId": "TrainProject",
                 "consumes": [],
                 "produces": [
@@ -1966,7 +1968,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -1996,7 +1998,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Get the list of exports for a specific iteration",
+                "summary": "Get the list of exports for a specific iteration.",
                 "operationId": "GetExports",
                 "consumes": [],
                 "produces": [
@@ -2009,7 +2011,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2018,7 +2020,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "The iteration id",
+                        "description": "The iteration id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2050,7 +2052,7 @@
                 "tags": [
                     "ProjectApi"
                 ],
-                "summary": "Export a trained iteration",
+                "summary": "Export a trained iteration.",
                 "operationId": "ExportIteration",
                 "consumes": [],
                 "produces": [
@@ -2063,7 +2065,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2072,7 +2074,7 @@
                     {
                         "name": "iterationId",
                         "in": "path",
-                        "description": "The iteration id",
+                        "description": "The iteration id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2081,7 +2083,7 @@
                     {
                         "name": "platform",
                         "in": "query",
-                        "description": "The target platform (coreml or tensorflow)",
+                        "description": "The target platform.",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -2095,7 +2097,7 @@
                     {
                         "name": "flavor",
                         "in": "query",
-                        "description": "The flavor of the target platform (Windows, Linux, ARM, or GPU)",
+                        "description": "The flavor of the target platform.",
                         "required": false,
                         "type": "string",
                         "enum": [
@@ -2130,7 +2132,7 @@
                 "tags": [
                     "TagsApi"
                 ],
-                "summary": "Get information about a specific tag",
+                "summary": "Get information about a specific tag.",
                 "operationId": "GetTag",
                 "consumes": [],
                 "produces": [
@@ -2143,7 +2145,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project this tag belongs to",
+                        "description": "The project this tag belongs to.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2152,7 +2154,7 @@
                     {
                         "name": "tagId",
                         "in": "path",
-                        "description": "The tag id",
+                        "description": "The tag id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2161,7 +2163,7 @@
                     {
                         "name": "iterationId",
                         "in": "query",
-                        "description": "The iteration to retrieve this tag from. Optional, defaults to current training set",
+                        "description": "The iteration to retrieve this tag from. Optional, defaults to current training set.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -2189,7 +2191,7 @@
                 "tags": [
                     "TagsApi"
                 ],
-                "summary": "Delete a tag from the project",
+                "summary": "Delete a tag from the project.",
                 "operationId": "DeleteTag",
                 "consumes": [],
                 "produces": [],
@@ -2197,7 +2199,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2206,7 +2208,7 @@
                     {
                         "name": "tagId",
                         "in": "path",
-                        "description": "Id of the tag to be deleted",
+                        "description": "Id of the tag to be deleted.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2231,7 +2233,7 @@
                 "tags": [
                     "TagsApi"
                 ],
-                "summary": "Update a tag",
+                "summary": "Update a tag.",
                 "operationId": "UpdateTag",
                 "consumes": [
                     "application/json",
@@ -2250,7 +2252,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2259,7 +2261,7 @@
                     {
                         "name": "tagId",
                         "in": "path",
-                        "description": "The id of the target tag",
+                        "description": "The id of the target tag.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2268,7 +2270,7 @@
                     {
                         "name": "updatedTag",
                         "in": "body",
-                        "description": "The updated tag model",
+                        "description": "The updated tag model.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Tag"
@@ -2298,7 +2300,7 @@
                 "tags": [
                     "TagsApi"
                 ],
-                "summary": "Get the tags for a given project and iteration",
+                "summary": "Get the tags for a given project and iteration.",
                 "operationId": "GetTags",
                 "consumes": [],
                 "produces": [
@@ -2311,7 +2313,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2320,7 +2322,7 @@
                     {
                         "name": "iterationId",
                         "in": "query",
-                        "description": "The iteration id. Defaults to workspace",
+                        "description": "The iteration id. Defaults to workspace.",
                         "required": false,
                         "type": "string",
                         "format": "uuid",
@@ -2352,7 +2354,7 @@
                 "tags": [
                     "TagsApi"
                 ],
-                "summary": "Create a tag for the project",
+                "summary": "Create a tag for the project.",
                 "operationId": "CreateTag",
                 "consumes": [],
                 "produces": [
@@ -2365,7 +2367,7 @@
                     {
                         "name": "projectId",
                         "in": "path",
-                        "description": "The project id",
+                        "description": "The project id.",
                         "required": true,
                         "type": "string",
                         "format": "uuid",
@@ -2374,7 +2376,7 @@
                     {
                         "name": "name",
                         "in": "query",
-                        "description": "The tag name",
+                        "description": "The tag name.",
                         "required": true,
                         "type": "string",
                         "x-nullable": true
@@ -2382,7 +2384,7 @@
                     {
                         "name": "description",
                         "in": "query",
-                        "description": "Optional description for the tag",
+                        "description": "Optional description for the tag.",
                         "required": false,
                         "type": "string",
                         "x-nullable": true
@@ -2390,7 +2392,7 @@
                     {
                         "name": "type",
                         "in": "query",
-                        "description": "Optional type for the tag",
+                        "description": "Optional type for the tag.",
                         "required": false,
                         "type": "string",
                         "enum": [
@@ -2461,9 +2463,11 @@
             "x-nullable": true
         },
         "ImageTagCreateBatch": {
+            "description": "Batch of image tags.",
             "type": "object",
             "properties": {
                 "tags": {
+                    "description": "Image Tag entries to include in this batch.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ImageTagCreateEntry"
@@ -2474,15 +2478,18 @@
             "x-nullable": true
         },
         "ImageTagCreateEntry": {
+            "description": "Entry associating a tag to an image.",
             "type": "object",
             "properties": {
                 "imageId": {
                     "format": "uuid",
+                    "description": "Id of the image.",
                     "type": "string",
                     "x-nullable": false
                 },
                 "tagId": {
                     "format": "uuid",
+                    "description": "Id of the tag.",
                     "type": "string",
                     "x-nullable": false
                 }
@@ -2531,15 +2538,18 @@
             "x-nullable": true
         },
         "ImageRegionCreateEntry": {
+            "description": "Entry associating a region to an image.",
             "type": "object",
             "properties": {
                 "imageId": {
                     "format": "uuid",
+                    "description": "Id of the image.",
                     "type": "string",
                     "x-nullable": false
                 },
                 "tagId": {
                     "format": "uuid",
+                    "description": "Id of the tag associated with this region.",
                     "type": "string",
                     "x-nullable": false
                 },
@@ -2621,6 +2631,7 @@
                 },
                 "tagId": {
                     "format": "uuid",
+                    "description": "Id of the tag associated with this region.",
                     "type": "string",
                     "x-nullable": false
                 },
@@ -2648,52 +2659,57 @@
             "x-nullable": true
         },
         "Image": {
-            "description": "Image model to be sent as JSON",
+            "description": "Image model to be sent as JSON.",
             "type": "object",
             "properties": {
                 "id": {
                     "format": "uuid",
+                    "description": "Id of the image.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "created": {
                     "format": "date-time",
+                    "description": "Date the image was created.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "width": {
                     "format": "int32",
+                    "description": "Width of the image.",
                     "type": "integer",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "height": {
                     "format": "int32",
+                    "description": "Height of the image.",
                     "type": "integer",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "resizedImageUri": {
-                    "description": "The Uri to the (resized) image used for training",
+                    "description": "The URI to the (resized) image used for training.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "thumbnailUri": {
-                    "description": "The Uri to the thumbnail of the original image",
+                    "description": "The URI to the thumbnail of the original image.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "originalImageUri": {
-                    "description": "The Uri to the original uploaded image",
+                    "description": "The URI to the original uploaded image.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "tags": {
+                    "description": "Tags associated with this image.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ImageTag"
@@ -2702,6 +2718,7 @@
                     "x-nullable": true
                 },
                 "regions": {
+                    "description": "Regions associated with this image.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ImageRegion"
@@ -2757,6 +2774,7 @@
                 },
                 "tagId": {
                     "format": "uuid",
+                    "description": "Id of the tag associated with this region.",
                     "type": "string",
                     "x-nullable": false
                 },
@@ -2787,11 +2805,13 @@
             "type": "object",
             "properties": {
                 "isBatchSuccessful": {
+                    "description": "True if all of the images in the batch were created successfully, otherwise false.",
                     "type": "boolean",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "images": {
+                    "description": "List of the image creation results.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ImageCreateResult"
@@ -2806,11 +2826,13 @@
             "type": "object",
             "properties": {
                 "sourceUrl": {
+                    "description": "Source URL of the image.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "status": {
+                    "description": "Status of the image creation.",
                     "enum": [
                         "OK",
                         "OKDuplicate",
@@ -2834,6 +2856,7 @@
                 },
                 "image": {
                     "$ref": "#/definitions/Image",
+                    "description": "The image.",
                     "readOnly": true
                 }
             },
@@ -2897,6 +2920,7 @@
             "properties": {
                 "tagId": {
                     "format": "uuid",
+                    "description": "Id of the tag associated with this region.",
                     "type": "string",
                     "x-nullable": false
                 },
@@ -3264,29 +3288,30 @@
             "x-nullable": true
         },
         "StoredImagePrediction": {
-            "description": "result of an image classification request",
+            "description": "result of an image classification request.",
             "type": "object",
             "properties": {
                 "resizedImageUri": {
-                    "description": "The Uri to the (resized) prediction image",
+                    "description": "The URI to the (resized) prediction image.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "thumbnailUri": {
-                    "description": "The Uri to the thumbnail of the original prediction image",
+                    "description": "The URI to the thumbnail of the original prediction image.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "originalImageUri": {
-                    "description": "The Uri to the original prediction image",
+                    "description": "The URI to the original prediction image.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "domain": {
                     "format": "uuid",
+                    "description": "Domain used for the prediction.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
@@ -3327,11 +3352,11 @@
             "x-nullable": true
         },
         "IterationPerformance": {
-            "description": "Represents the detailed performance data for a trained iteration",
+            "description": "Represents the detailed performance data for a trained iteration.",
             "type": "object",
             "properties": {
                 "perTagPerformance": {
-                    "description": "Gets the per-tag performance details for this iteration",
+                    "description": "Gets the per-tag performance details for this iteration.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/TagPerformance"
@@ -3341,35 +3366,35 @@
                 },
                 "precision": {
                     "format": "float",
-                    "description": "Gets the precision",
+                    "description": "Gets the precision.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "precisionStdDeviation": {
                     "format": "float",
-                    "description": "Gets the standard deviation for the precision",
+                    "description": "Gets the standard deviation for the precision.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "recall": {
                     "format": "float",
-                    "description": "Gets the recall",
+                    "description": "Gets the recall.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "recallStdDeviation": {
                     "format": "float",
-                    "description": "Gets the standard deviation for the recall",
+                    "description": "Gets the standard deviation for the recall.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "averagePrecision": {
                     "format": "float",
-                    "description": "Gets the average precision when applicable",
+                    "description": "Gets the average precision when applicable.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": true
@@ -3378,7 +3403,7 @@
             "x-nullable": true
         },
         "TagPerformance": {
-            "description": "Represents performance data for a particular tag in a trained iteration",
+            "description": "Represents performance data for a particular tag in a trained iteration.",
             "type": "object",
             "properties": {
                 "id": {
@@ -3394,35 +3419,35 @@
                 },
                 "precision": {
                     "format": "float",
-                    "description": "Gets the precision",
+                    "description": "Gets the precision.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "precisionStdDeviation": {
                     "format": "float",
-                    "description": "Gets the standard deviation for the precision",
+                    "description": "Gets the standard deviation for the precision.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "recall": {
                     "format": "float",
-                    "description": "Gets the recall",
+                    "description": "Gets the recall.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "recallStdDeviation": {
                     "format": "float",
-                    "description": "Gets the standard deviation for the recall",
+                    "description": "Gets the standard deviation for the recall.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "averagePrecision": {
                     "format": "float",
-                    "description": "Gets the average precision when applicable",
+                    "description": "Gets the average precision when applicable.",
                     "type": "number",
                     "readOnly": true,
                     "x-nullable": true
@@ -3431,7 +3456,7 @@
             "x-nullable": true
         },
         "ImagePerformance": {
-            "description": "Image performance model",
+            "description": "Image performance model.",
             "type": "object",
             "properties": {
                 "predictions": {
@@ -3496,46 +3521,46 @@
             "x-nullable": true
         },
         "Project": {
-            "description": "Represents a project",
+            "description": "Represents a project.",
             "type": "object",
             "properties": {
                 "id": {
                     "format": "uuid",
-                    "description": "Gets the project id",
+                    "description": "Gets The project id.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "name": {
-                    "description": "Gets or sets the name of the project",
+                    "description": "Gets or sets the name of the project.",
                     "type": "string",
                     "x-nullable": true
                 },
                 "description": {
-                    "description": "Gets or sets the description of the project",
+                    "description": "Gets or sets the description of the project.",
                     "type": "string",
                     "x-nullable": true
                 },
                 "settings": {
                     "$ref": "#/definitions/ProjectSettings",
-                    "description": "Gets or sets the project settings"
+                    "description": "Gets or sets the project settings."
                 },
                 "created": {
                     "format": "date-time",
-                    "description": "Gets the date this project was created",
+                    "description": "Gets the date this project was created.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "lastModified": {
                     "format": "date-time",
-                    "description": "Gets the date this project was last modifed",
+                    "description": "Gets the date this project was last modifed.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "thumbnailUri": {
-                    "description": "Gets the thumbnail url representing the project",
+                    "description": "Gets the thumbnail url representing the project.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
@@ -3544,17 +3569,17 @@
             "x-nullable": true
         },
         "ProjectSettings": {
-            "description": "Represents settings associated with a project",
+            "description": "Represents settings associated with a project.",
             "type": "object",
             "properties": {
                 "domainId": {
                     "format": "uuid",
-                    "description": "Gets or sets the id of the Domain to use with this project",
+                    "description": "Gets or sets the id of the Domain to use with this project.",
                     "type": "string",
                     "x-nullable": false
                 },
                 "classificationType": {
-                    "description": "Gets or sets the classification type of the project",
+                    "description": "Gets or sets the classification type of the project.",
                     "enum": [
                         "Multiclass",
                         "Multilabel"
@@ -3570,75 +3595,75 @@
             "x-nullable": true
         },
         "Iteration": {
-            "description": "Iteration model to be sent over JSON",
+            "description": "Iteration model to be sent over JSON.",
             "type": "object",
             "properties": {
                 "id": {
                     "format": "uuid",
-                    "description": "Gets the id of the iteration",
+                    "description": "Gets the id of the iteration.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "name": {
-                    "description": "Gets or sets the name of the iteration",
+                    "description": "Gets or sets the name of the iteration.",
                     "type": "string",
                     "x-nullable": true
                 },
                 "isDefault": {
-                    "description": "Gets or sets a value indicating whether the iteration is the default iteration for the project",
+                    "description": "Gets or sets a value indicating whether the iteration is the default iteration for the project.",
                     "type": "boolean",
                     "x-nullable": false
                 },
                 "status": {
-                    "description": "Gets the current iteration status",
+                    "description": "Gets the current iteration status.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "created": {
                     "format": "date-time",
-                    "description": "Gets the time this iteration was completed",
+                    "description": "Gets the time this iteration was completed.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "lastModified": {
                     "format": "date-time",
-                    "description": "Gets the time this iteration was last modified",
+                    "description": "Gets the time this iteration was last modified.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "trainedAt": {
                     "format": "date-time",
-                    "description": "Gets the time this iteration was last modified",
+                    "description": "Gets the time this iteration was last modified.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "projectId": {
                     "format": "uuid",
-                    "description": "Gets the project id of the iteration",
+                    "description": "Gets The project id. of the iteration.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "exportable": {
-                    "description": "Whether the iteration can be exported to another format for download",
+                    "description": "Whether the iteration can be exported to another format for download.",
                     "type": "boolean",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "domainId": {
                     "format": "uuid",
-                    "description": "Get or sets a guid of the domain the iteration has been trained on",
+                    "description": "Get or sets a guid of the domain the iteration has been trained on.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "classificationType": {
-                    "description": "Gets the classification type of the project",
+                    "description": "Gets the classification type of the project.",
                     "enum": [
                         "Multiclass",
                         "Multilabel"
@@ -3658,6 +3683,7 @@
             "type": "object",
             "properties": {
                 "platform": {
+                    "description": "Platform of the export.",
                     "enum": [
                         "CoreML",
                         "TensorFlow",
@@ -3673,6 +3699,7 @@
                     }
                 },
                 "status": {
+                    "description": "Status of the export.",
                     "enum": [
                         "Exporting",
                         "Failed",
@@ -3687,11 +3714,13 @@
                     }
                 },
                 "downloadUri": {
+                    "description": "URI used to download the model.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": true
                 },
                 "flavor": {
+                    "description": "Flavor of the export.",
                     "enum": [
                         "Linux",
                         "Windows",
@@ -3707,6 +3736,7 @@
                     }
                 },
                 "newerVersionAvailable": {
+                    "description": "Indicates an updated version of the export package is available and should be re-exported for the latest changes.",
                     "type": "boolean",
                     "readOnly": true,
                     "x-nullable": false
@@ -3715,28 +3745,28 @@
             "x-nullable": true
         },
         "Tag": {
-            "description": "Represents a Tag",
+            "description": "Represents a Tag.",
             "type": "object",
             "properties": {
                 "id": {
                     "format": "uuid",
-                    "description": "Gets the Tag ID",
+                    "description": "Gets the Tag ID.",
                     "type": "string",
                     "readOnly": true,
                     "x-nullable": false
                 },
                 "name": {
-                    "description": "Gets or sets the name of the tag",
+                    "description": "Gets or sets the name of the tag.",
                     "type": "string",
                     "x-nullable": true
                 },
                 "description": {
-                    "description": "Gets or sets the description of the tag",
+                    "description": "Gets or sets the description of the tag.",
                     "type": "string",
                     "x-nullable": true
                 },
                 "type": {
-                    "description": "Gets or sets the type of the tag",
+                    "description": "Gets or sets the type of the tag.",
                     "enum": [
                         "Regular",
                         "Negative"
@@ -3750,7 +3780,7 @@
                 },
                 "imageCount": {
                     "format": "int32",
-                    "description": "Gets the number of images with this tag",
+                    "description": "Gets the number of images with this tag.",
                     "type": "integer",
                     "readOnly": true,
                     "x-nullable": false
