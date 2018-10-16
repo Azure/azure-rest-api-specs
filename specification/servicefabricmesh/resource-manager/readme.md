@@ -6,7 +6,7 @@ This is the AutoRest configuration file for Azure Service Fabric Mesh.
 
 Azure Service Fabric Mesh is fully managed service where developers can build and deploy mission critical applications without managing any infrastructure such as VMs, storage, or networking. Mesh is a serverless environment for applications built from microservices.
 
-[Azure Service Fabric](http://aka.ms/ServiceFabric) is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices. 
+[Azure Service Fabric](http://aka.ms/ServiceFabric) is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices.
 
 
 ---
@@ -61,6 +61,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -69,7 +70,7 @@ swagger-to-sdk:
 
 
 ## C#
-These settings apply only when `--csharp` is specified on the command line. 
+These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
@@ -107,31 +108,11 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-servicefabricmesh
 ```
+
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: servicefabricmesh
-  clear-output-folder: true
-```
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-07-01-preview
-```
-
-### Tag: package-2018-07-01-preview and go
-
-These settings apply only when `--tag=package-2018-07-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-07-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/servicefabricmesh/mgmt/2018-07-01-preview/servicefabricmesh
-```
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
