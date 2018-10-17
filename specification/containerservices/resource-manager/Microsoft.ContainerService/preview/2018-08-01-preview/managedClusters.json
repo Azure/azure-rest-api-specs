@@ -179,6 +179,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}/listCredential": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetAccessProfile",
+        "summary": "Gets an access profile of a managed cluster.",
+        "description": "Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role for managed cluster accessProfile resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterAccessProfile"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersGetAccessProfile.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterAdminCredential": {
       "post": {
         "tags": [
@@ -1189,6 +1241,35 @@
         "orchestratorVersion"
       ],
       "description": "Contains information about orchestrator."
+    },
+    "ManagedClusterAccessProfile": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "properties": {
+            "properties": {
+              "description": "AccessProfile of a managed cluster.",
+              "$ref": "#/definitions/AccessProfile",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ],
+      "description": "Managed cluster Access Profile.",
+      "x-ms-azure-resource": false
+    },
+    "AccessProfile": {
+      "type": "object",
+      "properties": {
+        "kubeConfig": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "Profile for enabling a user to access a managed cluster."
     },
     "ManagedClusterPoolUpgradeProfile": {
       "properties": {
