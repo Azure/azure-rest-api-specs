@@ -958,11 +958,12 @@
       "description": "The definition of a report config.",
       "properties": {
         "type": {
-          "description": "The type of the report.",
+          "description": "The type of the report. Usage represents actual usage, forecast represents forecasted data and UsageAndForecast represents both usage and forecasted data. Actual usage and forecasted data can be differentiated based on dates.",
           "type": "string",
           "enum": [
             "Usage",
-            "Forecast"
+            "Forecast",
+            "UsageAndForecast"
           ],
           "x-ms-enum": {
             "name": "ReportType",
