@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2018-12-01-preview",
+    "billingAccountId": "70664866",
+    "parameters":{
+      "type": "Forecast",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-11-01T00:00:00.000Z",
+        "to": "2019-01-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",        
+        "filter":{
+          "and": [
+            {
+              "or":[
+                {
+                  "dimension": {
+                    "name": "SubscriptionName",
+                    "operator": "In",
+                    "values": [
+                      "Azure Dev",
+                      "Azure Prod",
+                      "Azure PPE"
+                    ]
+                  }
+                },
+                {
+                  "tag": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "Dev",
+                      "PPE",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "name": "DepartmentName",
+                "operator": "In",
+                "values": [
+                  "Azure Dept"
+                ]
+              }
+            }
+          ]                      
+        }
+      } 
+    }   
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "type": "microsoft.costmanagement/Query",
+            "properties": {
+              "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query?api-version=2018-12-31&$skiptoken=AQAAAA%3D%3D",
+              "columns": [                          
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "ConfidenceLevelsLower",
+                  "type": "String"
+                },
+                {
+                  "name": "ConfidenceLevelsUpper",
+                  "type": "Number"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [                
+                [                               
+                  20181131,
+                  9.4567,
+                  37.9876,
+                  "USD"
+                ],
+                [                          
+                  20181231,
+                  78.9887,
+                  316.87654,
+                  "USD"
+                ],
+                [                               
+                  20190131,
+                  10.4567,
+                  40.564433,
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

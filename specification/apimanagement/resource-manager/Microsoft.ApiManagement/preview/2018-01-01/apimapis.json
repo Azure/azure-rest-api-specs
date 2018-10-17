@@ -233,6 +233,9 @@
           },
           "ApiManagementCreateApiRevision": {
             "$ref": "./examples/ApiManagementCreateApiRevision.json"
+          },
+          "ApiManagementCreateApiWithOpenIdConnect": {
+            "$ref": "./examples/ApiManagementCreateApiWithOpenIdConnect.json"
           }
         },
         "consumes": [
@@ -3740,7 +3743,7 @@
               {
                 "value": "soap",
                 "description": "Imports the Soap API having a SOAP front end.",
-                "name": "SoapPassThrough"                
+                "name": "SoapPassThrough"
               }
             ]
           }
@@ -3905,7 +3908,7 @@
         },
         "apiRevisionDescription": {
           "type": "string",
-          "description": "Description of the Api Revision.",          
+          "description": "Description of the Api Revision.",
           "maxLength": 256
         },
         "apiVersionDescription": {
@@ -4104,6 +4107,14 @@
         "oAuth2": {
           "$ref": "#/definitions/OAuth2AuthenticationSettingsContract",
           "description": "OAuth2 Authentication settings"
+        },
+        "openid": {
+          "$ref": "#/definitions/OpenIdAuthenticationSettingsContract",
+          "description": "OpenID Connect Authentication Settings"
+        },
+        "subscriptionKeyRequired": {
+          "type": "boolean",
+          "description": "Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products."
         }
       },
       "description": "API Authentication Settings."
@@ -4120,6 +4131,44 @@
         }
       },
       "description": "API OAuth2 Authentication settings details."
+    },
+    "OpenIdAuthenticationSettingsContract": {
+      "properties": {
+        "openidProviderId": {
+          "type": "string",
+          "description": "OAuth authorization server identifier."
+        },
+        "bearerTokenSendingMethods": {
+          "description": "How to send token to the server.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BearerTokenSendingMethodsContract"
+          }
+        }
+      },
+      "description": "API OAuth2 Authentication settings details."
+    },
+    "BearerTokenSendingMethodsContract": {
+      "type": "string",
+      "description": "Form of an authorization grant, which the client uses to request the access token.",
+      "enum": [
+        "authorizationHeader",
+        "query"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "bearerTokenSendingMethods",
+        "values": [
+          {
+            "value": "authorizationHeader",
+            "description": "Access token will be transmitted in the Authorization header using Bearer schema"
+          },
+          {
+            "value": "query",
+            "description": "Access token will be transmitted as query parameters."
+          }
+        ]
+      }
     },
     "OperationCollection": {
       "properties": {
@@ -4511,7 +4560,7 @@
           "description": "Text describing the issue."
         },
         "createdDate": {
-          "type":"string",
+          "type": "string",
           "format": "date-time",
           "description": "Date and time when the issue was created."
         },
@@ -4608,7 +4657,7 @@
           "description": "Comment text."
         },
         "createdDate": {
-          "type":"string",
+          "type": "string",
           "format": "date-time",
           "description": "Date and time when the comment was created."
         },
@@ -4663,7 +4712,7 @@
           "description": "Filename by which the binary data will be saved."
         },
         "contentFormat": {
-          "type":"string",
+          "type": "string",
           "description": "Either 'link' if content is provided via an HTTP link or the MIME type of the Base64-encoded binary data provided in the 'content' property."
         },
         "content": {
