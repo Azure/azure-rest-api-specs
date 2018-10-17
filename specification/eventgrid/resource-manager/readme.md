@@ -39,6 +39,14 @@ input-file:
 - Microsoft.EventGrid/preview/2018-09-15-preview/EventGrid.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: 2018-09-15-preview/?EventGrid.json
+    reason: PATCH operation already exists in the json file but this is known tool bug.
+```
 
 ### Tag: package-2018-05-preview
 
