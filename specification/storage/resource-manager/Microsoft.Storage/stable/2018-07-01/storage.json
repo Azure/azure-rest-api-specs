@@ -164,7 +164,10 @@
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "delete": {
         "tags": [
@@ -590,7 +593,10 @@
             "description": "Accepted -- Failover request accepted; operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/lastSyncTime": {      
