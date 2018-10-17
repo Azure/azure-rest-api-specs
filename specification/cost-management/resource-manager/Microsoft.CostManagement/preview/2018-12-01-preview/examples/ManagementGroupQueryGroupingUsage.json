@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2018-12-01-preview",
+    "managementGroupId": "MyMgId",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-08-01T00:00:00.000Z",
+        "to": "2018-10-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "None",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "SubscriptionName"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "type": "microsoft.costmanagement/Query",
+            "properties": {
+              "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query?api-version=2018-12-31-preview&$skiptoken=AQAAAA%3D%3D",
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "SubscriptionName",
+                  "type": "String"
+                },             
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  19.545363672276512,
+                  "Trial Subscription",                  
+                  "USD"
+                ],
+                [
+                  173.41979241290323,
+                  "DEV Subscription",                  
+                  "USD"
+                ],
+                [
+                  20.35941656262545,
+                  "Cost Management Subscrioption",                  
+                  "USD"
+                ]                
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

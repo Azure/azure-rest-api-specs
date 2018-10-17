@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "api-version": "2018-08-31",
+    "subscriptionId": "55312978-ba1b-415c-9304-c4b9c43c0481",
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "parameters":{
+      "type": "Forecast",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2019-10-01T00:00:00.000Z",
+        "to": "2019-12-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",       
+        "filter":{
+          "and": [
+            {
+              "or":[
+                {
+                  "dimension": {
+                    "name": "ResourceLocation",
+                    "operator": "In",
+                    "values": [
+                      "East US",
+                      "West Europe"
+                    ]
+                  }
+                },
+                {
+                  "tag": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "UAT",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimension": {
+                "name": "ResourceGroup",
+                "operator": "In",
+                "values": [
+                  "API"
+                ]
+              }
+            }
+          ]                      
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "type": "microsoft.costmanagement/Query",
+            "properties": {
+              "nextLink": null,
+              "columns": [                        
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "ConfidenceLevelsLower",
+                  "type": "String"
+                },
+                {
+                  "name": "ConfidenceLevelsUpper",
+                  "type": "Number"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [                              
+                  20190417,
+                  545.33555,
+                  1000.434344,
+                  "USD"
+                ],
+                [                  
+                  20190418,
+                  344.5677,
+                  789.7666,
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

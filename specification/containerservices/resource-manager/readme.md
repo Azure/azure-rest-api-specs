@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for ContainerServices (ACS/AKS).
+This is the AutoRest configuration file for ContainerServices (ACS/AKS/OpenShift).
 
 The ContainerServices RPv2 consists of two similar services: ContainerServices and ManagedClusters.
 Each service has its own swagger spec.
@@ -34,7 +34,19 @@ These are the global settings for the ContainerServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2018-09-30-preview
+```
+
+### Tag: package-2018-09-30-preview
+
+These settings apply only when `--tag=package-2018-09-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-30-preview'
+input-file:
+- Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2018-03-31/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2018-03
@@ -138,71 +150,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
-```
-
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03
-  - tag: package-2017-09
-  - tag: package-2017-08
-  - tag: package-2017-07
-```
-
-### Tag: package-2018-03 and go
-
-These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-03' && $(go)
-namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2018-03-31/containerservice
-```
-
-### Tag: package-2017-09 and go
-
-These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-09' && $(go)
-namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-09-30/containerservice
-```
-
-### Tag: package-2017-08 and go
-
-These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-08' && $(go)
-namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-08-31/containerservice
-```
-
-### Tag: package-2017-07 and go
-
-These settings apply only when `--tag=package-2017-07 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-07' && $(go)
-namespace: containerservice
-output-folder: $(go-sdk-folder)/services/containerservice/mgmt/2017-07-01/containerservice
 ```
 
 ## Python
@@ -219,7 +171,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerservice
   package-name: azure-mgmt-containerservice
-  package-version: 4.1.0
+  package-version: 4.3.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -233,6 +185,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-containerservice
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

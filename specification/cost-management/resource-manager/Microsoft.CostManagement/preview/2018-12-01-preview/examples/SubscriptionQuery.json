@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2018-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters":{
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-10-01T00:00:00.000Z",
+        "to": "2018-12-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",           
+        "filter":{
+         "tag": {
+          "name": "Environment",
+          "operator": "In",
+           "values": [
+            "Dev",
+            "PPE",
+            "Prod"
+           ]
+         } 
+       } 
+     }
+    }   
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Query/00000000-0000-0000-0000-000000000000",
+            "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
+            "type": "microsoft.costmanagement/Query",
+            "properties": {
+              "nextLink": null,
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "ConfidenceLevelsLower",
+                  "type": "String"
+                },
+                {
+                  "name": "ConfidenceLevelsUpper",
+                  "type": "Number"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  2.10333307059661,
+                  20181017,
+                  0,
+                  0,
+                  "USD"
+                ],
+                [
+                  218.68795741935486,
+                  20181018,
+                  0,
+                  0,
+                  "USD"
+                ],
+                [
+                  0.14384913581657052,
+                  20181019,
+                  0,
+                  0,
+                  "USD"
+                ],
+                [
+                  0,
+                  20181217,
+                  1.67777,
+                  5.9787,
+                  "USD"
+                ],
+                [
+                  0,
+                  20181218,
+                  102.78787,
+                  456.976554,
+                  "USD"
+                ],
+                [
+                  0,
+                  20181219,
+                  0.07233,
+                  0.287766,
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
