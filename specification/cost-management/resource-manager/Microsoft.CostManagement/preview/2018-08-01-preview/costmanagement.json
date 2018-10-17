@@ -1754,7 +1754,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter alerts by properties/definition/alertType, properties/definition/category, properties/definition/alertCriteria, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "description": "May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1819,7 +1819,7 @@
           },
           {
             "name": "$filter",
-            "description": "May be used to filter alerts by properties/definition/alertType, properties/definition/category, properties/definition/alertCriteria, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "description": "May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2969,7 +2969,7 @@
       }
     },
     "AlertDefinition": {
-      "description": "The definition (type) of an Alert",
+      "description": "The definition (rule) of an Alert",
       "type": "object",
       "properties" : {
         "category": {
@@ -2979,16 +2979,15 @@
           "enum": [
             "Cost",
             "Usage",
-            "Billing",
-            "Compliance"
+            "Billing"
           ],
           "x-ms-enum": {
             "name": "AlertCategory",
             "modelAsString": true
           }
         },
-        "alertType": {
-          "description": "The type of entity the alert is defined on.",
+        "type": {
+          "description": "The type of cost-entity the alert is defined on.",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -3001,7 +3000,7 @@
             "modelAsString": true
           }
         },
-        "alertCriteria": {
+        "criteria": {
           "description": "Criteria (condition) of the alert.",
           "type": "string",
           "readOnly": true,
