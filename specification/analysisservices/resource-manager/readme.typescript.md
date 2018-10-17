@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-analysisservices
-  output-folder: $(typescript-sdks-folder)/packages/arm-analysisservices
+  package-name: "@azure/arm-analysisservices"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-analysisservices"
   generate-metadata: true
 ```

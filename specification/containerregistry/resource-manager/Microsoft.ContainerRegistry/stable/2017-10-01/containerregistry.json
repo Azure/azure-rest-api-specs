@@ -1407,10 +1407,6 @@
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
         },
-        "identity": {
-          "$ref": "#/definitions/RegistryIdentity",
-          "description": "The identity of the container registry."
-        },
         "properties": {
           "$ref": "#/definitions/RegistryProperties",
           "description": "The properties of the container registry.",
@@ -1453,24 +1449,6 @@
             "name": "SkuTier",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "RegistryIdentity": {
-      "description": "The identity of the container registry.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of identity used for the registry.",
-          "type": "string"
-        },
-        "principalId": {
-          "description": "The principal ID of registry identity.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenant ID associated with the registry.",
-          "type": "string"
         }
       }
     },
@@ -1571,10 +1549,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
-        },
-        "identity": {
-          "$ref": "#/definitions/RegistryIdentity",
-          "description": "The identity of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",

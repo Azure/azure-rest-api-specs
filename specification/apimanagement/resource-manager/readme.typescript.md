@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-apimanagement
-  output-folder: $(typescript-sdks-folder)/packages/arm-apimanagement
+  package-name: "@azure/arm-apimanagement"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-apimanagement"
   generate-metadata: true
 ```
