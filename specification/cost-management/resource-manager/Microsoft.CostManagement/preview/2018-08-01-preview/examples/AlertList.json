@@ -14,9 +14,9 @@
                 "type": "Microsoft.CostManagement/alerts",
                 "properties": {
                     "definition": {
-                        "costEntity": "Budget",
+                        "type": "Budget",
                         "category": "Cost",
-                        "alertType": "BudgetExceeded"
+                        "criteria": "CostThresholdExceeded"
                     },
                     "description": "This is an example alert",
                     "source": "User",
@@ -36,12 +36,12 @@
                 "type": "Microsoft.CostManagement/alerts",
                 "properties": {
                     "definition": {
-                        "costEntity": "ActiveInstances",
+                        "type": "Credit",
                         "category": "Billing",
-                        "alertType": "NewInvoiceReceived"
+                        "criteria": "CreditThresholdReached"
                     },
                     "description": "This is another example alert",
-                    "source": "User",
+                    "source": "Preset",
                     "details": {
                         "amountDue": "500.0",
                         "billedAmount": "680.36"
