@@ -616,6 +616,38 @@
         }
       }
     },
+    "DynamicsAXResourceDataset": {
+      "x-ms-discriminator-value": "DynamicsAXResource",
+      "description": "The path of the Dynamics AX OData entity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dynamics AX OData resource dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DynamicsAXResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DynamicsAXResourceDatasetTypeProperties": {
+      "description": "Dynamics AX OData resource dataset properties.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
     "AzureDataLakeStoreDataset": {
       "x-ms-discriminator-value": "AzureDataLakeStoreFile",
       "description": "Azure Data Lake Store dataset.",

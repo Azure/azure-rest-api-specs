@@ -384,6 +384,21 @@
         }
       }
     },
+    "DynamicsAXSource": { 
+      "description": "A copy activity Dynamics AX source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    },
     "RelationalSource": {
       "description": "A copy activity source for various relational databases.",
       "type": "object",

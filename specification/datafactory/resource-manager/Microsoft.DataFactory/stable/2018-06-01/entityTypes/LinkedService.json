@@ -459,8 +459,8 @@
           "description": "The port of on-premises Dynamics server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "serviceUri": {
-           "type": "object",
-           "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
+          "type": "object",
+          "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
         },
         "organizationName": {
           "type": "object",
@@ -495,6 +495,58 @@
         "deploymentType",
         "authenticationType",
         "username"
+      ]
+    },
+    "DynamicsAXLinkedService": {
+      "x-ms-discriminator-value": "DynamicsAX",
+      "description": "Dynamics AX linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dynamics AX linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DynamicsAXLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DynamicsAXLinkedServiceTypeProperties": {
+      "description": "Dynamics AX linked service properties.",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The URL of Dynamics AX OData API. Type: string (or Expression with resultType string)."
+        },
+        "tenant": {
+          "type": "object",
+          "description": "Specify the tenant information (domain name or tenant ID) under which your application resides. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "Specify the application id of your application registered in Azure Active Directory. Type: string (or Expression with resultType string)."
+        },
+        "aadResourceId": {
+          "type": "object",
+          "description": "Specify the resource you are requesting authorization to use Directory. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "Specify the secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url"
       ]
     },
     "HDInsightLinkedService": {
