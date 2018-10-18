@@ -1874,6 +1874,85 @@
         "url"
       ]
     },
+    "RestServiceLinkedService": { 
+      "x-ms-discriminator-value": "RestService", 
+      "description": "Rest Service linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Rest Service linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/RestServiceLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "RestServiceLinkedServiceTypeProperties": { 
+      "description": "Rest Service linked service properties.", 
+      "properties": {
+        "url": {
+          "description": "The base URL of the REST service.",
+          "type": "object"
+        },
+        "enableServerCertificateValidation": {
+          "type": "object",
+          "description": "Whether to validate server side SSL certificate when connecting to the endpoint.The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "authenticationType": {
+          "description": "Type of authentication used to connect to the REST service.",
+          "type": "string",
+          "enum": [
+            "Anonymous",
+            "Basic",
+            "AadServicePrincial",
+            "ManagedServiceIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "RestServiceAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "userName": {
+          "description": "The user name used in Basic authentication type.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password used in Basic authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalId": {
+          "description": "The application’s client ID used in AadServicePrincipal authentication type.",
+          "type": "object"
+        },
+        "servicePrincipalKey": {
+          "description": "The application’s key used in AadServicePrincipal authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "description": "The tenant information (domain name or tenant ID) used in AadServicePrincipal authentication type under which your application resides.",
+          "type": "object"
+        },
+        "aadResourceId": {
+          "description": "The resource you are requesting authorization to use.",
+          "type": "object"
+        },
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      },
+      "required": [
+        "url",
+        "authenticationType"
+      ] 
+    },
     "FtpServerLinkedService": {
       "x-ms-discriminator-value": "FtpServer",
       "description": "A FTP server Linked Service.",

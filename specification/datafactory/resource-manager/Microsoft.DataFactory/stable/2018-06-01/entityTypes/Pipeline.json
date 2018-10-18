@@ -700,6 +700,25 @@
         }
       }
     },
+    "RestServiceSource": { 
+      "description": "A copy activity Rest service source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "httpRequestTimeout": { 
+          "type": "object", 
+          "description": "The timeout (TimeSpan) to get an HTTP response.  It is the timeout to get a response, not the timeout to read response data.  Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))." 
+        },
+        "requestInterval": {
+            "type": "object",
+            "description": "The time to await before sending next page request.  Default value: 00:00:01. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      } 
+    }, 
     "AmazonMWSSource": { 
       "description": "A copy activity Amazon Marketplace Web Service source.", 
       "type": "object", 
