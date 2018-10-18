@@ -34,7 +34,7 @@ These are the global settings for the ContainerServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2018-09-30-preview
 ```
 
 ### Tag: package-2018-08-preview
