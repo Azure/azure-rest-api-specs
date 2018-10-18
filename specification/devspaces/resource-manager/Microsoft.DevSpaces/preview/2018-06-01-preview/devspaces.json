@@ -16,6 +16,46 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.DevSpaces/locations/{location}/checkContainerHostMapping": {
+      "post": {
+        "tags": [
+          "ContainerHostMappings"
+        ],
+        "summary": "Returns container host mapping object for a container host resource ID if an associated controller exists.",
+        "operationId": "ContainerHostMappings_GetContainerHostMapping",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "containerHostMapping",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerHostMapping"
+            }
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the container host.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {}
+          }
+        },
+        "x-ms-examples": {
+          "ContainerHostMappingsGetContainerHostMapping": {
+            "$ref": "./examples/ContainerHostMappingsGetContainerHostMapping_example.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevSpaces/controllers/{name}": {
       "get": {
         "tags": [
@@ -183,6 +223,7 @@
           {
             "name": "controllerUpdateParameters",
             "in": "body",
+            "description": "Parameters for updating the Azure Dev Spaces Controller.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ControllerUpdateParameters"
@@ -364,6 +405,20 @@
     }
   },
   "definitions": {
+    "ContainerHostMapping": {
+      "description": "Container host mapping object specifying the Container host resource ID and its associated Controller resource.",
+      "properties": {
+        "containerHostResourceId": {
+          "description": "ARM ID of the Container Host resource",
+          "type": "string"
+        },
+        "mappedControllerResourceId": {
+          "description": "ARM ID of the mapped Controller resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Controller": {
       "required": [
         "properties",
@@ -400,7 +455,8 @@
             "Canceled",
             "Updating",
             "Creating",
-            "Deleting"
+            "Deleting",
+            "Deleted"
           ],
           "type": "string",
           "readOnly": true,
@@ -530,6 +586,7 @@
       }
     },
     "OrchestratorSpecificConnectionDetails": {
+      "description": "Base class for types that supply values used to connect to container orchestrators",
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
@@ -638,6 +695,7 @@
       "x-ms-azure-resource": true
     },
     "KubernetesConnectionDetails": {
+      "description": "Contains information used to connect to a Kubernetes cluster",
       "allOf": [
         {
           "$ref": "#/definitions/OrchestratorSpecificConnectionDetails"

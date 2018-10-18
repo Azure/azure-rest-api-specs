@@ -4,11 +4,15 @@
     "title": "LUIS Authoring Client",
     "version": "2.0"
   },
-  "host": "api.cognitive.microsoft.com",
-  "basePath": "/luis/api/v2.0",
-  "schemes": [
-    "https"
-  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/luis/api/v2.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "securityDefinitions": {
     "apiKeyHeader": {
       "type": "apiKey",
@@ -7468,6 +7472,91 @@
           }
         }
       }
+    },
+    "/apps/{appId}/versions/{versionId}/settings": {
+      "get": {
+        "description": "Gets the application version settings.",
+        "operationId": "Settings_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of the application version settings.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AppVersionSettingObject"
+              }
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Application Version settings request": {
+            "$ref": "./examples/versions/SuccessfulGetApplicationVersionSettingsRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the application version settings.",
+        "operationId": "Settings_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "listOfAppVersionSettingObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppVersionSettingObject"
+            },
+            "description": "A list of the updated application version settings."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Update Application Version settings request": {
+            "$ref": "./examples/versions/SuccessfulUpdateApplicationVersionSettingsRequest.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -8135,10 +8224,6 @@
           "description": "Indicates if the staging slot should be used, instead of the Production one.",
           "default": false,
           "type": "boolean"
-        },
-        "region": {
-          "description": "The target region that the application is published to.",
-          "type": "string"
         }
       }
     },
@@ -9719,6 +9804,20 @@
           "type": "string"
         }
       }
+    },
+    "AppVersionSettingObject": {
+      "description": "Object model of an application version setting.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The application version setting name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The application version setting value.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -9784,6 +9883,15 @@
       "minimum": 0,
       "maximum": 500,
       "x-ms-parameter-location": "method"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }

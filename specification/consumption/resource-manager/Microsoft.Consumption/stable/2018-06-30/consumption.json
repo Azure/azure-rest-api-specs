@@ -2327,7 +2327,259 @@
           "nextLinkName": "nextLink"
         }
       }
-    }
+    },
+	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListByManagementGroup",
+        "description": "Lists the usage detail records for all subscriptions belonging to a management group scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsListByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_ListForBillingPeriodByManagementGroup",
+        "description": "Lists the usage detail records for all subscriptions belonging to a management group scope by specified billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+	},
+	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/aggregatedcost": {
+      "get": {
+        "tags": [
+          "AggregatedCost"
+        ],
+        "operationId": "AggregatedCost_GetByManagementGroup",
+        "description": "Provides the aggregate cost of a management group and all child management groups by current billing period.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "AggregatedCostByManagementGroup": {
+            "$ref": "./examples/AggregatedCostByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+	 }
+   },
+   	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
+      "get": {
+        "tags": [
+          "AggregatedCost"
+        ],
+        "operationId": "AggregatedCost_GetForBillingPeriodByManagementGroup",
+        "description": "Provides the aggregate cost of a management group and all child management groups by specified billing period",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "AggregatedCostListForBillingPeriodByManagementGroup": {
+            "$ref": "./examples/AggregatedCostForBillingPeriodByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },        
+		  {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+	 }
+   }
   },
   "definitions": {
     "MeterDetails": {
@@ -3651,7 +3903,64 @@
         }
       }
     },
-    "ErrorDetails": {
+	"ManagementGroupAggregatedCostResult": {
+      "description": "A management group aggregated cost resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagementGroupAggregatedCostProperties",
+          "title": "Management Group Aggregated Cost properties"
+        }
+      }
+    },
+    "ManagementGroupAggregatedCostProperties": {
+      "description": "The properties of the Management Group Aggregated Cost.",
+      "type": "object",
+      "properties": {
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the aggregated cost belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+         "azureCharges": {
+          "description": "Azure Charges.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+         "marketplaceCharges": {
+          "description": "Marketplace Charges.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+         "chargesBilledSeparately": {
+          "description": "Charges Billed Separately.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency in which the meter is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+		"children": {
+          "description": "Children of a management group",
+		  "type": "array",
+          "items": {
+             "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
+            }
+		}
+      }
+    },
+	"ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
         "code": {
@@ -3901,6 +4210,14 @@
           }
         ]
       }
+    },
+	"managementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "description": "Azure Management Group ID.",
+      "required": true,
+      "type": "string",
+	  "x-ms-parameter-location": "method"
     }
   }
 }
