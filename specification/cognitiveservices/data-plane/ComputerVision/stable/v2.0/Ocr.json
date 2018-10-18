@@ -1,0 +1,331 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0",
+    "title": "Computer Vision Client",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively."
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "host": "westcentralus.api.cognitive.microsoft.com",
+  "basePath": "/vision/v2.0",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/recognizeText": {
+      "post": {
+        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
+        "operationId": "RecognizeText",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/TextRecognitionMode"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return Accepted immediately and include an Operation-Location header. Client side should further query the operation status using the URL specified in this header. The operation ID will expire in 48 hours.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Domain Model analysis request": {
+            "$ref": "./examples/SuccessfulRecognizeTextWithUrl.json"
+          }
+        }
+      }
+    },
+    "/textOperations/{operationId}": {
+      "get": {
+        "description": "This interface is used for getting text operation result. The URL to this interface should be retrieved from 'Operation-Location' field returned from Recognize Text interface.",
+        "operationId": "GetTextOperationResult",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of the text operation returned in the response of the 'Recognize Text'",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the operation status.",
+            "schema": {
+              "$ref": "#/definitions/TextOperationResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Domain Model analysis request": {
+            "$ref": "./examples/SuccessfulGetTextOperationResult.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/recognizeText?overload=stream": {
+      "post": {
+        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
+        "operationId": "RecognizeTextInStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/TextRecognitionMode"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Domain Model analysis request": {
+            "$ref": "./examples/SuccessfulRecognizeTextWithStream.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TextOperationResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the text operation.",
+          "enum": [
+            "Not Started",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "TextOperationStatusCodes",
+            "modelAsString": false
+          },
+          "x-nullable": false
+        },
+        "recognitionResult": {
+          "$ref": "#/definitions/RecognitionResult"
+        }
+      }
+    },
+    "RecognitionResult": {
+      "type": "object",
+      "properties": {
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Line"
+          }
+        }
+      }
+    },
+    "Line": {
+      "type": "object",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "type": "string"
+        },
+        "words": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Word"
+          }
+        }
+      }
+    },
+    "Word": {
+      "type": "object",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "BoundingBox": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "x-nullable": false
+      }
+    },
+    "ComputerVisionError": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "enum": [
+            "InvalidImageUrl",
+            "InvalidImageFormat",
+            "InvalidImageSize",
+            "NotSupportedVisualFeature",
+            "NotSupportedImage",
+            "InvalidDetails",
+            "NotSupportedLanguage",
+            "BadArgument",
+            "FailedToProcess",
+            "Timeout",
+            "InternalServerError",
+            "Unspecified",
+            "StorageException"
+          ],
+          "x-ms-enum": {
+            "name": "ComputerVisionErrorCodes",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining the error reported by the service."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "A unique request identifier."
+        }
+      }
+    },
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TextRecognitionMode": {
+      "name": "mode",
+      "in": "query",
+      "description": "Type of text to recognize.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TextRecognitionMode",
+        "modelAsString": false
+      },
+      "enum": [
+        "Handwritten",
+        "Printed"
+      ]
+    },
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    },
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      }
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

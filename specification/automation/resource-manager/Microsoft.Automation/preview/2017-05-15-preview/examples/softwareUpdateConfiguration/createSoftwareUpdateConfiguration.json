@@ -26,6 +26,32 @@
                     "nonAzureComputerNames": [
                         "box1.contoso.com",
                         "box2.contoso.com"
+                    ],
+                    "targets":[
+                        {
+                            "azureQueries":
+                            {
+                               "scope":[
+                                "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources",
+                                "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067"
+                               ],
+                               "tagSettings":{
+                                   "tags":[
+                                       {
+                                           "tag1": ["tag1Value1", "tag1Value2", "tag1Value3"]
+                                       },
+                                       {
+                                           "tag2": ["tag2Value1", "tag2Value2", "tag2Value3"]
+                                       }
+                                   ],
+                                   "filterOperator" : "All"
+                               },
+                               "locations":[
+                                   "Japan East",
+                                   "UK South"
+                               ]
+                            }
+                        }
                     ]
                 },
                 "scheduleInfo": {
