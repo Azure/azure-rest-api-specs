@@ -716,7 +716,9 @@
           "description": "The type of run.",
           "enum": [
             "QuickBuild",
-            "AutoBuild"
+            "QuickRun",
+            "AutoBuild",
+            "AutoRun"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -740,7 +742,7 @@
           "type": "string"
         },
         "outputImages": {
-          "description": "The list of all images that were generated from the run. This is applicable if the run is of type Build.",
+          "description": "The list of all images that were generated from the run. This is applicable if the run generates base image dependencies.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDescriptor"
@@ -752,7 +754,7 @@
         },
         "imageUpdateTrigger": {
           "$ref": "#/definitions/ImageUpdateTrigger",
-          "description": "The image update trigger that caused the run. This is applicable if the task is of build type."
+          "description": "The image update trigger that caused the run. This is applicable if the task has base image trigger configured."
         },
         "sourceTrigger": {
           "$ref": "#/definitions/SourceTriggerDescriptor",
@@ -870,8 +872,7 @@
     "PlatformProperties": {
       "description": "The platform properties against which the run has to happen.",
       "required": [
-        "os",
-        "architecture"
+        "os"
       ],
       "type": "object",
       "properties": {
@@ -969,7 +970,9 @@
           "description": "The type of run.",
           "enum": [
             "QuickBuild",
-            "AutoBuild"
+            "QuickRun",
+            "AutoBuild",
+            "AutoRun"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1149,8 +1152,8 @@
           "description": "The type of the step.",
           "enum": [
             "Docker",
-            "BuildTask",
-            "RunTask"
+            "FileTask",
+            "EncodedTask"
           ],
           "type": "string",
           "readOnly": true,
@@ -1166,12 +1169,16 @@
             "$ref": "#/definitions/BaseImageDependency"
           },
           "readOnly": true
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
         }
       },
       "discriminator": "type"
     },
     "TriggerProperties": {
-      "description": "The properties of a build trigger.",
+      "description": "The properties of a trigger.",
       "type": "object",
       "properties": {
         "sourceTriggers": {
@@ -1239,7 +1246,8 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit"
+              "commit",
+              "pullrequest"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1249,7 +1257,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1287,7 +1295,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1486,8 +1494,8 @@
           "description": "The type of the step.",
           "enum": [
             "Docker",
-            "BuildTask",
-            "RunTask"
+            "FileTask",
+            "EncodedTask"
           ],
           "type": "string",
           "readOnly": true,
@@ -1495,12 +1503,16 @@
             "name": "StepType",
             "modelAsString": true
           }
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
         }
       },
       "discriminator": "type"
     },
     "TriggerUpdateParameters": {
-      "description": "The properties for updating build triggers.",
+      "description": "The properties for updating triggers.",
       "type": "object",
       "properties": {
         "sourceTriggers": {
@@ -1532,7 +1544,8 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit"
+              "commit",
+              "pullrequest"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1542,7 +1555,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1579,7 +1592,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1726,7 +1739,6 @@
       "required": [
         "type",
         "dockerFilePath",
-        "sourceLocation",
         "platform"
       ],
       "type": "object",
@@ -1764,13 +1776,9 @@
             "$ref": "#/definitions/Argument"
           }
         },
-        "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
-          "type": "string"
-        },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1778,11 +1786,15 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "DockerBuildRequest"
@@ -1810,12 +1822,11 @@
         }
       }
     },
-    "BuildTaskRequest": {
-      "description": "The request parameters for a quick task build.",
+    "FileTaskRunRequest": {
+      "description": "The request parameters for a scheduling run against a task file.",
       "required": [
         "type",
-        "definitionFilePath",
-        "sourceLocation",
+        "taskFilePath",
         "platform"
       ],
       "type": "object",
@@ -1825,7 +1836,7 @@
         }
       ],
       "properties": {
-        "definitionFilePath": {
+        "taskFilePath": {
           "description": "The template/definition file path relative to the source.",
           "type": "string"
         },
@@ -1840,13 +1851,9 @@
             "$ref": "#/definitions/SetValue"
           }
         },
-        "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
-          "type": "string"
-        },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1854,14 +1861,18 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
         }
       },
-      "x-ms-discriminator-value": "BuildTaskRequest"
+      "x-ms-discriminator-value": "FileTaskRunRequest"
     },
     "SetValue": {
       "description": "The properties of a overridable value that can be passed to a task template.",
@@ -1913,11 +1924,11 @@
       },
       "x-ms-discriminator-value": "TaskRunRequest"
     },
-    "QuickTaskRunRequest": {
+    "EncodedTaskRunRequest": {
       "description": "The parameters for a quick task run request.",
       "required": [
         "type",
-        "taskDefinitionContent",
+        "encodedTaskContent",
         "platform"
       ],
       "type": "object",
@@ -1927,11 +1938,11 @@
         }
       ],
       "properties": {
-        "taskDefinitionContent": {
+        "encodedTaskContent": {
           "description": "Base64 encoded value of the template/definition file content.",
           "type": "string"
         },
-        "valuesContent": {
+        "encodedValuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
         },
@@ -1944,7 +1955,7 @@
         },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1952,14 +1963,18 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
         }
       },
-      "x-ms-discriminator-value": "QuickTaskRunRequest"
+      "x-ms-discriminator-value": "EncodedTaskRunRequest"
     },
     "DockerBuildStep": {
       "description": "The Docker build step.",
@@ -2000,18 +2015,14 @@
           "items": {
             "$ref": "#/definitions/Argument"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
     },
-    "BuildTaskStep": {
-      "description": "The properties of a build task step.",
+    "FileTaskStep": {
+      "description": "The properties of a task step.",
       "required": [
-        "definitionFilePath"
+        "taskFilePath"
       ],
       "type": "object",
       "allOf": [
@@ -2020,8 +2031,8 @@
         }
       ],
       "properties": {
-        "definitionFilePath": {
-          "description": "The build task template/definition file path relative to the source context.",
+        "taskFilePath": {
+          "description": "The task template/definition file path relative to the source context.",
           "type": "string"
         },
         "valuesFilePath": {
@@ -2034,18 +2045,14 @@
           "items": {
             "$ref": "#/definitions/SetValue"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
-      "x-ms-discriminator-value": "BuildTask"
+      "x-ms-discriminator-value": "FileTask"
     },
-    "RunTaskStep": {
-      "description": "The properties of a generic task run step.",
+    "EncodedTaskStep": {
+      "description": "The properties of a encoded task step.",
       "required": [
-        "taskDefinitionContent"
+        "encodedTaskContent"
       ],
       "type": "object",
       "allOf": [
@@ -2054,11 +2061,11 @@
         }
       ],
       "properties": {
-        "taskDefinitionContent": {
+        "encodedTaskContent": {
           "description": "Base64 encoded value of the template/definition file content.",
           "type": "string"
         },
-        "valuesContent": {
+        "encodedValuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
         },
@@ -2070,7 +2077,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "RunTask"
+      "x-ms-discriminator-value": "EncodedTask"
     },
     "DockerBuildStepUpdateParameters": {
       "description": "The properties for updating a docker build step.",
@@ -2106,16 +2113,12 @@
           "items": {
             "$ref": "#/definitions/Argument"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
     },
-    "BuildTaskStepUpdateParameters": {
-      "description": "The properties of updating a build task step.",
+    "FileTaskStepUpdateParameters": {
+      "description": "The properties of updating a task step.",
       "type": "object",
       "allOf": [
         {
@@ -2123,12 +2126,12 @@
         }
       ],
       "properties": {
-        "definitionFilePath": {
-          "description": "The build task template/definition file path relative to the source context.",
+        "taskFilePath": {
+          "description": "The task template/definition file path relative to the source context.",
           "type": "string"
         },
         "valuesFilePath": {
-          "description": "The task values/parameters file path relative to the source context.",
+          "description": "The values/parameters file path relative to the source context.",
           "type": "string"
         },
         "values": {
@@ -2137,16 +2140,12 @@
           "items": {
             "$ref": "#/definitions/SetValue"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
-      "x-ms-discriminator-value": "BuildTask"
+      "x-ms-discriminator-value": "FileTask"
     },
-    "RunTaskStepUpdateParameters": {
-      "description": "The properties for updating generic task run step.",
+    "EncodedTaskStepUpdateParameters": {
+      "description": "The properties for updating encoded task step.",
       "type": "object",
       "allOf": [
         {
@@ -2154,11 +2153,11 @@
         }
       ],
       "properties": {
-        "taskDefinitionContent": {
+        "encodedTaskContent": {
           "description": "Base64 encoded value of the template/definition file content.",
           "type": "string"
         },
-        "valuesContent": {
+        "encodedValuesContent": {
           "description": "Base64 encoded value of the parameters/values file content.",
           "type": "string"
         },
@@ -2170,7 +2169,7 @@
           }
         }
       },
-      "x-ms-discriminator-value": "RunTask"
+      "x-ms-discriminator-value": "EncodedTask"
     }
   },
   "parameters": {

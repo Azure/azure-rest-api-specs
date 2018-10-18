@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31",
+    "version": "2018-06-30",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
@@ -79,7 +79,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
@@ -129,7 +129,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "object",
+              "format": "file"
             },
             "description": "The runbook draft content."
           },
@@ -141,7 +142,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "202": {
@@ -366,7 +367,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
@@ -1095,6 +1096,7 @@
           "description": "Gets or sets the values of the job stream."
         }
       },
+      "x-ms-client-flatten": true,
       "description": "Definition of the job stream."
     },
     "JobStreamListResult": {

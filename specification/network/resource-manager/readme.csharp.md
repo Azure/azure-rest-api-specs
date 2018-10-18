@@ -17,15 +17,15 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiApi)
+``` yaml $(csharp) && !$(multiapi) && !$(profile)
 namespace: Microsoft.Azure.Management.Network
 output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated
 ```
 
 ## MultiApi settings
-These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
+These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
-``` yaml $(multiApi)
+``` yaml $(multiapi)
 namespace: Microsoft.Azure.Management.Network.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
@@ -36,3 +36,19 @@ batch:
   - tag: package-2015-06split
     ApiVersionName: Api2016_06_15
 ```
+
+```yaml $(profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Network
+output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Generated
+batch:
+  - tag: package-2018-05
+  - tag: package-2017-10
+```
+
+``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Network
+output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Generated
+
+batch:
+ - tag: package-2015-06split
+ ```

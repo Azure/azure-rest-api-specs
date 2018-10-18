@@ -3976,7 +3976,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -4018,7 +4018,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -4304,13 +4304,13 @@
           "description": "Uri of the storage account to use for placing the console output and screenshot."
         }
       },
-      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
     },
     "DiagnosticsProfile": {
       "properties": {
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnostics",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
         }
       },
       "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
@@ -4374,10 +4374,12 @@
     "BootDiagnosticsInstanceView": {
       "properties": {
         "consoleScreenshotBlobUri": {
+          "readOnly": true,
           "type": "string",
           "description": "The console screenshot blob URI."
         },
         "serialConsoleLogBlobUri": {
+          "readOnly": true,
           "type": "string",
           "description": "The Linux serial console log blob Uri."
         }
@@ -4446,7 +4448,7 @@
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
         },
         "statuses": {
           "type": "array",
@@ -4906,7 +4908,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -5528,7 +5530,7 @@
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
         },
         "statuses": {
           "type": "array",
