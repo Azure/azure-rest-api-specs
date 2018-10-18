@@ -337,6 +337,10 @@
           "type": "object",
           "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
         },
+        "wildcardPath": {
+          "type": "object",
+          "description": "The path of the S3 object with wildcard supported. Type: string (or Expression with resultType string)."
+        },
         "version": {
           "type": "object",
           "description": "The version for the S3 object. Type: string (or Expression with resultType string)."
@@ -388,6 +392,10 @@
         "fileName": {
           "type": "object",
           "description": "The name of the Azure Blob. Type: string (or Expression with resultType string)."
+        },
+        "wildcardPath": {
+          "type": "object",
+          "description": "The whole path include file name of the Azure Blob storage with wildcard supported. Type: string (or Expression with resultType string)."
         },
         "format": {
           "description": "The format of the Azure Blob storage.",
@@ -643,14 +651,15 @@
           "description": "The format of the Data Lake Store.",
           "$ref": "#/definitions/DatasetStorageFormat"
         },
+        "wildcardPath": {
+          "type": "object",
+          "description": "The whole path include file name in the Azure Data Lake Store with wildcard supported. Type: string (or Expression with resultType string)."
+        },
         "compression": {
           "description": "The data compression method used for the item(s) in the Azure Data Lake Store.",
           "$ref": "#/definitions/DatasetCompression"
         }
-      },
-      "required": [
-        "folderPath"
-      ]
+      }
     },
     "FileShareDataset": {
       "x-ms-discriminator-value": "FileShare",
@@ -682,6 +691,10 @@
         "fileName": {
           "type": "object",
           "description": "The name of the on-premises file system. Type: string (or Expression with resultType string)."
+        },
+        "wildcardPath": {
+          "type": "object",
+          "description": "The whole path include file name of the on-premises file system with wildcard supported. Type: string (or Expression with resultType string)."
         },
         "format": {
           "description": "The format of the files.",
