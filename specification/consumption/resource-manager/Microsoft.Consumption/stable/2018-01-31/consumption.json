@@ -3,23 +3,15 @@
   "info": {
     "version": "2018-01-31",
     "title": "ConsumptionManagementClient",
-    "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
+    "description": "Update - Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -36,9 +28,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
-        "tags": [
-          "UsageDetails"
-        ],
+        "tags": ["UsageDetails"],
         "operationId": "UsageDetails_List",
         "description": "Lists the usage details for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
@@ -108,9 +98,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
-        "tags": [
-          "UsageDetails"
-        ],
+        "tags": ["UsageDetails"],
         "operationId": "UsageDetails_ListByBillingPeriod",
         "description": "Lists the usage details for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
@@ -186,9 +174,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
-        "tags": [
-          "Marketplaces"
-        ],
+        "tags": ["Marketplaces"],
         "x-ms-odata": "#/definitions/Marketplace",
         "operationId": "Marketplaces_List",
         "description": "Lists the marketplaces for a scope by subscriptionId. Marketplaces are available via this API only for May 1, 2014 or later.",
@@ -252,9 +238,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
-        "tags": [
-          "Marketplaces"
-        ],
+        "tags": ["Marketplaces"],
         "x-ms-odata": "#/definitions/Marketplace",
         "operationId": "Marketplaces_ListByBillingPeriod",
         "description": "Lists the marketplaces for a scope by billing period and subscripotionId. Marketplaces are available via this API only for May 1, 2014 or later.",
@@ -321,9 +305,7 @@
     },
     "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
-        "tags": [
-          "ReservedInstances"
-        ],
+        "tags": ["ReservedInstances"],
         "operationId": "ReservationsSummaries_ListByReservationOrder",
         "description": "Lists the reservations summaries for daily or monthly grain.",
         "externalDocs": {
@@ -347,10 +329,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "enum": [
-              "daily",
-              "monthly"
-            ],
+            "enum": ["daily", "monthly"],
             "x-ms-enum": {
               "name": "datagrain",
               "modelAsString": true,
@@ -400,9 +379,7 @@
     },
     "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
-        "tags": [
-          "ReservedInstances"
-        ],
+        "tags": ["ReservedInstances"],
         "operationId": "ReservationsSummaries_ListByReservationOrderAndReservation",
         "description": "Lists the reservations summaries for daily or monthly grain.",
         "externalDocs": {
@@ -429,10 +406,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "enum": [
-              "daily",
-              "monthly"
-            ],
+            "enum": ["daily", "monthly"],
             "x-ms-enum": {
               "name": "datagrain",
               "modelAsString": true,
@@ -482,9 +456,7 @@
     },
     "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
-        "tags": [
-          "ReservedInstances"
-        ],
+        "tags": ["ReservedInstances"],
         "operationId": "ReservationsDetails_ListByReservationOrder",
         "description": "Lists the reservations details for provided date range.",
         "externalDocs": {
@@ -531,9 +503,7 @@
     },
     "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
-        "tags": [
-          "ReservedInstances"
-        ],
+        "tags": ["ReservedInstances"],
         "operationId": "ReservationsDetails_ListByReservationOrderAndReservation",
         "description": "Lists the reservations details for provided date range.",
         "externalDocs": {
@@ -583,9 +553,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets": {
       "get": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_List",
         "description": "Lists all budgets for a subscription.",
         "externalDocs": {
@@ -625,9 +593,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/budgets": {
       "get": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_ListByResourceGroupName",
         "description": "Lists all budgets for a resource group under a subscription.",
         "externalDocs": {
@@ -670,9 +636,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/budgets/{budgetName}": {
       "get": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_Get",
         "description": "Gets the budget for a subscription by budget name.",
         "externalDocs": {
@@ -710,9 +674,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_CreateOrUpdate",
         "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "externalDocs": {
@@ -765,9 +727,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_Delete",
         "description": "The operation to delete a budget.",
         "externalDocs": {
@@ -804,9 +764,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Consumption/budgets/{budgetName}": {
       "get": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_GetByResourceGroupName",
         "description": "Gets the budget for a resource group under a subscription by budget name.",
         "externalDocs": {
@@ -847,9 +805,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_CreateOrUpdateByResourceGroupName",
         "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "externalDocs": {
@@ -905,9 +861,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Budgets"
-        ],
+        "tags": ["Budgets"],
         "operationId": "Budgets_DeleteByResourceGroupName",
         "description": "The operation to delete a budget.",
         "externalDocs": {
@@ -947,9 +901,7 @@
     },
     "/providers/Microsoft.Consumption/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
         "parameters": [
@@ -978,9 +930,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default": {
       "get": {
-        "tags": [
-          "PriceSheet"
-        ],
+        "tags": ["PriceSheet"],
         "operationId": "PriceSheet_Get",
         "description": "Gets the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
@@ -1030,7 +980,7 @@
             }
           },
           "default": {
-          "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1040,9 +990,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/default": {
       "get": {
-        "tags": [
-          "PriceSheet"
-        ],
+        "tags": ["PriceSheet"],
         "operationId": "PriceSheet_GetByBillingPeriod",
         "description": "Get the price sheet for a scope by subscriptionId and billing period. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
@@ -1176,11 +1124,6 @@
           "items": {
             "$ref": "#/definitions/UsageDetail"
           }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1683,10 +1626,7 @@
         "category": {
           "description": "The category of the budget, whether the budget tracks cost or usage.",
           "type": "string",
-          "enum": [
-            "Cost",
-            "Usage"
-          ],
+          "enum": ["Cost", "Usage"],
           "x-ms-enum": {
             "name": "CategoryType",
             "modelAsString": true
@@ -1700,11 +1640,7 @@
         "timeGrain": {
           "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
           "type": "string",
-          "enum": [
-            "Monthly",
-            "Quarterly",
-            "Annually"
-          ],
+          "enum": ["Monthly", "Quarterly", "Annually"],
           "x-ms-enum": {
             "name": "TimeGrainType",
             "modelAsString": true
@@ -1734,12 +1670,7 @@
           "maxItems": 5
         }
       },
-      "required": [
-        "category",
-        "amount",
-        "timeGrain",
-        "timePeriod"
-      ]
+      "required": ["category", "amount", "timeGrain", "timePeriod"]
     },
     "BudgetTimePeriod": {
       "description": "The start and end date for a budget.",
@@ -1755,9 +1686,7 @@
           "format": "date-time"
         }
       },
-      "required": [
-        "startDate"
-      ]
+      "required": ["startDate"]
     },
     "Filters": {
       "description": "May be used to filter budgets by resource group, resource, or meter.",
@@ -1817,11 +1746,7 @@
         "operator": {
           "description": "The comparison operator.",
           "type": "string",
-          "enum": [
-            "EqualTo",
-            "GreaterThan",
-            "GreaterThanOrEqualTo"
-          ],
+          "enum": ["EqualTo", "GreaterThan", "GreaterThanOrEqualTo"],
           "x-ms-enum": {
             "name": "OperatorType",
             "modelAsString": true
@@ -1858,12 +1783,7 @@
           "maxItems": 50
         }
       },
-      "required": [
-        "enabled",
-        "operator",
-        "threshold",
-        "contactEmails"
-      ]
+      "required": ["enabled", "operator", "threshold", "contactEmails"]
     },
     "ErrorDetails": {
       "description": "The details of the error.",
@@ -2071,8 +1991,8 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
-		    }
-	    }
+        }
+      }
     }
   },
   "parameters": {
