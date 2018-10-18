@@ -790,6 +790,18 @@
         "tableName"
       ]
     },
+    "OracleServiceCloudObjectDataset" : {
+      "x-ms-discriminator-value": "OracleServiceCloudObject", 
+      "description": "Oracle Service Cloud dataset.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+            "$ref": "#/definitions/Dataset" 
+        } 
+      ], 
+      "properties": { 
+      }
+    },
     "AzureMySqlTableDataset": {
       "x-ms-discriminator-value": "AzureMySqlTable",
       "description": "The Azure MySQL database dataset.",

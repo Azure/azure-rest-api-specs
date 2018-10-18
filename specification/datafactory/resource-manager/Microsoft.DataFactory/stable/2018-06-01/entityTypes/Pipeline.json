@@ -595,6 +595,21 @@
         }
       }
     },
+    "OracleServiceCloudSource": { 
+      "description": "A copy activity Oracle Service Cloud source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
     "WebSource": {
       "description": "A copy activity source for web page table.",
       "type": "object",

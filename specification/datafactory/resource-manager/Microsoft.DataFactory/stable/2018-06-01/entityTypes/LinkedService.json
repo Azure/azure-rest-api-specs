@@ -629,6 +629,64 @@
         "connectionString"
       ]
     },
+    "OracleServiceCloudLinkedService": { 
+      "x-ms-discriminator-value": "OracleServiceCloud", 
+      "description": "Oracle Service Cloud linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Oracle Service Cloud linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/OracleServiceCloudLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "OracleServiceCloudLinkedServiceTypeProperties": { 
+      "description": "Oracle Service Cloud linked service properties.", 
+      "properties": {
+        "host": {
+          "description": "The URL of the Oracle Service Cloud instance.",
+          "type": "object"
+        },
+        "username": {
+          "description": "The user name that you use to access Oracle Service Cloud server.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password corresponding to the user name that you provided in the username key.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "useEncryptedEndpoints": {
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "useHostVerification": {
+          "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "usePeerVerification": {
+          "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      },
+      "required": [
+        "host",
+        "username",
+        "password"
+      ] 
+    },
     "AzureMySqlLinkedService": {
       "x-ms-discriminator-value": "AzureMySql",
       "description": "Azure MySQL database linked service.",
