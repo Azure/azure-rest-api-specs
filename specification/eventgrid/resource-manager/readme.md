@@ -44,8 +44,8 @@ input-file:
 ``` yaml
 directive:
   - suppress: TrackedResourcePatchOperation
-    from: 2018-09-15-preview/?EventGrid.json
-    reason: PATCH operation already exists in the json file but this is known tool bug.
+    from: EventGrid.json
+    reason: PATCH operation already exists in the json file but this is known issue in the ARM validation.
 ```
 
 ### Tag: package-2018-05-preview
