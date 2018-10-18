@@ -759,9 +759,24 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
         }
       } 
+    },
+    "EloquaSource": {
+      "description": "A copy activity Eloqua server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
     }, 
-    "EloquaSource": { 
-      "description": "A copy activity Eloqua server source.", 
+    "GoogleAdWordsSource": { 
+      "description": "A copy activity Google AdWords service source.", 
       "type": "object", 
       "allOf": [ 
         { 

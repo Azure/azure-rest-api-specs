@@ -1151,8 +1151,20 @@
       }
     },
     "EloquaObjectDataset" : {
-      "x-ms-discriminator-value": "EloquaObject", 
-      "description": "Eloqua server dataset.", 
+      "x-ms-discriminator-value": "EloquaObject",
+      "description": "Eloqua server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "GoogleAdWordsObjectDataset" : {
+      "x-ms-discriminator-value": "GoogleAdWordsObject", 
+      "description": "Google AdWords service dataset.", 
       "type": "object", 
       "allOf": [ 
         { 
