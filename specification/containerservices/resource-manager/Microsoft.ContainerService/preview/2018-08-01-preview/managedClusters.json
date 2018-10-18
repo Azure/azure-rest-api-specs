@@ -319,7 +319,7 @@
             "$ref": "./examples/ManagedClustersListClusterCredentialResult.json"
           }
         }
-      } 
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}": {
       "get": {
@@ -948,16 +948,16 @@
         "maxCount":{
           "type": "integer",
           "format": "int32",
-          "description": "Maximun number of nodes for auto-scaling"
+          "description": "Maximum number of nodes for auto-scaling"
         },
         "minCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Minimun number of nodes for auto-scaling"
+          "description": "Minimum number of nodes for auto-scaling"
         },
         "enableAutoScaling":{
           "type": "boolean",
-          "description": "Wheter to enable auto-scaler"
+          "description": "Whether to enable auto-scaler"
         },
         "type": {
           "$ref": "#/definitions/AgentPoolType",
@@ -977,7 +977,6 @@
         "VirtualMachineScaleSets",
         "AvailabilitySet"
       ],
-      "default": "VirtualMachineScaleSets",
       "x-ms-enum": {
         "name": "AgentPoolType",
         "modelAsString": true
@@ -1348,8 +1347,7 @@
       },
       "required": [
         "clientAppID",
-        "serverAppID",
-        "serverAppSecret"
+        "serverAppID"
       ],
       "description": "AADProfile specifies attributes for Azure Active Directory integration."
     },
@@ -1439,7 +1437,7 @@
           "description": "Base64-encoded Kubernetes configuration file."
         }
       },
-      "description": "The credential result response." 
+      "description": "The credential result response."
     }
   },
   "parameters": {
