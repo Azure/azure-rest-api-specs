@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2018-03-01-preview"
+    "version": "2018-12-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -460,7 +460,7 @@
         "description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.",
         "x-ms-examples": {
           "Get a AKS Compute": { "$ref": "./examples/getAKSCompute.json" },
-          "Get a BatchAI Compute": { "$ref": "./examples/getBatchAICompute.json" }
+          "Get a AML Compute": { "$ref": "./examples/getAMLCompute.json" }
         },
         "parameters": [
           {
@@ -503,10 +503,10 @@
         "description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a BatchAI Compute": { "$ref": "./examples/createBasicBatchAICompute.json" },
+          "Create a AML Compute": { "$ref": "./examples/createBasicAMLCompute.json" },
           "Create AKS Compute": { "$ref": "./examples/createBasicAKSCompute.json" },
           "Create a DataFactory Compute": { "$ref": "./examples/createBasicDataFactoryCompute.json" },
-          "Update a BatchAI Compute": { "$ref": "./examples/updateBatchAICompute.json" },
+          "Update a AML Compute": { "$ref": "./examples/updateAMLCompute.json" },
           "Update a AKS Compute": { "$ref": "./examples/updateAKSCompute.json" }
         },
         "parameters": [
@@ -544,6 +544,61 @@
                 "type": "string"
               }
             },
+            "schema": {
+              "$ref": "#/definitions/ComputeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Update",
+        "description": "Updates properties of a AMLCompute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a AMLCompute Compute": { "$ref": "./examples/updateAMLCompute.json" },
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeDefinitionParameter"
+          },
+		  {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdateParameters"
+            },
+            "description": "Additional parameters for cluster update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compute creation or update initiated.",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
             }
@@ -672,8 +727,7 @@
         "operationId": "MachineLearningCompute_ListKeys",
         "description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).",
         "x-ms-examples": {
-          "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" },
-          "List BatchAI Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" }
+          "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" }
         },
         "parameters": [
           {
@@ -873,10 +927,6 @@
           "description": "The creation time of the machine learning workspace in ISO8601 format.",
           "type": "string",
           "readOnly": true
-        },
-        "batchaiWorkspace": {
-          "description": "ARM id of the Batch AI workspace associated with this workspace. This cannot be changed once the workspace has been created",
-          "type": "string"
         },
         "keyVault": {
           "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
@@ -1223,8 +1273,8 @@
       ],
       "x-ms-discriminator-value": "AKS"
     },
-    "BatchAI": {
-      "description": "A Machine Learning compute based on Azure BatchAI.",
+    "AMLCompute": {
+      "description": "A Machine Learning compute based on Azure AMLCompute.",
       "allOf": [
         {
           "$ref": "#/definitions/Compute"
@@ -1233,7 +1283,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "description": "BatchAI properties",
+              "description": "AML Compute properties",
               "type": "object",
               "properties": {
                 "vmSize": {
@@ -1245,15 +1295,64 @@
                   "type": "string"
                 },
                 "scaleSettings": {
-                  "description": "Scale settings for BatchAI",
+                  "description": "Scale settings for AML Compute",
                   "$ref": "#/definitions/ScaleSettings"
                 }
+				"subnet": {
+					"title": "Subnet.",
+					"description": "Virtual network subnet resource ID the cluster nodes belong to.",
+					"$ref": "#/definitions/ResourceId"
+				},
+				"allocationState": {
+				  "type": "string",
+				  "readOnly": true,
+				  "title": "Allocation state.",
+				  "description": "Allocation state of the cluster. Possible values are: steady - Indicates that the cluster is not resizing. There are no changes to the number of compute nodes in the cluster in progress. A cluster enters this state when it is created and when no operations are being performed on the cluster to change the number of compute nodes. resizing - Indicates that the cluster is resizing; that is, compute nodes are being added to or removed from the cluster.",
+				  "enum": [
+					"steady",
+					"resizing"
+				  ],
+				  "x-ms-enum": {
+					"name": "AllocationState",
+					"modelAsString": true
+				  }
+				},
+				"allocationStateTransitionTime": {
+				  "type": "string",
+				  "readOnly": true,
+				  "format": "date-time",
+				  "title": "Allocation state transition time.",
+				  "description": "The time at which the cluster entered its current allocation state."
+				},
+				"errors": {
+				  "readOnly": true,
+				  "title": "Errors.",
+				  "description": "Collection of errors encountered by various compute nodes during node setup.",
+				  "type": "array",
+				  "items": {
+					"$ref": "#/definitions/AMLComputeError"
+				  }
+				},
+				"currentNodeCount": {
+				  "type": "integer",
+				  "readOnly": true,
+				  "format": "int32",
+				  "title": "Current node count.",
+				  "description": "The number of compute nodes currently assigned to the cluster."
+				},
+				"nodeStateCounts": {
+				  "title": "Node state counts.",
+				  "description": "Counts of various node states on the cluster.",
+				  "readOnly": true,
+				  "$ref": "#/definitions/NodeStateCounts"
+				}
+
               }
             }
           }
         }
       ],
-      "x-ms-discriminator-value": "BatchAI"
+      "x-ms-discriminator-value": "AMLCompute"
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -1397,7 +1496,7 @@
     },
     "ScaleSettings": {
       "type": "object",
-      "description": "scale settings for BatchAI Compute",
+      "description": "scale settings for AML Compute",
       "properties": {
         "maxNodeCount": {
           "description": "Max number of nodes to use",
@@ -1407,11 +1506,97 @@
           "description": "Min number of nodes to use",
           "type": "integer"
         },
-        "autoScaleEnabled": {
-          "description": "Enable or disable auto scale",
-          "type": "boolean"
+        "NodeIdleTimeBeforeScaleDown": {
+            "type": "string",
+            "format": "duration",
+            "description": "Node Idle Time before scaling down cluster"
         }
       }
+    },
+    "NodeStateCounts": {
+      "properties": {
+        "idleNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Idle node count.",
+          "description": "Number of compute nodes in idle state."
+        },
+        "runningNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Running node count.",
+          "description": "Number of compute nodes which are running jobs."
+        },
+        "preparingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Preparing node count.",
+          "description": "Number of compute nodes which are being prepared."
+        },
+        "unusableNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Unusable node count.",
+          "description": "Number of compute nodes which are in unusable state."
+        },
+        "leavingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Leaving node count.",
+          "description": "Number of compute nodes which are leaving the cluster."
+        },
+        "preemptedNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Preempted node count.",
+          "description": "Number of compute nodes which are in preempted state."
+        }
+      },
+      "description": "Counts of various compute node states on the cluster."
+    },
+    "NameValuePair": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name.",
+          "description": "The name in the name-value pair."
+        },
+        "value": {
+          "type": "string",
+          "title": "Value.",
+          "description": "The value in the name-value pair."
+        }
+      },
+      "description": "Name-value pair."
+    },
+    "AMLComputeError": {
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An identifier of the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the AML Compute service."
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
@@ -1498,7 +1683,7 @@
       "description": "The type of compute",
       "enum": [
         "AKS",
-        "BatchAI",
+        "AMLCompute",
         "DataFactory",
         "VirtualMachine",
         "HDInsight"
