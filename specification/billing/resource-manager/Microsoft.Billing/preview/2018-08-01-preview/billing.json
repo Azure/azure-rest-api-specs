@@ -171,10 +171,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "billingPeriodName",
@@ -220,10 +220,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$expand",
@@ -289,10 +289,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "invoiceName",
@@ -332,10 +332,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -363,7 +363,7 @@
         "description": "Lists all of the available billing REST API operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -396,13 +396,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/projectIdParameter"
+            "$ref": "#/parameters/ProjectIdParameter"
           },
           {
-            "$ref": "#/parameters/initiateImportRequestParameter"
+            "$ref": "#/parameters/InitiateImportRequestParameter"
           }
         ],
         "tags": [
@@ -412,10 +412,7 @@
           "200": {
             "description": "Initiated import request details.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/importRequestDetails"
-              }
+              "$ref": "#/definitions/ImportRequestDetails"
             }
           },
           "default": {
@@ -438,13 +435,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/projectIdParameter"
+            "$ref": "#/parameters/ProjectIdParameter"
           },
           {
-            "$ref": "#/parameters/importRequestIdParameter"
+            "$ref": "#/parameters/ImportRequestIdParameter"
           }
         ],
         "tags": [
@@ -454,10 +451,7 @@
           "200": {
             "description": "Details of import request.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/importRequestDetails"
-              }
+                "$ref": "#/definitions/ImportRequestDetails"
             }
           },
           "default": {
@@ -478,13 +472,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/projectIdParameter"
+            "$ref": "#/parameters/ProjectIdParameter"
           },
           {
-            "$ref": "#/parameters/importRequestIdParameter"
+            "$ref": "#/parameters/ImportRequestIdParameter"
           }
         ],
         "tags": [
@@ -494,10 +488,7 @@
           "200": {
             "description": "Details of canceled import request.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/importRequestDetails"
-              }
+                "$ref": "#/definitions/ImportRequestDetails"
             }
           },
           "default": {
@@ -520,10 +511,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/projectIdParameter"
+            "$ref": "#/parameters/ProjectIdParameter"
           }
         ],
         "tags": [
@@ -533,10 +524,7 @@
           "200": {
             "description": "List of import requests initiated from this project.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/importRequestDetailsListResult"
-              }
+              "$ref": "#/definitions/ImportRequestDetailsListResult"
             }
           },
           "default": {
@@ -545,6 +533,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -559,10 +550,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/importRequestIdParameter"
+            "$ref": "#/parameters/ImportRequestIdParameter"
           },
           {
-            "$ref": "#/parameters/acceptImportRequestParameter"
+            "$ref": "#/parameters/AcceptImportRequestParameter"
           }
         ],
         "tags": [
@@ -572,10 +563,7 @@
           "200": {
             "description": "Details of the accepted import request.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/recipientImportRequestDetails"
-              }
+                "$ref": "#/definitions/RecipientImportRequestDetails"
             }
           },
           "default": {
@@ -598,7 +586,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/importRequestIdParameter"
+            "$ref": "#/parameters/ImportRequestIdParameter"
           }
         ],
         "tags": [
@@ -608,10 +596,7 @@
           "200": {
             "description": "Details of the declined import request.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/recipientImportRequestDetails"
-              }
+                "$ref": "#/definitions/RecipientImportRequestDetails"
             }
           },
           "default": {
@@ -634,7 +619,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/importRequestIdParameter"
+            "$ref": "#/parameters/ImportRequestIdParameter"
           }
         ],
         "tags": [
@@ -644,10 +629,7 @@
           "200": {
             "description": "Details of the import requests with given Id.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/recipientImportRequestDetails"
-              }
+                "$ref": "#/definitions/RecipientImportRequestDetails"
             }
           },
           "default": {
@@ -675,10 +657,7 @@
           "200": {
             "description": "List of import requests received by caller.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/recipientImportRequestDetailsListResult"
-              }
+              "$ref": "#/definitions/RecipientImportRequestDetailsListResult"
             }
           },
           "default": {
@@ -687,6 +666,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -974,18 +956,18 @@
       },
       "x-ms-azure-resource": true
     },
-    "initiateImportRequest": {
+    "InitiateImportRequest": {
       "type": "object",
       "description": "Request parameters to initiate import request.",
       "properties": {
         "properties": {
           "description": "Request parameters to initiate import request.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/initiateImportRequestProperties"
+          "$ref": "#/definitions/InitiateImportRequestProperties"
         }
       }
     },
-    "initiateImportRequestProperties": {
+    "InitiateImportRequestProperties": {
       "type": "object",
       "description": "Request parameters to initiate import request.",
       "properties": {
@@ -1003,18 +985,18 @@
         }
       }
     },
-    "acceptImportRequest": {
+    "AcceptImportRequest": {
       "type": "object",
       "description": "Request parameters to accept import request.",
       "properties": {
         "properties": {
           "description": "Request parameters to accept import request.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/acceptImportRequestProperties"
+          "$ref": "#/definitions/AcceptImportRequestProperties"
         }
       }
     },
-    "acceptImportRequestProperties": {
+    "AcceptImportRequestProperties": {
       "type": "object",
       "description": "Request parameters to accept import request.",
       "properties": {
@@ -1022,18 +1004,18 @@
           "description": "Request parameters to accept import request.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/productDetails"
+            "$ref": "#/definitions/ProductDetails"
           }
         }
       }
     },
-    "productDetails": {
+    "ProductDetails": {
       "type": "object",
       "description": "Details of the product to be imported.",
       "properties": {
         "productType": {
           "description": "Type of the prouct to be imported.",
-          "$ref": "#/definitions/productType"
+          "$ref": "#/definitions/ProductType"
         },
         "productId": {
           "type": "string",
@@ -1041,7 +1023,7 @@
         }
       }
     },
-    "productType": {
+    "ProductType": {
       "type": "string",
       "description": "Type of the product to be imported.",
       "enum": [
@@ -1053,29 +1035,29 @@
         "modelAsString": true
       }
     },
-    "importRequestDetails": {
+    "ImportRequestDetails": {
       "type": "object",
       "description": "Details of the import request.",
       "properties": {
         "properties": {
           "description": "Details of the import request.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/importRequestProperties"
+          "$ref": "#/definitions/ImportRequestProperties"
         }
       }
     },
-    "recipientImportRequestDetails": {
+    "RecipientImportRequestDetails": {
       "type": "object",
       "description": "Details of the import request.",
       "properties": {
         "properties": {
           "description": "Details of the import request.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/recipientImportRequestProperties"
+          "$ref": "#/definitions/RecipientImportRequestProperties"
         }
       }
     },
-    "extendedImportRequestStatus": {
+    "ExtendedImportRequestStatus": {
       "type": "object",
       "description": "Detailed import request status.",
       "properties": {
@@ -1096,11 +1078,11 @@
         },
         "errorDetails": {
           "description": "Error details for import request execution.",
-          "$ref": "#/definitions/error"
+          "$ref": "#/definitions/Error"
         }
       }
     },
-    "error": {
+    "Error": {
       "description": "Error details for import request execution.",
       "properties": {
         "errorCode": {
@@ -1115,7 +1097,7 @@
         }
       }
     },
-    "subscriptionType": {
+    "SubscriptionType": {
       "type": "string",
       "description": "Type of the subscriptions that can be imported.",
       "enum": [
@@ -1127,17 +1109,19 @@
         "modelAsString": true
       }
     },
-    "importRequestProperties": {
+    "ImportRequestProperties": {
       "description": "Import request details",
       "type": "object",
       "properties": {
         "creationTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Import request creation time.",
           "readOnly": true
         },
         "expirationTime": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Import request expiration time."
         },
@@ -1154,7 +1138,7 @@
         "devTestUsageContext": {
           "type": "string",
           "readOnly": true,
-          "description": "Target usage ontext for dev-test  susbcriptions."
+          "description": "Target usage context for dev-test  susbcriptions."
         },
         "standardUsageContext": {
           "type": "string",
@@ -1183,6 +1167,7 @@
         },
         "lastModifiedTime": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Import request last modification time."
         },
@@ -1191,22 +1176,24 @@
           "readOnly": true,
           "description": "Detailed import request status.",
           "items": {
-            "$ref": "#/definitions/extendedImportRequestStatus"
+            "$ref": "#/definitions/ExtendedImportRequestStatus"
           }
         }
       }
     },
-    "recipientImportRequestProperties": {
+    "RecipientImportRequestProperties": {
       "description": "Import request Details.",
       "type": "object",
       "properties": {
         "creationTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Import request creation time.",
           "readOnly": true
         },
         "expirationTime": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Import request expiration time."
         },
@@ -1215,7 +1202,7 @@
           "readOnly": true,
           "description": "Type of subscriptions that can be imported.",
           "items": {
-            "$ref": "#/definitions/subscriptionType"
+            "$ref": "#/definitions/SubscriptionType"
           }
         },
         "importRequestStatus": {
@@ -1240,6 +1227,7 @@
         },
         "lastModifiedTime": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Import request last modification time."
         },
@@ -1248,12 +1236,12 @@
           "readOnly": true,
           "description": "Detailed import request status.",
           "items": {
-            "$ref": "#/definitions/extendedImportRequestStatus"
+            "$ref": "#/definitions/ExtendedImportRequestStatus"
           }
         }
       }
     },
-    "recipientImportRequestDetailsListResult": {
+    "RecipientImportRequestDetailsListResult": {
       "description": "Result of listing details of the import request received by caller.",
       "properties": {
         "value": {
@@ -1261,7 +1249,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/recipientImportRequestDetails"
+            "$ref": "#/definitions/RecipientImportRequestDetails"
           }
         },
         "nextLink": {
@@ -1271,7 +1259,7 @@
         }
       }
     },
-    "importRequestDetailsListResult": {
+    "ImportRequestDetailsListResult": {
       "description": "Result of listing details of the import request initiated by caller.",
       "properties": {
         "value": {
@@ -1279,7 +1267,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/importRequestDetails"
+            "$ref": "#/definitions/ImportRequestDetails"
           }
         },
         "nextLink": {
@@ -1291,21 +1279,21 @@
     }
   },
   "parameters": {
-    "apiVersionParameter": {
+    "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
     },
-    "subscriptionIdParameter": {
+    "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "description": "Azure Subscription ID.",
       "required": true,
       "type": "string"
     },
-    "billingAccountIdParameter": {
+    "BillingAccountIdParameter": {
       "name": "billingAccountId",
       "x-ms-parameter-location": "method",
       "in": "path",
@@ -1313,7 +1301,7 @@
       "type": "string",
       "description": "Billing account Id."
     },
-    "projectIdParameter": {
+    "ProjectIdParameter": {
       "name": "projectId",
       "x-ms-parameter-location": "method",
       "in": "path",
@@ -1321,7 +1309,7 @@
       "type": "string",
       "description": "Project Id."
     },
-    "importRequestIdParameter": {
+    "ImportRequestIdParameter": {
       "name": "importRequestId",
       "x-ms-parameter-location": "method",
       "in": "path",
@@ -1329,24 +1317,24 @@
       "type": "string",
       "description": "Import request Id."
     },
-    "initiateImportRequestParameter": {
+    "InitiateImportRequestParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
       "description": "Initiate import request parameters.",
       "schema": {
-        "$ref": "#/definitions/initiateImportRequest"
+        "$ref": "#/definitions/InitiateImportRequest"
       }
     },
-    "acceptImportRequestParameter": {
+    "AcceptImportRequestParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
       "description": "Accept import request parameters.",
       "schema": {
-        "$ref": "#/definitions/acceptImportRequest"
+        "$ref": "#/definitions/AcceptImportRequest"
       }
     }
   },
