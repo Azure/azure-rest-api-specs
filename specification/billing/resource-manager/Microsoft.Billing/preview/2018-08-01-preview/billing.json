@@ -30,7 +30,7 @@
         "description": "Lists the enrollment accounts the caller has access to.",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -73,7 +73,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -109,10 +109,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -1063,6 +1063,7 @@
       "properties": {
         "productType": {
           "type": "string",
+          "$ref": "#/definitions/ProductType",
           "readOnly": true,
           "description": "Type of product being imported."
         },
@@ -1073,6 +1074,7 @@
         },
         "importRequestStatus": {
           "type": "string",
+          "$ref": "#/definitions/ProductImportRequestStatus",
           "readOnly": true,
           "description": "Import request status."
         },
@@ -1147,6 +1149,7 @@
         },
         "importRequestStatus": {
           "type": "string",
+          "$ref": "#/definitions/ImportRequestStatus",
           "description": "Overall import request status.",
           "readOnly": true
         },
@@ -1207,6 +1210,7 @@
         },
         "importRequestStatus": {
           "type": "string",
+          "$ref": "#/definitions/ImportRequestStatus",
           "description": "Overall import request status.",
           "readOnly": true
         },
@@ -1239,6 +1243,37 @@
             "$ref": "#/definitions/ExtendedImportRequestStatus"
           }
         }
+      }
+    },
+    "ImportRequestStatus": {
+      "type": "string",
+      "description": "Possible import request status.",
+      "enum": [
+        "Pending",
+        "InProgress",
+        "Completed",
+        "CompletedWithErrors",
+        "Failed",
+        "Canceled",
+        "Declined"
+      ],
+      "x-ms-enum": {
+        "name": "importRequestStatus",
+        "modelAsString": true
+      }
+    },
+    "ProductImportRequestStatus": {
+      "type": "string",
+      "description": "Possible import request status.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Completed",
+        "Failed",
+      ],
+      "x-ms-enum": {
+        "name": "productImportRequestStatus",
+        "modelAsString": true
       }
     },
     "RecipientImportRequestDetailsListResult": {
