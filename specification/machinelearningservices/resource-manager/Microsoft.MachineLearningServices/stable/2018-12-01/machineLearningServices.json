@@ -398,7 +398,7 @@
           "nextLinkName": null
         }
       }
-    },	
+    },    
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -622,7 +622,7 @@
           {
             "$ref": "#/parameters/ComputeDefinitionParameter"
           },
-		  {
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -1068,7 +1068,7 @@
       },
       "description": "Describes the properties of a VM size."
     },
-	"VirtualMachineSizeListResult": {
+    "VirtualMachineSizeListResult": {
       "properties": {
         "AKS": {
           "type": "array",
@@ -1105,7 +1105,7 @@
           },
           "description": "The list of virtual machine sizes for HDInsight."
         }
-		
+        
       },
       "description": "The List Virtual Machine size operation response."
     },
@@ -1409,40 +1409,40 @@
                   "description": "Scale settings for AML Compute",
                   "$ref": "#/definitions/ScaleSettings"
                 }
-				"subnet": {
-					"title": "Subnet.",
-					"description": "Virtual network subnet resource ID the cluster nodes belong to.",
-					"$ref": "#/definitions/ResourceId"
-				},
-				"allocationState": {
-				  "type": "string",
-				  "readOnly": true,
-				  "title": "Allocation state.",
-				  "description": "Allocation state of the cluster. Possible values are: steady - Indicates that the cluster is not resizing. There are no changes to the number of compute nodes in the cluster in progress. A cluster enters this state when it is created and when no operations are being performed on the cluster to change the number of compute nodes. resizing - Indicates that the cluster is resizing; that is, compute nodes are being added to or removed from the cluster.",
-				  "enum": [
-					"steady",
-					"resizing"
-				  ],
-				  "x-ms-enum": {
-					"name": "AllocationState",
-					"modelAsString": true
-				  }
-				},
-				"allocationStateTransitionTime": {
-				  "type": "string",
-				  "readOnly": true,
-				  "format": "date-time",
-				  "title": "Allocation state transition time.",
-				  "description": "The time at which the cluster entered its current allocation state."
-				},
-				"errors": {
-				  "readOnly": true,
-				  "title": "Errors.",
-				  "description": "Collection of errors encountered by various compute nodes during node setup.",
-				  "type": "array",
-				  "items": {
-					"$ref": "#/definitions/AMLComputeError"
-		          }
+                "subnet": {
+                    "title": "Subnet.",
+                    "description": "Virtual network subnet resource ID the cluster nodes belong to.",
+                    "$ref": "#/definitions/ResourceId"
+                },
+                "allocationState": {
+                  "type": "string",
+                  "readOnly": true,
+                  "title": "Allocation state.",
+                  "description": "Allocation state of the cluster. Possible values are: steady - Indicates that the cluster is not resizing. There are no changes to the number of compute nodes in the cluster in progress. A cluster enters this state when it is created and when no operations are being performed on the cluster to change the number of compute nodes. resizing - Indicates that the cluster is resizing; that is, compute nodes are being added to or removed from the cluster.",
+                  "enum": [
+                    "steady",
+                    "resizing"
+                  ],
+                  "x-ms-enum": {
+                    "name": "AllocationState",
+                    "modelAsString": true
+                  }
+                },
+                "allocationStateTransitionTime": {
+                  "type": "string",
+                  "readOnly": true,
+                  "format": "date-time",
+                  "title": "Allocation state transition time.",
+                  "description": "The time at which the cluster entered its current allocation state."
+                },
+                "errors": {
+                  "readOnly": true,
+                  "title": "Errors.",
+                  "description": "Collection of errors encountered by various compute nodes during node setup.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AMLComputeError"
+                  }
                 },
                 "currentNodeCount": {
                   "type": "integer",
@@ -1456,7 +1456,7 @@
                   "description": "Counts of various node states on the cluster.",
                   "readOnly": true,
                   "$ref": "#/definitions/NodeStateCounts"
-				}
+                }
 
               }
             }
