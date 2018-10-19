@@ -23,6 +23,8 @@ To see additional help and options, run:
 
 ### Basic Information
 These are the global settings for the DataLakeStorage API.
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 
 ``` yaml
 openapi-type: data-plane
