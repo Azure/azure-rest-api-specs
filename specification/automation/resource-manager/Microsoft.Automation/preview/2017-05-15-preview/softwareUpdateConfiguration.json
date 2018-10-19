@@ -350,12 +350,43 @@
           "type": "string",
           "description": "lastModifiedBy property, which only appears in the response.",
           "readOnly": true
+        },
+        "tasks": {
+          "description": "Tasks information for the Software update configuration",
+          "$ref": "#/definitions/tasksProperties"
         }
-      },
-      "required": [
-        "updateConfiguration",
-        "scheduleInfo"
-      ]
+      }
+    },
+    "tasksProperties": {
+      "type": "object",
+      "description": "task properties of the software update configuration.",
+      "properties": {
+        "preTask": {
+          "description": "Pre task object",
+          "$ref": "#/definitions/taskProperties"
+        },
+        "postTask": {
+          "description": "Post task object",
+          "$ref": "#/definitions/taskProperties"
+        }
+      }
+    },
+    "taskProperties": {
+      "type": "object",
+      "description": "task properties of the software update configuration.",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      }
     },
     "WindowsProperties": {
       "type": "object",

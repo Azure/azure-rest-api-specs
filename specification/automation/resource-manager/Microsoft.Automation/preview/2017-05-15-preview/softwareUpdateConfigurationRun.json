@@ -7,7 +7,7 @@
       "name": "Mohamed Enein"
     },
     "version": "2017-05-15-preview",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -262,6 +262,46 @@
           "type": "string",
           "description": "lastModifiedBy property, which only appears in the response.",
           "readOnly": true
+        },
+        "tasks": {
+          "description": "software update configuration tasks triggered in this run",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTasks"
+        }
+      }
+    },
+    "softareUpdateConfigurationRunTasks": {
+      "description": "Software update configuration run tasks model.",
+      "type": "object",
+      "properties": {
+        "preTask": {
+          "description": "Pre task object",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTaskProperties"
+        },
+        "postTask": {
+          "description": "Post task object",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTaskProperties"
+        }
+      },
+      "required": [
+        "updateConfiguration",
+        "scheduleInfo"
+      ]
+    },
+    "softareUpdateConfigurationRunTaskProperties": {
+      "type": "object",
+      "description": "task properties of the software update configuration.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "The name of the source of the task."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job id of the task."
         }
       }
     },
