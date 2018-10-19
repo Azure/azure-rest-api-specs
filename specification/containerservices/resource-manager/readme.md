@@ -34,7 +34,19 @@ These are the global settings for the ContainerServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2018-09-30-preview
+tag: package-2018-08-preview
+```
+
+### Tag: package-2018-08-preview
+
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08-preview'
+input-file:
+- Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/preview/2018-08-01-preview/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2018-09-30-preview
@@ -171,14 +183,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.containerservice
   package-name: azure-mgmt-containerservice
-  package-version: 4.3.0
+  package-version: 4.3.1
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
