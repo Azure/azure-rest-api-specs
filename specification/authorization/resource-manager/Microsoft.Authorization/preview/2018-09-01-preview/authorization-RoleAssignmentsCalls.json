@@ -563,6 +563,26 @@
           "type": "string",
           "description": "The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group."
         },
+        "principalType": {
+          "type": "string",
+          "description": "The principal type of the assigned principal ID.",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal",
+            "Unknown",
+            "DirectoryRoleTemplate",
+            "ForeignGroup",
+            "Application",
+            "MSI",
+            "DirectoryObjectOrGroup",
+            "Everyone"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
         "canDelegate": {
           "type": "boolean",
           "description": "The delgation flag used for creating a role assignment"
