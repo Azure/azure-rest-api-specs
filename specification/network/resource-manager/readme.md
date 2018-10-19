@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Network.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,62 @@ To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Network API.
 
 ``` yaml
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-07
+tag: package-2018-08
 ```
 
+
+### Tag: package-2018-08
+
+These settings apply only when `--tag=package-2018-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-08'
+input-file:
+  - Microsoft.Network/stable/2018-08-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-08-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-08-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-08-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-08-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-08-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-08-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-08-01/endpointService.json
+  - Microsoft.Network/stable/2018-08-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-08-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-08-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-08-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-08-01/network.json
+  - Microsoft.Network/stable/2018-08-01/networkInterface.json
+  - Microsoft.Network/stable/2018-08-01/networkProfile.json
+  - Microsoft.Network/stable/2018-08-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-08-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-08-01/operation.json
+  - Microsoft.Network/stable/2018-08-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-08-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-08-01/routeFilter.json
+  - Microsoft.Network/stable/2018-08-01/routeTable.json
+  - Microsoft.Network/stable/2018-08-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-08-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-08-01/usage.json
+  - Microsoft.Network/stable/2018-08-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-08-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-08-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-08-01/virtualWan.json
+  - Microsoft.Network/stable/2018-08-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2018-08-01/vmssPublicIpAddress.json
+```
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
@@ -405,7 +445,6 @@ input-file:
 - Microsoft.Network/stable/2017-08-01/vmssPublicIpAddress.json
 ```
 
-
 ### Tag: package-2017-06
 
 These settings apply only when `--tag=package-2017-06` is specified on the command line.
@@ -431,7 +470,6 @@ input-file:
 - Microsoft.Network/stable/2017-06-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2017-06-01/vmssPublicIpAddress.json
 ```
-
 
 ### Tag: package-2017-03
 
@@ -586,6 +624,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -596,6 +635,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: azureFirewall.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: azureFirewallFqdnTag.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
@@ -611,6 +653,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: expressRouteCrossConnection.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRouteGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
@@ -632,7 +677,7 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: publicIpPrefix.json
-    reason: name, id and type properties are inherited from the upper level    
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: routeFilter.json
     reason: name, id and type properties are inherited from the upper level
@@ -652,7 +697,19 @@ directive:
     from: serviceEndpointPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetworkTap.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: interfaceEndpoint.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkProfile.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: availableDelegations.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
@@ -688,8 +745,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -703,6 +760,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -710,6 +768,7 @@ swagger-to-sdk:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -729,6 +788,10 @@ directive:
     reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -745,7 +808,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ### Java multi-api
 
-```yaml $(java) && $(multiapi)
+``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-06
   - tag: package-2018-04

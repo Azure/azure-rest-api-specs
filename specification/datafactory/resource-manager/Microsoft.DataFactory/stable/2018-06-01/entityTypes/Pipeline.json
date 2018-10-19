@@ -25,6 +25,10 @@
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
           "description": "List of parameters for pipeline."
         },
+        "variables": {
+          "$ref": "../datafactory.json#/definitions/VariableDefinitionSpecification",
+          "description": "List of variables for pipeline."
+        },
         "concurrency": {
           "type": "integer",
           "minimum": 1,
@@ -187,6 +191,10 @@
           "description": "Interval between each retry attempt (in seconds). The default is 30 sec.",
           "minimum": 30,
           "maximum": 86400
+        },
+        "secureInput": {
+          "type": "boolean",
+          "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring."
         },
         "secureOutput": {
           "type": "boolean",
@@ -375,6 +383,21 @@
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics (online & on-premises). Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "DynamicsAXSource": { 
+      "description": "A copy activity Dynamics AX source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
     },
     "RelationalSource": {
       "description": "A copy activity source for various relational databases.",
@@ -587,6 +610,21 @@
         }
       }
     },
+    "OracleServiceCloudSource": { 
+      "description": "A copy activity Oracle Service Cloud source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    }, 
     "WebSource": {
       "description": "A copy activity source for web page table.",
       "type": "object",
@@ -677,6 +715,25 @@
         }
       }
     },
+    "RestServiceSource": { 
+      "description": "A copy activity Rest service source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "httpRequestTimeout": { 
+          "type": "object", 
+          "description": "The timeout (TimeSpan) to get an HTTP response.  It is the timeout to get a response, not the timeout to read response data.  Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))." 
+        },
+        "requestInterval": {
+            "type": "object",
+            "description": "The time to await before sending next page request.  Default value: 00:00:01. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      } 
+    }, 
     "AmazonMWSSource": { 
       "description": "A copy activity Amazon Marketplace Web Service source.", 
       "type": "object", 
@@ -751,9 +808,24 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
         }
       } 
+    },
+    "EloquaSource": {
+      "description": "A copy activity Eloqua server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
     }, 
-    "EloquaSource": { 
-      "description": "A copy activity Eloqua server source.", 
+    "GoogleAdWordsSource": { 
+      "description": "A copy activity Google AdWords service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1176,10 +1248,7 @@
           "description": "Stored procedure parameter type.",
           "$ref": "#/definitions/StoredProcedureParameterType"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
@@ -2854,7 +2923,7 @@
       ]
     },
     "FilterActivityTypeProperties": {
-      "description": "Fitler activity properties.",
+      "description": "Filter activity properties.",
       "properties": {
         "items": {
           "description": "Input array on which filter should be applied.",
@@ -3019,6 +3088,70 @@
       "required": [
         "pythonFile"
       ]
+    },
+    "SetVariableActivity": {
+      "x-ms-discriminator-value": "SetVariable",
+      "description": "Set value for a Variable.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Set Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SetVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SetVariableActivityTypeProperties": {
+      "description": "SetVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be set. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
+    },
+    "AppendVariableActivity": {
+      "x-ms-discriminator-value": "AppendVariable",
+      "description": "Append value for a Variable of type Array.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Append Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppendVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AppendVariableActivityTypeProperties": {
+      "description": "AppendVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be appended to.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be appended. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
     }
   }
 }

@@ -446,6 +446,14 @@
                         "type": "string"
                     },
                     "description": "Optional. The Distinguished Names for cluster user groups"
+                },
+                "aaddsResourceId": {
+                    "type": "string",
+                    "description": "The resource ID of the user's Azure Active Directory Domain Service."
+                },
+                "msiResourceId": {
+                    "type": "string",
+                    "description": "User assigned identity that has permissions to read and create cluster-related artifacts in the user's AADDS."
                 }
             }
         },
@@ -697,6 +705,10 @@
                 "properties": {
                     "$ref": "#/definitions/ClusterCreateProperties",
                     "description": "The cluster create parameters."
+                },
+                "identity": {
+                  "$ref": "#/definitions/ClusterIdentity",
+                  "description": "The identity of the cluster, if configured."
                 }
             },
             "description": "The CreateCluster request parameters."
@@ -860,6 +872,10 @@
                 "properties": {
                     "$ref": "#/definitions/ClusterGetProperties",
                     "description": "The properties of the cluster."
+                },
+                "identity": {
+                  "$ref": "#/definitions/ClusterIdentity",
+                  "description": "The identity of the cluster, if configured."
                 }
             },
             "description": "The HDInsight cluster."
@@ -1018,6 +1034,54 @@
             },
             "description": "The list runtime script action detail response."
         },
+        "ClusterIdentity": {
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of cluster identity. This property will only be provided for a system assigned identity."
+              },
+              "tenantId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The tenant id associated with the cluster. This property will only be provided for a system assigned identity."
+              },
+              "type": {
+                "type": "string",
+                "description": "The type of identity used for the cluster. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities.",
+                "enum": [
+                  "SystemAssigned",
+                  "UserAssigned",
+                  "SystemAssigned, UserAssigned",
+                  "None"
+                ],
+                "x-ms-enum": {
+                  "name": "ResourceIdentityType",
+                  "modelAsString": false
+                }
+              },
+              "userAssignedIdentities": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "principalId": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "The principal id of user assigned identity."
+                    },
+                    "clientId": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "The client id of user assigned identity."
+                    }
+                  }
+                },
+                "description": "The list of user identities associated with the cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+              }
+            },
+            "description": "Identity for the cluster."
+          },
         "ClusterListResult": {
             "properties": {
                 "value": {

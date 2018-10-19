@@ -2092,15 +2092,26 @@
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for DirectLine channel"
+          "description": "Whether this site is enabled for DirectLine channel."
         },
         "isV1Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol"
+          "description": "Whether this site is enabled for Bot Framework V1 protocol."
         },
         "isV3Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol"
+          "description": "Whether this site is enabled for Bot Framework V1 protocol."
+        },
+        "isSecureSiteEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is enabled for authentication with Bot Framework."
+        },
+        "trustedOrigins": {
+          "type": "array",
+          "description": "List of Trusted Origin URLs for this site. This field is applicable only if isSecureSiteEnabled is True.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "A site for the Direct Line channel",

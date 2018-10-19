@@ -395,6 +395,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken": {
+      "post": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_GetGitHubAccessToken",
+        "x-ms-examples": {
+          "Factories_GetGitHubAccessToken": {
+            "$ref": "./examples/Factories_GetGitHubAccessToken.json"
+          }
+        },
+        "description": "Get GitHub Access Token.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "gitHubAccessTokenRequest",
+            "description": "Get GitHub access token request definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes": {
       "get": {
         "tags": [
@@ -2217,6 +2268,13 @@
             "$ref": "#/parameters/runId"
           },
           {
+            "name": "isRecursive",
+            "description": "If true, cancel all the Child pipelines that are triggered by the current pipeline.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2521,6 +2579,249 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}": {
+      "put": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Create",
+        "x-ms-examples": {
+          "RerunTriggers_Create": {
+            "$ref": "./examples/RerunTriggers_Create.json"
+          }
+        },
+        "description": "Creates a rerun trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "rerunTumblingWindowTriggerActionParameters",
+            "description": "Rerun tumbling window trigger action parameters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RerunTumblingWindowTriggerActionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/start": {
+      "post": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Start",
+        "x-ms-examples": {
+          "Triggers_Start": {
+            "$ref": "./examples/RerunTriggers_Start.json"
+          }
+        },
+        "description": "Starts a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been started successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/stop": {
+      "post": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Stop",
+        "x-ms-examples": {
+          "Triggers_Stop": {
+            "$ref": "./examples/RerunTriggers_Stop.json"
+          }
+        },
+        "description": "Stops a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been stopped successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/cancel": {
+      "post": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Cancel",
+        "x-ms-examples": {
+          "Triggers_Cancel": {
+            "$ref": "./examples/RerunTriggers_Cancel.json"
+          }
+        },
+        "description": "Cancels a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been canceled successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers": {
+      "get": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_ListByTrigger",
+        "x-ms-examples": {
+          "RerunTriggers_List": {
+            "$ref": "./examples/RerunTriggers_ListByTrigger.json"
+          }
+        },
+        "description": "Lists rerun triggers by an original trigger name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RerunTriggerListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3043,6 +3344,39 @@
         "message"
       ]
     },
+    "VariableDefinitionSpecification": {
+      "description": "Definition of variable for a Pipeline.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/VariableSpecification"
+      }
+    },
+    "VariableSpecification": {
+      "description": "Definition of a single variable for a Pipeline.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Variable type.",
+          "enum": [
+            "String",
+            "Bool",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "VariableType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of variable."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "ParameterDefinitionSpecification": {
       "description": "Definition of all parameters for an entity.",
       "type": "object",
@@ -3149,7 +3483,7 @@
       ]
     },
     "FactoryGitHubConfiguration": {
-      "x-ms-discriminator-value": "FactoryGithubConfiguration",
+      "x-ms-discriminator-value": "FactoryGitHubConfiguration",
       "description": "Factory's GitHub repo information.",
       "type": "object",
       "allOf": [
@@ -3174,6 +3508,36 @@
         "repoConfiguration": {
           "$ref": "#/definitions/FactoryRepoConfiguration",
           "description": "Git repo information of the factory."
+        }
+      }
+    },
+    "GitHubAccessTokenRequest": {
+      "description": "Get GitHub access token request definition.",
+      "properties": {
+        "gitHubAccessCode": {
+          "description": "GitHub access code.",
+          "type": "string"
+        },
+        "gitHubClientId": {
+          "description": "GitHub application client ID.",
+          "type": "string"
+        },
+        "gitHubAccessTokenBaseUrl": {
+          "description": "GitHub access token base URL.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gitHubAccessCode",
+        "gitHubAccessTokenBaseUrl"
+      ]
+    },
+    "GitHubAccessTokenResponse": {
+      "description": "Get GitHub access token response definition.",
+      "properties": {
+        "gitHubAccessToken": {
+          "description": "GitHub access token.",
+          "type": "string"
         }
       }
     },
@@ -3848,6 +4212,71 @@
         "type": "object"
       }
     },
+    "RerunTumblingWindowTriggerActionParameters": {
+      "description": "Rerun tumbling window trigger Parameters.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxConcurrency": {
+          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "maxConcurrency"
+      ]
+    },
+    "RerunTriggerListResponse": {
+      "description": "A list of rerun triggers.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of rerun triggers.",
+          "items": {
+            "$ref": "#/definitions/RerunTriggerResource"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RerunTriggerResource": {
+      "description": "RerunTrigger resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Trigger.json#/definitions/RerunTumblingWindowTrigger",
+          "description": "Properties of the rerun trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "OperationListResponse": {
       "description": "A list of operations that can be performed by the Data Factory service.",
       "properties": {
@@ -4112,6 +4541,17 @@
     "triggerName": {
       "name": "triggerName",
       "description": "The trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "rerunTriggerName": {
+      "name": "rerunTriggerName",
+      "description": "The rerun trigger name.",
       "in": "path",
       "required": true,
       "type": "string",
