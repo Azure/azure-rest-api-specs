@@ -363,6 +363,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes": {
+      "get": {
+        "tags": [
+          "VirtualMachineSizes"
+        ],
+        "operationId": "VirtualMachineSizes_List",
+        "description": "Returns supported VM Sizes in a location",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location upon which virtual-machine-sizes is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },	
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -998,6 +1034,81 @@
         }
       }
     },
+    "VirtualMachineSize": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the virtual machine size."
+        },
+        "numberOfCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of cores supported by the virtual machine size."
+        },
+        "osDiskSizeInMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The OS disk size, in MB, allowed by the virtual machine size."
+        },
+        "resourceDiskSizeInMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The resource disk size, in MB, allowed by the virtual machine size."
+        },
+        "memoryInMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of memory, in MB, supported by the virtual machine size."
+        },
+        "maxDataDiskCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of data disks that can be attached to the virtual machine size."
+        }
+      },
+      "description": "Describes the properties of a VM size."
+    },
+	"VirtualMachineSizeListResult": {
+      "properties": {
+        "AKS": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSize"
+          },
+          "description": "The list of virtual machine sizes for AKS."
+        },
+        "AMLCompute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSize"
+          },
+          "description": "The list of virtual machine sizes for AMLCompute."
+        },
+        "DataFactory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSize"
+          },
+          "description": "The list of virtual machine sizes for DataFactory."
+        },
+        "VirtualMachine": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSize"
+          },
+          "description": "The list of virtual machine sizes for VirtualMachine."
+        },
+        "HDInsight": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSize"
+          },
+          "description": "The list of virtual machine sizes for HDInsight."
+        }
+		
+      },
+      "description": "The List Virtual Machine size operation response."
+    },
     "WorkspaceListResult": {
       "description": "The result of a request to list machine learning workspaces.",
       "properties": {
@@ -1331,20 +1442,20 @@
 				  "type": "array",
 				  "items": {
 					"$ref": "#/definitions/AMLComputeError"
-				  }
-				},
-				"currentNodeCount": {
-				  "type": "integer",
-				  "readOnly": true,
-				  "format": "int32",
-				  "title": "Current node count.",
-				  "description": "The number of compute nodes currently assigned to the cluster."
-				},
-				"nodeStateCounts": {
-				  "title": "Node state counts.",
-				  "description": "Counts of various node states on the cluster.",
-				  "readOnly": true,
-				  "$ref": "#/definitions/NodeStateCounts"
+		          }
+                },
+                "currentNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Current node count.",
+                  "description": "The number of compute nodes currently assigned to the cluster."
+                },
+                "nodeStateCounts": {
+                  "title": "Node state counts.",
+                  "description": "Counts of various node states on the cluster.",
+                  "readOnly": true,
+                  "$ref": "#/definitions/NodeStateCounts"
 				}
 
               }
@@ -1506,7 +1617,7 @@
           "description": "Min number of nodes to use",
           "type": "integer"
         },
-        "NodeIdleTimeBeforeScaleDown": {
+        "nodeIdleTimeBeforeScaleDown": {
             "type": "string",
             "format": "duration",
             "description": "Node Idle Time before scaling down cluster"
