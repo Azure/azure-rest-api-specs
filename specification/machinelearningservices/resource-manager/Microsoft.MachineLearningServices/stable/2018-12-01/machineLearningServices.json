@@ -598,7 +598,7 @@
           "MachineLearningComputes"
         ],
         "operationId": "MachineLearningCompute_Update",
-        "description": "Updates properties of a AMLCompute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
+        "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a AMLCompute Compute": { "$ref": "./examples/updateAMLCompute.json" },
@@ -1059,53 +1059,19 @@
           "type": "integer",
           "format": "int32",
           "description": "The amount of memory, in MB, supported by the virtual machine size."
-        },
-        "maxDataDiskCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of data disks that can be attached to the virtual machine size."
         }
       },
       "description": "Describes the properties of a VM size."
     },
     "VirtualMachineSizeListResult": {
       "properties": {
-        "AKS": {
+        "amlCompute": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
           },
-          "description": "The list of virtual machine sizes for AKS."
-        },
-        "AMLCompute": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineSize"
-          },
-          "description": "The list of virtual machine sizes for AMLCompute."
-        },
-        "DataFactory": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineSize"
-          },
-          "description": "The list of virtual machine sizes for DataFactory."
-        },
-        "VirtualMachine": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineSize"
-          },
-          "description": "The list of virtual machine sizes for VirtualMachine."
-        },
-        "HDInsight": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineSize"
-          },
-          "description": "The list of virtual machine sizes for HDInsight."
+          "description": "The list of virtual machine sizes supported by AMLCompute."
         }
-        
       },
       "description": "The List Virtual Machine size operation response."
     },
@@ -1385,7 +1351,7 @@
       "x-ms-discriminator-value": "AKS"
     },
     "AMLCompute": {
-      "description": "A Machine Learning compute based on Azure AMLCompute.",
+      "description": "An Azure Machine Learning compute.",
       "allOf": [
         {
           "$ref": "#/definitions/Compute"
@@ -1411,14 +1377,14 @@
                 }
                 "subnet": {
                     "title": "Subnet.",
-                    "description": "Virtual network subnet resource ID the cluster nodes belong to.",
+                    "description": "Virtual network subnet resource ID the compute nodes belong to.",
                     "$ref": "#/definitions/ResourceId"
                 },
                 "allocationState": {
                   "type": "string",
                   "readOnly": true,
                   "title": "Allocation state.",
-                  "description": "Allocation state of the cluster. Possible values are: steady - Indicates that the cluster is not resizing. There are no changes to the number of compute nodes in the cluster in progress. A cluster enters this state when it is created and when no operations are being performed on the cluster to change the number of compute nodes. resizing - Indicates that the cluster is resizing; that is, compute nodes are being added to or removed from the cluster.",
+                  "description": "Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
                   "enum": [
                     "steady",
                     "resizing"
@@ -1433,7 +1399,7 @@
                   "readOnly": true,
                   "format": "date-time",
                   "title": "Allocation state transition time.",
-                  "description": "The time at which the cluster entered its current allocation state."
+                  "description": "The time at which the compute entered its current allocation state."
                 },
                 "errors": {
                   "readOnly": true,
@@ -1441,7 +1407,7 @@
                   "description": "Collection of errors encountered by various compute nodes during node setup.",
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/AMLComputeError"
+                      "$ref": "#/definitions/MachineLearningServiceError"
                   }
                 },
                 "currentNodeCount": {
@@ -1449,11 +1415,11 @@
                   "readOnly": true,
                   "format": "int32",
                   "title": "Current node count.",
-                  "description": "The number of compute nodes currently assigned to the cluster."
+                  "description": "The number of compute nodes currently assigned to the compute."
                 },
                 "nodeStateCounts": {
                   "title": "Node state counts.",
-                  "description": "Counts of various node states on the cluster.",
+                  "description": "Counts of various node states on the compute.",
                   "readOnly": true,
                   "$ref": "#/definitions/NodeStateCounts"
                 }
@@ -1617,11 +1583,15 @@
           "type": "integer"
         },
         "nodeIdleTimeBeforeScaleDown": {
-            "type": "string",
-            "format": "duration",
-            "description": "Node Idle Time before scaling down cluster"
+          "type": "string",
+          "format": "duration",
+          "description": "Node Idle Time before scaling down cluster"
         }
-      }
+      },
+      "required": [
+        "maxNodeCount",
+        "minNodeCount"
+      ]
     },
     "NodeStateCounts": {
       "properties": {
@@ -1669,44 +1639,6 @@
         }
       },
       "description": "Counts of various compute node states on the cluster."
-    },
-    "NameValuePair": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name.",
-          "description": "The name in the name-value pair."
-        },
-        "value": {
-          "type": "string",
-          "title": "Value.",
-          "description": "The value in the name-value pair."
-        }
-      },
-      "description": "Name-value pair."
-    },
-    "AMLComputeError": {
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "An identifier of the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NameValuePair"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the AML Compute service."
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
