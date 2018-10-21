@@ -58,6 +58,12 @@ async function getLinterResult(swaggerPath) {
     const { err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
         (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
 
+    if (err && stderr.indexOf("Process() cancelled due to exception") !== -1) {
+        console.log(`AutoRest exited with code ${err.code}`);
+        console.log(stderr);
+        throw new Error("AutoRest failed");
+    }
+
     let resultString = stdout + stderr;
     if (resultString.indexOf('{') !== -1) {
         resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";

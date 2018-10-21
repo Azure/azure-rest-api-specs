@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -459,8 +459,8 @@
           "description": "The port of on-premises Dynamics server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "serviceUri": {
-           "type": "object",
-           "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
+          "type": "object",
+          "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
         },
         "organizationName": {
           "type": "object",
@@ -495,6 +495,58 @@
         "deploymentType",
         "authenticationType",
         "username"
+      ]
+    },
+    "DynamicsAXLinkedService": {
+      "x-ms-discriminator-value": "DynamicsAX",
+      "description": "Dynamics AX linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dynamics AX linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DynamicsAXLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DynamicsAXLinkedServiceTypeProperties": {
+      "description": "Dynamics AX linked service properties.",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The URL of Dynamics AX OData API. Type: string (or Expression with resultType string)."
+        },
+        "tenant": {
+          "type": "object",
+          "description": "Specify the tenant information (domain name or tenant ID) under which your application resides. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "Specify the application id of your application registered in Azure Active Directory. Type: string (or Expression with resultType string)."
+        },
+        "aadResourceId": {
+          "type": "object",
+          "description": "Specify the resource you are requesting authorization to use Directory. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "Specify the secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "url"
       ]
     },
     "HDInsightLinkedService": {
@@ -628,6 +680,64 @@
       "required": [
         "connectionString"
       ]
+    },
+    "OracleServiceCloudLinkedService": { 
+      "x-ms-discriminator-value": "OracleServiceCloud", 
+      "description": "Oracle Service Cloud linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Oracle Service Cloud linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/OracleServiceCloudLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "OracleServiceCloudLinkedServiceTypeProperties": { 
+      "description": "Oracle Service Cloud linked service properties.", 
+      "properties": {
+        "host": {
+          "description": "The URL of the Oracle Service Cloud instance.",
+          "type": "object"
+        },
+        "username": {
+          "description": "The user name that you use to access Oracle Service Cloud server.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password corresponding to the user name that you provided in the username key.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "useEncryptedEndpoints": {
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "useHostVerification": {
+          "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "usePeerVerification": {
+          "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        },
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      },
+      "required": [
+        "host",
+        "username",
+        "password"
+      ] 
     },
     "AzureMySqlLinkedService": {
       "x-ms-discriminator-value": "AzureMySql",
@@ -1106,8 +1216,11 @@
           "description": "Type of authentication used to connect to the OData service.",
           "type": "string",
           "enum": [
+            "Anonymous",
             "Basic",
-            "Anonymous"
+            "Windows",
+            "AadServicePrincipal",
+            "ManagedServiceIdentity"
           ],
           "x-ms-enum": {
             "name": "ODataAuthenticationType",
@@ -1122,13 +1235,50 @@
           "description": "Password of the OData service.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "tenant": {
+          "type": "object",
+          "description": "Specify the tenant information (domain name or tenant ID) under which your application resides. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "Specify the application id of your application registered in Azure Active Directory. Type: string (or Expression with resultType string)."
+        },
+        "aadResourceId": {
+          "type": "object",
+          "description": "Specify the resource you are requesting authorization to use Directory. Type: string (or Expression with resultType string)."
+        },
+        "aadServicePrincipalCredentialType": {
+          "description": "Specify the credential type (key or cert) is used for service principal.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipalKey",
+            "ServicePrincipalCert"
+          ],
+          "x-ms-enum": {
+            "name": "ODataAadServicePrincipalCredentialType",
+            "modelAsString": true
+          }
+        },
+        "servicePrincipalKey": {
+          "description": "Specify the secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
-        "url"
+        "url",
+        "authenticationType"
       ]
     },
     "WebLinkedService": {
@@ -1776,6 +1926,85 @@
         "url"
       ]
     },
+    "RestServiceLinkedService": { 
+      "x-ms-discriminator-value": "RestService", 
+      "description": "Rest Service linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Rest Service linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/RestServiceLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "RestServiceLinkedServiceTypeProperties": { 
+      "description": "Rest Service linked service properties.", 
+      "properties": {
+        "url": {
+          "description": "The base URL of the REST service.",
+          "type": "object"
+        },
+        "enableServerCertificateValidation": {
+          "type": "object",
+          "description": "Whether to validate server side SSL certificate when connecting to the endpoint.The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "authenticationType": {
+          "description": "Type of authentication used to connect to the REST service.",
+          "type": "string",
+          "enum": [
+            "Anonymous",
+            "Basic",
+            "AadServicePrincial",
+            "ManagedServiceIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "RestServiceAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "userName": {
+          "description": "The user name used in Basic authentication type.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password used in Basic authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalId": {
+          "description": "The application’s client ID used in AadServicePrincipal authentication type.",
+          "type": "object"
+        },
+        "servicePrincipalKey": {
+          "description": "The application’s key used in AadServicePrincipal authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "description": "The tenant information (domain name or tenant ID) used in AadServicePrincipal authentication type under which your application resides.",
+          "type": "object"
+        },
+        "aadResourceId": {
+          "description": "The resource you are requesting authorization to use.",
+          "type": "object"
+        },
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      },
+      "required": [
+        "url",
+        "authenticationType"
+      ] 
+    },
     "FtpServerLinkedService": {
       "x-ms-discriminator-value": "FtpServer",
       "description": "A FTP server Linked Service.",
@@ -2280,9 +2509,9 @@
       "required": [ 
         "typeProperties" 
       ] 
-    }, 
-    "EloquaLinkedServiceTypeProperties": { 
-      "description": "Eloqua server linked service properties.", 
+    },
+    "EloquaLinkedServiceTypeProperties": {
+      "description": "Eloqua server linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Eloqua server. (i.e. eloqua.example.com)",
@@ -2308,14 +2537,96 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "endpoint",
         "username"
+      ]
+    },
+    "GoogleAdWordsLinkedService": { 
+      "x-ms-discriminator-value": "GoogleAdWords", 
+      "description": "Google Awords service linked service.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/LinkedService" 
+        } 
+      ], 
+      "properties": { 
+        "typeProperties": { 
+          "description": "Google AdWords service linked service properties.", 
+          "x-ms-client-flatten": true, 
+          "$ref": "#/definitions/GoogleAdWordsLinkedServiceTypeProperties" 
+        } 
+      }, 
+      "required": [ 
+        "typeProperties" 
+      ] 
+    }, 
+    "GoogleAdWordsLinkedServiceTypeProperties": { 
+      "description": "Google AdWords service linked service properties.", 
+      "properties": {
+        "clientCustomerID": {
+          "description": "The Client customer ID of the AdWords account that you want to fetch report data for.",
+          "type": "object"
+        },
+        "developerToken":{
+            "description": "The developer token associated with the manager account that you use to grant access to the AdWords API.",
+            "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "authenticationType": {
+          "description": "The OAuth 2.0 authentication mechanism used for authentication. ServiceAuthentication can only be used on self-hosted IR.",
+          "type": "string",
+          "enum": [
+            "ServiceAuthentication",
+            "UserAuthentication"
+          ],
+          "x-ms-enum": {
+            "name": "GoogleAdWordsAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "refreshToken": {
+          "description": "The refresh token obtained from Google for authorizing access to AdWords for UserAuthentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "clientId": {
+          "description": "The client id of the google application used to acquire the refresh token.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "clientSecret": {
+          "description": "The client secret of the google application used to acquire the refresh token.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "email": {
+          "description": "The service account email ID that is used for ServiceAuthentication and can only be used on self-hosted IR.",
+          "type": "object"
+        },
+        "keyFilePath": {
+          "description": "The full path to the .p12 key file that is used to authenticate the service account email address and can only be used on self-hosted IR.",
+          "type": "object"
+        },
+        "trustedCertPath": {
+          "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
+          "type": "object"
+        },
+        "useSystemTrustStore": {
+          "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
+          "type": "object"
+        },
+        "encryptedCredential": { 
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+          "type": "object"
+        }
+      },
+      "required": [
+        "clientCustomerID",
+        "developerToken",
+        "authenticationType"
       ] 
     },
     "GoogleBigQueryLinkedService": { 
@@ -3966,6 +4277,13 @@
         "zookeeperNodeSize": {
           "type": "object",
           "description": "Specifies the size of the Zoo Keeper node for the HDInsight cluster."
+        },
+        "scriptActions": {
+          "description": "Custom script actions to run on HDI ondemand cluster once it's up. Please refer to https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux?toc=%2Fen-us%2Fazure%2Fhdinsight%2Fr-server%2FTOC.json&bc=%2Fen-us%2Fazure%2Fbread%2Ftoc.json#understanding-script-actions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptAction"
+          }
         }
       },
       "required": [
@@ -3976,6 +4294,42 @@
         "hostSubscriptionId",
         "tenant",
         "clusterResourceGroup"
+      ]
+    },
+    "ScriptAction": {
+      "description": "Custom script action to run on HDI ondemand cluster once it's up.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user provided name of the script action."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI for the script action."
+        },
+        "roles": {
+          "x-ms-enum": {
+            "name": "HdiNodeTypes",
+            "modelAsString": true
+          },
+          "enum": [
+            "Headnode",
+            "Workernode",
+            "Zookeeper"
+          ],
+          "type": "object",
+          "description": "The node types on which the script action should be executed."
+        },
+        "parameters": {
+          "type": "string",
+          "description": "The parameters for the script action."
+        }
+      },
+      "required": [
+        "name",
+        "uri",
+        "roles"
       ]
     },
     "AzureDataLakeAnalyticsLinkedService": {
@@ -4078,7 +4432,7 @@
           "type": "object",
           "description": "The Spark version of new cluster. Type: string (or Expression with resultType string)."
         },
-        "newClusterNumOfWorker": { 
+        "newClusterNumOfWorker": {
           "type": "object",
           "description": "Number of worker nodes that new cluster should have. A string formatted Int32, like '1' means numOfWorker is 1 or '1:10' means auto-scale from 1 as min and 10 as max. Type: string (or Expression with resultType string)."
         },
@@ -4087,7 +4441,15 @@
           "description": "The node types of new cluster. Type: string (or Expression with resultType string)."
         },
         "newClusterSparkConf": {
-          "description": "a set of optional, user-specified Spark configuration key-value pairs.",
+          "description": "A set of optional, user-specified Spark configuration key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "newClusterSparkEnvVars": {
+          "description": "A set of optional, user-specified Spark environment variables key-value pairs.",
           "type": "object",
           "additionalProperties": {
             "type": "object",

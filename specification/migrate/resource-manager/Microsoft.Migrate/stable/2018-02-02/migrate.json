@@ -1767,9 +1767,108 @@
         }
       },
       "description": "An error response from the Azure Migrate service."
+    },
+    "CheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name to check for availability"
+        },
+        "type": {
+          "type": "string",
+          "enum": [ "Microsoft.Migrate/projects" ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The resource type. Must be set to Microsoft.Migrate/projects"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Parameters for a check name availability request."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Available",
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": false
+          },
+          "description": "Gets the reason that a project name could not be used. The Reason element is only returned if NameAvailable is false."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets an error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "operationId": "Location_CheckNameAvailability",
+        "description": "Checks whether the project name is available in the specified region.",
+        "x-ms-examples": {
+          "LocationCheckNameAvailability_Available": { "$ref": "./examples/LocationCheckNameAvailability_Available.json" },
+          "LocationCheckNameAvailability_AlreadyExists": { "$ref": "./examples/LocationCheckNameAvailability_AlreadyExists.json" }
+        },
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The desired region for the name check."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Properties needed to check the availability of a name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Returns details about whether a project name is available.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/locations/{locationName}/assessmentOptions": {
       "get": {
         "summary": "Get the assessment options.",

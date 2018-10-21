@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "version": "2018-01-10",
@@ -6167,6 +6167,10 @@
         "recoveryBootDiagStorageAccountId": {
           "description": "The boot diagnostic storage account.",
           "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information."
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -6364,6 +6368,30 @@
           "format": "double",
           "description": "The data pending at source virtual machine in MB.",
           "type": "number"
+        },
+        "isDiskEncrypted": {
+          "description": "A value indicating whether vm has encrypted os disk or not.",
+          "type": "boolean"
+        },
+        "secretIdentifier": {
+          "description": "The secret URL / identifier (BEK).",
+          "type": "string"
+        },
+        "dekKeyVaultArmId": {
+          "description": "The KeyVault resource id for secret (BEK).",
+          "type": "string"
+        },
+        "isDiskKeyEncrypted": {
+          "description": "A value indicating whether disk key got encrypted or not.",
+          "type": "boolean"
+        },
+        "keyIdentifier": {
+          "description": "The key URL / identifier (KEK).",
+          "type": "string"
+        },
+        "kekKeyVaultArmId": {
+          "description": "The KeyVault resource id for key (KEK).",
+          "type": "string"
         }
       }
     },
@@ -6434,6 +6462,30 @@
           "format": "double",
           "description": "The data pending at source virtual machine in MB.",
           "type": "number"
+        },
+        "isDiskEncrypted": {
+          "description": "A value indicating whether vm has encrypted os disk or not.",
+          "type": "boolean"
+        },
+        "secretIdentifier": {
+          "description": "The secret URL / identifier (BEK).",
+          "type": "string"
+        },
+        "dekKeyVaultArmId": {
+          "description": "The KeyVault resource id for secret (BEK).",
+          "type": "string"
+        },
+        "isDiskKeyEncrypted": {
+          "description": "A value indicating whether disk key got encrypted or not.",
+          "type": "boolean"
+        },
+        "keyIdentifier": {
+          "description": "The key URL / identifier (KEK).",
+          "type": "string"
+        },
+        "kekKeyVaultArmId": {
+          "description": "The KeyVault resource id for key (KEK).",
+          "type": "string"
         }
       }
     },
@@ -6739,6 +6791,10 @@
         "recoveryBootDiagStorageAccountId": {
           "description": "The boot diagnostic storage account.",
           "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information."
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -6798,6 +6854,10 @@
         "recoveryBootDiagStorageAccountId": {
           "description": "The boot diagnostic storage account.",
           "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery os disk encryption information."
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -7623,6 +7683,34 @@
         },
         "vhdName": {
           "description": "The VHD name.",
+          "type": "string"
+        }
+      }
+    },
+    "DiskEncryptionInfo": {
+      "description": "Recovery disk encryption info (BEK and KEK).",
+      "type": "object",
+      "properties": {
+        "diskEncryptionKeyInfo": {
+          "$ref": "#/definitions/DiskEncryptionKeyInfo",
+          "description": "The recovery KeyVault reference for secret."
+        },
+        "keyEncryptionKeyInfo": {
+          "$ref": "#/definitions/KeyEncryptionKeyInfo",
+          "description": "The recovery KeyVault reference for key."
+        }
+      }
+    },
+    "DiskEncryptionKeyInfo": {
+      "description": "Disk Encryption Key Information (BitLocker Encryption Key (BEK) on Windows).",
+      "type": "object",
+      "properties": {
+        "secretIdentifier": {
+          "description": "The secret url / identifier.",
+          "type": "string"
+        },
+        "keyVaultResourceArmId": {
+          "description": "The KeyVault resource ARM id for secret.",
           "type": "string"
         }
       }
@@ -11028,6 +11116,20 @@
         }
       },
       "x-ms-discriminator-value": "JobTaskDetails"
+    },
+    "KeyEncryptionKeyInfo": {
+      "description": "Key Encryption Key (KEK) information.",
+      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "description": "The key url / identifier.",
+          "type": "string"
+        },
+        "keyVaultResourceArmId": {
+          "description": "The KeyVault resource ARM id for key.",
+          "type": "string"
+        }
+      }
     },
     "LogicalNetwork": {
       "description": "Logical network data model.",
@@ -14462,6 +14564,10 @@
         "recoveryNicIpAddressType": {
           "description": "IP allocation type for recovery VM.",
           "type": "string"
+        },
+        "enableAcceleratedNetworkingOnRecovery": {
+          "description": "A value indicating whether the NIC has accerated networking enabled.",
+          "type": "boolean"
         }
       }
     },
@@ -14484,6 +14590,10 @@
         "selectionType": {
           "description": "Selection type for failover.",
           "type": "string"
+        },
+        "enableAcceleratedNetworkingOnRecovery": {
+          "description": "Whether the NIC has accerated networking enabled.",
+          "type": "boolean"
         }
       }
     },
