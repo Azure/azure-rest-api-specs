@@ -56,6 +56,9 @@
           },
           "intervaledMetric": {
             "$ref": "examples/metric-get-full.json"
+          },
+          "segmentedIntervaledMetric": {
+            "$ref": "examples/metric-get-segmented.json"
           }
         },
         "parameters": [
@@ -216,6 +219,11 @@
             "$ref": "#/parameters/eventsApply"
           }
         ],
+        "produces": [
+          "application/json;odata=none",
+          "application/json;odata=minimal",
+          "application/json;odata=full"
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -255,6 +263,12 @@
           {
             "$ref": "#/parameters/eventId"
           }
+        ],
+        "produces": [
+          "application/json",
+          "application/json;odata=none",
+          "application/json;odata=minimal",
+          "application/json;odata=full"
         ],
         "responses": {
           "200": {
