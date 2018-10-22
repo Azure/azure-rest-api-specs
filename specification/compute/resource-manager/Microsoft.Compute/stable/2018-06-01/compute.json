@@ -4618,6 +4618,13 @@
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
           "description": "The virtual machine extension instance view."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of extension names after which this extension needs to be provisioned."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -4651,6 +4658,13 @@
         "protectedSettings": {
           "type": "object",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of extension names after which this extension needs to be provisioned."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -7067,6 +7081,13 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state, which only appears in the response."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of extension names after which this extension needs to be provisioned."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
