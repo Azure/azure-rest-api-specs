@@ -329,7 +329,7 @@
         },
         "creationTime": {
           "type": "string",
-          "description": "Creation time of there source, which only appears in the response.",
+          "description": "Creation time of the resource, which only appears in the response.",
           "format": "date-time",
           "x-nullable": false,
           "readOnly": true
@@ -353,7 +353,7 @@
         },
         "tasks": {
           "description": "Tasks information for the Software update configuration.",
-          "$ref": "#/definitions/tasksProperties"
+          "$ref": "#/definitions/softwareUpdateConfigurationTasks"
         }
       },
       "required": [
@@ -361,16 +361,16 @@
         "scheduleInfo"
       ]
     },
-    "tasksProperties": {
+    "softwareUpdateConfigurationTasks": {
       "type": "object",
       "description": "Task properties of the software update configuration.",
       "properties": {
         "preTask": {
-          "description": "Pre task object.",
+          "description": "Pre task properties.",
           "$ref": "#/definitions/taskProperties"
         },
         "postTask": {
-          "description": "Post task object.",
+          "description": "Post task properties.",
           "$ref": "#/definitions/taskProperties"
         }
       }
