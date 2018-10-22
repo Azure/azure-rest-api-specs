@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-advisor
-  output-folder: $(typescript-sdks-folder)/packages/arm-advisor
+  package-name: "@azure/arm-advisor"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-advisor"
   generate-metadata: true
 ```
