@@ -101,6 +101,29 @@
         }
       }
     },
+    "ConnectToMongoDbTaskProperties": {
+      "x-ms-discriminator-value": "Connect.MongoDb",
+      "type": "object",
+      "description": "Properties for the task that validates the connection to and provides information about a MongoDB server",
+      "properties": {
+        "input": {
+          "$ref": "./Common.json#/definitions/MongoDbConnectionInfo"
+        },
+        "output": {
+          "type": "array",
+          "description": "An array containing a single MongoDbClusterInfo object",
+          "items": {
+            "$ref": "./MongoDbTasks.json#/definitions/MongoDbClusterInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToSourceSqlServerTaskProperties": {
       "x-ms-discriminator-value": "ConnectToSource.SqlServer",
       "type": "object",
@@ -293,6 +316,28 @@
         }
       ]
     },
+    "MigrateMongoDbTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.MongoDb",
+      "type": "object",
+      "description": "Properties for the task that migrates data between MongoDB data sources",
+      "properties": {
+        "input": {
+          "$ref": "./MongoDbTasks.json#/definitions/MongoDbMigrationSettings"
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "$ref": "./MongoDbTasks.json#/definitions/MongoDbProgress"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "MigrateSqlServerSqlMITaskProperties": {
       "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDbMI",
       "type": "object",
@@ -451,6 +496,29 @@
           "type": "array",
           "items": {
             "$ref": "./ValidateMigrationInputSqlServerSqlMITask.json#/definitions/ValidateMigrationInputSqlServerSqlMITaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ValidateMongoDbTaskProperties": {
+      "x-ms-discriminator-value": "Validate.MongoDb",
+      "type": "object",
+      "description": "Properties for the task that validates a migration between MongoDB data sources",
+      "properties": {
+        "input": {
+          "$ref": "./MongoDbTasks.json#/definitions/MongoDbMigrationSettings"
+        },
+        "output": {
+          "type": "array",
+          "description": "An array containing a single MongoDbMigrationProgress object",
+          "items": {
+            "$ref": "./MongoDbTasks.json#/definitions/MongoDbMigrationProgress"
           },
           "readOnly": true
         }
