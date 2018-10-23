@@ -7,7 +7,7 @@
       "name": "Mohamed Enein"
     },
     "version": "2017-05-15-preview",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -143,7 +143,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "number of entries you skip before returning results"
+            "description": "Number of entries you skip before returning results"
           },
           {
             "name": "$top",
@@ -207,7 +207,7 @@
         },
         "configuredDuration": {
           "type": "string",
-          "description": "configured duration for the software update configuration run.",
+          "description": "Configured duration for the software update configuration run.",
           "readOnly": true
         },
         "osType": {
@@ -219,7 +219,7 @@
           "type": "string",
           "format": "date-time",
           "x-nullable": false,
-          "description": "Etart time of the software update configuration run.",
+          "description": "Start time of the software update configuration run.",
           "readOnly": true
         },
         "endTime": {
@@ -248,7 +248,7 @@
         },
         "createdBy": {
           "type": "string",
-          "description": "createdBy property, which only appears in the response.",
+          "description": "CreatedBy property, which only appears in the response.",
           "readOnly": true
         },
         "lastModifiedTime": {
@@ -260,8 +260,44 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "lastModifiedBy property, which only appears in the response.",
+          "description": "LastModifiedBy property, which only appears in the response.",
           "readOnly": true
+        },
+        "tasks": {
+          "description": "Software update configuration tasks triggered in this run",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTasks"
+        }
+      }
+    },
+    "softareUpdateConfigurationRunTasks": {
+      "description": "Software update configuration run tasks model.",
+      "type": "object",
+      "properties": {
+        "preTask": {
+          "description": "Pre task properties.",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTaskProperties"
+        },
+        "postTask": {
+          "description": "Post task properties.",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTaskProperties"
+        }
+      }      
+    },
+    "softareUpdateConfigurationRunTaskProperties": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "The name of the source of the task."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job id of the task."
         }
       }
     },
