@@ -692,6 +692,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrate": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Migrate",
+        "x-ms-examples": {
+          "NameSpaceUpdate": { "$ref": "./examples/NameSpaces/SBNamespaceMigrate.json" }
+        },
+        "description": "This operation Migrate the given namespace to provided name type",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBNamespaceMigrate"
+            },
+            "description": "Parameters supplied to migrate namespace type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Migrate Namepsace type is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
       "post": {
         "tags": [
@@ -2948,7 +2994,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/ipfilterrules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/ipfilterrules": {
       "get": {
         "tags": [
           "Namespaces"
@@ -3520,6 +3566,30 @@
         "name"
       ],
       "description": "SKU of the namespace."
+    },
+    "SBNamespaceMigrate": {
+      "type": "object",
+      "properties": {
+        "targetNamespaceType": {
+          "type": "string",
+          "description": "Type of namespaces",
+          "enum": [
+            "Messaging",
+            "NotificationHub",
+            "Mixed",
+            "EventHub",
+            "Relay"
+          ],
+          "x-ms-enum": {
+            "name": "NameSpaceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "targetNamespaceType"
+      ],
+      "description": "Namespace Migrate Object"
     },
     "SBAuthorizationRuleListResult": {
       "properties": {
@@ -4709,7 +4779,7 @@
       },
       "description": "The result of the List migrationConfigurations operation."
     },
-	"IpFilterRule": {
+    "IpFilterRule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -4936,7 +5006,7 @@
       "maximum": 1000,
       "x-ms-parameter-location": "method"
     },
-	"IPFilterRuleNameParameter": {
+    "IPFilterRuleNameParameter": {
       "name": "ipFilterRuleName",
       "in": "path",
       "required": true,
