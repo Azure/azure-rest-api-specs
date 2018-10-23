@@ -363,6 +363,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usage"
+        ],
+        "operationId": "Usages_List",
+        "description": "Gets the current usage information as well as limits for AML resources for given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Usages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes": {
       "get": {
         "tags": [
@@ -1034,6 +1075,73 @@
         }
       }
     },
+    "UsageName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Usage Names."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An enum describing the unit of usage measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": true
+          }
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/UsageName",
+          "description": "The name of the type of usage."
+        }
+      },
+      "description": "Describes AML Resource Usage."
+    },
+    "ListUsagesResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "The list of AML resource usages."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page of AML resource usage information. Call ListNext() with this to fetch the next page of AML resource usage information."
+        }
+      },
+      "description": "The List Usages operation response."
+    },
     "VirtualMachineSize": {
       "properties": {
         "name": {
@@ -1417,6 +1525,13 @@
                   "title": "Current node count.",
                   "description": "The number of compute nodes currently assigned to the compute."
                 },
+                "targetNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Target node count.",
+                  "description": "The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation."
+                },
                 "nodeStateCounts": {
                   "title": "Node state counts.",
                   "description": "Counts of various node states on the compute.",
@@ -1580,7 +1695,8 @@
         },
         "minNodeCount": {
           "description": "Min number of nodes to use",
-          "type": "integer"
+          "type": "integer",
+          "default": 0
         },
         "nodeIdleTimeBeforeScaleDown": {
           "type": "string",
@@ -1589,8 +1705,7 @@
         }
       },
       "required": [
-        "maxNodeCount",
-        "minNodeCount"
+        "maxNodeCount"
       ]
     },
     "NodeStateCounts": {
