@@ -706,6 +706,221 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "OutboundRules_List",
+        "description": "Gets all the outbound rules in a load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer OutboundRule resources.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OutboundRuleList": { "$ref": "./examples/OutboundRuleList.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}": {
+      "delete": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "OutboundRules_Delete",
+        "description": "Deletes the specified load balancer outbound rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "outboundRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the outbound rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-examples": {
+          "OutboundRuleDelete": { "$ref": "./examples/OutboundRuleDelete.json" }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "OutboundRules_Get",
+        "description": "Gets the specified load balancer outbound rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "outboundRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the outbound rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting OutboundRule resource.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OutboundRuleGet": { "$ref": "./examples/OutboundRuleGet.json" }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "OutboundRules_CreateOrUpdate",
+        "description": "Creates or updates a load balancer outbound rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "outboundRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the outbound rule."
+          },
+          {
+            "name": "outboundRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OutboundRule"
+            },
+            "description": "Parameters supplied to the create or update outbound rule operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting OutboundRule resource.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRule"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting OutboundRule resource.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OutboundRuleCreate": { "$ref": "./examples/OutboundRuleCreate.json" }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules": {
       "get": {
         "tags": [
