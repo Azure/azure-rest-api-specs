@@ -51,7 +51,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
         },
         "x-ms-examples": {
@@ -103,7 +103,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingPredicateExpressionSyntaxError - Invalid value of parameter 'predicateExpression'.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', value can not be empty.\n\n * 400 BlobAuditingInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 BlobAuditingStorageAccountIsDisabled - The provided storage account is disabled.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingPredicateExpressionSyntaxError - Invalid value of parameter 'predicateExpression'.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', value can not be empty.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 InvalidBlobAuditActionsAndGroupsForDW - Unsupported audit actions or action groups for DW.\n\n * 400 BlobAuditingInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 BlobAuditingStorageAccountIsDisabled - The provided storage account is disabled.\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           },
           "201": {
             "description": "Successfully created the extended database blob auditing policy.",
@@ -118,6 +118,9 @@
           },
           "Create or update an extended database's blob auditing policy with all parameters": {
             "$ref": "./examples/ExtendedDatabaseBlobAuditingCreateMax.json"
+          },
+          "Create or update an extended database's azure monitor auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedDatabaseAzureMonitorAuditingCreateMin.json"
           }
         }
       }
@@ -203,7 +206,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', value can not be empty.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 ServerBlobAuditingPolicyInProgress - Set server blob auditing is already in progress."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', value can not be empty.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 ServerBlobAuditingPolicyInProgress - Set server blob auditing is already in progress."
           },
           "202": {
             "description": "Updating the extended auditing settings is in progress."
@@ -211,11 +214,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a server's extended blob auditing policy with all parameters": {
-            "$ref": "./examples/ExtendedServerBlobAuditingCreateMax.json"
-          },
           "Update a server's extended blob auditing policy with minimal parameters": {
             "$ref": "./examples/ExtendedServerBlobAuditingCreateMin.json"
+          },
+          "Update a server's extended blob auditing policy with all parameters": {
+            "$ref": "./examples/ExtendedServerBlobAuditingCreateMax.json"
           }
         }
       }
@@ -301,7 +304,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 ServerBlobAuditingPolicyInProgress - Set server blob auditing is already in progress."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 ServerBlobAuditingPolicyInProgress - Set server blob auditing is already in progress."
           },
           "202": {
             "description": "Updating the auditing settings is in progress."
@@ -309,11 +312,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a server's blob auditing policy with all parameters": {
-            "$ref": "./examples/ServerBlobAuditingCreateMax.json"
-          },
           "Update a server's blob auditing policy with minimal parameters": {
             "$ref": "./examples/ServerBlobAuditingCreateMin.json"
+          },
+          "Update a server's blob auditing policy with all parameters": {
+            "$ref": "./examples/ServerBlobAuditingCreateMax.json"
           }
         }
       }
@@ -353,7 +356,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
         },
         "x-ms-examples": {
@@ -405,7 +408,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 BlobAuditingStorageAccountIsDisabled - The provided storage account is disabled.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 InvalidBlobAuditActionsAndGroupsForDW - Unsupported audit actions or action groups for DW.\n\n * 400 BlobAuditingInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 BlobAuditingStorageAccountIsDisabled - The provided storage account is disabled.\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           },
           "201": {
             "description": "Successfully created the database blob auditing policy.",
@@ -420,6 +423,9 @@
           },
           "Create or update a database's blob auditing policy with all parameters": {
             "$ref": "./examples/DatabaseBlobAuditingCreateMax.json"
+          },
+          "Create or update a database's azure monitor auditing policy with minimal parameters": {
+            "$ref": "./examples/DatabaseAzureMonitorAuditingCreateMin.json"
           }
         }
       }
@@ -438,7 +444,7 @@
           "type": "string"
         },
         "state": {
-          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint and storageAccountAccessKey are required.",
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -454,7 +460,7 @@
           "type": "string"
         },
         "storageAccountAccessKey": {
-          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled, storageAccountAccessKey is required.",
+          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled and storageEndpoint is specified, storageAccountAccessKey is required.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -463,7 +469,7 @@
         },
         "retentionDays": {
           "format": "int32",
-          "description": "Specifies the number of days to keep in the audit logs.",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account.",
           "type": "integer"
         },
         "auditActionsAndGroups": {
@@ -480,6 +486,10 @@
         },
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
+          "type": "boolean"
+        },
+        "isAzureMonitorTargetEnabled": {
+          "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as <databaseName>.\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.Sql/servers/<serverName>/databases/<databaseName>/providers/microsoft.insights/diagnosticSettings/<settingsName>?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
           "type": "boolean"
         }
       }
@@ -544,7 +554,7 @@
           "type": "string"
         },
         "state": {
-          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint and storageAccountAccessKey are required.",
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -560,7 +570,7 @@
           "type": "string"
         },
         "storageAccountAccessKey": {
-          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled, storageAccountAccessKey is required.",
+          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled and storageEndpoint is specified, storageAccountAccessKey is required.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -569,7 +579,7 @@
         },
         "retentionDays": {
           "format": "int32",
-          "description": "Specifies the number of days to keep in the audit logs.",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account.",
           "type": "integer"
         },
         "auditActionsAndGroups": {
@@ -586,6 +596,10 @@
         },
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
+          "type": "boolean"
+        },
+        "isAzureMonitorTargetEnabled": {
+          "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as <databaseName>.\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.Sql/servers/<serverName>/databases/<databaseName>/providers/microsoft.insights/diagnosticSettings/<settingsName>?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
           "type": "boolean"
         }
       }
@@ -614,7 +628,7 @@
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint and storageAccountAccessKey are required.",
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -630,7 +644,7 @@
           "type": "string"
         },
         "storageAccountAccessKey": {
-          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled, storageAccountAccessKey is required.",
+          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled and storageEndpoint is specified, storageAccountAccessKey is required.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -639,7 +653,7 @@
         },
         "retentionDays": {
           "format": "int32",
-          "description": "Specifies the number of days to keep in the audit logs.",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account.",
           "type": "integer"
         },
         "auditActionsAndGroups": {
@@ -656,6 +670,10 @@
         },
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
+          "type": "boolean"
+        },
+        "isAzureMonitorTargetEnabled": {
+          "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as <databaseName>.\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.Sql/servers/<serverName>/databases/<databaseName>/providers/microsoft.insights/diagnosticSettings/<settingsName>?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
           "type": "boolean"
         }
       }
@@ -684,7 +702,7 @@
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint and storageAccountAccessKey are required.",
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -700,7 +718,7 @@
           "type": "string"
         },
         "storageAccountAccessKey": {
-          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled, storageAccountAccessKey is required.",
+          "description": "Specifies the identifier key of the auditing storage account. If state is Enabled and storageEndpoint is specified, storageAccountAccessKey is required.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -709,7 +727,7 @@
         },
         "retentionDays": {
           "format": "int32",
-          "description": "Specifies the number of days to keep in the audit logs.",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account.",
           "type": "integer"
         },
         "auditActionsAndGroups": {
@@ -726,6 +744,10 @@
         },
         "isStorageSecondaryKeyInUse": {
           "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
+          "type": "boolean"
+        },
+        "isAzureMonitorTargetEnabled": {
+          "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'State' as 'Enabled' and 'IsAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as <databaseName>.\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.Sql/servers/<serverName>/databases/<databaseName>/providers/microsoft.insights/diagnosticSettings/<settingsName>?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
           "type": "boolean"
         }
       }
