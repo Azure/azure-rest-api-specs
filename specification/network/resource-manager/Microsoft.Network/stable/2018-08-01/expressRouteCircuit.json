@@ -1689,6 +1689,20 @@
           "$ref": "#/definitions/ExpressRouteCircuitServiceProviderProperties",
           "description": "The ServiceProviderProperties."
         },
+        "expressRoutePort": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the ExpressRoutePort resource when the circuit is provisioned on an ExpressRoutePort resource."
+        },
+        "bandwidthInGbps": {
+          "type": "number",
+          "description": "The bandwidth of the circuit when the circuit is provisioned on an ExpressRoutePort resource."
+        },
+        "stag": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The identifier of the circuit traffic. Outer tag for QinQ encapsulation."
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
