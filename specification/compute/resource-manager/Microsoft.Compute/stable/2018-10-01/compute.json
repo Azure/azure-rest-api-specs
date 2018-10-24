@@ -4931,16 +4931,12 @@
     },
     "VirtualMachineReimageParameters": {
       "properties": {
-        "osDisk": {
-          "type": "boolean",
-          "description": "Specified whether to reimage os disk. Default value: true."
-        },
         "tempDisk": {
           "type": "boolean",
           "description": "Specified whether to reimage temp disk. Default value: false."
         }
       },
-      "description": "Paramaters for Reimaging Virtual Machine."
+      "description": "Paramaters for Reimaging Virtual Machine. Default value for OSDisk : true."
     },
     "VirtualMachineCaptureParameters": {
       "properties": {
@@ -7392,15 +7388,6 @@
       "description": "Describes a Virtual Machine Scale Set."
     },
     "VirtualMachineScaleSetVMReimageParameters": {
-      "properties": {
-        "dataDisks": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          },
-          "description": "Luns of dataDisks in the virtual machine scale set VM to reimage."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/VirtualMachineReimageParameters"
