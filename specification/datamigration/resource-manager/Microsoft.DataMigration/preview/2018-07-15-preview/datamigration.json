@@ -1165,6 +1165,299 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files": {
+      "get": {
+        "summary": "Get files in a project",
+        "description": "The project resource is a nested resource representing a stored migration project. This method returns a list of files owned by a project resource.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "Files_List",
+        "x-ms-examples": {
+          "Files_List": { "$ref": "./examples/Files_List.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "List of files",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/FileList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files/{fileName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/groupName"
+        },
+        {
+          "$ref": "#/parameters/serviceName"
+        },
+        {
+          "$ref": "#/parameters/projectName"
+        },
+        {
+          "$ref": "#/parameters/fileName"
+        },
+        {
+          "$ref": "#/parameters/apiVersion"
+        }
+      ],
+      "get": {
+        "summary": "Get file information",
+        "description": "The files resource is a nested, proxy-only resource representing a file stored under the project resource. This method retrieves information about a file.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "Files_Get",
+        "x-ms-examples": {
+          "Files_List": { "$ref": "./examples/Files_Get.json" }
+        },
+        "responses": {
+          "200": {
+            "description": "A file resource",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Create a file resource",
+        "description": "The PUT method creates a new file or updates an existing one.",
+        "tags": [
+          "Fie resource",
+          "Standard operation",
+          "PUT"
+        ],
+        "operationId": "Files_CreateOrUpdate",
+        "x-ms-examples": {
+          "Files_CreateOrUpdate": { "$ref": "./examples/Files_CreateOrUpdate.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectFile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File updated",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "201": {
+            "description": "File created",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete file",
+        "description": "This method deletes a file.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "DELETE"
+        ],
+        "operationId": "Files_Delete",
+        "x-ms-examples": {
+          "Files_Delete": { "$ref": "./examples/Files_Delete.json" }
+        },
+        "responses": {
+          "200": {
+            "description": "File resource deleted"
+          },
+          "204": {
+            "description": "Not found"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a file",
+        "description": "This method updates an existing file.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "PATCH"
+        ],
+        "operationId": "Files_Update",
+        "x-ms-examples": {
+          "Files_Update": { "$ref": "./examples/Files_Update.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectFile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File resource updated",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files/{fileName}/read": {
+      "post": {
+        "summary": "Request storage information for downloading the file content",
+        "description": "This method is used for requesting storage information using which contents of the file can be downloaded.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "POST"
+        ],
+        "operationId": "Files_Read",
+        "x-ms-examples": {
+          "Files_List": { "$ref": "./examples/Files_Read.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/fileName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object describing how to access the file content",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/FileStorageInfo"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files/{fileName}/readwrite": {
+      "post": {
+        "summary": "Request information for reading and writing file content.",
+        "description": "This method is used for requesting information for reading and writing the file content.",
+        "tags": [
+          "File resource",
+          "Standard operation",
+          "POST"
+        ],
+        "operationId": "Files_ReadWrite",
+        "x-ms-examples": {
+          "Files_List": { "$ref": "./examples/Files_ReadWrite.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/fileName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object describing how to access the file content",
+            "schema": {
+              "$ref": "./definitions/Files.json#/definitions/FileStorageInfo"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1295,6 +1588,24 @@
       "schema": {
         "$ref": "./definitions/Commands.json#/definitions/CommandProperties"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "projectFile": {
+      "name": "parameters",
+      "description": "Information about the file",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "./definitions/Files.json#/definitions/ProjectFile"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "fileName": {
+      "name": "fileName",
+      "description": "Name of the File",
+      "in": "path",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
