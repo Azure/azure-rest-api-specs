@@ -1752,6 +1752,23 @@
       },
       "description": "Response for ListLoadBalancingRule API service call."
     },
+	"LoadBalancerOutboundRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundRule"
+          },
+          "description": "A list of outbound rules in a load balancer."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListOutboundRule API service call."
+    },	
     "LoadBalancerProbeListResult": {
       "properties": {
         "value": {
