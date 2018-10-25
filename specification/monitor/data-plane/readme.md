@@ -38,7 +38,8 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
-- preview/2018-09-01-preview/azureMonitorCustomMetricsIngestionApi.json
+- preview/2018-09-01-preview/metricsCreate_API.json
+
 ```
 
 # Code Generation

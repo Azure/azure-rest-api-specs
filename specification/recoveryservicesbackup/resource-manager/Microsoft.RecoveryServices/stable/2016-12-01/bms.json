@@ -284,7 +284,7 @@
         "tags": [
           "ProtectableContainers"
         ],
-        "description": "Lists the containers registered to Recovery Services Vault.",
+        "description": "Lists the containers that can be registered to Recovery Services Vault.",
         "operationId": "ProtectableContainers_List",
         "produces": [
           "application/json"
@@ -512,8 +512,8 @@
         "tags": [
           "ProtectionContainers"
         ],
-        "summary": "Inquires all the protectable item in the given container that can be protected.",
-        "description": "Inquires all the protectable items that are protectable under the given container.",
+        "summary": "Inquires all the protectable items under the given container.",
+        "description": "This is an async operation and the results should be tracked using location header or Azure-async-url.",
         "operationId": "ProtectionContainers_Inquire",
         "produces": [
           "application/json"
@@ -831,6 +831,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemResource"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
@@ -839,6 +845,9 @@
         "x-ms-examples": {
           "Enable Protection on Azure IaasVm": {
             "$ref": "./examples/AzureIaasVm/ConfigureProtection.json"
+          },
+          "Stop Protection with retain data on Azure IaasVm": {
+            "$ref": "./examples/AzureIaasVm/StopProtection.json"
           }
         }
       },
@@ -2414,7 +2423,27 @@
       "properties": {
         "workLoadType": {
           "description": "Type of workload for the backup management",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         },
         "schedulePolicy": {
           "$ref": "#/definitions/SchedulePolicy",
@@ -2946,6 +2975,10 @@
           "description": "Indicates if protectable item is auto-protectable",
           "type": "boolean"
         },
+        "isAutoProtected": {
+          "description": "Indicates if protectable item is auto-protected",
+          "type": "boolean"
+        },
         "subinquireditemcount": {
           "format": "int32",
           "description": "For instance or AG, indicates number of DB's present",
@@ -3086,7 +3119,27 @@
       "properties": {
         "workLoadType": {
           "description": "Type of workload for the backup management",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         },
         "settings": {
           "$ref": "#/definitions/Settings",
@@ -3387,7 +3440,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadBackupRequest"
     },
     "AzureWorkloadContainerExtendedInfo": {
       "description": "Extended information of the container.",
@@ -6410,7 +6464,18 @@
       "properties": {
         "policyType": {
           "description": "Type of backup policy type",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "Full",
+            "Differential",
+            "Log",
+            "CopyOnlyFull"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyType",
+            "modelAsString": true
+          }
         },
         "schedulePolicy": {
           "$ref": "#/definitions/SchedulePolicy",

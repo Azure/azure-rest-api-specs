@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "subscriptionId": "b67f7fec-69fc-4974-9099-a26bd6ffeda3",
+    "resourceGroupName": "Rac46PostSwapRG",
+    "ruleName": "SampleCrossResourceAlert",
+    "api-version": "2018-04-16",
+    "parameters": {
+      "location": "eastus",
+      "tags": {
+        "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI": "Resource"
+      },
+      "properties": {
+        "description": "Sample Cross Resource alert",
+        "enabled": "true",
+        "source": {
+          "query": "union requests, workspace(\"sampleWorkspace\").Update",
+          "authorizedResources": [
+            "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace",
+            "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI"
+          ],
+          "dataSourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI",
+          "queryType": "ResultCount"
+        },
+        "schedule": {
+          "frequencyInMinutes": 60,
+          "timeWindowInMinutes": 60
+        },
+        "action": {
+          "severity": "3",
+          "aznsAction": {
+            "actionGroup": [ "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/actiongroups/test-ag" ],
+            "emailSubject": "Cross Resource Mail!!"
+          },
+          "trigger": {
+            "thresholdOperator": "GreaterThan",
+            "threshold": 5000
+          },
+          "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/SampleCrossResourceAlert",
+        "name": "SampleCrossResourceAlert",
+        "type": "Microsoft.Insights/scheduledQueryRules",
+        "location": "eastus",
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI": "Resource"
+        },
+        "properties": {
+          "description": "Sample Cross Resource alert",
+          "enabled": "true",
+          "lastUpdatedTime": "2018-09-04T06:27:58.3892575Z",
+          "provisioningState": "Succeeded",
+          "source": {
+            "query": "union requests, workspace(\"sampleWorkspace\").Update",
+            "authorizedResources": [
+              "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace",
+              "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI"
+            ],
+            "dataSourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI",
+            "queryType": "ResultCount"
+          },
+          "schedule": {
+            "frequencyInMinutes": 60,
+            "timeWindowInMinutes": 60
+          },
+          "action": {
+            "severity": "3",
+            "aznsAction": {
+              "actionGroup": [ "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/actiongroups/test-ag" ],
+              "emailSubject": "Cross Resource Mail!!"
+            },
+            "trigger": {
+              "thresholdOperator": "GreaterThan",
+              "threshold": 5000
+            },
+            "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/SampleCrossResourceAlert",
+        "name": "SampleCrossResourceAlert",
+        "type": "Microsoft.Insights/scheduledQueryRules",
+        "location": "eastus",
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI": "Resource"
+        },
+        "properties": {
+          "description": "Sample Cross Resource alert",
+          "enabled": "true",
+          "lastUpdatedTime": "2018-09-04T06:27:58.3892575Z",
+          "provisioningState": "Succeeded",
+          "source": {
+            "query": "union requests, workspace(\"sampleWorkspace\").Update",
+            "authorizedResources": [
+              "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace",
+              "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI"
+            ],
+            "dataSourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI",
+            "queryType": "ResultCount"
+          },
+          "schedule": {
+            "frequencyInMinutes": 60,
+            "timeWindowInMinutes": 60
+          },
+          "action": {
+            "severity": "3",
+            "aznsAction": {
+              "actionGroup": [ "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/actiongroups/test-ag" ],
+              "emailSubject": "Cross Resource Mail!!"
+            },
+            "trigger": {
+              "thresholdOperator": "GreaterThan",
+              "threshold": 5000
+            },
+            "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction"
+          }
+        }
+      }
+    }
+  }
+}
