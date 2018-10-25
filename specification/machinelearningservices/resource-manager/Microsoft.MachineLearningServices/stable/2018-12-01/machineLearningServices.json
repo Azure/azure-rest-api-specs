@@ -642,7 +642,7 @@
         "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a AMLCompute Compute": { "$ref": "./examples/updateAMLCompute.json" },
+          "Update a AmlCompute Compute": { "$ref": "./examples/updateAMLCompute.json" },
         },
         "parameters": [
           {
@@ -1146,27 +1146,47 @@
       "properties": {
         "name": {
           "type": "string",
+          "title": "Virtual Machine size name",
           "description": "The name of the virtual machine size."
         },
-        "numberOfCores": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of cores supported by the virtual machine size."
+        "family": {
+          "type": "string",
+          "title": "Virtual Machine family name",
+          "description": "The family name of the virtual machine size."
         },
-        "osDiskSizeInMB": {
+        "vCPUs": {
           "type": "integer",
           "format": "int32",
-          "description": "The OS disk size, in MB, allowed by the virtual machine size."
+          "title": "Number of vPUs",
+          "description": "The number of vCPUs supported by the virtual machine size."
         },
-        "resourceDiskSizeInMB": {
+        "osVhdSizeMB": {
           "type": "integer",
           "format": "int32",
-          "description": "The resource disk size, in MB, allowed by the virtual machine size."
+          "title": "OS VHD Disk size",
+          "description": "The OS VHD disk size, in MB, allowed by the virtual machine size."
         },
-        "memoryInMB": {
+        "maxResourceVolumeMB": {
           "type": "integer",
           "format": "int32",
-          "description": "The amount of memory, in MB, supported by the virtual machine size."
+          "title": "Resource volume size",
+          "description": "The resource volume size, in MB, allowed by the virtual machine size."
+        },
+        "memoryGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Memory size",
+          "description": "The amount of memory, in GB, supported by the virtual machine size."
+        },
+        "lowPriorityCapable": {
+          "type": "boolean",
+          "title": "Low priority capable",
+          "description": "Specifies if the virtual machine size supports low priority VMs."
+        },
+        "premiumIO": {
+          "type": "boolean",
+          "title": "Premium IO supported",
+          "description": "Specifies if the virtual machine size supports premium IO."
         }
       },
       "description": "Describes the properties of a VM size."
@@ -1178,7 +1198,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
           },
-          "description": "The list of virtual machine sizes supported by AMLCompute."
+          "description": "The list of virtual machine sizes supported by AmlCompute."
         }
       },
       "description": "The List Virtual Machine size operation response."
@@ -1458,7 +1478,7 @@
       ],
       "x-ms-discriminator-value": "AKS"
     },
-    "AMLCompute": {
+    "AmlCompute": {
       "description": "An Azure Machine Learning compute.",
       "allOf": [
         {
@@ -1543,7 +1563,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "AMLCompute"
+      "x-ms-discriminator-value": "AmlCompute"
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -1840,7 +1860,7 @@
       "description": "The type of compute",
       "enum": [
         "AKS",
-        "AMLCompute",
+        "AmlCompute",
         "DataFactory",
         "VirtualMachine",
         "HDInsight"
