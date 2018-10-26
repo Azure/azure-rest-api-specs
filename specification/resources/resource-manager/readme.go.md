@@ -7,7 +7,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml 
 directive:
   from: swagger-document # do it globally
-  where: $.paths..pattern
+  where: $.paths..parameters[?(@.name == "resourceGroupName" || @.name == "sourceResourceGroupName")].pattern
   set: ^[-\p{L}\._\(\)]+$ 
   reason: Necessary to match Unicode characters in the Go regexp engine.
 ```
