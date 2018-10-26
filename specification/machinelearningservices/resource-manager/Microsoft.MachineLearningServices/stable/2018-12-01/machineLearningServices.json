@@ -369,7 +369,7 @@
           "Usage"
         ],
         "operationId": "Usages_List",
-        "description": "Gets the current usage information as well as limits for AML resources for given subscription.",
+        "description": "Gets the current usage information as well as limits for AML resources for given subscription and location.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -640,7 +640,6 @@
         ],
         "operationId": "MachineLearningCompute_Update",
         "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a AmlCompute Compute": { "$ref": "./examples/updateAMLCompute.json" },
         },
@@ -1107,7 +1106,7 @@
         "currentValue": {
           "readOnly": true,
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The current usage of the resource."
         },
         "limit": {
@@ -1173,8 +1172,8 @@
           "description": "The resource volume size, in MB, allowed by the virtual machine size."
         },
         "memoryGB": {
-          "type": "integer",
-          "format": "int32",
+          "type": "number",
+          "format": "double",
           "title": "Memory size",
           "description": "The amount of memory, in GB, supported by the virtual machine size."
         },
@@ -1721,7 +1720,7 @@
         "nodeIdleTimeBeforeScaleDown": {
           "type": "string",
           "format": "duration",
-          "description": "Node Idle Time before scaling down cluster"
+          "description": "Node Idle Time before scaling down amlCompute"
         }
       },
       "required": [
@@ -1763,7 +1762,7 @@
           "type": "integer",
           "format": "int32",
           "title": "Leaving node count.",
-          "description": "Number of compute nodes which are leaving the cluster."
+          "description": "Number of compute nodes which are leaving the amlCompute."
         },
         "preemptedNodeCount": {
           "readOnly": true,
@@ -1773,7 +1772,7 @@
           "description": "Number of compute nodes which are in preempted state."
         }
       },
-      "description": "Counts of various compute node states on the cluster."
+      "description": "Counts of various compute node states on the amlCompute."
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
