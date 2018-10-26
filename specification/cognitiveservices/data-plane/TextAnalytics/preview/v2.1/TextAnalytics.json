@@ -202,7 +202,7 @@
           "200": {
             "description": "A successful call results in a list of recognized entities returned for each valid document",
             "schema": {
-              "$ref": "#/definitions/EntitiesBatchResultV2dot1"
+              "$ref": "#/definitions/EntitiesBatchResult"
             }
           },
           "default": {
@@ -486,13 +486,13 @@
         }
       }
     },
-    "EntitiesBatchResultV2dot1": {
+    "EntitiesBatchResult": {
       "type": "object",
       "properties": {
         "documents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntitiesBatchResultItemV2dot1"
+            "$ref": "#/definitions/EntitiesBatchResultItem"
           },
           "readOnly": true
         },
@@ -505,7 +505,7 @@
         }
       }
     },
-    "EntitiesBatchResultItemV2dot1": {
+    "EntitiesBatchResultItem": {
       "type": "object",
       "properties": {
         "id": {
@@ -517,13 +517,13 @@
           "description": "Recognized entities in the document.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntityRecordV2dot1"
+            "$ref": "#/definitions/EntityRecord"
           },
           "readOnly": true
         }
       }
     },
-    "EntityRecordV2dot1": {
+    "EntityRecord": {
       "type": "object",
       "properties": {
         "name": {
@@ -534,7 +534,7 @@
           "description": "List of instances this entity appears in the text.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MatchRecordV2dot1"
+            "$ref": "#/definitions/MatchRecord"
           }
         },
         "wikipediaLanguage": {
@@ -564,7 +564,7 @@
         }
       }
     },
-    "MatchRecordV2dot1": {
+    "MatchRecord": {
       "type": "object",
       "properties": {
         "text": {
