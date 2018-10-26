@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-03-01-preview",
+    "version": "2018-10-01",
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service"
   },
@@ -751,7 +751,7 @@
           "type": "string"
         },
         "tier": {
-          "description": "Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead for Basic tier",
+          "description": "Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead for Basic tier.",
           "enum": [
             "Free",
             "Basic",
@@ -962,8 +962,8 @@
           "type": "integer"
         },
         "name": {
-          "description": "Localizable String object containing the name and a localized value.",
-          "$ref": "#/definitions/SignalRUsageName"
+          "$ref": "#/definitions/SignalRUsageName",
+          "description": "Localizable String object containing the name and a localized value."
         },
         "unit": {
           "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond.",
@@ -994,7 +994,8 @@
       "required": true,
       "type": "string",
       "enum": [
-        "2018-03-01-preview"
+        "2018-03-01-preview",
+        "2018-10-01"
       ]
     },
     "SubscriptionIdParameter": {
