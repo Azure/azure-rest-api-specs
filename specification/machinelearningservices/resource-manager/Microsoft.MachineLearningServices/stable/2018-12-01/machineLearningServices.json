@@ -372,7 +372,7 @@
         "description": "Gets the current usage information as well as limits for AML resources for given subscription and location.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -421,7 +421,7 @@
             "pattern": "^[-\\w\\._]+$"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -641,7 +641,7 @@
         "operationId": "MachineLearningCompute_Update",
         "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
         "x-ms-examples": {
-          "Update a AmlCompute Compute": { "$ref": "./examples/updateAMLCompute.json" },
+          "Update a AmlCompute Compute": { "$ref": "./examples/patchAMLCompute.json" }
         },
         "parameters": [
           {
@@ -1281,6 +1281,19 @@
         }
       }
     },
+    "ResourceId": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.",
+      "x-ms-azure-resource": true
+    },
     "ListWorkspaceKeysResult": {
       "type": "object",
       "properties": {
@@ -1501,7 +1514,7 @@
                 "scaleSettings": {
                   "description": "Scale settings for AML Compute",
                   "$ref": "#/definitions/ScaleSettings"
-                }
+                },
                 "subnet": {
                     "title": "Subnet.",
                     "description": "Virtual network subnet resource ID the compute nodes belong to.",
@@ -1773,6 +1786,26 @@
         }
       },
       "description": "Counts of various compute node states on the amlCompute."
+    },
+    "ClusterUpdateProperties": {
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Scale settings.",
+          "description": "Desired scale settings for the amlCompute."
+        }
+      },
+      "description": "The properties of a amlCompute that need to be updated."
+    },
+    "ClusterUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterUpdateProperties",
+          "description": "The properties of the amlCompute."
+        }
+      },
+      "description": "AmlCompute update parameters."
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
