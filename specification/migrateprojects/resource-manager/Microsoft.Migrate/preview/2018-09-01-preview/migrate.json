@@ -1,64 +1,64 @@
-{
+{  
    "swagger":"2.0",
-   "info":{
+   "info":{  
       "version":"2018-09-01-preview",
       "title":"Azure Migrate Hub",
       "description":"Migrate your workloads to Azure.",
-      "contact":{
+      "contact":{  
          "name":"Microsoft",
          "email":"azuremigrate@microsoft.com"
       }
    },
    "host":"management.azure.com",
-   "schemes":[
+   "schemes":[  
       "https"
    ],
-   "paths":{
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateErrors":{
-         "get":{
-            "tags":[
+   "paths":{  
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateErrors":{  
+         "get":{  
+            "tags":[  
                "Errors"
             ],
             "summary":"Gets a list of errors in the migrate project.",
             "operationId":"Errors_EnumerateErrors",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The name of the migrate project.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"continuationToken",
                   "in":"query",
                   "description":"Continuation token from the previous call.",
@@ -66,10 +66,10 @@
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/ErrorCollection"
                   }
                }
@@ -77,62 +77,62 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateErrors/{errorName}":{
-         "get":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateErrors/{errorName}":{  
+         "get":{  
+            "tags":[  
                "Errors"
             ],
             "summary":"Gets an error in the migrate project.",
             "operationId":"Errors_GetError",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The migrate project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"errorName",
                   "in":"path",
                   "description":"The ARM name of the error to be fetched.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/Error"
                   }
                }
@@ -140,51 +140,51 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Machines":{
-         "get":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Machines":{  
+         "get":{  
+            "tags":[  
                "Machines"
             ],
             "summary":"Gets a list of machines in the migrate project.",
             "operationId":"Machines_EnumerateMachines",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The name of the migrate project.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"continuationToken",
                   "in":"query",
                   "description":"Continuation token from the previous call.",
@@ -192,10 +192,10 @@
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/MachineCollection"
                   }
                }
@@ -203,62 +203,62 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Machines/{machineName}":{
-         "get":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Machines/{machineName}":{  
+         "get":{  
+            "tags":[  
                "Machines"
             ],
             "summary":"Gets a machine in the migrate project.",
             "operationId":"Machines_GetMachine",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The migrate project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"machineName",
                   "in":"path",
                   "description":"The ARM name of the machine to be fetched.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/Machine"
                   }
                }
@@ -266,128 +266,128 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}":{
-         "get":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}":{  
+         "get":{  
+            "tags":[  
                "MigrateProjects"
             ],
             "summary":"Method to get a migrate project.",
             "operationId":"MigrateProjects_GetMigrateProject",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"Subscription Id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"Resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"Migrate Project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/MigrateProject"
                   }
                }
             },
             "deprecated":false
          },
-         "put":{
-            "tags":[
+         "put":{  
+            "tags":[  
                "MigrateProjects"
             ],
             "summary":"Method to create or update a migrate project.",
             "operationId":"MigrateProjects_PutMigrateProject",
-            "consumes":[
+            "consumes":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml",
                "application/x-www-form-urlencoded"
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"Subscription Id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"Resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"Migrate Project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"body",
                   "in":"body",
                   "description":"Body with migrate project details.",
                   "required":true,
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/MigrateProject"
                   }
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/MigrateProject"
                   }
                },
-               "201":{
+               "201":{  
                   "description":"Created",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/MigrateProject"
                   }
                }
@@ -395,68 +395,68 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/registerTool":{
-         "post":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/registerTool":{  
+         "post":{  
+            "tags":[  
                "MigrateProjects"
             ],
             "summary":"Registers a tool with the migrate project.",
             "operationId":"MigrateProjects_RegisterTool",
-            "consumes":[
+            "consumes":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml",
                "application/x-www-form-urlencoded"
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The migrate project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"input",
                   "in":"body",
                   "description":"Input containing the name of the tool to be registered.",
                   "required":true,
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/RegisterToolInput"
                   }
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/RegistrationResult"
                   }
                }
@@ -464,55 +464,55 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/refreshSummary":{
-         "post":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/refreshSummary":{  
+         "post":{  
+            "tags":[  
                "MigrateProjects"
             ],
             "summary":"Refresh the summary of the migrate project.",
             "operationId":"MigrateProjects_RefreshMigrateProjectSummary",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The migrate project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/RefreshSummaryResult"
                   }
                }
@@ -520,136 +520,136 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Solutions/{solutionName}":{
-         "get":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Solutions/{solutionName}":{  
+         "get":{  
+            "tags":[  
                "Solutions"
             ],
             "summary":"Gets a solution in the migrate project.",
             "operationId":"Solutions_GetSolution",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The migrate project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"solutionName",
                   "in":"path",
                   "description":"The name of the solution to be fetched.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/Solution"
                   }
                }
             },
             "deprecated":false
          },
-         "put":{
-            "tags":[
+         "put":{  
+            "tags":[  
                "Solutions"
             ],
             "summary":"Creates a solution in the migrate project.",
             "operationId":"Solutions_PutSolution",
-            "consumes":[
+            "consumes":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml",
                "application/x-www-form-urlencoded"
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The migrate project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"solutionName",
                   "in":"path",
                   "description":"The name of the solution to be created.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"solutionInput",
                   "in":"body",
                   "description":"The input for the solution.",
                   "required":true,
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/Solution"
                   }
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/Solution"
                   }
                }
@@ -657,55 +657,55 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Solutions":{
-         "get":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Solutions":{  
+         "get":{  
+            "tags":[  
                "Solutions"
             ],
             "summary":"Gets the list of solutions in the migrate project.",
             "operationId":"Solutions_EnumerateSolutions",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The name of the migrate project.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/SolutionsCollection"
                   }
                }
@@ -713,542 +713,542 @@
             "deprecated":false
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Solutions/{solutionName}/getConfig":{
-         "post":{
-            "tags":[
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Solutions/{solutionName}/getConfig":{  
+         "post":{  
+            "tags":[  
                "Solutions"
             ],
             "summary":"Gets the config for the solution in the migrate project.",
             "operationId":"Solutions_GetConfig",
-            "consumes":[
+            "consumes":[  
 
             ],
-            "produces":[
+            "produces":[  
                "application/json",
                "text/json",
                "application/xml",
                "text/xml"
             ],
-            "parameters":[
-               {
+            "parameters":[  
+               {  
                   "name":"subscriptionId",
                   "in":"path",
                   "description":"The subscription id.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"resourceGroupName",
                   "in":"path",
                   "description":"The resource group name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"migrateProjectName",
                   "in":"path",
                   "description":"The migrate project name.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"solutionName",
                   "in":"path",
                   "description":"The name of the solution for which config is being fetched.",
                   "required":true,
                   "type":"string"
                },
-               {
+               {  
                   "name":"api-version",
                   "in":"query",
                   "required":true,
                   "type":"string"
                }
             ],
-            "responses":{
-               "200":{
+            "responses":{  
+               "200":{  
                   "description":"OK",
-                  "schema":{
+                  "schema":{  
                      "$ref":"#/definitions/SolutionConfig"
                   }
                }
             },
             "deprecated":false
          }
-      }
-   },
-   "/providers/Microsoft.Migrate/operations":{
-      "get":{
-         "summary":"Get list of operations supported in the API.",
-         "description":"Get a list of REST API supported by Microsoft.Migrate provider.",
-         "operationId":"Operations_List",
-         "responses":{
-            "200":{
-               "description":"OK. Returns list of operations.",
-               "schema":{
-                  "$ref":"#/definitions/OperationResultList"
+      },
+      "/providers/Microsoft.Migrate/operations":{  
+         "get":{  
+            "summary":"Get list of operations supported in the API.",
+            "description":"Get a list of REST API supported by Microsoft.Migrate provider.",
+            "operationId":"Operations_List",
+            "responses":{  
+               "200":{  
+                  "description":"OK. Returns list of operations.",
+                  "schema":{  
+                     "$ref":"#/definitions/OperationResultList"
+                  }
                }
-            }
-         },
-         "x-ms-pageable":{
-            "nextLinkName":null
-         },
-         "x-ms-examples":{
-            "Operations_List":{
-               "$ref":"./examples/Operations_List.json"
+            },
+            "x-ms-pageable":{  
+               "nextLinkName":null
+            },
+            "x-ms-examples":{  
+               "Operations_List":{  
+                  "$ref":"./examples/Operations_List.json"
+               }
             }
          }
       }
    },
-   "definitions":{
-      "Object":{
+   "definitions":{  
+      "Object":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "ErrorCollection":{
+      "ErrorCollection":{  
          "description":"Collection of errors.",
          "type":"object",
-         "properties":{
-            "value":{
+         "properties":{  
+            "value":{  
                "description":"Gets or sets the machines.",
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/Error"
                }
             },
-            "nextLink":{
+            "nextLink":{  
                "description":"Gets or sets the value of nextLink.",
                "type":"string"
             }
          }
       },
-      "Error":{
+      "Error":{  
          "description":"Error REST resource.",
          "type":"object",
-         "properties":{
-            "id":{
+         "properties":{  
+            "id":{  
                "description":"Gets or sets the relative URL to get to this REST resource.",
                "type":"string"
             },
-            "name":{
+            "name":{  
                "description":"Gets or sets the name of this REST resource.",
                "type":"string"
             },
-            "type":{
+            "type":{  
                "description":"Gets the type of this REST resource.",
                "type":"string",
                "readOnly":true
             },
-            "properties":{
+            "properties":{  
                "$ref":"#/definitions/ErrorProperties",
                "description":"Gets or sets the properties of the error."
             }
          }
       },
-      "ErrorProperties":{
+      "ErrorProperties":{  
          "description":"Properties of the error resource.",
          "type":"object",
-         "properties":{
-            "errorCode":{
+         "properties":{  
+            "errorCode":{  
                "description":"Gets or sets the error code.",
                "type":"string"
             },
-            "errorMessage":{
+            "errorMessage":{  
                "description":"Gets or sets the error message.",
                "type":"string"
             },
-            "recommendation":{
+            "recommendation":{  
                "description":"Gets or sets the recommendation for the error.",
                "type":"string"
             },
-            "possibleCauses":{
+            "possibleCauses":{  
                "description":"Gets or sets the possible causes for the error.",
                "type":"string"
             },
-            "solution":{
+            "solution":{  
                "description":"Gets or sets the solution for which the error is being reported.",
                "type":"string"
             },
-            "machine":{
+            "machine":{  
                "description":"Gets or sets the machine for which the error is being reported.",
                "type":"string"
             }
          }
       },
-      "ODataQueryOptions`1":{
+      "ODataQueryOptions`1":{  
          "type":"object",
-         "properties":{
-            "ifMatch":{
+         "properties":{  
+            "ifMatch":{  
                "$ref":"#/definitions/Object",
                "readOnly":true
             },
-            "ifNoneMatch":{
+            "ifNoneMatch":{  
                "$ref":"#/definitions/Object",
                "readOnly":true
             },
-            "request":{
+            "request":{  
                "$ref":"#/definitions/Object",
                "readOnly":true
             },
-            "context":{
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "rawValues":{
+            "rawValues":{  
                "$ref":"#/definitions/ODataRawQueryOptions",
                "readOnly":true
             },
-            "selectExpand":{
+            "selectExpand":{  
                "$ref":"#/definitions/SelectExpandQueryOption",
                "readOnly":true
             },
-            "apply":{
+            "apply":{  
                "$ref":"#/definitions/ApplyQueryOption",
                "readOnly":true
             },
-            "filter":{
+            "filter":{  
                "$ref":"#/definitions/FilterQueryOption",
                "readOnly":true
             },
-            "orderBy":{
+            "orderBy":{  
                "$ref":"#/definitions/OrderByQueryOption",
                "readOnly":true
             },
-            "skip":{
+            "skip":{  
                "$ref":"#/definitions/SkipQueryOption",
                "readOnly":true
             },
-            "top":{
+            "top":{  
                "$ref":"#/definitions/TopQueryOption",
                "readOnly":true
             },
-            "count":{
+            "count":{  
                "$ref":"#/definitions/CountQueryOption",
                "readOnly":true
             },
-            "validator":{
+            "validator":{  
                "$ref":"#/definitions/ODataQueryValidator"
             }
          }
       },
-      "ODataQueryContext":{
+      "ODataQueryContext":{  
          "type":"object",
-         "properties":{
-            "defaultQuerySettings":{
+         "properties":{  
+            "defaultQuerySettings":{  
                "$ref":"#/definitions/DefaultQuerySettings",
                "readOnly":true
             },
-            "model":{
+            "model":{  
                "$ref":"#/definitions/IEdmModel",
                "readOnly":true
             },
-            "elementType":{
+            "elementType":{  
                "$ref":"#/definitions/IEdmType",
                "readOnly":true
             },
-            "navigationSource":{
+            "navigationSource":{  
                "$ref":"#/definitions/IEdmNavigationSource",
                "readOnly":true
             },
-            "elementClrType":{
+            "elementClrType":{  
                "type":"string",
                "readOnly":true
             },
-            "path":{
+            "path":{  
                "$ref":"#/definitions/ODataPath",
                "readOnly":true
             },
-            "requestContainer":{
+            "requestContainer":{  
                "$ref":"#/definitions/IServiceProvider",
                "readOnly":true
             }
          }
       },
-      "ODataRawQueryOptions":{
+      "ODataRawQueryOptions":{  
          "type":"object",
-         "properties":{
-            "filter":{
+         "properties":{  
+            "filter":{  
                "type":"string",
                "readOnly":true
             },
-            "apply":{
+            "apply":{  
                "type":"string",
                "readOnly":true
             },
-            "orderBy":{
+            "orderBy":{  
                "type":"string",
                "readOnly":true
             },
-            "top":{
+            "top":{  
                "type":"string",
                "readOnly":true
             },
-            "skip":{
+            "skip":{  
                "type":"string",
                "readOnly":true
             },
-            "select":{
+            "select":{  
                "type":"string",
                "readOnly":true
             },
-            "expand":{
+            "expand":{  
                "type":"string",
                "readOnly":true
             },
-            "count":{
+            "count":{  
                "type":"string",
                "readOnly":true
             },
-            "format":{
+            "format":{  
                "type":"string",
                "readOnly":true
             },
-            "skipToken":{
+            "skipToken":{  
                "type":"string",
                "readOnly":true
             },
-            "deltaToken":{
+            "deltaToken":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "SelectExpandQueryOption":{
+      "SelectExpandQueryOption":{  
          "type":"object",
-         "properties":{
-            "context":{
+         "properties":{  
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "rawSelect":{
+            "rawSelect":{  
                "type":"string",
                "readOnly":true
             },
-            "rawExpand":{
+            "rawExpand":{  
                "type":"string",
                "readOnly":true
             },
-            "validator":{
+            "validator":{  
                "$ref":"#/definitions/SelectExpandQueryValidator"
             },
-            "selectExpandClause":{
+            "selectExpandClause":{  
                "$ref":"#/definitions/SelectExpandClause",
                "readOnly":true
             },
-            "levelsMaxLiteralExpansionDepth":{
+            "levelsMaxLiteralExpansionDepth":{  
                "format":"int32",
                "type":"integer"
             }
          }
       },
-      "ApplyQueryOption":{
+      "ApplyQueryOption":{  
          "type":"object",
-         "properties":{
-            "context":{
+         "properties":{  
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "resultClrType":{
+            "resultClrType":{  
                "type":"string",
                "readOnly":true
             },
-            "applyClause":{
+            "applyClause":{  
                "$ref":"#/definitions/ApplyClause",
                "readOnly":true
             },
-            "rawValue":{
+            "rawValue":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "FilterQueryOption":{
+      "FilterQueryOption":{  
          "type":"object",
-         "properties":{
-            "context":{
+         "properties":{  
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "validator":{
+            "validator":{  
                "$ref":"#/definitions/FilterQueryValidator"
             },
-            "filterClause":{
+            "filterClause":{  
                "$ref":"#/definitions/FilterClause",
                "readOnly":true
             },
-            "rawValue":{
+            "rawValue":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "OrderByQueryOption":{
+      "OrderByQueryOption":{  
          "type":"object",
-         "properties":{
-            "context":{
+         "properties":{  
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "orderByNodes":{
+            "orderByNodes":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/OrderByNode"
                },
                "readOnly":true
             },
-            "rawValue":{
+            "rawValue":{  
                "type":"string",
                "readOnly":true
             },
-            "validator":{
+            "validator":{  
                "$ref":"#/definitions/OrderByQueryValidator"
             },
-            "orderByClause":{
+            "orderByClause":{  
                "$ref":"#/definitions/OrderByClause",
                "readOnly":true
             }
          }
       },
-      "SkipQueryOption":{
+      "SkipQueryOption":{  
          "type":"object",
-         "properties":{
-            "context":{
+         "properties":{  
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "rawValue":{
+            "rawValue":{  
                "type":"string",
                "readOnly":true
             },
-            "value":{
+            "value":{  
                "format":"int32",
                "type":"integer",
                "readOnly":true
             },
-            "validator":{
+            "validator":{  
                "$ref":"#/definitions/SkipQueryValidator"
             }
          }
       },
-      "TopQueryOption":{
+      "TopQueryOption":{  
          "type":"object",
-         "properties":{
-            "context":{
+         "properties":{  
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "rawValue":{
+            "rawValue":{  
                "type":"string",
                "readOnly":true
             },
-            "value":{
+            "value":{  
                "format":"int32",
                "type":"integer",
                "readOnly":true
             },
-            "validator":{
+            "validator":{  
                "$ref":"#/definitions/TopQueryValidator"
             }
          }
       },
-      "CountQueryOption":{
+      "CountQueryOption":{  
          "type":"object",
-         "properties":{
-            "context":{
+         "properties":{  
+            "context":{  
                "$ref":"#/definitions/ODataQueryContext",
                "readOnly":true
             },
-            "rawValue":{
+            "rawValue":{  
                "type":"string",
                "readOnly":true
             },
-            "value":{
+            "value":{  
                "type":"boolean",
                "readOnly":true
             },
-            "validator":{
+            "validator":{  
                "$ref":"#/definitions/CountQueryValidator"
             }
          }
       },
-      "ODataQueryValidator":{
+      "ODataQueryValidator":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "DefaultQuerySettings":{
+      "DefaultQuerySettings":{  
          "type":"object",
-         "properties":{
-            "enableExpand":{
+         "properties":{  
+            "enableExpand":{  
                "type":"boolean"
             },
-            "enableSelect":{
+            "enableSelect":{  
                "type":"boolean"
             },
-            "enableCount":{
+            "enableCount":{  
                "type":"boolean"
             },
-            "enableOrderBy":{
+            "enableOrderBy":{  
                "type":"boolean"
             },
-            "enableFilter":{
+            "enableFilter":{  
                "type":"boolean"
             },
-            "maxTop":{
+            "maxTop":{  
                "format":"int32",
                "type":"integer"
             }
          }
       },
-      "IEdmModel":{
+      "IEdmModel":{  
          "type":"object",
-         "properties":{
-            "schemaElements":{
+         "properties":{  
+            "schemaElements":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/IEdmSchemaElement"
                },
                "readOnly":true
             },
-            "vocabularyAnnotations":{
+            "vocabularyAnnotations":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/IEdmVocabularyAnnotation"
                },
                "readOnly":true
             },
-            "referencedModels":{
+            "referencedModels":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/IEdmModel"
                },
                "readOnly":true
             },
-            "declaredNamespaces":{
+            "declaredNamespaces":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "type":"string"
                },
                "readOnly":true
             },
-            "directValueAnnotationsManager":{
+            "directValueAnnotationsManager":{  
                "$ref":"#/definitions/IEdmDirectValueAnnotationsManager",
                "readOnly":true
             },
-            "entityContainer":{
+            "entityContainer":{  
                "$ref":"#/definitions/IEdmEntityContainer",
                "readOnly":true
             }
          }
       },
-      "IEdmType":{
+      "IEdmType":{  
          "type":"object",
-         "properties":{
-            "typeKind":{
-               "enum":[
+         "properties":{  
+            "typeKind":{  
+               "enum":[  
                   "None",
                   "Primitive",
                   "Entity",
@@ -1265,129 +1265,129 @@
             }
          }
       },
-      "IEdmNavigationSource":{
+      "IEdmNavigationSource":{  
          "type":"object",
-         "properties":{
-            "navigationPropertyBindings":{
+         "properties":{  
+            "navigationPropertyBindings":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/IEdmNavigationPropertyBinding"
                },
                "readOnly":true
             },
-            "path":{
+            "path":{  
                "$ref":"#/definitions/IEdmPathExpression",
                "readOnly":true
             },
-            "type":{
+            "type":{  
                "$ref":"#/definitions/IEdmType",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "ODataPath":{
+      "ODataPath":{  
          "type":"object",
-         "properties":{
-            "edmType":{
+         "properties":{  
+            "edmType":{  
                "$ref":"#/definitions/IEdmType",
                "readOnly":true
             },
-            "navigationSource":{
+            "navigationSource":{  
                "$ref":"#/definitions/IEdmNavigationSource",
                "readOnly":true
             },
-            "segments":{
+            "segments":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/ODataPathSegment"
                },
                "readOnly":true
             },
-            "pathTemplate":{
+            "pathTemplate":{  
                "type":"string",
                "readOnly":true
             },
-            "path":{
+            "path":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/ODataPathSegment"
                },
                "readOnly":true
             }
          }
       },
-      "IServiceProvider":{
+      "IServiceProvider":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "SelectExpandQueryValidator":{
+      "SelectExpandQueryValidator":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "SelectExpandClause":{
+      "SelectExpandClause":{  
          "type":"object",
-         "properties":{
-            "selectedItems":{
+         "properties":{  
+            "selectedItems":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/SelectItem"
                },
                "readOnly":true
             },
-            "allSelected":{
+            "allSelected":{  
                "type":"boolean",
                "readOnly":true
             }
          }
       },
-      "ApplyClause":{
+      "ApplyClause":{  
          "type":"object",
-         "properties":{
-            "transformations":{
+         "properties":{  
+            "transformations":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/TransformationNode"
                },
                "readOnly":true
             }
          }
       },
-      "FilterQueryValidator":{
+      "FilterQueryValidator":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "FilterClause":{
+      "FilterClause":{  
          "type":"object",
-         "properties":{
-            "expression":{
+         "properties":{  
+            "expression":{  
                "$ref":"#/definitions/SingleValueNode",
                "readOnly":true
             },
-            "rangeVariable":{
+            "rangeVariable":{  
                "$ref":"#/definitions/RangeVariable",
                "readOnly":true
             },
-            "itemType":{
+            "itemType":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             }
          }
       },
-      "OrderByNode":{
+      "OrderByNode":{  
          "type":"object",
-         "properties":{
-            "direction":{
-               "enum":[
+         "properties":{  
+            "direction":{  
+               "enum":[  
                   "Ascending",
                   "Descending"
                ],
@@ -1396,64 +1396,64 @@
             }
          }
       },
-      "OrderByQueryValidator":{
+      "OrderByQueryValidator":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "OrderByClause":{
+      "OrderByClause":{  
          "type":"object",
-         "properties":{
-            "thenBy":{
+         "properties":{  
+            "thenBy":{  
                "$ref":"#/definitions/OrderByClause",
                "readOnly":true
             },
-            "expression":{
+            "expression":{  
                "$ref":"#/definitions/SingleValueNode",
                "readOnly":true
             },
-            "direction":{
-               "enum":[
+            "direction":{  
+               "enum":[  
                   "Ascending",
                   "Descending"
                ],
                "type":"string",
                "readOnly":true
             },
-            "rangeVariable":{
+            "rangeVariable":{  
                "$ref":"#/definitions/RangeVariable",
                "readOnly":true
             },
-            "itemType":{
+            "itemType":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             }
          }
       },
-      "SkipQueryValidator":{
+      "SkipQueryValidator":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "TopQueryValidator":{
+      "TopQueryValidator":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "CountQueryValidator":{
+      "CountQueryValidator":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "IEdmSchemaElement":{
+      "IEdmSchemaElement":{  
          "type":"object",
-         "properties":{
-            "schemaElementKind":{
-               "enum":[
+         "properties":{  
+            "schemaElementKind":{  
+               "enum":[  
                   "None",
                   "TypeDefinition",
                   "Term",
@@ -1464,55 +1464,55 @@
                "type":"string",
                "readOnly":true
             },
-            "namespace":{
+            "namespace":{  
                "type":"string",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "IEdmVocabularyAnnotation":{
+      "IEdmVocabularyAnnotation":{  
          "type":"object",
-         "properties":{
-            "qualifier":{
+         "properties":{  
+            "qualifier":{  
                "type":"string",
                "readOnly":true
             },
-            "term":{
+            "term":{  
                "$ref":"#/definitions/IEdmTerm",
                "readOnly":true
             },
-            "target":{
+            "target":{  
                "$ref":"#/definitions/IEdmVocabularyAnnotatable",
                "readOnly":true
             },
-            "value":{
+            "value":{  
                "$ref":"#/definitions/IEdmExpression",
                "readOnly":true
             }
          }
       },
-      "IEdmDirectValueAnnotationsManager":{
+      "IEdmDirectValueAnnotationsManager":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "IEdmEntityContainer":{
+      "IEdmEntityContainer":{  
          "type":"object",
-         "properties":{
-            "elements":{
+         "properties":{  
+            "elements":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/IEdmEntityContainerElement"
                },
                "readOnly":true
             },
-            "schemaElementKind":{
-               "enum":[
+            "schemaElementKind":{  
+               "enum":[  
                   "None",
                   "TypeDefinition",
                   "Term",
@@ -1523,49 +1523,49 @@
                "type":"string",
                "readOnly":true
             },
-            "namespace":{
+            "namespace":{  
                "type":"string",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "IEdmNavigationPropertyBinding":{
+      "IEdmNavigationPropertyBinding":{  
          "type":"object",
-         "properties":{
-            "navigationProperty":{
+         "properties":{  
+            "navigationProperty":{  
                "$ref":"#/definitions/IEdmNavigationProperty",
                "readOnly":true
             },
-            "target":{
+            "target":{  
                "$ref":"#/definitions/IEdmNavigationSource",
                "readOnly":true
             },
-            "path":{
+            "path":{  
                "$ref":"#/definitions/IEdmPathExpression",
                "readOnly":true
             }
          }
       },
-      "IEdmPathExpression":{
+      "IEdmPathExpression":{  
          "type":"object",
-         "properties":{
-            "pathSegments":{
+         "properties":{  
+            "pathSegments":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "type":"string"
                },
                "readOnly":true
             },
-            "path":{
+            "path":{  
                "type":"string",
                "readOnly":true
             },
-            "expressionKind":{
-               "enum":[
+            "expressionKind":{  
+               "enum":[  
                   "None",
                   "BinaryConstant",
                   "BooleanConstant",
@@ -1598,29 +1598,29 @@
             }
          }
       },
-      "ODataPathSegment":{
+      "ODataPathSegment":{  
          "type":"object",
-         "properties":{
-            "edmType":{
+         "properties":{  
+            "edmType":{  
                "$ref":"#/definitions/IEdmType",
                "readOnly":true
             },
-            "identifier":{
+            "identifier":{  
                "type":"string"
             }
          }
       },
-      "SelectItem":{
+      "SelectItem":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "TransformationNode":{
+      "TransformationNode":{  
          "type":"object",
-         "properties":{
-            "kind":{
-               "enum":[
+         "properties":{  
+            "kind":{  
+               "enum":[  
                   "Aggregate",
                   "GroupBy",
                   "Filter",
@@ -1631,15 +1631,15 @@
             }
          }
       },
-      "SingleValueNode":{
+      "SingleValueNode":{  
          "type":"object",
-         "properties":{
-            "typeReference":{
+         "properties":{  
+            "typeReference":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             },
-            "kind":{
-               "enum":[
+            "kind":{  
+               "enum":[  
                   "None",
                   "Constant",
                   "Convert",
@@ -1680,54 +1680,54 @@
             }
          }
       },
-      "RangeVariable":{
+      "RangeVariable":{  
          "type":"object",
-         "properties":{
-            "name":{
+         "properties":{  
+            "name":{  
                "type":"string",
                "readOnly":true
             },
-            "typeReference":{
+            "typeReference":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             },
-            "kind":{
+            "kind":{  
                "format":"int32",
                "type":"integer",
                "readOnly":true
             }
          }
       },
-      "IEdmTypeReference":{
+      "IEdmTypeReference":{  
          "type":"object",
-         "properties":{
-            "isNullable":{
+         "properties":{  
+            "isNullable":{  
                "type":"boolean",
                "readOnly":true
             },
-            "definition":{
+            "definition":{  
                "$ref":"#/definitions/IEdmType",
                "readOnly":true
             }
          }
       },
-      "IEdmTerm":{
+      "IEdmTerm":{  
          "type":"object",
-         "properties":{
-            "type":{
+         "properties":{  
+            "type":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             },
-            "appliesTo":{
+            "appliesTo":{  
                "type":"string",
                "readOnly":true
             },
-            "defaultValue":{
+            "defaultValue":{  
                "type":"string",
                "readOnly":true
             },
-            "schemaElementKind":{
-               "enum":[
+            "schemaElementKind":{  
+               "enum":[  
                   "None",
                   "TypeDefinition",
                   "Term",
@@ -1738,27 +1738,27 @@
                "type":"string",
                "readOnly":true
             },
-            "namespace":{
+            "namespace":{  
                "type":"string",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "IEdmVocabularyAnnotatable":{
+      "IEdmVocabularyAnnotatable":{  
          "type":"object",
-         "properties":{
+         "properties":{  
 
          }
       },
-      "IEdmExpression":{
+      "IEdmExpression":{  
          "type":"object",
-         "properties":{
-            "expressionKind":{
-               "enum":[
+         "properties":{  
+            "expressionKind":{  
+               "enum":[  
                   "None",
                   "BinaryConstant",
                   "BooleanConstant",
@@ -1791,11 +1791,11 @@
             }
          }
       },
-      "IEdmEntityContainerElement":{
+      "IEdmEntityContainerElement":{  
          "type":"object",
-         "properties":{
-            "containerElementKind":{
-               "enum":[
+         "properties":{  
+            "containerElementKind":{  
+               "enum":[  
                   "None",
                   "EntitySet",
                   "ActionImport",
@@ -1805,41 +1805,41 @@
                "type":"string",
                "readOnly":true
             },
-            "container":{
+            "container":{  
                "$ref":"#/definitions/IEdmEntityContainer",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "IEdmNavigationProperty":{
+      "IEdmNavigationProperty":{  
          "type":"object",
-         "properties":{
-            "partner":{
+         "properties":{  
+            "partner":{  
                "$ref":"#/definitions/IEdmNavigationProperty",
                "readOnly":true
             },
-            "onDelete":{
-               "enum":[
+            "onDelete":{  
+               "enum":[  
                   "None",
                   "Cascade"
                ],
                "type":"string",
                "readOnly":true
             },
-            "containsTarget":{
+            "containsTarget":{  
                "type":"boolean",
                "readOnly":true
             },
-            "referentialConstraint":{
+            "referentialConstraint":{  
                "$ref":"#/definitions/IEdmReferentialConstraint",
                "readOnly":true
             },
-            "propertyKind":{
-               "enum":[
+            "propertyKind":{  
+               "enum":[  
                   "None",
                   "Structural",
                   "Navigation"
@@ -1847,56 +1847,56 @@
                "type":"string",
                "readOnly":true
             },
-            "type":{
+            "type":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             },
-            "declaringType":{
+            "declaringType":{  
                "$ref":"#/definitions/IEdmStructuredType",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "IEdmReferentialConstraint":{
+      "IEdmReferentialConstraint":{  
          "type":"object",
-         "properties":{
-            "propertyPairs":{
+         "properties":{  
+            "propertyPairs":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/EdmReferentialConstraintPropertyPair"
                },
                "readOnly":true
             }
          }
       },
-      "IEdmStructuredType":{
+      "IEdmStructuredType":{  
          "type":"object",
-         "properties":{
-            "isAbstract":{
+         "properties":{  
+            "isAbstract":{  
                "type":"boolean",
                "readOnly":true
             },
-            "isOpen":{
+            "isOpen":{  
                "type":"boolean",
                "readOnly":true
             },
-            "baseType":{
+            "baseType":{  
                "$ref":"#/definitions/IEdmStructuredType",
                "readOnly":true
             },
-            "declaredProperties":{
+            "declaredProperties":{  
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/IEdmProperty"
                },
                "readOnly":true
             },
-            "typeKind":{
-               "enum":[
+            "typeKind":{  
+               "enum":[  
                   "None",
                   "Primitive",
                   "Entity",
@@ -1913,24 +1913,24 @@
             }
          }
       },
-      "EdmReferentialConstraintPropertyPair":{
+      "EdmReferentialConstraintPropertyPair":{  
          "type":"object",
-         "properties":{
-            "dependentProperty":{
+         "properties":{  
+            "dependentProperty":{  
                "$ref":"#/definitions/IEdmStructuralProperty",
                "readOnly":true
             },
-            "principalProperty":{
+            "principalProperty":{  
                "$ref":"#/definitions/IEdmStructuralProperty",
                "readOnly":true
             }
          }
       },
-      "IEdmProperty":{
+      "IEdmProperty":{  
          "type":"object",
-         "properties":{
-            "propertyKind":{
-               "enum":[
+         "properties":{  
+            "propertyKind":{  
+               "enum":[  
                   "None",
                   "Structural",
                   "Navigation"
@@ -1938,29 +1938,29 @@
                "type":"string",
                "readOnly":true
             },
-            "type":{
+            "type":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             },
-            "declaringType":{
+            "declaringType":{  
                "$ref":"#/definitions/IEdmStructuredType",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "IEdmStructuralProperty":{
+      "IEdmStructuralProperty":{  
          "type":"object",
-         "properties":{
-            "defaultValueString":{
+         "properties":{  
+            "defaultValueString":{  
                "type":"string",
                "readOnly":true
             },
-            "propertyKind":{
-               "enum":[
+            "propertyKind":{  
+               "enum":[  
                   "None",
                   "Structural",
                   "Navigation"
@@ -1968,525 +1968,525 @@
                "type":"string",
                "readOnly":true
             },
-            "type":{
+            "type":{  
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             },
-            "declaringType":{
+            "declaringType":{  
                "$ref":"#/definitions/IEdmStructuredType",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "MachineCollection":{
+      "MachineCollection":{  
          "description":"Collection of machines.",
          "type":"object",
-         "properties":{
-            "value":{
+         "properties":{  
+            "value":{  
                "description":"Gets or sets the machines.",
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/Machine"
                }
             },
-            "nextLink":{
+            "nextLink":{  
                "description":"Gets or sets the value of nextLink.",
                "type":"string"
             }
          }
       },
-      "Machine":{
+      "Machine":{  
          "description":"Machine REST resource.",
          "type":"object",
-         "properties":{
-            "id":{
+         "properties":{  
+            "id":{  
                "description":"Gets or sets the relative URL to get to this REST resource.",
                "type":"string"
             },
-            "name":{
+            "name":{  
                "description":"Gets or sets the name of this REST resource.",
                "type":"string"
             },
-            "type":{
+            "type":{  
                "description":"Gets the type of this REST resource.",
                "type":"string",
                "readOnly":true
             },
-            "properties":{
+            "properties":{  
                "$ref":"#/definitions/MachineProperties",
                "description":"Gets or sets the properties of the machine."
             }
          }
       },
-      "MachineProperties":{
+      "MachineProperties":{  
          "description":"Properties of the machine resource.",
          "type":"object",
-         "properties":{
-            "discoveryData":{
+         "properties":{  
+            "discoveryData":{  
                "description":"Gets or sets the discovery details of the machine published by various sources.",
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/DiscoveryDetails"
                }
             },
-            "assessmentData":{
+            "assessmentData":{  
                "description":"Gets or sets the assessment details of the machine published by various sources.",
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/AssessmentDetails"
                }
             },
-            "migrationData":{
+            "migrationData":{  
                "description":"Gets or sets the migration details of the machine published by various sources.",
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/MigrationDetails"
                }
             }
          }
       },
-      "DiscoveryDetails":{
+      "DiscoveryDetails":{  
          "description":"Discovery properties that can be published by various ISVs.",
          "type":"object",
-         "properties":{
-            "osType":{
+         "properties":{  
+            "osType":{  
                "description":"Gets or sets the OS type.",
                "type":"string"
             },
-            "osName":{
+            "osName":{  
                "description":"Gets or sets the OS name.",
                "type":"string"
             },
-            "osVersion":{
+            "osVersion":{  
                "description":"Gets or sets the OS version.",
                "type":"string"
             },
-            "enqueueTime":{
+            "enqueueTime":{  
                "description":"Gets or sets the time the message was enqueued.",
                "type":"string"
             },
-            "solutionName":{
+            "solutionName":{  
                "description":"Gets or sets the name of the solution that sent the data.",
                "type":"string"
             },
-            "machineId":{
+            "machineId":{  
                "description":"Gets or sets the unique identifier of the machine.",
                "type":"string"
             },
-            "machineManagerId":{
+            "machineManagerId":{  
                "description":"Gets or sets the unique identifier of the virtual machine manager(vCenter/VMM).",
                "type":"string"
             },
-            "machineName":{
+            "machineName":{  
                "description":"Gets or sets the name of the machine.",
                "type":"string"
             },
-            "extendedInfo":{
+            "extendedInfo":{  
                "description":"Gets or sets the ISV specific extended information.",
                "type":"object",
-               "additionalProperties":{
+               "additionalProperties":{  
                   "type":"string"
                }
             }
          }
       },
-      "AssessmentDetails":{
+      "AssessmentDetails":{  
          "description":"Assessment properties that can be shared by various publishers.",
          "type":"object",
-         "properties":{
-            "assessmentId":{
+         "properties":{  
+            "assessmentId":{  
                "description":"Gets or sets the id of the assessment done on the machine.",
                "type":"string"
             },
-            "targetVMSize":{
+            "targetVMSize":{  
                "description":"Gets or sets the target VM size.",
                "type":"string"
             },
-            "targetVMLocation":{
+            "targetVMLocation":{  
                "description":"Gets or sets the target VM location.",
                "type":"string"
             },
-            "targetStorageType":{
+            "targetStorageType":{  
                "description":"Gets or sets the target storage type.",
                "type":"object",
-               "additionalProperties":{
+               "additionalProperties":{  
                   "type":"string"
                }
             },
-            "enqueueTime":{
+            "enqueueTime":{  
                "description":"Gets or sets the time the message was enqueued.",
                "type":"string"
             },
-            "solutionName":{
+            "solutionName":{  
                "description":"Gets or sets the name of the solution that sent the data.",
                "type":"string"
             },
-            "machineId":{
+            "machineId":{  
                "description":"Gets or sets the unique identifier of the machine.",
                "type":"string"
             },
-            "machineManagerId":{
+            "machineManagerId":{  
                "description":"Gets or sets the unique identifier of the virtual machine manager(vCenter/VMM).",
                "type":"string"
             },
-            "machineName":{
+            "machineName":{  
                "description":"Gets or sets the name of the machine.",
                "type":"string"
             },
-            "extendedInfo":{
+            "extendedInfo":{  
                "description":"Gets or sets the ISV specific extended information.",
                "type":"object",
-               "additionalProperties":{
+               "additionalProperties":{  
                   "type":"string"
                }
             }
          }
       },
-      "MigrationDetails":{
+      "MigrationDetails":{  
          "description":"Migration properties that can be shared by various publishers.",
          "type":"object",
-         "properties":{
-            "migrationPhase":{
+         "properties":{  
+            "migrationPhase":{  
                "description":"Gets or sets the phase of migration of the machine.",
                "type":"string"
             },
-            "migrationTested":{
+            "migrationTested":{  
                "description":"Gets or sets a value indicating whether migration was tested on the machine.",
                "type":"boolean"
             },
-            "replicationProgressPercentage":{
+            "replicationProgressPercentage":{  
                "format":"int32",
                "description":"Gets or sets the progress percentage of migration on the machine.",
                "type":"integer"
             },
-            "targetVMArmId":{
+            "targetVMArmId":{  
                "description":"Gets or sets the ARM id the migrated VM.",
                "type":"string"
             },
-            "enqueueTime":{
+            "enqueueTime":{  
                "description":"Gets or sets the time the message was enqueued.",
                "type":"string"
             },
-            "solutionName":{
+            "solutionName":{  
                "description":"Gets or sets the name of the solution that sent the data.",
                "type":"string"
             },
-            "machineId":{
+            "machineId":{  
                "description":"Gets or sets the unique identifier of the machine.",
                "type":"string"
             },
-            "machineManagerId":{
+            "machineManagerId":{  
                "description":"Gets or sets the unique identifier of the virtual machine manager(vCenter/VMM).",
                "type":"string"
             },
-            "machineName":{
+            "machineName":{  
                "description":"Gets or sets the name of the machine.",
                "type":"string"
             },
-            "extendedInfo":{
+            "extendedInfo":{  
                "description":"Gets or sets the ISV specific extended information.",
                "type":"object",
-               "additionalProperties":{
+               "additionalProperties":{  
                   "type":"string"
                }
             }
          }
       },
-      "MigrateProject":{
+      "MigrateProject":{  
          "description":"Migrate Project REST Resource.",
          "type":"object",
-         "properties":{
-            "eTag":{
+         "properties":{  
+            "eTag":{  
                "description":"Gets or sets the eTag for concurrency control.",
                "type":"string"
             },
-            "location":{
+            "location":{  
                "description":"Gets or sets the Azure location in which migrate project is created.",
                "type":"string"
             },
-            "properties":{
+            "properties":{  
                "$ref":"#/definitions/MigrateProjectProperties",
                "description":"Gets or sets the nested properties."
             },
-            "id":{
+            "id":{  
                "description":"Gets the relative URL to get this migrate project.",
                "type":"string",
                "readOnly":true
             },
-            "name":{
+            "name":{  
                "description":"Gets or sets the name of the migrate project.",
                "type":"string"
             },
-            "type":{
+            "type":{  
                "description":"Handled by resource provider. Type = Microsoft.Migrate/MigrateProject.",
                "type":"string",
                "readOnly":true
             }
          }
       },
-      "MigrateProjectProperties":{
+      "MigrateProjectProperties":{  
          "description":"Class for migrate project properties.",
          "type":"object",
-         "properties":{
-            "registeredTools":{
+         "properties":{  
+            "registeredTools":{  
                "description":"Gets or sets the list of tools registered with the migrate project.",
                "type":"array",
-               "items":{
+               "items":{  
                   "type":"string"
                }
             },
-            "summary":{
+            "summary":{  
                "description":"Gets or sets the goals summary of the migrate Project. \r\n            It maps the goal to its summary object.",
                "type":"object",
-               "additionalProperties":{
+               "additionalProperties":{  
                   "$ref":"#/definitions/GoalSummary"
                }
             }
          }
       },
-      "GoalSummary":{
+      "GoalSummary":{  
          "description":"Class representing the summary object for goal.",
          "type":"object",
-         "properties":{
-            "discoveredCount":{
+         "properties":{  
+            "discoveredCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities discovered.",
                "type":"integer"
             },
-            "assessedCount":{
+            "assessedCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities assessed.",
                "type":"integer"
             },
-            "replicatingCount":{
+            "replicatingCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities being replicated.",
                "type":"integer"
             },
-            "migratedCount":{
+            "migratedCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities migrated.",
                "type":"integer"
             }
          }
       },
-      "RegisterToolInput":{
+      "RegisterToolInput":{  
          "description":"Class representing the register tool input.",
          "type":"object",
-         "properties":{
-            "tool":{
+         "properties":{  
+            "tool":{  
                "description":"Gets or sets the tool to be registered.",
                "type":"string"
             }
          }
       },
-      "RegistrationResult":{
+      "RegistrationResult":{  
          "description":"Class representing the registration status of a tool with the migrate project.",
          "type":"object",
-         "properties":{
-            "isRegistered":{
+         "properties":{  
+            "isRegistered":{  
                "description":"Gets or sets a value indicating whether the tool is registered or not.",
                "type":"boolean"
             }
          }
       },
-      "RefreshSummaryResult":{
+      "RefreshSummaryResult":{  
          "description":"Class representing the refresh summary status of the migrate project.",
          "type":"object",
-         "properties":{
-            "isRefreshed":{
+         "properties":{  
+            "isRefreshed":{  
                "description":"Gets or sets a value indicating whether the migrate project summary is refreshed.",
                "type":"boolean"
             }
          }
       },
-      "Solution":{
+      "Solution":{  
          "description":"Solution REST Resource.",
          "type":"object",
-         "properties":{
-            "id":{
+         "properties":{  
+            "id":{  
                "description":"Gets or sets the relative URL to get to this REST resource.",
                "type":"string"
             },
-            "name":{
+            "name":{  
                "description":"Gets or sets the name of this REST resource.",
                "type":"string"
             },
-            "type":{
+            "type":{  
                "description":"Gets the type of this REST resource.",
                "type":"string",
                "readOnly":true
             },
-            "properties":{
+            "properties":{  
                "$ref":"#/definitions/SolutionProperties",
                "description":"Gets or sets the properties of the solution."
             }
          }
       },
-      "SolutionProperties":{
+      "SolutionProperties":{  
          "description":"Class for solution properties.",
          "type":"object",
-         "properties":{
-            "tool":{
+         "properties":{  
+            "tool":{  
                "description":"Gets or sets the tool being used in the solution.",
                "type":"string"
             },
-            "purpose":{
+            "purpose":{  
                "description":"Gets or sets the purpose of the solution.",
                "type":"string"
             },
-            "goal":{
+            "goal":{  
                "description":"Gets or sets the goal of the solution.",
                "type":"string"
             },
-            "isInactive":{
+            "isInactive":{  
                "description":"Gets or sets a value indicating whether the solution is active or not.",
                "type":"boolean"
             },
-            "summary":{
+            "summary":{  
                "$ref":"#/definitions/SolutionSummary",
                "description":"Gets or sets the summary of the solution."
             },
-            "details":{
+            "details":{  
                "$ref":"#/definitions/SolutionDetails",
                "description":"Gets or sets the details of the solution."
             }
          }
       },
-      "SolutionSummary":{
+      "SolutionSummary":{  
          "description":"Class representing the summary object for solution.",
          "type":"object",
-         "properties":{
-            "discoveredCount":{
+         "properties":{  
+            "discoveredCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities discovered.",
                "type":"integer"
             },
-            "assessedCount":{
+            "assessedCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities assessed.",
                "type":"integer"
             },
-            "replicatingCount":{
+            "replicatingCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities being replicated.",
                "type":"integer"
             },
-            "migratedCount":{
+            "migratedCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities migrated.",
                "type":"integer"
             }
          }
       },
-      "SolutionDetails":{
+      "SolutionDetails":{  
          "description":"Class representing the details of the solution.",
          "type":"object",
-         "properties":{
-            "groupCount":{
+         "properties":{  
+            "groupCount":{  
                "format":"int32",
                "description":"Gets or sets the count of groups reported by the solution.",
                "type":"integer"
             },
-            "assessmentCount":{
+            "assessmentCount":{  
                "format":"int32",
                "description":"Gets or sets the count of assessments reported by the solution.",
                "type":"integer"
             },
-            "extendedDetails":{
+            "extendedDetails":{  
                "description":"Gets or sets the extended details reported by the solution.",
                "type":"object",
-               "additionalProperties":{
+               "additionalProperties":{  
                   "type":"string"
                }
             }
          }
       },
-      "SolutionsCollection":{
+      "SolutionsCollection":{  
          "description":"Collection of solutions.",
          "type":"object",
-         "properties":{
-            "value":{
+         "properties":{  
+            "value":{  
                "description":"Gets or sets the list of solutions.",
                "type":"array",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/Solution"
                }
             },
-            "nextLink":{
+            "nextLink":{  
                "description":"Gets or sets the value of next link.",
                "type":"string"
             }
          }
       },
-      "SolutionConfig":{
+      "SolutionConfig":{  
          "description":"Class representing the config for the solution in the migrate project.",
          "type":"object",
-         "properties":{
-            "publisherSasUri":{
+         "properties":{  
+            "publisherSasUri":{  
                "description":"Gets or sets the publisher sas uri for the solution.",
                "type":"string"
             }
          }
       },
-      "OperationResultList":{
+      "OperationResultList":{  
          "type":"object",
          "description":"List of API operations.",
-         "properties":{
-            "value":{
+         "properties":{  
+            "value":{  
                "type":"array",
                "description":"List of operations.",
-               "items":{
+               "items":{  
                   "$ref":"#/definitions/Operation"
                }
             }
          }
       },
-      "Operation":{
+      "Operation":{  
          "type":"object",
          "description":"A REST API operation supported by the provider.",
-         "properties":{
-            "name":{
+         "properties":{  
+            "name":{  
                "type":"string",
                "description":"Name of the operation.",
                "readOnly":true
             },
-            "display":{
+            "display":{  
                "description":"Displayable properties of the operation.",
                "$ref":"#/definitions/OperationDisplay"
             },
-            "origin":{
+            "origin":{  
                "type":"string",
                "description":"Origin of the operation.",
                "readOnly":true
             }
          }
       },
-      "OperationDisplay":{
+      "OperationDisplay":{  
          "type":"object",
          "description":"Displayable properties of the operation.",
          "readOnly":true,
-         "properties":{
-            "provider":{
+         "properties":{  
+            "provider":{  
                "type":"string",
                "description":"Provider of the operation.",
                "readOnly":true
             },
-            "resource":{
+            "resource":{  
                "type":"string",
                "description":"Resource operated on by the operation.",
                "readOnly":true
             },
-            "operation":{
+            "operation":{  
                "type":"string",
                "description":"Operation Type.",
                "readOnly":true
             },
-            "description":{
+            "description":{  
                "type":"string",
                "description":"Description of the operation.",
                "readOnly":true
