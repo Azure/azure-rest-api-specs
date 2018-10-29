@@ -11,7 +11,8 @@
   ],
   "consumes": [
     "application/json"
-  ],
+  ],
+
   "produces": [
     "application/json"
   ],
@@ -800,7 +801,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
       "get": {
         "tags": [
           "LoadBalancers"
@@ -868,7 +869,7 @@
             "description": "The name of the load balancer."
           },
           {
-            "name": "loadBalancingRuleName",
+            "name": "outboundRuleName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1752,7 +1753,7 @@
       },
       "description": "Response for ListLoadBalancingRule API service call."
     },
-	"LoadBalancerOutboundRuleListResult": {
+    "LoadBalancerOutboundRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -1768,7 +1769,7 @@
         }
       },
       "description": "Response for ListOutboundRule API service call."
-    },	
+    },
     "LoadBalancerProbeListResult": {
       "properties": {
         "value": {
