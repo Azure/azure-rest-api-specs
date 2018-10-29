@@ -117,10 +117,14 @@ directive:
         replace( /DeserializeObject<(.*?)>\((.*?), Client\.DeserializationSettings\)/g, "DeserializeObject<$1>($2, requestDeserializerSettings == null ? Client.DeserializationSettings : requestDeserializerSettings)" ).
         replace( /SerializeObject\((.*?), Client\.SerializationSettings\)/g , "SerializeObject($1, requestSerializerSettings == null ? Client.SerializationSettings : requestSerializerSettings)" ).
         replace( /WithHttpMessagesAsync\((.*?, cancellationToken)\)/g, "WithHttpMessagesAsync($1, requestSerializerSettings, requestDeserializerSettings)" ).
+        replace( /public partial class DocumentSearchResult/g, "internal partial class DocumentSearchResult" ).
         replace( /DocumentSearchResult/g, "DocumentSearchResultProxy" ).
         replace( /public SearchParameters\(bool/g, "private SearchParameters(bool" ).
         replace( /public IList<string> ScoringParameterStrings/g, "protected internal IList<string> ScoringParameterStrings" ).
         replace( /public SuggestParameters\(string/g, "private SuggestParameters(string" ).
         replace( /public string SelectStr { get; set; }/g, "protected internal string SelectStr { get { return (Select != null && Select.Any()) ? string.Join(\",\", Select) : \"*\"; } set { } }" ).
-        replace( /DocumentSuggestResult/g, "DocumentSuggestResultProxy" )
+        replace( /public partial class DocumentSuggestResult/g, "internal partial class DocumentSuggestResult" ).
+        replace( /DocumentSuggestResult/g, "DocumentSuggestResultProxy" ).
+        replace( /public partial class DocumentLookupResult/g, "internal partial class DocumentLookupResult" ).        
+        replace( /DocumentLookupResult/g, "DocumentLookupResultProxy" )        
 ```

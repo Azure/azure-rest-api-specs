@@ -915,15 +915,16 @@
     },
     "IndexAction": {
       "properties": {
-        "actionType": {
-          "$ref": "#/definitions/IndexActionType",
-          "x-nullable": false
+        "searchAction": {
+          "$ref": "#/definitions/SearchActionType"
         },
         "document": {
-          "type": "object",
-          "x-nullable": false
+          "type": "object"
         }
-      }
+      },
+      "required": [
+        "name", "searchAction", "document"
+      ]
     },
     "IndexingResult": {
       "properties": {
@@ -968,7 +969,7 @@
       },
       "description": "Response containing the status of operations for all documents in the indexing request."
     },
-    "IndexActionType": {
+    "SearchActionType": {
       "type": "string",
       "enum": [
         "upload",
@@ -976,7 +977,7 @@
         "mergeOrUpload",
         "delete"
       ],
-      "x-ms-enum": { "name": "IndexActionType" },
+      "x-ms-enum": { "name": "SearchActionType" },
       "description": "Specifies the operation to perform on a document in an indexing batch."
     },
     "SearchMode": {
@@ -1185,7 +1186,7 @@
         "minimumCoverage": {
           "type": "number",
           "format": "double",
-          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
         },
         "searchFields": {
           "type": "string",
