@@ -452,6 +452,96 @@
         "x-ms-long-running-operation": true
       }
     },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAvailableServerVariables",
+        "x-ms-examples": {
+          "Get Available Server Variables": {
+            "$ref": "./examples/ApplicationGatewayAvailableServerVariablesGet.json"
+          }
+        },
+        "description": "Lists all available server variables.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of all available server variables.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableServerVariablesResult"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableRequestHeaders": {
+     "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAvailableRequestHeaders",
+        "x-ms-examples": {
+          "Get Available Request Headers": {
+            "$ref": "./examples/ApplicationGatewayAvailableRequestHeadersGet.json"
+          }
+        },
+        "description": "Lists all available request headers.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of all available request headers.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableRequestHeadersResult"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAvailableResponseHeaders",
+        "x-ms-examples": {
+          "Get Available Response Headers": {
+            "$ref": "./examples/ApplicationGatewayAvailableResponseHeadersGet.json"
+          }
+        },
+        "description": "Lists all available response headers.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of all available response headers.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableResponseHeadersResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets": {
       "get": {
         "tags": [
@@ -1894,6 +1984,45 @@
         "ruleGroupName"
       ],
       "description": "Allows to disable rules within a rule group or an entire rule group."
+    },
+	"ApplicationGatewayAvailableServerVariablesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The supported server variable."
+          },
+          "description": "The list of supported server variables in application gateway."
+        }
+      },
+      "description": "Response for ApplicationGatewayAvailableServerVariables API service call."
+    },
+	"ApplicationGatewayAvailableRequestHeadersResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The supported request header."
+          },
+          "description": "The list of supported request headers in application gateway."
+        }
+      },
+      "description": "Response for ApplicationGatewayAvailableRequestHeaders API service call."
+    },
+	"ApplicationGatewayAvailableResponseHeadersResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The supported response header."
+          },
+          "description": "The list of supported response header in application gateway."
+        }
+      },
+      "description": "Response for ApplicationGatewayAvailableResponeHeaders API service call."
     },
     "ApplicationGatewayAvailableWafRuleSetsResult": {
       "properties": {
