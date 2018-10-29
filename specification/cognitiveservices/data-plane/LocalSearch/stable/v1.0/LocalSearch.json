@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Local Search API",
-    "description": "The Local Search API lets you send a search query to Bing and get back search results that include local businesses such as restaurants, hotels, retail stores, or other local businesses. The query can specify the name of the local business or it can ask for a list (for example, restaurants near me).",
+    "title": "Local Search Client",
+    "description": "The Local Search client lets you send a search query to Bing and get back search results that include local businesses such as restaurants, hotels, retail stores, or other local businesses. The query can specify the name of the local business or it can ask for a list (for example, restaurants near me).",
     "version": "1.0"
   },
   "parameters": {
@@ -247,6 +247,20 @@
           "description": "An object that contains the query string that Bing used for the request. This object contains the query string as entered by the user. It may also contain an altered query string that Bing used for the query if the query string contained a spelling mistake.",
           "$ref": "#/definitions/QueryContext",
           "readOnly": true
+        },
+        "places": {
+          "description": "A list of local entities such as restaurants or hotels that are relevant to the query.",
+          "$ref": "#/definitions/Places",
+          "readOnly": true
+        },
+        "lottery": {
+          "$ref": "#/definitions/SearchResultsAnswer",
+          "readOnly": true
+        },
+        "searchResultsConfidenceScore": {
+          "readOnly": true,
+          "type": "number",
+          "format": "float"
         }
       }
     },
