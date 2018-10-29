@@ -21,6 +21,8 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-09-01-preview-only
+  - tag: package-2018-07-01-preview-only
   - tag: package-2018-01-01-preview-only
   - tag: package-2015-07-authorization-only
   - tag: package-2015-06-01-preview
