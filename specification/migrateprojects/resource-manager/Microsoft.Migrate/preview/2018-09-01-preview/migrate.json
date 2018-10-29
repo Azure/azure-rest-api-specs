@@ -13,6 +13,102 @@
    "schemes":[  
       "https"
    ],
+   "produces":[  
+      "application/json"
+   ],
+   "consumes":[  
+      "application/json"
+   ],
+   "parameters":{  
+      "subscriptionId":{  
+         "name":"subscriptionId",
+         "description":"Azure Subscription Id in which migrate project was created.",
+         "type":"string",
+         "in":"path",
+         "required":true
+      },
+      "resourceGroupName":{  
+         "name":"resourceGroupName",
+         "description":"Name of the Azure Resource Group that migrate project is part of.",
+         "type":"string",
+         "in":"path",
+         "x-ms-parameter-location":"method",
+         "required":true
+      },
+      "migrateProjectName":{  
+         "name":"migrateProjectName",
+         "description":"Name of the Azure Migrate project.",
+         "type":"string",
+         "in":"path",
+         "x-ms-parameter-location":"method",
+         "required":true
+      },
+      "machineName":{  
+         "name":"machineName",
+         "description":"Unique name of a machine in Azure migration hub.",
+         "type":"string",
+         "in":"path",
+         "x-ms-parameter-location":"method",
+         "required":true
+      },
+      "solutionName":{  
+         "name":"solutionName",
+         "description":"Unique name of a migration solution within a migrate project.",
+         "type":"string",
+         "in":"path",
+         "x-ms-parameter-location":"method",
+         "required":true
+      },
+      "errorName":{  
+         "name":"errorName",
+         "description":"Unique name of an error within a migrate project.",
+         "type":"string",
+         "in":"path",
+         "x-ms-parameter-location":"method",
+         "required":true
+      },
+      "continuationToken":{  
+         "name":"continuationToken",
+         "description":"Continuation token query filter for the method.",
+         "type":"string",
+         "in":"query"
+      },
+      "api-version":{  
+         "name":"api-version",
+         "description":"Standard request header. Used by service to identify API version used by client.",
+         "type":"string",
+         "in":"query",
+         "required":true,
+         "enum":[  
+            "2018-09-01-preview"
+         ]
+      },
+      "acceptLanguage":{  
+         "description":"Standard request header. Used by service to respond to client in appropriate language.",
+         "name":"Accept-Language",
+         "type":"string",
+         "in":"header",
+         "x-ms-parameter-location":"client"
+      }
+   },
+   "securityDefinitions":{  
+      "azure_auth":{  
+         "type":"oauth2",
+         "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
+         "flow":"implicit",
+         "description":"Azure Active Directory OAuth2 Flow",
+         "scopes":{  
+            "user_impersonation":"impersonate your user account"
+         }
+      }
+   },
+   "security":[  
+      {  
+         "azure_auth":[  
+            "user_impersonation"
+         ]
+      }
+   ],
    "paths":{  
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateErrors":{  
          "get":{  
@@ -21,49 +117,24 @@
             ],
             "summary":"Gets a list of errors in the migrate project.",
             "operationId":"Errors_EnumerateErrors",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The name of the migrate project.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                },
                {  
-                  "name":"continuationToken",
-                  "in":"query",
-                  "description":"Continuation token from the previous call.",
-                  "required":false,
-                  "type":"string"
+                  "$ref":"#/parameters/continuationToken"
+               },
+               {  
+                  "$ref":"#/parameters/acceptLanguage"
                }
             ],
             "responses":{  
@@ -84,49 +155,21 @@
             ],
             "summary":"Gets an error in the migrate project.",
             "operationId":"Errors_GetError",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The migrate project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"errorName",
-                  "in":"path",
-                  "description":"The ARM name of the error to be fetched.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/errorName"
                }
             ],
             "responses":{  
@@ -147,49 +190,21 @@
             ],
             "summary":"Gets a list of machines in the migrate project.",
             "operationId":"Machines_EnumerateMachines",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The name of the migrate project.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                },
                {  
-                  "name":"continuationToken",
-                  "in":"query",
-                  "description":"Continuation token from the previous call.",
-                  "required":false,
-                  "type":"string"
+                  "$ref":"#/parameters/continuationToken"
                }
             ],
             "responses":{  
@@ -210,49 +225,21 @@
             ],
             "summary":"Gets a machine in the migrate project.",
             "operationId":"Machines_GetMachine",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The migrate project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"machineName",
-                  "in":"path",
-                  "description":"The ARM name of the machine to be fetched.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/machineName"
                }
             ],
             "responses":{  
@@ -273,42 +260,18 @@
             ],
             "summary":"Method to get a migrate project.",
             "operationId":"MigrateProjects_GetMigrateProject",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"Subscription Id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"Resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"Migrate Project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                }
             ],
             "responses":{  
@@ -327,40 +290,18 @@
             ],
             "summary":"Method to create or update a migrate project.",
             "operationId":"MigrateProjects_PutMigrateProject",
-            "consumes":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml",
-               "application/x-www-form-urlencoded"
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"Subscription Id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"Resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"Migrate Project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
+               },
+               {  
+                  "$ref":"#/parameters/api-version"
                },
                {  
                   "name":"body",
@@ -372,10 +313,7 @@
                   }
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/acceptLanguage"
                }
             ],
             "responses":{  
@@ -402,46 +340,18 @@
             ],
             "summary":"Registers a tool with the migrate project.",
             "operationId":"MigrateProjects_RegisterTool",
-            "consumes":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml",
-               "application/x-www-form-urlencoded"
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The migrate project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                },
                {  
                   "name":"input",
@@ -451,6 +361,9 @@
                   "schema":{  
                      "$ref":"#/definitions/RegisterToolInput"
                   }
+               },
+               {  
+                  "$ref":"#/parameters/acceptLanguage"
                }
             ],
             "responses":{  
@@ -471,42 +384,18 @@
             ],
             "summary":"Refresh the summary of the migrate project.",
             "operationId":"MigrateProjects_RefreshMigrateProjectSummary",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The migrate project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                }
             ],
             "responses":{  
@@ -527,49 +416,21 @@
             ],
             "summary":"Gets a solution in the migrate project.",
             "operationId":"Solutions_GetSolution",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The migrate project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"solutionName",
-                  "in":"path",
-                  "description":"The name of the solution to be fetched.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/solutionName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                }
             ],
             "responses":{  
@@ -588,53 +449,18 @@
             ],
             "summary":"Creates a solution in the migrate project.",
             "operationId":"Solutions_PutSolution",
-            "consumes":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml",
-               "application/x-www-form-urlencoded"
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The migrate project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"solutionName",
-                  "in":"path",
-                  "description":"The name of the solution to be created.",
-                  "required":true,
-                  "type":"string"
-               },
-               {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/solutionName"
                },
                {  
                   "name":"solutionInput",
@@ -644,6 +470,9 @@
                   "schema":{  
                      "$ref":"#/definitions/Solution"
                   }
+               },
+               {  
+                  "$ref":"#/parameters/api-version"
                }
             ],
             "responses":{  
@@ -664,42 +493,18 @@
             ],
             "summary":"Gets the list of solutions in the migrate project.",
             "operationId":"Solutions_EnumerateSolutions",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The name of the migrate project.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                }
             ],
             "responses":{  
@@ -720,49 +525,21 @@
             ],
             "summary":"Gets the config for the solution in the migrate project.",
             "operationId":"Solutions_GetConfig",
-            "consumes":[  
-
-            ],
-            "produces":[  
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
             "parameters":[  
                {  
-                  "name":"subscriptionId",
-                  "in":"path",
-                  "description":"The subscription id.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/subscriptionId"
                },
                {  
-                  "name":"resourceGroupName",
-                  "in":"path",
-                  "description":"The resource group name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/resourceGroupName"
                },
                {  
-                  "name":"migrateProjectName",
-                  "in":"path",
-                  "description":"The migrate project name.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/migrateProjectName"
                },
                {  
-                  "name":"solutionName",
-                  "in":"path",
-                  "description":"The name of the solution for which config is being fetched.",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/solutionName"
                },
                {  
-                  "name":"api-version",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
+                  "$ref":"#/parameters/api-version"
                }
             ],
             "responses":{  
@@ -2199,6 +1976,7 @@
       "MigrateProject":{  
          "description":"Migrate Project REST Resource.",
          "type":"object",
+         "x-ms-azure-resource":true,
          "properties":{  
             "eTag":{  
                "description":"Gets or sets the eTag for concurrency control.",
@@ -2219,7 +1997,8 @@
             },
             "name":{  
                "description":"Gets or sets the name of the migrate project.",
-               "type":"string"
+               "type":"string",
+               "readOnly":true
             },
             "type":{  
                "description":"Handled by resource provider. Type = Microsoft.Migrate/MigrateProject.",
@@ -2307,14 +2086,17 @@
       "Solution":{  
          "description":"Solution REST Resource.",
          "type":"object",
+         "x-ms-azure-resource":true,
          "properties":{  
             "id":{  
                "description":"Gets or sets the relative URL to get to this REST resource.",
-               "type":"string"
+               "type":"string",
+               "readOnly":true
             },
             "name":{  
                "description":"Gets or sets the name of this REST resource.",
-               "type":"string"
+               "type":"string",
+               "readOnly":true
             },
             "type":{  
                "description":"Gets the type of this REST resource.",
