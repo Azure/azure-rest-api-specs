@@ -2432,6 +2432,66 @@
                "type":"string"
             }
          }
+      },
+      "OperationResultList":{
+         "type":"object",
+         "description":"List of API operations.",
+         "properties":{
+            "value":{
+               "type":"array",
+               "description":"List of operations.",
+               "items":{
+                  "$ref":"#/definitions/Operation"
+               }
+            }
+         }
+      },
+      "Operation":{
+         "type":"object",
+         "description":"A REST API operation supported by the provider.",
+         "properties":{
+            "name":{
+               "type":"string",
+               "description":"Name of the operation.",
+               "readOnly":true
+            },
+            "display":{
+               "description":"Displayable properties of the operation.",
+               "$ref":"#/definitions/OperationDisplay"
+            },
+            "origin":{
+               "type":"string",
+               "description":"Origin of the operation.",
+               "readOnly":true
+            }
+         }
+      },
+      "OperationDisplay":{
+         "type":"object",
+         "description":"Displayable properties of the operation.",
+         "readOnly":true,
+         "properties":{
+            "provider":{
+               "type":"string",
+               "description":"Provider of the operation.",
+               "readOnly":true
+            },
+            "resource":{
+               "type":"string",
+               "description":"Resource operated on by the operation.",
+               "readOnly":true
+            },
+            "operation":{
+               "type":"string",
+               "description":"Operation Type.",
+               "readOnly":true
+            },
+            "description":{
+               "type":"string",
+               "description":"Description of the operation.",
+               "readOnly":true
+            }
+         }
       }
    }
 }
