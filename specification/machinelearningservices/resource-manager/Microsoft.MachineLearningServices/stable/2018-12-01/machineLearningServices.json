@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2018-03-01-preview"
+    "version": "2018-12-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -363,6 +363,83 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usage"
+        ],
+        "operationId": "Usages_List",
+        "description": "Gets the current usage information as well as limits for AML resources for given subscription and location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Usages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes": {
+      "get": {
+        "tags": [
+          "VirtualMachineSizes"
+        ],
+        "operationId": "VirtualMachineSizes_List",
+        "description": "Returns supported VM Sizes in a location",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location upon which virtual-machine-sizes is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },    
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -460,7 +537,7 @@
         "description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.",
         "x-ms-examples": {
           "Get a AKS Compute": { "$ref": "./examples/getAKSCompute.json" },
-          "Get a BatchAI Compute": { "$ref": "./examples/getBatchAICompute.json" }
+          "Get a AML Compute": { "$ref": "./examples/getAMLCompute.json" }
         },
         "parameters": [
           {
@@ -503,10 +580,10 @@
         "description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a BatchAI Compute": { "$ref": "./examples/createBasicBatchAICompute.json" },
+          "Create a AML Compute": { "$ref": "./examples/createBasicAMLCompute.json" },
           "Create AKS Compute": { "$ref": "./examples/createBasicAKSCompute.json" },
           "Create a DataFactory Compute": { "$ref": "./examples/createBasicDataFactoryCompute.json" },
-          "Update a BatchAI Compute": { "$ref": "./examples/updateBatchAICompute.json" },
+          "Update a AML Compute": { "$ref": "./examples/updateAMLCompute.json" },
           "Update a AKS Compute": { "$ref": "./examples/updateAKSCompute.json" }
         },
         "parameters": [
@@ -544,6 +621,57 @@
                 "type": "string"
               }
             },
+            "schema": {
+              "$ref": "#/definitions/ComputeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Update",
+        "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
+        "x-ms-examples": {
+          "Update a AmlCompute Compute": { "$ref": "./examples/patchAMLCompute.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdateParameters"
+            },
+            "description": "Additional parameters for cluster update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compute update initiated.",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
             }
@@ -672,8 +800,7 @@
         "operationId": "MachineLearningCompute_ListKeys",
         "description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).",
         "x-ms-examples": {
-          "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" },
-          "List BatchAI Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" }
+          "List AKS Compute Keys": { "$ref": "./examples/listKeysAKSCompute.json" }
         },
         "parameters": [
           {
@@ -874,10 +1001,6 @@
           "type": "string",
           "readOnly": true
         },
-        "batchaiWorkspace": {
-          "description": "ARM id of the Batch AI workspace associated with this workspace. This cannot be changed once the workspace has been created",
-          "type": "string"
-        },
         "keyVault": {
           "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
           "type": "string"
@@ -947,6 +1070,134 @@
           "type": "string"
         }
       }
+    },
+    "UsageName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Usage Names."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An enum describing the unit of usage measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": true
+          }
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/UsageName",
+          "description": "The name of the type of usage."
+        }
+      },
+      "description": "Describes AML Resource Usage."
+    },
+    "ListUsagesResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "The list of AML resource usages."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page of AML resource usage information. Call ListNext() with this to fetch the next page of AML resource usage information."
+        }
+      },
+      "description": "The List Usages operation response."
+    },
+    "VirtualMachineSize": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Virtual Machine size name",
+          "description": "The name of the virtual machine size."
+        },
+        "family": {
+          "type": "string",
+          "title": "Virtual Machine family name",
+          "description": "The family name of the virtual machine size."
+        },
+        "vCPUs": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of vPUs",
+          "description": "The number of vCPUs supported by the virtual machine size."
+        },
+        "osVhdSizeMB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "OS VHD Disk size",
+          "description": "The OS VHD disk size, in MB, allowed by the virtual machine size."
+        },
+        "maxResourceVolumeMB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Resource volume size",
+          "description": "The resource volume size, in MB, allowed by the virtual machine size."
+        },
+        "memoryGB": {
+          "type": "number",
+          "format": "double",
+          "title": "Memory size",
+          "description": "The amount of memory, in GB, supported by the virtual machine size."
+        },
+        "lowPriorityCapable": {
+          "type": "boolean",
+          "title": "Low priority capable",
+          "description": "Specifies if the virtual machine size supports low priority VMs."
+        },
+        "premiumIO": {
+          "type": "boolean",
+          "title": "Premium IO supported",
+          "description": "Specifies if the virtual machine size supports premium IO."
+        }
+      },
+      "description": "Describes the properties of a VM size."
+    },
+    "VirtualMachineSizeListResult": {
+      "properties": {
+        "amlCompute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSize"
+          },
+          "description": "The list of virtual machine sizes supported by AmlCompute."
+        }
+      },
+      "description": "The List Virtual Machine size operation response."
     },
     "WorkspaceListResult": {
       "description": "The result of a request to list machine learning workspaces.",
@@ -1026,6 +1277,19 @@
           }
         }
       }
+    },
+    "ResourceId": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.",
+      "x-ms-azure-resource": true
     },
     "ListWorkspaceKeysResult": {
       "type": "object",
@@ -1164,7 +1428,7 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "ARM resource id of the compute"
+          "description": "ARM resource id of the underlying compute"
         },
         "provisioningErrors": {
           "type": "array",
@@ -1223,8 +1487,8 @@
       ],
       "x-ms-discriminator-value": "AKS"
     },
-    "BatchAI": {
-      "description": "A Machine Learning compute based on Azure BatchAI.",
+    "AmlCompute": {
+      "description": "An Azure Machine Learning compute.",
       "allOf": [
         {
           "$ref": "#/definitions/Compute"
@@ -1233,7 +1497,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "description": "BatchAI properties",
+              "description": "AML Compute properties",
               "type": "object",
               "properties": {
                 "vmSize": {
@@ -1245,15 +1509,70 @@
                   "type": "string"
                 },
                 "scaleSettings": {
-                  "description": "Scale settings for BatchAI",
+                  "description": "Scale settings for AML Compute",
                   "$ref": "#/definitions/ScaleSettings"
+                },
+                "subnet": {
+                    "title": "Subnet.",
+                    "description": "Virtual network subnet resource ID the compute nodes belong to.",
+                    "$ref": "#/definitions/ResourceId"
+                },
+                "allocationState": {
+                  "type": "string",
+                  "readOnly": true,
+                  "title": "Allocation state.",
+                  "description": "Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
+                  "enum": [
+                    "steady",
+                    "resizing"
+                  ],
+                  "x-ms-enum": {
+                    "name": "AllocationState",
+                    "modelAsString": true
+                  }
+                },
+                "allocationStateTransitionTime": {
+                  "type": "string",
+                  "readOnly": true,
+                  "format": "date-time",
+                  "title": "Allocation state transition time.",
+                  "description": "The time at which the compute entered its current allocation state."
+                },
+                "errors": {
+                  "readOnly": true,
+                  "title": "Errors.",
+                  "description": "Collection of errors encountered by various compute nodes during node setup.",
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/MachineLearningServiceError"
+                  }
+                },
+                "currentNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Current node count.",
+                  "description": "The number of compute nodes currently assigned to the compute."
+                },
+                "targetNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Target node count.",
+                  "description": "The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation."
+                },
+                "nodeStateCounts": {
+                  "title": "Node state counts.",
+                  "description": "Counts of various node states on the compute.",
+                  "readOnly": true,
+                  "$ref": "#/definitions/NodeStateCounts"
                 }
               }
             }
           }
         }
       ],
-      "x-ms-discriminator-value": "BatchAI"
+      "x-ms-discriminator-value": "AmlCompute"
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -1397,7 +1716,7 @@
     },
     "ScaleSettings": {
       "type": "object",
-      "description": "scale settings for BatchAI Compute",
+      "description": "scale settings for AML Compute",
       "properties": {
         "maxNodeCount": {
           "description": "Max number of nodes to use",
@@ -1405,13 +1724,85 @@
         },
         "minNodeCount": {
           "description": "Min number of nodes to use",
-          "type": "integer"
+          "type": "integer",
+          "default": 0
         },
-        "autoScaleEnabled": {
-          "description": "Enable or disable auto scale",
-          "type": "boolean"
+        "nodeIdleTimeBeforeScaleDown": {
+          "type": "string",
+          "format": "duration",
+          "description": "Node Idle Time before scaling down amlCompute"
         }
-      }
+      },
+      "required": [
+        "maxNodeCount"
+      ]
+    },
+    "NodeStateCounts": {
+      "properties": {
+        "idleNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Idle node count.",
+          "description": "Number of compute nodes in idle state."
+        },
+        "runningNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Running node count.",
+          "description": "Number of compute nodes which are running jobs."
+        },
+        "preparingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Preparing node count.",
+          "description": "Number of compute nodes which are being prepared."
+        },
+        "unusableNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Unusable node count.",
+          "description": "Number of compute nodes which are in unusable state."
+        },
+        "leavingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Leaving node count.",
+          "description": "Number of compute nodes which are leaving the amlCompute."
+        },
+        "preemptedNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Preempted node count.",
+          "description": "Number of compute nodes which are in preempted state."
+        }
+      },
+      "description": "Counts of various compute node states on the amlCompute."
+    },
+    "ClusterUpdateProperties": {
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Scale settings.",
+          "description": "Desired scale settings for the amlCompute."
+        }
+      },
+      "description": "The properties of a amlCompute that need to be updated."
+    },
+    "ClusterUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterUpdateProperties",
+          "description": "The properties of the amlCompute."
+        }
+      },
+      "description": "AmlCompute update parameters."
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
@@ -1498,7 +1889,7 @@
       "description": "The type of compute",
       "enum": [
         "AKS",
-        "BatchAI",
+        "AmlCompute",
         "DataFactory",
         "VirtualMachine",
         "HDInsight"

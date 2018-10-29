@@ -4,20 +4,19 @@
         "resourceGroupName": "testrg123",
         "workspaceName": "workspaces123",
         "computeName": "compute123",
-        "api-version": "2018-03-01-preview",
+        "api-version": "2018-12-01",
         "parameters": {
             "location": "eastus",
             "properties": {
-                "computeType": "BatchAI",
+                "computeType": "AMLCompute",
                 "properties": {
                     "description": "some compute",
-                    "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.BatchAI/clusters/compute123-ccb488844dcc2",
-                    "computeType": "BatchAI",
+                    "computeType": "AMLCompute",
                     "properties": {
                         "scaleSettings": {
                             "maxNodeCount": 4,
                             "minNodeCount": 4,
-                            "autoScaleEnabled": false
+                            "nodeIdleTimeBeforeScaleDown": "PT5M"
                         }
                     }
                 }
@@ -33,8 +32,7 @@
                 "location": "eastus2",
                 "properties": {
                     "description": "some compute",
-                    "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.BatchAI/clusters/compute123-ccb488844dcc2",
-                    "computeType": "BatchAI",
+                    "computeType": "AMLCompute",
                     "provisioningState": "Updating"
                 }
             }
@@ -47,8 +45,7 @@
                 "location": "eastus2",
                 "properties": {
                     "description": "some compute",
-                    "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.BatchAI/clusters/compute123-ccb488844dcc2",
-                    "computeType": "BatchAI",
+                    "computeType": "AMLCompute",
                     "provisioningState": "Updating"
                 }
             },
