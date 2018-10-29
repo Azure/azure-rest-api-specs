@@ -10,18 +10,18 @@ This is the AutoRest configuration file for Azure Migrate.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-02
+  - tag: package-2018-09
 ```
 
-### Tag: package-2018-02 and java
+### Tag: package-2018-09 and java
 
-These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-09 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2018_02_02
-  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_02_02
+  namespace: com.microsoft.azure.management.azuremigrate.v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -46,15 +46,15 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-02
+tag: package-2018-09
 ```
 
 
-### Tag: package-2018-02
+### Tag: package-2018-09
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02'
+``` yaml $(tag) == 'package-2018-09'
 input-file:
 - Microsoft.Migrate/preview/2018-09-01-preview/migrate.json
 ```
@@ -86,14 +86,14 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2018-02
+  - tag: package-2018-09
 ```
 
-### Tag: package-2018-02 and go
+### Tag: package-2018-09 and go
 
-These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-09 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-2018-02' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-02-02/$(namespace)
+``` yaml $(tag)=='package-2018-09' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-09-01-preview/$(namespace)
 ```
