@@ -147,7 +147,7 @@
           }
         }
       }
-    },
+    },    
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/validateAddress": {
       "post": {
         "tags": [
@@ -305,7 +305,7 @@
           },
           "JobsGet5": {
             "$ref": "./examples/JobsGet5.json"
-          }
+          }          
         }
       },
       "put": {
@@ -924,13 +924,13 @@
         },
         "filesProcessed": {
           "format": "int64",
-          "description": "Number of files processed",
+          "description": "Number of files processed by the job as of now.",
           "type": "integer",
           "readOnly": true
         },
         "totalFilesToProcess": {
           "format": "int64",
-          "description": "Total files to process",
+          "description": "Total number of files to be processed by the job.",
           "type": "integer",
           "readOnly": true
         }
@@ -1400,93 +1400,6 @@
         "storageAccountId": {
           "description": "Destination Storage Account Arm Id.",
           "type": "string"
-        },
-        "alternateAccountId": {
-          "description": "Alternate Destination storage account id. AccountId will be replaced with this if sharedAccessSignature is passed.",
-          "type": "string"
-        },
-        "sharedAccessSignature": {
-          "description": "Shared access signature for the storage account.",
-          "type": "string"
-        },
-        "accountType": {
-          "description": "Account type.",
-          "enum": [
-            "UnknownType",
-            "GeneralPurposeStorage",
-            "BlobStorage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AccountType",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "UnknownType"
-              },
-              {
-                "value": "GeneralPurposeStorage",
-                "description": "General-purpose Storage Account gives access to Azure Storage services such as Tables, Queues, Files, Blobs and Azure virtual machine disks "
-              },
-              {
-                "value": "BlobStorage",
-                "description": "Blob Storage Account is a specialized storage account for storing unstructured data as blobs (objects) "
-              }
-            ]
-          }
-        },
-        "storageAccessTier": {
-          "description": "Access tier of the account.",
-          "enum": [
-            "Invalid",
-            "Hot",
-            "Cool",
-            "Cold"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AccessTier",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "Invalid"
-              },
-              {
-                "value": "Hot",
-                "description": "Hot Access tier for storage account"
-              },
-              {
-                "value": "Cool",
-                "description": "Cool Access tier for storage account"
-              },
-              {
-                "value": "Cold",
-                "description": "Cold Access tier for storage account"
-              }
-            ]
-          }
-        },
-        "storagePerformanceTier": {
-          "description": "Performance tier of the account.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PerformanceTier",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "Standard",
-                "description": "Standard performance tier for storage account"
-              },
-              {
-                "value": "Premium",
-                "description": "Premium performance tier for storage account"
-              }
-            ]
-          }
         }
       },
       "x-ms-discriminator-value": "StorageAccount"
@@ -2243,7 +2156,7 @@
         }
       },
       "x-ms-azure-resource": true
-    },
+    },    
     "ShareCredentialDetails": {
       "description": "Credential details of the shares in account.",
       "type": "object",
@@ -2260,7 +2173,8 @@
             "HCS",
             "BlockBlob",
             "PageBlob",
-            "AzureFile"
+            "AzureFile",
+            "ManagedDisk"
           ],
           "type": "string",
           "readOnly": true,
@@ -2287,6 +2201,10 @@
               {
                 "value": "AzureFile",
                 "description": "Azure storage file format."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Compute Disk."
               }
             ]
           }
@@ -2583,7 +2501,8 @@
             "Country",
             "Region",
             "Feature",
-            "OfferType"
+            "OfferType",
+            "NoSubscriptionInfo"
           ],
           "type": "string",
           "readOnly": true,
@@ -2601,7 +2520,7 @@
               },
               {
                 "value": "Region",
-                "description": "SKU is not available to push data to the requested storage account region."
+                "description": "SKU is not available to push data to the requested Azure region."
               },
               {
                 "value": "Feature",
