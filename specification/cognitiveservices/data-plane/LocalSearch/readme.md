@@ -1,4 +1,4 @@
-# Cognitive Services Entity Search SDK
+# Cognitive Services Local Search SDK
 
 > see https://aka.ms/autorest
 
