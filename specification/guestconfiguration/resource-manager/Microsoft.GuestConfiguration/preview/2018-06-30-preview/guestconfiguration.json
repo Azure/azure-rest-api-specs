@@ -354,6 +354,100 @@
           "application/json"
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/software/{softwareId}": {
+      "get": {
+        "tags": [
+          "Software"
+        ],
+        "operationId": "Software_Get",
+        "description": "Get information about a software installed on the given virtual machine",
+        "x-ms-examples": {
+          "Get a software": {
+            "$ref": "./examples/getSoftware.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "name": "softwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The software Id."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Software"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/software": {
+      "get": {
+        "tags": [
+          "Software"
+        ],
+        "operationId": "Software_List",
+        "description": "Get information about list of software installed on the given virtual machine",
+        "x-ms-examples": {
+          "List software": {
+            "$ref": "./examples/listSoftware.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SoftwareList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -777,6 +871,58 @@
         }
       },
       "description": "Reason and code for the compliance of the guest configuration assignment resource."
+    },
+    "SoftwareList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Software"
+          },
+          "description": "The list of software installed on a given virtual machine."
+        }
+      },
+      "description": "The list of software installed on a given virtual machine."
+    },
+    "Software": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/SoftwareProperties",
+          "description": "Properties of the software."
+        }
+      },
+      "allOf": [
+        {
+        "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+      }
+    ],
+    "description": "Describes a specific software installed on the given virtual machine."
+    },
+    "SoftwareProperties": {
+      "description": "Properties of the software object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the software"
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Version of the software"
+        },
+        "publisher": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Publisher of the software"
+        },
+        "lastRefreshDate": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Last refresh date for the software"
+        }
+      }
     }
   },
 "parameters": {}
