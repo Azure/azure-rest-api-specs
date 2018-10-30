@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DevTestLab.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DevTestLab, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for DevTestLab, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DevTestLab API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-05
+tag: package-preview-2015-05
 ```
 
 
+### Tag: package-preview-2015-05
+
+These settings apply only when `--tag=package-preview-2015-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2015-05'
+input-file:
+  - Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
+```
 ### Tag: package-2016-05
 
 These settings apply only when `--tag=package-2016-05` is specified on the command line.
@@ -48,10 +56,9 @@ input-file:
 - Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -69,7 +76,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_devtestlabs']
 ```
-
 
 ## C#
 
@@ -101,11 +107,13 @@ python:
   package-name: azure-mgmt-devtestlabs
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-devtestlabs/azure/mgmt/devtestlabs
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -163,5 +171,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
