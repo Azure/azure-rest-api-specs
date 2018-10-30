@@ -3,7 +3,7 @@
   "info": {
     "title": "Visual Studio Resource Provider Client",
     "version": "2014-04-01-preview",
-    "description": "Use these APIs to manage Visual Studio Team Services resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see https://docs.microsoft.com/en-us/rest/api/index."
+    "description": "Use these APIs to manage Azure DevOps Services resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see https://docs.microsoft.com/en-us/rest/api/index."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -66,7 +66,7 @@
           "Accounts"
         ],
         "summary": "Accounts_CheckNameAvailability",
-        "description": "Checks if the specified Visual Studio Team Services account name is available. Resource name can be either an account name or an account name and PUID.",
+        "description": "Checks if the specified Azure DevOps Services account name is available. Resource name can be either an account name or an account name and PUID.",
         "operationId": "Accounts_CheckNameAvailability",
         "parameters": [
           {
@@ -106,7 +106,7 @@
           "Accounts"
         ],
         "summary": "Accounts_ListByResourceGroup",
-        "description": "Gets all Visual Studio Team Services account resources under the resource group linked to the specified Azure subscription.",
+        "description": "Gets all Azure DevOps Services account resources under the resource group linked to the specified Azure subscription.",
         "operationId": "Accounts_ListByResourceGroup",
         "produces": [
           "application/json"
@@ -124,7 +124,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the details of the Visual Studio Team Services account resources linked to the Azure subscription.",
+            "description": "The operation succeeded. The response contains the details of the Azure DevOps Services account resources linked to the Azure subscription.",
             "schema": {
               "$ref": "#/definitions/AccountResourceListResult"
             }
@@ -161,7 +161,7 @@
           {
             "in": "path",
             "name": "accountResourceName",
-            "description": "The name of the Visual Studio Team Services account resource.",
+            "description": "The name of the Azure DevOps Services account resource.",
             "required": true,
             "type": "string"
           }
@@ -187,7 +187,7 @@
           "Extensions"
         ],
         "summary": "Extensions_Create",
-        "description": "Registers the extension with a Visual Studio Team Services account.",
+        "description": "Registers the extension with a Azure DevOps Services account.",
         "operationId": "Extensions_Create",
         "parameters": [
           {
@@ -211,7 +211,7 @@
           {
             "in": "path",
             "name": "accountResourceName",
-            "description": "The name of the Visual Studio Team Services account resource.",
+            "description": "The name of the Azure DevOps Services account resource.",
             "required": true,
             "type": "string"
           },
@@ -242,7 +242,7 @@
           "Extensions"
         ],
         "summary": "Extensions_Delete",
-        "description": "Removes an extension resource registration for a Visual Studio Team Services account.",
+        "description": "Removes an extension resource registration for a Azure DevOps Services account.",
         "operationId": "Extensions_Delete",
         "parameters": [
           {
@@ -257,7 +257,7 @@
           {
             "in": "path",
             "name": "accountResourceName",
-            "description": "The name of the Visual Studio Team Services account resource.",
+            "description": "The name of the Azure DevOps Services account resource.",
             "required": true,
             "type": "string"
           },
@@ -285,7 +285,7 @@
           "Extensions"
         ],
         "summary": "Extensions_Get",
-        "description": "Gets the details of an extension associated with a Visual Studio Team Services account resource.",
+        "description": "Gets the details of an extension associated with a Azure DevOps Services account resource.",
         "operationId": "Extensions_Get",
         "produces": [
           "application/json"
@@ -303,7 +303,7 @@
           {
             "in": "path",
             "name": "accountResourceName",
-            "description": "The name of the Visual Studio Team Services account resource.",
+            "description": "The name of the Azure DevOps Services account resource.",
             "required": true,
             "type": "string"
           },
@@ -337,7 +337,7 @@
           "Extensions"
         ],
         "summary": "Extensions_Update",
-        "description": "Updates an existing extension registration for the Visual Studio Team Services account.",
+        "description": "Updates an existing extension registration for the Azure DevOps Services account.",
         "operationId": "Extensions_Update",
         "parameters": [
           {
@@ -361,7 +361,7 @@
           {
             "in": "path",
             "name": "accountResourceName",
-            "description": "The name of the Visual Studio Team Services account resource.",
+            "description": "The name of the Azure DevOps Services account resource.",
             "required": true,
             "type": "string"
           },
@@ -394,7 +394,7 @@
           "Accounts"
         ],
         "summary": "Accounts_CreateOrUpdate",
-        "description": "Creates or updates a Visual Studio Team Services account resource.",
+        "description": "Creates or updates a Azure DevOps Services account resource.",
         "operationId": "Accounts_CreateOrUpdate",
         "parameters": [
           {
@@ -425,13 +425,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The Visual Studio Team Services account resource was created or updated.",
+            "description": "The operation succeeded. The Azure DevOps Services account resource was created or updated.",
             "schema": {
               "$ref": "#/definitions/AccountResource"
             }
           },
           "404": {
-            "description": "The Visual Studio Team Services account does not exist."
+            "description": "The Azure DevOps Services account does not exist."
           }
         },
         "x-ms-examples": {
@@ -445,7 +445,7 @@
           "Accounts"
         ],
         "summary": "Accounts_Delete",
-        "description": "Deletes a Visual Studio Team Services account resource.",
+        "description": "Deletes a Azure DevOps Services account resource.",
         "operationId": "Accounts_Delete",
         "parameters": [
           {
@@ -467,7 +467,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The Visual Studio Team Services account resource was deleted."
+            "description": "The operation succeeded. The Azure DevOps Services account resource was deleted."
           }
         },
         "x-ms-examples": {
@@ -481,7 +481,7 @@
           "Accounts"
         ],
         "summary": "Accounts_Get",
-        "description": "Gets the Visual Studio Team Services account resource details.",
+        "description": "Gets the Azure DevOps Services account resource details.",
         "operationId": "Accounts_Get",
         "parameters": [
           {
@@ -503,18 +503,69 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the details of the Visual Studio Team Services account resource.",
+            "description": "The operation succeeded. The response contains the details of the Azure DevOps Services account resource.",
             "schema": {
               "$ref": "#/definitions/AccountResource"
             }
           },
           "404": {
-            "description": "The Visual Studio Team Services account does not exist."
+            "description": "The Azure DevOps Services account does not exist."
           }
         },
         "x-ms-examples": {
           "Get an account resource": {
             "$ref": "./examples/GetResource.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Accounts_Update",
+        "description": "Updates tags for Azure DevOps Services account resource.",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request data.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountTagRequest"
+            }
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The Azure DevOps Services account resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "404": {
+            "description": "The Azure DevOps Services account does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Create an account resource": {
+            "$ref": "./examples/UpdateTags.json"
           }
         }
       }
@@ -525,7 +576,7 @@
           "Projects"
         ],
         "summary": "Projects_ListByResourceGroup",
-        "description": "Gets all Visual Studio Team Services project resources created in the specified Team Services account.",
+        "description": "Gets all Azure DevOps Services project resources created in the specified Azure DevOps Services account.",
         "operationId": "Projects_ListByResourceGroup",
         "parameters": [
           {
@@ -540,21 +591,21 @@
           {
             "in": "path",
             "name": "rootResourceName",
-            "description": "Name of the Team Services account.",
+            "description": "Name of the Azure DevOps Services account.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the details of the Visual Studio Team Services project resources created in the specified Team Services account.",
+            "description": "The operation succeeded. The response contains the details of the Azure DevOps Services project resources created in the specified Azure DevOps Services account.",
             "schema": {
               "$ref": "#/definitions/ProjectResourceListResult"
             }
           }
         },
         "x-ms-examples": {
-          "Get a list of project resources in the Team Services account": {
+          "Get a list of project resources in the Azure DevOps Services account": {
             "$ref": "./examples/GetProjectResources_List.json"
           }
         }
@@ -566,7 +617,7 @@
           "Projects"
         ],
         "summary": "Projects_Create",
-        "description": "Creates a Team Services project in the collection with the specified name. 'VersionControlOption' and 'ProcessTemplateId' must be specified in the resource properties. Valid values for VersionControlOption: Git, Tfvc. Valid values for ProcessTemplateId: 6B724908-EF14-45CF-84F8-768B5384DA45, ADCC42AB-9882-485E-A3ED-7678F01F66BC, 27450541-8E31-4150-9947-DC59F998FC01 (these IDs correspond to Scrum, Agile, and CMMI process templates).",
+        "description": "Creates a Azure DevOps Services project in the collection with the specified name. 'VersionControlOption' and 'ProcessTemplateId' must be specified in the resource properties. Valid values for VersionControlOption: Git, Tfvc. Valid values for ProcessTemplateId: 6B724908-EF14-45CF-84F8-768B5384DA45, ADCC42AB-9882-485E-A3ED-7678F01F66BC, 27450541-8E31-4150-9947-DC59F998FC01 (these IDs correspond to Scrum, Agile, and CMMI process templates).",
         "operationId": "Projects_Create",
         "parameters": [
           {
@@ -590,14 +641,14 @@
           {
             "in": "path",
             "name": "rootResourceName",
-            "description": "Name of the Team Services account.",
+            "description": "Name of the Azure DevOps Services account.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "resourceName",
-            "description": "Name of the Team Services project.",
+            "description": "Name of the Azure DevOps Services project.",
             "required": true,
             "type": "string"
           },
@@ -611,13 +662,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the details of the created or updated team project resource.",
+            "description": "The operation succeeded. The response contains the details of the created or updated Azure DevOps project resource.",
             "schema": {
               "$ref": "#/definitions/ProjectResource"
             }
           },
           "202": {
-            "description": "The operation succeeded. A job to create the team project resource has been queued. The URI to monitor the status of the job is provided in the 'location' header."
+            "description": "The operation succeeded. A job to create the Azure DevOps project resource has been queued. The URI to monitor the status of the job is provided in the 'location' header."
           }
         },
         "x-ms-long-running-operation": true,
@@ -632,7 +683,7 @@
           "Projects"
         ],
         "summary": "Projects_Get",
-        "description": "Gets the details of a Team Services project resource.",
+        "description": "Gets the details of a Azure DevOps Services project resource.",
         "operationId": "Projects_Get",
         "parameters": [
           {
@@ -647,21 +698,21 @@
           {
             "in": "path",
             "name": "rootResourceName",
-            "description": "Name of the Team Services account.",
+            "description": "Name of the Azure DevOps Services account.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "resourceName",
-            "description": "Name of the Team Services project.",
+            "description": "Name of the Azure DevOps Services project.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the details of the updated team project resource.",
+            "description": "The operation succeeded. The response contains the details of the updated Azure DevOps project resource.",
             "schema": {
               "$ref": "#/definitions/ProjectResource"
             }
@@ -681,7 +732,7 @@
           "Projects"
         ],
         "summary": "Projects_Update",
-        "description": "Updates the tags of the specified Team Services project.",
+        "description": "Updates the tags of the specified Azure DevOps Services project.",
         "operationId": "Projects_Update",
         "parameters": [
           {
@@ -705,21 +756,21 @@
           {
             "in": "path",
             "name": "rootResourceName",
-            "description": "Name of the Team Services account.",
+            "description": "Name of the Azure DevOps Services account.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "resourceName",
-            "description": "Name of the Team Services project.",
+            "description": "Name of the Azure DevOps Services project.",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the details of the updated team project resource.",
+            "description": "The operation succeeded. The response contains the details of the updated Azure DevOps project resource.",
             "schema": {
               "$ref": "#/definitions/ProjectResource"
             }
@@ -753,14 +804,14 @@
           {
             "in": "path",
             "name": "rootResourceName",
-            "description": "Name of the Team Services account.",
+            "description": "Name of the Azure DevOps Services account.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "resourceName",
-            "description": "Name of the Team Services project.",
+            "description": "Name of the Azure DevOps Services project.",
             "required": true,
             "type": "string"
           },
@@ -789,13 +840,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the details of the newly created team project resource.",
+            "description": "The operation succeeded. The response contains the details of the newly created Azure DevOps project resource.",
             "schema": {
               "$ref": "#/definitions/ProjectResource"
             }
           },
           "202": {
-            "description": "The team project creation job is still running."
+            "description": "The Azure DevOps project creation job is still running."
           }
         },
         "x-ms-examples": {
@@ -1081,7 +1132,7 @@
       }
     },
     "ProjectResource": {
-      "description": "A Visual Studio Team Services project resource.",
+      "description": "A Azure DevOps Services project resource.",
       "type": "object",
       "allOf": [
         {
@@ -1100,7 +1151,7 @@
       }
     },
     "ProjectResourceListResult": {
-      "description": "The response to a request to list Team Services project resources in a resource group/account.",
+      "description": "The response to a request to list Azure DevOps Services project resources in a resource group/account.",
       "type": "object",
       "properties": {
         "value": {
