@@ -34,3 +34,12 @@ csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.LocalSearch
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingLocalSearch/BingLocalSearch/Generated/LocalSearch
 ```
+
+
+## Suppressions
+Suppressing errors due to API design:
+``` yaml
+directive:
+  - suppress: R3016
+    reason: _type is a polymorphic discriminator that can't be changed.
+```
