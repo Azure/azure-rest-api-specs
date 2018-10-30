@@ -26,9 +26,18 @@ These are the global settings for the DevTestLab API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2016-05
+tag: package-2018-09
 ```
 
+
+### Tag: package-2018-09
+
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09'
+input-file:
+- Microsoft.DevTestLab/stable/2018-09-15/DTL.json
+```
 
 ### Tag: package-2016-05
 
