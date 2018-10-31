@@ -223,6 +223,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties within account's properties. By default, data is not included when fecthing properties. Currently we only support geoReplicationStats.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "geoReplicationStats"
+            ],
+            "x-ms-enum": {
+              "name": "StorageAccountExpand",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -1260,6 +1274,31 @@
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object."
     },
+    "GeoReplicationStats": {
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable.",
+          "enum": [
+            "Live",
+            "Bootstrap",
+            "Unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "GeoReplicationStatus",
+            "modelAsString": true
+          }
+        },
+        "lastSyncTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "All primary writes preceding this UTC date/time value are guaranteed to be available for read operations. Primary writes following this point in time may or may not be available for reads. Element may be default value if value of LastSyncTime is not available, this can happen if secondary is offline or we are in bootstrap."
+        }
+      },
+      "description": "Statistics related to replication for storage account's Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account."
+    },
     "StorageAccountProperties": {
       "properties": {
         "provisioningState": {
@@ -1377,6 +1416,12 @@
           "type": "boolean",
            "x-ms-client-name": "IsHnsEnabled",
            "description": "Account HierarchicalNamespace enabled if sets to true."
+        },
+        "geoReplicationStats": {
+          "$ref": "#/definitions/GeoReplicationStats",
+          "x-ms-client-name": "GeoReplicationStats",
+          "description": "Geo Replication Stats",
+          "readOnly": true
         }
       },
       "description": "Properties of the storage account."
