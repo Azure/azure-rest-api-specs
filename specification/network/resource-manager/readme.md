@@ -86,6 +86,7 @@ input-file:
   - Microsoft.Network/stable/2019-02-01/availableDelegations.json
   - Microsoft.Network/stable/2019-02-01/azureFirewall.json
   - Microsoft.Network/stable/2019-02-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2019-02-01/bastionHost.json
   - Microsoft.Network/stable/2019-02-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2019-02-01/ddosCustomPolicy.json
   - Microsoft.Network/stable/2019-02-01/ddosProtectionPlan.json
