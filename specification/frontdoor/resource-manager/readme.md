@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Network.
 
 ---
 ## Getting Started
-To build the SDK for Frontdoor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for FrontDoor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,11 +22,11 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the Frontdoor API.
+These are the global settings for the FrontDoor API.
 
 ``` yaml
-title: FrontdoorManagementClient
-description: Frontdoor Client
+title: FrontDoorManagementClient
+description: FrontDoor Client
 openapi-type: arm
 tag: package-2018-08-preview
 ```
@@ -61,6 +61,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -74,40 +75,14 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Frontdoor
-  output-folder: $(csharp-sdks-folder)/Frontdoor/Management.Frontdoor/Generated
+  namespace: Microsoft.Azure.Management.FrontDoor
+  output-folder: $(csharp-sdks-folder)/FrontDoor/Management.FrontDoor/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: frontdoor
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-08-preview
-```
-
-
-### Tag: package-2018-08-preview and go
-
-These settings apply only when `--tag=package-2018-08-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/frontdoor/mgmt/2018-08-01-preview/frontdoor
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

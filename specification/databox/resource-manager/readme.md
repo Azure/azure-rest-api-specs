@@ -1,5 +1,5 @@
 # DataBox
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for DataBox.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for DataBox.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for DataBox, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the DataBox API.
 
 ``` yaml
@@ -50,6 +50,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
@@ -58,7 +59,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -102,33 +103,6 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-databox
 ```
 
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: databox
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-01
-```
-
-### Tag: package-2018-01 and go
-
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/databox/mgmt/2018-01-01/databox
-```
-
 ## Ruby
 
 These settings apply only when `--ruby` is specified on the command line.
@@ -155,6 +129,10 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 namespace: "Azure::Compute::Mgmt::V2018_01_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_databox/lib
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

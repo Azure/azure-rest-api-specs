@@ -56,6 +56,9 @@
           },
           "intervaledMetric": {
             "$ref": "examples/metric-get-full.json"
+          },
+          "segmentedIntervaledMetric": {
+            "$ref": "examples/metric-get-segmented.json"
           }
         },
         "parameters": [
@@ -459,7 +462,7 @@
         ],
         "x-ms-enum": {
           "name": "MetricsAggregation",
-          "modelAsString": false
+          "modelAsString": true
         }
       }
     },
@@ -744,7 +747,7 @@
         ],
         "x-ms-enum": {
           "name": "MetricsAggregation",
-          "modelAsString": false
+          "modelAsString": true
         }
       }
     },
@@ -936,9 +939,7 @@
           }
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": true
     },
     "eventType": {
       "description": "The type of events to query; either a standard event type (`traces`, `customEvents`, `pageViews`, `requests`, `dependencies`, `exceptions`, `availabilityResults`) or `$all` to query across all event types.",
