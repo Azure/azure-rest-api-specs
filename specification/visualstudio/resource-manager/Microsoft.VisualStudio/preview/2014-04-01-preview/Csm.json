@@ -517,6 +517,57 @@
             "$ref": "./examples/GetResource.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Accounts_Update",
+        "description": "Updates tags for Visual Studio Team Services account resource.",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request data.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountTagRequest"
+            }
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The Visual Studio Team Services account resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "404": {
+            "description": "The Visual Studio Team Services account does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Create an account resource": {
+            "$ref": "./examples/UpdateTags.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.visualstudio/account/{rootResourceName}/project": {
@@ -837,6 +888,14 @@
             "$ref": "#/definitions/AccountResource"
           }
         }
+      }
+    },
+    "AccountTagRequest": {
+      "description": "The body of a Patch request to add tags to a Visual Studio account resource.",
+       "tags": {
+          "description": "The custom tags of the resource.",
+          "type": "object"
+       }
       }
     },
     "AccountResourceRequest": {
