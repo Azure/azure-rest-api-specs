@@ -363,6 +363,93 @@
                   "$ref":"./examples/MigrateProjects_Put.json"
                }
             }
+         },
+         "patch":{  
+            "tags":[  
+               "MigrateProjects"
+            ],
+            "summary":"Update migrate project.",
+            "description":"Update a migrate project with specified name. Supports partial updates, for example only tags can be provided.",
+            "operationId":"MigrateProjects_PatchMigrateProject",
+            "parameters":[  
+               {  
+                  "$ref":"#/parameters/subscriptionId"
+               },
+               {  
+                  "$ref":"#/parameters/resourceGroupName"
+               },
+               {  
+                  "$ref":"#/parameters/migraeProjectName"
+               },
+               {  
+                  "$ref":"#/parameters/api-version"
+               },
+               {  
+                  "$ref":"#/parameters/acceptLanguage"
+               },
+               {  
+                  "name":"body",
+                  "in":"body",
+                  "description":"Body with migrate project details.",
+                  "required":true,
+                  "schema":{  
+                     "$ref":"#/definitions/MigrateProject"
+                  }
+               },
+               {  
+                  "$ref":"#/parameters/acceptLanguage"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"OK",
+                  "schema":{  
+                     "$ref":"#/definitions/MigrateProject"
+                  }
+               }
+            },
+            "deprecated":false,
+            "x-ms-examples":{  
+               "MigrateProjects_Patch":{  
+                  "$ref":"./examples/MigrateProjects_Patch.json"
+               }
+            }
+         },
+         "delete":{  
+            "tags":[  
+               "MigrateProjects"
+            ],
+            "summary":"Delete the migrate project",
+            "description":"Delete the migrate project. Deleting non-existent project is a no-operation.",
+            "operationId":"MigrateProjects_DeleteMigrateProject",
+            "parameters":[  
+               {  
+                  "$ref":"#/parameters/subscriptionId"
+               },
+               {  
+                  "$ref":"#/parameters/resourceGroupName"
+               },
+               {  
+                  "$ref":"#/parameters/migrateProjectName"
+               },
+               {  
+                  "$ref":"#/parameters/api-version"
+               },
+               {  
+                  "$ref":"#/parameters/acceptLanguage"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"OK"
+               }
+            },
+            "deprecated":false,
+            "x-ms-examples":{  
+               "MigrateProjects_Delete":{  
+                  "$ref":"./examples/MigrateProjects_Delete.json"
+               }
+            }
          }
       },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/registerTool":{  
@@ -540,6 +627,93 @@
             "x-ms-examples":{  
                "Solutions_Put":{  
                   "$ref":"./examples/Solutions_Put.json"
+               }
+            }
+         },
+         "patch":{  
+            "tags":[  
+               "Solutions"
+            ],
+            "summary":"Update solution.",
+            "description":"Update a solution with specified name. Supports partial updates, for example only tags can be provided.",
+            "operationId":"Solutions_PatchSolution",
+            "parameters":[  
+               {  
+                  "$ref":"#/parameters/subscriptionId"
+               },
+               {  
+                  "$ref":"#/parameters/resourceGroupName"
+               },
+               {  
+                  "$ref":"#/parameters/migrateProjectName"
+               },
+               {  
+                  "$ref":"#/parameters/solutionName"
+               },
+               {  
+                  "name":"solutionInput",
+                  "in":"body",
+                  "description":"The input for the solution.",
+                  "required":true,
+                  "schema":{  
+                     "$ref":"#/definitions/Solution"
+                  }
+               },
+               {  
+                  "$ref":"#/parameters/api-version"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"OK",
+                  "schema":{  
+                     "$ref":"#/definitions/Solution"
+                  }
+               }
+            },
+            "deprecated":false,
+            "x-ms-examples":{  
+               "Solutions_Patch":{  
+                  "$ref":"./examples/Solutions_Patch.json"
+               }
+            }
+         },
+         "delete":{  
+            "tags":[  
+               "Solutions"
+            ],
+            "summary":"Delete the solution",
+            "description":"Delete the solution. Deleting non-existent project is a no-operation.",
+            "operationId":"Solutions_DeleteSolution",
+            "parameters":[  
+               {  
+                  "$ref":"#/parameters/subscriptionId"
+               },
+               {  
+                  "$ref":"#/parameters/resourceGroupName"
+               },
+               {  
+                  "$ref":"#/parameters/migrateProjectName"
+               },
+               {  
+                  "$ref":"#/parameters/solutionName"
+               },
+               {  
+                  "$ref":"#/parameters/api-version"
+               },
+               {  
+                  "$ref":"#/parameters/acceptLanguage"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"OK"
+               }
+            },
+            "deprecated":false,
+            "x-ms-examples":{  
+               "Solutions_Delete":{  
+                  "$ref":"./examples/Solutions_Delete.json"
                }
             }
          }
@@ -2344,4 +2518,4 @@
          }
       }
    }
-}
+}operat
