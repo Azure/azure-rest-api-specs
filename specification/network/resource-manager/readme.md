@@ -49,6 +49,7 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/expressRouteCircuit.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-08-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-08-01/expressRoutePort.json
   - Microsoft.Network/stable/2018-08-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-08-01/loadBalancer.json
   - Microsoft.Network/stable/2018-08-01/network.json
@@ -658,6 +659,9 @@ directive:
     from: expressRouteGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRoutePort.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -721,6 +725,9 @@ directive:
   - suppress: GetInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability"].get.operationId
     reason: Customized verb is used for API
+  - suppress: PutInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/links/{linkName}"].put.operationId
+    reason: Child resource is auto-created when top-level resource is created.
   - suppress: PutInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey"].put.operationId
     reason: Customized verb is used for API
