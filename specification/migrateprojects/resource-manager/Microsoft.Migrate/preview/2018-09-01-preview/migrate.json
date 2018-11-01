@@ -193,6 +193,42 @@
                   "$ref":"./examples/MigrateErrors_Get.json"
                }
             }
+         },
+         "delete":{  
+            "tags":[  
+               "Errors"
+            ],
+            "summary":"Delete the migrate error",
+            "description":"Delete the migrate error. Deleting non-existent migrate error is a no-operation.",
+            "operationId":"Errors_DeleteError",
+            "parameters":[  
+               {  
+                  "$ref":"#/parameters/subscriptionId"
+               },
+               {  
+                  "$ref":"#/parameters/resourceGroupName"
+               },
+               {  
+                  "$ref":"#/parameters/migrateProjectName"
+               },
+               {  
+                  "$ref":"#/parameters/api-version"
+               },
+               {  
+                  "$ref":"#/parameters/errorName"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"OK"
+               }
+            },
+            "deprecated":false,
+            "x-ms-examples":{  
+               "MigrateErrors_Delete":{  
+                  "$ref":"./examples/MigrateErrors_Delete.json"
+               }
+            }
          }
       },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/Machines":{  
