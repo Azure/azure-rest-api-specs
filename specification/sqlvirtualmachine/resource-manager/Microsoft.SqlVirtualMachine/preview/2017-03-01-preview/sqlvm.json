@@ -1,0 +1,1868 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-03-01-preview",
+    "title": "ArmSqlVMResourceProviderModule",
+    "description": "The SqlVM management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your Sql Server Virtual Machine. The API enables users to create, delete and retrieve the single SqlVm and SqlVm cluster."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}/availabilityGroupListeners/{availabilityGroupListenerName}": {
+      "get": {
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Gets an AvailabilityGroupListener.",
+        "operationId": "AvailabilityGroupListeners_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityGroupListenerName",
+            "in": "path",
+            "description": "The name of the Availability Group Listener.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the AvailabilityGroupListeners.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 400 DifferentSubSqlVmList - All SQL VM should be under same subscription.\n\n * 400 OnlyStandardPublicIp - Every VM should have Standard Public IP.\n\n * 400 ListenerNameTooLong - Listener name should not exceed 15 characters.\n\n * 400 InvalidListenerName - Invalid Listener name.\n\n * 400 InvalidLBResourceIdParameterValue - Load balancer resource Id is invalid.\n\n * 400 InvalidPublicIpResourceIdParameterValue - Public IP resource Id is invalid.\n\n * 400 InvalidSubnetIdParameterValue - Invalid resource id propvided for subnet parameter.\n\n * 400 VmNicVnetMismatch - VM NIC Vnet mismatch.\n\n * 400 InvalidPrivateIpParameterValue - Invalid address given for Private IP address.\n\n * 400 NoAvailabilitySet - Vm is not associated with any availability set.\n\n * 400 AvailabilitySetMismatch - Availability set of Vms does not match.\n\n * 400 MismatchVmGroupSubscription - Subscription ID for SQL Virtual machine and SqlVm Group are different.\n\n * 400 AgDoesNotExist - Availability group does not exist.\n\n * 400 AgListDoesNotMatch - Availability group SQL list does not match the list of VM in SqlVm Group.\n\n * 400 NoIpProvided - Atleast one IP needs to be provided.\n\n * 400 MoreIpProvided - Only one IPneeds to be provided.\n\n * 400 SqlVmGroupDoesNotHaveAGListener - SqlVmGroup does not have the AG listener.\n\n * 400 AgListenerUpdateNotAllowed - Only handful properties of of AG listener can be updated.\n\n * 400 SqlVmNotInGroup - SqlVM is not part of the group.\n\n * 400 SqlVmListCannotBeEmpty - SqlVirtualMachines cannot be empty.\n\n * 400 PublicIpNotIPv4 - Public IP must be IPv4 address.\n\n * 400 PublicIPDynamicAllocation - Public IP alllocation mode must be static\n\n * 400 PublicLBInvalid - Load balancer specified is not public.\n\n * 400 SubnetMissingFromPrivateIP - Subnet must be provided with Private IP.\n\n * 400 NoIpAvailable - No available IP.\n\n * 400 IPNotInSubnet - IP not part of subnet.\n\n * 400 MultipleListenerSameAG - MUltiple AG listeners for same AG are not allowed.\n\n * 400 AgListenerNotEmpty - AG listener not empty.\n\n * 400 AgListenerVnetMismatch - Provided Vnet for AGlistener does not match that of Internal Load balancer.\n\n * 400 InternalLBInvalid - Load balancer specified is not internal.\n\n * 400 InvalidSqlVmResourceIdParameterValue - SQL Vm resource Id provided is invalid.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP.\n\n * 500 SqlVmGroupIsBusy - SQL VM Group is busy."
+          }
+        },
+        "x-ms-examples": {
+          "Gets an AvailabilityGroupListener.": {
+            "$ref": "./examples/GetAvailabilityGroupListener.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Creates or Updates a AvailabilityGroupListener.",
+        "operationId": "AvailabilityGroupListeners_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityGroupListenerName",
+            "in": "path",
+            "description": "The name of the Availability Group Listener.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The AvailabilityGroup listener Resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the AvailabilityGroupListener.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 400 DifferentSubSqlVmList - All SQL VM should be under same subscription.\n\n * 400 OnlyStandardPublicIp - Every VM should have Standard Public IP.\n\n * 400 ListenerNameTooLong - Listener name should not exceed 15 characters.\n\n * 400 InvalidListenerName - Invalid Listener name.\n\n * 400 InvalidLBResourceIdParameterValue - Load balancer resource Id is invalid.\n\n * 400 InvalidPublicIpResourceIdParameterValue - Public IP resource Id is invalid.\n\n * 400 InvalidSubnetIdParameterValue - Invalid resource id propvided for subnet parameter.\n\n * 400 VmNicVnetMismatch - VM NIC Vnet mismatch.\n\n * 400 InvalidPrivateIpParameterValue - Invalid address given for Private IP address.\n\n * 400 NoAvailabilitySet - Vm is not associated with any availability set.\n\n * 400 AvailabilitySetMismatch - Availability set of Vms does not match.\n\n * 400 MismatchVmGroupSubscription - Subscription ID for SQL Virtual machine and SqlVm Group are different.\n\n * 400 AgDoesNotExist - Availability group does not exist.\n\n * 400 AgListDoesNotMatch - Availability group SQL list does not match the list of VM in SqlVm Group.\n\n * 400 NoIpProvided - Atleast one IP needs to be provided.\n\n * 400 MoreIpProvided - Only one IPneeds to be provided.\n\n * 400 SqlVmGroupDoesNotHaveAGListener - SqlVmGroup does not have the AG listener.\n\n * 400 AgListenerUpdateNotAllowed - Only handful properties of of AG listener can be updated.\n\n * 400 SqlVmNotInGroup - SqlVM is not part of the group.\n\n * 400 SqlVmListCannotBeEmpty - SqlVirtualMachines cannot be empty.\n\n * 400 PublicIpNotIPv4 - Public IP must be IPv4 address.\n\n * 400 PublicIPDynamicAllocation - Public IP alllocation mode must be static\n\n * 400 PublicLBInvalid - Load balancer specified is not public.\n\n * 400 SubnetMissingFromPrivateIP - Subnet must be provided with Private IP.\n\n * 400 NoIpAvailable - No available IP.\n\n * 400 IPNotInSubnet - IP not part of subnet.\n\n * 400 MultipleListenerSameAG - MUltiple AG listeners for same AG are not allowed.\n\n * 400 AgListenerNotEmpty - AG listener not empty.\n\n * 400 AgListenerVnetMismatch - Provided Vnet for AGlistener does not match that of Internal Load balancer.\n\n * 400 InternalLBInvalid - Load balancer specified is not internal.\n\n * 400 InvalidSqlVmResourceIdParameterValue - SQL Vm resource Id provided is invalid.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP.\n\n * 500 SqlVmGroupIsBusy - SQL VM Group is busy."
+          },
+          "201": {
+            "description": "Successfully created the AvailabilityGroupListener.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListener"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or Updates a AvailabilityGroupListener.": {
+            "$ref": "./examples/CreateOrUpdateAvailabilityGroupListener.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Deletes the AvailabilityGroup Listener with the given name.",
+        "operationId": "AvailabilityGroupListeners_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityGroupListenerName",
+            "in": "path",
+            "description": "The name of the Availability Group Listener.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the AvailabilityGroup Listener."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 400 DifferentSubSqlVmList - All SQL VM should be under same subscription.\n\n * 400 OnlyStandardPublicIp - Every VM should have Standard Public IP.\n\n * 400 ListenerNameTooLong - Listener name should not exceed 15 characters.\n\n * 400 InvalidListenerName - Invalid Listener name.\n\n * 400 InvalidLBResourceIdParameterValue - Load balancer resource Id is invalid.\n\n * 400 InvalidPublicIpResourceIdParameterValue - Public IP resource Id is invalid.\n\n * 400 InvalidSubnetIdParameterValue - Invalid resource id propvided for subnet parameter.\n\n * 400 VmNicVnetMismatch - VM NIC Vnet mismatch.\n\n * 400 InvalidPrivateIpParameterValue - Invalid address given for Private IP address.\n\n * 400 NoAvailabilitySet - Vm is not associated with any availability set.\n\n * 400 AvailabilitySetMismatch - Availability set of Vms does not match.\n\n * 400 MismatchVmGroupSubscription - Subscription ID for SQL Virtual machine and SqlVm Group are different.\n\n * 400 AgDoesNotExist - Availability group does not exist.\n\n * 400 AgListDoesNotMatch - Availability group SQL list does not match the list of VM in SqlVm Group.\n\n * 400 NoIpProvided - Atleast one IP needs to be provided.\n\n * 400 MoreIpProvided - Only one IPneeds to be provided.\n\n * 400 SqlVmGroupDoesNotHaveAGListener - SqlVmGroup does not have the AG listener.\n\n * 400 AgListenerUpdateNotAllowed - Only handful properties of of AG listener can be updated.\n\n * 400 SqlVmNotInGroup - SqlVM is not part of the group.\n\n * 400 SqlVmListCannotBeEmpty - SqlVirtualMachines cannot be empty.\n\n * 400 PublicIpNotIPv4 - Public IP must be IPv4 address.\n\n * 400 PublicIPDynamicAllocation - Public IP alllocation mode must be static\n\n * 400 PublicLBInvalid - Load balancer specified is not public.\n\n * 400 SubnetMissingFromPrivateIP - Subnet must be provided with Private IP.\n\n * 400 NoIpAvailable - No available IP.\n\n * 400 IPNotInSubnet - IP not part of subnet.\n\n * 400 MultipleListenerSameAG - MUltiple AG listeners for same AG are not allowed.\n\n * 400 AgListenerNotEmpty - AG listener not empty.\n\n * 400 AgListenerVnetMismatch - Provided Vnet for AGlistener does not match that of Internal Load balancer.\n\n * 400 InternalLBInvalid - Load balancer specified is not internal.\n\n * 400 InvalidSqlVmResourceIdParameterValue - SQL Vm resource Id provided is invalid.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP.\n\n * 500 SqlVmGroupIsBusy - SQL VM Group is busy."
+          },
+          "202": {
+            "description": "Deleting the AvailabilityGroup Listener."
+          },
+          "204": {
+            "description": "The specified AvailabilityGroup Listener does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes the AvailabilityGroup Listener with the given name.": {
+            "$ref": "./examples/DeleteAvailabilityGroupListener.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}/availabilityGroupListeners": {
+      "get": {
+        "tags": [
+          "AvailabilityGroupListeners"
+        ],
+        "description": "Lists AvailabilityGroup Listener by SqlVirtualMachineGroup.",
+        "operationId": "AvailabilityGroupListeners_ListByGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of AvailabilityGroup Listener.",
+            "schema": {
+              "$ref": "#/definitions/AvailabilityGroupListenerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists AvailabilityGroup Listener by Sql Virtual Machine Group.": {
+            "$ref": "./examples/ListByGroupAvailabilityGroupListener.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SqlVirtualMachine/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available SQL Rest API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists all of the available SQL Rest API operations.": {
+            "$ref": "./examples/ListOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}": {
+      "get": {
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Gets a SQL VirtualMachine Group.",
+        "operationId": "SqlVirtualMachineGroups_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the SQL VirtualMachine Group.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SQL VirtualMachine Group.": {
+            "$ref": "./examples/GetSqlVirtualMachineGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Creates or Updates SQL VirtualMachine Group.",
+        "operationId": "SqlVirtualMachineGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL VirtualMachine Group resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL VirtualMachine Group.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 SqlVmGroupUpdateFailVmAttached - Sql VM Group cannot be updated as it has attached Sql VM.\n\n * 400 InvalidSqlImageOffer - Provided SqlImage offer is invalid.\n\n * 400 InvalidSqlSku - Provided SQL Sku is invalid.\n\n * 400 OuPathAndDomainMismatch - OU path is not within the domain provided.\n\n * 400 InvalidAccountNameFormat - Account name format is invalid.\n\n * 400 CloudWitnessUnsupported - For Windows Server 2012R2 setup Cloud witness is not allowed.\n\n * 400 FileShareWitnessDisAllowed - For Windows Server 2016 and beyond setup, files share witness is not allowed.\n\n * 400 InvalidStorageAccountUrl - Invalid storage account Url.\n\n * 400 SqlVmGroupNameTooLong - SQL VM Group name cannot exceed 15 characters.\n\n * 400 InvalidSqlVmGroupName - Invalid SqlVm Group name.\n\n * 400 SqlVmGroupNotEmpty - SqlVirtualMachineGroup is not empty.\n\n * 400 SqlVmGroupUpdateNotAllowed - Update to SQLVirtualMachineGroup is not allowed.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          },
+          "201": {
+            "description": "Successfully created the SQL VirtualMachine Group.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or Updates SQL VirtualMachine Group.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Deletes the SQL VirtualMachine Group with the given name.",
+        "operationId": "SqlVirtualMachineGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL VirtualMachine Group."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 SqlVmGroupUpdateFailVmAttached - Sql VM Group cannot be updated as it has attached Sql VM.\n\n * 400 InvalidSqlImageOffer - Provided SqlImage offer is invalid.\n\n * 400 InvalidSqlSku - Provided SQL Sku is invalid.\n\n * 400 OuPathAndDomainMismatch - OU path is not within the domain provided.\n\n * 400 InvalidAccountNameFormat - Account name format is invalid.\n\n * 400 CloudWitnessUnsupported - For Windows Server 2012R2 setup Cloud witness is not allowed.\n\n * 400 FileShareWitnessDisAllowed - For Windows Server 2016 and beyond setup, files share witness is not allowed.\n\n * 400 InvalidStorageAccountUrl - Invalid storage account Url.\n\n * 400 SqlVmGroupNameTooLong - SQL VM Group name cannot exceed 15 characters.\n\n * 400 InvalidSqlVmGroupName - Invalid SqlVm Group name.\n\n * 400 SqlVmGroupNotEmpty - SqlVirtualMachineGroup is not empty.\n\n * 400 SqlVmGroupUpdateNotAllowed - Update to SQLVirtualMachineGroup is not allowed.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          },
+          "202": {
+            "description": "Deleting the SQL VirtualMachine Group."
+          },
+          "204": {
+            "description": "The specified SQL VirtualMachine Group does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes the SQL VirtualMachine Group with the given name.": {
+            "$ref": "./examples/DeleteSqlVirtualMachineGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Updates a SQL VirtualMachine Group.",
+        "operationId": "SqlVirtualMachineGroups_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineGroupName",
+            "in": "path",
+            "description": "The name of the Sql VirtualMachine Group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL VirtualMachine Group update resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroupUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL VirtualMachine Group.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 SqlVmGroupUpdateFailVmAttached - Sql VM Group cannot be updated as it has attached Sql VM.\n\n * 400 InvalidSqlImageOffer - Provided SqlImage offer is invalid.\n\n * 400 InvalidSqlSku - Provided SQL Sku is invalid.\n\n * 400 OuPathAndDomainMismatch - OU path is not within the domain provided.\n\n * 400 InvalidAccountNameFormat - Account name format is invalid.\n\n * 400 CloudWitnessUnsupported - For Windows Server 2012R2 setup Cloud witness is not allowed.\n\n * 400 FileShareWitnessDisAllowed - For Windows Server 2016 and beyond setup, files share witness is not allowed.\n\n * 400 InvalidStorageAccountUrl - Invalid storage account Url.\n\n * 400 SqlVmGroupNameTooLong - SQL VM Group name cannot exceed 15 characters.\n\n * 400 InvalidSqlVmGroupName - Invalid SqlVm Group name.\n\n * 400 SqlVmGroupNotEmpty - SqlVirtualMachineGroup is not empty.\n\n * 400 SqlVmGroupUpdateNotAllowed - Update to SQLVirtualMachineGroup is not allowed.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates a VirtualMachine Group tags.": {
+            "$ref": "./examples/UpdateSqlVirtualMachineGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups": {
+      "get": {
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Gets SQL VirtualMachine Groups by ResourceGroup.",
+        "operationId": "SqlVirtualMachineGroups_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of SQL VirtualMachine Groups within the given Resource Group.",
+            "schema": {
+              "$ref": "#/definitions/SqlVmGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets SQL VirtualMachine Groups by ResourceGroup.": {
+            "$ref": "./examples/ListByResourceGroupSqlVirtualMachineGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups": {
+      "get": {
+        "tags": [
+          "SqlVirtualMachineGroups"
+        ],
+        "description": "Gets all Sql VirtualMachine Groups in a subscription.",
+        "operationId": "SqlVirtualMachineGroups_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of SqlVirtualMachineGroup of the given Subscription.",
+            "schema": {
+              "$ref": "#/definitions/SqlVmGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Sql VirtualMachine Groups in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlVirtualMachineGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}": {
+      "get": {
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Gets SQL VirtualMachine by name.",
+        "operationId": "SqlVirtualMachines_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "The name of the Sql Virtual Machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the SQL VirtualMachine.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          }
+        },
+        "x-ms-examples": {
+          "Gets SQL VirtualMachine by name.": {
+            "$ref": "./examples/GetSqlVirtualMachine.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Creates or Updates a SqlVirtualMachineResource.",
+        "operationId": "SqlVirtualMachines_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "The name of the Sql Virtual Machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL VirtualMachine resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL VirtualMachine.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVmResourceIdChange - VirtualMachineResourceId property cannot be updated.\n\n * 400 SqlVmAlreadyIncludedInGroup - SqlVm cannot be moved from one group to another in same operation.\n\n * 400 SqlVmCannotRemoveFromGroup - Sql Virtual machine cannot be removed from Group.\n\n * 400 VmLocationMismatch - VM location does not match that of SqlVm.\n\n * 400 SqlSkuMismatchWithGroup - SQL Sku set on the SQL Virtual Machine Group does not match that of the Sql Virtual Machine.\n\n * 400 VmLoadBalancerAssociated - LB already associated with the NIC.\n\n * 400 VmInsufficientPermission - Insufficient permission to Vm.\n\n * 400 VmPublisherNotSql - Publisher of VMimage is not SQLServer.\n\n * 400 SingleNicOnVmAllowed - Only Single NiC Vms are allowed.\n\n * 400 InvalidSqlVmGroupResourceIdParameterValue - SqlVmGroup resource id is not in correct format.\n\n * 400 MismatchVmGroupSubscription - Subscription ID for SQL Virtual machine and SqlVm Group are different.\n\n * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for Domain credentials property.\n\n * 400 InvalidVmResourceIdParameterValue - Provided Virtual machine resource Id is not valid.\n\n * 400 MismatchInSqlVmAndVmResourceIdSubscription - Mismatch in subscription Id for Sql Virtual Machine and Virtual Machine resource Id property.\n\n * 400 MismatchSqlVmAndVmName - SQL Virtual Machine name is not same as the Virtual Machine name provided on VirtualMachineResourceId property.\n\n * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SqlVm Group.\n\n * 400 VmOSVersionMismatchWithGroup - OSversion mismatch with group.\n\n * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as AutoBackup setting.\n\n * 400 BackupScheduleTypeNotSet - Backup Schedule type needs to be set.\n\n * 400 BackupStorageCredentialsNotSpecified - Backup Storage credentials are not specified.\n\n * 400 KeyvaultCredentialsNotSpecified - KeyVault credentials not specified.\n\n * 400 SqlCredentialsNotSpecified - Sql Server credentials are not specified.\n\n * 400 IncompleteAutoPatchingSettings - Incomplete auto patching settings specified.\n\n * 400 IncompleteAutoBackupSettings - Incomplete auto backup settings specified.\n\n * 400 IncompleteSqlStorageSettings - Incomplete sql storage settings specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 404 SubscriptionDoesNotHaveSqlVMInResourceGroup - Subscription does not have SQL Virtual Machine Instance in Resource Group.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          },
+          "201": {
+            "description": "Successfully created the SQL VirtualMachine.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or Updates a SqlVirtualMachineResource to join a Sql Virtual Machine Group.": {
+            "$ref": "./examples/CreateOrUpdateVirtualMachineWithVMGroup.json"
+          },
+          "Creates or Updates a SqlVirtualMachineResource with minimal parameters.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMIN.json"
+          },
+          "Creates or Updates a SqlVirtualMachineResource with all possible paramenters.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMAX.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Deletes a SqlVm.",
+        "operationId": "SqlVirtualMachines_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "The name of the Sql Virtual Machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted a SQL VirtualMachine."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVmResourceIdChange - VirtualMachineResourceId property cannot be updated.\n\n * 400 SqlVmAlreadyIncludedInGroup - SqlVm cannot be moved from one group to another in same operation.\n\n * 400 SqlVmCannotRemoveFromGroup - Sql Virtual machine cannot be removed from Group.\n\n * 400 VmLocationMismatch - VM location does not match that of SqlVm.\n\n * 400 SqlSkuMismatchWithGroup - SQL Sku set on the SQL Virtual Machine Group does not match that of the Sql Virtual Machine.\n\n * 400 VmLoadBalancerAssociated - LB already associated with the NIC.\n\n * 400 VmInsufficientPermission - Insufficient permission to Vm.\n\n * 400 VmPublisherNotSql - Publisher of VMimage is not SQLServer.\n\n * 400 SingleNicOnVmAllowed - Only Single NiC Vms are allowed.\n\n * 400 InvalidSqlVmGroupResourceIdParameterValue - SqlVmGroup resource id is not in correct format.\n\n * 400 MismatchVmGroupSubscription - Subscription ID for SQL Virtual machine and SqlVm Group are different.\n\n * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for Domain credentials property.\n\n * 400 InvalidVmResourceIdParameterValue - Provided Virtual machine resource Id is not valid.\n\n * 400 MismatchInSqlVmAndVmResourceIdSubscription - Mismatch in subscription Id for Sql Virtual Machine and Virtual Machine resource Id property.\n\n * 400 MismatchSqlVmAndVmName - SQL Virtual Machine name is not same as the Virtual Machine name provided on VirtualMachineResourceId property.\n\n * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SqlVm Group.\n\n * 400 VmOSVersionMismatchWithGroup - OSversion mismatch with group.\n\n * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as AutoBackup setting.\n\n * 400 BackupScheduleTypeNotSet - Backup Schedule type needs to be set.\n\n * 400 BackupStorageCredentialsNotSpecified - Backup Storage credentials are not specified.\n\n * 400 KeyvaultCredentialsNotSpecified - KeyVault credentials not specified.\n\n * 400 SqlCredentialsNotSpecified - Sql Server credentials are not specified.\n\n * 400 IncompleteAutoPatchingSettings - Incomplete auto patching settings specified.\n\n * 400 IncompleteAutoBackupSettings - Incomplete auto backup settings specified.\n\n * 400 IncompleteSqlStorageSettings - Incomplete sql storage settings specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 404 SubscriptionDoesNotHaveSqlVMInResourceGroup - Subscription does not have SQL Virtual Machine Instance in Resource Group.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          },
+          "202": {
+            "description": "Deleting the SQL VirtualMachine."
+          },
+          "204": {
+            "description": "The specified SQL VirtualMachine does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a SqlVm.": {
+            "$ref": "./examples/DeleteSqlVirtualMachine.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Updates a SqlVirtualMachine.",
+        "operationId": "SqlVirtualMachines_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlVirtualMachineName",
+            "in": "path",
+            "description": "The name of the Sql Virtual Machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL VirtualMachine update resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachineUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL VirtualMachine.",
+            "schema": {
+              "$ref": "#/definitions/SqlVirtualMachine"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVmResourceIdChange - VirtualMachineResourceId property cannot be updated.\n\n * 400 SqlVmAlreadyIncludedInGroup - SqlVm cannot be moved from one group to another in same operation.\n\n * 400 SqlVmCannotRemoveFromGroup - Sql Virtual machine cannot be removed from Group.\n\n * 400 VmLocationMismatch - VM location does not match that of SqlVm.\n\n * 400 SqlSkuMismatchWithGroup - SQL Sku set on the SQL Virtual Machine Group does not match that of the Sql Virtual Machine.\n\n * 400 VmLoadBalancerAssociated - LB already associated with the NIC.\n\n * 400 VmInsufficientPermission - Insufficient permission to Vm.\n\n * 400 VmPublisherNotSql - Publisher of VMimage is not SQLServer.\n\n * 400 SingleNicOnVmAllowed - Only Single NiC Vms are allowed.\n\n * 400 InvalidSqlVmGroupResourceIdParameterValue - SqlVmGroup resource id is not in correct format.\n\n * 400 MismatchVmGroupSubscription - Subscription ID for SQL Virtual machine and SqlVm Group are different.\n\n * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for Domain credentials property.\n\n * 400 InvalidVmResourceIdParameterValue - Provided Virtual machine resource Id is not valid.\n\n * 400 MismatchInSqlVmAndVmResourceIdSubscription - Mismatch in subscription Id for Sql Virtual Machine and Virtual Machine resource Id property.\n\n * 400 MismatchSqlVmAndVmName - SQL Virtual Machine name is not same as the Virtual Machine name provided on VirtualMachineResourceId property.\n\n * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SqlVm Group.\n\n * 400 VmOSVersionMismatchWithGroup - OSversion mismatch with group.\n\n * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as AutoBackup setting.\n\n * 400 BackupScheduleTypeNotSet - Backup Schedule type needs to be set.\n\n * 400 BackupStorageCredentialsNotSpecified - Backup Storage credentials are not specified.\n\n * 400 KeyvaultCredentialsNotSpecified - KeyVault credentials not specified.\n\n * 400 SqlCredentialsNotSpecified - Sql Server credentials are not specified.\n\n * 400 IncompleteAutoPatchingSettings - Incomplete auto patching settings specified.\n\n * 400 IncompleteAutoBackupSettings - Incomplete auto backup settings specified.\n\n * 400 IncompleteSqlStorageSettings - Incomplete sql storage settings specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other RP.\n\n * 400 InvalidArgument - Invalid Argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument {0} not in range.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Virtual Machine Group in Resource Group.\n\n * 404 SubscriptionDoesNotHaveSqlVMInResourceGroup - Subscription does not have SQL Virtual Machine Instance in Resource Group.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation Id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtnNotInstalled - Sql Extension not installed.\n\n * 500 UnExpectedErrorOccured - Unexpected error occured.\n\n * 500 OperationTimeout - Operation timed out.\n\n * 500 RPGenericSystem - System Failure when calling other RP."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates a SqlVirtualMachine tags.": {
+            "$ref": "./examples/UpdateSqlVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines": {
+      "get": {
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Gets SQL VirtualMachines by ResourceGroup.",
+        "operationId": "SqlVirtualMachines_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of SQL VirtualMachines within the given Resource Group.",
+            "schema": {
+              "$ref": "#/definitions/SqlVmListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets SQL VirtualMachines by ResourceGroup.": {
+            "$ref": "./examples/ListByResourceGroupSqlVirtualMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines": {
+      "get": {
+        "tags": [
+          "SqlVirtualMachines"
+        ],
+        "description": "Gets all Sql VirtualMachines in a subscription.",
+        "operationId": "SqlVirtualMachines_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of SqlVirtualMachine of the given Subscription.",
+            "schema": {
+              "$ref": "#/definitions/SqlVmListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Sql VirtualMachines in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlVirtualMachine.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailabilityGroupListenerProperties": {
+      "description": "The properties of a AvailabilityGroupListener.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning State to track the aysnc provisoning operation status",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilityGroupName": {
+          "description": "The list of the Sql Virtual Machine Instance that enrolled into the AvailabilityGroup Listener.",
+          "type": "string"
+        },
+        "loadBalancerConfigurations": {
+          "description": "The list of load balancer configurations for AvailabilityGroup Listener.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerConfiguration"
+          }
+        },
+        "createDefaultAvailabilityGroupIfNotExist": {
+          "description": "Create Default AvailabilityGroup if does not exist",
+          "type": "boolean"
+        },
+        "port": {
+          "format": "int32",
+          "description": "Listener port",
+          "type": "integer"
+        }
+      }
+    },
+    "LoadBalancerConfiguration": {
+      "description": "Loadbalancer configuration for AvailabilityGroupListener.",
+      "type": "object",
+      "properties": {
+        "privateIpAddress": {
+          "$ref": "#/definitions/PrivateIPAddress",
+          "description": "Private IP address"
+        },
+        "publicIpAddressResourceId": {
+          "description": "The ResourceId of the Public IP.",
+          "type": "string"
+        },
+        "loadBalancerResourceId": {
+          "description": "The subnet used to include private IP.",
+          "type": "string"
+        },
+        "probePort": {
+          "format": "int32",
+          "description": "Probe port",
+          "type": "integer"
+        },
+        "sqlVirtualMachineInstances": {
+          "description": "The list of the Sql Virtual Machine Instance that enrolled into the AvailabilityGroup Listener.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateIPAddress": {
+      "description": "Private IP Address.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "The private IP Address bound to the Availability Group Listener.",
+          "type": "string"
+        },
+        "subnetResourceId": {
+          "description": "The subnet used to include private IP.",
+          "type": "string"
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "AvailabilityGroupListener": {
+      "description": "A SQL Virtual Machine Cluster AvailabilityGroupListener.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailabilityGroupListenerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AvailabilityGroupListenerListResult": {
+      "description": "A list of AvailabilityGroupListeners.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailabilityGroupListener"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list SQL operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "SQL REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation / action.",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "user",
+            "system"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "description": "Additional descriptions for the operation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Display metadata associated with the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized friendly form of the resource type related to this action/operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized friendly description for the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlVmGroupProperties": {
+      "description": "The properties of a SqlVirtualMachineGroup.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning State to track the aysnc provisoning operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sqlImageOffer": {
+          "description": "Sql image offer",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sqlImageSku": {
+          "description": "Sql Image Sku",
+          "enum": [
+            "Developer",
+            "Express",
+            "Standard",
+            "Enterprise"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SqlImageSku",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scaleType": {
+          "description": "The Scale type: HA or ReadOnly",
+          "enum": [
+            "HA"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ScaleType",
+            "modelAsString": true
+          }
+        },
+        "clusterManagerType": {
+          "description": "The type of the Cluster Manager( WSFC | NONE ), implied by the Scale Type of the Group and the OS Type",
+          "enum": [
+            "WSFC"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ClusterManagerType",
+            "modelAsString": true
+          }
+        },
+        "clusterConfiguration": {
+          "description": "The cluster type Domainful or Domainless.",
+          "enum": [
+            "Domainful"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClusterConfiguration",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "wsfcDomainProfile": {
+          "$ref": "#/definitions/WSFCDomainProfile",
+          "description": "The Cluster AD Domain Profile",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "domainlessProfile": {
+          "$ref": "#/definitions/DomainlessProfile",
+          "description": "The Cluster Domainless Profile",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "WSFCDomainProfile": {
+      "description": "The AD Domain Profile.",
+      "type": "object",
+      "properties": {
+        "domainFqdn": {
+          "description": "Fully qualified name of the Domain.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ouPath": {
+          "description": "OU path in which the nodes and cluster will be present.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "clusterBootstrapAccount": {
+          "description": "The account name used for creating cluster (at minimum needs permissions to 'Create Computer Objects' in domain).",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "clusterOperatorAccount": {
+          "description": "The account name used for operating cluster i.e. will be part of administrators group on all the participating Virtual Machines in the cluster.",
+          "type": "string",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "sqlServiceAccount": {
+          "description": "The account name under which SQL service will run on all participating SQL Virtual Machines in the cluster.",
+          "type": "string",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "fileShareWitnessPath": {
+          "description": "Optional path for Fileshare witness.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageAccountUrl": {
+          "description": "The fully qualified ARM resource ID of the Witness Storage Account",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageAccountPrimaryKey": {
+          "description": "The Primary Key of the Witness Storage Account",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "DomainlessProfile": {
+      "description": "The Domain less Profile.",
+      "type": "object",
+      "properties": {
+        "domainlessAccountPassword": {
+          "description": "The administrator login password required for creating windows account on nodes for domain-less cluster creation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageAccountUrl": {
+          "description": "The fully qualified ARM resource ID of the Witness Storage Account",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageAccountPrimaryKey": {
+          "description": "The Primary Key of the Witness Storage Account",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlVirtualMachineGroup": {
+      "description": "A SQL Virtual Machine Group.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVmGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlVirtualMachineGroupUpdate": {
+      "description": "An update to Sql VirtualMachine Group.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlVmGroupListResult": {
+      "description": "A list of SqlVmGroups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlVirtualMachineGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Sql Virtual Machine Properties": {
+      "description": "The SqlVm's properties.",
+      "type": "object",
+      "properties": {
+        "virtualMachineResourceId": {
+          "description": "ARM Resource Id of underlying Virtual Machine created from SQL marketplace image.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "description": "Provisioning State to track the aysnc provisoning operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sqlImageOffer": {
+          "description": "SQL image offer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sqlServerLicenseType": {
+          "description": "SQL Server License Type.",
+          "enum": [
+            "PAYG",
+            "AHUB"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "sqlImageSku": {
+          "description": "SQL Image Sku.",
+          "enum": [
+            "Developer",
+            "Express",
+            "Standard",
+            "Enterprise"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SqlImageSku",
+            "modelAsString": true
+          }
+        },
+        "sqlVirtualMachineGroupResourceId": {
+          "description": "ARM resource Id of the SQL VirtualMachine Group this SQL Virtual Machine is part of.",
+          "type": "string",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "wsfcDomainCredentials": {
+          "$ref": "#/definitions/WSFCDomainCredentials",
+          "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL Availability Group."
+        },
+        "autoTelemetrySettings": {
+          "$ref": "#/definitions/AutoTelemetrySettings",
+          "description": "Auto telemetry settings for SQL VirtualMachine."
+        },
+        "autoPatchingSettings": {
+          "$ref": "#/definitions/AutoPatchingSettings",
+          "description": "Auto patching settings for applying critical security updates to SQL VirtualMachine."
+        },
+        "autoBackupSettings": {
+          "$ref": "#/definitions/AutoBackupSettings",
+          "description": "Auto backup settings for SQL Server."
+        },
+        "keyVaultCredentialSettings": {
+          "$ref": "#/definitions/KeyVaultCredentialSettings",
+          "description": "Keyvault credential settings."
+        },
+        "serverConfigurationsManagementSettings": {
+          "$ref": "#/definitions/ServerConfigurationsManagementSettings",
+          "description": "SQL Server configuration management settings."
+        }
+      }
+    },
+    "WSFCDomainCredentials": {
+      "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL Availability Group.",
+      "type": "object",
+      "properties": {
+        "clusterBootstrapAccountPassword": {
+          "description": "Cluster Bootstrap account password.",
+          "type": "string"
+        },
+        "clusterOperatorAccountPassword": {
+          "description": "Cluster Operator account password.",
+          "type": "string"
+        },
+        "sqlServiceAccountPassword": {
+          "description": "SQL Service account password.",
+          "type": "string"
+        }
+      }
+    },
+    "AutoTelemetrySettings": {
+      "description": "Autotelemetry settings.",
+      "type": "object",
+      "properties": {
+        "region": {
+          "description": "Region for autotelemetry setting.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "AutoPatchingSettings": {
+      "description": "Autopatching settings.",
+      "type": "object",
+      "properties": {
+        "enable": {
+          "description": "Enable or disable autopatching on Sql VirtualMachine.",
+          "type": "boolean"
+        },
+        "dayOfWeek": {
+          "description": "Day of week to apply the patch on.",
+          "type": "string"
+        },
+        "maintenanceWindowStartingHour": {
+          "format": "int32",
+          "description": "Hour of the day when patching is initiated.",
+          "type": "integer"
+        },
+        "maintenanceWindowDuration": {
+          "format": "int32",
+          "description": "Duration of patching.",
+          "type": "integer"
+        }
+      }
+    },
+    "AutoBackupSettings": {
+      "description": "Autobackup settings on Sql VirtualMachine.",
+      "type": "object",
+      "properties": {
+        "enable": {
+          "description": "Enable or disable autobackup on Sql VirtualMachine.",
+          "type": "boolean"
+        },
+        "enableEncryption": {
+          "description": "Enable or disable encryption for backup on Sql VirtualMachine.",
+          "type": "boolean"
+        },
+        "retentionPeriod": {
+          "format": "int32",
+          "description": "Retention period of backup.",
+          "type": "integer"
+        },
+        "storageAccountUrl": {
+          "description": "Storage account Url where backup will be taken to.",
+          "type": "string"
+        },
+        "storageAccessKey": {
+          "description": "Storage account key where backup will be taken to.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "password": {
+          "description": "Password for encryption on backup.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "backupSystemDbs": {
+          "description": "Include or exclude system Databases from auto backup.",
+          "type": "boolean"
+        },
+        "backupScheduleType": {
+          "description": "Backup schedule type.",
+          "enum": [
+            "Manual",
+            "Automated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupScheduleType",
+            "modelAsString": true
+          }
+        },
+        "fullBackupFrequency": {
+          "description": "Full backup frequency.",
+          "enum": [
+            "Daily",
+            "Weekly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FullBackupFrequencyType",
+            "modelAsString": true
+          }
+        },
+        "fullBackupStartTime": {
+          "format": "int32",
+          "description": "Full backup startup time.",
+          "type": "integer"
+        },
+        "fullBackupWindowHours": {
+          "format": "int32",
+          "description": "Full backup window hours.",
+          "type": "integer"
+        },
+        "logBackupFrequency": {
+          "format": "int32",
+          "description": "Log backup frequency.",
+          "type": "integer"
+        }
+      }
+    },
+    "KeyVaultCredentialSettings": {
+      "description": "Keyvault credential settings.",
+      "type": "object",
+      "properties": {
+        "enable": {
+          "description": "Enable or disable Keyvault credential setting.",
+          "type": "boolean"
+        },
+        "credentialName": {
+          "description": "Credential name.",
+          "type": "string"
+        },
+        "azureKeyVaultUrl": {
+          "description": "Azure keyvault Url.",
+          "type": "string"
+        },
+        "servicePrincipalName": {
+          "description": "Service principal name to access keyvault.",
+          "type": "string"
+        },
+        "servicePrincipalSecret": {
+          "description": "Service principal name secret to access keyvault.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "ServerConfigurationsManagementSettings": {
+      "description": "ServerConfiguration management settings.",
+      "type": "object",
+      "properties": {
+        "sqlConnectivityUpdateSettings": {
+          "$ref": "#/definitions/SQLConnectivityUpdateSettings",
+          "description": "Sql cnnectivity type settings."
+        },
+        "sqlWorkloadTypeUpdateSettings": {
+          "$ref": "#/definitions/SQLWorkloadTypeUpdateSettings",
+          "description": "Sql workloadtype settings."
+        },
+        "sqlStorageUpdateSettings": {
+          "$ref": "#/definitions/SQLStorageUpdateSettings",
+          "description": "Sql storage update settings."
+        },
+        "additionalFeaturesServerConfigurations": {
+          "$ref": "#/definitions/AdditionalFeaturesServerConfigurations",
+          "description": "Additional SQL feature settings."
+        }
+      }
+    },
+    "SQLConnectivityUpdateSettings": {
+      "description": "SQL VirtualMachine connectivity update settings.",
+      "type": "object",
+      "properties": {
+        "connectivityType": {
+          "description": "SQL Server conectivity option.",
+          "enum": [
+            "LOCAL",
+            "PRIVATE",
+            "PUBLIC"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectivityType",
+            "modelAsString": true
+          }
+        },
+        "port": {
+          "format": "int32",
+          "description": "SQL Server port.",
+          "type": "integer"
+        },
+        "sqlAuthUpdateUserName": {
+          "description": "SQL Server sysadmin sql login to create.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sqlAuthUpdatePassword": {
+          "description": "SQL Server sysadmin sql login password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "SQLWorkloadTypeUpdateSettings": {
+      "description": "SQL Server workload type update settings.",
+      "type": "object",
+      "properties": {
+        "sqlWorkloadType": {
+          "description": "SQL Server workload type.",
+          "enum": [
+            "GENERAL",
+            "OLTP",
+            "DW"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SqlWorkloadType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "SQLStorageUpdateSettings": {
+      "description": "SQL Server disk storage setting.",
+      "type": "object",
+      "properties": {
+        "diskCount": {
+          "format": "int32",
+          "description": "Virtual Mahcine disk count.",
+          "type": "integer"
+        },
+        "diskConfigurationType": {
+          "description": "Disk configuration to apply to SQL Server.",
+          "enum": [
+            "NEW",
+            "EXTEND",
+            "ADD"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DiskConfigurationType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AdditionalFeaturesServerConfigurations": {
+      "description": "Additional SQL Server feature settings.",
+      "type": "object",
+      "properties": {
+        "isRServicesEnabled": {
+          "description": "Enable or Disable R Services (SQL 2016 onwards).",
+          "type": "boolean"
+        },
+        "backupPermissionsForAzureBackupSvc": {
+          "description": "Enable or disable Azure Backup service.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SqlVirtualMachine": {
+      "description": "A SQL Virtual Machine.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Sql Virtual Machine Properties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlVirtualMachineUpdate": {
+      "description": "An update to Sql Virtual Machine.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlVmListResult": {
+      "description": "A list of SqlVms.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlVirtualMachine"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
