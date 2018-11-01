@@ -32,7 +32,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R3012](#R3012)	| [APIVersionPattern](#R3012)	| ARM OpenAPI(swagger) specs |
+| [R3012](#r3012)	| [APIVersionPattern](#r3012)	| ARM OpenAPI(swagger) specs |
 | [R3019](#R3019)	| [ARMResourcePropertiesBag](#R3019)	| ARM and Data plane OpenAPI(swagger) specs |
 | [R3014](#R3014)	| [BodyPropertiesNamesCamelCase](#R3014) | ARM and Data plane OpenAPI(swagger) specs |
 | [R3016](#R3016)	| [DefinitionsPropertiesNamesCamelCase](#R3016)  | ARM and Data plane OpenAPI(swagger) specs |
@@ -129,7 +129,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 ## Rule Descriptions
 
-### <a name="R3012" />R3012 APIVersionPattern 
+### <a name="r3012" />R3012 APIVersionPattern 
 **Category** : ARM Error
 
 **Applies to**: ARM OpenAPI(swagger) specs
