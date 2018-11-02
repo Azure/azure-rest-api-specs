@@ -640,6 +640,7 @@
         ],
         "operationId": "MachineLearningCompute_Update",
         "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a AmlCompute Compute": { "$ref": "./examples/patchAMLCompute.json" }
         },
@@ -670,7 +671,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Compute update initiated.",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
