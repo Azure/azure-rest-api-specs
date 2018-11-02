@@ -1,22 +1,31 @@
 {
-  "x-generator": "NSwag v11.13.2.0 (NJsonSchema v9.10.21.0 (Newtonsoft.Json v11.0.0.0))",
   "swagger": "2.0",
   "info": {
-    "title": "QnA Maker REST API",
-    "description": "QnA Maker REST API V4.0",
-    "version": "4.0"
+    "version": "4.0",
+    "title": "QnAMaker Client",
+    "description": "An API for QnAMaker Service"
   },
-  "host": "westus.api.cognitive.microsoft.com",
-  "basePath": "/qnamaker/v4.0",
-  "schemes": [
-    "https"
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
   ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/qnamaker/v4.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "paths": {
     "/endpointkeys": {
       "get": {
@@ -1029,13 +1038,15 @@
       }
     }
   },
-  "parameters": {},
-  "responses": {},
-  "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
+  "parameters": {
+      "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
