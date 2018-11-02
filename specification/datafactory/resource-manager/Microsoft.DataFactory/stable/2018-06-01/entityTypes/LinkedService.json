@@ -114,8 +114,8 @@
           "description": "The Azure key vault secret reference of accountKey in connection string."
         },
         "sasUri": {
-          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
         },
         "sasToken": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -139,8 +139,8 @@
           "description": "The Azure key vault secret reference of accountKey in connection string."
         },
         "sasUri": {
-          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
         },
         "sasToken": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
