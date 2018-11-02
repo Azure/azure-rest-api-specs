@@ -874,8 +874,16 @@
       "type": "string",
       "description": "Delete the underlying compute if 'delete', or detach the underlying compute from workspace if 'detach'.",
       "required": true,
+      "enum": [
+        "Delete",
+        "Detach"
+      ],
+      "x-ms-enum": {
+        "name": "UnderlyingResourceAction",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
-    }
+}
   },
   "definitions": {
     "Operation": {
