@@ -1143,46 +1143,54 @@
         "name": {
           "type": "string",
           "title": "Virtual Machine size name",
-          "description": "The name of the virtual machine size."
+          "description": "The name of the virtual machine size.",
+          "readOnly": true
         },
         "family": {
           "type": "string",
           "title": "Virtual Machine family name",
-          "description": "The family name of the virtual machine size."
+          "description": "The family name of the virtual machine size.",
+          "readOnly": true
         },
         "vCPUs": {
           "type": "integer",
           "format": "int32",
           "title": "Number of vPUs",
-          "description": "The number of vCPUs supported by the virtual machine size."
+          "description": "The number of vCPUs supported by the virtual machine size.",
+          "readOnly": true
         },
         "osVhdSizeMB": {
           "type": "integer",
           "format": "int32",
           "title": "OS VHD Disk size",
-          "description": "The OS VHD disk size, in MB, allowed by the virtual machine size."
+          "description": "The OS VHD disk size, in MB, allowed by the virtual machine size.",
+          "readOnly": true
         },
         "maxResourceVolumeMB": {
           "type": "integer",
           "format": "int32",
           "title": "Resource volume size",
-          "description": "The resource volume size, in MB, allowed by the virtual machine size."
+          "description": "The resource volume size, in MB, allowed by the virtual machine size.",
+          "readOnly": true
         },
         "memoryGB": {
           "type": "number",
           "format": "double",
           "title": "Memory size",
-          "description": "The amount of memory, in GB, supported by the virtual machine size."
+          "description": "The amount of memory, in GB, supported by the virtual machine size.",
+          "readOnly": true
         },
         "lowPriorityCapable": {
           "type": "boolean",
           "title": "Low priority capable",
-          "description": "Specifies if the virtual machine size supports low priority VMs."
+          "description": "Specifies if the virtual machine size supports low priority VMs.",
+          "readOnly": true
         },
         "premiumIO": {
           "type": "boolean",
           "title": "Premium IO supported",
-          "description": "Specifies if the virtual machine size supports premium IO."
+          "description": "Specifies if the virtual machine size supports premium IO.",
+          "readOnly": true
         }
       },
       "description": "Describes the properties of a VM size."
@@ -1465,7 +1473,8 @@
                   "description": "System services",
                   "items": {
                     "$ref": "#/definitions/SystemService"
-                  }
+                  },
+                  "readOnly": true
                 },
                 "agentCount": {
                   "description": "Number of agents",
@@ -1506,7 +1515,15 @@
                 },
                 "vmPriority": {
                   "description": "Virtual Machine priority",
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "dedicated",
+                    "lowpriority"
+                  ],
+                  "x-ms-enum": {
+                    "name": "VmPriority",
+                    "modelAsString": true
+                  }
                 },
                 "scaleSettings": {
                   "description": "Scale settings for AML Compute",
@@ -1905,7 +1922,8 @@
       "properties": {
         "error": {
           "description": "The error response.",
-          "$ref": "#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorResponse",
+          "readOnly": true
         }
       }
     },
@@ -1915,24 +1933,23 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Error code."
+          "description": "Error code.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "Error message."
+          "description": "Error message.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
           "description": "An array of error detail objects.",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "readOnly": true
         }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
+      }
     },
     "ErrorDetail": {
       "type": "object",
