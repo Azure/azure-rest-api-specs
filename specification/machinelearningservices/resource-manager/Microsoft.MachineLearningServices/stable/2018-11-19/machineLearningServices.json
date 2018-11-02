@@ -736,59 +736,6 @@
             }
           }
         }
-      },
-      "post": {
-        "tags": [
-          "OperationalizationClusters",
-          "MachineLearningComputes"
-        ],
-        "operationId": "MachineLearningCompute_SystemUpdate",
-        "description": "System Update On Machine Learning compute.",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "System Update Compute": { "$ref": "./examples/systemUpdateCompute.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ComputeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Compute System updated."
-          },
-          "202": {
-            "description": "Compute System Update initiated.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the request failed.",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys": {
@@ -1666,6 +1613,52 @@
       ],
       "x-ms-discriminator-value": "DataFactory"
     },
+    "Databricks": {
+      "description": "A DataFactory compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "databricksAccessToken": {
+                  "description": "Databricks access token",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Databricks"
+    },
+    "DataLakeAnalytics": {
+      "description": "A DataLakeAnalytics compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "dataLakeStoreAccountName": {
+                  "description": "DataLake Store Account Name",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "DataLakeAnalytics"
+    },
     "ServicePrincipalCredentials": {
       "type": "object",
       "description": "Service principal credentials.",
@@ -1901,6 +1894,24 @@
       ],
       "x-ms-discriminator-value": "VirtualMachine"
     },
+    "DatabricksComputeSecrets": {
+      "description": "Secrets related to a Machine Learning compute based on Databricks.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeSecrets"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "databricksAccessToken": {
+              "description": "access token for databricks account.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Databricks"
+    },
     "ComputeType": {
       "type": "string",
       "description": "The type of compute",
@@ -1909,7 +1920,9 @@
         "AmlCompute",
         "DataFactory",
         "VirtualMachine",
-        "HDInsight"
+        "HDInsight",
+        "Databricks",
+        "DataLakeAnalytics"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
