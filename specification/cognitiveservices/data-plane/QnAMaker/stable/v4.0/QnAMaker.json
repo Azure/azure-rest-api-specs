@@ -51,14 +51,9 @@
         "summary": "Re-generates an endpoint key.",
         "operationId": "Refresh Endpoint Keys",
         "parameters": [
-          {
-            "type": "string",
-            "name": "keyType",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "type of Key"
-          }
+      {
+        "$ref": "#/parameters/KeyType"
+      }
         ],
         "responses": {
           "200": {
@@ -96,16 +91,9 @@
         "summary": "Replace alterations data.",
         "operationId": "Replace Alterations",
         "parameters": [
-          {
-            "name": "wordAlterations",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/WordAlterationsDTO"
-            },
-            "x-nullable": true,
-            "description": "New alterations data."
-          }
+                {
+        "$ref": "#/parameters/WordAlterations"
+      }
         ],
         "responses": {
           "204": {
@@ -146,14 +134,9 @@
         "summary": "Gets details of a specific long running operation.",
         "operationId": "Get Operation Details",
         "parameters": [
-          {
-            "type": "string",
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Operation id."
-          }
+      {
+        "$ref": "#/parameters/OperationId"
+      }
         ],
         "responses": {
           "200": {
@@ -180,14 +163,9 @@
         "summary": "Gets details of a specific knowledgebase.",
         "operationId": "Get Knowledgebase Details",
         "parameters": [
-          {
-            "type": "string",
-            "name": "kbId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Knowledgebase id."
-          }
+      {
+        "$ref": "#/parameters/KbId"
+      }
         ],
         "responses": {
           "200": {
@@ -206,14 +184,9 @@
         "summary": "Deletes the knowledgebase and all its data.",
         "operationId": "Delete Knowledgebase",
         "parameters": [
-          {
-            "type": "string",
-            "name": "kbId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Knowledgebase id."
-          }
+      {
+        "$ref": "#/parameters/KbId"
+      }
         ],
         "responses": {
           "204": {
@@ -228,14 +201,9 @@
         "summary": "Publishes all changes in test index of a knowledgebase to its prod index.",
         "operationId": "Publish Knowledgebase",
         "parameters": [
-          {
-            "type": "string",
-            "name": "kbId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Knowledgebase id"
-          }
+      {
+        "$ref": "#/parameters/KbId"
+      }
         ],
         "responses": {
           "204": {
@@ -250,24 +218,12 @@
         "summary": "Replace knowledgebase contents.",
         "operationId": "Replace Knowledgebase",
         "parameters": [
-          {
-            "type": "string",
-            "name": "kbId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Knowledgebase id"
-          },
-          {
-            "name": "replaceKb",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReplaceKbDTO"
-            },
-            "x-nullable": true,
-            "description": "An instance of ReplaceKbDTO which contains list of qnas to be uploaded"
-          }
+      {
+        "$ref": "#/parameters/KbId"
+      },
+      {
+        "$ref": "#/parameters/ReplaceKb"
+      }
         ],
         "responses": {
           "204": {
@@ -282,24 +238,12 @@
         "summary": "Asynchronous operation to modify a knowledgebase.",
         "operationId": "Update Knowledgebase",
         "parameters": [
-          {
-            "type": "string",
-            "name": "kbId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Knowledgebase id"
-          },
-          {
-            "name": "updateKb",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateKbOperationDTO"
-            },
-            "x-nullable": true,
-            "description": "Post body of the request."
-          }
+      {
+        "$ref": "#/parameters/KbId"
+      },
+                {
+        "$ref": "#/parameters/UpdateKb"
+      }
         ],
         "responses": {
           "202": {
@@ -326,16 +270,9 @@
         "summary": "Asynchronous operation to create a new knowledgebase.",
         "operationId": "Create Knowledgebase",
         "parameters": [
-          {
-            "name": "createKbPayload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateKbDTO"
-            },
-            "x-nullable": true,
-            "description": "Post body of the request."
-          }
+      {
+        "$ref": "#/parameters/CreateKbPayload"
+      }
         ],
         "responses": {
           "202": {
@@ -356,29 +293,12 @@
         "summary": "Download the knowledgebase.",
         "operationId": "Download Knowledgebase",
         "parameters": [
-          {
-            "type": "string",
-            "name": "kbId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Knowledgebase id"
-          },
-          {
-            "type": "string",
-            "name": "environment",
-            "in": "path",
-            "required": true,
-            "x-schema": {
-              "$ref": "#/definitions/KnowledgebaseEnvironment"
-            },
-            "x-nullable": false,
-            "description": "Specifies whether environment is Test or Prod.",
-            "enum": [
-              "Prod",
-              "Test"
-            ]
-          }
+      {
+        "$ref": "#/parameters/KbId"
+      },
+                {
+        "$ref": "#/parameters/Environment"
+      }
         ],
         "responses": {
           "200": {
@@ -1039,6 +959,95 @@
     }
   },
   "parameters": {
+  "Environment":
+  {
+            "type": "string",
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "x-schema": {
+              "$ref": "#/definitions/KnowledgebaseEnvironment"
+            },
+            "x-nullable": false,
+            "description": "Specifies whether environment is Test or Prod.",
+            "enum": [
+              "Prod",
+              "Test"
+            ]
+          },
+		  
+  "CreateKbPayload":{
+            "name": "createKbPayload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateKbDTO"
+            },
+            "x-nullable": true,
+            "description": "Post body of the request."
+          },
+		  
+        "UpdateKb":    {
+            "name": "updateKb",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateKbOperationDTO"
+            },
+            "x-nullable": true,
+            "description": "Post body of the request."
+          },
+  "ReplaceKb":
+            {
+            "name": "replaceKb",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplaceKbDTO"
+            },
+            "x-nullable": true,
+            "description": "An instance of ReplaceKbDTO which contains list of qnas to be uploaded"
+          },
+  "KbId":
+            {
+            "type": "string",
+            "name": "kbId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Knowledgebase id."
+          },
+		  
+  "OperationId":
+            {
+            "type": "string",
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "Operation id."
+          },
+		  
+  "WordAlterations":
+  {
+            "name": "wordAlterations",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WordAlterationsDTO"
+            },
+            "x-nullable": true,
+            "description": "New alterations data."
+          },
+		  
+  "KeyType": {
+            "type": "string",
+            "name": "keyType",
+            "in": "path",
+            "required": true,
+            "x-nullable": false,
+            "description": "type of Key"
+          },
       "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
