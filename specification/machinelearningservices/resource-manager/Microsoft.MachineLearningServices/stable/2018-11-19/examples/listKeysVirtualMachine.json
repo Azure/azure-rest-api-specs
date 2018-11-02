@@ -4,15 +4,18 @@
         "resourceGroupName": "testrg123",
         "workspaceName": "workspaces123",
         "computeName": "compute123",
-        "api-version": "2018-03-01-preview"
+        "api-version": "2018-11-19"
     },
     "responses": {
         "200": {
             "body": {
                 "computeType": "AKS",
-                "userKubeConfig": "user kube config...",
-                "adminKubeConfig": "admin kube config...",
-                "imagePullSecretName": "the image pull secret name"
+                "administratorAccount": {
+                    "username": "the user name",
+                    "password": "the password",
+                    "publicKeyData": "public key...",
+                    "privateKeyData": "private key..."
+                }
             }
         }
     }
