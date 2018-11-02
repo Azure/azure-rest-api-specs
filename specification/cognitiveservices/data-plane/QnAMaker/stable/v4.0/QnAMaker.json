@@ -39,6 +39,12 @@
               "$ref": "#/definitions/EndpointKeysDTO"
             },
             "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -51,9 +57,9 @@
         "summary": "Re-generates an endpoint key.",
         "operationId": "Refresh Endpoint Keys",
         "parameters": [
-      {
-        "$ref": "#/parameters/KeyType"
-      }
+          {
+            "$ref": "#/parameters/KeyType"
+          }
         ],
         "responses": {
           "200": {
@@ -62,6 +68,12 @@
               "$ref": "#/definitions/EndpointKeysDTO"
             },
             "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -81,6 +93,12 @@
               "$ref": "#/definitions/WordAlterationsDTO"
             },
             "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -91,13 +109,19 @@
         "summary": "Replace alterations data.",
         "operationId": "Replace Alterations",
         "parameters": [
-                {
-        "$ref": "#/parameters/WordAlterations"
-      }
+          {
+            "$ref": "#/parameters/WordAlterations"
+          }
         ],
         "responses": {
           "204": {
             "description": "HTTP 204 No Content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -117,6 +141,12 @@
               "$ref": "#/definitions/KnowledgebasesDTO"
             },
             "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -134,9 +164,9 @@
         "summary": "Gets details of a specific long running operation.",
         "operationId": "Get Operation Details",
         "parameters": [
-      {
-        "$ref": "#/parameters/OperationId"
-      }
+          {
+            "$ref": "#/parameters/OperationId"
+          }
         ],
         "responses": {
           "200": {
@@ -151,6 +181,12 @@
                 "description": "Indicates how long the client should wait before sending a follow up request. The header will be present only if the operation is running or has not started yet."
               }
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -163,9 +199,9 @@
         "summary": "Gets details of a specific knowledgebase.",
         "operationId": "Get Knowledgebase Details",
         "parameters": [
-      {
-        "$ref": "#/parameters/KbId"
-      }
+          {
+            "$ref": "#/parameters/KbId"
+          }
         ],
         "responses": {
           "200": {
@@ -174,6 +210,12 @@
               "$ref": "#/definitions/KnowledgebaseDTO"
             },
             "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -184,13 +226,19 @@
         "summary": "Deletes the knowledgebase and all its data.",
         "operationId": "Delete Knowledgebase",
         "parameters": [
-      {
-        "$ref": "#/parameters/KbId"
-      }
+          {
+            "$ref": "#/parameters/KbId"
+          }
         ],
         "responses": {
           "204": {
             "description": "HTTP 204 No content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -201,13 +249,19 @@
         "summary": "Publishes all changes in test index of a knowledgebase to its prod index.",
         "operationId": "Publish Knowledgebase",
         "parameters": [
-      {
-        "$ref": "#/parameters/KbId"
-      }
+          {
+            "$ref": "#/parameters/KbId"
+          }
         ],
         "responses": {
           "204": {
             "description": "HTTP 204 No content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -218,16 +272,22 @@
         "summary": "Replace knowledgebase contents.",
         "operationId": "Replace Knowledgebase",
         "parameters": [
-      {
-        "$ref": "#/parameters/KbId"
-      },
-      {
-        "$ref": "#/parameters/ReplaceKb"
-      }
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/ReplaceKb"
+          }
         ],
         "responses": {
           "204": {
             "description": "HTTP 204 No content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -238,12 +298,12 @@
         "summary": "Asynchronous operation to modify a knowledgebase.",
         "operationId": "Update Knowledgebase",
         "parameters": [
-      {
-        "$ref": "#/parameters/KbId"
-      },
-                {
-        "$ref": "#/parameters/UpdateKb"
-      }
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/UpdateKb"
+          }
         ],
         "responses": {
           "202": {
@@ -258,6 +318,12 @@
                 "description": "Relative URI to the target location of the asynchronous operation. Client should poll this resource to get status of the operation."
               }
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -270,9 +336,9 @@
         "summary": "Asynchronous operation to create a new knowledgebase.",
         "operationId": "Create Knowledgebase",
         "parameters": [
-      {
-        "$ref": "#/parameters/CreateKbPayload"
-      }
+          {
+            "$ref": "#/parameters/CreateKbPayload"
+          }
         ],
         "responses": {
           "202": {
@@ -281,6 +347,12 @@
               "$ref": "#/definitions/Operation"
             },
             "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -293,12 +365,12 @@
         "summary": "Download the knowledgebase.",
         "operationId": "Download Knowledgebase",
         "parameters": [
-      {
-        "$ref": "#/parameters/KbId"
-      },
-                {
-        "$ref": "#/parameters/Environment"
-      }
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/Environment"
+          }
         ],
         "responses": {
           "200": {
@@ -307,6 +379,12 @@
               "$ref": "#/definitions/QnADocumentsDTO"
             },
             "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -959,96 +1037,86 @@
     }
   },
   "parameters": {
-  "Environment":
-  {
-            "type": "string",
-            "name": "environment",
-            "in": "path",
-            "required": true,
-            "x-schema": {
-              "$ref": "#/definitions/KnowledgebaseEnvironment"
-            },
-            "x-nullable": false,
-            "description": "Specifies whether environment is Test or Prod.",
-            "enum": [
-              "Prod",
-              "Test"
-            ]
-          },
-		  
-  "CreateKbPayload":{
-            "name": "createKbPayload",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateKbDTO"
-            },
-            "x-nullable": true,
-            "description": "Post body of the request."
-          },
-		  
-        "UpdateKb":    {
-            "name": "updateKb",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateKbOperationDTO"
-            },
-            "x-nullable": true,
-            "description": "Post body of the request."
-          },
-  "ReplaceKb":
-            {
-            "name": "replaceKb",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReplaceKbDTO"
-            },
-            "x-nullable": true,
-            "description": "An instance of ReplaceKbDTO which contains list of qnas to be uploaded"
-          },
-  "KbId":
-            {
-            "type": "string",
-            "name": "kbId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Knowledgebase id."
-          },
-		  
-  "OperationId":
-            {
-            "type": "string",
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "Operation id."
-          },
-		  
-  "WordAlterations":
-  {
-            "name": "wordAlterations",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/WordAlterationsDTO"
-            },
-            "x-nullable": true,
-            "description": "New alterations data."
-          },
-		  
-  "KeyType": {
-            "type": "string",
-            "name": "keyType",
-            "in": "path",
-            "required": true,
-            "x-nullable": false,
-            "description": "type of Key"
-          },
-      "Endpoint": {
+    "Environment": {
+      "type": "string",
+      "name": "environment",
+      "in": "path",
+      "required": true,
+      "x-schema": {
+        "$ref": "#/definitions/KnowledgebaseEnvironment"
+      },
+      "x-nullable": false,
+      "description": "Specifies whether environment is Test or Prod.",
+      "enum": [
+        "Prod",
+        "Test"
+      ]
+    },
+    "CreateKbPayload": {
+      "name": "createKbPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CreateKbDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request."
+    },
+    "UpdateKb": {
+      "name": "updateKb",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/UpdateKbOperationDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request."
+    },
+    "ReplaceKb": {
+      "name": "replaceKb",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ReplaceKbDTO"
+      },
+      "x-nullable": true,
+      "description": "An instance of ReplaceKbDTO which contains list of qnas to be uploaded"
+    },
+    "KbId": {
+      "type": "string",
+      "name": "kbId",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Knowledgebase id."
+    },
+    "OperationId": {
+      "type": "string",
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Operation id."
+    },
+    "WordAlterations": {
+      "name": "wordAlterations",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WordAlterationsDTO"
+      },
+      "x-nullable": true,
+      "description": "New alterations data."
+    },
+    "KeyType": {
+      "type": "string",
+      "name": "keyType",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "type of Key"
+    },
+    "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "x-ms-parameter-location": "client",
