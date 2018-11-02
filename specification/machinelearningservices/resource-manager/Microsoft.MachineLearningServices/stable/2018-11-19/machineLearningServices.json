@@ -736,59 +736,6 @@
             }
           }
         }
-      },
-      "post": {
-        "tags": [
-          "OperationalizationClusters",
-          "MachineLearningComputes"
-        ],
-        "operationId": "MachineLearningCompute_SystemUpdate",
-        "description": "System Update On Machine Learning compute.",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "System Update Compute": { "$ref": "./examples/systemUpdateCompute.json" }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ComputeNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Compute System updated."
-          },
-          "202": {
-            "description": "Compute System Update initiated.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the request failed.",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys": {
