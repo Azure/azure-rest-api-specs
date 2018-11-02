@@ -1666,6 +1666,52 @@
       ],
       "x-ms-discriminator-value": "DataFactory"
     },
+    "Databricks": {
+      "description": "A DataFactory compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "databricksAccessToken": {
+                  "description": "Databricks access token",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Databricks"
+    },
+    "DataLakeAnalytics": {
+      "description": "A DataLakeAnalytics compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "dataLakeStoreAccountName": {
+                  "description": "DataLake Store Account Name",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "DataLakeAnalytics"
+    },
     "ServicePrincipalCredentials": {
       "type": "object",
       "description": "Service principal credentials.",
@@ -1901,6 +1947,24 @@
       ],
       "x-ms-discriminator-value": "VirtualMachine"
     },
+    "DatabricksComputeSecrets": {
+      "description": "Secrets related to a Machine Learning compute based on Databricks.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeSecrets"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "databricksAccessToken": {
+              "description": "access token for databricks account.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Databricks"
+    },
     "ComputeType": {
       "type": "string",
       "description": "The type of compute",
@@ -1909,7 +1973,9 @@
         "AmlCompute",
         "DataFactory",
         "VirtualMachine",
-        "HDInsight"
+        "HDInsight",
+        "Databricks",
+        "DataLakeAnalytics"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
