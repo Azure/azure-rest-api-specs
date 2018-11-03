@@ -46,8 +46,8 @@ csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.QnAMaker
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/QnAMaker/Generated
+  namespace: Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Knowledge/QnAMaker/Generated
   clear-output-folder: true
 ```
 
@@ -63,19 +63,19 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.qnamaker
-  package-name: azure-cognitiveservices-qnamaker
+  namespace: azure.cognitiveservices.knowledge.qnamaker
+  package-name: azure-cognitiveservices-knowledge-qnamaker
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-qnamaker/azure/cognitiveservices/qnamaker
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-qnamaker/azure/cognitiveservices/knowledge/qnamaker
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-qnamaker
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-knowledge-qnamaker
 ```
 
 ## Go
@@ -90,10 +90,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.qnamaker
+  namespace: com.microsoft.azure.cognitiveservices.knowledge.qnamaker
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/qnamaker
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/knowledge/qnamaker
   with-optional-parameters: true
   with-single-async-method: true
 ```
