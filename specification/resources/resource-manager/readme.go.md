@@ -2,6 +2,16 @@
 
 These settings apply only when `--go` is specified on the command line.
 
+### Fix up regular expressions to support Unicode.
+
+``` yaml 
+directive:
+  from: swagger-document # do it globally
+  where: $.paths..parameters[?(@.name == "resourceGroupName" || @.name == "sourceResourceGroupName")].pattern
+  set: ^[-\p{L}\._\(\)]+$ 
+  reason: Necessary to match Unicode characters in the Go regexp engine.
+```
+
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION

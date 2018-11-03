@@ -23,6 +23,7 @@ These are the global settings for the Cost Management API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-05
+azure-validator: true
 ```
 
 ---
@@ -35,6 +36,14 @@ input-file:
 - Microsoft.CostManagement/stable/2018-05-31/costmanagement.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: R2059
+    from: costmanagement.json
+    where: $.paths
+    reason: We are extending Microsoft.Billing RP in some scenarios
+```
 
 ### Tag: package-2018-08-preview
 
