@@ -9930,6 +9930,22 @@
       "additionalProperties": false,
       "description": "The request history.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/RequestHistoryProperties",
+          "description": "The request history properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "RequestHistoryProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The request history.",
+      "properties": {
         "startTime": {
           "type": "string",
           "format": "date-time",
@@ -9948,12 +9964,7 @@
           "$ref": "#/definitions/Response",
           "description": "The response."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      }
     },
     "Request": {
       "type": "object",
