@@ -28,7 +28,7 @@ Following are the settings for using this specification with [AutoRest](https://
 title: ServiceFabricMeshManagementClient
 description: Service Fabric Mesh Management Client
 openapi-type: arm
-tag: package-2018-07-01-preview
+tag: package-2018-09-01-preview
 
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -37,6 +37,15 @@ directive:
     reason: The `readOnly` boolean schema is part of Azure Resource Manager common schema.
   - suppress: TrackedResourcePatchOperation
     reason: The patch operation is not implemented in the preview APIs.
+```
+### Tag: package-2018-09-01-preview
+
+These settings apply only when `--tag=package-2018-09-01-preview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2018-09-01-preview'
+input-file:
+- Microsoft.ServiceFabricMesh/preview/2018-09-01-preview/servicefabricmesh.json
 ```
 ### Tag: package-2018-07-01-preview
 
@@ -129,8 +138,23 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicefabricmesh
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-09-01-preview
   - tag: package-2018-07-01-preview
 ```
+
+### Tag: package-2018-09-01-preview and java
+
+These settings apply only when `--tag=2018-09-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == '2018-09-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.servicefabricmesh.v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/servicefabricmesh/resource-manager/v2018_09_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2018-07-01-preview and java
 
 These settings apply only when `--tag=2018-07-01-preview --java` is specified on the command line.

@@ -74,6 +74,7 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlMITask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MongoDbTasks.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetTdeCertificatesSqlTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Projects.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Services.json

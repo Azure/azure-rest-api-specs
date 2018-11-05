@@ -692,6 +692,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrate": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Migrate",
+        "x-ms-examples": {
+          "NameSpaceUpdate": { "$ref": "./examples/NameSpaces/SBNamespaceMigrate.json" }
+        },
+        "description": "This operation Migrate the given namespace to provided name type",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBNamespaceMigrate"
+            },
+            "description": "Parameters supplied to migrate namespace type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Migrate Namepsace type is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
       "post": {
         "tags": [
@@ -2947,376 +2993,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/ipfilterrules": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListIpFilterRules",
-        "x-ms-examples": {
-          "ListIpFilterRules": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/SBNameSpaceIPFilterRuleListAll.json"
-          }
-        },
-        "description": "Gets a list of IP Filter rules for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace IpFilterRule successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/IpFilterRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}": {
-      "put": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_CreateOrUpdateIpFilterRule",
-        "x-ms-examples": {
-          "NameSpaceIpFilterRuleCreate": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/SBNameSpaceIpFilterRuleCreateorUpdate.json"
-          }
-        },
-        "description": "Creates or updates an IpFilterRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IpFilterRule"
-            },
-            "description": "The Namespace IpFilterRule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace IpFilterRule created",
-            "schema": {
-              "$ref": "#/definitions/IpFilterRule"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_DeleteIpFilterRule",
-        "x-ms-examples": {
-          "NameSpaceIpFilterRuleDelete": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/SBNameSpaceIpFilterRuleDelete.json"
-          }
-        },
-        "description": "Deletes an IpFilterRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No content."
-          },
-          "200": {
-            "description": "Namespace IpFilterRule successfully deleted."
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_GetIpFilterRule",
-        "x-ms-examples": {
-          "NameSpaceIpFilterRuleGet": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/SBNameSpaceIpFilterRuleGet.json"
-          }
-        },
-        "description": "Gets an IpFilterRule for a Namespace by rule name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace IpFilterRule returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/IpFilterRule"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/virtualnetworkrules": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListVirtualNetworkRules",
-        "x-ms-examples": {
-          "ListIpFilterRules": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNameSpaceVirtualNetworkRuleListAll.json"
-          }
-        },
-        "description": "Gets a list of VirtualNetwork rules for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace VirtualNetworkRule successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/virtualnetworkrules/{virtualNetworkRuleName}": {
-      "put": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_CreateOrUpdateVirtualNetworkRule",
-        "x-ms-examples": {
-          "NameSpaceVirtualNetworkRuleCreate": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNameSpaceVirtualNetworkRuleCreateorUpdate.json"
-          }
-        },
-        "description": "Creates or updates an VirtualNetworkRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRule"
-            },
-            "description": "The Namespace VirtualNetworkRule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace VirtualNetworkRule created",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRule"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_DeleteVirtualNetworkRule",
-        "x-ms-examples": {
-          "NameSpaceVirtualNetworkRuleDelete": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNameSpaceVirtualNetworkRuleDelete.json"
-          }
-        },
-        "description": "Deletes an VirtualNetworkRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No content."
-          },
-          "200": {
-            "description": "Namespace VirtualNetworkRule successfully deleted."
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_GetVirtualNetworkRule",
-        "x-ms-examples": {
-          "NameSpaceVirtualNetworkRuleGet": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNameSpaceVirtualNetworkRuleGet.json"
-          }
-        },
-        "description": "Gets an VirtualNetworkRule for a Namespace by rule name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace VirtualNetworkRule returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRule"
-            }
-          },
-          "default": {
-            "description": "ServiceBus error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -3520,6 +3196,30 @@
         "name"
       ],
       "description": "SKU of the namespace."
+    },
+    "SBNamespaceMigrate": {
+      "type": "object",
+      "properties": {
+        "targetNamespaceType": {
+          "type": "string",
+          "description": "Type of namespaces",
+          "enum": [
+            "Messaging",
+            "NotificationHub",
+            "Mixed",
+            "EventHub",
+            "Relay"
+          ],
+          "x-ms-enum": {
+            "name": "NameSpaceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "targetNamespaceType"
+      ],
+      "description": "Namespace Migrate Object"
     },
     "SBAuthorizationRuleListResult": {
       "properties": {
@@ -4708,94 +4408,6 @@
         }
       },
       "description": "The result of the List migrationConfigurations operation."
-    },
-	"IpFilterRule": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "properties": {
-            "ipMask": {
-              "type": "string",
-              "description": "IP Mask"
-            },
-            "action": {
-              "type": "string",
-              "description": "The IP Filter Action",
-              "enum": [
-                "Accept",
-                "Reject"
-              ],
-              "x-ms-enum": {
-                "name": "IPAction",
-                "modelAsString": true
-              }
-            },
-            "filterName": {
-              "type": "string",
-              "description": "IP Filter name"
-            }
-          },
-          "description": "Properties supplied to create or update IpFilterRules"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Single item in a List or Get IpFilterRules operation"
-    },
-    "IpFilterRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IpFilterRule"
-          },
-          "description": "Result of the List IpFilter Rules operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains an incomplete list of IpFilter Rules"
-        }
-      },
-      "description": "The response from the List namespace operation."
-    },
-    "VirtualNetworkRule": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "properties": {
-            "virtualNetworkSubnetId": {
-              "type": "string",
-              "description": "Resource ID of Virtual Network Subnet"
-            }
-          },
-          "description": "Properties supplied to create or update VirtualNetworkRules"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Single item in a List or Get VirtualNetworkRules operation"
-    },
-    "VirtualNetworkRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkRule"
-          },
-          "description": "Result of the List VirtualNetwork Rules operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains an incomplete list of VirtualNetwork Rules"
-        }
-      },
-      "description": "The response from the List namespace operation."
     }
   },
   "parameters": {
@@ -4935,24 +4547,6 @@
       "minimum": 1,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
-    },
-	"IPFilterRuleNameParameter": {
-      "name": "ipFilterRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "description": "The IP Filter Rule name."
-    },
-    "VirtualNetworkRuleNameParameter": {
-      "name": "virtualNetworkRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "description": "The Virtual Network Rule name."
     }
   }
 }

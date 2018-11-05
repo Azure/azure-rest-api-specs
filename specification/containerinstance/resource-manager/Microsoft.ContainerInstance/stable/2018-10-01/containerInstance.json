@@ -712,6 +712,10 @@
           "description": "The CPU request of this container instance.",
           "type": "number",
           "format": "double"
+        },
+        "gpu": {
+          "description": "The GPU request of this container instance.",
+          "$ref": "#/definitions/GpuResource"
         }
       }
     },
@@ -728,6 +732,38 @@
           "description": "The CPU limit of this container instance.",
           "type": "number",
           "format": "double"
+        },
+        "gpu": {
+          "description": "The GPU limit of this container instance.",
+          "$ref": "#/definitions/GpuResource"
+        }
+      }
+    },
+    "GpuResource": {
+      "description": "The GPU resource.",
+      "type": "object",
+      "required": [
+        "count",
+        "sku"
+      ],
+      "properties": {
+        "count": {
+          "description": "The count of the GPU resource.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "type": "string",
+          "description": "The SKU of the GPU resource.",
+          "enum": [
+            "K80",
+            "P100",
+            "V100"
+          ],
+          "x-ms-enum": {
+            "name": "GpuSku",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1020,6 +1056,10 @@
                 "networkProfile": {
                   "description": "The network profile information for a container group.",
                   "$ref": "#/definitions/ContainerGroupNetworkProfile"
+                },
+                "dnsConfig": {
+                  "description": "The DNS config information for a container group.",
+                  "$ref": "#/definitions/DnsConfiguration"
                 }
               },
               "required": [
@@ -1454,6 +1494,30 @@
         "password": {
           "type": "string",
           "description": "The password to start the exec command."
+        }
+      }
+    },
+    "DnsConfiguration": {
+      "description": "DNS configuration for the container group.",
+      "type": "object",
+      "required": [
+        "nameServers"
+      ],
+      "properties": {
+        "nameServers": {
+          "description": "The DNS servers for the container group.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchDomains": {
+          "description": "The DNS search domains for hostname lookup in the container group.",
+          "type": "string"
+        },
+        "options": {
+          "description": "The DNS options for the container group.",
+          "type": "string"
         }
       }
     },
