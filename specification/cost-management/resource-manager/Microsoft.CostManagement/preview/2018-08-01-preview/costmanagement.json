@@ -1947,6 +1947,234 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/alerts/updateStatus": {
+      "put": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_UpdateStatusList",
+        "description": "Update alerts status for a subscription, limit to 100 alerts.",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            },
+            "description": "Parameters supplied to the update alerts status operation."
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModifyAlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/alerts/updateStatus": {
+      "put": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_UpdateStatusByResourceGroupName",
+        "description": "Update alerts status for a resource group under a subscription. limit to 100 alerts",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            },
+            "description": "Parameters supplied to the update alerts status operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModifyAlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/alerts/updateStatus": {
+      "put": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_UpdateStatusByEnrollmentm",
+        "description": "Update alerts status for an enrollmentm limit to 100 alerts",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            },
+            "description": "Parameters supplied to the update alerts status operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModifyAlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/alerts/updateStatus": {
+      "put": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_UpdateStatusByDepartment",
+        "description": "Update alerts status for a department, limit to 100 alerts",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            },
+            "description": "Parameters supplied to the update alerts status operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModifyAlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	  "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts/updateStatus": {
+      "put": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_UpdateStatusListEnrollment",
+        "description": "Update alerts status for an enrollment, limit to 100 alerts",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            },
+            "description": "Parameters supplied to the update alerts status operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModifyAlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -2934,7 +3162,6 @@
         "value": {
           "description": "The list of alerts.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Alert"
           }
@@ -2952,7 +3179,6 @@
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true,
           "description": "Alert id"
         },
         "name": {
@@ -3013,8 +3239,10 @@
           "x-ms-client-flatten": true,
           "type": "object",
           "additionalProperties": {
-            "type": "string"
-          }
+            "type": "string",
+            "readOnly": true
+          },
+          "readOnly": true
         },
         "creationTime": {
           "format": "date-time",
@@ -3040,8 +3268,7 @@
           "x-ms-enum": {
             "name": "AlertStatus",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -3091,6 +3318,46 @@
             "modelAsString": true
           }
         }
+      },
+      "readOnly": true
+    },
+    "ModifyAlertListResult": {
+      "description": "Result of modify alerts. It contains a list of update status alerts in the scope provided with action status.",
+      "properties": {
+        "value": {
+          "description": "The list of alerts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ModifyAlert"
+          }
+        }
+      }
+    },
+	"ModifyAlert": {
+      "type": "object",
+      "description": "The modify Alert model definition",
+      "properties": {
+        "value": {
+          "description": "Modify alert.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },        
+		"ModifyAlertStatus": {
+          "description": "Holds status of modification action.",
+          "type": "string",
+          "enum": [
+			"Success",
+			"Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ModifyAlertStatus",
+            "modelAsString": true
+          },
+		  "readOnly": true
+        }
       }
     }
   },
@@ -3129,6 +3396,14 @@
       "name": "departmentId",
       "in": "path",
       "description": "Department ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountIdParameter": {
+      "name": "enrollmentAccountId",
+      "in": "path",
+      "description": "Enrollment Account ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
