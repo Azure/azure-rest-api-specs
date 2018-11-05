@@ -2327,7 +2327,7 @@
         "pipeline"
       ]
     },
-	"DeleteActivity": {
+    "DeleteActivity": {
       "x-ms-discriminator-value": "Delete",
       "description": "Delete activity.",
       "allOf": [
@@ -2350,7 +2350,7 @@
       "description": "Delete activity properties.",
       "properties": {
         "recursive": {
-          "type": "boolean",
+          "type": "object",
           "description": "If true, files under the folder path will be deleted recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "dataset": {
@@ -2359,8 +2359,7 @@
         }
       },
       "required": [
-        "dataset",
-        "recursive"
+        "dataset"
       ]
     },
     "LookupActivity": {
