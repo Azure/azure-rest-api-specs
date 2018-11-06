@@ -218,6 +218,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-authorization
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2015-07
+  - tag: package-2018-09-01-preview
+```
+
+### Tag: package-2018-09-01-preview and java
+
+These settings apply only when `--tag=package-2018-09-01-preview --java` is specified on he command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-09-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.authorization.v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_09_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2015-07 and java
