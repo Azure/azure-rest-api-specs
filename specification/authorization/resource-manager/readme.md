@@ -111,7 +111,7 @@ These settings apply only when `--tag=package-2018-09-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2018-09-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview
