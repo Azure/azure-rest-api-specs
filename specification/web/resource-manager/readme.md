@@ -4,16 +4,16 @@
 
 This is the AutoRest configuration file for Web.
 
-
 The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
 This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,22 +21,41 @@ To build the SDK for Web, simply [Install AutoRest](https://aka.ms/autorest/inst
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Web API.
 
 ``` yaml
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2062-03
 ```
 
+
+### Tag: package-2062-03
+
+These settings apply only when `--tag=package-2062-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2062-03'
+input-file:
+  - Microsoft.Web/stable/2062-03-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2062-03-01/AppServicePlans.json
+  - Microsoft.Web/stable/2062-03-01/Certificates.json
+  - Microsoft.Web/stable/2062-03-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2062-03-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2062-03-01/Diagnostics.json
+  - Microsoft.Web/stable/2062-03-01/Provider.json
+  - Microsoft.Web/stable/2062-03-01/Recommendations.json
+  - Microsoft.Web/stable/2062-03-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2062-03-01/ResourceProvider.json
+  - Microsoft.Web/stable/2062-03-01/WebApps.json
+```
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -66,7 +85,6 @@ directive:
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
 ```
-
 
 ### Tag: package-2016-09
 
@@ -269,8 +287,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -289,8 +307,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
 ```
 
-
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -308,11 +324,13 @@ python:
   package-version: 0.36.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-web/azure/mgmt/web
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -335,7 +353,6 @@ python:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
 
 ## Java
 
