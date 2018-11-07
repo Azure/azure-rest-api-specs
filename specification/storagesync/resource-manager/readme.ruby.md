@@ -12,8 +12,19 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2018-10-01
   - tag: package-2018-07-01
   - tag: package-2018-04-02
+```
+
+### Tag: package-2018-10-01 and ruby
+
+These settings apply only when `--tag=package-2018-10-01 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2018-10-01' && $(ruby)
+namespace: "Azure::StorageSync::Mgmt::V2018_10_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storagesync_management/lib
 ```
 
 ### Tag: package-2018-07-01 and ruby
@@ -31,7 +42,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storagesync_management/
 These settings apply only when `--tag=package-2018-04-02 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2018-04-02' && $(ruby)
+``` yaml $(tag) == 'package-2018-07-01' && $(ruby)
 namespace: "Azure::StorageSync::Mgmt::V2018_04_02"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storagesync_management/lib
 ```

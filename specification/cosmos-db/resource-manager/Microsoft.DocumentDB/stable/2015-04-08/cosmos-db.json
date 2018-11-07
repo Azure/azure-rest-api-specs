@@ -1643,6 +1643,10 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
         }
       }
     },
@@ -1702,6 +1706,10 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
         }
       },
       "required": [
@@ -1882,6 +1890,10 @@
         "id":{
           "type": "string",
           "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}."
+        },
+        "ignoreMissingVNetServiceEndpoint":{
+          "type": "boolean",
+          "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
         }
       }
     },

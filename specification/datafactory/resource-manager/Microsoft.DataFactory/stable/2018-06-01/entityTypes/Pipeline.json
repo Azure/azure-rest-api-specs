@@ -25,6 +25,10 @@
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
           "description": "List of parameters for pipeline."
         },
+        "variables": {
+          "$ref": "../datafactory.json#/definitions/VariableDefinitionSpecification",
+          "description": "List of variables for pipeline."
+        },
         "concurrency": {
           "type": "integer",
           "minimum": 1,
@@ -187,6 +191,10 @@
           "description": "Interval between each retry attempt (in seconds). The default is 30 sec.",
           "minimum": 30,
           "maximum": 86400
+        },
+        "secureInput": {
+          "type": "boolean",
+          "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring."
         },
         "secureOutput": {
           "type": "boolean",
@@ -2319,6 +2327,41 @@
         "pipeline"
       ]
     },
+    "DeleteActivity": {
+      "x-ms-discriminator-value": "Delete",
+      "description": "Delete activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Delete activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeleteActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DeleteActivityTypeProperties": {
+      "description": "Delete activity properties.",
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be deleted recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dataset": {
+          "description": "Delete activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
+      ]
+    },
     "LookupActivity": {
       "x-ms-discriminator-value": "Lookup",
       "description": "Lookup activity.",
@@ -2854,7 +2897,7 @@
       ]
     },
     "FilterActivityTypeProperties": {
-      "description": "Fitler activity properties.",
+      "description": "Filter activity properties.",
       "properties": {
         "items": {
           "description": "Input array on which filter should be applied.",
@@ -3019,6 +3062,70 @@
       "required": [
         "pythonFile"
       ]
+    },
+    "SetVariableActivity": {
+      "x-ms-discriminator-value": "SetVariable",
+      "description": "Set value for a Variable.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Set Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SetVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SetVariableActivityTypeProperties": {
+      "description": "SetVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be set. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
+    },
+    "AppendVariableActivity": {
+      "x-ms-discriminator-value": "AppendVariable",
+      "description": "Append value for a Variable of type Array.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Append Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppendVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AppendVariableActivityTypeProperties": {
+      "description": "AppendVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be appended to.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be appended. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
     }
   }
 }

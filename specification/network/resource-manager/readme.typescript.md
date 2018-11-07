@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-network
-  output-folder: $(typescript-sdks-folder)/packages/arm-network
+  package-name: "@azure/arm-network"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-network"
   generate-metadata: true
   generate-readme-md: false
 ```

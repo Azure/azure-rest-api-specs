@@ -716,7 +716,9 @@
           "description": "The type of run.",
           "enum": [
             "QuickBuild",
-            "AutoBuild"
+            "QuickRun",
+            "AutoBuild",
+            "AutoRun"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -740,7 +742,7 @@
           "type": "string"
         },
         "outputImages": {
-          "description": "The list of all images that were generated from the run. This is applicable if the run is of type Build.",
+          "description": "The list of all images that were generated from the run. This is applicable if the run generates base image dependencies.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDescriptor"
@@ -752,7 +754,7 @@
         },
         "imageUpdateTrigger": {
           "$ref": "#/definitions/ImageUpdateTrigger",
-          "description": "The image update trigger that caused the run. This is applicable if the task is of build type."
+          "description": "The image update trigger that caused the run. This is applicable if the task has base image trigger configured."
         },
         "sourceTrigger": {
           "$ref": "#/definitions/SourceTriggerDescriptor",
@@ -968,7 +970,9 @@
           "description": "The type of run.",
           "enum": [
             "QuickBuild",
-            "AutoBuild"
+            "QuickRun",
+            "AutoBuild",
+            "AutoRun"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1165,12 +1169,20 @@
             "$ref": "#/definitions/BaseImageDependency"
           },
           "readOnly": true
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
+        },
+        "contextAccessToken": {
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step.",
+          "type": "string"
         }
       },
       "discriminator": "type"
     },
     "TriggerProperties": {
-      "description": "The properties of a build trigger.",
+      "description": "The properties of a trigger.",
       "type": "object",
       "properties": {
         "sourceTriggers": {
@@ -1238,7 +1250,8 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit"
+              "commit",
+              "pullrequest"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1248,7 +1261,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1286,7 +1299,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1494,12 +1507,20 @@
             "name": "StepType",
             "modelAsString": true
           }
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
+        },
+        "contextAccessToken": {
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step.",
+          "type": "string"
         }
       },
       "discriminator": "type"
     },
     "TriggerUpdateParameters": {
-      "description": "The properties for updating build triggers.",
+      "description": "The properties for updating triggers.",
       "type": "object",
       "properties": {
         "sourceTriggers": {
@@ -1531,7 +1552,8 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit"
+              "commit",
+              "pullrequest"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1541,7 +1563,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1578,7 +1600,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1725,7 +1747,6 @@
       "required": [
         "type",
         "dockerFilePath",
-        "sourceLocation",
         "platform"
       ],
       "type": "object",
@@ -1763,13 +1784,9 @@
             "$ref": "#/definitions/Argument"
           }
         },
-        "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
-          "type": "string"
-        },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1777,11 +1794,15 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "DockerBuildRequest"
@@ -1814,7 +1835,6 @@
       "required": [
         "type",
         "taskFilePath",
-        "sourceLocation",
         "platform"
       ],
       "type": "object",
@@ -1839,13 +1859,9 @@
             "$ref": "#/definitions/SetValue"
           }
         },
-        "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
-          "type": "string"
-        },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1853,11 +1869,15 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "FileTaskRunRequest"
@@ -1943,7 +1963,7 @@
         },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1951,11 +1971,15 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "EncodedTaskRunRequest"
@@ -1999,10 +2023,6 @@
           "items": {
             "$ref": "#/definitions/Argument"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
@@ -2033,10 +2053,6 @@
           "items": {
             "$ref": "#/definitions/SetValue"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "FileTask"
@@ -2105,10 +2121,6 @@
           "items": {
             "$ref": "#/definitions/Argument"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
@@ -2136,10 +2148,6 @@
           "items": {
             "$ref": "#/definitions/SetValue"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "FileTask"

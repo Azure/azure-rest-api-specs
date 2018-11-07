@@ -7,50 +7,48 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   batch: true
-  package-name: arm-resource
-  output-folder: $(typescript-sdks-folder)/packages/arm-resource
+  generate-metadata: true
 batch:
+  - package-resources: true
   - package-features: true
   - package-locks: true
   - package-policy: true
-  - package-resources: true
-  - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
 ```
 
 ```yaml $(typescript) && $(package-features)
-nodejs:
-  source-code-folder-path: lib/feature
+typescript:
+  package-name: "@azure/arm-features"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-features"
 ```
 
 ```yaml $(typescript) && $(package-locks)
-nodejs:
-  source-code-folder-path: lib/lock
+typescript:
+  package-name: "@azure/arm-locks"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-locks"
 ```
 
 ```yaml $(typescript) && $(package-policy)
-nodejs:
-  source-code-folder-path: lib/policy
+typescript:
+  package-name: "@azure/arm-policy"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-policy"
 ```
 
 ```yaml $(typescript) && $(package-resources)
-nodejs:
-  source-code-folder-path: lib/resource
-```
-
-```yaml $(typescript) && $(package-subscriptions)
-nodejs:
-  source-code-folder-path: lib/subscription
+typescript:
+  package-name: "@azure/arm-resources"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-resources"
 ```
 
 ```yaml $(typescript) && $(package-links)
-nodejs:
-  source-code-folder-path: lib/link
+typescript:
+  package-name: "@azure/arm-links"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-links"
 ```
 
-```yaml $(typescript) && $(package-management)
-nodejs:
-  source-code-folder-path: lib/management
-  override-client-name: ManagementGroupsClient
+```yaml $(typescript) && $(package-managedapplications)
+typescript:
+  package-name: "@azure/arm-managedapplications"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-managedapplications"
 ```
