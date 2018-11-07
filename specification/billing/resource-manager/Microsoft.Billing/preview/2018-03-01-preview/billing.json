@@ -275,6 +275,60 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoices/{invoiceName}/pricesheet/download": {
+      "get": {
+        "tags": [
+          "invoices"
+        ],
+        "x-ms-examples": {
+          "invoice": {
+            "$ref": "./examples/PricesheetDownload.json"
+          }
+        },
+        "operationId": "Invoice_Pricesheet",
+        "description": "Get pricesheet data for invoice id (invoiceName).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices/{invoiceName}": {
       "get": {
         "tags": [
