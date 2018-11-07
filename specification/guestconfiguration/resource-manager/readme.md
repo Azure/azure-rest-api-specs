@@ -31,16 +31,16 @@ openapi-type: arm
 tag: package-2018-11
 ```
 
-
 ### Tag: package-2018-11
 
 These settings apply only when `--tag=package-2018-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-11'
+``` yaml $(tag) == 'package-2018-11'
 input-file:
   - Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration.json
   - Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration_NotImplemented.json
 ```
+
 ### Tag: package-2018-06-30-preview
 
 These settings apply only when `--tag=package-2018-06-30-preview` is specified on the command line.
@@ -68,11 +68,17 @@ directive:
   - suppress: UniqueResourcePaths
     from: guestconfiguration.json
     where: $.paths
-    reason: Microsoft.GuestConfiguration is a proxy resource provider under Microsoft. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540
+    reason: 'Microsoft.GuestConfiguration is a proxy resource provider under Microsoft. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540'
   - suppress: OperationsAPIImplementation
     from: guestconfiguration.json
     where: $.paths
-    reason: Microsoft.GuestConfiguration is a proxy resource provider under Microsoft.Compute. However, Operations API for is implmented. So, suppressing the false positive. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540
+    reason: 'Microsoft.GuestConfiguration is a proxy resource provider under Microsoft.Compute. However, Operations API for is implmented. So, suppressing the false positive. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540'
+  - suppress: OperationsAPIImplementation
+    from: guestconfiguration_NotImplemented.json
+    where: $.paths
+    reason: |-
+      - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
+      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
 ```
 
 ---
