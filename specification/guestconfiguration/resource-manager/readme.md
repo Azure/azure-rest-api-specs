@@ -79,6 +79,12 @@ directive:
     reason: |-
       - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
       - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
+  - suppress: UniqueResourcePaths
+    from: guestconfiguration_NotImplemented.json
+    where: $.paths
+    reason: |-
+      - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
+      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
 ```
 
 ---
