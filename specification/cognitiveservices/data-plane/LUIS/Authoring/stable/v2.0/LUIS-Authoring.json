@@ -58,11 +58,17 @@
               "$ref": "#/definitions/FeatureIDResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nSpecific reasons you can receive this error:\r\n\r\n* REGEX pattern is too complex\r\n"
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -99,11 +105,17 @@
               "$ref": "#/definitions/PatternFeatureInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -147,11 +159,17 @@
               "$ref": "#/definitions/FeatureIDResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -187,11 +205,17 @@
               "$ref": "#/definitions/PhraseListFeatureInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -229,11 +253,17 @@
               "$ref": "#/definitions/FeaturesResponseObject"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -273,11 +303,17 @@
               "$ref": "#/definitions/PatternFeatureInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -330,11 +366,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -369,11 +411,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -412,11 +460,17 @@
               "$ref": "#/definitions/PhraseListFeatureInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -464,11 +518,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -505,11 +565,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -553,11 +619,17 @@
               "$ref": "#/definitions/LabelExampleResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -607,11 +679,20 @@
               "$ref": "#/definitions/BatchLabelExampleResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned for several reasons: \r\n\r\n* too many items in batch\r\n* labeled examples list contains duplicates.\r\n* Item(s) includes intent that does not exist\r\n* item(s) include entity that does not exist\r\n* item(s) include prebuilt entity \r\n\r\nExamples of malformed JSON are:\r\n\r\n* incorrect use of a comma, for example a comma after the last item in the array\r\n* missing comma between property/value pairs\r\n* incorrect or missing colon between property and value\r\n* entityLabel array is present and has empty item in array {} without property or value\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "409": {
+            "description": "This error can be returned if another \"Batch add labels\" was already in progress. Wait until the other operation finishes before starting a new one."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -647,11 +728,17 @@
               "$ref": "#/definitions/LabeledUtterances"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -690,11 +777,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -738,6 +831,18 @@
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n    \r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n    \r\nThis error can be returned if you are attempting to create an intent when the max intent count is exceeded. \r\n```\r\n{\r\n      \"error\": {\r\n        \"code\": \"BadArgument\",\r\n        \"message\": \"An application cannot have more than 80 intents.\"\r\n      }\r\n    }\r\n```\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -773,11 +878,17 @@
               "$ref": "#/definitions/IntentClassifiersList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -822,11 +933,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create an entity when the max entity count is exceeded. \r\n\r\n```\r\n{\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"An application cannot have more than 30 entities.\"\r\n  }\r\n}\r\n```\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -862,11 +979,17 @@
               "$ref": "#/definitions/EntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -911,11 +1034,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a hierarchical entity when the max child count is exceeded. \r\n```\r\n{\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Number of entity children cannot exceed 10\"\r\n  }\r\n}\r\n```\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -951,11 +1080,17 @@
               "$ref": "#/definitions/HierarchicalEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1000,11 +1135,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a composite entity child when the max child count is exceeded. \r\n\r\n```\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Number of entity children cannot exceed 10\"\r\n  }\r\n```\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1040,11 +1181,17 @@
               "$ref": "#/definitions/CompositeEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1082,11 +1229,17 @@
               "$ref": "#/definitions/ClosedListEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1129,11 +1282,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n  \r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n  \r\nThis error can be returned if you are attempting to create an entity list when the max sublist item count is already exceeded. The total item count across all sublists is 20,000.\r\n ```\r\n\"error\": {\r\n  \"code\": \"BadArgument\",\r\n  \"message\": \"Closed list mylist cannot have more than 20000 phrases\"\r\n}\r\n```\r\n```\r\n   \"error\": {\r\n      \"code\": \"BadArgument\",\r\n      \"message\": \"An application cannot have more than 50 closedlists.\"\r\n    }\r\n```\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1177,11 +1336,17 @@
               "$ref": "#/definitions/PrebuiltEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1217,11 +1382,17 @@
               "$ref": "#/definitions/PrebuiltEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1253,11 +1424,17 @@
               "$ref": "#/definitions/AvailablePrebuiltEntityModels"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1295,11 +1472,17 @@
               "$ref": "#/definitions/ModelsInfoResponseObject"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1313,55 +1496,61 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/models/{modelId}/examples": {
-     "get": {
-       "description": "Gets the utterances for the given model in the given app version.",
-       "operationId": "Model_Examples",
-       "parameters": [
-         {
-           "$ref": "#/parameters/AppIdInPath"
-         },
-         {
-           "$ref": "#/parameters/VersionIdInPath"
-         },
-         {
+      "get": {
+        "description": "Gets the utterances for the given model in the given app version.",
+        "operationId": "Model_Examples",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "modelId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The ID (GUID) of the model.",
             "x-ms-parameter-location": "method"
-           },
-         {
-           "$ref": "#/parameters/SkipInPath"
-         },
-         {
-           "$ref": "#/parameters/TakeInPath"
-         }
-       ],
-       "responses": {
-         "200": {
-           "description": "A list of examples for the model.",
-           "schema": {
-             "$ref": "#/definitions/ExamplesPerModelResponseObject"
-           }
-         },
-         "default": {
-           "description": "Error Response.",
-           "schema": {
-             "$ref": "#/definitions/ErrorResponse"
-           }
-         }
-       },
-       "produces": [
-         "application/json"
-       ],
-       "x-ms-examples": {
-         "Successful Get Examples Per Model Request": {
-           "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
-         }
-       }
-     }
-   },
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of examples for the model.",
+            "schema": {
+              "$ref": "#/definitions/ExamplesPerModelResponseObject"
+            }
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Examples Per Model Request": {
+            "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
       "get": {
         "description": "Gets information about the intent model.",
@@ -1384,11 +1573,17 @@
               "$ref": "#/definitions/IntentClassifier"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1433,11 +1628,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1477,11 +1678,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1521,11 +1728,17 @@
               "$ref": "#/definitions/EntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1575,11 +1788,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1617,11 +1836,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1656,11 +1881,17 @@
               "$ref": "#/definitions/HierarchicalEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1705,11 +1936,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1742,11 +1979,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1781,11 +2024,17 @@
               "$ref": "#/definitions/CompositeEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1838,11 +2087,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a composite entity child when the max child count is exceeded. \r\n\r\n```\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Number of entity children cannot exceed 10\"\r\n  }\r\n```"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         }
       },
@@ -1867,11 +2122,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1911,11 +2172,17 @@
               "$ref": "#/definitions/ClosedListEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -1965,11 +2232,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2019,11 +2292,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if the sublist is already in the closed list. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2061,11 +2340,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2105,11 +2390,17 @@
               "$ref": "#/definitions/PrebuiltEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2147,11 +2438,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2198,11 +2495,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2259,11 +2562,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2301,11 +2610,17 @@
               "$ref": "#/definitions/IntentsSuggestionExamples"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2348,11 +2663,17 @@
               "$ref": "#/definitions/EntitiesSuggestionExamples"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2391,11 +2712,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2425,11 +2752,17 @@
               "$ref": "#/definitions/ApplicationsInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2474,11 +2807,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error is returned is your import JSON is incorrect. This is usual due to using values in the JSON that are no longer used or missing properties that are required. The error message will reference the exact property that is causing the problem.  "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2502,11 +2841,17 @@
               "$ref": "#/definitions/PersonalAssistantsResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* invalid, malformed, or empty subscription key\r\n* subscription key doesn't match region\r\n* you are not the owner or collaborator"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2530,11 +2875,17 @@
               "$ref": "#/definitions/AvailableDomains"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2558,11 +2909,17 @@
               "$ref": "#/definitions/ApplicationUsageScenarios"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2586,11 +2943,17 @@
               "$ref": "#/definitions/AvailableCultures"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2621,11 +2984,17 @@
               "description": "The query logs of an application for the past month in CSV format."
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2654,11 +3023,17 @@
               "$ref": "#/definitions/ApplicationInfoResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2697,11 +3072,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2728,11 +3109,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2775,11 +3162,17 @@
               "type": "string"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2820,11 +3213,17 @@
               "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nOther reasons for receiving this error:\r\n\r\n* app can't be published because model isn't trained\r\n* app can't be published in region specified\r\n\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2862,11 +3261,17 @@
               }
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2898,11 +3303,17 @@
               "$ref": "#/definitions/VersionInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2944,11 +3355,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -2978,11 +3395,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3014,11 +3437,17 @@
             },
             "description": "The LUIS application structure in JSON format."
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3050,11 +3479,17 @@
               "$ref": "#/definitions/EnqueueTrainingResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "400": {
+            "description": "This response can occur if either of the <b>appId</b> or <b>versionId</b> parameters are incorrect."
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3084,11 +3519,17 @@
               "$ref": "#/definitions/ModelTrainingInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "400": {
+            "description": "This response can occur for any of the following reasons: \r\n\r\n* You need to submit a training request before you request training status. \r\n* The format of appId is incorrect. \r\n* The value of appId is incorrect. \r\n* The value of  versionId is incorrect. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n\r\n\r\n"
+          },
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3136,11 +3577,17 @@
               "$ref": "#/definitions/VersionResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3169,11 +3616,17 @@
               "$ref": "#/definitions/ApplicationSettings"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3212,11 +3665,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3245,11 +3704,17 @@
               "$ref": "#/definitions/PublishSettings"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3288,11 +3753,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3336,11 +3807,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3369,11 +3846,17 @@
               "$ref": "#/definitions/UserAccessList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded. "
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3412,11 +3895,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded. "
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3455,11 +3944,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded. "
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3498,11 +3993,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded. "
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3531,11 +4032,17 @@
               "$ref": "#/definitions/AvailableEndpoints"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3587,11 +4094,17 @@
               "type": "integer"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3635,11 +4148,17 @@
               "$ref": "#/definitions/GuidList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3684,11 +4203,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.\r\n\r\nThis error can be returned if the request's body are incorrect meaning the JSON is missing or malformed. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3718,11 +4243,17 @@
               "$ref": "#/definitions/IntentClassifiersList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3767,11 +4298,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3801,11 +4338,17 @@
               "$ref": "#/definitions/EntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3837,11 +4380,17 @@
               "$ref": "#/definitions/CustomPrebuiltModelList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3880,11 +4429,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3908,11 +4463,17 @@
               "$ref": "#/definitions/PrebuiltDomainsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3949,11 +4510,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nYou will receive this error If you add a second prebuilt application before renaming the first."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -3986,11 +4553,17 @@
               "$ref": "#/definitions/PrebuiltDomainsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -4033,11 +4606,17 @@
               "$ref": "#/definitions/HierarchicalChildEntity"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -4095,11 +4674,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -4140,11 +4725,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -4197,11 +4788,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a hierarchical entity when the max child count is exceeded. \r\n```\r\n{\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Number of entity children cannot exceed 10\"\r\n  }\r\n}\r\n```"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -4254,11 +4851,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.\r\n\r\nThis error can be returned if you are attempting to create a composite entity child when the max child count is exceeded. \r\n```\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Number of entity children cannot exceed 10\"\r\n  }\r\n```"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -4301,11 +4904,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -4346,11 +4955,17 @@
               "$ref": "#/definitions/RegexEntityExtractorList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4393,11 +5008,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create an entity when the max entity count is exceeded. \r\n```\r\n{\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"An application cannot have more than 20 regex entities.\"\r\n  }\r\n}\r\n```\r\n\r\nThis error is returned if the regex is invalid:\r\n```\r\n{\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Failed to parse regex entity extractor creation object. Parameter name: regexEntityExtractorCreateObj\"\r\n  }\r\n}\r\n```\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4435,11 +5056,17 @@
               "$ref": "#/definitions/PatternAnyEntityExtractorList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4482,11 +5109,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create an entity when the max entity count is exceeded.\r\n"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4526,11 +5159,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4581,11 +5220,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4625,11 +5270,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4680,11 +5331,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4724,11 +5381,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4779,11 +5442,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4823,11 +5492,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4878,11 +5553,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4917,11 +5598,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -4967,11 +5654,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5011,11 +5704,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5066,11 +5765,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5105,11 +5810,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5155,11 +5866,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5199,11 +5916,17 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5254,11 +5977,17 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5298,11 +6027,17 @@
               "$ref": "#/definitions/ExplicitListItemList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5352,11 +6087,17 @@
               "$ref": "#/definitions/ExplicitListItemIDResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5396,11 +6137,17 @@
               "$ref": "#/definitions/RegexEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5450,11 +6197,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5492,11 +6245,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5536,11 +6295,17 @@
               "$ref": "#/definitions/PatternAnyEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5590,11 +6355,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a composite entity child when the max child count is exceeded. \r\n\r\n```\r\n  \"error\": {\r\n    \"code\": \"BadArgument\",\r\n    \"message\": \"Number of entity children cannot exceed 10\"\r\n  }\r\n```"
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5632,11 +6403,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5684,11 +6461,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5746,11 +6529,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5796,11 +6585,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5848,11 +6643,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5910,11 +6711,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -5960,11 +6767,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6012,11 +6825,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6074,11 +6893,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6124,11 +6949,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6176,11 +7007,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6238,11 +7075,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6288,11 +7131,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6335,11 +7184,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6392,11 +7247,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6437,11 +7298,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6489,11 +7356,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6551,11 +7424,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6601,11 +7480,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6648,11 +7533,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6705,11 +7596,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6750,11 +7647,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6802,11 +7705,17 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6864,11 +7773,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6914,11 +7829,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -6966,11 +7887,17 @@
               "$ref": "#/definitions/ExplicitListItem"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7028,11 +7955,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7078,11 +8011,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7126,11 +8065,17 @@
               "$ref": "#/definitions/PatternRuleInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7168,11 +8113,17 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7217,11 +8168,17 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7266,11 +8223,17 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7316,11 +8279,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7372,11 +8341,17 @@
               "$ref": "#/definitions/PatternRuleInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7414,11 +8389,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7459,11 +8440,17 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. "
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "x-ms-examples": {
@@ -7495,11 +8482,17 @@
               }
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "400": {
+            "description": "The app ID is missing or invalid.\r\nThe includeResponse is invalid."
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded."
           }
         },
         "produces": [
@@ -7541,11 +8534,17 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "description": "Rate limit is exceeded."
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large."
+          },
+          "401": {
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls"
+          },
+          "403": {
+            "description": "Total monthly key quota limit exceeded"
           }
         },
         "produces": [
@@ -9373,18 +10372,6 @@
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response when invoking an operation on the API.",
-      "type": "object",
-      "properties": {
-        "errorType": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
     "OperationError": {
       "description": "Operation error details when invoking an operation on the API.",
       "type": "object",
@@ -9716,14 +10703,14 @@
         "$ref": "#/definitions/PatternRuleInfo"
       }
     },
-    "ExamplesPerModelResponseObject":{
+    "ExamplesPerModelResponseObject": {
       "description": "A list of examples per model.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LabelTextObject"
       }
     },
-    "LabelTextObject":{
+    "LabelTextObject": {
       "description": "An object containing the example's text.",
       "type": "object",
       "properties": {
