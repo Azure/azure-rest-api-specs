@@ -292,10 +292,18 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "name": "billingAccountId",
+            "in": "path",
+            "description": "Azure Billing Account ID.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/invoiceNameParameter"
+            "name": "invoiceName",
+            "description": "The name of an invoice resource.",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -736,20 +744,6 @@
       "name": "subscriptionId",
       "in": "path",
       "description": "Azure Subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "billingAccountIdParameter": {
-      "name": "billingAccountId",
-      "in": "path",
-      "description": "Azure Billing Account ID.",
-      "required": true,
-      "type": "string"
-    },
-    "invoiceNameParameter": {
-      "name": "invoiceName",
-      "in": "path",
-      "description": "Invoice Name.",
       "required": true,
       "type": "string"
     }
