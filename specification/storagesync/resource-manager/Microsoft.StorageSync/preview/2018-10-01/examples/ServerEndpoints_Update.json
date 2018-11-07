@@ -9,7 +9,8 @@
 	"parameters" : {
             "properties": {
                 "cloudTiering": "off",
-                "volumeFreeSpacePercent": 100
+                "volumeFreeSpacePercent": 100,
+                "offlineDataTransfer": "off"
             }
 	},
         "api-version": "2018-07-01"
@@ -25,7 +26,7 @@
                 "properties": {
                         "serverLocalPath": "C:\\data_quota2",
                         "cloudTiering": "off",
-                        "volumeFreeSpacePercent": 20,
+                        "volumeFreeSpacePercent": 100,
                         "friendlyName": "somemachine2.redmond.corp.microsoft.com",
                         "serverResourceId": "/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/anpintDemoRG/providers/kailanitest07.one.microsoft.com/storageSyncServices/healthdemo1/registeredServers/f94e2944-b48d-4e5b-bdc7-c48ab3712659",
                         "provisioningState": "Succeeded",
@@ -49,7 +50,11 @@
                                 "lastSyncPerItemErrorCount": 0
                             },
                             "currentProgress": null
-                        }
+                        },
+                        "offlineDataTransfer": "off",
+                        "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
+                        "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                        "offlineDataTransferShareName": "myfileshare"
                     },
                 "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/10.91.86.47/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
                 "type": "10.91.86.47/storageSyncServices/syncGroups/serverEndpoints"
