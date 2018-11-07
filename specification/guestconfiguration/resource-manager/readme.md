@@ -1,11 +1,13 @@
 # Guest Configuration
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Guest Configuration.
 
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Guest Configuration, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,18 +15,31 @@ To build the SDK for Guest Configuration, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
+
 These are the global settings for the Guest Configuration API.
 
 ``` yaml
 title: GuestConfigurationClient
 description: Guest Configuration Client
 openapi-type: arm
-tag: package-2018-06-30-preview
+tag: package-2018-11
+```
+
+
+### Tag: package-2018-11
+
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-11'
+input-file:
+  - Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration.json
+  - Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration_NotImplemented.json
 ```
 ### Tag: package-2018-06-30-preview
 
@@ -45,7 +60,9 @@ input-file:
 - Microsoft.GuestConfiguration/preview/2018-01-20-preview/guestconfiguration.json
 
 ```
+
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: UniqueResourcePaths
@@ -57,11 +74,12 @@ directive:
     where: $.paths
     reason: Microsoft.GuestConfiguration is a proxy resource provider under Microsoft.Compute. However, Operations API for is implmented. So, suppressing the false positive. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540
 ```
+
 ---
+
 # Code Generation
 
-
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -74,4 +92,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/GuestConfiguration/Management.GuestConfiguration/Generated
   clear-output-folder: true
 ```
-
