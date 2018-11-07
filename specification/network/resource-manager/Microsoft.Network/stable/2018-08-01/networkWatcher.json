@@ -2585,6 +2585,9 @@
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicyParameters"
+        },
+        "format": {
+          "$ref": "#/definitions/FlowLogFormatParameters"
         }
       }
     },
@@ -2612,6 +2615,26 @@
           "description": "Flag to enable/disable retention.",
           "type": "boolean",
           "default": false
+        }
+      }
+    },
+    "FlowLogFormatParameters": {
+      "description": "Parameters that define the flow log format.",
+      "properties": {
+        "type": {          
+          "description": "The type of flow log format.",
+          "enum": [
+            "JSON"
+          ],
+          "x-ms-enum": {
+            "name": "FlowLogFormatType",
+            "modelAsString": true
+          }          
+        },
+        "version": {
+          "description": "The version (revision) of the flow log format.",
+          "type": "integer",
+          "default": 0
         }
       }
     },
