@@ -85,6 +85,12 @@ directive:
     reason: |-
       - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
       - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
+  - suppress: TrackedResourceListByImmediateParent
+    from: guestconfiguration_NotImplemented.json
+    where: $.definitions
+    reason: |-
+      - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
+      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
 ```
 
 ---
