@@ -1606,6 +1606,821 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems": {
+      "get": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Gets the list of migration items in the protection container.",
+        "description": "Gets the list of ASR migration items in the protection container.",
+        "operationId": "ReplicationMigrationItems_ListByReplicationProtectionContainers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItemCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the list of migration items in the protection container.": {
+            "$ref": "./examples/ReplicationMigrationItems_ListByReplicationProtectionContainers.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}": {
+      "get": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Gets the details of a migration item.",
+        "operationId": "ReplicationMigrationItems_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric unique name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a migration item.": {
+            "$ref": "./examples/ReplicationMigrationItems_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Enables migration.",
+        "description": "The operation to create an ASR migration item (enable migration).",
+        "operationId": "ReplicationMigrationItems_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Enable migration input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnableMigrationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Enables migration.": {
+            "$ref": "./examples/ReplicationMigrationItems_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Purges migration.",
+        "description": "The operation to purge an ASR migration item. This operation will force delete the migration item. Use the remove operation on migration item to perform a clean disable migration for the item.",
+        "operationId": "ReplicationMigrationItems_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Purges migration.": {
+            "$ref": "./examples/ReplicationMigrationItems_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Updates migration item.",
+        "description": "The operation to update the recovery settings of an ASR migration item.",
+        "operationId": "ReplicationMigrationItems_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Update migration item input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateMigrationItemInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates migration item.": {
+            "$ref": "./examples/ReplicationMigrationItems_Update.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/complete": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Complete migration.",
+        "description": "The operation to initiate complete migration of the item.",
+        "operationId": "ReplicationMigrationItems_Complete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Complete migration.": {
+            "$ref": "./examples/ReplicationMigrationItems_Complete.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/migrate": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Migrate item.",
+        "description": "The operation to initiate migration of the item.",
+        "operationId": "ReplicationMigrationItems_Migrate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrateInput",
+            "in": "body",
+            "description": "Migrate input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Migrate item.": {
+            "$ref": "./examples/ReplicationMigrationItems_Migrate.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/migrationRecoveryPoints": {
+      "get": {
+        "tags": [
+          "MigrationRecoveryPoints"
+        ],
+        "summary": "Gets the recovery points for a migration item.",
+        "operationId": "MigrationRecoveryPoints_ListByReplicationMigrationItems",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric unique name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationRecoveryPointCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the recovery points for a migration item.": {
+            "$ref": "./examples/MigrationRecoveryPoints_ListByReplicationMigrationItems.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/migrationRecoveryPoints/{migrationRecoveryPointName}": {
+      "get": {
+        "tags": [
+          "MigrationRecoveryPoints"
+        ],
+        "summary": "Gets a recovery point for a migration item.",
+        "operationId": "MigrationRecoveryPoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric unique name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationRecoveryPointName",
+            "in": "path",
+            "description": "The migration recovery point name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationRecoveryPoint"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a recovery point for a migration item.": {
+            "$ref": "./examples/MigrationRecoveryPoints_Get.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/remove": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Disables migration.",
+        "description": "The operation to disable an ASR migration item.",
+        "operationId": "ReplicationMigrationItems_Remove",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Disables migration.": {
+            "$ref": "./examples/ReplicationMigrationItems_Remove.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/testMigrate": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Test migrate item.",
+        "description": "The operation to initiate test migration of the item.",
+        "operationId": "ReplicationMigrationItems_TestMigrate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "testMigrateInput",
+            "in": "body",
+            "description": "Test migrate input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestMigrateInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Test migrate item.": {
+            "$ref": "./examples/ReplicationMigrationItems_TestMigrate.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/testMigrateCleanup": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Test migrate cleanup.",
+        "description": "The operation to initiate test migrate cleanup.",
+        "operationId": "ReplicationMigrationItems_TestMigrateCleanup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "testMigrateCleanupInput",
+            "in": "body",
+            "description": "Test migrate cleanup input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestMigrateCleanupInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Test migrate cleanup.": {
+            "$ref": "./examples/ReplicationMigrationItems_TestMigrateCleanup.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectableItems": {
       "get": {
         "tags": [
@@ -3574,6 +4389,74 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "ReplicationRecoveryServicesProviders"
+        ],
+        "summary": "Adds a recovery services provider.",
+        "description": "The operation to add a recovery services provider.",
+        "operationId": "ReplicationRecoveryServicesProviders_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Recovery services provider name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addProviderInput",
+            "in": "body",
+            "description": "Add provider input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddRecoveryServicesProviderInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryServicesProvider"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Adds a recovery services provider.": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_Create.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ReplicationRecoveryServicesProviders"
@@ -4706,6 +5589,63 @@
         "x-ms-examples": {
           "Exports the details of the Azure Site Recovery jobs of the vault.": {
             "$ref": "./examples/ReplicationJobs_Export.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationMigrationItems": {
+      "get": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Gets the list of migration items in the vault.",
+        "operationId": "ReplicationMigrationItems_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "The pagination token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItemCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/MigrationItemsQueryParameter",
+        "x-ms-examples": {
+          "Gets the list of migration items in the vault.": {
+            "$ref": "./examples/ReplicationMigrationItems_List.json"
           }
         }
       }
@@ -6924,6 +7864,42 @@
         }
       }
     },
+    "AddRecoveryServicesProviderInput": {
+      "description": "Input required to add a provider.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddRecoveryServicesProviderInputProperties",
+          "description": "The properties of an add provider request."
+        }
+      }
+    },
+    "AddRecoveryServicesProviderInputProperties": {
+      "description": "The properties of an add provider request.",
+      "required": [
+        "machineName",
+        "authenticationIdentityInput",
+        "resourceAccessIdentityInput"
+      ],
+      "type": "object",
+      "properties": {
+        "machineName": {
+          "description": "The name of the machine where the provider is getting added.",
+          "type": "string"
+        },
+        "authenticationIdentityInput": {
+          "$ref": "#/definitions/IdentityProviderInput",
+          "description": "The identity provider input for DRA authentication."
+        },
+        "resourceAccessIdentityInput": {
+          "$ref": "#/definitions/IdentityProviderInput",
+          "description": "The identity provider input for resource access."
+        }
+      }
+    },
     "AddVCenterRequest": {
       "description": "Input required to add vCenter.",
       "type": "object",
@@ -7706,11 +8682,11 @@
       "type": "object",
       "properties": {
         "secretIdentifier": {
-          "description": "The secret url / identifier.",
+          "description": "The secret url / identifier.",
           "type": "string"
         },
         "keyVaultResourceArmId": {
-          "description": "The KeyVault resource ARM id for secret.",
+          "description": "The KeyVault resource ARM id for secret.",
           "type": "string"
         }
       }
@@ -7750,6 +8726,51 @@
           "type": "string"
         }
       }
+    },
+    "EnableMigrationInput": {
+      "description": "Enable migration input.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnableMigrationInputProperties",
+          "description": "Enable migration input properties."
+        }
+      }
+    },
+    "EnableMigrationInputProperties": {
+      "description": "Enable migration input properties.",
+      "required": [
+        "policyId",
+        "providerSpecificDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "policyId": {
+          "description": "The policy Id.",
+          "type": "string"
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/EnableMigrationProviderSpecificInput",
+          "description": "The provider specific details."
+        }
+      }
+    },
+    "EnableMigrationProviderSpecificInput": {
+      "description": "Enable migration provider specific input.",
+      "required": [
+        "instanceType"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "EnableProtectionInput": {
       "description": "Enable protection input.",
@@ -9398,21 +10419,10 @@
       },
       "x-ms-discriminator-value": "HyperVVirtualMachine"
     },
-    "IdentityInformation": {
-      "description": "Identity details.",
+    "IdentityProviderDetails": {
+      "description": "Identity provider details.",
       "type": "object",
       "properties": {
-        "identityProviderType": {
-          "description": "The identity provider type. Value is the ToString() of a IdentityProviderType value.",
-          "enum": [
-            "RecoveryServicesActiveDirectory"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IdentityProviderType",
-            "modelAsString": true
-          }
-        },
         "tenantId": {
           "description": "The tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
@@ -9432,9 +10442,38 @@
         "aadAuthority": {
           "description": "The base authority for Azure Active Directory authentication.",
           "type": "string"
+        }
+      }
+    },
+    "IdentityProviderInput": {
+      "description": "Identity provider input.",
+      "required": [
+        "tenantId",
+        "applicationId",
+        "objectId",
+        "audience",
+        "aadAuthority"
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
         },
-        "certificateThumbprint": {
-          "description": "The certificate thumbprint. Applicable only if IdentityProviderType is RecoveryServicesActiveDirectory.",
+        "applicationId": {
+          "description": "The application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "audience": {
+          "description": "The intended Audience of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
+          "type": "string"
+        },
+        "aadAuthority": {
+          "description": "The base authority for Azure Active Directory authentication.",
           "type": "string"
         }
       }
@@ -11065,11 +12104,11 @@
         },
         "affectedObjectTypes": {
           "description": "The type of objects.",
-            "type": "string"
+          "type": "string"
         },
         "jobStatus": {
           "description": "The states of the job to be filtered can be in.",
-            "type": "string"
+          "type": "string"
         }
       }
     },
@@ -11122,11 +12161,11 @@
       "type": "object",
       "properties": {
         "keyIdentifier": {
-          "description": "The key url / identifier.",
+          "description": "The key url / identifier.",
           "type": "string"
         },
         "keyVaultResourceArmId": {
-          "description": "The KeyVault resource ARM id for key.",
+          "description": "The KeyVault resource ARM id for key.",
           "type": "string"
         }
       }
@@ -11300,6 +12339,245 @@
         "marsAgentVersionDetails": {
           "$ref": "#/definitions/VersionDetails",
           "description": "Mars agent version details."
+        }
+      }
+    },
+    "MigrateInput": {
+      "description": "Input for migrate.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrateInputProperties",
+          "description": "Migrate input properties."
+        }
+      }
+    },
+    "MigrateInputProperties": {
+      "description": "Migrate input properties.",
+      "required": [
+        "providerSpecificDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/MigrateProviderSpecificInput",
+          "description": "The provider specific details."
+        }
+      }
+    },
+    "MigrateProviderSpecificInput": {
+      "description": "Migrate provider specific input.",
+      "required": [
+        "instanceType"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "MigrationItem": {
+      "description": "Migration item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationItemProperties",
+          "description": "The migration item properties."
+        }
+      }
+    },
+    "MigrationItemCollection": {
+      "description": "Migration item collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of migration items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationItem"
+          }
+        },
+        "nextLink": {
+          "description": "The value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "MigrationItemProperties": {
+      "description": "Migration item properties.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "The ARM Id of policy governing this item.",
+          "type": "string"
+        },
+        "policyFriendlyName": {
+          "description": "The name of policy governing this item.",
+          "type": "string"
+        },
+        "recoveryServicesProviderId": {
+          "description": "The recovery services provider ARM Id.",
+          "type": "string"
+        },
+        "migrationState": {
+          "description": "The migration status.",
+          "type": "string"
+        },
+        "migrationStateDescription": {
+          "description": "The migration state description.",
+          "type": "string"
+        },
+        "lastSuccessfulMigrateTime": {
+          "format": "date-time",
+          "description": "The last successful migrate time.",
+          "type": "string"
+        },
+        "lastSuccessfulTestMigrateTime": {
+          "format": "date-time",
+          "description": "The last successful test migrate time.",
+          "type": "string"
+        },
+        "testMigrateState": {
+          "description": "The test migrate state.",
+          "type": "string"
+        },
+        "testMigrateStateDescription": {
+          "description": "The test migrate state description.",
+          "type": "string"
+        },
+        "health": {
+          "description": "The consolidated health.",
+          "type": "string"
+        },
+        "healthErrors": {
+          "description": "The list of health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          }
+        },
+        "allowedOperations": {
+          "description": "The allowed operations on the migration item.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "DisableMigration",
+              "TestMigrate",
+              "TestMigrateCleanup",
+              "Migrate",
+              "CompleteMigration"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MigrationItemOperation",
+              "modelAsString": true
+            }
+          }
+        },
+        "currentScenario": {
+          "$ref": "#/definitions/CurrentScenarioDetails",
+          "description": "The current scenario."
+        },
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/MigrationProviderSpecificSettings",
+          "description": "The migration provider custom settings."
+        }
+      }
+    },
+    "MigrationItemsQueryParameter": {
+      "description": "Query parameter to enumerate migration items.",
+      "type": "object",
+      "properties": {
+        "sourceFabricName": {
+          "description": "The source fabric name filter.",
+          "type": "string"
+        },
+        "instanceType": {
+          "description": "The replication provider type.",
+          "type": "string"
+        }
+      }
+    },
+    "MigrationProviderSpecificSettings": {
+      "description": "Migration provider specific settings.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the instance type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "MigrationRecoveryPoint": {
+      "description": "Recovery point for a migration item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationRecoveryPointProperties",
+          "description": "Recovery point properties."
+        }
+      }
+    },
+    "MigrationRecoveryPointCollection": {
+      "description": "Collection of migration recovery points.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The migration recovery point details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationRecoveryPoint"
+          }
+        },
+        "nextLink": {
+          "description": "The value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "MigrationRecoveryPointProperties": {
+      "description": "Migration item recovery point properties.",
+      "type": "object",
+      "properties": {
+        "recoveryPointTime": {
+          "format": "date-time",
+          "description": "The recovery point time.",
+          "type": "string"
+        },
+        "recoveryPointType": {
+          "description": "The recovery point type.",
+          "enum": [
+            "NotSpecified",
+            "ApplicationConsistent",
+            "CrashConsistent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MigrationRecoveryPointType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -13068,9 +14346,13 @@
           "description": "The DRA Id.",
           "type": "string"
         },
-        "identityDetails": {
-          "$ref": "#/definitions/IdentityInformation",
-          "description": "The identity details."
+        "authenticationIdentityDetails": {
+          "$ref": "#/definitions/IdentityProviderDetails",
+          "description": "The authentication identity details."
+        },
+        "resourceAccessIdentityDetails": {
+          "$ref": "#/definitions/IdentityProviderDetails",
+          "description": "The resource access identity details."
         },
         "providerVersionDetails": {
           "$ref": "#/definitions/VersionDetails",
@@ -13936,6 +15218,69 @@
       },
       "x-ms-discriminator-value": "TestFailoverJobDetails"
     },
+    "TestMigrateCleanupInput": {
+      "description": "Input for test migrate cleanup.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestMigrateCleanupInputProperties",
+          "description": "Test migrate cleanup input properties."
+        }
+      }
+    },
+    "TestMigrateCleanupInputProperties": {
+      "description": "Test migrate cleanup input properties.",
+      "type": "object",
+      "properties": {
+        "comments": {
+          "description": "Test migrate cleanup comments.",
+          "type": "string"
+        }
+      }
+    },
+    "TestMigrateInput": {
+      "description": "Input for test migrate.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestMigrateInputProperties",
+          "description": "Test migrate input properties."
+        }
+      }
+    },
+    "TestMigrateInputProperties": {
+      "description": "Test migrate input properties.",
+      "required": [
+        "providerSpecificDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/TestMigrateProviderSpecificInput",
+          "description": "The provider specific details."
+        }
+      }
+    },
+    "TestMigrateProviderSpecificInput": {
+      "description": "Test migrate provider specific input.",
+      "required": [
+        "instanceType"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
     "UnplannedFailoverInput": {
       "description": "Input definition for planned failover.",
       "type": "object",
@@ -13963,6 +15308,40 @@
           "description": "Provider specific settings"
         }
       }
+    },
+    "UpdateMigrationItemInput": {
+      "description": "Update migration item input.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateMigrationItemInputProperties",
+          "description": "Update migration item input properties."
+        }
+      }
+    },
+    "UpdateMigrationItemInputProperties": {
+      "description": "Update migration item input properties.",
+      "required": [
+        "providerSpecificDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/UpdateMigrationItemProviderSpecificInput",
+          "description": "The provider specific input to update migration item."
+        }
+      }
+    },
+    "UpdateMigrationItemProviderSpecificInput": {
+      "description": "Update migration item provider specific input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "UpdateMobilityServiceRequest": {
       "description": "Request to update the mobility service on a protected item.",
@@ -14621,8 +16000,376 @@
       },
       "x-ms-discriminator-value": "VmNicUpdatesTaskDetails"
     },
+    "VMwareCbtContainerCreationInput": {
+      "description": "VMwareCbt container creation input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificContainerCreationInput"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "6c7da455-506f-43ff-a16a-8eb101aebb70"
+    },
+    "VMwareCbtContainerMappingInput": {
+      "description": "VMwareCbt container mapping input.",
+      "required": [
+        "keyVaultId",
+        "keyVaultUri",
+        "storageAccountId",
+        "storageAccountSasSecretName",
+        "serviceBusConnectionStringSecretName",
+        "targetLocation"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
+        }
+      ],
+      "properties": {
+        "keyVaultId": {
+          "description": "The target key vault ARM Id.",
+          "type": "string"
+        },
+        "keyVaultUri": {
+          "description": "The target key vault URL.",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "The storage account ARM Id.",
+          "type": "string"
+        },
+        "storageAccountSasSecretName": {
+          "description": "The secret name of the storage account.",
+          "type": "string"
+        },
+        "serviceBusConnectionStringSecretName": {
+          "description": "The secret name of the service bus connection string.",
+          "type": "string"
+        },
+        "targetLocation": {
+          "description": "The target location.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtDiskInput": {
+      "description": "VMwareCbt disk input.",
+      "required": [
+        "diskId",
+        "isOSDisk",
+        "logStorageAccountId",
+        "logStorageAccountSasSecretName"
+      ],
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk Id.",
+          "type": "string"
+        },
+        "isOSDisk": {
+          "description": "A value indicating whether the disk is the OS disk.",
+          "type": "string"
+        },
+        "logStorageAccountId": {
+          "description": "The log storage account ARM Id.",
+          "type": "string"
+        },
+        "logStorageAccountSasSecretName": {
+          "description": "The key vault secret name of the log storage account.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "The disk type.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DiskAccountType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VMwareCbtEnableMigrationInput": {
+      "description": "VMwareCbt specific enable migration input.",
+      "required": [
+        "vmwareMachineId",
+        "disksToInclude",
+        "dataMoverRunAsAccountId",
+        "snapshotRunAsAccountId",
+        "targetResourceGroupId",
+        "targetNetworkId",
+        "instanceType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnableMigrationProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "vmwareMachineId": {
+          "description": "The ARM Id of the VM discovered in VMware.",
+          "type": "string"
+        },
+        "disksToInclude": {
+          "description": "The disks to include list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareCbtDiskInput"
+          }
+        },
+        "licenseType": {
+          "description": "License type.",
+          "enum": [
+            "NotSpecified",
+            "NoLicenseType",
+            "WindowsServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
+        },
+        "dataMoverRunAsAccountId": {
+          "description": "The data mover runas account Id.",
+          "type": "string"
+        },
+        "snapshotRunAsAccountId": {
+          "description": "The snapshot runas account Id.",
+          "type": "string"
+        },
+        "targetVmName": {
+          "description": "The target VM name.",
+          "type": "string"
+        },
+        "targetVmSize": {
+          "description": "The target VM size.",
+          "type": "string"
+        },
+        "targetResourceGroupId": {
+          "description": "The target resource group ARM Id.",
+          "type": "string"
+        },
+        "targetNetworkId": {
+          "description": "The target network ARM Id.",
+          "type": "string"
+        },
+        "targetSubnetName": {
+          "description": "The target subnet name.",
+          "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "The target availability set ARM Id.",
+          "type": "string"
+        },
+        "targetBootDiagnosticsStorageAccountId": {
+          "description": "The target boot diagnostics storage account ARM Id.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtMigrateInput": {
+      "description": "VMwareCbt specific migrate input.",
+      "required": [
+        "performShutdown",
+        "instanceType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "performShutdown": {
+          "description": "A value indicating whether VM is to be shutdown.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtMigrationDetails": {
+      "description": "VMwareCbt provider specific settings",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrationProviderSpecificSettings"
+        }
+      ],
+      "properties": {
+        "vmwareMachineId": {
+          "description": "The ARM Id of the VM discovered in VMware.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "The type of the OS on the VM.",
+          "type": "string"
+        },
+        "licenseType": {
+          "description": "License Type of the VM to be used.",
+          "type": "string"
+        },
+        "dataMoverRunAsAccountId": {
+          "description": "The data mover runas account Id.",
+          "type": "string"
+        },
+        "snapshotRunAsAccountId": {
+          "description": "The snapshot runas account Id.",
+          "type": "string"
+        },
+        "targetVmName": {
+          "description": "Target VM name.",
+          "type": "string"
+        },
+        "targetVmSize": {
+          "description": "The target VM size.",
+          "type": "string"
+        },
+        "targetLocation": {
+          "description": "The target location.",
+          "type": "string"
+        },
+        "targetResourceGroupId": {
+          "description": "The target resource group Id.",
+          "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "The target availability set Id.",
+          "type": "string"
+        },
+        "targetBootDiagnosticsStorageAccountId": {
+          "description": "The target boot diagnostics storage account ARM Id.",
+          "type": "string"
+        },
+        "protectedDisks": {
+          "description": "The list of protected disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareCbtProtectedDiskDetails"
+          }
+        },
+        "targetNetworkId": {
+          "description": "The target network Id.",
+          "type": "string"
+        },
+        "vmNics": {
+          "description": "The network details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareCbtNicDetails"
+          }
+        },
+        "migrationRecoveryPointId": {
+          "description": "The recovery point Id to which the VM was migrated.",
+          "type": "string"
+        },
+        "lastRecoveryPointReceived": {
+          "format": "date-time",
+          "description": "The last recovery point received time.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtNicDetails": {
+      "description": "VMwareCbt NIC details.",
+      "type": "object",
+      "properties": {
+        "nicId": {
+          "description": "The NIC Id.",
+          "type": "string"
+        },
+        "isPrimaryNic": {
+          "description": "A value indicating whether this is the primary NIC.",
+          "type": "string"
+        },
+        "sourceIPAddress": {
+          "description": "The source IP address.",
+          "type": "string"
+        },
+        "sourceIPAddressType": {
+          "description": "The source IP address type.",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EthernetAddressType",
+            "modelAsString": true
+          }
+        },
+        "sourceNetworkId": {
+          "description": "Source network Id.",
+          "type": "string"
+        },
+        "targetIPAddress": {
+          "description": "The target IP address.",
+          "type": "string"
+        },
+        "targetIPAddressType": {
+          "description": "The target IP address type.",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EthernetAddressType",
+            "modelAsString": true
+          }
+        },
+        "targetSubnetName": {
+          "description": "Target subnet name.",
+          "type": "string"
+        },
+        "isSelectedForMigration": {
+          "description": "A value indicating whether this NIC is selected for migration.",
+          "type": "string"
+        }
+      }
+    },
+    "VMwareCbtNicInput": {
+      "description": "VMwareCbt NIC input.",
+      "required": [
+        "nicId",
+        "isPrimaryNic"
+      ],
+      "type": "object",
+      "properties": {
+        "nicId": {
+          "description": "The NIC Id.",
+          "type": "string"
+        },
+        "isPrimaryNic": {
+          "description": "A value indicating whether this is the primary NIC.",
+          "type": "string"
+        },
+        "targetSubnetName": {
+          "description": "Target subnet name.",
+          "type": "string"
+        },
+        "targetStaticIPAddress": {
+          "description": "The static IP address.",
+          "type": "string"
+        },
+        "isSelectedForMigration": {
+          "description": "A value indicating whether this NIC is selected for migration.",
+          "type": "string"
+        }
+      }
+    },
     "VMwareCbtPolicyCreationInput": {
-      "description": "VMware Cbt Policy creation input.",
+      "description": "VMware Cbt policy creation input.",
       "type": "object",
       "allOf": [
         {
@@ -14630,7 +16377,7 @@
         }
       ],
       "properties": {
-        "recoveryPointHistory": {
+        "recoveryPointHistoryInMinutes": {
           "format": "int32",
           "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
@@ -14657,12 +16404,7 @@
         }
       ],
       "properties": {
-        "recoveryPointThresholdInMinutes": {
-          "format": "int32",
-          "description": "The recovery point threshold in minutes.",
-          "type": "integer"
-        },
-        "recoveryPointHistory": {
+        "recoveryPointHistoryInMinutes": {
           "format": "int32",
           "description": "The duration in minutes until which the recovery points need to be stored.",
           "type": "integer"
@@ -14676,6 +16418,170 @@
           "format": "int32",
           "description": "The crash consistent snapshot frequency in minutes.",
           "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtProtectedDiskDetails": {
+      "description": "VMwareCbt protected disk details.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk id.",
+          "type": "string"
+        },
+        "diskName": {
+          "description": "The disk name.",
+          "type": "string"
+        },
+        "diskPath": {
+          "description": "The disk path.",
+          "type": "string"
+        },
+        "isOSDisk": {
+          "description": "A value indicating whether the disk is the OS disk.",
+          "type": "string"
+        },
+        "capacityInBytes": {
+          "format": "int64",
+          "description": "The disk capacity in bytes.",
+          "type": "integer"
+        },
+        "logStorageAccountId": {
+          "description": "The log storage account ARM Id.",
+          "type": "string"
+        },
+        "logStorageAccountSasSecretName": {
+          "description": "The key vault secret name of the log storage account.",
+          "type": "string"
+        },
+        "seedManagedDiskId": {
+          "description": "The ARM Id of the seed managed disk.",
+          "type": "string"
+        },
+        "targetManagedDiskId": {
+          "description": "The ARM Id of the target managed disk.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "The disk type.",
+          "type": "string"
+        }
+      }
+    },
+    "VMwareCbtProtectionContainerMappingDetails": {
+      "description": "VMwareCbt provider specific container mapping details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectionContainerMappingProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "keyVaultId": {
+          "description": "The target key vault ARM Id.",
+          "type": "string"
+        },
+        "keyVaultUri": {
+          "description": "The target key vault URI.",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "The storage account ARM Id.",
+          "type": "string"
+        },
+        "storageAccountSasSecretName": {
+          "description": "The secret name of the storage account.",
+          "type": "string"
+        },
+        "serviceBusConnectionStringSecretName": {
+          "description": "The secret name of the service bus connection string.",
+          "type": "string"
+        },
+        "targetLocation": {
+          "description": "The target location.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtTestMigrateInput": {
+      "description": "VMwareCbt specific test migrate input.",
+      "required": [
+        "recoveryPointId",
+        "networkId",
+        "instanceType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestMigrateProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "recoveryPointId": {
+          "description": "The recovery point Id.",
+          "type": "string"
+        },
+        "networkId": {
+          "description": "The test network Id.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtUpdateMigrationItemInput": {
+      "description": "VMwareCbt specific update migration item input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateMigrationItemProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "targetVmName": {
+          "description": "The target VM name.",
+          "type": "string"
+        },
+        "targetVmSize": {
+          "description": "The target VM size.",
+          "type": "string"
+        },
+        "targetResourceGroupId": {
+          "description": "The target resource group ARM Id.",
+          "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "The target availability set ARM Id.",
+          "type": "string"
+        },
+        "targetBootDiagnosticsStorageAccountId": {
+          "description": "The target boot diagnostics storage account ARM Id.",
+          "type": "string"
+        },
+        "targetNetworkId": {
+          "description": "The target network ARM Id.",
+          "type": "string"
+        },
+        "vmNics": {
+          "description": "The list of NIC details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareCbtNicInput"
+          }
+        },
+        "licenseType": {
+          "description": "The license type.",
+          "enum": [
+            "NotSpecified",
+            "NoLicenseType",
+            "WindowsServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -14838,7 +16744,10 @@
       "x-ms-discriminator-value": "VMware"
     },
     "VMwareV2FabricCreationInput": {
-      "description": "Fabric provider specific settings.",
+      "description": "VMwareV2 fabric provider specific settings.",
+      "required": [
+        "vmwareSiteId"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -14846,19 +16755,19 @@
         }
       ],
       "properties": {
-        "keyVaultUrl": {
-          "description": "The Key Vault URL.",
+        "vmwareSiteId": {
+          "description": "The ARM Id of the VMware site.",
           "type": "string"
         },
-        "keyVaultResourceArmId": {
-          "description": "The Key Vault ARM Id.",
+        "migrationSolutionId": {
+          "description": "The ARM Id of the migration solution.",
           "type": "string"
         }
       },
       "x-ms-discriminator-value": "VMwareV2"
     },
     "VMwareV2FabricSpecificDetails": {
-      "description": "VMwareV2 fabric Specific Details.",
+      "description": "VMwareV2 fabric specific details.",
       "type": "object",
       "allOf": [
         {
@@ -14866,20 +16775,16 @@
         }
       ],
       "properties": {
+        "vmwareSiteId": {
+          "description": "The ARM Id of the VMware site.",
+          "type": "string"
+        },
+        "migrationSolutionId": {
+          "description": "The Migration solution ARM Id.",
+          "type": "string"
+        },
         "srsServiceEndpoint": {
-          "description": "The endpoint for making requests to the SRS Service.",
-          "type": "string"
-        },
-        "rcmServiceEndpoint": {
-          "description": "The endpoint for making requests to the RCM Service.",
-          "type": "string"
-        },
-        "keyVaultUrl": {
-          "description": "The Key Vault URL.",
-          "type": "string"
-        },
-        "keyVaultResourceArmId": {
-          "description": "The Key Vault ARM Id.",
+          "description": "The SRS service endpoint.",
           "type": "string"
         }
       },
@@ -14923,7 +16828,7 @@
           "type": "string"
         },
         "discoveryType": {
-          "description": "A value inidicating the discovery type of the machine. Value can be vCenter or physical.",
+          "description": "A value indicating the discovery type of the machine. Value can be vCenter or physical.",
           "type": "string"
         },
         "diskDetails": {
