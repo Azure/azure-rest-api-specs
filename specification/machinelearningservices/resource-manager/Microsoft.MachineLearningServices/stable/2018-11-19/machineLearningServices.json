@@ -1460,6 +1460,10 @@
                 "sslConfiguration": {
                   "description": "SSL configuration",
                   "$ref": "#/definitions/SslConfiguration"
+                },
+                "aksNetworkingConfiguration": {
+                  "description": "AKS networking configuration for vnet",
+                  "$ref": "#/definitions/AksNetworkingConfiguration"
                 }
               }
             }
@@ -1745,6 +1749,36 @@
         },
         "cname": {
           "description": "CNAME of the cert",
+          "type": "string"
+        }
+      }
+    },
+    "AksNetworkingConfiguration": {
+      "type": "object",
+      "description": "Advance configuration for AKS networking",
+      "properties": {
+        "subnetId": {
+          "description": "Virtual network subnet resource ID the compute nodes belong to",
+          "type": "string"
+        },
+        "podCidr": {
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
+          "description": "A CIDR notation IP range from which to assign pod IPs when kubenet is used.",
+          "type": "string"
+        },
+        "serviceCidr": {
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
+          "description": "A CIDR notation IP range from which to assign service cluster IPs. It must not overlap with any Subnet IP ranges.",
+          "type": "string"
+        },
+        "dnsServiceIP": {
+          "pattern": "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+          "description": "An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr.",
+          "type": "string"
+        },
+        "dockerBridgeCidr": {
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
+          "description": "A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range.",
           "type": "string"
         }
       }
