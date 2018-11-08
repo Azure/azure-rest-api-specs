@@ -34,7 +34,7 @@ The following packages may be composed from multiple api-versions.
 
 ### Tag: package-2020-20
 
-These settings apply only when `--tag=package-2018-08` is specified on the command line.
+These settings apply only when `--tag=package-2020-20` is specified on the command line.
 
 ```yaml $(tag) == 'package-2020-20'
 input-file:
