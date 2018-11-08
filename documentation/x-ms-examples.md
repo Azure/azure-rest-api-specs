@@ -82,7 +82,7 @@ _This will keep the spec cleaner and easy to manage._
   - The JSON schema for the content to be provided in the example file can be found [here](https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json).
 ```json5
 "x-ms-examples": {
-  "example-name": { //Name of the example/scenario.
+  "example-name": { //Name of the example/scenario.  It is free-form text and should succinctly describe the scenario.
     "parameters": { //Provide examples for all the path, query, header, body, formData parameters as applicable.
        ...
     },
