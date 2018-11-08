@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Network.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,63 @@ To build the SDK for Network, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Network API.
 
 ``` yaml
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-07
+tag: package-2018-08
 ```
 
+
+### Tag: package-2018-08
+
+These settings apply only when `--tag=package-2018-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-08'
+input-file:
+  - Microsoft.Network/stable/2018-08-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-08-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-08-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-08-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-08-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-08-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-08-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-08-01/endpointService.json
+  - Microsoft.Network/stable/2018-08-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-08-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-08-01/expressRoutePort.json
+  - Microsoft.Network/stable/2018-08-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-08-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-08-01/network.json
+  - Microsoft.Network/stable/2018-08-01/networkInterface.json
+  - Microsoft.Network/stable/2018-08-01/networkProfile.json
+  - Microsoft.Network/stable/2018-08-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-08-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-08-01/operation.json
+  - Microsoft.Network/stable/2018-08-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-08-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-08-01/routeFilter.json
+  - Microsoft.Network/stable/2018-08-01/routeTable.json
+  - Microsoft.Network/stable/2018-08-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-08-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-08-01/usage.json
+  - Microsoft.Network/stable/2018-08-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-08-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-08-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-08-01/virtualWan.json
+  - Microsoft.Network/stable/2018-08-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2018-08-01/vmssPublicIpAddress.json
+```
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
@@ -405,7 +446,6 @@ input-file:
 - Microsoft.Network/stable/2017-08-01/vmssPublicIpAddress.json
 ```
 
-
 ### Tag: package-2017-06
 
 These settings apply only when `--tag=package-2017-06` is specified on the command line.
@@ -431,7 +471,6 @@ input-file:
 - Microsoft.Network/stable/2017-06-01/vmssNetworkInterface.json
 - Microsoft.Network/stable/2017-06-01/vmssPublicIpAddress.json
 ```
-
 
 ### Tag: package-2017-03
 
@@ -586,6 +625,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -596,6 +636,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: azureFirewall.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: azureFirewallFqdnTag.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
@@ -611,6 +654,12 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: expressRouteCrossConnection.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRouteGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRoutePort.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
@@ -632,7 +681,7 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: publicIpPrefix.json
-    reason: name, id and type properties are inherited from the upper level    
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: routeFilter.json
     reason: name, id and type properties are inherited from the upper level
@@ -652,7 +701,19 @@ directive:
     from: serviceEndpointPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetworkTap.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: interfaceEndpoint.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkProfile.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: availableDelegations.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
@@ -664,6 +725,9 @@ directive:
   - suppress: GetInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability"].get.operationId
     reason: Customized verb is used for API
+  - suppress: PutInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/links/{linkName}"].put.operationId
+    reason: Child resource is auto-created when top-level resource is created.
   - suppress: PutInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey"].put.operationId
     reason: Customized verb is used for API
@@ -688,8 +752,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -703,73 +767,15 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_network']
 ```
 
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: network
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-06
-  - tag: package-2018-04
-  - tag: package-2018-02
-  - tag: package-2018-01
-  - tag: package-2017-11
-  - tag: package-2017-10
-  - tag: package-2017-09
-  - tag: package-2017-08
-  - tag: package-2017-06
-  - tag: package-2017-03
-  - tag: package-2016-12
-  - tag: package-2016-09
-  - tag: package-2016-06
-  - tag: package-2016-03
-  - tag: package-2015-06split
-  - tag: package-2015-05-preview
-```
-
-### Tag: package-2018-06 and go
-
-These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-06' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2018-06-01/network
-```
-
-### Tag: package-2018-04 and go
-
-These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-04' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2018-04-01/network
-```
-
-### Tag: package-2018-02 and go
-
-These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2018-02-01/network
-```
-
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -789,123 +795,9 @@ directive:
     reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
-### Tag: package-2018-01 and go
+## Go
 
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2018-01-01/network
-```
-
-### Tag: package-2017-11 and go
-
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2017-11-01/network
-```
-
-### Tag: package-2017-10 and go
-
-These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2017-10-01/network
-```
-
-### Tag: package-2017-09 and go
-
-These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-09' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2017-09-01/network
-```
-
-### Tag: package-2017-08 and go
-
-These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2017-08-01/network
-```
-
-### Tag: package-2017-06 and go
-
-These settings apply only when `--tag=package-2017-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-06' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2017-06-01/network
-```
-
-### Tag: package-2017-03 and go
-
-These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2017-03-01/network
-```
-
-### Tag: package-2016-12 and go
-
-These settings apply only when `--tag=package-2016-12 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-12' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2016-12-01/network
-```
-
-### Tag: package-2016-09 and go
-
-These settings apply only when `--tag=package-2016-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-09' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2016-09-01/network
-```
-
-### Tag: package-2016-06 and go
-
-These settings apply only when `--tag=package-2016-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-06' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2016-06-01/network
-```
-
-### Tag: package-2016-03 and go
-
-These settings apply only when `--tag=package-2016-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-03' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2016-03-30/network
-```
-
-### Tag: package-2015-06split and go
-
-These settings apply only when `--tag=package-2015-06split --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-06split' && $(go)
-output-folder: $(go-sdk-folder)/services/network/mgmt/2015-06-15/network
-```
-
-### Tag: package-2015-05-preview and go
-
-These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/network/mgmt/2015-05-01-preview/network
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -923,22 +815,37 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ### Java multi-api
 
-```yaml $(java) && $(multiapi)
+``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-08
+  - tag: package-2018-07
   - tag: package-2018-06
   - tag: package-2018-04
   - tag: package-2017-10
 ```
 
-### Tag: package-2018-04 and java
+### Tag: package-2018-08 and java
 
-These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.network.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
+  namespace: com.microsoft.azure.management.network.v2018_08_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_08_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-07 and java
+
+These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -952,6 +859,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.network.v2018_06_01
   output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-04 and java
+
+These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```

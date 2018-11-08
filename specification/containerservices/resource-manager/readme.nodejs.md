@@ -7,7 +7,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-containerservice
-  package-version: 4.0.0
   output-folder: $(node-sdks-folder)/lib/services/containerservicesManagement
   generate-license-txt: true
   generate-package-json: true

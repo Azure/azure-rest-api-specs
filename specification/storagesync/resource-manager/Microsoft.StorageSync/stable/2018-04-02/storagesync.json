@@ -8,7 +8,7 @@
       "name": "StorageSyncManagementClient"
      }
   },
-  "host": "azure.microsoft.com",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -137,7 +137,7 @@
             "description": "Storage Sync Service resource name.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageSyncService"
+              "$ref": "#/definitions/StorageSyncServiceCreateParameters"
             }
           }
         ],
@@ -529,7 +529,7 @@
             "description": "Sync Group Body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SyncGroup"
+              "$ref": "#/definitions/SyncGroupCreateParameters"
             }
           }
         ],
@@ -730,7 +730,7 @@
             "description": "Body of Cloud Endpoint resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CloudEndpoint"
+              "$ref": "#/definitions/CloudEndpointCreateParameters"
             }
           }
         ],
@@ -1507,7 +1507,7 @@
             "description": "Body of Server Endpoint object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerEndpoint"
+              "$ref": "#/definitions/ServerEndpointCreateParameters"
             }
           }
         ],
@@ -1920,6 +1920,15 @@
             "description": "Name of Server Endpoint object.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Recall Action object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecallActionParameters"
+            }
           }
         ],
         "tags": [
@@ -2126,7 +2135,7 @@
             "description": "Body of Registered Server object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegisteredServer"
+              "$ref": "#/definitions/RegisteredServerCreateParameters"
             }
           }
         ],
@@ -2397,6 +2406,20 @@
       "type": "object",
       "description": "Error type",
       "properties": {
+         "error": {
+          "$ref": "#/definitions/StorageSyncApiError",
+          "description": "Error details of the given entry."
+        },
+        "innererror": {
+          "$ref": "#/definitions/StorageSyncApiError",
+          "description": "Error details of the given entry."
+        }
+      }
+    },
+    "StorageSyncApiError": {
+      "type": "object",
+      "description": "Error type",
+      "properties": {
         "code": {
           "type": "string",
           "description": "Error code of the given entry."
@@ -2404,6 +2427,10 @@
         "message": {
           "type": "string",
           "description": "Error message of the given entry."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the given error entry."
         },
         "details": {
           "$ref": "#/definitions/StorageSyncErrorDetails",
@@ -2428,27 +2455,6 @@
           "description": "Target of the given entry."
         }
       }
-    },
-    "Resource": {
-      "description": "The Azure Resource Manager resource.",
-      "properties": {
-        "id": {
-          "description": "The id of the resource.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the resource",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "SubscriptionState": {
       "type": "object",
@@ -2487,56 +2493,251 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        },
-        {
-          "properties": {
+        }
+      ],
+      "properties": {
             "properties": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/StorageSyncServiceProperties",
               "description": "Storage Sync Service properties."
             }
-          }
-        }
-      ],
-      "x-ms-azure-resource": true
+      }
     },
     "SyncGroup": {
       "type": "object",
       "description": "Sync Group object.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+	  ],
+      "properties": {
+         "properties": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/SyncGroupProperties",
               "description": "SyncGroup properties."
-            }
-          }
-        }
-      ],
-      "x-ms-azure-resource": true
+         }
+      }
     },
     "CloudEndpoint": {
       "type": "object",
       "description": "Cloud Endpoint object.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/CloudEndpointProperties",
-              "description": "Cloud Endpoint properties."
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      ],
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+        "properties": {
+           "x-ms-client-flatten": true,
+           "$ref": "#/definitions/CloudEndpointProperties",
+            "description": "Cloud Endpoint properties."
+        }
+      }
+    },
+    "RecallActionParameters": {
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "Pattern of the files."
+        },
+        "recallPath": {
+          "type": "string",
+          "description": "Recall path."
+        }
+      },
+      "description": "The parameters used when calling recall action on server endpoint."
+    },
+    "StorageSyncServiceCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+        }
+      },
+      "description": "The parameters used when creating a storage sync service."
+    },
+    "SyncGroupCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SyncGroupCreateParametersProperties",
+          "description": "The parameters used to create the sync group"
+        }
+      },
+      "description": "The parameters used when creating a sync group."
+    },
+    "SyncGroupCreateParametersProperties": {
+      "type": "object",
+      "description": "Sync Group Create Properties object.",
+      "properties": {
+       }
+    },
+    "CloudEndpointCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudEndpointCreateParametersProperties",
+          "description": "The parameters used to create the storage sync service."
+        }
+      },
+      "description": "The parameters used when creating a storage sync service."
+    },
+    "CloudEndpointCreateParametersProperties": {
+      "description": "CloudEndpoint Properties object.",
+      "properties": {
+        "storageAccountResourceId": {
+            "type": "string",
+            "description": "Storage Account Resource Id"
+        },
+        "storageAccountShareName": {
+            "type": "string",
+            "description": "Storage Account Share name"
+        },
+        "storageAccountTenantId": {
+            "type": "string",
+            "description": "Storage Account Tenant Id"
+        }
+      }
+    },
+    "ServerEndpointCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerEndpointCreateParametersProperties",
+          "description": "The parameters used to create the storage sync service."
+        }
+      },
+      "description": "The parameters used when creating a storage sync service."
+    },
+    "ServerEndpointCreateParametersProperties": {
+      "description": "ServerEndpoint Properties object.",
+      "properties": {
+        "serverLocalPath": {
+          "$ref": "#/definitions/PhysicalPath",
+          "description": "Server Local path."
+        },
+        "cloudTiering": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Cloud Tiering."
+        },
+        "volumeFreeSpacePercent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "serverResourceId": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "Server Resource Id."
+        }
+      }
+    },
+    "RegisteredServerCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegisteredServerCreateParametersProperties",
+          "description": "The parameters used to create the storage sync service."
+        }
+      },
+      "description": "The parameters used when creating a storage sync service."
+    },
+    "RegisteredServerCreateParametersProperties": {
+      "description": "RegisteredServer Properties object.",
+      "properties": {
+        "serverCertificate": {
+          "type": "string",
+          "description": "Registered Server Certificate"
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "Registered Server Agent Version"
+        },
+        "serverOSVersion": {
+          "type": "string",
+          "description": "Registered Server OS Version"
+        },
+        "lastHeartBeat": {
+          "type": "string",
+          "description": "Registered Server last heart beat"
+        },
+        "serverRole": {
+          "type": "string",
+          "description": "Registered Server serverRole"
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Registered Server clusterId"
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Registered Server clusterName"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Registered Server serverId"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        }
+      }
     },
     "ServerEndpointUpdateParameters": {
       "properties": {
@@ -2560,46 +2761,32 @@
       "description": "Server Endpoint object.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ServerEndpointProperties",
-              "description": "Server Endpoint properties."
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      ],
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+         "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/ServerEndpointProperties",
+            "description": "Server Endpoint properties."
+         }
+      }
     },
     "RegisteredServer": {
       "type": "object",
       "description": "Registered Server resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RegisteredServerProperties",
-          "description": "RegisteredServer properties."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      },
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+         "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/RegisteredServerProperties",
+            "description": "RegisteredServer properties."
+         }
+      }
     },
     "ResourcesMoveInfo": {
       "type": "object",
@@ -2623,19 +2810,16 @@
       "description": "Workflow resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/WorkflowProperties",
-              "description": "Workflow properties."
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-      ],
-      "x-ms-azure-resource": true
+	  ],
+      "properties": {
+         "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/WorkflowProperties",
+            "description": "Workflow properties."
+         }
+      }
     },
     "OperationEntityListResult": {
       "description": "The list of storage sync operations.",
@@ -3145,14 +3329,6 @@
       "type": "object",
       "description": "CloudEndpoint Properties object.",
       "properties": {
-        "storageAccountKey": {
-          "type": "string",
-          "description": "Storage Account access key."
-        },
-        "storageAccount": {
-          "type": "string",
-          "description": "Storage Account name."
-        },
         "storageAccountResourceId": {
           "type": "string",
           "description": "Storage Account Resource Id"
