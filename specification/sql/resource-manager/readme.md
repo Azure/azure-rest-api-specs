@@ -22,15 +22,25 @@ These are the global settings for the Sql API.
 
 ``` yaml
 title: SqlManagementClient
-description: The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.
+description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-composite-v3
+tag: package-2020-20
 ```
 
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-2020-20
+
+These settings apply only when `--tag=package-2020-20` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-20'
+input-file:
+  - Microsoft.Sql/stable/2020-20-20/capabilities.json
+  - Microsoft.Sql/stable/2020-20-20/usages.json
+```
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
@@ -39,18 +49,27 @@ This section contains the "composite-v3" set of APIs, which is composed from a s
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-
 Differences in v3 (compared to v2):
- - Decoupled database and recommended elastic pool APIs
-   - `-2014-04-01/recommendedElasticPools.json`
-   - `+2014-04-01/recommendedElasticPoolsDecoupled.json`
- - Updated to new Sku-based API for databases and elastic pools
-   - `-2014-04-01/capabilities.json`
-   - `-2014-04-01/databases.json`
-   - `-2014-04-01/elasticPools.json`
-   - `+2017-10-01-preview/capabilities.json`
-   - `+2017-10-01-preview/databases.json`
-   - `+2017-10-01-preview/elasticPools.json`
+
+* Decoupled database and recommended elastic pool APIs
+
+  * `-2014-04-01/recommendedElasticPools.json`
+
+  * `+2014-04-01/recommendedElasticPoolsDecoupled.json`
+
+* Updated to new Sku-based API for databases and elastic pools
+
+  * `-2014-04-01/capabilities.json`
+
+  * `-2014-04-01/databases.json`
+
+  * `-2014-04-01/elasticPools.json`
+
+  * `+2017-10-01-preview/capabilities.json`
+
+  * `+2017-10-01-preview/databases.json`
+
+  * `+2017-10-01-preview/elasticPools.json`
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
@@ -125,10 +144,13 @@ APIs must only be added to this section when the API is publicly available in at
 
 Differences in v2 (compared to v1):
 
-- Updated to LTRv2
-  - `-201 4-04-01/backupLongTermRetentionPolicies.json`
-  - `-2014-04-01/backupLongTermRetentionVaults.json`
-  - `+2017-03-01-preview/longTermRetention.json`
+* Updated to LTRv2
+
+  * `-201 4-04-01/backupLongTermRetentionPolicies.json`
+
+  * `-2014-04-01/backupLongTermRetentionVaults.json`
+
+  * `+2017-03-01-preview/longTermRetention.json`
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
@@ -549,6 +571,7 @@ override-info:
 ```
 
 ---
+
 ## Code Generation
 
 ### Swagger to SDK
@@ -630,7 +653,6 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-sql
 ```
 
-
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
@@ -664,7 +686,6 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
 
 ## Validation
 
