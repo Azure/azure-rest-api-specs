@@ -711,6 +711,9 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UnderlyingResourceActionParameter"
           }
         ],
         "responses": {
@@ -864,7 +867,23 @@
       "description": "Type of compute to filter by.",
       "required": false,
       "x-ms-parameter-location": "method"
-    }
+    },
+    "UnderlyingResourceActionParameter": {
+      "in": "query",
+      "name": "underlyingResourceAction",
+      "type": "string",
+      "description": "Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.",
+      "required": true,
+      "enum": [
+        "Delete",
+        "Detach"
+      ],
+      "x-ms-enum": {
+        "name": "UnderlyingResourceAction",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+}
   },
   "definitions": {
     "Operation": {
@@ -1392,6 +1411,11 @@
           "items": {
             "$ref": "#/definitions/MachineLearningServiceError"
           },
+          "readOnly": true
+        },
+        "isAttachedCompute": {
+          "type": "boolean",
+          "description": "Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false.",
           "readOnly": true
         }
       },
