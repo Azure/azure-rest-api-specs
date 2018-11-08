@@ -227,27 +227,33 @@
       }
     },
     "ComputerVisionError": {
-      "type": "object",
+      "description": "Details about the API request error.",
       "required": [
         "code",
         "message"
       ],
+      "type": "object",
       "properties": {
         "code": {
-          "type": "string",
           "description": "The error code.",
           "enum": [
-            "InvalidImageUrl",
             "InvalidImageFormat",
-            "InvalidImageSize",
-            "NotSupportedVisualFeature",
+            "UnsupportedMediaType",
+            "InvalidImageUrl",
+            "NotSupportedFeature",
             "NotSupportedImage",
-            "InvalidDetails",
-            "NotSupportedLanguage",
-            "BadArgument",
-            "FailedToProcess",
             "Timeout",
             "InternalServerError",
+            "InvalidImageSize",
+            "BadArgument",
+            "DetectFaceError",
+            "NotSupportedLanguage",
+            "InvalidThumbnailSize",
+            "InvalidDetails",
+            "InvalidModel",
+            "CancelledRequest",
+            "NotSupportedVisualFeature",
+            "FailedToProcess",
             "Unspecified",
             "StorageException"
           ],
@@ -257,12 +263,12 @@
           }
         },
         "message": {
-          "type": "string",
-          "description": "A message explaining the error reported by the service."
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
         },
         "requestId": {
-          "type": "string",
-          "description": "A unique request identifier."
+          "description": "A unique request identifier.",
+          "type": "string"
         }
       }
     },
@@ -273,7 +279,7 @@
       ],
       "properties": {
         "url": {
-          "description": "Publicly reachable URL of an image",
+          "description": "Publicly reachable URL of an image.",
           "type": "string"
         }
       }
@@ -320,7 +326,7 @@
     },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints",
+      "description": "Supported Cognitive Services endpoints.",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
