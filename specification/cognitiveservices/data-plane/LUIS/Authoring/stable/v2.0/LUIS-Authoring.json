@@ -13,18 +13,6 @@
       }
     ]
   },
-  "securityDefinitions": {
-    "apiKeyHeader": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "apiKeyHeader": []
-    }
-  ],
   "paths": {
     "/apps/{appId}/versions/{versionId}/patterns": {
       "post": {
@@ -46,6 +34,9 @@
               "$ref": "#/definitions/PatternCreateObject"
             },
             "description": "The Name and Pattern of the feature."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -96,6 +87,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -147,6 +141,9 @@
               "$ref": "#/definitions/PhraselistCreateObject"
             },
             "description": "A Phraselist object containing Name, comma-separated Phrases and the isExchangeable boolean. Default value for isExchangeable is true."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -196,6 +193,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -244,6 +244,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -294,6 +297,9 @@
             "description": "The pattern feature ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -351,6 +357,9 @@
               "$ref": "#/definitions/PatternUpdateObject"
             },
             "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern and a boolean called IsActive to update the feature."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -402,6 +411,9 @@
             "description": "The pattern feature ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -451,6 +463,9 @@
             "description": "The ID of the feature to be retrieved.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -506,6 +521,9 @@
               "$ref": "#/definitions/PhraselistUpdateObject"
             },
             "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern, Mode, and a boolean called IsActive to update the feature."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -556,6 +574,9 @@
             "description": "The ID of the feature to be deleted.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -607,6 +628,9 @@
               "$ref": "#/definitions/ExampleLabelObject"
             },
             "description": "An example label with the expected intent and entities."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -661,6 +685,9 @@
               "$ref": "#/definitions/ExampleLabelObjectArray"
             },
             "description": "Array of examples."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -719,6 +746,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -768,6 +798,9 @@
             "description": "The example ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -819,6 +852,9 @@
               "$ref": "#/definitions/ModelCreateObject"
             },
             "description": "A model object containing the name of the new intent classifier."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -869,6 +905,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -920,6 +959,9 @@
               "$ref": "#/definitions/ModelCreateObject"
             },
             "description": "A model object containing the name for the new entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -970,6 +1012,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1021,6 +1066,9 @@
               "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1071,6 +1119,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1122,6 +1173,9 @@
               "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1172,6 +1226,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1220,6 +1277,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1269,6 +1329,9 @@
               "$ref": "#/definitions/ClosedListModelCreateObject"
             },
             "description": "A model containing the name and words for the new closed list entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1324,6 +1387,9 @@
               "$ref": "#/definitions/PrebuiltExtractorNames"
             },
             "description": "An array of prebuilt entity extractor names."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1373,6 +1439,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1415,6 +1484,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1463,6 +1535,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1519,6 +1594,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1564,6 +1642,9 @@
           },
           {
             "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1616,6 +1697,9 @@
               "$ref": "#/definitions/ModelUpdateObject"
             },
             "description": "A model object containing the new intent classifier name."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1669,6 +1753,9 @@
             "type": "boolean",
             "description": "Also delete the intent's utterances (true). Or move the utterances to the None intent (false - the default value).",
             "default": false
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1719,6 +1806,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1776,6 +1866,9 @@
               "$ref": "#/definitions/ModelUpdateObject"
             },
             "description": "A model object containing the new entity extractor name."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1827,6 +1920,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1872,6 +1968,9 @@
           },
           {
             "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1924,6 +2023,9 @@
               "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "Model containing names of the children of the hierarchical entity."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1970,6 +2072,9 @@
           },
           {
             "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2015,6 +2120,9 @@
           },
           {
             "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2067,6 +2175,9 @@
               "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model object containing the new entity extractor name and children."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2113,6 +2224,9 @@
           },
           {
             "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2163,6 +2277,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2220,6 +2337,9 @@
               "$ref": "#/definitions/ClosedListModelUpdateObject"
             },
             "description": "The new entity name and words list."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2280,6 +2400,9 @@
               "$ref": "#/definitions/ClosedListModelPatchObject"
             },
             "description": "A words list batch."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2331,6 +2454,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2381,6 +2507,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2429,6 +2558,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2486,6 +2618,9 @@
             "description": "The sublist ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2550,6 +2685,9 @@
               "$ref": "#/definitions/WordListBaseUpdateObject"
             },
             "description": "A sublist update object containing the new canonical form and the list of words."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2601,6 +2739,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2654,6 +2795,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2699,6 +2843,9 @@
               "$ref": "#/definitions/ApplicationCreateObject"
             },
             "description": "A model containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. Default value for the version ID is 0.1. Note: the culture cannot be changed after the app is created."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2743,6 +2890,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2794,6 +2944,9 @@
               "$ref": "#/definitions/LuisApp"
             },
             "description": "A LUIS application structure."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2834,6 +2987,11 @@
       "get": {
         "description": "Gets the endpoint URLs for the prebuilt Cortana applications.",
         "operationId": "Apps_ListCortanaEndpoints",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A personal assistant apps JSON object containing the endpoint URLs for Cortana applications and the user's endpoint keys.",
@@ -2868,6 +3026,11 @@
       "get": {
         "description": "Gets the available application domains.",
         "operationId": "Apps_ListDomains",
+         "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list object containing the available application domains.",
@@ -2902,6 +3065,11 @@
       "get": {
         "description": "Gets the application available usage scenarios.",
         "operationId": "Apps_ListUsageScenarios",
+         "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list object containing the available application usage scenarios.",
@@ -2936,6 +3104,11 @@
       "get": {
         "description": "Gets the supported application cultures.",
         "operationId": "Apps_ListSupportedCultures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list object containing the supported application cultures.",
@@ -2973,6 +3146,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3014,6 +3190,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3060,6 +3239,9 @@
               "$ref": "#/definitions/ApplicationUpdateObject"
             },
             "description": "A model containing Name and Description of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3100,6 +3282,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3150,6 +3335,9 @@
               "$ref": "#/definitions/TaskUpdateObject"
             },
             "description": "A model containing the new version ID."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3201,6 +3389,9 @@
               "$ref": "#/definitions/ApplicationPublishObject"
             },
             "description": "The application publish object. The region is the target region that the application is published to."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3249,6 +3440,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3294,6 +3488,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3343,6 +3540,9 @@
               "$ref": "#/definitions/TaskUpdateObject"
             },
             "description": "A model containing Name and Description of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3386,6 +3586,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3428,6 +3631,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3470,6 +3676,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3510,6 +3719,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3565,6 +3777,9 @@
               "$ref": "#/definitions/LuisApp"
             },
             "description": "A LUIS application structure."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3607,6 +3822,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3653,6 +3871,9 @@
               "$ref": "#/definitions/ApplicationSettingUpdateObject"
             },
             "description": "An object containing the new application settings."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3695,6 +3916,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3741,6 +3965,9 @@
               "$ref": "#/definitions/PublishSettingUpdateObject"
             },
             "description": "An object containing the new publish application settings."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3795,6 +4022,9 @@
               "type": "string"
             },
             "description": "The utterance text to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3837,6 +4067,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3883,6 +4116,9 @@
               "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A model containing the user's email address."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3932,6 +4168,9 @@
               "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A model containing the user's email address."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3981,6 +4220,9 @@
               "$ref": "#/definitions/CollaboratorsArray"
             },
             "description": "A model containing a list of user's email addresses."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4023,6 +4265,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4082,6 +4327,9 @@
               "$ref": "#/definitions/WordListObject"
             },
             "description": "Words list."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4136,6 +4384,9 @@
               "$ref": "#/definitions/PrebuiltDomainCreateBaseObject"
             },
             "description": "A prebuilt domain create object containing the name of the domain."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4190,6 +4441,9 @@
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
             "description": "A model object containing the name of the custom prebuilt intent and the name of the domain to which this model belongs."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4234,6 +4488,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4285,6 +4542,9 @@
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
             "description": "A model object containing the name of the custom prebuilt entity and the name of the domain to which this model belongs."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4329,6 +4589,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4371,6 +4634,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4420,6 +4686,9 @@
             "description": "Domain name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4456,6 +4725,11 @@
       "get": {
         "description": "Gets all the available custom prebuilt domains for all cultures.",
         "operationId": "Apps_ListAvailableCustomPrebuiltDomains",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt domains and their intents/entities representation.",
@@ -4497,6 +4771,9 @@
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4544,6 +4821,9 @@
             "description": "Culture.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4597,6 +4877,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4662,6 +4945,9 @@
               }
             },
             "description": "Model object containing new name of the hierarchical entity child."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4716,6 +5002,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4775,6 +5064,9 @@
               }
             },
             "description": "A model object containing the name of the new hierarchical child model."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4838,6 +5130,9 @@
               }
             },
             "description": "A model object containing the name of the new composite child model."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4895,6 +5190,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4946,6 +5244,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4998,6 +5299,9 @@
             "schema": {
               "$ref": "#/definitions/RegexModelCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5047,6 +5351,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5099,6 +5406,9 @@
             "schema": {
               "$ref": "#/definitions/PatternAnyModelCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5150,6 +5460,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5210,6 +5523,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5261,6 +5577,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5321,6 +5640,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5372,6 +5694,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5432,6 +5757,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5483,6 +5811,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5543,6 +5874,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5589,6 +5923,9 @@
           },
           {
             "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5644,6 +5981,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5695,6 +6035,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5755,6 +6098,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5801,6 +6147,9 @@
           },
           {
             "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5856,6 +6205,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5907,6 +6259,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5967,6 +6322,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6018,6 +6376,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6078,6 +6439,9 @@
             "schema": {
               "$ref": "#/definitions/ExplicitListItemCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6128,6 +6492,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6188,6 +6555,9 @@
             "schema": {
               "$ref": "#/definitions/RegexModelUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6236,6 +6606,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6286,6 +6659,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6346,6 +6722,9 @@
             "schema": {
               "$ref": "#/definitions/PatternAnyModelUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6394,6 +6773,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6452,6 +6834,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6520,6 +6905,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6576,6 +6964,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6634,6 +7025,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6702,6 +7096,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6758,6 +7155,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6816,6 +7216,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6884,6 +7287,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6940,6 +7346,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6998,6 +7407,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7066,6 +7478,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7122,6 +7537,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7175,6 +7593,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7238,6 +7659,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7289,6 +7713,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7347,6 +7774,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7415,6 +7845,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7471,6 +7904,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7524,6 +7960,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7587,6 +8026,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7638,6 +8080,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7696,6 +8141,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7764,6 +8212,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7820,6 +8271,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7878,6 +8332,9 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7946,6 +8403,9 @@
             "schema": {
               "$ref": "#/definitions/ExplicitListItemUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8002,6 +8462,9 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8056,6 +8519,9 @@
             "schema": {
               "$ref": "#/definitions/PatternRuleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8104,6 +8570,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8159,6 +8628,9 @@
                 "$ref": "#/definitions/PatternRuleUpdateObject"
               }
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8214,6 +8686,9 @@
                 "$ref": "#/definitions/PatternRuleCreateObject"
               }
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8270,6 +8745,9 @@
                 "type": "string"
               }
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8332,6 +8810,9 @@
             "schema": {
               "$ref": "#/definitions/PatternRuleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8380,6 +8861,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8431,6 +8915,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8470,6 +8957,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -8522,6 +9012,9 @@
               "$ref": "#/definitions/AppVersionSettingObject"
             },
             "description": "A list of the updated application version settings."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -10879,6 +11372,12 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "ApiKey": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "required": true,
+      "type": "string"
     }
   }
 }
