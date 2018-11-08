@@ -24,7 +24,7 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-2018-08
+tag: package-2020-20
 ```
 
 ## Composite packages
@@ -32,14 +32,14 @@ tag: package-2018-08
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: package-2018-08
+### Tag: package-2020-20
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-08'
+```yaml $(tag) == 'package-2020-20'
 input-file:
-  - Microsoft.Sql/stable/2018-08-08/capabilities.json
-  - Microsoft.Sql/stable/2018-08-08/usages.json
+  - Microsoft.Sql/stable/2020-20-20/capabilities.json
+  - Microsoft.Sql/stable/2020-20-20/usages.json
 ```
 ### Tag: package-composite-v3
 
