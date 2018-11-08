@@ -322,6 +322,38 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start": {
+      "post": {
+        "operationId": "ContainerGroups_Start",
+        "x-ms-examples": {
+          "ContainerStart": {
+            "$ref": "./examples/ContainerGroupsStart.json"
+          }
+        },
+        "summary": "Starts all containers in a container group.",
+        "description": "Starts all containers in a container group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.ContainerInstance/operations": {
       "get": {
         "tags": [
