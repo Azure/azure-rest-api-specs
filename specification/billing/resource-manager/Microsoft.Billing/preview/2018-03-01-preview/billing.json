@@ -275,8 +275,8 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoices/{invoiceName}/pricesheet/download": {
-      "get": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoices/{invoiceName}/pricesheets/default/download": {
+      "post": {
         "tags": [
           "pricesheet"
         ],
@@ -285,7 +285,11 @@
             "$ref": "./examples/PricesheetDownload.json"
           }
         },
-        "operationId": "InvoicePricesheet_Get",
+        "operationId": "InvoicePricesheet_Post",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "location"
+        },
         "description": "Get pricesheet data for invoice id (invoiceName).",
         "parameters": [
           {
@@ -326,6 +330,12 @@
                 "description": "The operation entity Id GUID.",
                 "type": "string"
               }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {
@@ -553,7 +563,7 @@
       }
     },
     "DownloadUrl": {
-      "description": "A secure URL that can be used to download a PDF invoice until the URL expires.",
+      "description": "A secure URL that can be used to download a an entity until the URL expires.",
       "properties": {
         "expiryTime": {
           "description": "The time in UTC at which this download URL will expire.",
