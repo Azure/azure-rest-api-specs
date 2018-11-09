@@ -40,7 +40,7 @@
           "ddosCustomPolicies"
         ],
         "operationId": "DdosCustomPolicies_Delete",
-        "description": "Deletes the specified DDoS customized plan.",
+        "description": "Deletes the specified DDoS custom policy.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -176,7 +176,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create DDoS protection plan": {
+          "Create DDoS custom policy": {
             "$ref": "./examples/DdosCustomPolicyCreate.json"
           }
         }
@@ -242,7 +242,10 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "type": "object",
+            "properties": {
+              "id":"string"
+            }
           },
           "description": "The list of public IPs associated with the DDoS custom policy resource. This list is read-only."
         },
@@ -250,29 +253,43 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "type": "#/definitions/ProtocolCustomSettingsFormat"
           },
           "description": "The list of public IPs associated with the DDoS custom policy resource. This list is read-only."
         }
       },
       "description": "DDoS custom policy properties."
     },
-    "DdosProtectionPlanListResult": {
+    "ProtocolCustomSettingsFormat": {
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DdosProtectionPlan"
-          },
-          "description": "A list of DDoS protection plans."
-        },
-        "nextLink": {
-          "readOnly": true,
+        "protocol": {
+          "readOnly": false,
           "type": "string",
-          "description": "The URL to get the next set of results."
+          "description": "The protocol for which the DDoS protection policy is being customized."
+        },
+        "triggerRateOverride": {
+          "readOnly": false,
+          "type": "string",
+          "description": "The customized DDoS protection trigger rate."
+        },
+        "sourceRateOverride": {
+          "readOnly": false,
+          "type": "string",
+          "description": "The customized DDoS protection source rate."
+        },
+        "triggerSensitivityOverride": {
+          "readOnly": false,
+          "type": "string",
+          "enum": [
+            "Default",
+            "High",
+            "Relaxed",
+            "Low"
+          ],
+          "description": "The customized DDoS protection trigger rate sensitivity degree."
         }
       },
-      "description": "A list of DDoS protection plans."
+      "description": "DDoS custom policy properties."
     }
   }
 }
