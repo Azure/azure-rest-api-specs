@@ -1595,10 +1595,11 @@
         },
         "tier": {
           "type": "string",
-          "description": "The tier of the SKU. Possible values are 'Standard' and 'Premium'.",
+          "description": "The tier of the SKU. Possible values are 'Standard', 'Premium' or 'Basic'.",
           "enum": [
             "Standard",
-            "Premium"
+            "Premium",
+            "Basic"
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuTier",
@@ -1687,6 +1688,20 @@
         "serviceProviderProperties": {
           "$ref": "#/definitions/ExpressRouteCircuitServiceProviderProperties",
           "description": "The ServiceProviderProperties."
+        },
+        "expressRoutePort": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the ExpressRoutePort resource when the circuit is provisioned on an ExpressRoutePort resource."
+        },
+        "bandwidthInGbps": {
+          "type": "number",
+          "description": "The bandwidth of the circuit when the circuit is provisioned on an ExpressRoutePort resource."
+        },
+        "stag": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The identifier of the circuit traffic. Outer tag for QinQ encapsulation."
         },
         "provisioningState": {
           "type": "string",

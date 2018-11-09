@@ -265,6 +265,24 @@
         "modelAsString": true
       }
     },
+    "MongoDbConnectionInfo": {
+      "type": "object",
+      "description": "Describes a connection to a MongoDB data source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "A MongoDB connection string or blob container URL. The user name and password can be specified here or in the userName and password properties"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },    
     "SqlConnectionInfo": {
       "x-ms-discriminator-value": "SqlConnectionInfo",
       "type": "object",

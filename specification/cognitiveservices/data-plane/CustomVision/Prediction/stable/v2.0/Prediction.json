@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "version": "2.0",
-        "title": "PredictionEndpoint"
+        "title": "Custom Vision Prediction Client"
     },
     "host": "southcentralus.api.cognitive.microsoft.com",
     "basePath": "/customvision/v2.0/Prediction",
@@ -410,6 +410,24 @@
             "type": "string",
             "x-ms-client-name": "ApiKey",
             "x-ms-parameter-location": "client"
+        },
+        "Endpoint": {
+            "name": "Endpoint",
+            "in": "path",
+            "description": "Supported Cognitive Services endpoints",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "client",
+            "x-ms-skip-url-encoding": true
         }
+    },
+    "x-ms-parameterized-host": {
+        "hostTemplate": "{Endpoint}",
+        "useSchemePrefix": false,
+        "parameters": [
+            {
+                "$ref": "#/parameters/Endpoint"
+            }
+        ]
     }
 }
