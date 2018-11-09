@@ -14923,6 +14923,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/snapshotsdr": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "description": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "operationId": "WebApps_ListSnapshotsFromDRSecondarySlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Website Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Website Slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/sourcecontrols/web": {
       "get": {
         "tags": [
@@ -16536,6 +16588,51 @@
         "summary": "Returns all Snapshots to the user.",
         "description": "Returns all Snapshots to the user.",
         "operationId": "WebApps_ListSnapshots",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Website Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/snapshotsdr": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "description": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "operationId": "WebApps_ListSnapshotsFromDRSecondary",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -18578,6 +18675,10 @@
             "snapshotTime": {
               "description": "Point in time to restore the deleted app from, formatted as a DateTime string. \nIf unspecified, default value is the time that the app was deleted.",
               "type": "string"
+            },
+            "useDRSecondary": {
+              "description": "If true, the snapshot is retrieved from DRSecondary endpoint.",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -21067,6 +21168,10 @@
             },
             "ignoreConflictingHostNames": {
               "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\nThis setting is only necessary when RecoverConfiguration is enabled.",
+              "type": "boolean"
+            },
+            "useDRSecondary": {
+              "description": "If true, the snapshot is retrieved from DRSecondary endpoint.",
               "type": "boolean"
             }
           },
