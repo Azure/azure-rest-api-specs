@@ -34,12 +34,12 @@
     }
   },
   "paths": {    
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicy}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicyName}": {
       "delete": {
         "tags": [
-          "DdosCustomPolicy"
+          "ddosCustomPolicies"
         ],
-        "operationId": "DdosCustomPolicy_Delete",
+        "operationId": "DdosCustomPolicies_Delete",
         "description": "Deletes the specified DDoS customized plan.",
         "parameters": [
           {
@@ -50,7 +50,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ddosCustomPolicy",
+            "name": "ddosCustomPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -83,9 +83,9 @@
       },
       "get": {
         "tags": [
-          "DdosCustomPolicy"
+          "ddosCustomPolicies"
         ],
-        "operationId": "DdosCustomPolicy_Get",
+        "operationId": "DdosCustomPolicies_Get",
         "description": "Gets information about the specified DDoS custom policy.",
         "parameters": [
           {
@@ -96,7 +96,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ddosCustomPolicy",
+            "name": "ddosCustomPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -125,9 +125,9 @@
       },
       "put": {
         "tags": [
-          "DdosCustomPolicy"
+          "ddosCustomPolicies"
         ],
-        "operationId": "DdosCustomPolicy_CreateOrUpdate",
+        "operationId": "DdosCustomPolicies_CreateOrUpdate",
         "description": "Creates or updates a DDoS custom policy.",
         "parameters": [
           {
@@ -138,7 +138,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ddosCustomPolicy",
+            "name": "ddosCustomPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -179,79 +179,6 @@
           "Create DDoS protection plan": {
             "$ref": "./examples/DdosCustomPolicyCreate.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ddosProtectionPlans": {
-      "get": {
-        "tags": [
-          "DdosProtectionPlans"
-        ],
-        "operationId": "DdosProtectionPlans_List",
-        "description": "Gets all DDoS protection plans in a subscription.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of DDoS protection plan resources.",
-            "schema": {
-              "$ref": "#/definitions/DdosProtectionPlanListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List all DDoS protection plans": {
-            "$ref": "./examples/DdosProtectionPlanListAll.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosProtectionPlans": {
-      "get": {
-        "tags": [
-          "DdosProtectionPlans"
-        ],
-        "operationId": "DdosProtectionPlans_ListByResourceGroup",
-        "description": "Gets all the DDoS protection plans in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of DDoS protection plan resources.",
-            "schema": {
-              "$ref": "#/definitions/DdosProtectionPlanListResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List DDoS protection plans in resource group": {
-            "$ref": "./examples/DdosProtectionPlanList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -318,7 +245,7 @@
             "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The list of public IPs associated with the DDoS custom policy resource. This list is read-only."
-        }
+        },
         "protocolCustomSettings": {
           "readOnly": true,
           "type": "array",
