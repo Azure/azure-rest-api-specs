@@ -2589,13 +2589,21 @@
                     "$ref": "#/definitions/ResourceId",
                     "description": "Server Resource Id."
                 },
-                "cloudSeededData": {
+                "offlineDataTransfer": {
                     "$ref": "#/definitions/FeatureStatus",
-                    "description": "Use cloud seeded data."
+                    "description": "Offline data transfer status."
                 },
-                "cloudSeededDataFileShareUri" : {
+                "offlineDataTransferStorageAccountResourceId" : {
                     "type": "string",
-                    "description": "URI for seeded Azure file share."
+                    "description": "Offline Data Transfer Storage Account ResourceId."
+                },
+                "offlineDataTransferStorageAccountTenantId" : {
+                    "type": "string",
+                    "description": "Offline Data Transfer Storage Account TenantId."
+                },
+                "offlineDataTransferShareName" : {
+                    "type": "string",
+                    "description": "Offline Data Transfer Share Name"
                 }
             }
         },
@@ -3302,13 +3310,13 @@
                     "maximum": 2147483647,
                     "description": "Tier files older than days."
                 },
-                "cloudSeededData": {
+                "offlineDataTransfer": {
                     "$ref": "#/definitions/FeatureStatus",
-                    "description": "Use cloud seeded data."
+                    "description": "Offline data transfer status."
                 },
-                "cloudSeededDataFileShareUri" : {
+                "offlineDataTransferShareName" : {
                     "type": "string",
-                    "description": "URI for seeded Azure file share."
+                    "description": "Offline Data Transfer Share Name"
                 }
             }
         },
