@@ -72,7 +72,7 @@
             "type": "boolean"
           },
           {
-              "$ref": "#/parameters/ApiKey"
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -83,25 +83,46 @@
             }
           },
           "414": {
-            "description": "The query is too large. Reduce your query to the maximum characters."
+            "description": "The query is too large. Reduce your query to the maximum characters.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "429": {
-            "description": "Too many requests. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. "
+            "description": "Too many requests. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. ",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nOther reasons include:\r\n\r\n* Model not published. Please publish your model before hitting the Endpoint.\r\n"
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nOther reasons include:\r\n\r\n* Model not published. Please publish your model before hitting the Endpoint.\r\n",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "401": {
-            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* invalid, malformed, or empty subscription key\r\n* subscription key doesn't match region"
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* invalid, malformed, or empty subscription key\r\n* subscription key doesn't match region",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "403": {
-            "description": "Total monthly key quota limit exceeded. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. "
+            "description": "Total monthly key quota limit exceeded. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. ",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "409": {
-            "description": "When you receive the error message\"Application loading in progress, please try again.\", retry the request."
+            "description": "When you receive the error message\"Application loading in progress, please try again.\", retry the request.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "410": {
-            "description": "When you receive \"Please re-train and republish your application.\", you should retrain and republish your app, then make the request again."
+            "description": "When you receive \"Please re-train and republish your application.\", you should retrain and republish your app, then make the request again.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "produces": [
@@ -171,7 +192,7 @@
             "type": "boolean"
           },
           {
-              "$ref": "#/parameters/ApiKey"
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -185,25 +206,46 @@
             }
           },
           "414": {
-            "description": "The query is too large. Reduce your query to the maximum characters."
+            "description": "The query is too large. Reduce your query to the maximum characters.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "429": {
-            "description": "Too many requests. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. "
+            "description": "Too many requests. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. ",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nOther reasons include:\r\n\r\n* Model not published. Please publish your model before hitting the Endpoint.\r\n"
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nOther reasons include:\r\n\r\n* Model not published. Please publish your model before hitting the Endpoint.\r\n",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "401": {
-            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* invalid, malformed, or empty subscription key\r\n* subscription key doesn't match region"
+            "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* invalid, malformed, or empty subscription key\r\n* subscription key doesn't match region",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "403": {
-            "description": "Total monthly key quota limit exceeded. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. "
+            "description": "Total monthly key quota limit exceeded. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. ",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "409": {
-            "description": "When you receive the error message\"Application loading in progress, please try again.\", retry the request."
+            "description": "When you receive the error message\"Application loading in progress, please try again.\", retry the request.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "410": {
-            "description": "When you receive \"Please re-train and republish your application.\", you should retrain and republish your app, then make the request again."
+            "description": "When you receive \"Please re-train and republish your application.\", you should retrain and republish your app, then make the request again.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           }
         },
         "produces": [
@@ -262,6 +304,20 @@
         },
         "sentimentAnalysis": {
           "$ref": "#/definitions/Sentiment"
+        }
+      }
+    },
+    "APIError": {
+      "type": "object",
+      "description": "Error information returned by the API",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "description": "HTTP Status code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Cause of the error."
         }
       }
     },
