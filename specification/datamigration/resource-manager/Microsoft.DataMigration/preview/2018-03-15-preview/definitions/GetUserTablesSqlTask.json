@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "Azure Data Migration Service Resource Provider",
@@ -42,6 +42,11 @@
       "type": "object",
       "description": "Output of the task that collects user tables for the given list of databases",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
         "databasesToTables": {
           "type": "string",
           "description": "Mapping from database name to list of tables",
@@ -61,12 +66,7 @@
           },
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
-        }
-      ]
+      }
     },
     "DatabaseTable": {
       "type": "object",

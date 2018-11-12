@@ -1,8 +1,12 @@
+
 {
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -53,17 +57,13 @@
         ],
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -71,22 +71,22 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",           
+            "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -110,17 +110,13 @@
         ],
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -134,15 +130,22 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "object",
+              "format": "file"
             },
-            "description": "The runbook draft content."
+            "description": "The runbook draft content."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
-        "responses": {         
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
           "202": {
             "description": "Accepted and  the operation will complete asynchronously.",
             "headers": {
@@ -155,7 +158,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -179,17 +182,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -197,22 +196,22 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/RunbookDraft"
+              "$ref": "#/definitions/RunbookDraft"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -235,17 +234,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -253,9 +248,9 @@
             "required": true,
             "type": "string",
             "description": "The parameters supplied to the publish runbook operation."
-          },          
+          },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -271,7 +266,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -295,17 +290,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -313,22 +304,22 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/RunbookDraftUndoEditResult"
+              "$ref": "#/definitions/RunbookDraftUndoEditResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -354,17 +345,13 @@
         ],
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -372,22 +359,22 @@
             "required": true,
             "type": "string",
             "description": "The runbook name."
-          },          
+          },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {            
+          "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -408,19 +395,15 @@
             "$ref": "./examples/getRunbook.json"
           }
         },
-        "parameters": [          
+        "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -430,20 +413,20 @@
             "description": "The runbook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Runbook"
+              "$ref": "#/definitions/Runbook"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -463,21 +446,17 @@
           },
           "Create runbook as draft": {
             "$ref": "./examples/createRunbookAsDraft.json"
-          }          
+          }
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -491,25 +470,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/RunbookCreateOrUpdateParameters"
+              "$ref": "#/definitions/RunbookCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for runbook. Provide either content link for a published runbook or draft, not both."
-          },     
+          },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Runbook"
+              "$ref": "#/definitions/Runbook"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Runbook"
+              "$ref": "#/definitions/Runbook"
             }
           },
           "400": {
@@ -518,7 +497,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -539,17 +518,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -563,25 +538,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/RunbookUpdateParameters"
+              "$ref": "#/definitions/RunbookUpdateParameters"
             },
             "description": "The update parameters for runbook."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Runbook"
+              "$ref": "#/definitions/Runbook"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -602,17 +577,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -622,7 +593,7 @@
             "description": "The runbook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -635,7 +606,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -658,33 +629,29 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/RunbookListResult"
+              "$ref": "#/definitions/RunbookListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -710,17 +677,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -737,20 +700,20 @@
             "description": "The job stream id."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobStream"
+              "$ref": "./job.json#/definitions/JobStream"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -773,17 +736,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -798,22 +757,22 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
-          },          
+          },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobStreamListResult"
+              "$ref": "./job.json#/definitions/JobStreamListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -839,17 +798,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -863,25 +818,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/TestJobCreateParameters"
+              "$ref": "#/definitions/TestJobCreateParameters"
             },
             "description": "The parameters supplied to the create test job operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/TestJob"
+              "$ref": "#/definitions/TestJob"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -902,17 +857,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -922,20 +873,20 @@
             "description": "The runbook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/TestJob"
+              "$ref": "#/definitions/TestJob"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -958,17 +909,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -978,7 +925,7 @@
             "description": "The runbook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -988,7 +935,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1011,17 +958,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -1031,7 +974,7 @@
             "description": "The runbook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1041,7 +984,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1064,17 +1007,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "runbookName",
@@ -1084,7 +1023,7 @@
             "description": "The runbook name."
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1094,13 +1033,578 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "ContentHash": {
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the content hash algorithm used to hash the content."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets expected hash value of the content."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "description": "Definition of the runbook property type."
+    },
+    "ContentLink": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the uri of the runbook content."
+        },
+        "contentHash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "Gets or sets the hash."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the content."
+        }
+      },
+      "description": "Definition of the content link."
+    },
+    "RunbookProperties": {
+      "properties": {
+        "runbookType": {
+          "type": "string",
+          "description": "Gets or sets the type of the runbook.",
+          "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
+            "PowerShell",
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell"
+          ],
+          "x-ms-enum": {
+            "name": "RunbookTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "publishContentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the published runbook content link."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets or sets the state of the runbook.",
+          "enum": [
+            "New",
+            "Edit",
+            "Published"
+          ],
+          "x-ms-enum": {
+            "name": "RunbookState",
+            "modelAsString": true
+          }
+        },
+        "logVerbose": {
+          "type": "boolean",
+          "description": "Gets or sets verbose log option."
+        },
+        "logProgress": {
+          "type": "boolean",
+          "description": "Gets or sets progress log option."
+        },
+        "logActivityTrace": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the option to log activity trace of the runbook."
+        },
+        "jobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the job count of the runbook."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RunbookParameter"
+          },
+          "description": "Gets or sets the runbook parameters."
+        },
+        "outputTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the runbook output types."
+        },
+        "draft": {
+          "$ref": "#/definitions/RunbookDraft",
+          "description": "Gets or sets the draft runbook properties."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the provisioning state of the runbook.",
+          "enum": [
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "RunbookProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Gets or sets the last modified by."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the runbook property type."
+    },
+    "Runbook": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunbookProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runbook properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the runbook type."
+    },
+    "RunbookListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Runbook"
+          },
+          "description": "Gets or sets a list of runbooks."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list runbook operation."
+    },
+    "RunbookCreateOrUpdateProperties": {
+      "properties": {
+        "logVerbose": {
+          "type": "boolean",
+          "description": "Gets or sets verbose log option."
+        },
+        "logProgress": {
+          "type": "boolean",
+          "description": "Gets or sets progress log option."
+        },
+        "runbookType": {
+          "type": "string",
+          "description": "Gets or sets the type of the runbook.",
+          "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
+            "PowerShell",
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell"
+          ],
+          "x-ms-enum": {
+            "name": "RunbookTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "draft": {
+          "$ref": "#/definitions/RunbookDraft",
+          "description": "Gets or sets the draft runbook properties."
+        },
+        "publishContentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the published runbook content link."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the runbook."
+        },
+        "logActivityTrace": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the activity-level tracing options of the runbook."
+        }
+      },
+      "required": [
+        "runbookType"
+      ],
+      "description": "The parameters supplied to the create or update runbook properties."
+    },
+    "RunbookCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunbookCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets runbook create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update runbook operation."
+    },
+    "RunbookUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the runbook."
+        },
+        "logVerbose": {
+          "type": "boolean",
+          "description": "Gets or sets verbose log option."
+        },
+        "logProgress": {
+          "type": "boolean",
+          "description": "Gets or sets progress log option."
+        },
+        "logActivityTrace": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the activity-level tracing options of the runbook."
+        }
+      },
+      "description": "The parameters supplied to the update runbook properties."
+    },
+    "RunbookUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunbookUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the runbook update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the update runbook operation."
+    },
+    "RunbookDraftUndoEditResult": {
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": false
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The response model for the undoedit runbook operation."
+    },
+    "RunbookDraft": {
+      "properties": {
+        "inEdit": {
+          "type": "boolean",
+          "description": "Gets or sets whether runbook is in edit mode."
+        },
+        "draftContentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the draft runbook content link."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the runbook draft.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time of the runbook draft.",
+          "x-nullable": false
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RunbookParameter"
+          },
+          "description": "Gets or sets the runbook draft parameters."
+        },
+        "outputTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the runbook output types."
+        }
+      }
+    },
+    "RunbookParameter": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the parameter."
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value to indicate whether the parameter is madatory or not."
+        },
+        "position": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Get or sets the position of the parameter."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Gets or sets the default value of parameter."
+        }
+      },
+      "description": "Definition of the runbook parameter type."
+    },
+    "TestJobCreateParameters": {
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the test job."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
+        }
+      },
+      "description": "The parameters supplied to the create test job operation."
+    },
+    "TestJob": {
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the test job.",
+          "x-nullable": false
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the status of the test job."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Gets or sets the status details of the test job."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the test job.",
+          "x-nullable": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the test job.",
+          "x-nullable": true
+        },
+        "exception": {
+          "type": "string",
+          "description": "Gets or sets the exception of the test job."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time of the test job.",
+          "x-nullable": false
+        },
+        "lastStatusModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last status modified time of the test job.",
+          "x-nullable": true
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the test job."
+        },
+        "logActivityTrace": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The activity-level tracing options of the runbook."
+        }
+      },
+      "description": "Definition of the test job."
+    },
+    "RunbookCreateOrUpdateDraftProperties": {
+      "properties": {
+        "logVerbose": {
+          "type": "boolean",
+          "description": "Gets or sets verbose log option."
+        },
+        "logProgress": {
+          "type": "boolean",
+          "description": "Gets or sets progress log option."
+        },
+        "runbookType": {
+          "type": "string",
+          "description": "Gets or sets the type of the runbook.",
+          "enum": [
+            "Script",
+            "Graph",
+            "PowerShellWorkflow",
+            "PowerShell",
+            "GraphPowerShellWorkflow",
+            "GraphPowerShell"
+          ],
+          "x-ms-enum": {
+            "name": "RunbookTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "draft": {
+          "$ref": "#/definitions/RunbookDraft",
+          "description": "Gets or sets the draft runbook properties."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the runbook."
+        },
+        "logActivityTrace": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the activity-level tracing options of the runbook."
+        }
+      },
+      "required": [
+        "runbookType",
+        "draft"
+      ],
+      "description": "The parameters supplied to the create or update dratft runbook properties."
+    },
+    "RunbookCreateOrUpdateDraftParameters": {
+      "properties": {
+        "runbookContent": {
+          "type": "string",
+          "description": "Content of the Runbook."
+        }
+      },
+      "x-ms-client-flatten": true,
+      "required": [
+        "runbookContent"
+      ],
+      "description": "The parameters supplied to the create or update runbook operation."
+    }
+  },
   "parameters": {}
 }

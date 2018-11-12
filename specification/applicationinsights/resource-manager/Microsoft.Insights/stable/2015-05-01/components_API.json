@@ -282,7 +282,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}": {
       "get": {
-        "description": "Gets the status of a previously submitted purge using the id returned from the original purge request.",
+        "description": "Get status for an ongoing purge operation.",
         "operationId": "Components_GetPurgeStatus",
         "parameters": [
           {
@@ -310,7 +310,7 @@
           }
         },
         "x-ms-examples": {
-          "ComponentPurgeStatus": {
+          "ComponentPurge": {
             "$ref": "./examples/ComponentsPurgeStatus.json"
           }
         }
@@ -318,7 +318,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "ComponentsResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -337,7 +337,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -377,7 +381,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ComponentsResource"
         }
       ],
       "required": [
@@ -534,8 +538,15 @@
           "description": "The column of the table over which the given query should run",
           "type": "string"
         },
-        "filter": {
-          "description": "A query to to run over the provided table and column to purge the corresponding data.",
+        "operator": {
+          "description": "A query operator to evaluate over the provided column and value(s).",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
+        },
+        "key": {
+          "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension.", 
           "type": "string"
         }
       }
@@ -559,8 +570,8 @@
           "description": "Status of the operation represented by the requested Id.",
           "type": "string",
           "enum": [
-            "Pending",
-            "Completed"
+            "pending",
+            "completed"
           ],
           "x-ms-enum": {
             "name": "PurgeState",

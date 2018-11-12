@@ -7,5 +7,8 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-logic
-  output-folder: $(node-sdks-folder)/lib/services/logicManagement/lib
+  output-folder: $(node-sdks-folder)/lib/services/logicManagement
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: true
 ```

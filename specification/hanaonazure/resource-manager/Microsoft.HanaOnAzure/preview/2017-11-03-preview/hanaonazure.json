@@ -194,6 +194,45 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/restart": {
+            "post": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "HanaInstances_Restart",
+                "description": "The operation to restart a SAP HANA instance.",
+                "x-ms-examples": {
+                    "Restart a HANA instance": {
+                        "$ref": "./examples/HanaInstances_Restart.json"
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HanaInstanceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -284,6 +323,23 @@
                     "readOnly": true,
                     "type": "string",
                     "description": "Specifies the HANA instance unique ID."
+                },
+                "powerState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "enum": [
+                        "starting",
+                        "started",
+                        "stopping",
+                        "stopped",
+                        "restarting",
+                        "unknown"
+                    ],
+                    "x-ms-enum": {
+                        "name": "HanaInstancePowerStateEnum",
+                        "modelAsString": true
+                    },
+                    "description": "Resource power state"
                 }
             },
             "description": "Describes the properties of a HANA instance."
@@ -294,13 +350,14 @@
                     "readOnly": true,
                     "type": "string",
                     "enum": [
-                        "Cisco_UCS"
+                        "Cisco_UCS",
+                        "HPE"
                     ],
                     "x-ms-enum": {
                         "name": "HanaHardwareTypeNamesEnum",
                         "modelAsString": true
                     },
-                    "description": "Name of the hardware type (vendor and/or thrie product name)"
+                    "description": "Name of the hardware type (vendor and/or their product name)"
                 },
                 "hanaInstanceSize": {
                     "readOnly": true,
@@ -311,7 +368,18 @@
                         "S72",
                         "S144",
                         "S192",
-                        "S192m"
+                        "S192m",
+                        "S192xm",
+                        "S384",
+                        "S384m",
+                        "S384xm",
+                        "S384xxm",
+                        "S576m",
+                        "S576xm",
+                        "S768",
+                        "S768m",
+                        "S768xm",
+                        "S960m"
                     ],
                     "x-ms-enum": {
                         "name": "HanaInstanceSizeNamesEnum",
@@ -440,7 +508,7 @@
                 "provider": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with “Microsoft” for 1st party services."
+                    "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
                 },
                 "resource": {
                     "readOnly": true,

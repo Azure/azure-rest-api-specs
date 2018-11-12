@@ -160,7 +160,7 @@
         "description": "Lists the available Namespaces within a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -200,10 +200,10 @@
         "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "name": "parameters",
@@ -260,10 +260,10 @@
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -302,10 +302,10 @@
         "description": "Gets the description of the specified namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -346,10 +346,10 @@
         "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "name": "parameters",
@@ -395,16 +395,19 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/messagingplan": {
       "get": {
         "tags": [
-          "MessagingPlan"
+          "Namespaces"
         ],
-        "operationId": "MessagingPlan_Get",
-        "description": "Gets a description for the specified namespace.",
+        "operationId": "Namespaces_GetMessagingPlan",
+        "x-ms-examples": {
+          "GetNamespaceMessagingPlan": { "$ref": "./examples/NameSpaces/EHNameSpaceGetMessagningPlan.json" }
+        },
+        "description": "Gets messaging plan for specified namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -419,11 +422,17 @@
             "schema": {
               "$ref": "#/definitions/MessagingPlan"
             }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules": {
       "get": {
         "tags": [
           "Namespaces"
@@ -435,10 +444,10 @@
         "description": "Gets a list of authorization rules for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -478,13 +487,13 @@
         "description": "Creates or updates an AuthorizationRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -528,13 +537,13 @@
         "description": "Deletes an AuthorizationRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -569,13 +578,13 @@
         "description": "Gets an AuthorizationRule for a Namespace by rule name.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -612,13 +621,13 @@
         "description": "Gets the primary and secondary connection strings for the Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -655,13 +664,13 @@
         "description": "Regenerates the primary or secondary connection strings for the specified Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -713,10 +722,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "name": "parameters",
@@ -756,10 +765,10 @@
         "description": "Gets all Alias(Disaster Recovery configurations)",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -799,13 +808,13 @@
         "description": "Creates or updates a new Alias(Disaster Recovery configuration)",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "name": "parameters",
@@ -852,13 +861,13 @@
         "description": "Deletes an Alias(Disaster Recovery configuration)",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -890,13 +899,13 @@
         "description": "Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -933,13 +942,13 @@
         "description": "This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -973,13 +982,13 @@
         "description": "envokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1013,13 +1022,13 @@
         "description": "Gets a list of authorization rules for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1059,16 +1068,16 @@
         "description": "Gets an AuthorizationRule for a Namespace by rule name.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1105,16 +1114,16 @@
         "description": "Gets the primary and secondary connection strings for the Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1151,16 +1160,22 @@
         "description": "Gets all the Event Hubs in a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1194,13 +1209,13 @@
         "description": "Creates or updates a new Event Hub as a nested resource within a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
             "name": "parameters",
@@ -1244,13 +1259,13 @@
         "description": "Deletes an Event Hub from the specified Namespace and resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1285,13 +1300,13 @@
         "description": "Gets an Event Hubs description for the specified Event Hub.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1328,13 +1343,13 @@
         "description": "Gets the authorization rules for an Event Hub.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1374,16 +1389,16 @@
         "description": "Creates or updates an AuthorizationRule for the specified Event Hub.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1427,16 +1442,16 @@
         "description": "Gets an AuthorizationRule for an Event Hub by rule name.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1471,16 +1486,16 @@
         "description": "Deletes an Event Hub AuthorizationRule.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1517,16 +1532,16 @@
         "description": "Gets the ACS and SAS connection strings for the Event Hub.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1563,16 +1578,16 @@
         "description": "Regenerates the ACS and SAS connection strings for the Event Hub.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1618,16 +1633,16 @@
         "description": "Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/consumerGroupNameParameter"
+            "$ref": "#/parameters/ConsumerGroupNameParameter"
           },
           {
             "name": "parameters",
@@ -1671,16 +1686,16 @@
         "description": "Deletes a consumer group from the specified Event Hub and resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/consumerGroupNameParameter"
+            "$ref": "#/parameters/ConsumerGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1715,16 +1730,16 @@
         "description": "Gets a description for the specified consumer group.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
-            "$ref": "#/parameters/consumerGroupNameParameter"
+            "$ref": "#/parameters/ConsumerGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1761,19 +1776,25 @@
         "description": "Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/eventHubNameParameter"
+            "$ref": "#/parameters/EventHubNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1795,12 +1816,16 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions": {
       "get": {
         "tags": [
           "Regions"
         ],
         "operationId": "Regions_ListBySku",
+        "x-ms-examples": {
+          "RegionsListBySkuBasic": { "$ref": "./examples/EHRegionsListBySkuBasic.json" },
+          "RegionsListBySkuStandard": { "$ref": "./examples/EHRegionsListBySkuStandard.json" }
+        },
         "description": "Gets the available Regions for a given sku",
         "parameters": [
           {
@@ -1810,7 +1835,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/skuNameParameter"
+            "$ref": "#/parameters/SkuNameParameter"
           }
         ],
         "responses": {
@@ -1947,6 +1972,10 @@
               "maximum": 20,
               "minimum": 0,
               "description": "Upper limit of throughput units when AutoInflate is enabled, vaule should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)"
+            },
+            "kafkaEnabled": {
+              "type": "boolean",
+              "description": "Value that indicates whether Kafka is enabled for eventhub namespace."
             }
           },
           "description": "Namespace properties supplied for create namespace operation."
@@ -2465,6 +2494,12 @@
                 "name": "RoleDisasterRecovery",
                 "modelAsString": false
               }
+            },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
             }
           },
           "description": "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
@@ -2494,7 +2529,7 @@
       },
       "description": "The result of the List Alias(Disaster Recovery configuration) operation."
     },
-	"MessagingRegions": {
+    "MessagingRegions": {
       "properties": {
         "properties": {
           "properties": {
@@ -2535,38 +2570,36 @@
       },
       "description": "The response of the List MessagingRegions operation."
     },
-	"MessagingPlanproperties": {
-      "properties": {
-        "sku": {
-          "format": "int32",
-          "type": "integer",
-          "description": "Sku type"
-        },
-        "selectedEventHubUnit": {
-          "format": "int32",
-          "type": "integer",
-          "description": "Selected event hub unit"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The exact time the messaging plan was updated."
-        },
-        "revision": {
-          "format": "int64",
-          "type": "integer",
-          "description": "revision number"
-        }
-      },
-      "description": "Messaging Region"
-    },
     "MessagingPlan": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MessagingPlanproperties"
+          "properties": {
+            "sku": {
+              "format": "int32",
+              "readOnly": true,
+              "type": "integer",
+              "description": "Sku type"
+            },
+            "selectedEventHubUnit": {
+              "format": "int32",
+              "readOnly": true,
+              "type": "integer",
+              "description": "Selected event hub unit"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true,
+              "description": "The exact time the messaging plan was updated."
+            },
+            "revision": {
+              "format": "int64",
+              "readOnly": true,
+              "type": "integer",
+              "description": "revision number"
+            }
+          }
         }
       },
       "allOf": [
@@ -2574,7 +2607,7 @@
           "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "Messaging"
+      "description": "Messaging Plan for the namespace"
     }
   },
   "parameters": {
@@ -2592,7 +2625,7 @@
       "type": "string",
       "description": "Client API Version."
     },
-    "resourceGroupNameParameter": {
+    "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
@@ -2602,7 +2635,7 @@
       "x-ms-parameter-location": "method",
       "description": "Name of the resource group within the azure subscription."
     },
-    "namespaceNameParameter": {
+    "NamespaceNameParameter": {
       "name": "namespaceName",
       "in": "path",
       "required": true,
@@ -2612,7 +2645,7 @@
       "x-ms-parameter-location": "method",
       "description": "The Namespace name"
     },
-    "authorizationRuleNameParameter": {
+    "AuthorizationRuleNameParameter": {
       "name": "authorizationRuleName",
       "in": "path",
       "required": true,
@@ -2621,7 +2654,7 @@
       "x-ms-parameter-location": "method",
       "description": "The authorization rule name."
     },
-    "eventHubNameParameter": {
+    "EventHubNameParameter": {
       "name": "eventHubName",
       "in": "path",
       "required": true,
@@ -2630,7 +2663,7 @@
       "x-ms-parameter-location": "method",
       "description": "The Event Hub name"
     },
-    "aliasNameParameter": {
+    "AliasNameParameter": {
       "name": "alias",
       "in": "path",
       "required": true,
@@ -2640,7 +2673,7 @@
       "x-ms-parameter-location": "method",
       "description": "The Disaster Recovery configuration name"
     },
-    "consumerGroupNameParameter": {
+    "ConsumerGroupNameParameter": {
       "name": "consumerGroupName",
       "in": "path",
       "required": true,
@@ -2650,7 +2683,7 @@
       "x-ms-parameter-location": "method",
       "description": "The consumer group name"
     },
-	"skuNameParameter": {
+    "SkuNameParameter": {
       "name": "sku",
       "in": "path",
       "required": true,
@@ -2659,6 +2692,26 @@
       "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The sku type."
+    },
+    "SkipParameter": {
+      "name": "$skip",
+      "description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results to the most recent N usageDetails.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
     }
   }
 }

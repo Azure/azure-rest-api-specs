@@ -7,6 +7,9 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-commerce
-  output-folder: $(node-sdks-folder)/lib/services/commerce/lib
+  output-folder: $(node-sdks-folder)/lib/services/commerce
   payload-flattening-threshold: 2
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: true
 ```

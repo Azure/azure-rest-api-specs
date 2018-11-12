@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -1419,6 +1419,18 @@
     "SalesforceMarketingCloudObjectDataset": {
       "x-ms-discriminator-value": "SalesforceMarketingCloudObject",
       "description": "Salesforce Marketing Cloud dataset.",
+      "type": "object",
+      "allOf": [
+        {
+            "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "ResponsysObjectDataset": {
+      "x-ms-discriminator-value": "ResponsysObject",
+      "description": "Responsys dataset.",
       "type": "object",
       "allOf": [
         {

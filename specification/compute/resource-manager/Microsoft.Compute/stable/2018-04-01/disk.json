@@ -201,10 +201,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -326,7 +323,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/endGetAccess": {
@@ -352,16 +352,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}": {
@@ -522,10 +522,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -647,7 +644,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/endGetAccess": {
@@ -673,16 +673,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
@@ -722,21 +722,6 @@
       ],
       "x-ms-azure-resource": true
     },
-    "ResourceUpdate": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/DiskSku"
-        }
-      }
-    },
     "Disk": {
       "properties": {
         "managedBy": {
@@ -771,13 +756,18 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/DiskSku"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceUpdate"
-        }
-      ],
       "description": "Disk update resource."
     },
     "DiskList": {
@@ -805,7 +795,8 @@
           "type": "string",
           "enum": [
             "Standard_LRS",
-            "Premium_LRS"
+            "Premium_LRS",
+            "StandardSSD_LRS"
           ],
           "x-ms-enum": {
             "name": "StorageAccountTypes",
@@ -820,7 +811,7 @@
           "description": "The sku tier."
         }
       },
-      "description": "The disks sku name. Can be Standard_LRS or Premium_LRS."
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, or StandardSSD_LRS."
     },
     "SnapshotSku": {
       "properties": {
@@ -1020,7 +1011,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "A relative uri containing either a Platform Imgage Repository or user image reference."
+          "description": "A relative uri containing either a Platform Image Repository or user image reference."
         },
         "lun": {
           "type": "integer",
@@ -1060,33 +1051,13 @@
     },
     "AccessUri": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessUriOutput",
-          "description": "Operation output data (raw JSON)"
-        }
-      },
-      "description": "A disk access SAS uri."
-    },
-    "AccessUriOutput": {
-      "properties": {
-        "output": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessUriRaw",
-          "description": "Operation output data (raw JSON)"
-        }
-      },
-      "description": "Azure properties, including output."
-    },
-    "AccessUriRaw": {
-      "properties": {
         "accessSAS": {
           "readOnly": true,
           "type": "string",
           "description": "A SAS uri for accessing a disk."
         }
       },
-      "description": "This object gets 'bubbled up' through flattening."
+      "description": "A disk access SAS uri."
     },
     "Snapshot": {
       "properties": {
@@ -1115,13 +1086,18 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/SnapshotSku"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceUpdate"
-        }
-      ],
       "description": "Snapshot update resource."
     },
     "SnapshotList": {
@@ -1142,96 +1118,6 @@
         "value"
       ],
       "description": "The List Snapshots operation response."
-    },
-    "ApiErrorBase": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "ApiError": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "description": "The Api error details"
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error."
-    },
-    "OperationStatusResponse": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation ID"
-        },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation status"
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the operation"
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the operation"
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error"
-        }
-      },
-      "description": "Operation status response"
     }
   },
   "parameters": {

@@ -650,7 +650,7 @@
           "Pool get lifetime statistics": { "$ref": "./examples/PoolGetLifetimeStatistics.json" }
         },
         "summary": "Gets lifetime summary statistics for all of the pools in the specified account.",
-        "description": "Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.",
+        "description": "Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -750,7 +750,7 @@
           "Job get lifetime statistics": { "$ref": "./examples/JobGetLifetimeStatistics.json" }
         },
         "summary": "Gets lifetime summary statistics for all of the jobs in the specified account.",
-        "description": "Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics.",
+        "description": "Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -5037,7 +5037,7 @@
           "Job terminate": { "$ref": "./examples/JobTerminate.json" }
         },
         "summary": "Terminates the specified job, marking it as completed.",
-        "description": "When a Terminate Job request is received, the Batch service sets the job to the terminating state. The Batch service then terminates any active or running tasks associated with the job, and runs any required Job Release tasks. The job then moves into the completed state.",
+        "description": "When a Terminate Job request is received, the Batch service sets the job to the terminating state. The Batch service then terminates any running tasks associated with the job and runs any required job release tasks. Then the job moves into the completed state. If there are any tasks in the job in the active state, they will remain in the active state. Once a job is terminated, new tasks cannot be added and any remaining active tasks will not be scheduled.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -11447,7 +11447,7 @@
         }
       },
       "title": "The definition of the user identity under which the task is run.",
-      "description": "Specify either the userName or autoUser property, but not both."
+      "description": "Specify either the userName or autoUser property, but not both. On CloudServiceConfiguration pools, this user is logged in with the INTERACTIVE flag. On Windows VirtualMachineConfiguration pools, this user is logged in with the BATCH flag."
     },
     "LinuxUserConfiguration": {
       "properties": {
@@ -11513,7 +11513,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the task may be retried. The Batch service retries a task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit."
+          "description": "Note that this value specifically controls the number of retries for the task executable due to a nonzero exit code. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task after the first attempt. If the maximum retry count is -1, the Batch service retries the task without limit. Resource files and application packages are only downloaded again if the task is retried on a new compute node."
         }
       },
       "title": "Execution constraints to apply to a task."
@@ -11533,7 +11533,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Job Manager task.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -11546,7 +11546,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
-          "description": "Files listed under this element are located in the task's working directory."
+          "description": "Files listed under this element are located in the task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
         },
        "outputFiles": {
           "type": "array",
@@ -11598,12 +11598,12 @@
         "allowLowPriorityNode": {
           "type": "boolean",
           "title": "Whether the Job Manager task may run on a low-priority compute node.",
-          "description": "The default value is false."
+          "description": "The default value is true."
         }
       },
       "required": [ "id", "commandLine" ],
       "title": "Specifies details of a Job Manager task.",
-      "description": "The Job Manager task is automatically started when the job is created. The Batch service tries to schedule the Job Manager task before any other tasks in the job. When shrinking a pool, the Batch service tries to preserve compute nodes where Job Manager tasks are running for as long as possible (that is, nodes running 'normal' tasks are removed before nodes running Job Manager tasks). When a Job Manager task fails and needs to be restarted, the system tries to schedule it at the highest priority. If there are no idle nodes available, the system may terminate one of the running tasks in the pool and return it to the queue in order to make room for the Job Manager task to restart. Note that a Job Manager task in one job does not have priority over tasks in other jobs. Across jobs, only job level priorities are observed. For example, if a Job Manager in a priority 0 job needs to be restarted, it will not displace tasks of a priority 1 job."
+      "description": "The Job Manager task is automatically started when the job is created. The Batch service tries to schedule the Job Manager task before any other tasks in the job. When shrinking a pool, the Batch service tries to preserve compute nodes where Job Manager tasks are running for as long as possible (that is, nodes running 'normal' tasks are removed before nodes running Job Manager tasks). When a Job Manager task fails and needs to be restarted, the system tries to schedule it at the highest priority. If there are no idle nodes available, the system may terminate one of the running tasks in the pool and return it to the queue in order to make room for the Job Manager task to restart. Note that a Job Manager task in one job does not have priority over tasks in other jobs. Across jobs, only job level priorities are observed. For example, if a Job Manager in a priority 0 job needs to be restarted, it will not displace tasks of a priority 1 job. Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some form of checkpointing."
     },
     "JobPreparationTask": {
       "properties": {
@@ -11615,7 +11615,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Job Preparation task.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -11628,7 +11628,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
-          "description": "Files listed under this element are located in the task's working directory."
+          "description": "Files listed under this element are located in the task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
         },
         "environmentSettings": {
           "type": "array",
@@ -11659,7 +11659,7 @@
       },
       "required": [ "commandLine" ],
       "title": "A Job Preparation task to run before any tasks of the job on any given compute node.",
-      "description": "You can use Job Preparation to prepare a compute node to run tasks for the job. Activities commonly performed in Job Preparation include: Downloading common resource files used by all the tasks in the job. The Job Preparation task can download these common resource files to the shared location on the compute node. (AZ_BATCH_NODE_ROOT_DIR\\shared), or starting a local service on the compute node so that all tasks of that job can communicate with it. If the Job Preparation task fails (that is, exhausts its retry count before exiting with exit code 0), Batch will not run tasks of this job on the compute node. The node remains ineligible to run tasks of this job until it is reimaged. The node remains active and can be used for other jobs. The Job Preparation task can run multiple times on the same compute node. Therefore, you should write the Job Preparation task to handle re-execution. If the compute node is rebooted, the Job Preparation task is run again on the node before scheduling any other task of the job, if rerunOnNodeRebootAfterSuccess is true or if the Job Preparation task did not previously complete. If the compute node is reimaged, the Job Preparation task is run again before scheduling any task of the job."
+      "description": "You can use Job Preparation to prepare a compute node to run tasks for the job. Activities commonly performed in Job Preparation include: Downloading common resource files used by all the tasks in the job. The Job Preparation task can download these common resource files to the shared location on the compute node. (AZ_BATCH_NODE_ROOT_DIR\\shared), or starting a local service on the compute node so that all tasks of that job can communicate with it. If the Job Preparation task fails (that is, exhausts its retry count before exiting with exit code 0), Batch will not run tasks of this job on the compute node. The node remains ineligible to run tasks of this job until it is reimaged. The node remains active and can be used for other jobs. The Job Preparation task can run multiple times on the same compute node. Therefore, you should write the Job Preparation task to handle re-execution. If the compute node is rebooted, the Job Preparation task is run again on the node before scheduling any other task of the job, if rerunOnNodeRebootAfterSuccess is true or if the Job Preparation task did not previously complete. If the compute node is reimaged, the Job Preparation task is run again before scheduling any task of the job. Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some form of checkpointing."
     },
     "JobReleaseTask": {
       "properties": {
@@ -11671,7 +11671,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the Job Release task.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -11683,7 +11683,7 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "title": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "title": "A list of files that the Batch service will download to the compute node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "description": "Files listed under this element are located in the task's working directory."
         },
         "environmentSettings": {
@@ -11747,7 +11747,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the start task.",
-          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -11759,7 +11759,7 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "title": "A list of files that the Batch service will download to the compute node before running the command line.",
+          "title": "A list of files that the Batch service will download to the compute node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "description": "Files listed under this element are located in the task's working directory."
         },
         "environmentSettings": {
@@ -11787,7 +11787,8 @@
         }
       },
       "required": [ "commandLine" ],
-      "title": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged."
+      "title": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.",
+      "description": "Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some form of checkpointing."
     },
     "CertificateReference": {
       "properties": {
@@ -11892,7 +11893,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -12315,7 +12316,7 @@
         },
         "stats": {
           "$ref": "#/definitions/JobScheduleStatistics",
-          "title": "The lifetime resource usage statistics for the job schedule."
+          "title": "The lifetime resource usage statistics for the job schedule. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes."
         }
       },
       "title": "A job schedule that allows recurring jobs by specifying when to run jobs and a specification used to create each job."
@@ -12541,7 +12542,7 @@
         },
         "stats": {
           "$ref": "#/definitions/JobStatistics",
-          "title": "Resource usage statistics for the entire lifetime of the job."
+          "title": "Resource usage statistics for the entire lifetime of the job. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes."
         }
       },
       "title": "An Azure Batch job."
@@ -13361,7 +13362,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -13490,7 +13491,7 @@
         },
         "stats": {
           "$ref": "#/definitions/PoolStatistics",
-          "title": "Utilization and resource usage statistics for the entire lifetime of the pool."
+          "title": "Utilization and resource usage statistics for the entire lifetime of the pool. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes."
         }
       },
       "title": "A pool in the Azure Batch service."
@@ -13510,7 +13511,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All virtual machines in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
@@ -13776,7 +13777,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download before running the coordination command line.",
-          "description": "The difference between common resource files and task resource files is that common resource files are downloaded for all subtasks including the primary, whereas task resource files are downloaded only for the primary. Also note that these resource files are not downloaded to the task working directory, but instead are downloaded to the task root directory (one directory above the working directory)."
+          "description": "The difference between common resource files and task resource files is that common resource files are downloaded for all subtasks including the primary, whereas task resource files are downloaded only for the primary. Also note that these resource files are not downloaded to the task working directory, but instead are downloaded to the task root directory (one directory above the working directory).  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
         }
       },
       "required": [ "coordinationCommandLine" ],
@@ -13939,7 +13940,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the task.",
-          "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -13952,7 +13953,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
-          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed."
+          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
         },
         "outputFiles": {
           "type": "array",
@@ -14017,7 +14018,8 @@
           "$ref": "#/definitions/AuthenticationTokenSettings"
         }
       },
-      "title": "An Azure Batch task."
+      "title": "An Azure Batch task.",
+      "description": "Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some form of checkpointing."
     },
     "TaskAddParameter": {
       "properties": {
@@ -14034,7 +14036,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line of the task.",
-          "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux."
+          "description": "For multi-instance tasks, the command line is executed as the primary task, after the primary task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables)."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -14051,7 +14053,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the compute node before running the command line.",
-          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed."
+          "description": "For multi-instance tasks, the resource files will only be downloaded to the compute node on which the primary task is executed. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
         },
         "outputFiles": {
           "type": "array",
@@ -14106,7 +14108,8 @@
         }
       },
       "required": [ "id", "commandLine" ],
-      "title": "An Azure Batch task to add."
+      "title": "An Azure Batch task to add.",
+      "description": "Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some form of checkpointing."
     },
     "TaskAddCollectionParameter": {
       "properties": {
@@ -14117,7 +14120,7 @@
           },
           "maxItems": 100,
           "title": "The collection of tasks to add.",
-          "description": "The total serialized size of this collection must be less than 4MB. If it is greater than 4MB (for example if each task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer tasks."
+          "description": "The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer tasks."
         }
       },
       "required": [ "value" ],
@@ -14553,7 +14556,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the virtual machine hosting the compute node.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "totalTasksRun": {
           "type": "integer",
@@ -15876,6 +15879,11 @@
           "format": "int32",
           "title": "The number of nodes in the startTaskFailed state."
         },
+        "leavingPool": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of nodes in the leavingPool state."
+        },
         "unknown": {
           "type": "integer",
           "format": "int32",
@@ -15907,6 +15915,7 @@
         "running",
         "starting",
         "startTaskFailed",
+        "leavingPool",
         "unknown",
         "unusable",
         "waitingForStartTask",

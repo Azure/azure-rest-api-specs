@@ -47,8 +47,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_msi']
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -95,31 +100,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: msi
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-08-31-preview
-```
-
-### Tag: package-2015-08-31-preview and go
-
-These settings apply only when `--tag=package-2015-08-31-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-08-31-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/msi/mgmt/2015-08-31-preview/msi
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -127,11 +108,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.msi
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-msi
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.msi
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-msi
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-08-31-preview
+```
+
+### Tag: package-2015-08-31-preview and java
+
+These settings apply only when `--tag=package-2015-08-31-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-08-31-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managedserviceidentity.v2015_08_31_preview
+  output-folder: $(azure-libraries-for-java-folder)/managedserviceidentity/resource-manager/v2015_08_31_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

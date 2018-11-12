@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -1076,7 +1076,22 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
         }
       } 
-    }, 
+    },
+    "ResponsysSource": { 
+      "description": "A copy activity Responsys source.", 
+      "type": "object", 
+      "allOf": [ 
+        { 
+          "$ref": "#/definitions/CopySource" 
+        } 
+      ], 
+      "properties": {
+        "query": { 
+          "type": "object", 
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        }
+      } 
+    } ,
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
@@ -1600,7 +1615,11 @@
       "properties": {
         "columnMappings": {
           "type": "object",
-          "description": "Column mappings. Type: string (or Expression with resultType string)."
+          "description": "Column mappings. Example: \"UserId: MyUserId, Group: MyGroup, Name: MyName\" Type: string (or Expression with resultType string)."
+        },
+        "schemaMapping": {
+          "type": "object",
+          "description": "The schema mapping to map between tabular data and hierarchical data. Example: {\"Column1\": \"$.Column1\", \"Column2\": \"$.Column2.Property1\", \"Column3\": \"$.Column2.Property2\"}. Type: object (or Expression with resultType object)."
         }
       }
     },
@@ -2019,12 +2038,47 @@
           "type": "string"
         },
         "environmentPath": {
-          "description": "The environment path to execution the SSIS package.",
+          "description": "The environment path to execute the SSIS package.",
           "type": "string"
         },
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        },
+        "projectParameters": {
+          "description": "The project level parameters to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISExecutionParameter"
+          }
+        },
+        "packageParameters": {
+          "description": "The package level parameters to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISExecutionParameter"
+          }
+        },
+        "projectConnectionManagers": {
+          "description": "The project level connection managers to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISConnectionManager"
+          }
+        },
+        "packageConnectionManagers": {
+          "description": "The package level connection managers to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISConnectionManager"
+          }
+        },
+        "propertyOverrides": {
+          "description": "The property overrides to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISPropertyOverride"
+          }
         }
       },
       "required": [
@@ -2043,6 +2097,43 @@
       },
       "required": [
         "packagePath"
+      ]
+    },
+    "SSISConnectionManager": {
+      "description": "SSIS Connection Manager.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SSISExecutionParameter"
+      }
+    },
+    "SSISExecutionParameter": {
+      "description": "SSIS execution parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "SSIS package execution parameter value. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SSISPropertyOverride": {
+      "description": "SSIS property override.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "SSIS package property override value. Type: string (or Expression with resultType string)."
+        },
+        "isSensitive": {
+          "type": "boolean",
+          "description": "Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "CustomActivity": {

@@ -35,7 +35,7 @@
         "description": "Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
         "operationId": "Accounts_Create",
         "x-ms-examples": {
-          "Get Account": {
+          "Create Account": {
             "$ref": "./examples/CreateAccount.json"
           }
         },
@@ -101,7 +101,7 @@
         "description": "Updates a Cognitive Services account",
         "operationId": "Accounts_Update",
         "x-ms-examples": {
-          "Get Account": {
+          "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
           }
         },
@@ -244,7 +244,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -287,7 +287,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountListResult"
             }
@@ -459,7 +459,41 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/skus": {
+      "get": {
+        "tags": [
+          "Skus",
+          "CognitiveServicesAccounts"
+        ],
+        "operationId": "ResourceSkus_List",
+        "description": "Gets the list of Microsoft.CognitiveServices SKUs available for your Subscription.",
+        "x-ms-examples": {
+          "Regenerate Keys": {
+            "$ref": "./examples/GetSkus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkusResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
       "get": {
         "tags": [
           "CognitiveServicesAccounts"
@@ -498,7 +532,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountEnumerateSkusResult"
             }
@@ -1174,6 +1208,130 @@
           "description": "Additional error message."
         }
       }
+    },
+    "ResourceSkuRestrictions": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of restrictions.",
+          "enum": [
+            "Location",
+            "Zone"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsType",
+            "modelAsString": false
+          }
+        },
+        "values": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "readOnly": true,
+          "description": "The information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for restriction.",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsReasonCode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes restrictions of a SKU."
+    },
+    "ResourceSku": {
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of SKU."
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the tier of Cognitive Services account."
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Kind of resources that are supported in this SKU."
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of locations that the SKU is available."
+        },
+        "restrictions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          },
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+        }
+      },
+      "description": "Describes an available Cognitive Services SKU."
+    },
+    "ResourceSkuRestrictionInfo": {
+      "properties": {
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Locations where the SKU is restricted"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is restricted."
+        }
+      }
+    },
+    "ResourceSkusResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
+          "description": "The list of skus available for the subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Skus."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Get Skus operation response."
     }
   },
   "parameters": {
@@ -1205,7 +1363,7 @@
       "required": false,
       "type": "string",
       "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -51,9 +51,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_graph_rbac']
 ```
 
 
@@ -86,6 +90,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.graphrbac
   package-name: azure-graphrbac
+  package-version: 0.52.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -99,47 +104,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-graphrbac
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: graphrbac
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: "1.6"
-```
-
-### Tag: 1.6 and go
-
-These settings apply only when `--tag=1.6 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == '1.6' && $(go)
-output-folder: $(go-sdk-folder)/services/graphrbac/1.6/graphrbac
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.graphrbac
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

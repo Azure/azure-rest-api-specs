@@ -40,7 +40,7 @@
           "UsageDetails"
         ],
         "operationId": "UsageDetails_List",
-        "description": "Lists the usage details for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "description": "Lists the usage details for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -91,7 +91,7 @@
           },
           {
             "name": "$apply",
-            "description": "OData apply expression to aggregatie usageDetails by tags or (tags and properties/usageStart)",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
             "type": "string",            
@@ -168,7 +168,7 @@
           },
           {
             "name": "$apply",
-            "description": "OData apply expression to aggregatie usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
             "in": "query",
             "required": false,
             "type": "string",            
@@ -217,6 +217,519 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetailsByBillingAccount_List",
+        "description": "Lists the usage details by billingAccountId for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetailsByBillingAccount_ListByBillingPeriod",
+        "description": "Lists the usage details based on billingAccountId for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+  },
+    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetailsByDepartment_List",
+        "description": "Lists the usage details by departmentId for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsListByDepartment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+"get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetailsByDepartment_ListByBillingPeriod",
+        "description": "Lists the usage details  based on departmentId for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByDepartment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+  },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetailsByEnrollmentAccount_List",
+        "description": "Lists the usage details by enrollmentAccountId for a scope by current billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList": {
+            "$ref": "./examples/UsageDetailsListByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName, properties/instanceId or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
+"get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetailsByEnrollmentAccount_ListByBillingPeriod",
+        "description": "Lists the usage details based on enrollmentAccountId for a scope by billing period. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsListForBillingPeriod": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalProperties or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$apply",
+            "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
+            "in": "query",
+            "required": false,
+            "type": "string",            
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "QueryOptions"
+            },
+            "x-ms-client-name": "Apply"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+  },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
         "tags": [
@@ -224,7 +737,7 @@
         ],
         "x-ms-odata": "#/definitions/Marketplace",
         "operationId": "Marketplaces_List",
-        "description": "Lists the marketplaces for a scope by subscriptionId. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "description": "Lists the marketplaces for a scope by subscriptionId and current billing period. Marketplaces are available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -352,7 +865,493 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "MarketplacesByBillingAccount_List",
+        "description": "Lists the marketplaces for a scope by billingAccountId and current billing period. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesList": {
+            "$ref": "./examples/MarketplacesByBillingAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "MarketplacesByBillingAccount_ListByBillingPeriod",
+        "description": "Lists the marketplaces for a scope by billing period and billingAccountId. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesListForBillingPeriod": {
+            "$ref": "./examples/MarketplacesByBillingAccountListForBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "MarketplacesByDepartment_List",
+        "description": "Lists the marketplaces for a scope by departmentId and current billing period. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesList": {
+            "$ref": "./examples/MarketplacesByDepartmentList.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "MarketplacesByDepartment_ListByBillingPeriod",
+        "description": "Lists the marketplaces for a scope by billing period and departmentId. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesListForBillingPeriod": {
+            "$ref": "./examples/MarketplacesByDepartment_ListByBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "MarketplacesByEnrollmentAccounts_List",
+        "description": "Lists the marketplaces for a scope by enrollmentAccountId and current billing period. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesList": {
+            "$ref": "./examples/MarketplacesByEnrollmentAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "MarketplacesByEnrollmentAccounts_ListByBillingPeriod",
+        "description": "Lists the marketplaces for a scope by billing period and enrollmentAccountId. Marketplaces are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesListForBillingPeriod": {
+            "$ref": "./examples/MarketplacesByEnrollmentAccounts_ListByBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter marketplaces by properties/usageEnd (Utc time), properties/usageStart (Utc time), properties/resourceGroup, properties/instanceName or properties/instanceId. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N marketplaces.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/balances": {
+      "get": {
+        "tags": [
+          "Balances"
+        ],
+        "operationId": "GetBalancesByBillingAccount",
+        "description": "Gets the balances for a scope by billingAccountId. Balances are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Balances": {
+            "$ref": "./examples/BalancesByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Balance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
+      "get": {
+        "tags": [
+          "Balances"
+        ],
+        "operationId": "GetBalancesByBillingAccount_ByBillingPeriod",
+        "description": "Gets the balances for a scope by billing period and billingAccountId. Balances are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Balances": {
+            "$ref": "./examples/BalancesByBillingAccountForBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Balance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservedInstances"
@@ -1142,6 +2141,136 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/costTags": {
+      "get": {
+        "tags": [
+          "CostTags"
+        ],
+        "operationId": "CostTags_Get",
+        "description": "Get cost tags for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CostTags_Get": {
+            "$ref": "./examples/CostTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CostTags"
+        ],
+        "description": "The operation to create or update cost tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "operationId": "CostTags_CreateOrUpdate",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateCostTags": {
+            "$ref": "./examples/CreateOrUpdateCostTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            },
+            "description": "Parameters supplied to the Create cost tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/CostTags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/tags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_Get",
+        "description": "Get all available tag keys for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Tags_Get": {
+            "$ref": "./examples/Tags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1511,7 +2640,154 @@
         }
       }
     },
-    "ReservationSummaries": {
+    "Balance": {
+      "description": "A balance resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BalanceProperties",
+          "title": "Balance properties"
+        }
+      }
+    },
+    "BalanceProperties": {
+      "description": "The properties of the balance.",
+      "type": "object",
+      "properties": {
+        "currency": {
+          "description": "The ISO currency in which the meter is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "beginningBalance": {
+          "description": "The beginning balance for the billing period.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "endingBalance": {
+          "description": "The ending balance for the billing period (for open periods this will be updated daily).",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "newPurchases": {
+          "description": "Total new purchase amount.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "adjustments": {
+          "description": "Total adjustment amount.",
+          "type": "number",
+		  "format": "decimal",
+          "readOnly": true
+        },
+        "utilized": {
+          "description": "Total Commitment usage.",
+          "type": "number",
+		  "format": "decimal",
+          "readOnly": true
+        },
+        "serviceOverage": {
+          "description": "Overage for Azure services.",
+          "type": "number",
+		  "format": "decimal",
+          "readOnly": true
+        },
+        "chargesBilledSeparately": {
+          "description": "Charges Billed separately.",
+          "type": "number",
+		  "format": "decimal",
+          "readOnly": true
+        },
+        "totalOverage": {
+          "description": "serviceOverage + chargesBilledSeparately.",
+          "type": "number",
+		  "format": "decimal",
+          "readOnly": true
+        },
+        "totalUsage": {
+          "description": "Azure service commitment + total Overage.",
+          "type": "number",
+		  "format": "decimal",
+          "readOnly": true
+        },
+        "azureMarketplaceServiceCharges": {
+          "description": "Total charges for Azure Marketplace.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "The billing frequency.",
+		  "type": "string",
+          "enum": [
+            "Month",
+            "Quarter",
+            "Year"
+          ],
+          "x-ms-enum": {
+            "name": "BillingFrequency",
+            "modelAsString": true
+          }
+          },
+        "priceHidden": {
+          "description": "Price is hidden or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "newPurchasesDetails": {
+          "description": "List of new purchases.",
+          "type": "array",
+		  "items": {
+			"type" : "object",
+			"properties" : {
+				"name" : {
+			      "description": "the name of new purchase.",
+				  "type": "string",
+                  "readOnly": true
+				},
+				"value": {
+				  "description": "the value of new purchase.",
+				  "type": "number",
+			      "format": "decimal",
+				  "readOnly": true
+				}
+			}
+		  },
+          "readOnly": true
+        },
+        "adjustmentDetails": {
+          "description": "List of Adjustments (Promo credit, SIE credit etc.).",
+          "type": "array",
+		  "items": {
+			"type" : "object",
+			"properties" : {
+				"name" : {
+			      "description": "the name of new adjustment.",
+				  "type": "string",
+                  "readOnly": true
+				},
+				"value": {
+				  "description": "the value of new adjustment.",
+				  "type": "number",
+				  "format": "decimal",
+				  "readOnly": true
+				}
+			}
+		  },
+          "readOnly": true
+        }
+      }
+    },
+	"ReservationSummaries": {
       "description": "reservation summaries resource.",
       "type": "object",
       "allOf": [
@@ -1777,6 +3053,43 @@
         }
       }
     },
+    "Tags": {
+      "description": "A resource listing all tags.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TagProperties",
+          "title": "Tag properties"
+        }
+      }
+    },
+    "TagProperties": {
+      "description": "The properties of the tag.",
+      "properties": {
+        "tags": {
+          "description": "A list of Tag.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "description": "The tag resource.",
+      "properties": {
+        "key": {
+          "description": "Tag key.",
+          "type": "string"
+        }
+      }
+    },
     "BudgetsListResult": {
       "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
       "properties": {
@@ -2012,6 +3325,43 @@
         "contactEmails"
       ]
     },
+    "CostTags": {
+      "description": "A cost tag resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CostTagProperties",
+          "title": "Cost tag properties"
+        }
+      }
+    },
+    "CostTagProperties": {
+      "description": "The properties of the cost tag.",
+      "properties": {
+        "costTags": {
+          "description": "Cost tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CostTag"
+          }
+        }
+      }
+    },
+    "CostTag": {
+      "description": "The cost tag.",
+      "properties": {
+        "key": {
+          "description": "Cost tag key.",
+          "type": "string"
+        }
+      }
+    },
     "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
@@ -2246,6 +3596,30 @@
       "type": "string",
       "description": "Version of the API to be used with the client request. The current version is 2018-03-31."
     },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentIdParameter": {
+      "name": "departmentId",
+      "in": "path",
+      "description": "Department ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountIdParameter": {
+      "name": "enrollmentAccountId",
+      "in": "path",
+      "description": "EnrollmentAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
@@ -2296,6 +3670,7 @@
     "grainParameter": {
       "name": "grain",
       "description": "Can be daily or monthly",
+      "x-ms-parameter-location": "method",
       "in": "query",
       "required": true,
       "type": "string",

@@ -25,7 +25,7 @@ These are the global settings for the OperationalInsightsData API.
 
 ``` yaml
 title: OperationalInsightsDataClient
-description: Operational Insights Data Client
+description: Log Analytics Data Plane Client
 add-credentials: true
 openapi-type: data-plane
 tag: v1
@@ -38,6 +38,18 @@ These settings apply only when `--tag=v1` is specified on the command line.
 ``` yaml $(tag) == 'v1'
 input-file:
 - Microsoft.OperationalInsights/stable/v1/OperationalInsights.json
+directive:
+  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
+    remove-operation: Query_Get
+```
+
+``` yaml $(tag) == '20171001'
+input-file:
+- Microsoft.OperationalInsights/preview/2017-10-01/swagger.json
+directive:
+  - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
+    where-operation: Query_Post
+    transform: $.operationId = "Query"
 ```
 
 ---
@@ -53,6 +65,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## C#
@@ -67,40 +82,40 @@ csharp:
   clear-output-folder: true
   payload-flattening-threshold: 3
 directive:
-  - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
-    remove-operation: Query_Get
-  - reason: Rename Query_Post to Query so that we don't get an IQuery interface with 1 operation
-    where-operation: Query_Post
-    transform: $.operationId = "Query"
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
+```
+
+``` yaml $(python)
+python-mode: create
+python:
+  override-client-name: LogAnalyticsDataClient
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.loganalytics
+  package-name: azure-loganalytics
+  package-version: 0.1.0
+  clear-output-folder: true
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
+```
+``` yaml $(python) && $(python-mode) == 'update'
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-loganalytics/azure/loganalytics
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-loganalytics
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: operationalinsights
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: v1
-```
-
-### Tag: v1 and go
-
-These settings apply only when `--tag=v1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='v1' && $(go)
-output-folder: $(go-sdk-folder)/services/operationalinsights/v1/operationalinsights
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -110,9 +125,13 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.operationalinsights
+  fluent: false
+  namespace: com.microsoft.azure.loganalytics
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-operationalinsights
-```
+  output-folder: $(azure-libraries-for-java-folder)/loganalytics/data-plane
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
+  ```

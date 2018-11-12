@@ -29,7 +29,40 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2015-03-preview
+tag: package-2018-06-preview
+```
+
+## Suppression
+ ``` yaml
+ directive:
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: This would require a breaking change, and the capabilities API was removed in version 2018-06-01-preview.
+     from: Microsoft.HDInsight/preview/2015-03-01-1/preview/locations.json
+     where:
+       - $.definitions.CapabilitiesResult.properties.vmSize_filters
+       - $.definitions.RegionalQuotaCapability.properties.cores_available
+       - $.definitions.RegionalQuotaCapability.properties.cores_used
+       - $.definitions.RegionalQuotaCapability.properties.region_name
+       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+ ```
+
+### Tag: package-2018-06-preview
+
+These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-preview'
+input-file:
+- Microsoft.HDInsight/preview/2018-06-01-preview/cluster.json
+- Microsoft.HDInsight/preview/2018-06-01-preview/applications.json
+- Microsoft.HDInsight/preview/2018-06-01-preview/locations.json
+- Microsoft.HDInsight/preview/2018-06-01-preview/configurations.json
+- Microsoft.HDInsight/preview/2018-06-01-preview/extensions.json
+- Microsoft.HDInsight/preview/2018-06-01-preview/scriptActions.json
+- Microsoft.HDInsight/preview/2018-06-01-preview/operations.json
 ```
 
 
@@ -41,7 +74,7 @@ These settings apply only when `--tag=package-2015-03-preview` is specified on t
 input-file:
 - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/applications.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/capabilities.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/configurations.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
@@ -61,8 +94,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -72,30 +106,7 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: hdinsight
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-03-preview
-```
-
-### Tag: package-2015-03-preview and go
-
-These settings apply only when `--tag=package-2015-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/hdinsight/mgmt/2015-03-01-preview/hdinsight
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## C#
 
@@ -117,11 +128,48 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.hdinsight
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.hdinsight
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-06-preview
+  - tag: package-2015-03-preview
+```
+
+
+### Tag: package-2018-06-preview and java
+
+These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.hdinsight.v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/hdinsight/resource-manager/v2018_06_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+
+### Tag: package-2015-03-preview and java
+
+These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-03-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.hdinsight.v2015_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/hdinsight/resource-manager/v2015_03_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

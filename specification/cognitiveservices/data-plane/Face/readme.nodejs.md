@@ -6,6 +6,9 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-face
-  output-folder: $(node-sdks-folder)/lib/services/face/lib
-  override-client-name: FaceAPIClient
+  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesFace
+  azure-arm: false
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: true
 ```

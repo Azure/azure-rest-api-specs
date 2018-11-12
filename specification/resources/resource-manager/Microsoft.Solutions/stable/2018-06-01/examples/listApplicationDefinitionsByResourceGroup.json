@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "api-version": "2018-06-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "name": "myManagedApplicationDef",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef",
+            "type": "Microsoft.Solutions/applicationDefinitions",
+            "location": "East US 2",
+            "managedBy": null,
+            "resourceGroup": "rg",
+            "tags": null,
+            "identity": null,
+            "sku": null,
+            "properties": {
+              "artifacts": [
+                {
+                  "name": "CreateUiDefinition",
+                  "type": "Custom",
+                  "uri": "https://path/to/managedApplicationCreateUiDefinition.json"
+                },
+                {
+                  "name": "ManagedApplicationResourceTemplate",
+                  "type": "Template",
+                  "uri": "https://path/to/mainTemplate.json"
+                }
+              ],
+              "authorizations": [
+                {
+                  "principalId": "validprincipalguid",
+                  "roleDefinitionId": "validroleguid"
+                }
+              ],
+              "description": "myManagedApplicationDef description",
+              "displayName": "myManagedApplicationDef",
+              "lockLevel": null,
+              "packageFileUri": "https://path/to/packagezipfile"
+            }
+          },
+          {
+            "name": "myManagedApplicationDef2",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef2",
+            "type": "Microsoft.Solutions/applicationDefinitions",
+            "location": "West US",
+            "managedBy": null,
+            "resourceGroup": "rg",
+            "tags": null,
+            "identity": null,
+            "sku": null,
+            "properties": {
+              "artifacts": [
+                {
+                  "name": "CreateUiDefinition",
+                  "type": "Custom",
+                  "uri": "https://path/to/managedApplicationCreateUiDefinition.json"
+                },
+                {
+                  "name": "ManagedApplicationResourceTemplate",
+                  "type": "Template",
+                  "uri": "https://path/to/mainTemplate.json"
+                }
+              ],
+              "authorizations": [
+                {
+                  "principalId": "validprincipalguid",
+                  "roleDefinitionId": "validroleguid"
+                }
+              ],
+              "description": "myManagedApplicationDef2 description",
+              "displayName": "myManagedApplicationDef2",
+              "lockLevel": null,
+              "packageFileUri": "https://path/to/packagezipfile"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

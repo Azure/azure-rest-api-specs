@@ -134,7 +134,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -144,16 +144,6 @@
           "x-ms-client-flatten": true
         }
       }
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
     },
     "DatabaseOperationProperties": {
       "description": "The properties of a database operation.",
@@ -247,28 +237,6 @@
           "readOnly": true
         }
       }
-    },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {

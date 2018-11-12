@@ -51,21 +51,23 @@
                     },
                     "Create Secure Hadoop cluster": {
                         "$ref": "./examples/CreateLinuxHadoopSecureHadoop.json"
+                    },
+                    "Create Hadoop cluster with Azure Data Lake Storage Gen 2": {
+                        "$ref": "./examples/CreateLinuxHadoopAdlsGen2.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -75,15 +77,15 @@
                             "$ref": "#/definitions/ClusterCreateParametersExtended"
                         },
                         "description": "The cluster create request."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -104,19 +106,18 @@
                         "$ref": "./examples/PatchLinuxHadoopCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "parameters",
@@ -126,15 +127,15 @@
                             "$ref": "#/definitions/ClusterPatchParameters"
                         },
                         "description": "The cluster patch request."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -154,28 +155,27 @@
                         "$ref": "./examples/DeleteLinuxHadoopCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "202": {
                         "description": "Accepted response definition."
                     },
@@ -199,28 +199,27 @@
                         "$ref": "./examples/GetLinuxSparkCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -242,21 +241,24 @@
                         "$ref": "./examples/GetLinuxHadoopAllClustersInResourceGroup.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -281,19 +283,15 @@
                         "$ref": "./examples/ResizeLinuxHadoopCluster.json"
                     }
                 },
-                "parameters": [{
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
                     },
                     {
                         "name": "roleName",
@@ -310,6 +308,9 @@
                         }
                     },
                     {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
@@ -317,15 +318,15 @@
                             "$ref": "#/definitions/ClusterResizeParameters"
                         },
                         "description": "The parameters for the resize operation."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition."
                     },
@@ -348,14 +349,21 @@
                     }
                 },
                 "description": "Lists all the HDInsight clusters under the subscription.",
-                "parameters": [{
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
+                "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
                     "200": {
                         "description": "OK response definition.",
                         "schema": {
@@ -438,6 +446,14 @@
                         "type": "string"
                     },
                     "description": "Optional. The Distinguished Names for cluster user groups"
+                },
+                "aaddsResourceId": {
+                    "type": "string",
+                    "description": "The resource ID of the user's Azure Active Directory Domain Service."
+                },
+                "msiResourceId": {
+                    "type": "string",
+                    "description": "User assigned identity that has permissions to read and create cluster-related artifacts in the user's AADDS."
                 }
             }
         },
@@ -483,6 +499,53 @@
                 }
             }
         },
+        "SshPublicKey": {
+            "description": "The SSH public key for the cluster nodes.",
+            "properties": {
+                "certificateData": {
+                    "type": "string",
+                    "description": "The certificate for SSH."
+                }
+            }
+        },
+        "SshProfile": {
+            "description": "The list of SSH public keys.",
+            "properties": {
+                "publicKeys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SshPublicKey"
+                    },
+                    "description": "The list of SSH public keys."
+                }
+            }
+        },
+        "LinuxOperatingSystemProfile": {
+            "description": "The ssh username, password, and ssh public key.",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The username."
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password."
+                },
+                "sshProfile": {
+                    "$ref": "#/definitions/SshProfile",
+                    "description": "The SSH profile."
+                }
+            }
+        },
+        "OsProfile": {
+            "description": "The Linux operation systems profile.",
+            "properties": {
+                "linuxOperatingSystemProfile": {
+                    "$ref": "#/definitions/LinuxOperatingSystemProfile",
+                    "description": "The Linux OS profile."
+                }
+            }
+        },
         "Role": {
             "properties": {
                 "name": {
@@ -504,7 +567,7 @@
                     "description": "The hardware profile."
                 },
                 "osProfile": {
-                    "$ref": "./configurations.json#/definitions/OsProfile",
+                    "$ref": "#/definitions/OsProfile",
                     "description": "The operating system profile."
                 },
                 "virtualNetworkProfile": {
@@ -552,7 +615,11 @@
                 },
                 "container": {
                     "type": "string",
-                    "description": "The container in the storage account."
+                    "description": "The container in the storage account, only to be specified for WASB storage accounts."
+                },
+                "fileSystem": {
+                    "type": "string",
+                    "description": "The filesystem, only to be specified for Azure Data Lake Storage Gen 2."
                 },
                 "key": {
                     "type": "string",
@@ -638,6 +705,10 @@
                 "properties": {
                     "$ref": "#/definitions/ClusterCreateProperties",
                     "description": "The cluster create parameters."
+                },
+                "identity": {
+                  "$ref": "#/definitions/ClusterIdentity",
+                  "description": "The identity of the cluster, if configured."
                 }
             },
             "description": "The CreateCluster request parameters."
@@ -665,7 +736,7 @@
                 }
             }
         },
-        "errors": {
+        "Errors": {
             "description": "The error message associated with the cluster creation.",
             "properties": {
                 "code": {
@@ -773,7 +844,7 @@
                 "errors": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/errors"
+                        "$ref": "#/definitions/Errors"
                     },
                     "description": "The list of errors."
                 },
@@ -801,6 +872,10 @@
                 "properties": {
                     "$ref": "#/definitions/ClusterGetProperties",
                     "description": "The properties of the cluster."
+                },
+                "identity": {
+                  "$ref": "#/definitions/ClusterIdentity",
+                  "description": "The identity of the cluster, if configured."
                 }
             },
             "description": "The HDInsight cluster."
@@ -959,6 +1034,54 @@
             },
             "description": "The list runtime script action detail response."
         },
+        "ClusterIdentity": {
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of cluster identity. This property will only be provided for a system assigned identity."
+              },
+              "tenantId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The tenant id associated with the cluster. This property will only be provided for a system assigned identity."
+              },
+              "type": {
+                "type": "string",
+                "description": "The type of identity used for the cluster. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities.",
+                "enum": [
+                  "SystemAssigned",
+                  "UserAssigned",
+                  "SystemAssigned, UserAssigned",
+                  "None"
+                ],
+                "x-ms-enum": {
+                  "name": "ResourceIdentityType",
+                  "modelAsString": false
+                }
+              },
+              "userAssignedIdentities": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "principalId": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "The principal id of user assigned identity."
+                    },
+                    "clientId": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "The client id of user assigned identity."
+                    }
+                  }
+                },
+                "description": "The list of user identities associated with the cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+              }
+            },
+            "description": "Identity for the cluster."
+          },
         "ClusterListResult": {
             "properties": {
                 "value": {
@@ -1002,7 +1125,7 @@
                     }
                 },
                 "error": {
-                    "$ref": "#/definitions/errors",
+                    "$ref": "#/definitions/Errors",
                     "description": "The operation error information."
                 }
             },
@@ -1066,49 +1189,6 @@
                     "$ref": "#/definitions/Resource"
                 }
             ]
-        },
-        "Operation": {
-            "description": "The HDInsight REST API operation.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "The operation name: {provider}/{resource}/{operation}",
-                    "type": "string"
-                },
-                "display": {
-                    "description": "The object that represents the operation.",
-                    "properties": {
-                        "provider": {
-                            "description": "The service provider: Microsoft.HDInsight",
-                            "type": "string"
-                        },
-                        "resource": {
-                            "description": "The resource on which the operation is performed: Cluster, Capabilities, etc.",
-                            "type": "string"
-                        },
-                        "operation": {
-                            "description": "The operation type: read, write, delete, etc.",
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "OperationListResult": {
-            "description": "Result of the request to list HDInsight operations. It contains a list of operations and a URL link to get the next set of results.",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Operation"
-                    },
-                    "description": "The list of HDInsight operations supported by the HDInsight resource provider."
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "The URL to get the next set of operation list results if there are any."
-                }
-            }
         }
     },
     "parameters": {
@@ -1118,6 +1198,22 @@
             "required": true,
             "type": "string",
             "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group.",
+            "x-ms-parameter-location": "method"
+        },
+        "ClusterNameParameter": {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster.",
+            "x-ms-parameter-location": "method"
         },
         "ApiVersionParameter": {
             "name": "api-version",

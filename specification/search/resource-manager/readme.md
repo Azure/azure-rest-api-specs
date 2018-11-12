@@ -61,9 +61,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_search']
 ```
 
 
@@ -108,44 +112,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-search
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: search
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-08
-  - tag: package-2015-02
-```
-
-### Tag: package-2015-08 and go
-
-These settings apply only when `--tag=package-2015-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-08' && $(go)
-output-folder: $(go-sdk-folder)/services/search/mgmt/2015-08-19/search
-```
-
-### Tag: package-2015-02 and go
-
-These settings apply only when `--tag=package-2015-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-02' && $(go)
-output-folder: $(go-sdk-folder)/services/search/mgmt/2015-02-28/search
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -153,11 +122,46 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.search
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-search
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.search
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-search
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-02
+  - tag: package-2015-08
+```
+
+### Tag: package-2015-02 and java
+
+These settings apply only when `--tag=package-2015-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_02_28
+  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_02_28
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2015-08 and java
+
+These settings apply only when `--tag=package-2015-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_08_19
+  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_08_19
+regenerate-manager: true
+generate-interface: true
+```
+
+

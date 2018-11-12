@@ -7,5 +7,8 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-machinelearningcompute
-  output-folder: $(node-sdks-folder)/lib/services/machinelearningcomputeManagement/lib
+  output-folder: $(node-sdks-folder)/lib/services/machinelearningcomputeManagement
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: true
 ```

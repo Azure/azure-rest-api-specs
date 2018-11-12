@@ -304,35 +304,6 @@
         }
       }
     },
-    "ResourceIdentity": {
-      "description": "Azure Active Directory identity configuration for a resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "format": "uuid",
-          "description": "The Azure Active Directory principal id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
-          "enum": [
-            "SystemAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          }
-        },
-        "tenantId": {
-          "format": "uuid",
-          "description": "The Azure Active Directory tenant id.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "ServerProperties": {
       "description": "The properties of a server.",
       "type": "object",
@@ -369,57 +340,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "Server": {
       "description": "An Azure SQL Database server.",
       "required": [
@@ -428,12 +348,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResourceIdentity",
+          "$ref": "../../../common/v1/types.json#/definitions/ResourceIdentity",
           "description": "The Azure Active Directory identity of the server.",
           "x-ms-mutability": [
             "read",

@@ -1,92 +1,76 @@
 {
-   "parameters":{
-      "api-version":"2016-06-01",
-      "resourceGroupName":"testResourceGroup",
-      "subscriptionId":"34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-      "workflowName":"testWorkflowName"
-   },
-   "responses":{
-      "200":{
-        "body": {
-            "swagger": "2.0",
-            "info": {
-              "title": "flow",
-              "description": "Azure Logic App."
-            },
-            "host": "test-host",
-            "basePath": "/workflows/2e420261710e423490d5d502fe9c4abb/triggers",
-            "schemes": [ "http" ],
-            "consumes": [ "application/json" ],
-            "produces": [ "application/json" ],
-            "paths": {
-              "/simpleManualTrigger/paths/invoke": {
-                "post": {
-                  "description": "Trigger a run of the logic app.",
-                  "operationId": "simpleManualTrigger-invoke",
-                  "parameters": [
-                    {
-                      "name": "api-version",
-                      "in": "query",
-                      "description": "The service API version.",
-                      "required": true,
-                      "type": "string"
-                    },
-                    {
-                      "name": "sp",
-                      "in": "query",
-                      "description": "The permissions; generally 'read' or 'write'.",
-                      "required": true,
-                      "type": "string"
-                    },
-                    {
-                      "name": "sv",
-                      "in": "query",
-                      "description": "The version number of the query parameters.",
-                      "required": true,
-                      "type": "string"
-                    },
-                    {
-                      "name": "sig",
-                      "in": "query",
-                      "description": "The SHA 256 hash of the entire request URI with an internal key.",
-                      "required": true,
-                      "type": "string"
-                    },
-                    {
-                      "name": "body",
-                      "in": "body",
-                      "description": "The request body.",
-                      "required": false,
-                      "schema": {
-                        "$ref": "#/definitions/request-simpleManualTrigger"
-                      }
-                    }
-                  ],
-                  "responses": {
-                    "default": {
-                      "description": "The Logic App Response.",
-                      "schema": { "type": "object" }
-                    }
-                  }
+  "parameters": {
+    "api-version": "2016-06-01",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workflowName": "testWorkflowName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "swagger": "2.0",
+        "info": {
+          "title": "flow",
+          "description": "Azure Logic App."
+        },
+        "host": "test-host",
+        "basePath": "/workflows/2e420261710e423490d5d502fe9c4abb/triggers",
+        "schemes": [
+          "http"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "paths": {
+          "/simpleManualTrigger/paths/invoke": {
+            "post": {
+              "description": "Trigger a run of the logic app.",
+              "operationId": "simpleManualTrigger-invoke",
+              "parameters": [
+                {
+                  "name": "api-version",
+                  "in": "query",
+                  "description": "The service API version.",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "sp",
+                  "in": "query",
+                  "description": "The permissions; generally 'read' or 'write'.",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "sv",
+                  "in": "query",
+                  "description": "The version number of the query parameters.",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "sig",
+                  "in": "query",
+                  "description": "The SHA 256 hash of the entire request URI with an internal key.",
+                  "required": true,
+                  "type": "string"
                 }
-              }
-            },
-            "definitions": {
-              "request-simpleManualTrigger": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "description": "Title."
-                  },
-                  "sendEmail": {
-                    "type": "boolean",
-                    "description": "Whether to send email."
+              ],
+              "responses": {
+                "default": {
+                  "description": "The Logic App Response.",
+                  "schema": {
+                    "type": "object"
                   }
                 }
               }
             }
           }
+        }
       }
-   }
+    }
+  }
 }

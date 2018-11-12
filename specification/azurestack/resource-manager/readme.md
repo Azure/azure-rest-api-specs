@@ -71,8 +71,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## C#
@@ -91,30 +93,9 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-azurestack
-  no-namespace-folders: true
-  clear-output-folder: true
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -122,11 +103,32 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.azurestack
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestack
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.azurestack
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestack
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-06-01
+```
+
+### Tag: package-2017-06-01 and java
+
+These settings apply only when `--tag=package-2017-06-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-06-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azurestack.v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/azurestack/resource-manager/v2017_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+

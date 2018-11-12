@@ -66,6 +66,32 @@
                     "description": "Type of Resource.",
                     "type": "string"
                 },
+                "etag": {
+                    "description": "The entity tag used for optimistic concurency when modifying the resource.",
+                    "type": "string"
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+		"TrackedResource": {
+            "description": "Base resource object.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "description": "ID of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "readOnly": true,
+                    "description": "Name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "readOnly": true,
+                    "description": "Type of Resource.",
+                    "type": "string"
+                },
                 "location": {
                     "description": "Location of the resource.",
                     "type": "string",
@@ -164,7 +190,37 @@
                     "type": "string"
                 }
             }
-        }
+        },
+		"ErrorDetails": {
+		  "description": "The details of the error.",
+		  "properties": {
+			"code": {
+			  "description": "Error code.",
+			  "type": "string",
+			  "readOnly": true
+			},
+			"message": {
+			  "description": "Error message indicating why the operation failed.",
+			  "type": "string",
+			  "readOnly": true
+			},
+			"target": {
+			  "description": "The target of the particular error.",
+			  "type": "string",
+			  "readOnly": true
+			}
+		  }
+		},
+		"ErrorResponse": {
+		  "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+		  "type": "object",
+		  "properties": {
+			"error": {
+			  "description": "The details of the error.",
+			  "$ref": "#/definitions/ErrorDetails"
+			}
+		  }
+		}
     },
     "parameters": {
         "SubscriptionIdParameter": {

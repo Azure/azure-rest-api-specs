@@ -26,7 +26,7 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2018-10
 ```
 
 ### Tag: package-2017-11
@@ -56,6 +56,46 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 ``` yaml $(tag) == 'package-2018-03'
 input-file:
 - Microsoft.Consumption/stable/2018-03-31/consumption.json
+```
+
+---
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05'
+input-file:
+- Microsoft.Consumption/stable/2018-05-31/consumption.json
+```
+
+---
+### Tag: package-2018-06
+
+These settings apply only when `--tag=package-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06'
+input-file:
+- Microsoft.Consumption/stable/2018-06-30/consumption.json
+```
+
+---
+### Tag: package-2018-08
+
+These settings apply only when `--tag=package-2018-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08'
+input-file:
+- Microsoft.Consumption/stable/2018-08-31/consumption.json
+```
+
+---
+### Tag: package-2018-10
+
+These settings apply only when `--tag=package-2018-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10'
+input-file:
+- Microsoft.Consumption/stable/2018-10-01/consumption.json
 ```
 
 ## Suppression
@@ -100,7 +140,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
 ```
 
 
@@ -146,81 +190,149 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
 
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: consumption
-  clear-output-folder: true
-```
-
-### Go multi-api
-``` yaml $(go) && $(multiapi)
-batch:
-   - tag: package-2017-04-preview
-   - tag: package-2017-11
-   - tag: package-2017-12-preview
-   - tag: package-2018-01
-   - tag: package-2018-03
-```
-
-
-### Tag: package-2017-04-preview and go
-
-These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-04-24-preview/consumption
-```
-
-### Tag: package-2017-11 and go
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-11-30/consumption
-```
-
-### Tag: package-2017-12-preview and go
-These settings apply only when `--tag=package-2017-12-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/consumption
-```
-
-### Tag: package-2018-01 and go
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-01-31/consumption
-```
-
-### Tag: package-2018-03 and go
-These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(go)
-output-folder: $(go-sdk-folder)/services/consumption/mgmt/2018-03-31/consumption
-```
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.consumption
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-consumption
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.consumption
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-consumption
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-04-preview
+  - tag: package-2017-11
+  - tag: package-2018-01
+  - tag: package-2018-03
+  - tag: package-2017-12-preview
+  - tag: package-2018-05
+  - tag: package-2018-06
+  - tag: package-2018-08
+  - tag: package-2018-10
+```
+
+### Tag: package-2017-04-preview and java
+
+These settings apply only when `--tag=package-2017-04-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_04_24_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-11 and java
+
+These settings apply only when `--tag=package-2017-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2017_11_30
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_11_30
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-01 and java
+
+These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_01_31
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_01_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-03 and java
+
+These settings apply only when `--tag=package-2018-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_03_31
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_03_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-12-preview and java
+
+These settings apply only when `--tag=package-2017-12-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-12-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2017_12_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_12_30_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-05 and java
+
+These settings apply only when `--tag=package-2018-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_05_31
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_05_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-06 and java
+
+These settings apply only when `--tag=package-2018-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_06_30
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_06_30
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-08 and java
+
+These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_08_31
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_08_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-10 and java
+
+These settings apply only when `--tag=package-2018-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
+regenerate-manager: true
+generate-interface: true
+```
+

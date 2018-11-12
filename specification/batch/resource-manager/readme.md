@@ -46,6 +46,30 @@ directive:
   - suppress: R2063
     from: BatchManagement.json
     reason: Bug in linter
+
+  - from:
+     - 2017-09-01/BatchManagement.json
+     - 2017-05-01/BatchManagement.json
+     - 2017-01-01/BatchManagement.json
+     - 2015-12-01/BatchManagement.json
+    where:
+    - $.definitions.Application
+    - $.definitions.ApplicationPackage
+    suppress:
+    - R2020
+    reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future next API versions.
+
+  - from:
+     - 2017-09-01/BatchManagement.json
+     - 2017-05-01/BatchManagement.json
+     - 2017-01-01/BatchManagement.json
+     - 2015-12-01/BatchManagement.json
+    where:
+    - $.definitions.Application.properties
+    - $.definitions.ApplicationPackage.properties
+    suppress:
+    - R3006
+    reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future API versions.
 ```
 
 
@@ -90,9 +114,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_batch']
 ```
 
 
@@ -111,6 +139,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Batch/Management/Management.Batch/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
@@ -139,75 +171,80 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-batch
 ```
 
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: batch
-  clear-output-folder: true
-```
-
-### Go multi-api
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-09
-  - tag: package-2017-05
-  - tag: package-2017-01
-  - tag: package-2015-12
-```
-
-### Tag: package-2017-09 and go
-
-These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-09' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/mgmt/2017-09-01/batch
-```
-
-### Tag: package-2017-05 and go
-
-These settings apply only when `--tag=package-2017-05 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-05' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/mgmt/2017-05-01/batch
-```
-
-### Tag: package-2017-01 and go
-
-These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-01' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/mgmt/2017-01-01/batch
-```
-
-### Tag: package-2015-12 and go
-
-These settings apply only when `--tag=package-2015-12 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-12' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/mgmt/2015-12-01/batch
-```
-
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.batch
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-batch
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.batch
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-batch
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-12
+  - tag: package-2017-09
+  - tag: package-2017-01
+  - tag: package-2017-05
+```
+
+### Tag: package-2015-12 and java
+
+These settings apply only when `--tag=package-2015-12 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-12' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.batch.v2015_12_01
+  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2015_12_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-09 and java
+
+These settings apply only when `--tag=package-2017-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.batch.v2017_09_01
+  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-01 and java
+
+These settings apply only when `--tag=package-2017-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.batch.v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-05 and java
+
+These settings apply only when `--tag=package-2017-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.batch.v2017_05_01
+  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+`

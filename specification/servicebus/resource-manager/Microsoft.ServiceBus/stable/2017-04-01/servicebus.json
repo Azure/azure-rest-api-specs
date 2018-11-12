@@ -166,7 +166,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -209,7 +209,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "namespaceName",
@@ -273,10 +273,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -318,10 +318,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -356,10 +356,10 @@
         "description": "Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "name": "parameters",
@@ -417,10 +417,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -463,13 +463,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -516,13 +516,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -560,13 +560,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -606,13 +606,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -652,13 +652,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -692,6 +692,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrate": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Migrate",
+        "x-ms-examples": {
+          "NameSpaceUpdate": { "$ref": "./examples/NameSpaces/SBNamespaceMigrate.json" }
+        },
+        "description": "This operation Migrate the given namespace to provided name type",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBNamespaceMigrate"
+            },
+            "description": "Parameters supplied to migrate namespace type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Migrate Namepsace type is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability": {
       "post": {
         "tags": [
@@ -704,10 +750,10 @@
         "description": "Check the give namespace name availability.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -753,10 +799,10 @@
         "description": "Gets all Alias(Disaster Recovery configurations)",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -796,13 +842,13 @@
         "description": "Creates or updates a new Alias(Disaster Recovery configuration)",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "name": "parameters",
@@ -849,13 +895,13 @@
         "description": "Deletes an Alias(Disaster Recovery configuration)",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -887,13 +933,13 @@
         "description": "Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -930,13 +976,13 @@
         "description": "This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -970,13 +1016,13 @@
         "description": "envokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1013,13 +1059,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1062,16 +1108,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1111,16 +1157,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/AliasNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1135,6 +1181,267 @@
             "schema": {
               "$ref": "#/definitions/AccessKeys"
             }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations": {
+      "get": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_List",
+        "x-ms-examples": {
+          "MigrationConfigurationsList": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationList.json" }
+        },
+        "description": "Gets all migrationConfigurations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of migrationConfigurations for servicebus namespace",
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}": {
+      "put": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_CreateAndStartMigration",
+        "x-ms-examples": {
+          "MigrationConfigurationsStartMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCreateAndStartMigration.json" }
+        },
+        "description": "Creates Migration configuration and starts migration of enties from Standard to Premium namespace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigProperties"
+            },
+            "description": "Parameters required to create Migration Configuration"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Migration Config successfully created",
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigProperties"
+            }
+          },
+          "201": {
+            "description": "Migration Config creation request received"
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_Delete",
+        "x-ms-examples": {
+          "MigrationConfigurationsDelete": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationDelete.json" }
+        },
+        "description": "Deletes a MigrationConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Migration Config request accepted"
+          },
+          "204": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_Get",
+        "x-ms-examples": {
+          "MigrationConfigurationsGet": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationGet.json" }
+        },
+        "description": "Retrieves Migration Config",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Migration Config)",
+            "schema": {
+              "$ref": "#/definitions/MigrationConfigProperties"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/upgrade": {
+      "post": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_CompleteMigration",
+        "x-ms-examples": {
+          "MigrationConfigurationsCompleteMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCompleteMigration.json" }
+        },
+        "description": "This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any enties created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "upgrade operation of Migration Config is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrationConfigurations/{configName}/revert": {
+      "post": {
+        "tags": [
+          "MigrationConfigs"
+        ],
+        "operationId": "MigrationConfigs_Revert",
+        "x-ms-examples": {
+          "MigrationConfigurationsRevert": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationRevert.json" }
+        },
+        "description": "This operation reverts Migration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MigrationConfig Revert operation is successful."
           },
           "default": {
             "description": "ServiceBus error response describing why the operation failed.",
@@ -1160,16 +1467,22 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1206,13 +1519,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
             "name": "parameters",
@@ -1259,13 +1572,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1303,13 +1616,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1349,13 +1662,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1395,16 +1708,16 @@
         "description": "Creates an authorization rule for a queue.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1451,16 +1764,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1498,16 +1811,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1547,16 +1860,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1596,16 +1909,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/queueNameParameter"
+            "$ref": "#/parameters/QueueNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1654,16 +1967,22 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -1700,13 +2019,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
             "name": "parameters",
@@ -1753,13 +2072,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1797,13 +2116,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1843,13 +2162,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1892,16 +2211,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -1948,16 +2267,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1995,16 +2314,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2044,16 +2363,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2093,16 +2412,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/authorizationRuleNameParameter"
+            "$ref": "#/parameters/AuthorizationRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -2151,19 +2470,25 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -2200,16 +2525,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionNameParameter"
+            "$ref": "#/parameters/SubscriptionNameParameter"
           },
           {
             "name": "parameters",
@@ -2256,16 +2581,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionNameParameter"
+            "$ref": "#/parameters/SubscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2303,16 +2628,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionNameParameter"
+            "$ref": "#/parameters/SubscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2349,22 +2674,28 @@
         "description": "List all the rules within given topic-subscription",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionNameParameter"
+            "$ref": "#/parameters/SubscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
           }
         ],
         "responses": {
@@ -2393,24 +2724,26 @@
         ],
         "operationId": "Rules_CreateOrUpdate",
         "x-ms-examples": {
-          "RulesCreateOrUpdate": { "$ref": "./examples/Rules/RuleUpdate.json" }
+          "RulesCreateOrUpdate": { "$ref": "./examples/Rules/RuleCreate.json" },
+          "RulesCreateSQLFilter": { "$ref": "./examples/Rules/RuleCreate_sqlfilter.json" },
+          "RulesCreateCorelationFilter": { "$ref": "./examples/Rules/RuleCreate_Corelationfilter.json" }
         },
         "description": "Creates a new rule and updates an existing rule",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionNameParameter"
+            "$ref": "#/parameters/SubscriptionNameParameter"
           },
           {
-            "$ref": "#/parameters/ruleNameParameter"
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "name": "parameters",
@@ -2454,19 +2787,19 @@
         "description": "Deletes an existing rule.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionNameParameter"
+            "$ref": "#/parameters/SubscriptionNameParameter"
           },
           {
-            "$ref": "#/parameters/ruleNameParameter"
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2504,19 +2837,19 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/topicNameParameter"
+            "$ref": "#/parameters/TopicNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionNameParameter"
+            "$ref": "#/parameters/SubscriptionNameParameter"
           },
           {
-            "$ref": "#/parameters/ruleNameParameter"
+            "$ref": "#/parameters/RuleNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2559,7 +2892,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/skuNameParameter"
+            "$ref": "#/parameters/SkuNameParameter"
           }
         ],
         "responses": {
@@ -2630,10 +2963,10 @@
         "description": "Gets all the Event Hubs in a service bus Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2863,6 +3196,30 @@
         "name"
       ],
       "description": "SKU of the namespace."
+    },
+    "SBNamespaceMigrate": {
+      "type": "object",
+      "properties": {
+        "targetNamespaceType": {
+          "type": "string",
+          "description": "Type of namespaces",
+          "enum": [
+            "Messaging",
+            "NotificationHub",
+            "Mixed",
+            "EventHub",
+            "Relay"
+          ],
+          "x-ms-enum": {
+            "name": "NameSpaceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "targetNamespaceType"
+      ],
+      "description": "Namespace Migrate Object"
     },
     "SBAuthorizationRuleListResult": {
       "properties": {
@@ -3626,6 +3983,13 @@
     "CorrelationFilter": {
       "type": "object",
       "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "dictionary object for custom filters"
+        },
         "correlationId": {
           "type": "string",
           "description": "Identifier of the correlation."
@@ -3928,6 +4292,12 @@
                 "modelAsString": false
               }
             },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
+            },
             "partnerNamespace": {
               "type": "string",
               "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
@@ -3977,6 +4347,67 @@
         }
       },
       "description": "The result of the List Alias(Disaster Recovery configuration) operation."
+    },
+    "MigrationConfigProperties": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Provisioning state of Migration Configuration "
+            },
+            "pendingReplicationOperationsCount": {
+              "readOnly": true,
+              "format": "int64",
+              "type": "integer",
+              "description": "Number of entities pending to be replicated."
+            },
+            "targetNamespace": {
+              "type": "string",
+              "description": "Existing premium Namespace ARM Id name which has no entities, will be used for migration"
+            },
+            "postMigrationName": {
+              "type": "string",
+              "description": "Name to access Standard Namespace after migration"
+            },
+            "migrationState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "State in which Standard to Premium Migration is, possible values : Unknown, Reverting, Completing, Initiating, Syncing, Active"
+            }
+          },
+          "required": [
+            "targetNamespace",
+            "postMigrationName"
+          ],
+          "description": "Properties required to the Create Migration Configuration"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in List or Get Migration Config operation"
+    },
+    "MigrationConfigListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationConfigProperties"
+          },
+          "description": "List of Migration Configs"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of migrationConfigurations"
+        }
+      },
+      "description": "The result of the List migrationConfigurations operation."
     }
   },
   "parameters": {
@@ -3994,7 +4425,7 @@
       "type": "string",
       "description": "Client API version."
     },
-    "resourceGroupNameParameter": {
+    "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
@@ -4004,7 +4435,7 @@
       "x-ms-parameter-location": "method",
       "description": "Name of the Resource group within the Azure subscription."
     },
-    "namespaceNameParameter": {
+    "NamespaceNameParameter": {
       "name": "namespaceName",
       "in": "path",
       "required": true,
@@ -4014,7 +4445,7 @@
       "x-ms-parameter-location": "method",
       "description": "The namespace name"
     },
-    "authorizationRuleNameParameter": {
+    "AuthorizationRuleNameParameter": {
       "name": "authorizationRuleName",
       "in": "path",
       "required": true,
@@ -4024,7 +4455,7 @@
       "x-ms-parameter-location": "method",
       "description": "The authorizationrule name."
     },
-    "queueNameParameter": {
+    "QueueNameParameter": {
       "name": "queueName",
       "in": "path",
       "required": true,
@@ -4033,7 +4464,7 @@
       "x-ms-parameter-location": "method",
       "description": "The queue name."
     },
-    "topicNameParameter": {
+    "TopicNameParameter": {
       "name": "topicName",
       "in": "path",
       "required": true,
@@ -4042,7 +4473,7 @@
       "x-ms-parameter-location": "method",
       "description": "The topic name."
     },
-    "subscriptionNameParameter": {
+    "SubscriptionNameParameter": {
       "name": "subscriptionName",
       "in": "path",
       "required": true,
@@ -4052,7 +4483,7 @@
       "x-ms-parameter-location": "method",
       "description": "The subscription name."
     },
-    "ruleNameParameter": {
+    "RuleNameParameter": {
       "name": "ruleName",
       "in": "path",
       "required": true,
@@ -4062,7 +4493,7 @@
       "x-ms-parameter-location": "method",
       "description": "The rule name."
     },
-    "skuNameParameter": {
+    "SkuNameParameter": {
       "name": "sku",
       "in": "path",
       "required": true,
@@ -4072,7 +4503,7 @@
       "x-ms-parameter-location": "method",
       "description": "The sku type."
     },
-    "aliasNameParameter": {
+    "AliasNameParameter": {
       "name": "alias",
       "in": "path",
       "required": true,
@@ -4081,6 +4512,41 @@
       "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The Disaster Recovery configuration name"
+    },
+    "ConfigNameParameter": {
+      "name": "configName",
+      "in": "path",
+      "description": "The configuration name. Should always be \"$default\".",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "$default"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationConfigurationName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "name": "$skip",
+      "description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results to the most recent N usageDetails.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
     }
   }
 }
