@@ -260,8 +260,9 @@
       "AzureFirewallIPConfigurationPropertiesFormat":{  
          "properties":{  
             "privateIPAddress": {
-              "type": "string",
-              "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes."
+               "type": "string",
+               "readOnly": true,
+               "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes."
             },
             "subnet":{
                "$ref":"./network.json#/definitions/SubResource",
