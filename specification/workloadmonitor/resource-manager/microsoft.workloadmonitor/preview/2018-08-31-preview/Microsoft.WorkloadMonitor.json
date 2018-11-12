@@ -628,6 +628,78 @@
             "$ref": "./examples/NotificationSettings_ListByResource.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Update notification settings for a resource.",
+        "operationId": "NotificationSettings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationSettingProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSettingsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationSettings_Update": {
+            "$ref": "./examples/NotificationSettings_Update.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.WorkloadMonitor/componentsSummary": {
@@ -1487,7 +1559,7 @@
       "description": "Model for properties of a NotificationSetting.",
       "type": "object",
       "properties": {
-        "actionGroups": {
+        "ActionGroupResourceIds": {
           "description": "List of action group resource ids to be notified",
           "type": "array",
           "items": {
