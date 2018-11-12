@@ -675,6 +675,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body of the NotificationSetting PUT object.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NotificationSettingProperties"
@@ -1518,11 +1519,6 @@
       "description": "Model for collection of notificationSettings.",
       "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "URL to the next set of results.",
-          "type": "string",
-          "readOnly": true
-        },
         "value": {
           "description": "Collection of components.",
           "type": "array",
@@ -1559,7 +1555,7 @@
       "description": "Model for properties of a NotificationSetting.",
       "type": "object",
       "properties": {
-        "ActionGroupResourceIds": {
+        "actionGroupResourceIds": {
           "description": "List of action group resource ids to be notified",
           "type": "array",
           "items": {
