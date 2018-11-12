@@ -678,7 +678,7 @@
             "description": "Body of the NotificationSetting PUT object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NotificationSettingProperties"
+              "$ref": "#/definitions/NotificationSetting"
             }
           }
         ],
@@ -1519,41 +1519,19 @@
       "description": "Model for collection of notificationSettings.",
       "type": "object",
       "properties": {
-        "value": {
-          "description": "Collection of components.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NotificationSetting"
-          },
-          "readOnly": true
+        "properties": {
+          "$ref": "#/definitions/NotificationSetting"
         }
       }
     },
     "NotificationSetting": {
-      "description": "Model for component.",
+      "description": "Model for properties of a NotificationSetting.",
       "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
-      "properties": {
-        "etag": {
-          "description": "For optimistic concurrency control.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/NotificationSettingProperties",
-          "description": "Properties of the component.",
-          "readOnly": true,
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NotificationSettingProperties": {
-      "description": "Model for properties of a NotificationSetting.",
-      "type": "object",
       "properties": {
         "actionGroupResourceIds": {
           "description": "List of action group resource ids to be notified",
