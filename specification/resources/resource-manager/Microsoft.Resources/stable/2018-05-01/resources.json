@@ -34,6 +34,31 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Microsoft.Resources REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}": {
       "delete": {
         "tags": [
@@ -2785,6 +2810,7 @@
           "description": "The ID of the deployment."
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the deployment."
         },
@@ -2797,9 +2823,6 @@
           "description": "Deployment properties."
         }
       },
-      "required": [
-        "name"
-      ],
       "x-ms-azure-resource": true,
       "description": "Deployment information."
     },
@@ -3000,6 +3023,7 @@
           "description": "The ID of the resource group."
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the resource group."
         },
@@ -3310,7 +3334,7 @@
         },
         "operation": {
           "type": "string",
-          "description": "Operation."
+          "description": "Resource provider operation."
         },
         "description": {
           "type": "string",
@@ -3349,7 +3373,7 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "Resource."
+      "description": "Specified resource."
     },
     "SubResource": {
       "properties": {
@@ -3373,6 +3397,53 @@
         }
       },
       "description": "Resource group export result."
+    },
+    "Operation": {
+      "description": "Microsoft.Resources operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Resources",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Resources operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     }
   },
   "parameters": {

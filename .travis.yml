@@ -68,7 +68,7 @@ script:
   - >-
     if [[ $MODE == 'semantic' ]]; then
       npm install
-      npm test -- test/semantic.js
+      node scripts/semanticValidation.js
     fi
   - >-
     if [[ $MODE == 'model' ]]; then
