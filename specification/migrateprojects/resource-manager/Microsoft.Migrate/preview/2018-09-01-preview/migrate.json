@@ -2290,6 +2290,11 @@
                "description":"Gets or sets the list of tools registered with the migrate project.",
                "type":"array",
                "items":{  
+                  "enum":[  
+                     "ServerDiscovery",
+                     "ServerAssessment",
+                     "ServerMigration"
+                  ],
                   "type":"string"
                }
             },
@@ -2298,6 +2303,22 @@
                "type":"object",
                "additionalProperties":{  
                   "$ref":"#/definitions/GoalSummary"
+               }
+            },
+            "provisioningState":{  
+               "type":"string",
+               "enum":[  
+                  "Accepted",
+                  "Creating",
+                  "Deleting",
+                  "Failed",
+                  "Moving",
+                  "Succeeded"
+               ],
+               "description":"Provisioning state of the migrate project.",
+               "x-ms-enum":{  
+                  "name":"ProvisioningState",
+                  "modelAsString":true
                }
             }
          }
@@ -2334,6 +2355,11 @@
          "properties":{  
             "tool":{  
                "description":"Gets or sets the tool to be registered.",
+               "enum":[  
+                  "ServerDiscovery",
+                  "ServerAssessment",
+                  "ServerMigration"
+               ],
                "type":"string"
             }
          }
@@ -2390,6 +2416,11 @@
          "properties":{  
             "tool":{  
                "description":"Gets or sets the tool being used in the solution.",
+               "enum":[  
+                  "ServerDiscovery",
+                  "ServerAssessment",
+                  "ServerMigration"
+               ],
                "type":"string"
             },
             "purpose":{  
@@ -2400,9 +2431,13 @@
                "description":"Gets or sets the goal of the solution.",
                "type":"string"
             },
-            "isInactive":{  
-               "description":"Gets or sets a value indicating whether the solution is active or not.",
-               "type":"boolean"
+            "activityStatus":{  
+               "description":"Gets or sets the value of activity status of the solution.",
+               "enum":[  
+                  "Active",
+                  "NotActive"
+               ],
+               "type":"string"
             },
             "summary":{  
                "$ref":"#/definitions/SolutionSummary",
