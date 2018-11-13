@@ -740,13 +740,6 @@
         "description": "Checks whether a private IP address is available for use.",
         "parameters": [
           {
-            "name": "ipAddress",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The private IP address to be verified."
-          },
-          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -759,6 +752,13 @@
             "required": true,
             "type": "string",
             "description": "The name of the virtual network."
+          },
+          {
+            "name": "ipAddress",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The private IP address to be verified."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
