@@ -8,7 +8,7 @@
             "name": "StorageSyncManagementClient"
         }
     },
-    "host": "azure.microsoft.com",
+    "host": "management.azure.com",
     "schemes": [
         "https"
     ],
@@ -2591,19 +2591,11 @@
                 },
                 "offlineDataTransfer": {
                     "$ref": "#/definitions/FeatureStatus",
-                    "description": "Offline data transfer status."
+                    "description": "Offline data transfer"
                 },
-                "offlineDataTransferStorageAccountResourceId" : {
+                "offlineDataTransferShareName": {
                     "type": "string",
-                    "description": "Offline Data Transfer Storage Account ResourceId."
-                },
-                "offlineDataTransferStorageAccountTenantId" : {
-                    "type": "string",
-                    "description": "Offline Data Transfer Storage Account TenantId."
-                },
-                "offlineDataTransferShareName" : {
-                    "type": "string",
-                    "description": "Offline Data Transfer Share Name"
+                    "description": "Offline data transfer share name"
                 }
             }
         },
@@ -3312,11 +3304,11 @@
                 },
                 "offlineDataTransfer": {
                     "$ref": "#/definitions/FeatureStatus",
-                    "description": "Offline data transfer status."
+                    "description": "Offline data transfer"
                 },
-                "offlineDataTransferShareName" : {
+                "offlineDataTransferShareName": {
                     "type": "string",
-                    "description": "Offline Data Transfer Share Name"
+                    "description": "Offline data transfer share name"
                 }
             }
         },
@@ -3368,13 +3360,23 @@
                     "type": "object",
                     "description": "Sync Health Status"
                 },
-                "cloudSeededData": {
+                "offlineDataTransfer": {
                     "$ref": "#/definitions/FeatureStatus",
-                    "description": "Use cloud seeded data."
+                    "description": "Offline data transfer"
                 },
-                "cloudSeededDataFileShareUri" : {
+                "offlineDataTransferStorageAccountResourceId": {
                     "type": "string",
-                    "description": "URI for seeded Azure file share."
+                    "description": "Offline data transfer storage account resource ID",
+                    "readOnly": true
+                },
+                "offlineDataTransferStorageAccountTenantId": {
+                    "type": "string",
+                    "description": "Offline data transfer storage account tenant ID",
+                    "readOnly": true
+                },
+                "offlineDataTransferShareName": {
+                    "type": "string",
+                    "description": "Offline data transfer share name"
                 }
             }
         },
