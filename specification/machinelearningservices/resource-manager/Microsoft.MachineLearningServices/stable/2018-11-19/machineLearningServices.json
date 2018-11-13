@@ -742,13 +742,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listRemoteLoginInformation": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes": {
       "post": {
         "tags": [
           "MachineLearningComputes"
         ],
-        "operationId": "MachineLearningCompute_ListRemoteLoginInformation",
-        "description": "Get the IP address, port of all the compute nodes in the AmlCompute.",
+        "operationId": "MachineLearningCompute_ListNodes",
+        "description": "Get the details (e.g IP address, port etc) of all the compute nodes in the compute.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -770,7 +770,7 @@
           "200": {
             "description": "The operation was successful. The response contains the list of IP addresses.",
             "schema": {
-              "$ref": "#/definitions/RemoteLoginInformationListResult"
+              "$ref": "#/definitions/ComputeNodeListResult"
             }
           },
           "default": {
@@ -784,8 +784,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get remote login information for a compute's nodes ": {
-            "$ref": "./examples/ComputeListRemoteLoginInfo.json"
+          "Get compute nodes information for a compute": {
+            "$ref": "./examples/amlComputeListNodes.json"
           }
         }
       }
@@ -1949,39 +1949,77 @@
       },
       "description": "AmlCompute update parameters."
     },
-    "RemoteLoginInformation": {
+    "ComputeNodesInformation": {
+      "type": "object",
+      "description": "Compute nodes information related to a Machine Learning compute. Might differ for every type of compute.",
+      "discriminator": "computeType",
       "properties": {
-        "nodeId": {
-          "readOnly": true,
-          "type": "string",
-          "title": "Node ID.",
-          "description": "ID of the compute node."
-        },
-        "ipAddress": {
-          "readOnly": true,
-          "type": "string",
-          "title": "IP address.",
-          "description": "Public IP address of the compute node."
-        },
-        "port": {
-          "readOnly": true,
-          "type": "number",
-          "format": "int32",
-          "title": "Port.",
-          "description": "SSH port number of the node."
+        "computeType": {
+          "description": "The type of compute",
+          "$ref": "#/definitions/ComputeType"
         }
       },
-      "description": "Login details to SSH to a compute node in compute."
+      "required": [
+        "computeType"
+      ]
     },
-    "RemoteLoginInformationListResult": {
+    "AmlComputeNodesInformation": {
+      "description": "Compute node information related to a AmlCompute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeNodesInformation"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "nodes": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AmlComputeNodeInformation"
+              },
+              "description": "The collection of returned AmlCompute nodes details."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AmlCompute"
+    },
+    "AmlComputeNodeInformation": {
+      "description": "Compute node information related to a AmlCompute.",
+        {
+          "type": "object",
+          "properties": {
+            "nodeId": {
+              "readOnly": true,
+              "type": "string",
+              "title": "Node ID.",
+              "description": "ID of the compute node."
+            },
+            "ipAddress": {
+              "readOnly": true,
+              "type": "string",
+              "title": "IP address.",
+              "description": "Public IP address of the compute node."
+            },
+            "port": {
+              "readOnly": true,
+              "type": "number",
+              "format": "int32",
+              "title": "Port.",
+              "description": "SSH port number of the node."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AmlCompute"
+    },
+    "ComputeNodeListResult": {
       "properties": {
-        "value": {
+        "details": {
           "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RemoteLoginInformation"
-          },
-          "description": "The collection of returned remote login details."
+          "type": "#/definitions/ComputeNodesInformation",
+          "description": "The collection of returned compute node details."
         },
         "nextLink": {
           "readOnly": true,
