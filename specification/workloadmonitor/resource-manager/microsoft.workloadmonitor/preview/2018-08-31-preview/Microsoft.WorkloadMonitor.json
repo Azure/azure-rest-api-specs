@@ -601,9 +601,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/$skiptoken"
           }
         ],
         "responses": {
@@ -619,9 +616,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NotificationSettings_ListByResource": {
@@ -1520,9 +1514,26 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NotificationSetting"
+          "$ref": "#/definitions/NotificationSetting",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "description": "Resource name of NotificationSettings",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "ARM resource ID of notification settings",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type of NotificationSettings",
+          "type": "string",
+          "readOnly": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "NotificationSetting": {
       "description": "Model for properties of a NotificationSetting.",
@@ -1533,14 +1544,14 @@
         }
       ],
       "properties": {
-        "actionGroupResourceIds": {
-          "description": "List of action group resource ids to be notified",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
+	  "actionGroupResourceIds": {
+		"description": "List of action group resource ids to be notified",
+		"type": "array",
+		"items": {
+		  "type": "string"
+		},
+		"readOnly": true
+	  }
       }
     },
     "OperationListResult": {
