@@ -711,6 +711,78 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations": {
+      "get": {
+        "tags": [
+          "AssignmentOperation"
+        ],
+        "operationId": "AssignmentOperation_List",
+        "description": "List Operations for given blueprint assignment within a subscription.",
+        "x-ms-examples": {
+          "Assignment": {
+            "$ref": "./examples/BlueprintAssignmentOperation_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - all Blueprint assignment Operation retrieved.",
+            "schema": {
+              "$ref": "#/definitions/AssignmentOperationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations/{assignmentOperationName}": {
+      "get": {
+        "tags": [
+          "AssignmentOperation"
+        ],
+        "operationId": "AssignmentOperation_Get",
+        "description": "Get a Blueprint assignment operation.",
+        "x-ms-examples": {
+          "Assignment": {
+            "$ref": "./examples/BlueprintAssignmentOperation_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentOperationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Blueprint assignment retrieved.",
+            "schema": {
+              "$ref": "#/definitions/AssignmentOperation"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Blueprint/operations": {
       "get": {
         "tags": [
