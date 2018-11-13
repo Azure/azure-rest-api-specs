@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DataBox.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DataBox, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for DataBox, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2018-02
 ```
 
+
+### Tag: package-2018-02
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-02'
+input-file:
+  - Microsoft.DataBox/stable/2018-02-02/databox.json
+```
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -39,8 +48,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -92,11 +101,13 @@ python:
   description: The DataBox Client.
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-databox/azure/mgmt/databox
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
