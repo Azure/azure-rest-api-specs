@@ -742,6 +742,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listRemoteLoginInformation": {
+      "post": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_ListRemoteLoginInformation",
+        "description": "Get the IP address, port of all the compute nodes in the AmlCompute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of IP addresses.",
+            "schema": {
+              "$ref": "#/definitions/RemoteLoginInformationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get remote login information for a compute's nodes ": {
+            "$ref": "./examples/ComputeListRemoteLoginInfo.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys": {
       "post": {
         "tags": [
@@ -1505,6 +1553,11 @@
                   "description": "Scale settings for AML Compute",
                   "$ref": "#/definitions/ScaleSettings"
                 },
+                "userAccountSettings": {
+                  "title": "User account settings.",
+                  "description": "Settings for an administrator user account that will be created on each compute node.",
+                  "$ref": "#/definitions/UserAccountSettings"
+                },
                 "subnet": {
                     "title": "Subnet.",
                     "description": "Virtual network subnet resource ID the compute nodes belong to.",
@@ -1783,6 +1836,29 @@
         }
       }
     },
+    "UserAccountSettings": {
+      "properties": {
+        "adminUserName": {
+          "type": "string",
+          "title": "User name.",
+          "description": "Name of the administrator user account which can be used to SSH to nodes."
+        },
+        "adminUserSshPublicKey": {
+          "type": "string",
+          "title": "SSH public key.",
+          "description": "SSH public key of the administrator user account."
+        },
+        "adminUserPassword": {
+          "type": "string",
+          "title": "Password.",
+          "description": "Password of the administrator user account."
+        }
+      },
+      "required": [
+        "adminUserName"
+      ],
+      "description": "Settings for user account that gets created on each on the nodes of a compute."
+    },
     "ScaleSettings": {
       "type": "object",
       "description": "scale settings for AML Compute",
@@ -1872,6 +1948,48 @@
         }
       },
       "description": "AmlCompute update parameters."
+    },
+    "RemoteLoginInformation": {
+      "properties": {
+        "nodeId": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node ID.",
+          "description": "ID of the compute node."
+        },
+        "ipAddress": {
+          "readOnly": true,
+          "type": "string",
+          "title": "IP address.",
+          "description": "Public IP address of the compute node."
+        },
+        "port": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "title": "Port.",
+          "description": "SSH port number of the node."
+        }
+      },
+      "description": "Login details to SSH to a compute node in compute."
+    },
+    "RemoteLoginInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemoteLoginInformation"
+          },
+          "description": "The collection of returned remote login details."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
