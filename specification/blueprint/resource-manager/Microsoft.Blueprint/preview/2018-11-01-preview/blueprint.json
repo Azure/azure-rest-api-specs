@@ -881,6 +881,20 @@
         { "$ref": "#/definitions/TrackedResource" }
       ]
     },
+    "AssignmentOperation": {
+      "type": "object",
+      "description": "Represents underlying deployment detail for each update to the assignment.",
+      "allOf": [
+        { "$ref": "#/definitions/AzureResourceBase" }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties for AssignmentOperation",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssignmentOperationProperties"
+        }
+      }
+    },
     "PublishedBlueprint": {
       "type": "object",
       "description": "Represents a published Blueprint.",
@@ -1220,6 +1234,108 @@
       "required": [
         "parameters",
         "resourceGroups"
+      ]
+    },
+    "AssignmentOperationProperties": {
+      "type": "object",
+      "description": "properties of AssignmentOperation.",
+      "properties": {
+        "blueprintVersion": {
+          "type": "string",
+          "description": "The blueprint version used for the assignment operation."
+        },
+        "assignmentState": {
+          "type": "string",
+          "description": "State of this assignment operation."
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "Create time of this Assignment Operation."
+        },
+        "timeStarted": {
+          "type": "string",
+          "description": "Start time of the underlying deployment."
+        },
+        "timeFinished": {
+          "type": "string",
+          "description": "Finish time of the overall underlying deployments."
+        },
+        "deployments": {
+          "type": "array",
+          "description": "list of jobs in this assignment operation.",
+          "items": {
+            "$ref": "#/definitions/AssignmentDeploymentJob"
+          }
+        }
+      }
+    },
+    "AssignmentDeploymentJob": {
+      "type": "object",
+      "description": "Represents individual job in given assignment operation.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of the job."
+        },
+        "action": {
+          "type": "string",
+          "description": "Name of the action performed in this job."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Id of this job."
+        },
+        "jobState": {
+          "type": "string",
+          "description": "State of this job."
+        },
+        "result": {
+          "description": "deployment job result.",
+          "$ref": "#/definitions/AssignmentDeploymentJobResult"
+        },
+        "history": {
+          "type": "array",
+          "description": "result of this deployment job for each retry.",
+          "items": {
+            "$ref": "#/definitions/AssignmentDeploymentJobResult"
+          }
+        },
+        "requestUri": {
+          "type": "string",
+          "description": "Reference to deployment job resource id."
+        }
+      }
+    },
+    "AssignmentDeploymentJobResult": {
+      "type": "object",
+      "description": "result of each individual deployment in a blueprint assignment.",
+      "properties": {
+        "error": {
+          "description": "contains error details if deployment job failed.",
+          "$ref": "#/definitions/AzureResourceManagerError"
+        },
+        "resources": {
+          "type": "array",
+          "description": "resources created as result of the deployment job.",
+          "items": {
+            "$ref": "#/definitions/AssignmentJobCreatedResource"
+          }
+        }
+      }
+    },
+    "AssignmentJobCreatedResource": {
+      "type": "object",
+      "description": "Azure resource created from deployment job.",
+      "properties": {
+        "properties": {
+          "additionalProperties": {
+            "type": "string",
+            "description": "properties"
+          }
+        }
+      },
+      "allOf": [
+        { "$ref": "#/definitions/AzureResourceBase" }
       ]
     },
     "TemplateArtifactProperties": {
@@ -1634,6 +1750,21 @@
           "type": "string",
           "description": "Name of this resource."
         }
+      }
+    },
+    "AzureResourceManagerError": {
+      "type": "object",
+      "description": "Error code and message",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+
       }
     },
     "ArtifactPropertiesBase": {
