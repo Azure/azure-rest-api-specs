@@ -65,7 +65,7 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
+                "type": "integer"
               }
             }
           },
@@ -90,7 +90,7 @@
         ]
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/providers/Microsoft.Subscription/createSubscription": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "Creates an Azure subscription",
         "operationId": "SubscriptionFactory_CreateSubscription",
@@ -116,7 +116,7 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
+                "type": "integer"
               }
             }
           },
@@ -129,16 +129,16 @@
         },
         "parameters": [
           {
-            "name": "billingAccountId",
+            "name": "billingAccountName",
             "in": "path",
-            "description": "The id of the commerce root billing account.",
+            "description": "The name of the commerce root billing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "invoiceSectionId",
+            "name": "invoiceSectionName",
             "in": "path",
-            "description": "The id of the invoice section.",
+            "description": "The name of the invoice section.",
             "required": true,
             "type": "string"
           },
