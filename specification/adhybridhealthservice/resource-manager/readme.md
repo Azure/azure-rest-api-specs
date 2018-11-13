@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ADHybridHealthService.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ADHybridHealthService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for ADHybridHealthService, simply [Install AutoRest](https://ak
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ADHybridHealthService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2014-01
+tag: package-2018-02
 ```
 
 
+### Tag: package-2018-02
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-02'
+input-file:
+  - Microsoft.ADHybridHealthService/stable/2018-02-02/ADHybridHealthService.json
+```
 ### Tag: package-2014-01
 
 These settings apply only when `--tag=package-2014-01` is specified on the command line.
@@ -40,8 +48,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -55,7 +63,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
 ```
-
 
 ## Python
 
@@ -74,17 +81,18 @@ python:
   package-version: 1.0.1
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-adhybridhealthservice/azure/mgmt/adhybridhealthservice
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-adhybridhealthservice
 ```
-
 
 ## Go
 
@@ -112,7 +120,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-2014-01' && $(go)
 output-folder: $(go-sdk-folder)/services/adhybridhealthservice/mgmt/2014-01-01/adhybridhealthservice
 ```
-
 
 ## Java
 
