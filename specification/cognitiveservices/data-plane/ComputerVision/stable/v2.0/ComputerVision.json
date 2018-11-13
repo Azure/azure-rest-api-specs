@@ -54,8 +54,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful List Domains request": {
-            "$ref": "./examples/SuccessfulListDomainModels.json"
+          "Successful ListModels request": {
+            "$ref": "./examples/SuccessfulListModels.json"
           }
         }
       }
@@ -116,8 +116,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Analyze with Url request": {
-            "$ref": "./examples/SuccessfulAnalyzeWithUrl.json"
+          "Successful AnalyzeImage request": {
+            "$ref": "./examples/SuccessfulAnalyzeImageWithUrl.json"
           }
         }
       }
@@ -178,7 +178,7 @@
           }
         },
         "x-ms-examples": {
-          "Successful Generate Thumbnail request": {
+          "Successful GenerateThumbnail request": {
             "$ref": "./examples/SuccessfulGenerateThumbnailWithUrl.json"
           }
         }
@@ -220,8 +220,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Ocr request": {
-            "$ref": "./examples/SuccessfulOcrWithUrl.json"
+          "Successful RecognizePrintedText request": {
+            "$ref": "./examples/SuccessfulRecognizePrintedTextWithUrl.json"
           }
         }
       }
@@ -267,8 +267,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Describe request": {
-            "$ref": "./examples/SuccessfulDescribeWithUrl.json"
+          "Successful DescribeImage request": {
+            "$ref": "./examples/SuccessfulDescribeImageWithUrl.json"
           }
         }
       }
@@ -306,8 +306,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Tag request": {
-            "$ref": "./examples/SuccessfulTagWithUrl.json"
+          "Successful TagImage request": {
+            "$ref": "./examples/SuccessfulTagImageWithUrl.json"
           }
         }
       }
@@ -352,87 +352,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Domain Model analysis request": {
-            "$ref": "./examples/SuccessfulDomainModelWithUrl.json"
-          }
-        }
-      }
-    },
-    "/recognizeText": {
-      "post": {
-        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
-        "operationId": "RecognizeText",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ImageUrl"
-          },
-          {
-            "$ref": "#/parameters/TextRecognitionMode"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "202": {
-            "description": "The service has accepted the request and will start processing later. It will return Accepted immediately and include an Operation-Location header. Client side should further query the operation status using the URL specified in this header. The operation ID will expire in 48 hours.",
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ComputerVisionError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Domain Model analysis request": {
-            "$ref": "./examples/SuccessfulRecognizeTextWithUrl.json"
-          }
-        }
-      }
-    },
-    "/textOperations/{operationId}": {
-      "get": {
-        "description": "This interface is used for getting text operation result. The URL to this interface should be retrieved from 'Operation-Location' field returned from Recognize Text interface.",
-        "operationId": "GetTextOperationResult",
-        "parameters": [
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Id of the text operation returned in the response of the 'Recognize Text'",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the operation status.",
-            "schema": {
-              "$ref": "#/definitions/TextOperationResult"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ComputerVisionError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Domain Model analysis request": {
-            "$ref": "./examples/SuccessfulGetTextOperationResult.json"
+          "Successful AnalyzeImageByDomain request": {
+            "$ref": "./examples/SuccessfulAnalyzeImageByDomainWithUrl.json"
           }
         }
       }
@@ -496,8 +417,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Analyze with Url request": {
-            "$ref": "./examples/SuccessfulAnalyzeWithStream.json"
+          "Successful AnalyzeImage request": {
+            "$ref": "./examples/SuccessfulAnalyzeImageWithStream.json"
           }
         }
       }
@@ -559,7 +480,7 @@
           }
         },
         "x-ms-examples": {
-          "Successful Generate Thumbnail request": {
+          "Successful GenerateThumbnail request": {
             "$ref": "./examples/SuccessfulGenerateThumbnailWithStream.json"
           }
         }
@@ -602,8 +523,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Ocr request": {
-            "$ref": "./examples/SuccessfulOcrWithStream.json"
+          "Successful RecognizePrintedText request": {
+            "$ref": "./examples/SuccessfulRecognizePrintedTextWithStream.json"
           }
         }
       }
@@ -650,8 +571,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Describe request": {
-            "$ref": "./examples/SuccessfulDescribeWithStream.json"
+          "Successful DescribeImage request": {
+            "$ref": "./examples/SuccessfulDescribeImageWithStream.json"
           }
         }
       }
@@ -690,8 +611,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Tag request": {
-            "$ref": "./examples/SuccessfulTagWithStream.json"
+          "Successful TagImage request": {
+            "$ref": "./examples/SuccessfulTagImageWithStream.json"
           }
         }
       }
@@ -737,125 +658,14 @@
           }
         },
         "x-ms-examples": {
-          "Successful Domain Model analysis request": {
-            "$ref": "./examples/SuccessfulDomainModelWithStream.json"
-          }
-        }
-      }
-    },
-    "/recognizeText?overload=stream": {
-      "post": {
-        "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
-        "operationId": "RecognizeTextInStream",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ImageStream"
-          },
-          {
-            "$ref": "#/parameters/TextRecognitionMode"
-          }
-        ],
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "202": {
-            "description": "The service has accepted the request and will start processing later.",
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ComputerVisionError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Domain Model analysis request": {
-            "$ref": "./examples/SuccessfulRecognizeTextWithStream.json"
+          "Successful AnalyzeImageByDomain request": {
+            "$ref": "./examples/SuccessfulAnalyzeImageByDomainWithStream.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "TextOperationResult": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Status of the text operation.",
-          "enum": [
-            "Not Started",
-            "Running",
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "TextOperationStatusCodes",
-            "modelAsString": false
-          },
-          "x-nullable": false
-        },
-        "recognitionResult": {
-          "$ref": "#/definitions/RecognitionResult"
-        }
-      }
-    },
-    "RecognitionResult": {
-      "type": "object",
-      "properties": {
-        "lines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Line"
-          }
-        }
-      }
-    },
-    "Line": {
-      "type": "object",
-      "properties": {
-        "boundingBox": {
-          "$ref": "#/definitions/BoundingBox"
-        },
-        "text": {
-          "type": "string"
-        },
-        "words": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Word"
-          }
-        }
-      }
-    },
-    "Word": {
-      "type": "object",
-      "properties": {
-        "boundingBox": {
-          "$ref": "#/definitions/BoundingBox"
-        },
-        "text": {
-          "type": "string"
-        }
-      }
-    },
-    "BoundingBox": {
-      "type": "array",
-      "items": {
-        "type": "integer",
-        "x-nullable": false
-      }
-    },
     "ImageAnalysis": {
       "type": "object",
       "description": "Result of AnalyzeImage operation.",

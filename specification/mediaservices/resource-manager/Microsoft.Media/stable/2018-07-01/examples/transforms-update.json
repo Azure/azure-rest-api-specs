@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2018-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "transformName": "transformToUpdate",
+    "parameters": {
+      "properties": {
+        "description": "Example transform to illustrate update."
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "transformToUpdate",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/transformToUpdate",
+        "type": "Microsoft.Media/mediaservices/transforms",
+        "properties": {
+          "created": "2018-08-08T16:29:58.0328058-04:00",
+          "description": "Example transform to illustrate update.",
+          "lastModified": "2018-08-08T16:29:58.0488338-04:00",
+          "outputs": [
+            {
+              "onError": "StopProcessingJob",
+              "relativePriority": "Normal",
+              "preset": {
+                "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
+                "presetName": "H264MultipleBitrate720p"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

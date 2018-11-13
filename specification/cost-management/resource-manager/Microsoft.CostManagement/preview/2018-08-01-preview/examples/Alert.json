@@ -1,0 +1,36 @@
+{
+    "parameters": {
+      "api-version": "2018-08-01-preview",
+      "subscriptionId": "01234567-89ab-cdef-0123-456789abcdef",
+      "resourceGroupName": "rg1",
+      "alertId": "0e1d6ee7-0052-4996-89e2-023263106885"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "id": "/subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885",
+          "name": "0e1d6ee7-0052-4996-89e2-023263106885",
+          "type": "Microsoft.CostManagement/alerts",
+          "properties": {
+            "definition": {
+                "type": "Budget",
+                "category": "Cost",
+                "criteria": "CostThresholdExceeded"
+            },
+            "description": "This is an example alert",
+            "source": "User",
+            "details": {
+                "amountDue": "500.0",
+                "billedAmount": "680.36"
+            },
+            "costEntityId": "123",
+            "creationTime": "2018-09-03T11:21:43.3495582+03:00",
+            "status": "Active",
+            "closeTime": "2018-09-10T11:21:43.3495582+03:00"
+          }
+        }
+      }   
+    }
+  }
+  
+  

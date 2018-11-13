@@ -109,9 +109,17 @@
           "description": "The connection string. It is mutually exclusive with sasUri property. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "accountKey": { 
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
+        },
         "sasUri": {
-          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
         },
         "encryptedCredential": {
           "type": "string",
@@ -126,9 +134,17 @@
           "type": "object",
           "description": "The connection string. It is mutually exclusive with sasUri, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference."          
         },
+        "accountKey": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
+        },
         "sasUri": {
-          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
         },
         "serviceEndpoint": {
           "type": "string",
@@ -178,6 +194,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -270,6 +290,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -405,6 +429,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "accountKey": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
         },
         "encryptedCredential": {
           "type": "object",
@@ -620,6 +648,10 @@
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -655,6 +687,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "type": "object",
@@ -692,6 +728,10 @@
           "description": "The connection string.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -727,6 +767,10 @@
         "connectionString": {
           "description": "The connection string.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2132,6 +2176,10 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -2222,6 +2270,10 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "credString": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of credString in connection string."
+        },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -2254,6 +2306,10 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
@@ -2429,6 +2485,10 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
@@ -2923,6 +2983,10 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
@@ -3730,6 +3794,10 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "pwd": { 
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference", 
+          "description": "The Azure key vault secret reference of password in connection string." 
+        }, 
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -3762,6 +3830,10 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
@@ -3966,6 +4038,13 @@
         "zookeeperNodeSize": {
           "type": "object",
           "description": "Specifies the size of the Zoo Keeper node for the HDInsight cluster."
+        },
+        "scriptActions": {
+          "description": "Custom script actions to run on HDI ondemand cluster once it's up. Please refer to https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux?toc=%2Fen-us%2Fazure%2Fhdinsight%2Fr-server%2FTOC.json&bc=%2Fen-us%2Fazure%2Fbread%2Ftoc.json#understanding-script-actions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScriptAction"
+          }
         }
       },
       "required": [
@@ -3976,6 +4055,42 @@
         "hostSubscriptionId",
         "tenant",
         "clusterResourceGroup"
+      ]
+    },
+    "ScriptAction": {
+      "description": "Custom script action to run on HDI ondemand cluster once it's up.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user provided name of the script action."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI for the script action."
+        },
+        "roles": {
+          "x-ms-enum": {
+            "name": "HdiNodeTypes",
+            "modelAsString": true
+          },
+          "enum": [
+            "Headnode",
+            "Workernode",
+            "Zookeeper"
+          ],
+          "type": "object",
+          "description": "The node types on which the script action should be executed."
+        },
+        "parameters": {
+          "type": "string",
+          "description": "The parameters for the script action."
+        }
+      },
+      "required": [
+        "name",
+        "uri",
+        "roles"
       ]
     },
     "AzureDataLakeAnalyticsLinkedService": {

@@ -235,8 +235,11 @@
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts": {
             "get": {
                 "x-ms-examples": {
-                    "Update security contact data": {
-                        "$ref": "./examples/SecurityContacts/GetSecurityContactsSubscription_example.json"
+                    "Update security contact data minimal": {
+                        "$ref": "./examples/SecurityContacts/GetSecurityContactsSubscription_min_example.json"
+                    },
+                    "Update security contact data full": {
+                        "$ref": "./examples/SecurityContacts/GetSecurityContactsSubscription_full_example.json"
                     }
                 },
                 "tags": ["Security Contacts"],
@@ -269,8 +272,11 @@
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts/{securityContactName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get security contact data": {
-                        "$ref": "./examples/SecurityContacts/GetSecurityContact_example.json"
+                    "Get security contact data minimal": {
+                        "$ref": "./examples/SecurityContacts/GetSecurityContact_min_example.json"
+                    },
+                    "Get security contact data full": {
+                        "$ref": "./examples/SecurityContacts/GetSecurityContact_full_example.json"
                     }
                 },
                 "tags": ["Security Contacts"],
@@ -300,8 +306,11 @@
             },
             "put": {
                 "x-ms-examples": {
-                    "Create security contact data": {
-                        "$ref": "./examples/SecurityContacts/CreateSecurityContact_example.json"
+                    "Create security contact data minimal": {
+                        "$ref": "./examples/SecurityContacts/CreateSecurityContact_min_example.json"
+                    },
+                    "Create security contact data full": {
+                        "$ref": "./examples/SecurityContacts/CreateSecurityContact_full_example.json"
                     }
                 },
                 "tags": ["Security Contacts"],
@@ -361,8 +370,11 @@
             },
             "patch": {
                 "x-ms-examples": {
-                    "Update security contact data": {
-                        "$ref": "./examples/SecurityContacts/UpdateSecurityContact_example.json"
+                    "Update security contact data minimal": {
+                        "$ref": "./examples/SecurityContacts/UpdateSecurityContact_min_example.json"
+                    },
+                    "Update security contact data full": {
+                        "$ref": "./examples/SecurityContacts/UpdateSecurityContact_full_example.json"
                     }
                 },
                 "tags": ["Security Contacts"],
@@ -728,6 +740,81 @@
                 }
             }
         },
+        "/{resourceId}/providers/Microsoft.Security/advancedThreatProtectionSettings/{settingName}": {
+          "get": {
+            "x-ms-examples": {
+              "Gets the Advanced Threat Protection settings for the specified resource.": {
+                "$ref": "./examples/AdvancedThreatProtection/GetAdvancedThreatProtectionSettings_example.json"
+              }
+            },
+            "tags": [ "AdvancedThreatProtection" ],
+            "description": "Gets the Advanced Threat Protection settings for the specified resource.",
+            "operationId": "AdvancedThreatProtection_Get",
+            "parameters": [
+              {
+                "$ref": "#/parameters/ApiVersion"
+              },
+              {
+                "$ref": "#/parameters/ResourceId"
+              },
+              {
+                "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful request to get Advanced Threat Protection settings.",
+                "schema": {
+                  "$ref": "#/definitions/AdvancedThreatProtectionSetting"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "#/definitions/CloudError"
+                }
+              }
+            }
+          },
+          "put": {
+            "x-ms-examples": {
+              "Creates or updates the Advanced Threat Protection settings on a specified resource.": {
+                "$ref": "./examples/AdvancedThreatProtection/PutAdvancedThreatProtectionSettings_example.json"
+              }
+            },
+            "tags": [ "AdvancedThreatProtection" ],
+            "description": "Creates or updates the Advanced Threat Protection settings on a specified resource.",
+            "operationId": "AdvancedThreatProtection_Create",
+            "parameters": [
+              {
+                "$ref": "#/parameters/ApiVersion"
+              },
+              {
+                "$ref": "#/parameters/ResourceId"
+              },
+              {
+                "$ref": "#/parameters/AdvancedThreatProtectionSettingName"
+              },
+              {
+                "$ref": "#/parameters/AdvancedThreatProtectionSetting"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful request to put Advanced Threat Protection settings.",
+                "schema": {
+                  "$ref": "#/definitions/AdvancedThreatProtectionSetting"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "#/definitions/CloudError"
+                }
+              }
+            }
+          }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings": {
             "get": {
                 "x-ms-examples": {
@@ -843,6 +930,116 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                }
+            }
+        },
+        "/{scope}/providers/Microsoft.Security/informationProtectionPolicies/{informationProtectionPolicyName}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get the customized information protection policy for a management group": {
+                        "$ref": "./examples/InformationProtectionPolicies/GetCustomInformationProtectionPolicy_example.json"
+                    },
+                    "Get the effective information protection policy for a management group": {
+                        "$ref": "./examples/InformationProtectionPolicies/GetEffectiveInformationProtectionPolicy_example.json"
+                    }
+                },
+                "tags": ["InformationProtectionPolicies"],
+                "description": "Details of the information protection policy.",
+                "operationId": "InformationProtectionPolicies_Get",
+                "parameters": [{
+                        "$ref": "#/parameters/ApiVersion"
+                    }, {
+                        "$ref": "#/parameters/Scope"
+                    }, {
+                        "$ref": "#/parameters/InformationProtectionPolicyName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicy"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Create or update an information protection policy for a management group": {
+                        "$ref": "./examples/InformationProtectionPolicies/CreateOrUpdateInformationProtectionPolicy_example.json"
+                    }
+                },
+                "tags": ["InformationProtectionPolicies"],
+                "description": "Details of the information protection policy.",
+                "operationId": "InformationProtectionPolicies_CreateOrUpdate",
+                "parameters": [{
+                        "$ref": "#/parameters/ApiVersion"
+                    }, {
+                        "$ref": "#/parameters/Scope"
+                    }, {
+                        "$ref": "#/parameters/InformationProtectionPolicyName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicy"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicy"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/{scope}/providers/Microsoft.Security/informationProtectionPolicies": {
+            "get": {
+                "x-ms-examples": {
+                    "Get information protection policies": {
+                        "$ref": "./examples/InformationProtectionPolicies/ListInformationProtectionPolicies_example.json"
+                    }
+                },
+                "tags": ["InformationProtectionPolicies"],
+                "description": "Information protection policies of a specific management group.",
+                "operationId": "InformationProtectionPolicies_List",
+                "parameters": [{
+                        "$ref": "#/parameters/ApiVersion"
+                    }, {
+                        "$ref": "#/parameters/Scope"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InformationProtectionPolicyList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         }
@@ -994,7 +1191,6 @@
             },
             "required": [
                 "email",
-                "phone",
                 "alertNotifications",
                 "alertsToAdmins"
             ]
@@ -1247,6 +1443,30 @@
                 }
             }
         },
+        "AdvancedThreatProtectionProperties": {
+          "properties": {
+            "isEnabled": {
+              "type": "boolean",
+              "description": "Indicates whether Advanced Threat Protection is enabled."
+            }
+          },
+          "description": "The Advanced Threat Protection settings."
+        },
+        "AdvancedThreatProtectionSetting": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Resource"
+            }
+          ],
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/AdvancedThreatProtectionProperties"
+            }
+          },
+          "description": "The Advanced Threat Protection resource."
+        },
         "SettingsList": {
             "type": "object",
             "description": "Subscription settings list.",
@@ -1285,7 +1505,7 @@
             "x-ms-discriminator-value": "DataExportSetting",
             "properties": {
                 "properties": {
-				    "x-ms-client-flatten": true,
+                    "x-ms-client-flatten": true,
                     "description": "Data export setting data",
                     "$ref": "#/definitions/DataExportSettingProperties"
                 }
@@ -1330,6 +1550,142 @@
             "required": [
                 "enabled"
             ]
+        },
+        "InformationProtectionPolicyList": {
+            "type": "object",
+            "readOnly": true,
+            "description": "Information protection policies response.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "List of information protection policies.",
+                    "items": {
+                        "$ref": "#/definitions/InformationProtectionPolicy"
+                    }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
+                }
+            }
+        },
+        "InformationProtectionPolicy": {
+            "type": "object",
+            "description": "Information protection policy.",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Information protection policy data",
+                    "$ref": "#/definitions/InformationProtectionPolicyProperties"
+                }
+            },
+            "allOf": [{
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "InformationProtectionPolicyProperties": {
+            "type": "object",
+            "description": "describes properties of an information protection policy.",
+            "properties": {
+                "lastModifiedUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Describes the last UTC time the policy was modified."
+                },
+                "labels": {
+                    "type": "object",
+                    "description": "Dictionary of sensitivity labels.",
+                    "additionalProperties": {
+                        "type": "object",
+                        "$ref": "#/definitions/SensitivityLabel"
+                    }
+                },
+                "informationTypes": {
+                    "type": "object",
+                    "description": "The sensitivity information types.",
+                    "additionalProperties": {
+                        "type": "object",
+                        "$ref": "#/definitions/InformationType"
+                    }
+                }
+            }
+        },
+        "SensitivityLabel": {
+            "type": "object",
+            "description": "The sensitivity label.",
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "The name of the sensitivity label."
+                },
+                "order": {
+                    "type": "number",
+                    "description": "The order of the sensitivity label."
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Indicates whether the label is enabled or not."
+                }
+            }
+        },
+        "InformationType": {
+            "type": "object",
+            "description": "The information type.",
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "The name of the information type."
+                },
+                "order": {
+                    "type": "number",
+                    "description": "The order of the information type."
+                },
+                "recommendedLabelId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The recommended label id to be associated with this information type."
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Indicates whether the information type is enabled or not."
+                },
+                "custom": {
+                    "type": "boolean",
+                    "description": "Indicates whether the information type is custom or not."
+                },
+                "keywords": {
+                    "type": "array",
+                    "description": "The information type keywords.",
+                    "items": {
+                        "$ref": "#/definitions/InformationProtectionKeyword"
+                    }
+                }
+            }
+        },
+        "InformationProtectionKeyword": {
+            "type": "object",
+            "description": "The information type keyword.",
+            "properties": {
+                "pattern": {
+                    "type": "string",
+                    "description": "The keyword pattern."
+                },
+                "custom": {
+                    "type": "boolean",
+                    "description": "Indicates whether the keyword is custom or not."
+                },
+                "canBeNumeric": {
+                    "type": "boolean",
+                    "description": "Indicates whether the keyword can be applied on numeric types or not."
+                },
+                "excluded": {
+                    "type": "boolean",
+                    "description": "Indicates whether the keyword is excluded or not."
+                }
+            }
         }
     },
     "parameters": {
@@ -1469,6 +1825,42 @@
             "type": "string",
             "description": "name of the Compliance",
             "x-ms-parameter-location": "method"
+        },
+        "InformationProtectionPolicyName": {
+            "name": "informationProtectionPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": ["effective", "custom"],
+            "description": "Name of the information protection policy.",
+            "x-ms-parameter-location": "method"
+        },
+        "ResourceId": {
+          "name": "resourceId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The identifier of the resource.",
+          "x-ms-parameter-location": "method"
+        },
+        "AdvancedThreatProtectionSettingName": {
+          "name": "settingName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "enum": ["current"], 
+          "description": "Advanced Threat Protection setting name.",
+          "x-ms-parameter-location": "method"
+        },
+        "AdvancedThreatProtectionSetting": {
+          "name": "advancedThreatProtectionSetting",
+          "in": "body",
+          "required": true,
+          "description": "Advanced Threat Protection Settings",
+          "schema": {
+            "$ref": "#/definitions/AdvancedThreatProtectionSetting"
+          },
+          "x-ms-parameter-location": "method"
         }
     }
 }

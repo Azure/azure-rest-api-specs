@@ -91,60 +91,6 @@
           "application/json"
         ]
       },
-      "delete": {
-        "tags": [
-          "GuestConfigurationAssignments"
-        ],
-        "operationId": "GuestConfigurationAssignments_Delete",
-        "description": "Delete a guest configuration assignment",
-        "x-ms-examples": {
-          "Delete an guest configuration assignment": {
-            "$ref": "./examples/deleteGuestConfigurationAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "guestConfigurationAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the guest configuration assignment"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
       "get": {
         "tags": [
           "GuestConfigurationAssignments"
@@ -454,12 +400,10 @@
         }, 
         "name": {
           "type": "string",
-          "readOnly": true,
           "description": "Name of the guest configuration."
         },
         "version": {
           "type": "string",
-          "readOnly": true,
           "description": "Version of the guest configuration."
         },
         "contentUri": {
@@ -473,7 +417,10 @@
           "description": "Combined hash of the guest configuration package and configuration parameters."
         },
         "configurationParameter": {
-          "$ref": "#/definitions/ConfigurationParameterList",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationParameter"
+          },
           "description": "The configuration parameters for the guest configuration."
         },
         "configurationSetting": {
@@ -481,18 +428,6 @@
           "description": "The configuration setting for the guest configuration."
         }
       }
-    },
-    "ConfigurationParameterList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationParameter"
-          },
-          "description": "Represents the list for configuration parameters."
-        }
-      },
-      "description": "Represents the list for configuration parameters."
     },
     "ConfigurationParameter": {
       "properties": {
@@ -613,7 +548,6 @@
         },
         "context": {
           "type": "string",
-          "readOnly": true,
           "description": "The source which initiated the guest configuration assignment. Ex: Azure Policy"
         },
         "assignmentHash": {

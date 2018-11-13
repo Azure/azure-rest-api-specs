@@ -85,6 +85,50 @@
             }
           }
         }
+      },
+      "get": {
+        "operationId": "Query_Get",
+        "summary": "Execute an Analytics query",
+        "description": "Executes an Analytics query for data",
+        "x-ms-examples": {
+          "queryGet": {
+            "$ref": "examples/query-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/queryTimespan"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/components/{applicationName}/metrics/{metricId}": {
@@ -98,6 +142,9 @@
           },
           "intervaledMetric": {
             "$ref": "examples/metric-get-full.json"
+          },
+          "segmentedIntervaledMetric": {
+            "$ref": "examples/metric-get-segmented.json"
           }
         },
         "parameters": [
@@ -443,7 +490,7 @@
         ],
         "x-ms-enum": {
           "name": "MetricsAggregation",
-          "modelAsString": false
+          "modelAsString": true
         }
       }
     },
@@ -763,7 +810,7 @@
         ],
         "x-ms-enum": {
           "name": "MetricsAggregation",
-          "modelAsString": false
+          "modelAsString": true
         }
       }
     },
@@ -955,9 +1002,7 @@
           }
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": true
     },
     "eventType": {
       "description": "The type of events to query; either a standard event type (`traces`, `customEvents`, `pageViews`, `requests`, `dependencies`, `exceptions`, `availabilityResults`) or `$all` to query across all event types.",
