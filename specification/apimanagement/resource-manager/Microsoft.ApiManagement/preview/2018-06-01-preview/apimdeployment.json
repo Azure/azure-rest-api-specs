@@ -64,6 +64,41 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus": {
+      "get": {
+        "tags": [
+          "ApiManagementServiceSkus"
+        ],
+        "summary": "Gets available SKUs for API Management service",
+        "description": "Gets all available SKU for a given API Management service",
+        "operationId": "ApiManagementServiceSkus_ListAvailableServiceSkus",
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkuResults"
+            }
+          }
+        },
+		"x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/restore": {
       "post": {
         "tags": [
@@ -646,6 +681,127 @@
     }
   },
   "definitions": {
+	"ResourceSkuResults": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuResult"
+          },
+          "description": "The list of skus available for the service."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of API Management service Skus."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The API Management service SKUs operation response."
+    },
+	"ResourceSkuResult": {
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "sku": {
+		  "$ref": "#/definitions/ResourceSku",
+          "readOnly": true,          
+          "description": "Specifies API Management SKU."
+        },        
+        "capacity": {
+          "$ref": "#/definitions/ResourceSkuCapacity",
+          "readOnly": true,
+          "description": "Specifies the number of API Management units."
+        }
+      },
+      "description": "Describes an available API Management service SKU."
+    },
+	"ResourceSkuCapacity": {
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The maximum capacity that can be set."
+        },
+        "default": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuCapacityScaleType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Describes scaling information of a SKU."
+    },
+	"ResourceSku": {
+      "properties": {        
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
+          },
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium",
+            "Basic",
+			"Consumption"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Developer",
+                "description": "Developer SKU of Api Management."
+              },
+              {
+                "value": "Standard",
+                "description": "Standard SKU of Api Management."
+              },
+              {
+                "value": "Premium",
+                "description": "Premium SKU of Api Management."
+              },
+              {
+                "value": "Basic",
+                "description": "Basic SKU of Api Management."
+              },
+              {
+                "value": "Consumption",
+                "description": "Consumption SKU of Api Management."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes an available API Management SKU."
+    },
     "CertificateInformation": {
       "properties": {
         "expiry": {
