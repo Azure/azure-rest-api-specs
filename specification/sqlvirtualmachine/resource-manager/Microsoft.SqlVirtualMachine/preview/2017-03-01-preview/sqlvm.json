@@ -69,7 +69,7 @@
         "tags": [
           "AvailabilityGroupListeners"
         ],
-        "description": "Creates or Updates an availability group listener.",
+        "description": "Creates or updates an availability group listener.",
         "operationId": "AvailabilityGroupListeners_CreateOrUpdate",
         "parameters": [
           {
@@ -307,7 +307,7 @@
         "tags": [
           "SqlVirtualMachineGroups"
         ],
-        "description": "Creates or Updates a SQL virtual machine group.",
+        "description": "Creates or updates a SQL virtual machine group.",
         "operationId": "SqlVirtualMachineGroups_CreateOrUpdate",
         "parameters": [
           {
@@ -462,7 +462,7 @@
         "tags": [
           "SqlVirtualMachineGroups"
         ],
-        "description": "Gets all the SQL virtual machine groups in a resource group.",
+        "description": "Gets all SQL virtual machine groups in a resource group.",
         "operationId": "SqlVirtualMachineGroups_ListByResourceGroup",
         "parameters": [
           {
@@ -477,7 +477,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved all the SQL virtual machine groups in the given resource group.",
+            "description": "Successfully retrieved all SQL virtual machine groups in the resource group.",
             "schema": {
               "$ref": "#/definitions/SqlVirtualMachineGroupListResult"
             }
@@ -490,7 +490,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets all the SQL virtual machine groups in a resource group.": {
+          "Gets all SQL virtual machine groups in a resource group.": {
             "$ref": "./examples/ListByResourceGroupSqlVirtualMachineGroup.json"
           }
         }
@@ -585,7 +585,7 @@
         "tags": [
           "SqlVirtualMachines"
         ],
-        "description": "Creates or Updates a SQL virtual machine.",
+        "description": "Creates or updates a SQL virtual machine.",
         "operationId": "SqlVirtualMachines_CreateOrUpdate",
         "parameters": [
           {
@@ -633,14 +633,14 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Creates or updates a SQL virtual machine with max paramenters.": {
+            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMAX.json"
+          },
           "Creates or updates a SQL virtual machine and joins it to a SQL virtual machine group.": {
             "$ref": "./examples/CreateOrUpdateVirtualMachineWithVMGroup.json"
           },
           "Creates or updates a SQL virtual machine with min parameters.": {
             "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMIN.json"
-          },
-          "Creates or updates a SQL virtual machine with max paramenters.": {
-            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineMAX.json"
           }
         }
       },
@@ -761,7 +761,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved all the SQL virtual machines in the resource group.",
+            "description": "Successfully retrieved all SQL virtual machines in the resource group.",
             "schema": {
               "$ref": "#/definitions/SqlVirtualMachineListResult"
             }
@@ -785,7 +785,7 @@
         "tags": [
           "SqlVirtualMachines"
         ],
-        "description": "Gets all the SQL virtual machines in a subscription.",
+        "description": "Gets all SQL virtual machines in a subscription.",
         "operationId": "SqlVirtualMachines_List",
         "parameters": [
           {
@@ -797,7 +797,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved all the SQL virtual machines in the subscription.",
+            "description": "Successfully retrieved all SQL virtual machines in the subscription.",
             "schema": {
               "$ref": "#/definitions/SqlVirtualMachineListResult"
             }
@@ -810,7 +810,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets all the SQL virtual machines in a subscription.": {
+          "Gets all SQL virtual machines in a subscription.": {
             "$ref": "./examples/ListSubscriptionSqlVirtualMachine.json"
           }
         }
@@ -828,7 +828,7 @@
           "readOnly": true
         },
         "availabilityGroupName": {
-          "description": "Name of the availability group listener.",
+          "description": "Name of the availability group.",
           "type": "string"
         },
         "loadBalancerConfigurations": {
@@ -1043,7 +1043,7 @@
         }
       }
     },
-    "SqlVmGroupProperties": {
+    "SqlVirtualMachineGroupProperties": {
       "description": "The properties of a SQL virtual machine group.",
       "type": "object",
       "properties": {
@@ -1053,7 +1053,7 @@
           "readOnly": true
         },
         "sqlImageOffer": {
-          "description": "SQL image offer.",
+          "description": "SQL image offer. Examples may include SQL2016-WS2016, SQL2017-WS2016.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1080,7 +1080,7 @@
           ]
         },
         "scaleType": {
-          "description": "Scale type: HA or ReadOnly.",
+          "description": "Scale type.",
           "enum": [
             "HA"
           ],
@@ -1092,7 +1092,7 @@
           }
         },
         "clusterManagerType": {
-          "description": "Type of the cluster manager: Windows Server Failover Cluster (WSFC) | NONE, implied by the scale type of the group and the OS type.",
+          "description": "Type of cluster manager: Windows Server Failover Cluster (WSFC), implied by the scale type of the group and the OS type.",
           "enum": [
             "WSFC"
           ],
@@ -1116,16 +1116,8 @@
           }
         },
         "wsfcDomainProfile": {
-          "$ref": "#/definitions/WSFCDomainProfile",
-          "description": "Cluster AD domain profile.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "domainlessProfile": {
-          "$ref": "#/definitions/DomainlessProfile",
-          "description": "Cluster domainless profile.",
+          "$ref": "#/definitions/WsfcDomainProfile",
+          "description": "Cluster Active Directory domain profile.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1133,8 +1125,8 @@
         }
       }
     },
-    "WSFCDomainProfile": {
-      "description": "The Active Directory domain profile.",
+    "WsfcDomainProfile": {
+      "description": "Active Directory account details to operate Windows Server Failover Cluster.",
       "type": "object",
       "properties": {
         "domainFqdn": {
@@ -1146,7 +1138,7 @@
           ]
         },
         "ouPath": {
-          "description": "OU path in which the nodes and cluster will be present.",
+          "description": "Organizational Unit path in which the nodes and cluster will be present.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1180,34 +1172,6 @@
           "type": "string",
           "x-ms-mutability": [
             "read",
-            "create"
-          ]
-        },
-        "storageAccountUrl": {
-          "description": "Fully qualified ARM resource id of the witness storage account.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "storageAccountPrimaryKey": {
-          "description": "Primary key of the witness storage account.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      }
-    },
-    "DomainlessProfile": {
-      "description": "The domainless profile.",
-      "type": "object",
-      "properties": {
-        "domainlessAccountPassword": {
-          "description": "Administrator login password required for creating windows account on nodes for domain-less cluster creation.",
-          "type": "string",
-          "x-ms-mutability": [
             "create"
           ]
         },
@@ -1270,7 +1234,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SqlVmGroupProperties",
+          "$ref": "#/definitions/SqlVirtualMachineGroupProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -1355,7 +1319,7 @@
           "readOnly": true
         },
         "sqlImageOffer": {
-          "description": "SQL image offer.",
+          "description": "SQL image offer. Examples include SQL2016-WS2016, SQL2017-WS2016.",
           "type": "string",
           "readOnly": true
         },
@@ -1388,19 +1352,15 @@
           }
         },
         "sqlVirtualMachineGroupResourceId": {
-          "description": "ARM resource id of the SQL virtual machine group this SQL virtual machine is part of.",
+          "description": "ARM resource id of the SQL virtual machine group this SQL virtual machine is or will be part of.",
           "type": "string",
           "x-ms-mutability": [
             "update"
           ]
         },
         "wsfcDomainCredentials": {
-          "$ref": "#/definitions/WSFCDomainCredentials",
+          "$ref": "#/definitions/WsfcDomainCredentials",
           "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL availability group."
-        },
-        "autoTelemetrySettings": {
-          "$ref": "#/definitions/AutoTelemetrySettings",
-          "description": "Auto telemetry settings for SQL virtual machine."
         },
         "autoPatchingSettings": {
           "$ref": "#/definitions/AutoPatchingSettings",
@@ -1420,7 +1380,7 @@
         }
       }
     },
-    "WSFCDomainCredentials": {
+    "WsfcDomainCredentials": {
       "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL availability group.",
       "type": "object",
       "properties": {
@@ -1438,21 +1398,8 @@
         }
       }
     },
-    "AutoTelemetrySettings": {
-      "description": "Auto telemetry settings.",
-      "type": "object",
-      "properties": {
-        "region": {
-          "description": "Region for autotelemetry setting.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      }
-    },
     "AutoPatchingSettings": {
-      "description": "Auto patching settings.",
+      "description": "Set a patching window during which Windows and SQL patches will be applied.",
       "type": "object",
       "properties": {
         "enable": {
@@ -1461,11 +1408,24 @@
         },
         "dayOfWeek": {
           "description": "Day of week to apply the patch on.",
-          "type": "string"
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": false
+          }
         },
         "maintenanceWindowStartingHour": {
           "format": "int32",
-          "description": "Hour of the day when patching is initiated.",
+          "description": "Hour of the day when patching is initiated. Local VM time.",
           "type": "integer"
         },
         "maintenanceWindowDuration": {
@@ -1476,7 +1436,7 @@
       }
     },
     "AutoBackupSettings": {
-      "description": "Auto backup settings.",
+      "description": "Configure backups for databases in your SQL virtual machine.",
       "type": "object",
       "properties": {
         "enable": {
@@ -1558,11 +1518,11 @@
       }
     },
     "KeyVaultCredentialSettings": {
-      "description": "Keyvault credential settings.",
+      "description": "Configure your SQL virtual machine to be able to connect to the Azure Key Vault service.",
       "type": "object",
       "properties": {
         "enable": {
-          "description": "Enable or disable keyvault credential setting.",
+          "description": "Enable or disable key vault credential setting.",
           "type": "boolean"
         },
         "credentialName": {
@@ -1588,19 +1548,19 @@
       }
     },
     "ServerConfigurationsManagementSettings": {
-      "description": "Server configuration management settings.",
+      "description": "Set the connectivity, storage and workload settings.",
       "type": "object",
       "properties": {
         "sqlConnectivityUpdateSettings": {
-          "$ref": "#/definitions/SQLConnectivityUpdateSettings",
+          "$ref": "#/definitions/SqlConnectivityUpdateSettings",
           "description": "SQL connectivity type settings."
         },
         "sqlWorkloadTypeUpdateSettings": {
-          "$ref": "#/definitions/SQLWorkloadTypeUpdateSettings",
+          "$ref": "#/definitions/SqlWorkloadTypeUpdateSettings",
           "description": "SQL workload type settings."
         },
         "sqlStorageUpdateSettings": {
-          "$ref": "#/definitions/SQLStorageUpdateSettings",
+          "$ref": "#/definitions/SqlStorageUpdateSettings",
           "description": "SQL storage update settings."
         },
         "additionalFeaturesServerConfigurations": {
@@ -1609,12 +1569,12 @@
         }
       }
     },
-    "SQLConnectivityUpdateSettings": {
-      "description": "SQL connectivity update settings.",
+    "SqlConnectivityUpdateSettings": {
+      "description": "Set the access level and network port settings for SQL Server.",
       "type": "object",
       "properties": {
         "connectivityType": {
-          "description": "SQL Server conectivity option.",
+          "description": "SQL Server connectivity option.",
           "enum": [
             "LOCAL",
             "PRIVATE",
@@ -1647,8 +1607,8 @@
         }
       }
     },
-    "SQLWorkloadTypeUpdateSettings": {
-      "description": "SQL workload type update settings.",
+    "SqlWorkloadTypeUpdateSettings": {
+      "description": "Set workload type to optimize storage for SQL Server.",
       "type": "object",
       "properties": {
         "sqlWorkloadType": {
@@ -1670,8 +1630,8 @@
         }
       }
     },
-    "SQLStorageUpdateSettings": {
-      "description": "SQL disk storage setting.",
+    "SqlStorageUpdateSettings": {
+      "description": "Set disk storage settings for SQL Server.",
       "type": "object",
       "properties": {
         "diskCount": {
