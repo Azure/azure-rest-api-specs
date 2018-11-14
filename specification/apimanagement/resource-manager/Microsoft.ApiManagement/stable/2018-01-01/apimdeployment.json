@@ -69,7 +69,7 @@
         "tags": [
           "ApiManagementServiceSkus"
         ],
-        "summary": "Gets all available SKU for a given API Management service",
+        "summary": "Gets available SKUs for API Management service",
         "description": "Gets all available SKU for a given API Management service",
         "operationId": "ApiManagementServiceSkus_ListAvailableServiceSkus",
         "parameters": [
@@ -93,6 +93,9 @@
               "$ref": "#/definitions/ResourceSkuResults"
             }
           }
+        },
+		"x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
