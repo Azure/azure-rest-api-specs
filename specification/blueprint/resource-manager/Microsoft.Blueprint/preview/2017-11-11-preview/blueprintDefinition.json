@@ -571,146 +571,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}": {
-      "put": {
-        "tags": [
-          "Assignment"
-        ],
-        "operationId": "Assignments_CreateOrUpdate",
-        "description": "Create or update a Blueprint assignment.",
-        "x-ms-examples": {
-          "Assignment": {
-            "$ref": "./examples/BlueprintAssignment_Create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AssignmentNameParameter"
-          },
-          {
-            "name": "assignment",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Assignment"
-            },
-            "description": "assignment object to save."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created - Blueprint assignment saved",
-            "schema": {
-              "$ref": "#/definitions/Assignment"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Assignment"
-        ],
-        "operationId": "Assignments_Get",
-        "description": "Get a Blueprint assignment.",
-        "x-ms-examples": {
-          "Assignment": {
-            "$ref": "./examples/BlueprintAssignment_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AssignmentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Blueprint assignment retrieved.",
-            "schema": {
-              "$ref": "#/definitions/Assignment"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Assignment"
-        ],
-        "operationId": "Assignments_Delete",
-        "description": "Delete a Blueprint assignment.",
-        "x-ms-examples": {
-          "Assignment_Delete": {
-            "$ref": "./examples/BlueprintAssignment_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AssignmentNameParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "OK - Blueprint assignment deleted.",
-            "schema": {
-              "$ref": "#/definitions/Assignment"
-            }
-          },
-          "204": {
-            "description": "no content"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments": {
-      "get": {
-        "tags": [
-          "Assignment"
-        ],
-        "operationId": "Assignments_List",
-        "description": "List Blueprint assignments within a subscription.",
-        "x-ms-examples": {
-          "Assignment": {
-            "$ref": "./examples/BlueprintAssignment_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - all Blueprint assignment retrieved.",
-            "schema": {
-              "$ref": "#/definitions/AssignmentList"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Blueprint/operations": {
       "get": {
         "tags": [
@@ -785,28 +645,6 @@
       },
       "required": [
         "kind"
-      ]
-    },
-    "Assignment": {
-      "type": "object",
-      "description": "Represents a Blueprint assignment.",
-      "properties": {
-        "identity": {
-          "description": "Managed Service Identity for this Blueprint assignment",
-          "$ref": "#/definitions/ManagedServiceIdentity"
-        },
-        "properties": {
-          "description": "Properties for Assignment object.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AssignmentProperties"
-        }
-      },
-      "required": [
-        "identity",
-        "properties"
-      ],
-      "allOf": [
-        { "$ref": "#/definitions/TrackedResource" }
       ]
     },
     "PublishedBlueprint": {
@@ -884,24 +722,6 @@
         }
       }
     },
-    "AssignmentList": {
-      "type": "object",
-      "description": "List of Blueprint assignments",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Blueprint assignments.",
-          "items": {
-            "$ref": "#/definitions/Assignment"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
-        }
-      }
-    },
     "ResourceProviderOperationList": {
       "description": "Result of the request to list operations.",
       "readOnly": true,
@@ -945,36 +765,6 @@
           }
         }
       }
-    },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "description": "Managed Service Identity",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the Managed Service Identity.",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ManagedServiceIdentityType",
-            "modelAsString": true
-          }
-        },
-        "principalId": {
-          "type": "string",
-          "description": "Azure Active Directory principal ID associated with this Identity."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "ID of the Azure Active Directory."
-        }
-      },
-      "required": [
-        "type"
-      ]
     },
     "SharedBlueprintProperties": {
       "description": "Shared Schema for both blueprintProperties and publishedBlueprintProperties.",
@@ -1060,90 +850,6 @@
       },
       "allOf": [
         { "$ref": "#/definitions/BlueprintResourceStatusBase" }
-      ]
-    },
-    "AssignmentStatus": {
-      "description": "The status of Blueprint assignment. This field is readonly.",
-      "type": "object",
-      "properties": {
-      },
-      "allOf": [
-        { "$ref": "#/definitions/BlueprintResourceStatusBase" }
-      ]
-    },
-    "AssignmentLockSettings": {
-      "description": "Defines how Blueprint-managed resources will be locked.",
-      "type": "object",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "Lock mode.",
-          "enum": [
-            "None",
-            "AllResources"
-          ],
-          "x-ms-enum": {
-            "name": "AssignmentLockMode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "AssignmentProperties": {
-      "type": "object",
-      "description": "Detailed properties for Assignment.",
-      "properties": {
-        "blueprintId": {
-          "type": "string",
-          "description": "ID of the Blueprint definition resource."
-        },
-        "parameters": {
-          "$ref": "#/definitions/ParameterValueCollection",
-          "description": "Blueprint parameter values."
-        },
-        "resourceGroups": {
-          "$ref": "#/definitions/ResourceGroupValueCollection",
-          "description": "Names and locations of resource group placeholders."
-        },
-        "status": {
-          "description": "Status of Blueprint assignment. This field is readonly.",
-          "readOnly": true,
-          "$ref": "#/definitions/AssignmentStatus"
-        },
-        "locks": {
-          "description": "Defines how Blueprint-managed resources will be locked.",
-          "$ref": "#/definitions/AssignmentLockSettings"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "State of the assignment.",
-          "enum": [
-            "creating",
-            "validating",
-            "waiting",
-            "deploying",
-            "cancelling",
-            "locking",
-            "succeeded",
-            "failed",
-            "canceled",
-            "deleting"
-          ],
-          "x-ms-enum": {
-            "name": "AssignmentProvisioningState",
-            "modelAsString": true
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BlueprintResourcePropertiesBase"
-        }
-      ],
-      "required": [
-        "parameters",
-        "resourceGroups"
       ]
     },
     "TemplateArtifactProperties": {
@@ -1508,21 +1214,6 @@
         }
       }
     },
-    "TrackedResource": {
-      "description": "Common properties for all Azure tracked resources.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location of this Blueprint assignment.",
-          "x-ms-mutability": [ "read", "create" ]
-        }
-      },
-      "required": [ "location" ],
-      "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
-      ]
-    },
     "AzureResourceBase": {
       "description": "Common properties for all Azure resources.",
       "type": "object",
@@ -1634,14 +1325,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "version of the published blueprint."
-    },
-    "AssignmentNameParameter": {
-      "name": "assignmentName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "name of the assignment."
     },
     "ApiVersionParameter": {
       "name": "api-version",
