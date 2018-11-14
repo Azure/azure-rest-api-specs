@@ -770,7 +770,7 @@
           "200": {
             "description": "The operation was successful. The response contains the list of IP addresses.",
             "schema": {
-              "$ref": "#/definitions/ComputeNodeListResult"
+              "$ref": "#/definitions/ComputeNodesInformation"
             }
           },
           "default": {
@@ -1957,6 +1957,11 @@
         "computeType": {
           "description": "The type of compute",
           "$ref": "#/definitions/ComputeType"
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
         }
       },
       "required": [
@@ -2009,21 +2014,6 @@
         }
       },
       "x-ms-discriminator-value": "AmlCompute"
-    },
-    "ComputeNodeListResult": {
-      "properties": {
-        "details": {
-          "readOnly": true,
-          "$ref": "#/definitions/ComputeNodesInformation",
-          "description": "The returned compute node details."
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The continuation token."
-        }
-      },
-      "description": "Values returned by the List operation."
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
