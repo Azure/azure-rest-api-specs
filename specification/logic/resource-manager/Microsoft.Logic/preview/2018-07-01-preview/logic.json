@@ -2058,7 +2058,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -2139,7 +2139,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         }
@@ -2203,7 +2203,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -2277,7 +2277,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         }
@@ -10029,17 +10029,15 @@
         }
       }
     },
-    "CloudError": {
-      "x-ms-external": true,
+    "ApiError": {
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/ApiErrorBody"
         }
       },
       "description": "An error response from the Logic App service."
     },
-    "CloudErrorBody": {
-      "x-ms-external": true,
+    "ApiErrorBody": {
       "properties": {
         "code": {
           "type": "string",
@@ -10056,7 +10054,7 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/ApiErrorBody"
           },
           "description": "A list of additional details about the error."
         }
