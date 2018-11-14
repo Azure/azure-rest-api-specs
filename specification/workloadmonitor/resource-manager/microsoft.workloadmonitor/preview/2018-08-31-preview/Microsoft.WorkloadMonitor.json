@@ -1536,7 +1536,7 @@
       "x-ms-azure-resource": true
     },
     "NotificationSetting": {
-      "description": "Model for properties of a NotificationSetting.",
+      "description": "Model for NotificationSetting.",
       "type": "object",
       "allOf": [
         {
@@ -1544,14 +1544,26 @@
         }
       ],
       "properties": {
-	  "actionGroupResourceIds": {
-		"description": "List of action group resource ids to be notified",
-		"type": "array",
-		"items": {
-		  "type": "string"
-		},
-		"readOnly": true
-	  }
+        "properties": {
+          "$ref": "#/definitions/NotificationSettingProperties",
+          "description": "Properties of Notification Settings",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NotificationSettingProperties": {
+      "description": "Model for properties of a NotificationSetting.",
+      "type": "object",
+      "properties": {
+        "actionGroupResourceIds": {
+          "description": "List of action group resource ids to be notified",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
       }
     },
     "OperationListResult": {
