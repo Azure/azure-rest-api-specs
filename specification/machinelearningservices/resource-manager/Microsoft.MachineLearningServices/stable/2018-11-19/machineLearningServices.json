@@ -1987,39 +1987,35 @@
     },
     "AmlComputeNodeInformation": {
       "description": "Compute node information related to a AmlCompute.",
-        {
-          "type": "object",
-          "properties": {
-            "nodeId": {
-              "readOnly": true,
-              "type": "string",
-              "title": "Node ID.",
-              "description": "ID of the compute node."
-            },
-            "ipAddress": {
-              "readOnly": true,
-              "type": "string",
-              "title": "IP address.",
-              "description": "Public IP address of the compute node."
-            },
-            "port": {
-              "readOnly": true,
-              "type": "number",
-              "format": "int32",
-              "title": "Port.",
-              "description": "SSH port number of the node."
-            }
-          }
+      "properties": {
+        "nodeId": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node ID.",
+          "description": "ID of the compute node."
+        },
+        "ipAddress": {
+          "readOnly": true,
+          "type": "string",
+          "title": "IP address.",
+          "description": "Public IP address of the compute node."
+        },
+        "port": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "title": "Port.",
+          "description": "SSH port number of the node."
         }
-      ],
+      },
       "x-ms-discriminator-value": "AmlCompute"
     },
     "ComputeNodeListResult": {
       "properties": {
         "details": {
           "readOnly": true,
-          "type": "#/definitions/ComputeNodesInformation",
-          "description": "The collection of returned compute node details."
+          "$ref": "#/definitions/ComputeNodesInformation",
+          "description": "The returned compute node details."
         },
         "nextLink": {
           "readOnly": true,
