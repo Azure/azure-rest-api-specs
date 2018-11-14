@@ -1522,17 +1522,30 @@
     },
     "ApplicationGatewayRewriteRule": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayRewriteRulePropertiesFormat"
+        },
         "name": {
           "type": "string",
           "description": "Name of the rewrite rule that is unique within an Application Gateway."
-        },
+        }
+      },
+      "description": "Rewrite rule of an application gateway."
+    },
+    "ApplicationGatewayRewriteRulePropertiesFormat": {
+      "properties": {
         "actionSet": {
           "type": "object",
           "$ref": "#/definitions/ApplicationGatewayRewriteRuleActionSet",
           "description": "Set of actions to be done as part of the rewrite Rule."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the rewrite rule. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "description": "Rewrite rule of an application gateway."
+      "description": "Properties of rewrite rule of the application gateway."
     },
     "ApplicationGatewayRewriteRuleActionSet": {
       "properties": {
