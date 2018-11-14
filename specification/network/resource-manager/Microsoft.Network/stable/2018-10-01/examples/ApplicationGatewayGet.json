@@ -215,22 +215,19 @@
                 "rewriteRules": [
                   {
                     "name": "Set X-Forwarded-For",
-                    "properties": {
-                      "provisioningState": "Succeeded",
-                      "actionSet": {
-                        "requestHeaderConfigurations": [
-                          {
-                            "headerName": "X-Forwarded-For",
-                            "headerValue": "{var_remote-addr}"
-                          }
-                        ],
-                        "responseHeaderConfigurations": [
-                          {
-                            "headerName": "Strict-Transport-Security",
-                            "headerValue": "max-age=31536000"
-                          }
-                        ]
-                      }
+                    "actionSet": {
+                      "requestHeaderConfigurations": [
+                        {
+                          "headerName": "X-Forwarded-For",
+                          "headerValue": "{var_remote-addr}"
+                        }
+                      ],
+                      "responseHeaderConfigurations": [
+                        {
+                          "headerName": "Strict-Transport-Security",
+                          "headerValue": "max-age=31536000"
+                        }
+                      ]
                     }
                   }
                 ]
