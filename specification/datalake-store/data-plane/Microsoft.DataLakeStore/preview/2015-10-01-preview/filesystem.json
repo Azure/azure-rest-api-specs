@@ -286,7 +286,7 @@
           "FileSystem"
         ],
         "operationId": "FileSystem_Concat",
-        "description": "Concatenates the list of source files into the destination file, removing all source files upon success.",
+        "description": "Concatenates the list of source files into the destination file, removing all source files upon success.  This operation has been deprecated, please use operation FileSystem_MsConcat instead.",
         "parameters": [
           {
             "name": "destinationPath",
@@ -331,7 +331,8 @@
               "$ref": "#/definitions/AdlsError"
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/webhdfs/v1/{msConcatDestinationPath}?op=MSCONCAT": {
