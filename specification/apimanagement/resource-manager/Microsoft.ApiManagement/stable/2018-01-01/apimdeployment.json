@@ -64,7 +64,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus": {
       "get": {
         "tags": [
           "ApiManagementServiceSkus"
@@ -72,7 +72,7 @@
         "summary": "Gets available SKUs for API Management service",
         "description": "Gets all available SKU for a given API Management service",
         "operationId": "ApiManagementServiceSkus_ListAvailableServiceSkus",
-		"x-ms-examples": {
+        "x-ms-examples": {
           "ApiManagementListSKUs": {
             "$ref": "./examples/ApiManagementListSKUs.json"
           }
@@ -99,7 +99,7 @@
             }
           }
         },
-		"x-ms-pageable": {
+        "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
@@ -686,7 +686,7 @@
     }
   },
   "definitions": {
-	"ResourceSkuResults": {
+    "ResourceSkuResults": {
       "properties": {
         "value": {
           "type": "array",
@@ -705,7 +705,7 @@
       ],
       "description": "The API Management service SKUs operation response."
     },
-	"ResourceSkuResult": {
+    "ResourceSkuResult": {
       "properties": {
         "resourceType": {
           "readOnly": true,
@@ -713,10 +713,10 @@
           "description": "The type of resource the SKU applies to."
         },
         "sku": {
-		  "$ref": "#/definitions/ResourceSku",
-          "readOnly": true,          
+          "$ref": "#/definitions/ResourceSku",
+          "readOnly": true,
           "description": "Specifies API Management SKU."
-        },        
+        },
         "capacity": {
           "$ref": "#/definitions/ResourceSkuCapacity",
           "readOnly": true,
@@ -725,7 +725,7 @@
       },
       "description": "Describes an available API Management service SKU."
     },
-	"ResourceSkuCapacity": {
+    "ResourceSkuCapacity": {
       "properties": {
         "minimum": {
           "type": "integer",
@@ -762,8 +762,8 @@
       },
       "description": "Describes scaling information of a SKU."
     },
-	"ResourceSku": {
-      "properties": {        
+    "ResourceSku": {
+      "properties": {
         "name": {
           "type": "string",
           "description": "Name of the Sku.",

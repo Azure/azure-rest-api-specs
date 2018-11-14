@@ -64,7 +64,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus": {
       "get": {
         "tags": [
           "ApiManagementServiceSkus"
@@ -72,9 +72,12 @@
         "summary": "Gets available SKUs for API Management service",
         "description": "Gets all available SKU for a given API Management service",
         "operationId": "ApiManagementServiceSkus_ListAvailableServiceSkus",
-		"x-ms-examples": {
-          "ApiManagementListSKUs": {
-            "$ref": "./examples/ApiManagementListSKUs.json"
+        "x-ms-examples": {
+          "ApiManagementListSKUs-Dedicated": {
+            "$ref": "./examples/ApiManagementListSKUs-Dedicated.json"
+          },
+          "ApiManagementListSKUs-Consumption": {
+            "$ref": "./examples/ApiManagementListSKUs-Consumption.json"
           }
         },
         "parameters": [
@@ -99,7 +102,7 @@
             }
           }
         },
-		"x-ms-pageable": {
+        "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
@@ -686,7 +689,7 @@
     }
   },
   "definitions": {
-	"ResourceSkuResults": {
+    "ResourceSkuResults": {
       "properties": {
         "value": {
           "type": "array",
@@ -705,7 +708,7 @@
       ],
       "description": "The API Management service SKUs operation response."
     },
-	"ResourceSkuResult": {
+    "ResourceSkuResult": {
       "properties": {
         "resourceType": {
           "readOnly": true,
@@ -713,10 +716,10 @@
           "description": "The type of resource the SKU applies to."
         },
         "sku": {
-		  "$ref": "#/definitions/ResourceSku",
-          "readOnly": true,          
+          "$ref": "#/definitions/ResourceSku",
+          "readOnly": true,
           "description": "Specifies API Management SKU."
-        },        
+        },
         "capacity": {
           "$ref": "#/definitions/ResourceSkuCapacity",
           "readOnly": true,
@@ -725,24 +728,24 @@
       },
       "description": "Describes an available API Management service SKU."
     },
-	"ResourceSkuCapacity": {
+    "ResourceSkuCapacity": {
       "properties": {
         "minimum": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The minimum capacity."
         },
         "maximum": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The maximum capacity that can be set."
         },
         "default": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The default capacity."
         },
         "scaleType": {
@@ -756,14 +759,28 @@
           ],
           "x-ms-enum": {
             "name": "ResourceSkuCapacityScaleType",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Automatic",
+                "description": "Supported scale type automatic."
+              },
+              {
+                "value": "Manual",
+                "description": "Supported scale type manual."
+              },
+              {
+                "value": "None",
+                "description": "Scaling not supported."
+              }
+            ]
           }
         }
       },
       "description": "Describes scaling information of a SKU."
     },
-	"ResourceSku": {
-      "properties": {        
+    "ResourceSku": {
+      "properties": {
         "name": {
           "type": "string",
           "description": "Name of the Sku.",
@@ -775,7 +792,7 @@
             "Standard",
             "Premium",
             "Basic",
-			"Consumption"
+            "Consumption"
           ],
           "x-ms-enum": {
             "name": "SkuType",
@@ -1184,7 +1201,7 @@
             "Standard",
             "Premium",
             "Basic",
-			"Consumption"
+            "Consumption"
           ],
           "x-ms-enum": {
             "name": "SkuType",
