@@ -59,8 +59,8 @@
          "x-ms-parameter-location":"method",
          "required":true
       },
-      "errorName":{  
-         "name":"errorName",
+      "eventName":{  
+         "name":"eventName",
          "description":"Unique name of an error within a migrate project.",
          "type":"string",
          "in":"path",
@@ -112,13 +112,13 @@
       }
    ],
    "paths":{  
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateErrors":{  
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateEvents":{  
          "get":{  
             "tags":[  
-               "Errors"
+               "Events"
             ],
-            "summary":"Gets a list of errors in the migrate project.",
-            "operationId":"Errors_EnumerateErrors",
+            "summary":"Gets a list of events in the migrate project.",
+            "operationId":"Errors_EnumerateEvents",
             "parameters":[  
                {  
                   "$ref":"#/parameters/subscriptionId"
@@ -143,25 +143,25 @@
                "200":{  
                   "description":"OK",
                   "schema":{  
-                     "$ref":"#/definitions/ErrorCollection"
+                     "$ref":"#/definitions/EventCollection"
                   }
                }
             },
             "deprecated":false,
             "x-ms-examples":{  
-               "MigrateErrors_List":{  
-                  "$ref":"./examples/MigrateErrors_List.json"
+               "MigrateEvents_List":{  
+                  "$ref":"./examples/MigrateEvents_List.json"
                }
             }
          }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateErrors/{errorName}":{  
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/MigrateEvents/{eventName}":{  
          "get":{  
             "tags":[  
-               "Errors"
+               "Events"
             ],
-            "summary":"Gets an error in the migrate project.",
-            "operationId":"Errors_GetError",
+            "summary":"Gets an event in the migrate project.",
+            "operationId":"Events_GetEvent",
             "parameters":[  
                {  
                   "$ref":"#/parameters/subscriptionId"
@@ -176,31 +176,31 @@
                   "$ref":"#/parameters/api-version"
                },
                {  
-                  "$ref":"#/parameters/errorName"
+                  "$ref":"#/parameters/eventName"
                }
             ],
             "responses":{  
                "200":{  
                   "description":"OK",
                   "schema":{  
-                     "$ref":"#/definitions/Error"
+                     "$ref":"#/definitions/MigrateEvent"
                   }
                }
             },
             "deprecated":false,
             "x-ms-examples":{  
-               "MigrateErrors_Get":{  
-                  "$ref":"./examples/MigrateErrors_Get.json"
+               "MigrateEvents_Get":{  
+                  "$ref":"./examples/MigrateEvents_Get.json"
                }
             }
          },
          "delete":{  
             "tags":[  
-               "Errors"
+               "Events"
             ],
-            "summary":"Delete the migrate error",
-            "description":"Delete the migrate error. Deleting non-existent migrate error is a no-operation.",
-            "operationId":"Errors_DeleteError",
+            "summary":"Delete the migrate event",
+            "description":"Delete the migrate event. Deleting non-existent migrate event is a no-operation.",
+            "operationId":"Events_DeleteEvent",
             "parameters":[  
                {  
                   "$ref":"#/parameters/subscriptionId"
@@ -215,7 +215,7 @@
                   "$ref":"#/parameters/api-version"
                },
                {  
-                  "$ref":"#/parameters/errorName"
+                  "$ref":"#/parameters/eventName"
                }
             ],
             "responses":{  
@@ -225,8 +225,8 @@
             },
             "deprecated":false,
             "x-ms-examples":{  
-               "MigrateErrors_Delete":{  
-                  "$ref":"./examples/MigrateErrors_Delete.json"
+               "MigrateEvents_Delete":{  
+                  "$ref":"./examples/MigrateEvents_Delete.json"
                }
             }
          }
@@ -859,7 +859,7 @@
 
          }
       },
-      "ErrorCollection":{  
+      "EventCollection":{  
          "description":"Collection of errors.",
          "type":"object",
          "properties":{  
@@ -867,7 +867,7 @@
                "description":"Gets or sets the machines.",
                "type":"array",
                "items":{  
-                  "$ref":"#/definitions/Error"
+                  "$ref":"#/definitions/MigrateEvent"
                }
             },
             "nextLink":{  
@@ -876,8 +876,8 @@
             }
          }
       },
-      "Error":{  
-         "description":"Error REST resource.",
+      "MigrateEvent":{  
+         "description":"MigrateEvent REST resource.",
          "type":"object",
          "properties":{  
             "id":{  
@@ -894,12 +894,12 @@
                "readOnly":true
             },
             "properties":{  
-               "$ref":"#/definitions/ErrorProperties",
-               "description":"Gets or sets the properties of the error."
+               "$ref":"#/definitions/EventProperties",
+               "description":"Gets or sets the properties of the event."
             }
          }
       },
-      "ErrorProperties":{  
+      "EventProperties":{  
          "description":"Properties of the error resource.",
          "type":"object",
          "properties":{  
@@ -2137,6 +2137,28 @@
                "description":"Gets or sets the name of the machine.",
                "type":"string"
             },
+            "ipAddresses":{  
+               "description":"Gets or sets the list of IP addresses of the machine.\r\n            IP addresses could be IP V4 or IP V6.",
+               "type":"array",
+               "items":{  
+                  "type":"string"
+               }
+            },
+            "fqdn":{  
+               "description":"Gets or sets the FQDN of the machine.",
+               "type":"string"
+            },
+            "biosId":{  
+               "description":"Gets or sets the BIOS ID of the machine.",
+               "type":"string"
+            },
+            "macAddresses":{  
+               "description":"Gets or sets the list of MAC addresses of the machine.",
+               "type":"array",
+               "items":{  
+                  "type":"string"
+               }
+            },
             "extendedInfo":{  
                "description":"Gets or sets the ISV specific extended information.",
                "type":"object",
@@ -2189,6 +2211,28 @@
                "description":"Gets or sets the name of the machine.",
                "type":"string"
             },
+            "ipAddresses":{  
+               "description":"Gets or sets the list of IP addresses of the machine.\r\n            IP addresses could be IP V4 or IP V6.",
+               "type":"array",
+               "items":{  
+                  "type":"string"
+               }
+            },
+            "fqdn":{  
+               "description":"Gets or sets the FQDN of the machine.",
+               "type":"string"
+            },
+            "biosId":{  
+               "description":"Gets or sets the BIOS ID of the machine.",
+               "type":"string"
+            },
+            "macAddresses":{  
+               "description":"Gets or sets the list of MAC addresses of the machine.",
+               "type":"array",
+               "items":{  
+                  "type":"string"
+               }
+            },
             "extendedInfo":{  
                "description":"Gets or sets the ISV specific extended information.",
                "type":"object",
@@ -2239,6 +2283,28 @@
                "description":"Gets or sets the name of the machine.",
                "type":"string"
             },
+            "ipAddresses":{  
+               "description":"Gets or sets the list of IP addresses of the machine.\r\n            IP addresses could be IP V4 or IP V6.",
+               "type":"array",
+               "items":{  
+                  "type":"string"
+               }
+            },
+            "fqdn":{  
+               "description":"Gets or sets the FQDN of the machine.",
+               "type":"string"
+            },
+            "biosId":{  
+               "description":"Gets or sets the BIOS ID of the machine.",
+               "type":"string"
+            },
+            "macAddresses":{  
+               "description":"Gets or sets the list of MAC addresses of the machine.",
+               "type":"array",
+               "items":{  
+                  "type":"string"
+               }
+            },
             "extendedInfo":{  
                "description":"Gets or sets the ISV specific extended information.",
                "type":"object",
@@ -2271,7 +2337,7 @@
                "readOnly":true
             },
             "name":{  
-               "description":"Gets or sets the name of the migrate project.",
+               "description":"Gets the name of the migrate project.",
                "type":"string",
                "readOnly":true
             },
@@ -2293,7 +2359,11 @@
                   "enum":[  
                      "ServerDiscovery",
                      "ServerAssessment",
-                     "ServerMigration"
+                     "ServerMigration",
+                     "Cloudamize",
+                     "CloudEndure",
+                     "Zerto",
+                     "CorentTech"
                   ],
                   "type":"string"
                }
@@ -2304,6 +2374,11 @@
                "additionalProperties":{  
                   "$ref":"#/definitions/GoalSummary"
                }
+            },
+            "lastSummaryRefreshedTime":{  
+               "format":"date-time",
+               "description":"Gets the last time the project summary was refreshed.",
+               "type":"string"
             },
             "provisioningState":{  
                "type":"string",
@@ -2358,7 +2433,11 @@
                "enum":[  
                   "ServerDiscovery",
                   "ServerAssessment",
-                  "ServerMigration"
+                  "ServerMigration",
+                  "Cloudamize",
+                  "CloudEndure",
+                  "Zerto",
+                  "CorentTech"
                ],
                "type":"string"
             }
@@ -2390,12 +2469,12 @@
          "x-ms-azure-resource":true,
          "properties":{  
             "id":{  
-               "description":"Gets or sets the relative URL to get to this REST resource.",
+               "description":"Gets the relative URL to get to this REST resource.",
                "type":"string",
                "readOnly":true
             },
             "name":{  
-               "description":"Gets or sets the name of this REST resource.",
+               "description":"Gets the name of this REST resource.",
                "type":"string",
                "readOnly":true
             },
@@ -2419,23 +2498,35 @@
                "enum":[  
                   "ServerDiscovery",
                   "ServerAssessment",
-                  "ServerMigration"
+                  "ServerMigration",
+                  "Cloudamize",
+                  "CloudEndure",
+                  "Zerto",
+                  "CorentTech"
                ],
                "type":"string"
             },
             "purpose":{  
                "description":"Gets or sets the purpose of the solution.",
+               "enum":[  
+                  "Discovery",
+                  "Assessment",
+                  "Migration"
+               ],
                "type":"string"
             },
             "goal":{  
                "description":"Gets or sets the goal of the solution.",
+               "enum":[  
+                  "Servers"
+               ],
                "type":"string"
             },
-            "activityStatus":{  
-               "description":"Gets or sets the value of activity status of the solution.",
+            "status":{  
+               "description":"Gets or sets the current status of the solution.",
                "enum":[  
-                  "Active",
-                  "NotActive"
+                  "Inactive",
+                  "Active"
                ],
                "type":"string"
             },
