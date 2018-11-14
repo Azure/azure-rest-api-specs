@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07-01-preview
+tag: package-2018-09-01-preview
 ```
 
 ## Suppression
@@ -91,7 +91,9 @@ These settings apply only when `--tag=package-2018-01-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2018-01-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 ```
 
 ### Tag: package-2018-07-01-preview-only
@@ -109,7 +111,7 @@ These settings apply only when `--tag=package-2018-09-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2018-09-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview
@@ -130,7 +132,9 @@ These settings apply only when `--tag=package-2018-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 ```
 
 ### Tag: package-2018-07-01-preview
@@ -140,7 +144,9 @@ These settings apply only when `--tag=package-2018-07-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-07-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
@@ -151,7 +157,9 @@ These settings apply only when `--tag=package-2018-09-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-09-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 

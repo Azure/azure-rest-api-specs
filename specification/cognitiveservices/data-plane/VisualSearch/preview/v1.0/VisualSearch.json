@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Visual Search API",
+    "title": "Visual Search Client",
     "description": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
     "version": "1.0"
   },
@@ -21,6 +21,15 @@
         "true"
       ]
     }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
   },
   "host": "api.cognitive.microsoft.com",
   "basePath": "/bing/v7.0",
@@ -488,7 +497,7 @@
           "type": "string"
         },
         "encodingFormat": {
-          "description": "Encoding format (e.g., mp3, mp4, jpeg, etc).",
+          "description": "Encoding format (e.g., png, gif, jpeg, etc).",
           "readOnly": true,
           "type": "string"
         },
