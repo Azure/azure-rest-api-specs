@@ -122,18 +122,19 @@ java:
 
 ``` yaml
 directive:
-  - from: blueprint.json
-    suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
-    reason: properties etag defined as eTag in model
-  - from: blueprint.json
-    suppress: R3026 # Tracked resource 'XXX' must have patch operation that at least supports the update of tags.
+  - from: blueprintAssignment.json
+    suppress: TrackedResourcePatchOperation 
     reason: Assignment is proxy resource.
-  - from: blueprint.json
+  - from: blueprintDefinition.json
     suppress: UniqueResourcePaths
     where: $.paths
     reason: Microsoft.Management is a proxy resource provider
-  - from: blueprint.json
+  - from: blueprintAssignment.json
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI for Microsoft.Management is out of scope.
+  - from: blueprintDefinition.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI for Microsoft.Management is out of scope.    
 ```
