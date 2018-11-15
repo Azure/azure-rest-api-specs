@@ -2058,7 +2058,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2139,7 +2139,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2203,7 +2203,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2277,7 +2277,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -10028,38 +10028,6 @@
           "description": "Details on the location of the body content."
         }
       }
-    },
-    "ApiError": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ApiErrorBody"
-        }
-      },
-      "description": "An error response from the Logic App service."
-    },
-    "ApiErrorBody": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Logic App service."
     }
   },
   "parameters": {
