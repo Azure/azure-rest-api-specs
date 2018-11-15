@@ -2454,9 +2454,7 @@
           "format": "uuid"
         },
         "RecognitionModel": {
-          "type": "string",
-          "description": "Recognition model name. maximum length is 128.",
-          "maxLength": 128
+          "$ref": "#/definitions/RecognitionModel"
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle"
@@ -3517,9 +3515,7 @@
       "description": "A combination of user defined name and user specified data and recognition model name for largePersonGroup/personGroup, and largeFaceList/faceList.",
       "properties": {
         "RecognitionModel": {
-          "type": "string",
-          "description": "Recognition model name. maximum length is 128.",
-          "maxLength": 128
+          "$ref": "#/definitions/RecognitionModel"
         }
       },
       "allOf": [
@@ -3527,6 +3523,11 @@
           "$ref": "#/definitions/NameAndUserDataContract"
         }
       ]
+    },
+    "RecognitionModel": {
+      "type": "string",
+      "description": "Recognition model name. maximum length is 128.",
+      "maxLength": 128
     }
   },
   "parameters": {
