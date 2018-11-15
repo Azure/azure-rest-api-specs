@@ -1993,6 +1993,296 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRepetitionsRequestHistories_List",
+        "description": "List a workflow run repetition request history.",
+        "x-ms-examples": {
+          "List repetition request history": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsRequestHistories_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repetitionName",
+            "description": "The workflow repetition.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories/{requestHistoryName}": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRepetitionsRequestHistories_Get",
+        "description": "Gets a workflow run repetition request history.",
+        "x-ms-examples": {
+          "Get a repetition request history": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsRequestHistories_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repetitionName",
+            "description": "The workflow repetition.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestHistoryName",
+            "description": "The request history name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/requestHistories": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRequestHistories_List",
+        "description": "List a workflow run request history.",
+        "x-ms-examples": {
+          "List a request history": {
+            "$ref": "./examples/WorkflowRunActionRequestHistories_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/requestHistories/{requestHistoryName}": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRequestHistories_Get",
+        "description": "Gets a workflow run request history.",
+        "x-ms-examples": {
+          "Get a request history": {
+            "$ref": "./examples/WorkflowRunActionRequestHistories_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestHistoryName",
+            "description": "The request history name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions": {
       "get": {
         "tags": [
@@ -9639,6 +9929,103 @@
         "recurrence": {
           "$ref": "#/definitions/WorkflowTriggerRecurrence",
           "description": "The recurrence."
+        }
+      }
+    },
+    "RequestHistoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestHistory"
+          },
+          "description": "A list of workflow request histories."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow request histories."
+    },
+    "RequestHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The request history.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RequestHistoryProperties",
+          "description": "The request history properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "RequestHistoryProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The request history.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the request started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the request ended."
+        },
+        "request": {
+          "$ref": "#/definitions/Request",
+          "description": "The request."
+        },
+        "response": {
+          "$ref": "#/definitions/Response",
+          "description": "The response."
+        }
+      }
+    },
+    "Request": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A request.",
+      "properties": {
+        "headers": {
+          "$ref": "#/definitions/Object",
+          "description": "A list of all the headers attached to the request."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The destination for the request."
+        },
+        "method": {
+          "type": "string",
+          "description": "The HTTP method used for the request."
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A response.",
+      "properties": {
+        "headers": {
+          "$ref": "#/definitions/Object",
+          "description": "A list of all the headers attached to the response."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The status code of the response."
+        },
+        "bodyLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Details on the location of the body content."
         }
       }
     }
