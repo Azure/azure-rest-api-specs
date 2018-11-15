@@ -118,9 +118,7 @@
           }
         },
         "x-ms-examples": {
-          "Get DDoS custom policy": {
-            "$ref": "./examples/DdosCustomPolicyGet.json"
-          }
+          "Get DDoS custom policy": { "$ref": "./examples/DdosCustomPolicyGet.json" }
         }
       },
       "put": {
@@ -238,15 +236,12 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "id":"string"
-            }
+            "$ref": "./network.json#/definitions/SubResource" 
           },
           "description": "The list of public IPs associated with the DDoS custom policy resource. This list is read-only."
         },
         "protocolCustomSettings": {
-          "readOnly": true,
+          "readOnly": false,
           "type": "array",
           "items": {
             "$ref": "./network.json#/definitions/SubResource" 
@@ -261,6 +256,11 @@
         "protocol": {
           "readOnly": false,
           "type": "string",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "Syn"
+          ],
           "description": "The protocol for which the DDoS protection policy is being customized."
         },
         "triggerRateOverride": {
