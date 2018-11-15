@@ -1,0 +1,3205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-11-01-preview",
+    "title": "BillingManagementClient",
+    "description": "Billing client provides access to billing resources for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts": {
+      "get": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccountsList": {
+            "$ref": "./examples/BillingAccountsList.json"
+          },
+          "BillingAccountsListWithExpand": {
+            "$ref": "./examples/BillingAccountsListWithExpand.json"
+          },
+          "BillingAccountsListWithExpandForEnrollmentDetails": {
+            "$ref": "./examples/BillingAccountsListWithExpandForEnrollmentDetails.json"
+          }
+        },
+        "operationId": "BillingAccounts_List",
+        "description": "Lists all billing accounts for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the invoiceSections and billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/listBillingAccountsWithCreateInvoiceSectionPermission": {
+      "get": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccountsListWithCreateInvoiceSectionPermission": {
+            "$ref": "./examples/BillingAccountsListWithCreateInvoiceSectionPermission.json"
+          }
+        },
+        "operationId": "BillingAccounts_ListWithCreateInvoiceSectionPermission",
+        "description": "Lists all billing accounts with create invoiceSection permission for a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the invoiceSections and billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}": {
+      "get": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccounts": {
+            "$ref": "./examples/BillingAccount.json"
+          },
+          "BillingAccountWithExpand": {
+            "$ref": "./examples/BillingAccountWithExpand.json"
+          },
+          "BillingAccountsListWithExpandForEnrollmentDetails": {
+            "$ref": "./examples/BillingAccountsListWithExpandForEnrollmentDetails.json"
+          }
+        },
+        "operationId": "BillingAccounts_Get",
+        "description": "Get the billing account by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the invoiceSections and billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/availableBalance": {
+      "get": {
+        "tags": [
+          "Credits"
+        ],
+        "operationId": "AvailableBalanceByBillingProfile_Get",
+        "description": "The latest available credit balance for a given billingAccountId and billingProfileId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "AvailableBalanceByBillingProfile": {
+            "$ref": "./examples/AvailableBalanceByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AvailableBalance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/paymentMethods": {
+      "get": {
+        "tags": [
+          "PaymentMethods"
+        ],
+        "operationId": "PaymentMethodsByBillingProfile_List",
+        "description": "Lists the Payment Methods by billing profile Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "PaymentMethodsListByBillingProfile": {
+            "$ref": "./examples/PaymentMethodsListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaymentMethodsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles": {
+      "get": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "BillingProfilesListByBillingAccountId": {
+            "$ref": "./examples/BillingProfilesListByBillingAccountId.json"
+          }
+        },
+        "operationId": "BillingProfiles_ListByBillingAccountId",
+        "description": "Lists all billing profiles for a user which that user has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the invoiceSections.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}": {
+      "get": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "BillingProfile": {
+            "$ref": "./examples/BillingProfile.json"
+          }
+        },
+        "operationId": "BillingProfiles_Get",
+        "description": "Get the billing profile by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the invoiceSections.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "operationId": "BillingProfiles_Update",
+        "description": "The operation to update a billing profile.",
+        "x-ms-examples": {
+          "UpdateBillingProfile": {
+            "$ref": "./examples/UpdateBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            },
+            "description": "Parameters supplied to the update billing profile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted. Billing profile update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections": {
+      "get": {
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "InvoiceSectionsListByBillingAccountId": {
+            "$ref": "./examples/InvoiceSectionsListByBillingAccountId.json"
+          },
+          "InvoiceSectionsListByBillingAccountIdWithExpand": {
+            "$ref": "./examples/InvoiceSectionsListByBillingAccountIdWithExpand.json"
+          }
+        },
+        "operationId": "InvoiceSections_ListByBillingAccountId",
+        "description": "Lists all invoice sections for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. InvoiceSection creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "InvoiceSections"
+        ],
+        "operationId": "InvoiceSections_Create",
+        "description": "The operation to create a InvoiceSection.",
+        "x-ms-examples": {
+          "CreateInvoiceSection": {
+            "$ref": "./examples/CreateInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionProperties"
+            },
+            "description": "Parameters supplied to the Create InvoiceSection operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/listInvoiceSectionsWithCreateSubscriptionPermission": {
+      "get": {
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "InvoiceSectionsListByBillingAccountIdWithCreateSubPermission": {
+            "$ref": "./examples/InvoiceSectionsListByBillingAccountIdWithCreateSubPermission.json"
+          },
+          "InvoiceSectionsListByBillingAccountIdWithExpandAndCreateSubPermission": {
+            "$ref": "./examples/InvoiceSectionsListByBillingAccountIdWithExpandAndCreateSubPermission.json"
+          }
+        },
+        "operationId": "InvoiceSections_ListWithCreateSubscriptionPermission",
+        "description": "Lists all invoiceSections with create subscription permission for a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. InvoiceSection creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}": {
+      "get": {
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "InvoiceSection": {
+            "$ref": "./examples/InvoiceSection.json"
+          },
+          "InvoiceSectionWithExpand": {
+            "$ref": "./examples/InvoiceSectionWithExpand.json"
+          }
+        },
+        "operationId": "InvoiceSections_Get",
+        "description": "Get the InvoiceSection by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "InvoiceSections"
+        ],
+        "operationId": "InvoiceSections_Update",
+        "description": "The operation to update a InvoiceSection.",
+        "x-ms-examples": {
+          "UpdateInvoiceSection": {
+            "$ref": "./examples/UpdateInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            },
+            "description": "Parameters supplied to the Create InvoiceSection operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
+          "202": {
+            "description": "Accepted. InvoiceSection update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "x-ms-examples": {
+          "DepartmentsListByBillingAccountId": {
+            "$ref": "./examples/DepartmentsListByBillingAccountId.json"
+          },
+          "DepartmentsListByBillingAccountIdWithExpand": {
+            "$ref": "./examples/DepartmentsListByBillingAccountIdWithExpand.json"
+          }
+        },
+        "operationId": "Departments_ListByBillingAccountId",
+        "description": "Lists all departments for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the enrollmentAccounts.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DepartmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "x-ms-examples": {
+          "Department": {
+            "$ref": "./examples/Department.json"
+          },
+          "DepartmentWithExpand": {
+            "$ref": "./examples/DepartmentWithExpand.json"
+          }
+        },
+        "operationId": "Departments_Get",
+        "description": "Get the department by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the enrollmentAccounts.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts": {
+      "get": {
+        "tags": [
+          "EnrollmentAccounts"
+        ],
+        "x-ms-examples": {
+          "EnrollmentAccountsListByBillingAccountId": {
+            "$ref": "./examples/EnrollmentAccountsListByBillingAccountId.json"
+          },
+          "EnrollmentAccountsListByBillingAccountIdWithExpand": {
+            "$ref": "./examples/EnrollmentAccountsListByBillingAccountIdWithExpand.json"
+          }
+        },
+        "operationId": "EnrollmentAccounts_ListByBillingAccountId",
+        "description": "Lists all Enrollment Accounts for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the department.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}": {
+      "get": {
+        "tags": [
+          "EnrollmentAccounts"
+        ],
+        "x-ms-examples": {
+          "EnrollmentAccount": {
+            "$ref": "./examples/EnrollmentAccount.json"
+          },
+          "EnrollmentAccountWithExpand": {
+            "$ref": "./examples/EnrollmentAccountWithExpand.json"
+          }
+        },
+        "operationId": "EnrollmentAccounts_GetByEnrollmentAccountAccountId",
+        "description": "Get the enrollment account by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the Department.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoices": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "BillingAccountInvoicesList": {
+            "$ref": "./examples/BillingAccountInvoicesList.json"
+          }
+        },
+        "operationId": "Invoices_ListByBillingAccount",
+        "description": "List of invoices for a billing account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "periodStartDate",
+            "description": "Invoice period start date.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "periodEndDate",
+            "description": "Invoice period end date.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoices/{invoiceName}/pricesheet/default/download": {
+      "post": {
+        "tags": [
+          "Pricesheets"
+        ],
+        "x-ms-examples": {
+          "PricesheetDownload": {
+            "$ref": "./examples/PricesheetDownload.json"
+          }
+        },
+        "operationId": "InvoicePricesheet_Download",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "location"
+        },
+        "description": "Get pricesheet data for invoice id (invoiceName).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "billingAccountId",
+            "in": "path",
+            "description": "Azure Billing Account ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invoiceName",
+            "description": "The name of an invoice resource.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoices": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "InvoicesListByBillingProfile": {
+            "$ref": "./examples/InvoicesListByBillingProfile.json"
+          }
+        },
+        "operationId": "Invoices_ListByBillingProfile",
+        "description": "List of invoices for a billing profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "periodStartDate",
+            "description": "Invoice period start date.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "periodEndDate",
+            "description": "Invoice period end date.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "Invoice": {
+            "$ref": "./examples/Invoice.json"
+          }
+        },
+        "operationId": "Invoice_Get",
+        "description": "Get the invoice by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingSubscriptions": {
+      "get": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "Products_ByBillingSubscriptions_List",
+        "description": "Lists billing subscriptions by billingAccountId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionsListByBillingAccount": {
+            "$ref": "./examples/BillingSubscriptionsListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}/billingSubscriptions": {
+      "get": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "BillingSubscriptions_ByBillingProfile_List",
+        "description": "Lists billing subscriptions by billingProfileId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionsListByBillingProfile": {
+            "$ref": "./examples/BillingSubscriptionsListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscriptions": {
+      "get": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "BillingSubscription_ByInvoiceSection_List",
+        "description": "Lists billing subscription by invoiceSectionId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionsListByInvoiceSection": {
+            "$ref": "./examples/BillingSubscriptionsListByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscriptions/{billingSubscriptionId}": {
+      "get": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "BillingSubscription_Get",
+        "description": "Get a single billing subscription by name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingSubscription": {
+            "$ref": "./examples/BillingSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_ByBillingAccount_List",
+        "description": "Lists products by billingAccountId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ProductsListByBillingAccount": {
+            "$ref": "./examples/ProductsListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_ByBillingProfile_List",
+        "description": "Lists products by billingProfileId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ProductsListByBillingProfile": {
+            "$ref": "./examples/ProductsListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_ByInvoiceSection_List",
+        "description": "Lists products by invoiceSectionId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ProductsListByInvoiceSection": {
+            "$ref": "./examples/ProductsListByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/products/{productName}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Get",
+        "description": "Get a single product by name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "Product": {
+            "$ref": "./examples/Product.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/productNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductsSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/transactions": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "operationId": "TransactionsByBillingAccount_List",
+        "description": "Lists the transactions by billingAccountId for given start and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "TransactionsListByBillingAccount": {
+            "$ref": "./examples/TransactionsListByBillingAccount.json"
+          },
+          "ReservationTransactionsListByBillingAccount": {
+            "$ref": "./examples/ReservationTransactionsListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by transaction kind. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/transactions": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "operationId": "TransactionsByBillingProfile",
+        "description": "Lists the transactions by billingProfileId for given start date and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "TransactionsListByBillingProfile": {
+            "$ref": "./examples/TransactionsListByBillingProfile.json"
+          },
+          "ReservationTransactionsListByBillingProfile": {
+            "$ref": "./examples/ReservationTransactionsListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by transaction kind. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/policies/default": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "operationId": "Policy_GetByBillingProfile",
+        "description": "The policy for a given billingAccountId and billingProfileId.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "PolicyByBillingProfile": {
+            "$ref": "./examples/Policy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "operationId": "Policy_Update",
+        "description": "The operation to update a policy.",
+        "x-ms-examples": {
+          "UpdateBillingProfile": {
+            "$ref": "./examples/UpdatePolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            },
+            "description": "Parameters supplied to the update policy operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty": {
+      "get": {
+        "tags": [
+          "BillingProperty"
+        ],
+        "operationId": "BillingProperty_Get",
+        "description": "Get billing property by subscription Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingProperty": {
+            "$ref": "./examples/BillingProperty.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProperty"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingAccountListResult": {
+      "description": "Result of listing billing accounts.",
+      "properties": {
+        "value": {
+          "description": "The list of billing accounts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingAccount"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingAccount": {
+      "description": "A billing account resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingAccountProperties"
+        }
+      }
+    },
+    "BillingAccountProperties": {
+      "description": "The properties of the billing account.",
+      "properties": {
+        "displayName": {
+          "description": "The billing account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "company": {
+          "description": "The Company this billing account belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountType": {
+          "description": "The billing account Type.",
+          "type": "string",
+          "enum": [
+            "Organization",
+            "Enrollment"
+          ],
+          "readOnly": true
+        },
+        "address": {
+          "description": "The address associated with billing account.",
+          "$ref": "#/definitions/Address"
+        },
+        "country": {
+          "description": "The country associated with billing account..",
+          "type": "string",
+          "readOnly": true
+        },
+        "agreements": {
+          "description": "Agreements.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "invoiceSections": {
+          "description": "The invoice sections associated to the billing account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
+          }
+        },
+        "billingProfiles": {
+          "description": "The billing profiles associated to the billing account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          }
+        },
+        "enrollmentDetails": {
+          "description": "The details about the associated legacy enrollment. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/Enrollment",
+          "readOnly": true
+        },
+        "departments": {
+          "description": "The departments associated to the enrollment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Department"
+          }
+        },
+        "enrollmentAccounts": {
+          "description": "The accounts associated to the enrollment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          }
+        }
+      }
+    },
+    "BillingProperty": {
+      "description": "The billing property.",
+      "properties": {
+        "productId": {
+          "description": "Product Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingTenantId": {
+          "description": "Billing tenant Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountId": {
+          "description": "Billing account Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountName": {
+          "description": "Billing account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing profile Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProflieName": {
+          "description": "Billing profile name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice Section Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice Section name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "SKU Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "SKU description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Enrollment": {
+      "description": "Current entity level details",
+      "properties": {
+        "startDate": {
+          "description": "Enrollment Start Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "Enrollment End Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "currency": {
+          "description": "The currency associated with enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "channel": {
+          "description": "The channel for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "policies": {
+          "description": "The attributes associated with legacy enrollment.",
+          "$ref": "#/definitions/EnrollmentPolicies",
+          "readOnly": true
+        },
+        "language": {
+          "description": "The language for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "The countryCode for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Enrollment status",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCylce": {
+          "description": "Enrollment billing cycle",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrollmentPolicies": {
+      "description": "The attributes associated with legacy enrollment",
+      "properties": {
+        "accountOwnerViewCharges": {
+          "description": "The accountOwnerViewCharges flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "departmentAdminViewCharges": {
+          "description": "The departmentAdminViewCharges flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "marketplacesEnabled": {
+          "description": "The marketplaces flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reservedInstancesEnabled": {
+          "description": "The reserved instances flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "DepartmentListResult": {
+      "description": "Result of listing departments.",
+      "properties": {
+        "value": {
+          "description": "The list of departments.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Department"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Department": {
+      "description": "A department resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A department.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DepartmentProperties"
+        }
+      }
+    },
+    "DepartmentProperties": {
+      "description": "The properties of the department.",
+      "properties": {
+        "departmentName": {
+          "description": "The name for department.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status for department.",
+          "type": "string"
+        },
+        "enrollmentAccounts": {
+          "description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          }
+        }
+      }
+    },
+    "EnrollmentAccountListResult": {
+      "description": "Result of listing enrollment accounts.",
+      "properties": {
+        "value": {
+          "description": "The list of enrollment accounts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrollmentAccount": {
+      "description": "An account resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "An account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnrollmentAccountProperties"
+        }
+      }
+    },
+    "EnrollmentAccountProperties": {
+      "description": "The properties of the account.",
+      "properties": {
+        "accountName": {
+          "description": "The account name.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center name.",
+          "type": "string"
+        },
+        "accountOwner": {
+          "description": "The account owner",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status for account.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "Account Start Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "Account End Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "department": {
+          "description": "Associated department. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/Department"          
+        }
+      }
+    },
+    "BillingProfileListResult": {
+      "description": "Result of listing billing profiles.",
+      "properties": {
+        "value": {
+          "description": "The list of billing profiles.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingProfile": {
+      "description": "A billing profile resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing profile.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingProfileProperties"
+        }
+      }
+    },
+    "BillingProfileProperties": {
+      "description": "The properties of the billing profile.",
+      "properties": {
+        "displayName": {
+          "description": "The billing profile name.",
+          "type": "string"
+        },
+        "poNumber": {
+          "description": "Purchase order number.",
+          "type": "string"
+        },
+        "billingAddress": {
+          "description": "Billing address.",
+          "$ref": "#/definitions/Address"
+        },
+        "invoiceEmailOptIn": {
+          "description": "If the billing profile is opted in to recieve invoices via email.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "IsClassic": {
+          "description": "Is OMS bootstrapped billing profile.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "invoiceDay": {
+          "description": "Invoice day.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "Currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enabledAzureSKUs": {
+          "description": "Information about the product.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnabledAzureSKUs"
+          }
+        },
+        "invoiceSections": {
+          "description": "The invoice sections associated to the billing profile.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
+          }
+        }
+      }
+    },
+    "Address": {
+      "description": "Address details.",
+      "properties": {
+        "FirstName": {
+          "description": "First Name.",
+          "type": "string"
+        },
+        "LastName": {
+          "description": "Last Name.",
+          "type": "string"
+        },
+        "CompanyName": {
+          "description": "Company Name.",
+          "type": "string"
+        },
+        "AddressLine1": {
+          "description": "Address Line1.",
+          "type": "string"
+        },
+        "AddressLine2": {
+          "description": "Address Line2.",
+          "type": "string"
+        },
+        "AddressLine3": {
+          "description": "Address Line3.",
+          "type": "string"
+        },
+        "City": {
+          "description": "City.",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region.",
+          "type": "string"
+        },
+        "Country": {
+          "description": "Country code uses ISO2, 2-digit format.",
+          "type": "string"
+        },
+        "PostalCode": {
+          "description": "Postal Code.",
+          "type": "string"
+        }
+      }
+    },
+    "BillingContact": {
+      "description": "Billing Contact details.",
+      "properties": {
+        "Name": {
+          "description": "Name.",
+          "type": "string"
+        },
+        "EmailAddress": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "description": "Phone number.",
+          "type": "string"
+        }
+      }
+    },
+    "InvoiceSectionListResult": {
+      "description": "Result of listing invoice sections.",
+      "properties": {
+        "value": {
+          "description": "The list of invoice sections.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InvoiceSection": {
+      "description": "An InvoiceSection resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The InvoiceSection.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InvoiceSectionProperties"
+        }
+      }
+    },
+    "InvoiceSectionProperties": {
+      "description": "The properties of an InvoiceSection.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the InvoiceSection.",
+          "type": "string"
+        },
+        "billingProfiles": {
+          "description": "The billing profiles associated to the billing account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          }
+        }
+      }
+    },
+    "EnabledAzureSKUs": {
+      "description": "Details about the product.",
+      "properties": {
+        "skuId": {
+          "description": "The sku id.",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "status of the Billing POST/PUT operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the pending operation",
+          "type": "string"
+        },
+        "statusDetail": {
+          "description": "Status Detail of the pending operation",
+          "type": "string"
+        }
+      }
+    },
+    "DownloadUrl": {
+      "description": "A secure URL that can be used to download a an entity until the URL expires.",
+      "properties": {
+        "expiryTime": {
+          "description": "The time in UTC at which this download URL will expire.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "url": {
+          "description": "The URL to the PDF file.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "InvoiceListResult": {
+      "description": "Result of listing invoices.",
+      "properties": {
+        "value": {
+          "description": "The list of invoices.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InvoiceSummary"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InvoiceSummary": {
+      "description": "An invoice resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "An invoice.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InvoiceSummaryProperties"
+        }
+      }
+    },
+    "InvoiceSummaryProperties": {
+      "description": "The properties of the invoice.",
+      "properties": {
+        "dueDate": {
+          "description": "The due date for invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceDate": {
+          "description": "The date when invoice was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Invoice status.",
+          "type": "string",
+          "enum": [
+            "PastDue",
+            "Due",
+            "Paid",
+            "Void"
+          ],
+          "readOnly": true
+        },
+        "amountDue": {
+          "description": "Amount due.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "billedAmount": {
+          "description": "Amount billed.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "invoicePeriodStartDate": {
+          "description": "The start date of the billing period.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoicePeriodEndDate": {
+          "description": "The end date of the billing period.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfile": {
+          "description": "The profile id which invoice belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "The profile name which invoice belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchaseOrderNumber": {
+          "description": "The purchase identifier for the invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "documentUrls": {
+          "description": "List of document urls available to download including invoice and tax documents.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DownloadProperties"
+          }
+        },
+        "payments": {
+          "description": "List of payments.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PaymentProperties"
+          }
+        }
+      }
+    },
+    "PaymentProperties": {
+      "description": "The properties of the payment.",
+      "properties": {
+        "paymentType": {
+          "description": "The type of payment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "amount": {
+          "description": "The paid amount.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "date": {
+          "description": "The date of the payment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadProperties": {
+      "description": "The properties of the invoice download.",
+      "properties": {
+        "kind": {
+          "description": "Document type.",
+          "type": "string",
+          "enum": [
+            "Invoice",
+            "VoidNote",
+            "Receipt",
+            "CreditNote"
+          ],
+          "readOnly": true
+        },
+        "url": {
+          "description": "Document URL.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProductsListResult": {
+      "description": "Result of listing products summary. It contains a list of available products summaries in reverse chronological order by purchase date.",
+      "properties": {
+        "value": {
+          "description": "The list of products summary.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ProductsSummary"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProductsSummary": {
+      "description": "A product summary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductsSummaryProperties",
+          "title": "Product summary properties"
+        }
+      }
+    },
+    "ProductsSummaryProperties": {
+      "description": "The properties of the product summary.",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchaseDate": {
+          "description": "The date of purchase.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "productTypeId": {
+          "description": "The product type id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productType": {
+          "description": "The type of product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Product status.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive",
+            "PastDue",
+            "Expiring",
+            "Expired",
+            "Disabled",
+            "Cancelled",
+            "AutoRenew"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          }
+        },
+        "endDate": {
+          "description": "end date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "Billing frequency.",
+          "type": "string",
+          "enum": [
+            "OneTime",
+            "Monthly",
+            "UsageBased"
+          ],
+          "x-ms-enum": {
+            "name": "BillingFrequency",
+            "modelAsString": true
+          }
+        },
+        "lastCharge": {
+          "description": "Last month charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "lastChargeDate": {
+          "description": "The date of the last charge.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "Currency Code",
+          "type": "number",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "Sku Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "Sku description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilityId": {
+          "description": "Availability Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parentProductId": {
+          "description": "Parent Product Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice section id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice section name to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing Profile id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing Profile name to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingSubscriptionsListResult": {
+      "description": "Result of listing billing subscriptions summary.",
+      "properties": {
+        "value": {
+          "description": "The list of billing subscriptions summary.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingSubscriptionSummary"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingSubscriptionSummary": {
+      "description": "A billing Subscription summary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingSubscriptionProperties",
+          "title": "Billing subscription properties"
+        }
+      }
+    },
+    "BillingSubscriptionProperties": {
+      "description": "The usage context properties.",
+      "properties": {
+        "displayName": {
+          "description": "display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription Id.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "subscriptionBillingStatus": {
+          "description": "Subscription billing status.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Abandoned",
+            "Deleted",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          }
+        },
+        "lastMonthCharges": {
+          "description": "Last month charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "monthToDateCharges": {
+          "description": "Month to date charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "enrollmentAccountContext": {
+          "description": "The enrollment account context.",
+          "$ref": "#/definitions/EnrollmentAccountContext",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing Profile id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing Profile name to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "The sku id.",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrollmentAccountContext": {
+      "description": "The rating context.",
+      "properties": {
+        "costCenter": {
+          "description": "The cost center name.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "Account Start Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "Account End Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "enrollmentAccountId": {
+          "description": "The enrollment account id.",
+          "type": "string"
+        }
+      }
+    },
+    "TransactionsListResult": {
+      "description": "Result of listing reservation transactions summary.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation transactions summary.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TransactionsSummary"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TransactionsSummary": {
+      "description": "A reservation transaction summary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TransactionsSummaryProperties",
+          "title": "Reservation transaction summary properties"
+        }
+      }
+    },
+    "TransactionsSummaryProperties": {
+      "description": "The properties of the reservation transaction summary.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of transaction. Choices are all and reservation.",
+          "enum": [
+            "all",
+            "reservation"
+          ],
+          "x-ms-enum": {
+            "name": "TransactionTypeKind",
+            "modelAsString": true
+          }
+        },
+        "date": {
+          "description": "The date of reservation transaction.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "invoice": {
+          "description": "Invoice number or 'pending' if not invoiced.",
+          "type": "string",
+          "readOnly": true
+        },
+        "orderId": {
+          "description": "The reservation order id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "orderName": {
+          "description": "The reservation order name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productTypeId": {
+          "description": "The product type id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productType": {
+          "description": "The type of product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productDescription": {
+          "description": "Product description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "transactionType": {
+          "description": "Transaction types.",
+          "type": "string",
+          "enum": [
+            "Purchase",
+            "Usage Charge"
+          ],
+          "x-ms-enum": {
+            "name": "ReservationType",
+            "modelAsString": true
+          }
+        },
+        "transactionAmount": {
+          "description": "Last charge associated with the purchase.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "quantity": {
+          "description": "Purchase quantity.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice section id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice section name to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing Profile id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing Profile name to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The subscription id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "description": "The subscription name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Policy": {
+      "description": "The Policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyProperties",
+          "title": "Policy properties"
+        }
+      }
+    },
+    "PolicyProperties": {
+      "description": "The properties of policy.",
+      "properties": {
+        "reservationPurchasesAllowed": {
+          "description": "The reservationPurchasesAllowed flag.",
+          "type": "boolean"
+        },
+        "marketplacePurchasesAllowed": {
+          "description": "The marketplacePurchasesAllowed flag.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AvailableBalance": {
+      "description": "Latest available balance on Monetary Credit PI.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvailableBalanceProperties",
+          "title": "Available balance properties"
+        }
+      }
+    },
+    "AvailableBalanceProperties": {
+      "description": "The properties of available balance.",
+      "properties": {
+        "Amount": {
+          "description": "Balance Amount.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        }
+      }
+    },
+    "Amount": {
+      "description": "The Amount.",
+      "properties": {
+        "currency": {
+          "description": "The currency for the amount value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Amount value.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "PaymentMethodsListResult": {
+      "description": "Result of listing payment methods.",
+      "properties": {
+        "value": {
+          "description": "The list of payment methods.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PaymentMethod"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PaymentMethod": {
+      "description": "A payment method resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PaymentMethodProperties",
+          "title": "Payment method properties"
+        }
+      }
+    },
+    "PaymentMethodProperties": {
+      "description": "The properties of the payment method.",
+      "properties": {
+        "methodType": {
+          "description": "Payment method type.",
+          "type": "string",
+          "enum": [
+            "Credits",
+            "ChequeWire"
+          ],
+          "x-ms-enum": {
+            "name": "PaymentMethodType",
+            "modelAsString": true
+          }
+        },
+        "details": {
+          "description": "Details about the payment method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiration": {
+          "description": "Expiration date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "Currency code",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2018-11-01-preview."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "billing Account Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceSectionIdParameter": {
+      "name": "invoiceSectionId",
+      "in": "path",
+      "description": "InvoiceSection Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountIdParameter": {
+      "name": "enrollmentAccountId",
+      "in": "path",
+      "description": "Enrollment Account Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentIdParameter": {
+      "name": "departmentId",
+      "in": "path",
+      "description": "Department Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "Billing Profile Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "operationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "Operation Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceNameParameter": {
+      "name": "invoiceName",
+      "in": "path",
+      "description": "Invoide Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "productNameParameter": {
+      "name": "productName",
+      "in": "path",
+      "description": "Invoide Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingSubscriptionIdParameter": {
+      "name": "billingSubscriptionId",
+      "in": "path",
+      "description": "Billing Subscription Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "description": "Start date",
+      "required": true,
+      "type": "string"
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "description": "End date",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

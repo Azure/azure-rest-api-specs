@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountId": "1234",
+    "billingProfileId": "42425",
+    "$filter": "properties/productType eq 'Subscription'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/products/productSummaryId2",
+            "name": "productSummaryId2",
+            "type": "Microsoft.Consumption/products",
+            "properties": {
+              "productTypeId": "A12345",
+              "productType": "Subscription",
+              "displayName": "AIP Dev",
+              "status": "Active",
+              "EndDate": "2018-05-01",
+              "purchaseDate": "2018-05-01",
+              "lastCharge": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "lastChargeDate": "2018-06-15",
+              "billingFrequency": "Monthly",
+              "quantity": 4,
+              "skuId": "0001",
+              "skuDescription": "Enterprise Agreement Development",
+              "availabilityId": "AvailabilityId1",
+              "parentProductId": "eligibleOffer2",
+              "invoiceSectionId": "12345",
+              "invoiceSectionName": "Contoso operations invoiceSection",
+              "billingProfileId": "42425",
+              "billingProfileName": "Contoso operations billing"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
