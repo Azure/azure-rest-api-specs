@@ -61,7 +61,7 @@
       },
       "eventName":{  
          "name":"eventName",
-         "description":"Unique name of an error within a migrate project.",
+         "description":"Unique name of an event within a migrate project.",
          "type":"string",
          "in":"path",
          "x-ms-parameter-location":"method",
@@ -118,7 +118,7 @@
                "Events"
             ],
             "summary":"Gets a list of events in the migrate project.",
-            "operationId":"Errors_EnumerateEvents",
+            "operationId":"Events_EnumerateEvents",
             "parameters":[  
                {  
                   "$ref":"#/parameters/subscriptionId"
@@ -860,7 +860,7 @@
          }
       },
       "EventCollection":{  
-         "description":"Collection of errors.",
+         "description":"Collection of events.",
          "type":"object",
          "properties":{  
             "value":{  
@@ -900,7 +900,7 @@
          }
       },
       "EventProperties":{  
-         "description":"Properties of the error resource.",
+         "description":"Properties of the event resource.",
          "type":"object",
          "properties":{  
             "errorCode":{  
@@ -912,19 +912,19 @@
                "type":"string"
             },
             "recommendation":{  
-               "description":"Gets or sets the recommendation for the error.",
+               "description":"Gets or sets the recommendation for the event.",
                "type":"string"
             },
             "possibleCauses":{  
-               "description":"Gets or sets the possible causes for the error.",
+               "description":"Gets or sets the possible causes for the event.",
                "type":"string"
             },
             "solution":{  
-               "description":"Gets or sets the solution for which the error is being reported.",
+               "description":"Gets or sets the solution for which the event is being reported.",
                "type":"string"
             },
             "machine":{  
-               "description":"Gets or sets the machine for which the error is being reported.",
+               "description":"Gets or sets the machine for which the event is being reported.",
                "type":"string"
             }
          }
