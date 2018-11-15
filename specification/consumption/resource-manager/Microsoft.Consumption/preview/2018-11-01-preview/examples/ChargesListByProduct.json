@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-Preview",
+    "billingAccountId": "1234",
+    "invoiceSectionId": "67890",
+    "startDate": "2018-04-01",
+    "endDate": "2018-04-30"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234/invoiceSections/67890/providers/Microsoft.Consumption/charges/chargesByProductId1",
+            "name": "chargesByProductId1",
+            "type": "Microsoft.Consumption/charges",
+            "properties": {
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/1234/providers/Microsoft.Billing/billingPeriods/201804",
+              "usageStart": "2018-04-01",
+              "usageEnd": "2018-04-30",
+              "productCharges": [
+                {
+                  "productName": "App Service",
+                  "totalCharges": {
+                    "currency": "USD",
+                    "value": 5000.0
+                  }
+                },
+                {
+                  "productName": "Storage",
+                  "totalCharges": {
+                    "currency": "USD",
+                    "value": 1500.0
+                  }
+                },
+                {
+                  "productName": "Visual Studio",
+                  "totalCharges": {
+                    "currency": "USD",
+                    "value": 1000.0
+                  }
+                },
+                {
+                  "productName": "Compute",
+                  "totalCharges": {
+                    "currency": "USD",
+                    "value": 700.0
+                  }
+                },
+                {
+                  "productName": "Network",
+                  "totalCharges": {
+                    "currency": "USD",
+                    "value": 550.0
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
