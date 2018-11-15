@@ -308,6 +308,14 @@ directive:
     where: $.definitions.TagValue.properties
     reason: TagValue is a top level property
   - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.TagValue
+    reason: TagValue will be deprecated soon
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    where: $.definitions.TagDetails
+    reason: TagDetails will be deprecated soon
+  - suppress: BodyTopLevelProperties
     from: managedapplications.json
     where: $.definitions.Appliance.properties
     reason: managedBy is a top level property
