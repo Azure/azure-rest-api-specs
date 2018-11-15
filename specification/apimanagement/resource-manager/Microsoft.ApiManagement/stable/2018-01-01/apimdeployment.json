@@ -93,7 +93,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success. The response describes the list of SKUs.",
             "schema": {
               "$ref": "#/definitions/ResourceSkuResults"
             }
@@ -730,19 +730,19 @@
         "minimum": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The minimum capacity."
         },
         "maximum": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The maximum capacity that can be set."
         },
         "default": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The default capacity."
         },
         "scaleType": {
@@ -750,9 +750,9 @@
           "readOnly": true,
           "description": "The scale type applicable to the sku.",
           "enum": [
-            "Automatic",
-            "Manual",
-            "None"
+            "automatic",
+            "manual",
+            "none"
           ],
           "x-ms-enum": {
             "name": "ResourceSkuCapacityScaleType",
