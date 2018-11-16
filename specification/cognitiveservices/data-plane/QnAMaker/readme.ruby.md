@@ -4,7 +4,7 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml
 package-name: azure_cognitiveservices_qnamaker
-package-version: "0.4.0"
+package-version: "0.16.0"
 azure-arm: true
 ```
 
@@ -21,7 +21,6 @@ These settings apply only when `--tag=release_4_0 --ruby` is specified on the co
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'release_4_0' && $(ruby)
-namespace: "Azure::CognitiveServices::QnAMaker::V4_0"
+namespace: "Azure::CognitiveServices::QnAMaker::V4"
 output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker/lib
-title: "QnAMakerClient"
 ```
