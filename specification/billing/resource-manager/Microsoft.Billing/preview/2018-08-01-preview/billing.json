@@ -385,13 +385,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/initiateImportRequest": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/initiateTransfer": {
       "post": {
-        "description": "Initiates the request to import the GTM or legacy subscriptions or RIs to GTM.",
-        "operationId": "ImportRequest_Initiate",
+        "description": "Initiates the request to transfer the GTM or legacy subscriptions or RIs to GTM.",
+        "operationId": "Transfer_Initiate",
         "x-ms-examples": {
-          "InitiateImportRequest": {
-            "$ref": "./examples/InitiateImportRequest.json"
+          "InitiateTransfer": {
+            "$ref": "./examples/InitiateTransfer.json"
           }
         },
         "parameters": [
@@ -399,10 +399,10 @@
             "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/ProjectIdParameter"
+            "$ref": "#/parameters/InvoiceSectionIdParameter"
           },
           {
-            "$ref": "#/parameters/InitiateImportRequestParameter"
+            "$ref": "#/parameters/InitiateTransferRequestParameter"
           }
         ],
         "tags": [
@@ -410,9 +410,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Initiated import request details.",
+            "description": "Initiated transfer details.",
             "schema": {
-              "$ref": "#/definitions/ImportRequestDetails"
+              "$ref": "#/definitions/TransferDetails"
             }
           },
           "default": {
@@ -424,13 +424,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/importRequests/{importRequestId}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/transfers/{transferId}": {
       "get": {
-        "description": "Gets the import request details for given import request Id.",
-        "operationId": "ImportRequest_Get",
+        "description": "Gets the transfer details for given transfer Id.",
+        "operationId": "Transfer_Get",
         "x-ms-examples": {
-          "ImportRequestGet": {
-            "$ref": "./examples/GetImportRequest.json"
+          "TransferGet": {
+            "$ref": "./examples/GetTransfer.json"
           }
         },
         "parameters": [
@@ -438,10 +438,10 @@
             "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/ProjectIdParameter"
+            "$ref": "#/parameters/InvoiceSectionIdParameter"
           },
           {
-            "$ref": "#/parameters/ImportRequestIdParameter"
+            "$ref": "#/parameters/TransferIdParameter"
           }
         ],
         "tags": [
@@ -449,9 +449,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Details of import request.",
+            "description": "Details of transfer.",
             "schema": {
-                "$ref": "#/definitions/ImportRequestDetails"
+              "$ref": "#/definitions/TransferDetails"
             }
           },
           "default": {
@@ -463,11 +463,11 @@
         }
       },
       "delete": {
-        "description": "Cancels the import request for given import request Id.",
-        "operationId": "ImportRequest_Cancel",
+        "description": "Cancels the transfer for given transfer Id.",
+        "operationId": "Transfer_Cancel",
         "x-ms-examples": {
-          "ImportRequestCancel": {
-            "$ref": "./examples/CancelImportRequest.json"
+          "TransferCancel": {
+            "$ref": "./examples/CancelTransfer.json"
           }
         },
         "parameters": [
@@ -475,10 +475,10 @@
             "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/ProjectIdParameter"
+            "$ref": "#/parameters/InvoiceSectionIdParameter"
           },
           {
-            "$ref": "#/parameters/ImportRequestIdParameter"
+            "$ref": "#/parameters/TransferIdParameter"
           }
         ],
         "tags": [
@@ -486,9 +486,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Details of canceled import request.",
+            "description": "Details of canceled transfer.",
             "schema": {
-                "$ref": "#/definitions/ImportRequestDetails"
+              "$ref": "#/definitions/TransferDetails"
             }
           },
           "default": {
@@ -500,13 +500,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/projects/{projectId}/importRequests": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/transfers": {
       "get": {
-        "description": "Lists all import requests' details initiated from given project.",
-        "operationId": "ImportRequests_List",
+        "description": "Lists all transfer's details initiated from given invoice section.",
+        "operationId": "Transfers_List",
         "x-ms-examples": {
-          "ImportRequestsList": {
-            "$ref": "./examples/ListImportRequests.json"
+          "TransfersList": {
+            "$ref": "./examples/ListTransfers.json"
           }
         },
         "parameters": [
@@ -514,7 +514,7 @@
             "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/ProjectIdParameter"
+            "$ref": "#/parameters/InvoiceSectionIdParameter"
           }
         ],
         "tags": [
@@ -522,9 +522,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of import requests initiated from this project.",
+            "description": "List of transfers initiated from this invoice section.",
             "schema": {
-              "$ref": "#/definitions/ImportRequestDetailsListResult"
+              "$ref": "#/definitions/TransferDetailsListResult"
             }
           },
           "default": {
@@ -539,21 +539,21 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/importRequests/{importRequestId}/acceptImportRequest": {
+    "/providers/Microsoft.Billing/transfers/{transferId}/acceptTransfer": {
       "post": {
-        "summary": "Accepts the import request with given import request Id.",
-        "operationId": "ImportRequest_Accept",
+        "summary": "Accepts the transfer with given transfer Id.",
+        "operationId": "Transfer_Accept",
         "x-ms-examples": {
-          "AcceptImportRequest": {
-            "$ref": "./examples/AcceptImportRequest.json"
+          "AcceptTransfer": {
+            "$ref": "./examples/AcceptTransfer.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ImportRequestIdParameter"
+            "$ref": "#/parameters/TransferIdParameter"
           },
           {
-            "$ref": "#/parameters/AcceptImportRequestParameter"
+            "$ref": "#/parameters/AcceptTransferRequestParameter"
           }
         ],
         "tags": [
@@ -561,9 +561,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Details of the accepted import request.",
+            "description": "Details of the accepted transfer.",
             "schema": {
-                "$ref": "#/definitions/RecipientImportRequestDetails"
+              "$ref": "#/definitions/RecipientTransferDetails"
             }
           },
           "default": {
@@ -575,18 +575,18 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/importRequests/{importRequestId}/declineImportRequest": {
+    "/providers/Microsoft.Billing/transfers/{transferId}/declineTransfer": {
       "post": {
-        "summary": "Declines the import request with given import request Id.",
-        "operationId": "ImportRequest_Decline",
+        "summary": "Declines the transfer with given transfer Id.",
+        "operationId": "Transfer_Decline",
         "x-ms-examples": {
-          "DeclineImportRequest": {
-            "$ref": "./examples/DeclineImportRequest.json"
+          "DeclineTransfer": {
+            "$ref": "./examples/DeclineTransfer.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ImportRequestIdParameter"
+            "$ref": "#/parameters/TransferIdParameter"
           }
         ],
         "tags": [
@@ -594,9 +594,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Details of the declined import request.",
+            "description": "Details of the declined transfer.",
             "schema": {
-                "$ref": "#/definitions/RecipientImportRequestDetails"
+              "$ref": "#/definitions/RecipientTransferDetails"
             }
           },
           "default": {
@@ -608,18 +608,18 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/importRequests/{importRequestId}/": {
+    "/providers/Microsoft.Billing/transfers/{transferId}/": {
       "get": {
-        "summary": "Gets the import request with given import request Id.",
-        "operationId": "RecipientImportRequest_Get",
+        "summary": "Gets the transfer with given transfer Id.",
+        "operationId": "RecipientTransfer_Get",
         "x-ms-examples": {
-          "RecipientImportRequestGet": {
-            "$ref": "./examples/GetRecipientImportRequest.json"
+          "RecipientTransferGet": {
+            "$ref": "./examples/GetRecipientTransfer.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ImportRequestIdParameter"
+            "$ref": "#/parameters/TransferIdParameter"
           }
         ],
         "tags": [
@@ -627,9 +627,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Details of the import requests with given Id.",
+            "description": "Details of the transfers with given Id.",
             "schema": {
-                "$ref": "#/definitions/RecipientImportRequestDetails"
+              "$ref": "#/definitions/RecipientTransferDetails"
             }
           },
           "default": {
@@ -641,13 +641,13 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/importRequests": {
+    "/providers/Microsoft.Billing/transfers": {
       "get": {
-        "summary": "Lists the import requests received by caller.",
-        "operationId": "RecipientImportRequest_List",
+        "summary": "Lists the transfers received by caller.",
+        "operationId": "RecipientTransfer_List",
         "x-ms-examples": {
-          "RecipientImportRequestsList": {
-            "$ref": "./examples/ListRecipientImportRequests.json"
+          "RecipientTransfersList": {
+            "$ref": "./examples/ListRecipientTransfers.json"
           }
         },
         "tags": [
@@ -655,9 +655,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of import requests received by caller.",
+            "description": "List of transfers received by caller.",
             "schema": {
-              "$ref": "#/definitions/RecipientImportRequestDetailsListResult"
+              "$ref": "#/definitions/RecipientTransferDetailsListResult"
             }
           },
           "default": {
@@ -956,52 +956,48 @@
       },
       "x-ms-azure-resource": true
     },
-    "InitiateImportRequest": {
+    "InitiateTransferRequest": {
       "type": "object",
-      "description": "Request parameters to initiate import request.",
+      "description": "Request parameters to initiate transfer.",
       "properties": {
         "properties": {
-          "description": "Request parameters to initiate import request.",
+          "description": "Request parameters to initiate transfer.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InitiateImportRequestProperties"
+          "$ref": "#/definitions/InitiateTransferProperties"
         }
       }
     },
-    "InitiateImportRequestProperties": {
+    "InitiateTransferProperties": {
       "type": "object",
-      "description": "Request parameters to initiate import request.",
+      "description": "Request parameters to initiate transfer.",
       "properties": {
-        "devTestUsageContext": {
+        "billingProfileId": {
           "type": "string",
           "description": "Target Usage context for devTest subscriptions."
         },
-        "standardUsageContext": {
-          "type": "string",
-          "description": "Target Usage context for standard subscriptions."
-        },
         "recipientEmailId": {
           "type": "string",
-          "description": "Email Id of recipient for import request."
+          "description": "Email Id of recipient for transfer."
         }
       }
     },
-    "AcceptImportRequest": {
+    "AcceptTransferRequest": {
       "type": "object",
-      "description": "Request parameters to accept import request.",
+      "description": "Request parameters to accept transfer.",
       "properties": {
         "properties": {
-          "description": "Request parameters to accept import request.",
+          "description": "Request parameters to accept transfer.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AcceptImportRequestProperties"
+          "$ref": "#/definitions/AcceptTransferProperties"
         }
       }
     },
-    "AcceptImportRequestProperties": {
+    "AcceptTransferProperties": {
       "type": "object",
-      "description": "Request parameters to accept import request.",
+      "description": "Request parameters to accept transfer.",
       "properties": {
         "productDetails": {
-          "description": "Request parameters to accept import request.",
+          "description": "Request parameters to accept transfer.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProductDetails"
@@ -1011,81 +1007,81 @@
     },
     "ProductDetails": {
       "type": "object",
-      "description": "Details of the product to be imported.",
+      "description": "Details of the product to be transferred.",
       "properties": {
         "productType": {
-          "description": "Type of the prouct to be imported.",
+          "description": "Type of the prouct to be transferred.",
           "$ref": "#/definitions/ProductType"
         },
         "productId": {
           "type": "string",
-          "description": "Id of product to be imported."
+          "description": "Id of product to be transferred."
         }
       }
     },
     "ProductType": {
       "type": "string",
-      "description": "Type of the product to be imported.",
+      "description": "Type of the product to be transferred.",
       "enum": [
-        "Subscription",
-        "ReservedInstance"
+        "AzureSubscription",
+        "AzureReservation"
       ],
       "x-ms-enum": {
         "name": "productType",
         "modelAsString": true
       }
     },
-    "ImportRequestDetails": {
+    "TransferDetails": {
       "type": "object",
-      "description": "Details of the import request.",
+      "description": "Details of the transfer.",
       "properties": {
         "properties": {
-          "description": "Details of the import request.",
+          "description": "Details of the transfer.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ImportRequestProperties"
+          "$ref": "#/definitions/TransferProperties"
         }
       }
     },
-    "RecipientImportRequestDetails": {
+    "RecipientTransferDetails": {
       "type": "object",
-      "description": "Details of the import request.",
+      "description": "Details of the transfer.",
       "properties": {
         "properties": {
-          "description": "Details of the import request.",
+          "description": "Details of the transfer.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RecipientImportRequestProperties"
+          "$ref": "#/definitions/RecipientTransferProperties"
         }
       }
     },
-    "ExtendedImportRequestStatus": {
+    "DetailedTransferStatus": {
       "type": "object",
-      "description": "Detailed import request status.",
+      "description": "Detailed transfer status.",
       "properties": {
         "productType": {
           "type": "string",
           "$ref": "#/definitions/ProductType",
           "readOnly": true,
-          "description": "Type of product being imported."
+          "description": "Type of product being transferred."
         },
         "productId": {
           "type": "string",
           "readOnly": true,
-          "description": "Id of product being imported."
+          "description": "Id of product being transferred."
         },
-        "importRequestStatus": {
+        "transferStatus": {
           "type": "string",
-          "$ref": "#/definitions/ProductImportRequestStatus",
+          "$ref": "#/definitions/ProductTransferStatus",
           "readOnly": true,
-          "description": "Import request status."
+          "description": "Transfer status."
         },
         "errorDetails": {
-          "description": "Error details for import request execution.",
+          "description": "Error details for transfer execution.",
           "$ref": "#/definitions/Error"
         }
       }
     },
     "Error": {
-      "description": "Error details for import request execution.",
+      "description": "Error details for transfer execution.",
       "properties": {
         "errorCode": {
           "type": "string",
@@ -1099,37 +1095,38 @@
         }
       }
     },
-    "SubscriptionType": {
+    "EligibleProductType": {
       "type": "string",
-      "description": "Type of the subscriptions that can be imported.",
+      "description": "Type of the products that can be transferred.",
       "enum": [
-        "DevTest",
-        "Standard"
+        "DevTestAzureSubscription",
+        "StandardAzureSubscription",
+        "AzureReservation"
       ],
       "x-ms-enum": {
-        "name": "subscriptionType",
+        "name": "eligibleProductType",
         "modelAsString": true
       }
     },
-    "ImportRequestProperties": {
-      "description": "Import request details",
+    "TransferProperties": {
+      "description": "Transfer details",
       "type": "object",
       "properties": {
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Import request creation time.",
+          "description": "Transfer creation time.",
           "readOnly": true
         },
         "expirationTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Import request expiration time."
+          "description": "Transfer expiration time."
         },
-        "projectId": {
+        "invoiceSectionId": {
           "type": "string",
-          "description": "Target project Id.",
+          "description": "Target invoice setion Id.",
           "readOnly": true
         },
         "billingAccountId": {
@@ -1137,117 +1134,107 @@
           "description": "Target billing account Id.",
           "readOnly": true
         },
-        "devTestUsageContext": {
+        "transferStatus": {
           "type": "string",
-          "readOnly": true,
-          "description": "Target usage context for dev-test  susbcriptions."
-        },
-        "standardUsageContext": {
-          "type": "string",
-          "description": "Target usage context for standard subscriptions.",
-          "readOnly": true
-        },
-        "importRequestStatus": {
-          "type": "string",
-          "$ref": "#/definitions/ImportRequestStatus",
-          "description": "Overall import request status.",
+          "$ref": "#/definitions/TransferStatus",
+          "description": "Overall transfer status.",
           "readOnly": true
         },
         "recipientEmailId": {
           "type": "string",
           "readOnly": true,
-          "description": "Email Id of recipient of import request."
+          "description": "Email Id of recipient of transfer."
         },
         "initiatorEmailId": {
           "type": "string",
           "readOnly": true,
-          "description": "Email Id of initiator of import request."
+          "description": "Email Id of initiator of transfer."
         },
         "canceledBy": {
           "type": "string",
           "readOnly": true,
-          "description": "Email Id who user canceled the import request."
+          "description": "Email Id who user canceled the transfer."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Import request last modification time."
+          "description": "Transfer last modification time."
         },
-        "extendedImportRequestStatus": {
+        "detailedTransferStatus": {
           "type": "array",
           "readOnly": true,
-          "description": "Detailed import request status.",
+          "description": "Detailed transfer status.",
           "items": {
-            "$ref": "#/definitions/ExtendedImportRequestStatus"
+            "$ref": "#/definitions/DetailedTransferStatus"
           }
         }
       }
     },
-    "RecipientImportRequestProperties": {
-      "description": "Import request Details.",
+    "RecipientTransferProperties": {
+      "description": "Transfer Details.",
       "type": "object",
       "properties": {
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Import request creation time.",
+          "description": "Transfer creation time.",
           "readOnly": true
         },
         "expirationTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Import request expiration time."
+          "description": "Transfer expiration time."
         },
-        "allowedSubscriptionType": {
+        "allowedProductType": {
           "type": "array",
           "readOnly": true,
-          "description": "Type of subscriptions that can be imported.",
+          "description": "Type of subscriptions that can be transferred.",
           "items": {
-            "$ref": "#/definitions/SubscriptionType"
+            "$ref": "#/definitions/EligibleProductType"
           }
         },
-        "importRequestStatus": {
+        "transferStatus": {
           "type": "string",
-          "$ref": "#/definitions/ImportRequestStatus",
-          "description": "Overall import request status.",
+          "$ref": "#/definitions/TransferStatus",
+          "description": "Overall transfer status.",
           "readOnly": true
         },
         "recipientEmailId": {
           "type": "string",
           "readOnly": true,
-          "description": "Email Id of recipient of import request."
+          "description": "Email Id of recipient of transfer."
         },
         "initiatorEmailId": {
           "type": "string",
           "readOnly": true,
-          "description": "Email Id of initiator of import request."
+          "description": "Email Id of initiator of transfer."
         },
         "canceledBy": {
           "type": "string",
           "readOnly": true,
-          "description": "Email Id who user canceled the import request."
+          "description": "Email Id who user canceled the transfer."
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Import request last modification time."
+          "description": "Transfer last modification time."
         },
-        "extendedImportRequestStatus": {
+        "detailedTransferStatus": {
           "type": "array",
           "readOnly": true,
-          "description": "Detailed import request status.",
+          "description": "Detailed transfer status.",
           "items": {
-            "$ref": "#/definitions/ExtendedImportRequestStatus"
+            "$ref": "#/definitions/DetailedTransferStatus"
           }
         }
       }
     },
-    "ImportRequestStatus": {
+    "TransferStatus": {
       "type": "string",
-      "description": "Possible import request status.",
+      "description": "Possible transfer status.",
       "enum": [
         "Pending",
         "InProgress",
@@ -1258,33 +1245,33 @@
         "Declined"
       ],
       "x-ms-enum": {
-        "name": "importRequestStatus",
+        "name": "transferStatus",
         "modelAsString": true
       }
     },
-    "ProductImportRequestStatus": {
+    "ProductTransferStatus": {
       "type": "string",
-      "description": "Possible import request status.",
+      "description": "Possible transfer status.",
       "enum": [
         "NotStarted",
         "InProgress",
         "Completed",
-        "Failed",
+        "Failed"
       ],
       "x-ms-enum": {
-        "name": "productImportRequestStatus",
+        "name": "productTransferStatus",
         "modelAsString": true
       }
     },
-    "RecipientImportRequestDetailsListResult": {
-      "description": "Result of listing details of the import request received by caller.",
+    "RecipientTransferDetailsListResult": {
+      "description": "Result of listing details of the transfer received by caller.",
       "properties": {
         "value": {
-          "description": "The list of import requests received by caller.",
+          "description": "The list of transfers received by caller.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RecipientImportRequestDetails"
+            "$ref": "#/definitions/RecipientTransferDetails"
           }
         },
         "nextLink": {
@@ -1294,15 +1281,15 @@
         }
       }
     },
-    "ImportRequestDetailsListResult": {
-      "description": "Result of listing details of the import request initiated by caller.",
+    "TransferDetailsListResult": {
+      "description": "Result of listing details of the transfer initiated by caller.",
       "properties": {
         "value": {
-          "description": "The list of import requests initiated by caller.",
+          "description": "The list of transfers initiated by caller.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ImportRequestDetails"
+            "$ref": "#/definitions/TransferDetails"
           }
         },
         "nextLink": {
@@ -1336,40 +1323,40 @@
       "type": "string",
       "description": "Billing account Id."
     },
-    "ProjectIdParameter": {
-      "name": "projectId",
+    "InvoiceSectionIdParameter": {
+      "name": "invoiceSectionId",
       "x-ms-parameter-location": "method",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Project Id."
+      "description": "Invoice section Id."
     },
-    "ImportRequestIdParameter": {
-      "name": "importRequestId",
+    "TransferIdParameter": {
+      "name": "transferId",
       "x-ms-parameter-location": "method",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Import request Id."
+      "description": "Transfer Id."
     },
-    "InitiateImportRequestParameter": {
+    "InitiateTransferRequestParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
-      "description": "Initiate import request parameters.",
+      "description": "Initiate transfer parameters.",
       "schema": {
-        "$ref": "#/definitions/InitiateImportRequest"
+        "$ref": "#/definitions/InitiateTransferRequest"
       }
     },
-    "AcceptImportRequestParameter": {
+    "AcceptTransferRequestParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
-      "description": "Accept import request parameters.",
+      "description": "Accept transfer parameters.",
       "schema": {
-        "$ref": "#/definitions/AcceptImportRequest"
+        "$ref": "#/definitions/AcceptTransferRequest"
       }
     }
   },

@@ -8,30 +8,31 @@
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/billingAccounts/billingAccountId/projects/projectId/importRequests/importRequestId",
-            "type": "Microsoft.Billing/importRequests",
-            "name": "importRequestId",
+            "id": "/providers/Microsoft.Billing/transfers/transferId",
+            "type": "Microsoft.Billing/transfers",
+            "name": "transferId",
             "properties": {
               "creationTime": "10/10/2018 9:40:01 PM",
               "expirationTime": "11/5/2018 4:47:08 AM",
               "allowedSubscriptionType": [
-                "DevTest",
-                "Standard"
+                "DevTestAzureSubscription",
+                "StandardAzureSubscription",
+                "AzureReservation"
               ],
-              "importRequestStatus": "InProgress",
+              "transferStatus": "InProgress",
               "recipientEmailId": "user@contoso.com",
               "initiatorEmailId": "user@contoso.com",
               "lastModifiedTime": "10/10/2018 9:45:01 PM",
-              "extendedImportRequestStatus": [
+              "detailedTransferStatus": [
                 {
-                  "productType": "Subscription",
+                  "productType": "AzureSubscription",
                   "productId": "subscriptionId",
-                  "importRequestStatus": "InProgress"
+                  "transferStatus": "InProgress"
                 },
                 {
                   "productType": "ReservedInstance",
                   "productId": "reservedInstanceId",
-                  "importRequestStatus": "InProgress"
+                  "transferStatus": "InProgress"
                 }
               ]
             }
