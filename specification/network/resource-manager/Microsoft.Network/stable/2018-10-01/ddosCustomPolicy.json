@@ -34,7 +34,7 @@
     }
   },
   "paths": {    
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicyName}": {      
       "delete": {
         "tags": [
           "ddosCustomPolicies"
@@ -261,6 +261,10 @@
             "Udp",
             "Syn"
           ],
+          "x-ms-enum": {
+            "name": "The protocol for which the DDoS protection policy is being customized.",
+            "modelAsString": true
+          },
           "description": "The protocol for which the DDoS protection policy is being customized."
         },
         "triggerRateOverride": {
@@ -277,12 +281,16 @@
           "readOnly": false,
           "type": "string",
           "enum": [
-            "Default",
-            "High",
             "Relaxed",
-            "Low"
+            "Low",
+            "Default",                        
+            "High"
           ],
-          "description": "The customized DDoS protection trigger rate sensitivity degree."
+          "x-ms-enum": {
+            "name": "The customized DDoS protection trigger rate sensitivity degrees. High: Trigger rate set with most sensitivity w.r.t. normal traffic. Default: Trigger rate set with moderate sensitivity w.r.t. normal traffic. Low: Trigger rate set with less sensitivity w.r.t. normal traffic. Relaxed: Trigger rate set with least sensitivity w.r.t. normal traffic.",
+            "modelAsString": true
+          },
+          "description": "The customized DDoS protection trigger rate sensitivity degrees. High: Trigger rate set with most sensitivity w.r.t. normal traffic. Default: Trigger rate set with moderate sensitivity w.r.t. normal traffic. Low: Trigger rate set with less sensitivity w.r.t. normal traffic. Relaxed: Trigger rate set with least sensitivity w.r.t. normal traffic."
         }
       },
       "description": "DDoS custom policy properties."
