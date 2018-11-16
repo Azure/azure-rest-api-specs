@@ -30,7 +30,7 @@
     "/endpointkeys": {
       "get": {
         "summary": "Gets endpoint keys for an endpoint",
-        "operationId": "Get Endpoint Keys",
+        "operationId": "Endpoint_GetKeys",
         "parameters": [],
         "consumes": [
           "application/json"
@@ -66,7 +66,7 @@
           "EndpointKeys"
         ],
         "summary": "Re-generates an endpoint key.",
-        "operationId": "Refresh Endpoint Keys",
+        "operationId": "Endpoint_RefreshKeys",
         "parameters": [
           {
             "$ref": "#/parameters/KeyType"
@@ -106,7 +106,7 @@
           "Alterations"
         ],
         "summary": "Download alterations from runtime.",
-        "operationId": "Download Alterations",
+        "operationId": "Alterations_Get",
         "parameters": [],
         "consumes": [
           "application/json"
@@ -140,7 +140,7 @@
           "Alterations"
         ],
         "summary": "Replace alterations data.",
-        "operationId": "Replace Alterations",
+        "operationId": "Alterations_Replace",
         "parameters": [
           {
             "$ref": "#/parameters/WordAlterations"
@@ -176,7 +176,7 @@
           "Knowledgebases"
         ],
         "summary": "Gets all knowledgebases for a user.",
-        "operationId": "Get Knowledgebases for user",
+        "operationId": "Knowledgebase_ListAll",
         "parameters": [],
         "consumes": [
           "application/json"
@@ -212,7 +212,7 @@
           "Operations"
         ],
         "summary": "Gets details of a specific long running operation.",
-        "operationId": "Get Operation Details",
+        "operationId": "Operation_Get",
         "parameters": [
           {
             "$ref": "#/parameters/OperationId"
@@ -258,7 +258,7 @@
           "Knowledgebases"
         ],
         "summary": "Gets details of a specific knowledgebase.",
-        "operationId": "Get Knowledgebase Details",
+        "operationId": "Knowledgebase_GetDetails",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -296,7 +296,7 @@
           "Knowledgebases"
         ],
         "summary": "Deletes the knowledgebase and all its data.",
-        "operationId": "Delete Knowledgebase",
+        "operationId": "Knowledgebase_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -330,7 +330,7 @@
           "Knowledgebases"
         ],
         "summary": "Publishes all changes in test index of a knowledgebase to its prod index.",
-        "operationId": "Publish Knowledgebase",
+        "operationId": "Knowledgebase_Publish",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -364,7 +364,7 @@
           "Knowledgebases"
         ],
         "summary": "Replace knowledgebase contents.",
-        "operationId": "Replace Knowledgebase",
+        "operationId": "Knowledgebase_Replace",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -401,7 +401,7 @@
           "Knowledgebases"
         ],
         "summary": "Asynchronous operation to modify a knowledgebase.",
-        "operationId": "Update Knowledgebase",
+        "operationId": "Knowledgebase_Update",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -450,7 +450,7 @@
           "Knowledgebases"
         ],
         "summary": "Asynchronous operation to create a new knowledgebase.",
-        "operationId": "Create Knowledgebase",
+        "operationId": "Knowledgebase_Create",
         "parameters": [
           {
             "$ref": "#/parameters/CreateKbPayload"
@@ -490,7 +490,7 @@
           "Knowledgebases"
         ],
         "summary": "Download the knowledgebase.",
-        "operationId": "Download Knowledgebase",
+        "operationId": "Knowledgebase_Download",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
