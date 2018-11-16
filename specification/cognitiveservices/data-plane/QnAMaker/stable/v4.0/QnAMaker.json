@@ -212,7 +212,7 @@
           "Operations"
         ],
         "summary": "Gets details of a specific long running operation.",
-        "operationId": "Operation_Get",
+        "operationId": "Operations_GetDetails",
         "parameters": [
           {
             "$ref": "#/parameters/OperationId"
@@ -728,6 +728,10 @@
     "KnowledgebaseEnvironment": {
       "type": "string",
       "description": "Enumeration of knowledgebase environments.",
+      "x-ms-enum": {
+        "name": "KnowledgebaseEnvironmentType",
+        "modelAsString": true
+      },
       "x-enumNames": [
         "Prod",
         "Test"
@@ -947,6 +951,10 @@
     "ErrorCode": {
       "type": "string",
       "description": "Human readable error code.",
+      "x-ms-enum": {
+        "name": "ErrorCodeType",
+        "modelAsString": true
+      },
       "x-enumNames": [
         "BadArgument",
         "Forbidden",
@@ -1033,6 +1041,10 @@
     "OperationState": {
       "type": "string",
       "description": "Enumeration of operation states.",
+      "x-ms-enum": {
+        "name": "OperationStateType",
+        "modelAsString": true
+      },
       "x-enumNames": [
         "Failed",
         "NotStarted",
@@ -1044,11 +1056,7 @@
         "NotStarted",
         "Running",
         "Succeeded"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": false
-      }
+      ]
     },
     "KnowledgebasesDTO": {
       "type": "object",
@@ -1185,6 +1193,10 @@
       },
       "x-nullable": false,
       "description": "Specifies whether environment is Test or Prod.",
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true
+      },
       "enum": [
         "Prod",
         "Test"
