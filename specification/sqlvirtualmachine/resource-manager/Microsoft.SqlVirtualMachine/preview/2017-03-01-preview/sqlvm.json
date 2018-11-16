@@ -1449,7 +1449,7 @@
         },
         "retentionPeriod": {
           "format": "int32",
-          "description": "Retention period of backup.",
+          "description": "Retention period of backup: 1-30 days.",
           "type": "integer"
         },
         "storageAccountUrl": {
@@ -1489,7 +1489,7 @@
           }
         },
         "fullBackupFrequency": {
-          "description": "Full backup frequency.",
+          "description": "Frequency of full backups. In both cases, full backups begin during the next scheduled time window.",
           "enum": [
             "Daily",
             "Weekly"
@@ -1502,17 +1502,17 @@
         },
         "fullBackupStartTime": {
           "format": "int32",
-          "description": "Full backup startup time.",
+          "description": "Start time of a given day during which full backups can take place. 0-23 hours.",
           "type": "integer"
         },
         "fullBackupWindowHours": {
           "format": "int32",
-          "description": "Full backup window hours.",
+          "description": "Duration of the time window of a given day during which full backups can take place. 1-23 hours.",
           "type": "integer"
         },
         "logBackupFrequency": {
           "format": "int32",
-          "description": "Log backup frequency.",
+          "description": "Frequency of log backups. 5-60 minutes.",
           "type": "integer"
         }
       }
