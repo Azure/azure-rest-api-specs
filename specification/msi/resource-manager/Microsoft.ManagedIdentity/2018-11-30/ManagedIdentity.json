@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-08-31-preview",
+    "version": "2018-11-30",
     "title": "ManagedServiceIdentityClient",
     "description": "The Managed Service Identity Client."
   },
@@ -388,7 +388,7 @@
         "clientSecretUrl": {
           "type": "string",
           "readOnly": true,
-          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials."
+          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials. If identity is user assigned, the clientSecretUrl is null, otherwise the clientSecretUrl is not null"
         }
       }
     },
@@ -535,7 +535,10 @@
       "in": "query",
       "description": "Version of API to invoke.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "2018-11-30"
+      ]
     }
   }
 }
