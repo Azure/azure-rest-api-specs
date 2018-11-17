@@ -1,0 +1,1243 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "version": "2018-11-01-preview",
+        "title": "BillingManagementClient",
+        "description": "Billing client provides access to billing resources for Azure subscriptions."
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Billing/billingPermissions": {
+            "get": {
+                "tags": [
+                    "billingPermissions"
+                ],
+                "x-ms-examples": {
+                    "BillingAccountPermissionsList": {
+                        "$ref": "./examples/BillingAccountPermissionsList.json"
+                    }
+                },
+                "operationId": "BillingAccountbillingPermissions_List",
+                "description": "Lists all billingPermissions for the caller has for a billing account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingPermissionsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/billingPermissions": {
+            "get": {
+                "tags": [
+                    "billingPermissions"
+                ],
+                "x-ms-examples": {
+                    "ProjectPermissionsList": {
+                        "$ref": "./examples/ProjectPermissionsList.json"
+                    }
+                },
+                "operationId": "InvoiceSectionsbillingPermissions_List",
+                "description": "Lists all billingPermissions for the caller has for a Invoice Section.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/invoiceSectionNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingPermissionsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Billing/billingPermissions": {
+            "get": {
+                "tags": [
+                    "billingPermissions"
+                ],
+                "x-ms-examples": {
+                    "BillingProfilePermissionsList": {
+                        "$ref": "./examples/BillingProfilePermissionsList.json"
+                    }
+                },
+                "operationId": "BillingProfilebillingPermissions_List",
+                "description": "Lists all billingPermissions for the caller has for a billing account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingPermissionsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Billing/billingRoleDefinitions/{billingRoleDefinitionId}": {
+            "get": {
+                "tags": [
+                    "billingRoleDefinition"
+                ],
+                "x-ms-examples": {
+                    "BillingAccountRoleDefinition": {
+                        "$ref": "./examples/BillingAccountRoleDefinition.json"
+                    }
+                },
+                "operationId": "BillingAccountbillingRoleDefinition_Get",
+                "description": "Gets the role definition for a role",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleDefinitionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleDefinition"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/billingRoleDefinitions/{billingRoleDefinitionId}": {
+            "get": {
+                "tags": [
+                    "billingRoleDefinition"
+                ],
+                "x-ms-examples": {
+                    "ProjectRoleDefinition": {
+                        "$ref": "./examples/ProjectRoleDefinition.json"
+                    }
+                },
+                "operationId": "InvoiceSectionbillingRoleDefinition_Get",
+                "description": "Gets the role definition for a role",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/invoiceSectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleDefinitionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleDefinition"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Billing/billingRoleDefinitions/{billingRoleDefinitionId}": {
+            "get": {
+                "tags": [
+                    "billingRoleDefinition"
+                ],
+                "x-ms-examples": {
+                    "BillingProfileRoleDefinition": {
+                        "$ref": "./examples/BillingProfileRoleDefinition.json"
+                    }
+                },
+                "operationId": "BillingProfilebillingRoleDefinition_Get",
+                "description": "Gets the role definition for a role",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleDefinitionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleDefinition"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Billing/billingRoleDefinitions": {
+            "get": {
+                "tags": [
+                    "billingRoleDefinition"
+                ],
+                "x-ms-examples": {
+                    "BillingAccountRoleDefinitionsList": {
+                        "$ref": "./examples/BillingAccountRoleDefinitionsList.json"
+                    }
+                },
+                "operationId": "BillingAccountbillingRoleDefinition_List",
+                "description": "Lists the role definition for a billing account",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleDefinitionListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/billingRoleDefinitions": {
+            "get": {
+                "tags": [
+                    "billingRoleDefinition"
+                ],
+                "x-ms-examples": {
+                    "ProjectRoleDefinitionsList": {
+                        "$ref": "./examples/ProjectRoleDefinitionsList.json"
+                    }
+                },
+                "operationId": "InvoiceSectionbillingRoleDefinition_List",
+                "description": "Lists the role definition for a invoice Section",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/invoiceSectionNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleDefinitionListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Billing/billingRoleDefinitions": {
+            "get": {
+                "tags": [
+                    "billingRoleDefinition"
+                ],
+                "x-ms-examples": {
+                    "BillingProfileRoleDefinitionsList": {
+                        "$ref": "./examples/BillingProfileRoleDefinitionsList.json"
+                    }
+                },
+                "operationId": "BillingProfilebillingRoleDefinition_List",
+                "description": "Lists the role definition for a Billing Profile",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleDefinitionListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Billing/billingRoleAssignments/{billingRoleAssignmentId}": {
+            "get": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "BillingAccountRoleAssignment": {
+                        "$ref": "./examples/BillingAccountRoleAssignment.json"
+                    }
+                },
+                "operationId": "BillingAccountbillingRoleAssignment_Get",
+                "description": "Get the role assignment for the caller",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleAssignmentIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "BillingAccountRoleAssignmentDelete": {
+                        "$ref": "./examples/BillingAccountRoleAssignmentDelete.json"
+                    }
+                },
+                "operationId": "BillingAccountbillingRoleAssignment_Delete",
+                "description": "Delete the role assignment on this billing account",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleAssignmentIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/billingRoleAssignments/{billingRoleAssignmentId}": {
+            "get": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "ProjectRoleAssignment": {
+                        "$ref": "./examples/ProjectRoleAssignment.json"
+                    }
+                },
+                "operationId": "invoiceSectionbillingRoleAssignment_Get",
+                "description": "Get the role assignment for the caller on the invoice Section",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/invoiceSectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleAssignmentIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "ProjectRoleAssignmentDelete": {
+                        "$ref": "./examples/ProjectRoleAssignmentDelete.json"
+                    }
+                },
+                "operationId": "invoiceSectionbillingRoleAssignment_Delete",
+                "description": "Delete the role assignment on this invoice Section",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/invoiceSectionNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleAssignmentIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Billing/billingRoleAssignments/{billingRoleAssignmentId}": {
+            "get": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "BillingProfileRoleAssignment": {
+                        "$ref": "./examples/BillingProfileRoleAssignment.json"
+                    }
+                },
+                "operationId": "BillingProfilebillingRoleAssignment_Get",
+                "description": "Get the role assignment for the caller on the Billing Profile",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleAssignmentIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "BillingProfileRoleAssignmentDelete": {
+                        "$ref": "./examples/BillingProfileRoleAssignmentDelete.json"
+                    }
+                },
+                "operationId": "BillingProfilebillingRoleAssignment_Delete",
+                "description": "Delete the role assignment on this Billing Profile",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingRoleAssignmentIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Billing/billingRoleAssignments": {
+            "get": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "BillingAccountRoleAssignmentList": {
+                        "$ref": "./examples/BillingAccountRoleAssignmentList.json"
+                    }
+                },
+                "operationId": "BillingAccountbillingRoleAssignment_List",
+                "description": "Get the role assignments on the Billing Account",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Billing/createBillingRoleAssignment": {
+            "post": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "operationId": "BillingAccountbillingRoleAssignment_Add",
+                "description": "The operation to add a role assignment to a billing account.",
+                "x-ms-examples": {
+                    "AddRoleAssignmentToBillingAccount": {
+                        "$ref": "./examples/AddRoleAssignmentToBillingAccount.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentPayload"
+                        },
+                        "description": "Parameters supplied to add a role assginment."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Role assignment is successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/billingRoleAssignments": {
+            "get": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "ProjectRoleAssignmentList": {
+                        "$ref": "./examples/ProjectRoleAssignmentList.json"
+                    }
+                },
+                "operationId": "invoiceSectionbillingRoleAssignment_List",
+                "description": "Get the role assignments on the invoice Section",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/invoiceSectionNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/createBillingRoleAssignment": {
+            "post": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "operationId": "invoiceSectionbillingRoleAssignment_Add",
+                "description": "The operation to add a role assignment to a invoice Section.",
+                "x-ms-examples": {
+                    "AddRoleAssignmentToProject": {
+                        "$ref": "./examples/AddRoleAssignmentToProject.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/invoiceSectionNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentPayload"
+                        },
+                        "description": "Parameters supplied to add a role assginment."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Role assignment is successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Billing/billingRoleAssignments": {
+            "get": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "x-ms-examples": {
+                    "BillingProfileRoleAssignmentList": {
+                        "$ref": "./examples/BillingProfileRoleAssignmentList.json"
+                    }
+                },
+                "operationId": "BillingProfilebillingRoleAssignment_List",
+                "description": "Get the role assignments on the Billing Profile",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Billing/createBillingRoleAssignment": {
+            "post": {
+                "tags": [
+                    "billingRoleAssignment"
+                ],
+                "operationId": "BillingProfilebillingRoleAssignment_Add",
+                "description": "The operation to add a role assignment to a billing profile.",
+                "x-ms-examples": {
+                    "AddRoleAssignmentToBillingProfile": {
+                        "$ref": "./examples/AddRoleAssignmentToBillingProfile.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingProfileNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentPayload"
+                        },
+                        "description": "Parameters supplied to add a role assginment."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Role assignment is successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/billingRoleAssignmentListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ErrorDetails": {
+            "description": "The details of the error.",
+            "properties": {
+                "code": {
+                    "description": "Error code.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "target": {
+                    "description": "The target of the particular error.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "ErrorResponse": {
+            "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "The details of the error.",
+                    "$ref": "#/definitions/ErrorDetails"
+                }
+            }
+        },
+        "Resource": {
+            "description": "The Resource model definition.",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type."
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "billingRoleAssignmentPayload": {
+            "description": "The payload use to update role assignment on a scope",
+            "properties": {
+                "principalId": {
+                    "description": "The user's principal id that the role gets assigned to",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "billingRoleDefinitionId": {
+                    "description": "The role defintion id",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "billingRoleAssignmentListResult": {
+            "description": "Result of get list of role assignments",
+            "properties": {
+                "value": {
+                    "description": "The list role assignments",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                        "$ref": "#/definitions/billingRoleAssignment"
+                    }
+                }
+            }
+        },
+        "billingRoleAssignment": {
+            "description": "a role assignment",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "description": "The role assignment the caller has",
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/billingRoleAssignmentProperties"
+                }
+            }
+        },
+        "billingRoleAssignmentProperties": {
+            "description": "The properties of the a role assignment.",
+            "properties": {
+                "createdOn": {
+                    "description": "the date the role assignment is created",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "createdByPrincipalTenantId": {
+                    "description": "the creator's tenant Id",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "createdByPrincipalId": {
+                    "description": "the creator's principal Id",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "the name of the role assignment",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "principalId": {
+                    "description": "The user's principal id that the role gets assigned to",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "roleDefinitionId": {
+                    "description": "The role defintion id",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "scope": {
+                    "description": "The scope the role get assigned to",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "billingRoleDefinitionListResult": {
+            "description": "list the role definitions.",
+            "properties": {
+                "value": {
+                    "description": "The list of role definitions.",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                        "$ref": "#/definitions/billingRoleDefinition"
+                    }
+                }
+            }
+        },
+        "billingRoleDefinition": {
+            "description": "Result of get role definition for a role.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "description": "The role definition for a role.",
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/billingRoleDefinitionProperties"
+                }
+            }
+        },
+        "billingRoleDefinitionProperties": {
+            "description": "The properties of the a role definition.",
+            "properties": {
+                "description": {
+                    "description": "The role description",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "permissions": {
+                    "description": "The billingPermissions the role has",
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/billingPermissionsListResult"
+                },
+                "roleName": {
+                    "description": "The name of the role",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "billingPermissionsListResult": {
+            "description": "Result of list billingPermissions a caller has on a billing account.",
+            "properties": {
+                "value": {
+                    "description": "The list OF billingPermissions a caller has on a billing account.",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                        "$ref": "#/definitions/billingPermissions"
+                    }
+                }
+            }
+        },
+        "billingPermissions": {
+            "description": "The set of allowed action and not allowed actions a caller has on a billing account",
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "description": "The set of actions that the caller is allowed to do",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                        "$ref": "#/definitions/Action"
+                    }
+                },
+                "notActions": {
+                    "description": "The set of actions the caller is not allowed to do",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                        "$ref": "#/definitions/NotAction"
+                    }
+                }
+            }
+        },
+        "Action": {
+            "description": "the action the caller allowed to do",
+            "type": "string",
+            "readOnly": true
+        },
+        "NotAction": {
+            "description": "the action the caller doesn't allowed to do",
+            "type": "string",
+            "readOnly": true
+        }
+    },
+    "parameters": {
+        "apiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
+        },
+        "subscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Azure Subscription ID.",
+            "required": true,
+            "type": "string"
+        },
+        "billingAccountIdParameter": {
+            "name": "billingAccountId",
+            "in": "path",
+            "description": "billing Account Id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "projectIdParameter": {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project Id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "enrollmentAccountIdParameter": {
+            "name": "enrollmentAccountId",
+            "in": "path",
+            "description": "Enrollment Account Id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "departmentIdParameter": {
+            "name": "departmentId",
+            "in": "path",
+            "description": "Department Id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "billingProfileIdParameter": {
+            "name": "billingProfileId",
+            "in": "path",
+            "description": "Billing Profile Id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "eligibleOfferIdParameter": {
+            "name": "eligibleOfferId",
+            "in": "path",
+            "description": "Eligible Offer Id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "operationIdParameter": {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation Id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "billingAccountNameParameter": {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "billing Account name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "billingProfileNameParameter": {
+            "name": "billingProfileName",
+            "in": "path",
+            "description": "Billing Profile Name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "invoiceSectionNameParameter": {
+            "name": "invoiceSectionName",
+            "in": "path",
+            "description": "Project name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "billingRoleDefinitionIdParameter": {
+            "name": "billingRoleDefinitionId",
+            "in": "path",
+            "description": "role definition id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "billingRoleAssignmentIdParameter": {
+            "name": "billingRoleAssignmentId",
+            "in": "path",
+            "description": "role assignment id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "invoiceNameParameter": {
+            "name": "invoiceName",
+            "in": "path",
+            "description": "Invoice name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "invoiceIdParameter": {
+            "name": "invoiceId",
+            "in": "path",
+            "description": "Invoice id.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow.",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    }
+}
