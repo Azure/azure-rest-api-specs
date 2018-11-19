@@ -22,5 +22,5 @@ These settings apply only when `--tag=package-2018-06-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/storage/datalake/2018-06-17/storagedatalake
+output-folder: $(go-sdk-folder)/services/storage/datalake/2018-06-17/$(namespace)
 ```

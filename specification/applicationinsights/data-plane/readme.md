@@ -68,6 +68,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## C#
@@ -100,12 +102,12 @@ directive:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-applicationinsights/azure/applicationinsights
+  output-folder: $(python-sdks-folder)/azure-applicationinsights-query/azure/applicationinsights/query
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-applicationinsights
+  output-folder: $(python-sdks-folder)/azure-applicationinsights-query
 ```
 
 ## Go

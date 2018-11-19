@@ -2,7 +2,7 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+```yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   namespace: storsimple
@@ -11,7 +11,7 @@ go:
 
 ### Go multi-api
 
-``` yaml $(go) && $(multiapi)
+```yaml $(go) && $(multiapi)
 batch:
   - tag: package-2017-06
 ```
@@ -21,6 +21,6 @@ batch:
 These settings apply only when `--tag=package-2017-06 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2017-06' && $(go)
-output-folder: $(go-sdk-folder)/services/storsimple8000series/mgmt/2017-06-01/storsimple
+```yaml $(tag) == 'package-2017-06' && $(go)
+output-folder: $(go-sdk-folder)/services/storsimple8000series/mgmt/2017-06-01/$(namespace)
 ```

@@ -54,6 +54,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -73,7 +74,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/WorkloadMonitor/Management.WorkloadMonitor/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 

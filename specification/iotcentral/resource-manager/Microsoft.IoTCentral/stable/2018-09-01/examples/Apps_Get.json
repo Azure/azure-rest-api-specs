@@ -7,12 +7,18 @@
   },
   "responses": {
     "200": {
-      "headers": {},
+      "description": "Returns the application details",
+      "headers": {
+        "code": "200"
+      },
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/IoTApps/myIoTCentralApp",
         "location": "westus",
         "type": "Microsoft.IoTCentral/IoTApps",
         "name": "myIoTCentralApp",
+        "tags": {
+          "key": "value"
+        },
         "properties": {
           "applicationId": "6ebd8fd3-6e34-419e-908f-9be61ec6f6d6",
           "displayName": "My IoT Central App",
@@ -21,6 +27,17 @@
         },
         "sku": {
           "name": "F1"
+        }
+      }
+    }, 
+    "default": {
+      "description": "Error message returned for an unexpected response",
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "target": "Error target"
         }
       }
     }

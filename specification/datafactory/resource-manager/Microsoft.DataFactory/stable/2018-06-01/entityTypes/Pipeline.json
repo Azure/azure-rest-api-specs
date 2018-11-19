@@ -1184,10 +1184,7 @@
           "description": "Stored procedure parameter type.",
           "$ref": "#/definitions/StoredProcedureParameterType"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
@@ -2325,6 +2322,41 @@
       },
       "required": [
         "pipeline"
+      ]
+    },
+    "DeleteActivity": {
+      "x-ms-discriminator-value": "Delete",
+      "description": "Delete activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Delete activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeleteActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DeleteActivityTypeProperties": {
+      "description": "Delete activity properties.",
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be deleted recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dataset": {
+          "description": "Delete activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
       ]
     },
     "LookupActivity": {

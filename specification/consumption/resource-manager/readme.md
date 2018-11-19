@@ -26,7 +26,7 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-08
+tag: package-2018-10
 ```
 
 ### Tag: package-2017-11
@@ -88,6 +88,16 @@ input-file:
 - Microsoft.Consumption/stable/2018-08-31/consumption.json
 ```
 
+---
+### Tag: package-2018-10
+
+These settings apply only when `--tag=package-2018-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10'
+input-file:
+- Microsoft.Consumption/stable/2018-10-01/consumption.json
+```
+
 ## Suppression
 ``` yaml
 directive:
@@ -130,6 +140,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -179,10 +190,6 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -209,6 +216,7 @@ batch:
   - tag: package-2018-05
   - tag: package-2018-06
   - tag: package-2018-08
+  - tag: package-2018-10
 ```
 
 ### Tag: package-2017-04-preview and java
@@ -311,6 +319,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_08_31
   output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_08_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-10 and java
+
+These settings apply only when `--tag=package-2018-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
 regenerate-manager: true
 generate-interface: true
 ```
