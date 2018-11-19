@@ -1540,12 +1540,16 @@
       "properties": {
         "requestHeaderConfigurations": {
           "type": "array",
-          "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
+          },
           "description": "Request Header Actions in the Action Set"
         },
         "responseHeaderConfigurations": {
           "type": "array",
-          "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
+          },
           "description": "Response Header Actions in the Action Set"
         }
       },
