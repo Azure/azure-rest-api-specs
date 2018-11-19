@@ -8,7 +8,16 @@
         "parameters": {
             "location": "eastus",
             "properties": {
-                "computeType": "AmlCompute"
+                "computeType": "AmlCompute",
+                "properties": {
+                  "vmSize": "STANDARD_NC6",
+                  "vmPriority": "Dedicated",
+                  "scaleSettings": {
+                    "maxNodeCount": 1,
+                    "minNodeCount": 0,
+                    "nodeIdleTimeBeforeScaleDown": "PT5M"
+				  }
+                }
             }
         }
     },
