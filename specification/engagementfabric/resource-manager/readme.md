@@ -106,14 +106,8 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: engagementfabric
-  clear-output-folder: true
-```
 
 ## Java
 
