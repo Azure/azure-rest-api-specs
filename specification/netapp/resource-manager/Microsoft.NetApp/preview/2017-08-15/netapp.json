@@ -49,6 +49,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -83,6 +86,9 @@
           "NetApp Accounts"
         ],
         "operationId": "Accounts_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -272,6 +278,9 @@
           "Capacity Pools"
         ],
         "operationId": "Pools_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -467,6 +476,9 @@
           "Volumes"
         ],
         "operationId": "Volumes_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -668,6 +680,9 @@
         ],
         "operationId": "MountTargets_List",
         "description": "List mount targets",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -738,33 +753,6 @@
             "$ref": "examples/MountTargets_Get.json"
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "MountTargets"
-        ],
-        "operationId": "MountTargets_Delete",
-        "description": "Delete mount target",
-        "responses": {
-          "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
-          },
-          "204": {
-            "description": "NoContent -- Resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "MountTargets_Delete": {
-            "$ref": "examples/MountTargets_Delete.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/snapshots": {
@@ -794,6 +782,9 @@
         ],
         "operationId": "Snapshots_List",
         "description": "List snapshots",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
