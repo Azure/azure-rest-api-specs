@@ -7557,6 +7557,225 @@
           }
         }
       }
+    },
+    "/apps/{appId}/azureaccounts": {
+      "post": {
+        "description": "Assigns an azure account to the application.",
+        "operationId": "5be32228e8473de116325515",
+        "summary": "apps - Assign a LUIS azure accounts to an application",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "name": "azureAccountInfoObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoObject"
+            },
+            "description": "The azure account information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
+            "schema": {             
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Assign azure account request": {
+            "$ref": "./examples/versions/SuccessfulAssignAzureAccountRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the LUIS azure accounts assigned to the application for the user using his ARM token.",
+        "operationId": "5be32028a1d48f88cfd57e20",
+        "summary": "apps - Get LUIS azure accounts assigned to the application",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of azure account information objects.",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoList"
+            }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
+            "schema": {             
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get assigned azure accounts request": {
+            "$ref": "./examples/versions/SuccessfulGetAssignedAzureAccountsRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes assigned azure account from the application.",
+        "operationId": "5be32554f8591db3a86232e1",
+        "summary": "apps - Removes an assigned LUIS azure account from an application",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "name": "azureAccountInfoObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoObject"
+            },
+            "description": "The azure account information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
+            "schema": {             
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get delete azure account request": {
+            "$ref": "./examples/versions/SuccessfulDeleteAssignedAzureAccountRequest.json"
+          }
+        }
+      }
+    },
+    "/azureaccounts": {
+      "get": {
+        "description": "Gets the LUIS azure accounts for the user using his ARM token.",
+        "operationId": "5be313cec181ae720aa2b26c",
+        "summary": "user - Get LUIS azure accounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of azure account information objects.",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoList"
+            }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
+            "schema": {             
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get azure accounts request": {
+            "$ref": "./examples/stats/SuccessfulGetAzureAccountsRequest.json"
+          }
+        }
+      }
+    }
+  }, 
+  "responses": {
+    "401": {
+      "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "403": {
+      "description": "Total monthly key quota limit exceeded",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "429": {
+      "description": "Rate limit is exceeded.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
     }
   },
   "definitions": {
@@ -9818,6 +10037,36 @@
           "type": "string"
         }
       }
+    },
+    "AzureAccountInfoList": {
+      "description": "List of Azure account info objects.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AzureAccountInfoObject"
+      }
+    },
+    "AzureAccountInfoObject": {
+      "description": "Defines the azure account information object.",
+      "type": "object",
+      "required": [
+        "azureSubscriptionId",
+        "resourceGroup",
+        "accountName"
+      ],
+      "properties": {
+        "azureSubscriptionId": {
+          "description": "The id for the azure subscription.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The azure resource group name.",
+          "type": "string"
+        },
+        "accountName": {
+          "description": "The azure account name.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -9892,6 +10141,14 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "BearerAuthPath": {
+      "name": "Authorization",
+      "in": "header",
+      "description": "The bearer authorization header to use; containing the user's ARM token used to validate azure accounts information.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
