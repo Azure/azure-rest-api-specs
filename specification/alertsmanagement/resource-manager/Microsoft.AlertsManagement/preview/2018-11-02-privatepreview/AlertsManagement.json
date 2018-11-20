@@ -1129,13 +1129,13 @@
     },
     "alertsListDefinition": {
       "description": "List the alerts.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alerts.",
+          "type": "string"
+        },
         "value": {
+          "description": "List of alerts",
           "type": "array",
           "items": {
             "$ref": "#/definitions/alert"
@@ -1144,13 +1144,12 @@
       }
     },
     "alertsSummaryListDefinition": {
-      "description": "List the alerts.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
+      "description": "List the alerts summary.",
       "properties": {
+        "nextLink": {
+          "description": "This will be always empty",
+          "type": "string"
+        },
         "value": {
           "type": "array",
           "items": {
