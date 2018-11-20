@@ -824,9 +824,9 @@
           "type": "string",
           "description": "Certificate public data."
         },
-        "keyvaultSecretId": {
+        "keyVaultSecretId": {
           "type": "string",
-          "description": "KeyVault Secret Id for certificate."
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         },
         "provisioningState": {
           "type": "string",
@@ -874,6 +874,10 @@
         "publicCertData": {
           "type": "string",
           "description": "Base-64 encoded Public cert data corresponding to pfx specified in data. Only applicable in GET request."
+        },
+        "keyVaultSecretId": {
+          "type": "string",
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         },
         "provisioningState": {
           "type": "string",
@@ -1818,6 +1822,10 @@
             "type": "string"
           },
           "description": "A list of availability zones denoting where the resource needs to come from."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the application gateway, if configured."
         }
       },
       "allOf": [
