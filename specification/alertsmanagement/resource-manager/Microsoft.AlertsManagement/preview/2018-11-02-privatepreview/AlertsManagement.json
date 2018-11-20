@@ -51,6 +51,162 @@
         }
       }
     },
+    "/providers/Microsoft.AlertsManagement/alertsList": {
+      "get": {
+        "operationId": "Alerts_GetMultiSubscriptionList",
+        "description": "List all the existing alerts, where the results can be selective by passing multiple filter parameters including time range and sorted on specific fields. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/targetResource"
+          },
+          {
+            "$ref": "#/parameters/targetResourceType"
+          },
+          {
+            "$ref": "#/parameters/targetResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/monitorCondition"
+          },
+          {
+            "$ref": "#/parameters/severity"
+          },
+          {
+            "$ref": "#/parameters/alertState"
+          },
+          {
+            "$ref": "#/parameters/alertRule"
+          },
+          {
+            "$ref": "#/parameters/smartGroupIdFilter"
+          },
+          {
+            "$ref": "#/parameters/includeContext"
+          },
+          {
+            "$ref": "#/parameters/includeEgressConfig"
+          },
+          {
+            "$ref": "#/parameters/alertsSortBy"
+          },
+          {
+            "$ref": "#/parameters/sortOrder"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/timeRange"
+          },
+          {
+            "$ref": "#/parameters/customTimeRange"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Succesfully listed alert objects.",
+            "schema": {
+              "$ref": "#/definitions/alertsListDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListAlerts": {
+            "$ref": "./examples/Alerts_MultiSubscriptionList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AlertsManagement/alertsSummaryList": {
+      "get": {
+        "operationId": "Alerts_GetMultiSubscriptionSummaryList",
+        "description": "Summary of alerts with the count each severity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/alertsSummaryGroupBy"
+          },
+          {
+            "$ref": "#/parameters/includeSmartGroupsCount"
+          },
+          {
+            "$ref": "#/parameters/targetResource"
+          },
+          {
+            "$ref": "#/parameters/targetResourceType"
+          },
+          {
+            "$ref": "#/parameters/targetResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/monitorCondition"
+          },
+          {
+            "$ref": "#/parameters/severity"
+          },
+          {
+            "$ref": "#/parameters/alertState"
+          },
+          {
+            "$ref": "#/parameters/alertRule"
+          },
+          {
+            "$ref": "#/parameters/timeRange"
+          },
+          {
+            "$ref": "#/parameters/customTimeRange"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Alert summary returned.",
+            "schema": {
+              "$ref": "#/definitions/alertsSummaryListDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Summary": {
+            "$ref": "./examples/Alerts_MultiSubscriptionSummary.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
@@ -525,6 +681,13 @@
     }
   },
   "parameters": {
+    "filter": {
+      "name": "oDataFilters",
+      "description": "list of subscriptions",
+      "type": "string",
+      "in": "query",
+      "required": true
+    },
     "subscriptionId": {
       "name": "subscriptionId",
       "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -961,6 +1124,38 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource name"
+        }
+      }
+    },
+    "alertsListDefinition": {
+      "description": "List the alerts.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/alert"
+          }
+        }
+      }
+    },
+    "alertsSummaryListDefinition": {
+      "description": "List the alerts.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/alertsSummary"
+          }
         }
       }
     },
