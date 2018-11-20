@@ -22,5 +22,5 @@ These settings apply only when `--tag=package-2015-04 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-04' && $(go)
-output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2015-04-08/documentdb
+output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2015-04-08/$(namespace)
 ```

@@ -60,6 +60,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## C#
@@ -90,7 +92,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.reservations
   package-name: azure-mgmt-reservations
-  package-version: 0.2.2
+  package-version: 0.3.2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

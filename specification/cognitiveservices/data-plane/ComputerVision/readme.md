@@ -18,7 +18,9 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_0'
-input-file: stable/v2.0/ComputerVision.json
+input-file: 
+  - stable/v2.0/ComputerVision.json
+  - stable/v2.0/Ocr.json
 ```
 
 ## Swagger to SDK
@@ -31,6 +33,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:

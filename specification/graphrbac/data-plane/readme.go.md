@@ -22,5 +22,5 @@ These settings apply only when `--tag=1.6 --go` is specified on the command line
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == '1.6' && $(go)
-output-folder: $(go-sdk-folder)/services/graphrbac/1.6/graphrbac
+output-folder: $(go-sdk-folder)/services/$(namespace)/1.6/$(namespace)
 ```

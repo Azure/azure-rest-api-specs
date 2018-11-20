@@ -25,7 +25,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-webservices-2017-01' && $(go)
 namespace: webservices
-output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2017-01-01/webservices
+output-folder: $(go-sdk-folder)/services/machinelearning/mgmt/2017-01-01/$(namespace)
 ```
 
 ### Tag: package-webservices-2016-05-preview and go
@@ -35,7 +35,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-webservices-2016-05-preview' && $(go)
 namespace: webservices
-output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2016-05-01-preview/webservices
+output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2016-05-01-preview/$(namespace)
 ```
 
 ### Tag: package-workspaces-2016-04 and go

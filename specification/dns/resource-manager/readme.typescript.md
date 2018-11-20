@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-dns"
-  output-folder: $(typescript-sdks-folder)/packages/arm-dns
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-dns"
   generate-metadata: true
 ```

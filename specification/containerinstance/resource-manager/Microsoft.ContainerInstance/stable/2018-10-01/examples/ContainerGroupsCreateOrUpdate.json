@@ -30,7 +30,11 @@
               "resources": {
                 "requests": {
                   "cpu": 1,
-                  "memoryInGB": 1.5
+                  "memoryInGB": 1.5,
+                  "gpu": {
+                    "count": 1,
+                    "sku": "K80"
+                  }
                 }
               },
               "volumeMounts": [
@@ -65,6 +69,11 @@
         },
         "networkProfile": {
           "id": "test-network-profile-id"
+        },
+        "dnsConfig": {
+          "nameServers": [ "1.1.1.1" ],
+          "searchDomains": "cluster.local svc.cluster.local",
+          "options": "ndots:2"
         },
         "imageRegistryCredentials": [],
         "ipAddress": {
@@ -126,7 +135,11 @@
                 "resources": {
                   "requests": {
                     "cpu": 1,
-                    "memoryInGB": 1.5
+                    "memoryInGB": 1.5,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    }
                   }
                 },
                 "volumeMounts": [
@@ -154,6 +167,11 @@
               "workspaceId": "workspaceid",
               "workspaceKey": ""
             }
+          },
+          "dnsConfig": {
+            "nameServers": [ "1.1.1.1" ],
+            "searchDomains": "cluster.local svc.cluster.local",
+            "options": "ndots:2"
           },
           "imageRegistryCredentials": [],
           "ipAddress": {
@@ -212,7 +230,11 @@
                 "resources": {
                   "requests": {
                     "cpu": 1,
-                    "memoryInGB": 1.5
+                    "memoryInGB": 1.5,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    }
                   }
                 },
                 "volumeMounts": [
@@ -235,6 +257,9 @@
               }
             }
           ],
+          "dnsConfig": {
+            "nameServers": [ "1.1.1.1" ]
+          },
           "imageRegistryCredentials": [],
           "ipAddress": {
             "ip": "10.0.0.1",

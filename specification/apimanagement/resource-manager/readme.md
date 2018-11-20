@@ -81,31 +81,31 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.ApiManagement/preview/2018-01-01/apimanagement.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimapis.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimauthorizationservers.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimbackends.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimcertificates.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimdeployment.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimdiagnostics.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimemailtemplate.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimgroups.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimidentityprovider.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimloggers.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimnotifications.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimnetworkstatus.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimopenidconnectproviders.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimportalsettings.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimproducts.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimproperties.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimquotas.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimreports.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimsubscriptions.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimtagresources.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimtags.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimtenant.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimusers.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimversionsets.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimanagement.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimapis.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimauthorizationservers.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimbackends.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimcertificates.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimdeployment.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimdiagnostics.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimemailtemplate.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimgroups.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimidentityprovider.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimloggers.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimnotifications.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimnetworkstatus.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimportalsettings.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimproducts.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimproperties.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimquotas.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimreports.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimsubscriptions.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimtagresources.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimtags.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimtenant.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimusers.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimversionsets.json
 ```
 
 ## Suppression
@@ -202,6 +202,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
     autorest_options:
       use: "@microsoft.azure/autorest.python@~3.0"
