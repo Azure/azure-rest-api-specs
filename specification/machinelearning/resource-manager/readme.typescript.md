@@ -6,7 +6,15 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-machinelearning"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-machinelearning"
   generate-metadata: true
+batch:
+  - package-commitmentPlans: true
+    package-name: "@azure/arm-commitmentplans"
+    output-folder: $(typescript-sdks-folder)/packages/@azure/arm-commitmentplans
+  - package-webservices: true
+    package-name: "@azure/arm-webservices"
+    output-folder: $(typescript-sdks-folder)/packages/@azure/arm-webservices
+  - package-workspaces: true
+    package-name: "@azure/arm-workspaces"
+    output-folder: $(typescript-sdks-folder)/packages/@azure/arm-workspaces
 ```
