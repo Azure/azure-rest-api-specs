@@ -1335,6 +1335,11 @@
           "type": "string",
           "format": "date-time",
           "description": "All primary writes preceding this UTC date/time value are guaranteed to be available for read operations. Primary writes following this point in time may or may not be available for reads. Element may be default value if value of LastSyncTime is not available, this can happen if secondary is offline or we are in bootstrap."
+        },
+        "canFailover": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether or not account failover is supported for the account."
         }
       },
       "description": "Statistics related to replication for storage account's Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account."
