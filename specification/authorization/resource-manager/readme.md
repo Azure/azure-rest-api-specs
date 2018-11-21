@@ -190,15 +190,6 @@ swagger-to-sdk:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-### Tag: package-2018-09-01-preview and go
-
-These settings apply only when `--tag=package-2018-09-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-09-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/authorization/mgmt/2018-09-01-preview/authorization
-```
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -218,6 +209,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-authorization
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2015-07
+  - tag: package-2018-09-01-preview
+```
+
+### Tag: package-2018-09-01-preview and java
+
+These settings apply only when `--tag=package-2018-09-01-preview --java` is specified on he command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-09-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.authorization.v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_09_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2015-07 and java
