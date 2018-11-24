@@ -1319,7 +1319,7 @@
     "/ApplicationTypes/{applicationTypeName}/$/GetServiceTypes/{serviceTypeName}": {
       "get": {
         "summary": "Gets the information about a specific service type that is supported by a provisioned application type in a Service Fabric cluster.",
-        "description": "Gets the information about a specific service type that is supported by a provisioned application type in a Service Fabric cluster. The provided application type must exist. Otherwise, a 404 status is returned. A 204 response is returned if the specificed service type is not found in the cluster.",
+        "description": "Gets the information about a specific service type that is supported by a provisioned application type in a Service Fabric cluster. The provided application type must exist. Otherwise, a 404 status is returned. A 204 response is returned if the specified service type is not found in the cluster.",
         "operationId": "GetServiceTypeInfoByName",
         "parameters": [
           {
@@ -5583,7 +5583,7 @@
         ],
         "responses": {
           "201": {
-            "description": "A sucessful operation returns 201 status code and creates a new backup policy."
+            "description": "A successful operation returns 201 status code and creates a new backup policy."
           },
           "default": {
             "description": "The detailed error response.",
@@ -5795,7 +5795,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A sucessful operation resturns 200 status code and updates the backup policy description."
+            "description": "A successful operation returns 200 status code and updates the backup policy description."
           },
           "default": {
             "description": "The detailed error response.",
@@ -7159,7 +7159,7 @@
             }
           },
           "409": {
-            "description": "A 409 response means that one of the property batch operations failed, and contains more information about the failure. None of the operations were commited.",
+            "description": "A 409 response means that one of the property batch operations failed, and contains more information about the failure. None of the operations were committed.",
             "schema": {
               "$ref": "#/definitions/FailedPropertyBatchInfo"
             }
@@ -13193,7 +13193,7 @@
         },
         "MaxPercentUnhealthyServices": {
           "type": "integer",
-          "description": "The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.",
+          "description": "The maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.",
           "default": 0
         }
       }
@@ -23507,7 +23507,7 @@
         "values": [
           {
             "value": "default",
-            "description": "This filter value will match all of the nodes excepts the ones with with status as Unknown or Removed."
+            "description": "This filter value will match all of the nodes excepts the ones with status as Unknown or Removed."
           },
           {
             "value": "all",
