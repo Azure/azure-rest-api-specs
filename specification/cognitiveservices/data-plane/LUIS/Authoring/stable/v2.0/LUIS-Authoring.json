@@ -2815,9 +2815,21 @@
         ],
         "responses": {
           "201": {
-            "description": "An object containing the application endpoint URL and its assigned endpoint key.",
+            "description": "An object containing the application endpoint URL, its assigned endpoint key and publishing status.",
             "schema": {
               "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
+            }
+          },
+          "207": {
+            "description": "An object containing the application endpoint URL, its assigned endpoint key and publishing status.",
+            "schema": {
+              "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
+            }
+          },
+          "503": {
+            "description": "A string with the error message",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "default": {
@@ -9332,6 +9344,10 @@
           "type": "string",
           "description": "The endpoint's region."
         },
+        "failedRegions": {
+          "type": "string",
+          "description": "Regions where publishing failed."
+        },
         "publishedDateTime": {
           "description": "Timestamp when was last published.",
           "type": "string"
@@ -9603,6 +9619,10 @@
       "additionalProperties": {
         "type": "object"
       }
+    },
+    "ErrorMessage": {
+      "description": "Error message when invoking an operation on the API.",
+      "type": "string"
     },
     "OperationError": {
       "description": "Operation error details when invoking an operation on the API.",
