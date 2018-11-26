@@ -189,29 +189,30 @@
       }
     },
     "ResourceQuantity":{
-      "ResourceId": {
-        "description": "The resource guid.",
-        "type": "string",
-        "format": "guid",
-        "readOnly": true
-      },
-      "Quantity": {
-        "description": "The quantity of resource.",
-        "type": "number",
-        "format": "decimal",
-        "readOnly": true
+      "description": "The properties of the resource quantity.",
+      "properties": {
+        "ResourceId": {
+          "description": "The resource guid.",
+          "type": "string",
+          "format": "guid",
+          "readOnly": true
+        },
+        "Quantity": {
+          "description": "The quantity of resource.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
       }
     },
     "ResourcePrice": {
-      "description": "The definition of resource price model.",
-      "properties": {
-        "type":"object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/ResourceQuantity"
-          }
-        ]       
-      }
+      "description": "The definition of resource price model.",      
+      "type":"object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceQuantity"
+        }
+      ]
     }   
   },
   "parameters": {
