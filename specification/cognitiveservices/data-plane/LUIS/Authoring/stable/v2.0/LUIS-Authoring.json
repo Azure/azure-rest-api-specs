@@ -3342,92 +3342,6 @@
         }
       }
     },
-    "/apps/{appId}/querylogsasync": {
-      "get": {
-        "description": "Get the status of the download request for query logs.\r\n\r\nNote: You must initiate a POST request first, before getting the query logs",
-        "operationId": "Apps_DownloadQueryLogsAsync_GetStatus",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A CSV file containing the query logs for the past month."
-          },
-          "201": {
-            "description": "A string mentions that the download process is finished."
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "202": {
-            "description": "A string mentions that the download process is still in progress."
-          }
-        },
-        "produces": [
-          "application/octet-stream",
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Query Log Async Status": {
-            "$ref": "./examples/apps/SuccessfulGetApplicationQueryLogsAsyncStatusRequest.json"
-          }
-        }
-      },
-      "post": {
-        "description": "Start a download request for the query logs of the past month for the application.\r\n\r\nThis POST request initiates a request asynchronously. To determine whether the downloading request is done, submit a GET request to get downloading status.",
-        "operationId": "Apps_DownloadQueryLogsAsync_Download",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/IncludeResponse"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "a string mentions the state of the download request"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "400": {
-            "description": "The app ID is missing or invalid.\r\nThe includeResponse is invalid.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Query Log Async": {
-            "$ref": "./examples/apps/SuccessfulDownloadApplicationQueryLogsAsyncRequest.json"
-          }
-        }
-      }
-    },
     "/apps/{appId}": {
       "get": {
         "description": "Gets the application info.",
@@ -11966,17 +11880,6 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
-    },
-    "IncludeResponse": {
-      "name": "IncludeResponse",
-      "in": "query",
-      "description": "indicate whether to include the response column in the csv file.",
-      "type": "boolean",
-      "default": "true",
-      "enum": [
-        "true",
-        "false"
-      ]
     },
     "ApiKey": {
       "name": "Ocp-Apim-Subscription-Key",
