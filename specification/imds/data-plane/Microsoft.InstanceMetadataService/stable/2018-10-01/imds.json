@@ -8,7 +8,7 @@
     "host": "169.254.169.254",
     "basePath": "/metadata",
     "schemes": [
-        "https"
+        "http"
     ],
     "consumes": [
         "application/json"
@@ -65,44 +65,8 @@
                             "$ref": "#/definitions/instance"
                         }
                     },
-                    "400": {
-                        "description": "Invalid request",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "405": {
-                        "description": "Method not allowed",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "429": {
-                        "description": "Too many requests",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "503": {
-                        "description": "Service unavailable",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -152,44 +116,8 @@
                             "$ref": "#/definitions/attested"
                         }
                     },
-                    "400": {
-                        "description": "Invalid request",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "405": {
-                        "description": "Method not allowed",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "429": {
-                        "description": "Too many requests",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "503": {
-                        "description": "Service unavailable",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -289,32 +217,8 @@
                             "$ref": "#/definitions/TokenResponse"
                         }
                     },
-                    "400": {
-                        "description": "Invalid request",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "405": {
-                        "description": "Method not allowed",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "429": {
-                        "description": "Too many requests",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -369,32 +273,8 @@
                             "$ref": "#/definitions/InfoResponse"
                         }
                     },
-                    "400": {
-                        "description": "Invalid request",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "405": {
-                        "description": "Method not allowed",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "429": {
-                        "description": "Too many requests",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -647,29 +527,16 @@
             }
         },
         "ErrorResponse": {
+            "description": "Describes the format of Error response.",
             "type": "object",
             "properties": {
-                "error": {
-                    "type": "string",
+                "code": {
                     "description": "Error code",
-                    "enum": [
-                        "invalid_request",
-                        "unauthorize_client",
-                        "access_denied",
-                        "unsupported_response_type",
-                        "invalid_scope",
-                        "server_error",
-                        "service_unavailable",
-                        "bad_request",
-                        "forbidden",
-                        "not_found",
-                        "method_not_allowed",
-                        "too_many_requests"
-                    ]
+                    "type": "string"
                 },
-                "error_description": {
-                    "type": "string",
-                    "description": "Error description"
+                "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string"
                 }
             }
         },
