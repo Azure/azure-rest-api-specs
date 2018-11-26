@@ -10,18 +10,18 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.imds
-  package-name: azure-mgmt-imds
+  namespace: azure.imds
+  package-name: azure-imds
   package-version: 0.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-imds/azure/mgmt/imds
+  output-folder: $(python-sdks-folder)/azure-imds/azure/imds
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-imds
+  output-folder: $(python-sdks-folder)/azure-imds
 ```
