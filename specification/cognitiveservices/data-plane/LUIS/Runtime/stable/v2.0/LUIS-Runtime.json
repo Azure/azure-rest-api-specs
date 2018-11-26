@@ -227,13 +227,13 @@
     "401": {
         "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* invalid, malformed, or empty subscription key\r\n* subscription key doesn't match region",
         "schema": {
-          "$ref": "#/definitions/ObjectError"
+          "$ref": "#/definitions/APIError"
         }
     },
     "403": {
       "description": "Total monthly key quota limit exceeded. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. ",
       "schema": {
-        "$ref": "#/definitions/ObjectError"
+        "$ref": "#/definitions/APIError"
       }      
     },
     "409": {
@@ -252,7 +252,7 @@
     "429": {
       "description": "Too many requests. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request. ",
       "schema": {
-        "$ref": "#/definitions/ObjectError"
+        "$ref": "#/definitions/APIError"
       }
     }
   },
@@ -308,15 +308,12 @@
       "type": "string",
       "description": "Error in string format."
     },
-    "ObjectError": {
-      "$ref": "#/definitions/APIError"
-    },
     "APIError": {
       "type": "object",
       "description": "Error information returned by the API",
       "properties": {
         "statusCode": {
-          "type": "string",
+          "type": "integer",
           "description": "HTTP Status code"
         },
         "message": {
