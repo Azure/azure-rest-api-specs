@@ -2,13 +2,13 @@
     "swagger": "2.0",
     "info": {
         "title": "InstanceMetadataClient",
-        "description": "The Azure Instance Metadata Client.",
+        "description": "The Azure Instance Metadata Client",
         "version": "2018-10-01"
     },
     "host": "169.254.169.254",
     "basePath": "/metadata",
     "schemes": [
-        "http"
+        "https"
     ],
     "consumes": [
         "application/json"
@@ -16,10 +16,28 @@
     "produces": [
         "application/json"
     ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
     "paths": {
         "/instance": {
             "get": {
-                "operationId": "instance",
+                "operationId": "getInstance",
                 "description": "Get Instance Metadata for the Virtual Machine.",
                 "parameters": [
                     {
@@ -99,7 +117,7 @@
         },
         "/attested/document": {
             "get": {
-                "operationId": "attested",
+                "operationId": "getAttested",
                 "description": "Get Attested Data for the Virtual Machine.",
                 "parameters": [
                     {
@@ -400,27 +418,22 @@
                 },
                 "location": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the Azure Region in which the VM is running."
                 },
                 "name": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the name of the VM."
                 },
                 "offer": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the offer information for the VM image. This value is only present for images deployed from the Azure Image Gallery."
                 },
                 "osType": {
                     "type": "string",
-                    "format": "string",
                     "description": "This value indicates the type of OS the VM is running, either Linux or Windows."
                 },
                 "placementGroupId": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the placement group of your Virtual Machine Scale Set."
                 },
                 "plan": {
@@ -436,57 +449,50 @@
                 },
                 "platformFaultDomain": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the fault domain in which the VM."
                 },
                 "platformUpdateDomain": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the update domain in which the VM."
+                },
+                "provider": {
+                    "type": "string",
+                    "description": "This is the provider of the VM."
                 },
                 "publisher": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the publisher of the VM image."
                 },          
                 "resourceGroupName": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the resource group for the VM."
                 },
                 "sku": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the specific SKU for the VM image."
                 },          
                 "subscriptionId": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the Azure subscription for the VM."
                 },
                 "tags": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the list of tags for your VM."
                 },
                 "version": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the version of the VM image."
                 },
                 "vmId": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the unique identifier for the VM."
                 },
                 "vmScaleSetName": { 
                     "type": "string",
-                    "format": "string",
                     "description": "This is the resource name of the VMSS."
                 },
                 "vmSize": {
                     "type": "string",
-                    "format": "string",
                     "description": "This is the size of the VM."
                 },
                 "zone": {
