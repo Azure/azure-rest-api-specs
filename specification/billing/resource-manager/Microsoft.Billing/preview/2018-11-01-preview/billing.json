@@ -188,15 +188,29 @@
         }
       }
     },
+    "ResourceQuantity":{
+      "ResourceId": {
+        "description": "The resource guid.",
+        "type": "string",
+        "format": "guid",
+        "readOnly": true
+      },
+      "Quantity": {
+        "description": "The quantity of resource.",
+        "type": "number",
+        "format": "decimal",
+        "readOnly": true
+      }
+    },
     "ResourcePrice": {
       "description": "The definition of resource price model.",
       "properties": {
-        "resources": [
+        "type":"object",
+        "allOf": [
           {
-            "resourceId": "Resource guid",
-            "quantity": "decimal"
+            "$ref": "#/definitions/ResourceQuantity"
           }
-        ]
+        ]       
       }
     }   
   },
