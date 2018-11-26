@@ -3173,7 +3173,7 @@
                     "type": "string",
                     "description": "Registered Server OS Version"
                 },
-                "serverManagementtErrorCode": {
+                "serverManagementErrorCode": {
                     "type": "integer",
                     "description": "Registered Server Management Error Code"
                 },
@@ -3356,9 +3356,10 @@
                     "type": "string",
                     "description": "Resource Last Operation Name"
                 },
-                "syncStatus": {
+                 "syncStatus": {
                     "type": "object",
-                    "description": "Sync Health Status"
+                    "$ref": "#/definitions/ServerEndpointHealth",
+                    "description": "Server Endpoint properties."
                 },
                 "offlineDataTransfer": {
                     "$ref": "#/definitions/FeatureStatus",
@@ -3380,6 +3381,108 @@
                 }
             }
         },
+        "ServerEndpointHealth": {
+            "type": "object",
+            "description": "ServerEndpoint Health object.",
+            "properties": {
+                "downloadHealth": {
+                    "$ref": "#/definitions/HealthState",
+                    "description": "Download Health Status."
+                },
+                 "uploadHealth": {
+                    "$ref": "#/definitions/HealthState",
+                    "description": "Upload Health Status."
+                },
+                 "combinedHealth": {
+                    "$ref": "#/definitions/HealthState",
+                    "description": "Combined Health Status."
+                },
+                "lastUpdatedTimestamp": {
+                    "type" : "string",
+                    "description": "Last Updated Timestamp"
+                },
+                 "uploadStatus": {
+                    "$ref": "#/definitions/SyncSessionStatus",
+                    "description": "Upload Status"
+                },
+                 "downloadStatus": {
+                    "$ref": "#/definitions/SyncSessionStatus",
+                    "description": "Download Status"
+                },
+                 "currentProgress": {
+                    "$ref": "#/definitions/SyncProgressStatus",
+                    "description": "Current progress"
+                }                
+            }
+        },
+        "SyncSessionStatus": {
+            "type": "object",
+            "description": "Sync Session status object.",
+            "properties": {
+                "lastSyncResult": {
+                    "type": "integer",
+                    "description": "Last sync status"
+                },
+                 "lastSyncTimestamp": {
+                    "type" : "string",
+                    "description": "Last sync timestamp"
+                },
+                 "lastSyncSuccessTimestamp": {
+                     "type" : "string",
+                    "description": "Last sync success timestamp"
+                },
+                "lastSyncPerItemErrorCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Last sync per item error count."
+                }
+            }
+        },
+        "SyncProgressStatus": {
+            "type": "object",
+            "description": "Sync Session status object.",
+            "properties": {
+                "progressTimestamp": {
+                    "type" : "string",
+                    "description": "Progress timestamp"
+                },
+                 "syncDirection": {
+                     "$ref": "#/definitions/ProgressType",
+                    "description": "Sync direction."
+                },
+                 "perItemErrorCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Per item error count"
+                },
+                "appliedItemCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Applied item count."
+                },
+                "totalItemCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Total item count"
+                },
+                "appliedBytes": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Applied bytes"
+                },
+                "totalBytes": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Total bytes"
+                }
+            }
+        },
         "PhysicalPath": {
             "type": "string",
             "description": "Server folder used for data synchronization"
@@ -3398,6 +3501,17 @@
             "enum": [
                 "on",
                 "off"
+            ]
+        },
+        "HealthState": {
+            "type": "string",
+            "description": "Type of the Health state",
+            "enum": [
+               "Healthy",
+               "Error",
+               "SyncBlockedForRestore",
+               "SyncBlockedForChangeDetectionPostRestore",
+               "NoActivity"
             ]
         },
         "WorkflowStatus": {
