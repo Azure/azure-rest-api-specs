@@ -1591,24 +1591,11 @@
       "description": "Model for collection of notificationSettings.",
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/NotificationSetting",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "Resource name of NotificationSettings",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "ARM resource ID of notification settings",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type of NotificationSettings",
-          "type": "string",
-          "readOnly": true
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationSetting"
+          }
         }
       },
       "x-ms-azure-resource": true
@@ -1622,6 +1609,11 @@
         }
       ],
       "properties": {
+        "etag": {
+          "description": "For optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/NotificationSettingProperties",
           "description": "Properties of Notification Settings",
@@ -1842,6 +1834,17 @@
       "required": true,
       "type": "string",
       "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "notificationSettingName": {
+      "name": "notificationSettingName",
+      "in": "path",
+      "description": "Default string modeled as parameter for URL to work correctly.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
       "x-ms-parameter-location": "method"
     }
   },
