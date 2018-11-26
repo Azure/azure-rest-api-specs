@@ -1022,7 +1022,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group to create or update.",
+            "description": "The name of the resource group to create or update. Can include alphanumeric, underscore, parentheses, hyphen, period (except at end), and Unicode characters that match the allowed characters.",
             "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
@@ -2814,6 +2814,11 @@
           "type": "string",
           "description": "The name of the deployment."
         },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the deployment."
+        },
         "location": {
           "type": "string",
           "description": "the location of the deployment."
@@ -3026,6 +3031,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The name of the resource group."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource group."
         },
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties"

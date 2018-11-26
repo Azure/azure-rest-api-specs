@@ -2137,6 +2137,60 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Reimage",
+        "description": "Reimages (upgrade the operating system) virtual machine. This operation is only supported for differencing OS disks.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+           {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          { 
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineReimageParameters"
+             },
+            "description": "Parameters supplied to the Reimage Virtual Machine operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reimage a Virtual Machine.": {
+            "$ref": "./examples/ReimageVirtualMachine.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/performMaintenance": {
       "post": {
         "tags": [
@@ -3202,13 +3256,13 @@
             "description": "The name of the VM scale set."
           },
           {
-            "name": "vmInstanceIDs",
+            "name": "vmScaleSetReimageInput",
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+              "$ref": "#/definitions/VirtualMachineScaleSetReimageParameters"
             },
-            "description": "A list of virtual machine instance IDs from the VM scale set."
+            "description": "Parameters for Reimaging VM ScaleSet."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3515,6 +3569,15 @@
             "required": true,
             "type": "string",
             "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "vmScaleSetVMReimageInput",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMReimageParameters"
+            },
+            "description": "Parameters for the Reimaging Virtual machine in ScaleSet."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4865,6 +4928,15 @@
         "value"
       ],
       "description": "The List Usages operation response."
+    },
+    "VirtualMachineReimageParameters": {
+      "properties": {
+        "tempDisk": {
+          "type": "boolean",
+          "description": "Specified whether to reimage temp disk. Default value: false."
+        }
+      },
+      "description": "Paramaters for Reimaging Virtual Machine. Default value for OSDisk : true."
     },
     "VirtualMachineCaptureParameters": {
       "properties": {
@@ -7314,6 +7386,31 @@
         }
       ],
       "description": "Describes a Virtual Machine Scale Set."
+    },
+    "VirtualMachineScaleSetVMReimageParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualMachineReimageParameters"
+        }
+      ],
+      "description": "Describes a Virtual Machine Scale Set VM Reimage Parameters."
+    },
+    "VirtualMachineScaleSetReimageParameters": {
+      "properties": {
+        "instanceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualMachineScaleSetVMReimageParameters"
+        }
+      ],
+      "description": "Describes a Virtual Machine Scale Set VM Reimage Parameters."
     },
     "VirtualMachineScaleSetUpdate": {
       "properties": {

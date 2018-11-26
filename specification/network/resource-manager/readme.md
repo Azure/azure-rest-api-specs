@@ -49,6 +49,7 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/expressRouteCircuit.json
   - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-08-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-08-01/expressRoutePort.json
   - Microsoft.Network/stable/2018-08-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-08-01/loadBalancer.json
   - Microsoft.Network/stable/2018-08-01/network.json
@@ -658,6 +659,9 @@ directive:
     from: expressRouteGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: expressRoutePort.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -721,6 +725,9 @@ directive:
   - suppress: GetInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability"].get.operationId
     reason: Customized verb is used for API
+  - suppress: PutInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/links/{linkName}"].put.operationId
+    reason: Child resource is auto-created when top-level resource is created.
   - suppress: PutInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey"].put.operationId
     reason: Customized verb is used for API
@@ -810,20 +817,35 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-08
+  - tag: package-2018-07
   - tag: package-2018-06
   - tag: package-2018-04
   - tag: package-2017-10
 ```
 
-### Tag: package-2018-04 and java
+### Tag: package-2018-08 and java
 
-These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.network.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
+  namespace: com.microsoft.azure.management.network.v2018_08_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_08_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-07 and java
+
+These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -837,6 +859,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.network.v2018_06_01
   output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-04 and java
+
+These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```

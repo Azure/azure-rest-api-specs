@@ -8,7 +8,7 @@
             "name": "StorageSyncManagementClient"
         }
     },
-    "host": "azure.microsoft.com",
+    "host": "management.azure.com",
     "schemes": [
         "https"
     ],
@@ -2588,6 +2588,14 @@
                 "serverResourceId": {
                     "$ref": "#/definitions/ResourceId",
                     "description": "Server Resource Id."
+                },
+                "offlineDataTransfer": {
+                    "$ref": "#/definitions/FeatureStatus",
+                    "description": "Offline data transfer"
+                },
+                "offlineDataTransferShareName": {
+                    "type": "string",
+                    "description": "Offline data transfer share name"
                 }
             }
         },
@@ -2595,7 +2603,7 @@
             "type": "object",
             "description": "Trigger Rollover Request.",
             "properties": {
-                "certificateData": {
+                "serverCertificate": {
                     "type": "string",
                     "description": "Certificate Data"
                 }
@@ -3256,7 +3264,7 @@
                     "description": "Friendly Name"
                 },
                 "backupEnabled": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Backup Enabled",
                     "readOnly": true
                 },
@@ -3293,6 +3301,14 @@
                     "minimum": 0,
                     "maximum": 2147483647,
                     "description": "Tier files older than days."
+                },
+                "offlineDataTransfer": {
+                    "$ref": "#/definitions/FeatureStatus",
+                    "description": "Offline data transfer"
+                },
+                "offlineDataTransferShareName": {
+                    "type": "string",
+                    "description": "Offline data transfer share name"
                 }
             }
         },
@@ -3343,6 +3359,24 @@
                 "syncStatus": {
                     "type": "object",
                     "description": "Sync Health Status"
+                },
+                "offlineDataTransfer": {
+                    "$ref": "#/definitions/FeatureStatus",
+                    "description": "Offline data transfer"
+                },
+                "offlineDataTransferStorageAccountResourceId": {
+                    "type": "string",
+                    "description": "Offline data transfer storage account resource ID",
+                    "readOnly": true
+                },
+                "offlineDataTransferStorageAccountTenantId": {
+                    "type": "string",
+                    "description": "Offline data transfer storage account tenant ID",
+                    "readOnly": true
+                },
+                "offlineDataTransferShareName": {
+                    "type": "string",
+                    "description": "Offline data transfer share name"
                 }
             }
         },
