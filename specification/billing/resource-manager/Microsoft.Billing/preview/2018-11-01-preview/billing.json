@@ -125,17 +125,20 @@
       "x-ms-azure-resource": true
     },
     "Error":{
-      "Code": {
-        "description": "The error code, this is either ResourceNotFound or MultipleItemsFoundForTheResource.",
-        "type": "string",
-        "format": "string",
-        "readOnly": true
-      },
-      "Message": {
-        "description": "The error message for given error code.",
-        "type": "string",
-        "format": "string",
-        "readOnly": true
+      "description": "The Resource model definition.",
+      "properties": {
+        "code": {
+          "description": "The error code, this is either ResourceNotFound or MultipleItemsFoundForTheResource.",
+          "type": "string",
+          "format": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message for given error code.",
+          "type": "string",
+          "format": "string",
+          "readOnly": true
+        }
       }
     },  
     "ResourcePriceProperties": {
