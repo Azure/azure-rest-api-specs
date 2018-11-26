@@ -824,9 +824,9 @@
           "type": "string",
           "description": "Certificate public data."
         },
-        "keyvaultSecretId": {
+        "keyVaultSecretId": {
           "type": "string",
-          "description": "KeyVault Secret Id for certificate."
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         },
         "provisioningState": {
           "type": "string",
@@ -874,6 +874,10 @@
         "publicCertData": {
           "type": "string",
           "description": "Base-64 encoded Public cert data corresponding to pfx specified in data. Only applicable in GET request."
+        },
+        "keyVaultSecretId": {
+          "type": "string",
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         },
         "provisioningState": {
           "type": "string",
@@ -1275,6 +1279,10 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Redirect configuration resource of URL path map path rule."
         },
+        "rewriteRuleSet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Rewrite rule set resource of URL path map path rule."
+        },
         "provisioningState": {
           "type": "string",
           "description": "Path rule of URL path map resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
@@ -1437,6 +1445,10 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "URL path map resource of the application gateway."
         },
+        "rewriteRuleSet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Rewrite Rule Set resource in Basic rule of the application gateway."
+        },
         "redirectConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Redirect configuration resource of the application gateway."
@@ -1473,6 +1485,92 @@
         }
       ],
       "description": "Request routing rule of an application gateway."
+    },
+    "ApplicationGatewayRewriteRuleSet": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayRewriteRuleSetPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the rewrite rule set that is unique within an Application Gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Rewrite rule set of an application gateway."
+    },
+    "ApplicationGatewayRewriteRuleSetPropertiesFormat": {
+      "properties": {
+        "rewriteRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRewriteRule"
+          },
+          "description": "Rewrite rules in the rewrite rule set."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the rewrite rule set resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of rewrite rule set of the application gateway."
+    },
+    "ApplicationGatewayRewriteRule": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the rewrite rule that is unique within an Application Gateway."
+        },
+        "actionSet": {
+          "type": "object",
+          "$ref": "#/definitions/ApplicationGatewayRewriteRuleActionSet",
+          "description": "Set of actions to be done as part of the rewrite Rule."
+        }
+      },
+      "description": "Rewrite rule of an application gateway."
+    },
+    "ApplicationGatewayRewriteRuleActionSet": {
+      "properties": {
+        "requestHeaderConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
+          },
+          "description": "Request Header Actions in the Action Set"
+        },
+        "responseHeaderConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
+          },
+          "description": "Response Header Actions in the Action Set"
+        }
+      },
+      "description": "Set of actions in the Rewrite Rule in Application Gateway."
+    },
+    "ApplicationGatewayHeaderConfiguration": {
+      "properties": {
+        "headerName": {
+          "type": "string",
+          "description": "Header name of the header configuration"
+        },
+        "headerValue": {
+          "type": "string",
+          "description": "Header value of the header configuration"
+        }
+      },
+      "description": "Header configuration of the Actions set in Application Gateway."
     },
     "ApplicationGatewayRedirectConfigurationPropertiesFormat": {
       "properties": {
@@ -1660,6 +1758,13 @@
           },
           "description": "Request routing rules of the application gateway resource."
         },
+        "rewriteRuleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRewriteRuleSet"
+          },
+          "description": "Rewrite rules for the application gateway resource."
+        },
         "redirectConfigurations": {
           "type": "array",
           "items": {
@@ -1717,6 +1822,10 @@
             "type": "string"
           },
           "description": "A list of availability zones denoting where the resource needs to come from."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the application gateway, if configured."
         }
       },
       "allOf": [
@@ -1751,6 +1860,10 @@
         "defaultBackendHttpSettings": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Default backend http settings resource of URL path map."
+        },
+        "defaultRewriteRuleSet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Default Rewrite rule set resource of URL path map."
         },
         "defaultRedirectConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",

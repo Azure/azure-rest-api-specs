@@ -64,6 +64,14 @@
                 "provisioningState": "Succeeded",
                 "port": 443
               }
+            },
+            {
+              "name": "appgwfp80",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "port": 80
+              }
             }
           ],
           "backendAddressPools": [
@@ -107,9 +115,61 @@
                 },
                 "requireServerNameIndication": false
               }
+            },
+            {
+              "name": "appgwhttplistener",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "frontendIPConfiguration": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip"
+                },
+                "frontendPort": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp80"
+                },
+                "protocol": "Http"
+              }
             }
           ],
-          "urlPathMaps": [],
+          "urlPathMaps": [
+            {
+              "name": "pathMap1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "defaultBackendAddressPool": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                },
+                "defaultBackendHttpSettings": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                },
+                "defaultRewriteRuleSet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
+                },
+                "pathRules": [
+                  {
+                    "name": "apiPaths",
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1/pathRules/apiPaths",
+                    "properties": {
+                      "provisioningState": "Succeeded",
+                      "paths": [
+                        "/api", "/v1/api"
+                      ],
+                      "backendAddressPool": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                      },
+                      "backendHttpSettings": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                      },
+                      "rewriteRuleSet": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
           "requestRoutingRules": [
             {
               "name": "appgwrule",
@@ -125,7 +185,52 @@
                 },
                 "backendHttpSettings": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                },
+                "rewriteRuleSet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1"
                 }
+              }
+            },
+            {
+              "name": "appgwPathBasedRule",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/appgwPathBasedRule",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "ruleType": "PathBasedRouting",
+                "httpListener": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhttplistener"
+                },
+                "urlPathMap": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/urlPathMaps/pathMap1"
+                }
+              }
+            }
+          ],
+          "rewriteRuleSets": [
+            {
+              "name": "rewriteRuleSet1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/rewriteRuleSets/rewriteRuleSet1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "rewriteRules": [
+                  {
+                    "name": "Set X-Forwarded-For",
+                    "actionSet": {
+                      "requestHeaderConfigurations": [
+                        {
+                          "headerName": "X-Forwarded-For",
+                          "headerValue": "{var_remote-addr}"
+                        }
+                      ],
+                      "responseHeaderConfigurations": [
+                        {
+                          "headerName": "Strict-Transport-Security",
+                          "headerValue": "max-age=31536000"
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             }
           ],
