@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters":{
+      "resources": [
+        {
+          "resourceId": "d9237d47-a777-4e6d-b3d8-8fdec09500e0",
+          "quantity": 2.0
+        },
+        {
+          "resourceId": "c8237d47-a777-4e6d-b3d8-8fdec095000",
+          "quantity": 2.0
+        },
+        {
+          "resourceId": "c7237d47-a777-4e6d-b3d8-8fdec09500e0",
+          "quantity": 2.2
+        }        
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Consumption/subscriptions/00000000-0000-0000-0000-000000000000/pricesheet/resourcePrices/d9237d47-a777-4e6d-b3d8-8fdec09500e0_2.00",
+            "name": "d9237d47-a777-4e6d-b3d8-8fdec09500e0_2.00",
+            "type": "Microsoft.Consumption/resourcePrices",
+            "properties": {
+              "resourceId": "d9237d47-a777-4e6d-b3d8-8fdec09500e0",
+              "quantity": 2,
+              "amount": 0.28,
+              "pricingcurrency": "USD",
+              "unitOfMeasure": "GB",
+              "unitPrice": 0.14,
+              "error": null             
+            }
+          },
+          {
+            "id": "providers/Microsoft.Consumption/subscriptions/00000000-0000-0000-0000-000000000000/pricesheet/resourcePrices/c8237d47-a777-4e6d-b3d8-8fdec0950001_2.00",
+            "name": "c8237d47-a777-4e6d-b3d8-8fdec0950001_2.00",
+            "type": "Microsoft.Consumption/resourcePrices",
+            "properties": {
+              "resourceId": "c8237d47-a777-4e6d-b3d8-8fdec0950001",
+              "quantity": 2,
+              "amount": 0,
+              "pricingCurrency": "",
+              "unitPrice": 0,
+              "error": {
+                "code": "ResourceNotFound",
+                "message": "Couldn't find any resource price for the requested resourceId."
+              }
+            }
+          },
+          {
+            "id": "providers/Microsoft.Consumption/subscriptions/00000000-0000-0000-0000-000000000000/pricesheet/resourcePrices/c7237d47-a777-4e6d-b3d8-8fdec09500e0_2.00",
+            "name": "c7237d47-a777-4e6d-b3d8-8fdec09500e0_2.00",
+            "type": "Microsoft.Consumption/resourcePrices",
+            "properties": {
+              "resourceId": "c7237d47-a777-4e6d-b3d8-8fdec09500e0",
+              "quantity": 2,
+              "amount": 0,
+              "pricingCurrency": "",
+              "unitPrice": 0,
+              "error": {
+                "code": "MultipleItemsFoundForTheResource",
+                "message": "There are more than one resource price found for the requested resourceId."
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

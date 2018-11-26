@@ -1,0 +1,232 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-11-01-preview",
+    "title": "BillingManagementClient",
+    "description": "Billing client provides access to billing resources for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {  
+    "/providers/Microsoft.Billing/subscriptions/{subscriptionId}/pricesheet/resourceprices": {
+      "post": {
+        "tags": [
+          "ResourcePrices"
+        ],
+        "operationId": "ResourcePrices_List",
+        "description": "Lists the resource prices for given resource ids under a subscription in given order of resource ids.",
+        "externalDocs": {
+          "url": "https://go.microsoft.com/fwlink/?linkid=844490"
+        },
+        "x-ms-examples": {
+          "ResourcePricesList": {
+            "$ref": "./examples/ResourcePricesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePriceResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {  
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },    
+    "ResourcePriceResponse": {
+      "description": "A resource price response.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A resource price.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourcePriceProperties"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Error":{
+      "Code": {
+        "description": "The error code, this is either ResourceNotFound or MultipleItemsFoundForTheResource.",
+        "type": "string",
+        "format": "string",
+        "readOnly": true
+      },
+      "Message": {
+        "description": "The error message for given error code.",
+        "type": "string",
+        "format": "string",
+        "readOnly": true
+      }
+    },  
+    "ResourcePriceProperties": {
+      "description": "The properties of the resource price.",
+      "properties": {
+        "ResourceId": {
+          "description": "The resource guid.",
+          "type": "string",
+          "format": "guid",
+          "readOnly": true
+        },
+        "Quantity": {
+          "description": "The quantity of resource.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "Amount": {
+          "description": "The amount for given resource id and quantity.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true         
+        },
+        "PricingCurrency": {
+          "description": "The currency code for calculated amount.",
+          "type": "string",
+          "format": "string",
+          "readOnly": true
+        },
+        "UnitOfMeasure": {
+          "description": "The unit for measure for resource.",
+          "type": "string",
+          "format": "string",
+          "readOnly": true
+        },
+        "UnitPrice": {
+          "description": "The unit price for given resource.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "Error": {
+          "description": "Error details.",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "ResourcePrice": {
+      "description": "The definition of resource price model.",
+      "properties": {
+        "resources": [
+          {
+            "resourceId": "Resource guid",
+            "quantity": "decimal"
+          }
+        ]
+      }
+    }   
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
