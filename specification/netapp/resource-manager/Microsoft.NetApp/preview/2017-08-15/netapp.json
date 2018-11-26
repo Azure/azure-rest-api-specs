@@ -856,6 +856,84 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Create",
+        "description": "Create a snapshot",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Snapshot object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Snapshot created",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Snapshots_Create": {
+            "$ref": "examples/Snapshots_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Update",
+        "description": "Patch a snapshot",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Snapshot object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshotPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Update": {
+            "$ref": "examples/Snapshots_Update.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Snapshots"
@@ -1200,27 +1278,24 @@
         "size": {
           "title": "size",
           "type": "integer",
-          "description": "Provisioned size of the pool (in GB)",
-          "minimum": 4096,
-          "default": 4096
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
+          "minimum": 4398046511104,
+          "maximum": 549755813888000,
+          "default": 4398046511104
         },
         "serviceLevel": {
           "title": "serviceLevel",
           "type": "string",
           "description": "The service level of the file system",
           "enum": [
-            "Basic",
             "Standard",
-            "Premium"
+            "Premium",
+            "Extreme"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
             "values": [
-              {
-                "value": "Basic",
-                "description": "Basic service level"
-              },
               {
                 "value": "Standard",
                 "description": "Standard service level"
@@ -1228,11 +1303,15 @@
               {
                 "value": "Premium",
                 "description": "Premium service level"
+              },
+              {
+                "value": "Extreme",
+                "description": "Extreme service level"
               }
             ]
           },
-          "example": "Premium",
-          "default": "Standard"
+          "example": "Extreme",
+          "default": "Premium"
         },
         "provisioningState": {
           "type": "string",
@@ -1338,18 +1417,14 @@
           "type": "string",
           "description": "The service level of the file system",
           "enum": [
-            "Basic",
             "Standard",
-            "Premium"
+            "Premium",
+            "Extreme"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
             "values": [
-              {
-                "value": "Basic",
-                "description": "Basic service level"
-              },
               {
                 "value": "Standard",
                 "description": "Standard service level"
@@ -1357,21 +1432,25 @@
               {
                 "value": "Premium",
                 "description": "Premium service level"
+              },
+              {
+                "value": "Extreme",
+                "description": "Extreme service level"
               }
             ]
           },
-          "example": "Premium",
-          "default": "Standard"
+          "example": "Extreme",
+          "default": "Premium"
         },
         "usageThreshold": {
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Upper limit is 100TB.",
-          "minimum": 0,
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB.",
+          "minimum": 107374182400,
           "maximum": 109951162777600,
-          "default": 0,
-          "example": 101010
+          "default": 107374182400,
+          "example": 107374182400
         },
         "provisioningState": {
           "type": "string",
@@ -1434,18 +1513,14 @@
           "type": "string",
           "description": "The service level of the file system",
           "enum": [
-            "Basic",
             "Standard",
-            "Premium"
+            "Premium",
+            "Extreme"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
             "values": [
-              {
-                "value": "Basic",
-                "description": "Basic service level"
-              },
               {
                 "value": "Standard",
                 "description": "Standard service level"
@@ -1453,21 +1528,25 @@
               {
                 "value": "Premium",
                 "description": "Premium service level"
+              },
+              {
+                "value": "Extreme",
+                "description": "Extreme service level"
               }
             ]
           },
-          "example": "Premium",
-          "default": "Standard"
+          "example": "Extreme",
+          "default": "Premium"
         },
         "usageThreshold": {
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Upper limit is 100TB.",
-          "minimum": 0,
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB.",
+          "minimum": 107374182400,
           "maximum": 109951162777600,
-          "default": 0,
-          "example": 101010
+          "default": 107374182400,
+          "example": 107374182400
         }
       }
     },
@@ -1611,6 +1690,7 @@
     "snapshot": {
       "description": "Snapshot of a Volume",
       "type": "object",
+      "x-ms-azure-resource": true,
       "required": [
         "location",
         "properties"
@@ -1618,7 +1698,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "id": {
           "type": "string",
@@ -1630,6 +1714,11 @@
           "readOnly": true,
           "description": "Resource name"
         },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
         "tags": {
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags",
@@ -1638,6 +1727,18 @@
         "properties": {
           "description": "Snapshot Properties",
           "$ref": "#/definitions/snapshotProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "snapshotPatch": {
+      "description": "Snapshot patch",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags",
           "x-ms-client-flatten": true
         }
       }
