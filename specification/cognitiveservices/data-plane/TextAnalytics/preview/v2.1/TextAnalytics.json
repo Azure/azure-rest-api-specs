@@ -208,7 +208,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/EntitiesErrorResponse"
             }
           }
         },
@@ -323,6 +323,36 @@
       }
     },
     "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InternalError"
+        }
+      }
+    },
+    "EntitiesErrorRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Input document unique identifier the error refers to.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        }
+      }
+    },
+    "EntitiesErrorResponse": {
       "type": "object",
       "properties": {
         "code": {
@@ -489,17 +519,17 @@
     "EntitiesBatchResult": {
       "type": "object",
       "properties": {
-        "documents": {
+        "Documents": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EntitiesBatchResultItem"
           },
           "readOnly": true
         },
-        "errors": {
+        "Errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorRecord"
+            "$ref": "#/definitions/EntitiesErrorRecord"
           },
           "readOnly": true
         }
@@ -508,12 +538,12 @@
     "EntitiesBatchResultItem": {
       "type": "object",
       "properties": {
-        "id": {
+        "Id": {
           "description": "Unique document identifier.",
           "type": "string",
           "readOnly": true
         },
-        "entities": {
+        "Entities": {
           "description": "Recognized entities in the document.",
           "type": "array",
           "items": {
@@ -526,39 +556,39 @@
     "EntityRecord": {
       "type": "object",
       "properties": {
-        "name": {
+        "Name": {
           "description": "Entity formal name.",
           "type": "string"
         },
-        "matches": {
+        "Matches": {
           "description": "List of instances this entity appears in the text.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MatchRecord"
           }
         },
-        "wikipediaLanguage": {
+        "WikipediaLanguage": {
           "description": "Wikipedia language for which the WikipediaId and WikipediaUrl refers to.",
           "type": "string"
         },
-        "wikipediaId": {
+        "WikipediaId": {
           "description": "Wikipedia unique identifier of the recognized entity.",
           "type": "string"
         },
-        "wikipediaUrl": {
+        "WikipediaUrl": {
           "description": "URL for the entity's English Wikipedia page.",
           "type": "string",
           "readOnly": true
         },
-        "bingId": {
+        "BingId": {
           "description": "Bing unique identifier of the recognized entity. Use in conjunction with the Bing Entity Search API to fetch additional relevant information.",
           "type": "string"
         },
-        "type": {
+        "Type": {
           "description": "Entity type from Named Entity Recognition model",
           "type": "string"
         },
-        "subType": {
+        "SubType": {
           "description": "Entity sub type from Named Entity Recognition model",
           "type": "string"
         }
@@ -567,16 +597,16 @@
     "MatchRecord": {
       "type": "object",
       "properties": {
-        "text": {
+        "Text": {
           "description": "Entity text as appears in the request.",
           "type": "string"
         },
-        "offset": {
+        "Offset": {
           "format": "int32",
           "description": "Start position (in Unicode characters) for the entity match text.",
           "type": "integer"
         },
-        "length": {
+        "Length": {
           "format": "int32",
           "description": "Length (in Unicode characters) for the entity match text.",
           "type": "integer"
