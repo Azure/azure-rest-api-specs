@@ -388,7 +388,7 @@
         "clientSecretUrl": {
           "type": "string",
           "readOnly": true,
-          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials. If identity is user assigned, the clientSecretUrl is null, otherwise the clientSecretUrl is not null"
+          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials. If identity is user assigned, then the clientSecretUrl will not be present in the response, otherwise it will be present."
         }
       }
     },
@@ -535,10 +535,7 @@
       "in": "query",
       "description": "Version of API to invoke.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2018-11-30"
-      ]
+      "type": "string"
     }
   }
 }
