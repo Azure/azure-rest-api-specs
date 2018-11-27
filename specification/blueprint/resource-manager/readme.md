@@ -148,4 +148,8 @@ directive:
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI for Microsoft.Management is out of scope.    
+  - from: assignmentOperation.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI for Microsoft.Management is out of scope.    
 ```
