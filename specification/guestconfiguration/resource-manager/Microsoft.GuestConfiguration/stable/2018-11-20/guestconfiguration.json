@@ -76,6 +76,12 @@
               "$ref": "#/definitions/GuestConfigurationAssignment"
             }
           },
+          "200": {
+            "description": "OK. The guest configuration assignment for the VM was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -536,6 +542,7 @@
         },
         "lastComplianceStatusChecked": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Date and time when last compliance status was checked.",
           "x-nullable": true
@@ -566,7 +573,10 @@
             "modelAsString": true
           },
           "enum": [
-            "Succeeded"
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Created"
           ]
         }
       },

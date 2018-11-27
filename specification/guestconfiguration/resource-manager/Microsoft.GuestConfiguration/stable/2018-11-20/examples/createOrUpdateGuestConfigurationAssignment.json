@@ -3,16 +3,28 @@
       "subscriptionId": "mySubscriptionId",
       "resourceGroupName": "myResourceGroupName",
       "vmName": "myVMName",
-      "guestConfigurationAssignmentName": "SecureProtocol",
+      "guestConfigurationAssignmentName": "WhitelistedApplication",
       "api-version": "2018-11-20",
       "parameters": {
         "location": "westcentralus",
-        "name": "multiconfigassignment2",
+        "name": "WhitelistedApplication",
         "properties": {
           "context": "Azure policy",
           "guestConfiguration": {
-            "name": "AuditSecureProtocol",
-            "version": "1.0.0.3"
+            "name": "WhitelistedApplication",
+            "version": "1.*",
+            "configurationParameter": [
+              {
+                "name": "[InstalledApplication]bwhitelistedapp;Name",
+                "value": "NotePad,sql"
+              }
+            ],
+            "configurationSetting": {
+              "rebootIfNeeded": "False",
+              "actionAfterReboot": "ContinueConfiguration",
+              "configurationModeFrequencyMins": 15,
+              "configurationMode": "MonitorOnly"
+            }
           }
         }
       }
@@ -23,21 +35,66 @@
         "body": {
           "location": "westcentralus",
           "id": null,
-          "name": "multiconfigassignment2",
+          "name": "WhitelistedApplication",
           "properties": {
             "complianceStatus": "Pending",
             "assignmentHash": null,
             "latestReportId": null,
             "lastComplianceStatusChecked": null,
-            "context": "Azure policy A",
+            "context": "Azure policy",
             "guestConfiguration": {
               "kind": null,
-              "name": "AuditSecureProtocol",
+              "name": "WhitelistedApplication",
               "version": "1.0.0.3",
               "contentUri": null,
               "contentHash": null,
-              "configurationParameter": null,
-              "configurationSetting": null
+              "configurationParameter": [
+                {
+                  "name": "[InstalledApplication]bwhitelistedapp;Name",
+                  "value": "NotePad,sql"
+                }
+              ],
+              "configurationSetting": {
+                "rebootIfNeeded": "False",
+                "actionAfterReboot": "ContinueConfiguration",
+                "configurationModeFrequencyMins": 15,
+                "configurationMode": "MonitorOnly"
+              }
+            },
+            "provisioningState": "Succeeded"
+          }
+        }
+      },
+      "200": {
+        "headers": {},
+        "body": {
+          "location": "westcentralus",
+          "id": null,
+          "name": "WhitelistedApplication",
+          "properties": {
+            "complianceStatus": "Pending",
+            "assignmentHash": null,
+            "latestReportId": null,
+            "lastComplianceStatusChecked": null,
+            "context": "Azure policy",
+            "guestConfiguration": {
+              "kind": null,
+              "name": "WhitelistedApplication",
+              "version": "1.0.0.3",
+              "contentUri": null,
+              "contentHash": null,
+              "configurationParameter": [
+                {
+                  "name": "[InstalledApplication]bwhitelistedapp;Name",
+                  "value": "NotePad,sql"
+                }
+              ],
+              "configurationSetting": {
+                "rebootIfNeeded": "False",
+                "actionAfterReboot": "ContinueConfiguration",
+                "configurationModeFrequencyMins": 15,
+                "configurationMode": "MonitorOnly"
+              }
             },
             "provisioningState": "Succeeded"
           }
