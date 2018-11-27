@@ -13,18 +13,6 @@
       }
     ]
   },
-  "securityDefinitions": {
-    "apiKeyHeader": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "apiKeyHeader": []
-    }
-  ],
   "paths": {
     "/apps/{appId}/versions/{versionId}/patterns": {
       "post": {
@@ -46,6 +34,9 @@
               "$ref": "#/definitions/PatternCreateObject"
             },
             "description": "The Name and Pattern of the feature."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -58,11 +49,20 @@
               "$ref": "#/definitions/FeatureIDResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nSpecific reasons you can receive this error:\r\n\r\n* REGEX pattern is too complex\r\n",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -90,6 +90,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -99,11 +102,20 @@
               "$ref": "#/definitions/PatternFeatureInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -135,6 +147,9 @@
               "$ref": "#/definitions/PhraselistCreateObject"
             },
             "description": "A Phraselist object containing Name, comma-separated Phrases and the isExchangeable boolean. Default value for isExchangeable is true."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -147,11 +162,20 @@
               "$ref": "#/definitions/FeatureIDResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -178,6 +202,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -187,11 +214,20 @@
               "$ref": "#/definitions/PhraseListFeatureInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -220,6 +256,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -229,11 +268,20 @@
               "$ref": "#/definitions/FeaturesResponseObject"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -264,6 +312,9 @@
             "description": "The pattern feature ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -273,11 +324,20 @@
               "$ref": "#/definitions/PatternFeatureInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -315,6 +375,9 @@
               "$ref": "#/definitions/PatternUpdateObject"
             },
             "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern and a boolean called IsActive to update the feature."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -330,11 +393,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -360,6 +432,9 @@
             "description": "The pattern feature ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -369,11 +444,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -403,6 +487,9 @@
             "description": "The ID of the feature to be retrieved.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -412,11 +499,20 @@
               "$ref": "#/definitions/PhraseListFeatureInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -452,6 +548,9 @@
               "$ref": "#/definitions/PhraselistUpdateObject"
             },
             "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern, Mode, and a boolean called IsActive to update the feature."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -464,11 +563,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -496,6 +604,9 @@
             "description": "The ID of the feature to be deleted.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -505,11 +616,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -541,6 +661,9 @@
               "$ref": "#/definitions/ExampleLabelObject"
             },
             "description": "An example label with the expected intent and entities."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -553,11 +676,20 @@
               "$ref": "#/definitions/LabelExampleResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -589,6 +721,9 @@
               "$ref": "#/definitions/ExampleLabelObjectArray"
             },
             "description": "Array of examples."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -607,11 +742,26 @@
               "$ref": "#/definitions/BatchLabelExampleResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned for several reasons: \r\n\r\n* too many items in batch\r\n* labeled examples list contains duplicates.\r\n* Item(s) includes intent that does not exist\r\n* item(s) include entity that does not exist\r\n* item(s) include prebuilt entity \r\n\r\nExamples of malformed JSON are:\r\n\r\n* incorrect use of a comma, for example a comma after the last item in the array\r\n* missing comma between property/value pairs\r\n* incorrect or missing colon between property and value\r\n* entityLabel array is present and has empty item in array {} without property or value\r\n",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "409": {
+            "description": "This error can be returned if another \"Batch add labels\" was already in progress. Wait until the other operation finishes before starting a new one.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -638,6 +788,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -647,11 +800,20 @@
               "$ref": "#/definitions/LabeledUtterances"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -681,6 +843,9 @@
             "description": "The example ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -690,11 +855,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -726,6 +900,9 @@
               "$ref": "#/definitions/ModelCreateObject"
             },
             "description": "A model object containing the name of the new intent classifier."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -738,6 +915,21 @@
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n    \r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n    \r\nThis error can be returned if you are attempting to create an intent when the max intent count is exceeded.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -764,6 +956,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -773,11 +968,20 @@
               "$ref": "#/definitions/IntentClassifiersList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -809,6 +1013,9 @@
               "$ref": "#/definitions/ModelCreateObject"
             },
             "description": "A model object containing the name for the new entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -822,11 +1029,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create an entity when the max entity count is exceeded.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -853,6 +1069,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -862,11 +1081,20 @@
               "$ref": "#/definitions/EntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -898,6 +1126,9 @@
               "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -911,11 +1142,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a hierarchical entity when the max child count is exceeded.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -942,6 +1182,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -951,11 +1194,20 @@
               "$ref": "#/definitions/HierarchicalEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -987,6 +1239,9 @@
               "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model containing the name and children of the new entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1000,11 +1255,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a composite entity child when the max child count is exceeded.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1031,6 +1295,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1040,11 +1307,20 @@
               "$ref": "#/definitions/CompositeEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1073,6 +1349,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1082,11 +1361,20 @@
               "$ref": "#/definitions/ClosedListEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1116,6 +1404,9 @@
               "$ref": "#/definitions/ClosedListModelCreateObject"
             },
             "description": "A model containing the name and words for the new closed list entity extractor."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1129,11 +1420,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n  \r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n  \r\nThis error can be returned if you are attempting to create an entity list when the max sublist item count is already exceeded. The total item count across all sublists is 20,000.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1165,6 +1465,9 @@
               "$ref": "#/definitions/PrebuiltExtractorNames"
             },
             "description": "An array of prebuilt entity extractor names."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1177,11 +1480,20 @@
               "$ref": "#/definitions/PrebuiltEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1208,6 +1520,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1217,11 +1532,20 @@
               "$ref": "#/definitions/PrebuiltEntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1244,6 +1568,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1253,11 +1580,20 @@
               "$ref": "#/definitions/AvailablePrebuiltEntityModels"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1286,6 +1622,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1295,11 +1634,20 @@
               "$ref": "#/definitions/ModelsInfoResponseObject"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1313,55 +1661,67 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/models/{modelId}/examples": {
-     "get": {
-       "description": "Gets the utterances for the given model in the given app version.",
-       "operationId": "Model_Examples",
-       "parameters": [
-         {
-           "$ref": "#/parameters/AppIdInPath"
-         },
-         {
-           "$ref": "#/parameters/VersionIdInPath"
-         },
-         {
+      "get": {
+        "description": "Gets the utterances for the given model in the given app version.",
+        "operationId": "Model_Examples",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "modelId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The ID (GUID) of the model.",
             "x-ms-parameter-location": "method"
-           },
-         {
-           "$ref": "#/parameters/SkipInPath"
-         },
-         {
-           "$ref": "#/parameters/TakeInPath"
-         }
-       ],
-       "responses": {
-         "200": {
-           "description": "A list of examples for the model.",
-           "schema": {
-             "$ref": "#/definitions/ExamplesPerModelResponseObject"
-           }
-         },
-         "default": {
-           "description": "Error Response.",
-           "schema": {
-             "$ref": "#/definitions/ErrorResponse"
-           }
-         }
-       },
-       "produces": [
-         "application/json"
-       ],
-       "x-ms-examples": {
-         "Successful Get Examples Per Model Request": {
-           "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
-         }
-       }
-     }
-   },
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of examples for the model.",
+            "schema": {
+              "$ref": "#/definitions/ExamplesPerModelResponseObject"
+            }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Examples Per Model Request": {
+            "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
       "get": {
         "description": "Gets information about the intent model.",
@@ -1375,6 +1735,9 @@
           },
           {
             "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1384,11 +1747,20 @@
               "$ref": "#/definitions/IntentClassifier"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1421,6 +1793,9 @@
               "$ref": "#/definitions/ModelUpdateObject"
             },
             "description": "A model object containing the new intent classifier name."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1433,11 +1808,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1468,6 +1852,9 @@
             "type": "boolean",
             "description": "Also delete the intent's utterances (true). Or move the utterances to the None intent (false - the default value).",
             "default": false
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1477,11 +1864,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1512,6 +1908,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1521,11 +1920,20 @@
               "$ref": "#/definitions/EntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1563,6 +1971,9 @@
               "$ref": "#/definitions/ModelUpdateObject"
             },
             "description": "A model object containing the new entity extractor name."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1575,11 +1986,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1608,6 +2028,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1617,11 +2040,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1647,6 +2079,9 @@
           },
           {
             "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1656,11 +2091,20 @@
               "$ref": "#/definitions/HierarchicalEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1693,6 +2137,9 @@
               "$ref": "#/definitions/HierarchicalEntityModel"
             },
             "description": "Model containing names of the children of the hierarchical entity."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1705,11 +2152,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1733,6 +2189,9 @@
           },
           {
             "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1742,11 +2201,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1772,6 +2240,9 @@
           },
           {
             "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1781,11 +2252,20 @@
               "$ref": "#/definitions/CompositeEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1818,6 +2298,9 @@
               "$ref": "#/definitions/CompositeEntityModel"
             },
             "description": "A model object containing the new entity extractor name and children."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1838,11 +2321,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a composite entity child when the max child count is exceeded.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         }
       },
@@ -1858,6 +2350,9 @@
           },
           {
             "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1867,11 +2362,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1902,6 +2406,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -1911,11 +2418,20 @@
               "$ref": "#/definitions/ClosedListEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -1953,6 +2469,9 @@
               "$ref": "#/definitions/ClosedListModelUpdateObject"
             },
             "description": "The new entity name and words list."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -1965,11 +2484,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2007,6 +2535,9 @@
               "$ref": "#/definitions/ClosedListModelPatchObject"
             },
             "description": "A words list batch."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2019,11 +2550,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if the sublist is already in the closed list.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2052,6 +2592,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2061,11 +2604,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2096,6 +2648,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2105,11 +2660,20 @@
               "$ref": "#/definitions/PrebuiltEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2138,6 +2702,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2147,11 +2714,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2189,6 +2765,9 @@
             "description": "The sublist ID.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2198,11 +2777,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2247,6 +2835,9 @@
               "$ref": "#/definitions/WordListBaseUpdateObject"
             },
             "description": "A sublist update object containing the new canonical form and the list of words."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2259,11 +2850,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2292,6 +2892,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2301,11 +2904,20 @@
               "$ref": "#/definitions/IntentsSuggestionExamples"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2339,6 +2951,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2348,11 +2963,20 @@
               "$ref": "#/definitions/EntitiesSuggestionExamples"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2378,6 +3002,9 @@
               "$ref": "#/definitions/ApplicationCreateObject"
             },
             "description": "A model containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. Default value for the version ID is 0.1. Note: the culture cannot be changed after the app is created."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2391,11 +3018,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2416,6 +3052,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2425,11 +3064,20 @@
               "$ref": "#/definitions/ApplicationsInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2461,6 +3109,9 @@
               "$ref": "#/definitions/LuisApp"
             },
             "description": "A LUIS application structure."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2474,11 +3125,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error is returned is your import JSON is incorrect. This is usual due to using values in the JSON that are no longer used or missing properties that are required. The error message will reference the exact property that is causing the problem.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2495,6 +3155,11 @@
       "get": {
         "description": "Gets the endpoint URLs for the prebuilt Cortana applications.",
         "operationId": "Apps_ListCortanaEndpoints",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A personal assistant apps JSON object containing the endpoint URLs for Cortana applications and the user's endpoint keys.",
@@ -2502,11 +3167,14 @@
               "$ref": "#/definitions/PersonalAssistantsResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2523,6 +3191,11 @@
       "get": {
         "description": "Gets the available application domains.",
         "operationId": "Apps_ListDomains",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list object containing the available application domains.",
@@ -2530,11 +3203,14 @@
               "$ref": "#/definitions/AvailableDomains"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2551,6 +3227,11 @@
       "get": {
         "description": "Gets the application available usage scenarios.",
         "operationId": "Apps_ListUsageScenarios",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list object containing the available application usage scenarios.",
@@ -2558,11 +3239,14 @@
               "$ref": "#/definitions/ApplicationUsageScenarios"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2579,6 +3263,11 @@
       "get": {
         "description": "Gets the supported application cultures.",
         "operationId": "Apps_ListSupportedCultures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list object containing the supported application cultures.",
@@ -2586,11 +3275,14 @@
               "$ref": "#/definitions/AvailableCultures"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2610,6 +3302,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2621,11 +3316,20 @@
               "description": "The query logs of an application for the past month in CSV format."
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2645,6 +3349,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2654,11 +3361,20 @@
               "$ref": "#/definitions/ApplicationInfoResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2685,6 +3401,9 @@
               "$ref": "#/definitions/ApplicationUpdateObject"
             },
             "description": "A model containing Name and Description of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2697,11 +3416,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2719,6 +3447,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2728,11 +3459,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2763,6 +3503,9 @@
               "$ref": "#/definitions/TaskUpdateObject"
             },
             "description": "A model containing the new version ID."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2775,11 +3518,20 @@
               "type": "string"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2808,6 +3560,9 @@
               "$ref": "#/definitions/ApplicationPublishObject"
             },
             "description": "The application publish object. The region is the target region that the application is published to."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2820,11 +3575,20 @@
               "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nOther reasons for receiving this error:\r\n\r\n* app can't be published because model isn't trained\r\n* app can't be published in region specified\r\n\r\n",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2850,6 +3614,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2862,11 +3629,20 @@
               }
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2889,6 +3665,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2898,11 +3677,20 @@
               "$ref": "#/definitions/VersionInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2932,6 +3720,9 @@
               "$ref": "#/definitions/TaskUpdateObject"
             },
             "description": "A model containing Name and Description of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -2944,11 +3735,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -2969,6 +3769,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -2978,11 +3781,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3005,6 +3817,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3014,11 +3829,20 @@
             },
             "description": "The LUIS application structure in JSON format."
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3041,6 +3865,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3050,8 +3877,23 @@
               "$ref": "#/definitions/EnqueueTrainingResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "409": {
+            "description": "This error can be returned if training is already queued or in progress.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -3075,6 +3917,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3084,11 +3929,20 @@
               "$ref": "#/definitions/ModelTrainingInfoList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "400": {
+            "description": "This response can occur for any of the following reasons: \r\n\r\n* You need to submit a training request before you request training status. \r\n* The format of appId is incorrect. \r\n* The value of appId is incorrect. \r\n* The value of  versionId is incorrect.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3124,6 +3978,9 @@
               "$ref": "#/definitions/LuisApp"
             },
             "description": "A LUIS application structure."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3136,11 +3993,20 @@
               "$ref": "#/definitions/VersionResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3160,6 +4026,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3169,11 +4038,20 @@
               "$ref": "#/definitions/ApplicationSettings"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3200,6 +4078,9 @@
               "$ref": "#/definitions/ApplicationSettingUpdateObject"
             },
             "description": "An object containing the new application settings."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3212,11 +4093,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3236,6 +4126,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3245,11 +4138,20 @@
               "$ref": "#/definitions/PublishSettings"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3276,6 +4178,9 @@
               "$ref": "#/definitions/PublishSettingUpdateObject"
             },
             "description": "An object containing the new publish application settings."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3288,11 +4193,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3324,6 +4238,9 @@
               "type": "string"
             },
             "description": "The utterance text to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3336,11 +4253,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3360,6 +4286,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3369,11 +4298,20 @@
               "$ref": "#/definitions/UserAccessList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3400,6 +4338,9 @@
               "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A model containing the user's email address."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3412,11 +4353,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3443,6 +4393,9 @@
               "$ref": "#/definitions/UserCollaborator"
             },
             "description": "A model containing the user's email address."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3455,11 +4408,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3486,6 +4448,9 @@
               "$ref": "#/definitions/CollaboratorsArray"
             },
             "description": "A model containing a list of user's email addresses."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3498,11 +4463,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3522,6 +4496,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3531,11 +4508,20 @@
               "$ref": "#/definitions/AvailableEndpoints"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3575,6 +4561,9 @@
               "$ref": "#/definitions/WordListObject"
             },
             "description": "Words list."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3587,11 +4576,20 @@
               "type": "integer"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3623,6 +4621,9 @@
               "$ref": "#/definitions/PrebuiltDomainCreateBaseObject"
             },
             "description": "A prebuilt domain create object containing the name of the domain."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3635,11 +4636,20 @@
               "$ref": "#/definitions/GuidList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3671,6 +4681,9 @@
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
             "description": "A model object containing the name of the custom prebuilt intent and the name of the domain to which this model belongs."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3684,11 +4697,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.\r\n\r\nThis error can be returned if the request's body are incorrect meaning the JSON is missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3709,6 +4731,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3718,11 +4743,20 @@
               "$ref": "#/definitions/IntentClassifiersList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3754,6 +4788,9 @@
               "$ref": "#/definitions/PrebuiltDomainModelCreateObject"
             },
             "description": "A model object containing the name of the custom prebuilt entity and the name of the domain to which this model belongs."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3767,11 +4804,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3792,6 +4838,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3801,11 +4850,20 @@
               "$ref": "#/definitions/EntityExtractorsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3828,6 +4886,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3837,11 +4898,20 @@
               "$ref": "#/definitions/CustomPrebuiltModelList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3871,6 +4941,9 @@
             "description": "Domain name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3880,11 +4953,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3901,6 +4983,11 @@
       "get": {
         "description": "Gets all the available custom prebuilt domains for all cultures.",
         "operationId": "Apps_ListAvailableCustomPrebuiltDomains",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns a list of all custom prebuilt domains and their intents/entities representation.",
@@ -3908,11 +4995,14 @@
               "$ref": "#/definitions/PrebuiltDomainsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3936,6 +5026,9 @@
             "schema": {
               "$ref": "#/definitions/PrebuiltDomainCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -3949,11 +5042,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nYou will receive this error If you add a second prebuilt application before renaming the first.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -3977,6 +5079,9 @@
             "description": "Culture.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -3986,11 +5091,20 @@
               "$ref": "#/definitions/PrebuiltDomainsList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -4024,6 +5138,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4033,11 +5150,20 @@
               "$ref": "#/definitions/HierarchicalChildEntity"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -4083,6 +5209,9 @@
               }
             },
             "description": "Model object containing new name of the hierarchical entity child."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4095,11 +5224,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -4131,6 +5269,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4140,11 +5281,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -4184,6 +5334,9 @@
               }
             },
             "description": "A model object containing the name of the new hierarchical child model."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4197,11 +5350,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create a hierarchical entity when the max child count is exceeded.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -4241,6 +5403,9 @@
               }
             },
             "description": "A model object containing the name of the new composite child model."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -4254,11 +5419,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.\r\n\r\nThis error can be returned if you are attempting to create a composite entity child when the max child count is exceeded.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -4292,6 +5466,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4301,11 +5478,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -4337,6 +5523,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4346,11 +5535,20 @@
               "$ref": "#/definitions/RegexEntityExtractorList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4383,6 +5581,9 @@
             "schema": {
               "$ref": "#/definitions/RegexModelCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4393,11 +5594,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create an entity when the max entity count is exceeded.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4426,6 +5636,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4435,11 +5648,20 @@
               "$ref": "#/definitions/PatternAnyEntityExtractorList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4472,6 +5694,9 @@
             "schema": {
               "$ref": "#/definitions/PatternAnyModelCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4482,11 +5707,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. \r\n\r\nThis error can be returned if you are attempting to create an entity when the max entity count is exceeded.\r\n",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4517,6 +5751,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4526,11 +5763,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4571,6 +5817,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4581,11 +5830,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4616,6 +5874,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4625,11 +5886,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4670,6 +5940,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4680,11 +5953,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4715,6 +5997,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4724,11 +6009,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4769,6 +6063,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4779,11 +6076,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4814,6 +6120,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4823,11 +6132,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4868,6 +6186,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4878,11 +6199,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4908,6 +6238,9 @@
           },
           {
             "$ref": "#/parameters/CEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4917,11 +6250,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -4957,6 +6299,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -4967,11 +6312,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5002,6 +6356,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5011,11 +6368,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5056,6 +6422,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5066,11 +6435,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5096,6 +6474,9 @@
           },
           {
             "$ref": "#/parameters/HEntityIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5105,11 +6486,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5145,6 +6535,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5155,11 +6548,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5190,6 +6592,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5199,11 +6604,20 @@
               "$ref": "#/definitions/EntityRoleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5244,6 +6658,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5254,11 +6671,20 @@
               "$ref": "#/definitions/GuidResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5289,6 +6715,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5298,11 +6727,20 @@
               "$ref": "#/definitions/ExplicitListItemList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5343,6 +6781,9 @@
             "schema": {
               "$ref": "#/definitions/ExplicitListItemCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5352,11 +6793,20 @@
               "$ref": "#/definitions/ExplicitListItemIDResponse"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5387,6 +6837,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5396,11 +6849,20 @@
               "$ref": "#/definitions/RegexEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5410,7 +6872,7 @@
         }
       },
       "put": {
-        "summary": "Updates the regex entity model .",
+        "summary": "Updates the regex entity model.",
         "operationId": "Model_UpdateRegexEntityModel",
         "consumes": [
           "application/json"
@@ -5441,6 +6903,9 @@
             "schema": {
               "$ref": "#/definitions/RegexModelUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5450,11 +6915,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5483,6 +6957,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5492,11 +6969,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5527,6 +7013,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5536,11 +7025,20 @@
               "$ref": "#/definitions/PatternAnyEntityExtractor"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5581,6 +7079,9 @@
             "schema": {
               "$ref": "#/definitions/PatternAnyModelUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5590,11 +7091,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5623,6 +7133,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5632,11 +7145,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing or malformed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5675,6 +7197,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5684,11 +7209,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5737,6 +7271,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5746,11 +7283,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5787,6 +7333,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5796,11 +7345,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5839,6 +7397,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5848,11 +7409,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5901,6 +7471,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5910,11 +7483,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -5951,6 +7533,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -5960,11 +7545,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6003,6 +7597,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6012,11 +7609,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6065,6 +7671,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6074,11 +7683,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6115,6 +7733,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6124,11 +7745,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6167,6 +7797,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6176,11 +7809,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6229,6 +7871,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6238,11 +7883,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6279,6 +7933,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6288,11 +7945,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6326,6 +7992,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6335,11 +8004,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6383,6 +8061,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6392,11 +8073,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6428,6 +8118,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6437,11 +8130,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6480,6 +8182,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6489,11 +8194,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6542,6 +8256,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6551,11 +8268,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6592,6 +8318,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6601,11 +8330,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6639,6 +8377,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6648,11 +8389,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6696,6 +8446,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6705,11 +8458,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6741,6 +8503,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6750,11 +8515,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6793,6 +8567,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6802,11 +8579,20 @@
               "$ref": "#/definitions/EntityRole"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6855,6 +8641,9 @@
             "schema": {
               "$ref": "#/definitions/EntityRoleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6864,11 +8653,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6905,6 +8703,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6914,11 +8715,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -6957,6 +8767,9 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -6966,11 +8779,20 @@
               "$ref": "#/definitions/ExplicitListItem"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7019,6 +8841,9 @@
             "schema": {
               "$ref": "#/definitions/ExplicitListItemUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7028,11 +8853,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7069,6 +8903,9 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7078,11 +8915,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7117,6 +8963,9 @@
             "schema": {
               "$ref": "#/definitions/PatternRuleCreateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7126,11 +8975,20 @@
               "$ref": "#/definitions/PatternRuleInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7159,6 +9017,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7168,11 +9029,20 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7208,6 +9078,9 @@
                 "$ref": "#/definitions/PatternRuleUpdateObject"
               }
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7217,11 +9090,20 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7257,6 +9139,9 @@
                 "$ref": "#/definitions/PatternRuleCreateObject"
               }
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7266,11 +9151,20 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7307,6 +9201,9 @@
                 "type": "string"
               }
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7316,11 +9213,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7363,6 +9269,9 @@
             "schema": {
               "$ref": "#/definitions/PatternRuleUpdateObject"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7372,11 +9281,20 @@
               "$ref": "#/definitions/PatternRuleInfo"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7405,6 +9323,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7414,11 +9335,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7450,6 +9380,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7459,11 +9392,20 @@
               "$ref": "#/definitions/PatternRuleList"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "x-ms-examples": {
@@ -7483,6 +9425,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -7495,11 +9440,20 @@
               }
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7529,6 +9483,9 @@
               "$ref": "#/definitions/AppVersionSettingObject"
             },
             "description": "A list of the updated application version settings."
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -7541,11 +9498,20 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "default": {
-            "description": "Error Response.",
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7556,6 +9522,26 @@
             "$ref": "./examples/versions/SuccessfulUpdateApplicationVersionSettingsRequest.json"
           }
         }
+      }
+    }
+  },
+  "responses": {
+    "401": {
+      "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "403": {
+      "description": "Total monthly key quota limit exceeded",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "429": {
+      "description": "Rate limit is exceeded.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
       }
     }
   },
@@ -7779,7 +9765,7 @@
           "type": "string"
         },
         "isExchangeable": {
-          "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
+          "description": "An exchangeable phrase list feature serves as a single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
           "default": true,
           "type": "boolean"
         }
@@ -9374,15 +11360,17 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error response when invoking an operation on the API.",
       "type": "object",
+      "description": "Error information returned by the API",
       "properties": {
-        "errorType": {
-          "type": "string"
+        "statusCode": {
+          "type": "integer",
+          "description": "HTTP Status code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Cause of the error."
         }
-      },
-      "additionalProperties": {
-        "type": "object"
       }
     },
     "OperationError": {
@@ -9716,14 +11704,14 @@
         "$ref": "#/definitions/PatternRuleInfo"
       }
     },
-    "ExamplesPerModelResponseObject":{
+    "ExamplesPerModelResponseObject": {
       "description": "A list of examples per model.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LabelTextObject"
       }
     },
-    "LabelTextObject":{
+    "LabelTextObject": {
       "description": "An object containing the example's text.",
       "type": "object",
       "properties": {
@@ -9892,6 +11880,12 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "ApiKey": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "required": true,
+      "type": "string"
     }
   }
 }

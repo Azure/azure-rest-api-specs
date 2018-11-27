@@ -13,18 +13,6 @@
       }
     ]
   },
-  "securityDefinitions": {
-    "apiKeyHeader": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "apiKeyHeader": []
-    }
-  ],
   "paths": {
     "/apps/{appId}": {
       "get": {
@@ -82,20 +70,35 @@
             "in": "query",
             "description": "Log query (default is true)",
             "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
           "200": {
-            "description": "Prediction, based on the input query, containing intent(s) and entities.",
-            "schema": {
-              "$ref": "#/definitions/LuisResult"
-            }
+            "$ref": "#/responses/200"
           },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
+          "414": {
+            "$ref": "#/responses/414"
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "409": {
+            "$ref": "#/responses/409"
+          },
+          "410": {
+            "$ref": "#/responses/410"
           }
         },
         "produces": [
@@ -163,23 +166,38 @@
             "in": "query",
             "description": "Log query (default is true)",
             "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
           "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "Prediction, based on the input query, containing intent(s) and entities.",
-            "schema": {
-              "$ref": "#/definitions/LuisResult"
-            }
+         "200": {
+            "$ref": "#/responses/200"
           },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
+          "414": {
+            "$ref": "#/responses/414"
+          },
+          "429": {
+            "$ref": "#/responses/429"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "409": {
+            "$ref": "#/responses/409"
+          },
+          "410": {
+            "$ref": "#/responses/410"
           }
         },
         "produces": [
@@ -190,6 +208,51 @@
             "$ref": "./examples/prediction/SuccessfulGetPredictionsFromEndpointViaPostRequest.json"
           }
         }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Prediction, based on the input query, containing intent(s) and entities.",
+      "schema": {
+        "$ref": "#/definitions/LuisResult"
+      }
+    },
+    "400": {
+      "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nOther reasons include:\r\n\r\n* Model not published. Please publish your model before hitting the Endpoint.\r\n",
+      "schema": {
+        "$ref": "#/definitions/StringError"
+      }
+    },
+    "401": {
+        "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* invalid, malformed, or empty subscription key\r\n* subscription key doesn't match region",
+        "schema": {
+          "$ref": "#/definitions/APIError"
+        }
+    },
+    "403": {
+      "description": "Total monthly key quota limit exceeded. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request.",
+      "schema": {
+        "$ref": "#/definitions/APIError"
+      }      
+    },
+    "409": {
+      "description": "When you receive the error message\"Application loading in progress, please try again.\", retry the request."    
+    },
+    "410": {
+      "description": "When you receive \"Please re-train and republish your application.\", you should retrain and republish your app, then make the request again.",
+      "schema": {
+        "$ref": "#/definitions/StringError"
+      }      
+    },
+    "414":
+    {
+      "description": "The query is too large. Reduce your query to the maximum characters."
+    },
+    "429": {
+      "description": "Too many requests. If you created a LUIS key to increase your quota, make sure to change the subscription key used in the endpoint request.",
+      "schema": {
+        "$ref": "#/definitions/APIError"
       }
     }
   },
@@ -238,6 +301,24 @@
         },
         "sentimentAnalysis": {
           "$ref": "#/definitions/Sentiment"
+        }
+      }
+    },
+    "StringError": {
+      "type": "string",
+      "description": "Error in string format."
+    },
+    "APIError": {
+      "type": "object",
+      "description": "Error information returned by the API",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "description": "HTTP Status code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Cause of the error."
         }
       }
     },
@@ -373,20 +454,6 @@
         }
       ]
     },
-    "APIError": {
-      "type": "object",
-      "description": "Error information returned by the API",
-      "properties": {
-        "statusCode": {
-          "type": "string",
-          "description": "HTTP Status code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Cause of the error."
-        }
-      }
-    },
     "Sentiment": {
       "description": "Sentiment of the input utterance.",
       "type": "object",
@@ -411,6 +478,12 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "ApiKey": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "required": true,
+      "type": "string"
     }
   }
 }
