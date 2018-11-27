@@ -601,6 +601,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
           }
         ],
         "responses": {
@@ -616,6 +619,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NotificationSettings_ListByResource": {
@@ -678,7 +684,7 @@
           "200": {
             "description": "OK. At least one component found.",
             "schema": {
-              "$ref": "#/definitions/NotificationSettingsCollection"
+              "$ref": "#/definitions/NotificationSetting"
             }
           },
           "default": {
@@ -758,7 +764,7 @@
           "200": {
             "description": "OK. At least one component found.",
             "schema": {
-              "$ref": "#/definitions/NotificationSettingsCollection"
+              "$ref": "#/definitions/NotificationSetting"
             }
           },
           "default": {
@@ -1596,6 +1602,11 @@
           "items": {
             "$ref": "#/definitions/NotificationSetting"
           }
+        },
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
