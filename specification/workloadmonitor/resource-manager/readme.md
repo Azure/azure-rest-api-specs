@@ -54,7 +54,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python 
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -75,13 +75,11 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
 ``` yaml $(python)
 python-mode: create
 python:
@@ -102,6 +100,7 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-workloadmonitor
 ```
+
 
 
 ## Go
