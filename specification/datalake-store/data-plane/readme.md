@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DataLakeStore.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DataLakeStore, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for DataLakeStore, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DataLakeStore API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2016-11
+tag: package-preview-2222-11
 ```
 
 
+### Tag: package-preview-2222-11
+
+These settings apply only when `--tag=package-preview-2222-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2222-11'
+input-file:
+  - Microsoft.DataLakeStore/preview/2222-11-03/filesystem.json
+```
 ### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
@@ -49,8 +57,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -62,7 +70,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
 ```
-
 
 ## C#
 
