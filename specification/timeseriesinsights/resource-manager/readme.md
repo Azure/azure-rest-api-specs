@@ -63,15 +63,19 @@ directive:
     where:
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.StandardEnvironmentResource
+      - $.definitions.LongTermEnvironmentResource
     from: timeseriesinsights.json
-    reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource.
+    reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource. Similarly, the Environments_Get operation returns an EnvironmentResource, from which both StandardEnvironmentResource and LongTermEnvironmentResource inherit.
 
   - suppress: R3026  # Tracked resource 'XXX' must have patch operation that at least supports the update of tags. It's strongly recommended that the PATCH operation supports update of all mutable properties as well.
     where:
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.StandardEnvironmentResource
+      - $.definitions.LongTermEnvironmentResource 
     from: timeseriesinsights.json
-    reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
+    reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
 ```
 
 ---
