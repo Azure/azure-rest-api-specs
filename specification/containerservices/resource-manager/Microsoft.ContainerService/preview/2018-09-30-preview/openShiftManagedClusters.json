@@ -6,20 +6,12 @@
     "version": "2018-09-30-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -34,11 +26,80 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/openShiftManagedClusters": {
+      "get": {
+        "tags": ["OpenShiftManagedClusters"],
+        "operationId": "OpenShiftManagedClusters_List",
+        "summary": "Gets a list of OpenShift managed clusters in the specified subscription.",
+        "description": "Gets a list of OpenShift managed clusters in the specified subscription. The operation returns properties of each OpenShift managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftManagedClusterListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Managed Clusters": {
+            "$ref": "./examples/OpenShiftManagedClustersList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/openShiftManagedClusters": {
+      "get": {
+        "tags": ["OpenShiftManagedClusters"],
+        "operationId": "OpenShiftManagedClusters_ListByResourceGroup",
+        "summary": "Lists OpenShift managed clusters in the specified subscription and resource group.",
+        "description": "Lists OpenShift managed clusters in the specified subscription and resource group. The operation returns properties of each OpenShift managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftManagedClusterListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Managed Clusters by Resource Group": {
+            "$ref": "./examples/OpenShiftManagedClustersListByResourceGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/openShiftManagedClusters/{resourceName}": {
       "get": {
-        "tags": [
-          "OpenShiftManagedClusters"
-        ],
+        "tags": ["OpenShiftManagedClusters"],
         "operationId": "OpenShiftManagedClusters_Get",
         "summary": "Gets a openshift managed cluster.",
         "description": "Gets the details of the managed openshift cluster with a specified resource group and name.",
@@ -85,9 +146,7 @@
         }
       },
       "put": {
-        "tags": [
-          "OpenShiftManagedClusters"
-        ],
+        "tags": ["OpenShiftManagedClusters"],
         "operationId": "OpenShiftManagedClusters_CreateOrUpdate",
         "summary": "Creates or updates an openshift managed cluster.",
         "description": "Creates or updates a openshift managed cluster with the specified configuration for agents and OpenShift version.",
@@ -150,9 +209,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "OpenShiftManagedClusters"
-        ],
+        "tags": ["OpenShiftManagedClusters"],
         "operationId": "OpenShiftManagedClusters_UpdateTags",
         "summary": "Updates tags on an openshift managed cluster.",
         "description": "Updates an openshift managed cluster with the specified tags.",
@@ -209,9 +266,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "OpenShiftManagedClusters"
-        ],
+        "tags": ["OpenShiftManagedClusters"],
         "operationId": "OpenShiftManagedClusters_Delete",
         "summary": "Deletes an openshift managed cluster.",
         "description": "Deletes the openshift managed cluster with a specified resource group and name.",
@@ -282,10 +337,7 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "tags": {
           "type": "object",
@@ -295,16 +347,15 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "x-ms-azure-resource": true
     },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Details about the error."
         }
       },
       "description": "An error response from the Container service."
@@ -361,7 +412,7 @@
           "type": "string",
           "description": "Name of the router profile."
         },
-        "publicSubdomain" : {
+        "publicSubdomain": {
           "type": "string",
           "description": "DNS subdomain for openshift router."
         },
@@ -380,7 +431,7 @@
           "description": "CIDR for the OpenShift Vnet.",
           "default": "10.0.0.0/8"
         },
-        "peerVnetId" : {
+        "peerVnetId": {
           "type": "string",
           "description": "CIDR of the Vnet to peer."
         }
@@ -390,10 +441,7 @@
     "OSType": {
       "type": "string",
       "default": "Linux",
-      "enum": [
-        "Linux",
-        "Windows"
-      ],
+      "enum": ["Linux", "Windows"],
       "x-ms-enum": {
         "name": "OSType",
         "modelAsString": true
@@ -409,15 +457,43 @@
       "description": "Size of OpenShift VMs.",
       "enum": [
         "Standard_D2s_v3",
-        "Standard_D4s_v3"
+        "Standard_D4s_v3",
+        "Standard_D8s_v3",
+        "Standard_D16s_v3",
+        "Standard_D32s_v3",
+        "Standard_D64s_v3",
+        "Standard_DS4_v2",
+        "Standard_DS5_v2",
+        "Standard_F8s_v2",
+        "Standard_F16s_v2",
+        "Standard_F32s_v2",
+        "Standard_F64s_v2",
+        "Standard_F72s_v2",
+        "Standard_F8s",
+        "Standard_F16s",
+        "Standard_E4s_v3",
+        "Standard_E8s_v3",
+        "Standard_E16s_v3",
+        "Standard_E20s_v3",
+        "Standard_E32s_v3",
+        "Standard_E64s_v3",
+        "Standard_GS2",
+        "Standard_GS3",
+        "Standard_GS4",
+        "Standard_GS5",
+        "Standard_DS12_v2",
+        "Standard_DS13_v2",
+        "Standard_DS14_v2",
+        "Standard_DS15_v2",
+        "Standard_L4s",
+        "Standard_L8s",
+        "Standard_L16s",
+        "Standard_L32s"
       ]
     },
     "OpenShiftAgentPoolProfileRole": {
       "type": "string",
-      "enum": [
-        "compute",
-        "infra"
-      ],
+      "enum": ["compute", "infra"],
       "x-ms-enum": {
         "name": "OpenShiftAgentPoolProfileRole",
         "modelAsString": true
@@ -451,10 +527,7 @@
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         }
       },
-      "required": [
-        "count",
-        "vmSize"
-      ],
+      "required": ["count", "vmSize"],
       "description": "OpenShiftManagedClusterMaterPoolProfile contains configuration for OpenShift master VMs."
     },
     "OpenShiftManagedClusterAgentPoolProfile": {
@@ -484,16 +557,12 @@
           "$ref": "#/definitions/OSType",
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         },
-        "role" : {
+        "role": {
           "description": "Define the role of the AgentPoolProfile.",
           "$ref": "#/definitions/OpenShiftAgentPoolProfileRole"
         }
       },
-      "required": [
-        "name",
-        "count",
-        "vmSize"
-      ],
+      "required": ["name", "count", "vmSize"],
       "description": "Defines the configuration of the OpenShift cluster VMs."
     },
     "OpenShiftManagedClusterIdentityProvider": {
@@ -513,7 +582,7 @@
       "properties": {
         "identityProviders": {
           "type": "array",
-          "items" : {
+          "items": {
             "$ref": "#/definitions/OpenShiftManagedClusterIdentityProvider"
           },
           "description": "Type of authentication profile to use."
@@ -567,9 +636,7 @@
           "description": "Configures OpenShift authentication."
         }
       },
-      "required": [
-        "openShiftVersion"
-      ],
+      "required": ["openShiftVersion"],
       "description": "Properties of the openshift managed cluster."
     },
     "OpenShiftManagedCluster": {
@@ -579,7 +646,7 @@
         },
         {
           "properties": {
-            "plan" : {
+            "plan": {
               "description": "Define the resource plan as required by ARM for billing purposes",
               "$ref": "#/definitions/PurchasePlan"
             },
@@ -593,40 +660,39 @@
       ],
       "description": "OpenShift Managed cluster."
     },
-    "OpenShiftManagedClusterBaseIdentityProvider":
-    {
+    "OpenShiftManagedClusterBaseIdentityProvider": {
       "discriminator": "kind",
       "required": ["kind"],
       "properties": {
-          "kind": {
-            "type": "string",
-            "description": "The kind of the provider."
-          }
-        },
-        "description": "Structure for any Identity provider."
+        "kind": {
+          "type": "string",
+          "description": "The kind of the provider."
+        }
+      },
+      "description": "Structure for any Identity provider."
     },
     "OpenShiftManagedClusterAADIdentityProvider": {
       "x-ms-discriminator-value": "AADIdentityProvider",
       "allOf": [
-      { 
+        {
           "$ref": "#/definitions/OpenShiftManagedClusterBaseIdentityProvider"
-      },
-      {
-        "properties": {
-          "clientId": {
-            "type": "string",
-            "description": "The clientId password associated with the provider."
-          },
-          "secret": {
-            "type": "string",
-            "description": "The secret password associated with the provider."
-          },
-          "tenantId": {
-            "type": "string",
-            "description": "The tenantId associated with the provider."
+        },
+        {
+          "properties": {
+            "clientId": {
+              "type": "string",
+              "description": "The clientId password associated with the provider."
+            },
+            "secret": {
+              "type": "string",
+              "description": "The secret password associated with the provider."
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "The tenantId associated with the provider."
+            }
           }
         }
-      }
       ],
       "description": "Defines the Identity provider for MS AAD."
     },
@@ -641,6 +707,23 @@
         }
       },
       "description": "Tags object for patch operations."
+    },
+    "OpenShiftManagedClusterListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenShiftManagedCluster"
+          },
+          "description": "The list of OpenShift managed clusters."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of OpenShift managed cluster results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List OpenShift Managed Clusters operation."
     }
   },
   "parameters": {
