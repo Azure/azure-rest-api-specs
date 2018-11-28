@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2018-12-01"
+    "version": "2018-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -358,10 +358,6 @@
           "$ref": "#/definitions/PublicIPAddressDnsSettings",
           "description": "The FQDN of the DNS record associated with the public IP address."
         },
-        "ddosSettings": {
-          "$ref": "#/definitions/DdoSSettings",
-          "description": "The DDoS protection custom policy associated with the public IP address."
-        },
         "ipTags": {
           "type": "array",
           "items": {
@@ -455,25 +451,6 @@
         }
       },
       "description": "Contains FQDN of the DNS record associated with the public IP address"
-    },
-    "DdoSSettings": {
-      "properties": {
-        "ddosCustomPolicy": {
-          "readOnly": false,
-          "$ref":"./network.json#/definitions/SubResource",          
-          "description": "The DDoS custom policy associated with the public IP."
-        },
-        "protectionCoverage": {
-          "readOnly": false,
-          "type": "string",
-          "enum": [
-            "Basic",
-            "Standard"            
-          ],
-          "description": "The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized."
-        }
-      },
-      "description": "Contains the DDoS protection settings of the public IP."
     },
     "IpTag": {
       "properties": {

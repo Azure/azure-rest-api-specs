@@ -28,15 +28,60 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-10
+tag: package-2018-12
 ```
 
 
+### Tag: package-2018-12
+
+These settings apply only when `--tag=package-2018-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-12'
+input-file:
+  - Microsoft.Network/stable/2018-12-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-12-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-12-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-12-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-12-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-12-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-12-01/endpointService.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-12-01/expressRoutePort.json
+  - Microsoft.Network/stable/2018-12-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-12-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-12-01/network.json
+  - Microsoft.Network/stable/2018-12-01/networkInterface.json
+  - Microsoft.Network/stable/2018-12-01/networkProfile.json
+  - Microsoft.Network/stable/2018-12-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-12-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-12-01/operation.json
+  - Microsoft.Network/stable/2018-12-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-12-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-12-01/routeFilter.json
+  - Microsoft.Network/stable/2018-12-01/routeTable.json
+  - Microsoft.Network/stable/2018-12-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-12-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-12-01/usage.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-12-01/virtualWan.json
+  - Microsoft.Network/stable/2018-12-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2018-12-01/vmssPublicIpAddress.json
+```
+>>>>>>> 635b2be78297687932cf8aa2ca4577e7ca021e88
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
+<<<<<<< HEAD
 ```yaml $(tag) == 'package-2018-10'
+=======
+``` yaml $(tag) == 'package-2018-10'
+>>>>>>> 635b2be78297687932cf8aa2ca4577e7ca021e88
 input-file:
   - Microsoft.Network/stable/2018-10-01/applicationGateway.json
   - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
@@ -72,6 +117,10 @@ input-file:
   - Microsoft.Network/stable/2018-10-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-10-01/vmssPublicIpAddress.json
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635b2be78297687932cf8aa2ca4577e7ca021e88
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
@@ -858,20 +907,35 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-08
+  - tag: package-2018-07
   - tag: package-2018-06
   - tag: package-2018-04
   - tag: package-2017-10
 ```
 
-### Tag: package-2018-04 and java
+### Tag: package-2018-08 and java
 
-These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.network.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
+  namespace: com.microsoft.azure.management.network.v2018_08_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_08_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-07 and java
+
+These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -885,6 +949,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.network.v2018_06_01
   output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-04 and java
+
+These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```

@@ -630,6 +630,149 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/notificationSettings/{notificationSettingName}": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get a of notification setting for a resource.",
+        "operationId": "NotificationSettings_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+			"$ref": "#/parameters/notificationSettingName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationSettings_Get": {
+            "$ref": "./examples/NotificationSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Update notification settings for a resource.",
+        "operationId": "NotificationSettings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+			"$ref": "#/parameters/notificationSettingName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body of the NotificationSetting PUT object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationSettings_Update": {
+            "$ref": "./examples/NotificationSettings_Update.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.WorkloadMonitor/componentsSummary": {
       "get": {
         "tags": [
@@ -1446,23 +1589,22 @@
       "description": "Model for collection of notificationSettings.",
       "type": "object",
       "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationSetting"
+          }
+        },
         "nextLink": {
           "description": "URL to the next set of results.",
           "type": "string",
           "readOnly": true
-        },
-        "value": {
-          "description": "Collection of components.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NotificationSetting"
-          },
-          "readOnly": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "NotificationSetting": {
-      "description": "Model for component.",
+      "description": "Model for NotificationSetting.",
       "type": "object",
       "allOf": [
         {
@@ -1477,7 +1619,7 @@
         },
         "properties": {
           "$ref": "#/definitions/NotificationSettingProperties",
-          "description": "Properties of the component.",
+          "description": "Properties of Notification Settings",
           "readOnly": true,
           "x-ms-client-flatten": true
         }
@@ -1487,7 +1629,7 @@
       "description": "Model for properties of a NotificationSetting.",
       "type": "object",
       "properties": {
-        "actionGroups": {
+        "actionGroupResourceIds": {
           "description": "List of action group resource ids to be notified",
           "type": "array",
           "items": {
@@ -1695,6 +1837,17 @@
       "required": true,
       "type": "string",
       "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "notificationSettingName": {
+      "name": "notificationSettingName",
+      "in": "path",
+      "description": "Default string modeled as parameter for URL to work correctly.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
       "x-ms-parameter-location": "method"
     }
   },
