@@ -324,19 +324,19 @@
           "readOnly": true
         },
         "error": {
-          "description": "detailes of provisioning error",
+          "description": "Details of provisioning error",
           "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
         },
         "creationTime": {
           "type": "string",
-          "description": "Creation time of theresource, which only appears in the response.",
+          "description": "Creation time of the resource, which only appears in the response.",
           "format": "date-time",
           "x-nullable": false,
           "readOnly": true
         },
         "createdBy": {
           "type": "string",
-          "description": "createdBy property, which only appears in the response.",
+          "description": "CreatedBy property, which only appears in the response.",
           "readOnly": true
         },
         "lastModifiedTime": {
@@ -348,14 +348,49 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "lastModifiedBy property, which only appears in the response.",
+          "description": "LastModifiedBy property, which only appears in the response.",
           "readOnly": true
+        },
+        "tasks": {
+          "description": "Tasks information for the Software update configuration.",
+          "$ref": "#/definitions/softwareUpdateConfigurationTasks"
         }
       },
       "required": [
         "updateConfiguration",
         "scheduleInfo"
       ]
+    },
+    "softwareUpdateConfigurationTasks": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "preTask": {
+          "description": "Pre task properties.",
+          "$ref": "#/definitions/taskProperties"
+        },
+        "postTask": {
+          "description": "Post task properties.",
+          "$ref": "#/definitions/taskProperties"
+        }
+      }
+    },
+    "taskProperties": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      }
     },
     "WindowsProperties": {
       "type": "object",
@@ -781,7 +816,7 @@
             "description": "Subscription or Resource Group ARM Id."
           }
         },
-        "location": {
+        "locations": {
           "type": "array",
           "description": "List of locations to scope the query to.",
           "items": {

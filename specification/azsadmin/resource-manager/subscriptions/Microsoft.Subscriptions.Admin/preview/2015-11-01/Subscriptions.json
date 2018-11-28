@@ -595,7 +595,49 @@
             ],
             "x-ms-enum": {
                 "name": "SubscriptionState",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                    {
+                        "description": "Subscription is active. New resources can be created.",
+                        "name": "Enabled",
+                        "value": "Enabled"
+                    },
+                    {
+                        "description": "This state is not used in Azure Stack.",
+                        "name": "PastDue",
+                        "value": "PastDue"
+                    },
+                    {
+                        "description": "This state is not used in Azure Stack.",
+                        "name": "Warned",
+                        "value": "Warned"
+                    },
+                    {
+                        "description": "Subscription is not active and usage is not reported. Resources are shut down (VMs stopped and deallocated, IP addresses are freed, etc). During this period, the Azure Stack Operator can re-enable the subscription which allows creation of new resources but doesn’t automatically restore disabled resources.",
+                        "name": "Disabled",
+                        "value": "Disabled"
+                    },
+                    {
+                        "description": "This state is unique to Azure Stack and is only visible to the Azure Stack Operator, and if used, to the respective Delegated Provider. Resources and Data are being deleted before subscription state is set to Deleted. This state cannot be reversed. It means that deletion is in progress.",
+                        "name": "Deleting",
+                        "value": "Deleting"
+                    },
+                    {
+                        "description": "Final state of subscription. All resources and data are deleted. This state cannot be reversed.",
+                        "name": "Deleted",
+                        "value": "Deleted"
+                    },
+                    {
+                        "description": "This state is not used in Azure Stack.",
+                        "name": "NotDefined",
+                        "value": "NotDefined"
+                    },
+                    {
+                        "description": "This state is unique to Azure Stack and is only visible to the Azure Stack Operator, and if used, to the respective Delegated Provider. It means that deletion failed.  You can’t reverse the deletion process, so in this state all you can do is restart deletion.  This state is not reported to RPs.",
+                        "name": "PartiallyDeleted",
+                        "value": "PartiallyDeleted"
+                    }
+                ]
             }
         },
         "Metric": {
