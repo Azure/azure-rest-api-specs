@@ -28,15 +28,55 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-10
+tag: package-2222-22
 ```
 
 
+### Tag: package-2222-22
+
+These settings apply only when `--tag=package-2222-22` is specified on the command line.
+
+```yaml $(tag) == 'package-2222-22'
+input-file:
+  - Microsoft.Network/stable/2222-22-22/applicationGateway.json
+  - Microsoft.Network/stable/2222-22-22/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2222-22-22/availableDelegations.json
+  - Microsoft.Network/stable/2222-22-22/azureFirewall.json
+  - Microsoft.Network/stable/2222-22-22/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2222-22-22/checkDnsAvailability.json
+  - Microsoft.Network/stable/2222-22-22/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2222-22-22/endpointService.json
+  - Microsoft.Network/stable/2222-22-22/expressRouteCircuit.json
+  - Microsoft.Network/stable/2222-22-22/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2222-22-22/expressRouteGateway.json
+  - Microsoft.Network/stable/2222-22-22/expressRoutePort.json
+  - Microsoft.Network/stable/2222-22-22/interfaceEndpoint.json
+  - Microsoft.Network/stable/2222-22-22/loadBalancer.json
+  - Microsoft.Network/stable/2222-22-22/network.json
+  - Microsoft.Network/stable/2222-22-22/networkInterface.json
+  - Microsoft.Network/stable/2222-22-22/networkProfile.json
+  - Microsoft.Network/stable/2222-22-22/networkSecurityGroup.json
+  - Microsoft.Network/stable/2222-22-22/networkWatcher.json
+  - Microsoft.Network/stable/2222-22-22/operation.json
+  - Microsoft.Network/stable/2222-22-22/publicIpAddress.json
+  - Microsoft.Network/stable/2222-22-22/publicIpPrefix.json
+  - Microsoft.Network/stable/2222-22-22/routeFilter.json
+  - Microsoft.Network/stable/2222-22-22/routeTable.json
+  - Microsoft.Network/stable/2222-22-22/serviceCommunity.json
+  - Microsoft.Network/stable/2222-22-22/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2222-22-22/usage.json
+  - Microsoft.Network/stable/2222-22-22/virtualNetwork.json
+  - Microsoft.Network/stable/2222-22-22/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2222-22-22/virtualNetworkTap.json
+  - Microsoft.Network/stable/2222-22-22/virtualWan.json
+  - Microsoft.Network/stable/2222-22-22/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2222-22-22/vmssPublicIpAddress.json
+```
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-10'
+``` yaml $(tag) == 'package-2018-10'
 input-file:
   - Microsoft.Network/stable/2018-10-01/applicationGateway.json
   - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
@@ -72,6 +112,7 @@ input-file:
   - Microsoft.Network/stable/2018-10-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-10-01/vmssPublicIpAddress.json
 ```
+
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
