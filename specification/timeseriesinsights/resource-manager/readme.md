@@ -46,6 +46,15 @@ input-file:
 - Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
 ```
 
+### Tag: package-2018-08-preview
+
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08-preview'
+input-file:
+- Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
+```
+
 ## Suppression
 
 ``` yaml
