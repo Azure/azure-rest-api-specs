@@ -72,16 +72,12 @@ input-file:
   - Microsoft.Network/stable/2018-12-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-12-01/vmssPublicIpAddress.json
 ```
->>>>>>> 635b2be78297687932cf8aa2ca4577e7ca021e88
+
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
-<<<<<<< HEAD
-```yaml $(tag) == 'package-2018-10'
-=======
 ``` yaml $(tag) == 'package-2018-10'
->>>>>>> 635b2be78297687932cf8aa2ca4577e7ca021e88
 input-file:
   - Microsoft.Network/stable/2018-10-01/applicationGateway.json
   - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
@@ -117,10 +113,6 @@ input-file:
   - Microsoft.Network/stable/2018-10-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-10-01/vmssPublicIpAddress.json
 ```
-<<<<<<< HEAD
-=======
-
->>>>>>> 635b2be78297687932cf8aa2ca4577e7ca021e88
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
