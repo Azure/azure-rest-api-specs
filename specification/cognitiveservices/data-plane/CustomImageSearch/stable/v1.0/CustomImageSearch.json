@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Custom Image Search API",
+    "title": "Custom Image Search Client",
     "description": "The Bing Custom Image Search API lets you send an image search query to Bing and get back image search results customized to meet your custom search definition.",
     "version": "1.0"
   },
@@ -21,6 +21,15 @@
         "true"
       ]
     }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
   },
   "host": "api.cognitive.microsoft.com",
   "basePath": "/bingcustomsearch/v7.0",
@@ -104,9 +113,7 @@
             "in": "query",
             "description": "The identifier for the custom search configuration",
             "required": true,
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "type": "string"
           },
           {
             "name": "aspect",

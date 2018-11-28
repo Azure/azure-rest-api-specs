@@ -278,6 +278,9 @@
             "$ref": "./examples/getDscConfigurationContent.json"
           }
         },
+        "produces": [
+          "text/powershell"
+        ],
         "parameters": [
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
@@ -303,7 +306,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {

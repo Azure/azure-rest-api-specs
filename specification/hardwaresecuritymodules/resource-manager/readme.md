@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the KeyVault API.
+These are the global settings for the Hardware Security Modules API.
 
 ``` yaml
 openapi-type: arm
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-10'
 input-file:
-- Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/keyvault.json
+- Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
 ```
 
 

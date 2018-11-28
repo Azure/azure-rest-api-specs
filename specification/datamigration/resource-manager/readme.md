@@ -1,5 +1,5 @@
 # Azure Database Migration Service
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Azure Database Migration Service.
@@ -8,7 +8,7 @@ The Data Migration RP comprises of APIs that enable a customer to manage the ser
 
 ---
 
-## Getting Started 
+## Getting Started
 To build the SDK for Compute, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,14 +21,14 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Database Migration Service API.
 
 ``` yaml
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-2018-04-19
+tag: package-2018-07-15-preview
 ```
 
 ### Tag: package-2018-04-19
@@ -48,6 +48,40 @@ input-file:
 - Microsoft.DataMigration/stable/2018-04-19/definitions/Tasks.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/TasksCommon.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/MigrationValidation.json
+```
+
+### Tag: package-2018-07-15-preview
+
+These settings apply only when `--tag=package-2018-07-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-15-preview'
+input-file:
+- Microsoft.DataMigration/preview/2018-07-15-preview/datamigration.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Commands.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Common.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceMySqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrationValidation.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MongoDbTasks.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetTdeCertificatesSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Tasks.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/TasksCommon.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
 ```
 
 ### Tag: package-2018-03-31-preview
@@ -127,6 +161,9 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-java
 ```
 
 ## C#
@@ -173,41 +210,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: datamigration
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-11-15-preview
-  - tag: package-2018-03-31-preview
-```
-
-
-### Tag: package-2017-11-15-preview and go
-
-These settings apply only when `--tag=package-2017-11-15-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-11-15-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/datamigration/mgmt/2017-11-15-preview/datamigration
-```
-
-### Tag: package-2018-03-31-preview and go
-
-These settings apply only when `--tag=package-2018-03-31-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-03-31-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-03-31-preview/$(namespace)
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -227,8 +230,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datamigration
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-07-15-preview
   - tag: package-2017-11-15-preview
   - tag: package-2018-03-31-preview
+```
+
+### Tag: package-2018-07-15-preview and java
+
+These settings apply only when `--tag=package-2018-07-15-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07-15-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuredatabasemigrationservice.v2018_07_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/azuredatabasemigrationservice/resource-manager/v2018_07_15_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2017-11-15-preview and java

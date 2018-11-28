@@ -328,6 +328,11 @@
               "default": false,
               "type": "boolean"
             },
+            "maximumElasticWorkerCount": {
+              "format": "int32",
+              "description": "Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan",
+              "type": "integer"
+            },
             "numberOfSites": {
               "format": "int32",
               "description": "Number of apps assigned to this App Service plan.",
@@ -363,6 +368,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
               "default": false,
               "type": "boolean",
@@ -851,37 +865,58 @@
     "DeletedSite": {
       "description": "A deleted app.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "deletedSiteId": {
-          "format": "int32",
-          "description": "Numeric id for the deleted site",
-          "type": "integer",
-          "readOnly": true
-        },
-        "deletedTimestamp": {
-          "description": "Time in UTC when the app was deleted.",
-          "type": "string",
-          "readOnly": true
-        },
-        "subscription": {
-          "description": "Subscription containing the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceGroup": {
-          "description": "ResourceGroup that contained the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "deletedSiteName": {
-          "description": "Name of the deleted site",
-          "type": "string",
-          "readOnly": true
-        },
-        "slot": {
-          "description": "Slot of the deleted site",
-          "type": "string",
-          "readOnly": true
+        "properties": {
+          "description": "DeletedSite resource specific properties",
+          "properties": {
+            "deletedSiteId": {
+              "format": "int32",
+              "description": "Numeric id for the deleted site",
+              "type": "integer",
+              "readOnly": true
+            },
+            "deletedTimestamp": {
+              "description": "Time in UTC when the app was deleted.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subscription": {
+              "description": "Subscription containing the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "resourceGroup": {
+              "description": "ResourceGroup that contained the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "deletedSiteName": {
+              "description": "Name of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "slot": {
+              "description": "Slot of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "kind": {
+              "description": "Kind of site that was deleted",
+              "type": "string",
+              "readOnly": true
+            },
+            "geoRegionName": {
+              "description": "Geo Region of the deleted site",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1532,12 +1567,12 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
           "format": "int32",
-          "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
+          "description": "Specifies interval in minutes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
@@ -1966,6 +2001,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "Hyper-V sandbox.",
               "default": false,
               "type": "boolean",
@@ -2510,7 +2554,7 @@
       }
     },
     "SlotSwapStatus": {
-      "description": "The status of the last successfull slot swap operation.",
+      "description": "The status of the last successful slot swap operation.",
       "type": "object",
       "properties": {
         "timestampUtc": {
@@ -2678,7 +2722,7 @@
       }
     },
     "User": {
-      "description": "User crendentials used for publishing activity.",
+      "description": "User credentials used for publishing activity.",
       "type": "object",
       "allOf": [
         {

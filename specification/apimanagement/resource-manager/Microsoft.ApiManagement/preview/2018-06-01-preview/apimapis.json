@@ -233,6 +233,9 @@
           },
           "ApiManagementCreateApiRevision": {
             "$ref": "./examples/ApiManagementCreateApiRevision.json"
+          },
+          "ApiManagementCreateApiWithOpenIdConnect": {
+            "$ref": "./examples/ApiManagementCreateApiWithOpenIdConnect.json"
           }
         },
         "consumes": [
@@ -2053,6 +2056,14 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "includeNotTaggedApis",
+            "in": "query",
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Include not tagged apis in response"
           }
         ],
         "responses": {
@@ -2625,6 +2636,65 @@
             "schema": {
               "$ref": "#/definitions/IssueContract"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApiIssues"
+        ],
+        "operationId": "ApiIssue_Update",
+        "description": "Updates an existing issue for an API.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApiIssue": {
+            "$ref": "./examples/ApiManagementUpdateApiIssue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueUpdateContract"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Issue was successfully updated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3520,7 +3590,7 @@
               {
                 "value": "soap",
                 "description": "Imports the Soap API having a SOAP front end.",
-                "name": "SoapPassThrough"                
+                "name": "SoapPassThrough"
               }
             ]
           }
@@ -3685,7 +3755,7 @@
         },
         "apiRevisionDescription": {
           "type": "string",
-          "description": "Description of the Api Revision.",          
+          "description": "Description of the Api Revision.",
           "maxLength": 256
         },
         "apiVersionDescription": {
@@ -3696,6 +3766,10 @@
         "apiVersionSetId": {
           "type": "string",
           "description": "A resource identifier for the related ApiVersionSet."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Specifies whether an API or Product subscription is required for accessing the API."
         }
       },
       "description": "API base contract details."
@@ -3884,6 +3958,14 @@
         "oAuth2": {
           "$ref": "#/definitions/OAuth2AuthenticationSettingsContract",
           "description": "OAuth2 Authentication settings"
+        },
+        "openid": {
+          "$ref": "#/definitions/OpenIdAuthenticationSettingsContract",
+          "description": "OpenID Connect Authentication Settings"
+        },
+        "subscriptionKeyRequired": {
+          "type": "boolean",
+          "description": "Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products."
         }
       },
       "description": "API Authentication Settings."
@@ -3900,6 +3982,44 @@
         }
       },
       "description": "API OAuth2 Authentication settings details."
+    },
+    "OpenIdAuthenticationSettingsContract": {
+      "properties": {
+        "openidProviderId": {
+          "type": "string",
+          "description": "OAuth authorization server identifier."
+        },
+        "bearerTokenSendingMethods": {
+          "description": "How to send token to the server.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BearerTokenSendingMethodsContract"
+          }
+        }
+      },
+      "description": "API OAuth2 Authentication settings details."
+    },
+    "BearerTokenSendingMethodsContract": {
+      "type": "string",
+      "description": "Form of an authorization grant, which the client uses to request the access token.",
+      "enum": [
+        "authorizationHeader",
+        "query"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "bearerTokenSendingMethods",
+        "values": [
+          {
+            "value": "authorizationHeader",
+            "description": "Access token will be transmitted in the Authorization header using Bearer schema"
+          },
+          {
+            "value": "query",
+            "description": "Access token will be transmitted as query parameters."
+          }
+        ]
+      }
     },
     "OperationCollection": {
       "properties": {
@@ -4280,6 +4400,16 @@
       ],
       "description": "Issue Contract details."
     },
+    "IssueUpdateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IssueUpdateContractProperties",
+          "description": "Issue entity Update contract properties."
+        }
+      },
+      "description": "Issue update Parameters."
+    },
     "IssueContractProperties": {
       "properties": {
         "title": {
@@ -4290,8 +4420,49 @@
           "type": "string",
           "description": "Text describing the issue."
         },
+        "userId": {
+          "type": "string",
+          "description": "A resource identifier for the user created the issue."
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "userId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IssueContractBaseProperties"
+        }
+      ],
+      "description": "Issue contract Properties."
+    },
+    "IssueUpdateContractProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The issue title."
+        },
+        "description": {
+          "type": "string",
+          "description": "Text describing the issue."
+        },
+        "userId": {
+          "type": "string",
+          "description": "A resource identifier for the user created the issue."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IssueContractBaseProperties"
+        }
+      ],
+      "description": "Issue contract Update Properties."
+    },
+    "IssueContractBaseProperties": {
+      "properties": {
         "createdDate": {
-          "type":"string",
+          "type": "string",
           "format": "date-time",
           "description": "Date and time when the issue was created."
         },
@@ -4332,21 +4503,12 @@
             ]
           }
         },
-        "userId": {
-          "type": "string",
-          "description": "A resource identifier for the user created the issue."
-        },
         "apiId": {
           "type": "string",
           "description": "A resource identifier for the API the issue was created for."
         }
       },
-      "required": [
-        "title",
-        "description",
-        "userId"
-      ],
-      "description": "Issue contract Properties."
+      "description": "Issue contract Base Properties."
     },
     "IssueCommentCollection": {
       "properties": {
@@ -4388,7 +4550,7 @@
           "description": "Comment text."
         },
         "createdDate": {
-          "type":"string",
+          "type": "string",
           "format": "date-time",
           "description": "Date and time when the comment was created."
         },
@@ -4443,7 +4605,7 @@
           "description": "Filename by which the binary data will be saved."
         },
         "contentFormat": {
-          "type":"string",
+          "type": "string",
           "description": "Either 'link' if content is provided via an HTTP link or the MIME type of the Base64-encoded binary data provided in the 'content' property."
         },
         "content": {
