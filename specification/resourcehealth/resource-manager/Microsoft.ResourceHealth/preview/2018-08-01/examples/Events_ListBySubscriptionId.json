@@ -1,0 +1,76 @@
+﻿{
+	"parameters": {
+		"subscriptionId": "subscriptionId",
+		"api-version": "2018-01-01",
+		"$filter": "service eq 'Virtual Machines' or region eq 'West US'"
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"value": [
+					{
+						"id": "/providers/Microsoft.ResourceHealth/events/VIRTUALMACHINES-WESTUS-DTR1",
+						"name": "VIRTUALMACHINES-WESTUS-DTR1",
+						"type": "/providers/Microsoft.ResourceHealth/events",
+						"properties": {
+							"eventType": "ServiceIssue",
+							"eventSource": "ResourceHealth",
+							"status": "Active",
+							"title": "Unavailable",
+							"summary": "Your virtual machine is unavailable",
+							"reason": "DTR1",
+							"impactStartTime": "2017-12-05T21:05:00Z",
+							"impact": [
+								{
+									"impactedService": "Virtual Machines",
+									"impactedRegions": [
+										{
+											"impactedRegion": "West US",
+											"status": "Active",
+											"impactedSubscriptions": [
+												"{subscriptionId}"
+											],
+											"impactedResourcesCount": 2,
+											"lastUpdateTime": "2017-12-05T21:05:00Z"
+										}
+									]
+								}
+							]
+						}
+					},
+					{
+						"id": "/providers/Microsoft.ResourceHealth/events/VIRTUALMACHINES-WESTUS-DTR2",
+						"name": "VIRTUALMACHINES-WESTUS-DTR2",
+						"type": "/providers/Microsoft.ResourceHealth/events",
+						"properties": {
+							"eventType": "ServiceIssue",
+							"eventSource": "ResourceHealth",
+							"status": "Active",
+							"title": "Unavailable",
+							"summary": "Your virtual machine is unavailable",
+							"reason": "DTR2",
+							"impactStartTime": "2017-12-05T21:05:00Z",
+							"impact": [
+								{
+									"impactedService": "Virtual Machines",
+									"impactedRegions": [
+										{
+											"impactedRegion": "West US",
+											"status": "Active",
+											"impactedSubscriptions": [
+												"{subscriptionId}"
+											],
+											"impactedResourcesCount": 2,
+											"lastUpdateTime": "2017-12-05T21:05:00Z"
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+			}
+		}
+	}
+}
