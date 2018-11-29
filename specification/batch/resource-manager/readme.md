@@ -82,6 +82,10 @@ directive:
     from: BatchManagement.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/regenerateKeys"].post.operationId'
     reason: supress
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: BatchManagement.json
+    where: $.definitions.UserAccount
+    reason: model suppress
 ```
 
 ### Tag: package-2017-05
