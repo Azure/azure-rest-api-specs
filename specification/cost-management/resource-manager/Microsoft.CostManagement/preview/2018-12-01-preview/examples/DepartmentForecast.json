@@ -59,20 +59,24 @@
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "id": "providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
             "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
-            "type": "microsoft.costmanagement/Query",
+            "type": "microsoft.costmanagement/Forecast",
             "properties": {
-              "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D",
+              "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Forecast?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D",
               "columns": [
                 {
                   "name": "PreTaxCost",
                   "type": "Number"
-                },               
+                },
                 {
                   "name": "UsageDate",
                   "type": "Number"
-                },               
+                },
+                {
+                  "name": "CostStatus",
+                  "type": "String"
+                },
                 {
                   "name": "Currency",
                   "type": "String"
@@ -80,20 +84,41 @@
               ],
               "rows": [
                 [
-                  19.545363672276512,                  
-                  20181031,                
+                  19.545363672276512,
+                  20181026,
+                  "Actual",
                   "USD"
                 ],
                 [
-                  173.41979241290323,                  
-                  20181031,                  
+                  20.41179241293923,
+                  20181027,
+                  "Actual",
                   "USD"
                 ],
                 [
-                  20.359416562625452,                  
-                  20181031,                 
+                  21.359416562625452,
+                  20181028,
+                  "Actual",
                   "USD"
-                ]              
+                ],
+                [
+                  22.545363672276512,
+                  20181029,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  23.41979241290323,
+                  20181030,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  24.359416562625452,
+                  20181031,
+                  "Forecast",
+                  "USD"
+                ]
               ]
             }
           }
