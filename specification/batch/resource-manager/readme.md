@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Batch.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-09
+tag: package-2018-29
 ```
 
+
+### Tag: package-2018-29
+
+These settings apply only when `--tag=package-2018-29` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-29'
+input-file:
+  - Microsoft.Batch/stable/2018-29-11/BatchManagement.json
+```
 ### Tag: package-2017-09
 
 These settings apply only when `--tag=package-2017-09` is specified on the command line.
@@ -41,6 +50,7 @@ input-file:
 ## Suppression
 
 Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/68) is fixed.
+
 ``` yaml
 directive:
   - suppress: R2063
@@ -72,7 +82,6 @@ directive:
     reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future API versions.
 ```
 
-
 ### Tag: package-2017-05
 
 These settings apply only when `--tag=package-2017-05` is specified on the command line.
@@ -81,7 +90,6 @@ These settings apply only when `--tag=package-2017-05` is specified on the comma
 input-file:
 - Microsoft.Batch/stable/2017-05-01/BatchManagement.json
 ```
-
 
 ### Tag: package-2017-01
 
@@ -101,10 +109,9 @@ input-file:
 - Microsoft.Batch/stable/2015-12-01/BatchManagement.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -122,7 +129,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_batch']
 ```
-
 
 ## C#
 
@@ -160,11 +166,13 @@ python:
   package-name: azure-mgmt-batch
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-batch/azure/mgmt/batch
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
