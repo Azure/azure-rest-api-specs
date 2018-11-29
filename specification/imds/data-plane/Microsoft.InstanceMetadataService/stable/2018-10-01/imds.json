@@ -37,32 +37,63 @@
     "paths": {
         "/instance": {
             "get": {
-                "operationId": "getInstance",
+                "operationId": "Instance_GetMetadata",
                 "description": "Get Instance Metadata for the Virtual Machine.",
                 "parameters": [
                     {
-                        "name": "api-version",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "description": "This is the version of API to invoke."
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
-                        "name": "Metadata",
-                        "in": "header",
-                        "type": "string",
-                        "enum": [
-                            "true"
-                        ],
-                        "description": "This must be set to 'true'.",
-                        "required": true
+                        "$ref": "#/parameters/MetadataParameter"
                     }   
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/instance"
+                            "$ref": "#/definitions/Instance"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "503": {
+                        "description": "Service unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     },
                     "default": {
@@ -81,39 +112,70 @@
         },
         "/attested/document": {
             "get": {
-                "operationId": "getAttested",
+                "operationId": "Attested_GetDocument",
                 "description": "Get Attested Data for the Virtual Machine.",
                 "parameters": [
                     {
-                        "name": "api-version",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "description": "This is the version of API to invoke."
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "nonce",
                         "in": "query",
                         "required": false,
                         "type": "string",
-                        "description": "10-digit random number."
+                        "description": "This is a string of up to 32 random alphanumeric characters."
                     },
                     {
-                        "name": "Metadata",
-                        "in": "header",
-                        "type": "string",
-                        "enum": [
-                            "true"
-                        ],
-                        "description": "This must be set to 'true'.",
-                        "required": true
-                    }
+                        "$ref": "#/parameters/MetadataParameter"
+                    } 
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/attested"
+                            "$ref": "#/definitions/Attested"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "503": {
+                        "description": "Service unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     },
                     "default": {
@@ -135,22 +197,14 @@
                 "tags": [
                     "Get token"
                 ],
-                "summary": "Get a Token from Azure AD",
-                "description": "",
-                "operationId": "getToken",
+                "description": "Get a Token from Azure AD",
+                "operationId": "Identity_GetToken",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "Metadata",
-                        "in": "header",
-                        "type": "string",
-                        "enum": [
-                            "true"
-                        ],
-                        "description": "This must be set to 'true'.",
-                        "required": true
+                        "$ref": "#/parameters/MetadataParameter"
                     },
                     {
                         "name": "resource",
@@ -160,16 +214,7 @@
                         "required": true
                     },
                     {
-                        "name": "api-version",
-                        "in": "query",
-                        "type": "string",
-                        "enum": [
-                            "2018-02-01",
-                            "2018-04-02",
-                            "2018-10-01"
-                        ],
-                        "description": "This is the API version to use.",
-                        "required": true
+                        "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
                         "name": "client_id",
@@ -207,20 +252,54 @@
                             "true"
                         ],
                         "description": "If provided, the value must be 'true'. This indicates to the server that the token must be retrieved from Azure AD and cannot be retrieved from an internal cache.",
-                        "required": false
+                        "required": false,
+                        "x-ms-enum": {
+                            "name": "BypassCache",
+                            "modelAsString": true
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
                         "schema": {
-                            "$ref": "#/definitions/TokenResponse"
+                            "$ref": "#/definitions/IdentityTokenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
                         }
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/IdentityErrorResponse"
                         }
                     }
                 },
@@ -236,47 +315,60 @@
                 "tags": [
                     "Get metadata information"
                 ],
-                "summary": "Get information about AAD Metadata",
-                "description": "",
-                "operationId": "getInfo",
+                "description": "Get information about AAD Metadata",
+                "operationId": "Identity_GetInfo",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "Metadata",
-                        "in": "header",
-                        "type": "string",
-                        "enum": [
-                            "true"
-                        ],
-                        "description": "This must be set to 'true'.",
-                        "required": true
+                        "$ref": "#/parameters/MetadataParameter"
                     },
                     {
-                        "name": "api-version",
-                        "in": "query",
-                        "type": "string",
-                        "enum": [
-                            "2018-02-01",
-                            "2018-04-02",
-                            "2018-10-01"
-                        ],
-                        "description": "This is the API version to use.",
-                        "required": true
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
                         "schema": {
-                            "$ref": "#/definitions/InfoResponse"
+                            "$ref": "#/definitions/IdentityInfoResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "405": {
+                        "description": "Method not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityErrorResponse"
                         }
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/IdentityErrorResponse"
                         }
                     }
                 },
@@ -289,7 +381,7 @@
         }
     },
     "definitions": {
-        "compute": {
+        "Compute": {
             "type": "object",
             "properties": {
                 "azEnvironment": {
@@ -318,12 +410,12 @@
                 },
                 "plan": {
                     "type": "object",
-                    "$ref": "#/definitions/planProperties"
+                    "$ref": "#/definitions/PlanProperties"
                 },
                 "publicKeys": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/publicKeysProperties"
+                        "$ref": "#/definitions/PublicKeysProperties"
                     },
                     "description": "This is information about the SSH certificate"
                 },
@@ -382,20 +474,20 @@
             }, 
             "description": "Compute Metadata"
         },
-        "network": {
+        "Network": {
             "type": "object",
             "properties": {
                 "interface": {
                     "type":"array",
                     "items": {
                         "type": "object",
-                        "$ref": "#/definitions/networkInterface"
+                        "$ref": "#/definitions/NetworkInterface"
                     }
                 }            
             },
             "description": "Network Metadata"
         },
-        "networkInterface": {
+        "NetworkInterface": {
             "type": "object",
             "properties": {
                 "ipv4": {
@@ -405,14 +497,14 @@
                             "type":"array",
                             "items": {
                                 "type": "object",
-                                "$ref":"#/definitions/ipv4Properties"
+                                "$ref":"#/definitions/Ipv4Properties"
                             }
                         },
                         "subnet": {
                             "type":"array",
                             "items": {
                                 "type": "object",
-                                "$ref": "#/definitions/subnetProperties"
+                                "$ref": "#/definitions/SubnetProperties"
                             }
                         }
                     }
@@ -424,7 +516,7 @@
                             "type":"array",
                             "items": {
                                 "type": "object",
-                                "$ref":"#/definitions/ipv6Properties"
+                                "$ref":"#/definitions/Ipv6Properties"
                             }
                         }
                     }
@@ -435,8 +527,9 @@
                 }
             }
         },
-        "planProperties": {
+        "PlanProperties": {
             "type": "object",
+            "description": "This contains the data about the plan.",
             "properties": {
                 "name": {
                     "type": "string",
@@ -452,8 +545,9 @@
                 }
             }
         },
-        "publicKeysProperties": {
+        "PublicKeysProperties": {
             "type": "object",
+            "description": "This contains the data about the public key.",
             "properties": {
                 "path": {
                     "type": "string",
@@ -465,8 +559,9 @@
                 }
             }
         },
-        "ipv4Properties": {
+        "Ipv4Properties": {
             "type": "object",
+            "description": "This contains the IPv4 properties.",
             "properties": { 
                 "privateIpAddress": {
                     "type":"string",
@@ -478,8 +573,9 @@
                 }
             }
         },
-        "ipv6Properties": {
+        "Ipv6Properties": {
             "type": "object",
+            "description": "This contains the IPv6 properties.",
             "properties": { 
                 "privateIpAddress": {
                     "type":"string",
@@ -487,8 +583,9 @@
                 }
             }
         },
-        "subnetProperties": {
+        "SubnetProperties": {
             "type": "object",
+            "description": "This contains the properties of the subnet.",
             "properties": { 
                 "address": {
                     "type":"string",
@@ -500,21 +597,23 @@
                 }
             }
         },
-        "instance": {
+        "Instance": {
             "type": "object",
+            "description": "This is the response from the Instance_GetMetadata operation.",
             "properties": {
                 "compute": {
-                    "$ref": "#/definitions/compute",
+                    "$ref": "#/definitions/Compute",
                     "description": "Compute Metadata"
                 },
                 "network": {
-                    "$ref": "#/definitions/network",
+                    "$ref": "#/definitions/Network",
                     "description": "Network Metadata" 
                 }
             }
         },
-        "attested": {
+        "Attested": {
             "type": "object",
+            "description": "This is the response from the Attested_GetDocument operation.",
             "properties": {
                 "signature": {
                     "type": "string",
@@ -527,21 +626,50 @@
             }
         },
         "ErrorResponse": {
-            "description": "Describes the format of Error response.",
+            "description": "This is the response from an operation in the case an error occurs.",
             "type": "object",
             "properties": {
-                "code": {
-                    "description": "Error code",
-                    "type": "string"
-                },
-                "message": {
+                "error": {
                     "description": "Error message indicating why the operation failed.",
                     "type": "string"
                 }
             }
         },
-        "TokenResponse": {
+        "IdentityErrorResponse": {
             "type": "object",
+            "description": "This is the response from an Identity operation in the case an error occurs.",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "description": "Error code",
+                    "enum": [
+                        "invalid_request",
+                        "unauthorize_client",
+                        "access_denied",
+                        "unsupported_response_type",
+                        "invalid_scope",
+                        "server_error",
+                        "service_unavailable",
+                        "bad_request",
+                        "forbidden",
+                        "not_found",
+                        "method_not_allowed",
+                        "too_many_requests"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Error",
+                        "modelAsString": true
+                    }
+                },
+                "error_description": {
+                    "type": "string",
+                    "description": "Error message indicating why the operation failed."
+                }
+            }
+        },
+        "IdentityTokenResponse": {
+            "type": "object",
+            "description": "This is the response from the Identity_GetToken operation.",
             "properties": {
                 "access_token": {
                     "type": "string",
@@ -585,14 +713,47 @@
                 }
             }
         },
-        "InfoResponse": {
+        "IdentityInfoResponse": {
             "type": "object",
+            "description": "This is the response from the Identity_GetInfo operation.",
             "properties": {
                 "tenantId": {
                     "type": "string",
                     "description": "This is the AAD tenantId of the identity of the caller."
                 }
             }           
+        }
+    },
+    "parameters": {
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "type": "string",
+            "enum": [
+                "2018-02-01",
+                "2018-04-02",
+                "2018-10-01"
+            ],
+            "description": "This is the API version to use.",
+            "required": true,
+            "x-ms-enum": {
+                "name": "ApiVersion",
+                "modelAsString": true
+            }
+        },
+        "MetadataParameter": {
+            "name": "Metadata",
+            "in": "header",
+            "type": "string",
+            "enum": [
+                "true"
+            ],
+            "description": "This must be set to 'true'.",
+            "required": true,
+            "x-ms-enum": {
+                "name": "Metadata",
+                "modelAsString": true
+            }
         }
     }
 }
