@@ -61,10 +61,13 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Common.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceMySqlTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToSourcePostgreSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlMiSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlMITask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetUserTablesSqlTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
@@ -72,6 +75,7 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlDbTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlMiSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlMITask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrationValidation.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MongoDbTasks.json
@@ -82,6 +86,7 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/TasksCommon.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
 ```
 
 ### Tag: package-2018-03-31-preview
