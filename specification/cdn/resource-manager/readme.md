@@ -128,4 +128,8 @@ directive:
     from: cdn.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles"].get.operationId'
     reason: It's fine
+  - suppress: GetInOperationName
+    from: cdn.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles"].get.operationId'
+    reason: gdxg
 ```
