@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2018-06-preview --python` is speci
 
 ``` yaml $(tag) == 'package-2018-06-preview' && $(python)
 python:
-  namespace: azure.datalake.storage.v2018_06_17
+  namespace: azure.datalake.storage.v2018_06_17_preview
   output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_06_17_preview
 ```
 
