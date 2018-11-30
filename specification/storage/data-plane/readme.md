@@ -26,28 +26,27 @@ These are the global settings for the DataLakeStorage API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-11-preview
-tag: package-2018-06-preview
+tag: package-2018-11
 use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: package-2018-11-preview
+### Tag: package-2018-11
 
-These settings apply only when `--tag=package-2018-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-11-preview'
+``` yaml $(tag) == 'package-2018-11'
 input-file:
-- Microsoft.StorageDataLake/preview/2018-11-09/DataLakeStorage.json
+- Microsoft.StorageDataLake/stable/2018-11-09/DataLakeStorage.json
 ```
 
-### Tag: package-2018-06-preview
+### Tag: package-2018-06
 
-These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-preview'
+``` yaml $(tag) == 'package-2018-06'
 input-file:
-- Microsoft.StorageDataLake/preview/2018-06-17/DataLakeStorage.json
+- Microsoft.StorageDataLake/stable/2018-06-17/DataLakeStorage.json
 ```
 
 ---
@@ -96,28 +95,28 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
-  - tag: package-2018-11-preview
-  - tag: package-2018-06-preview
+  - tag: package-2018-11
+  - tag: package-2018-06
 ```
 
-### Tag: package-2018-11-preview and python
+### Tag: package-2018-11 and python
 
-These settings apply only when `--tag=package-2018-11-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-2018-11 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-11-preview' && $(python)
+``` yaml $(tag) == 'package-2018-11' && $(python)
 python:
-  namespace: azure.datalake.storage.v2018_11_09_preview
-  output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_11_09_preview
+  namespace: azure.datalake.storage.v2018_11_09
+  output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_11_09
 ```
 
-### Tag: package-2018-06-preview and python
+### Tag: package-2018-06 and python
 
-These settings apply only when `--tag=package-2018-06-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-2018-06 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-preview' && $(python)
+``` yaml $(tag) == 'package-2018-06' && $(python)
 python:
-  namespace: azure.datalake.storage.v2018_06_17_preview
-  output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_06_17_preview
+  namespace: azure.datalake.storage.v2018_06_17
+  output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_06_17
 ```
 
 ## Go
