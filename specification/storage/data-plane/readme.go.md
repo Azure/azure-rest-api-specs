@@ -14,7 +14,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-11
-  - tag: package-2018-06
+  - tag: package-2018-06-preview
 ```
 
 ### Tag:  package-2018-11 and go
@@ -26,11 +26,11 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/stable/storage/datalake/2018-11-09/$(namespace)
 ```
 
-### Tag:  package-2018-06 and go
+### Tag:  package-2018-06-preview and go
 
-These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-06' && $(go)
-output-folder: $(go-sdk-folder)/services/stable/storage/datalake/2018-06-17/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/storage/datalake/2018-06-17/$(namespace)
 ```
