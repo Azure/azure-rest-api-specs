@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2018-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-11-preview'
 input-file:
-- preview/2018-11-09/DataLakeStorage.json
+- Microsoft.StorageDataLake/preview/2018-11-09/DataLakeStorage.json
 ```
 
 ### Tag: package-2018-06-preview
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- preview/2018-06-17/DataLakeStorage.json
+- Microsoft.StorageDataLake/preview/2018-06-17/DataLakeStorage.json
 ```
 
 ---
