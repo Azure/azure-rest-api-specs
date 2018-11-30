@@ -109,11 +109,11 @@ python:
   output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_11_09
 ```
 
-### Tag: package-2018-06 and python
+### Tag: package-2018-06-preview and python
 
 These settings apply only when `--tag=package-2018-06-preview --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06' && $(python)
+``` yaml $(tag) == 'package-2018-06-preview' && $(python)
 python:
   namespace: azure.datalake.storage.v2018_06_17
   output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_06_17_preview
