@@ -26,15 +26,23 @@ These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05
+tag: package-2025-10
 ```
 
 
+### Tag: package-2025-10
+
+These settings apply only when `--tag=package-2025-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10'
+input-file:
+  - Microsoft.Network/stable/2025-10-04/dns.json
+```
 ### Tag: package-2018-05
 
 These settings apply only when `--tag=package-2018-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-05'
+``` yaml $(tag) == 'package-2018-05'
 input-file:
   - Microsoft.Network/stable/2018-05-01/dns.json
 directive:
@@ -57,6 +65,7 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase  
 ```
+
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
