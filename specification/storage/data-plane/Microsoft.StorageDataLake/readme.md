@@ -87,7 +87,18 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-11-preview
   - tag: package-2018-06-preview
+```
+
+### Tag: package-2018-11-preview and python
+
+These settings apply only when `--tag=package-2018-11-preview --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11-preview' && $(python)
+python:
+  namespace: azure.datalake.storage.v2018_11_09_preview
+  output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2018_11_09_preview
 ```
 
 ### Tag: package-2018-06-preview and python

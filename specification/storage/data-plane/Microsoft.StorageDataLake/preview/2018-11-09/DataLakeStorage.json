@@ -3,7 +3,7 @@
   "info": {
     "description": "Azure Data Lake Storage provides storage for Hadoop and other big data workloads.",
     "title": "Azure Data Lake Storage REST API",
-    "version": "2018-06-17",
+    "version": "2018-11-09",
     "x-ms-code-generation-settings": {
       "internalConstructors": true,
       "name": "DataLakeStorageClient"
@@ -478,6 +478,13 @@
             "minimum": 1,
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "upn",
+            "in": "query",
+            "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the identity values returned in the owner and group fields of each list entry will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false.",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -580,6 +587,9 @@
           "name": "filesystem",
           "in": "path",
           "description": "The filesystem identifier.  The value must start and end with a letter or number and must contain only letters, numbers, and the dash (-) character.  Consecutive dashes are not permitted.  All letters must be lowercase.  The value must have between 3 and 63 characters.",
+          "pattern": "^[a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$",
+          "minLength": 3,
+          "maxLength": 63,
           "required": true,
           "type": "string"
         },
@@ -669,7 +679,8 @@
               },
               "Content-Length": {
                 "description": "The size of the resource in bytes.",
-                "type": "string"
+                "type": "integer",
+                "format": "int64"
               }
             }
           },
@@ -794,14 +805,6 @@
             "type": "string"
           },
           {
-            "name": "x-ms-proposed-lease-id",
-            "in": "header",
-            "description": "Optional for create operations.  Required when \"x-ms-lease-action\" is used.  A lease will be acquired using the proposed ID when the resource is created.",
-            "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "x-ms-source-lease-id",
             "in": "header",
             "description": "Optional for rename operations.  A lease ID for the source path.  The source path must have an active lease and the lease ID must match.",
@@ -819,6 +822,13 @@
           {
             "name": "x-ms-permissions",
             "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access permissions for the file owner, the file owning group, and others. Each class may be granted read, write, or execute permission.  The sticky bit is also supported.  Both symbolic (rwxrw-rw-) and 4-digit octal notation (e.g. 0766) are supported.",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-umask",
+            "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. When creating a file or directory and the parent folder does not have a default ACL, the umask restricts the permissions of the file or directory to be created.  The resulting permission is given by p & ^u, where p is the permission and u is the umask.  For example, if p is 0777 and u is 0057, then the resulting permission is 0720.  The default permission is 0777 for a directory and 0666 for a file.  The default umask is 0027.  The umask must be specified in 4-digit octal notation (e.g. 0766).",
             "in": "header",
             "required": false,
             "type": "string"
@@ -930,7 +940,8 @@
               },
               "Content-Length": {
                 "description": "The size of the resource in bytes.",
-                "type": "string"
+                "type": "integer",
+                "format": "int64"
               },
               "Content-Range": {
                 "description": "Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.",
@@ -1016,21 +1027,8 @@
             "description": "Required for \"Append Data\" and \"Flush Data\".  Must be 0 for \"Flush Data\".  Must be the length of the request content in bytes for \"Append Data\".",
             "minimum": 0,
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-ms-lease-action",
-            "in": "header",
-            "description": "Optional.  The lease action can be \"renew\" to renew an existing lease or \"release\" to release a lease.",
-            "type": "string",
-            "enum": [
-              "renew",
-              "release"
-            ],
-            "x-ms-enum": {
-              "name": "PathUpdateLeaseAction",
-              "modelAsString": false
-            }
+            "type": "integer",
+            "format": "int64"
           },
           {
             "name": "x-ms-lease-id",
@@ -1369,7 +1367,8 @@
               },
               "Content-Length": {
                 "description": "The size of the resource in bytes.",
-                "type": "string"
+                "type": "integer",
+                "format": "int64"
               },
               "Content-Range": {
                 "description": "Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.",
@@ -1450,7 +1449,8 @@
               },
               "Content-Length": {
                 "description": "The size of the resource in bytes.",
-                "type": "string"
+                "type": "integer",
+                "format": "int64"
               },
               "Content-Range": {
                 "description": "Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.",
@@ -1519,6 +1519,14 @@
             "name": "Range"
           },
           {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "Optional. If this header is specified, the operation will be performed only if both of the following conditions are met: i) the path's lease is currently active and ii) the lease ID specified in the request matches that of the path.",
+            "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "If-Match",
             "description": "Optional.  An ETag value. Specify this header to perform the operation only if the resource's ETag matches the value specified. The ETag must be specified in quotes.",
             "in": "header",
@@ -1550,8 +1558,8 @@
       },
       "head": {
         "operationId": "Path_GetProperties",
-        "summary": "Get Properties | Get Access Control List",
-        "description": "Get the properties for a file or directory, and optionally include the access control list.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "summary": "Get Properties | Get Status | Get Access Control List",
+        "description": "Get Properties returns all system and user defined properties for a path. Get Status returns all system defined properties for a path. Get Access Control List returns the access control list for a path. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "File and Directory Operations"
         ],
@@ -1581,7 +1589,8 @@
               },
               "Content-Length": {
                 "description": "The size of the resource in bytes.",
-                "type": "string"
+                "type": "integer",
+                "format": "int64"
               },
               "Content-Range": {
                 "description": "Indicates the range of bytes returned in the event that the client requested a subset of the file by setting the Range request header.",
@@ -1658,16 +1667,32 @@
           {
             "name": "action",
             "in": "query",
-            "description": "Optional. If the value is \"getAccessControl\" the access control list is returned in the response headers (Hierarchical Namespace must be enabled for the account).",
+            "description": "Optional. If the value is \"getStatus\" only the system defined properties for the path are returned. If the value is \"getAccessControl\" the access control list is returned in the response headers (Hierarchical Namespace must be enabled for the account), otherwise the properties are returned.",
             "required": false,
             "type": "string",
             "enum": [
-              "getAccessControl"
+              "getAccessControl",
+              "getStatus"
             ],
             "x-ms-enum": {
               "name": "PathGetPropertiesAction",
               "modelAsString": false
             }
+          },
+          {
+            "name": "upn",
+            "in": "query",
+            "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "Optional. If this header is specified, the operation will be performed only if both of the following conditions are met: i) the path's lease is currently active and ii) the lease ID specified in the request matches that of the path.",
+            "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "If-Match",
