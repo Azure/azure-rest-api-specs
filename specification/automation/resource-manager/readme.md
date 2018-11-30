@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for Automation.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Automation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,21 +15,34 @@ To build the SDK for Automation, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 =======
+
 ### Basic Information
+
 These are the global settings for the Automation API.
 
 ``` yaml
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2018-06-preview
+tag: package-3123-32
 ```
 
+
+### Tag: package-3123-32
+
+These settings apply only when `--tag=package-3123-32` is specified on the command line.
+
+```yaml $(tag) == 'package-3123-32'
+input-file:
+  - Microsoft.Automation/stable/3123-32-32/python2package.json
+  - Microsoft.Automation/stable/3123-32-32/runbook.json
+```
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
@@ -53,7 +68,6 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/variable.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
-
 
 ### Tag: package-2017-05-preview
 
@@ -157,7 +171,9 @@ input-file:
 ```
 
 ---
+
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -184,6 +200,7 @@ directive:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -201,7 +218,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_automation']
 ```
-
 
 ## C#
 
@@ -234,11 +250,13 @@ python:
   package-version: 0.3.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-automation/azure/mgmt/automation
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -282,5 +300,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
