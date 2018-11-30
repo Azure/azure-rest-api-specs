@@ -3413,6 +3413,10 @@
                  "currentProgress": {
                     "$ref": "#/definitions/SyncProgressStatus",
                     "description": "Current progress"
+                },
+                 "offlineDataTransferStatus": {
+                    "$ref": "#/definitions/OfflineDataTransferState",
+                    "description": "Offline Data Transfer State"
                 }                
             }
         },
@@ -3516,6 +3520,16 @@
                "SyncBlockedForRestore",
                "SyncBlockedForChangeDetectionPostRestore",
                "NoActivity"
+            ]
+        },
+        "OfflineDataTransferState": {
+            "type": "string",
+            "description": "Type of the Health state",
+            "enum": [
+               "InProgress",
+               "Stopping",
+               "NotRunning",
+               "Complete"
             ]
         },
         "WorkflowStatus": {
