@@ -26,11 +26,20 @@ These are the global settings for the DataLakeStorage API.
 
 ``` yaml
 openapi-type: data-plane
+tag: package-2018-11-preview
 tag: package-2018-06-preview
 use-internal-constructors: true
 add-credentials: true
 ```
 
+### Tag: package-2018-11-preview
+
+These settings apply only when `--tag=package-2018-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11-preview'
+input-file:
+- preview/2018-11-09/DataLakeStorage.json
+```
 
 ### Tag: package-2018-06-preview
 
