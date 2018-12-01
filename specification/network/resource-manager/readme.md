@@ -28,15 +28,42 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-10
+tag: package-2025-12
 ```
 
 
+### Tag: package-2025-12
+
+These settings apply only when `--tag=package-2025-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12'
+input-file:
+  - Microsoft.Network/stable/2025-12-07/applicationGateway.json
+  - Microsoft.Network/stable/2025-12-07/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2025-12-07/checkDnsAvailability.json
+  - Microsoft.Network/stable/2025-12-07/endpointService.json
+  - Microsoft.Network/stable/2025-12-07/expressRouteCircuit.json
+  - Microsoft.Network/stable/2025-12-07/loadBalancer.json
+  - Microsoft.Network/stable/2025-12-07/network.json
+  - Microsoft.Network/stable/2025-12-07/networkInterface.json
+  - Microsoft.Network/stable/2025-12-07/networkSecurityGroup.json
+  - Microsoft.Network/stable/2025-12-07/networkWatcher.json
+  - Microsoft.Network/stable/2025-12-07/operation.json
+  - Microsoft.Network/stable/2025-12-07/publicIpAddress.json
+  - Microsoft.Network/stable/2025-12-07/routeFilter.json
+  - Microsoft.Network/stable/2025-12-07/routeTable.json
+  - Microsoft.Network/stable/2025-12-07/serviceCommunity.json
+  - Microsoft.Network/stable/2025-12-07/usage.json
+  - Microsoft.Network/stable/2025-12-07/virtualNetwork.json
+  - Microsoft.Network/stable/2025-12-07/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2025-12-07/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2025-12-07/vmssPublicIpAddress.json
+```
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-10'
+``` yaml $(tag) == 'package-2018-10'
 input-file:
   - Microsoft.Network/stable/2018-10-01/applicationGateway.json
   - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
@@ -72,6 +99,7 @@ input-file:
   - Microsoft.Network/stable/2018-10-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-10-01/vmssPublicIpAddress.json
 ```
+
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
