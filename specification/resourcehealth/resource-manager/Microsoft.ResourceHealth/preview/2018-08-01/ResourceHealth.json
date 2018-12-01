@@ -409,9 +409,38 @@
               "type": "string",
               "description": "Summary text of event."
             },
-            "reason": {
+            "header": {
               "type": "string",
-              "description": "Downtime reason of event."
+              "description": "Header text of event."
+            },
+            "level": {
+              "type": "string",
+              "description": "Level of event.",
+              "enum": [
+                "Critical",
+                "Warning"
+              ],
+              "x-ms-enum": {
+                "name": "LevelValues",
+                "modelAsString": true
+              }
+            },
+            "article": {
+              "type": "object",
+              "description": "Article of event.",
+              "properties": {
+                "articleContent": {
+                  "type": "string",
+                  "description": "Article content of event."
+                }
+              }
+            },
+            "links": {
+              "type": "array",
+              "description": "Useful links of event.",
+              "items": {
+                "$ref": "#/definitions/link"
+              }
             },
             "impactStartTime": {
               "type": "string",
@@ -429,6 +458,39 @@
               "items": {
                 "$ref": "#/definitions/impact"
               }
+            },
+            "recommendedActions": {
+              "type": "object",
+              "description": "Recommended actions of event.",
+              "properties": {
+                "groupId": {
+                  "type": "string",
+                  "description": "Recommended action group Id for the service health event."
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Recommended action title for the service health event."
+                },
+                "actions": {
+                  "type": "array",
+                  "description": "Recommended actions for the service health event.",
+                  "items": {
+                    "type": "string",
+                    "description": "Recommended action for the service health event."
+                  }
+                },
+                "localeCode": {
+                  "type": "string",
+                  "description": "Recommended action locale for the service health event."
+                }
+              }
+            },
+            "faqs": {
+              "type": "array",
+              "description": "Frequently asked questions for the service health event.",
+              "items": {
+                "$ref": "#/definitions/faq"
+              }
             }
           }
         }
@@ -439,20 +501,72 @@
         }
       ]
     },
+    "link": {
+      "description": "Useful links for service health event.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of link.",
+          "enum": [
+            "Button",
+            "Hyperlink"
+          ],
+          "x-ms-enum": {
+            "name": "LinkTypeValues",
+            "modelAsString": true
+          }
+        },
+        "displayText": {
+          "type": "object",
+          "description": "Display text of link.",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Display text of link."
+            },
+            "localizedValue": {
+              "type": "string",
+              "description": "Localized display text of link."
+            }
+          }
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "It provides the name of portal extension to produce link for given service health event."
+        },
+        "bladeName": {
+          "type": "string",
+          "description": "It provides the name of portal extension blade to produce link for given service health event."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "It provides a map of parameter name and value for portal extension blade to produce lik for given service health event."
+        }
+      }
+    },
+    "faq": {
+      "description": "Frequently asked question for the service health event",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "FAQ question for the service health event."
+        },
+        "answer": {
+          "type": "string",
+          "description": "FAQ answer for the service health event."
+        },
+        "localeCode": {
+          "type": "string",
+          "description": "FAQ locale for the service health event."
+        }
+      }
+    },
     "impact": {
       "description": "Azure service impacted by the service health event.",
       "properties": {
         "impactedService": {
           "type": "string",
-          "description": "Impacted service name.",
-          "enum": [
-            "Virtual Machines",
-            "SQL Database"
-          ],
-          "x-ms-enum": {
-            "name": "Services",
-            "modelAsString": true
-          }
+          "description": "Impacted service name."
         },
         "impactedRegions": {
           "type": "array",
@@ -490,13 +604,30 @@
             "description": "Subscription impacted by the service health event."
           }
         },
-        "impactedResourcesCount": {
-          "type": "integer",
-          "description": "Total Azure resources impacted by the service health event."
-        },
         "lastUpdateTime": {
           "type": "string",
           "description": "It provides the Timestamp for when the last update for the service health event.",
+          "format": "date-time"
+        },
+        "updates": {
+          "type": "array",
+          "description": "List of updates for given servie health event.",
+          "items": {
+            "$ref": "#/definitions/update"
+          }
+        }
+      }
+    },
+    "update": {
+      "description": "Update for service health event.",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Summary text for the given update for the service health event."
+        },
+        "updateDateTime": {
+          "type": "string",
+          "description": "It provides the Timestamp for the given update for the service health event.",
           "format": "date-time"
         }
       }
@@ -837,7 +968,7 @@
             },
             "operation": {
               "type": "string",
-              "description": "Operation."
+              "description": "Operation name."
             },
             "description": {
               "type": "string",
