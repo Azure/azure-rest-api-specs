@@ -1,42 +1,66 @@
-PUT /subscriptions/{subscriptionId}/resourcegroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwareUpdateDeployments/{name}?api-version=2018-08-12-preview
-
-Request Body:
 {
-  "properties": {
-    "windows": {
-      "includedUpdateClassifications": "FeaturePack, Critical",
-      "includedKBNumbers": ["kb1", "kb2", "kb3"],
-      "excludedKBNumbers": ["kb10", "kb20", "kb30"]
-    },
-    "linux": {
-      "includedPackageClassifications": "Critical, Security",
-      "includedPackageNameMasks": ["m1", "m2"],
-      "excludedPackageNameMasks": ["m3"]
-    },
-    "maximumDuration": "PT2H30M",
-    "rebootSetting": "IfRequired"
-   }
-}
-
-Response Body:
-{
-	"id": "/subscriptions/{subscriptionId}/resourcegroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwareUpdateDeployments/{name}",
-	"name": "name",
-	"type": "Microsoft.Compute/virtualMachines/softwareUpdateDeployments",
-	"properties": {
-		"windows": {
-			"includedUpdateClassifications": "Critical, FeaturePack",
-			"excludedKbNumbers": ["kb10", "kb20", "kb30"],
-			"includedKbNumbers": ["kb1", "kb2", "kb3"]
-		},
-		"linux": {
-			"includedPackageClassifications": "Critical, Security",
-			"excludedPackageNameMasks": ["m3"],
-			"includedPackageNameMasks": ["m1", "m2"]
-		},
-		"maximumDuration": "PT2H30M",
-		"rebootSetting": "IfRequired",
-		"provisioningState": "Provisioning"	
+	"parameters": {
+		"subscriptionId": "1a7d4044-286c-4acb-969a-96639265bf2e",
+		"resourceGroupName": "mygroup",
+		"vmName": "vmName",
+		"softwareUpdateDeploymentName": "weeklyUpdate",
+		"api-version": "2017-05-15-preview",
+		"body": {
+			"properties": {
+				"windows": {
+					"includedUpdateClassifications": "FeaturePack, Critical",
+					"includedKBNumbers": ["kb1", "kb2", "kb3"],
+					"excludedKBNumbers": ["kb10", "kb20", "kb30"]
+				},
+				"linux": {
+					"includedPackageClassifications": "Critical, Security",
+					"includedPackageNameMasks": ["m1", "m2"],
+					"excludedPackageNameMasks": ["m3"]
+				},
+				"maximumDuration": "PT2H30M",
+				"rebootSetting": "IfRequired"
+			}
+		}
+	},
+	"responses": {
+		"200": {
+			"id": "/subscriptions/{subscriptionId}/resourcegroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwareUpdateDeployments/{name}",
+			"name": "name",
+			"type": "Microsoft.Compute/virtualMachines/softwareUpdateDeployments",
+			"properties": {
+				"windows": {
+					"includedUpdateClassifications": "Critical, FeaturePack",
+					"excludedKbNumbers": ["kb10", "kb20", "kb30"],
+					"includedKbNumbers": ["kb1", "kb2", "kb3"]
+				},
+				"linux": {
+					"includedPackageClassifications": "Critical, Security",
+					"excludedPackageNameMasks": ["m3"],
+					"includedPackageNameMasks": ["m1", "m2"]
+				},
+				"maximumDuration": "PT2H30M",
+				"rebootSetting": "IfRequired",
+				"provisioningState": "Provisioning",
+				"instanceView": {
+					"statuses": [{
+						"code": "Provisioning Succeeded",
+						"level": "Info",
+						"displayStatus": "Provisioning Succeded",
+						"message": "Provisioning Succeded",
+						"time": "2018-12-01T02:54:32.716Z"
+					}],
+					"updates": [{
+						"updateId": "package1",
+						"updateState": "excluded",
+						"updateStateReason": "based on input",
+						"message": "by input",
+						"classification": "Critical",
+						"title": "KB1234- RFC1243"
+					}],
+					"rebootRequired": true,
+					"maintenanceWindowExceeded": true
+				}
+			}
+		}
 	}
 }
-
