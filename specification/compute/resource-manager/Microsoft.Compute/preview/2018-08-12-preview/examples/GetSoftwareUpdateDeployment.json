@@ -1,0 +1,23 @@
+
+GET /subscriptions/{subscriptionId}/resourcegroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwareUpdateDeployments/{name}?api-version=2018-08-12-preview
+
+{
+	"id": "/subscriptions/{subscriptionId}/resourcegroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwareUpdateDeployments/{name}",
+	"name": "name",
+	"type": "Microsoft.Compute/virtualMachines/softwareUpdateDeployments",
+	"properties": {
+		"windows": {
+			"includedUpdateClassifications": "Critical, FeaturePack",
+			"excludedKbNumbers": ["kb10", "kb20", "kb30"],
+			"includedKbNumbers": ["kb1", "kb2", "kb3"]
+		},
+		"linux": {
+			"includedPackageClassifications": "Critical, Security",
+			"excludedPackageNameMasks": ["m3"],
+			"includedPackageNameMasks": ["m1", "m2"]
+		},
+		"maximumDuration": "PT2H30M",
+		"rebootSetting": "IfRequired",
+		"provisioningState": "Provisioning"
+	}
+}

@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ComputeManagementClient",
-    "description": "The Compute Management Client.",
+    "title": "Compute Management- Update Management API",
+    "description": "APIs for managing software update configurations.",
     "version": "2016-04-30-preview"
   },
   "host": "management.azure.com",
@@ -54,7 +54,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The virtual machine name."
           },
           {
             "name": "softwareUpdateDeploymentName",
@@ -90,59 +90,7 @@
         },
         "x-ms-examples": {
           "Create a virtual machine image from a blob.": {
-            "$ref": "./examples/CreateAnImageFromABlob.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "SoftwareUpdateDeployments"
-        ],
-        "operationId": "SoftwareUpdateDeployments_Delete",
-        "description": "Delete a software Update Deployment.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "vmName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "softwareUpdateDeploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Software Update Deployment."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
-          },
-          "204": {
-            "description": "No Content"
-          }
-        },
-        "x-ms-examples": {
-          "Create a virtual machine image from a blob.": {
-            "$ref": "./examples/CreateAnImageFromABlob.json"
+            "$ref": "./examples"
           }
         }
       },
@@ -165,7 +113,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The virtual machine name."
           },
           {
             "name": "softwareUpdateDeploymentName",
@@ -191,7 +139,46 @@
         },
         "x-ms-examples": {
           "Create a virtual machine image from a blob.": {
-            "$ref": "./examples/CreateAnImageFromABlob.json"
+            "$ref": "./examples/GetSoftwareUpdateDeployment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/SoftwareUpdateDeployments/{softwareUpdateDeploymentName}/instanceView": {
+      "get": {
+        "tags": [
+          "SoftwareUpdateDeployments"
+        ],
+        "operationId": "SoftwareUpdateDeployments_GetInstanceView",
+        "description": "Gets the status of a SoftwareUpdateDeployment.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SoftwareUpdateDeploymentInstanceView"
+            }
           }
         }
       }
@@ -206,6 +193,13 @@
         "parameters": [
           {
             "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -231,158 +225,185 @@
         },
         "x-ms-examples": {
           "Create a virtual machine image from a blob.": {
-            "$ref": "./examples/CreateAnImageFromABlob.json"
+            "$ref": "./examples/GetSoftwareUpdateDeploymentByName.json"
           }
         }
       }
     }
   },
-  "definitions": {
-    "InstanceViewStatus": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The status code."
-        },
-        "level": {
-          "type": "string",
-          "description": "The level code.",
-          "enum": [
-            "Info",
-            "Warning",
-            "Error"
-          ],
-          "x-ms-enum": {
-            "name": "StatusLevelTypes",
-            "modelAsString": false
+    "definitions": {
+      "InstanceViewStatus": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The status code."
+          },
+          "level": {
+            "type": "string",
+            "description": "The level code.",
+            "enum": [
+              "Info",
+              "Warning",
+              "Error"
+            ],
+            "x-ms-enum": {
+              "name": "StatusLevelTypes",
+              "modelAsString": false
+            }
+          },
+          "displayStatus": {
+            "type": "string",
+            "description": "The short localizable label for the status."
+          },
+          "message": {
+            "type": "string",
+            "description": "The detailed status message, including for alerts and error messages."
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The time of the status."
           }
         },
-        "displayStatus": {
-          "type": "string",
-          "description": "The short localizable label for the status."
-        },
-        "message": {
-          "type": "string",
-          "description": "The detailed status message, including for alerts and error messages."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time of the status."
-        }
+        "description": "Instance view status."
       },
-      "description": "Instance view status."
-    },
-    "SoftwareUpdateDeploymentProperties": {
-      "properties": {
-        "windows": {
-          "$ref": "#/definitions/WindowsUpdateConfiguration",
-          "description": "Windows Update Configuration."
-        },
-        "linux": {
-          "$ref": "#/definitions/LinuxUpdateConfiguration",
-          "description": "Linux Update Configuration."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "maximumDuration": {
-          "readOnly": true,
-          "type": "string",
-          "format": "?????",
-          "description": "Maximum Duration of the Maintenance Window"
-        },
-        "rebootSetting": {
-          "type": "string",
-          "description": "The detailed status message, including for alerts and error messages."
-        },        
-        "instanceView": {
-          "$ref": "#/definitions/SoftwareUpdateDeploymentInstanceView",
-          "readOnly": true,
-          "description": "The virtual machine instance view."
-        }      
-      },
-      "description": "The instance view of a resource."
-    },
-    "SoftwareUpdateDeployment":  {
-      "properties": {
+      "SoftwareUpdateDeploymentProperties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SoftwareUpdateDeploymentProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Describes a Software Update Deployment."
-    },
-    "SoftwareUpdateDeploymentListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SoftwareUpdateDeployment"
+          "windows": {
+            "$ref": "#/definitions/WindowsUpdateConfiguration",
+            "description": "Windows Update Configuration."
           },
-          "description": "The list of software update deployments"
+          "linux": {
+            "$ref": "#/definitions/LinuxUpdateConfiguration",
+            "description": "Linux Update Configuration."
+          },
+          "provisioningState": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The provisioning state, which only appears in the response."
+          },
+          "maximumDuration": {
+            "type": "string",
+            "format": "duration",
+            "description": "Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
+          },
+          "rebootSetting": {
+            "type": "string",
+            "description": "Reboot setting for the software update configuration."
+          },
+          "instanceView": {
+            "$ref": "#/definitions/SoftwareUpdateDeploymentInstanceView",
+            "readOnly": true,
+            "description": "The virtual machine instance view."
+          }
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of SoftwareUpdateDeployments. Call ListNext() with this URI to fetch the next page of SoftwareUpdateDeployments."
-        }
+        "description": "The instance view of a resource."
       },
-      "required": [
-        "value"
-      ],
-      "description": "The List Availability Set operation response."
-    },
-    "WindowsUpdateConfiguration": {
-      "properties": {
-        "includedUpdates": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }          
+      "SoftwareUpdateDeployment": {
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SoftwareUpdateDeploymentProperties"
+          }
         },
-        "excludedUpdates": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }          
-        },
-        "includedUpdateClassifications": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }          
-      }
-    },
-      "description": "Specifies Windows operating system Update configuration on the virtual machine."
-    },
-    "LinuxUpdateConfiguration": {
-      "properties": {
-          "includedUpdates": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "description": "Describes a Software Update Deployment."
+      },
+      "SoftwareUpdateDeploymentListResult": {
+        "properties": {
+          "value": {
             "type": "array",
             "items": {
+              "$ref": "#/definitions/SoftwareUpdateDeployment"
+            },
+            "description": "The list of software update deployments"
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The URI to fetch the next page of SoftwareUpdateDeployments. Call ListNext() with this URI to fetch the next page of SoftwareUpdateDeployments."
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "description": "The List Availability Set operation response."
+      },
+      "WindowsUpdateConfiguration": {
+        "type": "object",
+        "properties": {
+          "includedUpdates": {
+            "type": "array",
+            "description": "KB numbers included from the software update configuration.",
+            "items": {
               "type": "string"
-            }          
+            }
           },
           "excludedUpdates": {
             "type": "array",
+            "description": "KB numbers excluded from the software update configuration.",
             "items": {
               "type": "string"
-            }          
+            }
           },
           "includedUpdateClassifications": {
+            "description": "Update classification included in the software update configuration. A comma separated string with required values",
+            "type": "string",
+            "enum": [
+              "Unclassified",
+              "Critical",
+              "Security",
+              "UpdateRollup",
+              "FeaturePack",
+              "ServicePack",
+              "Definition",
+              "Tools",
+              "Updates"
+            ],
+            "x-ms-enum": {
+              "name": "WindowsUpdateClasses",
+              "modelAsString": true
+            }
+          }
+
+        },
+        "description": "Specifies Windows operating system Update configuration on the virtual machine."
+      },
+      "LinuxUpdateConfiguration": {
+        "type": "object",
+        "properties": {
+          "includedUpdates": {
             "type": "array",
+            "description": "packages included from the software update configuration.",
             "items": {
               "type": "string"
-            }          
-        }
-      },
+            }
+          },
+          "excludedUpdates": {
+            "type": "array",
+            "description": "packages excluded from the software update configuration.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "includedUpdateClassifications": {
+            "description": "Update classifications included in the software update configuration.",
+            "type": "string",
+            "enum": [
+              "Unclassified",
+              "Critical",
+              "Security",
+              "Other"
+            ],
+            "x-ms-enum": {
+              "name": "LinuxUpdateClasses",
+              "modelAsString": true
+            }
+          }
+        },
         "description": "Specifies Linux operating system Update configuration on the virtual machine."
       },
       "SoftwareUpdateDeploymentInstanceView": {
@@ -399,27 +420,27 @@
             "readOnly": true,
             "type": "array",
             "items": {
-              "$ref": "#/definitions/"
+              "$ref": "#/definitions/UpdateResult"
             },
             "description": "The resource status information."
           },
           "rebootRequired": {
             "type": "boolean",
             "description": "Specifies whether reboot need to be done."
-          },        
+          },
           "maintenanceWindowExceeded": {
             "type": "boolean",
             "description": "Specifies whether maintenance window exceeded."
           }
         },
         "description": "The instance view of a Software Update Deployment ."
-      },    
+      },
       "UpdateResult": {
         "properties": {
           "updateId": {
             "type": "boolean",
             "description": "Specifies whether reboot need to be done."
-          },        
+          },
           "updateState": {
             "type": "string",
             "description": "Specifies whether maintenance window exceeded."
@@ -442,304 +463,179 @@
           }
         },
         "description": "The instance view of a Software Update Deployment ."
-      },  
-    "WindowsConfiguration": {
-      "properties":  {
-        "provisionVMAgent": {
-          "type": "boolean",
-          "description": "Indicates whether virtual machine agent should be provisioned on the virtual machine. <br><br> When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later."
+      },
+      "UpdateResource": {
+        "description": "The Update Resource model definition.",
+        "properties": {
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Resource tags"
+          }
         },
-        "enableAutomaticUpdates": {
-          "type": "boolean",
-          "description": "Indicates whether virtual machine is enabled for automatic updates."
+        "x-ms-azure-resource": true
+      },
+      "SubResource": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Resource Id"
+          }
         },
-        "timeZone": {
-          "type": "string",
-          "description": "Specifies the time zone of the virtual machine. e.g. \"Pacific Standard Time\""
+        "x-ms-azure-resource": true
+      },
+      "SubResourceReadOnly": {
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource Id"
+          }
         },
-        "additionalUnattendContent": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdditionalUnattendContent"
+        "x-ms-azure-resource": true
+      },
+      "Resource": {
+        "description": "The Resource model definition.",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource Id"
           },
-          "description": "Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup."
-        },
-        "winRM": {
-          "$ref": "#/definitions/WinRMConfiguration",
-          "description": "Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell."
-        }
-      },
-      "description": "Specifies Windows operating system settings on the virtual machine."
-    },
-    "LinuxConfiguration": {
-      "properties": {
-        "disablePasswordAuthentication": {
-          "type": "boolean",
-          "description": "Specifies whether password authentication should be disabled."
-        },
-        "ssh": {
-          "$ref": "#/definitions/SshConfiguration",
-          "description": "Specifies the ssh key configuration for a Linux OS."
-        }
-      },
-      "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
-    },
-    "OSProfile": {
-      "properties": {
-        "computerName": {
-          "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
-        },
-        "adminUsername": {
-          "type": "string",
-          "description": "Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
-        },
-        "adminPassword": {
-          "type": "string",
-          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)"
-        },
-        "customData": {
-          "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
-        },
-        "windowsConfiguration": {
-          "$ref": "#/definitions/WindowsConfiguration",
-          "description": "Specifies Windows operating system settings on the virtual machine."
-        },
-        "linuxConfiguration": {
-          "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
-        },
-        "secrets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VaultSecretGroup"
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource name"
           },
-          "description": "Specifies set of certificates that should be installed onto the virtual machine."
-        }
-      },
-      "description": "Specifies the operating system settings for the virtual machine."
-    },
-    "DiagnosticsProfile": {
-      "properties": {
-        "bootDiagnostics": {
-          "$ref": "#/definitions/BootDiagnostics",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
-        }
-      },
-      "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
-    },
-   
-    "VirtualMachineInstanceView": {
-      "properties": {
-        "platformUpdateDomain": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the update domain of the virtual machine."
-        },
-        "platformFaultDomain": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the fault domain of the virtual machine."
-        },
-        "rdpThumbPrint": {
-          "type": "string",
-          "description": "The Remote desktop certificate thumbprint."
-        },
-        "vmAgent": {
-          "$ref": "#/definitions/VirtualMachineAgentInstanceView",
-          "description": "The VM Agent running on the virtual machine."
-        },
-        "disks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiskInstanceView"
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type"
           },
-          "description": "The virtual machine disk information."
-        },
-        "extensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
+          "location": {
+            "type": "string",
+            "description": "Resource location"
           },
-          "description": "The extensions information."
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Resource tags"
+          }
         },
-        "bootDiagnostics": {
-          "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
-        },
-        "statuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
+        "required": [
+          "location"
+        ],
+        "x-ms-azure-resource": true
+      },
+      "InnerError": {
+        "properties": {
+          "exceptiontype": {
+            "type": "string",
+            "description": "The exception type."
           },
-          "description": "The resource status information."
-        }
+          "errordetail": {
+            "type": "string",
+            "description": "The internal error message or exception dump."
+          }
+        },
+        "description": "Inner error details."
       },
-      "description": "The instance view of a virtual machine."
-    },
-    "VirtualMachineProperties": {
-      "properties": {
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware settings for the virtual machine."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Specifies the storage settings for the virtual machine disks."
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OSProfile",
-          "description": "Specifies the operating system settings for the virtual machine."
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
-          "description": "Specifies the network interfaces of the virtual machine."
-        },
-        "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
-        },
-        "availabilitySet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "instanceView": {
-          "$ref": "#/definitions/VirtualMachineInstanceView",
-          "readOnly": true,
-          "description": "The virtual machine instance view."
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
-        },
-        "vmId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands."
-        }
-      },
-      "description": "Describes the properties of a Virtual Machine."
-    },   
-    "UpdateResource": {
-      "description": "The Update Resource model definition.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+      "ApiError": {
+        "properties": {
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ApiErrorBase"
+            },
+            "description": "The Api error details"
           },
-          "description": "Resource tags"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResourceReadOnly": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "innererror": {
+            "$ref": "#/definitions/InnerError",
+            "description": "The Api inner error"
           },
-          "description": "Resource tags"
-        }
+          "code": {
+            "type": "string",
+            "description": "The error code."
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the particular error."
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message."
+          }
+        },
+        "description": "Api error."
       },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "OperationStatusResponse": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation ID"
+      "ApiErrorBase": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The error code."
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the particular error."
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message."
+          }
         },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation status"
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the operation"
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the operation"
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error"
-        }
+        "description": "Api error base."
       },
-      "description": "Operation status response"
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "OperationStatusResponse": {
+        "properties": {
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Operation ID"
+          },
+          "status": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Operation status"
+          },
+          "startTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "Start time of the operation"
+          },
+          "endTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "End time of the operation"
+          },
+          "error": {
+            "readOnly": true,
+            "$ref": "#/definitions/ApiError",
+            "description": "Api error"
+          }
+        },
+        "description": "Operation status response"
+      }
     },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      }
     }
   }
-}

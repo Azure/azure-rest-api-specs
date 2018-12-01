@@ -1,0 +1,42 @@
+PUT /subscriptions/{subscriptionId}/resourcegroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwareUpdateDeployments/{name}?api-version=2018-08-12-preview
+
+Request Body:
+{
+  "properties": {
+    "windows": {
+      "includedUpdateClassifications": "FeaturePack, Critical",
+      "includedKBNumbers": ["kb1", "kb2", "kb3"],
+      "excludedKBNumbers": ["kb10", "kb20", "kb30"]
+    },
+    "linux": {
+      "includedPackageClassifications": "Critical, Security",
+      "includedPackageNameMasks": ["m1", "m2"],
+      "excludedPackageNameMasks": ["m3"]
+    },
+    "maximumDuration": "PT2H30M",
+    "rebootSetting": "IfRequired"
+   }
+}
+
+Response Body:
+{
+	"id": "/subscriptions/{subscriptionId}/resourcegroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwareUpdateDeployments/{name}",
+	"name": "name",
+	"type": "Microsoft.Compute/virtualMachines/softwareUpdateDeployments",
+	"properties": {
+		"windows": {
+			"includedUpdateClassifications": "Critical, FeaturePack",
+			"excludedKbNumbers": ["kb10", "kb20", "kb30"],
+			"includedKbNumbers": ["kb1", "kb2", "kb3"]
+		},
+		"linux": {
+			"includedPackageClassifications": "Critical, Security",
+			"excludedPackageNameMasks": ["m3"],
+			"includedPackageNameMasks": ["m1", "m2"]
+		},
+		"maximumDuration": "PT2H30M",
+		"rebootSetting": "IfRequired",
+		"provisioningState": "Provisioning"	
+	}
+}
+
