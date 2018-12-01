@@ -276,7 +276,12 @@
       "description": "Details of JobOutput errors."
     },
     "MediaJobOutput": {
+      "discriminator": "@odata.type",
       "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
         "error": {
           "$ref": "#/definitions/MediaJobError",
           "description": "Gets the Job output error."

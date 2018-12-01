@@ -919,6 +919,9 @@
         "x-ms-examples": {
           "ApiManagementGetApiOperation": {
             "$ref": "./examples/ApiManagementGetApiOperation.json"
+          },
+          "ApiManagementGetApiOperationPetstore": {
+            "$ref": "./examples/ApiManagementGetApiOperationPetstore.json"
           }
         },
         "parameters": [
@@ -2124,7 +2127,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of diagnostics for an API.",
+            "description": "Paged Result response of diagnostics for an API.",
             "schema": {
               "$ref": "./apimdiagnostics.json#/definitions/DiagnosticCollection"
             }
@@ -2419,7 +2422,7 @@
           "ApiIssues"
         ],
         "operationId": "ApiIssue_ListByService",
-        "description": "Lists all issues assosiated with the specified API.",
+        "description": "Lists all issues associated with the specified API.",
         "x-ms-examples": {
           "ApiManagementListApiIssues": {
             "$ref": "./examples/ApiManagementListApiIssues.json"
@@ -2457,7 +2460,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of issues for the API.",
+            "description": "Paged Result response of issues for the API.",
             "schema": {
               "$ref": "#/definitions/IssueCollection"
             }
@@ -2645,6 +2648,65 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "ApiIssues"
+        ],
+        "operationId": "ApiIssue_Update",
+        "description": "Updates an existing issue for an API.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApiIssue": {
+            "$ref": "./examples/ApiManagementUpdateApiIssue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IssueIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueUpdateContract"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "ETag of the Issue Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Issue was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ApiIssues"
@@ -2705,7 +2767,7 @@
           "ApiIssueComments"
         ],
         "operationId": "ApiIssueComment_ListByService",
-        "description": "Lists all comments for the Issue assosiated with the specified API.",
+        "description": "Lists all comments for the Issue associated with the specified API.",
         "x-ms-examples": {
           "ApiManagementListApiIssueComments": {
             "$ref": "./examples/ApiManagementListApiIssueComments.json"
@@ -2746,7 +2808,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of issue comments for the API.",
+            "description": "Paged Result response of issue comments for the API.",
             "schema": {
               "$ref": "#/definitions/IssueCommentCollection"
             }
@@ -3006,7 +3068,7 @@
           "ApiIssueAttachments"
         ],
         "operationId": "ApiIssueAttachment_ListByService",
-        "description": "Lists all comments for the Issue assosiated with the specified API.",
+        "description": "Lists all comments for the Issue associated with the specified API.",
         "x-ms-examples": {
           "ApiManagementListApiIssueAttachments": {
             "$ref": "./examples/ApiManagementListApiIssueAttachments.json"
@@ -3047,7 +3109,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of issue comments for the API.",
+            "description": "Paged Result response of issue comments for the API.",
             "schema": {
               "$ref": "#/definitions/IssueAttachmentCollection"
             }
@@ -4341,6 +4403,16 @@
       ],
       "description": "Issue Contract details."
     },
+    "IssueUpdateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IssueUpdateContractProperties",
+          "description": "Issue entity Update contract properties."
+        }
+      },
+      "description": "Issue update Parameters."
+    },
     "IssueContractProperties": {
       "properties": {
         "title": {
@@ -4351,6 +4423,47 @@
           "type": "string",
           "description": "Text describing the issue."
         },
+        "userId": {
+          "type": "string",
+          "description": "A resource identifier for the user created the issue."
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "userId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IssueContractBaseProperties"
+        }
+      ],
+      "description": "Issue contract Properties."
+    },
+    "IssueUpdateContractProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The issue title."
+        },
+        "description": {
+          "type": "string",
+          "description": "Text describing the issue."
+        },
+        "userId": {
+          "type": "string",
+          "description": "A resource identifier for the user created the issue."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IssueContractBaseProperties"
+        }
+      ],
+      "description": "Issue contract Update Properties."
+    },
+    "IssueContractBaseProperties": {
+      "properties": {
         "createdDate": {
           "type": "string",
           "format": "date-time",
@@ -4393,21 +4506,12 @@
             ]
           }
         },
-        "userId": {
-          "type": "string",
-          "description": "A resource identifier for the user created the issue."
-        },
         "apiId": {
           "type": "string",
           "description": "A resource identifier for the API the issue was created for."
         }
       },
-      "required": [
-        "title",
-        "description",
-        "userId"
-      ],
-      "description": "Issue contract Properties."
+      "description": "Issue contract Base Properties."
     },
     "IssueCommentCollection": {
       "properties": {

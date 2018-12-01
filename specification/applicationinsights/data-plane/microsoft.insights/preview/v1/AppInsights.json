@@ -56,6 +56,9 @@
           },
           "intervaledMetric": {
             "$ref": "examples/metric-get-full.json"
+          },
+          "segmentedIntervaledMetric": {
+            "$ref": "examples/metric-get-segmented.json"
           }
         },
         "parameters": [
@@ -140,7 +143,7 @@
     "/apps/{appId}/metrics/metadata": {
       "get": {
         "operationId": "Metrics_GetMetadata",
-        "summary": "Retrieve metric metatadata",
+        "summary": "Retrieve metric metadata",
         "description": "Gets metadata describing the available metrics",
         "x-ms-examples": {
           "metricMetadata": {
@@ -936,9 +939,7 @@
           }
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": true
     },
     "eventType": {
       "description": "The type of events to query; either a standard event type (`traces`, `customEvents`, `pageViews`, `requests`, `dependencies`, `exceptions`, `availabilityResults`) or `$all` to query across all event types.",
@@ -1470,7 +1471,7 @@
           "type": "string"
         },
         "outerAssembly": {
-          "description": "The outer assmebly of the exception",
+          "description": "The outer assembly of the exception",
           "type": "string"
         },
         "outerMessage": {

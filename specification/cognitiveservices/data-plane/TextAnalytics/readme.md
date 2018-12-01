@@ -118,7 +118,7 @@ The current release is `release_2_0`.
 A preview release `release_2_1` is also available.
 
 ``` yaml
-tag: release_2_0
+tag: release_2_1
 add-credentials: true
 ```
 
@@ -150,6 +150,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
