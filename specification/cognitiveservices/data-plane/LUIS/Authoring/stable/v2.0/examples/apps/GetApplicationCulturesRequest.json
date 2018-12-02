@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "name": "English",
+          "code": "en-us"
+        },
+        {
+          "name": "Chinese",
+          "code": "zh-cn"
+        },
+        {
+          "name": "French",
+          "code": "fr-fr"
+        },
+        {
+          "name": "French Canadian",
+          "code": "fr-ca"
+        },
+        {
+          "name": "Spanish",
+          "code": "es-es"
+        },
+        {
+          "name": "Spanish Mexican",
+          "code": "es-mx"
+        },
+        {
+          "name": "Italian",
+          "code": "it-it"
+        },
+        {
+          "name": "German",
+          "code": "de-de"
+        },
+        {
+          "name": "Japanese",
+          "code": "ja-jp"
+        },
+        {
+          "name": "Brazilian Portuguese",
+          "code": "pt-br"
+        },
+        {
+          "name": "Korean",
+          "code": "ko-kr"
+        },
+        {
+          "name": "Dutch",
+          "code": "nl-nl"
+        }
+      ]
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statusCode": 401,
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "statusCode": 429,
+        "message": "Rate limit is exceeded. Try again in 1 second."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statusCode": 403,
+        "message": "Total monthly key quota limit exceeded."
+      }
+    }
+  }
+}

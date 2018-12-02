@@ -1,0 +1,46 @@
+{
+	"parameters": {
+		"Endpoint": "{Endpoint}",
+		"Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+		"appId": "86226c53-b7a6-416f-876b-226b2b5ab07b",
+		"versionId": "0.1",
+		"patternId": 8342
+	},
+	"responses": {
+		"200": {
+			"headers": {},
+			"body": {
+				"code": "Success",
+				"message": "Operation Successful"
+			}
+		},
+		"400": {
+	      "headers": {},
+	      "body": {
+	        "statusCode": 400,
+	        "message": "Cannot find an application version with the version ID \"0.1\"."
+	      }
+	    },
+	    "401": {
+	      "headers": {},
+	      "body": {
+	        "statusCode": 401,
+	        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+	      }
+	    },
+	    "429": {
+	      "headers": {},
+	      "body": {
+	        "statusCode": 429,
+	        "message": "Rate limit is exceeded. Try again in 1 second."
+	      }
+	    },
+	    "403": {
+	      "headers": {},
+	      "body": {
+	        "statusCode": 403,
+	        "message": "Total monthly key quota limit exceeded."
+	      }
+	    }
+	}
+}

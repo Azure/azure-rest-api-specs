@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "appId": "363187f1-c573-46b3-bc4c-ae01d686e68e",
+    "versionId": "0.1",
+    "hEntityId": "860f54f9-be76-4c28-9cca-a1c0ad1704ff",
+    "hChildId": "f059e547-4fd1-47b8-a2f7-99b65c2a86d3"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "f059e547-4fd1-47b8-a2f7-99b65c2a86d3",
+        "name": "From",
+        "typeId": 6,
+        "readableType": "Hierarchical Child Entity Extractor"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "statusCode": 400,
+        "message": "Cannot find an application with the ID 363187f1-c573-46b3-bc4c-ae01d686e68e."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statusCode": 401,
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "statusCode": 429,
+        "message": "Rate limit is exceeded. Try again in 1 second."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statusCode": 403,
+        "message": "Total monthly key quota limit exceeded."
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "Get Applications List request": {
+    "parameters": {
+      "Endpoint": "{Endpoint}",
+      "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+      "skip": "0",
+      "take": "100"
+    },
+    "responses": {
+      "200": {
+        "headers": {},
+        "body": [
+          {
+            "id": "363187f1-c573-46b3-bc4c-ae01d686e68e",
+            "name": "MyFirstDummyApp",
+            "description": "This is my first dummy application",
+            "culture": "en-us",
+            "usageScenario": "IoT",
+            "domain": "Comics",
+            "versionsCount": 3,
+            "createdDateTime": "2017-01-31T16:15:54Z",
+            "endpoints": {
+              "PRODUCTION": {
+                "versionId": "0.1",
+                "isStaging": false,
+                "endpointUrl": "DummyUrl",
+                "assignedEndpointKey": "",
+                "endpointRegion": "westus",
+                "publishedDateTime": "2017-02-19T17:09:14Z"
+              }
+            },
+            "endpointHitsCount": 0
+          }
+        ]
+      },
+      "400": {
+        "headers": {},
+        "body": {
+          "statusCode": 400,
+          "message": "Take parameter must have a positive value that doesn't exceed 500."
+        }
+      },
+      "401": {
+        "headers": {},
+        "body": {
+          "statusCode": 401,
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      },
+      "429": {
+        "headers": {},
+        "body": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 1 second."
+        }
+      },
+      "403": {
+        "headers": {},
+        "body": {
+          "statusCode": 403,
+          "message": "Total monthly key quota limit exceeded."
+        }
+      }
+    }
+  }
+}

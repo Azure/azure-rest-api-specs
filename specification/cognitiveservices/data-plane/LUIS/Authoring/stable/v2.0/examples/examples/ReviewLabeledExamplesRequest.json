@@ -1,0 +1,139 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+    "appId": "86226c53-b7a6-416f-876b-226b2b5ab07b",
+    "versionId": "0.1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "id": -12,
+          "text": "what's the weather like in seattle?",
+          "tokenizedText": [
+            "what",
+            "'",
+            "s",
+            "the",
+            "weather",
+            "like",
+            "in",
+            "seattle",
+            "?"
+          ],
+          "intentLabel": "GetWeather",
+          "entityLabels": [
+            {
+              "entityName": "Location",
+              "startTokenIndex": 7,
+              "endTokenIndex": 7
+            }
+          ],
+          "intentPredictions": [
+            {
+              "name": "GetWeather",
+              "score": 1
+            },
+            {
+              "name": "None",
+              "score": 0.21
+            },
+            {
+              "name": "BookFlight",
+              "score": 0
+            }
+          ],
+          "entityPredictions": [
+            {
+              "entityName": "Location",
+              "startTokenIndex": 7,
+              "endTokenIndex": 7,
+              "phrase": "seattle"
+            }
+          ]
+        },
+        {
+          "id": -11,
+          "text": "book me a flight from cairo to redmond next thursday",
+          "tokenizedText": [
+            "book",
+            "me",
+            "a",
+            "flight",
+            "from",
+            "cairo",
+            "to",
+            "redmond",
+            "next",
+            "thursday"
+          ],
+          "intentLabel": "BookFlight",
+          "entityLabels": [
+            {
+              "entityName": "Location::To",
+              "startTokenIndex": 7,
+              "endTokenIndex": 7
+            },
+            {
+              "entityName": "Location::From",
+              "startTokenIndex": 5,
+              "endTokenIndex": 5
+            }
+          ],
+          "intentPredictions": [
+            {
+              "name": "BookFlight",
+              "score": 0.93
+            },
+            {
+              "name": "None",
+              "score": 0.41
+            },
+            {
+              "name": "GetWeather",
+              "score": 0
+            }
+          ],
+          "entityPredictions": [
+            {
+              "entityName": "datetime",
+              "startTokenIndex": 8,
+              "endTokenIndex": 9,
+              "phrase": "next thursday"
+            }
+          ]
+        }
+      ]
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "statusCode": 400,
+        "message": "Cannot find an application version with the version ID \"0.1\"."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statusCode": 401,
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "statusCode": 429,
+        "message": "Rate limit is exceeded. Try again in 1 second."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statusCode": 403,
+        "message": "Total monthly key quota limit exceeded."
+      }
+    }
+  }
+}

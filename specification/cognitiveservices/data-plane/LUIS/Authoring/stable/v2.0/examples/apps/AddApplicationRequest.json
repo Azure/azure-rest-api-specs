@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+    "applicationCreateObject": {
+      "culture": "en-us",
+      "domain": "Comics",
+      "description": "New LUIS App",
+      "usageScenario": "IoT",
+      "name": "LUIS App"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/9e6703ec-56fe-48ce-8a72-10d592f6056d"
+      },
+      "body": "9e6703ec-56fe-48ce-8a72-10d592f6056d"
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "statusCode": 400,
+        "message": "LUIS App already exists."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statusCode": 401,
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "statusCode": 429,
+        "message": "Rate limit is exceeded. Try again in 1 second."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statusCode": 403,
+        "message": "Total monthly key quota limit exceeded."
+      }
+    }
+  }
+}

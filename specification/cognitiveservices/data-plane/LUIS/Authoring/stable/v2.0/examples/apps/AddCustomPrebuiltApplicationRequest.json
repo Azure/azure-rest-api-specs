@@ -1,0 +1,48 @@
+{
+  "Add Custom Prebuilt Application request": {
+    "parameters": {
+      "Endpoint": "{Endpoint}",
+      "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+      "prebuiltDomainCreateObject": {
+        "culture": "en-US",
+        "domainName": "Web"
+      }
+    },
+    "responses": {
+      "201": {
+        "headers": {
+          "location": "https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/customprebuiltdomains/00000000-0000-0000-0000-000000000000"
+        },
+        "body": "00000000-0000-0000-0000-000000000000"
+      },
+      "400": {
+        "headers": {},
+        "body": {
+          "statusCode": 400,
+          "message": "Value cannot be null. Parameter name: Prebuilt domain culture cannot be null."
+        }
+      },
+      "401": {
+        "headers": {},
+        "body": {
+          "statusCode": 401,
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      },
+      "429": {
+        "headers": {},
+        "body": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 1 second."
+        }
+      },
+      "403": {
+        "headers": {},
+        "body": {
+          "statusCode": 403,
+          "message": "Total monthly key quota limit exceeded."
+        }
+      }
+    }
+  }
+}

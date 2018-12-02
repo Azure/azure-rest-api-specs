@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+    "appId": "86226c53-b7a6-416f-876b-226b2b5ab07b",
+    "q": "forward to frank 30 dollars through HSBC"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "query": "forward to frank 30 dollars through HSBC",
+        "topScoringIntent": {
+          "intent": "give",
+          "score": 0.3964121
+        },
+        "entities": [
+          {
+            "entity": "30",
+            "type": "builtin.number",
+            "startIndex": 17,
+            "endIndex": 18,
+            "resolution": {
+              "value": "30"
+            }
+          },
+          {
+            "entity": "frank",
+            "type": "frank",
+            "startIndex": 11,
+            "endIndex": 15,
+            "score": 0.935219169
+          },
+          {
+            "entity": "30 dollars",
+            "type": "builtin.currency",
+            "startIndex": 17,
+            "endIndex": 26,
+            "resolution": {
+              "unit": "Dollar",
+              "value": "30"
+            }
+          },
+          {
+            "entity": "hsbc",
+            "type": "Bank",
+            "startIndex": 36,
+            "endIndex": 39,
+            "resolution": {
+              "values": [
+                "BankeName"
+              ]
+            }
+          }
+        ],
+        "sentimentAnalysis": {
+          "label": "positive",
+          "score": 0.9163064
+        }
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": "Model not published. Please publish your model before hitting the Endpoint."
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statusCode": 401,
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "statusCode": 429,
+        "message": "Rate limit is exceeded. Try again in 1 second."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statusCode": 403,
+        "message": "Total monthly key quota limit exceeded."
+      }
+    },
+    "409": {
+      "headers": {}
+    },
+    "410": {
+      "headers": {},
+      "body": "Please re-train and republish your application."
+    },
+    "414": {
+      "headers": {}
+    }
+  }
+}

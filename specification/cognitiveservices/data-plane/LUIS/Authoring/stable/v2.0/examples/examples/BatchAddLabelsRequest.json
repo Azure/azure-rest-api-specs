@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+    "appId": "2370fb9d-7dbc-4898-a361-a742cf290766",
+    "versionId": "0.1",
+    "exampleLabelObjectArray": [
+      {
+        "text": "whats the weather in seattle?",
+        "entityLabels": [
+          {
+            "entityName": "Place",
+            "startCharIndex": 21,
+            "endCharIndex": 29
+          }
+        ],
+        "intentName": "WeatherInPlace"
+      },
+      {
+        "text": "whats the weather in buenos aires?",
+        "entityLabels": [
+          {
+            "entityName": "Place",
+            "startCharIndex": 21,
+            "endCharIndex": 34
+          }
+        ],
+        "intentName": "WeatherInPlace"
+      }
+    ]
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": [
+        {
+          "value": {
+            "UtteranceText": "whats the weather in seattle?",
+            "ExampleId": -728104
+          },
+          "hasError": false
+        },
+        {
+          "value": {
+            "UtteranceText": "whats the weather in buenos aires?",
+            "ExampleId": -5313943
+          },
+          "hasError": false
+        }
+      ]
+    },
+    "207": {
+      "headers": {},
+      "body": [
+        {
+          "hasError": true,
+          "error": {
+            "code": "FAILED",
+            "message": "whats the weather in seattle?. Error: The intent classifier InvalidIntent does not exist in the selected application"
+          }
+        },
+        {
+          "value": {
+            "UtteranceText": "whats the weather in buenos aires?",
+            "ExampleId": -5313943
+          },
+          "hasError": false
+        }
+      ]
+    },
+    "400": {
+        "headers": {},
+        "body": {
+          "statusCode": 400,
+          "message": "Cannot find an application version with the version ID \"0.1\"."
+        }
+      },
+    "401": {
+      "headers": {},
+      "body": {
+        "statusCode": 401,
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "statusCode": 429,
+        "message": "Rate limit is exceeded. Try again in 1 second."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statusCode": 403,
+        "message": "Total monthly key quota limit exceeded."
+      }
+    },
+    "409": {
+      "headers": {},
+      "body": {
+        "statusCode": 409,
+        "message": "A batch add operation is already in progress. Please wait for the request to be served before sending another request."
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+    "appId": "62c2c890-1ccc-4b17-b34a-7fe7ebb1540c"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/octet-stream"
+      },
+      "body": "\"Query\",\"UTC DateTime\",\"Response\" \"hello, world!\",01/31/2017 17:17:41,\"{  \"\"query\"\": \"\"Hello, World!\"\",  \"\"topScoringIntent\"\": {    \"\"intent\"\": \"\"None\"\",    \"\"score\"\": 0.6277761  },  \"\"intents\"\": [    {      \"\"intent\"\": \"\"None\"\",      \"\"score\"\": 0.6277761    },    {      \"\"intent\"\": \"\"BookFlight\"\",      \"\"score\"\": 0.002136109    },    {      \"\"intent\"\": \"\"GetWeather\"\",      \"\"score\"\": 0.00142168161    }  ],  \"\"entities\"\": []}\""
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "statusCode": 400,
+        "message": "Cannot find an application with the ID 62c2c890-1ccc-4b17-b34a-7fe7ebb1540c."
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "statusCode": 401,
+        "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "statusCode": 429,
+        "message": "Rate limit is exceeded. Try again in 1 second."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "statusCode": 403,
+        "message": "Total monthly key quota limit exceeded."
+      }
+    }
+  }
+}
