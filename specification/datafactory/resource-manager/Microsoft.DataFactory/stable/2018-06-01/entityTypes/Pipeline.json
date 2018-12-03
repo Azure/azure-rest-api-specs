@@ -98,11 +98,11 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "User proprety name.",
+          "description": "User property name.",
           "type": "string"
         },
         "value": {
-          "description": "User proprety value. Type: string (or Expression with resultType string).",
+          "description": "User property value. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -250,7 +250,7 @@
           "$ref": "#/definitions/CopySink"
         },
         "translator": {
-          "description": "Copy activity translator. If not specificed, tabular translator is used.",
+          "description": "Copy activity translator. If not specified, tabular translator is used.",
           "$ref": "#/definitions/CopyTranslator"
         },
         "enableStaging": {
@@ -383,21 +383,6 @@
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics (online & on-premises). Type: string (or Expression with resultType string)."
         }
       }
-    },
-    "DynamicsAXSource": { 
-      "description": "A copy activity Dynamics AX source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
     },
     "RelationalSource": {
       "description": "A copy activity source for various relational databases.",
@@ -610,21 +595,6 @@
         }
       }
     },
-    "OracleServiceCloudSource": { 
-      "description": "A copy activity Oracle Service Cloud source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
     "WebSource": {
       "description": "A copy activity source for web page table.",
       "type": "object",
@@ -715,25 +685,6 @@
         }
       }
     },
-    "RestServiceSource": { 
-      "description": "A copy activity Rest service source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "httpRequestTimeout": { 
-          "type": "object", 
-          "description": "The timeout (TimeSpan) to get an HTTP response.  It is the timeout to get a response, not the timeout to read response data.  Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))." 
-        },
-        "requestInterval": {
-            "type": "object",
-            "description": "The time to await before sending next page request.  Default value: 00:00:01. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
-        }
-      } 
-    }, 
     "AmazonMWSSource": { 
       "description": "A copy activity Amazon Marketplace Web Service source.", 
       "type": "object", 
@@ -765,7 +716,7 @@
       } 
     }, 
     "ConcurSource": { 
-      "description": "A copy activity Concur Serivce source.", 
+      "description": "A copy activity Concur Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -808,24 +759,9 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
         }
       } 
-    },
-    "EloquaSource": {
-      "description": "A copy activity Eloqua server source.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CopySource"
-        }
-      ],
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
-        }
-      }
     }, 
-    "GoogleAdWordsSource": { 
-      "description": "A copy activity Google AdWords service source.", 
+    "EloquaSource": { 
+      "description": "A copy activity Eloqua server source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -900,7 +836,7 @@
       } 
     }, 
     "HubspotSource": { 
-      "description": "A copy activity Hubspot Serivce source.", 
+      "description": "A copy activity Hubspot Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -930,7 +866,7 @@
       } 
     }, 
     "JiraSource": { 
-      "description": "A copy activity Jira Serivce source.", 
+      "description": "A copy activity Jira Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -990,7 +926,7 @@
       } 
     }, 
     "PaypalSource": { 
-      "description": "A copy activity Paypal Serivce source.", 
+      "description": "A copy activity Paypal Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1065,7 +1001,7 @@
       } 
     }, 
     "ShopifySource": { 
-      "description": "A copy activity Shopify Serivce source.", 
+      "description": "A copy activity Shopify Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1095,7 +1031,7 @@
       } 
     }, 
     "SquareSource": { 
-      "description": "A copy activity Square Serivce source.", 
+      "description": "A copy activity Square Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1110,7 +1046,7 @@
       } 
     }, 
     "XeroSource": { 
-      "description": "A copy activity Xero Serivce source.", 
+      "description": "A copy activity Xero Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -2386,6 +2322,41 @@
       },
       "required": [
         "pipeline"
+      ]
+    },
+    "DeleteActivity": {
+      "x-ms-discriminator-value": "Delete",
+      "description": "Delete activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Delete activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeleteActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DeleteActivityTypeProperties": {
+      "description": "Delete activity properties.",
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be deleted recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dataset": {
+          "description": "Delete activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
       ]
     },
     "LookupActivity": {

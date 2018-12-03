@@ -1060,7 +1060,7 @@
       }
     },
     "Task": {
-      "description": "The task that has the ARM resource and task properties. \r\nThe  task will have all information to schedule a run against it.",
+      "description": "The task that has the ARM resource and task properties. \r\nThe task will have all information to schedule a run against it.",
       "type": "object",
       "allOf": [
         {
@@ -1172,6 +1172,10 @@
         },
         "contextPath": {
           "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
+        },
+        "contextAccessToken": {
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step.",
           "type": "string"
         }
       },
@@ -1506,6 +1510,10 @@
         },
         "contextPath": {
           "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
+        },
+        "contextAccessToken": {
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step.",
           "type": "string"
         }
       },
@@ -2186,6 +2194,7 @@
       "description": "The name of the resource group to which the container registry belongs.",
       "required": true,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "RegistryNameParameter": {

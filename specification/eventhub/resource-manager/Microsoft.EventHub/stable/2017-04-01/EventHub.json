@@ -232,7 +232,7 @@
             }
           },
           "200": {
-            "description": "Namespace successfuly created.",
+            "description": "Namespace successfully created.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
@@ -277,7 +277,7 @@
             "description": "No content."
           },
           "200": {
-            "description": "Namespace successfuly deleted."
+            "description": "Namespace successfully deleted."
           },
           "202": {
             "description": "Namespace delete request accepted."
@@ -375,7 +375,7 @@
             }
           },
           "200": {
-            "description": "Namespace successfuly updated.",
+            "description": "Namespace successfully updated.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
@@ -399,7 +399,7 @@
         ],
         "operationId": "Namespaces_GetMessagingPlan",
         "x-ms-examples": {
-          "GetNamespaceMessagingPlan": { "$ref": "./examples/NameSpaces/EHNameSpaceGetMessagningPlan.json" }
+          "GetNamespaceMessagingPlan": { "$ref": "./examples/NameSpaces/EHNameSpaceGetMessagingPlan.json" }
         },
         "description": "Gets messaging plan for specified namespace.",
         "parameters": [
@@ -439,7 +439,7 @@
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
         "x-ms-examples": {
-          "ListAuthorizationRules": { "$ref": "./examples/NameSpaces/EHNameSpaceAutorizationRuleListAll.json" }
+          "ListAuthorizationRules": { "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleListAll.json" }
         },
         "description": "Gets a list of authorization rules for a Namespace.",
         "parameters": [
@@ -532,7 +532,7 @@
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
         "x-ms-examples": {
-          "NameSpaceAutorizationRuleDelete": { "$ref": "./examples/NameSpaces/EHNameSpaceAutorizationRuleDelete.json" }
+          "NameSpaceAuthorizationRuleDelete": { "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleDelete.json" }
         },
         "description": "Deletes an AuthorizationRule for a Namespace.",
         "parameters": [
@@ -573,7 +573,7 @@
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
         "x-ms-examples": {
-          "NameSpaceAutorizationRuleGet": { "$ref": "./examples/NameSpaces/EHNameSpaceAutorizationRuleGet.json" }
+          "NameSpaceAuthorizationRuleGet": { "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleGet.json" }
         },
         "description": "Gets an AuthorizationRule for a Namespace by rule name.",
         "parameters": [
@@ -659,7 +659,7 @@
         ],
         "operationId": "Namespaces_RegenerateKeys",
         "x-ms-examples": {
-          "NameSpaceAuthorizationRuleRegenrateKey": { "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleRegenrateKey.json" }
+          "NameSpaceAuthorizationRuleRegenerateKey": { "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleRegenerateKey.json" }
         },
         "description": "Regenerates the primary or secondary connection strings for the specified Namespace.",
         "parameters": [
@@ -979,7 +979,7 @@
         "x-ms-examples": {
           "EHAliasFailOver": { "$ref": "./examples/disasterRecoveryConfigs/EHAliasFailOver.json" }
         },
-        "description": "envokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
+        "description": "Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1017,7 +1017,7 @@
         ],
         "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
         "x-ms-examples": {
-          "ListAuthorizationRules": { "$ref": "./examples/disasterRecoveryConfigs/EHAliasAutorizationRuleListAll.json" }
+          "ListAuthorizationRules": { "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleListAll.json" }
         },
         "description": "Gets a list of authorization rules for a Namespace.",
         "parameters": [
@@ -1063,7 +1063,7 @@
         ],
         "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
         "x-ms-examples": {
-          "NameSpaceAutorizationRuleGet": { "$ref": "./examples/disasterRecoveryConfigs/EHAliasAutorizationRuleGet.json" }
+          "NameSpaceAuthorizationRuleGet": { "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleGet.json" }
         },
         "description": "Gets an AuthorizationRule for a Namespace by rule name.",
         "parameters": [
@@ -1338,7 +1338,7 @@
         ],
         "operationId": "EventHubs_ListAuthorizationRules",
         "x-ms-examples": {
-          "EventHubAutorizationRuleListAll": { "$ref": "./examples/EventHubs/EHEventHubAutorizationRuleListAll.json" }
+          "EventHubAuthorizationRuleListAll": { "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleListAll.json" }
         },
         "description": "Gets the authorization rules for an Event Hub.",
         "parameters": [
@@ -1437,7 +1437,7 @@
         ],
         "operationId": "EventHubs_GetAuthorizationRule",
         "x-ms-examples": {
-          "EventHubAutorizationRuleGet": { "$ref": "./examples/EventHubs/EHEventHubAutorizationRuleGet.json" }
+          "EventHubAuthorizationRuleGet": { "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleGet.json" }
         },
         "description": "Gets an AuthorizationRule for an Event Hub by rule name.",
         "parameters": [
@@ -1481,7 +1481,7 @@
         ],
         "operationId": "EventHubs_DeleteAuthorizationRule",
         "x-ms-examples": {
-          "EventHubAutorizationRuleDelete": { "$ref": "./examples/EventHubs/EHEventHubAutorizationRuleDelete.json" }
+          "EventHubAuthorizationRuleDelete": { "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleDelete.json" }
         },
         "description": "Deletes an Event Hub AuthorizationRule.",
         "parameters": [
@@ -1573,7 +1573,7 @@
         ],
         "operationId": "EventHubs_RegenerateKeys",
         "x-ms-examples": {
-          "EventHubAuthorizationRuleRegenrateKey": { "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleRegenrateKey.json" }
+          "EventHubAuthorizationRuleRegenerateKey": { "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleRegenerateKey.json" }
         },
         "description": "Regenerates the ACS and SAS connection strings for the Event Hub.",
         "parameters": [
@@ -1856,376 +1856,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListIPFilterRules",
-        "x-ms-examples": {
-          "ListIpFilterRules": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/EHNameSpaceIPFilterRuleListAll.json"
-          }
-        },
-        "description": "Gets a list of IP Filter rules for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace IpFilterRule successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/IpFilterRuleListResult"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}": {
-      "put": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_CreateOrUpdateIpFilterRule",
-        "x-ms-examples": {
-          "NameSpaceIpFilterRuleCreate": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/EHNameSpaceIpFilterRuleCreateorUpdate.json"
-          }
-        },
-        "description": "Creates or updates an IpFilterRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IpFilterRule"
-            },
-            "description": "The Namespace IpFilterRule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace IpFilterRule created",
-            "schema": {
-              "$ref": "#/definitions/IpFilterRule"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_DeleteIpFilterRule",
-        "x-ms-examples": {
-          "NameSpaceIpFilterRuleDelete": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/EHNameSpaceIpFilterRuleDelete.json"
-          }
-        },
-        "description": "Deletes an IpFilterRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No content."
-          },
-          "200": {
-            "description": "Namespace IpFilterRule successfully deleted."
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_GetIpFilterRule",
-        "x-ms-examples": {
-          "NameSpaceIpFilterRuleGet": {
-            "$ref": "./examples/NameSpaces/IPFilterRule/EHNameSpaceIpFilterRuleGet.json"
-          }
-        },
-        "description": "Gets an IpFilterRule for a Namespace by rule name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace IpFilterRule returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/IpFilterRule"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_ListVirtualNetworkRules",
-        "x-ms-examples": {
-          "ListIpFilterRules": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleListAll.json"
-          }
-        },
-        "description": "Gets a list of VirtualNetwork rules for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace VirtualNetworkRule successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRuleListResult"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules/{virtualNetworkRuleName}": {
-      "put": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_CreateOrUpdateVirtualNetworkRule",
-        "x-ms-examples": {
-          "NameSpaceVirtualNetworkRuleCreate": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleCreateorUpdate.json"
-          }
-        },
-        "description": "Creates or updates an VirtualNetworkRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRule"
-            },
-            "description": "The Namespace VirtualNetworkRule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace VirtualNetworkRule created",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRule"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_DeleteVirtualNetworkRule",
-        "x-ms-examples": {
-          "NameSpaceVirtualNetworkRuleDelete": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleDelete.json"
-          }
-        },
-        "description": "Deletes an VirtualNetworkRule for a Namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No content."
-          },
-          "200": {
-            "description": "Namespace VirtualNetworkRule successfully deleted."
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_GetVirtualNetworkRule",
-        "x-ms-examples": {
-          "NameSpaceVirtualNetworkRuleGet": {
-            "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHNameSpaceVirtualNetworkRuleGet.json"
-          }
-        },
-        "description": "Gets an VirtualNetworkRule for a Namespace by rule name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Namespace VirtualNetworkRule returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkRule"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2341,7 +1971,7 @@
               "type": "integer",
               "maximum": 20,
               "minimum": 0,
-              "description": "Upper limit of throughput units when AutoInflate is enabled, vaule should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)"
+              "description": "Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)"
             },
             "kafkaEnabled": {
               "type": "boolean",
@@ -2390,7 +2020,7 @@
           "maximum": 20,
           "minimum": 0,
           "type": "integer",
-          "description": "The Event Hubs throughput units, vaule should be 0 to 20 throughput units."
+          "description": "The Event Hubs throughput units, value should be 0 to 20 throughput units."
         }
       },
       "required": [
@@ -2511,7 +2141,7 @@
       "required": [
         "keyType"
       ],
-      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key neeeds to be reset."
+      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset."
     },
     "Eventhub": {
       "properties": {
@@ -2646,7 +2276,7 @@
               "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
             }
           },
-          "description": "Properties describing the storage account, blob container and acrchive anme format for capture destination"
+          "description": "Properties describing the storage account, blob container and archive name format for capture destination"
         }
       },
       "description": "Capture storage details for capture description"
@@ -2686,7 +2316,7 @@
             },
             "userMetadata": {
               "type": "string",
-              "description": "Usermetadata is a placeholder to store user-defined string data with maximum length 1024. e.g. it can be used to store descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
+              "description": "User Metadata is a placeholder to store user-defined string data with maximum length 1024. e.g. it can be used to store descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored."
             }
           },
           "description": "Single item in List or Get Consumer group operation"
@@ -2811,7 +2441,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates EventHub service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates EventHub service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {
@@ -2845,7 +2475,7 @@
             },
             "partnerNamespace": {
               "type": "string",
-              "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+              "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairing"
             },
             "alternateName": {
               "type": "string",
@@ -2978,94 +2608,6 @@
         }
       ],
       "description": "Messaging Plan for the namespace"
-    },
-    "IpFilterRule": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "properties": {
-            "ipMask": {
-              "type": "string",
-              "description": "IP Mask"
-            },
-            "action": {
-              "type": "string",
-              "description": "The IP Filter Action",
-              "enum": [
-                "Accept",
-                "Reject"
-              ],
-              "x-ms-enum": {
-                "name": "IPAction",
-                "modelAsString": true
-              }
-            },
-            "filterName": {
-              "type": "string",
-              "description": "IP Filter name"
-            }
-          },
-          "description": "Properties supplied to create or update IpFilterRules"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Single item in a List or Get IpFilterRules operation"
-    },
-    "IpFilterRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IpFilterRule"
-          },
-          "description": "Result of the List IpFilter Rules operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains an incomplete list of IpFilter Rules"
-        }
-      },
-      "description": "The response from the List namespace operation."
-    },
-    "VirtualNetworkRule": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "properties": {
-            "virtualNetworkSubnetId": {
-              "type": "string",
-              "description": "ARM ID of Virtual Network Subnet"
-            }
-          },
-          "description": "Properties supplied to create or update VirtualNetworkRules"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Single item in a List or Get VirtualNetworkRules operation"
-    },
-    "VirtualNetworkRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkRule"
-          },
-          "description": "Result of the List VirtualNetwork Rules operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains an incomplete list of VirtualNetwork Rules"
-        }
-      },
-      "description": "The response from the List namespace operation."
     }
   },
   "parameters": {
@@ -3170,24 +2712,6 @@
       "minimum": 1,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
-    },
-    "IPFilterRuleNameParameter": {
-      "name": "ipFilterRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "description": "The IP Filter Rule name."
-    },
-    "VirtualNetworkRuleNameParameter": {
-      "name": "virtualNetworkRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "description": "The Virtual Network Rule name."
     }
   }
 }

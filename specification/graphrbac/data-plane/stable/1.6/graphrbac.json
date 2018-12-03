@@ -2465,7 +2465,6 @@
         },
         "customKeyIdentifier": {
           "type":"string",
-          "format": "byte",
           "description": "Custom Key Identifier"
         }
       },
@@ -2494,6 +2493,11 @@
         "value": {
           "type": "string",
           "description": "Key value."
+        },
+        "customKeyIdentifier": {
+          "type": "string",
+          "format": "byte",
+          "description": "Custom Key Identifier"
         }
       },
       "additionalProperties": {
@@ -2735,9 +2739,30 @@
           "type": "string",
           "description": "The home page of the application."
         },
-        "oauth2AllowImplicitFlow" : {
+        "oauth2AllowImplicitFlow": {
           "type": "boolean",
           "description": "Whether to allow implicit grant flow for OAuth2"
+        },
+        "requiredResourceAccess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequiredResourceAccess"
+          },
+          "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience."
+        },
+        "keyCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "A collection of KeyCredential objects."
+        },
+        "passwordCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "A collection of PasswordCredential objects"
         }
       },
       "description": "Active Directory application information."

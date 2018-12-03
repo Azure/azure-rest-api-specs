@@ -8,7 +8,7 @@
             "name": "StorageSyncManagementClient"
         }
     },
-    "host": "azure.microsoft.com",
+    "host": "management.azure.com",
     "schemes": [
         "https"
     ],
@@ -2588,6 +2588,14 @@
                 "serverResourceId": {
                     "$ref": "#/definitions/ResourceId",
                     "description": "Server Resource Id."
+                },
+                "offlineDataTransfer": {
+                    "$ref": "#/definitions/FeatureStatus",
+                    "description": "Offline data transfer"
+                },
+                "offlineDataTransferShareName": {
+                    "type": "string",
+                    "description": "Offline data transfer share name"
                 }
             }
         },
@@ -3165,7 +3173,7 @@
                     "type": "string",
                     "description": "Registered Server OS Version"
                 },
-                "serverManagementtErrorCode": {
+                "serverManagementErrorCode": {
                     "type": "integer",
                     "description": "Registered Server Management Error Code"
                 },
@@ -3256,7 +3264,7 @@
                     "description": "Friendly Name"
                 },
                 "backupEnabled": {
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Backup Enabled",
                     "readOnly": true
                 },
@@ -3293,6 +3301,14 @@
                     "minimum": 0,
                     "maximum": 2147483647,
                     "description": "Tier files older than days."
+                },
+                "offlineDataTransfer": {
+                    "$ref": "#/definitions/FeatureStatus",
+                    "description": "Offline data transfer"
+                },
+                "offlineDataTransferShareName": {
+                    "type": "string",
+                    "description": "Offline data transfer share name"
                 }
             }
         },
@@ -3340,9 +3356,138 @@
                     "type": "string",
                     "description": "Resource Last Operation Name"
                 },
-                "syncStatus": {
+                 "syncStatus": {
                     "type": "object",
-                    "description": "Sync Health Status"
+                    "$ref": "#/definitions/ServerEndpointHealth",
+                    "description": "Server Endpoint properties."
+                },
+                "offlineDataTransfer": {
+                    "$ref": "#/definitions/FeatureStatus",
+                    "description": "Offline data transfer"
+                },
+                "offlineDataTransferStorageAccountResourceId": {
+                    "type": "string",
+                    "description": "Offline data transfer storage account resource ID",
+                    "readOnly": true
+                },
+                "offlineDataTransferStorageAccountTenantId": {
+                    "type": "string",
+                    "description": "Offline data transfer storage account tenant ID",
+                    "readOnly": true
+                },
+                "offlineDataTransferShareName": {
+                    "type": "string",
+                    "description": "Offline data transfer share name"
+                }
+            }
+        },
+        "ServerEndpointHealth": {
+            "type": "object",
+            "description": "ServerEndpoint Health object.",
+            "properties": {
+                "downloadHealth": {
+                    "$ref": "#/definitions/HealthState",
+                    "description": "Download Health Status."
+                },
+                 "uploadHealth": {
+                    "$ref": "#/definitions/HealthState",
+                    "description": "Upload Health Status."
+                },
+                 "combinedHealth": {
+                    "$ref": "#/definitions/HealthState",
+                    "description": "Combined Health Status."
+                },
+                "lastUpdatedTimestamp": {
+                    "type" : "string",
+                    "format" : "date-time",
+                    "description": "Last Updated Timestamp"
+                },
+                 "uploadStatus": {
+                    "$ref": "#/definitions/SyncSessionStatus",
+                    "description": "Upload Status"
+                },
+                 "downloadStatus": {
+                    "$ref": "#/definitions/SyncSessionStatus",
+                    "description": "Download Status"
+                },
+                 "currentProgress": {
+                    "$ref": "#/definitions/SyncProgressStatus",
+                    "description": "Current progress"
+                },
+                 "offlineDataTransferStatus": {
+                    "$ref": "#/definitions/OfflineDataTransferState",
+                    "description": "Offline Data Transfer State"
+                }                
+            }
+        },
+        "SyncSessionStatus": {
+            "type": "object",
+            "description": "Sync Session status object.",
+            "properties": {
+                "lastSyncResult": {
+                    "type": "integer",
+                    "description": "Last sync status"
+                },
+                 "lastSyncTimestamp": {
+                    "type" : "string",
+                    "format" : "date-time",
+                    "description": "Last sync timestamp"
+                },
+                 "lastSyncSuccessTimestamp": {
+                     "type" : "string",
+                     "format" : "date-time",
+                    "description": "Last sync success timestamp"
+                },
+                "lastSyncPerItemErrorCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Last sync per item error count."
+                }
+            }
+        },
+        "SyncProgressStatus": {
+            "type": "object",
+            "description": "Sync Session status object.",
+            "properties": {
+                "progressTimestamp": {
+                    "type" : "string",
+                    "format" : "date-time",
+                    "description": "Progress timestamp"
+                },
+                 "syncDirection": {
+                     "$ref": "#/definitions/ProgressType",
+                    "description": "Sync direction."
+                },
+                 "perItemErrorCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Per item error count"
+                },
+                "appliedItemCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Applied item count."
+                },
+                "totalItemCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Total item count"
+                },
+                "appliedBytes": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Applied bytes"
+                },
+                "totalBytes": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Total bytes"
                 }
             }
         },
@@ -3364,6 +3509,27 @@
             "enum": [
                 "on",
                 "off"
+            ]
+        },
+        "HealthState": {
+            "type": "string",
+            "description": "Type of the Health state",
+            "enum": [
+               "Healthy",
+               "Error",
+               "SyncBlockedForRestore",
+               "SyncBlockedForChangeDetectionPostRestore",
+               "NoActivity"
+            ]
+        },
+        "OfflineDataTransferState": {
+            "type": "string",
+            "description": "Type of the Health state",
+            "enum": [
+               "InProgress",
+               "Stopping",
+               "NotRunning",
+               "Complete"
             ]
         },
         "WorkflowStatus": {
