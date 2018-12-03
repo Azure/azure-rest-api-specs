@@ -1269,6 +1269,106 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata": {
+      "post": {
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
+        "operationId": "IntegrationRuntimeObjectMetadata_Refresh",
+        "x-ms-examples": {
+          "IntegrationRuntimeObjectMetadata_Refresh": {
+            "$ref": "./examples/IntegrationRuntimeObjectMetadata_Refresh.json"
+          }
+        },
+        "description": "Refresh a ssis integration runtime object metadata.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getObjectMetadata": {
+      "post": {
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
+        "operationId": "IntegrationRuntimeObjectMetadata_Get",
+        "x-ms-examples": {
+          "IntegrationRuntimeObjectMetadata_Get": {
+            "$ref": "./examples/IntegrationRuntimeObjectMetadata_Get.json"
+          }
+        },
+        "description": "Get a ssis integration runtime object metadata by specified path. The return is pageable metadata list.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "name": "getMetadataRequest",
+            "description": "The parameters for getting a ssis object metadata.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GetSsisObjectMetadataRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/SsisObjectMetadataListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
       "get": {
         "tags": [
@@ -4557,6 +4657,16 @@
           "description": "Whether the dimension should be exported to Azure Monitor.",
           "type": "boolean"
         }
+      }
+    },
+    "GetSsisObjectMetadataRequest": {
+      "type": "object",
+      "description": "The request payload of get ssis object metadata.",
+      "properties": {
+          "metadataPath": {
+              "type": "string",
+              "description": "Metadata path"
+          }
       }
     }
   },
