@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-08-01.7.0",
+    "api-version": "2018-12-01.8.0",
     "jobId": "jobId",
     "client-request-id": "00000000-0000-0000-0000-000000000000",
     "ocp-data": "Fri, 17 Feb 2017 00:00:00 GMT",
@@ -11,8 +11,8 @@
           "commandLine": "cmd /c dir /s",
           "resourceFiles": [
             {
-              "blobSource": "https://account.blob.core.windows.net/",
-              "filePath": "file1"
+              "autoStorageContainerName": "containerName",
+              "filePath": "data"
             }
           ],
           "environmentSettings": [
@@ -38,7 +38,7 @@
             "coordinationCommandLine": "cmd /c echo coordinating",
             "commonResourceFiles": [
               {
-                "blobSource": "https://common.blob.core.windows.net/",
+                "httpUrl": "https://common.blob.core.windows.net/",
                 "filePath": "common.exe"
               }
             ]
