@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2017-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-10-01'
 input-file:
-- Microsoft.PowerBIdedicated/stable/2017-10-01/powerbidedicated.json
+- Microsoft.PowerBIDedicated/stable/2017-10-01/powerbidedicated.json
 ```
 
 ---
