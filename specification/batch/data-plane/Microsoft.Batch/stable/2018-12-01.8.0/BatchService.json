@@ -11092,12 +11092,8 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "title": "The ARM resource identifier of the virtual network subnet which nodes running tasks from the job will join for the duration of the task. This will only work with a VirtualMachineConfiguration pool.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes which will run tasks from the job. This can be up to the number of nodes in the pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
-          "externalDocs": {
-            "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
-            "description": "Setting up RBAC for Azure Batch VNets"
-          }
+          "title": "The ARM resource identifier of the virtual network subnet which nodes running tasks from the job will join for the duration of the task.",
+          "description": "This is only supported for jobs running on VirtualMachineConfiguration pools. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes which will run tasks from the job. For more details, see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         }
       },
       "required": [ "subnetId" ],
@@ -11134,12 +11130,12 @@
         "storageContainerUrl": {
           "type": "string",
           "title": "The URL of the blob container within Azure Blob Storage.",
-          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable using anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, or set the ACL for the blob or its container to allow public access."
+          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable using anonymous access; that is, the Batch service does not present any credentials when downloading blobs from the container. There are two ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the container, or set the ACL for the container to allow public access."
         },
         "httpUrl": {
           "type": "string",
           "title": "The URL of the file to download.",
-          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL is Azure Blob Storage, it must be readable using anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, or set the ACL for the blob or its container to allow public access."
+          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable using anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, or set the ACL for the blob or its container to allow public access."
         },
         "blobPrefix": {
           "type": "string",
@@ -11148,7 +11144,7 @@
         },
         "filePath": {
           "type": "string",
-          "title": "The location on the compute node to which to download the file, relative to the task's working directory.",
+          "title": "The location on the compute node to which to download the file(s), relative to the task's working directory.",
           "description": "If the httpUrl property is specified, the filePath is required and describes the path which the file will be downloaded to, including the filename. Otherwise, if the autoStorageContainerName or storageContainerUrl property is specified, filePath is optional and is the directory to download the files to. In the case where filePath is used as a directory, any directory structure already associated with the input data will be retained in full and appended to the specified filePath directory. The specified relative path cannot break out of the task's working directory (for example by using '..')."
         },
         "fileMode": {
@@ -11201,7 +11197,7 @@
         "default": {
           "$ref": "#/definitions/ExitOptions",
           "title": "How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties.",
-          "description": "This value is used if the task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behaviour on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
+          "description": "This value is used if the task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
         }
       },
       "title": "Specifies how the Batch service should respond when the task completes."
@@ -11373,8 +11369,8 @@
       "properties": {
         "loginMode": {
           "type": "string",
-          "title": "Login mode for user",
-          "description": "Specifies login mode for the user. The default value for VirtualMachineConfiguration pools is interactive mode and for CloudServiceConfiguration pools is batch mode.",
+          "title": "The login mode for the user.",
+          "description": "The default value for VirtualMachineConfiguration pools is batch and for CloudServiceConfiguration pools is interactive.",
           "enum": [
             "batch",
             "interactive"
@@ -11389,7 +11385,7 @@
               },
               {
                 "value": "interactive",
-                "description": "The LOGON32_LOGON_INTERACTIVE Win32 login mode. Some applications require having permissions associated with the interactive login mode. If this is the case for an application used in your task, then this option is recommended."
+                "description": "The LOGON32_LOGON_INTERACTIVE Win32 login mode. UAC is enabled on Windows VirtualMachineConfiguration pools. If this option is used with an elevated user identity in a Windows VirtualMachineConfiguration pool, the user session will not be elevated unless the application executed by the task command line is configured to always require administrative privilege or to always require maximum privilege."
               }
             ]
           }
@@ -11444,7 +11440,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the task may be retried. The Batch service retries a task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries for the task executable due to a nonzero exit code. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task after the first attempt. If the maximum retry count is -1, the Batch service retries the task without limit. Resource files and application packages are only downloaded again if the task is retried on a new compute node."
+          "description": "Note that this value specifically controls the number of retries for the task executable due to a nonzero exit code. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task after the first attempt. If the maximum retry count is -1, the Batch service retries the task without limit."
         }
       },
       "title": "Execution constraints to apply to a task."
@@ -12949,7 +12945,7 @@
         "virtualMachineImageId": {
           "type": "string",
           "title": "The ARM resource identifier of the virtual machine image. Computes nodes of the pool will be created using this custom image. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}",
-          "description": "This property is mutually exclusive with other ImageReference properties. The virtual machine image must be in the same region and subscription as the Azure Batch account. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
+          "description": "This property is mutually exclusive with other ImageReference properties. The virtual machine image must be in the same region and subscription as the Azure Batch account. For more details, see https://docs.microsoft.com/azure/batch/batch-custom-images."
         }
       },
       "title": "A reference to an Azure Virtual Machines Marketplace image or a custom Azure Virtual Machine image. To get the list of all Azure Marketplace image references verified by Azure Batch, see the 'List node agent SKUs' operation."
@@ -13149,14 +13145,10 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. For pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
-          "externalDocs": {
-            "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
-            "description": "Setting up RBAC for Azure Batch VNets"
-          }
+          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join.",
+          "description": "This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. For pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. For more details, see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
         },
-        "DynamicVNetAssignmentScope": {
+        "dynamicVNetAssignmentScope": {
           "type": "string",
           "title": "The scope of dynamic vnet assignment.",
           "enum": [
@@ -14471,13 +14463,14 @@
         "lastBootTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The time at which the compute node was started.",
+          "title": "The last time at which the compute node was started.",
           "description": "This property may not be present if the node state is unusable."
         },
         "allocationTime": {
           "type": "string",
           "format": "date-time",
-          "title": "The time at which this compute node was allocated to the pool."
+          "title": "The time at which this compute node was allocated to the pool.",
+          "description": "This is the time when the node was initially allocated and doesn't change once set. It is not updated when the node is service healed or preempted."
         },
         "ipAddress": {
           "type": "string",
