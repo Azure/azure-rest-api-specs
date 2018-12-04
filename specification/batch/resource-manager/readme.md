@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2018-12
 ```
 
-
 ### Tag: package-2018-12
 
 These settings apply only when `--tag=package-2018-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-12'
+``` yaml $(tag) == 'package-2018-12'
 input-file:
   - Microsoft.Batch/stable/2018-12-01/BatchManagement.json
 ```
+
 ### Tag: package-2017-09
 
 These settings apply only when `--tag=package-2017-09` is specified on the command line.
@@ -56,30 +56,32 @@ directive:
   - suppress: R2063
     from: BatchManagement.json
     reason: Bug in linter
-
   - from:
-     - 2017-09-01/BatchManagement.json
-     - 2017-05-01/BatchManagement.json
-     - 2017-01-01/BatchManagement.json
-     - 2015-12-01/BatchManagement.json
+      - 2017-09-01/BatchManagement.json
+      - 2017-05-01/BatchManagement.json
+      - 2017-01-01/BatchManagement.json
+      - 2015-12-01/BatchManagement.json
     where:
-    - $.definitions.Application
-    - $.definitions.ApplicationPackage
+      - $.definitions.Application
+      - $.definitions.ApplicationPackage
     suppress:
-    - R2020
+      - R2020
     reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future next API versions.
-
   - from:
-     - 2017-09-01/BatchManagement.json
-     - 2017-05-01/BatchManagement.json
-     - 2017-01-01/BatchManagement.json
-     - 2015-12-01/BatchManagement.json
+      - 2017-09-01/BatchManagement.json
+      - 2017-05-01/BatchManagement.json
+      - 2017-01-01/BatchManagement.json
+      - 2015-12-01/BatchManagement.json
     where:
-    - $.definitions.Application.properties
-    - $.definitions.ApplicationPackage.properties
+      - $.definitions.Application.properties
+      - $.definitions.ApplicationPackage.properties
     suppress:
-    - R3006
+      - R3006
     reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future API versions.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: BatchManagement.json
+    where: $.definitions.UserAccount
+    reason: This field contains a secret (password) and is not returned on a get (but is required on a PUT/PATCH). Previous discussions with the modelling team had said that this was the correct way to model this type of field.
 ```
 
 ### Tag: package-2017-05
