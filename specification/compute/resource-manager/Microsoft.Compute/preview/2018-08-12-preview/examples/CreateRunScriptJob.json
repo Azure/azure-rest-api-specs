@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVirtualMachine",
+    "jobName": "myRunScriptJob",
+    "api-version": "2018-08-12-preview",
+    "parameters": {
+      "properties": {
+        "name": "myRunScriptJob",
+        "properties": {
+          "script": {
+            "content": "ipconfig /all",
+            "scriptType": "PowerShell"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVirtualMachine/scriptJobs/myRunScriptJob",
+        "name": "myRunScriptJob",
+        "type": "Microsoft.Compute/VirtualMachines/ScriptJobs",
+        "properties": {
+          "provisioningState": "Processing",
+          "statuses": [{
+            "code": "ProvisioningState/Created",
+            "displayStatus": "RunScriptsJobCreated",
+            "level": "Info",
+            "message": "RunScripts job created successfully",
+            "time": "2018-12-03T21:50:00.245+00:00"
+          }]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVirtualMachine",
+    "jobName": "myRunScriptJob",
+    "api-version": "2018-08-12-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "output": [{
+          "code" : "scriptJobs/output",
+          "displayStatus": "output",
+          "level": "Info",
+          "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+          "code" : "scriptJobs/warning",
+          "displayStatus": "warning",
+          "level": "Info",
+          "message": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+        },
+        {
+          "code" : "scriptJobs/error",
+          "displayStatus": "error",
+          "level": "error",
+          "message": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }]
+      }
+    }
+  }
+}
