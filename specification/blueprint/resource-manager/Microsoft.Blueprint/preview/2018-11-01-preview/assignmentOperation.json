@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations": {
       "get": {
         "tags": [
           "AssignmentOperations"
@@ -51,7 +51,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location":"method",
+            "description": "dummy"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -70,7 +75,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations/{assignmentOperationName}": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations/{assignmentOperationName}": {
       "get": {
         "tags": [
           "AssignmentOperations"
@@ -87,7 +92,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "dummy",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -285,14 +295,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "azure subscriptionId, which we assign the blueprint to."
-    },
     "AssignmentNameParameter": {
       "name": "assignmentName",
       "in": "path",
