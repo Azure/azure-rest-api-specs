@@ -169,7 +169,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Account created",
             "schema": {
               "$ref": "#/definitions/netAppAccount"
@@ -257,7 +257,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -302,7 +302,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -364,7 +364,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Pool created or updated",
             "schema": {
               "$ref": "#/definitions/capacityPool"
@@ -452,7 +452,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -500,7 +500,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -653,7 +653,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/mountTargets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -704,7 +704,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/mountTargets/{mountTargetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets/{mountTargetName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -755,7 +755,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/snapshots": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -806,7 +806,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -1165,16 +1165,6 @@
       "description": "NetApp account properties",
       "type": "object",
       "properties": {
-        "accountId": {
-          "title": "accountId",
-          "type": "string",
-          "readOnly": true,
-          "description": "UUID v4 used to identify the Account",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "maxLength": 36,
-          "minLength": 36,
-          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
-        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -1252,19 +1242,7 @@
     "poolProperties": {
       "description": "Pool properties",
       "type": "object",
-      "required": [
-        "accountId"
-      ],
       "properties": {
-        "accountId": {
-          "title": "accountId",
-          "type": "string",
-          "description": "UUID v4 used to identify the Account",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "maxLength": 36,
-          "minLength": 36,
-          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
-        },
         "poolId": {
           "title": "poolId",
           "type": "string",
@@ -1278,6 +1256,7 @@
         "size": {
           "title": "size",
           "type": "integer",
+          "format": "int64",
           "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
           "minimum": 4398046511104,
           "maximum": 549755813888000,
@@ -1398,12 +1377,6 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
         },
-        "name": {
-          "title": "FileSystem name",
-          "type": "string",
-          "description": "FileSystem name",
-          "example": "myvolume"
-        },
         "creationToken": {
           "title": "Creation Token or File Path",
           "type": "string",
@@ -1502,12 +1475,6 @@
       "description": "Patchable volume properties",
       "type": "object",
       "properties": {
-        "name": {
-          "title": "FileSystem name",
-          "type": "string",
-          "description": "FileSystem name",
-          "example": "myvolume"
-        },
         "serviceLevel": {
           "title": "serviceLevel",
           "type": "string",
@@ -1629,13 +1596,6 @@
           "type": "string",
           "readOnly": true,
           "example": "1.2.3.4"
-        },
-        "name": {
-          "title": "name",
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the mount target",
-          "example": "mountTarget1"
         },
         "vlanId": {
           "title": "vlanid",
@@ -1768,13 +1728,6 @@
           "maxLength": 36,
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
-        },
-        "name": {
-          "title": "name",
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the snapshot",
-          "example": "snapshot1"
         },
         "creationDate": {
           "title": "name",
