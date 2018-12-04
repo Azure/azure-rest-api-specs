@@ -731,7 +731,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Indicates success. Returns true if the user, contact, group, or service principal is a direct or a transitive member of the specified group; otherwsie, false.",
+            "description": "OK. Indicates success. Returns true if the user, contact, group, or service principal is a direct or a transitive member of the specified group; otherwise, false.",
             "schema": {
               "$ref": "#/definitions/CheckGroupMembershipResult"
             }
@@ -2001,7 +2001,7 @@
           "in" : "body",
           "name" : "body",
           "required" : false,
-          "description": "The relevant app Service Principal Object Id and the Service Principal Objecit Id you want to grant.",
+          "description": "The relevant app Service Principal Object Id and the Service Principal Object Id you want to grant.",
           "schema" : {
             "$ref" : "#/definitions/Permissions"
               },
@@ -2465,7 +2465,6 @@
         },
         "customKeyIdentifier": {
           "type":"string",
-          "format": "byte",
           "description": "Custom Key Identifier"
         }
       },
@@ -2494,6 +2493,11 @@
         "value": {
           "type": "string",
           "description": "Key value."
+        },
+        "customKeyIdentifier": {
+          "type": "string",
+          "format": "byte",
+          "description": "Custom Key Identifier"
         }
       },
       "additionalProperties": {
@@ -2522,7 +2526,7 @@
       "required": [
         "resourceAccess"
       ],
-      "description": "Specifies the set of OAuth 2.0 permission scopes and app roles under the specified resource that an application requires access to. The specified OAuth 2.0 permission scopes may be requested by client applications (through the requiredResourceAccess collection) when calling a resource application. The requiredResourceAccess property of the Application entity is a collection of ReqiredResourceAccess."
+      "description": "Specifies the set of OAuth 2.0 permission scopes and app roles under the specified resource that an application requires access to. The specified OAuth 2.0 permission scopes may be requested by client applications (through the requiredResourceAccess collection) when calling a resource application. The requiredResourceAccess property of the Application entity is a collection of RequiredResourceAccess."
     },
     "ResourceAccess": {
       "type": "object",
@@ -2735,16 +2739,30 @@
           "type": "string",
           "description": "The home page of the application."
         },
-        "oauth2AllowImplicitFlow" : {
+        "oauth2AllowImplicitFlow": {
           "type": "boolean",
           "description": "Whether to allow implicit grant flow for OAuth2"
         },
-        "requiredResourceAccess" : {
+        "requiredResourceAccess": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RequiredResourceAccess"
           },
           "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience."
+        },
+        "keyCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "A collection of KeyCredential objects."
+        },
+        "passwordCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "A collection of PasswordCredential objects"
         }
       },
       "description": "Active Directory application information."

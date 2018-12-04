@@ -98,11 +98,11 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "User proprety name.",
+          "description": "User property name.",
           "type": "string"
         },
         "value": {
-          "description": "User proprety value. Type: string (or Expression with resultType string).",
+          "description": "User property value. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -250,7 +250,7 @@
           "$ref": "#/definitions/CopySink"
         },
         "translator": {
-          "description": "Copy activity translator. If not specificed, tabular translator is used.",
+          "description": "Copy activity translator. If not specified, tabular translator is used.",
           "$ref": "#/definitions/CopyTranslator"
         },
         "enableStaging": {
@@ -716,7 +716,7 @@
       } 
     }, 
     "ConcurSource": { 
-      "description": "A copy activity Concur Serivce source.", 
+      "description": "A copy activity Concur Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -836,7 +836,7 @@
       } 
     }, 
     "HubspotSource": { 
-      "description": "A copy activity Hubspot Serivce source.", 
+      "description": "A copy activity Hubspot Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -866,7 +866,7 @@
       } 
     }, 
     "JiraSource": { 
-      "description": "A copy activity Jira Serivce source.", 
+      "description": "A copy activity Jira Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -926,7 +926,7 @@
       } 
     }, 
     "PaypalSource": { 
-      "description": "A copy activity Paypal Serivce source.", 
+      "description": "A copy activity Paypal Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1001,7 +1001,7 @@
       } 
     }, 
     "ShopifySource": { 
-      "description": "A copy activity Shopify Serivce source.", 
+      "description": "A copy activity Shopify Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1031,7 +1031,7 @@
       } 
     }, 
     "SquareSource": { 
-      "description": "A copy activity Square Serivce source.", 
+      "description": "A copy activity Square Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1046,7 +1046,7 @@
       } 
     }, 
     "XeroSource": { 
-      "description": "A copy activity Xero Serivce source.", 
+      "description": "A copy activity Xero Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1184,10 +1184,7 @@
           "description": "Stored procedure parameter type.",
           "$ref": "#/definitions/StoredProcedureParameterType"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
@@ -2347,7 +2344,8 @@
         "pipeline"
       ]
     },
-    "DeleteActivity": {
+    "
+    Activity": {
       "x-ms-discriminator-value": "Delete",
       "description": "Delete activity.",
       "allOf": [

@@ -117,6 +117,7 @@ csharp:
   namespace: Microsoft.Azure.Management.Media
   output-folder: $(csharp-sdks-folder)/Media/Management.Media/Generated
   clear-output-folder: true
+  opt-in-extensible-enums: true 
 ```
 
 ## Python
