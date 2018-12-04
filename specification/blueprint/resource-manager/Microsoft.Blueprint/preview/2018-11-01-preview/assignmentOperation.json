@@ -51,12 +51,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location":"method",
-            "description": "dummy"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -92,12 +87,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "dummy",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -295,6 +285,15 @@
     }
   },
   "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "dummy description",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
     "AssignmentNameParameter": {
       "name": "assignmentName",
       "in": "path",
