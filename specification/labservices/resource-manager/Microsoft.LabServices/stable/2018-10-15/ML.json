@@ -152,11 +152,11 @@
             "type": "string"
           },
           {
-            "name": "personalPerferencesOperationsPayload",
+            "name": "personalPreferencesOperationsPayload",
             "in": "body",
             "description": "Represents payload for any Environment operations like get, start, stop, connect",
             "required": true,
-            "schema": { "$ref": "#/definitions/PersonalPerferencesOperationsPayload" }
+            "schema": { "$ref": "#/definitions/PersonalPreferencesOperationsPayload" }
           },
           { "$ref": "#/parameters/api-version" }
         ],
@@ -2505,7 +2505,6 @@
     },
     "Environment": {
       "description": "Represents an environment instance",
-      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/Resource" } ],
       "properties": {
@@ -2677,7 +2676,6 @@
     },
     "EnvironmentSetting": {
       "description": "Represents settings of an environment, from which environment instances would be created",
-      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/Resource" } ],
       "properties": {
@@ -3615,7 +3613,7 @@
         }
       }
     },
-    "PersonalPerferencesOperationsPayload": {
+    "PersonalPreferencesOperationsPayload": {
       "description": "Represents payload for any Environment operations like get, start, stop, connect",
       "type": "object",
       "properties": {
