@@ -52,7 +52,6 @@ input-file:
 - Microsoft.DataMigration/stable/2018-04-19/definitions/GetTdeCertificatesSqlTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/GetUserTablesSqlSyncTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/GetUserTablesSqlTask.json
-- Microsoft.DataMigration/stable/2018-04-19/definitions/MongoDbTasks.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlDbSyncTask.json
