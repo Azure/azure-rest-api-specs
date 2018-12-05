@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations": {
       "get": {
         "tags": [
           "AssignmentOperations"
@@ -51,7 +51,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations/{assignmentOperationName}": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/operations/{assignmentOperationName}": {
       "get": {
         "tags": [
           "AssignmentOperations"
@@ -87,7 +87,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -285,13 +285,14 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
+    "ScopeParameter": {
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
       "x-ms-parameter-location": "method",
-      "description": "azure subscriptionId, which we assign the blueprint to."
+      "x-ms-skip-url-encoding": true
     },
     "AssignmentNameParameter": {
       "name": "assignmentName",
