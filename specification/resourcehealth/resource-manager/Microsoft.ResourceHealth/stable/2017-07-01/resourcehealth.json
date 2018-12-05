@@ -221,6 +221,154 @@
         }
       }
     },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current": {
+      "get": {
+        "tags": [
+          "ChildAvailabilityStatuses"
+        ],
+        "operationId": "ChildAvailabilityStatuses_GetByResource",
+        "description": "Gets current availability status for a single resource",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the current availability status for a single resource",
+            "schema": {
+              "$ref": "#/definitions/childAvailabilityStatus"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        
+        "x-ms-examples": {
+          "GetCurrentHealthByResource": {
+            "$ref": "./examples/ChildAvailabilityStatus_GetByResource.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/child/availabilityStatuses": {
+      "get": {
+        "tags": [
+          "ChildAvailabilityStatuses"
+        ],
+        "operationId": "ChildAvailabilityStatuses_List",
+        "description": "Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of the historical availability statuses for a single child resource",
+            "schema": {
+              "$ref": "#/definitions/childAvailabilityStatusListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetHealthHistoryByResource": {
+            "$ref": "./examples/ChildAvailabilitystatuses_List.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/children": {
+      "get": {
+        "tags": [
+          "Children"
+        ],
+        "operationId": "Children_List",
+        "description": "Lists the all the children and its current health status for a parent resource. Use the nextLink property in the response to get the next page of children current health",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support not nested parent resource type: /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of the children's current availability statuses for a single resource which contains children",
+            "schema": {
+              "$ref": "#/definitions/ChildrenListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetHealthHistoryByResource": {
+            "$ref": "./examples/Children_List.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ResourceHealth/operations": {
       "get": {
         "tags": [
