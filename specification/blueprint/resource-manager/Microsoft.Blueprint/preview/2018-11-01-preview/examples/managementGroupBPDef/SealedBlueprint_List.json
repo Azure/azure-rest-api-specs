@@ -1,7 +1,8 @@
 {
     "parameters": {
-        "api-version":"2018-11-01-preview",
-        "scope":"/subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b"
+        "api-version":"2017-11-11-preview",
+        "scope":"/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup",
+        "blueprintName": "simpleBlueprint"
     },
     "responses": {
         "200": {
@@ -9,6 +10,7 @@
                 "value": [
                     {
                         "properties": {
+                            "blueprintName": "simpleBlueprint",
                             "description": "blueprint contains all artifact kinds {'template', 'rbac', 'policy'}",
                             "parameters": {
                                 "storageAccountType": {
@@ -41,9 +43,9 @@
                             "targetScope": "subscription",
                             "status": null
                         },
-                        "id": "/subscriptions/f8df94f2-2f5a-4f4a-bcaf-1bb992fb564b/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
-                        "type": "Microsoft.Blueprint/blueprints",
-                        "name": "simpleBlueprint"
+                        "id": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/v1",
+                        "type": "Microsoft.Blueprint/blueprints/versions",
+                        "name": "v1"
                     }
                 ]
             }
