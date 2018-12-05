@@ -140,10 +140,10 @@
           "readOnly": true
         },
         "orphanedUsers": {
-          "type": "string",
-          "description": "Map of users to database name of orphaned users.",
-          "additionalProperties": {
-            "type": "string"
+          "type": "array",
+          "description": "List of orphaned users.",
+          "items": {
+            "$ref": "./Common.json#/definitions/OrphanedUserInfo"
           },
           "readOnly": true
         },
