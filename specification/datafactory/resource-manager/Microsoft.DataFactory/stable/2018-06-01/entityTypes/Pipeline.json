@@ -1719,6 +1719,18 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "variables": {
+          "description": "User specified arguments under hivevar namespace.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "queryTimeout": {
+          "type": "integer",
+          "description": "Query timeout value (in minutes).  Effective when the HDInsight culster is with ESP (Enterprise Security Package)"
         }
       }
     },
