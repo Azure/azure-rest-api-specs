@@ -38,16 +38,29 @@ These settings apply only when `--tag=package-2018-04-19` is specified on the co
 ``` yaml $(tag) == 'package-2018-04-19'
 input-file:
 - Microsoft.DataMigration/stable/2018-04-19/datamigration.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/Commands.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/Common.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToSourceMySqlTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToSourcePostgreSqlSyncTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToSourceSqlServerTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetSqlDbTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetSqlMITask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetSqlMiSyncTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/GetUserTablesSqlTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlMITask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlMiSyncTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlDbTask.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/Projects.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/Services.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/Tasks.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/TasksCommon.json
 - Microsoft.DataMigration/stable/2018-04-19/definitions/MigrationValidation.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ValidateMigrationInputSqlServerSqlMITask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
+- Microsoft.DataMigration/stable/2018-04-19/definitions/ValidateSyncMigrationInputSqlServerTask.json
 ```
 
 ### Tag: package-2018-07-15-preview
