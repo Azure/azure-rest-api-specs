@@ -36,7 +36,7 @@ These settings apply only when `--tag=1.6` is specified on the command line.
 
 ``` yaml $(tag) == '1.6'
 input-file:
-- GraphRbac/stable/1.6/graphrbac.json
+- Microsoft.GraphRbac/stable/1.6/graphrbac.json
 ```
 
 ---
