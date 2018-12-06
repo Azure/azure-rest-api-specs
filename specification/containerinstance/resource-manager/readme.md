@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2019-01
 ```
 
-
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01'
+``` yaml $(tag) == 'package-2019-01'
 input-file:
   - Microsoft.ContainerInstance/stable/2019-01-01/containerInstance.json
 ```
+
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
@@ -116,7 +116,11 @@ input-file:
 directive:
   - suppress: UniqueResourcePaths
     from: containerInstance.json
-    reason: false positive, see https://github.com/Azure/azure-openapi-validator/issues/176
+    reason: 'false positive, see https://github.com/Azure/azure-openapi-validator/issues/176'
+  - suppress: PageableOperation
+    from: containerInstance.json
+    where: '$.paths["/providers/Microsoft.ContainerInstance/operations"].get'
+    reason: Existing issue.
 ```
 
 ---
