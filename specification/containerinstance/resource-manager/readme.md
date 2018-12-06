@@ -125,6 +125,10 @@ directive:
     from: containerInstance.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/usages"].get'
     reason: This is an existing issue.
+  - suppress: SummaryAndDescriptionMustNotBeSame
+    from: containerInstance.json
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start"].post'
+    reason: Existing issue.
 ```
 
 ---
