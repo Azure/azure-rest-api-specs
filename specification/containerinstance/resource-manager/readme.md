@@ -121,6 +121,10 @@ directive:
     from: containerInstance.json
     where: '$.paths["/providers/Microsoft.ContainerInstance/operations"].get'
     reason: Existing issue.
+  - suppress: PageableOperation
+    from: containerInstance.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/usages"].get'
+    reason: This is an existing issue.
 ```
 
 ---
