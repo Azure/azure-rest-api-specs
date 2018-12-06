@@ -1922,7 +1922,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/alerts": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/alerts": {
       "get": {
         "tags": [
           "Alerts"
@@ -1937,6 +1937,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/departmentIdParameter"
@@ -1984,7 +1987,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts": {
       "get": {
         "tags": [
           "Alerts"
@@ -1999,6 +2002,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/enrollmentAccountIdParameter"
@@ -2237,7 +2243,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/alerts/{alertId}": {
       "get": {
         "tags": [
           "Alerts"
@@ -2255,6 +2261,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/departmentIdParameter"
@@ -2279,7 +2288,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}": {
       "get": {
         "tags": [
           "Alerts"
@@ -2297,6 +2306,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/enrollmentAccountIdParameter"
@@ -2510,7 +2522,7 @@
         }
       }
     },
-	"/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus": {
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus": {
       "patch": {
         "tags": [
           "Alerts"
@@ -2525,6 +2537,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/departmentIdParameter"
@@ -2558,7 +2573,7 @@
         }
       }
     },
-	"/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus": {
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus": {
       "patch": {
         "tags": [
           "Alerts"
@@ -2573,6 +2588,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+		  {
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/enrollmentAccountIdParameter"
