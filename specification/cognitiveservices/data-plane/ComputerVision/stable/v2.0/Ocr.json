@@ -110,6 +110,85 @@
           }
         }
       }
+    },
+    "/read/core/asyncBatchAnalyze": {
+      "post": {
+        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called \"Operation-Location\". The \"Operation-Location\" field contains the URL that you must use for your \"Read Operation Result\" operation to access OCR results.​",
+        "operationId": "BatchReadFile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/TextRecognitionMode"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Domain Model analysis request": {
+            "$ref": "./examples/SuccessfulBatchReadFileWithUrl.json"
+          }
+        }
+      }
+    },
+    "/read/operations/{operationId}": {
+      "get": {
+        "description": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from \"Operation-Location\" field returned from Batch Read File interface.",
+        "operationId": "GetReadOperationResult",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of read operation returned in the response of the \"Batch Read File\" interface.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the read operation status.",
+            "schema": {
+              "$ref": "#/definitions/ReadOperationResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Domain Model analysis request": {
+            "$ref": "./examples/SuccessfulReadOperationResult.json"
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -154,6 +233,48 @@
           }
         }
       }
+    },
+    "/read/core/asyncBatchAnalyze?overload=stream": {
+      "post": {
+        "description": "Use this interface to get the result of a Read Document operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read Document interface, the response contains a field called \"Operation-Location\". The \"Operation-Location\" field contains the URL that you must use for your \"Get Read Result operation\" to access OCR results.​",
+        "operationId": "BatchReadFileInStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/TextRecognitionMode"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Domain Model analysis request": {
+            "$ref": "./examples/SuccessfulBatchReadFileWithStream.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -161,33 +282,78 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "string",
           "description": "Status of the text operation.",
-          "enum": [
-            "Not Started",
-            "Running",
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "TextOperationStatusCodes",
-            "modelAsString": false
-          },
-          "x-nullable": false
+          "$ref": "#/definitions/Status"
         },
         "recognitionResult": {
-          "$ref": "#/definitions/RecognitionResult"
+          "$ref": "#/definitions/TextRecognitionResult"
         }
       }
     },
-    "RecognitionResult": {
+    "ReadOperationResult": {
       "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the text operation.",
+          "$ref": "#/definitions/Status"
+        },
+        "recognitionResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextRecognitionResult"
+          }
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "Not Started",
+        "Running",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "TextOperationStatusCodes",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
+    "TextRecognitionResult": {
+      "type": "object",
+      "required": [
+        "lines"
+      ],
       "properties": {
         "lines": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Line"
           }
+        },
+        "page": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "clockwiseOrientation": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "pixel",
+            "inch"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultDimensionUnit",
+            "modelAsString": false
+          },
+          "x-nullable": true
         }
       }
     },
@@ -210,12 +376,28 @@
     },
     "Word": {
       "type": "object",
+      "required": [
+        "boundingBox",
+        "text"
+      ],
       "properties": {
         "boundingBox": {
           "$ref": "#/definitions/BoundingBox"
         },
         "text": {
           "type": "string"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "High",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultConfidenceClass",
+            "modelAsString": false
+          },
+          "x-nullable": true
         }
       }
     },
