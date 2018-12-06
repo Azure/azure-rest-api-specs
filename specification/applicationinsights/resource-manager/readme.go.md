@@ -22,7 +22,7 @@ These settings apply only when `--tag=package-2015-05 --go` is specified on he c
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-05' && $(go)
-output-folder: $(go-sdk-folder)/services/appinsights/mgmt/2015-05-01/insights
+output-folder: $(go-sdk-folder)/services/appinsights/mgmt/2015-05-01/$(namespace)
 ```
 
 ### Tag: schema-2015-05-preview

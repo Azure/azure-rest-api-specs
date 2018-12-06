@@ -64,7 +64,7 @@
               "format": "file"
             },
             "required": true,
-            "description": "The file contents to include when appending to the file."
+            "description": "The file contents to include when appending to the file.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "appendMode",
@@ -277,14 +277,16 @@
           }
         }
       }
-    },
-    "/webhdfs/v1/{destinationPath}": {
+    }
+  },
+  "x-ms-paths": {
+    "/webhdfs/v1/{destinationPath}?op=CONCAT": {
       "post": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_Concat",
-        "description": "Concatenates the list of source files into the destination file, removing all source files upon success.",
+        "description": "Concatenates the list of source files into the destination file, removing all source files upon success.  This operation has been deprecated, please use operation FileSystem_MsConcat instead.",
         "parameters": [
           {
             "name": "destinationPath",
@@ -302,7 +304,7 @@
               "type": "string"
             },
             "collectionFormat": "csv",
-            "description": "A list of comma seperated Data Lake Store paths (starting with '/') of the files to concatenate, in the order in which they should be concatenated."
+            "description": "A list of comma separated Data Lake Store paths (starting with '/') of the files to concatenate, in the order in which they should be concatenated."
           },
           {
             "name": "op",
@@ -329,10 +331,11 @@
               "$ref": "#/definitions/AdlsError"
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
-    "/webhdfs/v1/{msConcatDestinationPath}": {
+    "/webhdfs/v1/{msConcatDestinationPath}?op=MSCONCAT": {
       "post": {
         "tags": [
           "FileSystem"
@@ -395,7 +398,7 @@
         }
       }
     },
-    "/webhdfs/v1/{listFilePath}": {
+    "/webhdfs/v1/{listFilePath}?op=MSLISTSTATUS": {
       "get": {
         "tags": [
           "FileSystem"
@@ -423,14 +426,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the item or lexographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
+            "description": "Gets or sets the item or lexicographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
           },
           {
             "name": "listBefore",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the item or lexographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
+            "description": "Gets or sets the item or lexicographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
           },
           {
             "name": "op",
@@ -463,7 +466,7 @@
         }
       }
     },
-    "/webhdfs/va/{getContentSummaryFilePath}": {
+    "/webhdfs/va/{getContentSummaryFilePath}?op=GETCONTENTSUMMARY": {
       "get": {
         "tags": [
           "FileSystem"
@@ -509,7 +512,7 @@
         }
       }
     },
-    "/webhdfs/v1/{getFilePath}": {
+    "/webhdfs/v1/{getFilePath}?op=MSGETFILESTATUS": {
       "get": {
         "tags": [
           "FileSystem"
@@ -555,7 +558,7 @@
         }
       }
     },
-    "/webhdfs/v1/{flushFilePath}": {
+    "/webhdfs/v1/{flushFilePath}?op=APPEND;append=true;flush=true": {
       "post": {
         "tags": [
           "FileSystem"
@@ -621,7 +624,7 @@
         }
       }
     },
-    "/webhdfs/v1/{directFilePath}": {
+    "/webhdfs/v1/{directFilePath}?op=APPEND": {
       "post": {
         "tags": [
           "FileSystem"
@@ -647,7 +650,7 @@
               "format": "file"
             },
             "required": true,
-            "description": "The file contents to include when appending to the file."
+            "description": "The file contents to include when appending to the file.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "offset",
@@ -719,7 +722,7 @@
               "format": "file"
             },
             "required": false,
-            "description": "The file contents to include when creating the file. This parameter is optional, resulting in an empty file if not specified."
+            "description": "The file contents to include when creating the file. This parameter is optional, resulting in an empty file if not specified.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "overwrite",
@@ -834,7 +837,7 @@
         }
       }
     },
-    "/webhdfs/v1/{setAclFilePath}": {
+    "/webhdfs/v1/{setAclFilePath}?op=SETACL": {
       "put": {
         "tags": [
           "FileSystem"
@@ -884,7 +887,7 @@
         }
       }
     },
-    "/webhdfs/v1/{modifyAclFilePath}": {
+    "/webhdfs/v1/{modifyAclFilePath}?op=MODIFYACLENTRIES": {
       "put": {
         "tags": [
           "FileSystem"
@@ -934,7 +937,7 @@
         }
       }
     },
-    "/webhdfs/v1/{removeAclFilePath}": {
+    "/webhdfs/v1/{removeAclFilePath}?op=REMOVEACLENTRIES": {
       "put": {
         "tags": [
           "FileSystem"
@@ -984,7 +987,7 @@
         }
       }
     },
-    "/webhdfs/v1/{defaultAclFilePath}": {
+    "/webhdfs/v1/{defaultAclFilePath}?op=REMOVEDEFAULTACL": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1027,7 +1030,7 @@
         }
       }
     },
-    "/webhdfs/v1/{aclFilePath}": {
+    "/webhdfs/v1/{aclFilePath}?op=REMOVEACL": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1114,7 +1117,7 @@
         }
       }
     },
-    "/webhdfs/v1/{filePath}": {
+    "/webhdfs/v1/{filePath}?op=DELETE": {
       "delete": {
         "tags": [
           "FileSystem"
@@ -1167,7 +1170,7 @@
         }
       }
     },
-    "/webhdfs/v1/{renameFilePath}": {
+    "/webhdfs/v1/{renameFilePath}?op=RENAME": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1220,7 +1223,7 @@
         }
       }
     },
-    "/webhdfs/v1/{setOwnerFilePath}": {
+    "/webhdfs/v1/{setOwnerFilePath}?op=SETOWNER": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1277,7 +1280,7 @@
         }
       }
     },
-    "/webhdfs/v1/{setPermissionFilePath}": {
+    "/webhdfs/v1/{setPermissionFilePath}?op=SETPERMISSION": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1397,7 +1400,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "the number of bytes used by the contet."
+          "description": "the number of bytes used by the content."
         },
         "spaceConsumed": {
           "type": "integer",

@@ -24,7 +24,7 @@ Following are the settings for using this specification with [AutoRest](https://
 
 Suppressed Rule | Reason
 ----------------|--------
-R3023 OperationsAPIImplementation | Service map is sharing RP with Log Analytics, so this operaration won't reach ServiceMap's service endpoint. Hence this rule is not applicable.
+R3023 OperationsAPIImplementation | Service map is sharing RP with Log Analytics, so this operation won't reach ServiceMap's service endpoint. Hence this rule is not applicable.
 
 ```yaml
 model-validator: true
@@ -66,6 +66,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 

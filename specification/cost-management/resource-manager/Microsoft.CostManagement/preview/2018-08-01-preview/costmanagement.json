@@ -475,7 +475,7 @@
           "Reports"
         ],
         "operationId": "Reports_GetByBillingAccount",
-        "description": "Gets the report for a billing acount by report name.",
+        "description": "Gets the report for a billing account by report name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1105,7 +1105,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1178,7 +1178,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1254,7 +1254,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1732,9 +1732,303 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_List",
+        "description": "List all alerts for a subscription.",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N alerts.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_ListByResourceGroupName",
+        "description": "List all alerts for a resource group under a subscription.",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N alerts.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_GetBySubscription",
+        "description": "Gets the alert for a subscription by alert ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "Alert": {
+            "$ref": "./examples/Alert.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_GetByResourceGroupName",
+        "description": "Gets the alert for a resource group under a subscription by alert ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "Alert": {
+            "$ref": "./examples/Alert.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available cost management REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "Operation": {
+      "description": "A Cost Management REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.CostManagement.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing CostManagement operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of CostManagement operations supported by the Microsoft.CostManagement resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ErrorBase": {
       "description": "The details of the error.",
       "properties": {
@@ -2061,7 +2355,7 @@
         },
         "aggregation": {
           "type": "object",
-          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
           "additionalProperties": {
             "type": "object",
             "$ref": "#/definitions/ReportAggregation"
@@ -2069,7 +2363,7 @@
           "maxItems": 2
         },
         "grouping": {
-          "description": "Array of group by expression to use in the report. Report can have upto 2 group by clauses.",
+          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportGrouping"
@@ -2140,7 +2434,7 @@
       "description": "The filter expression to be used in the report.",
       "properties": {
         "and": {
-          "description": "The logical \"AND\" expression. Must have atleast 2 items.",
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportFilter"
@@ -2148,7 +2442,7 @@
           "minItems": 2
         },
         "or": {
-          "description": "The logical \"OR\" expression. Must have atleast 2 items.",
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportFilter"
@@ -2185,7 +2479,7 @@
       "description": "The comparison expression to be used in the report.",
       "properties": {
         "name": {
-          "description": "The name of the column to use in comaprison.",
+          "description": "The name of the column to use in comparison.",
           "type": "string"
         },
         "operator": {
@@ -2228,7 +2522,7 @@
       }
     },
     "ReportExecution" : {
-      "description": "A report exeuction.",
+      "description": "A report execution.",
       "type": "object",
       "allOf": [
         {
@@ -2462,7 +2756,7 @@
           "x-ms-mutability": [
             "read",
             "create"
-           ],          
+           ],
           "description": "Connector location"
         },
         "tags": {
@@ -2476,7 +2770,7 @@
            "update"
           ],
           "description": "Resource tags."
-         },        
+         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConnectorProperties",
@@ -2570,9 +2864,6 @@
         },
         "collection": {
           "$ref": "#/definitions/ConnectorCollectionInfo",
-          "x-ms-mutability": [
-            "read"
-          ],
           "description": "Collection information",
           "readOnly": true
         }
@@ -2632,8 +2923,173 @@
         "errorStartTime": {
           "format": "date-time",
           "type": "string",
-          "description": "Time the error started occuring (Last time error occurred in lastRun)",
+          "description": "Time the error started occurring (Last time error occurred in lastRun)",
           "readOnly": true
+        }
+      }
+    },
+    "AlertListResult": {
+      "description": "Result of listing alerts. It contains a list of available alerts in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of alerts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Alerts.",
+          "readOnly": true
+        }
+      }
+    },
+    "Alert": {
+      "type": "object",
+      "description": "The Alert model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Alert id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Alert name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Alert type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertProperties",
+          "description": "Alert properties"
+        }
+      }
+    },
+    "AlertProperties": {
+      "description": "The properties of an Alert.",
+      "properties": {
+        "costEntityId": {
+          "description": "The id of the creating cost-entity (budget, invoice, credit).",
+          "type": "string",
+          "readOnly": true
+        },
+        "definition": {
+          "description": "The definition (rule) of an Alert",
+          "$ref": "#/definitions/AlertDefinition",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of an alert.",
+          "type": "string",
+          "readOnly": true
+        },
+        "scope": {
+          "description": "The scope of an alert.",
+          "type": "string",
+          "readOnly": true
+        },
+        "source": {
+          "description": "The source of an Alert",
+          "type": "string",
+          "enum": [
+            "Preset",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "AlertSource",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "details": {
+          "description": "Specific details of an alert - key-value dictionary.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "The time when the alert was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "closeTime": {
+          "format": "date-time",
+          "description": "The time when the alert was closed (resolved / overridden).",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The current status of the alert.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Overridden",
+            "Resolved",
+            "Dismissed"
+          ],
+          "x-ms-enum": {
+            "name": "AlertStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AlertDefinition": {
+      "description": "The definition (rule) of an Alert",
+      "type": "object",
+      "properties" : {
+        "category": {
+          "description": "Category of the alert.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Cost",
+            "Usage",
+            "Billing"
+          ],
+          "x-ms-enum": {
+            "name": "AlertCategory",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "description": "The type of cost-entity the alert is defined on.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Budget",
+            "Invoice",
+            "Credit"
+          ],
+          "x-ms-enum": {
+            "name": "AlertType",
+            "modelAsString": true
+          }
+        },
+        "criteria": {
+          "description": "Criteria (condition) of the alert.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CostThresholdExceeded",
+            "UsageThresholdExceeded",
+            "CreditThresholdReached"
+          ],
+          "x-ms-enum": {
+            "name": "AlertCriteria",
+            "modelAsString": true
+          }
         }
       }
     }
@@ -2689,6 +3145,14 @@
       "name": "connectorName",
       "in": "path",
       "description": "Connector Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "alertIdParameter": {
+      "name": "alertId",
+      "in": "path",
+      "description": "Alert ID.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

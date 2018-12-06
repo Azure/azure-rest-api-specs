@@ -96,6 +96,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -116,7 +117,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.HDInsight
-  output-folder: $(csharp-sdks-folder)/HDInsight/Management.HDInsight/Generated
+  output-folder: $(csharp-sdks-folder)/HDInsight/Management/Management.HDInsight/Generated
   clear-output-folder: true
 ```
 

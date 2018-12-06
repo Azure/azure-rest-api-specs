@@ -62,6 +62,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -93,7 +94,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datafactory
-  package-name: azure-mgmt-dafactory
+  package-name: azure-mgmt-datafactory
   package-version: 1.0.0
   clear-output-folder: true
 ```
@@ -187,7 +188,7 @@ directive:
     from: datafactory.json
     reason:
       - Flattening does not work well with polymorphic models.
-      - TriggerResource.properties is an arbitary dictionary and cannot be flattened.
+      - TriggerResource.properties is an arbitrary dictionary and cannot be flattened.
   - suppress: R2018  # XmsEnumValidation
     where:
       - $.definitions.Expression.properties.type
@@ -255,7 +256,7 @@ directive:
       - $.definitions.SelfHostedIntegrationRuntimeNode.properties.isActiveDispatcher
       - $.definitions.IntegrationRuntimeConnectionInfo.properties.isIdentityCertExprired
     reason:
-      - toBeExportedForShoebox is property we send to Azure Monitor which requries the boolean type
+      - toBeExportedForShoebox is property we send to Azure Monitor which requires the boolean type
       - The other properties are simple and self explanatory
 
 ```
