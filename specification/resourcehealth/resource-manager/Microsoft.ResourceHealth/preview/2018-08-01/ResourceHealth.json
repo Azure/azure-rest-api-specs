@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-01-01",
+    "version": "2018-07-01-preview",
     "title": "Microsoft.ResourceHealth",
     "description": "The Resource Health Client."
   },
@@ -69,6 +69,53 @@
         "x-ms-examples": {
           "ListEventsBySubscriptionId": {
             "$ref": "./examples/Events_ListBySubscriptionId.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "Events_ListBySingleResource",
+        "description": "Lists current service health events for given resource.",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API support not nested and one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name} and /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of current service health events for given resource",
+            "schema": {
+              "$ref": "#/definitions/events"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListEventsBySingleResource": {
+            "$ref": "./examples/Events_ListBySingleResource.json"
           }
         }
       }
