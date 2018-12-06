@@ -7774,9 +7774,6 @@
         "description": "Packages published LUIS application as GZip.",
         "operationId": "apps-packagepublishedapplicationasgzip",
         "summary": "package - Gets published LUIS application package in binary stream GZip format",
-        "produces": [
-          "application/octet-stream"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -7808,6 +7805,10 @@
             "$ref": "#/responses/403"
           }
         },
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Get published application package request": {
             "$ref": "./examples/package/SuccessfulGetTrainedApplicationPackageRequest.json"
@@ -7820,9 +7821,6 @@
         "description": "Packages trained LUIS application as GZip.",
         "operationId": "apps-packagetrainedapplicationasgzip",
         "summary": "package - Gets trained LUIS application package in binary stream GZip format",
-        "produces": [
-          "application/octet-stream"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -7854,6 +7852,10 @@
             "$ref": "#/responses/403"
           }
         },
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "x-ms-examples": {
           "Successful Get published application package request": {
             "$ref": "./examples/package/SuccessfulGetPublishedApplicationPackageRequest.json"
