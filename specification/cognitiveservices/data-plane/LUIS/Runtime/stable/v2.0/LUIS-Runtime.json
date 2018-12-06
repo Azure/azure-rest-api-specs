@@ -13,6 +13,18 @@
       }
     ]
   },
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
   "paths": {
     "/apps/{appId}": {
       "get": {
@@ -70,9 +82,6 @@
             "in": "query",
             "description": "Log query (default is true)",
             "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "responses": {
@@ -166,9 +175,6 @@
             "in": "query",
             "description": "Log query (default is true)",
             "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
           }
         ],
         "consumes": [
@@ -478,14 +484,6 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
-    },
-    "ApiKey": {
-      "name": "Ocp-Apim-Subscription-Key",
-      "description": "Subscription key which provides access to this API.",
-      "in": "header",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
     }
   }
 }
