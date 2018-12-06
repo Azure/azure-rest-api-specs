@@ -7,7 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   package-name: "@azure/cognitiveservices-autosuggest"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-autosuggest"
-  override-client-name: AutoSuggestClient
   azure-arm: false
   generate-metadata: true
 ```
