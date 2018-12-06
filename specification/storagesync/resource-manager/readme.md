@@ -67,7 +67,7 @@ These settings apply only when `--tag=package-2017-06-05-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-06-05-preview'
 input-file:
-- Microsoft.StorageSync/2017-06-05-preview/storagesync.json
+- Microsoft.StorageSync/preview/2017-06-05-preview/storagesync.json
 ```
 
 
