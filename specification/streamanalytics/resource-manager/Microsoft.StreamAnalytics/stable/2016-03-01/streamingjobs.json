@@ -88,7 +88,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -164,7 +164,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the streaming job. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -497,7 +497,7 @@
       }
     },
     "StreamingJob": {
-      "description": "A streamng job object, containing all information associated with the named streaming job.",
+      "description": "A streaming job object, containing all information associated with the named streaming job.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -589,7 +589,7 @@
         },
         "transformation": {
           "$ref": "./transformations.json#/definitions/Transformation",
-          "description": "Indicates the query and the number of streaming units to use for the streaming job. The name property of the transformation is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual tranformation."
+          "description": "Indicates the query and the number of streaming units to use for the streaming job. The name property of the transformation is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual transformation."
         },
         "outputs": {
           "type": "array",
@@ -617,7 +617,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SKU. Required on PUT (CreateOrReplace) requests.",          
+          "description": "The name of the SKU. Required on PUT (CreateOrReplace) requests.",
           "enum": [
             "Standard"
           ],
