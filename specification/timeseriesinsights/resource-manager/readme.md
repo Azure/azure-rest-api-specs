@@ -46,23 +46,36 @@ input-file:
 - Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
 ```
 
+### Tag: package-2018-08-preview
+
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08-preview'
+input-file:
+- Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
+```
+
 ## Suppression
 
 ``` yaml
 directive:
   - suppress: R3025  # Tracked resource 'XXX' must have a get operation
     where:
+      - $.definitions.StandardEnvironmentResource
+      - $.definitions.LongTermEnvironmentResource
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
     from: timeseriesinsights.json
-    reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource.
+    reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource. Similarly, the Environments_Get operation returns an EnvironmentResource, from which both StandardEnvironmentResource and LongTermEnvironmentResource inherit.
 
   - suppress: R3026  # Tracked resource 'XXX' must have patch operation that at least supports the update of tags. It's strongly recommended that the PATCH operation supports update of all mutable properties as well.
     where:
+      - $.definitions.StandardEnvironmentResource
+      - $.definitions.LongTermEnvironmentResource 
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
     from: timeseriesinsights.json
-    reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
+    reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
 ```
 
 ---
@@ -105,6 +118,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-timeseriesinsights
 batch:
   - tag: package-2017-11-15
   - tag: package-2017-02-preview
+  - tag: package-2018-08-preview
 ```
 
 ### Tag: package-2017-11-15 and java
@@ -133,4 +147,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2018-08-preview and java
 
+These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.timeseriesinsights.v2018_08_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/timeseriesinsights/resource-manager/v2018_08_15_preview
+regenerate-manager: true
+generate-interface: true
+```

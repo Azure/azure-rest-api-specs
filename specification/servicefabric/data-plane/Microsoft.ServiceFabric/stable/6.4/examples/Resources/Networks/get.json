@@ -1,0 +1,21 @@
+{
+  "operationId": "MeshGateway_Get",
+  "description": "This example shows how to get a network resource. If the network resource exists, its description is returned along with an OK (200) status code. If the network resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "networkResourceName": "sampleNetwork"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleNetwork",
+        "properties": {
+          "kind": "Local",
+          "description": "Service Fabric Mesh sample network.",
+          "networkAddressPrefix": "2.0.0.0/16",
+          "status": "Ready"
+        }
+      }
+    }
+  }
+}
