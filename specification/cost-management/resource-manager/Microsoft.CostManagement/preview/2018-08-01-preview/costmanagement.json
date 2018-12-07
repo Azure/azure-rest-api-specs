@@ -2342,7 +2342,8 @@
           "description": "The granularity of rows in the report.",
           "type": "string",
           "enum": [
-            "Daily"
+            "Daily",
+            "Hourly"
           ],
           "x-ms-enum": {
             "name": "GranularityType",
@@ -2556,11 +2557,13 @@
           "description": "The status of the report execution.",
           "type": "string",
           "enum": [
-            "Queud",
+            "Queued",
             "InProgress",
             "Completed",
             "Failed",
-            "Timeout"
+            "Timeout",
+            "NewDataNotAvailable",
+            "DataNotAvailable"
           ],
           "x-ms-enum": {
             "name": "ExecutionStatus",
@@ -3125,8 +3128,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-<<<<<<< HEAD
-=======
     "departmentIdParameter": {
       "name": "departmentId",
       "in": "path",
@@ -3135,7 +3136,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
->>>>>>> e9b8241965b77cbb89ea3a0661d25753e1027eec
     "reportNameParameter": {
       "name": "reportName",
       "in": "path",
