@@ -1,0 +1,176 @@
+{
+  "parameters": {
+    "api-version": "2018-12-01-preview",
+    "billingAccountId": "00000000-0000-0000-0000-000000000000",
+    "billingProfileId": "11111111-1111-1111-1111-111111111111",
+    "budgetName": "Budget1",
+    "parameters": {
+      "eTag": "\"1d34d016a593709\"",
+      "properties": {
+        "category": "Cost",
+        "amount": 100.65,
+        "timeGrain": "Monthly",
+        "timePeriod": {
+          "startDate": "2018-10-01T00:00:00Z",
+          "endDate": "2019-10-31T00:00:00Z"
+        },
+        "filters": {
+          "resources": [
+            "/subscriptions/0000/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/VM1",
+            "/subscriptions/0000/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/VM2"
+          ],
+          "meters": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "tags": {
+            "category": [
+              "Cat1",
+              "Cat2"
+            ],
+            "department": [
+              "Dep1",
+              "Dep2"
+            ]
+          }
+        },
+        "notifications": {
+          "Actual_GreaterThan_80_Percent": {
+            "operator": "GreaterThan",
+            "threshold": 80,
+            "contactEmails": [
+              "johndoe@contoso.com"
+            ]
+          },
+          "Actual_GreaterThanOrEqualTo_90_Percent": {
+            "operator": "GreaterThanOrEqualTo",
+            "threshold": 90,
+            "contactEmails": [
+              "johndoe@contoso.com",
+              "janesmith@contoso.com"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/billingProfiles/11111111-1111-1111-1111-111111111111/providers/Microsoft.Consumption/budgets/Budget1",
+        "name": "Budget1",
+        "type": "Microsoft.Consumption/budgets",
+        "eTag": "\"1d34d012214157f\"",
+        "properties": {
+          "category": "Cost",
+          "amount": 100.65,
+          "timeGrain": "Monthly",
+          "timePeriod": {
+            "startDate": "2018-10-01T00:00:00Z",
+            "endDate": "2019-10-31T00:00:00Z"
+          },
+          "filters": {
+            "resources": [
+              "/subscriptions/0000/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/VM1",
+              "/subscriptions/0000/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/VM2"
+            ],
+            "meters": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "tags": {
+              "category": [
+                "Cat1",
+                "Cat2"
+              ],
+              "department": [
+                "Dep1",
+                "Dep2"
+              ]
+            }
+          },
+          "currentSpend": {
+            "amount": 80.89,
+            "unit": "USD"
+          },
+          "notifications": {
+            "Actual_GreaterThan_80_Percent": {
+              "enabled": true,
+              "operator": "GreaterThan",
+              "threshold": 80,
+              "contactEmails": [
+                "johndoe@contoso.com"
+              ]
+            },
+            "Actual_GreaterThanOrEqualTo_90_Percent": {
+              "enabled": true,
+              "operator": "GreaterThanOrEqualTo",
+              "threshold": 90,
+              "contactEmails": [
+                "johndoe@contoso.com",
+                "janesmith@contoso.com"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/billingProfiles/11111111-1111-1111-1111-111111111111/providers/Microsoft.Consumption/budgets/Budget1",
+        "name": "Budget1",
+        "type": "Microsoft.Consumption/budgets",
+        "eTag": "\"1d34d012214157f\"",
+        "properties": {
+          "category": "Cost",
+          "amount": 100.65,
+          "timeGrain": "Monthly",
+          "timePeriod": {
+            "startDate": "2018-10-01T00:00:00Z",
+            "endDate": "2019-10-31T00:00:00Z"
+          },
+          "filters": {
+            "resources": [
+              "/subscriptions/0000/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/VM1",
+              "/subscriptions/0000/resourceGroups/RG1/providers/Microsoft.Compute/virtualMachines/VM2"
+            ],
+            "meters": [
+              "00000000-0000-0000-0000-000000000000"
+            ],
+            "tags": {
+              "category": [
+                "Cat1",
+                "Cat2"
+              ],
+              "department": [
+                "Dep1",
+                "Dep2"
+              ]
+            }
+          },
+          "currentSpend": {
+            "amount": 80.89,
+            "unit": "USD"
+          },
+          "notifications": {
+            "Actual_GreaterThan_80_Percent": {
+              "enabled": true,
+              "operator": "GreaterThan",
+              "threshold": 80,
+              "contactEmails": [
+                "johndoe@contoso.com"
+              ]
+            },
+            "Actual_GreaterThanOrEqualTo_90_Percent": {
+              "enabled": true,
+              "operator": "GreaterThanOrEqualTo",
+              "threshold": 90,
+              "contactEmails": [
+                "johndoe@contoso.com",
+                "janesmith@contoso.com"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
