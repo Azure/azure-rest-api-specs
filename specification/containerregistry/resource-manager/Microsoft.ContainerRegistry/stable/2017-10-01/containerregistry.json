@@ -1201,11 +1201,31 @@
           "type": "string"
         },
         "registryUri": {
-          "description": "The address of the source registry.",
+          "description": "The address of the source registry (e.g. 'mcr.microsoft.com').",
           "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/ImportSourceCredentials",
+          "description": "Credentials used when importing from a registry uri."
         },
         "sourceImage": {
           "description": "Repository name of the source image.\r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "type": "string"
+        }
+      }
+    },
+    "ImportSourceCredentials": {
+      "required": [
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username to authenticate with the source registry.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password used to authenticate with the source registry.",
           "type": "string"
         }
       }
@@ -1477,6 +1497,10 @@
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The properties of the storage account for the container registry. Only applicable to Classic SKU."
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
         }
       }
     },
@@ -1515,6 +1539,48 @@
         }
       }
     },
+    "NetworkRuleSet": {
+      "description": "The network rule set for a container registry.",
+      "required": [
+        "defaultAction"
+      ],
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "description": "The default action of allow or deny when no other rules match.",
+          "default": "Allow",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": true
+          }
+        },
+        "virtualNetworkRules": {
+          "description": "The virtual network rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "description": "The virtual network rule for a container registry.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
+          "type": "string"
+        }
+      }
+    },
     "RegistryUpdateParameters": {
       "description": "The parameters for updating a container registry.",
       "type": "object",
@@ -1548,6 +1614,10 @@
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The parameters of a storage account for the container registry. Only applicable to Classic SKU. If specified, the storage account must be in the same physical location as the container registry."
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
         }
       }
     },
@@ -2350,6 +2420,7 @@
       "description": "The name of the resource group to which the container registry belongs.",
       "required": true,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "RegistryNameParameter": {

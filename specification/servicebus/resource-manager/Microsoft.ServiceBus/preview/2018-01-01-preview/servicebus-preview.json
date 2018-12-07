@@ -34,6 +34,40 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.ServiceBus/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": { "$ref": "./examples/SBOperations_List.json" }
+        },
+        "description": "Lists all of the available ServiceBus REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
@@ -324,7 +358,7 @@
           }
         }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/ipfilterrules": {
       "get": {
         "tags": [
@@ -694,6 +728,97 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkruleset/default": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceVirtualNetworkRuleSetCreate": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBVirtualNetworkRuleSetCreate.json"
+          }
+        },
+        "operationId": "Namespaces_CreateNetworkRuleSet",
+        "description": "Gets NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            },
+            "description": "The Namespace IpFilterRule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace NetworkRuleSet successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceVirtualNetworkRuleSetget": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBVirtualNetworkRuleSetGet.json"
+          }
+        },
+        "operationId": "Namespaces_GetNetworkRuleSet",
+        "description": "Gets NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace NetworkRuleSet successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -902,6 +1027,55 @@
       ],
       "description": "SKU of the namespace."
     },
+    "OperationListResult": {
+      "description": "Result of the request to list ServiceBus operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of ServiceBus operations supported by the Microsoft.ServiceBus resource provider.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "A ServiceBus REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Service provider: Microsoft.ServiceBus"
+            },
+            "resource": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource on which the operation is performed: Invoice, etc."
+            },
+            "operation": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Operation type: Read, write, delete, etc."
+            }
+          }
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Error reponse indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
@@ -1003,6 +1177,92 @@
         }
       },
       "description": "The response from the List namespace operation."
+    },
+    "Subnet": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of Virtual Network Subnet"
+        }
+      },
+      "description": "Properties supplied for Subnet"
+    },
+    "NWRuleSetIpRules": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "ipMask": {
+          "type": "string",
+          "description": "IP Mask"
+        },
+        "action": {
+          "type": "string",
+          "description": "The IP Filter Action",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleIPAction",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The response from the List namespace operation."
+    },
+    "NWRuleSetVirtualNetworkRules": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "Subnet properties"
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Value that indicates whether to ignore missing Vnet Service Endpoint"
+        }
+      },
+      "description": "The response from the List namespace operation."
+    },
+    "NetworkRuleSet": {
+      "properties": {
+        "properties": {
+          "description": "NetworkRuleSet properties",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "defaultAction": {
+              "type": "string",
+              "description": "Default Action for Network Rule Set",
+              "enum": [
+                "Allow",
+                "Deny"
+              ],
+              "x-ms-enum": {
+                "name": "DefaultAction",
+                "modelAsString": true
+              }
+            },
+            "virtualNetworkRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NWRuleSetVirtualNetworkRules"
+              },
+              "description": "List VirtualNetwork Rules"
+            },
+            "ipRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NWRuleSetIpRules"
+              },
+              "description": "List of IpRules"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of topic resource."
     }
   },
   "parameters": {

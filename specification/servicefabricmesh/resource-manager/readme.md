@@ -6,7 +6,7 @@ This is the AutoRest configuration file for Azure Service Fabric Mesh.
 
 Azure Service Fabric Mesh is fully managed service where developers can build and deploy mission critical applications without managing any infrastructure such as VMs, storage, or networking. Mesh is a serverless environment for applications built from microservices.
 
-[Azure Service Fabric](http://aka.ms/ServiceFabric) is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices. 
+[Azure Service Fabric](http://aka.ms/ServiceFabric) is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices.
 
 
 ---
@@ -28,15 +28,24 @@ Following are the settings for using this specification with [AutoRest](https://
 title: ServiceFabricMeshManagementClient
 description: Service Fabric Mesh Management Client
 openapi-type: arm
-tag: package-2018-07-01-preview
+tag: package-2018-09-01-preview
 
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required by RP to manage those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed. The inlined objects should be part of the application properties and not a seperate proxy resource.
+    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required by RP to manage those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed. The inlined objects should be part of the application properties and not a separate proxy resource.
   - suppress: EnumInsteadOfBoolean
     reason: The `readOnly` boolean schema is part of Azure Resource Manager common schema.
   - suppress: TrackedResourcePatchOperation
     reason: The patch operation is not implemented in the preview APIs.
+```
+### Tag: package-2018-09-01-preview
+
+These settings apply only when `--tag=package-2018-09-01-preview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2018-09-01-preview'
+input-file:
+- Microsoft.ServiceFabricMesh/preview/2018-09-01-preview/servicefabricmesh.json
 ```
 ### Tag: package-2018-07-01-preview
 
@@ -61,6 +70,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -69,7 +79,7 @@ swagger-to-sdk:
 
 
 ## C#
-These settings apply only when `--csharp` is specified on the command line. 
+These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
@@ -107,31 +117,11 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-servicefabricmesh
 ```
+
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: servicefabricmesh
-  clear-output-folder: true
-```
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-07-01-preview
-```
-
-### Tag: package-2018-07-01-preview and go
-
-These settings apply only when `--tag=package-2018-07-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-07-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/servicefabricmesh/mgmt/2018-07-01-preview/servicefabricmesh
-```
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -148,8 +138,23 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicefabricmesh
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-09-01-preview
   - tag: package-2018-07-01-preview
 ```
+
+### Tag: package-2018-09-01-preview and java
+
+These settings apply only when `--tag=2018-09-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == '2018-09-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.servicefabricmesh.v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/servicefabricmesh/resource-manager/v2018_09_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2018-07-01-preview and java
 
 These settings apply only when `--tag=2018-07-01-preview --java` is specified on the command line.

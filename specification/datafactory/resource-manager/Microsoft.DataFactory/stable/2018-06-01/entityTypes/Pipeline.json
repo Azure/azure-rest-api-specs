@@ -25,6 +25,10 @@
           "$ref": "../datafactory.json#/definitions/ParameterDefinitionSpecification",
           "description": "List of parameters for pipeline."
         },
+        "variables": {
+          "$ref": "../datafactory.json#/definitions/VariableDefinitionSpecification",
+          "description": "List of variables for pipeline."
+        },
         "concurrency": {
           "type": "integer",
           "minimum": 1,
@@ -94,11 +98,11 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "User proprety name.",
+          "description": "User property name.",
           "type": "string"
         },
         "value": {
-          "description": "User proprety value. Type: string (or Expression with resultType string).",
+          "description": "User property value. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -246,7 +250,7 @@
           "$ref": "#/definitions/CopySink"
         },
         "translator": {
-          "description": "Copy activity translator. If not specificed, tabular translator is used.",
+          "description": "Copy activity translator. If not specified, tabular translator is used.",
           "$ref": "#/definitions/CopyTranslator"
         },
         "enableStaging": {
@@ -712,7 +716,7 @@
       } 
     }, 
     "ConcurSource": { 
-      "description": "A copy activity Concur Serivce source.", 
+      "description": "A copy activity Concur Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -832,7 +836,7 @@
       } 
     }, 
     "HubspotSource": { 
-      "description": "A copy activity Hubspot Serivce source.", 
+      "description": "A copy activity Hubspot Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -862,7 +866,7 @@
       } 
     }, 
     "JiraSource": { 
-      "description": "A copy activity Jira Serivce source.", 
+      "description": "A copy activity Jira Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -922,7 +926,7 @@
       } 
     }, 
     "PaypalSource": { 
-      "description": "A copy activity Paypal Serivce source.", 
+      "description": "A copy activity Paypal Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -997,7 +1001,7 @@
       } 
     }, 
     "ShopifySource": { 
-      "description": "A copy activity Shopify Serivce source.", 
+      "description": "A copy activity Shopify Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1027,7 +1031,7 @@
       } 
     }, 
     "SquareSource": { 
-      "description": "A copy activity Square Serivce source.", 
+      "description": "A copy activity Square Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1042,7 +1046,7 @@
       } 
     }, 
     "XeroSource": { 
-      "description": "A copy activity Xero Serivce source.", 
+      "description": "A copy activity Xero Service source.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -1180,10 +1184,7 @@
           "description": "Stored procedure parameter type.",
           "$ref": "#/definitions/StoredProcedureParameterType"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
@@ -1454,6 +1455,26 @@
         "modelAsString": true
       }
     },
+    "LogStorageSettings": {
+      "description": "Log storage settings.",
+      "type": "object",
+      "properties": {
+        "linkedServiceName": {
+          "description": "Log storage linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "path": {
+          "type": "object",
+          "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "linkedServiceName"
+      ]
+    },
     "StagingSettings": {
       "description": "Staging settings.",
       "type": "object",
@@ -1718,6 +1739,18 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "variables": {
+          "description": "User specified arguments under hivevar namespace.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "queryTimeout": {
+          "type": "integer",
+          "description": "Query timeout value (in minutes).  Effective when the HDInsight culster is with ESP (Enterprise Security Package)"
         }
       }
     },
@@ -2321,6 +2354,54 @@
       },
       "required": [
         "pipeline"
+      ]
+    },
+    "DeleteActivity": {
+      "x-ms-discriminator-value": "Delete",
+      "description": "Delete activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Delete activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeleteActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DeleteActivityTypeProperties": {
+      "description": "Delete activity properties.",
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files or sub-folders under current folder path will be deleted recursively. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "maxConcurrentConnections":{
+          "type": "integer",
+          "minimum": 1,
+          "description": "The max concurrent connections to connect data source at the same time."
+        },
+        "enableLogging":{
+          "type":"object",
+          "description": "Whether to record detailed logs of delete-activity execution. Default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "logStorageSettings":{
+          "description": "Log storage settings customer need to provide when enableLogging is true.",
+          "$ref": "#/definitions/LogStorageSettings"
+        },
+        "dataset": {
+          "description": "Delete activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
       ]
     },
     "LookupActivity": {
@@ -3023,6 +3104,70 @@
       "required": [
         "pythonFile"
       ]
+    },
+    "SetVariableActivity": {
+      "x-ms-discriminator-value": "SetVariable",
+      "description": "Set value for a Variable.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Set Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SetVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SetVariableActivityTypeProperties": {
+      "description": "SetVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be set. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
+    },
+    "AppendVariableActivity": {
+      "x-ms-discriminator-value": "AppendVariable",
+      "description": "Append value for a Variable of type Array.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Append Variable activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppendVariableActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AppendVariableActivityTypeProperties": {
+      "description": "AppendVariable activity properties.",
+      "properties": {
+        "variableName": {
+          "description": "Name of the variable whose value needs to be appended to.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value to be appended. Could be a static value or Expression",
+          "type": "object"
+        }
+      }
     }
   }
 }

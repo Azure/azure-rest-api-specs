@@ -75,7 +75,7 @@
           "Query at management group scope": {
             "$ref": "./examples/PolicyTrackedResources_QueryManagementGroupScope.json"
           },
-          "Query at management group scope using query paramters": {
+          "Query at management group scope using query parameters": {
             "$ref": "./examples/PolicyTrackedResources_QueryManagementGroupScopeWithFilterAndTop.json"
           }
         }
@@ -123,7 +123,7 @@
           "Query at subscription scope": {
             "$ref": "./examples/PolicyTrackedResources_QuerySubscriptionScope.json"
           },
-          "Query at subscription scope using query paramters": {
+          "Query at subscription scope using query parameters": {
             "$ref": "./examples/PolicyTrackedResources_QuerySubscriptionScopeWithFilterAndTop.json"
           }
         }
@@ -174,7 +174,7 @@
           "Query at resource group scope": {
             "$ref": "./examples/PolicyTrackedResources_QueryResourceGroupScope.json"
           },
-          "Query at resource group scope using query paramters": {
+          "Query at resource group scope using query parameters": {
             "$ref": "./examples/PolicyTrackedResources_QueryResourceGroupScopeWithFilterAndTop.json"
           }
         }
@@ -222,37 +222,9 @@
           "Query at resource scope": {
             "$ref": "./examples/PolicyTrackedResources_QueryResourceScope.json"
           },
-          "Query at resource scope using query paramters": {
+          "Query at resource scope using query parameters": {
             "$ref": "./examples/PolicyTrackedResources_QueryResourceScopeWithFilterAndTop.json"
           }
-        }
-      }
-    },
-    "/providers/Microsoft.PolicyInsights/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "description": "Lists available operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of available operations.",
-            "schema": {
-              "$ref": "#/definitions/OperationsListResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/QueryFailure"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List operations": { "$ref": "./examples/PolicyTrackedResources_ListOperations.json" }
         }
       }
     }
@@ -385,61 +357,6 @@
           }
         }
       }
-    },
-    "OperationsListResults": {
-      "description": "List of available operations.",
-      "properties": {
-        "@odata.count": {
-          "description": "OData entity count; represents the number of policy state records returned.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "readOnly": true
-        },
-        "value": {
-          "description": "List of available operations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "Operation definition.",
-      "properties": {
-        "name": {
-          "description": "Operation name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Resource provider name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource name on which the operation is performed.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Operation description.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -521,7 +438,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Microsoft Azure subscription ID."
     },
     "apiVersionParameter": {
       "name": "api-version",

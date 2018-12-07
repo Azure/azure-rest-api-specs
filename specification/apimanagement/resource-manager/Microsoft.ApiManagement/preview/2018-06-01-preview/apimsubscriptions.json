@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
+            "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| ownerId      | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| scope        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -258,7 +258,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscription_Update",
-        "description": "Updates the details of a subscription specificied by its identifier.",
+        "description": "Updates the details of a subscription specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementUpdateSubscription": {
             "$ref": "./examples/ApiManagementUpdateSubscription.json"
@@ -474,13 +474,13 @@
     },
     "SubscriptionContractProperties": {
       "properties": {
-        "userId": {
+        "ownerId": {
           "type": "string",
           "description": "The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier."
         },
-        "productId": {
+        "scope": {
           "type": "string",
-          "description": "The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier."
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId}."
         },
         "displayName": {
           "type": "string",
@@ -545,11 +545,15 @@
         "stateComment": {
           "type": "string",
           "description": "Optional subscription comment added by an administrator."
+        },
+        "allowTracing": {
+          "type": "boolean",
+          "description": "Determines whether tracing is enabled",
+          "x-apim-code-nillable": true
         }
       },
       "required": [
-        "userId",
-        "productId",
+        "scope",
         "state",
         "primaryKey",
         "secondaryKey"
@@ -568,13 +572,13 @@
     },
     "SubscriptionCreateParameterProperties": {
       "properties": {
-        "userId": {
+        "ownerId": {
           "type": "string",
           "description": "User (user id path) for whom subscription is being created in form /users/{uid}"
         },
-        "productId": {
+        "scope": {
           "type": "string",
-          "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId}."
         },
         "displayName": {
           "type": "string",
@@ -609,11 +613,14 @@
             "name": "SubscriptionState",
             "modelAsString": false
           }
+        },
+        "allowTracing": {
+          "type": "boolean",
+          "description": "Determines whether tracing can be enabled"
         }
       },
       "required": [
-        "userId",
-        "productId",
+        "scope",
         "displayName"
       ],
       "description": "Parameters supplied to the Create subscription operation."
@@ -630,13 +637,13 @@
     },
     "SubscriptionUpdateParameterProperties": {
       "properties": {
-        "userId": {
+        "ownerId": {
           "type": "string",
           "description": "User identifier path: /users/{uid}"
         },
-        "productId": {
+        "scope": {
           "type": "string",
-          "description": "Product identifier path: /products/{productId}"
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId}"
         },
         "expirationDate": {
           "type": "string",
@@ -678,6 +685,10 @@
         "stateComment": {
           "type": "string",
           "description": "Comments describing subscription state change by the administrator."
+        },
+        "allowTracing": {
+          "type": "boolean",
+          "description": "Determines whether tracing can be enabled"
         }
       },
       "description": "Parameters supplied to the Update subscription operation."

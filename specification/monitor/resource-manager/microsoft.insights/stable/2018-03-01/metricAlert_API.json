@@ -63,7 +63,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts": {
       "get": {
         "tags": [ "MetricAlerts" ],
-        "description": "Retrieve alert rule defintions in a resource group.",
+        "description": "Retrieve alert rule definitions in a resource group.",
         "operationId": "MetricAlerts_ListByResourceGroup",
         "parameters": [
           { "$ref": "#/parameters/SubscriptionIdParameter" },
@@ -93,7 +93,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}": {
       "get": {
         "tags": [ "MetricAlerts" ],
-        "description": "Retrieve an alert rule definiton.",
+        "description": "Retrieve an alert rule definition.",
         "operationId": "MetricAlerts_Get",
         "parameters": [
           { "$ref": "#/parameters/SubscriptionIdParameter" },
@@ -114,7 +114,10 @@
           }
         },
         "x-ms-examples": {
-          "Get an alert rule": { "$ref": "./examples/getMetricAlert.json" }
+          "Get an alert rule for single resource": { "$ref": "./examples/getMetricAlertSingleResource.json" },
+          "Get an alert rule for multiple resources": { "$ref": "./examples/getMetricAlertMultipleResource.json" },
+          "Get an alert rule on resource group(s)": { "$ref": "./examples/getMetricAlertResourceGroup.json" },
+          "Get an alert rule on subscription": { "$ref": "./examples/getMetricAlertSubscription.json" }
         }
       },
       "put": {
@@ -149,7 +152,10 @@
           }
         },
         "x-ms-examples": {
-          "Create or update an alert rule": { "$ref": "./examples/createOrUpdateMetricAlert.json" }
+          "Create or update an alert rule for Single Resource": { "$ref": "./examples/createOrUpdateMetricAlertSingleResource.json" },
+          "Create or update an alert rule for Multiple Resource": { "$ref": "./examples/createOrUpdateMetricAlertMultipleResource.json" },
+          "Create or update an alert rule on Resource group(s)": { "$ref": "./examples/createOrUpdateMetricAlertResourceGroup.json" },
+          "Create or update an alert rule on Subscription ": { "$ref": "./examples/createOrUpdateMetricAlertSubscription.json" }
         }
       },
       "patch": {
@@ -189,7 +195,7 @@
       },
       "delete": {
         "tags": [ "MetricAlerts" ],
-        "description": "Delete an alert rule defitiniton.",
+        "description": "Delete an alert rule definition.",
         "operationId": "MetricAlerts_Delete",
         "parameters": [
           { "$ref": "#/parameters/SubscriptionIdParameter" },
@@ -363,6 +369,14 @@
           "format": "duration",
           "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
         },
+        "targetResourceType" :{
+          "type" : "string",
+          "description" : "the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+        },
+        "targetResourceRegion" : {
+          "type" : "string",
+          "description" : "the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+        },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria",
           "description": "defines the specific alert criteria information."
@@ -498,7 +512,8 @@
       "properties": {
         "odata.type": {
           "enum": [
-            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
+            "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
           ],
           "x-ms-enum": {
             "name": "odatatype",
@@ -530,7 +545,14 @@
       "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
     },
     "MetricCriteria": {
-      "required": [
+      "x-ms-discriminator-value": "StaticThresholdCriterion",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiMetricCriteria"
+        }
+      ],
+     "required": [
         "name",
         "metricName",
         "operator",
@@ -606,7 +628,7 @@
         },
         "operator": {
           "type": "string",
-          "description": "the dimension operator."
+          "description": "the dimension operator. Only 'Include' and 'Exclude' are supported"
         },
         "values": {
           "type": "array",
@@ -617,7 +639,47 @@
         }
       },
       "description": "Specifies a metric dimension."
-    }
+    },
+    "MetricAlertMultipleResourceMultipleMetricCriteria":{
+      "x-ms-discriminator-value": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+      "type": "object",
+      "allOf":[
+        {
+          "$ref":"#/definitions/MetricAlertCriteria"
+        }
+      ],
+      "properties":{
+        "allOf":{
+          "type": "array",
+          "items":{
+            "$ref":"#/definitions/MultiMetricCriteria"
+          },
+          "description": "the list of multiple metric criteria for this 'all of' operation. "
+        }
+      },
+      "description": "Specifies the metric alert criteria for multiple resource that has multiple metric criteria."
+    },
+    "MultiMetricCriteria": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "discriminator":"criterionType",
+      "properties":{
+        "criterionType" : {
+          "enum":[
+           "StaticThresholdCriterion"            
+          ],
+          "x-ms-enum" : {
+            "name" : "criterionType",
+            "modelAsString": true
+          },
+          "description":" Specifies the type of threshold criteria"
+        }
+      },
+      "required": ["criterionType"],
+      "description": "The types of conditions for a multi resource alert"
+    }    
   },
   "parameters": {
     "SubscriptionIdParameter": {

@@ -85,7 +85,9 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update rule": { "$ref": "./examples/createOrUpdateScheduledQueryRules.json" }
+          "Create or Update rule - AlertingAction": { "$ref": "./examples/createOrUpdateScheduledQueryRules.json" },
+          "Create or Update rule - AlertingAction with Cross-Resource": { "$ref": "./examples/createOrUpdateScheduledQueryRuleswithCrossResource.json" },
+          "Create or Update rule - LogToMetricAction": { "$ref": "./examples/createOrUpdateScheduledQueryRule-LogToMetricAction.json" }
         }
       },
       "get": {
@@ -380,7 +382,7 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "Log search query."
+          "description": "Log search query. Required for action type - AlertingAction"
         },
         "authorizedResources": {
           "type": "array",
@@ -399,7 +401,6 @@
         }
       },
       "required": [
-        "query",
         "dataSourceId"
       ]
     },
@@ -462,7 +463,7 @@
         },
         "customWebhookPayload": {
           "type": "string",
-          "description": "Custom payload to be sent for all webook URI in Azure action group"
+          "description": "Custom payload to be sent for all webhook URI in Azure action group"
         }
       },
       "description": "Azure action group"
@@ -539,7 +540,7 @@
         "name": "QueryType",
         "modelAsString": true
       },
-      "description": "Set value to 'ResultAcount'"
+      "description": "Set value to 'ResultAccount'"
     },
     "LogSearchRule": {
       "description": "Log Search Rule Definition",
@@ -579,7 +580,7 @@
             "name": "provisioningState",
             "modelAsString": true
           },
-          "description": "Provisioning state of the scheduledquery rule"
+          "description": "Provisioning state of the scheduled query rule"
         },
         "source": {
           "$ref": "#/definitions/Source",
@@ -587,7 +588,7 @@
         },
         "schedule": {
           "$ref": "#/definitions/Schedule",
-          "description": "Schedule (Frequnecy, Time Window) for rule."
+          "description": "Schedule (Frequency, Time Window) for rule. Required for action type - AlertingAction"
         },
         "action": {
           "$ref": "#/definitions/Action",
@@ -595,7 +596,6 @@
         }
       },
       "required": [
-        "schedule",
         "source",
         "action"
       ]
@@ -623,7 +623,7 @@
       "properties": {
         "odata.type": {
           "type": "string",
-          "description": "Specifies the action. Only supported value - AlertingAction "
+          "description": "Specifies the action. Supported values - AlertingAction, LogToMetricAction"
         }
       },
       "required": [
@@ -632,7 +632,7 @@
       "description": "Action descriptor."
     },
     "AlertingAction": {
-      "description": "Specifiy action need to be taken when rule type is Alert",
+      "description": "Specify action need to be taken when rule type is Alert",
       "x-ms-discriminator-value": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
       "type": "object",
       "allOf": [
@@ -663,6 +663,78 @@
         "aznsAction",
         "trigger",
         "severity"
+      ]
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Specifies the criteria for converting log to metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "operator": {
+          "type": "string",
+          "description": "Operator for dimension values",
+          "enum": [
+            "Include"
+          ],
+          "x-ms-enum": {
+            "name": "operator",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of dimension values"
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "Criteria": {
+      "type": "object",
+      "description": "Specifies the criteria for converting log to metric.",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "description": "List of Dimensions for creating metric"
+        }
+      },
+      "required": [
+        "metricName"
+      ]
+    },
+    "LogToMetricAction": {
+      "description": "Specify action need to be taken when rule type is converting log to metric",
+      "x-ms-discriminator-value": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.LogToMetricAction",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "properties": {
+        "criteria": {
+          "$ref": "#/definitions/Criteria",
+          "description": "Severity of the alert"
+        }
+      },
+      "required": [
+        "criteria"
       ]
     },
     "ErrorResponse": {

@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Logic.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Logic, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,9 +19,8 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Logic API.
 
 ``` yaml
@@ -40,7 +39,6 @@ directive:
 
 ```
 
-
 ### Tag: package-2018-07-preview
 
 These settings apply only when `--package-2018-07-preview` is specified on the command line.
@@ -48,6 +46,24 @@ These settings apply only when `--package-2018-07-preview` is specified on the c
 ``` yaml $(tag) == 'package-2018-07-preview'
 input-file:
 - Microsoft.Logic/preview/2018-07-01-preview/logic.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3016
+    reason: Existing properties, can't be changed without breaking API.
+    #where:
+    #  - $.definitions.EdifactValidationSettings.properties.validateEDITypes
+    #  - $.definitions.EdifactValidationSettings.properties.validateXSDTypes
+    #  - $.definitions.EdifactValidationOverride.properties.validateEDITypes
+    #  - $.definitions.EdifactValidationOverride.properties.validateXSDTypes
+    #  - $.definitions.X12ValidationSettings.properties.validateEDITypes
+    #  - $.definitions.X12ValidationSettings.properties.validateXSDTypes
+    #  - $.definitions.X12ValidationOverride.properties.validateEDITypes
+    #  - $.definitions.X12ValidationOverride.properties.validateXSDTypes
+
 ```
 
 ### Tag: package-2016-06
@@ -77,10 +93,9 @@ input-file:
 - Microsoft.Logic/preview/2015-02-01-preview/logic.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -92,12 +107,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_logic']
 ```
-
 
 ## C#
 
@@ -129,16 +144,22 @@ python:
   package-name: azure-mgmt-logic
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-logic/azure/mgmt/logic
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-logic
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

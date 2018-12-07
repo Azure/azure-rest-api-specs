@@ -22,7 +22,7 @@ These are the global settings for the Storage API.
 
 ``` yaml
 title: StorageAdminClient
-description: Storag Admin Client
+description: Storage Admin Client
 openapi-type: arm
 tag: package-2016-05-01
 ```
