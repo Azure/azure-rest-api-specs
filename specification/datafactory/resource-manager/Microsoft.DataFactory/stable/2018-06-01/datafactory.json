@@ -1301,7 +1301,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SsisObjectMetadataStatusResponse"
+            }
           },
           "202": {
             "description": "Accepted."
@@ -4667,6 +4670,28 @@
               "type": "string",
               "description": "Metadata path."
           }
+      }
+    },
+    "SsisObjectMetadataStatusResponse": {
+      "type": "object",
+      "description": "The status of the operation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "string",
+          "description": "The operation properties."
+        },
+        "error": {
+          "type": "string",
+          "description": "The operation error message."
+        }
       }
     }
   },
