@@ -137,4 +137,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getSupportedOptimizationTypes"].post.operationId'
     from: cdn.json
     reason: ''
+  - suppress: PostOperationIdContainsUrlVerb
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkResourceUsage"].post.operationId'
+    from: cdn.json
+    reason: ''
 ```
