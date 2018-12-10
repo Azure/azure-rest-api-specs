@@ -388,7 +388,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscription/{subscriptionId}/transfer": {
       "post": {
         "description": "Transfers the GTM subscription from one invoice section to another within a billing account.",
-        "operationId": "Transfer_Billing_Subscription",
+        "operationId": "BillingSubscription_Transfer",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -406,7 +406,7 @@
             "$ref": "#/parameters/InvoiceSectionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/TransferBillingSubscriptionRequestParameter"
@@ -451,7 +451,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscriptions/{subscriptionId}/transfer/operationResults/{operationId}": {
       "get": {
         "description": "Gets the result of the transfer operation.",
-        "operationId": "Transfer_Billing_Subscription_Operation_Result",
+        "operationId": "BillingSubscriptionOperationResult_Get",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -469,7 +469,7 @@
             "$ref": "#/parameters/InvoiceSectionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -514,7 +514,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscriptions/{subscriptionId}/transfer/operationStatus/{operationId}": {
       "get": {
         "description": "Gets the result of the transfer operation.",
-        "operationId": "Transfer_Billing_Subscription_Operation_Result",
+        "operationId": "BillingSubscriptionOperationStatus_Get",
         "x-ms-examples": {
           "TransferBillingSubscriptionOperationStatus": {
             "$ref": "./examples/TransferBillingSubscriptionOperationStatus.json"
@@ -528,7 +528,7 @@
             "$ref": "#/parameters/InvoiceSectionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/OperationIdParameter"
@@ -905,11 +905,11 @@
       "type": "object",
       "description": "Transfer operation properties",
       "properties": {
-        "AzureSubscriptionId": {
+        "azureSubscriptionId": {
           "type": "string",
           "description": "The transferred azure subscription Id"
         },
-        "InvoiceSectionId": {
+        "invoiceSectionId": {
           "type": "string",
           "description": "The invoice section to which the subscription was transferred"
         }
@@ -925,6 +925,20 @@
       "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
     },
     "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "BillingAccountIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "InvoiceSectionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "description": "Azure Subscription ID.",
