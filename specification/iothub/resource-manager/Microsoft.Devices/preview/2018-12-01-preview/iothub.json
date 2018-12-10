@@ -1960,8 +1960,14 @@
         "deviceStreams": {
           "description": "The device streams properties of iothub.",
           "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/deviceStreamsProperties"
+          "properties": {
+            "streamingEndpoints": {
+              "description": "List of Device Streams Endpoints.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         },
         "features": {
@@ -2100,19 +2106,6 @@
           "type": "integer",
           "minimum": 1,
           "maximum": 100
-        }
-      }
-    },
-    "deviceStreamsProperties": {
-      "description": "The properties of the device streams used by this IoT hub.",
-      "type": "object",
-      "properties": {
-        "streamingEndpoints": {
-          "description": "List of Device Streams Endpoints.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -2619,6 +2612,11 @@
               "readOnly": true,
               "type": "string",
               "description": "Name of the operation"
+            },
+            "description": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Description of the operation"
             }
           }
         }
