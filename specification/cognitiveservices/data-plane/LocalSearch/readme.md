@@ -29,6 +29,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## CSharp Settings
@@ -42,6 +44,14 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## JavaScript/TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Node.js
+
+See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
 ## Suppressions
 Suppressing errors due to API design:
