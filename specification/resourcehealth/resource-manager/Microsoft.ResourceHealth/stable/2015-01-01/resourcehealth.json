@@ -222,7 +222,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current": {
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current": {
       "get": {
         "tags": [
           "ChildAvailabilityStatuses"
@@ -270,7 +270,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ResourceHealth/child/availabilityStatuses": {
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses": {
       "get": {
         "tags": [
           "ChildAvailabilityStatuses"
@@ -320,12 +320,12 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ResourceHealth/children": {
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/childResources": {
       "get": {
         "tags": [
-          "Children"
+          "ChildResources"
         ],
-        "operationId": "Children_List",
+        "operationId": "ChildResources_List",
         "description": "Lists the all the children and its current health status for a parent resource. Use the nextLink property in the response to get the next page of children current health",
         "parameters": [
           {
@@ -365,7 +365,7 @@
         },
         "x-ms-examples": {
           "GetHealthHistoryByResource": {
-            "$ref": "./examples/Children_List.json"
+            "$ref": "./examples/ChildResources_List.json"
           }
         }
       }
