@@ -2719,6 +2719,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ForcePath"
           }
         ],
         "responses": {
@@ -7573,7 +7576,7 @@
     "/apps/{appId}/azureaccounts": {
       "post": {
         "description": "Assigns an azure account to the application.",
-        "operationId": "5be32228e8473de116325515",
+        "operationId": "AzureAccounts_AssignToApp",
         "summary": "apps - Assign a LUIS azure account to an application",
         "parameters": [
           {
@@ -7628,7 +7631,7 @@
       },
       "get": {
         "description": "Gets the LUIS azure accounts assigned to the application for the user using his ARM token.",
-        "operationId": "5be32028a1d48f88cfd57e20",
+        "operationId": "AzureAccounts_GetAssigned",
         "summary": "apps - Get LUIS azure accounts assigned to the application",
         "parameters": [
           {
@@ -7672,7 +7675,7 @@
       },
       "delete": {
         "description": "Removes assigned azure account from the application.",
-        "operationId": "5be32554f8591db3a86232e1",
+        "operationId": "AzureAccounts_RemoveFromApp",
         "summary": "apps - Removes an assigned LUIS azure account from an application",
         "parameters": [
           {
@@ -7729,7 +7732,7 @@
     "/azureaccounts": {
       "get": {
         "description": "Gets the LUIS azure accounts for the user using his ARM token.",
-        "operationId": "5be313cec181ae720aa2b26c",
+        "operationId": "AzureAccounts_GetUserLUISAccounts",
         "summary": "user - Get LUIS azure accounts",
         "parameters": [
           {
@@ -7772,7 +7775,7 @@
     "/package/{appId}/slot/{slotName}/gzip": {
       "get": {
         "description": "Packages published LUIS application as GZip.",
-        "operationId": "apps-packagepublishedapplicationasgzip",
+        "operationId": "Apps_PackagePublishedApplicationAsGzip",
         "summary": "package - Gets published LUIS application package in binary stream GZip format",
         "parameters": [
           {
@@ -7819,7 +7822,7 @@
     "/package/{appId}/versions/{versionId}/gzip": {
       "get": {
         "description": "Packages trained LUIS application as GZip.",
-        "operationId": "apps-packagetrainedapplicationasgzip",
+        "operationId": "Apps_PackageTrainedApplicationAsGzip",
         "summary": "package - Gets trained LUIS application package in binary stream GZip format",
         "parameters": [
           {
@@ -10254,6 +10257,14 @@
       "default": 100,
       "minimum": 0,
       "maximum": 500,
+      "x-ms-parameter-location": "method"
+    },
+    "ForcePath": {
+      "name": "force",
+      "in": "query",
+      "description": "A flag to indicate whether to force an operation.",
+      "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "Endpoint": {
