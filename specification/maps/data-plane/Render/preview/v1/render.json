@@ -217,7 +217,7 @@
     "/map/static/{format}": {
       "get": {
         "x-publish": true,
-        "description": "The static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20.\n\nThe supported resolution range for the map image is from 1x1 to 8192x8192.\n\nIf you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice.\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the API.\nThe supported Lat and Lon ranges when using the **bbox** parameter, are as follows:\nZoom Level | Max Lon Range | Max Lat Range\n-----------|---------------|--------------\n0 | 360.0 | 170.0\n1 | 360.0 | 170.0\n2 | 360.0 | 170.0\n3 | 360.0 | 170.0\n4 | 360.0 | 170.0\n5 | 180.0 | 85.0\n6 | 90.0 | 42.5\n7 | 45.0 | 21.25\n8 | 22.5 | 10.625\n9 | 11.25 | 5.3125\n10 | 5.625 | 2.62625\n11 | 2.8125 | 1.328125\n12 | 1.40625 | 0.6640625\n13 | 0.703125 | 0.33203125\n14 | 0.3515625 | 0.166015625\n15 | 0.17578125 | 0.0830078125\n16 | 0.087890625 | 0.0415039063\n17 | 0.0439453125 | 0.0207519531\n18 | 0.0219726563 | 0.0103759766\n19 | 0.0109863281 | 0.0051879883\n20 | 0.0054931641 | 0.0025939941",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nThe static image service renders a user-defined, rectangular image containing a map section using a zoom level from 0 to 20.\nThe supported resolution range for the map image is from 1x1 to 8192x8192.\nIf you are deciding when to use the static image service over the map tile service, you may want to consider how you would like to interact with the rendered map. If the map contents will be relatively unchanging, a static map is a good choice. If you want to support a lot of zooming, panning and changing of the map content, the map tile service would be a better choice. <br><br>   _Note_ : Either **center** or **bbox** parameter must be supplied to the API. <br><br> The supported Lat and Lon ranges when using the **bbox** parameter, are as follows: <br><br>\n\n  |Zoom Level | Max Lon Range   | Max Lat Range|\n  |:----------|:----------------|:-------------|\n  |0          | 360.0           | 170.0        | \n  |1          | 360.0           | 170.0        |\n  |2          | 360.0           | 170.0        |\n  |3          | 360.0           | 170.0        |\n  |4          | 360.0           | 170.0        |\n  |5          | 180.0           | 85.0         |\n  |6          | 90.0            | 42.5         |\n  |7          | 45.0            | 21.25        |\n  |8          | 22.5            | 10.625       |\n  |9          | 11.25           | 5.3125       |\n  |10         | 5.625           | 2.62625      |\n  |11         | 2.8125          | 1.328125     |\n  |12         | 1.40625         | 0.6640625    |\n  |13         | 0.703125        | 0.33203125   |\n  |14         | 0.3515625       | 0.166015625  |\n  |15         | 0.17578125      | 0.0830078125 |  \n  |16         | 0.087890625     | 0.0415039063 | \n  |17         | 0.0439453125    | 0.0207519531 |\n  |18         | 0.0219726563    | 0.0103759766 |\n  |19         | 0.0109863281    | 0.0051879883 |\n  |20         | 0.0054931641    | 0.0025939941 |",
         "operationId": "Render_GetMapImage",
         "x-ms-examples": {
           "GetMapStaticImage": {
@@ -233,6 +233,18 @@
           },
           {
             "$ref": "#/parameters/RasterTileFormat"
+          },
+          {
+            "name": "path",
+            "description": "Path style and locations. Use this parameter to optionally add lines, polygons or circles to the image.\nThe path style describes the appearance of the line and fill. (Be sure to properly URL-encode values of this\nparameter since it will contain reserved characters such as pipes and punctuation.)\n\nPath parameter is supported in Azure Maps account SKU starting with S1. Multiple instances of the path parameter \nallow to specify multiple geometries with their styles. Nuber of parameters per request is limited to 10 and\nnumber of locations is limited to 100 per path.\n\nTo render a circle with radius 100 meters and center point at latitude 45°N and longitude 122°W using the default style, add the\nquerystring parameter \n\n`path=r100||-122 45` \n\nNote that the longitude comes before the latitude.\nAfter URL encoding this will look like\n\n`path=r100%7C%7C45+-122`\n\nAll of the examples here show the path parameter without URL encoding, for clarity.\n\nTo render a line, separate each location with a pipe character. For example, use\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12`\n\nTo render a polygon, last location must be equal to the start location. For example, use\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12|-122 45`\n\n### Style Modifiers\n\nYou can modify the appearance of the path by adding style modifiers. These are added before the locations. \nStyle modifiers each have a two-letter name. These abbreviated names are used to help\nreduce the length of the URL.\n\nTo change the color of the outline, use the 'lc' style modifier and specify the color using the HTML/CSS RGB color\nformat which is a six-digit hexadecimal number (the three-digit form is not supported). For example, to use\na deep pink color which you would specify as #FF1493 in CSS, use\n\n`path=lcFF1493||-122 45|-119.5 43.2`\n\n### Getting Path locations from Azure Maps Data Storage\n\nFor all Azure Maps account SKUs other than S0, the path location information can be obtained from Azure Maps Data Storage. \nAfter uploading a GeoJSON document containing path locations, the Data Storage service returns a Unique Data ID (UDID) that you can use\nto reference the data in the path parameter.\n\nTo use the point geometry from an uploaded GeoJSON document as the path locations, specify the UDID in the locations\nsection of the path parameter. For example,\n\n`path=||udid-29dc105a-dee7-409f-a3f9-22b066ae4713`\n\nNote the it is not allowed to mix path locations from Data Storage with locations specified in the path parameter. \n\n### Style Modifier Summary\n\nModifier  | Description            | Range            \n:--------:|------------------------|------------------\nlc        | Line color             | 000000 to FFFFFF\nfc        | Fill color             | 000000 to FFFFFF\nla        | Line alpha (opacity)   | 0 to 1           \nfa        | Fill alpha (opacity)   | 0 to 1           \nlw        | Line width             | Greater than 0            \nra        | Circle radius (meters) | Greater than 0",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            },
+            "x-publish": false
           },
           {
             "name": "layer",
@@ -289,21 +301,21 @@
           {
             "name": "center",
             "in": "query",
-            "description": "Coordinates of the center point. Format: 'lon,lat'. Projection used - EPSG:3857. Longitude range: -180 to 180. Latitude range: -85 to 85. Note: Either center or bbox are required parameters. They are mutually exclusive.",
+            "description": "Coordinates of the center point. Format: 'lon,lat'. Projection used\n- EPSG:3857. Longitude range: -180 to 180. Latitude range: -85 to\n85. Note: Either center or bbox are required parameters. They are\nmutually exclusive.",
             "required": false,
             "type": "string"
           },
           {
             "name": "bbox",
             "in": "query",
-            "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'. Note: Either bbox or center are required parameters. They are mutually exclusive. It shouldn’t be used with height or width. \nThe maximum allowed ranges for Lat and Lon are defined for each zoom level in the table at the top of this page. ",
+            "description": "Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat,\nmaxLon, maxLat'. Note: Either bbox or center are required\nparameters. They are mutually exclusive. It shouldn’t be used with\nheight or width. \n\nThe maximum allowed ranges for Lat and Lon are defined for each zoom level\nin the table at the top of this page. ",
             "required": false,
             "type": "string"
           },
           {
             "name": "height",
             "in": "query",
-            "description": "Height of the resulting image in pixels. Range is 1 to 8192. Default is 512. It shouldn’t be used with bbox.",
+            "description": "Height of the resulting image in pixels. Range is 1 to 8192. Default\nis 512. It shouldn’t be used with bbox.",
             "required": false,
             "type": "integer",
             "minimum": 1,
@@ -356,7 +368,7 @@
     "/map/tile/{format}": {
       "get": {
         "x-publish": true,
-        "description": "Fetches map tiles in vector or raster format typically to be integrated into a new map control or SDK. By default, Azure uses vector map tiles for its web map control (see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid))",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nFetches map tiles in vector or raster format typically to be integrated into a new map control or SDK. By default, Azure uses vector map tiles for its web map control (see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid))",
         "operationId": "Render_GetMapTile",
         "x-ms-examples": {
           "GetMapTile": {
@@ -495,7 +507,7 @@
     "/map/copyright/caption/{format}": {
       "get": {
         "x-publish": true,
-        "description": "Copyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\n\nAs an alternative to copyrights for map request, one can receive captions  for displaying the map provider information on the map.",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nCopyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\nAs an alternative to copyrights for map request, one can receive captions  for displaying the map provider information on the map.",
         "operationId": "Render_GetCopyrightCaption",
         "x-ms-examples": {
           "GetCopyrightCaption": {
@@ -541,7 +553,7 @@
     "/map/imagery/{format}": {
       "get": {
         "x-publish": true,
-        "description": "This service returns a map image tile with size 256x256, given the x and y coordinates and zoom level. Zoom level ranges from 0 to 18. The current available style value is 'satellite' which provides satellite imagery alone.",
+        "description": "**Applies to**: S1 pricing tier. Access from S0 pricing tier will be deprecated after February 4th' 2019.\n\n\nThis service returns a map image tile with size 256x256, given the x and y coordinates and zoom  level. Zoom level ranges from 0 to 18. The current available style value is 'satellite' which provides satellite  imagery alone.",
         "operationId": "Render_GetMapImageryTilePreview",
         "x-ms-examples": {
           "GetMapImagery": {
@@ -620,7 +632,7 @@
     "/map/copyright/bounding/{format}": {
       "get": {
         "x-publish": true,
-        "description": "Returns copyright information for a given bounding box. Bounding-box requests should specify the minimum and maximum longitude and latitude (EPSG-3857) coordinates",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nReturns copyright information for a given bounding box. Bounding-box requests should specify the minimum and maximum longitude and latitude (EPSG-3857) coordinates",
         "operationId": "Render_GetCopyrightFromBoundingBox",
         "x-ms-examples": {
           "GetCopyrightBounding": {
@@ -683,7 +695,7 @@
     "/map/copyright/tile/{format}": {
       "get": {
         "x-publish": true,
-        "description": "Copyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\n\nReturns the copyright information for a given tile. To obtain the  copyright information for a particular tile, the request should specify  the tile's zoom level and x and y coordinates (see: Zoom Levels and Tile  Grid).",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\n\nCopyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\nReturns the copyright information for a given tile. To obtain the  copyright information for a particular tile, the request should specify  the tile's zoom level and x and y coordinates (see: Zoom Levels and Tile  Grid).",
         "operationId": "Render_GetCopyrightForTile",
         "x-ms-examples": {
           "GetCopyrightTile": {
@@ -741,7 +753,7 @@
     "/map/copyright/world/{format}": {
       "get": {
         "x-publish": true,
-        "description": "Copyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\n\nReturns the copyright information for the world. To obtain the default copyright information for the whole world, do not specify a tile or bounding box.",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\n\nCopyrights API is designed to serve copyright information for Render Tile  service. In addition to basic copyright for the whole map, API is serving  specific groups of copyrights for some countries.\nReturns the copyright information for the world. To obtain the default copyright information for the whole world, do not specify a tile or bounding box.",
         "operationId": "Render_GetCopyrightForWorld",
         "x-ms-examples": {
           "GetCopyrightWorld": {

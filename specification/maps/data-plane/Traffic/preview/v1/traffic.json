@@ -39,13 +39,12 @@
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
       "schema": {
         "type": "object",
-        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.",
-        "properties": {
-          "Location": {
-            "type": "string",
-            "readOnly": true,
-            "description": "New URL to check for the results of the long running process."
-          }
+        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.      "
+      },
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
         }
       }
     },
@@ -100,10 +99,13 @@
     },
     "JsonFormat": {
       "name": "format",
-      "description": "Desired format of the response. Only `JSON` format is supported.",
+      "description": "Desired format of the response. Only `json` format is supported.",
       "type": "string",
       "in": "path",
       "required": true,
+      "enum": [
+        "json"
+      ],
       "x-ms-enum": {
         "name": "JsonFormat",
         "modelAsString": false,
@@ -163,10 +165,44 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "TileFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Possible values are png & pbf.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "png",
+        "pbf"
+      ],
+      "x-ms-enum": {
+        "name": "TileFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "png",
+            "description": "An image in the png format. Supports zoom levels 0 through 18."
+          },
+          {
+            "value": "pbf",
+            "description": "Vector graphic in the pbf format. Supports zoom levels 0 through 20."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "RasterZoom": {
       "name": "zoom",
       "in": "query",
       "description": "Zoom level for the desired tile. Zoom value must be in the range: 0-18 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "RasterVectorZoom": {
+      "name": "zoom",
+      "in": "query",
+      "description": "Zoom level for the desired tile. For _raster_ tiles, value must be in the range: 0-18 (inclusive). For _vector_ tiles, value must be in the range: 0-20 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
       "x-ms-parameter-location": "method"
@@ -194,7 +230,7 @@
     "/traffic/flow/tile/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Traffic Flow Tile__ <br/><br/>The Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
+        "description": "__Traffic Flow Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound  display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
         "operationId": "Traffic_GetTrafficFlowTile",
         "x-ms-examples": {
           "GetTrafficFlowTile": {
@@ -209,7 +245,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/RasterTileFormat"
+            "$ref": "#/parameters/TileFormat"
           },
           {
             "name": "style",
@@ -241,13 +277,13 @@
                 },
                 {
                   "value": "reduced-sensitivity",
-                  "description": "Displays relative colors but a larger difference from freeflow is required for segments to change the color."
+                  "description": "Displays relative colors but a larger difference from freeflow is required for segments to change the color. This mode only valid when format is png."
                 }
               ]
             }
           },
           {
-            "$ref": "#/parameters/RasterZoom"
+            "$ref": "#/parameters/RasterVectorZoom"
           },
           {
             "$ref": "#/parameters/xTileIndex"
@@ -258,7 +294,7 @@
           {
             "name": "thickness",
             "in": "query",
-            "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10.",
+            "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10. This parameter is not valid when format is pbf.",
             "required": false,
             "type": "integer",
             "minimum": 1,
@@ -298,7 +334,7 @@
     "/traffic/flow/segment/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Traffic Flow Segment__<br/><br/>This service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable flow data visualizations. With this API, the client side can connect any place in the map with flow data on the closest road and present it to the user.",
+        "description": "__Traffic Flow Segment__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable  flow data visualizations. With this API, the client side can connect any place in the map with flow data on the  closest road and present it to the user.",
         "operationId": "Traffic_GetTrafficFlowSegment",
         "x-ms-examples": {
           "GetTrafficFlowSegment": {
@@ -414,7 +450,7 @@
     "/traffic/incident/tile/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Traffic Incident Tile__ <br/><br/>This API provides information on traffic incidents inside a given bounding box, based on the current Traffic Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [traffic tiles](../traffic/gettrafficincidenttile). It can be obtained from the [Viewport API](../traffic/gettrafficincidentviewport).",
+        "description": "__Traffic Incident Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's.  The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every  minute, and is valid for two minutes before it times out. It is used in rendering  [traffictiles](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport).",
         "operationId": "Traffic_GetTrafficIncidentTile",
         "x-ms-examples": {
           "GetTrafficIncidentTile": {
@@ -429,12 +465,12 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/RasterTileFormat"
+            "$ref": "#/parameters/TileFormat"
           },
           {
             "name": "style",
             "in": "query",
-            "description": "The style to be used to render the tile.",
+            "description": "The style to be used to render the tile. This parameter is not valid when format is pbf.",
             "required": true,
             "type": "string",
             "enum": [
@@ -467,7 +503,7 @@
             }
           },
           {
-            "$ref": "#/parameters/RasterZoom"
+            "$ref": "#/parameters/RasterVectorZoom"
           },
           {
             "$ref": "#/parameters/xTileIndex"
@@ -513,7 +549,7 @@
     "/traffic/incident/detail/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Traffic Incident Detail__ \nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute,  and is valid for two minutes before it times out.  It is used in rendering [incident tiles](../traffic/gettrafficincidenttile). It can be obtained from the [Viewport API](../traffic/gettrafficincidentviewport).",
+        "description": "__Traffic Incident Detail__ \n\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic  Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The  Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute,  and is valid for two minutes before it times out. It is used in rendering  [incident tiles](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport).",
         "operationId": "Traffic_GetTrafficIncidentDetail",
         "x-ms-examples": {
           "GetTrafficIncidentDetail": {
@@ -533,7 +569,7 @@
           {
             "name": "style",
             "in": "query",
-            "description": "The style that will be used to render the tile in Traffic [Incident Tile API](../traffic/gettrafficincidenttile).  This will have an effect on the coordinates of traffic incidents in the reply.",
+            "description": "The style that will be used to render the tile in Traffic [Incident Tile API](./gettrafficincidenttile).  This will have an effect on the coordinates of traffic incidents in the reply.",
             "required": true,
             "type": "string",
             "enum": [
@@ -676,7 +712,7 @@
     "/traffic/incident/viewport/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Traffic Incident Viewport__ <br/><br/>This API returns legal and technical information for the viewport described in the request. It should be called by client applications whenever the viewport changes (for instance, through zooming, panning, going to a location, or displaying a route). The request should contain the bounding box and zoom level of the viewport whose information is needed. The return will contain map version information, as well as the current Traffic Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to retrieve last traffic information for further processing.",
+        "description": "__Traffic Incident Viewport__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API returns legal and technical information for the viewport described in the request. It should be called  by client applications whenever the viewport changes (for instance, through zooming, panning, going to a  location, or displaying a route). The request should contain the bounding box and zoom level of the viewport  whose information is needed. The return will contain map version information, as well as the current Traffic  Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to  retrieve last traffic information for further processing.",
         "operationId": "Traffic_GetTrafficIncidentViewport",
         "x-ms-examples": {
           "GetTrafficIncidentViewport": {
@@ -787,16 +823,19 @@
       }
     },
     "Coordinate": {
+      "description": "A location represented as a latitude and longitude.",
       "type": "object",
       "properties": {
         "latitude": {
           "description": "Latitude property",
           "type": "number",
+          "format": "double",
           "readOnly": true
         },
         "longitude": {
           "description": "Longitude property",
           "type": "number",
+          "format": "double",
           "readOnly": true
         }
       }
@@ -863,6 +902,11 @@
             "@version": {
               "description": "@Version property",
               "type": "string",
+              "readOnly": true
+            },
+            "openlr": {
+              "description": "OpenLR code for segment",
+              "type": "number",
               "readOnly": true
             }
           }
@@ -933,7 +977,7 @@
           }
         },
         "ic": {
-          "description": "The icon category associated with this incident. Values are numbers in the range 0-13, with the following meanings",
+          "description": "The icon category associated with this incident. Values are numbers in the range 0-13, with the following meanings -- 0: Unknown, 1: Accident, 2: Fog, 3: Dangerous Conditions, 4: Rain, 5: Ice, 6: Jam, 7: Lane Closed, 8: Road Closed, 9: Road Works, 10: Wind, 11: Flooding, 12: Detour, 13: Cluster",
           "type": "integer",
           "readOnly": true
         },

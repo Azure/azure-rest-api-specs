@@ -1,0 +1,162 @@
+definitions:
+  RouteDirectionsBatchDescription: >-
+    ## Route Directions Batch API
+
+
+    **Applies to**: S1 pricing tier. Access from S0 pricing tier will be deprecated after February 4th' 2019.
+
+    
+    The Route Directions Batch API allows the caller to batch up to 1,000 [Route Directions API](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections) queries/requests using just a single API call.
+
+    ### Submit Batch Request
+
+    To send the _route directions_ queries you will use a `POST` request where the request body will contain the `queries` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _route directions_ queries:  
+
+    <br>
+
+    ```json
+
+    {
+        "queries": [
+            "?query=47.639987,-122.128384:47.621252,-122.184408:47.596437,-122.332000&routeType=fastest&travelMode=car",
+            "?query=47.620659,-122.348934:47.610101,-122.342015&travelMode=bicycle&routeType=eco&traffic=false",
+            "?query=40.759856,-73.985108:40.771136,-73.973506&travelMode=pedestrian&routeType=shortest"
+        ]
+    }
+
+    ```
+
+    <br>
+    A _route directions_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _route directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#uri-parameters). The string values in the _route directions_ query must be properly escaped (e.g. " character should be escaped with \\ ) and it should also be properly URL-encoded.     
+
+    <br>
+
+    The maximum number of queries that can be specified in the batch is **1,000** and the batch should contain at least **1** query.    
+
+    <br>
+
+    Please note that the Route Directions Batch API is a long-running request. Here's a typical sequence of operations:
+
+    1. Client sends a Route Directions Batch `POST` request to Azure Maps
+
+    2. The server will respond with one of the following:
+        
+        > HTTP `202 Accepted` - Batch request has been accepted.
+        
+        > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.
+
+    3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.
+
+    4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.
+    
+    
+    <br>
+
+    ### Download Batch Results
+
+    To download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:
+
+    <br>
+
+    ```
+
+    https://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}
+    
+    ```
+
+    <br>
+    Here's the typical sequence of operations for downloading the batch results:
+
+    1. Client sends a `GET` request using the _download URL_.
+
+    2. The server will respond with one of the following:
+        
+        > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.
+
+        > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.
+
+    <br>
+
+    ### Batch Response Model
+
+    When downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:
+
+      - [`RouteDirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#routedirectionsresponse) - If the query completed successfully.
+
+      - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.
+
+    <br>
+    Here's a sample Batch Response with 1 _successful_ and 1 _failed_ result:
+
+    <br>
+
+    ```json            
+
+    {
+        "summary": {
+            "successfulRequests": 1,
+            "totalRequests": 2
+        },
+        "batchResults": [
+            {
+                "routes": [
+                    {
+                        "summary": {
+                            "lengthInMeters": 1758,
+                            "travelTimeInSeconds": 387,
+                            "trafficDelayInSeconds": 0,
+                            "departureTime": "2018-07-17T00:49:56+00:00",
+                            "arrivalTime": "2018-07-17T00:56:22+00:00"
+                        },
+                        "legs": [
+                            {
+                                "summary": {
+                                    "lengthInMeters": 1758,
+                                    "travelTimeInSeconds": 387,
+                                    "trafficDelayInSeconds": 0,
+                                    "departureTime": "2018-07-17T00:49:56+00:00",
+                                    "arrivalTime": "2018-07-17T00:56:22+00:00"
+                                },
+                                "points": [
+                                    {
+                                        "latitude": 47.62094,
+                                        "longitude": -122.34892
+                                    },
+                                    {
+                                        "latitude": 47.62094,
+                                        "longitude": -122.3485
+                                    },
+                                    {
+                                        "latitude": 47.62095,
+                                        "longitude": -122.3476
+                                    }
+                                ]
+                            }
+                        ],
+                        "sections": [
+                            {
+                                "startPointIndex": 0,
+                                "endPointIndex": 40,
+                                "sectionType": "TRAVEL_MODE",
+                                "travelMode": "bicycle"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "statusCode": 400,
+                "message": "Bad Request"
+            }
+        ]
+    }
+
+    ```
+
+    <br>
+
+    ### Data Retention Period
+
+    Please, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.
+
+    <br>

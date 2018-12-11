@@ -39,13 +39,12 @@
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
       "schema": {
         "type": "object",
-        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.",
-        "properties": {
-          "Location": {
-            "type": "string",
-            "readOnly": true,
-            "description": "New URL to check for the results of the long running process."
-          }
+        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.      "
+      },
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
         }
       }
     },
@@ -100,10 +99,13 @@
     },
     "JsonFormat": {
       "name": "format",
-      "description": "Desired format of the response. Only `JSON` format is supported.",
+      "description": "Desired format of the response. Only `json` format is supported.",
       "type": "string",
       "in": "path",
       "required": true,
+      "enum": [
+        "json"
+      ],
       "x-ms-enum": {
         "name": "JsonFormat",
         "modelAsString": false,
@@ -116,10 +118,10 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Query": {
+    "TimezoneByCoordinatesQuery": {
       "name": "query",
       "in": "query",
-      "description": "The applicable query string. Must be properly URL encoded.",
+      "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -199,7 +201,7 @@
     "/timezone/byId/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Time Zone by Id__\n\nThis API returns current, historical, and future time zone information for the specified IANA time zone ID.",
+        "description": "__Time Zone by Id__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for the specified IANA time zone ID.",
         "operationId": "Timezone_GetTimezoneByID",
         "x-ms-examples": {
           "GetTimezoneByID": {
@@ -232,7 +234,12 @@
             "$ref": "#/parameters/JsonFormat"
           },
           {
-            "$ref": "#/parameters/Query"
+            "name": "query",
+            "in": "query",
+            "description": "The IANA time zone ID.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -266,7 +273,7 @@
     "/timezone/byCoordinates/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Time Zone by Coordinates__\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair.",
+        "description": "__Time Zone by Coordinates__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair.",
         "operationId": "Timezone_GetTimezoneByCoordinates",
         "x-ms-examples": {
           "GetTimezoneByCoordinates": {
@@ -299,7 +306,7 @@
             "$ref": "#/parameters/JsonFormat"
           },
           {
-            "$ref": "#/parameters/Query"
+            "$ref": "#/parameters/TimezoneByCoordinatesQuery"
           }
         ],
         "responses": {
@@ -333,7 +340,7 @@
     "/timezone/enumWindows/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Enumerate Windows Time Zones__\n\nThis API returns a full list of Windows Time Zone IDs.",
+        "description": "__Enumerate Windows Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of Windows Time Zone IDs.",
         "operationId": "Timezone_GetTimezoneEnumWindows",
         "x-ms-examples": {
           "GetTimezoneEnumWindows": {
@@ -382,7 +389,7 @@
     "/timezone/enumIana/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Enumerate IANA Time Zones__\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
+        "description": "__Enumerate IANA Time Zones__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a full list of IANA time zone IDs. Updates to the IANA service will be reflected in the system within one day.",
         "operationId": "Timezone_GetTimezoneEnumIANA",
         "x-ms-examples": {
           "GetTimezoneEnumIANA": {
@@ -431,7 +438,7 @@
     "/timezone/ianaVersion/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Time Zone IANA Version__\n\nThis API returns the current IANA version number.",
+        "description": "__Time Zone IANA Version__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns the current IANA version number.",
         "operationId": "Timezone_GetTimezoneIANAVersion",
         "x-ms-examples": {
           "GetTimezoneIANAVersion": {
@@ -480,7 +487,7 @@
     "/timezone/windowsToIana/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Windows to IANA Time Zone__\n\nThis API returns a corresponding IANA ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
+        "description": "__Windows to IANA Time Zone__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns a corresponding IANA ID, given a valid Windows Time Zone ID. Multiple IANA IDs may be returned for a single Windows ID. It is possible to narrow these results by adding an optional territory parameter.",
         "operationId": "Timezone_GetTimezoneWindowsToIANA",
         "x-ms-examples": {
           "GetTimezoneWindowsToIANA": {
@@ -498,7 +505,11 @@
             "$ref": "#/parameters/JsonFormat"
           },
           {
-            "$ref": "#/parameters/Query"
+            "name": "query",
+            "in": "query",
+            "description": "The Windows time zone ID.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "territory",
@@ -824,12 +835,12 @@
               "type": "string",
               "readOnly": true
             },
-            "PosixTimezoneValidYear": {
+            "PosixTzValidYear": {
               "description": "Posix Timezone Valid Year property",
               "type": "integer",
               "readOnly": true
             },
-            "PosixTimezone": {
+            "PosixTz": {
               "description": "Posix timezone property",
               "type": "string",
               "readOnly": true
