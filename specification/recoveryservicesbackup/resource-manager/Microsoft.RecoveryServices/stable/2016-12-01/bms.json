@@ -2940,12 +2940,12 @@
         },
         "subinquireditemcount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present",
+          "description": "For instance or AG, indicates number of DBs present",
           "type": "integer"
         },
         "subWorkloadItemCount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected",
+          "description": "For instance or AG, indicates number of DBs to be protected",
           "type": "integer"
         }
       }
@@ -2981,12 +2981,12 @@
         },
         "subinquireditemcount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present",
+          "description": "For instance or AG, indicates number of DBs present",
           "type": "integer"
         },
         "subprotectableitemcount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected",
+          "description": "For instance or AG, indicates number of DBs to be protected",
           "type": "integer"
         },
         "prebackupvalidation": {
@@ -3465,7 +3465,7 @@
       }
     },
     "AzureWorkloadRecoveryPoint": {
-      "description": "Workload specific recoverypoint, specifcally encaspulates full/diff recoverypoint",
+      "description": "Workload specific recovery point, specifically encapsulates full/diff recovery point",
       "type": "object",
       "allOf": [
         {
@@ -3475,7 +3475,7 @@
       "properties": {
         "recoveryPointTimeInUTC": {
           "format": "date-time",
-          "description": "UTC time at which recoverypoint was created",
+          "description": "UTC time at which recovery point was created",
           "type": "string"
         },
         "type": {
@@ -3569,7 +3569,7 @@
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
     },
     "AzureWorkloadSAPHanaRecoveryPoint": {
-      "description": "SAPHana specific recoverypoint, specifcally encaspulates full/diff recoverypoints",
+      "description": "SAPHana specific recovery point, specifically encapsulates full/diff recovery points",
       "type": "object",
       "allOf": [
         {
@@ -3579,7 +3579,7 @@
       "properties": {
         "recoveryPointTimeInUTC": {
           "format": "date-time",
-          "description": "UTC time at which recoverypoint was created",
+          "description": "UTC time at which recovery point was created",
           "type": "string"
         },
         "type": {
@@ -3677,7 +3677,7 @@
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
     },
     "AzureWorkloadSQLRecoveryPoint": {
-      "description": "SQL specific recoverypoint, specifcally encaspulates full/diff recoverypoint alongwith extended info",
+      "description": "SQL specific recovery point, specifically encapsulates full/diff recovery point along with extended info",
       "type": "object",
       "allOf": [
         {
@@ -3819,7 +3819,7 @@
         },
         "extendedInfo": {
           "$ref": "#/definitions/BackupEngineExtendedInfo",
-          "description": "Extended info of the backupengine"
+          "description": "Extended info of the backup engine"
         }
       },
       "discriminator": "backupEngineType"
@@ -3881,12 +3881,12 @@
         },
         "usedDiskSpace": {
           "format": "double",
-          "description": "Diskspace used in the backup engine.",
+          "description": "Disk space used in the backup engine.",
           "type": "number"
         },
         "availableDiskSpace": {
           "format": "double",
-          "description": "Diskspace currently available in the backup engine.",
+          "description": "Disk space currently available in the backup engine.",
           "type": "number"
         },
         "refreshedAt": {
@@ -3909,7 +3909,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -4061,7 +4061,7 @@
       }
     },
     "BEKDetails": {
-      "description": "BEK is bitlocker encrpytion key.",
+      "description": "BEK is bitlocker encryption key.",
       "type": "object",
       "properties": {
         "secretUrl": {
@@ -4639,7 +4639,7 @@
           "type": "string"
         },
         "protectionState": {
-          "description": "Protection state of the backupengine",
+          "description": "Protection state of the backup engine",
           "enum": [
             "Invalid",
             "IRPending",
@@ -5176,7 +5176,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -5263,7 +5263,7 @@
       }
     },
     "KeyAndSecretDetails": {
-      "description": "BEK is bitlocker key.\r\n            KEK is encryption key for BEK\r\n            If the VM was encrypted then we will store follwing details :\r\n            1. Secret(BEK) - Url + Backup Data + vaultId.\r\n            2. Key(KEK) - Url + Backup Data + vaultId.\r\n            3. EncryptionMechanism\r\n            BEK and KEK can potentiallty have different vault ids.",
+      "description": "BEK is bitlocker key.\r\n            KEK is encryption key for BEK\r\n            If the VM was encrypted then we will store following details :\r\n            1. Secret(BEK) - Url + Backup Data + vaultId.\r\n            2. Key(KEK) - Url + Backup Data + vaultId.\r\n            3. EncryptionMechanism\r\n            BEK and KEK can potentially have different vault ids.",
       "type": "object",
       "properties": {
         "kekDetails": {
@@ -5272,7 +5272,7 @@
         },
         "bekDetails": {
           "$ref": "#/definitions/BEKDetails",
-          "description": "BEK is bitlocker encrpytion key."
+          "description": "BEK is bitlocker encryption key."
         },
         "encryptionMechanism": {
           "description": "Encryption mechanism: None/ SinglePass/ DoublePass",
@@ -5649,7 +5649,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -5765,7 +5765,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the container.",
+          "description": "Type of backup management for the container.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5861,7 +5861,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the backed up item.",
+          "description": "Type of backup management for the backed up item.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5963,7 +5963,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the container.",
+          "description": "Type of backup management for the container.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -6062,7 +6062,7 @@
           "type": "integer"
         },
         "backupManagementType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6090,7 +6090,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6234,7 +6234,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6288,7 +6288,7 @@
       "type": "object",
       "properties": {
         "retentionPolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6302,7 +6302,7 @@
       "type": "object",
       "properties": {
         "schedulePolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6654,7 +6654,7 @@
       "type": "object",
       "properties": {
         "backupManagementType": {
-          "description": "Type of backup managemenent to backup an item.",
+          "description": "Type of backup management to backup an item.",
           "type": "string"
         },
         "workloadType": {
@@ -6724,7 +6724,7 @@
       "type": "object",
       "properties": {
         "backupManagementType": {
-          "description": "Type of backup managemenent to backup an item.",
+          "description": "Type of backup management to backup an item.",
           "type": "string"
         },
         "workloadType": {

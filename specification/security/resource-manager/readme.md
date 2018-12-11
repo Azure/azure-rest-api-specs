@@ -66,7 +66,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
 ```
 
-## C
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -77,7 +77,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Security
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Security/Management.Security/Generated
+  output-folder: $(csharp-sdks-folder)/SecurityCenter/Management.SecurityCenter/Generated
   clear-output-folder: true
 ```
 

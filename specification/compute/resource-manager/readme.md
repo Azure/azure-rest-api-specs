@@ -437,7 +437,7 @@ input-file:
 
 ### Tag: package-container-service-2015-11-preview
 
-These setings apply only when `--tag=package-container-service-2015-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-container-service-2015-11-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-container-service-2015-11-preview'
 input-file:
