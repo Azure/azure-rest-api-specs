@@ -384,6 +384,174 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscription/{subscriptionId}/transfer": {
+      "post": {
+        "description": "Transfers the GTM subscription from one invoice section to another within a billing account.",
+        "operationId": "BillingSubscription_Transfer",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "TransferBillingSubscription": {
+            "$ref": "./examples/TransferBillingSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TransferBillingSubscriptionRequestParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransferOperationSummary"
+            }
+          },
+          "202": {
+            "description": "Accepted. Billing Subscription transfer is in progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscriptions/{subscriptionId}/transfer/operationResults/{operationId}": {
+      "get": {
+        "description": "Gets the result of the transfer operation.",
+        "operationId": "BillingSubscriptionOperationResult_Get",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "TransferBillingSubscriptionOperationResult": {
+            "$ref": "./examples/TransferBillingSubscriptionOperationResults.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Transfer operation summary.",
+            "schema": {
+              "$ref": "#/definitions/TransferOperationSummary"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscriptions/{subscriptionId}/transfer/operationStatus/{operationId}": {
+      "get": {
+        "description": "Gets the result of the transfer operation.",
+        "operationId": "BillingSubscriptionOperationStatus_Get",
+        "x-ms-examples": {
+          "TransferBillingSubscriptionOperationStatus": {
+            "$ref": "./examples/TransferBillingSubscriptionOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Billing Subscription transfer operation status.",
+            "schema": {
+              "$ref": "#/definitions/TransferOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -668,6 +836,84 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "TransferBillingSubscriptionRequest": {
+      "type": "object",
+      "description": "Request parameters to transfer billing subscription.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to transfer billing subscription.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TransferBillingSubscriptionProperties"
+        }
+      }
+    },
+    "TransferBillingSubscriptionProperties": {
+      "type": "object",
+      "description": "Request parameters to transfer billing subscription.",
+      "properties": {
+        "destinationInvoiceSectionId": {
+          "type": "string",
+          "description": "The destination invoiceSectionId."
+        }
+      }
+    },
+    "TransferOperationStatus": {
+      "description": "status of the transfer operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the pending operation",
+          "type": "string",
+          "$ref": "#/definitions/TransferOperationState"
+        },
+        "statusDetail": {
+          "description": "Status Detail of the pending operation",
+          "type": "string"
+        }
+      }
+    },
+    "TransferOperationState": {
+      "type": "string",
+      "description": "Asset operation state.",
+      "enum": [
+        "pending",
+        "completed",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "transferOperationState",
+        "modelAsString": true
+      }
+    },
+    "TransferOperationSummary": {
+      "type": "object",
+      "description": "Summary of transfer operation",
+      "properties": {
+        "properties": {
+          "description": "Summary of transfer operation properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TransferOperationSummaryProperties"
+        }
+      }
+    },
+    "TransferOperationSummaryProperties": {
+      "type": "object",
+      "description": "Transfer operation properties",
+      "properties": {
+        "azureSubscriptionId": {
+          "type": "string",
+          "description": "The transferred azure subscription Id"
+        },
+        "invoiceSectionId": {
+          "type": "string",
+          "description": "The invoice section to which the subscription was transferred"
+        }
+      }
     }
   },
   "parameters": {
@@ -684,6 +930,38 @@
       "description": "Azure Subscription ID.",
       "required": true,
       "type": "string"
+    },
+    "BillingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "InvoiceSectionIdParameter": {
+      "name": "invoiceSectionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "TransferBillingSubscriptionRequestParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Transfer billing subscription parameters.",
+      "schema": {
+        "$ref": "#/definitions/TransferBillingSubscriptionRequest"
+      }
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Operation Id."
     }
   },
   "security": [
