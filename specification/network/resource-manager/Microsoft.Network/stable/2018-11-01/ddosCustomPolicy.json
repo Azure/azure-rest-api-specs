@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DDoSCustomPolicyClient",
+    "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
     "version": "2018-11-01"
   },
@@ -72,6 +72,12 @@
           },
           "200": {
             "description": "Delete successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -114,6 +120,12 @@
             "description": "Request successful. The operation returns the specified DDoS custom policy resource.",
             "schema": {
               "$ref": "#/definitions/DdosCustomPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -170,6 +182,12 @@
             "schema": {
               "$ref": "#/definitions/DdosCustomPolicy"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -213,6 +231,11 @@
           "$ref": "#/definitions/DdosCustomPolicyPropertiesFormat",
           "description": "Properties of the DDoS custom policy."
         },
+        "allOf":[  
+          {  
+             "$ref":"./network.json#/definitions/Resource"
+          }
+       ],
         "etag": {
           "readOnly": true,
           "type": "string",
