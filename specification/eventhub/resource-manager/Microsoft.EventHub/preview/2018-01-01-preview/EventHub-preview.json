@@ -989,8 +989,8 @@
             "$ref": "./examples/NameSpaces/VirtualNetworkRule/EHVirtualNetworkRuleSetCreate.json"
           }
         },
-        "operationId": "Namespaces_CreateNetworkRuleSet",
-        "description": "Gets NetworkRuleSet for a Namespace.",
+        "operationId": "Namespaces_CreateOrUpdateNetworkRuleSet",
+        "description": "Create or update NetworkRuleSet for a Namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1009,7 +1009,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkRuleSet"
+              "$ref": "#/definitions/NetworkRuleSets"
             },
             "description": "The Namespace IpFilterRule."
           }
@@ -1058,7 +1058,7 @@
           "200": {
             "description": "Namespace NetworkRuleSet successfully returned.",
             "schema": {
-              "$ref": "#/definitions/NetworkRuleSet"
+              "$ref": "#/definitions/NetworkRuleSets"
             }
           },
           "default": {
@@ -1530,7 +1530,7 @@
       },
       "description": "The response from the List namespace operation."
     },
-    "NetworkRuleSet": {
+    "NetworkRuleSets": {
       "properties": {
         "properties": {
           "description": "NetworkRuleSet properties",
