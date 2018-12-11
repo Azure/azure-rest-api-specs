@@ -364,8 +364,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - pool updated",
+            "schema": {
+              "$ref": "#/definitions/capacityPool"
+            }
+          },
           "201": {
-            "description": "Pool created or updated",
+            "description": "Pool created",
             "schema": {
               "$ref": "#/definitions/capacityPool"
             }
@@ -565,8 +571,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok - volume updated",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
           "201": {
-            "description": "Volume created or updated",
+            "description": "Volume created",
             "schema": {
               "$ref": "#/definitions/volume"
             }
@@ -700,57 +712,6 @@
         "x-ms-examples": {
           "MountTargets_List": {
             "$ref": "examples/MountTargets_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets/{mountTargetName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/SubscriptionId"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroup"
-        },
-        {
-          "$ref": "#/parameters/AccountName"
-        },
-        {
-          "$ref": "#/parameters/PoolName"
-        },
-        {
-          "$ref": "#/parameters/VolumeName"
-        },
-        {
-          "$ref": "#/parameters/MountTargetName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "MountTargets"
-        ],
-        "operationId": "MountTargets_Get",
-        "description": "Get a mount target",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/mountTarget"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MountTargets_Get": {
-            "$ref": "examples/MountTargets_Get.json"
           }
         }
       }
