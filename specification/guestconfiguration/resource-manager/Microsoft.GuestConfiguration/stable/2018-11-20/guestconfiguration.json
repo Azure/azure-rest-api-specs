@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-06-30-preview",
+    "version": "2018-11-20",
     "title": "GuestConfiguration"
   },
   "host": "management.azure.com",
@@ -117,7 +117,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The guest configuration assignment name."
+            "description": "The guest configuration assingment name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -274,7 +274,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The guest configuration assignment name."
+            "description": "The guest configuration assingment name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -454,7 +454,7 @@
           "enum": [
             "DSC"
           ]
-        },
+        }, 
         "name": {
           "type": "string",
           "description": "Name of the guest configuration."
@@ -515,7 +515,7 @@
             "ApplyOnly",
             "ApplyAndMonitor",
             "ApplyAndAutoCorrect"
-          ]
+          ]     
         },
         "allowModuleOverwrite": {
           "type": "string",
@@ -527,7 +527,7 @@
           "enum": [
             "True",
             "False"
-          ]
+          ]       
         },
         "actionAfterReboot": {
           "type": "string",
@@ -540,7 +540,7 @@
           "enum": [
             "ContinueConfiguration",
             "StopConfiguration"
-          ]
+          ]     
         },
         "refreshFrequencyMins": {
           "type": "number",
@@ -560,7 +560,7 @@
           "enum": [
             "True",
             "False"
-          ]
+          ]     
         },
         "configurationModeFrequencyMins": {
           "type": "number",
@@ -593,8 +593,8 @@
         },
         "lastComplianceStatusChecked": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
-          "format":"date-time",
           "description": "Date and time when last compliance status was checked.",
           "x-nullable": true
         },
@@ -692,7 +692,7 @@
         "vm": {
           "$ref": "#/definitions/VMInfo",
           "description": "Information about the VM."
-        },
+        },        
         "startTime": {
           "type": "string",
           "format": "date-time",
@@ -707,7 +707,8 @@
         },
         "details": {
           "$ref": "#/definitions/AssignmentReportDetails",
-          "description": "Details of the assignment report."
+          "description": "Details of the assignment report.",
+          "x-nullable": true
         }
       },
       "description": "Report for the guest configuration assignment. Report contains information such as compliance status, reason, and more."
@@ -769,14 +770,14 @@
         },
         "startTime": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
+          "readOnly": true,
           "description": "Start date and time of the guest configuration assignment compliance status check."
         },
         "endTime": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
+          "readOnly": true,
           "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "jobId": {
@@ -833,7 +834,7 @@
         "properties": {
           "type": "object",
           "readOnly": true,
-          "description": "Properties of a guest configuration assignment resource."
+          "description": "Properties of a guest configuation assignment resource."
         }
       },
       "description": "The guest configuration assignment resource."
