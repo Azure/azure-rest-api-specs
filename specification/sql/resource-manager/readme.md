@@ -642,7 +642,7 @@ python:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Java
+### Java
 
 See configuration in [readme.java.md](./readme.java.md)
 

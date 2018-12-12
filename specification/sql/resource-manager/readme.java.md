@@ -45,8 +45,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-pure-2015-05-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.sql.v2015_05_01
-  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2015_05_01
+  namespace: com.microsoft.azure.management.sql.v2015_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sql/resource-manager/v2015_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
