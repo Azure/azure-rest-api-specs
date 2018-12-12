@@ -18,6 +18,61 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckResourceNameAvailability"
+        ],
+        "summary": "API to check for resource name availability.\r\nA name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type\r\nor if one or more such resources exist, each of these must be GCed and their time of deletion be more than 24 Hours Ago",
+        "operationId": "CheckResourceNameAvailability_Post",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Contains information about Resource type and Resource name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailabilityInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailabilityResponseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Availability status of Resource Name when no resource with same name, type and subscription exists, nor has been deleted within last 24 hours": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
+          },
+          "Availability status of Resource Name when resource with same name, type and subscription exists": {
+            "$ref": "./examples/CheckNameAvailability_NotAvailable.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "tags": [
@@ -123,7 +178,7 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
-          "itemName":"value"
+          "itemName": "value"
         },
         "x-ms-examples": {
           "List of Recovery Services Resources in ResourceGroup": {
@@ -256,7 +311,7 @@
           }
         },
         "deprecated": false,
-        "x-ms-examples":{
+        "x-ms-examples": {
           "Delete Recovery Services Vault": {
             "$ref": "./examples/DeleteVault.json"
           }
@@ -589,6 +644,47 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResourceNameAvailabilityInput": {
+      "description": "Resource information, as sent to the regional resource provider from Global RP.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceNameAvailabilityResponse": {
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceNameAvailabilityResponseResource": {
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceNameAvailabilityResponse",
+          "description": "ResourceNameAvailabilityResponseResource properties"
+        }
+      }
+    },
     "Sku": {
       "description": "Identifies the unique system identifier for each Azure resource.",
       "required": [
@@ -621,7 +717,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties":{
+      "properties": {
         "location": {
           "description": "Resource location.",
           "type": "string"
@@ -643,7 +739,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties":{
+      "properties": {
         "location": {
           "description": "Resource location.",
           "type": "string"
