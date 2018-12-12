@@ -136,7 +136,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 **Output Message**: API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.
 
-**Description**: The API Version paramemter MUST be in the Year-Month-Date format (i.e. 2016-07-04.)  NOTE that this is the en-US ordering of month and date.  
+**Description**: The API Version parameter MUST be in the Year-Month-Date format (i.e. 2016-07-04.)  NOTE that this is the en-US ordering of month and date.  
 
 The date MAY optionally be followed by one of:
 * -preview - Indicates the API version is in (public) preview
@@ -178,7 +178,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Property names must use lowerCamelCase style. 
 If the property is a single word (ex: foo, bar, etc.) it will be all lowercase. 
-Two-letter acronmys (ex: ID, IO, IP, etc.) should be capitalized. 
+Two-letter acronyms (ex: ID, IO, IP, etc.) should be capitalized. 
 Three-letter acronyms (ex: API, URL, etc.) should only have the first letter capitalized (ex: Api, Url, etc.) 
 For more capitalization guidance, see: [https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx](https://msdn.microsoft.com/en-us/library/141e06ef(v=vs.71).aspx)
 
@@ -344,7 +344,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Ensure that the `location` property in the tracked resource's hierarchy has `x-ms-mutability` correctly set to `read` and `create`.
 For example:
-```
+```json
 "location": {
   "type": "string",
   "description": "location of the resource",
@@ -370,7 +370,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Impact on generated code**: Generated SDK code will expose the corresponding client name on property or model.
 
 **Examples**:
-```
+```json
 ...
 "x-ms-client-name": "name"
 ...
@@ -418,7 +418,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Good Examples**:
 Example with primitive type.
-```
+```json
 "MyPrimitiveArray":{
   "type": "array",
   "items": {
@@ -427,7 +427,7 @@ Example with primitive type.
 }
 ```
 Example with object reference type
-```
+```json
 "MyComplexArray":{
   "type": "array",
   "items": {
@@ -454,7 +454,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Impact on generated code**: Generated SDK code will expose the corresponding client name on property or model.
 
 **Examples**:
-```
+```json
 "parameters": {
     "ApiVersionParameter": {
       "name": "x-ms-version",
@@ -496,7 +496,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Impact on generated code**: Generated SDK code will expose the corresponding client name on property or model.
 
 **Examples**:
-```
+```json
 {
   "definitions": {
     "Product": {
@@ -524,7 +524,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: Facilitate decoupling of "msdn.microsoft.com" from "docs.microsoft.com".
 
-**How to fix the violation**: Please avoid using referenes to "msdn.microsoft.com" in title and descriptions.
+**How to fix the violation**: Please avoid using references to "msdn.microsoft.com" in title and descriptions.
 
 **Impact on generated code**: N/A.
 
@@ -648,7 +648,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
-**Output Message**: Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.
+**Output Message**: Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.
 
 **Description**: Verifies whether format is specified as "uuid" or not.
 
@@ -678,7 +678,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Impact on generated code**: N/A.
 
 **Examples**:
-```
+```json
 "schemes": [
   "https"
 ]
@@ -721,7 +721,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Examples**: 
 **Bad Examples**: Following example contains 2 resource providers. **Microsoft.Compute** and **Microsoft.Network**.
-```
+```json
 "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces": {
       "get": {
@@ -791,7 +791,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Based on the value of the `readOnly` property, assign appropriate `x-ms-mutability` options. 
 
 **Bad Example**:
-```
+```json
   "prop0":{
     "type": "string",
     "readOnly":true,
@@ -799,7 +799,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
   }
 ```
 **Good Example**:
-```
+```json
   "prop0":{
     "type": "string",
     "readOnly": false,
@@ -816,14 +816,14 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters. 
 
-**Description**: The `x-ms-paths` extension allows us to overload an existing path based on path parameters. We cannot specify an `x-ms-paths` without a path that already exists in the `paths` section. For more details about this extension please refere [here](https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-paths).
+**Description**: The `x-ms-paths` extension allows us to overload an existing path based on path parameters. We cannot specify an `x-ms-paths` without a path that already exists in the `paths` section. For more details about this extension please refer [here](https://github.com/Azure/azure-rest-api-specs/blob/dce4da0d748565efd2ab97a43d0683c2979a974a/documentation/swagger-extensions.md#x-ms-paths).
 
 **Why the rule is important**: The `x-ms-paths` overload an existing path only, not adhering to this rule would violate the applicability of the extension itself.
 
 **How to fix the violation**: Ensure that the `x-ms-paths` is overloading an existing url path in the `paths` section.
 
 **Good Example**:
-```
+```json
   "paths":{
     "/foo":{
       ...
@@ -836,7 +836,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
   }
 ```
 **Bad Example**:
-```
+```json
   "paths":{
     "/foo":{
       ...
@@ -895,7 +895,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Ensure that the default desired actually exists in the enums' list.
 
 **Bad Example**:
-```
+```json
 "status":{
   "type": "string",
   "enum": [
@@ -924,7 +924,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Add a non-empty `name` property to the parameter.
 
 **Good Example**:
-```
+```json
 "MyParam":{
   "name":"myParam",
   "type": "string",
@@ -934,7 +934,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ```
 
 **Bad Example**:
-```
+```json
 "MyParam":{
   "type": "string",
   "in": "path",
@@ -976,7 +976,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.
 
-**Description**: An operationId can have exaclty one underscore, not adhering to it can cause errors in code generation.
+**Description**: An operationId can have exactly one underscore, not adhering to it can cause errors in code generation.
 
 **Why the rule is important**: Given an operationId of the form `Noun_Verb`, AutoRest breaks the operation id into its `Noun` and `Verb` where `Noun` becomes name of the operations class and the `Verb` becomes the name of the method in that class. Not adhering to this format can cause AutoRest to fail during code generation.
 
@@ -1007,7 +1007,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Add an operations API endpoint (if not already present) and add details regarding this endpoint in the corresponding OpenAPI document. Examples can be found for most RPs in this repo.
 
 **Example**: A typical operations path would look like
-```
+```json
 "/providers/Microsoft.ResourceProviderName/operations": {
     "get": {
         "tags": [
@@ -1039,7 +1039,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 }
 ```
 A typical `OperationsList` and `Operation` model would look like
-```
+```json
 
 "Operation": {
   "description": "REST API operation",
@@ -1135,7 +1135,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Ensure that the given property is either marked as `readonly: true` or `required` but not both.
 
 **Bad Example**:
-```
+```json
 "MyModel": {
   "properties":{
     "MyProp":{
@@ -1174,7 +1174,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description**: Only valid types are allowed for properties.
 
-**Why the rule is important**: Invalid formats can cause errors during code generation or result in erraneous generated code.
+**Why the rule is important**: Invalid formats can cause errors during code generation or result in erroneous generated code.
 
 **How to fix the violation**: Ensure format defined for property is valid. Please refer [here](https://github.com/Azure/autorest/blob/81d4d31d06637f4f9ef042d7f2ec64cfea29892f/docs/developer/validation-rules/valid-formats.md) for allowed types in OpenAPI.
 
@@ -1238,7 +1238,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: A response for the 200 HTTP status code must be defined to use x-ms-pageable.
 
-**Description**: Per definition of AutoRest [x-ms-pageable extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable), the response shema must contain a 200 response schema.
+**Description**: Per definition of AutoRest [x-ms-pageable extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-pageable), the response schema must contain a 200 response schema.
 
 **Why the rule is important**: Pageable operation needs to have a response schema to be used by the SDK to serialize/deserialize the result. 
 
@@ -1472,9 +1472,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: The enum types should have x-ms-enum type extension set with appropriate options. Property name: {0}.
 
-**Description**: AutoRest defines [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) to provide more flexibily for enum types, please refer to the documentation.
+**Description**: AutoRest defines [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) to provide more flexibility for enum types, please refer to the documentation.
 
-**Why the rule is important**: Including [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) provides more flexibilty for enum types in SDK generated code.
+**Why the rule is important**: Including [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) provides more flexibility for enum types in SDK generated code.
 
 **How to fix the violation**: Include the [x-ms-enum extension](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum) per indicated in its documentation. Consider setting "modelAsString": true, if you'd like the enum to be modeled as a string in generated SDKs, no enum validation will happen, though the values are exposed to the user for a better experience.
 
@@ -1534,11 +1534,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message**: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'
 
-**Description**: The request & reponse('200') schema of the PUT operation must be same.
+**Description**: The request & response('200') schema of the PUT operation must be same.
 
 **Why the rule is important**: This will provide a consistent experience to the user, i.e. the user could use the same model object to perform various operations. Also, within the SDK, this will encourage reuse of the same model objects.
 
-**How to fix the violation**: Ensure the request & reponse('200') schema of the PUT operation must be same. This might involve a service side change which will result cause a breaking change in the generated SDK.
+**How to fix the violation**: Ensure the request & response('200') schema of the PUT operation must be same. This might involve a service side change which will result cause a breaking change in the generated SDK.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1703,7 +1703,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: Appropriate documentation could not be generated without the 'description'/'title' property.
 
-**How to fix the violation**: For each definition, provide atleast one of the properties - description/title.
+**How to fix the violation**: For each definition, provide at least one of the properties - description/title.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1718,7 +1718,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Why the rule is important**: Appropriate documentation could not be generated without the 'description'/'summary' property.
 
-**How to fix the violation**: For each operation, provide atleast one of the property - description/summary.
+**How to fix the violation**: For each operation, provide at least one of the property - description/summary.
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1736,12 +1736,12 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **How to fix the violation**: Provide a short summary for the summary section and a detailed description for the description section.
 
 **Good Examples**: The following operation is a good example:
-```
+```json
 ......
 ......
 "put": {
-  "summary": "Creates or Updates an availabilty set",
-  "description": "This operation creates or updates an availability set. This takes the resourceGroupName and availabiltySetName as input. If an availability set with the same name exists, then the same is updated. Else a new availabilty set is created.",
+  "summary": "Creates or Updates an availability set",
+  "description": "This operation creates or updates an availability set. This takes the resourceGroupName and availabilitySetName as input. If an availability set with the same name exists, then the same is updated. Else a new availability set is created.",
   .....
   .....
 }
@@ -1750,12 +1750,12 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 ```
 
 **Bad Examples**: The following would be invalid:
-```
+```json
 ......
 ......
 "put": {
-  "summary": "Creates or Updates an availabilty set",
-  "description": "Creates or Updates an availabilty set",
+  "summary": "Creates or Updates an availability set",
+  "description": "Creates or Updates an availability set",
   .....
   .....
 }
@@ -1788,11 +1788,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The parameter '{your parameter name}' is defined in global parameters section without 'x-ms-parameter-location' extension. This would add the parameter as the client property. Please ensure that this is exactly you want. If so, apply the extension "x-ms-parameter-location": "client". Else, apply the extension "x-ms-parameter-location": "method".
 
-**Description** : SDKs generated by AutoRest have two types of operation parameters: method arguments and client fields. The `x-ms-parameter-location` extension gives the Swagger author control of how an operation-parameter will be interpreted by AutoRest, and as such is one of few things in a Swagger document that has semantic value only relvant to the shape of the generated SDKs.
+**Description** : SDKs generated by AutoRest have two types of operation parameters: method arguments and client fields. The `x-ms-parameter-location` extension gives the Swagger author control of how an operation-parameter will be interpreted by AutoRest, and as such is one of few things in a Swagger document that has semantic value only relevant to the shape of the generated SDKs.
 
 Some parameters, such as API Version and Subscription ID will make sense as part of nearly every request. For these, having developers specify them for each method call would be burdensome; attaching them to the client and automatically including them in each request makes way more sense. Other parameters will be very operation specific and should be provided each time the method is called.
 
-**Why this rule is important**: Without providing the parameter-location, constructor parameter lists end up incorporating entries that are only relevant to one of the methods that belong to a type. Needlees to say, this can spiral out of control and turn your SDKs into gunk.
+**Why this rule is important**: Without providing the parameter-location, constructor parameter lists end up incorporating entries that are only relevant to one of the methods that belong to a type. Needless to say, this can spiral out of control and turn your SDKs into gunk.
 
 **How to fix the violation**: For each parameter in the document-level "parameters" section of your document provide either:
 ``` json

@@ -11,7 +11,7 @@
         "description": "Root API"
     }, {
         "name": "Manifest",
-        "description": "Everything about manfests"
+        "description": "Everything about manifests"
     }, {
         "name": "Tag",
         "description": "Everything about tags"
@@ -20,7 +20,7 @@
         "description": "Everything about layers"
     }, {
         "name": "Repository",
-        "description": "Everyting about repository"
+        "description": "Everything about repository"
     }, {
         "name": "AcrRepository",
         "description": "ACR APIs related to repositories"
@@ -137,7 +137,7 @@
         "/v2/_catalog": {
             "get": {
                 "tags": ["Repository"],
-                "description": "List respositories",
+                "description": "List repositories",
                 "operationId": "GetRepositories",
                 "x-ms-examples": {
                     "Get repositories in a registry": { "$ref": "./examples/GetRepositories.json" }
@@ -145,7 +145,7 @@
                 "parameters": [{
                     "name": "last",
                     "in": "query",
-                    "description": "query parameter for the last item in previou query",
+                    "description": "query parameter for the last item in previous query",
                     "required": false,
                     "type": "string"
                 }, {
@@ -174,7 +174,7 @@
         "/acr/v1/_catalog": {
             "get": {
                 "tags": ["AcrRepository"],
-                "description": "List respositories",
+                "description": "List repositories",
                 "operationId": "GetAcrRepositories",
                 "x-ms-examples": {
                     "Get repositories in a registry": { "$ref": "./examples/GetRepositories.json" }
@@ -182,7 +182,7 @@
                 "parameters": [{
                     "name": "last",
                     "in": "query",
-                    "description": "query parameter for the last item in previou query",
+                    "description": "query parameter for the last item in previous query",
                     "required": false,
                     "type": "string"
                 }, {
@@ -211,7 +211,7 @@
         "/acr/v1/{name}": {
             "get": {
                 "tags": ["AcrRepository", "AcrMetadata"],
-                "description": "Get respository attributes",
+                "description": "Get repository attributes",
                 "operationId": "GetAcrRepositoryAttributes",
                 "x-ms-examples": {
                     "Get details of repository": { "$ref": "./examples/GetAcrRepositoryAttributes.json" }
@@ -243,7 +243,7 @@
             },
             "delete": {
                 "tags": ["AcrRepository"],
-                "description": "Delete a respository",
+                "description": "Delete a repository",
                 "operationId": "DeleteAcrRepository",
                 "x-ms-examples": {
                     "Delete a repository": { "$ref": "./examples/DeleteAcrRepository.json" }
@@ -257,7 +257,7 @@
                 }],
                 "responses": {
                     "202": {
-                        "description": "The repoisotry is deleted",
+                        "description": "The repository is deleted",
                         "schema": {
                             "$ref": "#/definitions/DeletedRepository"
                         }
@@ -329,7 +329,7 @@
                 }, {
                     "name": "last",
                     "in": "query",
-                    "description": "query parameter for the last item in previou query",
+                    "description": "query parameter for the last item in previous query",
                     "required": false,
                     "type": "string"
                 }, {
@@ -507,7 +507,7 @@
                 }, {
                     "name": "last",
                     "in": "query",
-                    "description": "query parameter for the last item in previou query",
+                    "description": "query parameter for the last item in previous query",
                     "required": false,
                     "type": "string"
                 }, {
@@ -1180,7 +1180,7 @@
                 }
             },
             "example": {
-                "repositories": ["production/apline", "testing/apline"]
+                "repositories": ["production/alpine", "testing/alpine"]
             }
         },
         "DeletedRepository": {
@@ -1418,7 +1418,7 @@
         "queryLast": {
             "name": "last",
             "in": "query",
-            "description": "query parameter for the last item in previou query",
+            "description": "query parameter for the last item in previous query",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"

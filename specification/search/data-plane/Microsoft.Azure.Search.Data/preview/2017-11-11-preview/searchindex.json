@@ -4,10 +4,10 @@
     "title": "SearchIndexClient",
     "description": "Client that can be used to query an Azure Search index and upload, merge, or delete documents.",
     "version": "2017-11-11-Preview",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true,
-      "syncMethods": "None"  
-    }  
+      "syncMethods": "None"
+    }
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "https://{searchServiceName}.{searchDnsSuffix}/indexes('{indexName}')",
@@ -105,7 +105,7 @@
               "twoTerms",
               "oneTermWithContext"
             ],
-            "x-ms-enum": { 
+            "x-ms-enum": {
              "name": "AutocompleteMode",
              "modelAsString": false
             },
@@ -193,15 +193,15 @@
         "operationId": "DocumentsProxy_AutocompletePost",
         "x-ms-examples": {
           "SearchIndexPostAutocomplete": { "$ref": "./examples/SearchIndexPostAutocomplete.json" }
-        },        
-        "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",        
+        },
+        "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",
         "parameters": [
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },          
+          },
           {
             "name": "AutocompleteRequest",
             "in": "body",
@@ -224,7 +224,6 @@
           }
         }
       }
-      
     }
   },
   "definitions": {
@@ -460,7 +459,7 @@
         }
       },
       "description": "Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors."
-    },    
+    },
     "AutocompleteRequest": {
       "properties": {
         "search": {
@@ -505,7 +504,7 @@
         }
       },
       "description": "Parameters for fuzzy matching, and other autocomplete query behaviors."
-    },    
+    },
     "AutocompleteResult" : {
      "properties": {
         "value": {
@@ -518,7 +517,7 @@
           "x-ms-client-name": "Results"
         }
       },
-    "description": "The result of Autocomlete query."
+    "description": "The result of Autocomplete query."
     },
     "AutocompleteItem": {
       "properties": {

@@ -254,7 +254,7 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/favorites_API.json
 - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
-- microsoft.insights/stable/2015-05-01/analyticsItems_API.json
+- Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
 ```
 

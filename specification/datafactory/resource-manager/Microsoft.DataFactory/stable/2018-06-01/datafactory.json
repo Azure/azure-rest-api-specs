@@ -1133,7 +1133,7 @@
             "$ref": "./examples/IntegrationRuntimes_Upgrade.json"
           }
         },
-        "description": "Upgrade self-hosted integration runtime to latest version if availably.",
+        "description": "Upgrade self-hosted integration runtime to latest version if availability.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1258,6 +1258,109 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata": {
+      "post": {
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
+        "operationId": "IntegrationRuntimeObjectMetadata_Refresh",
+        "x-ms-examples": {
+          "IntegrationRuntimeObjectMetadata_Refresh": {
+            "$ref": "./examples/IntegrationRuntimeObjectMetadata_Refresh.json"
+          }
+        },
+        "description": "Refresh a SSIS integration runtime object metadata.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SsisObjectMetadataStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getObjectMetadata": {
+      "post": {
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
+        "operationId": "IntegrationRuntimeObjectMetadata_Get",
+        "x-ms-examples": {
+          "IntegrationRuntimeObjectMetadata_Get": {
+            "$ref": "./examples/IntegrationRuntimeObjectMetadata_Get.json"
+          }
+        },
+        "description": "Get a SSIS integration runtime object metadata by specified path. The return is pageable metadata list.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "name": "getMetadataRequest",
+            "description": "The parameters for getting a SSIS object metadata.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GetSsisObjectMetadataRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/SsisObjectMetadataListResponse"
             }
           },
           "default": {
@@ -2111,7 +2214,7 @@
           },
           {
             "name": "referencePipelineRunId",
-            "description": "The pipeline run identifier. If run ID is specified the parameters of the the specified run will be used to create a new run.",
+            "description": "The pipeline run identifier. If run ID is specified the parameters of the specified run will be used to create a new run.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -3486,7 +3589,7 @@
           "type": "string"
         },
         "repositoryName": {
-          "description": "Rrepository name.",
+          "description": "Repository name.",
           "type": "string"
         },
         "collaborationBranch": {
@@ -4556,6 +4659,38 @@
         "toBeExportedForShoebox": {
           "description": "Whether the dimension should be exported to Azure Monitor.",
           "type": "boolean"
+        }
+      }
+    },
+    "GetSsisObjectMetadataRequest": {
+      "type": "object",
+      "description": "The request payload of get SSIS object metadata.",
+      "properties": {
+          "metadataPath": {
+              "type": "string",
+              "description": "Metadata path."
+          }
+      }
+    },
+    "SsisObjectMetadataStatusResponse": {
+      "type": "object",
+      "description": "The status of the operation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "string",
+          "description": "The operation properties."
+        },
+        "error": {
+          "type": "string",
+          "description": "The operation error message."
         }
       }
     }

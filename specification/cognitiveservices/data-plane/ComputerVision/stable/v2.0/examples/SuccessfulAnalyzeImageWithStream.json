@@ -2,8 +2,8 @@
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "visualFeatures": ["Categories", "Adult", "Tags", "Description", "Faces", "Color", "ImageType"],
-    "details": "Celebrities",
+    "visualFeatures": ["Categories", "Adult", "Tags", "Description", "Faces", "Color", "ImageType", "Objects"],
+    "details": ["Celebrities", "Landmarks"],
     "language": "en",
     "Image": "{binary}"
   },
@@ -116,7 +116,23 @@
         "imageType": {
           "clipArtType": 0,
           "lineDrawingType": 0
-        }
+        },
+        "objects": [
+          {
+            "rectangle": {
+              "x": 0,
+              "y": 0,
+              "w": 50,
+              "h": 50
+            },
+            "object": "tree",
+            "confidence": 0.9,
+            "parent": {
+              "object": "plant",
+              "confidence": 0.95
+            }
+          }
+        ]
       }
     }
   }
