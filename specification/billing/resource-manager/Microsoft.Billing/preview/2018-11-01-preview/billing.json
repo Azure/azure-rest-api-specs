@@ -385,7 +385,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscription/{subscriptionId}/transfer": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/billingSubscriptions/{subscriptionId}/transfer": {
       "post": {
         "description": "Transfers the GTM subscription from one invoice section to another within a billing account.",
         "operationId": "BillingSubscription_Transfer",
@@ -905,13 +905,9 @@
       "type": "object",
       "description": "Transfer operation properties",
       "properties": {
-        "azureSubscriptionId": {
+        "billingSubscriptionId": {
           "type": "string",
-          "description": "The transferred azure subscription Id"
-        },
-        "invoiceSectionId": {
-          "type": "string",
-          "description": "The invoice section to which the subscription was transferred"
+          "description": "The transferred billing subscription Id"
         }
       }
     }
