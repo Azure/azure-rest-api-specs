@@ -1,0 +1,586 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Enterprise Knowledge Graph Service",
+    "description": "Azure Enterprise Knowledge Graph Service is a platform for creating knowledge graphs at scale.",
+    "version": "2018-12-03"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/ekgService/{resourceName}": {
+      "put": {
+        "tags": [
+          "EKG"
+        ],
+        "description": "Creates a EKG Service. EKG Service is a resource group wide resource type.",
+        "operationId": "EKG_Create",
+        "x-ms-examples": {
+          "Create EKG": {
+            "$ref": "./examples/CreateEKG.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          }, 
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EKG"
+            },
+            "description": "The parameters to provide for the created EKG."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "If resource is created successfully, the service should return 201 (Creating). Execution to continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/EKG"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EKG"
+        ],
+        "description": "Deletes a EKG Service from the resource group. ",
+        "operationId": "EKG_Delete",
+        "x-ms-examples": {
+          "Delete EKG": {
+            "$ref": "./examples/DeleteEKG.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "204": {
+            "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EKG"
+        ],
+        "description": "Returns a EKGService specified by the parameters.",
+        "operationId": "EKG_Get",
+        "x-ms-examples": {
+          "Get EKG": {
+            "$ref": "./examples/GetEKG.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/EKG"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/ekgService": {
+      "get": {
+        "tags": [
+          "EKG"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a resource group",
+        "operationId": "EKG_ListByResourceGroup",
+        "x-ms-examples": {
+          "List EKG by Resource Group": {
+            "$ref": "./examples/ListEKGByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "schema": {
+              "$ref": "#/definitions/EKGResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EKG/ekgService": {
+      "get": {
+        "tags": [
+          "EKG"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "operationId": "EKG_List",
+        "x-ms-examples": {
+          "List EKG by Subscription": {
+            "$ref": "./examples/ListEKGBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. ",
+            "schema": {
+              "$ref": "#/definitions/EKGResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.EKG/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available EKGService operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Azure resource",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Specifies the resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Specifies the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets the SKU of the resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "Required. Gets or sets the Kind of the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag"
+        }
+      }
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The sku name"
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the sku tier. This is based on the SKU name.",
+          "enum": [
+            "Free",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The SKU of the cognitive services account."
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "The name of SKU.",
+      "enum": [
+        "F0",
+        "S1"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      }
+    },
+    "Kind": {
+      "type": "string",
+      "description": "Indicates the type of EKG service",
+      "enum": [
+        "sdk",
+        "designer",
+        "EKG",
+        "function"
+      ],
+      "x-ms-enum": {
+        "name": "Kind",
+        "modelAsString": true
+      }
+    },
+    "EKG": {
+      "type": "object",
+      "description": "EKG resource definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EKGProperties",
+          "description": "The set of properties specific to EKG resource"
+        }
+      }
+    },
+    "EKGProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The Name of the EKG"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the EKG"
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "The Icon Url of the EKG"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The EKG's endpoint"
+        },
+        "endpointVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The EKG's endpoint version"
+        },
+        "msaAppId": {
+          "type": "string",
+          "description": "Microsoft App Id for the EKG"
+        },
+        "developerAppInsightKey": {
+          "type": "string",
+          "description": "The Application Insights key"
+        },
+        "developerAppInsightsApiKey": {
+          "type": "string",
+          "description": "The Application Insights Api Key"
+        },
+        "developerAppInsightsApplicationId": {
+          "type": "string",
+          "description": "The Application Insights App Id"
+        },
+        "luisAppIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of LUIS App Ids"
+        },
+        "luisKey": {
+          "type": "string",
+          "description": "The LUIS Key"
+        }
+      },
+      "description": "The parameters to provide for the EKG.",
+      "required": [
+        "displayName",
+        "endpoint",
+        "msaAppId"
+      ]
+    },
+    "EKGResponseList": {
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of EKG service resources.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EKG"
+          },
+          "description": "Gets the list of EKG service results and their properties."
+        }
+      },
+      "description": "The list of  EKG service operation response."
+    },
+    "Error": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorBody",
+          "description": "The error body."
+        }
+      },
+      "description": "EKG Service error object."
+    },
+    "ErrorBody": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "error message"
+        }
+      },
+      "description": "EKG Service error body.",
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "OperationEntityListResult": {
+      "description": "The list of EKG service operation response.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "The operations supported by EKG Service Management.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by EKG Service Management."
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Additional properties.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by Bot Service Management.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Service provider: Microsoft Bot Service.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the EKG resource group in the user subscription."
+    },
+    "resourceNameParameter": {
+      "name": "resourceName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the EKG resource."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    }
+  }
+}
