@@ -315,6 +315,10 @@ directive:
     from: resources.json
     where: $.definitions.TagDetails
     reason: TagDetails will be deprecated soon
+  - suppress: XmsResourceInPutResponse
+    from: resources.json
+    where: $.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put
+    reason: TagDetails is not an Azure resource
   - suppress: BodyTopLevelProperties
     from: managedapplications.json
     where: $.definitions.Appliance.properties

@@ -1370,7 +1370,7 @@
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
-          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
+          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
         "staticIP": {
           "type": "string",
@@ -1924,7 +1924,7 @@
           "items": {
             "$ref": "#/definitions/RedisLinkedServerWithProperties"
           },
-          "description": "List of linked servers (with properites) of a Redis cache."
+          "description": "List of linked servers (with properties) of a Redis cache."
         },
         "nextLink": {
           "type": "string",
@@ -1932,7 +1932,7 @@
           "description": "Link for next set."
         }
       },
-      "description": "List of linked servers (with properites) of a Redis cache."
+      "description": "List of linked servers (with properties) of a Redis cache."
     },
     "RedisLinkedServerCreateProperties": {
       "description": "Create properties for a linked server",
@@ -2053,7 +2053,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when upgrade notification occured."
+          "description": "Timestamp when upgrade notification occurred."
         },
         "upsellNotification": {
           "readOnly": true,

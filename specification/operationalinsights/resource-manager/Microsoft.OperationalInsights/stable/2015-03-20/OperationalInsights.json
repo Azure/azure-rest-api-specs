@@ -326,7 +326,7 @@
         ],
         "x-ms-examples": {
           "SavedSearchesGet": { "$ref": "./examples/WorkspacesSavedSearchesGet.json" }
-        },        
+        },
         "operationId": "SavedSearches_Get",
         "description": "Gets the specified saved search for a given workspace.",
         "parameters": [
@@ -400,7 +400,7 @@
           "SavedSearches"
         ],
         "x-ms-examples": {
-          "SaveSearchsListResults": { "$ref": "./examples/SavedSearchesGetResults.json" }
+          "SaveSearchesListResults": { "$ref": "./examples/SavedSearchesGetResults.json" }
         },
         "operationId": "SavedSearches_GetResults",
         "description": "Gets the results from a saved search for a given workspace.",
@@ -579,7 +579,7 @@
           },
           {
             "$ref": "#/parameters/WorkspacePurgeParameter"
-          }         
+          }
         ],
         "responses": {
           "202": {
@@ -624,7 +624,7 @@
           },
           {
             "$ref": "#/parameters/WorkspacePurgeIdParameter"
-          }         
+          }
         ],
         "responses": {
           "200": {
@@ -648,7 +648,7 @@
         ],
         "x-ms-examples": {
           "SharedKeysList": { "$ref": "./examples/WorkspacesListKeys.json" }
-          },        
+          },
         "operationId": "Workspaces_ListKeys",
         "description": "Gets the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.",
         "parameters": [
@@ -682,7 +682,7 @@
         ],
         "x-ms-examples": {
           "SharedKeysList": { "$ref": "./examples/WorkspacesRegenerateSharedKeys.json" }
-          },        
+          },
         "operationId": "Workspaces_RegenerateSharedKeys",
         "description": "Regenerates the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.",
         "parameters": [
@@ -749,7 +749,7 @@
       }
     },
     "Operation": {
-      "description": "Supported operation of OperationalInsights resource provider.",      
+      "description": "Supported operation of OperationalInsights resource provider.",
       "properties": {
           "name": {
               "description": "Operation name: {provider}/{resource}/{operation}",
@@ -832,7 +832,7 @@
           "format": "int64",
           "minimum": 1,
           "maximum": 2,
-          "description": "The version number of the query lanuage. The current version is 2 and is the default."
+          "description": "The version number of the query language. The current version is 2 and is the default."
         },
         "tags": {
           "type": "array",
@@ -862,7 +862,7 @@
         }
       },
       "required": [
-        "numberOfDocuments" 
+        "numberOfDocuments"
       ],
       "description": "The core summary of a search."
     },
@@ -1019,7 +1019,7 @@
         "properties"
       ],
       "description": "Value object for saved search results.",
-      "x-ms-azure-resource": true            
+      "x-ms-azure-resource": true
     },
     "SavedSearchesListResult": {
       "properties": {
@@ -1157,7 +1157,7 @@
         },
         "highlight": {
           "$ref": "#/definitions/SearchHighlight",
-          "description": "The highlight that looks for all occurences of a string."
+          "description": "The highlight that looks for all occurrences of a string."
         },
         "query": {
           "type": "string",
@@ -1269,7 +1269,7 @@
         }
       ],
       "description": "The top level storage insight resource container.",
-      "x-ms-azure-resource": true            
+      "x-ms-azure-resource": true
     },
     "StorageInsightListResult": {
       "properties": {
@@ -1323,22 +1323,22 @@
       "description": "The resource definition.",
       "x-ms-azure-resource": true
     },
-    "ProxyResource": { 
-      "properties": { 
-        "id": { 
-          "readOnly": true, 
-          "type": "string", 
-          "description": "Resource ID." 
-        }, 
-        "name": { 
-          "readOnly": true, 
-          "type": "string", 
-          "description": "Resource name." 
-        }, 
-        "type": { 
-          "readOnly": true, 
-          "type": "string", 
-          "description": "Resource type." 
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
         },
         "tags": {
           "type": "object",
@@ -1347,8 +1347,8 @@
           },
           "description": "Resource tags"
         }
-      }, 
-      "description": "Common properties of proxy resource." 
+      },
+      "description": "Common properties of proxy resource."
     },
     "WorkspacePurgeBody": {
       "description": "Describes the body of a purge request for an App Insights Workspace",
@@ -1385,7 +1385,7 @@
           "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
         },
         "key": {
-          "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension.", 
+          "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension.",
           "type": "string"
         }
       }

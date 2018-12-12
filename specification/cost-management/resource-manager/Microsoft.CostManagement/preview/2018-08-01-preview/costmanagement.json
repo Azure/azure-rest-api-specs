@@ -475,7 +475,7 @@
           "Reports"
         ],
         "operationId": "Reports_GetByBillingAccount",
-        "description": "Gets the report for a billing acount by report name.",
+        "description": "Gets the report for a billing account by report name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1105,7 +1105,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1178,7 +1178,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1254,7 +1254,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2355,7 +2355,7 @@
         },
         "aggregation": {
           "type": "object",
-          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
           "additionalProperties": {
             "type": "object",
             "$ref": "#/definitions/ReportAggregation"
@@ -2363,7 +2363,7 @@
           "maxItems": 2
         },
         "grouping": {
-          "description": "Array of group by expression to use in the report. Report can have upto 2 group by clauses.",
+          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportGrouping"
@@ -2434,7 +2434,7 @@
       "description": "The filter expression to be used in the report.",
       "properties": {
         "and": {
-          "description": "The logical \"AND\" expression. Must have atleast 2 items.",
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportFilter"
@@ -2442,7 +2442,7 @@
           "minItems": 2
         },
         "or": {
-          "description": "The logical \"OR\" expression. Must have atleast 2 items.",
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportFilter"
@@ -2479,7 +2479,7 @@
       "description": "The comparison expression to be used in the report.",
       "properties": {
         "name": {
-          "description": "The name of the column to use in comaprison.",
+          "description": "The name of the column to use in comparison.",
           "type": "string"
         },
         "operator": {
@@ -2522,7 +2522,7 @@
       }
     },
     "ReportExecution" : {
-      "description": "A report exeuction.",
+      "description": "A report execution.",
       "type": "object",
       "allOf": [
         {
@@ -2756,7 +2756,7 @@
           "x-ms-mutability": [
             "read",
             "create"
-           ],          
+           ],
           "description": "Connector location"
         },
         "tags": {
@@ -2770,7 +2770,7 @@
            "update"
           ],
           "description": "Resource tags."
-         },        
+         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConnectorProperties",
@@ -2923,7 +2923,7 @@
         "errorStartTime": {
           "format": "date-time",
           "type": "string",
-          "description": "Time the error started occuring (Last time error occurred in lastRun)",
+          "description": "Time the error started occurring (Last time error occurred in lastRun)",
           "readOnly": true
         }
       }
@@ -2964,7 +2964,7 @@
           "type": "string",
           "readOnly": true,
           "description": "Alert type"
-        },        
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AlertProperties",
@@ -3024,7 +3024,7 @@
         },
         "closeTime": {
           "format": "date-time",
-          "description": "The time when the alert was closed (resolved / overriden).",
+          "description": "The time when the alert was closed (resolved / overridden).",
           "type": "string",
           "readOnly": true
         },

@@ -9,5 +9,4 @@ typescript:
   package-name: "@azure/arm-network"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-network"
   generate-metadata: true
-  generate-readme-md: false
 ```

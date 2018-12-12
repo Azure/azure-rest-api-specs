@@ -20,13 +20,13 @@
           "provisioningState": "Succeeded",
           "openShiftVersion": "v3.10",
           "fqdn": "clustername1.location1.cloudapp.azure.com",
-          "networkProfile":{
-            "vnetCidr":"10.0.0.0/8"
+          "networkProfile": {
+            "vnetCidr": "10.0.0.0/8"
           },
           "masterPoolProfile": {
-              "count": 3,
-              "vmSize": "Standard_D2s_v3",
-              "subnetCidr": "10.0.0.0/24"
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "subnetCidr": "10.0.0.0/24"
           },
           "agentPoolProfiles": [
             {
@@ -55,14 +55,15 @@
           ],
           "authProfile": {
             "identityProviders": [
-                {
-                    "name": "Azure AD",
-                    "provider": {
-                        "kind": "AADIdentityProvider",
-                        "clientId": "clientId",
-                        "tenantId": "tenantId"
-                    }
-                }]
+              {
+                "name": "Azure AD",
+                "provider": {
+                  "kind": "AADIdentityProvider",
+                  "clientId": "clientId",
+                  "tenantId": "tenantId"
+                }
+              }
+            ]
           }
         }
       }
