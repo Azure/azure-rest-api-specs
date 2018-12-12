@@ -2824,15 +2824,9 @@
             }
           },
           "207": {
-            "description": "An object containing the application endpoint URL, its assigned endpoint key and publishing status.",
+            "description": "An object containing the application endpoint URL, its assigned endpoint key and publishing status in case that publishing one or more regions failed.",
             "schema": {
               "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
-            }
-          },
-          "503": {
-            "description": "A string with the error message",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "default": {
@@ -7604,20 +7598,11 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "429": {
-            "$ref": "#/responses/429"
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
-            "schema": {             
+          "default": {
+            "description": "Error Response.",
+            "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7648,20 +7633,11 @@
               "$ref": "#/definitions/AzureAccountInfoList"
             }
           },
-          "429": {
-            "$ref": "#/responses/429"
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
-            "schema": {             
+          "default": {
+            "description": "Error Response.",
+            "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7703,20 +7679,11 @@
               "$ref": "#/definitions/OperationStatus"
             }
           },
-          "429": {
-            "$ref": "#/responses/429"
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
-            "schema": {             
+          "default": {
+            "description": "Error Response.",
+            "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7746,20 +7713,11 @@
               "$ref": "#/definitions/AzureAccountInfoList"
             }
           },
-          "429": {
-            "$ref": "#/responses/429"
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
-            "schema": {             
+          "default": {
+            "description": "Error Response.",
+            "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7792,20 +7750,11 @@
               "type": "file"
             }
           },
-          "429": {
-            "$ref": "#/responses/429"
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
-            "schema": {             
+          "default": {
+            "description": "Error Response.",
+            "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7839,20 +7788,11 @@
               "type": "file"
             }
           },
-          "429": {
-            "$ref": "#/responses/429"
-          },
-          "400": {
-            "description": "This error can be returned if the request's parameters are incorrect meaning the required parameters are missing, malformed, or too large.\r\n\r\nThis error can be returned if the request's body is incorrect meaning the JSON is missing, malformed, or too large. ",
-            "schema": {             
+          "default": {
+            "description": "Error Response.",
+            "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
           }
         },
         "produces": [
@@ -7867,26 +7807,6 @@
       }
     }
   }, 
-  "responses": {
-    "401": {
-      "description": "You do not have access. \r\n\r\nReasons can include:\r\n\r\n* used endpoint subscription key, instead of authoring key\r\n* invalid, malformed, or empty authoring key\r\n* authoring key doesn't match region\r\n* you are not the owner or collaborator\r\n* invalid order of API calls\r\n",
-      "schema": {
-        "$ref": "#/definitions/ErrorResponse"
-      }
-    },
-    "403": {
-      "description": "Total monthly key quota limit exceeded",
-      "schema": {
-        "$ref": "#/definitions/ErrorResponse"
-      }
-    },
-    "429": {
-      "description": "Rate limit is exceeded.",
-      "schema": {
-        "$ref": "#/definitions/ErrorResponse"
-      }
-    }
-  },
   "definitions": {
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
@@ -9716,10 +9636,6 @@
       "additionalProperties": {
         "type": "object"
       }
-    },
-    "ErrorMessage": {
-      "description": "Error message when invoking an operation on the API.",
-      "type": "string"
     },
     "OperationError": {
       "description": "Operation error details when invoking an operation on the API.",
