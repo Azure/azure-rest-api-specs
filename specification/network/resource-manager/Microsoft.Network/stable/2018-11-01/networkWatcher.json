@@ -2585,6 +2585,9 @@
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicyParameters"
+        },
+        "format": {
+          "$ref": "#/definitions/FlowLogFormatParameters"
         }
       }
     },
@@ -2612,6 +2615,27 @@
           "description": "Flag to enable/disable retention.",
           "type": "boolean",
           "default": false
+        }
+      }
+    },
+    "FlowLogFormatParameters": {
+      "description": "Parameters that define the flow log format.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The file type of flow log.",
+          "enum": [
+            "JSON"
+          ],
+          "x-ms-enum": {
+            "name": "FlowLogFormatType",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "The version (revision) of the flow log.",
+          "type": "integer",
+          "default": 0
         }
       }
     },
@@ -2669,7 +2693,11 @@
         },
         "workspaceResourceId": {
           "description": "Resource Id of the attached workspace ",
-         "type": "string"
+          "type": "string"
+        },
+        "trafficAnalyticsInterval": {
+          "description": "The interval in minutes which would decide how frequently TA service should do flow analytics",
+          "type": "integer"
         }
       }
     },
@@ -3432,23 +3460,36 @@
       "description": "Parameters to get network configuration diagnostic.",
       "required": [
         "targetResourceId",
-        "queries"
+        "profiles"
       ],
       "properties": {
         "targetResourceId": {
           "type": "string",
           "description": "The ID of the target resource to perform network configuration diagnostic. Valid options are VM, NetworkInterface, VMSS/NetworkInterface and Application Gateway."
         },
-        "queries": {
+        "verbosityLevel": {
+          "type": "string",          
+          "enum": [
+            "Normal",
+            "Minimum",
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "VerbosityLevel",
+            "modelAsString": true
+          },
+          "description": "Verbosity level. Accepted values are 'Normal', 'Minimum', 'Full'."
+        },
+        "profiles": {
           "type": "array",
-          "description": "List of traffic queries.",
+          "description": "List of network configuration diagnostic profiles.",
           "items": {
-            "$ref": "#/definitions/TrafficQuery"
+            "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
           }
         }
       }
     },
-    "TrafficQuery": {
+    "NetworkConfigurationDiagnosticProfile": {
       "description": "Parameters to compare with network configuration.",
       "required": [
         "direction",
@@ -3504,8 +3545,8 @@
     "NetworkConfigurationDiagnosticResult": {
       "description": "Network configuration diagnostic result corresponded to provided traffic query.",
       "properties": {
-        "trafficQuery": {
-          "$ref": "#/definitions/TrafficQuery"
+        "profile": {
+          "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
         },
         "networkSecurityGroupResult": {
           "$ref": "#/definitions/NetworkSecurityGroupResult"
@@ -3543,6 +3584,10 @@
         "networkSecurityGroupId": {
           "type": "string",
           "description": "Network security group ID."
+        },
+        "appliedTo": {
+          "type": "string",
+          "description": "Resource ID of nic or subnet to which network security group is applied."
         },
         "matchedRule": {
           "$ref": "#/definitions/MatchedRule"
