@@ -143,7 +143,7 @@
     },
     "AssignmentOperationProperties": {
       "type": "object",
-      "description": "properties of AssignmentOperation.",
+      "description": "Properties of AssignmentOperation.",
       "properties": {
         "blueprintVersion": {
           "type": "string",
@@ -167,7 +167,7 @@
         },
         "deployments": {
           "type": "array",
-          "description": "list of jobs in this assignment operation.",
+          "description": "List of jobs in this assignment operation.",
           "items": {
             "$ref": "#/definitions/AssignmentDeploymentJob"
           }
@@ -195,7 +195,7 @@
           "description": "State of this job."
         },
         "result": {
-          "description": "deployment job result.",
+          "description": "Deployment job result.",
           "$ref": "#/definitions/AssignmentDeploymentJobResult"
         },
         "history": {
@@ -213,15 +213,15 @@
     },
     "AssignmentDeploymentJobResult": {
       "type": "object",
-      "description": "result of each individual deployment in a blueprint assignment.",
+      "description": "Result of each individual deployment in a blueprint assignment.",
       "properties": {
         "error": {
-          "description": "contains error details if deployment job failed.",
+          "description": "Contains error details if deployment job failed.",
           "$ref": "#/definitions/AzureResourceManagerError"
         },
         "resources": {
           "type": "array",
-          "description": "resources created as result of the deployment job.",
+          "description": "Resources created as result of the deployment job.",
           "items": {
             "$ref": "#/definitions/AssignmentJobCreatedResource"
           }
@@ -234,7 +234,7 @@
       "properties": {
         "properties": {
           "type": "object",
-          "description": "additional properties in a dictionary.",
+          "description": "Additional properties in a dictionary.",
           "additionalProperties": {
             "type": "string",
             "description": "property value"
@@ -308,7 +308,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "name of the assignment operation."
+      "description": "Name of the assignment operation."
     },
     "ApiVersionParameter": {
       "name": "api-version",
