@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
-    "version": "2018-07-15-preview"
+    "version": "2018-04-19"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -17,35 +17,35 @@
   },
   "paths": {},
   "definitions": {
-    "MigrateMySqlAzureDbForMySqlSyncTaskInput": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskInput": {
       "type": "object",
-      "description": "Input for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
+      "description": "Input for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations",
       "properties": {
-        "sourceConnectionInfo": {
-          "description": "Connection information for source MySQL",
-          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
-        },
-        "targetConnectionInfo": {
-          "description": "Connection information for target Azure Database for MySQL",
-          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
-        },
         "selectedDatabases": {
           "type": "array",
           "description": "Databases to migrate",
           "items": {
-            "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncDatabaseInput"
+            "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput"
           }
+        },
+        "targetConnectionInfo": {
+          "description": "Connection information for target Azure Database for PostgreSQL",
+          "$ref": "./Common.json#/definitions/PostgreSqlConnectionInfo"
+        },
+        "sourceConnectionInfo": {
+          "description": "Connection information for source PostgreSQL",
+          "$ref": "./Common.json#/definitions/PostgreSqlConnectionInfo"
         }
       },
       "required": [
-        "sourceConnectionInfo",
         "targetConnectionInfo",
+        "sourceConnectionInfo",
         "selectedDatabases"
       ]
     },
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutput": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput": {
       "type": "object",
-      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for online migrations",
+      "description": "Output for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations",
       "properties": {
         "id": {
           "type": "string",
@@ -60,7 +60,7 @@
       },
       "discriminator": "resultType"
     },
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel": {
       "x-ms-discriminator-value": "MigrationLevelOutput",
       "type": "object",
       "properties": {
@@ -99,11 +99,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+          "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput"
         }
       ]
     },
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel": {
       "type": "object",
       "x-ms-discriminator-value": "DatabaseLevelOutput",
       "properties": {
@@ -197,11 +197,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+          "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput"
         }
       ]
     },
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel": {
       "type": "object",
       "x-ms-discriminator-value": "TableLevelOutput",
       "properties": {
@@ -216,17 +216,20 @@
           "readOnly": true
         },
         "cdcInsertCounter": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Number of applied inserts",
           "readOnly": true
         },
         "cdcUpdateCounter": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Number of applied updates",
           "readOnly": true
         },
         "cdcDeleteCounter": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Number of applied deletes",
           "readOnly": true
         },
@@ -280,11 +283,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+          "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput"
         }
       ]
     },
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputError": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError": {
       "type": "object",
       "x-ms-discriminator-value": "ErrorOutput",
       "properties": {
@@ -296,11 +299,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+          "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput"
         }
       ]
     },
-    "MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError": {
       "type": "object",
       "x-ms-discriminator-value": "DatabaseLevelErrorOutput",
       "properties": {
@@ -318,13 +321,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlSyncTaskOutput"
+          "$ref": "#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput"
         }
       ]
     },
-    "MigrateMySqlAzureDbForMySqlSyncDatabaseInput": {
+    "MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput": {
       "type": "object",
-      "description": "Database specific information for MySQL to Azure Database for MySQL migration task inputs",
+      "description": "Database specific information for PostgreSQL to Azure Database for PostgreSQL migration task inputs",
       "properties": {
         "name": {
           "type": "string",

@@ -305,6 +305,46 @@
         "projectLocation"
       ]
     },
+	"SqlServerSqlMISyncTaskInput": {
+      "type": "object",
+      "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
+      "properties": {
+        "selectedDatabases": {
+          "description": "Databases to migrate",
+          "type": "array",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlMIDatabaseInput"
+          }
+        },
+        "backupFileShare": {
+          "$ref": "./TasksCommon.json#/definitions/FileShare",
+          "description": "Backup file share information for all selected databases."
+        },
+        "storageResourceId": {
+          "type": "string",
+          "description": "Fully qualified resourceId of storage"
+        },
+        "sourceConnectionInfo": {
+            "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+            "description": "Connection information for source SQL Server"
+        },
+        "targetConnectionInfo": {
+            "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
+            "description": "Connection information for Azure SQL Database Managed Instance"
+        },
+        "azureApp":{
+            "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
+            "description" : "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
+        }
+      },
+      "required": [
+        "selectedDatabases",
+        "azureApp",
+        "sourceConnectionInfo",
+        "targetConnectionInfo",
+        "storageResourceId"
+      ]
+    },
     "MigrationState": {
       "type": "string",
       "description": "Current state of migration",
@@ -1120,6 +1160,26 @@
       ],
       "x-ms-enum": {
         "name": "BackupType",
+        "modelAsString": true
+      }
+	},
+    "DatabaseMigrationState": {
+      "type": "string",
+      "description": "Database level migration state.",
+      "enum": [
+        "UNDEFINED",
+        "INITIAL",
+        "FULL_BACKUP_UPLOAD_START",
+        "LOG_SHIPPING_START",
+        "UPLOAD_LOG_FILES_START",
+        "CUTOVER_START",
+        "POST_CUTOVER_COMPLETE",
+        "COMPLETED",
+        "CANCELLED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseMigrationState",
         "modelAsString": true
       }
     }
