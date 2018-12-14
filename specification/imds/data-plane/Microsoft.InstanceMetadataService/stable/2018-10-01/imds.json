@@ -37,7 +37,7 @@
     "paths": {
         "/instance": {
             "get": {
-                "operationId": "Instance_GetMetadata",
+                "operationId": "Instances_GetMetadata",
                 "description": "Get Instance Metadata for the Virtual Machine.",
                 "parameters": [
                     {
@@ -133,7 +133,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Attested"
+                            "$ref": "#/definitions/AttestedData"
                         }
                     },
                     "400": {
@@ -489,6 +489,7 @@
         },
         "NetworkInterface": {
             "type": "object",
+            "description": "This contains data about the network interface.",
             "properties": {
                 "ipv4": {
                     "type":"object",
@@ -611,13 +612,13 @@
                 }
             }
         },
-        "Attested": {
+        "AttestedData": {
             "type": "object",
             "description": "This is the response from the Attested_GetDocument operation.",
             "properties": {
                 "signature": {
                     "type": "string",
-                    "description": "This is the encoded string containing the VM ID, plan information, and nonce value."
+                    "description": "This is the encoded string containing the VM ID, plan information, public key, timestamp, and nonce value."
                 },
                 "encoding": {
                     "type": "string",
@@ -730,8 +731,6 @@
             "in": "query",
             "type": "string",
             "enum": [
-                "2018-02-01",
-                "2018-04-02",
                 "2018-10-01"
             ],
             "description": "This is the API version to use.",
@@ -750,10 +749,6 @@
             ],
             "description": "This must be set to 'true'.",
             "required": true,
-            "x-ms-enum": {
-                "name": "Metadata",
-                "modelAsString": true
-            },
             "x-ms-parameter-location": "method"
         }
     }
