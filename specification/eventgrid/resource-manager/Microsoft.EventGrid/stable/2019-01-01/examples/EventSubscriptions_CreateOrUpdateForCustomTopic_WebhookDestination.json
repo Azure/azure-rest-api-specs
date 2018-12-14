@@ -19,7 +19,8 @@
         "deadLetterDestination": {
           "endpointType": "StorageBlob",
           "properties": {
-            "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg/blobServices/default/containers/contosocontainer"
+            "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg",
+            "blobContainerName": "contosocontainer"
           }
         }
       }
@@ -48,10 +49,11 @@
           "provisioningState": "Creating",
           "labels": null,
           "deadLetterDestination": {
+            "endpointType": "StorageBlob",
             "properties": {
-              "storageBlobContainerResourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg/blobServices/default/containers/contosocontainer"
-            },
-            "endpointType": "StorageBlob"
+              "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg",
+              "blobContainerName": "contosocontainer"
+            }
           }
         },
         "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
