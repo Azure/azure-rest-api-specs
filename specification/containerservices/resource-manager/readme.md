@@ -285,7 +285,7 @@ generate-interface: true
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: managedClusters.json
-    reason: Name chamge of "enableRBAC" property would break compatibility
+    reason: Name change of "enableRBAC" property would break compatibility
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
