@@ -3057,19 +3057,19 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/TrafficHardeningRule"
-                    },
-                    "trafficAlerts": {
-                        "description": "The set of North-south hardening alerts associated with the Azure resource",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/TrafficAlert"
-                        },
-                        "rulesCalculationTime": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The UTC time on which the traffic hardening rules were calculated"
-                        }
                     }
+                },
+                "trafficAlerts": {
+                    "description": "The set of North-south hardening alerts associated with the Azure resource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TrafficAlert"
+                    }
+                },
+                "rulesCalculationTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC time on which the traffic hardening rules were calculated"
                 }
             }
         },
