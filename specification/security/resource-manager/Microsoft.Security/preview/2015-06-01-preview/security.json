@@ -1438,6 +1438,99 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/northSouthHardenings": {
+            "get": {
+                "x-ms-examples": {
+                    "List north-south hardening resources for a resource group": {
+                        "$ref": "./examples/NorthSouthHardenings/ListByResourceGroupNorthSouthHardenings_example.json"
+                    }
+                },
+                "description": "Gets a list of north-south hardening resources for the resource group.",
+                "tags": [
+                    "NorthSouthHardenings"
+                ],
+                "operationId": "NorthSouthHardenings_ListByResourceGroup",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/NorthSouthHardeningsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/northSouthHardenings/{northSouthResourceName}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a north-south hardening resource": {
+                        "$ref": "./examples/NorthSouthHardenings/GetNorthSouthHardenings_example.json"
+                    }
+                },
+                "tags": [
+                    "NorthSouthHardenings"
+                ],
+                "description": "Gets the north-south traffic hardening for the specified resource",
+                "operationId": "NorthSouthHardenings_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceType"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceName"
+                    },
+                    {
+                        "$ref": "#/parameters/NorthSouthResourceName"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/NorthSouthHardenings"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/topologies": {
             "get": {
                 "x-ms-examples": {
@@ -1445,10 +1538,13 @@
                         "$ref": "./examples/Topology/GetTopologySubscription_example.json"
                     }
                 },
-                "tags": ["Topology"],
+                "tags": [
+                    "Topology"
+                ],
                 "description": "Gets a list that allows to build a topology view of a subscription.",
                 "operationId": "Topology_List",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -1481,10 +1577,13 @@
                         "$ref": "./examples/Topology/GetTopologySubscriptionLocation_example.json"
                     }
                 },
-                "tags": ["Topology"],
+                "tags": [
+                    "Topology"
+                ],
                 "description": "Gets a list that allows to build a topology view of a subscription and location.",
                 "operationId": "Topology_ListByHomeRegion",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -1520,10 +1619,13 @@
                         "$ref": "./examples/Topology/GetTopology_example.json"
                     }
                 },
-                "tags": ["Topology"],
+                "tags": [
+                    "Topology"
+                ],
                 "description": "Gets a specific topology component.",
                 "operationId": "Topology_Get",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/SubscriptionId"
                     },
                     {
@@ -2227,7 +2329,8 @@
                     "$ref": "#/definitions/TopologyResourceProperties"
                 }
             },
-            "allOf": [{
+            "allOf": [
+                {
                     "$ref": "#/definitions/Resource"
                 },
                 {
@@ -2852,6 +2955,154 @@
                     "$ref": "#/definitions/ExternalSecuritySolutionProperties"
                 }
             ]
+        },
+        "NorthSouthProtocol": {
+            "description": "The transport protocols supported by north-south hardenings",
+            "type": "string",
+            "enum": [
+                "TCP",
+                "UDP"
+            ],
+            "x-ms-enum": {
+                "name": "northSouthProtocol",
+                "modelAsString": true
+            }
+        },
+        "NorthSouthTrafficDirection": {
+            "description": "The north south traffic direction",
+            "type": "string",
+            "enum": [
+                "Inbound",
+                "Outbound"
+            ],
+            "x-ms-enum": {
+                "name": "northSouthTrafficDirection",
+                "modelAsString": true
+            }
+        },
+        "TrafficHardeningRule": {
+            "description": "A north-south traffic hardening rule",
+            "properties": {
+                "name": {
+                    "description": "The name of the rule",
+                    "type": "string"
+                },
+                "direction": {
+                    "description": "The rule;s traffic direction",
+                    "$ref": "#/definitions/NorthSouthTrafficDirection"
+                },
+                "destinationPort": {
+                    "description": "The rule's destination port",
+                    "$ref": "#/definitions/PortNumber"
+                },
+                "protocols": {
+                    "description": "The rule's transport protocol",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NorthSouthProtocol"
+                    }
+                },
+                "allowRemoteAddresses": {
+                    "description": "The remote addresses that should be able to communicate with the Azure resource on the rule's destination port and protocol",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "TrafficAlert": {
+            "description": "A north-south traffic hardening alert",
+            "properties": {
+                "detectionDate": {
+                    "description": "the date (UTC) that the traffic was detected",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "direction": {
+                    "description": "The alert's traffic direction",
+                    "$ref": "#/definitions/NorthSouthTrafficDirection"
+                },
+                "destinationPort": {
+                    "description": "The alert's deStination port",
+                    "$ref": "#/definitions/PortNumber"
+                },
+                "protocol": {
+                    "description": "The alert's transport protocol",
+                    "$ref": "#/definitions/NorthSouthProtocol"
+                },
+                "traffic": {
+                    "description": "The traffic that was detected and raised the alert",
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "remoteAddress": {
+                                "description": "The IP address of the remote host that is associated with the traffic",
+                                "type": "string"
+                            },
+                            "attempts": {
+                                "description": "The detected number of packets sent to or from the remote address (depends on the direction of the traffic)",
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "NorthSouthHardeningsProperties": {
+            "description": "North-south hardening resource propeties",
+            "properties": {
+                "trafficHardeningRules": {
+                    "description": "The set of North-south traffic hardening rules",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TrafficHardeningRule"
+                    },
+                    "trafficAlerts": {
+                        "description": "The set of North-south hardening alerts associated with the Azure resource",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/TrafficAlert"
+                        },
+                        "rulesCalculationTime": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The UTC time on which the traffic hardening rules were calculated"
+                        }
+                    }
+                }
+            }
+        },
+        "NorthSouthHardenings": {
+            "description": "The resource whose properties describes the North-south hardening settings for some Azure resource",
+            "properties": {
+                "properties": {
+                    "description": "Properties of the north-south hardening resource",
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/NorthSouthHardeningsProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "NorthSouthHardeningsList": {
+            "description": "Response for ListNorthSouthHardenings API service call",
+            "properties": {
+                "value": {
+                    "description": "A list of north-south hardening resources",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NorthSouthHardenings"
+                    }
+                },
+                "nextLink": {
+                    "description": "The URL to get the next set of results",
+                    "type": "string"
+                }
+            }
         },
         "AllowedConnectionsList": {
             "type": "object",

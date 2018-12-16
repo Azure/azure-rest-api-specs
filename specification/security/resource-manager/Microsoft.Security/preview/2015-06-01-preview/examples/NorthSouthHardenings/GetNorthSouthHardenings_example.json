@@ -1,0 +1,61 @@
+{
+    "parameters": {
+        "api-version": "2015-06-01-preview",
+        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+        "resourceGroupName": "rg1",
+        "extendedResourceProvider": "Microsoft.Compute",
+        "extendedResourceType": "virtualMachines",
+        "extendedResourceName": "vm1",
+        "northSouthResourceName": "ns1"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Security/northSouthHardenings/ns1",
+                "name": "ns1",
+                "type": "Microsoft.Security/northSouthHardenings",
+                "properties": {
+                    "trafficHardeningRules": [
+                        {
+                            "name": "rule1",
+                            "direction": "Inbound",
+                            "destinationPort": 3389,
+                            "protocols": [
+                                "TCP"
+                            ],
+                            "allowRemoteAddresses": [
+                                "100.10.1.1",
+                                "200.20.2.2",
+                                "50.5.5.5-50.5.5.6"
+                            ]
+                        },
+                        {
+                            "name": "rule2",
+                            "direction": "Inbound",
+                            "destinationPort": 22,
+                            "protocols": [
+                                "TCP"
+                            ],
+                            "allowRemoteAddresses": []
+                        }
+                    ],
+                    "rulesCalculationTime": "2018-08-15T00:00:00.0000000Z",
+                    "trafficAlerts": [
+                        {
+                            "detectionDate": "2018-08-14T00:00:00.0000000Z",
+                            "direction": "Inbound",
+                            "destinationPort": 22,
+                            "protocol": "TCP",
+                            "traffic": [
+                                {
+                                    "remoteAddress": "150.1.1.1",
+                                    "attempts": 4
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
