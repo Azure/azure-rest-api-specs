@@ -1438,6 +1438,45 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/northSouthHardenings": {
+            "get": {
+                "x-ms-examples": {
+                    "List all north-south hardening resources for a subscription": {
+                        "$ref": "./examples/NorthSouthHardenings/ListNorthSouthHardenings_example.json"
+                    }
+                },
+                "description": "Gets a list of north-south hardening resources for the subscription.",
+                "tags": [
+                    "NorthSouthHardenings"
+                ],
+                "operationId": "NorthSouthHardenings_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/NorthSouthHardeningsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/northSouthHardenings": {
             "get": {
                 "x-ms-examples": {
