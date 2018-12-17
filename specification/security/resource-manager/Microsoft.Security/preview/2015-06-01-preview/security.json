@@ -1570,6 +1570,60 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/northSouthHardenings/{northSouthResourceName}/enforce": {
+            "post": {
+                "x-ms-examples": {
+                    "Enforces the given collections of traffic hardenings rule's on the VM's NSG": {
+                        "$ref": "./examples/NorthSouthHardenings/EnforceTrafficHardeningRules_example.json"
+                    }
+                },
+                "tags": [
+                    "NorthSouthHardenings"
+                ],
+                "description": "Enforces the given collections of traffic hardenings rule's on the VM's NSG",
+                "operationId": "NorthSouthHardenings_Enforce",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceType"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceName"
+                    },
+                    {
+                        "$ref": "#/parameters/NorthSouthResourceName"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/TrafficHardeningsRulesEnforceAction"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/topologies": {
             "get": {
                 "x-ms-examples": {
@@ -3437,6 +3491,17 @@
             "description": "Name of a north-south resource.",
             "required": true,
             "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "TrafficHardeningsRulesEnforceAction": {
+            "name": "trafficHardeningsRulesEnforceAction",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "Enforces the given collections of traffic hardenings rule's on the VM's NSG",
+            "enum": [
+                "enforce"
+            ],
             "x-ms-parameter-location": "method"
         },
         "TopologyResourceName": {
