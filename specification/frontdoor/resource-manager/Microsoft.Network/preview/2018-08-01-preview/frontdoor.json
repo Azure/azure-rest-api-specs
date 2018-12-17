@@ -1694,7 +1694,14 @@
         },
         "type": {
           "type": "string",
-          "readOnly": true,
+          "enum": [
+            "Forward",
+            "Redirect"
+          ],
+          "x-ms-enum": {
+            "name": "RoutingRuleType",
+            "modelAsString": true
+          },
           "description": "Resource type."
         }
       },
@@ -1808,6 +1815,67 @@
             "name": "FrontDoorEnabledState",
             "modelAsString": true
           }
+        },
+        "redirectConfiguration": {
+          "description": "A reference to the redirect routing configuration. ",
+          "$ref": "./network.json#/definitions/RedirectConfiguration"
+        }
+      }
+    },
+    "RedirectConfiguration": {
+      "description": "The configuration for a redirect routing rule. This object is needed only if the type property of RoutingRule is set to Redirect. ",
+      "type": "object",
+      "properties": {
+        "redirectType": {
+          "description": "The redirect type the rule will use when redirecting traffic.",
+          "type": "string",
+          "enum": [
+            "Moved(301)",
+            "Found(302)",
+            "TemporaryRedirect(307)",
+            "PermanentRedirect(308)"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorRedirectProtocol",
+            "modelAsString": true
+          }
+        },
+        "destinationProtocol": {
+          "description": "The protpcol of the destination where the traffic is forwarded to",
+          "type": "string",
+          "enum": [
+            "MatchRequest",
+            "Htt",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "DestinationProtocol",
+            "modelAsString": true
+          }
+        },
+        "destinationHost": {
+          "type": "string",
+          "description": "If left blank, then we will use the incoming host as the destination host."
+        },
+        "destinationPath": {
+          "type": "string",
+          "description": "Path cannot be empty and must start with /."
+        },
+        "destinationFragment": {
+          "type": "string",
+          "description": "Fragment is the part of the URL that comes after #. Do not include the #."
+        },
+        "preservePath": {
+          "description": "Indicates whether the path is preserved.",
+          "type": "boolean"
+        },
+        "preserveQueryString": {
+          "description": "Indicates whether the query string is preserved.",
+          "type": "boolean"
+        },
+        "extraQueryString": {
+          "description": "Any string to be added to the query string in the destination URL. ? and & will be added automatically so do not include them.",
+          "type": "string"
         }
       }
     },
