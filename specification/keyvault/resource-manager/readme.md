@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for KeyVault.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,31 @@ To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-02
+tag: package-2019-00
 ```
 
 
+### Tag: package-2019-00
+
+These settings apply only when `--tag=package-2019-00` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-00'
+input-file:
+  - Microsoft.KeyVault/stable/2019-00-00/keyvault.json
+  - Microsoft.KeyVault/stable/2019-00-00/providers.json
+  - Microsoft.KeyVault/stable/2019-00-00/secrets.json
+```
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -39,8 +49,6 @@ input-file:
 - Microsoft.KeyVault/stable/2018-02-14/keyvault.json
 - Microsoft.KeyVault/stable/2018-02-14/providers.json
 ```
-
-
 
 ### Tag: package-2016-10
 
@@ -52,7 +60,6 @@ input-file:
 - Microsoft.KeyVault/stable/2016-10-01/providers.json
 ```
 
-
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
@@ -62,10 +69,9 @@ input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -105,7 +111,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-keyvault
 
 ### Java multi-api
 
-```yaml $(java) && $(multiapi)
+``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2016-10
   - tag: package-2015-06
