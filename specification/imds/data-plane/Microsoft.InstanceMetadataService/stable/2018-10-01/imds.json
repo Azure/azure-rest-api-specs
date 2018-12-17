@@ -8,7 +8,7 @@
     "host": "169.254.169.254",
     "basePath": "/metadata",
     "schemes": [
-        "http"
+        "https"
     ],
     "consumes": [
         "application/json"
@@ -410,6 +410,7 @@
                 },
                 "plan": {
                     "type": "object",
+                    "description": "This contains the data about the plan.",
                     "$ref": "#/definitions/PlanProperties"
                 },
                 "publicKeys": {
@@ -479,6 +480,7 @@
             "properties": {
                 "interface": {
                     "type":"array",
+                    "description": "This contains data about the network interface.",
                     "items": {
                         "type": "object",
                         "$ref": "#/definitions/NetworkInterface"
@@ -496,15 +498,19 @@
                     "properties": { 
                         "ipAddress": { 
                             "type":"array",
+                            "description": "This is the IP address",
                             "items": {
                                 "type": "object",
+                                "description": "This contains the IPv4 properties.",
                                 "$ref":"#/definitions/Ipv4Properties"
                             }
                         },
                         "subnet": {
                             "type":"array",
+                            "description": "This is the subnet",
                             "items": {
                                 "type": "object",
+                                "description": "This contains the subnet properties.",
                                 "$ref": "#/definitions/SubnetProperties"
                             }
                         }
@@ -515,8 +521,10 @@
                     "properties": { 
                         "ipAddress": { 
                             "type":"array",
+                            "description": "This is the IP address",
                             "items": {
                                 "type": "object",
+                                "description": "This contains the IPv6 properties.",
                                 "$ref":"#/definitions/Ipv6Properties"
                             }
                         }
