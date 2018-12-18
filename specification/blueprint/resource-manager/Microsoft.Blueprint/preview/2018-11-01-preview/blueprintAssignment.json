@@ -3,7 +3,7 @@
   "info": {
     "title": "BlueprintClient",
     "description": "Azure Blueprint Client.",
-    "version": "2017-11-11-preview"
+    "version": "2018-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}": {
       "put": {
         "tags": [
           "Assignment"
@@ -51,7 +51,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -91,7 +91,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -122,7 +122,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
@@ -141,7 +141,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Blueprint/blueprintAssignments": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments": {
       "get": {
         "tags": [
           "Assignment"
@@ -158,7 +158,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ScopeParameter"
           }
         ],
         "responses": {
@@ -216,6 +216,20 @@
         }
       }
     },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User assigned Identity",
+      "properties": {
+        "principalId": {
+          "type":  "string",
+          "description": "Azure Active Directory principal ID associated with this Identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client App Id associated with this identity."
+        }
+      }
+    },
     "ManagedServiceIdentity": {
       "type": "object",
       "description": "Managed Service Identity",
@@ -240,6 +254,14 @@
         "tenantId": {
           "type": "string",
           "description": "ID of the Azure Active Directory."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource, key will be Azure resource Id of the ManagedIdentity.",
+          "additionalProperties": {
+            "description": "User assigned Identity",
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
         }
       },
       "required": [
@@ -335,7 +357,7 @@
       "type": "object",
       "properties": {},
       "additionalProperties": {
-        "description": "keyValue pair of parameter fulfillment.",
+        "description": "keyValue pair of parameter fullfillment.",
         "$ref": "#/definitions/ParameterValueBase"
       }
     },
@@ -505,13 +527,14 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
+    "ScopeParameter": {
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
       "x-ms-parameter-location": "method",
-      "description": "azure subscriptionId, which we assign the blueprint to."
+      "x-ms-skip-url-encoding": true
     },
     "AssignmentNameParameter": {
       "name": "assignmentName",

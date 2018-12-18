@@ -3,7 +3,7 @@
   "info": {
     "title": "BlueprintClient",
     "description": "Azure Blueprint Client.",
-    "version": "2017-11-11-preview"
+    "version": "2018-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints/{blueprintName}": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}": {
       "put": {
         "tags": [
           "Blueprint"
@@ -42,8 +42,11 @@
         "operationId": "Blueprints_CreateOrUpdate",
         "description": "Create or update Blueprint definition.",
         "x-ms-examples": {
-          "Blueprint": {
-            "$ref": "./examples/Blueprint_Create.json"
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_Create.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_Create.json"
           }
         },
         "parameters": [
@@ -51,7 +54,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -82,8 +85,11 @@
         "operationId": "Blueprints_Get",
         "description": "Get a blueprint definition.",
         "x-ms-examples": {
-          "Blueprint": {
-            "$ref": "./examples/Blueprint_Get.json"
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_Get.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_Get.json"
           }
         },
         "parameters": [
@@ -91,7 +97,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -113,8 +119,11 @@
         "operationId": "Blueprints_Delete",
         "description": "Delete a blueprint definition.",
         "x-ms-examples": {
-          "Blueprint_Delete": {
-            "$ref": "./examples/Blueprint_Delete.json"
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_Delete.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_Delete.json"
           }
         },
         "parameters": [
@@ -122,7 +131,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -130,7 +139,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- blueprint definition deleted",
+            "description": "OK -- blueprint deinition deleted",
             "schema": {
               "$ref": "#/definitions/Blueprint"
             }
@@ -141,16 +150,19 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints": {
       "get": {
         "tags": [
           "Blueprint"
         ],
         "operationId": "Blueprints_List",
-        "description": "List Blueprint definitions within a Management Group.",
+        "description": "Create or update blueprint definition.",
         "x-ms-examples": {
-          "Blueprint": {
-            "$ref": "./examples/Blueprint_List.json"
+          "SubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/Blueprint_List.json"
+          },
+          "ManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/Blueprint_List.json"
           }
         },
         "parameters": [
@@ -158,7 +170,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           }
         ],
         "responses": {
@@ -174,7 +186,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts/{artifactName}": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts/{artifactName}": {
       "put": {
         "tags": [
           "Artifact"
@@ -182,14 +194,23 @@
         "operationId": "Artifacts_CreateOrUpdate",
         "description": "Create or update Blueprint artifact.",
         "x-ms-examples": {
-          "ARMTemplateArtifact": {
-            "$ref": "./examples/ARMTemplateArtifact_Create.json"
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Create.json"
           },
-          "PolicyAssignmentArtifact": {
-            "$ref": "./examples/PolicyAssignmentArtifact_Create.json"
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Create.json"
           },
-          "RoleAssignmentArtifact": {
-            "$ref": "./examples/RoleAssignmentArtifact_Create.json"
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Create.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Create.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Create.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Create.json"
           }
         },
         "parameters": [
@@ -197,7 +218,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -231,14 +252,23 @@
         "operationId": "Artifacts_Get",
         "description": "Get a Blueprint artifact.",
         "x-ms-examples": {
-          "ARMTemplateArtifact": {
-            "$ref": "./examples/ARMTemplateArtifact_Get.json"
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Get.json"
           },
-          "PolicyAssignmentArtifact": {
-            "$ref": "./examples/PolicyAssignmentArtifact_Get.json"
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Get.json"
           },
-          "RoleAssignmentArtifact": {
-            "$ref": "./examples/RoleAssignmentArtifact_Get.json"
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Get.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Get.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Get.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Get.json"
           }
         },
         "parameters": [
@@ -246,7 +276,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -271,14 +301,23 @@
         "operationId": "Artifacts_Delete",
         "description": "Delete a Blueprint artifact.",
         "x-ms-examples": {
-          "ARMTemplateArtifact_Delete": {
-            "$ref": "./examples/ARMTemplateArtifact_Delete.json"
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Delete.json"
           },
-          "PolicyAssignmentArtifact_Delete": {
-            "$ref": "./examples/PolicyAssignmentArtifact_Delete.json"
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Delete.json"
           },
-          "RoleAssignmentArtifact_Delete": {
-            "$ref": "./examples/RoleAssignmentArtifact_Delete.json"
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Delete.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Delete.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Delete.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Delete.json"
           }
         },
         "parameters": [
@@ -286,7 +325,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -308,7 +347,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/artifacts": {
       "get": {
         "tags": [
           "Artifact"
@@ -316,8 +355,11 @@
         "operationId": "Artifacts_List",
         "description": "List artifacts for a given Blueprint.",
         "x-ms-examples": {
-          "ArtifactList": {
-            "$ref": "./examples/Artifact_List.json"
+          "Sub-ArtifactList": {
+            "$ref": "./examples/subscriptionBPDef/Artifact_List.json"
+          },
+          "MG-ArtifactList": {
+            "$ref": "./examples/managementGroupBPDef/Artifact_List.json"
           }
         },
         "parameters": [
@@ -325,7 +367,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -344,7 +386,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}": {
       "put": {
         "tags": [
           "PublishedBlueprint"
@@ -352,8 +394,11 @@
         "operationId": "PublishedBlueprints_Create",
         "description": "Publish a new version of the Blueprint with the latest artifacts. Published Blueprints are immutable.",
         "x-ms-examples": {
-          "PublishedBlueprint_Publish": {
-            "$ref": "./examples/SealedBlueprint_Publish.json"
+          "PublishedSubscriptionBlueprint_Publish": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Publish.json"
+          },
+          "PublishedManagementGroupBlueprint_Publish": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_Publish.json"
           }
         },
         "parameters": [
@@ -361,7 +406,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -386,8 +431,11 @@
         "operationId": "PublishedBlueprints_Get",
         "description": "Get a published Blueprint.",
         "x-ms-examples": {
-          "PublishedBlueprint_Get": {
-            "$ref": "./examples/SealedBlueprint_Get.json"
+          "PublishedSubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Get.json"
+          },
+          "PublishedManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_Get.json"
           }
         },
         "parameters": [
@@ -395,7 +443,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -420,8 +468,11 @@
         "operationId": "PublishedBlueprints_Delete",
         "description": "Delete a published Blueprint.",
         "x-ms-examples": {
-          "PublishedBlueprint_Delete": {
-            "$ref": "./examples/SealedBlueprint_Delete.json"
+          "PublishedSubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Delete.json"
+          },
+          "PublishedManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_Delete.json"
           }
         },
         "parameters": [
@@ -429,7 +480,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -451,7 +502,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions": {
       "get": {
         "tags": [
           "PublishedBlueprint"
@@ -459,8 +510,11 @@
         "operationId": "PublishedBlueprints_List",
         "description": "List published versions of given Blueprint.",
         "x-ms-examples": {
-          "PublishedBlueprintList": {
-            "$ref": "./examples/SealedBlueprint_List.json"
+          "PublishedSubscriptionBlueprint": {
+            "$ref": "./examples/subscriptionBPDef/SealedBlueprint_List.json"
+          },
+          "PublishedManagementGroupBlueprint": {
+            "$ref": "./examples/managementGroupBPDef/SealedBlueprint_List.json"
           }
         },
         "parameters": [
@@ -468,7 +522,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -487,7 +541,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts/{artifactName}": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts/{artifactName}": {
       "get": {
         "tags": [
           "PublishedArtifact"
@@ -495,14 +549,23 @@
         "operationId": "PublishedArtifacts_Get",
         "description": "Get an artifact for a published Blueprint.",
         "x-ms-examples": {
-          "ARMTemplateArtifact": {
-            "$ref": "./examples/SealedARMTemplateArtifact_Get.json"
+          "Sub-ARMTemplateArtifact": {
+            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Get.json"
           },
-          "PolicyAssignmentArtifact": {
-            "$ref": "./examples/SealedPolicyAssignmentArtifact_Get.json"
+          "Sub-PolicyAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Get.json"
           },
-          "RoleAssignmentArtifact": {
-            "$ref": "./examples/SealedRoleAssignmentArtifact_Get.json"
+          "Sub-RoleAssignmentArtifact": {
+            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Get.json"
+          },
+          "MG-ARMTemplateArtifact": {
+            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Get.json"
+          },
+          "MG-PolicyAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Get.json"
+          },
+          "MG-RoleAssignmentArtifact": {
+            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Get.json"
           }
         },
         "parameters": [
@@ -510,7 +573,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -532,7 +595,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts": {
+    "/{scope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions/{versionId}/artifacts": {
       "get": {
         "tags": [
           "PublishedArtifact"
@@ -540,8 +603,11 @@
         "operationId": "PublishedArtifacts_List",
         "description": "List artifacts for a published Blueprint.",
         "x-ms-examples": {
-          "ArtifactList": {
-            "$ref": "./examples/SealedArtifact_List.json"
+          "Sub-ArtifactList": {
+            "$ref": "./examples/subscriptionBPDef/SealedArtifact_List.json"
+          },
+          "MG-ArtifactList": {
+            "$ref": "./examples/managementGroupBPDef/SealedArtifact_List.json"
           }
         },
         "parameters": [
@@ -549,7 +615,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/BlueprintNameParameter"
@@ -568,33 +634,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Blueprint/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "x-ms-examples": {
-          "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
-        "operationId": "Operations_List",
-        "description": "List all of the available operations the Blueprint resource provider supports.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
-            }
-          }
         }
       }
     }
@@ -987,7 +1026,7 @@
       "x-ms-discriminator-value": "policyAssignment",
       "properties": {
         "properties": {
-          "description": "properties for policyAssignment Artifact",
+          "description": "properties for policyAssginment Artifact",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PolicyAssignmentArtifactProperties"
         }
@@ -1006,7 +1045,7 @@
       "type": "object",
       "properties": {},
       "additionalProperties": {
-        "description": "keyValue pair of parameter fulfillment.",
+        "description": "keyValue pair of parameter fullfillment.",
         "$ref": "#/definitions/ParameterValueBase"
       }
     },
@@ -1286,21 +1325,14 @@
     }
   },
   "parameters": {
-    "ManagementGroupNameParameter": {
-      "name": "managementGroupName",
+    "ScopeParameter":{
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
       "x-ms-parameter-location": "method",
-      "description": "ManagementGroup where blueprint stores."
-    },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "azure subscriptionId, which we assign the blueprint to."
+      "x-ms-skip-url-encoding": true
     },
     "BlueprintNameParameter": {
       "name": "blueprintName",
