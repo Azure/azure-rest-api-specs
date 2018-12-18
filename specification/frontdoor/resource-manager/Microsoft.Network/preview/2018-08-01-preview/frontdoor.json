@@ -431,8 +431,11 @@
           }
         },
         "x-ms-examples": {
-          "Get Routing Rule": {
+          "Get Forward Routing Rule": {
             "$ref": "./examples/FrontdoorRoutingRuleGet.json"
+          },
+          "Get Redirect Routing Rule": {
+            "$ref": "./examples/FrontdoorRedirectRoutingRuleGet.json"
           }
         }
       },
@@ -495,8 +498,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update specific Routing Rule": {
+          "Create or update specific Forward Routing Rule": {
             "$ref": "./examples/FrontdoorRoutingRuleCreate.json"
+          },
+          "Create or update specific Rediret Routing Rule": {
+            "$ref": "./examples/FrontdoorRedirectRoutingRuleCreate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1841,7 +1847,7 @@
           }
         },
         "destinationProtocol": {
-          "description": "The protpcol of the destination where the traffic is forwarded to",
+          "description": "The protocol of the destination where the traffic is forwarded to",
           "type": "string",
           "enum": [
             "MatchRequest",
@@ -1849,7 +1855,7 @@
             "Https"
           ],
           "x-ms-enum": {
-            "name": "DestinationProtocol",
+            "name": "FrontDoorDestinationProtocol",
             "modelAsString": true
           }
         },

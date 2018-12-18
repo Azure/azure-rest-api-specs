@@ -34,6 +34,40 @@
               },
               "enabledState": "Enabled"
             }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/redirectRoutingRule1",
+            "name": "redirectRoutingRule1",
+            "type": "redirect",
+            "properties": {
+              "frontendEndpoints": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/default"
+                }
+              ],
+              "acceptedProtocols": [
+                "Https"
+              ],
+              "patternsToMatch": [
+                "/*"
+              ],
+              "redirectConfiguration": {
+                "redirectType": [
+                  "Moved(301)"
+                ],
+                "destinationProtocol": [
+                  "Https"
+                ],
+                "destinationHost": "www.bing.com",
+                "destinationPath": "/api",
+                "preservePath": "false",
+                "preserveQueryString": "true"
+              },
+              "enabledState": "Enabled"
+            }
           }
         ]
       }
