@@ -522,7 +522,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclusters/{resourceName}/resetServicePrincipalProfile":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile":{
       "post":{
         "tags": [
           "ManagedClusters"
@@ -567,8 +567,15 @@
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Reset Service Principal Profile": {
             "$ref": "./examples/ManagedClustersResetServicePrincipalProfile.json"
@@ -576,7 +583,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclusters/{resourceName}/resetAADProfile":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetAADProfile":{
       "post":{
         "tags": [
           "ManagedClusters"
@@ -621,8 +628,15 @@
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Reset Service Principal Profile": {
             "$ref": "./examples/ManagedClustersResetAADProfile.json"

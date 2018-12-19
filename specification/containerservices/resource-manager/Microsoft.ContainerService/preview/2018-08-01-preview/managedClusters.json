@@ -522,7 +522,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclusters/{resourceName}/resetServicePrincipalProfile":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile":{
       "post":{
         "tags": [
           "ManagedClusters"
@@ -567,8 +567,21 @@
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
+          }, 
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Reset Service Principal Profile": {
             "$ref": "./examples/ManagedClustersResetServicePrincipalProfile.json"
@@ -576,7 +589,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclusters/{resourceName}/resetAADProfile":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetAADProfile":{
       "post":{
         "tags": [
           "ManagedClusters"
@@ -621,8 +634,21 @@
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Reset Service Principal Profile": {
             "$ref": "./examples/ManagedClustersResetAADProfile.json"
@@ -1546,6 +1572,41 @@
         }
       },
       "description": "The credential result response."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Details about the error."
+        }
+      },
+      "description": "An error response from the Container service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Container service."
     }
   },
   "parameters": {
