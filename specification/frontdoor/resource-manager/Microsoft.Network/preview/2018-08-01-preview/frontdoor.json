@@ -1700,14 +1700,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "Forward",
-            "Redirect"
-          ],
-          "x-ms-enum": {
-            "name": "RoutingRuleType",
-            "modelAsString": true
-          },
+          "readOnly": true,
           "description": "Resource type."
         }
       },
@@ -1753,6 +1746,18 @@
       "description": "Routing rules to apply to an endpoint",
       "type": "object",
       "properties": {
+        "routeType": {
+          "type": "string",
+          "enum": [
+            "Forward",
+            "Redirect"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorRouteType",
+            "modelAsString": true
+          },
+          "description": "Route type."
+        },
         "frontendEndpoints": {
           "description": "Frontend endpoints associated with this rule",
           "type": "array",
@@ -1851,7 +1856,7 @@
           "type": "string",
           "enum": [
             "MatchRequest",
-            "Htt",
+            "Http",
             "Https"
           ],
           "x-ms-enum": {
