@@ -521,6 +521,128 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile":{
+      "post":{
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ResetServicePrincipalProfile",
+        "summary": "Reset Service Principal Profile of a managed cluster.",
+        "description": "Update the service principal Profile for a managed cluster.",
+        "parameters":[
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterServicePrincipalProfile"
+            },
+            "description": "Parameters supplied to the Reset Service Principal Profile operation for a Managed Cluster."
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reset Service Principal Profile": {
+            "$ref": "./examples/ManagedClustersResetServicePrincipalProfile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetAADProfile":{
+      "post":{
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ResetAADProfile",
+        "summary": "Reset AAD Profile of a managed cluster.",
+        "description": "Update the AAD Profile for a managed cluster.",
+        "parameters":[
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterAADProfile"
+            },
+            "description": "Parameters supplied to the Reset AAD Profile operation for a Managed Cluster."
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ManagedCluster"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reset Service Principal Profile": {
+            "$ref": "./examples/ManagedClustersResetAADProfile.json"
+          }
+        }
+      } 
     }
   },
   "definitions": {
