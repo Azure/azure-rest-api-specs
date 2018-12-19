@@ -20,7 +20,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the Instance Metadata Service API.
 
 ``` yaml
-openapi-type: arm
+openapi-type: data-plane
 azure-arm: true
 tag: package-2018-05
 input-file:
