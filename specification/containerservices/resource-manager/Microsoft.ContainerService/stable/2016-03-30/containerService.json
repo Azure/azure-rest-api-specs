@@ -18,6 +18,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/containerServices": {
       "get": {
+        "deprecated": true,
         "tags": [
           "ContainerServices"
         ],
@@ -46,6 +47,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}": {
       "put": {
+        "deprecated": true,
         "tags": [
           "ContainerServices"
         ],
@@ -105,6 +107,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "ContainerService"
         ],
@@ -142,6 +145,7 @@
         }
       },
       "delete": {
+        "deprecated": true,
         "tags": [
           "ContainerService"
         ],
@@ -182,6 +186,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices": {
       "get": {
+        "deprecated": true,
         "tags": [
           "ContainerService"
         ],
@@ -268,7 +273,9 @@
         }
       },
       "description": "Profile for the container service orchestrator.",
-      "required": [ "orchestratorType" ]
+      "required": [
+        "orchestratorType"
+      ]
     },
     "ContainerServiceMasterProfile": {
       "properties": {
@@ -430,7 +437,9 @@
         }
       },
       "description": "SSH configuration for Linux-based VMs running on Azure.",
-      "required": ["publicKeys"]
+      "required": [
+        "publicKeys"
+      ]
     },
     "ContainerServiceSshPublicKey": {
       "properties": {
@@ -451,7 +460,9 @@
           "description": "Profile for the container service VM diagnostic agent."
         }
       },
-      "required": ["vmDiagnostics"]
+      "required": [
+        "vmDiagnostics"
+      ]
     },
     "ContainerServiceVMDiagnostics": {
       "properties": {
@@ -489,7 +500,7 @@
         "value": {
           "type": "array",
           "items": {
-             "$ref": "#/definitions/ContainerService"
+            "$ref": "#/definitions/ContainerService"
           },
           "description": "the list of container services."
         }
