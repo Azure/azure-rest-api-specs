@@ -9,6 +9,12 @@
     "schemes": [
         "https"
     ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts": {
             "get": {
@@ -50,13 +56,7 @@
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
                 },
-                "x-ms-odata": "#/definitions/Alert",
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                "x-ms-odata": "#/definitions/Alert"
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}": {
@@ -95,13 +95,7 @@
                             "$ref": "#/definitions/Alert"
                         }
                     }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+                }
             },
             "put": {
                 "x-ms-examples": {
@@ -144,13 +138,47 @@
                             "$ref": "#/definitions/Alert"
                         }
                     }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/alerts/{alertName}/repair": {
+            "post": {
+                "x-ms-examples": {
+                    "Repairs an alert.": {
+                        "$ref": "./examples/Alert/Repair.json"
+                    }
                 },
-                "produces": [
-                    "application/json"
+                "tags": [
+                    "Alerts"
                 ],
-                "consumes": [
-                    "application/json"
-                ]
+                "x-ms-long-running-operation": true,
+                "description": "Repairs an alert.",
+                "operationId": "Alerts_Repair",
+                "parameters": [
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertNameParameter"
+                    },
+                    {
+                        "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                      "description": "OK"
+                    },
+                    "202": {
+                      "description": "ACCEPTED"
+                    }
+                }
             }
         }
     },
@@ -250,6 +278,10 @@
                 "closedByUserAlias": {
                     "description": "User alias who closed the alert.",
                     "type": "string"
+                },
+                "hasValidRemediationAction": {
+                    "description": "Indicates if the alert can be remediated.",
+                    "type": "boolean"
                 }
             }
         },

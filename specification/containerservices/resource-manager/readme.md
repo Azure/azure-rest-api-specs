@@ -206,10 +206,26 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_service']
+```
+
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.ContainerService
+  payload-flattening-threshold: 1
+  output-folder: $(csharp-sdks-folder)/ContainerService/Management.ContainerService/Generated
+  clear-output-folder: true
 ```
 
 ## Go
@@ -233,6 +249,7 @@ description: "Container Service Client"
 ```
 
 ### Java multi-api
+
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2017-09-only
@@ -285,7 +302,7 @@ generate-interface: true
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: managedClusters.json
-    reason: Name chamge of "enableRBAC" property would break compatibility
+    reason: Name change of "enableRBAC" property would break compatibility
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented

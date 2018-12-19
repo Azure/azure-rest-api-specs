@@ -114,11 +114,11 @@
                 },
                 "delete": {
                     "x-ms-examples": {
-                        "Delete the specifed subscription": {
+                        "Delete the specified subscription": {
                             "$ref": "./examples/Subscriptions/Delete.json"
                         }
                     },
-                    "description": "Delete the specifed subscription.",
+                    "description": "Delete the specified subscription.",
                     "tags": [
                         "Subscriptions"
                     ],
@@ -137,7 +137,7 @@
                         },
                         "204": {
                             "description": "No Content"
-                        }                   
+                        }
                     },
                     "produces": [
                         "application/json"
@@ -145,33 +145,6 @@
                     "consumes": [
                         "application/json"
                     ]
-                }
-            },
-            "/providers/Microsoft.Subscriptions/operations": {
-                "get": {
-                    "x-ms-examples": {
-                        "Get the list of Operations.": {
-                            "$ref": "./examples/Subscriptions/Operations.json"
-                        }
-                    },
-                    "description": "Get the list of Operations.",
-                    "tags": [
-                        "Operations"
-                    ],
-                    "operationId": "Operations_List",
-                    "parameters": [
-                        {
-                            "$ref": "#/parameters/ApiVersionParameter"
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "OK",
-                            "schema": {
-                                "$ref": "#/definitions/OperationList"
-                            }
-                        }
-                    }
                 }
             }
         },
@@ -271,62 +244,7 @@
                     "name": "SubscriptionState",
                     "modelAsString": true
                 }
-            },
-            "Operation": {
-                "description": "Supported REST operation.",
-                "type": "object",
-                "properties": {
-                    "display": {
-                        "description": "Display information for the operation.",
-                        "type": "object",
-                        "properties": {
-                            "description": {
-                                "description": "Description for the operation.",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "operation": {
-                                "description": "Display name of the operation.",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "provider": {
-                                "description": "Resource provider display name.",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "resource": {
-                                "description": "Resource type display name related to the operation.",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        }
-                    },
-                    "name": {
-                        "description": "Name of the operation being performed on an object.",
-                        "type": "string",
-                        "readOnly": true
-                    },
-                    "origin": {
-                        "description": "Origin for the operation.",
-                        "type": "string",
-                        "readOnly": true
-                    }
-                }
-            },
-            "OperationList": {
-                "description": "List of supported operations.",
-                "type": "object",
-                "properties": {
-                    "value": {
-                        "description": "List of supported operations.",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/Operation"
-                        }
-                    }
-                }
-            }            
+            }
         },
         "parameters": {
             "ApiVersionParameter": {
@@ -344,7 +262,7 @@
                 "type": "string",
                 "description": "Id of the subscription.",
                 "x-ms-parameter-location": "method"
-            },            
+            },
             "NewSubscriptionParameter": {
                 "description": "Subscription parameter.",
                 "name": "newSubscription",
