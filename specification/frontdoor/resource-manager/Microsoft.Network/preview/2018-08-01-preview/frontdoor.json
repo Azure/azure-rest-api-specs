@@ -1749,14 +1749,14 @@
         "routeType": {
           "type": "string",
           "enum": [
-            "Forward",
+            "Forwarding",
             "Redirect"
           ],
           "x-ms-enum": {
             "name": "FrontDoorRouteType",
             "modelAsString": true
           },
-          "description": "Route type."
+          "description": "The type of a routing rule. It must be set to Redirect for a redirect routing rule. To be backwards-compatible, it is not needed for a forwarding routing rule."
         },
         "frontendEndpoints": {
           "description": "Frontend endpoints associated with this rule",
@@ -1828,8 +1828,8 @@
           }
         },
         "redirectConfiguration": {
-          "description": "A reference to the redirect routing configuration. ",
-          "$ref": "./network.json#/definitions/RedirectConfiguration"
+          "description": "A reference to the redirect routing configuration. It is null for a forward-routing rule. But it must not be null if the routeType property is set to Redirect.",
+          "$ref": "#/definitions/RedirectConfiguration"
         }
       }
     },
@@ -1841,10 +1841,10 @@
           "description": "The redirect type the rule will use when redirecting traffic.",
           "type": "string",
           "enum": [
-            "Moved(301)",
-            "Found(302)",
-            "TemporaryRedirect(307)",
-            "PermanentRedirect(308)"
+            "Moved",
+            "Found",
+            "TemporaryRedirect",
+            "PermanentRedirect"
           ],
           "x-ms-enum": {
             "name": "FrontDoorRedirectProtocol",
@@ -1878,11 +1878,27 @@
         },
         "preservePath": {
           "description": "Indicates whether the path is preserved.",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorPreservePath",
+            "modelAsString": true
+          }
         },
         "preserveQueryString": {
           "description": "Indicates whether the query string is preserved.",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorPreserveQueryString",
+            "modelAsString": true
+          }
         },
         "extraQueryString": {
           "description": "Any string to be added to the query string in the destination URL. ? and & will be added automatically so do not include them.",
