@@ -370,6 +370,167 @@
         ]
       }
     },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/softwareUpdateProfile": {
+          "get": {
+            "tags": [
+              "SoftwareUpdateProfile"
+            ],
+            "operationId": "SoftwareUpdateProfile_Get",
+            "description": "Get the singleton software update profile for the computer.",
+            "x-ms-examples": {
+              "Get the singleton software update profile for a computer.": {
+                "$ref": "./examples/getSoftwareUpdateProfile.json"
+              }
+            },
+            "parameters": [
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+              },
+              {
+                "name": "softwareUpdateId",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The identifier of the software update"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK. This response is because the software update profile was found for the computer.",
+                "schema": {
+                  "$ref": "#/definitions/SoftwareUpdateProfile"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "consumes": [
+              "application/json"
+            ]
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/softwareUpdates": {
+          "get": {
+            "tags": [
+              "SoftwareUpdates"
+            ],
+            "operationId": "SoftwareUpdates_List",
+            "description": "List all the software updates for a virtual machine.",
+            "x-ms-examples": {
+              "List all the software updates for a virtual machine": {
+                "$ref": "./examples/listSoftwareUpdates.json"
+              }
+            },
+            "parameters": [
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/SoftwareUpdatesList"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+                }
+              }
+            },
+            "x-ms-pageable": {
+              "nextLinkName": null
+            },
+            "produces": [
+              "application/json"
+            ],
+            "consumes": [
+              "application/json"
+            ]
+          }
+        },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/softwareUpdates/{softwareUpdateId}": {
+          "get": {
+            "tags": [
+              "SoftwareUpdates"
+            ],
+            "operationId": "SoftwareUpdates_Get",
+            "description": "Get a software update on the computer, by softwareUpdateId.",
+            "x-ms-examples": {
+              "Get a software update by Id for a virtual machine": {
+                "$ref": "./examples/getSoftwareUpdates.json"
+              }
+            },
+            "parameters": [
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+              },
+              {
+                "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+              },
+              {
+                "name": "softwareUpdateId",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "description": "The identifier of the software update"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK. This response is because the software update was found on the computer.",
+                "schema": {
+                  "$ref": "#/definitions/SoftwareUpdate"
+                }
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "consumes": [
+              "application/json"
+            ]
+          }
+    },
     "/providers/Microsoft.GuestConfiguration/operations": {
       "get": {
         "tags": [
@@ -852,6 +1013,323 @@
         }
       },
       "description": "Reason and code for the compliance of the guest configuration assignment resource."
+    },
+    "SoftwareUpdateProfile": {
+        "description": "The profile of the computer in the context of software updates.",
+        "properties": {
+      "computerName": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Name of the computer"
+          },
+      "computerIP": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Computer IP"
+          },
+      "computerEnvironment": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Computer Environment"
+          },
+      "osType": {
+            "type": "string",
+            "readOnly": true,
+            "description": "OS Type"
+          },
+      "osName": {
+            "type": "string",
+            "readOnly": true,
+            "description": "OS Name"
+          },
+      "osVersion": {
+            "type": "string",
+            "readOnly": true,
+            "description": "OS Version"
+          },
+      "osMajorVersion": {
+            "type": "string",
+            "readOnly": true,
+            "description": "OS Major Version"
+          },
+      "osMinorVersion": {
+            "type": "string",
+            "readOnly": true,
+            "description": "OS Minor Version"
+          },
+      "osFullName": {
+            "type": "string",
+            "readOnly": true,
+            "description": "OS Full Name"
+          },
+      "osArch": {
+            "type": "string",
+            "readOnly": true,
+            "description": "OS Architecture"
+          },
+      "computerStartTime": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Start time of the computer"
+          },
+      "restartPending": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Restart pending status of the computer"
+          },
+      "restartPendingSince": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Timestamp of when an active restart pending state was first observed on the computer"
+          },
+      "guestConfigAgentVersion": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Version of the guest configuration agent"
+          },
+      "guestConfigAgentStartTime": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Start time of the guest configuration agent"
+          },
+      "netRuntimeVersion": {
+            "type": "string",
+            "readOnly": true,
+            "description": ".Net runtime version"
+          },
+      "windowsUpdateSetting": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Windows Update setting"
+          },
+      "windowsUpdateAgentVersion": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Windows Update agent version"
+          },
+      "windowsUpdateIncludeRecommendedUpdates": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Windows Update include recommended updates"
+          },
+      "wsusServer": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Windows Server Update Services server the computer is connected to"
+          },
+      "linuxPackageManager": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Package manager discovered on the computer if it is running Linux"
+          },
+      "criticalCount": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Count of updates available classified as critical"
+          },
+      "securityCount": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Count of updates available classified as security"
+          },
+      "otherCount": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Count of updates available that are classified as neither critical or security"
+          },
+      "approvalSource": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Source of approval"
+          },
+      "latestAssessmentTimeTaken": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Time taken for the latest assessment to complete on the computer"
+          },
+      "lastUpdateApplied": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Last update applied"
+          },
+      "updateAssessmentErrors": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Errors that occurred during assessment, if any"
+          },
+      "updateAssessmentErrorStackTrace": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Stack Trace for any terminal error during assessment, if any"
+          },
+      "lastRefreshDate": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Last refresh date"
+          }
+        }
+      },
+    "SoftwareUpdatesList": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SoftwareUpdate"
+            },
+            "description": "The collection of software updates found on the computer."
+          }
+        },
+        "description": "The collection of software updates found on the computer."
+      },
+      "SoftwareUpdate": {
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SoftwareUpdateProperties",
+            "description": "Properties of the software update."
+          }
+        },
+        "allOf": [
+          {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Describes a specific software update on the given virtual machine."
+      },
+      "SoftwareUpdateProperties": {
+        "description": "Properties of the software update object.",
+        "properties": {
+          "updateState": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Needed / Installed"
+          },
+          "availableOnComputerSince": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Point in time when this update was first seen on this computer"
+          },
+          "approved": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Approval status"
+          },
+          "packageRepository": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Package repository"
+          },
+          "supercededUpdateIds": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Superseded Update Ids"
+          },
+          "isSupercededUpdate": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Is a superceded update"
+          },
+          "deploymentAction": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Deployment action"
+          },
+          "kbid": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Knowledge Base ID of a Windows Update"
+          },
+          "kbRevisionNumber": {
+            "type": "string",
+            "readOnly": true,
+            "description": "KB revision number"
+          },
+          "publishedDate": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Reported published date for this update"
+          },
+          "productName": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Product name"
+          },
+          "productVersion": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Product version"
+          },
+          "productArch": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Product architecture"
+          },
+          "title": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Update title"
+          },
+          "classification": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Normalized update classification"
+          },
+          "packageClassification": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Linux package classification"
+          },
+          "packageSeverity": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Linux package severity"
+          },
+          "msrcSeverity": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Microsoft Security Response Center severity for Windows updates"
+          },
+          "externalURL": {
+            "type": "string",
+            "readOnly": true,
+            "description": "External documentation URL"
+          },
+          "msrcBulletinId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Microsoft Security Response Center bulletin id"
+          },
+          "cveNumbers": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Common Vulnerabilities and Exposures numbers"
+          },
+          "rebootBehavior": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Reboot behavior"
+          },
+          "optional": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Update optional"
+          },
+          "autoSelectOnWebsites": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Auto-select on websites"
+          },
+          "browseOnly": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Browse only"
+          },
+          "lastRefreshDate": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Last refresh date"
+          }
+        }
     }
   },
 "parameters": {}
