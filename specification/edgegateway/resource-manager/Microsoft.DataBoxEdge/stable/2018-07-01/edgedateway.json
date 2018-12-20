@@ -1,0 +1,3201 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-07-01",
+    "title": "DataBoxEdgeManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
+  "paths": {
+    "/providers/Microsoft.DataBoxEdge/operations": {
+      "get": {
+        "tags": [ "Operations" ],
+        "summary": "Lists all the operations supported.",
+        "operationId": "Operations_List",
+        "parameters": [ { "$ref": "#/parameters/apiVersionParameter" } ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/OperationsList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "OperationsGet": {
+            "$ref": "./examples/OperationsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices": {
+      "get": {
+        "tags": [ "Devices" ],
+        "description": "Retrieves all data box edge/gateway devices in a subscription.",
+        "operationId": "Devices_ListBySubscription",
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of data box edge/gateway devices.",
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDeviceList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceGetBySubscription": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices": {
+      "get": {
+        "tags": [ "Devices" ],
+        "description": "Retrieves all data box edge/gateway devices in a resource group.",
+        "operationId": "Devices_ListByResourceGroup",
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of data box edge/gateway devices.",
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDeviceList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceGetByResourceGroup": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}": {
+      "get": {
+        "tags": [ "Devices" ],
+        "description": "Returns the properties of the data box edge/gateway device.",
+        "operationId": "Devices_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data box edge/gateway device.",
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDevice" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceGetByName": {
+            "$ref": "./examples/DataBoxEdgeDeviceGetByName.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Devices" ],
+        "description": "Creates or updates a Data Box Edge/Gateway resource.",
+        "operationId": "Devices_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "DataBoxEdgeDevice",
+            "in": "body",
+            "description": "The resource object.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDevice" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the resource.",
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDevice" }
+          },
+          "202": { "description": "Accepted the request to create or update the resource." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataBoxEdgeDevicePut": {
+            "$ref": "./examples/DataBoxEdgeDevicePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Devices" ],
+        "description": "Deletes the data box edge/gateway device.",
+        "operationId": "Devices_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully deleted the resource." },
+          "202": { "description": "Accepted the request to delete the resource." },
+          "204": { "description": "The resource is already deleted." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataBoxEdgeDeviceDelete": {
+            "$ref": "./examples/DataBoxEdgeDeviceDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [ "Devices" ],
+        "description": "Updates data box edge/gateway device.",
+        "operationId": "Devices_Update",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The device update parameters.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDevicePatch" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data box edge/gateway device has been successfully updated.",
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDevice" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "DataBoxEdgeDevicePatch": {
+            "$ref": "./examples/DataBoxEdgeDevicePatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/alerts": {
+      "get": {
+        "tags": [ "Alerts" ],
+        "description": "Retrieves all the alerts for a data box edge/gateway device.",
+        "operationId": "Alerts_ListByDataBoxEdgeDevice",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of alerts.",
+            "schema": { "$ref": "#/definitions/AlertList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "AlertGetAllInDevice": {
+            "$ref": "./examples/AlertGetAllInDevice.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/alerts/{name}": {
+      "get": {
+        "tags": [ "Alerts" ],
+        "summary": "Returns an alert by name.",
+        "operationId": "Alerts_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the alert which needs to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The alert details.",
+            "schema": { "$ref": "#/definitions/Alert" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "AlertGet": {
+            "$ref": "./examples/AlertGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/bandwidthSchedules": {
+      "get": {
+        "tags": [ "BandwidthSchedules" ],
+        "description": "Returns all the bandwidth Schedules for a data box edge/gateway device.",
+        "operationId": "BandwidthSchedules_ListByDataBoxEdgeDevice",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of bandwidth settings.",
+            "schema": { "$ref": "#/definitions/BandwidthSchedulesList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "BandwidthScheduleGetAllInDevice": {
+            "$ref": "./examples/BandwidthScheduleGetAllInDevice.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/bandwidthSchedules/{name}": {
+      "get": {
+        "tags": [ "BandwidthSchedules" ],
+        "description": "Returns the properties of the specified bandwidth schedule name.",
+        "operationId": "BandwidthSchedules_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The bandwidth schedule name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The bandwidth settings.",
+            "schema": { "$ref": "#/definitions/BandwidthSchedule" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "BandwidthScheduleGet": {
+            "$ref": "./examples/BandwidthScheduleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [ "BandwidthSchedules" ],
+        "description": "Creates or updates a bandwidth schedule.",
+        "operationId": "BandwidthSchedules_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The bandwidth schedule name which needs to be added/updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The bandwidth schedule to be added or updated.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/BandwidthSchedule" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the bandwidth schedule.",
+            "schema": { "$ref": "#/definitions/BandwidthSchedule" }
+          },
+          "202": { "description": "Accepted the request to create or update the bandwidth schedule." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BandwidthSchedulePut": {
+            "$ref": "./examples/BandwidthSchedulePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "BandwidthSchedules" ],
+        "description": "Deletes the specified bandwidth schedule.",
+        "operationId": "BandwidthSchedules_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The bandwidth schedule name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully deleted the bandwidth schedule." },
+          "202": { "description": "Accepted the request to delete the bandwidth schedule." },
+          "204": { "description": "Successfully deleted the bandwidth schedule." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BandwidthScheduleDelete": {
+            "$ref": "./examples/BandwidthScheduleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/downloadUpdates": {
+      "post": {
+        "tags": [ "Devices" ],
+        "summary": "Downloads the updates on the data box edge/gateway device.",
+        "operationId": "Devices_DownloadUpdates",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully downloaded the updates on the device." },
+          "202": { "description": "Accepted the request to download the updates on the device." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DownloadUpdatesPost": {
+            "$ref": "./examples/DownloadUpdatesPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/getExtendedInformation": {
+      "put": {
+        "tags": [ "Devices" ],
+        "description": "Creates or updates the extended info of the data box edge/gateway device.",
+        "operationId": "Devices_CreateOrUpdateExtendedInfo",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The device extended information.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfo" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The extended information on the device has been successfully created/updated.",
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfo" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "ExtendedInfoPut": {
+            "$ref": "./examples/ExtendedInfoPut.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Devices" ],
+        "description": "Returns the extended information of the specified data box edge/gateway device.",
+        "operationId": "Devices_GetExtendedInformation",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data box edge/gateway device extended information.",
+            "schema": { "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfo" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "ExtendedInfoPost": {
+            "$ref": "./examples/ExtendedInfoPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/installUpdates": {
+      "post": {
+        "tags": [ "Devices" ],
+        "summary": "Installs the updates on the data box edge/gateway device.",
+        "operationId": "Devices_InstallUpdates",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully installed updates on the device." },
+          "202": { "description": "Accepted the request to install updates on the device." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "InstallUpdatesPost": {
+            "$ref": "./examples/InstallUpdatesPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/networkSettings/default": {
+      "get": {
+        "tags": [ "Devices" ],
+        "description": "Returns the network settings of the specified data box edge/gateway device.",
+        "operationId": "Devices_GetNetworkSettings",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device network settings.",
+            "schema": { "$ref": "#/definitions/NetworkSettings" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSettingsGet": {
+            "$ref": "./examples/NetworkSettingsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles": {
+      "get": {
+        "tags": [ "Roles" ],
+        "description": "Lists all the roles configured in a data box edge/gateway device.",
+        "operationId": "Roles_ListByDataBoxEdgeDevice",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all roles configured in the device.",
+            "schema": { "$ref": "#/definitions/RoleList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "RoleGetAllInDevice": {
+            "$ref": "./examples/RoleGetAllInDevice.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{name}": {
+      "get": {
+        "tags": [ "Roles" ],
+        "description": "Get a specific role by name.",
+        "operationId": "Roles_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of role to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The role with specified name in the given device.",
+            "schema": { "$ref": "#/definitions/Role" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "RoleGet": {
+            "$ref": "./examples/RoleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Roles" ],
+        "description": "Create or update a role.",
+        "operationId": "Roles_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device in which the role needs to be added or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the role to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "in": "body",
+            "description": "Role to be added.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Role" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the role.",
+            "schema": { "$ref": "#/definitions/Role" }
+          },
+          "202": { "description": "Accepted the request to create or update the role." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RolePut": {
+            "$ref": "./examples/RolePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Roles" ],
+        "description": "Deletes the role on the gateway device.",
+        "operationId": "Roles_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the role which needs to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully deleted the role." },
+          "202": { "description": "Accepted the request to delete the role." },
+          "204": { "description": "The role is already deleted." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RoleDelete": {
+            "$ref": "./examples/RoleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/scanForUpdates": {
+      "post": {
+        "tags": [ "Devices" ],
+        "summary": "Scans for updates on a data box edge/gateway device.",
+        "operationId": "Devices_ScanForUpdates",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully scanned the device for updates." },
+          "202": { "description": "Accepted the request to scan for updates on the device." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ScanForUpdatesPost": {
+            "$ref": "./examples/ScanForUpdatesPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/securitySettings/default/update": {
+      "post": {
+        "tags": [ "Devices" ],
+        "description": "Updates the security settings on a data box edge/gateway device.",
+        "operationId": "Devices_CreateOrUpdateSecuritySettings",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securitySettings",
+            "in": "body",
+            "description": "The security settings.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/SecuritySettings" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "202": { "description": "Accepted the request to update the security settings." },
+          "204": { "description": "Updated the security settings." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ShareGetAllInDevice": {
+            "$ref": "./examples/SecuritySettingsUpdatePost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares": {
+      "get": {
+        "tags": [ "Shares" ],
+        "summary": "Lists all the shares in a data box edge/gateway device.",
+        "operationId": "Shares_ListByDataBoxEdgeDevice",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of all shares on the device.",
+            "schema": { "$ref": "#/definitions/ShareList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "ShareGetAllInDevice": {
+            "$ref": "./examples/ShareGetAllInDevice.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares/{name}": {
+      "get": {
+        "tags": [ "Shares" ],
+        "summary": "Returns a particular share by name.",
+        "operationId": "Shares_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The share.",
+            "schema": { "$ref": "#/definitions/Share" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "ShareGet": {
+            "$ref": "./examples/ShareGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Shares" ],
+        "summary": "Creates a new share or update an existing share on the device.",
+        "operationId": "Shares_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the share which needs to be added/updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "share",
+            "in": "body",
+            "description": "The share object containing the share details.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Share" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the share.",
+            "schema": { "$ref": "#/definitions/Share" }
+          },
+          "202": { "description": "Accepted the request to create or update the share." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SharePut": {
+            "$ref": "./examples/SharePut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Shares" ],
+        "description": "Deletes the share on the data box edge/gateway device.",
+        "operationId": "Shares_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the share which needs to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully deleted the share." },
+          "202": { "description": "Accepted the request to delete the share." },
+          "204": { "description": "The share is already deleted." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ShareDelete": {
+            "$ref": "./examples/ShareDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/shares/{name}/refresh": {
+      "post": {
+        "tags": [ "Shares" ],
+        "summary": "Triggers a manual refresh of the share metadata with the actual cloud storage account.",
+        "operationId": "Shares_Refresh",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully refreshed the share on the device." },
+          "202": { "description": "Accepted the request to refresh the share on the device." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ShareRefreshPost": {
+            "$ref": "./examples/ShareRefreshPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccountCredentials": {
+      "get": {
+        "tags": [ "StorageAccountCredentials" ],
+        "summary": "Gets all the storage account credentials in a data box edge/gateway device.",
+        "operationId": "StorageAccountCredentials_ListByDataBoxEdgeDevice",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of storage account credentials.",
+            "schema": { "$ref": "#/definitions/StorageAccountCredentialList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "SACGetAllInDevice": {
+            "$ref": "./examples/SACGetAllInDevice.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/storageAccountCredentials/{name}": {
+      "get": {
+        "tags": [ "StorageAccountCredentials" ],
+        "description": "Gets the properties of the specified storage account credential.",
+        "operationId": "StorageAccountCredentials_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the storage account credential to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage account credential.",
+            "schema": { "$ref": "#/definitions/StorageAccountCredential" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "SACGet": {
+            "$ref": "./examples/SACGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [ "StorageAccountCredentials" ],
+        "description": "Creates or updates the storage account credential.",
+        "operationId": "StorageAccountCredentials_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The storage account credential name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "storageAccountCredential",
+            "in": "body",
+            "description": "The storage account credential to be added or updated.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/StorageAccountCredential" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the storage account credential.",
+            "schema": { "$ref": "#/definitions/StorageAccountCredential" }
+          },
+          "202": { "description": "Accepted the request to create or update the storage account credential." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SACPut": {
+            "$ref": "./examples/SACPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "StorageAccountCredentials" ],
+        "description": "Deletes the storage account credential.",
+        "operationId": "StorageAccountCredentials_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the storage account credential.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully deleted the storage account credential." },
+          "202": { "description": "Accepted the request to delete the storage account credential." },
+          "204": { "description": "The storage account credential is already deleted." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SACDelete": {
+            "$ref": "./examples/SACDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/updateSummary/default": {
+      "get": {
+        "tags": [ "Devices" ],
+        "summary": "Returns information about the availability of updates as per the last scan done on the device. It also returns information about any ongoing download or install jobs on the device.",
+        "operationId": "Devices_GetUpdateSummary",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update summary.",
+            "schema": { "$ref": "#/definitions/UpdateSummary" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateSummaryGet": {
+            "$ref": "./examples/UpdateSummaryGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/uploadCertificate": {
+      "post": {
+        "tags": [ "Devices" ],
+        "description": "Uploads registration certificate for the device.",
+        "operationId": "Devices_UploadCertificate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The upload certificate request.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UploadCertificateRequest" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uploaded the registration certificate.",
+            "schema": { "$ref": "#/definitions/UploadCertificateResponse" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "UploadCertificatePost": {
+            "$ref": "./examples/UploadCertificatePost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/users": {
+      "get": {
+        "tags": [ "Users" ],
+        "description": "Returns all the users registered in a data box edge/gateway device.",
+        "operationId": "Users_ListByDataBoxEdgeDevice",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of all users on the device.",
+            "schema": { "$ref": "#/definitions/UserList" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "OperationsGet": {
+            "$ref": "./examples/UserGetAllInDevice.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/users/{name}": {
+      "get": {
+        "tags": [ "Users" ],
+        "description": "Returns the properties of the specified user.",
+        "operationId": "Users_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the user who needs to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user details.",
+            "schema": { "$ref": "#/definitions/User" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "UserGet": {
+            "$ref": "./examples/UserGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Users" ],
+        "description": "Create a new user or update an existing user's information on a data box edge/gateway device.",
+        "operationId": "Users_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the user who needs to be added/updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "description": "The user object containing the user details and encrypted password.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/User" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the user.",
+            "schema": { "$ref": "#/definitions/User" }
+          },
+          "202": { "description": "Accepted the request to create or update the user." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UserPut": {
+            "$ref": "./examples/UserPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Users" ],
+        "description": "Deletes the user on a databox edge/gateway device.",
+        "operationId": "Users_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the user who needs to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": { "description": "Successfully deleted the user." },
+          "202": { "description": "Accepted the request to delete the user." },
+          "204": { "description": "The user is already deleted." },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UserDelete": {
+            "$ref": "./examples/UserDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Alert": {
+      "description": "Alert on the data box edge/gateway device.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertProperties",
+          "description": "Properties of alert.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AlertErrorDetails": {
+      "description": "Errordetails for the alert.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error Message.",
+          "type": "string"
+        },
+        "occurences": {
+          "format": "int32",
+          "description": "Number of occurences.",
+          "type": "integer"
+        }
+      }
+    },
+    "AlertList": {
+      "description": "Collection of Alerts.",
+      "required": [ "value" ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/Alert" }
+        },
+        "nextLink": {
+          "description": "Id of the next page of alerts.",
+          "type": "string"
+        }
+      }
+    },
+    "AlertProperties": {
+      "description": "Properties of alert.",
+      "required": [ "title", "alertType", "appearedAtDateTime", "severity" ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Title of the alert.",
+          "type": "string"
+        },
+        "alertType": {
+          "description": "Type of the alert.",
+          "type": "string"
+        },
+        "appearedAtDateTime": {
+          "format": "date-time",
+          "description": "UTC time at which the alert appeared.",
+          "type": "string"
+        },
+        "recommendation": {
+          "description": "Recommendation for acting on the alert.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of the alert.",
+          "enum": [ "Informational", "Warning", "Critical" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertSeverity",
+            "modelAsString": false
+          }
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/AlertErrorDetails",
+          "description": "ErrorDetails of the alert."
+        },
+        "detailedInformation": {
+          "description": "Other information about the alert.",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "ARMBaseModel": {
+      "description": "Represents the base class for all other object models.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AsymmetricEncryptedSecret": {
+      "description": "Represent the secrets intended for encryption with asymmetric key pair.",
+      "required": [ "value", "encryptionAlgorithm" ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value of the secret.",
+          "type": "string"
+        },
+        "encryptionCertThumbprint": {
+          "description": "Thumbprint certificate that was used to encrypt \"Value\". If the value in unencrypted, it will be null.",
+          "type": "string"
+        },
+        "encryptionAlgorithm": {
+          "description": "The algorithm used to encrypt \"Value\".",
+          "enum": [ "None", "AES256", "RSAES_PKCS1_v_1_5" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionAlgorithm",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Authentication": {
+      "description": "Authentication mechanism for IoT devices.",
+      "type": "object",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKey",
+          "description": "Symmetric key for authentication."
+        }
+      }
+    },
+    "AzureContainerInfo": {
+      "description": "Azure container mapping of the endpoint.",
+      "required": [ "storageAccountCredentialId", "containerName", "dataFormat" ],
+      "type": "object",
+      "properties": {
+        "storageAccountCredentialId": {
+          "description": "ID of the Storage account credential to be used for accessing storage.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Container name (Based on the data format specified, represents the name of Azure file/ Page blob / Block blob).",
+          "type": "string"
+        },
+        "dataFormat": {
+          "description": "Storage format used for the file represented by the share.",
+          "enum": [ "BlockBlob", "PageBlob", "AzureFile" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureContainerDataFormat",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "BandwidthSchedule": {
+      "description": "The bandwidth schedule details.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BandwidthScheduleProperties",
+          "description": "The properties of the bandwidth schedule.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BandwidthScheduleProperties": {
+      "description": "The properties of the bandwidth schedule.",
+      "required": [ "start", "stop", "rateInMbps", "days" ],
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "The start time of the schdule in UTC.",
+          "type": "string"
+        },
+        "stop": {
+          "description": "The stop time of the schedule in UTC.",
+          "type": "string"
+        },
+        "rateInMbps": {
+          "format": "int32",
+          "description": "The rate in Mbps.",
+          "type": "integer"
+        },
+        "days": {
+          "description": "The days of the week when this schedule is applicable.",
+          "type": "array",
+          "items": {
+            "enum": [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": false
+            }
+          }
+        }
+      }
+    },
+    "BandwidthSchedulesList": {
+      "description": "The collection of bandwidth schedules.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of bandwidth schedules.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/BandwidthSchedule" }
+        },
+        "nextLink": {
+          "description": "Id of the next page",
+          "type": "string"
+        }
+      }
+    },
+    "ClientAccessRight": {
+      "description": "The mapping between a particular client ip and the type of access he has on the share.",
+      "required": [ "client", "accessPermission" ],
+      "type": "object",
+      "properties": {
+        "client": {
+          "description": "Ip of the user.",
+          "type": "string"
+        },
+        "accessPermission": {
+          "description": "Type of access to be allowed for the user.",
+          "enum": [ "NoAccess", "ReadOnly", "ReadWrite" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientPermissionType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error details."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "type": "string"
+        },
+        "details": {
+          "description": "A list of additional details about the error.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/CloudErrorBody" }
+        }
+      },
+      "x-ms-external": true
+    },
+    "DataBoxEdgeDevice": {
+      "description": "The Data Box Edge/Gateway device.",
+      "required": [ "location" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "location": {
+          "description": "The location of the device. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a device cannot be changed once it is created, but if an identical geo region is specified on update the request will succeed.",
+          "type": "string",
+          "x-ms-mutability": [ "read", "create" ]
+        },
+        "tags": {
+          "description": "The list of tags that describe the device. These tags can be used in viewing and grouping this device (across resource groups).",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku type."
+        },
+        "etag": {
+          "description": "The etag of the devices.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
+          "description": "The properties of the Data Box Edge/Gateway device.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataBoxEdgeDeviceExtendedInfo": {
+      "description": "The extended Info of the Data Box Edge/Gateway device.",
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfoProperties",
+          "description": "The extended info properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataBoxEdgeDeviceExtendedInfoProperties": {
+      "description": "The properties of the Data Box Edge/Gateway device extended info.",
+      "required": [ "integrityKey" ],
+      "type": "object",
+      "properties": {
+        "integrityKey": {
+          "description": "The Channel Integrity Key (CIK) of the device.",
+          "type": "string"
+        },
+        "encryptionKeyThumbprint": {
+          "description": "The certificate thumbprint that was used to encrypt the Channel Integrity Key (CIK).",
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "The Channel Integrity Key (CIK) of the device.",
+          "type": "string"
+        },
+        "resourceKey": {
+          "description": "The Resource Id of the Resource.",
+          "type": "string"
+        }
+      }
+    },
+    "DataBoxEdgeDeviceList": {
+      "description": "The collection of Data Box Edge/Gateway devices.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Data Box Edge/Gateway devices.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/DataBoxEdgeDevice" }
+        },
+        "nextLink": {
+          "description": "Id of the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "DataBoxEdgeDevicePatch": {
+      "description": "The Data Box Edge/Gateway device patch.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags attached to the Data Box Edge/Gateway resource.",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "DataBoxEdgeDeviceProperties": {
+      "description": "The properties of the Data Box Edge/Gateway device.",
+      "type": "object",
+      "properties": {
+        "dataBoxEdgeDeviceStatus": {
+          "description": "The status of the Data Box Edge/Gateway device.",
+          "enum": [ "ReadyToSetup", "Online", "Offline", "NeedsAttention", "Disconnected", "PartiallyDisconnected" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBoxEdgeDeviceStatus",
+            "modelAsString": false
+          }
+        },
+        "serialNumber": {
+          "description": "The Serial Number of Data Box Edge/Gateway device.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The Description of the Data Box Edge/Gateway device.",
+          "type": "string"
+        },
+        "modelDescription": {
+          "description": "The description of the Data Box Edge/Gateway device model.",
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "The type of the Data Box Edge/Gateway device.",
+          "enum": [ "DataBoxEdgeDevice" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeviceType",
+            "modelAsString": false
+          }
+        },
+        "friendlyName": {
+          "description": "The Data Box Edge/Gateway device name.",
+          "type": "string"
+        },
+        "culture": {
+          "description": "The Data Box Edge/Gateway device culture.",
+          "type": "string"
+        },
+        "deviceModel": {
+          "description": "The Data Box Edge/Gateway device model.",
+          "type": "string"
+        },
+        "deviceSoftwareVersion": {
+          "description": "The Data Box Edge/Gateway device software version.",
+          "type": "string"
+        },
+        "deviceLocalCapacity": {
+          "format": "int64",
+          "description": "The Data Box Edge/Gateway device local capacity in MB.",
+          "type": "integer"
+        },
+        "timeZone": {
+          "description": "The Data Box Edge/Gateway device timezone.",
+          "type": "string"
+        },
+        "deviceHcsVersion": {
+          "description": "The device software version number of the device (eg: 1.2.18105.6).",
+          "type": "string"
+        },
+        "configuredRoleTypes": {
+          "description": "Type of compute roles configured.",
+          "type": "array",
+          "items": {
+            "enum": [ "IOT", "ASA", "Functions", "Cognitive" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "RoleTypes",
+              "modelAsString": false
+            }
+          }
+        }
+      }
+    },
+    "IoTDeviceInfo": {
+      "description": "Metadata of IoT device/IoT edge device to be configured.",
+      "required": [ "deviceId", "ioTHostHub" ],
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "description": "Id of the IoT device/edge device.",
+          "type": "string"
+        },
+        "ioTHostHub": {
+          "description": "Host name for IoT hub which is associated to the device.",
+          "type": "string"
+        },
+        "authentication": {
+          "$ref": "#/definitions/Authentication",
+          "description": "IoT device authentication info."
+        }
+      }
+    },
+    "IoTRole": {
+      "description": "Compute role.",
+      "required": [ "kind" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/Role" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTRoleProperties",
+          "description": "Properties specific to IoT Role.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "IOT"
+    },
+    "IoTRoleProperties": {
+      "description": "IoT role properties.",
+      "required": [ "hostPlatform", "ioTDeviceDetails", "ioTEdgeDeviceDetails", "roleStatus" ],
+      "type": "object",
+      "properties": {
+        "hostPlatform": {
+          "description": "Host OS which IoT role support.",
+          "enum": [ "Windows", "Linux" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PlatformType",
+            "modelAsString": false
+          }
+        },
+        "ioTDeviceDetails": {
+          "$ref": "#/definitions/IoTDeviceInfo",
+          "description": "IoT device metadata to which data box edge device needs to be connected."
+        },
+        "ioTEdgeDeviceDetails": {
+          "$ref": "#/definitions/IoTDeviceInfo",
+          "description": "IoT edge device to which the IoT role needs to be configured."
+        },
+        "shareMappings": {
+          "description": "Mount points of shares in role(s).",
+          "type": "array",
+          "items": { "$ref": "#/definitions/MountPointMap" }
+        },
+        "roleStatus": {
+          "description": "Role status.",
+          "enum": [ "Enabled", "Disabled" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoleStatus",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Ipv4Config": {
+      "description": "Details related to the IPv4 address configuration.",
+      "required": [ "ipAddress", "gateway" ],
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "The IPv4 address of the network adapter.",
+          "type": "string"
+        },
+        "subnet": {
+          "description": "The IPv4 subnet of the network adapter.",
+          "type": "string"
+        },
+        "gateway": {
+          "description": "The IPv4 gateway of the network adapter.",
+          "type": "string"
+        }
+      }
+    },
+    "Ipv6Config": {
+      "description": "Details related to the IPv6 address configuration.",
+      "required": [ "ipAddress", "gateway" ],
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "The IPv6 address of the network adapter.",
+          "type": "string"
+        },
+        "prefixLength": {
+          "format": "int32",
+          "description": "The IPv6 prefix of the network adapter.",
+          "type": "integer"
+        },
+        "gateway": {
+          "description": "The IPv6 gateway of the network adapter.",
+          "type": "string"
+        }
+      }
+    },
+    "Job": {
+      "description": "A job on the data box edge/gateway device.",
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "status": {
+          "description": "The current status of the job.",
+          "enum": [ "Invalid", "Running", "Succeeded", "Failed", "Canceled", "Paused", "Scheduled" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The UTC datetime at which the job was started.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The UTC datetime at which the job completed.",
+          "type": "string"
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "The percentage of the job that is already complete.",
+          "type": "integer"
+        },
+        "error": {
+          "$ref": "#/definitions/JobErrorDetails",
+          "description": "The Error details."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "The properties of the job.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobErrorDetails": {
+      "description": "The job error information containing List of JobErrorItem.",
+      "type": "object",
+      "properties": {
+        "errorDetails": {
+          "description": "The error details.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/JobErrorItem" }
+        },
+        "code": {
+          "description": "The code intended for programmatic access.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message intended to describe the error in detail.",
+          "type": "string"
+        }
+      }
+    },
+    "JobErrorItem": {
+      "description": "The job error items.",
+      "type": "object",
+      "properties": {
+        "recommendations": {
+          "description": "The recommended actions.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "code": {
+          "description": "The code intended for programmatic access.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message intended to describe the error in detail.",
+          "type": "string"
+        }
+      }
+    },
+    "JobProperties": {
+      "description": "The properties for the job.",
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "description": "The type of the job.",
+          "enum": [ "Invalid", "ScanForUpdates", "DownloadUpdates", "InstallUpdates", "RefreshShare" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          }
+        },
+        "currentStage": {
+          "description": "Current stage of the update operation.",
+          "enum": [ "Unknown", "Initial", "ScanStarted", "ScanComplete", "ScanFailed", "DownloadStarted", "DownloadComplete", "DownloadFailed", "InstallStarted", "InstallComplete", "InstallFailed", "RebootInitiated", "Success", "Failure", "RescanStarted", "RescanComplete", "RescanFailed" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpdateOperationStage",
+            "modelAsString": false
+          }
+        },
+        "downloadProgress": {
+          "$ref": "#/definitions/UpdateDownloadProgress",
+          "description": "The download progress."
+        },
+        "installProgress": {
+          "$ref": "#/definitions/UpdateInstallProgress",
+          "description": "The install progress."
+        },
+        "totalRefreshErrors": {
+          "format": "int32",
+          "description": "Total number of errors encountered during the refresh process.",
+          "type": "integer"
+        },
+        "errorManifestFile": {
+          "description": "Local Share/Remote Container relative path to the error manifest file of the refresh.",
+          "type": "string"
+        },
+        "shareId": {
+          "description": "ARM id of the Share on which the Refresh operation was done.",
+          "type": "string"
+        },
+        "folder": {
+          "description": "If only subfolders need to be refreshed, then the sub folder path inside the share. Empty otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDimension_V1": {
+      "description": "Metric Dimension v1.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metrics dimension.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the metrics dimension.",
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "To be exported to shoe box.",
+          "type": "boolean"
+        }
+      }
+    },
+    "MetricSpecification_V1": {
+      "description": "Metric specification version 1.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the metric.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Description of the metric to be displayed.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Metric units.",
+          "enum": [ "NotSpecified", "Percent", "Count", "Seconds", "Milliseconds", "Bytes", "BytesPerSecond", "CountPerSecond" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricUnit",
+            "modelAsString": false
+          }
+        },
+        "aggregationType": {
+          "description": "Metric aggregation type.",
+          "enum": [ "NotSpecified", "None", "Average", "Minimum", "Maximum", "Total", "Count" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricAggregationType",
+            "modelAsString": false
+          }
+        },
+        "dimensions": {
+          "description": "Metric dimensions, other than default dimension which is resource.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/MetricDimension_V1" }
+        },
+        "fillGapWithZero": {
+          "description": "set true to fill the gaps with zero.",
+          "type": "boolean"
+        },
+        "category": {
+          "description": "Metric category.",
+          "enum": [ "Capacity", "Transaction" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetricCategory",
+            "modelAsString": false
+          }
+        },
+        "resourceIdDimensionNameOverride": {
+          "description": "Resource name override.",
+          "type": "string"
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Support granularity of metrics.",
+          "type": "array",
+          "items": {
+            "enum": [ "PT1M", "PT5M", "PT15M", "PT30M", "PT1H", "PT6H", "PT12H", "PT1D" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TimeGrain",
+              "modelAsString": false
+            }
+          }
+        },
+        "supportedAggregationTypes": {
+          "description": "Support metric aggreagtion type.",
+          "type": "array",
+          "items": {
+            "enum": [ "NotSpecified", "None", "Average", "Minimum", "Maximum", "Total", "Count" ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricAggregationType",
+              "modelAsString": false
+            }
+          }
+        }
+      }
+    },
+    "MountPointMap": {
+      "description": "The share mount point.",
+      "type": "object",
+      "properties": {
+        "shareId": {
+          "description": "ID of the share which is mounted to role VM.",
+          "type": "string"
+        },
+        "roleId": {
+          "description": "ID of the role to which share is mounted.",
+          "type": "string",
+          "readOnly": true
+        },
+        "mountPoint": {
+          "description": "Mount point for the share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleType": {
+          "description": "Role type.",
+          "enum": [ "IOT", "ASA", "Functions", "Cognitive" ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RoleTypes",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "NetworkAdapter": {
+      "description": "Represents the networkAdapter on a device.",
+      "required": [ "adapterId", "adapterPosition" ],
+      "type": "object",
+      "properties": {
+        "adapterId": {
+          "description": "Instance ID of network adapter.",
+          "type": "string"
+        },
+        "adapterPosition": {
+          "$ref": "#/definitions/NetworkAdapterPosition",
+          "description": "Hardware position of network adapter."
+        },
+        "index": {
+          "format": "int32",
+          "description": "Logical index of the adapter.",
+          "type": "integer"
+        },
+        "nodeId": {
+          "description": "Node ID of the network adapter.",
+          "type": "string"
+        },
+        "networkAdapterName": {
+          "description": "Network Adapter Name.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Hardware label for the adapter.",
+          "type": "string"
+        },
+        "macAddress": {
+          "description": "MAC Address.",
+          "type": "string"
+        },
+        "linkSpeed": {
+          "format": "int64",
+          "description": "Link Speed.",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Value indicating whether this adapter is valid.",
+          "enum": [ "Inactive", "Active" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkAdapterStatus",
+            "modelAsString": false
+          }
+        },
+        "rdmaStatus": {
+          "description": "Value indicating whether this adapter is RDMA Capable.",
+          "enum": [ "Incapable", "Capable" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkAdapterRDMAStatus",
+            "modelAsString": false
+          }
+        },
+        "dhcpStatus": {
+          "description": "Value indicating whether this adapter has DHCP Enabled.",
+          "enum": [ "Disabled", "Enabled" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkAdapterDHCPStatus",
+            "modelAsString": false
+          }
+        },
+        "ipv4Configuration": {
+          "$ref": "#/definitions/Ipv4Config",
+          "description": "The IPv4 configuration of the network adapter."
+        },
+        "ipv6Configuration": {
+          "$ref": "#/definitions/Ipv6Config",
+          "description": "The IPv6 configuration of the network adapter."
+        },
+        "ipv6LinkLocalAddress": {
+          "description": "The IPv6 local address.",
+          "type": "string"
+        },
+        "dnsServers": {
+          "description": "The list DNS Servers of the device.",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "NetworkAdapterPosition": {
+      "description": "The network adapter position.",
+      "type": "object",
+      "properties": {
+        "networkGroup": {
+          "description": "The network group.",
+          "enum": [ "None", "NonRDMA", "RDMA" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkGroup",
+            "modelAsString": false
+          }
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port.",
+          "type": "integer"
+        }
+      }
+    },
+    "NetworkSettings": {
+      "description": "The NetworkSettings of a device.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsProperties",
+          "description": "The properties of network settings of a device.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSettingsProperties": {
+      "description": "The properties of NetworkSettings.",
+      "required": [ "networkAdapters" ],
+      "type": "object",
+      "properties": {
+        "networkAdapters": {
+          "description": "The network adapter list on the device.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/NetworkAdapter" }
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operations.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Properties to displayed for the operation."
+        },
+        "origin": {
+          "description": "Origin of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Operation properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display properties.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The type of resource in which the operation is performed.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation to be performed on the resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation to be performed.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Operations Properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specification."
+        }
+      }
+    },
+    "OperationsList": {
+      "description": "Class for set of operations used for discovery of available provider operations.",
+      "required": [ "value" ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/Operation" }
+        },
+        "nextLink": {
+          "description": "The NextLink.",
+          "type": "string"
+        }
+      }
+    },
+    "RawCertificateData": {
+      "description": "Raw Certificate Data.",
+      "required": [ "certificate" ],
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "description": "The authentication type.",
+          "enum": [ "Invalid", "AzureActiveDirectory" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthenticationType",
+            "modelAsString": false
+          }
+        },
+        "certificate": {
+          "description": "The base64 encoded certificate raw data.",
+          "type": "string"
+        }
+      }
+    },
+    "RefreshDetails": {
+      "description": "Fields for tracking refresh job on the share.",
+      "type": "object",
+      "properties": {
+        "inProgressRefreshJobId": {
+          "description": "If a RefreshShare job is currently inprogress on this share - this field indicates the ArmId of that job. Empty otherwise.",
+          "type": "string"
+        },
+        "lastCompletedRefreshJobTimeInUTC": {
+          "format": "date-time",
+          "description": "Indicates the job completed time of the last refresh job on this particular share, if any.\r\nThis could be a failed job or a successful job.",
+          "type": "string"
+        },
+        "errorManifestFile": {
+          "description": "Indicates the relative path of the error xml for the last refresh job on this particular share, if any.\r\nThis could be a failed job or a successful job.",
+          "type": "string"
+        },
+        "lastJob": {
+          "description": "Indicates the id of the last refresh job on this particular share,if any.\r\nThis could be a failed job or a successful job.",
+          "type": "string"
+        }
+      }
+    },
+    "Role": {
+      "description": "Compute role.",
+      "required": ["kind"],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "kind": {
+          "description": "Role type.",
+          "enum": [ "IOT", "ASA", "Functions", "Cognitive" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoleTypes",
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "RoleList": {
+      "description": "Collection of all role on the data box edge device.",
+      "required": [ "value" ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The Value.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/Role" }
+        },
+        "nextLink": {
+          "description": "Id of the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "SecuritySettings": {
+      "description": "The security settings of a device.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecuritySettingsProperties",
+          "description": "Properties of the security settings.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SecuritySettingsProperties": {
+      "description": "The properties of security settings.",
+      "required": [ "deviceAdminPassword" ],
+      "type": "object",
+      "properties": {
+        "deviceAdminPassword": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "Device administrator password as an encrypted string (encrypted using RSA PKCS #1) is used to log into the  local web UI of the device. Actual password could have at least 8 characters that are a combination of  uppercase, lowercase, numeric, and special characters."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specification as defined by shoebox.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/MetricSpecification_V1" }
+        }
+      }
+    },
+    "Share": {
+      "description": "Represents a share on the  Data Box Edge/Gateway device.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ShareProperties",
+          "description": "The share properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ShareAccessRight": {
+      "description": "Specifies the mapping between this particular user and the type of access he has on shares on this device.",
+      "required": [ "shareId", "accessType" ],
+      "type": "object",
+      "properties": {
+        "shareId": {
+          "description": "Id of the share.",
+          "type": "string"
+        },
+        "accessType": {
+          "description": "Type of access to be allowed on the share for this user.",
+          "enum": [ "Change", "Read", "Custom" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShareAccessType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "ShareList": {
+      "description": "Collection of all shares on the Data Box Edge/Gateway device.",
+      "required": [ "value" ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The Value.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/Share" }
+        },
+        "nextLink": {
+          "description": "Id of the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ShareProperties": {
+      "description": "The share properties.",
+      "required": [ "shareStatus", "monitoringStatus", "accessProtocol" ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description for the share.",
+          "type": "string"
+        },
+        "shareStatus": {
+          "description": "Current status of the share.",
+          "enum": [ "Online", "Offline" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShareStatus",
+            "modelAsString": false
+          }
+        },
+        "monitoringStatus": {
+          "description": "Current monitoring status of the share.",
+          "enum": [ "Enabled", "Disabled" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MonitoringStatus",
+            "modelAsString": false
+          }
+        },
+        "azureContainerInfo": {
+          "$ref": "#/definitions/AzureContainerInfo",
+          "description": "Azure container mapping for the share."
+        },
+        "accessProtocol": {
+          "description": "Accessprotocol to be used by the share.",
+          "enum": [ "SMB", "NFS" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShareAccessProtocol",
+            "modelAsString": false
+          }
+        },
+        "userAccessRights": {
+          "description": "Mapping of Users and corresponding access rights on the share (mandatory for SMB protocol).",
+          "type": "array",
+          "items": { "$ref": "#/definitions/UserAccessRight" }
+        },
+        "clientAccessRights": {
+          "description": "List of IP addresses and corresponding access rights on the share(mandatory for NFS protocol).",
+          "type": "array",
+          "items": { "$ref": "#/definitions/ClientAccessRight" }
+        },
+        "refreshDetails": {
+          "$ref": "#/definitions/RefreshDetails",
+          "description": "Details of the refresh job on this share."
+        },
+        "shareMappings": {
+          "description": "Share mount point to the role.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/MountPointMap" }
+        },
+        "dataPolicy": {
+          "description": "Data policy of the share.",
+          "enum": [ "Cloud", "Local" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataPolicy",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Sku": {
+      "description": "The SKU type.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Sku name.",
+          "enum": [ "Gateway", "Edge" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": false
+          }
+        },
+        "tier": {
+          "description": "The SKU tier. This is based on the SKU name.",
+          "enum": [ "Standard" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "StorageAccountCredential": {
+      "description": "The storage account credential.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountCredentialProperties",
+          "description": "The storage account credential properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StorageAccountCredentialList": {
+      "description": "The collection of storage account credential entities.",
+      "required": [ "value" ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/StorageAccountCredential" }
+        },
+        "nextLink": {
+          "description": "Id of the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageAccountCredentialProperties": {
+      "description": "The storage account credential properties.",
+      "required": [ "alias", "sslStatus", "accountType" ],
+      "type": "object",
+      "properties": {
+        "alias": {
+          "description": "Alias for the storage account.",
+          "type": "string"
+        },
+        "userName": {
+          "description": "UserName for the storage account.",
+          "type": "string"
+        },
+        "accountKey": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "Account key for the storage account."
+        },
+        "connectionString": {
+          "description": "ConnectionString for the storage account. This needs to be specified if UserName/AccountKey are not specified.",
+          "type": "string"
+        },
+        "sslStatus": {
+          "description": "Signifies whether SSL needs to be enabled or not.",
+          "enum": [ "Enabled", "Disabled" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SSLStatus",
+            "modelAsString": false
+          }
+        },
+        "blobDomainName": {
+          "description": "Blob end point for private clouds.",
+          "type": "string"
+        },
+        "accountType": {
+          "description": "Type of storage accessed on the storage account.",
+          "enum": [ "GeneralPurposeStorage", "BlobStorage" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccountType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "SymmetricKey": {
+      "description": "Symmetric Key for authentication.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "Connection string based on symmetric key."
+        }
+      }
+    },
+    "UpdateDownloadProgress": {
+      "description": "Details about the download progress of update.",
+      "type": "object",
+      "properties": {
+        "downloadPhase": {
+          "description": "The download phase.",
+          "enum": [ "Unknown", "Initializing", "Downloading", "Verifying" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DownloadPhase",
+            "modelAsString": false
+          }
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Percentage of completion.",
+          "type": "integer"
+        },
+        "totalBytesToDownload": {
+          "format": "double",
+          "description": "Total bytes to download.",
+          "type": "number"
+        },
+        "totalBytesDownloaded": {
+          "format": "double",
+          "description": "Total bytes downloaded.",
+          "type": "number"
+        },
+        "numberOfUpdatesToDownload": {
+          "format": "int32",
+          "description": "Number of updates to download.",
+          "type": "integer"
+        },
+        "numberOfUpdatesDownloaded": {
+          "format": "int32",
+          "description": "Number of updates downloaded.",
+          "type": "integer"
+        }
+      }
+    },
+    "UpdateInstallProgress": {
+      "description": "Details about the progress during installation of updates.",
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "format": "int32",
+          "description": "Percentage of completion.",
+          "type": "integer"
+        },
+        "numberOfUpdatesToInstall": {
+          "format": "int32",
+          "description": "Number of updates to install.",
+          "type": "integer"
+        },
+        "numberOfUpdatesInstalled": {
+          "format": "int32",
+          "description": "Number of updates installed.",
+          "type": "integer"
+        }
+      }
+    },
+    "UpdateSummary": {
+      "description": "Details about ongoing updates and availability of updates on the device.",
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateSummaryProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateSummaryProperties": {
+      "description": "The device update information summary.",
+      "type": "object",
+      "properties": {
+        "deviceVersionNumber": {
+          "description": "The current version of the device, of format: 1.2.17312.13.",
+          "type": "string"
+        },
+        "friendlyDeviceVersionName": {
+          "description": "The current version of the device represented in text format.",
+          "type": "string"
+        },
+        "deviceLastScannedDateTime": {
+          "format": "date-time",
+          "description": "The last time when a scan was done on the device.",
+          "type": "string"
+        },
+        "lastCompletedScanJobDateTime": {
+          "format": "date-time",
+          "description": "The time when the last scan job was completed (success/cancelled/failed) on the appliance.",
+          "type": "string"
+        },
+        "lastCompletedDownloadJobDateTime": {
+          "format": "date-time",
+          "description": "The time when the last Download job was completed (success/cancelled/failed) on the appliance.",
+          "type": "string"
+        },
+        "lastCompletedInstallJobDateTime": {
+          "format": "date-time",
+          "description": "The time when the last Install job was completed (success/cancelled/failed) on the appliance.",
+          "type": "string"
+        },
+        "totalNumberOfUpdatesAvailable": {
+          "format": "int32",
+          "description": "Count of updates that are available for the current device version as per the last scan on the device.",
+          "type": "integer"
+        },
+        "totalNumberOfUpdatesPendingDownload": {
+          "format": "int32",
+          "description": "The total number of items pending download.",
+          "type": "integer"
+        },
+        "totalNumberOfUpdatesPendingInstall": {
+          "format": "int32",
+          "description": "The total number of items pending install.",
+          "type": "integer"
+        },
+        "rebootBehavior": {
+          "description": "Indicates if updates are available and atleast one of the update items detected needs a reboot.",
+          "enum": [ "NeverReboots", "RequiresReboot", "RequestReboot" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstallRebootBehavior",
+            "modelAsString": false
+          }
+        },
+        "ongoingUpdateOperation": {
+          "description": "The current update operation.",
+          "enum": [ "None", "Scan", "Download", "Install" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpdateOperation",
+            "modelAsString": false
+          }
+        },
+        "inProgressDownloadJobId": {
+          "description": "The Job ID of the download job if a download is in progress.",
+          "type": "string"
+        },
+        "inProgressInstallJobId": {
+          "description": "The Job ID of the installl job if an install is in progress.",
+          "type": "string"
+        },
+        "inProgressDownloadJobStartedDateTime": {
+          "format": "date-time",
+          "description": "The time when the currently running download (if any) started.",
+          "type": "string"
+        },
+        "inProgressInstallJobStartedDateTime": {
+          "format": "date-time",
+          "description": "The time when the currently running install (if any) started.",
+          "type": "string"
+        },
+        "updateTitles": {
+          "description": "The list of update titles which are available for install.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "totalUpdateSizeInBytes": {
+          "format": "double",
+          "description": "The total size of updates available for download in bytes.",
+          "type": "number"
+        }
+      }
+    },
+    "UploadCertificateRequest": {
+      "description": "The Upload certificate request.",
+      "required": [ "properties" ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData",
+          "description": "The Base 64 encoded certificate raw data.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UploadCertificateResponse": {
+      "description": "The upload registration certificate response.",
+      "required": [ "resourceId", "aadAuthority", "aadTenantId", "servicePrincipalClientId", "servicePrincipalObjectId", "azureManagementEndpointAudience" ],
+      "type": "object",
+      "properties": {
+        "authType": {
+          "description": "Specifies the Authentication type.",
+          "enum": [ "Invalid", "AzureActiveDirectory" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthenticationType",
+            "modelAsString": false
+          }
+        },
+        "resourceId": {
+          "description": "The resource ID of the edge device.",
+          "type": "string"
+        },
+        "aadAuthority": {
+          "description": "Azure Active Directory tenant authority.",
+          "type": "string"
+        },
+        "aadTenantId": {
+          "description": "Azure Active Directory tenant ID.",
+          "type": "string"
+        },
+        "servicePrincipalClientId": {
+          "description": "Azure Active Directory service principal client ID.",
+          "type": "string"
+        },
+        "servicePrincipalObjectId": {
+          "description": "Azure Active Directory service principal Object ID.",
+          "type": "string"
+        },
+        "azureManagementEndpointAudience": {
+          "description": "The Azure Management Endpoint Audience.",
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "description": "Represents a user who has access to one or more shares on the Edge storage device.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserProperties",
+          "description": "The storage account credential properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UserAccessRight": {
+      "description": "The mapping between a particular user and the type of access they have on the share.",
+      "required": [ "userId", "accessType" ],
+      "type": "object",
+      "properties": {
+        "userId": {
+          "description": "Id of the user (already existing in the device).",
+          "type": "string"
+        },
+        "accessType": {
+          "description": "Type of access to be allowed for the user.",
+          "enum": [ "Change", "Read", "Custom" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShareAccessType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "UserList": {
+      "description": "Collection of users.",
+      "required": [ "value" ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/User" }
+        },
+        "nextLink": {
+          "description": "Id of the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "UserProperties": {
+      "description": "The User properties.",
+      "type": "object",
+      "properties": {
+        "encryptedPassword": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "The details of the password specified for the user."
+        },
+        "shareAccessRights": {
+          "description": "List of shares that the user has rights on. This field should not be specified during user creation.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/ShareAccessRight" }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version.",
+      "required": true,
+      "type": "string"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The location of the Resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Subscription ID.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": { "user_impersonation": "impersonate your user account." }
+    }
+  },
+  "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+}
