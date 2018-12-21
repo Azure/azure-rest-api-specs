@@ -202,9 +202,12 @@
               "summary": "Patches the Tags field of a SAP HANA instance.",
               "description": "Patches the Tags field of a SAP HANA instance for the specified subscription, resource group, and instance name.",
               "x-ms-examples": {
-                  "Get properties of a HANA instance": {
+                  "Update Tags field of a HANA instance": {
                       "$ref": "./examples/HanaInstances_PatchTags.json"
-                  }
+                  },
+                  "Delete Tags field of a HANA instance": {
+                    "$ref": "./examples/HanaInstances_PatchTags_Delete.json"
+                }
               },
               "parameters": [
                   {
@@ -220,7 +223,7 @@
                       "$ref": "#/parameters/HanaInstanceNameParameter"
                   },
                   {
-                      "$ref": "#/parameters/HanaInstancePatchTagsParameter"
+                      "$ref": "#/parameters/TagsParameter"
                   }
               ],
               "responses": {
@@ -591,19 +594,6 @@
                     "type": "string"
                 }
             }
-        },
-        "Tags": {
-          "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              },
-              "description": "Tags field of the HANA instance."
-            }
-          },
-          "description": "Tags field of the HANA instance."
         }
     },
     "parameters": {
@@ -637,14 +627,14 @@
             "type": "string",
             "description": "Client API version."
         },
-        "HanaInstancePatchTagsParameter": {
-            "name": "hanaInstancePatchTagsParameter",
+        "TagsParameter": {
+            "name": "tagsParameter",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Tags"
+              "$ref": "#/definitions/Resource/properties/tags"
             },
-            "description": "Request body that contains the new Tags field for the HANA instance",
+            "description": "Request body that only contains the new Tags field",
             "x-ms-parameter-location": "method"
         }
     }
