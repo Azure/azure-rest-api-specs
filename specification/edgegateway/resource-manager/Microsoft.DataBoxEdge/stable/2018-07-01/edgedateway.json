@@ -660,6 +660,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/operationsStatus/{name}": {
+      "get": {
+        "tags": [ "OperationsStatus" ],
+        "summary": "Returns the job details of the specified job on a data box edge/gateway device.",
+        "operationId": "OperationsStatus_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The job name.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The job details.",
+            "schema": { "$ref": "#/definitions/Job" }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsStatusGet": {
+            "$ref": "./examples/OperationsStatusGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles": {
       "get": {
         "tags": [ "Roles" ],
@@ -1552,7 +1593,7 @@
     },
     "AlertProperties": {
       "description": "Properties of alert.",
-      "required": [ "title", "alertType", "appearedAtDateTime", "severity" ],
+      "required": [ "title", "alertType", "severity" ],
       "type": "object",
       "properties": {
         "title": {
@@ -2078,8 +2119,22 @@
     "Job": {
       "description": "A job on the data box edge/gateway device.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
       "properties": {
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        },
         "status": {
           "description": "The current status of the job.",
           "enum": [ "Invalid", "Running", "Succeeded", "Failed", "Canceled", "Paused", "Scheduled" ],
@@ -2578,7 +2633,7 @@
     },
     "Role": {
       "description": "Compute role.",
-      "required": ["kind"],
+      "required": [ "kind" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
       "properties": {
