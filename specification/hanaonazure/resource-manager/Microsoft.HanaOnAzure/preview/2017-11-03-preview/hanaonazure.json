@@ -594,6 +594,19 @@
                     "type": "string"
                 }
             }
+        },
+        "Tags": {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Tags field of the HANA instance."
+            }
+          },
+          "description": "Tags field of the HANA instance."
         }
     },
     "parameters": {
@@ -632,7 +645,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Resource/properties/tags"
+              "$ref": "#/definitions/Tags"
             },
             "description": "Request body that only contains the new Tags field",
             "x-ms-parameter-location": "method"
