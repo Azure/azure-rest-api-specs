@@ -156,6 +156,105 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_GetFeature",
+        "x-ms-examples": {
+          "Factories_ConfigureFactoryRepo": {
+            "$ref": "./examples/ExposureControl_GetFeature.json"
+          }
+        },
+        "description": "Get exposure control feature for specific location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "The exposure control request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_GetFeatureForSubscription",
+        "x-ms-examples": {
+          "Factories_ConfigureFactoryRepo": {
+            "$ref": "./examples/ExposureControl_GetFeatureForSubscription.json"
+          }
+        },
+        "description": "Get exposure control feature for specific data factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "The exposure control request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -4691,6 +4790,34 @@
         "error": {
           "type": "string",
           "description": "The operation error message."
+        }
+      }
+    },
+    "ExposureControlRequest": {
+      "type": "object",
+      "description": "The exposure control request.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name."
+        },
+        "featureType": {
+          "type": "string",
+          "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlResponse": {
+      "type": "object",
+      "description": "The exposure control response.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The feature value."
         }
       }
     }
