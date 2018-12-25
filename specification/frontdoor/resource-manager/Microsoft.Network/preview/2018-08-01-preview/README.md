@@ -1,4 +1,4 @@
-# Public Preview API specification for Frontdoor Azure Resource
+# Public Preview API specification for FrontDoor Azure Resource
 
 This directory contains preview schema specifications for the new Front Door Azure Resource.  The API will be added to support Front Door on Azure Resource Manager.
 
@@ -6,7 +6,7 @@ The base swagger document for new features in this preview: [FrontDoor.json](./F
 
 ## Overview
 The Front Door ARM API supports CRUD functionality on four objects in the resource schema:
-`Frontdoor`, a collection of child objects `BackendPool`, a collection of child objects `FrontendEndpoints` and the primary child object `RoutingRule`, which each reference one `BackendPool` and `FrontendEndpoints` .  Each routing rule encapsulates
+`FrontDoor`, a collection of child objects `BackendPool`, a collection of child objects `FrontendEndpoints` and the primary child object `RoutingRule`, which each reference one `BackendPool` and `FrontendEndpoints` .  Each routing rule encapsulates
 all of the settings needed to configure the AzureFD backend infrastructure to set up a 
 reverse-proxy route to accelerate traffic, detect backend availability, 
 and balance between healthy members of the pool.
