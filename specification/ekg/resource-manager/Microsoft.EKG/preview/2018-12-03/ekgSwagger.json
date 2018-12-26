@@ -27,7 +27,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/ekgService/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/services/{resourceName}": {
       "put": {
         "tags": [
           "EKG"
@@ -42,7 +42,7 @@
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
-          }, 
+          },
           {
             "$ref": "#/parameters/resourceNameParameter"
           },
@@ -71,6 +71,57 @@
           },
           "default": {
             "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EKG"
+        ],
+        "description": "Updates a EKG Service",
+        "operationId": "EKG_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/EKG"
+            },
+            "description": "The parameters to provide for the created EKG."
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/EKG"
+            }
+          },
+          "201": {
+            "description": "If resource is updated successfully, the service should return 201 (Created). Execution to continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/EKG"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -121,7 +172,7 @@
         "tags": [
           "EKG"
         ],
-        "description": "Returns a EKGService specified by the parameters.",
+        "description": "Returns a ekg service specified by the parameters.",
         "operationId": "EKG_Get",
         "x-ms-examples": {
           "Get EKG": {
@@ -158,7 +209,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/ekgService": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/services": {
       "get": {
         "tags": [
           "EKG"
@@ -200,7 +251,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EKG/ekgService": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EKG/services": {
       "get": {
         "tags": [
           "EKG"
@@ -244,7 +295,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all the available EKGService operations.",
+        "description": "Lists all the available ekg services operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
           "Get Operations": {
@@ -290,11 +341,6 @@
           "description": "Specifies the location of the resource.",
           "type": "string"
         },
-        "type": {
-          "description": "Specifies the type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Contains resource tags defined as key/value pairs.",
           "type": "object",
@@ -305,14 +351,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Gets or sets the SKU of the resource."
-        },
-        "kind": {
-          "$ref": "#/definitions/Kind",
-          "description": "Required. Gets or sets the Kind of the resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Entity Tag"
         }
       }
     },
@@ -321,25 +359,12 @@
         "name": {
           "$ref": "#/definitions/SkuName",
           "description": "The sku name"
-        },
-        "tier": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the sku tier. This is based on the SKU name.",
-          "enum": [
-            "Free",
-            "Standard"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": true
-          }
         }
       },
       "required": [
         "name"
       ],
-      "description": "The SKU of the cognitive services account."
+      "description": "The SKU of the EKG service account."
     },
     "SkuName": {
       "type": "string",
@@ -353,22 +378,7 @@
         "modelAsString": true
       }
     },
-    "Kind": {
-      "type": "string",
-      "description": "Indicates the type of EKG service",
-      "enum": [
-        "sdk",
-        "designer",
-        "EKG",
-        "function"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true
-      }
-    },
     "EKG": {
-      "type": "object",
       "description": "EKG resource definition",
       "allOf": [
         {
@@ -384,61 +394,16 @@
     },
     "EKGProperties": {
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The Name of the EKG"
-        },
         "description": {
           "type": "string",
           "description": "The description of the EKG"
         },
-        "iconUrl": {
+        "provisioningState": {
           "type": "string",
-          "description": "The Icon Url of the EKG"
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "The EKG's endpoint"
-        },
-        "endpointVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The EKG's endpoint version"
-        },
-        "msaAppId": {
-          "type": "string",
-          "description": "Microsoft App Id for the EKG"
-        },
-        "developerAppInsightKey": {
-          "type": "string",
-          "description": "The Application Insights key"
-        },
-        "developerAppInsightsApiKey": {
-          "type": "string",
-          "description": "The Application Insights Api Key"
-        },
-        "developerAppInsightsApplicationId": {
-          "type": "string",
-          "description": "The Application Insights App Id"
-        },
-        "luisAppIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Collection of LUIS App Ids"
-        },
-        "luisKey": {
-          "type": "string",
-          "description": "The LUIS Key"
+          "description": "The state of EKG provisioning"
         }
       },
-      "description": "The parameters to provide for the EKG.",
-      "required": [
-        "displayName",
-        "endpoint",
-        "msaAppId"
-      ]
+      "description": "The parameters to provide for the EKG."
     },
     "EKGResponseList": {
       "properties": {
@@ -523,7 +488,7 @@
       }
     },
     "OperationDisplayInfo": {
-      "description": "The operation supported by Bot Service Management.",
+      "description": "The operation supported by EKG Service Management.",
       "type": "object",
       "properties": {
         "description": {
@@ -535,7 +500,7 @@
           "type": "string"
         },
         "provider": {
-          "description": "Service provider: Microsoft Bot Service.",
+          "description": "Service provider: Microsoft EKG Service.",
           "type": "string"
         },
         "resource": {

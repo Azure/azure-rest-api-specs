@@ -12,18 +12,18 @@ This is the AutoRest configuration file for EkgService.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-12-31
+  - tag: package-2018-12-03
 ```
 
-### Tag: package-2018-12-31 and java
+### Tag: package-2018-12-03 and java
 
-These settings apply only when `--tag=package-2018-12-31 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-12-03 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-12-31' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-12-03' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.ekgservice.v2018-12-31
-  output-folder: $(azure-libraries-for-java-folder)/ekgservice/resource-manager/v2018-12-31
+  namespace: com.microsoft.azure.management.ekgservice.v2018-12-03
+  output-folder: $(azure-libraries-for-java-folder)/ekgservice/resource-manager/v2018-12-03
 regenerate-manager: true
 generate-interface: true
 ```
@@ -48,16 +48,16 @@ These are the global settings for the EkgService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-12-31
+tag: package-2018-12-03
 ```
 
-### Tag: package-2018-12-31
+### Tag: package-2018-12-03
 
-These settings apply only when `--tag=package-2018-12-31` is specified on the command line.
+These settings apply only when `--tag=package-2018-12-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-12-31'
+``` yaml $(tag) == 'package-2018-12-03'
 input-file:
-- Microsoft.EKG/preview/2018-12-31/ekgservice.json
+- Microsoft.EKG/preview/2018-12-03/ekgSwagger.json
 directive:
   - None at the moment
 ```
@@ -89,4 +89,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/EkgService/Microsoft.Azure.Management.EkgService/Generated
   clear-output-folder: true
 ```
-
