@@ -78,6 +78,7 @@ async function getLinterResult(swaggerPath) {
             console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
             console.dir(resultString);
             console.dir(e, { depth: null, colors: true });
+            process.exit(1)
         }
     }
     return [];
@@ -87,7 +88,7 @@ async function getLinterResult(swaggerPath) {
 async function runTools(swagger, beforeOrAfter) {
     console.log(`Processing "${swagger}":`);
     const linterErrors = await getLinterResult(swagger);
-    console.log(`Linter produced ${linterErrors.length} results`);
+    console.log(linterErrors);
     await updateResult(swagger, linterErrors, beforeOrAfter);
 };
 
