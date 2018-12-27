@@ -209,10 +209,10 @@
         "tags": [
           "exposureControl"
         ],
-        "operationId": "ExposureControl_GetFeatureForSubscription",
+        "operationId": "ExposureControl_GetFeatureBySubscription",
         "x-ms-examples": {
           "Factories_ConfigureFactoryRepo": {
-            "$ref": "./examples/ExposureControl_GetFeatureForSubscription.json"
+            "$ref": "./examples/ExposureControl_GetFeatureBySubscription.json"
           }
         },
         "description": "Get exposure control feature for specific data factory.",
@@ -4813,11 +4813,13 @@
       "properties": {
         "featureName": {
           "type": "string",
-          "description": "The feature name."
+          "description": "The feature name.",
+          "readOnly": true
         },
         "value": {
           "type": "string",
-          "description": "The feature value."
+          "description": "The feature value.",
+          "readOnly": true
         }
       }
     }
