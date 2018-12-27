@@ -37,6 +37,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -48,7 +49,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  namespace: Microsoft.CognitiveServices.ContentModerator
+  namespace: Microsoft.Azure.CognitiveServices.ContentModerator
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ContentModerator/ContentModerator/Generated
 ```
 
