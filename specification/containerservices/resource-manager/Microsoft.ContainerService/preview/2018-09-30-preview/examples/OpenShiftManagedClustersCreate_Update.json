@@ -13,13 +13,13 @@
       "properties": {
         "openShiftVersion": "v3.10",
         "fqdn": "clustername1.location1.cloudapp.azure.com",
-        "networkProfile":{
-          "vnetCidr":"10.0.0.0/8"
+        "networkProfile": {
+          "vnetCidr": "10.0.0.0/8"
         },
         "masterPoolProfile": {
           "name": "master",
           "count": 3,
-          "vmSize": "Standard_D2s_v3",
+          "vmSize": "Standard_D4s_v3",
           "osType": "Linux",
           "subnetCidr": "10.0.0.0/24"
         },
@@ -47,15 +47,17 @@
           }
         ],
         "authProfile": {
-          "identityProviders": [{
-             "name": "Azure AD",
-             "provider": {
+          "identityProviders": [
+            {
+              "name": "Azure AD",
+              "provider": {
                 "kind": "AADIdentityProvider",
                 "clientId": "clientId",
                 "secret": "secret",
                 "tenantId": "tenantId"
-             }
-          }]
+              }
+            }
+          ]
         }
       }
     }
@@ -75,13 +77,13 @@
           "provisioningState": "Succeeded",
           "openShiftVersion": "v3.10",
           "fqdn": "clustername1.location1.cloudapp.azure.com",
-          "networkProfile":{
-            "vnetCidr":"10.0.0.0/8"
+          "networkProfile": {
+            "vnetCidr": "10.0.0.0/8"
           },
           "masterPoolProfile": {
-              "count": 3,
-              "vmSize": "Standard_D2s_v3",
-              "subnetCidr": "10.0.0.0/24"
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "subnetCidr": "10.0.0.0/24"
           },
           "agentPoolProfiles": [
             {
@@ -109,14 +111,16 @@
             }
           ],
           "authProfile": {
-            "identityProviders": [{
-               "name": "Azure AD",
-               "provider": {
+            "identityProviders": [
+              {
+                "name": "Azure AD",
+                "provider": {
                   "kind": "AADIdentityProvider",
                   "clientId": "clientId",
                   "tenantId": "tenantId"
-               }
-            }]
+                }
+              }
+            ]
           }
         }
       }
@@ -135,15 +139,15 @@
           "provisioningState": "Creating",
           "openShiftVersion": "v3.10",
           "fqdn": "clustername1.location1.cloudapp.azure.com",
-          "networkProfile":{
-            "vnetCidr":"10.0.0.0/8"
+          "networkProfile": {
+            "vnetCidr": "10.0.0.0/8"
           },
           "masterPoolProfile": {
-              "name": "master",
-              "count": 3,
-              "vmSize": "Standard_D2s_v3",
-              "osType": "Linux",
-              "subnetCidr": "10.0.0.0/24"
+            "name": "master",
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
           },
           "agentPoolProfiles": [
             {
@@ -169,16 +173,18 @@
             }
           ],
           "authProfile": {
-            "identityProviders": [{
-               "name": "Azure AD",
-               "provider": {
+            "identityProviders": [
+              {
+                "name": "Azure AD",
+                "provider": {
                   "kind": "AADIdentityProvider",
                   "clientId": "clientId",
                   "tenantId": "tenantId"
-               }
-            }]
+                }
+              }
+            ]
           }
-        } 
+        }
       }
     }
   }
