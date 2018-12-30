@@ -817,6 +817,11 @@
         },
         "/{resourceId}/providers/Microsoft.Security/iotSecurityGroups": {
             "get": {
+                "x-ms-examples": {
+                    "List all IoT security groups for the specified IoT hub resource": {
+                        "$ref": "./examples/IotSecurityGroups/ListIotSecurityGroups_example.json"
+                    }
+                },   
                 "tags": ["IotSecurityGroups"],
                 "description": "Gets the list of security groups for the specified IoT hub resource.",
                 "operationId": "IotSecurityGroups_List",
@@ -825,7 +830,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceId"
-                    },
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -887,7 +892,7 @@
                 },
                 "tags": [ "IotSecurityGroups" ],
                 "description": "Creates or updates the security group on a specified IoT hub resource.",
-                "operationId": "IotSecurityGroups_Put",
+                "operationId": "IotSecurityGroups_CreateOrUpdate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersion"
@@ -954,7 +959,7 @@
                         }
                     }
                 }
-            },
+            }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings": {
             "get": {
@@ -1863,6 +1868,7 @@
             "properties": {
                 "thresholdRules": {
                     "type": "array",
+                    "description": "A list of threshold custom alert rules.",
                     "items": {
                         "type": "object",
                         "$ref": "#/definitions/ThresholdCustomAlertRule"
@@ -1870,6 +1876,7 @@
                 },
                 "timeWindowRules": {
                     "type": "array",
+                    "description": "A list of time window custom alert rules.",
                     "items": {
                         "type": "object",
                         "$ref": "#/definitions/TimeWindowCustomAlertRule"
@@ -1877,6 +1884,7 @@
                 },
                 "allowlistRules": {
                     "type": "array",
+                    "description": "A list of allow-list custom alert rules.",
                     "items": {
                         "type": "object",
                         "$ref": "#/definitions/AllowlistCustomAlertRule"
@@ -1884,11 +1892,12 @@
                 },
                 "denylistRules": {
                     "type": "array",
+                    "description": "A list of deny-list custom alert rules.",
                     "items": {
                         "type": "object",
                         "$ref": "#/definitions/DenylistCustomAlertRule"
                     }
-                },
+                }
             }
         },
         "CustomAlertRule": {
@@ -1936,6 +1945,7 @@
                 },
                 "ruleType": {
                     "type": "string",
+                    "description": "The type of the custom alert rule.",
                     "enum": ["ConnectionToIpNotAllowed", "LocalUserNotAllowed", "ProcessNotAllowed"],
                     "x-ms-enum": {
                         "name": "ruleType",
@@ -2021,6 +2031,7 @@
                 },
                 "ruleType": {
                     "type": "string",
+                    "description": "The type of the custom alert rule.",
                     "enum": ["ActiveConnectionsNotInAllowedRange", "AmqpC2DMessagesNotInAllowedRange", "MqttC2DMessagesNotInAllowedRange", "HttpC2DMessagesNotInAllowedRange", "AmqpC2DRejectedMessagesNotInAllowedRange", "MqttC2DRejectedMessagesNotInAllowedRange", "HttpC2DRejectedMessagesNotInAllowedRange", "AmqpD2CMessagesNotInAllowedRange", "MqttD2CMessagesNotInAllowedRange", "HttpD2CMessagesNotInAllowedRange", "DirectMethodInvokesNotInAllowedRange", "FailedLocalLoginsNotInAllowedRange", "FileUploadsNotInAllowedRange", "QueuePurgesNotInAllowedRange", "TwinUpdatesNotInAllowedRange", "UnauthorizedOperationsNotInAllowedRange"],
                     "x-ms-enum": {
                         "name": "ruleType",
@@ -2088,7 +2099,7 @@
                             {
                                 "value": "UnauthorizedOperationsNotInAllowedRange",
                                 "description": "Number of unauthorized operations is not in allowed range."
-                            },
+                            }
                         ]
                     }
                 }
@@ -2096,7 +2107,7 @@
             "required": [
                 "timeWindowSize"
             ]
-        },
+        }
     },
     "parameters": {
         "SubscriptionId": {
@@ -2277,7 +2288,6 @@
           "in": "path",
           "required": true,
           "type": "string",
-          "enum": ["current"], 
           "description": "The name of the security group. Please notice that the name is case insensitive.",
           "x-ms-parameter-location": "method"
         },
@@ -2290,6 +2300,6 @@
             "$ref": "#/definitions/IotSecurityGroup"
           },
           "x-ms-parameter-location": "method"
-        },
+        }
     }
 }
