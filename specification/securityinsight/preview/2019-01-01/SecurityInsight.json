@@ -82,11 +82,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "operationalInsightsResourceProvider",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of workspaces resource provider- Microsoft.operationalinsights."
+			"$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
@@ -130,6 +126,9 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+			"$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
@@ -326,6 +325,14 @@
       ],
       "description": "API version for the operation"
     },
+	"OperationalInsightsResourceProvider": {
+		"name": "operationalInsightsResourceProvider",
+		"in": "path",
+		"required": true,
+		"type": "string",
+		"description": "The namespace of workspaces resource provider- Microsoft.operationalinsights.",
+		"x-ms-parameter-location": "method"
+	},
     "WorkspaceName": {
       "name": "workspaceName",
       "in": "path",
