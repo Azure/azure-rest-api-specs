@@ -1311,8 +1311,8 @@
         },
         "isHnsEnabled": {
           "type": "boolean",
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1575,8 +1575,8 @@
         },
         "isHnsEnabled": {
           "type": "boolean",
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         },
         "geoReplicationStats": {
           "$ref": "#/definitions/GeoReplicationStats",
@@ -2092,7 +2092,7 @@
     "StorageAccountManagementPolicies": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StorageAccountManagementPoliciesRulesProperty",
+          "$ref": "#/definitions/StorageAccountManagementPolicyProperty",
           "x-ms-client-flatten": true,
           "readOnly": true,
           "description": "Returns the Storage Account Data Policies Rules."
@@ -2105,35 +2105,37 @@
       ],
       "description": "The Get Storage Account ManagementPolicies operation response."
     },
-    "StorageAccountManagementPoliciesRulesProperty": {
+    "StorageAccountManagementPolicyProperty": {
       "properties": {
         "lastModifiedTime": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Returns the date and time the ManagementPolicies was last modified."
+        },
+        "policy": {
+          "$ref": "#/definitions/ManagementPolicySchema",
+          "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagementPolicySchema"
-        }
-      ],
       "description": "The Storage Account Data Policies properties."
     },
     "ManagementPoliciesRulesSetParameter": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ManagementPolicySchema",
-          "x-ms-client-flatten": true,
-          "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+          "properties": {
+            "policy": {
+              "$ref": "#/definitions/ManagementPolicySchema",
+              "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+            }
+          }
         }
       },
       "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
     },
-    "ManagementPolicySchema":{
+    "ManagementPolicySchema": {
       "properties": {
-        "version" : {
+        "version": {
           "type": "string",
           "description": "The policy version expressed as x.x."
         },
@@ -2162,9 +2164,8 @@
           "description": "The valid value is Lifecycle"
         },
         "definition": {
-            "$ref": "#/definitions/ManagementPolicyDefinition",
-            "x-ms-client-flatten": true,
-            "description": "An object that defines the lifecycle rule."
+          "$ref": "#/definitions/ManagementPolicyDefinition",
+          "description": "An object that defines the lifecycle rule."
         }
       },
       "description": "An object that wraps the lifecycle rule. Each rule is uniquely defined by name."
@@ -2200,12 +2201,12 @@
         },
         "sizeInByteGreaterThan": {
           "type": "integer",
-          "minimum" : 0,
+          "minimum": 0,
           "description": "A whole number specifying the minimal blob size for this rule."
         },
         "sizeInByteLessThan": {
           "type": "integer",
-          "minimum" : 0,
+          "minimum": 0,
           "description": "A whole number specifying the maximum blob size for this rule."
         },
         "blobTypes": {
@@ -2221,12 +2222,12 @@
     "ManagementPolicyAction": {
       "properties": {
         "baseBlob": {
-            "$ref": "#/definitions/ManagementPolicyBaseBlob",
-            "description": "The management policy action for baseblob"
+          "$ref": "#/definitions/ManagementPolicyBaseBlob",
+          "description": "The management policy action for baseblob"
         },
         "snapshot": {
-            "$ref": "#/definitions/ManagementPolicySnapShot",
-            "description": "The management policy action for snapshot"
+          "$ref": "#/definitions/ManagementPolicySnapShot",
+          "description": "The management policy action for snapshot"
         }
       },
       "description": "Actions are applied to the filtered blobs when the execution condition is met."
@@ -2234,21 +2235,16 @@
     "ManagementPolicyBaseBlob": {
       "properties": {
         "tierToCool": {
-          "properties": {
-            "DateAfterModification": {
-              "type": "integer",
-              "description": "Integer value indicating the age in days after last modification"
-            }
-          },
-          "description": "The function to tier blobs to cool storage. Support blobs currently at Hot tier"
+            "$ref": "#/definitions/DateAfterModification",
+            "description": "The function to tier blobs to cool storage. Support blobs currently at Hot tier"
         },
         "tierToArchive": {
-            "$ref": "#/definitions/DateAfterModification",
-            "description": "The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier"
+          "$ref": "#/definitions/DateAfterModification",
+          "description": "The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier"
         },
         "delete": {
-            "$ref": "#/definitions/DateAfterModification",
-            "description": "The function to delete the blob"
+          "$ref": "#/definitions/DateAfterModification",
+          "description": "The function to delete the blob"
         }
       },
       "description": "Management policy action for baseblob."
@@ -2256,8 +2252,8 @@
     "ManagementPolicySnapShot": {
       "properties": {
         "delete": {
-            "$ref": "#/definitions/DateAfterCreation",
-            "description": "The function to delete the blob snapshot"
+          "$ref": "#/definitions/DateAfterCreation",
+          "description": "The function to delete the blob snapshot"
         }
       },
       "description": "Management policy action for snapshot."
@@ -2265,8 +2261,8 @@
     "DateAfterModification": {
       "properties": {
         "daysAfterModificationGreaterThan": {
-            "type": "integer",
-            "description": "Integer value indicating the age in days after last modification"
+          "type": "integer",
+          "description": "Integer value indicating the age in days after last modification"
         }
       },
       "description": "Object to define the number of days after last modification."
@@ -2274,8 +2270,8 @@
     "DateAfterCreation": {
       "properties": {
         "daysAfterCreationGreaterThan": {
-            "type": "integer",
-            "description": "Integer value indicating the age in days after creation"
+          "type": "integer",
+          "description": "Integer value indicating the age in days after creation"
         }
       },
       "description": "Object to define the number of days after creation."
