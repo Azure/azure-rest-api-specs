@@ -1,0 +1,2459 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "version": "2015-04-08"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_Get",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountGet": { "$ref": "./examples/CosmosDBDatabaseAccountGet.json" }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The database account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccount"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DatabaseAccounts_Patch",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountPatch": { "$ref": "./examples/CosmosDBDatabaseAccountPatch.json" }
+        },
+        "description": "Patches the properties of an existing Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountPatchParameters"
+            },
+            "description": "The tags parameter to patch for the current database account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the database account were patched successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccount"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateOrUpdate",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountCreateMin": { "$ref": "./examples/CosmosDBDatabaseAccountCreateMin.json" },
+          "CosmosDBDatabaseAccountCreateMax": { "$ref": "./examples/CosmosDBDatabaseAccountCreateMax.json" }
+        },
+        "description": "Creates or updates an Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current database account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The database account create or update operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccount"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_Delete",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountDelete": { "$ref": "./examples/CosmosDBDatabaseAccountDelete.json" }
+        },
+        "description": "Deletes an existing Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The database account delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The specified account does not exist in the subscription."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange": {
+      "post": {
+        "operationId": "DatabaseAccounts_FailoverPriorityChange",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountFailoverPriorityChange": { "$ref": "./examples/CosmosDBDatabaseAccountFailoverPriorityChange.json" }
+        },
+        "description": "Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "failoverParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FailoverPolicies"
+            },
+            "description": "The new failover policies for the database account."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The failover policy change operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccounts": {
+      "get": {
+        "operationId": "DatabaseAccounts_List",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountList": { "$ref": "./examples/CosmosDBDatabaseAccountList.json" }
+        },
+        "description": "Lists all the Azure Cosmos DB database accounts available under the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListByResourceGroup",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListByResourceGroup": { "$ref": "./examples/CosmosDBDatabaseAccountListByResourceGroup.json" }
+        },
+        "description": "Lists all the Azure Cosmos DB database accounts available under the given resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "DatabaseAccounts_ListKeys",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListKeys.json" }
+        },
+        "description": "Lists the access keys for the specified Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListKeysResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listConnectionStrings": {
+      "post": {
+        "operationId": "DatabaseAccounts_ListConnectionStrings",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListConnectionStrings": { "$ref": "./examples/CosmosDBDatabaseAccountListConnectionStrings.json" },
+          "CosmosDBDatabaseAccountListConnectionStringsMongo": { "$ref": "./examples/CosmosDBDatabaseAccountListConnectionStringsMongo.json" }
+        },
+        "description": "Lists the connection strings for the specified Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListConnectionStringsResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/offlineRegion": {
+      "post": {
+        "operationId": "DatabaseAccounts_OfflineRegion",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountOfflineRegion": { "$ref": "./examples/CosmosDBDatabaseAccountOfflineRegion.json" }
+        },
+        "description": "Offline the specified region for the specified Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionParameterForOffline",
+            "in": "body",
+            "required": true,
+            "description": "Cosmos DB region to offline for the database account.",
+            "schema": {
+              "$ref": "#/definitions/RegionForOnlineOffline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The offline region operation is completed successfully."
+          },
+          "202": {
+            "description": "Accepted. The offline region operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/onlineRegion": {
+      "post": {
+        "operationId": "DatabaseAccounts_OnlineRegion",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountOnlineRegion": { "$ref": "./examples/CosmosDBDatabaseAccountOnlineRegion.json" }
+        },
+        "description": "Online the specified region for the specified Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionParameterForOnline",
+            "in": "body",
+            "required": true,
+            "description": "Cosmos DB region to online for the database account.",
+            "schema": {
+              "$ref": "#/definitions/RegionForOnlineOffline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The online region operation is completed successfully."
+          },
+          "202": {
+            "description": "Accepted. The online region operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetReadOnlyKeys",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }
+        },
+        "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DatabaseAccounts_ListReadOnlyKeys",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }
+        },
+        "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey": {
+      "post": {
+        "operationId": "DatabaseAccounts_RegenerateKey",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegenerateKey": { "$ref": "./examples/CosmosDBDatabaseAccountRegenerateKey.json" }
+        },
+        "description": "Regenerates an access key for the specified Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "keyToRegenerate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountRegenerateKeyParameters"
+            },
+            "description": "The name of the key to regenerate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. The regenerate key operation will complete asynchronously."
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}": {
+      "head": {
+        "operationId": "DatabaseAccounts_CheckNameExists",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountCheckNameExists": { "$ref": "./examples/CosmosDBDatabaseAccountCheckNameExists.json" }
+        },
+        "description": "Checks that the Azure Cosmos DB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The account name is valid but is already in use."
+          },
+          "404": {
+            "description": "Not Found. The account name is available and valid."
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DocumentDB/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Cosmos DB Resource Provider operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "CosmosDBOperationsList": { "$ref": "./examples/CosmosDBOperationsList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metrics": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountGetMetrics": { "$ref": "./examples/CosmosDBDatabaseAccountGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metrics for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metrics": {
+      "get": {
+        "operationId": "Database_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseGetMetrics": { "$ref": "./examples/CosmosDBDatabaseGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given database account and database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metrics for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metrics": {
+      "get": {
+        "operationId": "Collection_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBCollectionGetMetrics": { "$ref": "./examples/CosmosDBCollectionGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given database account and collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metrics for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/metrics": {
+      "get": {
+        "operationId": "CollectionRegion_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBRegionCollectionGetMetrics": { "$ref": "./examples/CosmosDBRegionCollectionGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given database account, collection and region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/regionParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metrics for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/metrics": {
+      "get": {
+        "operationId": "DatabaseAccountRegion_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBDatabaseAccountRegionGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given database account and region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/regionParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metrics for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sourceRegion/{sourceRegion}/targetRegion/{targetRegion}/percentile/metrics": {
+      "get": {
+        "operationId": "PercentileSourceTarget_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPercentileSourceTargetGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sourceRegionParameter"
+          },
+          {
+            "$ref": "#/parameters/targetRegionParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The percentile metrics for the account, source and target regions were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PercentileMetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/targetRegion/{targetRegion}/percentile/metrics": {
+      "get": {
+        "operationId": "PercentileTarget_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPercentileTargetGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given account target region. This url is only for PBS and Replication Latency data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/targetRegionParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The percentile metrics for the account and target regions were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PercentileMetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/percentile/metrics": {
+      "get": {
+        "operationId": "Percentile_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPercentileGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and Replication Latency data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The percentile metrics for the account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PercentileMetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics": {
+      "get": {
+        "operationId": "CollectionPartitionRegion_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBCollectionPartitionRegionGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given collection and region, split by partition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/regionParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition-level metrics for the collection and region were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics": {
+      "get": {
+        "operationId": "CollectionPartition_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBCollectionPartitionGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given collection, split by partition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition-level metrics for the collection were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics": {
+      "get": {
+        "operationId": "PartitionKeyRangeId_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPKeyRangeIdGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given partition key range id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/partitionKeyRangeIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition-level metrics for the partition key range id were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics": {
+      "get": {
+        "operationId": "PartitionKeyRangeIdRegion_ListMetrics",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPKeyRangeIdRegionGetMetrics.json" }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the metrics determined by the given filter for the given partition key range id and region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/regionParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/partitionKeyRangeIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition-level metrics for the partition key range id and region were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/usages": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListUsages",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountGetUsages": { "$ref": "./examples/CosmosDBDatabaseAccountGetUsages.json" }
+        },
+        "description": "Retrieves the usages (most recent data) for the given database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usages for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages": {
+      "get": {
+        "operationId": "Database_ListUsages",
+        "x-ms-examples": {
+          "CosmosDBDatabaseGetUsages": { "$ref": "./examples/CosmosDBDatabaseGetUsages.json" }
+        },
+        "description": "Retrieves the usages (most recent data) for the given database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usages for the database were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages": {
+      "get": {
+        "operationId": "Collection_ListUsages",
+        "x-ms-examples": {
+          "CosmosDBCollectionGetUsages": { "$ref": "./examples/CosmosDBCollectionGetUsages.json" }
+        },
+        "description": "Retrieves the usages (most recent storage data) for the given collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usages for the collection were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages": {
+      "get": {
+        "operationId": "CollectionPartition_ListUsages",
+        "x-ms-examples": {
+          "CosmosDBCollectionGetUsages": { "$ref": "./examples/CosmosDBCollectionPartitionGetUsages.json" }
+        },
+        "description": "Retrieves the usages (most recent storage data) for the given collection, split by partition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usages for the collection, per partition were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionUsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metricDefinitions": {
+      "get": {
+        "operationId": "Database_ListMetricDefinitions",
+        "x-ms-examples": {
+          "CosmosDBDatabaseGetMetricDefinitions": { "$ref": "./examples/CosmosDBDatabaseGetMetricDefinitions.json" }
+        },
+        "description": "Retrieves metric definitions for the given database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metric definitions for the database were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
+      "get": {
+        "operationId": "Collection_ListMetricDefinitions",
+        "x-ms-examples": {
+          "CosmosDBCollectionGetMetricDefinitions": { "$ref": "./examples/CosmosDBCollectionGetMetricDefinitions.json" }
+        },
+        "description": "Retrieves metric definitions for the given collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metric definitions for the collection were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListMetricDefinitions",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountGetMetricDefinitions": { "$ref": "./examples/CosmosDBDatabaseAccountGetMetricDefinitions.json" }
+        },
+        "description": "Retrieves metric definitions for the given database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metric definitions for the database account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseAccountsListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseAccount"
+          },
+          "description": "List of database account and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the database accounts and their properties."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
+    },
+    "FailoverPolicies": {
+      "properties": {
+        "failoverPolicies": {
+          "type": "array",
+          "description": "List of failover policies.",
+          "items": {
+            "$ref": "#/definitions/FailoverPolicy"
+          }
+        }
+      },
+      "required": [
+        "failoverPolicies"
+      ],
+      "description": "The list of new failover policies for the failover priority change."
+    },
+    "FailoverPolicy": {
+      "type": "object",
+      "description": "The failover policy for a given region of a database account.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique identifier of the region in which the database account replicates to. Example: &lt;accountName&gt;-&lt;locationName&gt;."
+        },
+        "locationName": {
+          "type": "string",
+          "description": "The name of the region in which the database account exists."
+        },
+        "failoverPriority": {
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32",
+          "description": "The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists."
+        }
+      }
+    },
+    "RegionForOnlineOffline": {
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Cosmos DB region, with spaces between words and each word capitalized."
+        }
+      },
+      "required": [
+        "region"
+      ],
+      "description": "Cosmos DB region to online or offline."
+    },
+    "Location": {
+      "description": "A region in which the Azure Cosmos DB database account is deployed.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique identifier of the region within the database account. Example: &lt;accountName&gt;-&lt;locationName&gt;."
+        },
+        "locationName": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "documentEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The connection endpoint for the specific region. Example: https://&lt;accountName&gt;-&lt;locationName&gt;.documents.azure.com:443/"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "failoverPriority": {
+          "description": "The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "A database account resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the database account."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the database account."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "DatabaseAccount": {
+      "description": "An Azure Cosmos DB database account.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Indicates the type of database account. This can only be set at database account creation.",
+          "type": "string",
+          "default": "GlobalDocumentDB",
+          "enum": [
+            "GlobalDocumentDB",
+            "MongoDB",
+            "Parse"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseAccountKind",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ConsistencyPolicy": {
+      "type": "object",
+      "description": "The consistency policy for the Cosmos DB database account.",
+      "properties": {
+        "defaultConsistencyLevel": {
+          "description": "The default consistency level and configuration settings of the Cosmos DB account.",
+          "type": "string",
+          "enum": [
+            "Eventual",
+            "Session",
+            "BoundedStaleness",
+            "Strong",
+            "ConsistentPrefix"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultConsistencyLevel",
+            "modelAsString": false
+          }
+        },
+        "maxStalenessPrefix": {
+          "description": "When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 1 – 2,147,483,647. Required when defaultConsistencyPolicy is set to 'BoundedStaleness'.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647,
+          "format": "int64"
+        },
+        "maxIntervalInSeconds": {
+          "description": "When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400. Required when defaultConsistencyPolicy is set to 'BoundedStaleness'.",
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 86400,
+          "format": "int32"
+        }
+      },
+      "required": [
+        "defaultConsistencyLevel"
+      ]
+    },
+    "DatabaseAccountProperties": {
+      "description": "Properties for the database account.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "documentEndpoint": {
+          "description": "The connection endpoint for the Cosmos DB database account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseAccountOfferType": {
+          "description": "The offer type for the Cosmos DB database account. Default value: Standard.",
+          "readOnly": true,
+          "$ref": "#/definitions/DatabaseAccountOfferType"
+        },
+        "ipRangeFilter": {
+          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "$ref": "#/definitions/IPRangeFilter"
+        },
+        "isVirtualNetworkFilterEnabled": {
+          "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
+          "type": "boolean"
+        },
+        "enableAutomaticFailover": {
+          "description": "Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.",
+          "type": "boolean"
+        },
+        "consistencyPolicy": {
+          "description": "The consistency policy for the Cosmos DB database account.",
+          "$ref": "#/definitions/ConsistencyPolicy"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "writeLocations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains the write location for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "readLocations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains of the read locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "failoverPolicies": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains the regions ordered by their failover priorities.",
+          "items": {
+            "$ref": "#/definitions/FailoverPolicy"
+          }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "List of Virtual Network ACL rules configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatabaseAccountPatchProperties": {
+      "description": "Properties to update Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        }
+      }
+    },
+    "DatabaseAccountCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "consistencyPolicy": {
+          "description": "The consistency policy for the Cosmos DB account.",
+          "$ref": "#/definitions/ConsistencyPolicy"
+        },
+        "locations": {
+          "type": "array",
+          "description": "An array that contains the georeplication locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "databaseAccountOfferType": {
+          "$ref": "#/definitions/DatabaseAccountOfferType"
+        },
+        "ipRangeFilter": {
+          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "$ref": "#/definitions/IPRangeFilter"
+        },
+        "isVirtualNetworkFilterEnabled": {
+          "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
+          "type": "boolean"
+        },
+        "enableAutomaticFailover": {
+          "description": "Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "List of Virtual Network ACL rules configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "locations",
+        "databaseAccountOfferType"
+      ]
+    },
+    "DatabaseAccountCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Indicates the type of database account. This can only be set at database account creation.",
+          "type": "string",
+          "default": "GlobalDocumentDB",
+          "enum": [
+            "GlobalDocumentDB",
+            "MongoDB",
+            "Parse"
+          ],
+          "x-ms-enum": {
+            "name": "DatabaseAccountKind",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "DatabaseAccountPatchParameters": {
+      "description": "Parameters for patching Azure Cosmos DB database account properties.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountPatchProperties"
+        }
+      }
+    },
+    "DatabaseAccountListReadOnlyKeysResult": {
+      "description": "The read-only access keys for the given database account.",
+      "properties": {
+        "primaryReadonlyMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the primary read-only key."
+        },
+        "secondaryReadonlyMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the secondary read-only key."
+        }
+      }
+    },
+    "DatabaseAccountListKeysResult": {
+      "description": "The access keys for the given database account.",
+      "properties": {
+        "primaryMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the primary read-write key."
+        },
+        "secondaryMasterKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Base 64 encoded value of the secondary read-write key."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+        }
+      }
+    },
+    "DatabaseAccountConnectionString": {
+      "description": "Connection string for the Cosmos DB account",
+      "properties": {
+        "connectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Value of the connection string"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the connection string"
+        }
+      }
+    },
+    "DatabaseAccountListConnectionStringsResult": {
+      "description": "The connection strings for the given database account.",
+      "properties": {
+        "connectionStrings": {
+          "type": "array",
+          "description": "An array that contains the connection strings for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/DatabaseAccountConnectionString"
+          }
+        }
+      }
+    },
+    "DatabaseAccountRegenerateKeyParameters": {
+      "type": "object",
+      "description": "Parameters to regenerate the keys within the database account.",
+      "properties": {
+        "keyKind": {
+          "type": "string",
+          "description": "The access key to regenerate.",
+          "enum": [
+            "primary",
+            "secondary",
+            "primaryReadonly",
+            "secondaryReadonly"
+          ],
+          "x-ms-enum": {
+            "name": "KeyKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "keyKind"
+      ]
+    },
+    "DatabaseAccountOfferType": {
+      "description": "The offer type for the Cosmos DB database account.",
+      "type": "string",
+      "enum": [
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseAccountOfferType",
+        "modelAsString": false
+      }
+    },
+    "Capability": {
+      "type": "object",
+      "description": "Cosmos DB capability object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB capability. For example, \"name\": \"EnableCassandra\". Current values also include \"EnableTable\" and \"EnableGremlin\"."
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\"."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation."
+    },
+    "IPRangeFilter": {
+      "type": "string",
+      "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces."
+    },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "description": "Virtual Network ACL Rule object",
+      "properties": {
+        "id":{
+          "type": "string",
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}."
+        },
+        "ignoreMissingVNetServiceEndpoint":{
+          "type": "boolean",
+          "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "Provider": {
+              "description": "Service provider: Microsoft.ResourceProvider",
+              "type": "string"
+            },
+            "Resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "Operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "Description": {
+              "description": "Description of operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "UsagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "The list of usages for the database. A usage is a point in time metric"
+        }
+      },
+      "description": "The response to a list usage request."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "description": "The unit of the metric.",
+          "$ref": "#/definitions/UnitType"
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "readOnly": true,
+          "description": "The name information for the metric."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The quota period used to summarize the usage values."
+        },
+        "limit": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Maximum value for this metric"
+        },
+        "currentValue": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Current value for this metric"
+        }
+      },
+      "description": "The usage data for a usage request."
+    },
+    "PartitionUsagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PartitionUsage"
+          },
+          "description": "The list of partition-level usages for the database. A usage is a point in time metric"
+        }
+      },
+      "description": "The response to a list partition level usage request."
+    },
+    "PartitionUsage": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Usage"
+        }
+      ],
+      "properties": {
+        "partitionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The partition id (GUID identifier) of the usages."
+        },
+        "partitionKeyRangeId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The partition key range id (integer identifier) of the usages."
+        }
+      },
+      "description": "The partition level usage data for a usage request."
+    },
+    "MetricDefinitionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          },
+          "description": "The list of metric definitions for the account."
+        }
+      },
+      "description": "The response to a list metric definitions request."
+    },
+    "MetricDefinition": {
+      "properties": {
+        "metricAvailabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "description": "The list of metric availabilities for the account."
+        },
+        "primaryAggregationType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The primary aggregation type of the metric.",
+          "enum": [
+            "None",
+            "Average",
+            "Total",
+            "Minimimum",
+            "Maximum",
+            "Last"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PrimaryAggregationType"
+          }
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "$ref": "#/definitions/UnitType"
+        },
+        "resourceUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource uri of the database."
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric."
+        }
+      },
+      "description": "The definition of a metric."
+    },
+    "MetricAvailability": {
+      "properties": {
+        "timeGrain": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The time grain to be used to summarize the metric values."
+        },
+        "retention": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The retention for the metric values."
+        }
+      },
+      "description": "The availability of the metric."
+    },
+    "MetricListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          },
+          "description": "The list of metrics for the account."
+        }
+      },
+      "description": "The response to a list metrics request."
+    },
+    "Metric": {
+      "properties": {
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the metric (ISO-8601 format)."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the metric (ISO-8601 format)."
+        },
+        "timeGrain": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The time grain to be used to summarize the metric values."
+        },
+        "unit": {
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric."
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric."
+        },
+        "metricValues": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "description": "The metric values for the specified time window and timestep."
+        }
+      },
+      "description": "Metric data"
+    },
+    "MetricName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The friendly name of the metric."
+        }
+      },
+      "description": "A metric name."
+    },
+    "MetricValue": {
+      "properties": {
+        "_count": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "description": "The number of values for the metric."
+        },
+        "average": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The average value of the metric."
+        },
+        "maximum": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The max value of the metric."
+        },
+        "minimum": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The min value of the metric."
+        },
+        "timestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The metric timestamp (ISO-8601 format)."
+        },
+        "total": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The total value of the metric."
+        }
+      },
+      "description": "Represents metrics values."
+    },
+    "PercentileMetricListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PercentileMetric"
+          },
+          "description": "The list of percentile metrics for the account."
+        }
+      },
+      "description": "The response to a list percentile metrics request."
+    },
+    "PercentileMetric": {
+      "properties": {
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the metric (ISO-8601 format)."
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the metric (ISO-8601 format)."
+        },
+        "timeGrain": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The time grain to be used to summarize the metric values."
+        },
+        "unit": {
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric."
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric."
+        },
+        "metricValues": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PercentileMetricValue"
+          },
+          "description": "The percentile metric values for the specified time window and timestep."
+        }
+      },
+      "description": "Percentile Metric data"
+    },
+    "PercentileMetricValue": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricValue"
+        }
+      ],
+      "properties": {
+        "P10": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The 10th percentile value for the metric."
+        },
+        "P25": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The 25th percentile value for the metric."
+        },
+        "P50": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The 50th percentile value for the metric."
+        },
+        "P75": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The 75th percentile value for the metric."
+        },
+        "P90": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The 90th percentile value for the metric."
+        },
+        "P95": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The 95th percentile value for the metric."
+        },
+        "P99": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The 99th percentile value for the metric."
+        }
+      },
+      "description": "Represents percentile metrics values."
+    },
+    "PartitionMetricListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartitionMetric"
+          },
+          "description": "The list of partition-level metrics for the account."
+        }
+      },
+      "description": "The response to a list partition metrics request."
+    },
+    "PartitionMetric" : {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Metric"
+        }
+      ],
+      "properties": {
+        "partitionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The partition id (GUID identifier) of the metric values."
+        },
+        "partitionKeyRangeId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The partition key range id (integer identifier) of the metric values."
+        }
+      },
+      "description": "The metric values for a single partition."
+    },
+    "UnitType" : {
+      "type": "string",
+      "readOnly": true,
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "Percent",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Milliseconds"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UnitType"
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2015-04-08."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    },
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database account name.",
+      "minLength": 3,
+      "maxLength": 50
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq."
+    },
+    "usageFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names)."
+    },
+    "databaseRidParameter": {
+      "name": "databaseRid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database rid."
+    },
+    "collectionRidParameter": {
+      "name": "collectionRid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB collection rid."
+    },
+    "regionParameter": {
+      "name": "region",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "sourceRegionParameter": {
+      "name": "sourceRegion",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "targetRegionParameter": {
+      "name": "targetRegion",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "partitionKeyRangeIdParameter": {
+      "name": "partitionKeyRangeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Partition Key Range Id for which to get data."
+    }
+  }
+}

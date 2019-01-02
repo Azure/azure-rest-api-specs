@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-10-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "enableNonSslPort": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+        "location": "West US",
+        "name": "cache1",
+        "type": "Microsoft.Cache/Redis",
+        "tags": {},
+        "properties": {
+          "accessKeys": {
+            "primaryKey": "secretkey1",
+            "secondaryKey": "secretKey2"
+          },
+          "provisioningState": "Succeeded",
+          "redisVersion": "3.0",
+          "sku": {
+            "name": "Premium",
+            "family": "P",
+            "capacity": 1
+          },
+          "enableNonSslPort": true,
+          "redisConfiguration": {
+            "maxclients": "1000",
+            "maxmemory-reserved": "50",
+            "maxmemory-delta": "50"
+          },
+          "hostName": "cache1.redis.cache.windows.net",
+          "port": 6379,
+          "sslPort": 6380
+        }
+      }
+    }
+  }
+}

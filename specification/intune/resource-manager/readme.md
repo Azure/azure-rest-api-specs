@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2015-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-01-preview'
 input-file:
-- Microsoft.Intune/2015-01-14-preview/intune.json
+- Microsoft.Intune/preview/2015-01-14-preview/intune.json
 ```
  
 ### Tag: package-2015-01-privatepreview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2015-01-privatepreview` is specifi
 
 ``` yaml $(tag) == 'package-2015-01-privatepreview'
 input-file:
-- Microsoft.Intune/2015-01-14-privatepreview/intune.json
+- Microsoft.Intune/preview/2015-01-14-privatepreview/intune.json
 ```
 
 ---
@@ -63,4 +63,18 @@ csharp:
   namespace: Microsoft.Azure.Management.Intune
   output-folder: $(csharp-sdks-folder)/Intune/Intune/Generated
   clear-output-folder: true
+```
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.intune
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-intune
 ```

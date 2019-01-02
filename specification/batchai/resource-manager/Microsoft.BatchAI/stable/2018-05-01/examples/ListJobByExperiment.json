@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "resourceGroupName": "demo_resource_group",
+    "workspaceName": "demo_workspace",
+    "experimentName": "demo_experimnet",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/jobs/demo_job",
+            "name": "demo_job",
+            "type": "Microsoft.BatchAI/Jobs",
+            "properties": {
+              "schedulingPriority": "normal",
+              "cluster": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/clusters/demo_cluster"
+              },
+              "nodeCount": 1,
+              "containerSettings": {
+                "imageSourceRegistry": {
+                  "image": "ubuntu"
+                }
+              },
+              "toolType": "custom",
+              "customToolkitSettings": {
+                "commandLine": "echo hi | tee $AZ_BATCHAI_OUTPUT_OUTPUTS/hi.txt"
+              },
+              "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles",
+              "jobOutputDirectoryPathSegment": "00000000-0000-0000-0000-000000000000/demo_resource_group/workspaces/demo_workspace/experiments/demo_experiment/jobs/demo_job/00000000-0000-0000-0000-000000000000",
+              "inputDirectories": [
+                {
+                  "id": "INPUT",
+                  "path": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/input"
+                }
+              ],
+              "outputDirectories": [
+                {
+                  "id": "OUTPUTS",
+                  "pathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/",
+                  "pathSuffix": "files"
+                }
+              ],
+              "constraints": {
+                "maxWallClockTime": "P7D"
+              },
+              "creationTime": "2017-09-27T23:36:52.611Z",
+              "provisioningState": "succeeded",
+              "provisioningStateTransitionTime": "2017-09-27T23:36:53.701Z",
+              "executionState": "running",
+              "executionStateTransitionTime": "2017-09-27T23:36:56.395Z",
+              "executionInfo": {
+                "startTime": "2017-09-27T23:36:54.115Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

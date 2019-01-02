@@ -1,0 +1,3949 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BatchAI",
+    "description": "The Azure BatchAI Management API.",
+    "version": "2018-05-01",
+    "x-ms-code-generation-settings": {
+      "name": "BatchAIManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.BatchAI/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the Microsoft.BatchAI provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create or update cluster": {
+            "$ref": "./examples/ListOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BatchAI/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usage"
+        ],
+        "operationId": "Usages_List",
+        "description": "Gets the current usage information as well as limits for Batch AI resources for given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create or update cluster": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BatchAI/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_List",
+        "description": "Gets a list of Workspaces associated with the given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/MaxResultsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a formatted list of workspaces and their properties.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List file servers": {
+            "$ref": "./examples/ListWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "Gets a list of Workspaces within the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxResultsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of workspaces within the resource group.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workspaces": {
+            "$ref": "./examples/ListWorkspaceByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}": {
+      "put": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Create",
+        "description": "Creates a Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCreateParameters"
+            },
+            "description": "Workspace creation parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the workspace entity.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a workspace": {
+            "$ref": "./examples/PutWorkspace.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "Updates properties of a Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdateParameters"
+            },
+            "description": "Additional parameters for workspace update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Workspace entity.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update workspace tags": {
+            "$ref": "./examples/PatchWorkspace.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Delete",
+        "description": "Deletes a Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/DeleteWorkspace.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Get",
+        "description": "Gets information about a Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the Workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workspace information": {
+            "$ref": "./examples/GetWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/experiments": {
+      "get": {
+        "tags": [
+          "Experiment"
+        ],
+        "operationId": "Experiments_ListByWorkspace",
+        "description": "Gets a list of Experiments within the specified Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxResultsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of experiments within the workspace.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List experiments": {
+            "$ref": "./examples/ListExperimentByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/experiments/{experimentName}": {
+      "put": {
+        "tags": [
+          "Experiment"
+        ],
+        "operationId": "Experiments_Create",
+        "description": "Creates an Experiment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the experiment entity.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create an experiment": {
+            "$ref": "./examples/PutExperiment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Experiment"
+        ],
+        "operationId": "Experiments_Delete",
+        "description": "Deletes an Experiment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete an experiment": {
+            "$ref": "./examples/DeleteExperiment.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Experiment"
+        ],
+        "operationId": "Experiments_Get",
+        "description": "Gets information about an Experiment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the experiment.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an experiment information": {
+            "$ref": "./examples/GetExperiment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/experiments/{experimentName}/jobs": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Jobs_ListByExperiment",
+        "description": "Gets a list of Jobs within the specified Experiment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxResultsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of ExperimentJob entities associated with the experiment.",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List jobs in an experiment": {
+            "$ref": "./examples/ListJobByExperiment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/experiments/{experimentName}/jobs/{jobName}": {
+      "put": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Jobs_Create",
+        "description": "Creates a Job in the given Experiment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobCreateParameters"
+            },
+            "description": "The parameters to provide for job creation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the job entity.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a job": {
+            "$ref": "./examples/PutJob.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Jobs_Delete",
+        "description": "Deletes a Job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a job": {
+            "$ref": "./examples/DeleteJob.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Jobs_Get",
+        "description": "Gets information about a Job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Job entity.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get job's information": {
+            "$ref": "./examples/GetJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/experiments/{experimentName}/jobs/{jobName}/listOutputFiles": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Jobs_ListOutputFiles",
+        "description": "List all directories and files inside the given directory of the Job's output directory (if the output directory is on Azure File Share or Azure Storage Container).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OutputDirectoryIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Directory"
+          },
+          {
+            "$ref": "#/parameters/DownloadLinkExpiryParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxResultsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of files.",
+            "schema": {
+              "$ref": "#/definitions/FileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List a job's files": {
+            "$ref": "./examples/ListOutputFiles.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/experiments/{experimentName}/jobs/{jobName}/listRemoteLoginInformation": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Jobs_ListRemoteLoginInformation",
+        "description": "Gets a list of currently existing nodes which were used for the Job execution. The returned information contains the node ID, its public IP and SSH port.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains compute node remote login information.",
+            "schema": {
+              "$ref": "#/definitions/RemoteLoginInformationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get information about nodes which ran a job": {
+            "$ref": "./examples/JobListRemoteLoginInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/experiments/{experimentName}/jobs/{jobName}/terminate": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "operationId": "Jobs_Terminate",
+        "description": "Terminates a job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExperimentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Terminate a job": {
+            "$ref": "./examples/TerminateJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/fileServers/{fileServerName}": {
+      "put": {
+        "tags": [
+          "FileServer"
+        ],
+        "operationId": "FileServers_Create",
+        "description": "Creates a File Server in the given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FileServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileServerCreateParameters"
+            },
+            "description": "The parameters to provide for File Server creation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the file server entity.",
+            "schema": {
+              "$ref": "#/definitions/FileServer"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a file server": {
+            "$ref": "./examples/PutFileServer.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FileServer"
+        ],
+        "operationId": "FileServers_Delete",
+        "description": "Deletes a File Server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FileServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a file server": {
+            "$ref": "./examples/DeleteFileServer.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FileServer"
+        ],
+        "operationId": "FileServers_Get",
+        "description": "Gets information about a File Server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FileServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the FileServer.",
+            "schema": {
+              "$ref": "#/definitions/FileServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a file server's information": {
+            "$ref": "./examples/GetFileServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/fileServers": {
+      "get": {
+        "tags": [
+          "FileServer"
+        ],
+        "operationId": "FileServers_ListByWorkspace",
+        "description": "Gets a list of File Servers associated with the specified workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxResultsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of File Servers and their properties.",
+            "schema": {
+              "$ref": "#/definitions/FileServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of file servers": {
+            "$ref": "./examples/ListFileServerByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/clusters/{clusterName}": {
+      "put": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_Create",
+        "description": "Creates a Cluster in the given Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterCreateParameters"
+            },
+            "description": "The parameters to provide for the Cluster creation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Cluster entity.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a cluster": {
+            "$ref": "./examples/PutCluster.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_Update",
+        "description": "Updates properties of a Cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdateParameters"
+            },
+            "description": "Additional parameters for cluster update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Cluster entity.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resize a cluster": {
+            "$ref": "./examples/PatchCluster.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_Delete",
+        "description": "Deletes a Cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a cluster": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_Get",
+        "description": "Gets information about a Cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the Cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a cluster's information": {
+            "$ref": "./examples/GetCluster.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/clusters/{clusterName}/listRemoteLoginInformation": {
+      "post": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_ListRemoteLoginInformation",
+        "description": "Get the IP address, port of all the compute nodes in the Cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of IP addresses.",
+            "schema": {
+              "$ref": "#/definitions/RemoteLoginInformationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get remote login information for a cluster's nodes ": {
+            "$ref": "./examples/ClusterListRemoteLoginInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/clusters": {
+      "get": {
+        "tags": [
+          "Cluster"
+        ],
+        "operationId": "Clusters_ListByWorkspace",
+        "description": "Gets information about Clusters associated with the given Workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxResultsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of Clusters and their properties.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of cluster in a workspace": {
+            "$ref": "./examples/ListClusterByWorkspace.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UsageName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Usage Names."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An enum describing the unit of usage measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": true
+          }
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/UsageName",
+          "description": "The name of the type of usage."
+        }
+      },
+      "description": "Describes Batch AI Resource Usage."
+    },
+    "ListUsagesResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "The list of compute resource usages."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+        }
+      },
+      "description": "The List Usages operation response."
+    },
+    "FileServerBaseProperties": {
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machine for the File Server. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines (Linux)."
+        },
+        "sshConfiguration": {
+          "title": "SSH configuration.",
+          "description": "SSH configuration for the File Server node.",
+          "$ref": "#/definitions/SshConfiguration"
+        },
+        "dataDisks": {
+          "title": "Data disks.",
+          "description": "Settings for the data disks which will be created for the File Server.",
+          "$ref": "#/definitions/DataDisks"
+        },
+        "subnet": {
+          "title": "Subnet identifier.",
+          "description": "Identifier of an existing virtual network subnet to put the File Server in. If not provided, a new virtual network and subnet will be created.",
+          "$ref": "#/definitions/ResourceId"
+        }
+      },
+      "required": [
+        "vmSize",
+        "sshConfiguration",
+        "dataDisks"
+      ],
+      "description": "The properties of a file server."
+    },
+    "FileServerListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileServer"
+          },
+          "description": "The collection of File Servers."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the File Server List operation."
+    },
+    "DataDisks": {
+      "properties": {
+        "diskSizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": false,
+          "title": "Disk size in GB.",
+          "description": "Disk size in GB for the blank data disks."
+        },
+        "cachingType": {
+          "type": "string",
+          "title": "Caching type.",
+          "description": "Caching type for the disks. Available values are none (default), readonly, readwrite. Caching type can be set only for VM sizes supporting premium storage.",
+          "default": "none",
+          "enum": [
+            "none",
+            "readonly",
+            "readwrite"
+          ],
+          "x-ms-enum": {
+            "name": "CachingType",
+            "modelAsString": false
+          }
+        },
+        "diskCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": false,
+          "title": "Number of data disks.",
+          "description": "Number of data disks attached to the File Server. If multiple disks attached, they will be configured in RAID level 0."
+        },
+        "storageAccountType": {
+          "type": "string",
+          "readOnly": false,
+          "title": "Storage account type.",
+          "description": "Type of storage account to be used on the disk. Possible values are: Standard_LRS or Premium_LRS. Premium storage account type can only be used with VM sizes supporting premium storage.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "diskSizeInGB",
+        "diskCount",
+        "storageAccountType"
+      ],
+      "description": "Data disks settings."
+    },
+    "KeyVaultSecretReference": {
+      "properties": {
+        "sourceVault": {
+          "title": "Key Vault resource identifier.",
+          "description": "Fully qualified resource identifier of the Key Vault.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "secretUrl": {
+          "type": "string",
+          "title": "Secret URL.",
+          "description": "The URL referencing a secret in the Key Vault."
+        }
+      },
+      "required": [
+        "sourceVault",
+        "secretUrl"
+      ],
+      "description": "Key Vault Secret reference."
+    },
+    "MountSettings": {
+      "properties": {
+        "mountPoint": {
+          "type": "string",
+          "title": "Mount Point.",
+          "description": "Path where the data disks are mounted on the File Server."
+        },
+        "fileServerPublicIP": {
+          "type": "string",
+          "title": "Public IP.",
+          "description": "Public IP address of the File Server which can be used to SSH to the node from outside of the subnet."
+        },
+        "fileServerInternalIP": {
+          "type": "string",
+          "title": "Internal IP.",
+          "description": "Internal IP address of the File Server which can be used to access the File Server from within the subnet."
+        }
+      },
+      "description": "File Server mount Information."
+    },
+    "SshConfiguration": {
+      "properties": {
+        "publicIPsToAllow": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed public IPs.",
+          "description": "List of source IP ranges to allow SSH connection from. The default value is '*' (all source IPs are allowed). Maximum number of IP ranges that can be specified is 400."
+        },
+        "userAccountSettings": {
+          "title": "User account settings.",
+          "description": "Settings for administrator user account to be created on a node. The account can be used to establish SSH connection to the node.",
+          "$ref": "#/definitions/UserAccountSettings"
+        }
+      },
+      "required": [
+        "userAccountSettings"
+      ],
+      "description": "SSH configuration."
+    },
+    "FileServerCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileServerBaseProperties",
+          "description": "The properties of the File Server.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "File Server creation parameters."
+    },
+    "FileServerProperties": {
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "VM size of the File Server."
+        },
+        "sshConfiguration": {
+          "title": "SSH configuration.",
+          "description": "SSH configuration for accessing the File Server node.",
+          "$ref": "#/definitions/SshConfiguration"
+        },
+        "dataDisks": {
+          "title": "Data disks configuration.",
+          "description": "Information about disks attached to File Server VM.",
+          "$ref": "#/definitions/DataDisks"
+        },
+        "subnet": {
+          "title": "Subnet.",
+          "description": "File Server virtual network subnet resource ID.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "mountSettings": {
+          "title": "Mount settings.",
+          "description": "File Server mount settings.",
+          "readOnly": true,
+          "$ref": "#/definitions/MountSettings"
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Provisioning State Transition time.",
+          "description": "Time when the provisioning state was changed."
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Creation time.",
+          "description": "Time when the FileServer was created."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "Provisioning state.",
+          "description": "Provisioning state of the File Server. Possible values: creating - The File Server is getting created; updating - The File Server creation has been accepted and it is getting updated; deleting - The user has requested that the File Server be deleted, and it is in the process of being deleted; failed - The File Server creation has failed with the specified error code. Details about the error code are specified in the message field; succeeded - The File Server creation has succeeded.",
+          "enum": [
+            "creating",
+            "updating",
+            "deleting",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "FileServerProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "File Server properties."
+    },
+    "FileServer": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FileServerProperties",
+          "description": "File Server properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "File Server information."
+    },
+    "ClusterBaseProperties": {
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machines in the cluster. All nodes in a cluster have the same VM size. For information about available VM sizes for clusters using images from the Virtual Machines Marketplace see Sizes for Virtual Machines (Linux). Batch AI service supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+        },
+        "vmPriority": {
+          "type": "string",
+          "title": "VM priority.",
+          "description": "VM priority. Allowed values are: dedicated (default) and lowpriority.",
+          "default": "dedicated",
+          "enum": [
+            "dedicated",
+            "lowpriority"
+          ],
+          "x-ms-enum": {
+            "name": "VmPriority",
+            "modelAsString": false
+          }
+        },
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Scale settings.",
+          "description": "Scale settings for the cluster. Batch AI service supports manual and auto scale clusters."
+        },
+        "virtualMachineConfiguration": {
+          "title": "VM configuration.",
+          "description": "OS image configuration for cluster nodes. All nodes in a cluster have the same OS image.",
+          "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "nodeSetup": {
+          "title": "Node setup.",
+          "description": "Setup to be performed on each compute node in the cluster.",
+          "$ref": "#/definitions/NodeSetup"
+        },
+        "userAccountSettings": {
+          "title": "User account settings.",
+          "description": "Settings for an administrator user account that will be created on each compute node in the cluster.",
+          "$ref": "#/definitions/UserAccountSettings"
+        },
+        "subnet": {
+          "title": "Subnet.",
+          "description": "Existing virtual network subnet to put the cluster nodes in. Note, if a File Server mount configured in node setup, the File Server's subnet will be used automatically.",
+          "$ref": "#/definitions/ResourceId"
+        }
+      },
+      "required": [
+        "vmSize",
+        "userAccountSettings"
+      ],
+      "description": "The properties of a Cluster."
+    },
+    "ClusterUpdateProperties": {
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Scale settings.",
+          "description": "Desired scale settings for the cluster. Batch AI service supports manual and auto scale clusters."
+        }
+      },
+      "description": "The properties of a Cluster that need to be updated."
+    },
+    "DeallocationOption": {
+      "type": "string",
+      "title": "Deallocation options.",
+      "description": "Actions which should be performed when compute nodes are removed from the cluster. Possible values are: requeue (default) - Terminate running jobs and requeue them so the jobs will run again. Remove compute nodes as soon as jobs have been terminated; terminate - Terminate running jobs. The jobs will not run again. Remove compute nodes as soon as jobs have been terminated. waitforjobcompletion - Allow currently running jobs to complete. Schedule no new jobs while waiting. Remove compute nodes when all jobs have completed.",
+      "default": "requeue",
+      "enum": [
+        "requeue",
+        "terminate",
+        "waitforjobcompletion"
+      ],
+      "x-ms-enum": {
+        "name": "DeallocationOption",
+        "modelAsString": true
+      }
+    },
+    "ScaleSettings": {
+      "properties": {
+        "manual": {
+          "$ref": "#/definitions/ManualScaleSettings",
+          "title": "Manual scale settings.",
+          "description": "Manual scale settings for the cluster."
+        },
+        "autoScale": {
+          "$ref": "#/definitions/AutoScaleSettings",
+          "title": "Auto-scale settings.",
+          "description": "Auto-scale settings for the cluster."
+        }
+      },
+      "description": "At least one of manual or autoScale settings must be specified. Only one of manual or autoScale settings can be specified. If autoScale settings are specified, the system automatically scales the cluster up and down (within the supplied limits) based on the pending jobs on the cluster."
+    },
+    "AutoScaleSettings": {
+      "properties": {
+        "minimumNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Minimum node count.",
+          "description": "The minimum number of compute nodes the Batch AI service will try to allocate for the cluster. Note, the actual number of nodes can be less than the specified value if the subscription has not enough quota to fulfill the request."
+        },
+        "maximumNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Maximum node count.",
+          "description": "The maximum number of compute nodes the cluster can have."
+        },
+        "initialNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Initial node count.",
+          "description": "The number of compute nodes to allocate on cluster creation. Note that this value is used only during cluster creation. Default: 0.",
+          "default": 0
+        }
+      },
+      "required": [
+        "minimumNodeCount",
+        "maximumNodeCount"
+      ],
+      "description": "Auto-scale settings for the cluster. The system automatically scales the cluster up and down (within minimumNodeCount and maximumNodeCount) based on the number of queued and running jobs assigned to the cluster."
+    },
+    "ManualScaleSettings": {
+      "properties": {
+        "targetNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Target node count.",
+          "description": "The desired number of compute nodes in the Cluster. Default is 0.",
+          "default": 0
+        },
+        "nodeDeallocationOption": {
+          "title": "Node deallocation options.",
+          "description": "An action to be performed when the cluster size is decreasing. The default value is requeue.",
+          "default": "requeue",
+          "$ref": "#/definitions/DeallocationOption"
+        }
+      },
+      "required": [
+        "targetNodeCount"
+      ],
+      "description": "Manual scale settings for the cluster."
+    },
+    "VirtualMachineConfiguration": {
+      "properties": {
+        "imageReference": {
+          "title": "Image reference.",
+          "description": "OS image reference for cluster nodes.",
+          "$ref": "#/definitions/ImageReference"
+        }
+      },
+      "description": "VM configuration."
+    },
+    "ImageReference": {
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "title": "Publisher.",
+          "description": "Publisher of the image."
+        },
+        "offer": {
+          "type": "string",
+          "title": "Offer.",
+          "description": "Offer of the image."
+        },
+        "sku": {
+          "type": "string",
+          "title": "SKU.",
+          "description": "SKU of the image."
+        },
+        "version": {
+          "type": "string",
+          "title": "Version.",
+          "description": "Version of the image."
+        },
+        "virtualMachineImageId": {
+          "type": "string",
+          "title": "Custom VM image resource ID.",
+          "description": "The ARM resource identifier of the virtual machine image for the compute nodes. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}. The virtual machine image must be in the same region and subscription as the cluster. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration. Note, you need to provide publisher, offer and sku of the base OS image of which the custom image has been derived from."
+        }
+      },
+      "required": [
+        "publisher",
+        "offer",
+        "sku"
+      ],
+      "description": "The OS image reference."
+    },
+    "NodeStateCounts": {
+      "properties": {
+        "idleNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Idle node count.",
+          "description": "Number of compute nodes in idle state."
+        },
+        "runningNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Running node count.",
+          "description": "Number of compute nodes which are running jobs."
+        },
+        "preparingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Preparing node count.",
+          "description": "Number of compute nodes which are being prepared."
+        },
+        "unusableNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Unusable node count.",
+          "description": "Number of compute nodes which are in unusable state."
+        },
+        "leavingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Leaving node count.",
+          "description": "Number of compute nodes which are leaving the cluster."
+        }
+      },
+      "description": "Counts of various compute node states on the cluster."
+    },
+    "UserAccountSettings": {
+      "properties": {
+        "adminUserName": {
+          "type": "string",
+          "title": "User name.",
+          "description": "Name of the administrator user account which can be used to SSH to nodes."
+        },
+        "adminUserSshPublicKey": {
+          "type": "string",
+          "title": "SSH public key.",
+          "description": "SSH public key of the administrator user account."
+        },
+        "adminUserPassword": {
+          "type": "string",
+          "title": "Password.",
+          "description": "Password of the administrator user account."
+        }
+      },
+      "required": [
+        "adminUserName"
+      ],
+      "description": "Settings for user account that gets created on each on the nodes of a cluster."
+    },
+    "PerformanceCountersSettings": {
+      "properties": {
+        "appInsightsReference": {
+          "title": "Azure Application Insights reference.",
+          "description": "Azure Application Insights information for performance counters reporting. If provided, Batch AI will upload node performance counters to the corresponding Azure Application Insights account.",
+          "$ref": "#/definitions/AppInsightsReference"
+        }
+      },
+      "required": [
+        "appInsightsReference"
+      ],
+      "description": "Performance counters reporting settings."
+    },
+    "AppInsightsReference": {
+      "properties": {
+        "component": {
+          "title": "Component ID.",
+          "description": "Azure Application Insights component resource ID.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "instrumentationKey": {
+          "type": "string",
+          "title": "Instrumentation Key.",
+          "description": "Value of the Azure Application Insights instrumentation key."
+        },
+        "instrumentationKeySecretReference": {
+          "title": "Instrumentation key KeyVault Secret reference.",
+          "description": "KeyVault Store and Secret which contains Azure Application Insights instrumentation key. One of instrumentationKey or instrumentationKeySecretReference must be specified.",
+          "$ref": "#/definitions/KeyVaultSecretReference"
+        }
+      },
+      "required": [
+        "component"
+      ],
+      "description": "Azure Application Insights information for performance counters reporting."
+    },
+    "NodeSetup": {
+      "properties": {
+        "setupTask": {
+          "title": "Setup task.",
+          "description": "Setup task to run on cluster nodes when nodes got created or rebooted. The setup task code needs to be idempotent. Generally the setup task is used to download static data that is required for all jobs that run on the cluster VMs and/or to download/install software.",
+          "$ref": "#/definitions/SetupTask"
+        },
+        "mountVolumes": {
+          "title": "Mount volumes.",
+          "description": "Mount volumes to be available to setup task and all jobs executing on the cluster. The volumes will be mounted at location specified by $AZ_BATCHAI_MOUNT_ROOT environment variable.",
+          "$ref": "#/definitions/MountVolumes"
+        },
+        "performanceCountersSettings": {
+          "title": "Performance counters settings.",
+          "description": "Settings for performance counters collecting and uploading.",
+          "$ref": "#/definitions/PerformanceCountersSettings"
+        }
+      },
+      "description": "Node setup settings."
+    },
+    "SetupTask": {
+      "properties": {
+        "commandLine": {
+          "type": "string",
+          "title": "Command line.",
+          "description": "The command line to be executed on each cluster's node after it being allocated or rebooted. The command is executed in a bash subshell as a root."
+        },
+        "environmentVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "title": "Environment variables.",
+          "description": "A collection of user defined environment variables to be set for setup task."
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariableWithSecretValue"
+          },
+          "title": "Secrets.",
+          "description": "A collection of user defined environment variables with secret values to be set for the setup task. Server will never report values of these variables back."
+        },
+        "stdOutErrPathPrefix": {
+          "type": "string",
+          "title": "Output path prefix.",
+          "description": "The prefix of a path where the Batch AI service will upload the stdout, stderr and execution log of the setup task."
+        },
+        "stdOutErrPathSuffix": {
+          "type": "string",
+          "title": "Output path suffix.",
+          "description": "A path segment appended by Batch AI to stdOutErrPathPrefix to form a path where stdout, stderr and execution log of the setup task will be uploaded. Batch AI creates the setup task output directories under an unique path to avoid conflicts between different clusters. The full path can be obtained by concatenation of stdOutErrPathPrefix and stdOutErrPathSuffix.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "commandLine",
+        "stdOutErrPathPrefix"
+      ],
+      "description": "Specifies a setup task which can be used to customize the compute nodes of the cluster."
+    },
+    "ClusterCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterBaseProperties",
+          "description": "The properties of the Cluster.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Cluster creation operation."
+    },
+    "ClusterUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterUpdateProperties",
+          "description": "The properties of the Cluster."
+        }
+      },
+      "description": "Cluster update parameters."
+    },
+    "ClusterProperties": {
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machines in the cluster. All nodes in a cluster have the same VM size."
+        },
+        "vmPriority": {
+          "type": "string",
+          "title": "VM priority.",
+          "description": "VM priority of cluster nodes.",
+          "default": "dedicated",
+          "enum": [
+            "dedicated",
+            "lowpriority"
+          ],
+          "x-ms-enum": {
+            "name": "VmPriority",
+            "modelAsString": false
+          }
+        },
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Scale settings.",
+          "description": "Scale settings of the cluster."
+        },
+        "virtualMachineConfiguration": {
+          "title": "VM configuration.",
+          "description": "Virtual machine configuration (OS image) of the compute nodes. All nodes in a cluster have the same OS image configuration.",
+          "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "nodeSetup": {
+          "title": "Node setup.",
+          "description": "Setup (mount file systems, performance counters settings and custom setup task) to be performed on each compute node in the cluster.",
+          "$ref": "#/definitions/NodeSetup"
+        },
+        "userAccountSettings": {
+          "title": "User account settings.",
+          "description": "Administrator user account settings which can be used to SSH to compute nodes.",
+          "$ref": "#/definitions/UserAccountSettings"
+        },
+        "subnet": {
+          "title": "Subnet.",
+          "description": "Virtual network subnet resource ID the cluster nodes belong to.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Creation time.",
+          "description": "The time when the cluster was created."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "Provisioning state.",
+          "description": "Provisioning state of the cluster. Possible value are: creating - Specifies that the cluster is being created. succeeded - Specifies that the cluster has been created successfully. failed - Specifies that the cluster creation has failed. deleting - Specifies that the cluster is being deleted.",
+          "enum": [
+            "creating",
+            "succeeded",
+            "failed",
+            "deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Provisioning State Transition time.",
+          "description": "Time when the provisioning state was changed."
+        },
+        "allocationState": {
+          "type": "string",
+          "readOnly": true,
+          "title": "Allocation state.",
+          "description": "Allocation state of the cluster. Possible values are: steady - Indicates that the cluster is not resizing. There are no changes to the number of compute nodes in the cluster in progress. A cluster enters this state when it is created and when no operations are being performed on the cluster to change the number of compute nodes. resizing - Indicates that the cluster is resizing; that is, compute nodes are being added to or removed from the cluster.",
+          "enum": [
+            "steady",
+            "resizing"
+          ],
+          "x-ms-enum": {
+            "name": "AllocationState",
+            "modelAsString": true
+          }
+        },
+        "allocationStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Allocation state transition time.",
+          "description": "The time at which the cluster entered its current allocation state."
+        },
+        "errors": {
+          "readOnly": true,
+          "title": "Errors.",
+          "description": "Collection of errors encountered by various compute nodes during node setup.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchAIError"
+          }
+        },
+        "currentNodeCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "title": "Current node count.",
+          "description": "The number of compute nodes currently assigned to the cluster."
+        },
+        "nodeStateCounts": {
+          "title": "Node state counts.",
+          "description": "Counts of various node states on the cluster.",
+          "readOnly": true,
+          "$ref": "#/definitions/NodeStateCounts"
+        }
+      },
+      "description": "Cluster properties."
+    },
+    "Cluster": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The properties associated with the Cluster."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Information about a Cluster."
+    },
+    "ClusterListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          },
+          "description": "The collection of returned Clusters."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List Clusters operation."
+    },
+    "JobBaseProperties": {
+      "properties": {
+        "schedulingPriority": {
+          "type": "string",
+          "default": "normal",
+          "enum": [
+            "low",
+            "normal",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "JobPriority",
+            "modelAsString": true
+          },
+          "title": "Scheduling priority.",
+          "description": "Scheduling priority associated with the job. Possible values: low, normal, high."
+        },
+        "cluster": {
+          "title": "Cluster.",
+          "description": "Resource ID of the cluster on which this job will run.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "mountVolumes": {
+          "title": "Mount volumes.",
+          "description": "Information on mount volumes to be used by the job. These volumes will be mounted before the job execution and will be unmounted after the job completion. The volumes will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.",
+          "$ref": "#/definitions/MountVolumes"
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Node count.",
+          "description": "Number of compute nodes to run the job on. The job will be gang scheduled on that many compute nodes."
+        },
+        "containerSettings": {
+          "title": "Container settings.",
+          "description": "Docker container settings for the job. If not provided, the job will run directly on the node.",
+          "$ref": "#/definitions/ContainerSettings"
+        },
+        "cntkSettings": {
+          "title": "CNTK settings.",
+          "description": "Settings for CNTK (aka Microsoft Cognitive Toolkit) job.",
+          "$ref": "#/definitions/CNTKsettings"
+        },
+        "pyTorchSettings": {
+          "title": "pyTorch settings.",
+          "description": "Settings for pyTorch job.",
+          "$ref": "#/definitions/PyTorchSettings"
+        },
+        "tensorFlowSettings": {
+          "title": "TensorFlow settings.",
+          "description": "Settings for Tensor Flow job.",
+          "$ref": "#/definitions/TensorFlowSettings"
+        },
+        "caffeSettings": {
+          "title": "Caffe settings.",
+          "description": "Settings for Caffe job.",
+          "$ref": "#/definitions/CaffeSettings"
+        },
+        "caffe2Settings": {
+          "title": "Caffe2 settings.",
+          "description": "Settings for Caffe2 job.",
+          "$ref": "#/definitions/Caffe2Settings"
+        },
+        "chainerSettings": {
+          "title": "Chainer settings.",
+          "description": "Settings for Chainer job.",
+          "$ref": "#/definitions/ChainerSettings"
+        },
+        "customToolkitSettings": {
+          "title": "Custom tool kit job.",
+          "description": "Settings for custom tool kit job.",
+          "$ref": "#/definitions/CustomToolkitSettings"
+        },
+        "customMpiSettings": {
+          "title": "Custom MPI settings.",
+          "description": "Settings for custom MPI job.",
+          "$ref": "#/definitions/CustomMpiSettings"
+        },
+        "horovodSettings": {
+          "title": "Horovod settings.",
+          "description": "Settings for Horovod job.",
+          "$ref": "#/definitions/HorovodSettings"
+        },
+        "jobPreparation": {
+          "title": "Job preparation.",
+          "description": "A command line to be executed on each node allocated for the job before tool kit is launched.",
+          "$ref": "#/definitions/JobPreparation"
+        },
+        "stdOutErrPathPrefix": {
+          "type": "string",
+          "title": "Standard output path prefix.",
+          "description": "The path where the Batch AI service will store stdout, stderror and execution log of the job."
+        },
+        "inputDirectories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputDirectory"
+          },
+          "title": "Input directories.",
+          "description": "A list of input directories for the job."
+        },
+        "outputDirectories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputDirectory"
+          },
+          "title": "Output directories.",
+          "description": "A list of output directories for the job."
+        },
+        "environmentVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "title": "Environment variables.",
+          "description": "A list of user defined environment variables which will be setup for the job."
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariableWithSecretValue"
+          },
+          "title": "Secrets.",
+          "description": "A list of user defined environment variables with secret values which will be setup for the job. Server will never report values of these variables back."
+        },
+        "constraints": {
+          "properties": {
+            "maxWallClockTime": {
+              "type": "string",
+              "format": "duration",
+              "title": "Max wall clock time.",
+              "description": "Max time the job can run. Default value: 1 week.",
+              "default": "7.00:00:00"
+            }
+          },
+          "description": "Constraints associated with the Job."
+        }
+      },
+      "required": [
+        "cluster",
+        "nodeCount",
+        "stdOutErrPathPrefix"
+      ],
+      "description": "The properties of a Batch AI Job."
+    },
+    "JobCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JobBaseProperties",
+          "description": "The properties of the Job."
+        }
+      },
+      "description": "Job creation parameters."
+    },
+    "JobProperties": {
+      "properties": {
+        "schedulingPriority": {
+          "type": "string",
+          "default": "normal",
+          "enum": [
+            "low",
+            "normal",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "JobPriority",
+            "modelAsString": true
+          },
+          "title": "Scheduling priority.",
+          "description": "Scheduling priority associated with the job."
+        },
+        "cluster": {
+          "title": "Cluster.",
+          "description": "Resource ID of the cluster associated with the job.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "mountVolumes": {
+          "title": "Mount volumes.",
+          "description": "Collection of mount volumes available to the job during execution. These volumes are mounted before the job execution and unmounted after the job completion. The volumes are mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.",
+          "$ref": "#/definitions/MountVolumes"
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of compute nodes to run the job on.",
+          "description": "The job will be gang scheduled on that many compute nodes"
+        },
+        "containerSettings": {
+          "title": "If provided the job will run in the specified container.",
+          "description": "If the container was downloaded as part of cluster setup then the same container image will be used. If not provided, the job will run on the VM.",
+          "$ref": "#/definitions/ContainerSettings"
+        },
+        "toolType": {
+          "title": "The toolkit type of this job.",
+          "description": "Possible values are: cntk, tensorflow, caffe, caffe2, chainer, pytorch, custom, custommpi, horovod.",
+          "$ref": "#/definitions/ToolType"
+        },
+        "cntkSettings": {
+          "title": "Specifies the settings for CNTK (aka Microsoft Cognitive Toolkit) job.",
+          "$ref": "#/definitions/CNTKsettings"
+        },
+        "pyTorchSettings": {
+          "title": "Specifies the settings for pyTorch job.",
+          "$ref": "#/definitions/PyTorchSettings"
+        },
+        "tensorFlowSettings": {
+          "title": "Specifies the settings for Tensor Flow job.",
+          "$ref": "#/definitions/TensorFlowSettings"
+        },
+        "caffeSettings": {
+          "title": "Specifies the settings for Caffe job.",
+          "$ref": "#/definitions/CaffeSettings"
+        },
+        "caffe2Settings": {
+          "title": "Specifies the settings for Caffe2 job.",
+          "$ref": "#/definitions/Caffe2Settings"
+        },
+        "chainerSettings": {
+          "title": "Specifies the settings for Chainer job.",
+          "$ref": "#/definitions/ChainerSettings"
+        },
+        "customToolkitSettings": {
+          "title": "Specifies the settings for custom tool kit job.",
+          "$ref": "#/definitions/CustomToolkitSettings"
+        },
+        "customMpiSettings": {
+          "title": "Specifies the settings for custom MPI job.",
+          "$ref": "#/definitions/CustomMpiSettings"
+        },
+        "horovodSettings": {
+          "title": "Specifies the settings for Horovod job.",
+          "$ref": "#/definitions/HorovodSettings"
+        },
+        "jobPreparation": {
+          "title": "Specifies the actions to be performed before tool kit is launched.",
+          "description": "The specified actions will run on all the nodes that are part of the job",
+          "$ref": "#/definitions/JobPreparation"
+        },
+        "jobOutputDirectoryPathSegment": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Output directory path segment.",
+          "description": "A segment of job's output directories path created by Batch AI. Batch AI creates job's output directories under an unique path to avoid conflicts between jobs. This value contains a path segment generated by Batch AI to make the path unique and can be used to find the output directory on the node or mounted filesystem."
+        },
+        "stdOutErrPathPrefix": {
+          "type": "string",
+          "title": "Standard output directory path prefix.",
+          "description": "The path where the Batch AI service stores stdout, stderror and execution log of the job."
+        },
+        "inputDirectories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputDirectory"
+          },
+          "title": "Input directories.",
+          "description": "A list of input directories for the job."
+        },
+        "outputDirectories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputDirectory"
+          },
+          "title": "Output directories.",
+          "description": "A list of output directories for the job."
+        },
+        "environmentVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "title": "Environment variables.",
+          "description": "A collection of user defined environment variables to be setup for the job."
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariableWithSecretValue"
+          },
+          "title": "Secrets.",
+          "description": "A collection of user defined environment variables with secret values to be setup for the job. Server will never report values of these variables back."
+        },
+        "constraints": {
+          "properties": {
+            "maxWallClockTime": {
+              "type": "string",
+              "format": "duration",
+              "title": "Max wall clock time.",
+              "description": "Max time the job can run. Default value: 1 week.",
+              "default": "7.00:00:00"
+            }
+          },
+          "description": "Constraints associated with the Job."
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Creation time.",
+          "description": "The creation time of the job."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "Provisioning state.",
+          "description": "The provisioned state of the Batch AI job",
+          "enum": [
+            "creating",
+            "deleting",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Provisioning state transition time.",
+          "description": "The time at which the job entered its current provisioning state."
+        },
+        "executionState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Execution state.",
+          "description": "The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running successfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.",
+          "enum": [
+            "queued",
+            "running",
+            "terminating",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionState",
+            "modelAsString": true
+          }
+        },
+        "executionStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Execution state transition time.",
+          "description": "The time at which the job entered its current execution state."
+        },
+        "executionInfo": {
+          "properties": {
+            "startTime": {
+              "readOnly": true,
+              "type": "string",
+              "format": "date-time",
+              "title": "Start time.",
+              "description": "The time at which the job started running. 'Running' corresponds to the running state. If the job has been restarted or retried, this is the most recent time at which the job started running. This property is present only for job that are in the running or completed state."
+            },
+            "endTime": {
+              "readOnly": true,
+              "type": "string",
+              "format": "date-time",
+              "title": "End time.",
+              "description": "The time at which the job completed. This property is only returned if the job is in completed state."
+            },
+            "exitCode": {
+              "readOnly": true,
+              "type": "integer",
+              "format": "int32",
+              "title": "Exit code.",
+              "description": "The exit code of the job. This property is only returned if the job is in completed state."
+            },
+            "errors": {
+              "readOnly": true,
+              "title": "Errors.",
+              "description": "A collection of errors encountered by the service during job execution.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BatchAIError"
+              }
+            }
+          },
+          "description": "Information about the execution of a job."
+        }
+      },
+      "description": "Job properties."
+    },
+    "Job": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JobProperties",
+          "description": "The properties associated with the Job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Information about a Job."
+    },
+    "JobListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Job"
+          },
+          "description": "The collection of jobs."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "RemoteLoginInformation": {
+      "properties": {
+        "nodeId": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node ID.",
+          "description": "ID of the compute node."
+        },
+        "ipAddress": {
+          "readOnly": true,
+          "type": "string",
+          "title": "IP address.",
+          "description": "Public IP address of the compute node."
+        },
+        "port": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "title": "Port.",
+          "description": "SSH port number of the node."
+        }
+      },
+      "description": "Login details to SSH to a compute node in cluster."
+    },
+    "RemoteLoginInformationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemoteLoginInformation"
+          },
+          "description": "The collection of returned remote login details."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "FileProperties": {
+      "properties": {
+        "lastModified": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "title": "Last modified time.",
+          "description": "The time at which the file was last modified."
+        },
+        "contentLength": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "title": "Content length.",
+          "description": "The file of the size."
+        }
+      },
+      "description": "File properties."
+    },
+    "File": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Name.",
+          "description": "Name of the file."
+        },
+        "fileType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "file",
+            "directory"
+          ],
+          "x-ms-enum": {
+            "name": "FileType",
+            "modelAsString": true
+          },
+          "title": "File type.",
+          "description": "Type of the file. Possible values are file and directory."
+        },
+        "downloadUrl": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Download URL.",
+          "description": "URL to download the corresponding file. The downloadUrl is not returned for directories."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FileProperties",
+          "title": "Properties.",
+          "description": "The properties associated with the file. The properties are not returned for directories."
+        }
+      },
+      "description": "Properties of the file or directory."
+    },
+    "FileListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/File"
+          },
+          "description": "The collection of returned job directories and files."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "ResourceId": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.",
+      "x-ms-azure-resource": true
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource"
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the resource"
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags of the resource"
+        }
+      },
+      "description": "A definition of an Azure resource.",
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        }
+      },
+      "description": "A definition of an Azure proxy resource.",
+      "x-ms-azure-resource": true
+    },
+    "ToolType": {
+      "type": "string",
+      "title": "Toolkit type.",
+      "description": "The toolkit type of the job.",
+      "enum": [
+        "cntk",
+        "tensorflow",
+        "caffe",
+        "caffe2",
+        "chainer",
+        "horovod",
+        "custommpi",
+        "custom"
+      ],
+      "x-ms-enum": {
+        "name": "ToolType",
+        "modelAsString": true
+      }
+    },
+    "NameValuePair": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name.",
+          "description": "The name in the name-value pair."
+        },
+        "value": {
+          "type": "string",
+          "title": "Value.",
+          "description": "The value in the name-value pair."
+        }
+      },
+      "description": "Name-value pair."
+    },
+    "EnvironmentVariable": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name.",
+          "description": "The name of the environment variable."
+        },
+        "value": {
+          "type": "string",
+          "title": "Value.",
+          "description": "The value of the environment variable."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "An environment variable definition."
+    },
+    "EnvironmentVariableWithSecretValue": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name.",
+          "description": "The name of the environment variable to store the secret value."
+        },
+        "value": {
+          "type": "string",
+          "title": "Value.",
+          "description": "The value of the environment variable. This value will never be reported back by Batch AI."
+        },
+        "valueSecretReference": {
+          "title": "KeyVault secret reference.",
+          "description": "KeyVault store and secret which contains the value for the environment variable. One of value or valueSecretReference must be provided.",
+          "$ref": "#/definitions/KeyVaultSecretReference"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "An environment variable with secret value definition."
+    },
+    "ImageSourceRegistry": {
+      "properties": {
+        "serverUrl": {
+          "type": "string",
+          "title": "Server URL.",
+          "description": "URL for image repository."
+        },
+        "image": {
+          "type": "string",
+          "title": "Image.",
+          "description": "The name of the image in the image repository."
+        },
+        "credentials": {
+          "title": "Credentials.",
+          "description": "Credentials to access the private docker repository.",
+          "$ref": "#/definitions/PrivateRegistryCredentials"
+        }
+      },
+      "description": "Information about docker image for the job.",
+      "required": [
+        "image"
+      ]
+    },
+    "PrivateRegistryCredentials": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "User name.",
+          "description": "User name to login to the repository."
+        },
+        "password": {
+          "type": "string",
+          "title": "Password.",
+          "description": "User password to login to the docker repository. One of password or passwordSecretReference must be specified."
+        },
+        "passwordSecretReference": {
+          "title": "Password secret reference.",
+          "description": "KeyVault Secret storing the password. Users can store their secrets in Azure KeyVault and pass it to the Batch AI service to integrate with KeyVault. One of password or passwordSecretReference must be specified.",
+          "$ref": "#/definitions/KeyVaultSecretReference"
+        }
+      },
+      "description": "Credentials to access a container image in a private repository.",
+      "required": [
+        "username"
+      ]
+    },
+    "ContainerSettings": {
+      "properties": {
+        "imageSourceRegistry": {
+          "title": "Image source registry.",
+          "description": "Information about docker image and docker registry to download the container from.",
+          "$ref": "#/definitions/ImageSourceRegistry"
+        },
+        "shmSize": {
+          "type": "string",
+          "title": "/dev/shm size.",
+          "description": "Size of /dev/shm. Please refer to docker documentation for supported argument formats."
+        }
+      },
+      "description": "Docker container settings.",
+      "required": [
+        "imageSourceRegistry"
+      ]
+    },
+    "InputDirectory": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID.",
+          "description": "The ID for the input directory. The job can use AZ_BATCHAI_INPUT_<id> environment variable to find the directory path, where <id> is the value of id attribute."
+        },
+        "path": {
+          "type": "string",
+          "title": "Path.",
+          "description": "The path to the input directory."
+        }
+      },
+      "description": "Input directory for the job.",
+      "required": [
+        "id",
+        "path"
+      ]
+    },
+    "OutputDirectory": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID.",
+          "description": "The ID of the output directory. The job can use AZ_BATCHAI_OUTPUT_<id> environment variable to find the directory path, where <id> is the value of id attribute."
+        },
+        "pathPrefix": {
+          "type": "string",
+          "title": "Path prefix.",
+          "description": "The prefix path where the output directory will be created. Note, this is an absolute path to prefix. E.g. $AZ_BATCHAI_MOUNT_ROOT/MyNFS/MyLogs. The full path to the output directory by combining pathPrefix, jobOutputDirectoryPathSegment (reported by get job) and pathSuffix."
+        },
+        "pathSuffix": {
+          "type": "string",
+          "title": "Path suffix.",
+          "description": "The suffix path where the output directory will be created. E.g. models. You can find the full path to the output directory by combining pathPrefix, jobOutputDirectoryPathSegment (reported by get job) and pathSuffix."
+        }
+      },
+      "description": "Output directory for the job.",
+      "required": [
+        "id",
+        "pathPrefix"
+      ]
+    },
+    "AzureStorageCredentialsInfo": {
+      "properties": {
+        "accountKey": {
+          "type": "string",
+          "title": "Account key.",
+          "description": "Storage account key. One of accountKey or accountKeySecretReference must be specified."
+        },
+        "accountKeySecretReference": {
+          "title": "Account key secret reference.",
+          "description": "Information about KeyVault secret storing the storage account key. One of accountKey or accountKeySecretReference must be specified.",
+          "$ref": "#/definitions/KeyVaultSecretReference"
+        }
+      },
+      "description": "Azure storage account credentials."
+    },
+    "AzureFileShareReference": {
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "title": "Account name.",
+          "description": "Name of the Azure storage account."
+        },
+        "azureFileUrl": {
+          "type": "string",
+          "title": "Azure File URL.",
+          "description": "URL to access the Azure File."
+        },
+        "credentials": {
+          "title": "Credentials.",
+          "description": "Information about the Azure storage credentials.",
+          "$ref": "#/definitions/AzureStorageCredentialsInfo"
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "Relative mount path.",
+          "description": "The relative path on the compute node where the Azure File share will be mounted. Note that all cluster level file shares will be mounted under $AZ_BATCHAI_MOUNT_ROOT location and all job level file shares will be mounted under $AZ_BATCHAI_JOB_MOUNT_ROOT."
+        },
+        "fileMode": {
+          "type": "string",
+          "title": "File mode.",
+          "description": "File mode for files on the mounted file share. Default value: 0777.",
+          "default": "0777"
+        },
+        "directoryMode": {
+          "type": "string",
+          "title": "Directory mode.",
+          "description": "File mode for directories on the mounted file share. Default value: 0777.",
+          "default": "0777"
+        }
+      },
+      "description": "Azure File Share mounting configuration.",
+      "required": [
+        "accountName",
+        "azureFileUrl",
+        "credentials",
+        "relativeMountPath"
+      ]
+    },
+    "AzureBlobFileSystemReference": {
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "title": "Account name.",
+          "description": "Name of the Azure storage account."
+        },
+        "containerName": {
+          "type": "string",
+          "title": "Container name.",
+          "description": "Name of the Azure Blob Storage container to mount on the cluster."
+        },
+        "credentials": {
+          "title": "Credentials.",
+          "description": "Information about the Azure storage credentials.",
+          "$ref": "#/definitions/AzureStorageCredentialsInfo"
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "Relative mount path.",
+          "description": "The relative path on the compute node where the Azure File container will be mounted. Note that all cluster level containers will be mounted under $AZ_BATCHAI_MOUNT_ROOT location and all job level containers will be mounted under $AZ_BATCHAI_JOB_MOUNT_ROOT."
+        },
+        "mountOptions": {
+          "type": "string",
+          "title": "Mount options.",
+          "description": "Mount options for mounting blobfuse file system."
+        }
+      },
+      "description": "Azure Blob Storage Container mounting configuration.",
+      "required": [
+        "accountName",
+        "containerName",
+        "credentials",
+        "relativeMountPath"
+      ]
+    },
+    "FileServerReference": {
+      "properties": {
+        "fileServer": {
+          "title": "File server.",
+          "description": "Resource ID of the existing File Server to be mounted.",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "sourceDirectory": {
+          "type": "string",
+          "title": "Source directory.",
+          "description": "File Server directory that needs to be mounted. If this property is not specified, the entire File Server will be mounted."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "Relative mount path.",
+          "description": "The relative path on the compute node where the File Server will be mounted. Note that all cluster level file servers will be mounted under $AZ_BATCHAI_MOUNT_ROOT location and all job level file servers will be mounted under $AZ_BATCHAI_JOB_MOUNT_ROOT."
+        },
+        "mountOptions": {
+          "type": "string",
+          "title": "Mount options.",
+          "description": "Mount options to be passed to mount command."
+        }
+      },
+      "description": "File Server mounting configuration.",
+      "required": [
+        "fileServer",
+        "relativeMountPath"
+      ]
+    },
+    "UnmanagedFileSystemReference": {
+      "properties": {
+        "mountCommand": {
+          "title": "Mount command.",
+          "description": "Mount command line. Note, Batch AI will append mount path to the command on its own.",
+          "type": "string"
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "Relative mount path.",
+          "description": "The relative path on the compute node where the unmanaged file system will be mounted. Note that all cluster level unmanaged file systems will be mounted under $AZ_BATCHAI_MOUNT_ROOT location and all job level unmanaged file systems will be mounted under $AZ_BATCHAI_JOB_MOUNT_ROOT."
+        }
+      },
+      "description": "Unmanaged file system mounting configuration.",
+      "required": [
+        "mountCommand",
+        "relativeMountPath"
+      ]
+    },
+    "MountVolumes": {
+      "properties": {
+        "azureFileShares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFileShareReference"
+          },
+          "title": "Azure File Shares.",
+          "description": "A collection of Azure File Shares that are to be mounted to the cluster nodes."
+        },
+        "azureBlobFileSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureBlobFileSystemReference"
+          },
+          "title": "Azure Blob file systems.",
+          "description": "A collection of Azure Blob Containers that are to be mounted to the cluster nodes."
+        },
+        "fileServers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileServerReference"
+          },
+          "title": "File Servers.",
+          "description": "A collection of Batch AI File Servers that are to be mounted to the cluster nodes."
+        },
+        "unmanagedFileSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnmanagedFileSystemReference"
+          },
+          "title": "Unmanaged file systems.",
+          "description": "A collection of unmanaged file systems that are to be mounted to the cluster nodes."
+        }
+      },
+      "description": "Details of volumes to mount on the cluster."
+    },
+    "CNTKsettings": {
+      "properties": {
+        "languageType": {
+          "type": "string",
+          "title": "Language type.",
+          "description": "The language to use for launching CNTK (aka Microsoft Cognitive Toolkit) job. Valid values are 'BrainScript' or 'Python'."
+        },
+        "configFilePath": {
+          "type": "string",
+          "title": "Config file path.",
+          "description": "Specifies the path of the BrainScript config file. This property can be specified only if the languageType is 'BrainScript'."
+        },
+        "pythonScriptFilePath": {
+          "type": "string",
+          "title": "Python script file path.",
+          "description": "Python script to execute. This property can be specified only if the languageType is 'Python'."
+        },
+        "pythonInterpreterPath": {
+          "type": "string",
+          "title": "Python interpreter path.",
+          "description": "The path to the Python interpreter. This property can be specified only if the languageType is 'Python'."
+        },
+        "commandLineArgs": {
+          "type": "string",
+          "title": "Command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script or cntk executable."
+        },
+        "processCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Process count.",
+          "description": "Number of processes to launch for the job execution. The default value for this property is equal to nodeCount property"
+        }
+      },
+      "description": "CNTK (aka Microsoft Cognitive Toolkit) job settings."
+    },
+    "CaffeSettings": {
+      "properties": {
+        "configFilePath": {
+          "type": "string",
+          "title": "Config file path.",
+          "description": "Path of the config file for the job. This property cannot be specified if pythonScriptFilePath is specified."
+        },
+        "pythonScriptFilePath": {
+          "type": "string",
+          "title": "Python script file path.",
+          "description": "Python script to execute. This property cannot be specified if configFilePath is specified."
+        },
+        "pythonInterpreterPath": {
+          "type": "string",
+          "title": "Python interpreter path.",
+          "description": "The path to the Python interpreter. The property can be specified only if the pythonScriptFilePath is specified."
+        },
+        "commandLineArgs": {
+          "type": "string",
+          "title": "Command line arguments.",
+          "description": "Command line arguments that need to be passed to the Caffe job."
+        },
+        "processCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Process count.",
+          "description": "Number of processes to launch for the job execution. The default value for this property is equal to nodeCount property"
+        }
+      },
+      "description": "Caffe job settings."
+    },
+    "Caffe2Settings": {
+      "properties": {
+        "pythonScriptFilePath": {
+          "type": "string",
+          "title": "Python script file path.",
+          "description": "The python script to execute."
+        },
+        "pythonInterpreterPath": {
+          "type": "string",
+          "title": "Python interpreter path.",
+          "description": "The path to the Python interpreter."
+        },
+        "commandLineArgs": {
+          "type": "string",
+          "title": "Command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script."
+        }
+      },
+      "description": "Caffe2 job settings.",
+      "required": [
+        "pythonScriptFilePath"
+      ]
+    },
+    "ChainerSettings": {
+      "properties": {
+        "pythonScriptFilePath": {
+          "type": "string",
+          "title": "Python script file path.",
+          "description": "The python script to execute."
+        },
+        "pythonInterpreterPath": {
+          "type": "string",
+          "title": "Python interpreter path.",
+          "description": "The path to the Python interpreter."
+        },
+        "commandLineArgs": {
+          "type": "string",
+          "title": "Command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script."
+        },
+        "processCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Process count.",
+          "description": "Number of processes to launch for the job execution. The default value for this property is equal to nodeCount property"
+        }
+      },
+      "description": "Chainer job settings.",
+      "required": [
+        "pythonScriptFilePath"
+      ]
+    },
+    "CustomToolkitSettings": {
+      "properties": {
+        "commandLine": {
+          "type": "string",
+          "title": "Command line.",
+          "description": "The command line to execute on the master node."
+        }
+      },
+      "description": "Custom tool kit job settings."
+    },
+    "CustomMpiSettings": {
+      "properties": {
+        "commandLine": {
+          "type": "string",
+          "title": "Command line.",
+          "description": "The command line to be executed by mpi runtime on each compute node."
+        },
+        "processCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Process count.",
+          "description": "Number of processes to launch for the job execution. The default value for this property is equal to nodeCount property"
+        }
+      },
+      "description": "Custom MPI job settings.",
+      "required": [
+        "commandLine"
+      ]
+    },
+    "JobPreparation": {
+      "properties": {
+        "commandLine": {
+          "type": "string",
+          "title": "Command line.",
+          "description": "The command line to execute. If containerSettings is specified on the job, this commandLine will be executed in the same container as job. Otherwise it will be executed on the node."
+        }
+      },
+      "description": "Job preparation settings.",
+      "required": [
+        "commandLine"
+      ]
+    },
+    "PyTorchSettings": {
+      "properties": {
+        "pythonScriptFilePath": {
+          "type": "string",
+          "title": "Python script file path.",
+          "description": "The python script to execute."
+        },
+        "pythonInterpreterPath": {
+          "type": "string",
+          "title": "Python interpreter path.",
+          "description": "The path to the Python interpreter."
+        },
+        "commandLineArgs": {
+          "type": "string",
+          "title": "Command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script."
+        },
+        "processCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Process count.",
+          "description": "Number of processes to launch for the job execution. The default value for this property is equal to nodeCount property"
+        },
+        "communicationBackend": {
+          "type": "string",
+          "title": "Communication backend.",
+          "description": "Type of the communication backend for distributed jobs. Valid values are 'TCP', 'Gloo' or 'MPI'. Not required for non-distributed jobs."
+        }
+      },
+      "description": "pyTorch job settings.",
+      "required": [
+        "pythonScriptFilePath"
+      ]
+    },
+    "HorovodSettings": {
+      "properties": {
+        "pythonScriptFilePath": {
+          "type": "string",
+          "title": "Python script file path.",
+          "description": "The python script to execute."
+        },
+        "pythonInterpreterPath": {
+          "type": "string",
+          "title": "Python interpreter path.",
+          "description": "The path to the Python interpreter."
+        },
+        "commandLineArgs": {
+          "type": "string",
+          "title": "Command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script."
+        },
+        "processCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Process count.",
+          "description": "Number of processes to launch for the job execution. The default value for this property is equal to nodeCount property"
+        }
+      },
+      "description": "Specifies the settings for Horovod job.",
+      "required": [
+        "pythonScriptFilePath"
+      ]
+    },
+    "TensorFlowSettings": {
+      "properties": {
+        "pythonScriptFilePath": {
+          "type": "string",
+          "title": "Python script file path.",
+          "description": "The python script to execute."
+        },
+        "pythonInterpreterPath": {
+          "type": "string",
+          "title": "Python interpreter path.",
+          "description": "The path to the Python interpreter."
+        },
+        "masterCommandLineArgs": {
+          "type": "string",
+          "title": "Master command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script for the master task."
+        },
+        "workerCommandLineArgs": {
+          "type": "string",
+          "title": "Worker command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script for the worker task. Optional for single process jobs."
+        },
+        "parameterServerCommandLineArgs": {
+          "type": "string",
+          "title": "Parameter server command line arguments.",
+          "description": "Command line arguments that need to be passed to the python script for the parameter server. Optional for single process jobs."
+        },
+        "workerCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Worker count.",
+          "description": "The number of worker tasks. If specified, the value must be less than or equal to (nodeCount * numberOfGPUs per VM). If not specified, the default value is equal to nodeCount. This property can be specified only for distributed TensorFlow training."
+        },
+        "parameterServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Parameter server count.",
+          "description": "The number of parameter server tasks. If specified, the value must be less than or equal to nodeCount. If not specified, the default value is equal to 1 for distributed TensorFlow training. This property can be specified only for distributed TensorFlow training."
+        }
+      },
+      "description": "TensorFlow job settings.",
+      "required": [
+        "pythonScriptFilePath"
+      ]
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the Batch AI service."
+        }
+      },
+      "description": "An error response from the Batch AI service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch AI service."
+    },
+    "BatchAIError": {
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An identifier of the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch AI service."
+    },
+    "Operation": {
+      "title": "A REST API operation.",
+      "description": "Details of a REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "readOnly": true,
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "readOnly": true,
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action",
+              "type": "string"
+            },
+            "resource": {
+              "readOnly": true,
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "readOnly": true,
+              "title": "The friendly name of the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "readOnly": true,
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "title": "Properties of the operation.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationListResult": {
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "description": "Contains the list of all operations supported by BatchAI resource provider",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "WorkspaceListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          },
+          "description": "The collection of workspaces."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "WorkspaceCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "title": "Location.",
+          "description": "The region in which to create the Workspace."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Tags.",
+          "description": "The user specified tags associated with the Workspace."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Workspace creation parameters."
+    },
+    "WorkspaceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Tags.",
+          "description": "The user specified tags associated with the Workspace."
+        }
+      },
+      "description": "Workspace update parameters."
+    },
+    "WorkspaceProperties": {
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Creation time.",
+          "description": "Time when the Workspace was created."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "Provisioning state.",
+          "description": "The provisioned state of the Workspace",
+          "enum": [
+            "creating",
+            "deleting",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Provisioning state transition time.",
+          "description": "The time at which the workspace entered its current provisioning state."
+        }
+      },
+      "description": "Workspace specific properties."
+    },
+    "Workspace": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The properties associated with the workspace."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Batch AI Workspace information."
+    },
+    "ExperimentListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Experiment"
+          },
+          "description": "The collection of experiments."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "ExperimentProperties": {
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Creation time.",
+          "description": "Time when the Experiment was created."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "Provisioning state.",
+          "description": "The provisioned state of the experiment",
+          "enum": [
+            "creating",
+            "deleting",
+            "succeeded",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Provisioning state transition time.",
+          "description": "The time at which the experiment entered its current provisioning state."
+        }
+      },
+      "description": "Experiment properties."
+    },
+    "Experiment": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExperimentProperties",
+          "description": "The properties associated with the experiment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Experiment information."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscriptionID for the Azure user."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w_]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the cluster within the specified resource group. Cluster names can only contain a combination of alphanumeric characters along with dash (-) and underscore (_). The name must be from 1 through 64 characters long."
+    },
+    "JobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w_]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the job within the specified resource group. Job names can only contain a combination of alphanumeric characters along with dash (-) and underscore (_). The name must be from 1 through 64 characters long."
+    },
+    "FileServerNameParameter": {
+      "name": "fileServerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w_]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the file server within the specified resource group. File server names can only contain a combination of alphanumeric characters along with dash (-) and underscore (_). The name must be from 1 through 64 characters long."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the version of API used for this request."
+    },
+    "MaxResultsParameter": {
+      "name": "maxresults",
+      "x-ms-client-name": "maxResults",
+      "default": 1000,
+      "minimum": 1,
+      "maximum": 1000,
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "description": "The maximum number of items to return in the response. A maximum of 1000 files can be returned.",
+      "x-ms-parameter-grouping": {
+        "postfix": "Options"
+      }
+    },
+    "OutputDirectoryIdParameter": {
+      "name": "outputdirectoryid",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Id of the job output directory. This is the OutputDirectory-->id parameter that is given by the user during Create Job.",
+      "x-ms-parameter-grouping": {
+        "postfix": "Options"
+      }
+    },
+    "DownloadLinkExpiryParameter": {
+      "name": "linkexpiryinminutes",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 5,
+      "maximum": 600,
+      "default": 60,
+      "x-ms-parameter-location": "method",
+      "description": "The number of minutes after which the download link will expire.",
+      "x-ms-parameter-grouping": {
+        "postfix": "Options"
+      }
+    },
+    "Directory": {
+      "name": "directory",
+      "in": "query",
+      "default": ".",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The path to the directory.",
+      "x-ms-parameter-grouping": {
+        "postfix": "Options"
+      }
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w_]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the workspace. Workspace names can only contain a combination of alphanumeric characters along with dash (-) and underscore (_). The name must be from 1 through 64 characters long."
+    },
+    "ExperimentNameParameter": {
+      "name": "experimentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w_]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the experiment. Experiment names can only contain a combination of alphanumeric characters along with dash (-) and underscore (_). The name must be from 1 through 64 characters long."
+    }
+  }
+}

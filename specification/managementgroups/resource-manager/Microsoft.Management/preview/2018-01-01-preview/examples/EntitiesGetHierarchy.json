@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2018-01-01-preview",
+    "view": "hierarchy",
+    "Cache-Control": "no-cache"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/87063dd2-ab5a-438b-909a-09c03a9018ab",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "87063dd2-ab5a-438b-909a-09c03a9018ab",
+        "properties": {
+          "displayName": "87063dd2-ab5a-438b-909a-09c03a9018ab",
+          "permissions": "read",
+          "children": [
+            {
+              "id": "/providers/Microsoft.Management/managementGroups/Root",
+              "type": "/providers/Microsoft.Management/managementGroup",
+              "name": "Root",
+              "properties": {
+                "displayName": "Root",
+                "permissions": "read",
+                "children": [
+                  {
+                    "id": "/providers/Microsoft.Management/managementGroups/Child",
+                    "type": "/providers/Microsoft.Management/managementGroup",
+                    "name": "Child",
+                    "properties": {
+                      "displayName": "Child",
+                      "permissions": "read",
+                      "children": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

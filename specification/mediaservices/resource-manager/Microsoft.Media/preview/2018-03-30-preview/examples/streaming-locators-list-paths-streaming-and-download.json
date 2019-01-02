@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "streamingLocatorName": "clearStreamingLocator",
+    "api-version": "2018-03-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "streamingPaths": [
+          {
+            "streamingProtocol": "Hls",
+            "encryptionScheme": "NoEncryption",
+            "paths": [
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest1.ism/manifest(format=m3u8-aapl)",
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest2.ism/manifest(format=m3u8-aapl)",
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest3.ism/manifest(format=m3u8-aapl)"
+            ]
+          },
+          {
+            "streamingProtocol": "Dash",
+            "encryptionScheme": "NoEncryption",
+            "paths": [
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest1.ism/manifest(format=mpd-time-csf)",
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest2.ism/manifest(format=mpd-time-csf)",
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest3.ism/manifest(format=mpd-time-csf)"
+            ]
+          },
+          {
+            "streamingProtocol": "SmoothStreaming",
+            "encryptionScheme": "NoEncryption",
+            "paths": [
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest1.ism/manifest",
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest2.ism/manifest",
+              "/4388089d-846d-4eed-83e3-9a227cd44c33/videoManifest3.ism/manifest"
+            ]
+          }
+        ],
+        "downloadPaths": [
+          "/4388089d-846d-4eed-83e3-9a227cd44c33/textTrack.vtt",
+          "/4388089d-846d-4eed-83e3-9a227cd44c33/video1.mp4",
+          "/4388089d-846d-4eed-83e3-9a227cd44c33/video2.mp4",
+          "/4388089d-846d-4eed-83e3-9a227cd44c33/video3.mp4"
+        ]
+      }
+    }
+  }
+}

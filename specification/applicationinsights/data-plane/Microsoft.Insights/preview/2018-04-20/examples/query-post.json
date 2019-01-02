@@ -1,0 +1,93 @@
+{
+  "title": "Post Query",
+  "description": "A simple query that returns query results.",
+  "parameters": {
+    "subscriptionId": "c512b59c-4005-40e2-b13d-ac29cfb46af4",
+    "resourceGroupName": "test-rg",
+    "applicationName": "azure-insights",
+    "apiVersion": "2018-04-20",
+    "body": {
+      "timespan": "PT12H",
+      "query": "requests | summarize count() by bin(timestamp, 1h)"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5",
+        "x-ms-correlation-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5"
+      },
+      "body": {
+        "tables": [
+          {
+            "name": "PrimaryResult",
+            "columns": [
+              {
+                "name": "timestamp",
+                "type": "datetime"
+              },
+              {
+                "name": "count_",
+                "type": "long"
+              }
+            ],
+            "rows": [
+              [
+                "2018-02-02T05:00:00Z",
+                "255"
+              ],
+              [
+                "2018-02-01T17:00:00Z",
+                "148"
+              ],
+              [
+                "2018-02-01T18:00:00Z",
+                "453"
+              ],
+              [
+                "2018-02-01T19:00:00Z",
+                "404"
+              ],
+              [
+                "2018-02-01T20:00:00Z",
+                "403"
+              ],
+              [
+                "2018-02-01T21:00:00Z",
+                "405"
+              ],
+              [
+                "2018-02-01T22:00:00Z",
+                "438"
+              ],
+              [
+                "2018-02-01T23:00:00Z",
+                "403"
+              ],
+              [
+                "2018-02-02T00:00:00Z",
+                "423"
+              ],
+              [
+                "2018-02-02T01:00:00Z",
+                "403"
+              ],
+              [
+                "2018-02-02T02:00:00Z",
+                "425"
+              ],
+              [
+                "2018-02-02T03:00:00Z",
+                "437"
+              ],
+              [
+                "2018-02-02T04:00:00Z",
+                "420"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
