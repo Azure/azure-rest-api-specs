@@ -107,6 +107,9 @@ python:
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
