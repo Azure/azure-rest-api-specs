@@ -5,34 +5,14 @@
     "resourceGroupName": "rg1",
     "ddosCustomPolicyName": "test-ddos-custom-policy",
     "parameters": {
-      "properties": {
-        "protocolCustomSettings": [
-          {
-            "protocol": "Tcp"
-          }
-        ]
+      "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
       }
     }
   },
   "responses": {
     "200": {
-      "body": {
-        "name": "test-ddos-custom-policy",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
-        "type": "Microsoft.Network/ddosCustomPolicies",
-        "properties": {
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000",
-          "publicIPAddresses": [],
-          "protocolCustomSettings": [
-            {
-              "protocol": "Tcp", "triggerRateOverride": "20000"
-            }
-          ]
-        }
-      }
-    },
-    "201": {
       "body": {
         "name": "test-ddos-custom-policy",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
