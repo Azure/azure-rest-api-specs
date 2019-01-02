@@ -609,6 +609,122 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}": {
+      "get": {
+        "tags": [
+          "ManagementPolicies"
+        ],
+        "operationId": "ManagementPolicies_Get",
+        "description": "Gets the data policy rules associated with the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountGetManagementPolicies": { "$ref": "./examples/StorageAccountGetManagementPolicy.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementPolicyName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get management policies successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountManagementPolicies"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagementPolicies"
+        ],
+        "operationId": "ManagementPolicies_CreateOrUpdate",
+        "description": "Sets the data policy rules associated with the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountSetManagementPolicies": { "$ref": "./examples/StorageAccountSetManagementPolicy.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementPolicyName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagementPoliciesRulesSetParameter"
+            },
+            "description": "The data policy rules to set to a storage account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get management policies successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountManagementPolicies"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagementPolicies"
+        ],
+        "operationId": "ManagementPolicies_Delete",
+        "description": "Deletes the data policy rules associated with the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountDeleteManagementPolicies": { "$ref": "./examples/StorageAccountDeleteManagementPolicy.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementPolicyName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete management policies successfully."
+          },
+          "204": {
+            "description": "No Content -- The management policies does not exist."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1972,6 +2088,197 @@
         }
       },
       "description": "The List service SAS credentials operation response."
+    },
+    "StorageAccountManagementPolicies": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountManagementPoliciesRulesProperty",
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "Returns the Storage Account Data Policies Rules."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Get Storage Account ManagementPolicies operation response."
+    },
+    "StorageAccountManagementPoliciesRulesProperty": {
+      "properties": {
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Returns the date and time the ManagementPolicies was last modified."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagementPolicySchema"
+        }
+      ],
+      "description": "The Storage Account Data Policies properties."
+    },
+    "ManagementPoliciesRulesSetParameter": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagementPolicySchema",
+          "x-ms-client-flatten": true,
+          "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+        }
+      },
+      "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+    },
+    "ManagementPolicySchema":{
+      "properties": {
+        "version" : {
+          "type": "string",
+          "description": "The policy version expressed as x.x."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementPolicyRule"
+          },
+          "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+        }
+      },
+      "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+    },
+    "ManagementPolicyRule": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Rule is enabled if set to true."
+        },
+        "name": {
+          "type": "string",
+          "description": "A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy."
+        },
+        "type": {
+          "type": "string",
+          "description": "The valid value is Lifecycle"
+        },
+        "definition": {
+            "$ref": "#/definitions/ManagementPolicyDefinition",
+            "x-ms-client-flatten": true,
+            "description": "An object that defines the lifecycle rule."
+        }
+      },
+      "description": "An object that wraps the lifecycle rule. Each rule is uniquely defined by name."
+    },
+    "ManagementPolicyDefinition": {
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/ManagementPolicyAction",
+          "description": "An object that defines the action set."
+        },
+        "filters": {
+          "$ref": "#/definitions/ManagementPolicyFilter",
+          "description": "An object that defines the filter set."
+        }
+      },
+      "description": "An object that defines the lifecycle rule. Each definition is made up with a filters set and an actions set."
+    },
+    "ManagementPolicyFilter": {
+      "properties": {
+        "prefixMatch": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of strings for prefixes to be match."
+        },
+        "suffixMatch": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of strings for suffixes to be match."
+        },
+        "sizeInByteGreaterThan": {
+          "type": "integer",
+          "minimum" : 0,
+          "description": "A whole number specifying the minimal blob size for this rule."
+        },
+        "sizeInByteLessThan": {
+          "type": "integer",
+          "minimum" : 0,
+          "description": "A whole number specifying the maximum blob size for this rule."
+        },
+        "blobTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of predefined enum values. Only blockBlob is supported."
+        }
+      },
+      "description": "Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. "
+    },
+    "ManagementPolicyAction": {
+      "properties": {
+        "baseBlob": {
+            "$ref": "#/definitions/ManagementPolicyBaseBlob",
+            "description": "The management policy action for baseblob"
+        },
+        "snapshot": {
+            "$ref": "#/definitions/ManagementPolicySnapShot",
+            "description": "The management policy action for snapshot"
+        }
+      },
+      "description": "Actions are applied to the filtered blobs when the execution condition is met."
+    },
+    "ManagementPolicyBaseBlob": {
+      "properties": {
+        "tierToCool": {
+          "properties": {
+            "DateAfterModification": {
+              "type": "integer",
+              "description": "Integer value indicating the age in days after last modification"
+            }
+          },
+          "description": "The function to tier blobs to cool storage. Support blobs currently at Hot tier"
+        },
+        "tierToArchive": {
+            "$ref": "#/definitions/DateAfterModification",
+            "description": "The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier"
+        },
+        "delete": {
+            "$ref": "#/definitions/DateAfterModification",
+            "description": "The function to delete the blob"
+        }
+      },
+      "description": "Management policy action for baseblob."
+    },
+    "ManagementPolicySnapShot": {
+      "properties": {
+        "delete": {
+            "$ref": "#/definitions/DateAfterCreation",
+            "description": "The function to delete the blob snapshot"
+        }
+      },
+      "description": "Management policy action for snapshot."
+    },
+    "DateAfterModification": {
+      "properties": {
+        "daysAfterModificationGreaterThan": {
+            "type": "integer",
+            "description": "Integer value indicating the age in days after last modification"
+        }
+      },
+      "description": "Object to define the number of days after last modification."
+    },
+    "DateAfterCreation": {
+      "properties": {
+        "daysAfterCreationGreaterThan": {
+            "type": "integer",
+            "description": "Integer value indicating the age in days after creation"
+        }
+      },
+      "description": "Object to define the number of days after creation."
     }
   },
   "parameters": {
@@ -1994,6 +2301,21 @@
       "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
       "maxLength": 24,
       "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "ManagementPolicyName": {
+      "name": "managementPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Storage Account Management Policy. It should always be 'default'",
+      "enum":[
+        "default"
+      ],
+      "x-ms-enum": {
+          "name": "ManagementPolicyName",
+          "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     }
   },
