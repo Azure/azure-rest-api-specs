@@ -174,6 +174,56 @@
         "x-ms-examples": {
           "Create application security group": { "$ref": "./examples/ApplicationSecurityGroupCreate.json" }
         }
+      },
+      "patch": {
+        "tags": [
+          "applicationSecurityGroups"
+        ],
+        "operationId": "ApplicationSecurityGroups_UpdateTags",
+        "description": "Updates an application security group's tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application security group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update application security group tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ApplicationSecurityGroup resource.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationSecurityGroup"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update application security group tags": { "$ref": "./examples/ApplicationSecurityGroupUpdateTags.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationSecurityGroups": {
