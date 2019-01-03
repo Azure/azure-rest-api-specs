@@ -358,6 +358,10 @@
           "$ref": "#/definitions/PublicIPAddressDnsSettings",
           "description": "The FQDN of the DNS record associated with the public IP address."
         },
+        "ddosSettings": {
+          "$ref": "#/definitions/DdosSettings",
+          "description": "The DDoS protection custom policy associated with the public IP address."
+        },
         "ipTags": {
           "type": "array",
           "items": {
@@ -451,6 +455,25 @@
         }
       },
       "description": "Contains FQDN of the DNS record associated with the public IP address"
+    },
+    "DdosSettings": {
+      "properties": {
+        "ddosCustomPolicy": {
+          "readOnly": false,
+          "$ref":"./network.json#/definitions/SubResource",          
+          "description": "The DDoS custom policy associated with the public IP."
+        },
+        "protectionCoverage": {
+          "readOnly": false,
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Standard"            
+          ],
+          "description": "The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized."
+        }
+      },
+      "description": "Contains the DDoS protection settings of the public IP."
     },
     "IpTag": {
       "properties": {
