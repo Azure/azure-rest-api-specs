@@ -616,7 +616,7 @@
           "ManagementPolicies"
         ],
         "operationId": "ManagementPolicies_Get",
-        "description": "Gets the data policy rules associated with the specified storage account.",
+        "description": "Gets the managementpolicy associated with the specified storage account.",
         "x-ms-examples": {
           "StorageAccountGetManagementPolicies": { "$ref": "./examples/StorageAccountGetManagementPolicy.json" }
         },
@@ -639,9 +639,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Get management policies successfully.",
+            "description": "OK -- Get the managementpolicy successfully.",
             "schema": {
-              "$ref": "#/definitions/StorageAccountManagementPolicies"
+              "$ref": "#/definitions/StorageAccountManagementPolicy"
             }
           }
         }
@@ -651,7 +651,7 @@
           "ManagementPolicies"
         ],
         "operationId": "ManagementPolicies_CreateOrUpdate",
-        "description": "Sets the data policy rules associated with the specified storage account.",
+        "description": "Sets the managementpolicy to the specified storage account.",
         "x-ms-examples": {
           "StorageAccountSetManagementPolicies": { "$ref": "./examples/StorageAccountSetManagementPolicy.json" }
         },
@@ -676,16 +676,16 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagementPoliciesRulesSetParameter"
+              "$ref": "#/definitions/StorageAccountManagementPolicy"
             },
-            "description": "The data policy rules to set to a storage account."
+            "description": "The ManagementPolicy set to a storage account."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Get management policies successfully.",
+            "description": "OK -- Get managementpolicy successfully.",
             "schema": {
-              "$ref": "#/definitions/StorageAccountManagementPolicies"
+              "$ref": "#/definitions/StorageAccountManagementPolicy"
             }
           }
         }
@@ -695,7 +695,7 @@
           "ManagementPolicies"
         ],
         "operationId": "ManagementPolicies_Delete",
-        "description": "Deletes the data policy rules associated with the specified storage account.",
+        "description": "Deletes the managementpolicy associated with the specified storage account.",
         "x-ms-examples": {
           "StorageAccountDeleteManagementPolicies": { "$ref": "./examples/StorageAccountDeleteManagementPolicy.json" }
         },
@@ -718,10 +718,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Delete management policies successfully."
+            "description": "OK -- Delete the managementpolicy successfully."
           },
           "204": {
-            "description": "No Content -- The management policies does not exist."
+            "description": "No Content -- The managementpolicy does not exist."
           }
         }
       }
@@ -2089,7 +2089,7 @@
       },
       "description": "The List service SAS credentials operation response."
     },
-    "StorageAccountManagementPolicies": {
+    "StorageAccountManagementPolicy": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageAccountManagementPolicyProperty",
@@ -2114,40 +2114,23 @@
           "description": "Returns the date and time the ManagementPolicies was last modified."
         },
         "policy": {
-          "$ref": "#/definitions/ManagementPolicySchema",
-          "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
-        }
-      },
-      "description": "The Storage Account Data Policies properties."
-    },
-    "ManagementPoliciesRulesSetParameter": {
-      "properties": {
-        "properties": {
           "properties": {
-            "policy": {
-              "$ref": "#/definitions/ManagementPolicySchema",
-              "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+            "version": {
+              "type": "string",
+              "description": "The policy version expressed as x.x."
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ManagementPolicyRule"
+              },
+              "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
             }
-          }
-        }
-      },
-      "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
-    },
-    "ManagementPolicySchema": {
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "The policy version expressed as x.x."
-        },
-        "rules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagementPolicyRule"
           },
-          "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+          "description": "The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
         }
       },
-      "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+      "description": "The Storage Account ManagementPolicy properties."
     },
     "ManagementPolicyRule": {
       "properties": {
@@ -2165,10 +2148,10 @@
         },
         "definition": {
           "$ref": "#/definitions/ManagementPolicyDefinition",
-          "description": "An object that defines the lifecycle rule."
+          "description": "An object that defines the Lifecycle rule."
         }
       },
-      "description": "An object that wraps the lifecycle rule. Each rule is uniquely defined by name."
+      "description": "An object that wraps the Lifecycle rule. Each rule is uniquely defined by name."
     },
     "ManagementPolicyDefinition": {
       "properties": {
@@ -2181,7 +2164,7 @@
           "description": "An object that defines the filter set."
         }
       },
-      "description": "An object that defines the lifecycle rule. Each definition is made up with a filters set and an actions set."
+      "description": "An object that defines the Lifecycle rule. Each definition is made up with a filters set and an actions set."
     },
     "ManagementPolicyFilter": {
       "properties": {
