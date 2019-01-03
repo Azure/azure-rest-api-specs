@@ -1,0 +1,28 @@
+{
+  "operationId": "Network_Get",
+  "description": "This example shows how to get a network resource. If the network resource exists, its description is returned along with an OK (200) status code. If the network resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "networkResourceName": "sampleNetwork"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/networks",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/sampleNetwork",
+        "name": "sampleNetwork",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "kind": "Local",
+          "description": "Service Fabric Mesh sample network.",
+          "networkAddressPrefix": "2.0.0.0/16",
+          "status": "Ready"
+        }
+      }
+    }
+  }
+}

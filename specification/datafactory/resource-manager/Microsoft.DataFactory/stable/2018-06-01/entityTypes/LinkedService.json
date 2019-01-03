@@ -109,9 +109,17 @@
           "description": "The connection string. It is mutually exclusive with sasUri property. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "accountKey": { 
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
+        },
         "sasUri": {
-          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
         },
         "encryptedCredential": {
           "type": "string",
@@ -126,9 +134,17 @@
           "type": "object",
           "description": "The connection string. It is mutually exclusive with sasUri, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference."          
         },
+        "accountKey": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
+        },
         "sasUri": {
-          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
         },
         "serviceEndpoint": {
           "type": "string",
@@ -178,6 +194,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -270,6 +290,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -405,6 +429,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "accountKey": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
         },
         "encryptedCredential": {
           "type": "object",
@@ -543,6 +571,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "isEspEnabled": {
+          "type": "object",
+          "description": "Specify if the HDInsight is created with ESP (Enterprise Security Package). Type: Boolean."
         }
       },
       "required": [
@@ -620,6 +652,10 @@
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -655,6 +691,10 @@
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "type": "object",
@@ -692,6 +732,10 @@
           "description": "The connection string.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -727,6 +771,10 @@
         "connectionString": {
           "description": "The connection string.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2062,7 +2110,7 @@
           "type": "object"
         },
         "marketplaceID": {
-          "description": "The Amazon Marketplace ID you want to retrieve data from. To retrive data from multiple Marketplace IDs, seperate them with a comma (,). (i.e. A2EUQ1WTGCTBG2)",
+          "description": "The Amazon Marketplace ID you want to retrieve data from. To retrieve data from multiple Marketplace IDs, separate them with a comma (,). (i.e. A2EUQ1WTGCTBG2)",
           "type": "object"
         },
         "sellerID": {
@@ -2132,6 +2180,10 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -2140,7 +2192,7 @@
     },
     "ConcurLinkedService": { 
       "x-ms-discriminator-value": "Concur", 
-      "description": "Concur Serivce linked service.", 
+      "description": "Concur Service linked service.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -2149,7 +2201,7 @@
       ], 
       "properties": { 
         "typeProperties": { 
-          "description": "Concur Serivce linked service properties.", 
+          "description": "Concur Service linked service properties.", 
           "x-ms-client-flatten": true, 
           "$ref": "#/definitions/ConcurLinkedServiceTypeProperties" 
         } 
@@ -2159,7 +2211,7 @@
       ] 
     }, 
     "ConcurLinkedServiceTypeProperties": { 
-      "description": "Concur Serivce linked service properties.", 
+      "description": "Concur Service linked service properties.", 
       "properties": {
         "clientId": {
           "description": "Application client_id supplied by Concur App Management.",
@@ -2222,6 +2274,10 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "credString": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of credString in connection string."
+        },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -2254,6 +2310,10 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
@@ -2429,6 +2489,10 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
@@ -2644,7 +2708,7 @@
     },
     "HubspotLinkedService": { 
       "x-ms-discriminator-value": "Hubspot", 
-      "description": "Hubspot Serivce linked service.", 
+      "description": "Hubspot Service linked service.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -2653,7 +2717,7 @@
       ], 
       "properties": { 
         "typeProperties": { 
-          "description": "Hubspot Serivce linked service properties.", 
+          "description": "Hubspot Service linked service properties.", 
           "x-ms-client-flatten": true, 
           "$ref": "#/definitions/HubspotLinkedServiceTypeProperties" 
         } 
@@ -2663,7 +2727,7 @@
       ] 
     }, 
     "HubspotLinkedServiceTypeProperties": { 
-      "description": "Hubspot Serivce linked service properties.", 
+      "description": "Hubspot Service linked service properties.", 
       "properties": {
         "clientId": {
           "description": "The client ID associated with your Hubspot application.",
@@ -2786,7 +2850,7 @@
     },
     "JiraLinkedService": { 
       "x-ms-discriminator-value": "Jira", 
-      "description": "Jira Serivce linked service.", 
+      "description": "Jira Service linked service.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -2795,7 +2859,7 @@
       ], 
       "properties": { 
         "typeProperties": { 
-          "description": "Jira Serivce linked service properties.", 
+          "description": "Jira Service linked service properties.", 
           "x-ms-client-flatten": true, 
           "$ref": "#/definitions/JiraLinkedServiceTypeProperties" 
         } 
@@ -2805,7 +2869,7 @@
       ] 
     }, 
     "JiraLinkedServiceTypeProperties": { 
-      "description": "Jira Serivce linked service properties.", 
+      "description": "Jira Service linked service properties.", 
       "properties": {
         "host": {
           "description": "The IP address or host name of the Jira service. (e.g. jira.example.com)",
@@ -2924,6 +2988,10 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -2989,7 +3057,7 @@
     },
     "PaypalLinkedService": { 
       "x-ms-discriminator-value": "Paypal", 
-      "description": "Paypal Serivce linked service.", 
+      "description": "Paypal Service linked service.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -2998,7 +3066,7 @@
       ], 
       "properties": { 
         "typeProperties": { 
-          "description": "Paypal Serivce linked service properties.", 
+          "description": "Paypal Service linked service properties.", 
           "x-ms-client-flatten": true, 
           "$ref": "#/definitions/PaypalLinkedServiceTypeProperties" 
         } 
@@ -3008,7 +3076,7 @@
       ] 
     }, 
     "PaypalLinkedServiceTypeProperties": { 
-      "description": "Paypal Serivce linked service properties.", 
+      "description": "Paypal Service linked service properties.", 
       "properties": {
         "host": {
           "description": "The URL of the PayPal instance. (i.e. api.sandbox.paypal.com)",
@@ -3369,7 +3437,7 @@
     },
     "ShopifyLinkedService": { 
       "x-ms-discriminator-value": "Shopify", 
-      "description": "Shopify Serivce linked service.", 
+      "description": "Shopify Service linked service.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -3378,7 +3446,7 @@
       ], 
       "properties": { 
         "typeProperties": { 
-          "description": "Shopify Serivce linked service properties.", 
+          "description": "Shopify Service linked service properties.", 
           "x-ms-client-flatten": true, 
           "$ref": "#/definitions/ShopifyLinkedServiceTypeProperties" 
         } 
@@ -3388,7 +3456,7 @@
       ] 
     }, 
     "ShopifyLinkedServiceTypeProperties": { 
-      "description": "Shopify Serivce linked service properties.", 
+      "description": "Shopify Service linked service properties.", 
       "properties": {
         "host": {
           "description": "The endpoint of the Shopify server. (i.e. mystore.myshopify.com)",
@@ -3535,7 +3603,7 @@
     },
     "SquareLinkedService": { 
       "x-ms-discriminator-value": "Square", 
-      "description": "Square Serivce linked service.", 
+      "description": "Square Service linked service.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -3544,7 +3612,7 @@
       ], 
       "properties": { 
         "typeProperties": { 
-          "description": "Square Serivce linked service properties.", 
+          "description": "Square Service linked service properties.", 
           "x-ms-client-flatten": true, 
           "$ref": "#/definitions/SquareLinkedServiceTypeProperties" 
         } 
@@ -3554,7 +3622,7 @@
       ] 
     }, 
     "SquareLinkedServiceTypeProperties": { 
-      "description": "Square Serivce linked service properties.", 
+      "description": "Square Service linked service properties.", 
       "properties": {
         "host": {
           "description": "The URL of the Square instance. (i.e. mystore.mysquare.com)",
@@ -3597,7 +3665,7 @@
     },
     "XeroLinkedService": { 
       "x-ms-discriminator-value": "Xero", 
-      "description": "Xero Serivce linked service.", 
+      "description": "Xero Service linked service.", 
       "type": "object", 
       "allOf": [ 
         { 
@@ -3606,7 +3674,7 @@
       ], 
       "properties": { 
         "typeProperties": { 
-          "description": "Xero Serivce linked service properties.", 
+          "description": "Xero Service linked service properties.", 
           "x-ms-client-flatten": true, 
           "$ref": "#/definitions/XeroLinkedServiceTypeProperties" 
         } 
@@ -3616,7 +3684,7 @@
       ] 
     }, 
     "XeroLinkedServiceTypeProperties": { 
-      "description": "Xero Serivce linked service properties.", 
+      "description": "Xero Service linked service properties.", 
       "properties": {
         "host": {
           "description": "The endpoint of the Xero server. (i.e. api.xero.com)",
@@ -3730,6 +3798,10 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "pwd": { 
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference", 
+          "description": "The Azure key vault secret reference of password in connection string." 
+        }, 
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -3762,6 +3834,10 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",

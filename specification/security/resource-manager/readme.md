@@ -61,9 +61,12 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
-## C
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -74,10 +77,22 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Security
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Security/Management.Security/Generated
+  output-folder: $(csharp-sdks-folder)/SecurityCenter/Management.SecurityCenter/Generated
   clear-output-folder: true
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Node.js
+
+See configuration in [readme.nodejs.md](./readme.nodejs.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)

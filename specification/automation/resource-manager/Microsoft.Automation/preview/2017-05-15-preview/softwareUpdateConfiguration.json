@@ -324,19 +324,19 @@
           "readOnly": true
         },
         "error": {
-          "description": "detailes of provisioning error",
+          "description": "Details of provisioning error",
           "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
         },
         "creationTime": {
           "type": "string",
-          "description": "Creation time of theresource, which only appears in the response.",
+          "description": "Creation time of the resource, which only appears in the response.",
           "format": "date-time",
           "x-nullable": false,
           "readOnly": true
         },
         "createdBy": {
           "type": "string",
-          "description": "createdBy property, which only appears in the response.",
+          "description": "CreatedBy property, which only appears in the response.",
           "readOnly": true
         },
         "lastModifiedTime": {
@@ -348,14 +348,49 @@
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "lastModifiedBy property, which only appears in the response.",
+          "description": "LastModifiedBy property, which only appears in the response.",
           "readOnly": true
+        },
+        "tasks": {
+          "description": "Tasks information for the Software update configuration.",
+          "$ref": "#/definitions/softwareUpdateConfigurationTasks"
         }
       },
       "required": [
         "updateConfiguration",
         "scheduleInfo"
       ]
+    },
+    "softwareUpdateConfigurationTasks": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "preTask": {
+          "description": "Pre task properties.",
+          "$ref": "#/definitions/taskProperties"
+        },
+        "postTask": {
+          "description": "Post task properties.",
+          "$ref": "#/definitions/taskProperties"
+        }
+      }
+    },
+    "taskProperties": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      }
     },
     "WindowsProperties": {
       "type": "object",
@@ -414,7 +449,7 @@
     },
     "updateConfiguration": {
       "type": "object",
-      "description": "Update specifc properties of the software update configuration.",
+      "description": "Update specific properties of the software update configuration.",
       "properties": {
         "operatingSystem": {
           "description": "operating system of target machines",
@@ -766,8 +801,31 @@
             "type": "object",
             "$ref": "#/definitions/AzureQueryProperties"
           }
+        },
+        "nonAzureQueries":{
+          "description": "List of non Azure queries in the software update configuration.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/NonAzureQueryProperties"
+          }
         }
       }
+    },
+    "NonAzureQueryProperties":{
+      "type": "object",
+      "description": "Non Azure query for the update configuration.",
+      "properties":{
+        "functionAlias" :{
+          "type": "string",
+          "description": "Log Analytics Saved Search name."
+        },
+        "workspaceId" :{
+          "type": "string",
+          "description": "Workspace Id for Log Analytics in which the saved Search is resided."
+        }
+      }
+     
     },
     "AzureQueryProperties": {
       "type": "object",
@@ -781,7 +839,7 @@
             "description": "Subscription or Resource Group ARM Id."
           }
         },
-        "location": {
+        "locations": {
           "type": "array",
           "description": "List of locations to scope the query to.",
           "items": {

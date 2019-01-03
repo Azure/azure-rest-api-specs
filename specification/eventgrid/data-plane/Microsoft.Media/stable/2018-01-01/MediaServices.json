@@ -276,7 +276,12 @@
       "description": "Details of JobOutput errors."
     },
     "MediaJobOutput": {
+      "discriminator": "@odata.type",
       "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
         "error": {
           "$ref": "#/definitions/MediaJobError",
           "description": "Gets the Job output error."
@@ -825,7 +830,7 @@
         }
       },
       "type": "object",
-      "description": "Ingest fragment dropped event event data."
+      "description": "Ingest fragment dropped event data."
     },
     "MediaLiveEventIngestHeartbeatEventData": {
       "properties": {
@@ -896,7 +901,7 @@
         }
       },
       "type": "object",
-      "description": "Ingest fragment dropped event event data."
+      "description": "Ingest fragment dropped event data."
     },
     "MediaLiveEventTrackDiscontinuityDetectedEventData": {
       "properties": {

@@ -1,7 +1,7 @@
 # Cognitive Services Language SDK
 
 The Cognitive Service Language SDK has support for the Text Analytics Cognitive Service.
-While this repository contains the [Autorest](https://aka.ms/autorest) generated SDK, the easiest way to consume the SDK is by installing the Nuget package for it.
+While this repository contains the [Autorest](https://aka.ms/autorest) generated SDK, the easiest way to consume the SDK is by installing the NuGet package for it.
 
 Note that the Cognitive Services Language SDK is simply a wrapper on top of the Text Analytics Cognitive service. As such, it will generate calls to the Azure service.
 
@@ -11,12 +11,12 @@ You must have a [Cognitive Services API account](https://docs.microsoft.com/azur
 
 You must also have the [endpoint and access key](../How-tos/text-analytics-how-to-access-key.md) that was generated for you during sign up.
 
-## Installing the Nuget SDK Package
+## Installing the NuGet SDK Package
 1. Create a new Console solution in Visual Studio.
 1. Right click on the solution and click **Manage NuGet Packages for Solution**
 1. Mark the **Include Prerelease** checkbox.
 1. Select the **Browse** tab, and Search for **Microsoft.Azure.CognitiveServices.Language**
-1. Select the Nuget package and install it.
+1. Select the NuGet package and install it.
 
 ## Calling the Text Analytics API using the SDK
 The following code snippets show to consume the SDK. Note that you will need to replace `client.SubscriptionKey` with the key you received when you signed up and `client.AzureRegion` with the region you signed up for.
@@ -118,7 +118,7 @@ The current release is `release_2_0`.
 A preview release `release_2_1` is also available.
 
 ``` yaml
-tag: release_2_0
+tag: release_2_1
 add-credentials: true
 ```
 
@@ -150,6 +150,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
