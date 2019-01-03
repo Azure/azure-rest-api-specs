@@ -26,9 +26,17 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2018-11
 ```
 
+### Tag: package-2018-11
+
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11'
+input-file:
+- Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+```
 
 ### Tag: package-2018-03-preview
 
@@ -121,7 +129,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/ser
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-03-preview
+  - tag: package-2018-11
+```
+
+### Tag: package-2018-11 and java
+
+These settings apply only when `--tag=package-2018-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
+  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_11_19
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-03-preview and java
@@ -136,5 +157,4 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
 
