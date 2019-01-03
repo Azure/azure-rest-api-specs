@@ -235,18 +235,6 @@
             "$ref": "#/parameters/RasterTileFormat"
           },
           {
-            "name": "path",
-            "description": "Path style and locations. Use this parameter to optionally add lines, polygons or circles to the image.\nThe path style describes the appearance of the line and fill. (Be sure to properly URL-encode values of this\nparameter since it will contain reserved characters such as pipes and punctuation.)\n\nPath parameter is supported in Azure Maps account SKU starting with S1. Multiple instances of the path parameter \nallow to specify multiple geometries with their styles. Nuber of parameters per request is limited to 10 and\nnumber of locations is limited to 100 per path.\n\nTo render a circle with radius 100 meters and center point at latitude 45°N and longitude 122°W using the default style, add the\nquerystring parameter \n\n`path=r100||-122 45` \n\nNote that the longitude comes before the latitude.\nAfter URL encoding this will look like\n\n`path=r100%7C%7C45+-122`\n\nAll of the examples here show the path parameter without URL encoding, for clarity.\n\nTo render a line, separate each location with a pipe character. For example, use\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12`\n\nTo render a polygon, last location must be equal to the start location. For example, use\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12|-122 45`\n\n### Style Modifiers\n\nYou can modify the appearance of the path by adding style modifiers. These are added before the locations. \nStyle modifiers each have a two-letter name. These abbreviated names are used to help\nreduce the length of the URL.\n\nTo change the color of the outline, use the 'lc' style modifier and specify the color using the HTML/CSS RGB color\nformat which is a six-digit hexadecimal number (the three-digit form is not supported). For example, to use\na deep pink color which you would specify as #FF1493 in CSS, use\n\n`path=lcFF1493||-122 45|-119.5 43.2`\n\n### Getting Path locations from Azure Maps Data Storage\n\nFor all Azure Maps account SKUs other than S0, the path location information can be obtained from Azure Maps Data Storage. \nAfter uploading a GeoJSON document containing path locations, the Data Storage service returns a Unique Data ID (UDID) that you can use\nto reference the data in the path parameter.\n\nTo use the point geometry from an uploaded GeoJSON document as the path locations, specify the UDID in the locations\nsection of the path parameter. For example,\n\n`path=||udid-29dc105a-dee7-409f-a3f9-22b066ae4713`\n\nNote the it is not allowed to mix path locations from Data Storage with locations specified in the path parameter. \n\n### Style Modifier Summary\n\nModifier  | Description            | Range            \n:--------:|------------------------|------------------\nlc        | Line color             | 000000 to FFFFFF\nfc        | Fill color             | 000000 to FFFFFF\nla        | Line alpha (opacity)   | 0 to 1           \nfa        | Fill alpha (opacity)   | 0 to 1           \nlw        | Line width             | Greater than 0            \nra        | Circle radius (meters) | Greater than 0",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "collectionFormat": "multi",
-            "items": {
-              "type": "string"
-            },
-            "x-publish": false
-          },
-          {
             "name": "layer",
             "in": "query",
             "description": "Map layer requested. If layer is set to labels or hybrid, the format should be png.",
