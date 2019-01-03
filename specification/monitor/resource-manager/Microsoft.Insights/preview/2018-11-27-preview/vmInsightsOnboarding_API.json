@@ -204,7 +204,7 @@
             "properties": {
               "resourceId": {
                 "type": "string",
-                "description": "Azure Resource Manager identifier of the resource whose onboarding status is being represented.",
+                "description": "Azure Resource Manager identifier of the resource whose onboarding status is being represented."
               },
               "onboardingStatus": {
                 "type": "string",
@@ -216,7 +216,7 @@
                   "name": "OnboardingStatus",
                   "modelAsString": true
                 },
-                "description": "The onboarding status for the resource. Note that, a higher level scope, e.g., resource group or subscription, is considered onboarded if at least one resource under it is onboarded. Future versions of the API may provide more detailed information, e.g., identifying that eligible resources within a subscription or resource group are not yet onboarded.",
+                "description": "The onboarding status for the resource. Note that, a higher level scope, e.g., resource group or subscription, is considered onboarded if at least one resource under it is onboarded. Future versions of the API may provide more detailed information, e.g., identifying that eligible resources within a subscription or resource group are not yet onboarded."
               },
               "dataStatus": {
                 "type": "string",
@@ -228,14 +228,14 @@
                   "name": "DataStatus",
                   "modelAsString": true
                 },
-                "description": "The status of VM Insights data from the resource. When reported as `present` the data array will contain information about the data containers to which data for the specified resource is being routed.",
+                "description": "The status of VM Insights data from the resource. When reported as `present` the data array will contain information about the data containers to which data for the specified resource is being routed."
               },
               "data": {
                 "type": "array",
                 "items": {
                   "$ref": "#/definitions/DataContainer"
                 },
-                "description": "Containers that currently store VM Insights data for the specified resource.",
+                "description": "Containers that currently store VM Insights data for the specified resource."
               }
             },
             "required": [
