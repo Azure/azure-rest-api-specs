@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for MonitorClient.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for MonitorClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,31 @@ To build the SDK for MonitorClient, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the MonitorClient API.
 
 ``` yaml
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
+tag: package-preview-2018-11
+```
 
-tag: package-2018-09
 
+### Tag: package-preview-2018-11
+
+These settings apply only when `--tag=package-preview-2018-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2018-11'
+input-file:
+  - Microsoft.Insights/preview/2018-11-27-preview/guestDiagnosticSettingsAssociation_API.json
+  - Microsoft.Insights/preview/2018-11-27-preview/guestDiagnosticSettings_API.json
 ```
 ### Tag: package-2018-09
 
@@ -85,7 +94,6 @@ input-file:
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 ```
 
-
 ### Tag: package-2018-02-preview
 
 These settings apply only when `--tag=package-2018-02-preview` is specified on the command line.
@@ -109,7 +117,6 @@ input-file:
 - Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
 - Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 ```
-
 
 ### Tag: package-2017-12
 
@@ -273,8 +280,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -292,7 +299,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
 ```
-
 
 ## C#
 
