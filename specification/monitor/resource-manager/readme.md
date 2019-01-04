@@ -28,15 +28,14 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2018-11
+tag: package-2018-09
 ```
 
+### Tag: package-2018-11-preview
 
-### Tag: package-2018-11
+These settings apply only when `--tag=package-2018-11-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-2018-11` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2018-11'
+```yaml $(tag) == 'package-2018-11-preview'
 input-file:
 - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
@@ -59,6 +58,7 @@ input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 ```
+
 ### Tag: package-2018-09
 
 These settings apply only when `--tag=package-2018-09` is specified on the command line.
