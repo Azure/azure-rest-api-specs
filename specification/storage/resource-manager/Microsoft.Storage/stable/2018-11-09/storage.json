@@ -641,7 +641,7 @@
           "200": {
             "description": "OK -- Get the managementpolicy successfully.",
             "schema": {
-              "$ref": "#/definitions/StorageAccountManagementPolicy"
+              "$ref": "#/definitions/ManagementPolicy"
             }
           }
         }
@@ -676,7 +676,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageAccountManagementPolicy"
+              "$ref": "#/definitions/ManagementPolicy"
             },
             "description": "The ManagementPolicy set to a storage account."
           }
@@ -685,7 +685,7 @@
           "200": {
             "description": "OK -- Get managementpolicy successfully.",
             "schema": {
-              "$ref": "#/definitions/StorageAccountManagementPolicy"
+              "$ref": "#/definitions/ManagementPolicy"
             }
           }
         }
@@ -2089,10 +2089,10 @@
       },
       "description": "The List service SAS credentials operation response."
     },
-    "StorageAccountManagementPolicy": {
+    "ManagementPolicy": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StorageAccountManagementPolicyProperty",
+          "$ref": "#/definitions/ManagementPolicyProperties",
           "x-ms-client-flatten": true,
           "readOnly": true,
           "description": "Returns the Storage Account Data Policies Rules."
@@ -2105,7 +2105,7 @@
       ],
       "description": "The Get Storage Account ManagementPolicies operation response."
     },
-    "StorageAccountManagementPolicyProperty": {
+    "ManagementPolicyProperties": {
       "properties": {
         "lastModifiedTime": {
           "readOnly": true,
@@ -2114,23 +2114,29 @@
           "description": "Returns the date and time the ManagementPolicies was last modified."
         },
         "policy": {
-          "properties": {
-            "version": {
-              "type": "string",
-              "description": "The policy version expressed as x.x."
-            },
-            "rules": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ManagementPolicyRule"
-              },
-              "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
-            }
-          },
-          "description": "The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+            "$ref": "#/definitions/ManagementPolicySchema",
+            "description": "The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
         }
       },
+      "required": ["policy"],
       "description": "The Storage Account ManagementPolicy properties."
+    },
+    "ManagementPolicySchema":{
+      "properties": {
+        "version" : {
+          "type": "string",
+          "description": "The policy version expressed as x.x."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementPolicyRule"
+          },
+          "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+        }
+      },
+      "required": ["version", "rules"],
+      "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
     },
     "ManagementPolicyRule": {
       "properties": {
@@ -2151,6 +2157,7 @@
           "description": "An object that defines the Lifecycle rule."
         }
       },
+      "required": ["name", "type", "definition"],
       "description": "An object that wraps the Lifecycle rule. Each rule is uniquely defined by name."
     },
     "ManagementPolicyDefinition": {
@@ -2164,6 +2171,7 @@
           "description": "An object that defines the filter set."
         }
       },
+      "required": ["actions"],
       "description": "An object that defines the Lifecycle rule. Each definition is made up with a filters set and an actions set."
     },
     "ManagementPolicyFilter": {
@@ -2183,12 +2191,12 @@
           "description": "An array of strings for suffixes to be match."
         },
         "sizeInByteGreaterThan": {
-          "type": "integer",
+          "type": "number",
           "minimum": 0,
           "description": "A whole number specifying the minimal blob size for this rule."
         },
         "sizeInByteLessThan": {
-          "type": "integer",
+          "type": "number",
           "minimum": 0,
           "description": "A whole number specifying the maximum blob size for this rule."
         },
@@ -2200,6 +2208,7 @@
           "description": "An array of predefined enum values. Only blockBlob is supported."
         }
       },
+      "required": [ "blobTypes" ],
       "description": "Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. "
     },
     "ManagementPolicyAction": {
@@ -2245,18 +2254,22 @@
       "properties": {
         "daysAfterModificationGreaterThan": {
           "type": "integer",
+          "minimum": 0,
           "description": "Integer value indicating the age in days after last modification"
         }
       },
+      "required": ["daysAfterModificationGreaterThan"],
       "description": "Object to define the number of days after last modification."
     },
     "DateAfterCreation": {
       "properties": {
         "daysAfterCreationGreaterThan": {
           "type": "integer",
+          "minimum": 0,
           "description": "Integer value indicating the age in days after creation"
         }
       },
+      "required": ["daysAfterCreationGreaterThan"],
       "description": "Object to define the number of days after creation."
     }
   },
