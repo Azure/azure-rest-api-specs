@@ -43,15 +43,15 @@
             "VM Insights Onboarding"
           ],
           "operationId": "VMInsights_GetOnboardingStatus",
-          "description": "Retrieves the VM Insights onboarding status for the specified resource.",
+          "description": "Retrieves the VM Insights onboarding status for the specified resource or resource scope.",
           "x-ms-examples": {
-            "Get status for single vm that has not yet reported data": {
+            "Get status for a VM that has not yet reported data": {
                 "$ref": "./examples/getOnboardingStatusSingleVMUnknown.json"
             },
-            "Get status for single VM that is actively reporting data": {
+            "Get status for a VM that is actively reporting data": {
               "$ref": "./examples/getOnboardingStatusSingleVM.json"
             },
-            "Get status for a VM Scale Set that is actively reporting data": {
+            "Get status for a VM scale set that is actively reporting data": {
                 "$ref": "./examples/getOnboardingStatusVMScaleSet.json"
             },
             "Get status for a resource group that has at least one VM that is actively reporting data": {
@@ -210,13 +210,14 @@
                 "type": "string",
                 "enum": [
                   "onboarded",
+                  "notOnboarded",
                   "unknown"
                 ],
                 "x-ms-enum": {
                   "name": "OnboardingStatus",
                   "modelAsString": true
                 },
-                "description": "The onboarding status for the resource. Note that, a higher level scope, e.g., resource group or subscription, is considered onboarded if at least one resource under it is onboarded. Future versions of the API may provide more detailed information, e.g., identifying that eligible resources within a subscription or resource group are not yet onboarded."
+                "description": "The onboarding status for the resource. Note that, a higher level scope, e.g., resource group or subscription, is considered onboarded if at least one resource under it is onboarded."
               },
               "dataStatus": {
                 "type": "string",
