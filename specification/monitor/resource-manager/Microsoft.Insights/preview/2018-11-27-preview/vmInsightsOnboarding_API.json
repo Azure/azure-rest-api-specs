@@ -84,7 +84,7 @@
             "default": {
               "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
               "schema": {
-                "$ref": "#/definitions/ErrorResponse"
+                "$ref": "#/definitions/ResponseWithError"
               }
             }
           }
@@ -92,7 +92,7 @@
       }
     },
     "definitions": {
-      "Resource": {
+      "ProxyResource": {
         "properties": {
           "id": {
             "type": "string",
@@ -113,7 +113,7 @@
         "x-ms-azure-resource": true,
         "description": "An azure resource object"
       },
-      "ErrorResponse": {
+      "ResponseWithError": {
         "type": "object",
         "description": "An error response from the API.",
         "properties": {
@@ -193,7 +193,7 @@
         "description": "VM Insights onboarding status for a resource.",
         "allOf": [
           {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/ProxyResource"
           }
         ],
         "properties": {
