@@ -113,6 +113,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           }
         ],
@@ -154,6 +155,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -199,6 +201,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -251,6 +254,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -296,6 +300,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -341,6 +346,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -384,6 +390,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -443,6 +450,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -496,6 +504,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -522,15 +531,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile":{
-      "post":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile": {
+      "post": {
         "tags": [
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_ResetServicePrincipalProfile",
         "summary": "Reset Service Principal Profile of a managed cluster.",
         "description": "Update the service principal Profile for a managed cluster.",
-        "parameters":[
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -542,6 +551,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -559,7 +569,7 @@
               "$ref": "#/definitions/ManagedClusterServicePrincipalProfile"
             },
             "description": "Parameters supplied to the Reset Service Principal Profile operation for a Managed Cluster."
-          } 
+          }
         ],
         "responses": {
           "200": {
@@ -577,15 +587,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetAADProfile":{
-      "post":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetAADProfile": {
+      "post": {
         "tags": [
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_ResetAADProfile",
         "summary": "Reset AAD Profile of a managed cluster.",
         "description": "Update the AAD Profile for a managed cluster.",
-        "parameters":[
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -597,6 +607,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -614,7 +625,7 @@
               "$ref": "#/definitions/ManagedClusterAADProfile"
             },
             "description": "Parameters supplied to the Reset AAD Profile operation for a Managed Cluster."
-          } 
+          }
         ],
         "responses": {
           "200": {
@@ -630,7 +641,7 @@
             "$ref": "./examples/ManagedClustersResetAADProfile.json"
           }
         }
-      } 
+      }
     }
   },
   "definitions": {
@@ -1494,10 +1505,10 @@
       },
       "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     },
-    "CredentialResults":{
+    "CredentialResults": {
       "properties": {
         "kubeconfigs": {
-          "type" : "array",
+          "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/CredentialResult"
@@ -1509,7 +1520,7 @@
     "CredentialResult": {
       "type": "object",
       "properties": {
-        "name":{
+        "name": {
           "type": "string",
           "readOnly": true,
           "description": "The name of the credential."
