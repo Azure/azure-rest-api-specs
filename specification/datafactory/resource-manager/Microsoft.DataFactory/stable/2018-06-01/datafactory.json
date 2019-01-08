@@ -161,10 +161,10 @@
         "tags": [
           "exposureControl"
         ],
-        "operationId": "ExposureControl_GetFeature",
+        "operationId": "ExposureControl_GetFeatureValue",
         "x-ms-examples": {
           "Factories_ConfigureFactoryRepo": {
-            "$ref": "./examples/ExposureControl_GetFeature.json"
+            "$ref": "./examples/ExposureControl_GetFeatureValue.json"
           }
         },
         "description": "Get exposure control feature for specific location.",
@@ -174,57 +174,6 @@
           },
           {
             "$ref": "#/parameters/locationId"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "exposureControlRequest",
-            "description": "The exposure control request.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExposureControlRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/ExposureControlResponse"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue": {
-      "post": {
-        "tags": [
-          "exposureControl"
-        ],
-        "operationId": "ExposureControl_GetFeatureBySubscription",
-        "x-ms-examples": {
-          "Factories_ConfigureFactoryRepo": {
-            "$ref": "./examples/ExposureControl_GetFeatureBySubscription.json"
-          }
-        },
-        "description": "Get exposure control feature for specific data factory.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
           },
           {
             "$ref": "#/parameters/api-version"
