@@ -15,6 +15,7 @@ async function main() {
   for (const swagger of swaggersToProcess) {
     try {
       await oav.validateExamples(swagger, null, {consoleLogLevel: 'error', pretty: true});
+      oav.clearCache();
     } catch (e) {
       console.error("error: ")
       console.error(e)
