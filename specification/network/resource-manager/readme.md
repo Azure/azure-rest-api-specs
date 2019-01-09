@@ -44,6 +44,7 @@ input-file:
   - Microsoft.Network/stable/2018-11-01/azureFirewall.json
   - Microsoft.Network/stable/2018-11-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2018-11-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-11-01/ddosCustomPolicy.json
   - Microsoft.Network/stable/2018-11-01/ddosProtectionPlan.json
   - Microsoft.Network/stable/2018-11-01/endpointService.json
   - Microsoft.Network/stable/2018-11-01/expressRouteCircuit.json
@@ -724,6 +725,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ddosCustomPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: ddosProtectionPlan.json
