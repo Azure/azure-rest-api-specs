@@ -1640,6 +1640,17 @@
           "type": "string",
           "description": "Name of the rewrite rule that is unique within an Application Gateway."
         },
+        "ruleSequence": {
+          "type": "integer",
+          "description": "Rule Sequence of the rewrite rule that determines the order of execution of a particular rule in a RewriteRuleSet."
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRewriteRuleCondition"
+          },
+          "description": "Conditions based on which the action set execution will be evaluated."
+        },
         "actionSet": {
           "type": "object",
           "$ref": "#/definitions/ApplicationGatewayRewriteRuleActionSet",
@@ -1647,6 +1658,27 @@
         }
       },
       "description": "Rewrite rule of an application gateway."
+    },
+    "ApplicationGatewayRewriteRuleCondition": {
+      "properties": {
+        "variable": {
+          "type": "string",
+          "description": "The condition parameter of the RewriteRuleCondition."
+        },
+        "pattern": {
+          "type": "string",
+          "description": "The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition"
+        },
+        "ignoreCase": {
+          "type": "boolean",
+          "description": "Setting this paramter to truth value with force the pattern to do a case in-sensitive comparison."
+        },
+        "negate": {
+          "type": "boolean",
+          "description": "Setting this value as truth will force to check the negation of the condition given by the user."
+        }
+      },
+      "description": "Set of conditions in the Rewrite Rule in Application Gateway."
     },
     "ApplicationGatewayRewriteRuleActionSet": {
       "properties": {
