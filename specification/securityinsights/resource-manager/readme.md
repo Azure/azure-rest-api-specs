@@ -2,13 +2,13 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for SecurityInsight.
+This is the AutoRest configuration file for SecurityInsights.
 
 ---
 
 ## Getting Started
 
-To build the SDK for SecurityInsight, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for SecurityInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the SecurityInsight API.
+These are the global settings for the SecurityInsights API.
 
 ```yaml
 openapi-type: arm
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.SecurityInsight/preview/2019-01-01-preview/SecurityInsight.json
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
 ```
 
 ---
@@ -64,9 +64,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.SecurityInsight
+  namespace: Microsoft.Azure.Management.SecurityInsights
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/SecurityInsight/Management.SecurityInsight/Generated
+  output-folder: $(csharp-sdks-folder)/SecurityInsights/Management.SecurityInsights/Generated
   clear-output-folder: true
 ```
 
