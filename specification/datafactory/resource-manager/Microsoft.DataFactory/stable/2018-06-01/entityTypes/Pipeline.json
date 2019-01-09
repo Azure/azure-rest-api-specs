@@ -456,7 +456,7 @@
         }
       }
     },
-	"SqlSource": {
+    "SqlSource": {
       "description": "A copy activity SQL source.",
       "type": "object",
       "allOf": [
@@ -1134,7 +1134,7 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
-    } ,
+    },
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
@@ -2152,7 +2152,7 @@
     },
     "SSISPackageLocation": {
       "description": "SSIS package location.",
-      "type" : "object",
+      "type": "object",
       "properties": {
         "packagePath": {
           "description": "The SSIS package path. Type: string (or Expression with resultType string).",
@@ -2374,16 +2374,16 @@
           "type": "object",
           "description": "If true, files or sub-folders under current folder path will be deleted recursively. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
-        "maxConcurrentConnections":{
+        "maxConcurrentConnections": {
           "type": "integer",
           "minimum": 1,
           "description": "The max concurrent connections to connect data source at the same time."
         },
-        "enableLogging":{
-          "type":"object",
+        "enableLogging": {
+          "type": "object",
           "description": "Whether to record detailed logs of delete-activity execution. Default value is false. Type: boolean (or Expression with resultType boolean)."
         },
-        "logStorageSettings":{
+        "logStorageSettings": {
           "description": "Log storage settings customer need to provide when enableLogging is true.",
           "$ref": "#/definitions/LogStorageSettings"
         },
@@ -3160,6 +3160,67 @@
           "type": "object"
         }
       }
+    },
+    "AzureFunctionActivityMethod": {
+      "description": "The list of HTTP methods supported by a AzureFunctionActivity.",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS",
+        "HEAD",
+        "TRACE"
+      ],
+      "x-ms-enum": {
+        "name": "AzureFunctionActivityMethod",
+        "modelAsString": true
+      }
+    },
+    "AzureFunctionActivity": {
+      "x-ms-discriminator-value": "AzureFunctionActivity",
+      "description": "Azure Function activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Function activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureFunctionActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureFunctionActivityTypeProperties": {
+      "description": "Azure Function activity type properties.",
+      "properties": {
+        "method": {
+          "description": "Rest API method for target endpoint.",
+          "$ref": "#/definitions/AzureFunctionActivityMethod"
+        },
+        "functionName": {
+          "type": "object",
+          "description": "Name of the Function that the Azure Function Activity will call."
+        },
+        "headers": {
+          "type": "object",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+        },
+        "body": {
+          "type": "object",
+          "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "method",
+        "functionName"
+      ]
     }
   }
 }
