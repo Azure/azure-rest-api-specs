@@ -2469,25 +2469,12 @@
         "typeProperties"
       ]
     },
-    "WebActivityAuthenticationType": {
-      "description": "The list of Authentication types supported by a Web Activity.",
-      "type": "string",
-      "enum": [
-        "Basic",
-        "ClientCertificate",
-        "MSI"
-      ],
-      "x-ms-enum": {
-        "name": "WebActivityAuthenticationType",
-        "modelAsString": true
-      }
-    },
     "WebActivityAuthentication": {
       "description": "Web activity authentication properties.",
       "properties": {
         "type": {
           "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
-          "$ref": "#/definitions/WebActivityAuthenticationType"
+          "type": "string"
         },
         "pfx": {
           "description": "Base64-encoded contents of a PFX file.",
