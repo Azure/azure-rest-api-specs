@@ -456,7 +456,7 @@
         }
       }
     },
-	"SqlSource": {
+    "SqlSource": {
       "description": "A copy activity SQL source.",
       "type": "object",
       "allOf": [
@@ -1134,7 +1134,7 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
-    } ,
+    },
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
@@ -2152,7 +2152,7 @@
     },
     "SSISPackageLocation": {
       "description": "SSIS package location.",
-      "type" : "object",
+      "type": "object",
       "properties": {
         "packagePath": {
           "description": "The SSIS package path. Type: string (or Expression with resultType string).",
@@ -2374,16 +2374,16 @@
           "type": "object",
           "description": "If true, files or sub-folders under current folder path will be deleted recursively. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
-        "maxConcurrentConnections":{
+        "maxConcurrentConnections": {
           "type": "integer",
           "minimum": 1,
           "description": "The max concurrent connections to connect data source at the same time."
         },
-        "enableLogging":{
-          "type":"object",
+        "enableLogging": {
+          "type": "object",
           "description": "Whether to record detailed logs of delete-activity execution. Default value is false. Type: boolean (or Expression with resultType boolean)."
         },
-        "logStorageSettings":{
+        "logStorageSettings": {
           "description": "Log storage settings customer need to provide when enableLogging is true.",
           "$ref": "#/definitions/LogStorageSettings"
         },
@@ -2533,6 +2533,69 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           }
+        }
+      },
+      "required": [
+        "method",
+        "url"
+      ]
+    },
+    "WebHookActivity": {
+      "x-ms-discriminator-value": "WebHook",
+      "description": "WebHook activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "WebHook activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WebHookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "WebHookActivityMethod": {
+      "description": "The list of HTTP methods supported by a WebHook activity.",
+      "type": "string",
+      "enum": [
+        "POST"
+      ],
+      "x-ms-enum": {
+        "name": "WebHookActivityMethod",
+        "modelAsString": true
+      }
+    },
+    "WebHookActivityTypeProperties": {
+      "description": "WebHook activity type properties.",
+      "properties": {
+        "method": {
+          "description": "Rest API method for target endpoint.",
+          "$ref": "#/definitions/WebHookActivityMethod"
+        },
+        "url": {
+          "type": "object",
+          "description": "WebHook activity target endpoint and path. Type: string (or Expression with resultType string)."
+        },
+        "timeout": {
+          "type": "object",
+          "description": "Specifies the timeout within which the webhook should be called back. If there is no value specified, it takes the value of TimeSpan.FromMinutes(10) which is 10 minutes as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "headers": {
+          "type": "object",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+        },
+        "body": {
+          "type": "object",
+          "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "description": "Authentication method used for calling the endpoint.",
+          "$ref": "#/definitions/WebActivityAuthentication"
         }
       },
       "required": [
