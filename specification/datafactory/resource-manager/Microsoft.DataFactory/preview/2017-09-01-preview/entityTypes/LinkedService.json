@@ -4087,46 +4087,6 @@
         "endpoint",
         "clientId"
       ]
-    },
-    "AzureFunctionLinkedService": {
-      "x-ms-discriminator-value": "AzureFunction",
-      "description": "Azure Function linked service.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LinkedService"
-        }
-      ],
-      "properties": {
-        "typeProperties": {
-          "description": "Azure Function linked service properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AzureFunctionLinkedServiceTypeProperties"
-        }
-      },
-      "required": [
-        "typeProperties"
-      ]
-    },
-    "AzureFunctionLinkedServiceTypeProperties": {
-      "description": "Azure Function linked service properties.",
-      "properties": {
-        "functionAppUrl": {
-          "description": "The endpoint of the Azure Function App. URL will be in the format https://<accountName>.azurewebsites.net.",
-          "type": "object"
-        },
-        "functionKey": {
-          "description": "Function or Host key for Azure Function App.",
-          "type": "object"
-        },
-        "encryptedCredential": {
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
-        }
-      },
-      "required": [
-        "functionAppUrl"
-      ]
     }
   }
 }
