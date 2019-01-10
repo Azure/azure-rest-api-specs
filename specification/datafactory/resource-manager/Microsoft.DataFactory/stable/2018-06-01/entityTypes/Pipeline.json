@@ -2469,12 +2469,25 @@
         "typeProperties"
       ]
     },
+    "WebActivityAuthenticationType": {
+      "description": "The list of Authentication types supported by a Web Activity.",
+      "type": "string",
+      "enum": [
+        "Basic",
+        "ClientCertificate",
+        "MSI"
+      ],
+      "x-ms-enum": {
+        "name": "WebActivityAuthenticationType",
+        "modelAsString": true
+      }
+    },
     "WebActivityAuthentication": {
       "description": "Web activity authentication properties.",
       "properties": {
         "type": {
           "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
-          "type": "string"
+          "$ref": "#/definitions/WebActivityAuthenticationType"
         },
         "pfx": {
           "description": "Base64-encoded contents of a PFX file.",
@@ -2570,34 +2583,6 @@
         "modelAsString": true
       }
     },
-    "WebHookActivityAuthentication": {
-      "description": "WebHook activity authentication properties.",
-      "properties": {
-        "type": {
-          "description": "WebHook activity authentication (Basic/ClientCertificate/MSI)",
-          "type": "string"
-        },
-        "pfx": {
-          "description": "Base64-encoded contents of a PFX file.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
-        },
-        "username": {
-          "description": "WebHook activity authentication user name for basic authentication.",
-          "type": "string"
-        },
-        "password": {
-          "description": "Password for the PFX file or basic authentication.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
-        },
-        "resource": {
-          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
     "WebHookActivityTypeProperties": {
       "description": "WebHook activity type properties.",
       "properties": {
@@ -2623,7 +2608,7 @@
         },
         "authentication": {
           "description": "Authentication method used for calling the endpoint.",
-          "$ref": "#/definitions/WebHookActivityAuthentication"
+          "$ref": "#/definitions/WebActivityAuthentication"
         }
       },
       "required": [
