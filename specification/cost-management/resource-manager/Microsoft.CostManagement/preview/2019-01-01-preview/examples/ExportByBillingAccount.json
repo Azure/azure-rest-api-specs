@@ -1,21 +1,21 @@
 {
   "parameters": {
-    "api-version": "2018-08-01-preview",
+    "api-version": "2019-01-01-preview",
     "billingAccountId": "123456",
-    "reportName": "TestReport"
+    "exportName": "TestExport"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/reports/TestReport",
-        "name": "TestReport",
-        "type": "Microsoft.CostManagement/reports",
+        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
         "properties": {
           "format": "Csv",
           "deliveryInfo": {
             "destination": {
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-              "container": "reports",
+              "container": "exports",
               "rootFolderPath": "ad-hoc"
             }
           },

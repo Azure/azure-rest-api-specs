@@ -1,9 +1,8 @@
 {
   "parameters": {
-    "api-version": "2018-08-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "MYDEVTESTRG",
-    "reportName": "TestReport",
+    "api-version": "2019-01-01-preview",
+    "billingAccountId": "123456",
+    "exportName": "TestExport",
     "parameters": {
       "properties": {
         "schedule":{
@@ -18,7 +17,7 @@
         "deliveryInfo": {
           "destination": {
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-            "container": "reports",
+            "container": "exports",
             "rootFolderPath": "ad-hoc"
           }
         },
@@ -97,9 +96,9 @@
   "responses": {
     "201": {
       "body": {
-        "id": "subscriptions/{subscription-id}/providers/Microsoft.CostManagement/reports/TestReport",
-        "name": "TestReport",
-        "type": "Microsoft.CostManagement/reports",
+        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-id}/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
         "properties": {
           "schedule":{
             "status": "Active",
@@ -113,7 +112,7 @@
           "deliveryInfo": {
             "destination": {
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-              "container": "reports",
+              "container": "exports",
               "rootFolderPath": "ad-hoc"
             }
           },
@@ -191,9 +190,9 @@
     },
     "200": {
       "body": {
-        "id": "subscriptions/{subscription-id}/providers/Microsoft.CostManagement/reports/TestReport",
-        "name": "TestReport",
-        "type": "Microsoft.CostManagement/reports",
+        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
         "properties": {
           "schedule":{
             "status": "Active",
@@ -207,7 +206,7 @@
           "deliveryInfo": {
             "destination": {
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-              "container": "reports",
+              "container": "exports",
               "rootFolderPath": "ad-hoc"
             }
           },

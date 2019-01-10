@@ -65,6 +65,16 @@ input-file:
 ```
 
 
+### Tag: package-2019-01-preview
+
+These settings apply only when `--tag=package-2019-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-01-preview'
+input-file:
+- Microsoft.CostManagement/preview/2019-01-01-preview/costmanagement.json
+```
+
+
 ---
 # Code Generation
 
@@ -186,6 +196,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2018_12_01_preview
   output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_12_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-01-preview and java
+
+These settings apply only when `--tag=package-2019-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.costmanagement.v2019_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2019_01_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-08-01-preview",
+    "api-version": "2019-01-01-preview",
     "billingAccountId": "123456"
   },
   "responses": {
@@ -8,15 +8,15 @@
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/reports/TestReport1",
-            "name": "TestReport1",
-            "type": "Microsoft.CostManagement/reports",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/exports/TestExport1",
+            "name": "TestExport1",
+            "type": "Microsoft.CostManagement/exports",
             "properties": {
               "format": "Csv",
               "deliveryInfo": {
                 "destination": {
                   "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-                  "container": "reports",
+                  "container": "exports",
                   "rootFolderPath": "ad-hoc"
                 }
               },
@@ -92,9 +92,9 @@
             }
           },
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/reports/TestReport2",
-            "name": "TestReport2",
-            "type": "Microsoft.CostManagement/reports",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccount-Id}/providers/Microsoft.CostManagement/exports/TestExport2",
+            "name": "TestExport2",
+            "type": "Microsoft.CostManagement/exports",
             "properties": {
               "schedule":{
                 "status": "Active",
@@ -108,7 +108,7 @@
               "deliveryInfo": {
                 "destination": {
                   "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-                  "container": "reports",
+                  "container": "exports",
                   "rootFolderPath": "ad-hoc"
                 }
               },
