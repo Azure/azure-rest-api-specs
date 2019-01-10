@@ -2023,9 +2023,17 @@
           "description": "Last modified by user name.",
           "readOnly": true
         },
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates if the given action rule is enabled or disabled"
+        "status": {
+		  "type": "string",
+          "description": "Indicates if the given action rule is enabled or disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ActionRuleStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2048,9 +2056,17 @@
     "patchObject": {
       "description": "Properties supported by patch",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to indicate to enable or disable action rule"
+        "status": {
+		  "type": "string",
+          "description": "Indicates if the given action rule is enabled or disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ActionRuleStatus",
+            "modelAsString": true
+          }
         },
         "tags": {
           "type": "object",
