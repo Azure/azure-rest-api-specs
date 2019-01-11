@@ -1,8 +1,8 @@
-# EkgService
+# EnterpriseKnowledgeGraphService
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for EkgService.
+This is the AutoRest configuration file for EnterpriseKnowledgeGraphService.
 
 
 
@@ -22,15 +22,15 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2018-12-03' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.ekgservice.v2018-12-03
-  output-folder: $(azure-libraries-for-java-folder)/ekgservice/resource-manager/v2018-12-03
+  namespace: com.microsoft.azure.management.EnterpriseKnowledgeGraphservice.v2018-12-03
+  output-folder: $(azure-libraries-for-java-folder)/EnterpriseKnowledgeGraphservice/resource-manager/v2018-12-03
 regenerate-manager: true
 generate-interface: true
 ```
 
 
 ## Getting Started
-To build the SDK for EkgService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for EnterpriseKnowledgeGraphService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -44,7 +44,7 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the EkgService API.
+These are the global settings for the EnterpriseKnowledgeGraphService API.
 
 ``` yaml
 openapi-type: arm
@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2018-12-03` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-12-03'
 input-file:
-- Microsoft.EKG/preview/2018-12-03/ekgSwagger.json
+- Microsoft.EnterpriseKnowledgeGraph/preview/2018-12-03/EnterpriseKnowledgeGraphSwagger.json
 directive:
   - None at the moment
 ```
@@ -85,7 +85,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.EkgService
-  output-folder: $(csharp-sdks-folder)/EkgService/Microsoft.Azure.Management.EkgService/Generated
+  namespace: Microsoft.Azure.Management.EnterpriseKnowledgeGraphService
+  output-folder: $(csharp-sdks-folder)/EnterpriseKnowledgeGraphService/Microsoft.Azure.Management.EnterpriseKnowledgeGraphService/Generated
   clear-output-folder: true
 ```
