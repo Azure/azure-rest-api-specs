@@ -27,16 +27,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/services/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseKnowledgeGraph/services/{resourceName}": {
       "put": {
         "tags": [
-          "EKG"
+          "EnterpriseKnowledgeGraph"
         ],
-        "description": "Creates a EKG Service. EKG Service is a resource group wide resource type.",
-        "operationId": "EKG_Create",
+        "description": "Creates a EnterpriseKnowledgeGraph Service. EnterpriseKnowledgeGraph Service is a resource group wide resource type.",
+        "operationId": "EnterpriseKnowledgeGraph_Create",
         "x-ms-examples": {
-          "Create EKG": {
-            "$ref": "./examples/CreateEKG.json"
+          "Create EnterpriseKnowledgeGraph": {
+            "$ref": "./examples/CreateEnterpriseKnowledgeGraph.json"
           }
         },
         "parameters": [
@@ -51,9 +51,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EKG"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraph"
             },
-            "description": "The parameters to provide for the created EKG."
+            "description": "The parameters to provide for the created EnterpriseKnowledgeGraph."
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -63,10 +63,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseKnowledgeGraph"
+            }
+          },
           "201": {
             "description": "If resource is created successfully, the service should return 201 (Creating). Execution to continue asynchronously.",
             "schema": {
-              "$ref": "#/definitions/EKG"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraph"
             }
           },
           "default": {
@@ -79,13 +85,13 @@
       },
       "patch": {
         "tags": [
-          "EKG"
+          "EnterpriseKnowledgeGraph"
         ],
-        "description": "Updates a EKG Service",
-        "operationId": "EKG_Update",
+        "description": "Updates a EnterpriseKnowledgeGraph Service",
+        "operationId": "EnterpriseKnowledgeGraph_Update",
         "x-ms-examples": {
-          "Update EKG": {
-            "$ref": "./examples/UpdateEKG.json"
+          "Update EnterpriseKnowledgeGraph": {
+            "$ref": "./examples/UpdateEnterpriseKnowledgeGraph.json"
           }
         },
         "parameters": [
@@ -101,9 +107,9 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/EKG"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraph"
             },
-            "description": "The parameters to provide for the created EKG."
+            "description": "The parameters to provide for the created EnterpriseKnowledgeGraph."
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -116,13 +122,13 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
             "schema": {
-              "$ref": "#/definitions/EKG"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraph"
             }
           },
           "201": {
             "description": "If resource is updated successfully, the service should return 201 (Created). Execution to continue asynchronously.",
             "schema": {
-              "$ref": "#/definitions/EKG"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraph"
             }
           },
           "default": {
@@ -135,13 +141,13 @@
       },
       "delete": {
         "tags": [
-          "EKG"
+          "EnterpriseKnowledgeGraph"
         ],
-        "description": "Deletes a EKG Service from the resource group. ",
-        "operationId": "EKG_Delete",
+        "description": "Deletes a EnterpriseKnowledgeGraph Service from the resource group. ",
+        "operationId": "EnterpriseKnowledgeGraph_Delete",
         "x-ms-examples": {
-          "Delete EKG": {
-            "$ref": "./examples/DeleteEKG.json"
+          "Delete EnterpriseKnowledgeGraph": {
+            "$ref": "./examples/DeleteEnterpriseKnowledgeGraph.json"
           }
         },
         "parameters": [
@@ -175,13 +181,13 @@
       },
       "get": {
         "tags": [
-          "EKG"
+          "EnterpriseKnowledgeGraph"
         ],
-        "description": "Returns a ekg service specified by the parameters.",
-        "operationId": "EKG_Get",
+        "description": "Returns a EnterpriseKnowledgeGraph service specified by the parameters.",
+        "operationId": "EnterpriseKnowledgeGraph_Get",
         "x-ms-examples": {
-          "Get EKG": {
-            "$ref": "./examples/GetEKG.json"
+          "Get EnterpriseKnowledgeGraph": {
+            "$ref": "./examples/GetEnterpriseKnowledgeGraph.json"
           }
         },
         "parameters": [
@@ -202,7 +208,7 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
             "schema": {
-              "$ref": "#/definitions/EKG"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraph"
             }
           },
           "default": {
@@ -214,16 +220,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EKG/services": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EnterpriseKnowledgeGraph/services": {
       "get": {
         "tags": [
-          "EKG"
+          "EnterpriseKnowledgeGraph"
         ],
         "description": "Returns all the resources of a particular type belonging to a resource group",
-        "operationId": "EKG_ListByResourceGroup",
+        "operationId": "EnterpriseKnowledgeGraph_ListByResourceGroup",
         "x-ms-examples": {
-          "List EKG by Resource Group": {
-            "$ref": "./examples/ListEKGByResourceGroup.json"
+          "List EnterpriseKnowledgeGraph by Resource Group": {
+            "$ref": "./examples/ListEnterpriseKnowledgeGraphByResourceGroup.json"
           }
         },
         "parameters": [
@@ -241,7 +247,7 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
             "schema": {
-              "$ref": "#/definitions/EKGResponseList"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraphResponseList"
             }
           },
           "default": {
@@ -256,16 +262,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EKG/services": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EnterpriseKnowledgeGraph/services": {
       "get": {
         "tags": [
-          "EKG"
+          "EnterpriseKnowledgeGraph"
         ],
         "description": "Returns all the resources of a particular type belonging to a subscription.",
-        "operationId": "EKG_List",
+        "operationId": "EnterpriseKnowledgeGraph_List",
         "x-ms-examples": {
-          "List EKG by Subscription": {
-            "$ref": "./examples/ListEKGBySubscription.json"
+          "List EnterpriseKnowledgeGraph by Subscription": {
+            "$ref": "./examples/ListEnterpriseKnowledgeGraphBySubscription.json"
           }
         },
         "parameters": [
@@ -280,7 +286,7 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. ",
             "schema": {
-              "$ref": "#/definitions/EKGResponseList"
+              "$ref": "#/definitions/EnterpriseKnowledgeGraphResponseList"
             }
           },
           "default": {
@@ -295,12 +301,12 @@
         }
       }
     },
-    "/providers/Microsoft.EKG/operations": {
+    "/providers/Microsoft.EnterpriseKnowledgeGraph/operations": {
       "get": {
         "tags": [
           "Operations"
         ],
-        "description": "Lists all the available ekg services operations.",
+        "description": "Lists all the available EnterpriseKnowledgeGraph services operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
           "Get Operations": {
@@ -374,7 +380,7 @@
       "required": [
         "name"
       ],
-      "description": "The SKU of the EKG service account."
+      "description": "The SKU of the EnterpriseKnowledgeGraph service account."
     },
     "SkuName": {
       "type": "string",
@@ -388,8 +394,8 @@
         "modelAsString": true
       }
     },
-    "EKG": {
-      "description": "EKG resource definition",
+    "EnterpriseKnowledgeGraph": {
+      "description": "EnterpriseKnowledgeGraph resource definition",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -397,40 +403,46 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EKGProperties",
-          "description": "The set of properties specific to EKG resource"
+          "$ref": "#/definitions/EnterpriseKnowledgeGraphProperties",
+          "description": "The set of properties specific to EnterpriseKnowledgeGraph resource"
         }
       }
     },
-    "EKGProperties": {
+    "EnterpriseKnowledgeGraphProperties": {
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the EKG"
+          "description": "The description of the EnterpriseKnowledgeGraph"
         },
         "provisioningState": {
           "type": "string",
-          "description": "The state of EKG provisioning"
+          "description": "The state of EnterpriseKnowledgeGraph provisioning",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Failed",
+            "Succeeded"
+          ]
         }
       },
-      "description": "The parameters to provide for the EKG."
+      "description": "The parameters to provide for the EnterpriseKnowledgeGraph."
     },
-    "EKGResponseList": {
+    "EnterpriseKnowledgeGraphResponseList": {
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of EKG service resources.",
+          "description": "The link used to get the next page of EnterpriseKnowledgeGraph service resources.",
           "type": "string"
         },
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EKG"
+            "$ref": "#/definitions/EnterpriseKnowledgeGraph"
           },
-          "description": "Gets the list of EKG service results and their properties."
+          "description": "Gets the list of EnterpriseKnowledgeGraph service results and their properties."
         }
       },
-      "description": "The list of  EKG service operation response."
+      "description": "The list of  EnterpriseKnowledgeGraph service operation response."
     },
     "Error": {
       "properties": {
@@ -439,7 +451,7 @@
           "description": "The error body."
         }
       },
-      "description": "EKG Service error object."
+      "description": "EnterpriseKnowledgeGraph Service error object."
     },
     "ErrorBody": {
       "properties": {
@@ -452,14 +464,14 @@
           "description": "error message"
         }
       },
-      "description": "EKG Service error body.",
+      "description": "EnterpriseKnowledgeGraph Service error body.",
       "required": [
         "code",
         "message"
       ]
     },
     "OperationEntityListResult": {
-      "description": "The list of EKG service operation response.",
+      "description": "The list of EnterpriseKnowledgeGraph service operation response.",
       "type": "object",
       "properties": {
         "nextLink": {
@@ -476,7 +488,7 @@
       }
     },
     "OperationEntity": {
-      "description": "The operations supported by EKG Service Management.",
+      "description": "The operations supported by EnterpriseKnowledgeGraph Service Management.",
       "type": "object",
       "properties": {
         "name": {
@@ -485,7 +497,7 @@
         },
         "display": {
           "$ref": "#/definitions/OperationDisplayInfo",
-          "description": "The operation supported by EKG Service Management."
+          "description": "The operation supported by EnterpriseKnowledgeGraph Service Management."
         },
         "origin": {
           "description": "The origin of the operation.",
@@ -498,7 +510,7 @@
       }
     },
     "OperationDisplayInfo": {
-      "description": "The operation supported by EKG Service Management.",
+      "description": "The operation supported by EnterpriseKnowledgeGraph Service Management.",
       "type": "object",
       "properties": {
         "description": {
@@ -510,7 +522,7 @@
           "type": "string"
         },
         "provider": {
-          "description": "Service provider: Microsoft EKG Service.",
+          "description": "Service provider: Microsoft EnterpriseKnowledgeGraph Service.",
           "type": "string"
         },
         "resource": {
@@ -530,7 +542,7 @@
       "maxLength": 64,
       "minLength": 2,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-      "description": "The name of the EKG resource group in the user subscription."
+      "description": "The name of the EnterpriseKnowledgeGraph resource group in the user subscription."
     },
     "resourceNameParameter": {
       "name": "resourceName",
@@ -541,7 +553,7 @@
       "maxLength": 64,
       "minLength": 2,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-      "description": "The name of the EKG resource."
+      "description": "The name of the EnterpriseKnowledgeGraph resource."
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
