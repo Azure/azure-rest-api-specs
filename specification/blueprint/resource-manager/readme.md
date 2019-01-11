@@ -46,6 +46,7 @@ These settings apply only when `--tag=package-2018-11-preview` is specified on t
 input-file:
 - Microsoft.Blueprint/preview/2018-11-01-preview/blueprintDefinition.json
 - Microsoft.Blueprint/preview/2018-11-01-preview/blueprintAssignment.json
+- Microsoft.Blueprint/preview/2018-11-01-preview/assignmentOperation.json
 ```
 
 ---
