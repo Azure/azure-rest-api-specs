@@ -722,6 +722,15 @@
             "description": "The name that needs to be updated",
             "required": true,
             "type": "string"
+          },
+		  {
+			"name": "actionRulePatch",
+			"in": "body",
+			"required": true,
+			"schema": {
+				"$ref": "#/definitions/patchObject"
+			},
+			"description": "Parameters supplied to the operation."
           }
         ],
         "responses": {
@@ -1130,6 +1139,34 @@
           "description": "Azure resource name"
         }
       }
+    },
+	"ManagedResource": {
+      "x-ms-azure-resource": true,
+      "description": "An azure managed resource object",
+	  "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+		"location": {
+		  "type": "string",
+		  "description": "Resource location",
+		  "x-ms-mutability": [
+		    "create",
+			"read"
+		  ]
+		},
+		"tags": {
+		  "additionalProperties": {
+			"type": "string"
+		  },
+		  "description": "Resource tags"
+		}
+	  },
+		"required": [
+		"location"
+		]
     },
     "alert": {
       "description": "An alert created in alert management service.",
@@ -1967,14 +2004,10 @@
       "description": "Action rule object containing target scope, conditions and suppression logic",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ManagedResource"
         }
       ],
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "List of tags specified by user associated with this resource"
-        },
         "properties": {
           "$ref": "#/definitions/actionRuleProperties"
         }

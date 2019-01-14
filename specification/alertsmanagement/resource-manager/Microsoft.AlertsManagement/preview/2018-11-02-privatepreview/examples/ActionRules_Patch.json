@@ -4,13 +4,11 @@
         "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
 		"resourceGroup": "alertscorrelationrg",
 		"actionRuleName": "DailySuppression",
-		"patchObject": {
-			"properties": {
-				"status": "disabled",
-				"tags": {
-					"suppress": "test"
-				}
-			}
+		"actionRulePatch": {
+			"tags": { "key1": "value1", "key2": "value2" },
+            "properties": {
+                "status": "disabled"
+            }
 		}
     },
 	"responses": {
@@ -46,9 +44,8 @@
 				"id":"/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
 				"type":"Microsoft.AlertsManagement/actionRules",
 				"name":"DailySuppression",
-				"tags": {
-					"suppress": "test"
-				}	
+				"location": "Global",
+				"tags": { "key1": "value1", "key2": "value2" }	
 			}
 		}	
 	}
