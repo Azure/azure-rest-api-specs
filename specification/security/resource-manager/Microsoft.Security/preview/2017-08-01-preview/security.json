@@ -815,16 +815,16 @@
             }
           }
         },
-        "/{resourceId}/providers/Microsoft.Security/iotSecurityGroups": {
+        "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups": {
             "get": {
                 "x-ms-examples": {
-                    "List all IoT security groups for the specified IoT hub resource": {
-                        "$ref": "./examples/IotSecurityGroups/ListIotSecurityGroups_example.json"
+                    "List all device security groups for the specified IoT hub resource": {
+                        "$ref": "./examples/DeviceSecurityGroups/ListDeviceSecurityGroups_example.json"
                     }
                 },   
-                "tags": ["IotSecurityGroups"],
-                "description": "Gets the list of security groups for the specified IoT hub resource.",
-                "operationId": "IotSecurityGroups_List",
+                "tags": ["DeviceSecurityGroups"],
+                "description": "Gets the list of device security groups for the specified IoT hub resource.",
+                "operationId": "DeviceSecurityGroups_List",
                 "parameters": [{
                         "$ref": "#/parameters/ApiVersion"
                     },
@@ -836,7 +836,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/IotSecurityGroupList"
+                            "$ref": "#/definitions/DeviceSecurityGroupList"
                         }
                     },
                     "default": {
@@ -845,19 +845,22 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
                 }
             }
         },
-        "/{resourceId}/providers/Microsoft.Security/iotSecurityGroups/{iotSecurityGroupName}": {
+        "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups/{deviceSecurityGroupName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get an IoT security group for the specified IoT hub resource": {
-                        "$ref": "./examples/IotSecurityGroups/GetIotSecurityGroups_example.json"
+                    "Get an device security group for the specified IoT hub resource": {
+                        "$ref": "./examples/DeviceSecurityGroups/GetDeviceSecurityGroups_example.json"
                     }
                 },        
-                "tags": [ "IotSecurityGroups" ],
-                "description": "Gets the security group for the specified IoT hub resource.",
-                "operationId": "IotSecurityGroups_Get",
+                "tags": [ "DeviceSecurityGroups" ],
+                "description": "Gets the device security group for the specified IoT hub resource.",
+                "operationId": "DeviceSecurityGroups_Get",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersion"
@@ -866,14 +869,14 @@
                         "$ref": "#/parameters/ResourceId"
                     },
                     {
-                        "$ref": "#/parameters/IotSecurityGroupName"
+                        "$ref": "#/parameters/DeviceSecurityGroupName"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Successful request to get security group.",
                         "schema": {
-                            "$ref": "#/definitions/IotSecurityGroup"
+                            "$ref": "#/definitions/DeviceSecurityGroup"
                         }
                     },
                     "default": {
@@ -886,13 +889,13 @@
             },
             "put": {
               "x-ms-examples": {
-                    "Create or update an IoT security group for the specified IoT hub resource": {
-                        "$ref": "./examples/IotSecurityGroups/PutIotSecurityGroups_example.json"
+                    "Create or update a device security group for the specified IoT hub resource": {
+                        "$ref": "./examples/DeviceSecurityGroups/PutDeviceSecurityGroups_example.json"
                     }
                 },
-                "tags": [ "IotSecurityGroups" ],
-                "description": "Creates or updates the security group on a specified IoT hub resource.",
-                "operationId": "IotSecurityGroups_CreateOrUpdate",
+                "tags": [ "DeviceSecurityGroups" ],
+                "description": "Creates or updates the device security group on a specified IoT hub resource.",
+                "operationId": "DeviceSecurityGroups_CreateOrUpdate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersion"
@@ -901,23 +904,23 @@
                         "$ref": "#/parameters/ResourceId"
                     },
                     {
-                        "$ref": "#/parameters/IotSecurityGroupName"
+                        "$ref": "#/parameters/DeviceSecurityGroupName"
                     },
                     {
-                        "$ref": "#/parameters/IotSecurityGroup"
+                        "$ref": "#/parameters/DeviceSecurityGroup"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Security group was updated",
                         "schema": {
-                            "$ref": "#/definitions/IotSecurityGroup"
+                            "$ref": "#/definitions/DeviceSecurityGroup"
                         }
                     },
                     "201": {
                         "description": "Security group was created",
                         "schema": {
-                            "$ref": "#/definitions/IotSecurityGroup"
+                            "$ref": "#/definitions/DeviceSecurityGroup"
                         }
                     },
                     "default": {
@@ -930,13 +933,13 @@
             },
             "delete": {
                 "x-ms-examples": {
-                      "Delete an IoT security group for the specified IoT hub resource": {
-                          "$ref": "./examples/IotSecurityGroups/DeleteIotSecurityGroups_example.json"
+                      "Delete a device security group for the specified IoT hub resource": {
+                          "$ref": "./examples/DeviceSecurityGroups/DeleteDeviceSecurityGroups_example.json"
                       }
                 },
-                "tags": ["IotSecurityGroups"],
+                "tags": ["DeviceSecurityGroups"],
                 "description": "Deletes the security group",
-                "operationId": "IotSecurityGroups_Delete",
+                "operationId": "DeviceSecurityGroups_Delete",
                 "parameters": [
                     {
                       "$ref": "#/parameters/ApiVersion"
@@ -945,12 +948,15 @@
                       "$ref": "#/parameters/ResourceId"
                     },
                     {
-                      "$ref": "#/parameters/IotSecurityGroupName"
+                      "$ref": "#/parameters/DeviceSecurityGroupName"
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Device security group has been deleted."
+                    },
                     "204": {
-                        "description": "No Content"
+                        "description": "Device security group does not exist."
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -1833,28 +1839,33 @@
                 }
             }
         },
-        "IotSecurityGroupList": {
+        "DeviceSecurityGroupList": {
             "type": "object",
             "readOnly": true,
-            "description": "List of IoT security groups",
+            "description": "List of device security groups",
             "properties": {
                 "value": {
                     "type": "array",
-                    "description": "List of IoT security group objects",
+                    "description": "List of device security group objects",
                     "items": {
-                        "$ref": "#/definitions/IotSecurityGroup"
+                        "$ref": "#/definitions/DeviceSecurityGroup"
                     }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
                 }
             }
         },
-        "IotSecurityGroup": {
+        "DeviceSecurityGroup": {
             "type": "object",
-            "description": "The IoT security group resource",
+            "description": "The device security group resource",
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "description": "IoT Security group data",
-                    "$ref": "#/definitions/IotSecurityGroupProperties"
+                    "description": "Device Security group data",
+                    "$ref": "#/definitions/DeviceSecurityGroupProperties"
                 }
             },
             "allOf": [{
@@ -1862,7 +1873,7 @@
                 }
             ]
         },
-        "IotSecurityGroupProperties": {
+        "DeviceSecurityGroupProperties": {
             "type": "object",
             "description": "describes properties of a security group.",
             "properties": {
@@ -2283,21 +2294,21 @@
           },
           "x-ms-parameter-location": "method"
         },
-        "IotSecurityGroupName": {
-          "name": "iotSecurityGroupName",
+        "DeviceSecurityGroupName": {
+          "name": "deviceSecurityGroupName",
           "in": "path",
           "required": true,
           "type": "string",
           "description": "The name of the security group. Please notice that the name is case insensitive.",
           "x-ms-parameter-location": "method"
         },
-        "IotSecurityGroup": {
-          "name": "iotSecurityGroup",
+        "DeviceSecurityGroup": {
+          "name": "deviceSecurityGroup",
           "in": "body",
           "required": true,
           "description": "Security group object.",
           "schema": {
-            "$ref": "#/definitions/IotSecurityGroup"
+            "$ref": "#/definitions/DeviceSecurityGroup"
           },
           "x-ms-parameter-location": "method"
         }
