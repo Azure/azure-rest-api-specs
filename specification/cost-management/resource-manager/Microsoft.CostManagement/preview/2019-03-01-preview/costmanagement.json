@@ -1147,6 +1147,226 @@
         }
       }
     },
+    "/providers/Microsoft.CostManagement/cloudConnectors": {
+      "get": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnector_List",
+        "description": "List all cloud connector definitions",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CloudConnector_List": {
+            "$ref": "./examples/CloudConnectorList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/cloudConnectors/{connectorName}": {
+      "get": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnector_Get",
+        "description": "Get a cloud connector definition",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CloudConnector_Get": {
+            "$ref": "./examples/CloudConnectorGet.json"
+          },
+          "CloudConnector_Get_Expand": {
+            "$ref": "./examples/CloudConnectorGetExpand.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/connectorNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnector_CreateOrUpdate",
+        "description": "Create or update a cloud connector definition",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CloudConnector_Put": {
+            "$ref": "./examples/CloudConnectorPut.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/connectorNameParameter"
+          },
+          {
+            "name": "connector",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            },
+            "description": "Connector details"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnector_Delete",
+        "description": "Delete a cloud connector definition",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CloudConnector_Delete": {
+            "$ref": "./examples/CloudConnectorDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/connectorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnector_Update",
+        "description": "Update a cloud connector definition",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CloudConnector_Patch": {
+            "$ref": "./examples/CloudConnectorPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/connectorNameParameter"
+          },
+          {
+            "name": "connector",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            },
+            "description": "Connector details"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -1180,18 +1400,49 @@
     }
   },
   "definitions": {
+    "ErrorBase": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine readable error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Indicates which property in the request is responsible for the error.",
+          "readOnly": true
+        }
+      }
+    },
     "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
         "code": {
-          "description": "Error code.",
+          "description": "A machine readable error code.",
           "type": "string",
           "readOnly": true
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
+          "description": "A human readable error message.",
           "type": "string",
           "readOnly": true
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorBase"
+          }
         }
       }
     },
@@ -1626,6 +1877,244 @@
         }
       }
     },
+    "ConnectorDefinitionListResult": {
+      "description": "Result of listing connector definitions. It contains a list of available connector definitions in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of connector definitions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ConnectorDefinition"
+          }
+        }
+      }
+    },
+    "ConnectorDefinition": {
+      "type": "object",
+      "description": "The Connector model definition",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Connector kind (eg aws)"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Connector id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Connector name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Connector type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+           "type": "string"
+          },
+          "x-ms-mutability": [
+           "read",
+           "create",
+           "update"
+          ],
+          "description": "Resource tags."
+         },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectorProperties",
+          "description": "Connector properties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ConnectorProperties": {
+      "type": "object",
+      "description": "The properties of a Connector",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Connector DisplayName (defaults to Name)"
+        },
+        "providerAccountId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Connector providerAccountId (determined from credentials)",
+          "readOnly": true
+        },
+        "credentialsKey": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Credentials authentication key (eg AWS ARN)"
+        },
+        "credentialsSecret": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "Credentials secret (eg AWS ExternalId)"
+        },
+        "reportId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Identifying source report. (For AWS this is a CUR report name, defined with Daily and with Resources)"
+        },
+        "createdOn": {
+          "format": "date-time",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Connector definition creation datetime",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "format": "date-time",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Connector last modified datetime",
+          "readOnly": true
+        },
+        "status": {
+          "enum": [
+            "active",
+            "error",
+            "suspended"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectorStatus",
+            "modelAsString": true
+          },
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Connector status"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Billing SubscriptionId"
+        },
+        "billingModel": {
+          "enum": [
+            "trial",
+            "autoUpgrade",
+            "premium",
+            "expired"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectorBillingModel",
+            "modelAsString": true
+          },
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Connector billing model"
+        },
+        "collectionInfo": {
+          "$ref": "#/definitions/ConnectorCollectionInfo",
+          "description": "Collection information",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectorCollectionInfo": {
+      "type": "object",
+      "description": "Collection and ingestion information",
+      "properties": {
+        "lastChecked": {
+          "format": "date-time",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Last time the data acquisition process initiated connecting to the external provider",
+          "readOnly": true
+        },
+        "sourceLastUpdated": {
+          "format": "date-time",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Source timestamp of external data currently available in Azure (eg AWS last processed CUR file timestamp)",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Last time the external data was updated into Azure",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ConnectorCollectionErrorInfo",
+          "description": "Error information of last collection"
+        }
+      }
+    },
+    "ConnectorCollectionErrorInfo": {
+      "type": "object",
+      "description": "Details of any error encountered on last collection attempt",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "Detailed error message",
+          "readOnly": true
+        },
+        "errorInnerMessage": {
+          "type": "string",
+          "description": "External Provider error message",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Short error code",
+          "readOnly": true
+        },
+        "errorStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Time the error started occurring (Last time error occurred in lastChecked)",
+          "readOnly": true
+        }
+      }
+    },
     "OperationListResult": {
       "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
@@ -1727,6 +2216,14 @@
       "name": "resourceGroupName",
       "in": "path",
       "description": "Azure Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "connectorNameParameter": {
+      "name": "connectorName",
+      "in": "path",
+      "description": "Connector Name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
