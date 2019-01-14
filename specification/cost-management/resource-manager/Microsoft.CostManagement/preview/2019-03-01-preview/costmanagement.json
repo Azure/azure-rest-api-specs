@@ -1367,6 +1367,172 @@
         }
       }
     },
+    "/providers/Microsoft.CostManagement/awsConsolidatedAccounts": {
+      "get": {
+        "tags": [
+          "AwsConsolidatedAccounts"
+        ],
+        "operationId": "AwsConsolidatedAccount_List",
+        "description": "List all AwsConsolidatedAccount definitions",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "AwsConsolidatedAccount_List": {
+            "$ref": "./examples/AwsConsolidatedAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AwsConsolidatedAccountDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/awsConsolidatedAccounts/{awsConsolidatedAccountName}": {
+      "get": {
+        "tags": [
+          "AwsConsolidatedAccounts"
+        ],
+        "operationId": "AwsConsolidatedAccount_Get",
+        "description": "Get a AwsConsolidatedAccount definition",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "AwsConsolidatedAccount_Get": {
+            "$ref": "./examples/AwsConsolidatedAccountGet.json"
+          },
+          "AwsConsolidatedAccount_Get_Expand": {
+            "$ref": "./examples/AwsConsolidatedAccountGetExpand.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/awsConsolidatedAccountNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AwsConsolidatedAccountDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/awsLinkedAccounts": {
+      "get": {
+        "tags": [
+          "AwsLinkedAccounts"
+        ],
+        "operationId": "AwsLinkedAccount_List",
+        "description": "List all AwsLinkedAccount definitions",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "AwsLinkedAccount_List": {
+            "$ref": "./examples/AwsLinkedAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AwsLinkedAccountDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/awsLinkedAccounts/{awsLinkedAccountName}": {
+      "get": {
+        "tags": [
+          "AwsLinkedAccounts"
+        ],
+        "operationId": "AwsLinkedAccount_Get",
+        "description": "Get a AwsLinkedAccount definition",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "AwsLinkedAccount_Get": {
+            "$ref": "./examples/AwsLinkedAccountGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/awsLinkedAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AwsLinkedAccountDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -1944,7 +2110,7 @@
             "create",
             "update"
           ],
-          "description": "Connector DisplayName (defaults to Name)"
+          "description": "Connector DisplayName"
         },
         "providerAccountId": {
           "type": "string",
@@ -2115,6 +2281,149 @@
         }
       }
     },
+    "AwsConsolidatedAccountDefinitionListResult": {
+      "description": "Result of listing AwsConsolidatedAccount definitions. It contains a list of available AwsConsolidatedAccount definitions in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of AwsConsolidatedAccount definitions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AwsConsolidatedAccountDefinition"
+          }
+        }
+      }
+    },
+    "AwsConsolidatedAccountDefinition": {
+      "type": "object",
+      "description": "The AwsConsolidatedAccount model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "AwsConsolidatedAccount id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "AwsConsolidatedAccount name (Account number)"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "AwsConsolidatedAccount type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+           "type": "string"
+          },
+          "x-ms-mutability": [
+           "read",
+           "create",
+           "update"
+          ],
+          "description": "Resource tags."
+         },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AwsConsolidatedAccountProperties",
+          "description": "AwsConsolidatedAccount properties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AwsConsolidatedAccountProperties": {
+      "type": "object",
+      "description": "The properties of a AwsConsolidatedAccount",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "AwsConsolidatedAccount DisplayName"
+        },
+        "connectorId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Underlying ConnectorId",
+          "readOnly": true
+        },
+        "collectionInfo": {
+          "$ref": "#/definitions/ConnectorCollectionInfo",
+          "description": "Collection information",
+          "readOnly": true
+        }
+      }
+    },
+    "AwsLinkedAccountDefinitionListResult": {
+      "description": "Result of listing AwsLinkedAccount definitions. It contains a list of available AwsLinkedAccount definitions in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of AwsLinkedAccount definitions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AwsLinkedAccountDefinition"
+          }
+        }
+      }
+    },
+    "AwsLinkedAccountDefinition": {
+      "type": "object",
+      "description": "The AwsLinkedAccount model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "AwsLinkedAccount id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "AwsLinkedAccount name (Account number)"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "AwsLinkedAccount type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+           "type": "string"
+          },
+          "x-ms-mutability": [
+           "read",
+           "create",
+           "update"
+          ],
+          "description": "Resource tags."
+         },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AwsLinkedAccountProperties",
+          "description": "AwsLinkedAccount properties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AwsLinkedAccountProperties": {
+      "type": "object",
+      "description": "The properties of a AwsLinkedAccount",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "AwsLinkedAccount DisplayName"
+        }
+      }
+    },
     "OperationListResult": {
       "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
@@ -2224,6 +2533,22 @@
       "name": "connectorName",
       "in": "path",
       "description": "Connector Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "awsConsolidatedAccountNameParameter": {
+      "name": "awsConsolidatedAccountName",
+      "in": "path",
+      "description": "awsConsolidatedAccountName.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "awsLinkedAccountNameParameter": {
+      "name": "awsLinkedAccountName",
+      "in": "path",
+      "description": "awsLinkedAccountName.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
