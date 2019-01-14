@@ -1716,7 +1716,7 @@
               }
             }
         },
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/products/{productName}/cancel": {
+      "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/products/{productName}/updateAutoRenew": {
         "post": {
           "tags": [
             "Products"
@@ -1743,18 +1743,18 @@
               "$ref": "#/parameters/apiVersionParameter"
             },
             {
-              "$ref": "#/parameters/CancelProductRequestParameter"
+              "$ref": "#/parameters/UpdateAutoRenewRequestParameter"
             }
           ],
           "responses": {
             "200": {
               "description": "OK. The request has succeeded.",
               "schema": {
-                "$ref": "#/definitions/CancelOperationSummary"
+                "$ref": "#/definitions/UpdateAutoRenewOperationSummary"
               }
             },
             "202": {
-              "description": "Accepted. prodcut cancelation is in progress.",
+              "description": "Accepted. update product auto renew policy is in progress.",
               "headers": {
                 "Location": {
                   "description": "Location URI to poll for result.",
@@ -1779,7 +1779,7 @@
           }
         }
       },
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/products/{productName}/cancel": {
+      "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/products/{productName}/updateAutoRenew": {
         "post": {
           "tags": [
             "Products"
@@ -1809,18 +1809,18 @@
               "$ref": "#/parameters/apiVersionParameter"
             },
             {
-              "$ref": "#/parameters/CancelProductRequestParameter"
+              "$ref": "#/parameters/UpdateAutoRenewRequestParameter"
             }
           ],
           "responses": {
             "200": {
               "description": "OK. The request has succeeded.",
               "schema": {
-                "$ref": "#/definitions/CancelOperationSummary"
+                "$ref": "#/definitions/UpdateAutoRenewOperationSummary"
               }
             },
             "202": {
-              "description": "Accepted. product cancellation is in progress.",
+              "description": "Accepted. update product auto renew is in progress.",
               "headers": {
                 "Location": {
                   "description": "Location URI to poll for result.",
@@ -1845,7 +1845,7 @@
           }
         }
       },
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}/products/{productName}/cancel": {
+      "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}/products/{productName}/updateAutoRenew": {
         "post": {
           "tags": [
             "Products"
@@ -1875,18 +1875,18 @@
               "$ref": "#/parameters/apiVersionParameter"
             },
             {
-              "$ref": "#/parameters/CancelProductRequestParameter"
+              "$ref": "#/parameters/UpdateAutoRenewRequestParameter"
             }
           ],
           "responses": {
             "200": {
               "description": "OK. The request has succeeded.",
               "schema": {
-                "$ref": "#/definitions/CancelOperationSummary"
+                "$ref": "#/definitions/UpdateAutoRenewOperationSummary"
               }
             },
             "202": {
-              "description": "Accepted. Product cancellation is in progress",
+              "description": "Accepted. Updating product auto renew policy is in progress",
               "headers": {
                 "Location": {
                   "description": "Location URI to poll for result.",
@@ -1913,20 +1913,20 @@
       }
     },
     "definitions": {
-      "CancelOperationSummary": {
+      "UpdateAutoRenewOperationSummary": {
         "type": "object",
         "description": "Summary of cancel product operation",
         "properties": {
           "properties": {
-            "description": "Summary of cancel operation summary properties",
+            "description": "Summary of update auto renew operation summary properties",
             "x-ms-client-flatten": true,
-            "$ref": "#/definitions/CancelOperationSummaryProperties"
+            "$ref": "#/definitions/UpdateAutoRenewOperationSummaryProperties"
           }
         }
       },
-      "CancelOperationSummaryProperties": {
+      "UpdateAutoRenewOperationSummaryProperties": {
         "type": "object",
-        "description": "cancel operation summary properties",
+        "description": "update auto renew operation summary properties",
         "properties": {
           "endDate": {
             "type": "string",
@@ -3304,13 +3304,13 @@
           }
         }
       },
-      "CancelProductRequest": {
+      "UpdateAutoRenewRequest": {
         "type": "object",
-        "description": "Request parameters to cancel product.",
+        "description": "Request parameters to update auto renew for support prouct.",
         "properties": {
-          "reasonCode": {
-            "description": "Request parameters to cancel a product.",
-            "type": "string"
+          "autoRenew": {
+            "description": "Request parameters to update auto renew policy a product.",
+            "type": "boolean"
           }
         }
       }
@@ -3370,14 +3370,14 @@
         "type": "string",
         "x-ms-parameter-location": "method"
       },
-      "CancelProductRequestParameter": {
+      "UpdateAutoRenewRequestParameter": {
         "name": "body",
         "x-ms-parameter-location": "method",
         "in": "body",
         "required": true,
-        "description": "Transfer billing subscription parameters.",
+        "description": "Update auto renew request parameters.",
         "schema": {
-          "$ref": "#/definitions/CancelProductRequest"
+          "$ref": "#/definitions/UpdateAutoRenewRequest"
         }
       },
       "operationIdParameter": {
