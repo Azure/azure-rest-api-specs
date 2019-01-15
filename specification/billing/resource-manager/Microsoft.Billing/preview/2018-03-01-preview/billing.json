@@ -200,6 +200,47 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/DiscoverTenants?billingProfileId={billingProfileId}": {
+      "get": {
+        "tags": [
+          "TenantProperties"
+        ],
+        "x-ms-examples": {
+          "TenantPropertiesGet": {
+            "$ref": "./examples/TenantPropertiesGet.json"
+          }
+        },
+        "operationId": "TenantProperties_Get",
+        "description": "Gets a Tenant Properties.",
+        "parameters": [
+          {
+            "name": "billingProfileId",
+            "in": "path",
+            "description": "Billing Profile Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TenantProperties"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
     "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices": {
       "get": {
         "tags": [
@@ -402,7 +443,7 @@
           "$ref": "#/definitions/EnrollmentAccountProperties"
         }
       }
-    },
+    },    
     "EnrollmentAccountListResult": {
       "description": "Result of listing enrollment accounts.",
       "properties": {
@@ -426,6 +467,26 @@
       "properties": {
         "principalName": {
           "description": "The account owner's principal name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantProperties": {
+      "description": "A Tenant properties Resource",
+      "properties": {
+        "BillingProfileName": {
+          "description": "The Billing Profile name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "BillingAccountId": {
+          "description": "The Billing AccountId.",
+          "type": "string",
+          "readOnly": true
+        },
+        "TenantId": {
+          "description": "The TenantId.",
           "type": "string",
           "readOnly": true
         }
