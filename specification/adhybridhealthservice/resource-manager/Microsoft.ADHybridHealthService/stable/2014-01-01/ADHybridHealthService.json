@@ -3258,6 +3258,70 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/GetAllBlobUri": {
+      "get": {
+        "tags": [ "Reports" ],
+        "description": "Gets all the blob uri for the risky ip download report requested for a given service for last 7 days.",
+        "x-ms-examples": {
+          "services_listAllRiskyIpDownloadReport": {
+            "$ref": "./examples/RiskyIpDownload.json"
+          }
+        },
+        "operationId": "services_listAllRiskyIpDownloadReport",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },          
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of blob uri for the risky ip download report requested for a given service for last 7 days.",            
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/GetBlobUri": {
+      "get": {
+        "tags": [ "Reports" ],
+        "description": "Gets only the current requested risky ip download report for a given service.",
+        "x-ms-examples": {
+          "services_listCurrentRiskyIpDownloadReport": {
+            "$ref": "./examples/RiskyIpDownload.json"
+          }
+        },
+        "operationId": "services_listCurrentRiskyIpDownloadReport",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },          
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The blob URI for the currently requested risky ip download report for a given service.",            
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
