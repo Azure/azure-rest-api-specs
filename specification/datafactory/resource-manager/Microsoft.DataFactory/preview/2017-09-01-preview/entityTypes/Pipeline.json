@@ -2022,24 +2022,23 @@
           "$ref": "#/definitions/SSISPackageLocation"
         },
         "runtime": {
-          "description": "Specifies the runtime to execute SSIS package.",
-          "type": "string",
-          "enum": [
-            "x64",
-            "x86"
-          ],
-          "x-ms-enum": {
-            "name": "SSISExecutionRuntime",
-            "modelAsString": true
-          }
+          "description": "Specifies the runtime to execute SSIS package. The value should be \"x86\" or \"x64\". Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "loggingLevel": {
-          "description": "The logging level of SSIS package execution.",
-          "type": "string"
+          "description": "The logging level of SSIS package execution. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "environmentPath": {
-          "description": "The environment path to execute the SSIS package.",
-          "type": "string"
+          "description": "The environment path to execute the SSIS package. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "executionCredential": {
+          "description": "The package execution credential.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISExecutionCredential"
+          }
         },
         "connectVia": {
           "description": "The integration runtime reference.",
@@ -2091,8 +2090,8 @@
       "type" : "object",
       "properties": {
         "packagePath": {
-          "description": "The SSIS package path.",
-          "type": "string"
+          "description": "The SSIS package path. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [
@@ -2134,6 +2133,28 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "SSISExecutionCredential": {
+      "description": "SSIS package execution credential.",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecureString",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
       ]
     },
     "CustomActivity": {
