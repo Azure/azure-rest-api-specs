@@ -1542,6 +1542,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/adaptiveNetworkControls/{adaptiveNetworkControlsResourceName}/{adaptiveNetworkControlsEnforceAction}": {
             "post": {
+                "x-ms-long-running-operation": true,
                 "x-ms-examples": {
                     "Enforces the given rules on the NSG(s) listed in the request": {
                         "$ref": "./examples/AdaptiveNetworkControls/EnforceAdaptiveNetworkControlsRules_example.json"
@@ -1587,8 +1588,7 @@
                         "schema": {
                             "$ref": "#/definitions/CloudError"
                         }
-                    },
-                    "x-ms-long-running-operation": true
+                    }
                 }
             }
         },
