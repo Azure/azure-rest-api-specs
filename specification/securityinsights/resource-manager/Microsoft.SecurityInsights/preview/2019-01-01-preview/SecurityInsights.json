@@ -34,31 +34,31 @@
     }
   },
   "paths": {
-	  "/providers/Microsoft.SecurityInsights/operations": {
-		"get": {
-			"operationId": "Operations_List",
-			"description": "Lists all operations available Azure Security Insights Resource Provider.",
-			"parameters": [
-				{
-					"$ref": "#/parameters/ApiVersion"
-				}
-			],
-			"produces": [
-				"application/json"
-			],
-			"responses": {
-				"200": {
-					"description": "OK. Successfully retrieved operations list.",
-					"schema": {
-						"$ref": "#/definitions/operationsList"
-					}
-				}
-			},
-			"x-ms-pageable": {
-				"nextLinkName": "nextLink"
-			}
-		}
-	},
+      "/providers/Microsoft.SecurityInsights/operations": {
+        "get": {
+            "operationId": "Operations_List",
+            "description": "Lists all operations available Azure Security Insights Resource Provider.",
+            "parameters": [
+                {
+                    "$ref": "#/parameters/ApiVersion"
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK. Successfully retrieved operations list.",
+                    "schema": {
+                        "$ref": "#/definitions/operationsList"
+                    }
+                }
+            },
+            "x-ms-pageable": {
+                "nextLinkName": "nextLink"
+            }
+        }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
       "get": {
         "x-ms-examples": {
@@ -82,7 +82,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-			"$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
@@ -128,7 +128,7 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-			"$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
@@ -164,56 +164,56 @@
     }
   },
   "definitions": {
-	  "operation": {
-		"description": "Operation provided by provider",
-		"properties": {
-			"name": {
-				"type": "string",
-				"description": "Name of the operation"
-			},
-			"display": {
-				"type": "object",
-				"description": "Properties of the operation",
-				"properties": {
-					"provider": {
-						"type": "string",
-						"description": "Provider name"
-					},
-					"resource": {
-						"type": "string",
-						"description": "Resource name"
-					},
-					"operation": {
-						"type": "string",
-						"description": "Operation name"
-					},
-					"description": {
-						"type": "string",
-						"description": "Description of the operation"
-					}
-				}
-			}
-		}
-	},
-	"operationsList": {
-		"description": "Lists the operations available in the SecurityInsights RP.",
-		"properties": {
-			"nextLink": {
-				"description": "URL to fetch the next set of alerts.",
-				"type": "string"
-			},
-			"value": {
-				"description": "Array of operations",
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/operation"
-				}
-			}
-		},
-		"required": [
-			"value"
-		]
-	},
+      "operation": {
+        "description": "Operation provided by provider",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Name of the operation"
+            },
+            "display": {
+                "type": "object",
+                "description": "Properties of the operation",
+                "properties": {
+                    "provider": {
+                        "type": "string",
+                        "description": "Provider name"
+                    },
+                    "resource": {
+                        "type": "string",
+                        "description": "Resource name"
+                    },
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the operation"
+                    }
+                }
+            }
+        }
+    },
+    "operationsList": {
+        "description": "Lists the operations available in the SecurityInsights RP.",
+        "properties": {
+            "nextLink": {
+                "description": "URL to fetch the next set of alerts.",
+                "type": "string"
+            },
+            "value": {
+                "description": "Array of operations",
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/operation"
+                }
+            }
+        },
+        "required": [
+            "value"
+        ]
+    },
     "CloudError": {
       "x-ms-external": true,
       "type": "object",
@@ -253,9 +253,9 @@
       ],
       "properties": {
         "properties": {
-			"x-ms-client-flatten": true,
-			"description": "Alert rule properties",
-			"$ref": "#/definitions/AlertRuleProperties"
+            "x-ms-client-flatten": true,
+            "description": "Alert rule properties",
+            "$ref": "#/definitions/AlertRuleProperties"
         }
       }
     },
@@ -325,14 +325,14 @@
       ],
       "description": "API version for the operation"
     },
-	"OperationalInsightsResourceProvider": {
-		"name": "operationalInsightsResourceProvider",
-		"in": "path",
-		"required": true,
-		"type": "string",
-		"description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
-		"x-ms-parameter-location": "method"
-	},
+    "OperationalInsightsResourceProvider": {
+        "name": "operationalInsightsResourceProvider",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
+        "x-ms-parameter-location": "method"
+    },
     "WorkspaceName": {
       "name": "workspaceName",
       "in": "path",
@@ -350,7 +350,7 @@
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "type": "string",
       "description": "Alert rule ID",
-	  "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     },
     "AlertRule": {
       "name": "alertRule",
@@ -360,7 +360,7 @@
       "schema": {
         "$ref": "#/definitions/AlertRule"
       },
-	  "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     }
   }
 }
