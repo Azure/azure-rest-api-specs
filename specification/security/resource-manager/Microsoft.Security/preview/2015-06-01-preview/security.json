@@ -1582,9 +1582,6 @@
                     "202": {
                         "description": "Accepted"
                     },
-                    "204": {
-                        "description": "No Content"
-                    },
                     "default": {
                         "description": "Error response describing why the operation failed.",
                         "schema": {
@@ -3045,14 +3042,17 @@
                 },
                 "protocols": {
                     "description": "The rule's transport protocols",
-                    "type": "string",
-                    "enum": [
-                        "TCP",
-                        "UDP"
-                    ],
-                    "x-ms-enum": {
-                        "name": "transportProtocol",
-                        "modelAsString": true
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "TCP",
+                            "UDP"
+                        ],
+                        "x-ms-enum": {
+                            "name": "transportProtocol",
+                            "modelAsString": true
+                        }
                     }
                 },
                 "ipAddresses": {
