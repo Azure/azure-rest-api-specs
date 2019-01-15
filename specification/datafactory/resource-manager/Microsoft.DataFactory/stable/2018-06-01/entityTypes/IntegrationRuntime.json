@@ -103,6 +103,10 @@
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeVNetProperties"
+        },
+        "virtualNetwork": {
+          "description": "VNet properties for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeVirtualNetworkProperties"
         }
       },
       "additionalProperties": {
@@ -119,6 +123,19 @@
         },
         "subnet": {
           "description": "The name of the subnet this integration runtime will join.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeVirtualNetworkProperties": {
+      "description": "VNet properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The ID of the Subnet that this integration runtime will join.",
           "type": "string"
         }
       },

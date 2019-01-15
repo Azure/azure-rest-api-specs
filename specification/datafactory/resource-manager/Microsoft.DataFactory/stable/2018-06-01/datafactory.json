@@ -1269,6 +1269,99 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/enableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_EnableIntegrationRuntimeInteractiveQuery",
+        "x-ms-examples": {
+          "IntegrationRuntimes_EnableIntegrationRuntimeInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_EnableInteractiveQuery.json"
+          }
+        },
+        "description": "Enable interactive query for an Auzre-VNet integration runtime.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "enableInteractiveQueryForIntegrationRuntimeRequest",
+            "description": "The request parameter for enabling interactive query of a integration runtime.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnableInteractiveQueryForIntegrationRuntimeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/disableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_DisableIntegrationRuntimeInteractiveQuery",
+        "x-ms-examples": {
+          "IntegrationRuntimes_DisableIntegrationRuntimeInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_DisableInteractiveQuery.json"
+          }
+        },
+        "description": "Disable interactive query for an Azure-VNet integration runtime.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata": {
       "post": {
         "tags": [
@@ -3357,6 +3450,18 @@
         "dataFactoryLocation": {
           "description": "The location of the data factory that the linked integration runtime belongs to.",
           "type": "string"
+        }
+      }
+    },
+    "EnableInteractiveQueryForIntegrationRuntimeRequest": {
+      "type": "object",
+      "description": "the request of enable interactive query for an integration runtime.",
+      "discriminator": "type",
+      "properties": {
+        "AutoTerminationMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the number of minutes that the resource will be reserved."
         }
       }
     },
