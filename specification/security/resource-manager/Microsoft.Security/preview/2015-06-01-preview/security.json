@@ -1438,99 +1438,18 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/northSouthHardenings": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/adaptiveNetworkControls": {
             "get": {
                 "x-ms-examples": {
-                    "List all north-south hardening resources for a subscription": {
-                        "$ref": "./examples/NorthSouthHardenings/ListNorthSouthHardenings_example.json"
+                    "List Adaptive Network Controls resources of an extended resource": {
+                        "$ref": "./examples/adaptiveNetworkControls/ListByExtendedResourceAdaptiveNetworkControls_example.json"
                     }
                 },
-                "description": "Gets a list of north-south hardening resources for the subscription.",
+                "description": "Gets a list of Adaptive Network Controls resources in scope of the given extended resource.",
                 "tags": [
-                    "NorthSouthHardenings"
+                    "AdaptiveNetworkControls"
                 ],
-                "operationId": "NorthSouthHardenings_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/NorthSouthHardeningsList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/northSouthHardenings": {
-            "get": {
-                "x-ms-examples": {
-                    "List north-south hardening resources for a resource group": {
-                        "$ref": "./examples/NorthSouthHardenings/ListByResourceGroupNorthSouthHardenings_example.json"
-                    }
-                },
-                "description": "Gets a list of north-south hardening resources for the resource group.",
-                "tags": [
-                    "NorthSouthHardenings"
-                ],
-                "operationId": "NorthSouthHardenings_ListByResourceGroup",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/NorthSouthHardeningsList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/northSouthHardenings/{northSouthResourceName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get a north-south hardening resource": {
-                        "$ref": "./examples/NorthSouthHardenings/GetNorthSouthHardenings_example.json"
-                    }
-                },
-                "tags": [
-                    "NorthSouthHardenings"
-                ],
-                "description": "Gets the north-south traffic hardening for the specified resource",
-                "operationId": "NorthSouthHardenings_Get",
+                "operationId": "AdaptiveNetworkControls_ListByExtendedResource",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionId"
@@ -1548,7 +1467,58 @@
                         "$ref": "#/parameters/ExtendedResourceName"
                     },
                     {
-                        "$ref": "#/parameters/NorthSouthResourceName"
+                        "$ref": "#/parameters/ApiVersion"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AdaptiveNetworkControlsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/adaptiveNetworkControls/{adaptiveNetworkControlsResourceName}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a single Adaptive Network Controls resource": {
+                        "$ref": "./examples/AdaptiveNetworkControls/GetAdaptiveNetworkControls_example.json"
+                    }
+                },
+                "tags": [
+                    "AdaptiveNetworkControls"
+                ],
+                "description": "Gets the Adaptive Network Controls resource matching the given resource ID",
+                "operationId": "AdaptiveNetworkControls_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceType"
+                    },
+                    {
+                        "$ref": "#/parameters/ExtendedResourceName"
+                    },
+                    {
+                        "$ref": "#/parameters/AdaptiveNetworkControlsResourceName"
                     },
                     {
                         "$ref": "#/parameters/ApiVersion"
@@ -1558,7 +1528,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/NorthSouthHardenings"
+                            "$ref": "#/definitions/AdaptiveNetworkControls"
                         }
                     },
                     "default": {
@@ -1570,18 +1540,18 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/northSouthHardenings/{northSouthResourceName}/{trafficHardeningsRulesEnforceAction}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{extendedResourceProvider}/{extendedResourceType}/{extendedResourceName}/providers/Microsoft.Security/adaptiveNetworkControls/{adaptiveNetworkControlsResourceName}/{adaptiveNetworkControlsEnforceAction}": {
             "post": {
                 "x-ms-examples": {
-                    "Enforces the given collections of traffic hardenings rule's on the VM's NSG": {
-                        "$ref": "./examples/NorthSouthHardenings/EnforceTrafficHardeningRules_example.json"
+                    "Enforces the given rules on the NSG(s) listed in the request": {
+                        "$ref": "./examples/AdaptiveNetworkControls/EnforceAdaptiveNetworkControlsRules_example.json"
                     }
                 },
                 "tags": [
-                    "NorthSouthHardenings"
+                    "AdaptiveNetworkControls"
                 ],
-                "description": "Enforces the given collections of traffic hardenings rule's on the VM's NSG",
-                "operationId": "NorthSouthHardenings_Enforce",
+                "description": "Enforces the given rules on the NSG(s) listed in the request",
+                "operationId": "AdaptiveNetworkControls_Enforce",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionId"
@@ -1599,13 +1569,13 @@
                         "$ref": "#/parameters/ExtendedResourceName"
                     },
                     {
-                        "$ref": "#/parameters/NorthSouthResourceName"
+                        "$ref": "#/parameters/AdaptiveNetworkControlsResourceName"
                     },
                     {
                         "$ref": "#/parameters/ApiVersion"
                     },
                     {
-                        "$ref": "#/parameters/TrafficHardeningsRulesEnforceAction"
+                        "$ref": "#/parameters/AdaptiveNetworkControlsEnforceAction"
                     }
                 ],
                 "responses": {
@@ -1620,7 +1590,8 @@
                         "schema": {
                             "$ref": "#/definitions/CloudError"
                         }
-                    }
+                    },
+                    "x-ms-long-running-operation": true
                 }
             }
         },
@@ -3049,54 +3020,43 @@
                 }
             ]
         },
-        "NorthSouthProtocol": {
-            "description": "The transport protocols supported by north-south hardenings",
-            "type": "string",
-            "enum": [
-                "TCP",
-                "UDP"
-            ],
-            "x-ms-enum": {
-                "name": "northSouthProtocol",
-                "modelAsString": true
-            }
-        },
-        "NorthSouthTrafficDirection": {
-            "description": "The north south traffic direction",
-            "type": "string",
-            "enum": [
-                "Inbound",
-                "Outbound"
-            ],
-            "x-ms-enum": {
-                "name": "northSouthTrafficDirection",
-                "modelAsString": true
-            }
-        },
-        "TrafficHardeningRule": {
-            "description": "A north-south traffic hardening rule",
+        "AdaptiveNetworkControlsRule": {
+            "description": "Describes remote addresses that is recommended to communicate with the Azure resource on some (Protocol, Port, Direction). All other remote addresses are recommended to be blocked",
             "properties": {
                 "name": {
                     "description": "The name of the rule",
                     "type": "string"
                 },
                 "direction": {
-                    "description": "The rule;s traffic direction",
-                    "$ref": "#/definitions/NorthSouthTrafficDirection"
+                    "description": "The rule's direction",
+                    "type": "string",
+                    "enum": [
+                        "Inbound",
+                        "Outbound"
+                    ],
+                    "x-ms-enum": {
+                        "name": "direction",
+                        "modelAsString": true
+                    }
                 },
                 "destinationPort": {
                     "description": "The rule's destination port",
                     "$ref": "#/definitions/PortNumber"
                 },
                 "protocols": {
-                    "description": "The rule's transport protocol",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/NorthSouthProtocol"
+                    "description": "The rule's transport protocols",
+                    "type": "string",
+                    "enum": [
+                        "TCP",
+                        "UDP"
+                    ],
+                    "x-ms-enum": {
+                        "name": "transportProtocol",
+                        "modelAsString": true
                     }
                 },
-                "allowRemoteAddresses": {
-                    "description": "The remote addresses that should be able to communicate with the Azure resource on the rule's destination port and protocol",
+                "ipAddresses": {
+                    "description": "The remote IP addresses that should be able to communicate with the Azure resource on the rule's destination port and protocol",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -3104,75 +3064,53 @@
                 }
             }
         },
-        "TrafficAlert": {
-            "description": "A north-south traffic hardening alert",
+        "AdaptiveNetworkControlsEffectiveNetworkSecurityGroups": {
+            "description": "Describes the Network Security Groups effective on a network interface",
             "properties": {
-                "detectionDate": {
-                    "description": "the date (UTC) that the traffic was detected",
-                    "type": "string",
-                    "format": "date-time"
+                "networkInterface": {
+                    "description": "The Azure resource ID of the network interface",
+                    "type": "string"
                 },
-                "direction": {
-                    "description": "The alert's traffic direction",
-                    "$ref": "#/definitions/NorthSouthTrafficDirection"
-                },
-                "destinationPort": {
-                    "description": "The alert's destination port",
-                    "$ref": "#/definitions/PortNumber"
-                },
-                "protocol": {
-                    "description": "The alert's transport protocol",
-                    "$ref": "#/definitions/NorthSouthProtocol"
-                },
-                "traffic": {
-                    "description": "The traffic that was detected and raised the alert",
+                "networkSecurityGroups": {
+                    "description": "The Network Security Groups effective on the network interface",
                     "type": "array",
                     "items": {
-                        "properties": {
-                            "remoteAddress": {
-                                "description": "The IP address of the remote host that is associated with the traffic",
-                                "type": "string"
-                            },
-                            "attempts": {
-                                "description": "The detected number of packets sent to or from the remote address (depends on the direction of the traffic)",
-                                "type": "number"
-                            }
-                        }
+                        "type": "string"
                     }
                 }
             }
         },
-        "NorthSouthHardeningsProperties": {
-            "description": "North-south hardening resource properties",
+        "AdaptiveNetworkControlsProperties": {
+            "description": "Adaptive Network Controls resource properties",
             "properties": {
-                "trafficHardeningRules": {
-                    "description": "The set of North-south traffic hardening rules",
+                "rules": {
+                    "description": "The security rules which are recommended to be effective on the VM",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/TrafficHardeningRule"
-                    }
-                },
-                "trafficAlerts": {
-                    "description": "The set of North-south hardening alerts associated with the Azure resource",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/TrafficAlert"
+                        "$ref": "#/definitions/AdaptiveNetworkControlsRule"
                     }
                 },
                 "rulesCalculationTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "The UTC time on which the traffic hardening rules were calculated"
+                    "description": "The UTC time on which the rules were calculated"
+                },
+                "effectiveNetworkSecurityGroups": {
+                    "description": "The Network Security Groups effective on the network interfaces of the protected resource",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdaptiveNetworkControlsEffectiveNetworkSecurityGroups"
+                    }
                 }
             }
         },
-        "NorthSouthHardenings": {
-            "description": "The resource whose properties describes the North-south hardening settings for some Azure resource",
+        "AdaptiveNetworkControls": {
+            "description": "The resource whose properties describes the Adaptive Network Controls settings for some Azure resource",
             "properties": {
                 "properties": {
-                    "description": "Properties of the north-south hardening resource",
+                    "description": "Properties of the Adaptive Network Controls resource",
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/NorthSouthHardeningsProperties"
+                    "$ref": "#/definitions/AdaptiveNetworkControlsProperties"
                 }
             },
             "allOf": [
@@ -3181,14 +3119,14 @@
                 }
             ]
         },
-        "NorthSouthHardeningsList": {
-            "description": "Response for ListNorthSouthHardenings API service call",
+        "AdaptiveNetworkControlsList": {
+            "description": "Response for ListAdaptiveNetworkControls API service call",
             "properties": {
                 "value": {
-                    "description": "A list of north-south hardening resources",
+                    "description": "A list of Adaptive Network Controls resources",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/NorthSouthHardenings"
+                        "$ref": "#/definitions/AdaptiveNetworkControls"
                     }
                 },
                 "nextLink": {
@@ -3485,20 +3423,20 @@
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "NorthSouthResourceName": {
-            "name": "northSouthResourceName",
+        "AdaptiveNetworkControlsResourceName": {
+            "name": "adaptiveNetworkControlsResourceName",
             "in": "path",
-            "description": "Name of a north-south resource.",
+            "description": "The name of the Adaptive Network Controls resource.",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "TrafficHardeningsRulesEnforceAction": {
-            "name": "trafficHardeningsRulesEnforceAction",
+        "AdaptiveNetworkControlsEnforceAction": {
+            "name": "adaptiveNetworkControlsEnforceAction",
             "type": "string",
             "in": "path",
             "required": true,
-            "description": "Enforces the given collections of traffic hardenings rule's on the VM's NSG",
+            "description": "Enforces the given rules on the NSG(s) listed in the request",
             "enum": [
                 "enforce"
             ],
