@@ -169,7 +169,9 @@
           "application/json",
           "application/vnd.sun.wadl+xml",
           "application/vnd.swagger.doc+json",
-          "application/wsdl+xml"
+          "application/wsdl+xml",
+          "application/vnd.oai.openapi",
+          "application/vnd.oai.openapi+json"
         ],
         "parameters": [
           {
@@ -216,6 +218,9 @@
         "operationId": "Api_CreateOrUpdate",
         "description": "Creates new or updates existing specified API of the API Management service instance.",
         "x-ms-examples": {
+          "ApiManagementCreateApiUsingOai3Import": {
+            "$ref": "./examples/ApiManagementCreateApiUsingOai3Import.json"
+          },
           "ApiManagementCreateApiUsingSwaggerImport": {
             "$ref": "./examples/ApiManagementCreateApiUsingSwaggerImport.json"
           },
@@ -242,7 +247,9 @@
           "application/json",
           "application/vnd.sun.wadl+xml",
           "application/vnd.swagger.doc+json",
-          "application/wsdl+xml"
+          "application/wsdl+xml",
+          "application/vnd.oai.openapi",
+          "application/vnd.oai.openapi+json"
         ],
         "parameters": [
           {
@@ -920,8 +927,8 @@
           "ApiManagementGetApiOperation": {
             "$ref": "./examples/ApiManagementGetApiOperation.json"
           },
-          "ApiManagementGetApiOperationPetstore": {
-            "$ref": "./examples/ApiManagementGetApiOperationPetstore.json"
+          "ApiManagementGetApiOperationPetStore": {
+            "$ref": "./examples/ApiManagementGetApiOperationPetStore.json"
           }
         },
         "parameters": [
@@ -3395,7 +3402,8 @@
             "enum": [
               "swagger-link",
               "wadl-link",
-              "wsdl-link"
+              "wsdl-link",
+              "openapi-link"
             ],
             "x-ms-enum": {
               "name": "ExportFormat",
@@ -3415,6 +3423,11 @@
                   "value": "wadl-link",
                   "description": "Export the Api Definition in WADL Schema to Storage Blob.",
                   "name": "Wadl"
+                },
+                {
+                  "value": "openapi-link",
+                  "description": "Export the Api Definition in OpenApi Specification 3.0 to Storage Blob.",
+                  "name": "OpenApi3"
                 }
               ]
             },
@@ -3526,7 +3539,10 @@
             "swagger-json",
             "swagger-link-json",
             "wsdl",
-            "wsdl-link"
+            "wsdl-link",
+            "openapi",
+            "openapi+json",
+            "openapi-link"
           ],
           "x-ms-enum": {
             "name": "ContentFormat",
@@ -3555,6 +3571,18 @@
               {
                 "value": "wsdl-link",
                 "description": "The WSDL document is hosted on a publicly accessible internet address."
+              },
+              {
+                "value": "openapi",
+                "description": "The contents are inline and Content Type is a OpenApi 3.0 Document in YAML format."
+              },
+              {
+                "value": "openapi+json",
+                "description": "The contents are inline and Content Type is a OpenApi 3.0 Document in JSON format."
+              },
+              {
+                "value": "openapi-link",
+                "description": "The Open Api 3.0 document is hosted on a publicly accessible internet address."
               }
             ]
           }

@@ -113,6 +113,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           }
         ],
@@ -154,6 +155,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -199,6 +201,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -237,8 +240,8 @@
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_ListClusterAdminCredentials",
-        "summary": "Gets clusteradmin credential of a managed cluster.",
-        "description": "Gets clusteradmin credential of the managed cluster with a specified resource group and name.",
+        "summary": "Gets cluster admin credential of a managed cluster.",
+        "description": "Gets cluster admin credential of the managed cluster with a specified resource group and name.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -251,6 +254,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -282,8 +286,8 @@
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_ListClusterUserCredentials",
-        "summary": "Gets clusteruser credential of a managed cluster.",
-        "description": "Gets clusteruser credential of the managed cluster with a specified resource group and name.",
+        "summary": "Gets cluster user credential of a managed cluster.",
+        "description": "Gets cluster user credential of the managed cluster with a specified resource group and name.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -296,6 +300,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -341,6 +346,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -384,6 +390,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -443,6 +450,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -496,6 +504,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 1,
             "description": "The name of the resource group."
           },
           {
@@ -518,6 +527,118 @@
         "x-ms-examples": {
           "Delete Managed Cluster": {
             "$ref": "./examples/ManagedClustersDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ResetServicePrincipalProfile",
+        "summary": "Reset Service Principal Profile of a managed cluster.",
+        "description": "Update the service principal Profile for a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterServicePrincipalProfile"
+            },
+            "description": "Parameters supplied to the Reset Service Principal Profile operation for a Managed Cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reset Service Principal Profile": {
+            "$ref": "./examples/ManagedClustersResetServicePrincipalProfile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetAADProfile": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ResetAADProfile",
+        "summary": "Reset AAD Profile of a managed cluster.",
+        "description": "Update the AAD Profile for a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterAADProfile"
+            },
+            "description": "Parameters supplied to the Reset AAD Profile operation for a Managed Cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reset AAD Profile": {
+            "$ref": "./examples/ManagedClustersResetAADProfile.json"
           }
         }
       }
@@ -654,7 +775,7 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
-      "description": "VNet SubnetID specifies the vnet's subnet identifier."
+      "description": "VNet SubnetID specifies the VNet's subnet identifier."
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -887,7 +1008,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier."
+          "description": "VNet SubnetID specifies the VNet's subnet identifier."
         },
         "firstConsecutiveStaticIP": {
           "type": "string",
@@ -901,7 +1022,7 @@
         "fqdn": {
           "readOnly": true,
           "type": "string",
-          "description": "FDQN for the master pool."
+          "description": "FQDN for the master pool."
         }
       },
       "required": [
@@ -939,7 +1060,7 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the vnet's subnet identifier."
+          "description": "VNet SubnetID specifies the VNet's subnet identifier."
         },
         "maxPods": {
           "type": "integer",
@@ -1155,7 +1276,7 @@
         "fqdn": {
           "readOnly": true,
           "type": "string",
-          "description": "FDQN for the master pool."
+          "description": "FQDN for the master pool."
         },
         "agentPoolProfiles": {
           "type": "array",
@@ -1384,14 +1505,15 @@
       },
       "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     },
-    "CredentialResults":{
+    "CredentialResults": {
       "properties": {
         "kubeconfigs": {
-          "type" : "array",
+          "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/CredentialResult"
-          }
+          },
+          "description": "Base64-encoded Kubernetes configuration file."
         }
       },
       "description": "The list of credential result response."
@@ -1399,7 +1521,7 @@
     "CredentialResult": {
       "type": "object",
       "properties": {
-        "name":{
+        "name": {
           "type": "string",
           "readOnly": true,
           "description": "The name of the credential."
