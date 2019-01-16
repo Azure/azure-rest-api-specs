@@ -128,6 +128,16 @@ input-file:
 ```
 
 ---
+### Tag: package-2018-12-preview
+
+These settings apply only when `--tag=package-2018-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12-preview'
+input-file:
+- Microsoft.Consumption/preview/2018-12-01-preview/consumption.json
+```
+
+---
 # Code Generation
 
 
@@ -217,6 +227,7 @@ batch:
   - tag: package-2018-06
   - tag: package-2018-08
   - tag: package-2018-10
+  - tag: package-2018-12-preview
 ```
 
 ### Tag: package-2017-04-preview and java
@@ -332,6 +343,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_10_01
   output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-12-preview and java
+
+These settings apply only when `--tag=package-2018-12-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-12-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2018_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_12_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
