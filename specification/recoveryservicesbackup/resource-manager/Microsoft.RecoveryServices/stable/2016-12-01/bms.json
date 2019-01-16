@@ -2190,7 +2190,7 @@
           "BackupResourceStorageConfigs"
         ],
         "description": "Updates vault storage model type.",
-        "operationId": "BackupResourceStorageConfigs_Patch",
+        "operationId": "BackupResourceStorageConfigs_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3456,7 +3456,7 @@
       "x-ms-discriminator-value": "AzureWorkloadPointInTimeRestoreRequest"
     },
     "AzureWorkloadRecoveryPoint": {
-      "description": "Workload specific recoverypoint, specifcally encaspulates full/diff recoverypoint",
+      "description": "Workload specific recovery point, specifically encapsulates full/diff recovery point",
       "type": "object",
       "allOf": [
         {
@@ -3555,7 +3555,7 @@
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
     },
     "AzureWorkloadSAPHanaRecoveryPoint": {
-      "description": "SAPHana specific recoverypoint, specifcally encaspulates full/diff recoverypoints",
+      "description": "SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints",
       "type": "object",
       "allOf": [
         {
@@ -3611,7 +3611,7 @@
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
     },
     "AzureWorkloadSQLRecoveryPoint": {
-      "description": "SQL specific recoverypoint, specifcally encaspulates full/diff recoverypoint alongwith extended info",
+      "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint alongwith extended info",
       "type": "object",
       "allOf": [
         {
@@ -3839,7 +3839,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -3991,7 +3991,7 @@
       }
     },
     "BEKDetails": {
-      "description": "BEK is bitlocker encrpytion key.",
+      "description": "BEK is bitlocker encryption key.",
       "type": "object",
       "properties": {
         "secretUrl": {
@@ -4396,7 +4396,7 @@
           "type": "string"
         },
         "scriptNameSuffix": {
-          "description": "Mandator suffix that should be added to the name of script that is given for download to user.\r\nIf its null or empty then , ignore it.",
+          "description": "Mandatory suffix that should be added to the name of script that is given for download to user.\r\nIf its null or empty then , ignore it.",
           "type": "string"
         }
       }
@@ -5112,7 +5112,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -5199,7 +5199,7 @@
       }
     },
     "KeyAndSecretDetails": {
-      "description": "BEK is bitlocker key.\r\nKEK is encryption key for BEK\r\nIf the VM was encrypted then we will store follwing details :\r\n1. Secret(BEK) - Url + Backup Data + vaultId.\r\n2. Key(KEK) - Url + Backup Data + vaultId.\r\n3. EncryptionMechanism\r\nBEK and KEK can potentiallty have different vault ids.",
+      "description": "BEK is bitlocker key.\r\nKEK is encryption key for BEK\r\nIf the VM was encrypted then we will store following details :\r\n1. Secret(BEK) - Url + Backup Data + vaultId.\r\n2. Key(KEK) - Url + Backup Data + vaultId.\r\n3. EncryptionMechanism\r\nBEK and KEK can potentiallty have different vault ids.",
       "type": "object",
       "properties": {
         "kekDetails": {
@@ -5208,7 +5208,7 @@
         },
         "bekDetails": {
           "$ref": "#/definitions/BEKDetails",
-          "description": "BEK is bitlocker encrpytion key."
+          "description": "BEK is bitlocker encryption key."
         },
         "encryptionMechanism": {
           "description": "Encryption mechanism: None/ SinglePass/ DoublePass",
@@ -5583,7 +5583,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -5699,7 +5699,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the container.",
+          "description": "Type of backup management for the container.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5795,7 +5795,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the backed up item.",
+          "description": "Type of backup management for the backed up item.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5898,7 +5898,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the container.",
+          "description": "Type of backup management for the container.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5997,7 +5997,7 @@
           "type": "integer"
         },
         "backupManagementType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6025,7 +6025,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6169,7 +6169,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6223,7 +6223,7 @@
       "type": "object",
       "properties": {
         "retentionPolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6237,7 +6237,7 @@
       "type": "object",
       "properties": {
         "schedulePolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6589,7 +6589,7 @@
       "type": "object",
       "properties": {
         "backupManagementType": {
-          "description": "Type of backup managemenent to backup an item.",
+          "description": "Type of backup management to backup an item.",
           "type": "string"
         },
         "workloadType": {
@@ -6659,7 +6659,7 @@
       "type": "object",
       "properties": {
         "backupManagementType": {
-          "description": "Type of backup managemenent to backup an item.",
+          "description": "Type of backup management to backup an item.",
           "type": "string"
         },
         "workloadType": {
