@@ -1367,19 +1367,19 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/awsConsolidatedAccounts": {
+    "/providers/Microsoft.CostManagement/externalBillingAccounts": {
       "get": {
         "tags": [
-          "AwsConsolidatedAccounts"
+          "ExternalBillingAccounts"
         ],
-        "operationId": "AwsConsolidatedAccount_List",
-        "description": "List all AwsConsolidatedAccount definitions",
+        "operationId": "ExternalBillingAccount_List",
+        "description": "List all ExternalBillingAccount definitions",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "AwsConsolidatedAccount_List": {
-            "$ref": "./examples/AwsConsolidatedAccountList.json"
+          "ExternalBillingAccount_List": {
+            "$ref": "./examples/ExternalBillingAccountList.json"
           }
         },
         "parameters": [
@@ -1391,7 +1391,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AwsConsolidatedAccountDefinitionListResult"
+              "$ref": "#/definitions/ExternalBillingAccountDefinitionListResult"
             }
           },
           "default": {
@@ -1406,22 +1406,19 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/awsConsolidatedAccounts/{awsConsolidatedAccountName}": {
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}": {
       "get": {
         "tags": [
-          "AwsConsolidatedAccounts"
+          "ExternalBillingAccounts"
         ],
-        "operationId": "AwsConsolidatedAccount_Get",
-        "description": "Get a AwsConsolidatedAccount definition",
+        "operationId": "ExternalBillingAccount_Get",
+        "description": "Get a ExternalBillingAccount definition",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "AwsConsolidatedAccount_Get": {
-            "$ref": "./examples/AwsConsolidatedAccountGet.json"
-          },
-          "AwsConsolidatedAccount_Get_Expand": {
-            "$ref": "./examples/AwsConsolidatedAccountGetExpand.json"
+          "ExternalBillingAccount_Get": {
+            "$ref": "./examples/ExternalBillingAccountGet.json"
           }
         },
         "parameters": [
@@ -1429,21 +1426,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/awsConsolidatedAccountNameParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AwsConsolidatedAccountDefinition"
+              "$ref": "#/definitions/ExternalBillingAccountDefinition"
             }
           },
           "default": {
@@ -1455,19 +1445,19 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/awsLinkedAccounts": {
+    "/providers/Microsoft.CostManagement/externalSubscriptions": {
       "get": {
         "tags": [
-          "AwsLinkedAccounts"
+          "ExternalSubscriptions"
         ],
-        "operationId": "AwsLinkedAccount_List",
-        "description": "List all AwsLinkedAccount definitions",
+        "operationId": "ExternalSubscription_List",
+        "description": "List all ExternalSubscription definitions",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "AwsLinkedAccount_List": {
-            "$ref": "./examples/AwsLinkedAccountList.json"
+          "ExternalSubscription_List": {
+            "$ref": "./examples/ExternalSubscriptionList.json"
           }
         },
         "parameters": [
@@ -1479,7 +1469,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AwsLinkedAccountDefinitionListResult"
+              "$ref": "#/definitions/ExternalSubscriptionDefinitionListResult"
             }
           },
           "default": {
@@ -1494,19 +1484,19 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/awsLinkedAccounts/{awsLinkedAccountName}": {
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}": {
       "get": {
         "tags": [
-          "AwsLinkedAccounts"
+          "ExternalSubscriptions"
         ],
-        "operationId": "AwsLinkedAccount_Get",
-        "description": "Get a AwsLinkedAccount definition",
+        "operationId": "ExternalSubscription_Get",
+        "description": "Get an ExternalSubscription definition",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "AwsLinkedAccount_Get": {
-            "$ref": "./examples/AwsLinkedAccountGet.json"
+          "ExternalSubscription_Get": {
+            "$ref": "./examples/ExternalSubscriptionGet.json"
           }
         },
         "parameters": [
@@ -1514,14 +1504,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/awsLinkedAccountNameParameter"
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AwsLinkedAccountDefinition"
+              "$ref": "#/definitions/ExternalSubscriptionDefinition"
             }
           },
           "default": {
@@ -1529,6 +1519,132 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/externalSubscriptions": {
+      "get": {
+        "tags": [
+          "ExternalSubscriptions"
+        ],
+        "operationId": "ExternalSubscription_ListByManagementGroup",
+        "description": "List all ExternalSubscription definitions for Management Group",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscription_List": {
+            "$ref": "./examples/ManagementGroupExternalSubscriptionList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExternalSubscriptionDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}": {
+      "put": {
+        "tags": [
+          "ExternalSubscriptions"
+        ],
+        "operationId": "ExternalSubscription_UpdateByManagementGroup",
+        "description": "Update ExternalSubscription definition Management Group",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscription_Get": {
+            "$ref": "./examples/ManagementGroupExternalSubscriptionPut.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExternalSubscriptionDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/getEntities": {
+      "post": {
+        "tags": [
+          "Entities"
+        ],
+        "operationId": "Entities_ListByManagementGroup",
+        "description": "List all entities (Management Groups, Subscriptions, ExternalSubscriptions, etc.) focusing on a particular group for the authenticated user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EntityViewParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetEntities": {
+            "$ref": "./examples/ManagementGroupGetEntities.json"
           }
         }
       }
@@ -2210,9 +2326,19 @@
           ],
           "description": "Connector billing model"
         },
+        "daysTrialRemaining": {
+          "type": "integer",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Number of days remaining of trial",
+          "readOnly": true
+        },
         "collectionInfo": {
           "$ref": "#/definitions/ConnectorCollectionInfo",
           "description": "Collection information",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -2281,37 +2407,42 @@
         }
       }
     },
-    "AwsConsolidatedAccountDefinitionListResult": {
-      "description": "Result of listing AwsConsolidatedAccount definitions. It contains a list of available AwsConsolidatedAccount definitions in the scope provided.",
+    "ExternalBillingAccountDefinitionListResult": {
+      "description": "Result of listing ExternalBillingAccount definitions. It contains a list of available ExternalBillingAccount definitions in the scope provided.",
       "properties": {
         "value": {
-          "description": "The list of AwsConsolidatedAccount definitions.",
+          "description": "The list of ExternalBillingAccount definitions.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/AwsConsolidatedAccountDefinition"
+            "$ref": "#/definitions/ExternalBillingAccountDefinition"
           }
         }
       }
     },
-    "AwsConsolidatedAccountDefinition": {
+    "ExternalBillingAccountDefinition": {
       "type": "object",
-      "description": "The AwsConsolidatedAccount model definition",
+      "description": "The ExternalBillingAccount model definition",
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "AwsConsolidatedAccount id"
+          "description": "ExternalBillingAccount id"
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "AwsConsolidatedAccount name (Account number)"
+          "description": "ExternalBillingAccount name"
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "AwsConsolidatedAccount type"
+          "description": "ExternalBillingAccount type"
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ExternalBillingAccount kind (eg aws)"
         },
         "tags": {
           "type": "object",
@@ -2327,22 +2458,22 @@
          },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AwsConsolidatedAccountProperties",
-          "description": "AwsConsolidatedAccount properties"
+          "$ref": "#/definitions/ExternalBillingAccountProperties",
+          "description": "ExternalBillingAccount properties"
         }
       },
       "x-ms-azure-resource": true
     },
-    "AwsConsolidatedAccountProperties": {
+    "ExternalBillingAccountProperties": {
       "type": "object",
-      "description": "The properties of a AwsConsolidatedAccount",
+      "description": "The properties of a ExternalBillingAccount",
       "properties": {
         "displayName": {
           "type": "string",
           "x-ms-mutability": [
             "read"
           ],
-          "description": "AwsConsolidatedAccount DisplayName",
+          "description": "ExternalBillingAccount DisplayName",
           "readOnly": true
         },
         "connectorId": {
@@ -2360,37 +2491,42 @@
         }
       }
     },
-    "AwsLinkedAccountDefinitionListResult": {
-      "description": "Result of listing AwsLinkedAccount definitions. It contains a list of available AwsLinkedAccount definitions in the scope provided.",
+    "ExternalSubscriptionDefinitionListResult": {
+      "description": "Result of listing ExternalSubscription definitions. It contains a list of available ExternalSubscription definitions in the scope provided.",
       "properties": {
         "value": {
-          "description": "The list of AwsLinkedAccount definitions.",
+          "description": "The list of ExternalSubscription definitions.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/AwsLinkedAccountDefinition"
+            "$ref": "#/definitions/ExternalSubscriptionDefinition"
           }
         }
       }
     },
-    "AwsLinkedAccountDefinition": {
+    "ExternalSubscriptionDefinition": {
       "type": "object",
-      "description": "The AwsLinkedAccount model definition",
+      "description": "The ExternalSubscription model definition",
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "AwsLinkedAccount id"
+          "description": "ExternalSubscription id"
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "AwsLinkedAccount name (Account number)"
+          "description": "ExternalSubscription name"
         },
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "AwsLinkedAccount type"
+          "description": "ExternalSubscription type"
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ExternalSubscription kind (eg aws)"
         },
         "tags": {
           "type": "object",
@@ -2406,25 +2542,166 @@
          },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AwsLinkedAccountProperties",
-          "description": "AwsLinkedAccount properties"
+          "$ref": "#/definitions/ExternalSubscriptionProperties",
+          "description": "ExternalSubscription properties"
         }
       },
       "x-ms-azure-resource": true
     },
-    "AwsLinkedAccountProperties": {
+    "ExternalSubscriptionProperties": {
       "type": "object",
-      "description": "The properties of a AwsLinkedAccount",
+      "description": "The properties of a ExternalSubscription",
       "properties": {
         "displayName": {
           "type": "string",
           "x-ms-mutability": [
             "read"
           ],
-          "description": "AwsLinkedAccount DisplayName",
+          "description": "ExternalSubscription DisplayName",
+          "readOnly": true
+        },
+        "externalBillingAccountId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Parent ExternalBillingAccountId",
           "readOnly": true
         }
       }
+    },
+    "EntityListResult": {
+      "description": "Describes the result of the request to view entities.",
+      "properties": {
+        "value": {
+          "description": "The list of entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityInfo"
+          }
+        },
+        "count": {
+          "description": "Total count of records that match the filter",
+          "type": "integer",
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EntityInfo": {
+      "description": "The entity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the entity.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. For example, /providers/Microsoft.Management/managementGroups",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the entity. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "x-nullable": true,
+          "$ref": "#/definitions/EntityInfoProperties"
+        }
+      }
+    },
+    "EntityInfoProperties": {
+      "description": "The generic properties of an entity.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000",
+          "x-nullable": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
+        },
+        "parent": {
+          "title": "Parent",
+          "$ref": "#/definitions/EntityParentGroupInfo",
+          "x-nullable": true
+        },
+        "permissions": {
+          "title": "Permissions",
+          "x-nullable": true,
+          "$ref": "#/definitions/Permissions"
+        },
+        "inheritedPermissions": {
+          "title": "Inherited Permissions",
+          "x-nullable": true,
+          "$ref": "#/definitions/Permissions"
+        },
+        "numberOfDescendants": {
+          "title": "Number of Descendants",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "numberOfChildren": {
+          "title": "Number of Children",
+          "description": "Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "numberOfChildGroups": {
+          "title": "Number of Child Groups",
+          "description": "Number of child groups is the number of Groups that are exactly one level underneath the current Group.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "parentDisplayNameChain": {
+          "type": "array",
+          "description": "The parent display name chain from the root group to the immediate parent",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "parentNameChain": {
+          "type": "array",
+          "description": "The parent name chain from the root group to the immediate parent",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntityParentGroupInfo": {
+      "description": "(Optional) The ID of the parent management group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "Permissions": {
+      "type": "string",
+      "enum": [
+        "noaccess",
+        "view",
+        "edit",
+        "delete"
+      ],
+      "description": "The users specific permissions to this item."
     },
     "OperationListResult": {
       "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
@@ -2482,7 +2759,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2018-05-31."
+      "description": "Version of the API to be used with the client request. The current version is 2019-03-01-preview"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
@@ -2539,21 +2816,36 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "awsConsolidatedAccountNameParameter": {
-      "name": "awsConsolidatedAccountName",
+    "externalBillingAccountNameParameter": {
+      "name": "externalBillingAccountName",
       "in": "path",
-      "description": "Aws Consolidated Account Number.",
+      "description": "External Billing Account Name. (eg 'aws-{PayerAccountId}')",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "awsLinkedAccountNameParameter": {
-      "name": "awsLinkedAccountName",
+    "externalSubscriptionNameParameter": {
+      "name": "externalSubscriptionName",
       "in": "path",
-      "description": "Aws Linked Account Number.",
+      "description": "External Subscription Name. (eg 'aws-{UsageAccountId}')",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "EntityViewParameter": {
+      "name": "$view",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "FullHierarchy",
+        "GroupsOnly",
+        "SubscriptionsOnly",
+        "ExternalSubscriptionsOnly",
+        "Audit"
+      ],
+      "x-ms-parameter-location": "method",
+      "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call."
     }
   }
 }
