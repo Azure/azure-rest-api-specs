@@ -1,18 +1,19 @@
 {
   "parameters": {
     "api-version": "2019-03-01-preview",
-    "managementGroupId": "MyMgId",
-    "externalSubscriptionName": "654321654321"
+    "managementGroupId": "XYZ",
+    "externalSubscriptionName": "aws-654321654321"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.CostManagement/externalSubscription/654321654321",
-        "name": "654321654321",
+        "id": "/providers/Microsoft.CostManagement/externalSubscription/aws-654321654321",
+        "name": "aws-654321654321",
         "type": "Microsoft.CostManagement/externalSubscription",
         "properties": {
           "displayName": "MyUsageAccount1",
-          "externalBillingAccountId": "/providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012"
+          "externalBillingAccountId": "/providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012",
+          "managementGroupId" : "/providers/Microsoft.Management/managementGroups/XYZ"
         }
       }
     }

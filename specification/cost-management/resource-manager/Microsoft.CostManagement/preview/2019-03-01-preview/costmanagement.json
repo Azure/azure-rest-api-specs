@@ -1445,6 +1445,48 @@
         }
       }
     },
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/externalSubscriptions": {
+      "get": {
+        "tags": [
+          "ExternalSubscriptions"
+        ],
+        "operationId": "ExternalSubscription_ListByExternalBillingAccount",
+        "description": "List all ExternalSubscriptions by ExternalBillingAccount definitions",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscription_List": {
+            "$ref": "./examples/ExternalSubscriptionList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExternalSubscriptionDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/externalSubscriptions": {
       "get": {
         "tags": [
@@ -2298,6 +2340,15 @@
           ],
           "description": "Connector status"
         },
+        "defaultManagementGroupId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Default ManagementGroupId"
+        },
         "subscriptionId": {
           "type": "string",
           "x-ms-mutability": [
@@ -2558,6 +2609,14 @@
             "read"
           ],
           "description": "ExternalSubscription DisplayName",
+          "readOnly": true
+        },
+        "managementGroupId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "ManagementGroupId",
           "readOnly": true
         },
         "externalBillingAccountId": {
