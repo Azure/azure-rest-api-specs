@@ -1613,12 +1613,12 @@
           "ExternalSubscriptions"
         ],
         "operationId": "ExternalSubscription_UpdateByManagementGroup",
-        "description": "Update ExternalSubscription definition Management Group",
+        "description": "Associates ExternalSubscription with the management group",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "ExternalSubscription_Get": {
+          "ManagementGroupExternalSubscription_Put": {
             "$ref": "./examples/ManagementGroupExternalSubscriptionPut.json"
           }
         },
@@ -1634,11 +1634,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExternalSubscriptionDefinition"
-            }
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2509,11 +2506,6 @@
             "read"
           ],
           "description": "Underlying ConnectorId",
-          "readOnly": true
-        },
-        "collectionInfo": {
-          "$ref": "#/definitions/ConnectorCollectionInfo",
-          "description": "Collection information",
           "readOnly": true
         }
       }
