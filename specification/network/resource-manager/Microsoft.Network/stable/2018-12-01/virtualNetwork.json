@@ -308,7 +308,7 @@
         }
       }
     },
-     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}": {
       "delete": {
         "tags": [
           "Subnets"
@@ -478,6 +478,61 @@
           "Create subnet": { "$ref": "./examples/SubnetCreate.json" },
           "Create subnet with service endpoints": { "$ref": "./examples/SubnetCreateServiceEndpoint.json" },
           "Create subnet with a delegation": { "$ref": "./examples/SubnetCreateWithDelegation.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/PrepareNetworkPolicies": {
+      "post": {
+        "operationId": "Subnets_PrepareNetworkPolicies",
+        "description": "Prepares a subnet by applying network intent policies.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the subnet."
+          },
+          {
+            "name": "prepareNetworkPoliciesRequestParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrepareNetworkPoliciesRequest"
+            },
+            "description": "Parameters supplied to prepare subnet by applying network intent policies."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Preparing subnet by applying network intent policies is successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "Prepare Network Policies": { "$ref": "./examples/SubnetPrepareNetworkPolicies.json" }
         }
       }
     },
@@ -922,7 +977,7 @@
           "description": "Describes the actions permitted to the service upon delegation"
         },
         "provisioningState": {
-		  "readOnly": true,
+          "readOnly": true,
           "type": "string",
           "description": "The provisioning state of the resource."
         }
@@ -974,7 +1029,7 @@
           "description": "The reference of the RouteTable resource."
         },
         "serviceEndpoints": {
-        "type": "array",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceEndpointPropertiesFormat"
           },
@@ -1376,6 +1431,35 @@
         }
       },
       "description": "Usage strings container."
+    },
+    "PrepareNetworkPoliciesRequest": {
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service for which subnet is being preparation for."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group where the Network Intent Policy will be stored."
+        },
+        "networkIntentPolicyConfigurations": [
+          {
+            "$ref": "#/definitions/NetworkIntentPolicyConfiguration"
+          }
+        ]
+      }
+    },
+    "NetworkIntentPolicyConfiguration": {
+      "properties": {
+        "networkIntentPolicyName": {
+          "type": "string",
+          "description": "The name of the Network Intent Policy with which it is to be stored in target subscripton."
+        },
+        "sourceNetworkIntentPolicy": {
+          "type": "NetworkIntentPolicy",
+          "description": "The  network intent policy"
+        }
+      }
     }
   }
 }
