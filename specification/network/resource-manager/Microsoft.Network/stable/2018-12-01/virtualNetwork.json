@@ -1442,24 +1442,39 @@
           "type": "string",
           "description": "The name of the resource group where the Network Intent Policy will be stored."
         },
-        "networkIntentPolicyConfigurations": [
-          {
+        "networkIntentPolicyConfigurations": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/NetworkIntentPolicyConfiguration"
-          }
-        ]
+          },
+          "description": "A list of NetworkIntentPolicyConfiguration."
+        }
       }
     },
     "NetworkIntentPolicyConfiguration": {
       "properties": {
         "networkIntentPolicyName": {
           "type": "string",
-          "description": "The name of the Network Intent Policy with which it is to be stored in target subscripton."
+          "description": "The name of the Network Intent Policy for storing in target subscripton."
         },
         "sourceNetworkIntentPolicy": {
-          "type": "NetworkIntentPolicy",
-          "description": "The  network intent policy"
+          "$ref": "#/definitions/NetworkIntentPolicy"
         }
       }
+    },
+    "NetworkIntentPolicy": {
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Network Intent Policy resource."
     }
   }
 }
