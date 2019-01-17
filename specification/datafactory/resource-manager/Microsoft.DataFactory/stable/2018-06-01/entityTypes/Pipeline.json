@@ -2540,69 +2540,6 @@
         "url"
       ]
     },
-    "WebHookActivity": {
-      "x-ms-discriminator-value": "WebHook",
-      "description": "WebHook activity.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ControlActivity"
-        }
-      ],
-      "properties": {
-        "typeProperties": {
-          "description": "WebHook activity properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WebHookActivityTypeProperties"
-        }
-      },
-      "required": [
-        "typeProperties"
-      ]
-    },
-    "WebHookActivityMethod": {
-      "description": "The list of HTTP methods supported by a WebHook activity.",
-      "type": "string",
-      "enum": [
-        "POST"
-      ],
-      "x-ms-enum": {
-        "name": "WebHookActivityMethod",
-        "modelAsString": true
-      }
-    },
-    "WebHookActivityTypeProperties": {
-      "description": "WebHook activity type properties.",
-      "properties": {
-        "method": {
-          "description": "Rest API method for target endpoint.",
-          "$ref": "#/definitions/WebHookActivityMethod"
-        },
-        "url": {
-          "type": "object",
-          "description": "WebHook activity target endpoint and path. Type: string (or Expression with resultType string)."
-        },
-        "timeout": {
-          "type": "object",
-          "description": "Specifies the timeout within which the webhook should be called back. If there is no value specified, it takes the value of TimeSpan.FromMinutes(10) which is 10 minutes as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
-        },
-        "headers": {
-          "type": "object",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
-        },
-        "body": {
-          "type": "object",
-          "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
-        },
-        "authentication": {
-          "description": "Authentication method used for calling the endpoint.",
-          "$ref": "#/definitions/WebActivityAuthentication"
-        }
-      },
-      "required": [
-        "method",
-        "url"
-      ]
-    },
     "GetMetadataActivity": {
       "x-ms-discriminator-value": "GetMetadata",
       "description": "Activity to get metadata of dataset",
