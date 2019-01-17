@@ -1753,23 +1753,6 @@
                 "$ref": "#/definitions/UpdateAutoRenewOperationSummary"
               }
             },
-            "202": {
-              "description": "Accepted. update product auto renew policy is in progress.",
-              "headers": {
-                "Location": {
-                  "description": "Location URI to poll for result.",
-                  "type": "string"
-                },
-                "Retry-After": {
-                  "description": "Recommends the retryable time after receiving this.",
-                  "type": "integer"
-                },
-                "Azure-AsyncOperation": {
-                  "description": "URI to poll for the operation status",
-                  "type": "string"
-                }
-              }
-            },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
@@ -1785,7 +1768,7 @@
             "Products"
           ],
           "operationId": "ProductCancelForInvoiceSection",
-          "description": "Cancel product by product id",
+          "description": "Cancel auto renew for product by product id",
           "x-ms-long-running-operation": true,
           "x-ms-long-running-operation-options": {
             "final-state-via": "location"
@@ -1817,89 +1800,6 @@
               "description": "OK. The request has succeeded.",
               "schema": {
                 "$ref": "#/definitions/UpdateAutoRenewOperationSummary"
-              }
-            },
-            "202": {
-              "description": "Accepted. update product auto renew is in progress.",
-              "headers": {
-                "Location": {
-                  "description": "Location URI to poll for result.",
-                  "type": "string"
-                },
-                "Retry-After": {
-                  "description": "Recommends the retryable time after receiving this.",
-                  "type": "integer"
-                },
-                "Azure-AsyncOperation": {
-                  "description": "URI to poll for the operation status",
-                  "type": "string"
-                }
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}/products/{productName}/updateAutoRenew": {
-        "post": {
-          "tags": [
-            "Products"
-          ],
-          "operationId": "ProductCancelForBillingProfile",
-          "description": "Cancel product by product id",
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "location"
-          },
-          "x-ms-examples": {
-            "ProductsListByBillingProfile": {
-              "$ref": "./examples/ProductsCancelByBillingProfile.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "#/parameters/billingAccountIdParameter"
-            },
-            {
-              "$ref": "#/parameters/billingProfileIdParameter"
-            },
-            {
-              "$ref": "#/parameters/productNameParameter"
-            },
-            {
-              "$ref": "#/parameters/apiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/UpdateAutoRenewRequestParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "#/definitions/UpdateAutoRenewOperationSummary"
-              }
-            },
-            "202": {
-              "description": "Accepted. Updating product auto renew policy is in progress",
-              "headers": {
-                "Location": {
-                  "description": "Location URI to poll for result.",
-                  "type": "string"
-                },
-                "Retry-After": {
-                  "description": "Recommends the retryable time after receiving this.",
-                  "type": "integer"
-                },
-                "Azure-AsyncOperation": {
-                  "description": "URI to poll for the operation status",
-                  "type": "string"
-                }
               }
             },
             "default": {
@@ -3310,7 +3210,15 @@
         "properties": {
           "autoRenew": {
             "description": "Request parameters to update auto renew policy a product.",
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "UpdateAutoRenew",
+              "modelAsString": true
+            }
           }
         }
       }
