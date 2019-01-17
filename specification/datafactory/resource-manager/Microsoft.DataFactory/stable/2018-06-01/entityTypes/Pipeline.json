@@ -2105,6 +2105,10 @@
           "description": "The environment path to execute the SSIS package. Type: string (or Expression with resultType string).",
           "type": "object"
         },
+        "executionCredential": {
+					"description": "The package execution credential.",
+					"$ref": "#/definitions/SSISExecutionCredential"
+				},
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
@@ -2198,6 +2202,29 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "SSISExecutionCredential": {
+      "description": "SSIS package execution credential.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecureString",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
       ]
     },
     "CustomActivity": {
@@ -2972,6 +2999,49 @@
       "required": [
         "expression",
         "activities"
+      ]
+    },
+    "ValidationActivity": {
+      "x-ms-discriminator-value": "Validation",
+      "description": "This activity blocks execution until a file has been validated to exist, with an optional minimum size, or the timeout is reached, whichever is earlier.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Validation activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ValidationActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ValidationActivityTypeProperties": {
+      "description": "Validation activity properties.",
+      "properties": {
+        "timeout": {
+          "type": "object",
+          "description": "Specifies the timeout for the activity to run. If there is no value specified, it takes the value of TimeSpan.FromDays(7) which is 1 week as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "sleep": {
+          "description": "A delay in seconds between validation attempts. If no value is specified, 10 seconds will be used as the default.",
+          "type": "integer"
+        },
+        "minimumSize": {
+          "description": "Minimum size of a file in byte. If no value is specified, 0 byte will be used as the default.",
+          "type": "integer"
+        },
+        "dataset": {
+          "description": "Validation activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
       ]
     },
     "FilterActivity": {

@@ -248,6 +248,7 @@
                     "HanaOnAzure"
                 ],
                 "operationId": "HanaInstances_Restart",
+                "x-ms-long-running-operation": true,
                 "description": "The operation to restart a SAP HANA instance.",
                 "x-ms-examples": {
                     "Restart a HANA instance": {
@@ -275,6 +276,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
                     "202": {
                         "description": "Accepted"
                     }
