@@ -58,6 +58,10 @@ directive:
     from: costmanagement.json
     where: $.paths
     reason: We are extending Microsoft.Billing RP in some scenarios
+  - suppress: R3023
+    from: costmanagement.json
+    where: $.paths
+    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
 ```
 
 ### Tag: package-2018-08-preview
