@@ -2373,8 +2373,13 @@
           "minimum": 10485760
         },
         "encoding": {
-          "description": "Encoding that is used to serialize messages to blobs. Supported values are 'avro' and 'avroDeflate'. Default value is 'avro'.",
-          "type": "string"
+          "description": "Encoding that is used to serialize messages to blobs. Supported values are 'avro', 'avroDeflate', and 'JSON'. Default value is 'avro'.",
+          "type": "string",
+          "enum": [
+            "Avro",
+            "AvroDeflate",
+            "JSON"
+          ]
         }
       },
       "required": [
