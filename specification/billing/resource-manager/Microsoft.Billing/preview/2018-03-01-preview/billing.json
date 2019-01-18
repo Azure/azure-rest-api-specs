@@ -199,47 +199,7 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Billing/billingProfiles/{billingProfileId}/discoverTenants": {
-      "get": {
-        "tags": [
-          "discoverTenants"
-        ],
-        "x-ms-examples": {
-          "TenantPropertiesGet": {
-            "$ref": "./examples/DiscoverTenantsGet.json"
-          }
-        },
-        "operationId": "DiscoverTenants_Get",
-        "description": "Gets a Tenant Properties.",
-        "parameters": [
-          {
-            "name": "billingProfileId",
-            "in": "path",
-            "description": "Billing Profile Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DiscoverTenant"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
+    },   
 	"/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices": {
       "get": {
         "tags": [
@@ -466,26 +426,6 @@
       "properties": {
         "principalName": {
           "description": "The account owner's principal name.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DiscoverTenant": {
-      "description": "A Tenant properties Resource",
-      "properties": {
-        "billingProfileName": {
-          "description": "The Billing Profile name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "billingAccountId": {
-          "description": "The Billing AccountId.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tenantId": {
-          "description": "The TenantId.",
           "type": "string",
           "readOnly": true
         }

@@ -2702,6 +2702,46 @@
         }
       }
     },
+	 "/providers/Microsoft.Consumption/billingProfiles/{billingProfileId}/discoverTenants": {
+      "get": {
+        "tags": [
+          "discoverTenants"
+        ],
+        "x-ms-examples": {
+          "TenantPropertiesGet": {
+            "$ref": "./examples/DiscoverTenantsGet.json"
+          }
+        },
+        "operationId": "DiscoverTenants_Get",
+        "description": "Gets a Tenant Properties.",
+        "parameters": [
+          {
+            "name": "billingProfileId",
+            "in": "path",
+            "description": "Billing Profile Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DiscoverTenant"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },	
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
         "tags": [
@@ -3088,6 +3128,26 @@
         }
       }
     },
+	 "DiscoverTenant": {
+      "description": "A Tenant properties Resource",
+      "properties": {
+        "billingProfileName": {
+          "description": "The Billing Profile name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountId": {
+          "description": "The Billing AccountId.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The TenantId.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },   
     "MarketplacesListResult": {
       "description": "Result of listing marketplaces. It contains a list of available marketplaces in reverse chronological order by billing period.",
       "type": "object",
