@@ -3187,6 +3187,67 @@
           "type": "object"
         }
       }
+    },
+    "AzureFunctionActivityMethod": {
+      "description": "The list of HTTP methods supported by a AzureFunctionActivity.",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS",
+        "HEAD",
+        "TRACE"
+      ],
+      "x-ms-enum": {
+        "name": "AzureFunctionActivityMethod",
+        "modelAsString": true
+      }
+    },
+    "AzureFunctionActivity": {
+      "x-ms-discriminator-value": "AzureFunctionActivity",
+      "description": "Azure Function activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Function activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureFunctionActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureFunctionActivityTypeProperties": {
+      "description": "Azure Function activity type properties.",
+      "properties": {
+        "method": {
+          "description": "Rest API method for target endpoint.",
+          "$ref": "#/definitions/AzureFunctionActivityMethod"
+        },
+        "functionName": {
+          "type": "object",
+          "description": "Name of the Function that the Azure Function Activity will call. Type: string (or Expression with resultType string)"
+        },
+        "headers": {
+          "type": "object",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+        },
+        "body": {
+          "type": "object",
+          "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "method",
+        "functionName"
+      ]
     }
   }
 }
