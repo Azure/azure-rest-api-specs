@@ -3,7 +3,7 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml $(ruby)
-package-name: azure_mgmt_edgedateway
+package-name: azure_mgmt_edgegateway
 package-version: "0.0.1"
 azure-arm: true
 ```
@@ -22,5 +22,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2018-07' && $(ruby)
 namespace: "Azure::Compute::Mgmt::V2018_07_01"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_edgedateway/lib
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_edgegateway/lib
 ```
