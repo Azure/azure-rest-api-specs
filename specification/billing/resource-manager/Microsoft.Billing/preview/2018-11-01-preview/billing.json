@@ -1324,55 +1324,6 @@
               }
             }
           },
-          "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}/products": {
-            "get": {
-              "tags": [
-                "Products"
-              ],
-              "operationId": "Products_ByBillingProfile_List",
-              "description": "Lists products by billingProfileId.",
-              "externalDocs": {
-                "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-              },
-              "x-ms-examples": {
-                "ProductsListByBillingProfile": {
-                  "$ref": "./examples/ProductsListByBillingProfile.json"
-                }
-              },
-              "parameters": [
-                {
-                  "$ref": "#/parameters/billingAccountIdParameter"
-                },
-                {
-                  "$ref": "#/parameters/billingProfileIdParameter"
-                },
-                {
-                  "$ref": "#/parameters/apiVersionParameter"
-                },
-                {
-                  "name": "$filter",
-                  "description": "May be used to filter by product type. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
-                  "in": "query",
-                  "required": false,
-                  "type": "string"
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK. The request has succeeded.",
-                  "schema": {
-                    "$ref": "#/definitions/ProductsListResult"
-                  }
-                },
-                "default": {
-                  "description": "Error response describing why the operation failed.",
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-                }
-              }
-            }
-          },
           "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/products": {
             "get": {
               "tags": [
@@ -1723,10 +1674,6 @@
           ],
           "operationId": "ProductCancelForBillingAccount",
           "description": "Cancel product by product id",
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "location"
-          },
           "x-ms-examples": {
             "ProductsCancelByBillingAccount": {
               "$ref": "./examples/ProductCancelByBillingAccount.json"
@@ -1769,10 +1716,6 @@
           ],
           "operationId": "ProductCancelForInvoiceSection",
           "description": "Cancel auto renew for product by product id",
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "location"
-          },
           "x-ms-examples": {
             "CancelProductForInvoiceSection": {
               "$ref": "./examples/ProductCancelForInvoiceSection.json"
