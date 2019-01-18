@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for IotHub.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for IotHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for IotHub, simply [Install AutoRest](https://aka.ms/autorest/i
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the IotHub API.
 
 ``` yaml
@@ -84,8 +84,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -103,7 +103,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
 ```
-
 
 ## C#
 
@@ -169,4 +168,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/iothub/resource-manager/v2018_04_01
 regenerate-manager: true
 generate-interface: true
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: iothub.json
+    where: $.definitions.Operation.properties.display
+    reason: I didn't add this. If this was checked into this repo then it should have already passed validation
 ```
