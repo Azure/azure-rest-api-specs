@@ -1,0 +1,41 @@
+{
+    "parameters": {
+        "api-version": "2017-08-01-preview",
+        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [{
+                        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/IoTSecuritySolutions/default",
+                        "name": "default",
+                        "type": "Microsoft.Security/IoTSecuritySolutions",
+                        "properties": {
+                            "workspaceId": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1",
+                            "enabled": true,
+                            "exportRawEventsToLogAnalytics": false,
+                            "displayName": "Solution Default",
+                            "resources": [
+                              "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub"
+                            ]
+                        }
+                    },
+                    {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/IoTSecuritySolutions/sec-solution",
+                      "name": "sec-solution",
+                      "type": "Microsoft.Security/IoTSecuritySolutions",
+                      "properties": {
+                          "workspaceId": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1",
+                          "enabled": true,
+                          "exportRawEventsToLogAnalytics": true,
+                          "displayName": "Second Solution",
+                          "resources": [
+                            "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/IotHubSecond"
+                          ]
+                      }
+                  }
+                ]
+            }
+        }
+    }
+}
