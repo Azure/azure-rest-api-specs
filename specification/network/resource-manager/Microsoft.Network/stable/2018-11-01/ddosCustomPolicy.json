@@ -33,8 +33,8 @@
       }
     }
   },
-  "paths": {    
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicyName}": {      
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicyName}": {
       "delete": {
         "tags": [
           "ddosCustomPolicies"
@@ -130,7 +130,9 @@
           }
         },
         "x-ms-examples": {
-          "Get DDoS custom policy": { "$ref": "./examples/DdosCustomPolicyGet.json" }
+          "Get DDoS custom policy": {
+            "$ref": "./examples/DdosCustomPolicyGet.json"
+          }
         }
       },
       "put": {
@@ -198,7 +200,9 @@
         }
       },
       "patch": {
-        "tags": ["ddosCustomPolicies"],
+        "tags": [
+          "ddosCustomPolicies"
+        ],
         "operationId": "DdosCustomPolicies_UpdateTags",
         "description": "Update a DDoS custom policy tags",
         "parameters": [
@@ -258,30 +262,7 @@
   "definitions": {
     "DdosCustomPolicy": {
       "description": "A DDoS custom policy in a resource group.",
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },        
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DdosCustomPolicyPropertiesFormat",
@@ -293,11 +274,11 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
-      "allOf":[  
-        {  
-           "$ref":"./network.json#/definitions/Resource"
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
         }
-     ]
+      ]
     },
     "DdosCustomPolicyPropertiesFormat": {
       "properties": {
@@ -315,7 +296,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./network.json#/definitions/SubResource" 
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The list of public IPs associated with the DDoS custom policy resource. This list is read-only."
         },
@@ -323,7 +304,7 @@
           "readOnly": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProtocolCustomSettingsFormat"            
+            "$ref": "#/definitions/ProtocolCustomSettingsFormat"
           },
           "description": "The protocol-specific DDoS policy customization parameters."
         }
@@ -341,7 +322,7 @@
             "Syn"
           ],
           "x-ms-enum": {
-            "name": "The protocol for which the DDoS protection policy is being customized.",
+            "name": "DdosCustomPolicyProtocol",
             "modelAsString": true
           },
           "description": "The protocol for which the DDoS protection policy is being customized."
@@ -362,11 +343,11 @@
           "enum": [
             "Relaxed",
             "Low",
-            "Default",                        
+            "Default",
             "High"
           ],
           "x-ms-enum": {
-            "name": "The customized DDoS protection trigger rate sensitivity degrees. High: Trigger rate set with most sensitivity w.r.t. normal traffic. Default: Trigger rate set with moderate sensitivity w.r.t. normal traffic. Low: Trigger rate set with less sensitivity w.r.t. normal traffic. Relaxed: Trigger rate set with least sensitivity w.r.t. normal traffic.",
+            "name": "DdosCustomPolicyTriggerSensitivityOverride",
             "modelAsString": true
           },
           "description": "The customized DDoS protection trigger rate sensitivity degrees. High: Trigger rate set with most sensitivity w.r.t. normal traffic. Default: Trigger rate set with moderate sensitivity w.r.t. normal traffic. Low: Trigger rate set with less sensitivity w.r.t. normal traffic. Relaxed: Trigger rate set with least sensitivity w.r.t. normal traffic."
