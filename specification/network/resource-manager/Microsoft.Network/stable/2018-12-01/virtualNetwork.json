@@ -531,6 +531,7 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Prepare Network Policies": { "$ref": "./examples/SubnetPrepareNetworkPolicies.json" }
         }
@@ -1436,7 +1437,7 @@
       "properties": {
         "serviceName": {
           "type": "string",
-          "description": "The name of the service for which subnet is being preparation for."
+          "description": "The name of the service for which subnet is being prepared for."
         },
         "resourceGroupName": {
           "type": "string",
@@ -1455,7 +1456,7 @@
       "properties": {
         "networkIntentPolicyName": {
           "type": "string",
-          "description": "The name of the Network Intent Policy for storing in target subscripton."
+          "description": "The name of the Network Intent Policy for storing in target subscription."
         },
         "sourceNetworkIntentPolicy": {
           "$ref": "#/definitions/NetworkIntentPolicy"
