@@ -210,6 +210,13 @@
               "rewriteRules": [
                 {
                   "name": "Set X-Forwarded-For",
+                  "ruleSequence": 102,
+                  "conditions": {
+                    "variable": "http_req_Authorization",
+                    "pattern": "^Bearer",
+                    "ignoreCase": true,
+                    "negate": false
+                  },
                   "actionSet": {
                     "requestHeaderConfigurations": [
                       {
@@ -442,6 +449,13 @@
                 "rewriteRules": [
                   {
                     "name": "Set X-Forwarded-For",
+                    "ruleSequence": 102,
+                    "conditions": {
+                      "variable": "http_req_Authorization",
+                      "pattern": "^Bearer",
+                      "ignoreCase": true,
+                      "negate": false
+                    },
                     "actionSet": {
                       "requestHeaderConfigurations": [
                         {
@@ -674,6 +688,13 @@
                 "rewriteRules": [
                   {
                     "name": "Set X-Forwarded-For",
+                    "ruleSequence": 102,
+                    "conditions": {
+                      "variable": "http_req_Authorization",
+                      "pattern": "^Bearer",
+                      "ignoreCase": true,
+                      "negate": false
+                    },
                     "actionSet": {
                       "requestHeaderConfigurations": [
                         {
