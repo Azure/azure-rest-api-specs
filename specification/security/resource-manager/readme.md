@@ -47,7 +47,6 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 input-file:
 - Microsoft.Security/preview/2017-08-01-preview/security.json
 - Microsoft.Security/preview/2015-06-01-preview/security.json
-- Microsoft.Security/stable/2019-01-01/security.json
 ```
 
 ---
