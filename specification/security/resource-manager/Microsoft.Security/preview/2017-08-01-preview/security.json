@@ -707,7 +707,7 @@
               }
           }
       },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/IoTSecuritySolutions/{solutionName}": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/Locations/{location}/IoTSecuritySolutions/{solutionName}": {
           "get": {
               "x-ms-examples": {
                   "Get an iot security solution": {
@@ -721,6 +721,8 @@
                   "$ref": "#/parameters/ApiVersion"
               }, {
                   "$ref": "#/parameters/SubscriptionId"
+              }, {
+                "$ref": "#/parameters/Location"
               }, {
                   "$ref": "#/parameters/SolutionName"
               }],
@@ -752,6 +754,8 @@
                   "$ref": "#/parameters/ApiVersion"
               }, {
                   "$ref": "#/parameters/SubscriptionId"
+              }, {
+                "$ref": "#/parameters/Location"
               }, {
                   "$ref": "#/parameters/SolutionName"
               }, {
@@ -791,6 +795,8 @@
                   "$ref": "#/parameters/ApiVersion"
               }, {
                   "$ref": "#/parameters/SubscriptionId"
+              }, {
+                "$ref": "#/parameters/Location"
               }, {
                   "$ref": "#/parameters/SolutionName"
               }],
@@ -1470,9 +1476,13 @@
           "type": "object",
           "description": "Security Solution setting data",
           "properties": {
-              "workspaceId": {
+              "workspaceResourceId": {
                   "type": "string",
                   "description": "The full Azure ID of the workspace to save the data in"
+              },
+              "workspaceCustomerId": {
+                  "type": "string",
+                  "description": "the customer id associate with the workspace"
               },
               "displayName": {
                   "type": "string",
@@ -1480,20 +1490,22 @@
               },
               "enabled": {
                   "type": "boolean",
+                  "default": true,
                   "description": "Is the solution Enabled for the customer."
               },
               "exportRawEventsToLogAnalytics": {
                   "type": "boolean",
+                  "default": false,
                   "description": "Wether to save the raw events to the given workspace."
               },
-              "resources": {
+              "iotHubResources": {
                   "type": "array",
-                  "description": "Related resources IDs",
+                  "description": "Related iot hub resources ID",
                   "items": {"type": "string"}
               }
           },
           "required": [
-              "resources",
+              "iotHubResources",
               "displayName"
           ]
       },
@@ -1914,6 +1926,13 @@
           "type": "string",
           "description": "Azure subscription ID"
       },
+      "Location": {
+          "name": "location",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "Azure location"
+      },
       "ResourceGroupName": {
           "name": "resourceGroupName",
           "in": "path",
@@ -2098,7 +2117,7 @@
         "x-ms-parameter-location": "method"
       },
       "IotHubId": {
-        "name": "iotHubId",
+        "name": "iotHubResourceId",
         "in": "query",
         "required": false,
         "description": "The resource id of the iot hub",
