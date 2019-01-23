@@ -1280,7 +1280,8 @@
             "$ref": "./examples/IntegrationRuntimes_EnableInteractiveQuery.json"
           }
         },
-        "description": "Enable interactive query for an Auzre-VNet integration runtime.",
+        "description": "Enable interactive query for an Azure-VNet integration runtime.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3458,7 +3459,7 @@
       "description": "the request of enable interactive query for an integration runtime.",
       "discriminator": "type",
       "properties": {
-        "AutoTerminationMinutes": {
+        "autoTerminationMinutes": {
           "type": "integer",
           "format": "int64",
           "description": "the number of minutes that the resource will be reserved."
