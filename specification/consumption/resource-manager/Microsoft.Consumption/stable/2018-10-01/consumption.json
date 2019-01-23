@@ -2702,7 +2702,7 @@
         }
       }
     },
-	 "/providers/Microsoft.Consumption/billingProfiles/{billingProfileId}/discoverTenants": {
+	 "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/discoverTenants": {
       "get": {
         "tags": [
           "discoverTenants"
@@ -2715,6 +2715,13 @@
         "operationId": "DiscoverTenants_Get",
         "description": "Gets a Tenant Properties.",
         "parameters": [
+		  {
+            "name": "billingAccountId",
+            "in": "path",
+            "description": "Billing Account Id.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "billingProfileId",
             "in": "path",
