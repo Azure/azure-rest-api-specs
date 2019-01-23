@@ -1,0 +1,1884 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-23",
+    "title": "Windows Virtual Desktop API Client"
+  },
+  "paths": {
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools/{hostPoolName}/appgroups/{appGroupName}": {
+      "get": {
+        "tags": [
+          "ArmApplicationGroup"
+        ],
+        "operationId": "GetAppGroupAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmApplicationGroupResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ArmApplicationGroup"
+        ],
+        "operationId": "CreateAppGroupAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupIn",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ArmApplicationGroupCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmApplicationGroupResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArmApplicationGroup"
+        ],
+        "operationId": "RemoveAppGroupAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools/{hostPoolName}/appgroups": {
+      "get": {
+        "tags": [
+          "ArmApplicationGroup"
+        ],
+        "operationId": "GetAllAppGroupsAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "LastEntry",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "SortField",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "IsDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "InitialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "NextActivityId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools/{hostPoolName}/appgroups/{appGroupName}/assignedusers/{userPrincipalName}": {
+      "get": {
+        "tags": [
+          "ArmApplicationGroupUser"
+        ],
+        "operationId": "GetAppGroupUserAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userPrincipalName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmApplicationGroupUserResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ArmApplicationGroupUser"
+        ],
+        "operationId": "AddAppGroupUserAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userPrincipalName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArmApplicationGroupUser"
+        ],
+        "operationId": "RemoveAppGroupUserAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userPrincipalName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools/{hostPoolName}/appgroups/{appGroupName}/assignedusers": {
+      "get": {
+        "tags": [
+          "ArmApplicationGroupUser"
+        ],
+        "operationId": "GetAllAppGroupUsersAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "LastEntry",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "SortField",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "IsDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "InitialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "NextActivityId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RdMgmtUser"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools/{hostPoolName}": {
+      "get": {
+        "tags": [
+          "ArmHostPool"
+        ],
+        "operationId": "GetHostPoolAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmHostPoolResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ArmHostPool"
+        ],
+        "operationId": "CreateHostPoolAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "armHostPoolCreate",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ArmHostPoolCreate"
+            }
+          },
+          {
+            "name": "x-ms-client-tenant-id",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmHostPoolResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArmHostPool"
+        ],
+        "operationId": "RemoveHostPoolAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ArmHostPool"
+        ],
+        "operationId": "UpdateHostPoolAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "armHostPoolCreate",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ArmHostPoolCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RdMgmtHostPool"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools": {
+      "get": {
+        "tags": [
+          "ArmHostPool"
+        ],
+        "operationId": "GetAllHostPoolAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools/{hostPoolName}/RegenerateRegistrationInfo": {
+      "post": {
+        "tags": [
+          "ArmHostPool"
+        ],
+        "operationId": "RegenerateRegistrationInfo",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "regInfoIn",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RdMgmtRegistrationInfo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RdMgmtHostPool"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/providers/Microsoft.WindowsVirtualDesktop/Operations": {
+      "get": {
+        "tags": [
+          "ArmOperations"
+        ],
+        "operationId": "GetOperations",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OperationDescription"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscriptionIn}": {
+      "put": {
+        "tags": [
+          "ArmSubscriptions"
+        ],
+        "operationId": "PutSubscriptionAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionIn",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscription",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/providers/Microsoft.WindowsVirtualDesktop/ssocontext": {
+      "put": {
+        "tags": [
+          "ArmSubscriptions"
+        ],
+        "operationId": "PutSsoContextAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/RdsManagement/V1/TenantGroups/{tenantGroupName}/Tenants/{tenantName}/HostPools/{hostPoolName}": {
+      "post": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPoolLink",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tenantGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolIn",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RdMgmtHostPool"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RdMgmtHostPool"
+            }
+          }
+        }
+      }
+    },
+    "/RdsManagement/V1": {
+      "get": {
+        "tags": [
+          "Management"
+        ],
+        "operationId": "Index",
+        "consumes": [],
+        "produces": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/PublishingService/v1/ping": {
+      "get": {
+        "tags": [
+          "PublishingService"
+        ],
+        "operationId": "Ping",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/PublishingService/v1/IsUserAuthorizedToRun/{userToken}/{tenantId}/{publishedItemId}": {
+      "get": {
+        "tags": [
+          "PublishingService"
+        ],
+        "operationId": "IsAuthorizedAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userToken",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publishedItemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/ResourceProvider/V1/subscriptions/{subscription}/resourcegroups/{resourcegroup}/providers/Microsoft.WindowsVirtualDesktop/hostpools/{hostPoolName}/SessionHosts/{sessionHostName}": {
+      "get": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "GetSessionHostAsync",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionHostName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmSessionHost"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "UpdateSessionHostAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionHostName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sessionHostIn",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ArmSessionHostUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmSessionHost"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/WebFeed/v1/ping": {
+      "get": {
+        "tags": [
+          "WebFeed"
+        ],
+        "operationId": "Ping",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/WebFeed/v1/Tenants/{userToken}": {
+      "get": {
+        "tags": [
+          "WebFeed"
+        ],
+        "operationId": "GetTenantsAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/WebFeed/v1/Tenant/{tenantId}": {
+      "get": {
+        "tags": [
+          "WebFeed"
+        ],
+        "operationId": "GetTenantAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/WebFeed/v1/FeedActivity/Tenant/{tenantId}/User/{userToken}": {
+      "get": {
+        "tags": [
+          "WebFeed"
+        ],
+        "operationId": "GetWebFeedAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/WebFeed/v1/RdpResource/Tenant/{tenantId}/PublishedItem/{publishedItemId}": {
+      "get": {
+        "tags": [
+          "WebFeed"
+        ],
+        "operationId": "GetRdpResourceAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publishedItemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/WebFeed/v1/IconResource/Tenant/{tenantId}/PublishedItem/{publishedItemId}": {
+      "get": {
+        "tags": [
+          "WebFeed"
+        ],
+        "operationId": "GetIconResourceAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publishedItemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/WebFeed/v1/PngResource/Tenant/{tenantId}/PublishedItem/{publishedItemId}": {
+      "get": {
+        "tags": [
+          "WebFeed"
+        ],
+        "operationId": "GetPngResourceAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publishedItemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmApplicationGroupCreate": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ArmApplicationGroup"
+        }
+      }
+    },
+    "ArmApplicationGroup": {
+      "type": "object",
+      "properties": {
+        "tenantGroupName": {
+          "type": "string"
+        },
+        "tenantName": {
+          "type": "string"
+        },
+        "hostPoolName": {
+          "type": "string"
+        },
+        "appGroupName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "ArmApplicationGroupResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ArmApplicationGroup"
+        }
+      }
+    },
+    "ArmApplicationGroupUserResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ArmApplicationGroupUser"
+        }
+      }
+    },
+    "ArmApplicationGroupUser": {
+      "type": "object",
+      "properties": {
+        "userPrincipalName": {
+          "type": "string"
+        },
+        "subscription": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "hostPoolName": {
+          "type": "string"
+        },
+        "appGroupName": {
+          "type": "string"
+        }
+      }
+    },
+    "RdMgmtUser": {
+      "type": "object",
+      "properties": {
+        "userPrincipalName": {
+          "type": "string"
+        },
+        "tenantName": {
+          "type": "string"
+        },
+        "tenantGroupName": {
+          "type": "string"
+        },
+        "hostPoolName": {
+          "type": "string"
+        },
+        "appGroupName": {
+          "type": "string"
+        }
+      }
+    },
+    "ArmHostPoolCreate": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ArmHostPool"
+        }
+      }
+    },
+    "ArmHostPool": {
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "boolean"
+        },
+        "diskPath": {
+          "type": "string"
+        },
+        "enableUserProfileDisk": {
+          "type": "boolean"
+        },
+        "excludeFolderPath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeFilePath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includeFilePath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includeFolderPath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customRdpProperty": {
+          "type": "string"
+        },
+        "maxSessionLimit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "useReverseConnect": {
+          "type": "boolean"
+        },
+        "loadBalancerType": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "type": "integer"
+        },
+        "validationEnv": {
+          "type": "boolean"
+        },
+        "ring": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "registrationInfo": {
+          "$ref": "#/definitions/ArmRegistrationInfo"
+        },
+        "tokenExpirationHours": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ArmRegistrationInfo": {
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "ArmHostPoolResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ArmHostPool"
+        }
+      }
+    },
+    "RdMgmtHostPool": {
+      "type": "object",
+      "properties": {
+        "tenantName": {
+          "type": "string"
+        },
+        "tenantGroupName": {
+          "type": "string"
+        },
+        "hostPoolName": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "boolean"
+        },
+        "diskPath": {
+          "type": "string"
+        },
+        "enableUserProfileDisk": {
+          "type": "boolean"
+        },
+        "excludeFolderPath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeFilePath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includeFilePath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includeFolderPath": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customRdpProperty": {
+          "type": "string"
+        },
+        "maxSessionLimit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "loadBalancerType": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "type": "integer"
+        },
+        "validationEnv": {
+          "type": "boolean"
+        },
+        "ring": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "RdMgmtRegistrationInfo": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "expirationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "tenantGroupName": {
+          "type": "string"
+        },
+        "tenantName": {
+          "type": "string"
+        },
+        "hostPoolName": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationDescription": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Subscription": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "registrationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionProperties"
+        }
+      }
+    },
+    "SubscriptionProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "locationPlacementId": {
+          "type": "string"
+        },
+        "quotaId": {
+          "type": "string"
+        },
+        "registeredFeatures": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegisteredFeature"
+          }
+        }
+      }
+    },
+    "RegisteredFeature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "ArmSessionHostUpdate": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RdMgmtSessionHost"
+        }
+      }
+    },
+    "RdMgmtSessionHost": {
+      "type": "object",
+      "properties": {
+        "sessionHostName": {
+          "type": "string"
+        },
+        "tenantName": {
+          "type": "string"
+        },
+        "tenantGroupName": {
+          "type": "string"
+        },
+        "hostPoolName": {
+          "type": "string"
+        },
+        "allowNewSession": {
+          "type": "boolean"
+        },
+        "sessions": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastHeartBeat": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "assignedUser": {
+          "type": "string"
+        },
+        "status": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "integer"
+        },
+        "statusTimestamp": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ArmSessionHost": {
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "type": "string"
+        },
+        "hostPool": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "sessionHostName": {
+          "type": "string"
+        },
+        "lastHeartBeat": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sessions": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "allowNewSession": {
+          "type": "boolean"
+        },
+        "assignedUser": {
+          "type": "string"
+        },
+        "status": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "integer"
+        },
+        "statusTimestamp": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
