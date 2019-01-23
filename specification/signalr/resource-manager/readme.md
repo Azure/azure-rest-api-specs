@@ -29,6 +29,28 @@ openapi-type: arm
 tag: package-2018-10-01
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.NameAvailability.properties.nameAvailable
+    reason:  The boolean properties 'nameAvailable' is actually boolean value defined by Azure API spec
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.Dimension.properties.toBeExportedForShoebox
+    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+  - suppress: ListInOperationName
+    from: signalr.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/switchFeatures"].post.operationId
+    reason:  The `switchFeatures` operation is POST action to submit server-side configurations while `_List*` sounds like a Read operation.
+  - suppress: LongRunningResponseStatusCode
+    from: signalr.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/restart"].post["x-ms-long-running-operation"]
+    reason:  200,201 and 204 doesn't apply to this API, which triggers a long-time background operation. Customer should only care the status of the opeartion itself.
+```
+
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.

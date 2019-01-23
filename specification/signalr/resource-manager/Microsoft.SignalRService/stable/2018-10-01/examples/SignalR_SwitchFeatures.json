@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "parameters": {
+      "features": [
+        {
+          "flag": "ServiceMode",
+          "value": "SomeValue",
+          "properties": {}
+        }
+      ]
+    },
+    "api-version": "2018-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySignalRService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "flag": "ServiceMode",
+            "value": "SomeValue",
+            "properties": {
+              "someKey": "someValue"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+      }
+    }
+  }
+}
