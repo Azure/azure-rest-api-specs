@@ -3067,7 +3067,8 @@
           "description": "The granularity of rows in the report.",
           "type": "string",
           "enum": [
-            "Daily"
+            "Daily",
+            "Hourly"
           ],
           "x-ms-enum": {
             "name": "GranularityType",
@@ -3281,11 +3282,13 @@
           "description": "The status of the report execution.",
           "type": "string",
           "enum": [
-            "Queud",
+            "Queued",
             "InProgress",
             "Completed",
             "Failed",
-            "Timeout"
+            "Timeout",
+            "NewDataNotAvailable",
+            "DataNotAvailable"
           ],
           "x-ms-enum": {
             "name": "ExecutionStatus",
