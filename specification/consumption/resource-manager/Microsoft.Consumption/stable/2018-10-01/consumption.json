@@ -2702,20 +2702,20 @@
         }
       }
     },
-	 "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/discoverTenants": {
+	  "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/tenants": {
       "get": {
         "tags": [
-          "discoverTenants"
+          "Tenants"
         ],
         "x-ms-examples": {
           "TenantPropertiesGet": {
-            "$ref": "./examples/DiscoverTenantsGet.json"
+            "$ref": "./examples/TenantsGet.json"
           }
         },
-        "operationId": "DiscoverTenants_Get",
+        "operationId": "Tenants_Get",
         "description": "Gets a Tenant Properties.",
         "parameters": [
-		  {
+		      {
             "name": "billingAccountId",
             "in": "path",
             "description": "Billing Account Id.",
@@ -2737,7 +2737,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DiscoverTenant"
+              "$ref": "#/definitions/TenantListResult"
             }
           },
           "default": {
@@ -3135,8 +3135,24 @@
         }
       }
     },
-	 "DiscoverTenant": {
-      "description": "A Tenant properties Resource",
+    "Tenant": {
+      "description": "An tenant detail resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantProperties",
+          "title": "Usage detail properties"
+        }
+      }
+    },
+    "TenantProperties": {
+      "description": "The properties of the tenants.",
       "properties": {
         "billingProfileName": {
           "description": "The Billing Profile name.",
@@ -3152,9 +3168,32 @@
           "description": "The TenantId.",
           "type": "string",
           "readOnly": true
+        },
+        "billingAccountName": {
+          "description": "The Billing Account Name.",
+          "type": "string",
+          "readOnly": true
         }
       }
-    },   
+    },
+    "TenantListResult": {
+      "description": "A Tenant properties Resource",
+      "properties": {
+        "value": {
+          "description": "The list of tenant details.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Tenant"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "MarketplacesListResult": {
       "description": "Result of listing marketplaces. It contains a list of available marketplaces in reverse chronological order by billing period.",
       "type": "object",
@@ -4262,19 +4301,19 @@
             "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
           }
         },
-		"includedSubscriptions": {
+        "includedSubscriptions": {
           "description": "List of subscription Guids included in the calculation of aggregated cost",
-		  "type": "array",
+          "type": "array",
           "items": {
             "type": "string"
-           }
+          }
         },
-		"excludedSubscriptions": {
+        "excludedSubscriptions": {
           "description": "List of subscription Guids excluded from the calculation of aggregated cost",
-		  "type": "array",
+          "type": "array",
           "items": {
             "type": "string"
-           }
+          }
         }
       }
     },
