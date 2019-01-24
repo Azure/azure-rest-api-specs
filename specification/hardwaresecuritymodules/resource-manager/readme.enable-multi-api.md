@@ -4,6 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - >-
-    Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
+  - Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
 ```

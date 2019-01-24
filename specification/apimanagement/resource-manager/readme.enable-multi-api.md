@@ -6,8 +6,7 @@
 input-file:
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimanagement.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapis.json
-  - >-
-    Microsoft.ApiManagement/preview/2018-06-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2018-06-01-preview/apimauthorizationservers.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimbackends.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimcertificates.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimdeployment.json
@@ -18,8 +17,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimloggers.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnotifications.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnetworkstatus.json
-  - >-
-    Microsoft.ApiManagement/preview/2018-06-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2018-06-01-preview/apimopenidconnectproviders.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimportalsettings.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproducts.json
   - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproperties.json

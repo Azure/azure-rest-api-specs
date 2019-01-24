@@ -4,6 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - >-
-    Microsoft.MachineLearningExperimentation/preview/2017-05-01-preview/machineLearningExperimentation.json
+  - Microsoft.MachineLearningExperimentation/preview/2017-05-01-preview/machineLearningExperimentation.json
 ```

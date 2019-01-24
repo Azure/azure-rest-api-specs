@@ -4,6 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - >-
-    Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json
+  - Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json
 ```

@@ -17,14 +17,12 @@ input-file:
   - Microsoft.Media/preview/2018-03-30-preview/Assets.json
   - Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
   - Microsoft.Media/preview/2018-03-30-preview/Encoding.json
-  - >-
-    Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
   - Microsoft.Media/preview/2018-06-01-preview/Accounts.json
   - Microsoft.Media/preview/2018-06-01-preview/Assets.json
   - Microsoft.Media/preview/2018-06-01-preview/ContentKeyPolicies.json
   - Microsoft.Media/preview/2018-06-01-preview/Encoding.json
-  - >-
-    Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/preview/2018-06-01-preview/streamingservice.json
 ```

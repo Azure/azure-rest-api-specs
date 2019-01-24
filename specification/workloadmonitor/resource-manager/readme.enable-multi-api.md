@@ -4,6 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - >-
-    Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
+  - Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
 ```

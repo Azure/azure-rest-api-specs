@@ -4,6 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - >-
-    Microsoft.OperationsManagement/preview/2015-11-01-preview/OperationsManagement.json
+  - Microsoft.OperationsManagement/preview/2015-11-01-preview/OperationsManagement.json
 ```
