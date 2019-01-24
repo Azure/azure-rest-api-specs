@@ -1,5 +1,7 @@
 # Multi-API support for AutoRest v3 generators
 
+> see https://aka.ms/autorest
+
 ``` yaml $(enable-multi-api)
 input-file:
   - preview/2017-11-11-preview/searchservice.json

@@ -1,5 +1,7 @@
 # Multi-API support for AutoRest v3 generators
 
+> see https://aka.ms/autorest
+
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.Features/stable/2015-12-01/features.json

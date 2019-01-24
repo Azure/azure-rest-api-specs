@@ -1,5 +1,7 @@
 # Multi-API support for AutoRest v3 generators
 
+> see https://aka.ms/autorest
+
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.RecoveryServices/stable/2017-07-01/bms.json

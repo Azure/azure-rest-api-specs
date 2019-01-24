@@ -1,5 +1,7 @@
 # Multi-API support for AutoRest v3 generators
 
+> see https://aka.ms/autorest
+
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.ApiManagement/preview/2017-03-01/apimanagement.json
