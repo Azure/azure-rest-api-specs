@@ -87,6 +87,13 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
+            "name": "showDisabledRecommendations",
+            "in": "query",
+            "description": "Specifies whether to return disabled recommendations or not.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "An OData filter expression that filters elements in the collection.",
@@ -122,13 +129,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sensitivityLabels": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/recommended/enable": {
+      "post": {
         "tags": [
           "SensitivityLabels"
         ],
-        "description": "Gets the sensitivity labels of a given database",
-        "operationId": "SensitivityLabels_ListByDatabase",
+        "description": "Enables sensitivity recommendations on a given column",
+        "operationId": "SensitivityLabels_Enable",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -140,10 +147,24 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
             "type": "string"
           },
           {
@@ -155,22 +176,75 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the sensitivity labels.",
-            "schema": {
-              "$ref": "#/definitions/SensitivityLabelListResult"
-            }
+            "description": "Successfully enabled the sensitivity recommendations on the given column."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
           }
         },
-        "x-ms-odata": "#/definitions/SensitivityLabel",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-examples": {
+          "Enables sensitivity recommendations on a given column": {
+            "$ref": "./examples/RecommendedColumnSensitivityLabelEnable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/recommended/disable": {
+      "post": {
+        "tags": [
+          "SensitivityLabels"
+        ],
+        "description": "Disables sensitivity recommendations on a given column",
+        "operationId": "SensitivityLabels_Disable",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disabled the sensitivity recommendation on the given column."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
         },
         "x-ms-examples": {
-          "Gets the current and recommended sensitivity labels of a given database": {
-            "$ref": "./examples/SensitivityLabelsListByDatabase.json"
+          "Disables sensitivity recommendations on a given column": {
+            "$ref": "./examples/RecommendedColumnSensitivityLabelDisable.json"
           }
         }
       }
@@ -436,6 +510,11 @@
         "informationTypeId": {
           "description": "The information type ID.",
           "type": "string"
+        },
+        "isDisabled": {
+          "description": "Applicable for recommended sensitivity label source only. Specifies whether the recommended sensitivity label is disabled or not.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
