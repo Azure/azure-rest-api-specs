@@ -4,25 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - s
-  - t
-  - a
-  - b
-  - l
-  - e
-  - /
-  - v
-  - '1'
-  - .
-  - '0'
-  - E
-  - 'n'
-  - i
-  - 'y'
-  - S
-  - r
-  - c
-  - h
-  - j
-  - o
+  - stable/v1.0/EntitySearch.json
 ```

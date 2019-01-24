@@ -4,23 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - s
-  - t
-  - a
-  - b
-  - l
-  - e
-  - /
-  - v
-  - '1'
-  - .
-  - '0'
-  - L
-  - o
-  - c
-  - S
-  - r
-  - h
-  - j
-  - 'n'
+  - stable/v1.0/LocalSearch.json
 ```

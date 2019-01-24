@@ -4,23 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - s
-  - t
-  - a
-  - b
-  - l
-  - e
-  - /
-  - v
-  - '4'
-  - .
-  - '0'
-  - Q
-  - 'n'
-  - A
-  - M
-  - k
-  - r
-  - j
-  - o
+  - stable/v4.0/QnAMaker.json
 ```

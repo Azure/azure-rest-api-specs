@@ -4,20 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - s
-  - t
-  - a
-  - b
-  - l
-  - e
-  - /
-  - v
-  - '1'
-  - .
-  - '0'
-  - F
-  - c
-  - j
-  - o
-  - 'n'
+  - stable/v1.0/Face.json
 ```

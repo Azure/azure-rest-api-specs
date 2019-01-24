@@ -4,23 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - s
-  - t
-  - a
-  - b
-  - l
-  - e
-  - /
-  - v
-  - '1'
-  - .
-  - '0'
-  - W
-  - S
-  - r
-  - c
-  - h
-  - j
-  - o
-  - 'n'
+  - stable/v1.0/WebSearch.json
 ```

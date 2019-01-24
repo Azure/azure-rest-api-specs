@@ -4,25 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - p
-  - r
-  - e
-  - v
-  - i
-  - w
-  - /
-  - '1'
-  - .
-  - '0'
-  - V
-  - s
-  - u
-  - a
-  - l
-  - S
-  - c
-  - h
-  - j
-  - o
-  - 'n'
+  - preview/v1.0/VisualSearch.json
 ```

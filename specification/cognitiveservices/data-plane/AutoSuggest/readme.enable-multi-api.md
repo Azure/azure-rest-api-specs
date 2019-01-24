@@ -4,22 +4,5 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - s
-  - t
-  - a
-  - b
-  - l
-  - e
-  - /
-  - v
-  - '1'
-  - .
-  - '0'
-  - A
-  - u
-  - o
-  - S
-  - g
-  - j
-  - 'n'
+  - stable/v1.0/AutoSuggest.json
 ```

@@ -4,28 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - s
-  - t
-  - a
-  - b
-  - l
-  - e
-  - /
-  - v
-  - '2'
-  - .
-  - '0'
-  - T
-  - x
-  - A
-  - 'n'
-  - 'y'
-  - i
-  - c
-  - j
-  - o
-  - p
-  - r
-  - w
-  - '1'
+  - stable/v2.0/TextAnalytics.json
+  - preview/v2.1/TextAnalytics.json
 ```
