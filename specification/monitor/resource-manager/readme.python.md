@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.monitor
   package-name: azure-mgmt-monitor
-  package-version: 0.5.0
+  package-version: 0.6.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

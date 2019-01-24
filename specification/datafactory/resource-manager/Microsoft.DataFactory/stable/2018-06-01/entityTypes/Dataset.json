@@ -23,6 +23,10 @@
           "type": "object",
           "description": "Columns that define the structure of the dataset. Type: array (or Expression with resultType array), itemType: DatasetDataElement."
         },
+        "schema": {
+          "type": "object",
+          "description": "Columns that define the physical type schema of the dataset. Type: array (or Expression with resultType array), itemType: DatasetSchemaDataElement."
+        },
         "linkedServiceName": {
           "description": "Linked service reference.",
           "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
@@ -69,6 +73,23 @@
           "type": "object",
           "description": "Type of the column. Type: string (or Expression with resultType string)."
         }
+      }
+    },
+    "DatasetSchemaDataElement": {
+      "description": "Columns that define the physical type schema of the dataset.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "Name of the schema column. Type: string (or Expression with resultType string)."
+        },
+        "type": {
+          "type": "object",
+          "description": "Type of the schema column. Type: string (or Expression with resultType string)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "DatasetStorageFormat": {
