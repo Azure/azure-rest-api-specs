@@ -531,6 +531,219 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/agentPools": {
+      "get": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "AgentPools_List",
+        "summary": "Gets a list of agent pools in the specified managed cluster.",
+        "description": "Gets a list of agent pools in the specified managed cluster. The operation returns properties of each agent pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Agent Pools by Managed Cluster": {
+            "$ref": "./examples/AgentPoolsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/agentPools/{agentPoolName}": {
+      "get": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "AgentPools_Get",
+        "summary": "Gets the agent pool.",
+        "description": "Gets the details of the agent pool by managed cluster and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Agent Pool": {
+            "$ref": "./examples/AgentPoolsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "AgentPools_CreateOrUpdate",
+        "summary": "Creates or updates an agent pool.",
+        "description": "Creates or updates an agent pool in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent pool."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            },
+            "description": "Parameters supplied to the Create or Update an agent pool operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create/Update Agent Pool": {
+            "$ref": "./examples/AgentPoolsCreate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "AgentPools_Delete",
+        "summary": "Deletes an agent pool.",
+        "description": "Deletes the agent pool in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed cluster resource."
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent pool."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Agent Pool": {
+            "$ref": "./examples/AgentPoolsDelete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile": {
       "post": {
         "tags": [
@@ -752,6 +965,27 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "Reference to another subresource.",
       "x-ms-azure-resource": true
     },
     "TagsObject": {
@@ -1043,12 +1277,8 @@
       ],
       "description": "Profile for the container service master."
     },
-    "ManagedClusterAgentPoolProfile": {
+    "ManagedClusterAgentPoolProfileProperties": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
-        },
         "count": {
           "type": "integer",
           "format": "int32",
@@ -1098,9 +1328,27 @@
         }
       },
       "required": [
-        "name",
         "vmSize",
         "count"
+      ],
+      "description": "Properties for the container service agent pool profile."
+    },
+    "ManagedClusterAgentPoolProfile": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedClusterAgentPoolProfileProperties"
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
+            }
+          }
+        }
+      ],
+      "required": [
+        "name"
       ],
       "description": "Profile for the container service agent pool."
     },
@@ -1115,6 +1363,61 @@
         "modelAsString": true
       },
       "description": "AgentPoolType represents types of an agent pool"
+    },
+    "AgentPoolListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentPool"
+          },
+          "description": "The list of agent pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of agent pool results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Agent Pools operation."
+    },
+    "AgentPool": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        },
+        {
+          "properties": {
+            "properties": {
+              "description": "Properties of a agent pool.",
+              "$ref": "#/definitions/AgentPoolProperties",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ],
+      "description": "Agent Pool."
+    },
+    "AgentPoolProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedClusterAgentPoolProfileProperties"
+        },
+        {
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The current deployment or provisioning state, which only appears in the response."
+            },
+            "kubernetesVersion": {
+              "type": "string",
+              "description": "Version of Kubernetes specified when creating the managed cluster."
+            }
+          }
+        }
+      ],
+      "description": "Agent Pool properties."
     },
     "ContainerServiceWindowsProfile": {
       "properties": {
