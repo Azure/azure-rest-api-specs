@@ -65,7 +65,7 @@ input-file:
 ``` yaml
 directive:
   - suppress: UniqueResourcePaths
-    from: guestconfiguration.json
+    from: guestConfiguration.json
     where: $.paths
     reason: 'Microsoft.GuestConfiguration is a proxy resource provider under Microsoft. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/540'
   - suppress: OperationsAPIImplementation
@@ -75,21 +75,21 @@ directive:
   - suppress: OperationsAPIImplementation
     from: guestconfiguration_NotImplemented.json
     where: $.paths
-    reason: |-
+    reason: '|-
       - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
-      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
+      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 '
   - suppress: UniqueResourcePaths
     from: guestconfiguration_NotImplemented.json
     where: $.paths
-    reason: |-
+    reason: '|-
       - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
-      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
+      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 '
   - suppress: TrackedResourceListByImmediateParent
     from: guestconfiguration_NotImplemented.json
     where: $.definitions
-    reason: |-
+    reason: '|-
       - APIs are approved here https://github.com/Azure/azure-rest-api-specs-pr/pull/540 
-      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 
+      - They were suppressed https://github.com/Azure/azure-rest-api-specs-pr/pull/559 '
 ```
 
 ---
