@@ -1325,6 +1325,15 @@
         "type": {
           "$ref": "#/definitions/AgentPoolType",
           "description": "AgentPoolType represents types of an agent pool"
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "Version of Kubernetes specified when creating the managed cluster."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response."
         }
       },
       "required": [
@@ -1389,35 +1398,14 @@
         {
           "properties": {
             "properties": {
-              "description": "Properties of a agent pool.",
-              "$ref": "#/definitions/AgentPoolProperties",
+              "description": "Properties of an agent pool.",
+              "$ref": "#/definitions/ManagedClusterAgentPoolProfileProperties",
               "x-ms-client-flatten": true
             }
           }
         }
       ],
       "description": "Agent Pool."
-    },
-    "AgentPoolProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedClusterAgentPoolProfileProperties"
-        },
-        {
-          "properties": {
-            "provisioningState": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The current deployment or provisioning state, which only appears in the response."
-            },
-            "kubernetesVersion": {
-              "type": "string",
-              "description": "Version of Kubernetes specified when creating the managed cluster."
-            }
-          }
-        }
-      ],
-      "description": "Agent Pool properties."
     },
     "ContainerServiceWindowsProfile": {
       "properties": {
