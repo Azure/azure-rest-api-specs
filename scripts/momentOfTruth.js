@@ -66,6 +66,7 @@ async function getLinterResult(swaggerPath) {
 
     let resultString = stdout + stderr;
     if (resultString.indexOf('{') !== -1) {
+        resultString = resultString.replace(/Processing batch task - {.*} \.\n/g, "");
         resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
         //console.log('>>>>>> Trimmed Result...');
         //console.log(resultString);
