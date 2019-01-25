@@ -241,6 +241,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "No Content"
           },
@@ -405,26 +408,31 @@
         },
         "queryFrequency": {
           "type": "string",
-          "pattern": "^(\\d+\\.)?\\d{2}\\:\\d{2}\\:\\d{2}$",
-          "description": "TimeSpan format represents the frequncy for this alert rule to run."
+          "format": "duration",
+          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run."
         },
         "queryPeriod": {
           "type": "string",
-          "pattern": "^(\\d+\\.)?\\d{2}\\:\\d{2}\\:\\d{2}$",
-          "description": "TimeSpan format represents the period that this alert rule looks at."
+          "format": "duration",
+          "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
         },
         "alertTriggerOperator": {
           "type": "string",
-          "enum": ["gt", "lt", "ne", "eq"],
+          "enum": [
+            "GreaterThan",
+            "LessThan",
+            "Equal",
+            "NotEqual"
+          ],
           "x-ms-enum": {
             "name": "AlertTriggerOperator",
             "modelAsString": false
           },
-          "description": "The operation against the threahold that triggers alert rule."
+          "description": "The operation against the threshold that triggers alert rule."
         },
         "alertTriggerThreshold": {
           "type": "integer",
-          "description": "The threahold triggers this alert rule."
+          "description": "The threshold triggers this alert rule."
         },
         "suppressionEnabled": {
           "type": "boolean",
@@ -432,8 +440,8 @@
         },
         "suppressionDuration": {
           "type": "string",
-          "pattern": "^(\\d+\\.)?\\d{2}\\:\\d{2}\\:\\d{2}$",
-          "description": "TimeSpan format represents the suppression to wait since last time this alert rule been triggered."
+          "format": "duration",
+          "description": "The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered."
         },
         "lastModifiedUtc": {
           "type": "string",
@@ -535,7 +543,7 @@
       "x-ms-parameter-location": "method"
     },
     "ScheduledAlertRule": {
-      "name": "alertScheduledtRule",
+      "name": "scheduledAlertRule",
       "in": "body",
       "description": "The alert rule",
       "required": true,
