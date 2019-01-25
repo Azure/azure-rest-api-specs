@@ -34,6 +34,48 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identity": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "User_GetIdentity",
+        "description": "Returns calling user identity information.",
+        "x-ms-examples": {
+          "ApiManagementListUsers": {
+            "$ref": "./examples/ApiManagementGetUserIdentity.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current user APIM id.",
+            "schema": {
+              "$ref": "#/definitions/CurrentUserIdentity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users": {
       "get": {
         "tags": [
@@ -942,6 +984,14 @@
         }
       ],
       "description": "Parameters supplied to the Update User operation."
+    },
+    "CurrentUserIdentity": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API Management service user id."
+        }
+      }
     }
   },
   "parameters": {

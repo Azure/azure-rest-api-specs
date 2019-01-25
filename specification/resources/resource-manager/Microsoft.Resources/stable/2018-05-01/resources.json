@@ -793,7 +793,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns informatin about the resource provider.",
+            "description": "OK - Returns information about the resource provider.",
             "schema": {
               "$ref": "#/definitions/Provider"
             }
@@ -1014,6 +1014,9 @@
         "tags": [
           "ResourceGroups"
         ],
+        "x-ms-examples": {
+          "Create or update a resource group": { "$ref": "./examples/CreateResourceGroup.json" }
+        },
         "operationId": "ResourceGroups_CreateOrUpdate",
         "description": "Creates or updates a resource group.",
         "parameters": [
@@ -2422,7 +2425,7 @@
       "required": [
         "uri"
       ],
-      "description": "Entity representing the reference to the deployment paramaters."
+      "description": "Entity representing the reference to the deployment parameters."
     },
     "DeploymentProperties": {
       "properties": {
@@ -2687,7 +2690,7 @@
         },
         "outputs": {
           "type": "object",
-          "description": "Key/value pairs that represent deploymentoutput."
+          "description": "Key/value pairs that represent deployment output."
         },
         "providers": {
           "type": "array",
@@ -2813,6 +2816,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The name of the deployment."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the deployment."
         },
         "location": {
           "type": "string",
@@ -3026,6 +3034,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The name of the resource group."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource group."
         },
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties"

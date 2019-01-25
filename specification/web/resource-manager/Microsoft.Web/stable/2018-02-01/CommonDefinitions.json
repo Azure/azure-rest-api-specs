@@ -686,6 +686,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "supportCredentials": {
+          "description": "Gets or sets whether CORS requests with credentials are allowed. See \nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials\nfor more details.",
+          "type": "boolean"
         }
       }
     },
@@ -760,7 +764,7 @@
       "type": "object",
       "properties": {
         "unit": {
-          "description": "Units of measurement for the quota resourse.",
+          "description": "Units of measurement for the quota resource.",
           "type": "string"
         },
         "nextResetTime": {
@@ -907,6 +911,11 @@
             },
             "kind": {
               "description": "Kind of site that was deleted",
+              "type": "string",
+              "readOnly": true
+            },
+            "geoRegionName": {
+              "description": "Geo Region of the deleted site",
               "type": "string",
               "readOnly": true
             }
@@ -1562,12 +1571,12 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
           "format": "int32",
-          "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
+          "description": "Specifies interval in minutes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
@@ -2331,7 +2340,7 @@
         },
         "experiments": {
           "$ref": "#/definitions/Experiments",
-          "description": "This is work around for polymophic types."
+          "description": "This is work around for polymorphic types."
         },
         "limits": {
           "$ref": "#/definitions/SiteLimits",
@@ -2389,11 +2398,22 @@
           "type": "integer"
         },
         "ipSecurityRestrictions": {
-          "description": "IP security restrictions.",
+          "description": "IP security restrictions for main.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpSecurityRestriction"
           }
+        },
+        "scmIpSecurityRestrictions": {
+          "description": "IP security restrictions for scm.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
+        },
+        "scmIpSecurityRestrictionsUseMain": {
+          "description": "IP security restrictions for scm to use main.",
+          "type": "boolean"
         },
         "http20Enabled": {
           "description": "Http20Enabled: configures a web site to allow clients to connect over http2.0",
@@ -2549,7 +2569,7 @@
       }
     },
     "SlotSwapStatus": {
-      "description": "The status of the last successfull slot swap operation.",
+      "description": "The status of the last successful slot swap operation.",
       "type": "object",
       "properties": {
         "timestampUtc": {
@@ -2717,7 +2737,7 @@
       }
     },
     "User": {
-      "description": "User crendentials used for publishing activity.",
+      "description": "User credentials used for publishing activity.",
       "type": "object",
       "allOf": [
         {
@@ -2924,6 +2944,10 @@
             "dnsServers": {
               "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
               "type": "string"
+            },
+            "isSwift": {
+              "description": "Flag that is used to denote if this is VNET injection",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true

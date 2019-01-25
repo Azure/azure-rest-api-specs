@@ -32,7 +32,7 @@ tag: package-2018-09-01-preview
 
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required by RP to manage those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed. The inlined objects should be part of the application properties and not a seperate proxy resource.
+    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required by RP to manage those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed. The inlined objects should be part of the application properties and not a separate proxy resource.
   - suppress: EnumInsteadOfBoolean
     reason: The `readOnly` boolean schema is part of Azure Resource Manager common schema.
   - suppress: TrackedResourcePatchOperation
