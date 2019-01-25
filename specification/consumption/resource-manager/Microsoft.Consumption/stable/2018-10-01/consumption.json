@@ -2836,6 +2836,201 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/reservationDetails": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsUsageDetails_ListByBillingProfile",
+        "description": "List the reserved instance usage details based on billingAccountId and billingProfileId within the provided date range.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/ReservationUsageDetailsListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/reservationSummaries": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsUsageSummaries_ListByBillingProfile",
+        "description": "List the reserved instance usage summary for daily or monthly grain based on billingAccountId and billingProfileId within the provided date range.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationSummariesDaily": {
+            "$ref": "./examples/ReservationUsageSummaryListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/sharedReservationRecommendations": {
+      "get": {
+          "tags": [
+              "ReservationRecommendations"
+          ],
+          "operationId": "ReservationRecommendationsShared_ListByBillingProfile",
+          "description": "List of recommendations for purchasing reserved instances calculated based on past usage for the provided billingAccountId and billingProfileId.",
+          "externalDocs": {
+              "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+          },
+          "x-ms-examples": {
+              "ReservationRecommendationsSharedListByBillingProfile": {
+                  "$ref": "./examples/ReservationRecommendationsSharedListByBillingProfile.json"
+              }
+          },
+          "parameters": [
+              {
+                "$ref": "#/parameters/billingAccountIdParameter"
+              },
+              {
+                "$ref": "#/parameters/billingProfileIdParameter"
+              },
+              {
+                "$ref": "#/parameters/apiVersionParameter"
+              },
+              {
+                "$ref": "#/parameters/lookBackPeriodParameter"
+              }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK. The request has succeeded.",
+                  "schema": {
+                      "$ref": "#/definitions/ReservationRecommendationsSharedListResult"
+                  }
+              },
+              "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                  }
+              }
+          }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/singleReservationRecommendations": {
+      "get": {
+          "tags": [
+              "ReservationRecommendations"
+          ],
+          "operationId": "ReservationRecommendationsSingle_ListByBillingProfile",
+          "description": "List of recommendations calculated based on past usage for the provided billingAccountId and billingProfileId for each subscription within it.",
+          "externalDocs": {
+              "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+          },
+          "x-ms-examples": {
+              "ReservationRecommendationsSingleListByBillingProfile": {
+                  "$ref": "./examples/ReservationRecommendationsSingleListByBillingProfile.json"
+              }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/billingAccountIdParameter"
+            },
+            {
+              "$ref": "#/parameters/billingProfileIdParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/lookBackPeriodParameter"
+            }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK. The request has succeeded.",
+                  "schema": {
+                      "$ref": "#/definitions/ReservationRecommendationsSingleListResult"
+                  }
+              },
+              "default": {
+                  "description": "Error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                  }
+              }
+          }
+      }
     }
   },
   "definitions": {
@@ -4426,6 +4621,169 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "Amount": {
+      "description": "Denotes an instance of product charges.",
+      "properties": {
+        "currency": {
+          "description": "The currency for the amount value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Tha actual amount value.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationsSharedListResult": {
+      "description": "Result of reservation recommendations listing by billing account and billing profile.",
+      "properties": {
+        "value": {
+          "description": "The list of reservation recommendations by billing account and billing profile.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReservationRecommendationsShared"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationsSingleListResult": {
+      "description": "Result of reservation recommendations listing by billing account and billing profile for each subscription.",
+      "properties": {
+        "value": {
+            "description": "The list of reservation recommendations by billing account and billing profile and subscription.",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/definitions/ReservationRecommendationsSingle"
+            }
+        },
+        "nextLink": {
+            "description": "The link (url) to the next page of results.",
+            "type": "string",
+            "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationsShared": {
+      "description": "Reservation Recommendation for shared scope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationRecommendationPropertiesWithAmount",
+          "title": "Reservation recommendation properties"
+        }
+      }
+    },
+    "ReservationRecommendationsSingle": {
+      "description": "Reservation Recommendation for single subscription scope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationRecommendationSingleProperties",
+          "title": "Reservation recommendation properties"
+        }
+      }
+    },
+    "ReservationRecommendationSingleProperties": {
+      "description": "The properties of the reservation recommendation for single subscription.",
+      "type": "object",
+      "allOf": [
+        {
+          "properties": {
+            "subscriptionId": {
+              "description": "Subscription Id.",
+              "type": "string",
+              "format": "uuid",
+              "readOnly": true
+            }
+          }
+        }, 
+        {
+          "$ref": "#/definitions/ReservationRecommendationPropertiesWithAmount"
+        }
+      ]
+    },
+    "ReservationRecommendationPropertiesWithAmount": {
+      "description": "The properties of the reservation recommendation.",
+      "properties": {
+        "lookBackPeriod": {
+          "description": "The number of days of usage to look back for recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id (GUID)",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "Sku name of the reserved instance resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "region": {
+          "description": "Region of the reserved instance resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "RI recommendations in one or three year terms.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costWithNoRI": {
+          "description": "The total amount of cost without reserved instances.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "recommendedQuantity": {
+          "description": "Recommended quality for reserved instances.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "totalCostWithRI": {
+          "description": "The total amount of cost with reserved instances.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "netSavings": {
+          "description": "Total estimated savings with reserved instances.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "firstUsageDate": {
+          "description": "The usage date for looking back.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -4440,6 +4798,14 @@
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "BillingProfile ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -4535,13 +4901,36 @@
         ]
       }
     },
-	"managementGroupIdParameter": {
+    "managementGroupIdParameter": {
       "name": "managementGroupId",
       "in": "path",
       "description": "Azure Management Group ID.",
       "required": true,
       "type": "string",
-	  "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
+    },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "description": "The start of the date time range."
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "description": "The start of the date time range."
+    },
+    "lookBackPeriodParameter": {
+      "name": "lookBackPeriod",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The number of days of usage data to look back into."
     }
   }
 }
