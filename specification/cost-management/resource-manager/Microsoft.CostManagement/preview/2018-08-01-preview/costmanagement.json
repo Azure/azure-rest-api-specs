@@ -1865,8 +1865,8 @@
         "tags": [
           "Alerts"
         ],
-        "operationId": "Alerts_ListByEnrollment",
-        "description": "List all alerts for an enrollment.",
+        "operationId": "Alerts_ListByBillingAccount",
+        "description": "List all alerts for a billing account.",
         "x-ms-examples": {
           "Alert_List": {
             "$ref": "./examples/AlertList.json"
@@ -1878,6 +1878,136 @@
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N alerts.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_ListByBillingProfile",
+        "description": "List all alerts for a billing profile.",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N alerts.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/providers/Microsoft.CostManagement/alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_ListByInvoiceSection",
+        "description": "List all alerts for an invoice section.",
+        "x-ms-examples": {
+          "Alert_List": {
+            "$ref": "./examples/AlertList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
           },
           {
             "name": "$filter",
@@ -2206,8 +2336,8 @@
         "tags": [
           "Alerts"
         ],
-        "operationId": "Alerts_GetByEnrollment",
-        "description": "Gets the alert for an enrollment by alert ID.",
+        "operationId": "Alerts_GetByBillingAccount",
+        "description": "Gets the alert for a billing account by alert ID.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -2222,6 +2352,96 @@
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_GetByBillingProfile",
+        "description": "Gets the alert for a billing profile by alert ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "Alert": {
+            "$ref": "./examples/Alert.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_GetByInvoiceSection",
+        "description": "Gets the alert for an invoice section by alert ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "Alert": {
+            "$ref": "./examples/Alert.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionIdParameter"
           },
           {
             "$ref": "#/parameters/alertIdParameter"
@@ -3867,6 +4087,22 @@
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "BillingProfile ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceSectionIdParameter": {
+      "name": "invoiceSectionId",
+      "in": "path",
+      "description": "InvoiceSection ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
