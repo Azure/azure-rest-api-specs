@@ -215,7 +215,7 @@
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously."
           },
           "204": {
-            "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the service metadata in the service and the status of the delete operation is set to a completed state."
+            "description": "The resource does not exist."
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -467,9 +467,9 @@
             "modelAsString": true
           }
         },
-        "accessControlSettings": {
-          "$ref": "#/definitions/ServiceAccessControlSettingsInfo",
-          "description": "The access control settings of the service instance."
+        "accessPolicies": {
+          "$ref": "#/definitions/ServiceAccessPoliciesInfo",
+          "description": "The access policies of the service instance."
         },
         "cosmosDbSettings": {
           "$ref": "#/definitions/ServiceCosmosDbSettingsInfo",
@@ -477,28 +477,26 @@
         }
       },
       "required": [
-        "accessControlSettings"
+        "accessPolicies"
       ]
     },
-    "ServiceAccessControlSettingsInfo": {
-      "description": "The access control settings of the service instance.",
-      "type": "object",
-      "properties": {
-        "authority": {
-          "description": "Url to the authentication authority.",
+    "ServiceAccessPoliciesInfo": {
+      "description": "The access policies of the service instance.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceAccessPolicyEntry"
+      }
+    },
+    "ServiceAccessPolicyEntry": {
+      "description": "An access policy entry.",
+      "properties":{
+        "objectId": {
+          "description": "An object ID that is allowed access to the FHIR service.",
           "type": "string"
-        },
-        "allowedOids": {
-          "description": "List of object IDs that are allowed to access the FHIR service.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       },
       "required": [
-        "authority",
-        "allowedOids"
+        "objectId"
       ]
     },
     "ServiceCosmosDbSettingsInfo": {
