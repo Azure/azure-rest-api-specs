@@ -59,7 +59,7 @@
       }
     }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/scheduledAlertRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules": {
       "get": {
         "x-ms-examples": {
           "Get all scheduled alert rules.": {
@@ -67,10 +67,10 @@
           }
         },
         "tags": [
-          "Scheduled Alert Rules"
+          "Alert Rules"
         ],
-        "description": "Gets all scheduled alert rules.",
-        "operationId": "ScheduledAlertRules_List",
+        "description": "Gets all alert rules.",
+        "operationId": "AlertRules_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -92,7 +92,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ScheduledAlertRulesList"
+              "$ref": "#/definitions/AlertRulesList"
             }
           },
           "default": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/scheduledAlertRules/{ruleId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
       "get": {
         "x-ms-examples": {
           "Get a scheduled alert rule.": {
@@ -115,10 +115,10 @@
           }
         },
         "tags": [
-          "Scheduled Alert Rules"
+          "Alert Rules"
         ],
-        "description": "Gets a scheduled alert rule.",
-        "operationId": "ScheduledAlertRules_Get",
+        "description": "Gets a alert rule.",
+        "operationId": "AlertRules_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -143,7 +143,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ScheduledAlertRule"
+              "$ref": "#/definitions/AlertRule"
             }
           },
           "default": {
@@ -161,10 +161,10 @@
           }
         },
         "tags": [
-          "Scheduled Alert Rules"
+          "Alert Rules"
         ],
         "description": "Creates or updates the alert rule.",
-        "operationId": "ScheduledAlertRules_Create",
+        "operationId": "AlertRules_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -185,20 +185,20 @@
             "$ref": "#/parameters/RuleId"
           },
           {
-            "$ref": "#/parameters/ScheduledAlertRule"
+            "$ref": "#/parameters/AlertRule"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ScheduledAlertRule"
+              "$ref": "#/definitions/AlertRule"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ScheduledAlertRule"
+              "$ref": "#/definitions/AlertRule"
             }
           },
           "default": {
@@ -216,10 +216,10 @@
           }
         },
         "tags": [
-          "Scheduled Alert Rules"
+          "Alert Rules"
         ],
         "description": "Delete the alert rule.",
-        "operationId": "ScheduledAlertRules_Delete",
+        "operationId": "AlertRules_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -337,19 +337,19 @@
         }
       }
     },
-    "ScheduledAlertRulesList":{
-      "description": "List all the scheduled alert rules.",
+    "AlertRulesList":{
+      "description": "List all the alert rules.",
       "properties": {
         "nextLink": {
           "readOnly": true,
-          "description": "URL to fetch the next set of scheduled alert rules.",
+          "description": "URL to fetch the next set of alert rules.",
           "type": "string"
         },
         "value": {
-          "description": "Array of scheduled alert rules.",
+          "description": "Array of alert rules.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScheduledAlertRule"
+            "$ref": "#/definitions/AlertRule"
           }
         }
       },
@@ -357,25 +357,62 @@
         "value"
       ]
     },
-    "ScheduledAlertRule": {
+    "AlertRule": {
       "type": "object",
       "description": "Alert rule.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        },
+        {
+            "$ref": "#/definitions/AlertRuleKind"
         }
       ],
       "properties": {
         "etag": {
           "type": "string",
           "description": "Etag of the alert rule."
-        },
-        "properties": {
-            "x-ms-client-flatten": true,
-            "description": "Alert rule properties",
-            "$ref": "#/definitions/ScheduledAlertRuleProperties"
         }
       }
+    },
+    "AlertRuleKind": {
+        "type": "object",
+        "description": "Describes an Azure resource with kind.",
+        "properties": {
+            "kind": {
+                "type": "string",
+                "description": "The kind of the alert rule",
+                "enum": [
+                    "Scheduled"
+                ],
+                "x-ms-enum": {
+                    "name": "AlertRuleKind",
+                    "modelAsString": true,
+                    "values": [
+                        {
+                            "value": "Scheduled"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ScheduledAlertRule": {
+        "x-ms-discriminator-value": "Scheduled",
+        "type": "object",
+        "description": "Represents scheduled alert rule.",
+        "allOf": [
+            {
+                "$ref": "#/definitions/AlertRule"
+            }
+        ],
+        "properties": {
+            "properties": {
+                "x-ms-client-flatten": true,
+                "description": "Scheduled alert rule properties",
+                "$ref": "#/definitions/ScheduledAlertRuleProperties"
+            }
+        }
     },
     "ScheduledAlertRuleProperties": {
       "type": "object",
@@ -542,13 +579,13 @@
       "description": "Alert rule ID",
       "x-ms-parameter-location": "method"
     },
-    "ScheduledAlertRule": {
-      "name": "scheduledAlertRule",
+    "AlertRule": {
+      "name": "AlertRule",
       "in": "body",
       "description": "The alert rule",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ScheduledAlertRule"
+        "$ref": "#/definitions/AlertRule"
       },
       "x-ms-parameter-location": "method"
     }
