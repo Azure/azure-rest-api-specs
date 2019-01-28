@@ -321,7 +321,7 @@
         "tags": [
           "ManagedDatabaseSensitivityLabels"
         ],
-        "description": "Enables sensitivity recommendations on a given column",
+        "description": "Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)",
         "operationId": "ManagedDatabaseSensitivityLabels_EnableRecommendation",
         "parameters": [
           {
@@ -447,9 +447,9 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "showDisabledRecommendations",
+            "name": "includeDisabledRecommendations",
             "in": "query",
-            "description": "Specifies whether to return disabled recommendations or not.",
+            "description": "Specifies whether to include disabled recommendations or not.",
             "required": false,
             "type": "boolean"
           },
@@ -512,7 +512,7 @@
           "type": "string"
         },
         "isDisabled": {
-          "description": "Applicable for recommended sensitivity label source only. Specifies whether the recommended sensitivity label is disabled or not.",
+          "description": "Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.",
           "type": "boolean",
           "readOnly": true
         }
