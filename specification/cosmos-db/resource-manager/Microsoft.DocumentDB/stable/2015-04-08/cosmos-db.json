@@ -337,8 +337,131 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/offlineRegion": {
+      "post": {
+        "operationId": "DatabaseAccounts_OfflineRegion",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountOfflineRegion": { "$ref": "./examples/CosmosDBDatabaseAccountOfflineRegion.json" }
+        },
+        "description": "Offline the specified region for the specified Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionParameterForOffline",
+            "in": "body",
+            "required": true,
+            "description": "Cosmos DB region to offline for the database account.",
+            "schema": {
+              "$ref": "#/definitions/RegionForOnlineOffline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The offline region operation is completed successfully."
+          },
+          "202": {
+            "description": "Accepted. The offline region operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/onlineRegion": {
+      "post": {
+        "operationId": "DatabaseAccounts_OnlineRegion",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountOnlineRegion": { "$ref": "./examples/CosmosDBDatabaseAccountOnlineRegion.json" }
+        },
+        "description": "Online the specified region for the specified Azure Cosmos DB database account.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionParameterForOnline",
+            "in": "body",
+            "required": true,
+            "description": "Cosmos DB region to online for the database account.",
+            "schema": {
+              "$ref": "#/definitions/RegionForOnlineOffline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The online region operation is completed successfully."
+          },
+          "202": {
+            "description": "Accepted. The online region operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
       "get": {
+        "operationId": "DatabaseAccounts_GetReadOnlyKeys",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }
+        },
+        "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+            }
+          }
+        }
+      },
+      "post": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
         "x-ms-examples": {
           "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }
@@ -467,7 +590,7 @@
         "operationId": "DatabaseAccounts_ListMetrics",
         "x-ms-examples": {
           "CosmosDBDatabaseAccountGetMetrics": { "$ref": "./examples/CosmosDBDatabaseAccountGetMetrics.json" }
-        }, 
+        },
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -1006,7 +1129,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages": {
@@ -1046,7 +1169,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages": {
@@ -1089,7 +1212,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages": {
@@ -1141,7 +1264,7 @@
         "x-ms-examples": {
           "CosmosDBDatabaseGetMetricDefinitions": { "$ref": "./examples/CosmosDBDatabaseGetMetricDefinitions.json" }
         },
-        "description": "Retrieves metric defintions for the given database.",
+        "description": "Retrieves metric definitions for the given database.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1169,7 +1292,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
@@ -1178,7 +1301,7 @@
         "x-ms-examples": {
           "CosmosDBCollectionGetMetricDefinitions": { "$ref": "./examples/CosmosDBCollectionGetMetricDefinitions.json" }
         },
-        "description": "Retrieves metric defintions for the given collection.",
+        "description": "Retrieves metric definitions for the given collection.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1209,7 +1332,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions": {
@@ -1218,7 +1341,7 @@
         "x-ms-examples": {
           "CosmosDBDatabaseAccountGetMetricDefinitions": { "$ref": "./examples/CosmosDBDatabaseAccountGetMetricDefinitions.json" }
         },
-        "description": "Retrieves metric defintions for the given database account.",
+        "description": "Retrieves metric definitions for the given database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1243,7 +1366,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     }
   },
@@ -1260,6 +1383,19 @@
         }
       },
       "description": "The List operation response, that contains the database accounts and their properties."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
     },
     "FailoverPolicies": {
       "properties": {
@@ -1296,6 +1432,18 @@
           "description": "The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists."
         }
       }
+    },
+    "RegionForOnlineOffline": {
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Cosmos DB region, with spaces between words and each word capitalized."
+        }
+      },
+      "required": [
+        "region"
+      ],
+      "description": "Cosmos DB region to online or offline."
     },
     "Location": {
       "description": "A region in which the Azure Cosmos DB database account is deployed.",
@@ -1446,6 +1594,10 @@
           "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
           "$ref": "#/definitions/IPRangeFilter"
         },
+        "isVirtualNetworkFilterEnabled": {
+          "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
+          "type": "boolean"
+        },
         "enableAutomaticFailover": {
           "description": "Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.",
           "type": "boolean"
@@ -1484,6 +1636,17 @@
           "items": {
             "$ref": "#/definitions/FailoverPolicy"
           }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "List of Virtual Network ACL rules configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
         }
       }
     },
@@ -1522,6 +1685,10 @@
           "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
           "$ref": "#/definitions/IPRangeFilter"
         },
+        "isVirtualNetworkFilterEnabled": {
+          "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
+          "type": "boolean"
+        },
         "enableAutomaticFailover": {
           "description": "Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.",
           "type": "boolean"
@@ -1532,6 +1699,17 @@
           "items": {
             "$ref": "#/definitions/Capability"
           }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "List of Virtual Network ACL rules configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
         }
       },
       "required": [
@@ -1705,6 +1883,20 @@
       "type": "string",
       "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces."
     },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "description": "Virtual Network ACL Rule object",
+      "properties": {
+        "id":{
+          "type": "string",
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}."
+        },
+        "ignoreMissingVNetServiceEndpoint":{
+          "type": "boolean",
+          "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
+        }
+      }
+    },
     "Operation": {
       "description": "REST API operation",
       "type": "object",
@@ -1817,7 +2009,7 @@
         "partitionId": {
           "readOnly": true,
           "type": "string",
-          "description": "The parition id (GUID identifier) of the usages."
+          "description": "The partition id (GUID identifier) of the usages."
         },
         "partitionKeyRangeId": {
           "readOnly": true,
@@ -2083,13 +2275,13 @@
           "type": "number",
           "format": "double",
           "description": "The 50th percentile value for the metric."
-        }, 
+        },
         "P75": {
           "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "The 75th percentile value for the metric."
-        }, 
+        },
         "P90": {
           "readOnly": true,
           "type": "number",
@@ -2101,7 +2293,7 @@
           "type": "number",
           "format": "double",
           "description": "The 95th percentile value for the metric."
-        }, 
+        },
         "P99": {
           "readOnly": true,
           "type": "number",
@@ -2134,7 +2326,7 @@
         "partitionId": {
           "readOnly": true,
           "type": "string",
-          "description": "The parition id (GUID identifier) of the metric values."
+          "description": "The partition id (GUID identifier) of the metric values."
         },
         "partitionKeyRangeId": {
           "readOnly": true,

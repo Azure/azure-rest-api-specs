@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "resourceGroupName": "demo_resource_group",
+    "workspaceName": "demo_workspace",
+    "clusterName": "demo_cluster",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/clusters/demo_cluster",
+        "name": "demo_cluster",
+        "type": "Microsoft.BatchAI/Clusters",
+        "properties": {
+          "provisioningState": "succeeded",
+          "allocationState": "resizing",
+          "creationTime": "2017-09-27T21:50:02.377Z",
+          "allocationStateTransitionTime": "2017-09-27T21:50:04.521Z",
+          "provisioningStateTransitionTime": "2017-09-27T21:50:03.828Z",
+          "vmSize": "STANDARD_NC6",
+          "currentNodeCount": 0,
+          "nodeStateCounts": {
+            "runningNodeCount": 0,
+            "idleNodeCount": 0,
+            "unusableNodeCount": 0,
+            "preparingNodeCount": 0,
+            "leavingNodeCount": 0
+          },
+          "vmPriority": "dedicated",
+          "scaleSettings": {
+            "manual": {
+              "targetNodeCount": 1,
+              "nodeDeallocationOption": "requeue"
+            }
+          },
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "publisher": "Canonical",
+              "offer": "UbuntuServer",
+              "sku": "16.04-LTS",
+              "version": "latest"
+            }
+          },
+          "userAccountSettings": {
+            "adminUserName": "admin_user_name"
+          },
+          "nodeSetup": {
+            "mountVolumes": {
+              "azureFileShares": [
+                {
+                  "accountName": "storage_account_name",
+                  "azureFileUrl": "https://storage_account_name.file.core.windows.net/azure_file_share_name",
+                  "credentials": {},
+                  "relativeMountPath": "azfiles",
+                  "fileMode": "0777",
+                  "directoryMode": "0777"
+                }
+              ],
+              "fileServers": [
+                {
+                  "fileServer": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/fileservers/fileservercedd134b"
+                  },
+                  "relativeMountPath": "nfs",
+                  "mountOptions": "rw"
+                }
+              ]
+            }
+          },
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.Network/virtualNetworks/7feb1976-8c31-4f1f-bea2-86cb1839a7bavnet/subnets/Subnet-1"
+          }
+        }
+      }
+    }
+  }
+}

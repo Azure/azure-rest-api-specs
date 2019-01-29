@@ -6,12 +6,18 @@
     "description": "Use this API to manage the IoT hubs in your Azure subscription.",
     "x-ms-code-generation-settings": {
       "header": "MICROSOFT_MIT_NO_VERSION"
-    }  
+    }
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
       "azure_auth": [
@@ -37,7 +43,9 @@
           "Operations"
         ],
         "x-ms-examples": {
-          "Operations_List": { "$ref": "./examples/iothub_operations.json" }
+          "Operations_List": {
+            "$ref": "./examples/iothub_operations.json"
+          }
         },
         "operationId": "Operations_List",
         "description": "Lists all of the available IoT Hub REST API operations.",
@@ -67,12 +75,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get the non-security related metadata of an IoT hub.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the non-security related metadata of an IoT hub",
         "description": "Get the non-security related metadata of an IoT hub.",
         "operationId": "IotHubResource_Get",
         "x-ms-examples": {
-          "IotHubResource_Get": { "$ref": "./examples/iothub_get.json" }
+          "IotHubResource_Get": {
+            "$ref": "./examples/iothub_get.json"
+          }
         },
         "parameters": [
           {
@@ -105,12 +117,16 @@
         "deprecated": false
       },
       "put": {
-        "tags": [ "PUT" ],
+        "tags": [
+          "PUT"
+        ],
         "summary": "Create or update the metadata of an IoT hub.",
         "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub.",
         "operationId": "IotHubResource_CreateOrUpdate",
         "x-ms-examples": {
-          "IotHubResource_CreateOrUpdate": { "$ref": "./examples/iothub_createOrUpdate.json" }
+          "IotHubResource_CreateOrUpdate": {
+            "$ref": "./examples/iothub_createOrUpdate.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -167,68 +183,74 @@
       },
       "patch": {
         "tags": [
-         "PATCH"
+          "PATCH"
         ],
         "summary": "Update an existing IoT Hubs tags.",
         "description": "Update an existing IoT Hub tags. to update other fields use the CreateOrUpdate method",
         "x-ms-long-running-operation": true,
         "operationId": "IotHubResource_Update",
         "x-ms-examples": {
-          "IotHubResource_Update": { "$ref": "./examples/iothub_patch.json" }
+          "IotHubResource_Update": {
+            "$ref": "./examples/iothub_patch.json"
+          }
         },
         "parameters": [
-         {
-          "$ref": "#/parameters/subscriptionId"
-         },
-         {
-          "name": "resourceGroupName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "Resource group identifier."
-         },
-         {
-          "name": "resourceName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "Name of iot hub to update."
-         },
-         {
-          "name": "IotHubTags",
-          "in": "body",
-          "required": true,
-          "description": "Updated tag information to set into the iot hub instance.",
-          "schema": {
-           "$ref": "#/definitions/TagsResource"
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource group identifier."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of iot hub to update."
+          },
+          {
+            "name": "IotHubTags",
+            "in": "body",
+            "required": true,
+            "description": "Updated tag information to set into the iot hub instance.",
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
-         },
-         {
-          "$ref": "#/parameters/api-version"
-         }
         ],
         "responses": {
-         "200": {
-          "description": "Iot Hub was successfully updated",
-          "schema": {
-           "$ref": "#/definitions/IotHubDescription"
+          "200": {
+            "description": "Iot Hub was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
           }
-         }
         },
         "produces": [
-         "application/json"
+          "application/json"
         ],
         "consumes": [
-         "application/json"
+          "application/json"
         ]
-       },
+      },
       "delete": {
-        "tags": [ "DELETE" ],
-        "summary": "Delete an IoT hub.",
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete an IoT hub",
         "description": "Delete an IoT hub.",
         "operationId": "IotHubResource_Delete",
         "x-ms-examples": {
-          "IotHubResource_Delete": { "$ref": "./examples/iothub_delete.json" }
+          "IotHubResource_Delete": {
+            "$ref": "./examples/iothub_delete.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -279,12 +301,16 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/IotHubs": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get all the IoT hubs in a subscription.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get all the IoT hubs in a subscription",
         "description": "Get all the IoT hubs in a subscription.",
         "operationId": "IotHubResource_ListBySubscription",
         "x-ms-examples": {
-          "IotHubResource_ListBySubscription": { "$ref": "./examples/iothub_listbysubscription.json" }
+          "IotHubResource_ListBySubscription": {
+            "$ref": "./examples/iothub_listbysubscription.json"
+          }
         },
         "parameters": [
           {
@@ -316,12 +342,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get all the IoT hubs in a resource group.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get all the IoT hubs in a resource group",
         "description": "Get all the IoT hubs in a resource group.",
         "operationId": "IotHubResource_ListByResourceGroup",
         "x-ms-examples": {
-          "IotHubResource_ListByResourceGroup": { "$ref": "./examples/iothub_listbyrg.json" }
+          "IotHubResource_ListByResourceGroup": {
+            "$ref": "./examples/iothub_listbyrg.json"
+          }
         },
         "parameters": [
           {
@@ -356,12 +386,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get the statistics from an IoT hub.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the statistics from an IoT hub",
         "description": "Get the statistics from an IoT hub.",
         "operationId": "IotHubResource_GetStats",
         "x-ms-examples": {
-          "IotHubResource_GetStats": { "$ref": "./examples/iothub_stats.json" }
+          "IotHubResource_GetStats": {
+            "$ref": "./examples/iothub_stats.json"
+          }
         },
         "parameters": [
           {
@@ -396,12 +430,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/skus": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get the list of valid SKUs for an IoT hub.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the list of valid SKUs for an IoT hub",
         "description": "Get the list of valid SKUs for an IoT hub.",
         "operationId": "IotHubResource_GetValidSkus",
         "x-ms-examples": {
-          "IotHubResource_GetValidSkus": { "$ref": "./examples/iothub_getskus.json" }
+          "IotHubResource_GetValidSkus": {
+            "$ref": "./examples/iothub_getskus.json"
+          }
         },
         "parameters": [
           {
@@ -439,12 +477,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub",
         "description": "Get a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.",
         "operationId": "IotHubResource_ListEventHubConsumerGroups",
         "x-ms-examples": {
-          "IotHubResource_ListEventHubConsumerGroups": { "$ref": "./examples/iothub_listehgroups.json" }
+          "IotHubResource_ListEventHubConsumerGroups": {
+            "$ref": "./examples/iothub_listehgroups.json"
+          }
         },
         "parameters": [
           {
@@ -469,7 +511,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized list of the consumer groups in the the Event Hub-compatible endpoint in this IoT hub",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized list of the consumer groups in the Event Hub-compatible endpoint in this IoT hub",
             "schema": {
               "$ref": "#/definitions/EventHubConsumerGroupsListResult"
             }
@@ -489,12 +531,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{name}": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub",
         "description": "Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub.",
         "operationId": "IotHubResource_GetEventHubConsumerGroup",
         "x-ms-examples": {
-          "IotHubResource_ListEventHubConsumerGroups": { "$ref": "./examples/iothub_getconsumergroup.json" }
+          "IotHubResource_ListEventHubConsumerGroups": {
+            "$ref": "./examples/iothub_getconsumergroup.json"
+          }
         },
         "parameters": [
           {
@@ -541,12 +587,16 @@
         "deprecated": false
       },
       "put": {
-        "tags": [ "PUT" ],
-        "summary": "Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.",
+        "tags": [
+          "PUT"
+        ],
+        "summary": "Add a consumer group to an Event Hub-compatible endpoint in an IoT hub",
         "description": "Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.",
         "operationId": "IotHubResource_CreateEventHubConsumerGroup",
         "x-ms-examples": {
-          "IotHubResource_CreateEventHubConsumerGroup": { "$ref": "./examples/iothub_createconsumergroup.json" }
+          "IotHubResource_CreateEventHubConsumerGroup": {
+            "$ref": "./examples/iothub_createconsumergroup.json"
+          }
         },
         "parameters": [
           {
@@ -593,12 +643,16 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [ "DELETE" ],
-        "summary": "Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub.",
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub",
         "description": "Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub.",
         "operationId": "IotHubResource_DeleteEventHubConsumerGroup",
         "x-ms-examples": {
-          "IotHubResource_DeleteEventHubConsumerGroup": { "$ref": "./examples/iothub_deleteconsumergroup.json" }
+          "IotHubResource_DeleteEventHubConsumerGroup": {
+            "$ref": "./examples/iothub_deleteconsumergroup.json"
+          }
         },
         "parameters": [
           {
@@ -644,12 +698,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry",
         "description": "Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "operationId": "IotHubResource_ListJobs",
         "x-ms-examples": {
-          "IotHubResource_ListJobs": { "$ref": "./examples/iothub_listjobs.json" }
+          "IotHubResource_ListJobs": {
+            "$ref": "./examples/iothub_listjobs.json"
+          }
         },
         "parameters": [
           {
@@ -687,12 +745,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs/{jobId}": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry",
         "description": "Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "operationId": "IotHubResource_GetJob",
         "x-ms-examples": {
-          "IotHubResource_GetJob": { "$ref": "./examples/iothub_getjob.json" }
+          "IotHubResource_GetJob": {
+            "$ref": "./examples/iothub_getjob.json"
+          }
         },
         "parameters": [
           {
@@ -734,12 +796,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/quotaMetrics": {
       "get": {
-        "tags": [ "GET" ],
-        "summary": "Get the quota metrics for an IoT hub.",
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the quota metrics for an IoT hub",
         "description": "Get the quota metrics for an IoT hub.",
         "operationId": "IotHubResource_GetQuotaMetrics",
         "x-ms-examples": {
-          "IotHubResource_GetQuotaMetrics": { "$ref": "./examples/iothub_quotametrics.json" }
+          "IotHubResource_GetQuotaMetrics": {
+            "$ref": "./examples/iothub_quotametrics.json"
+          }
         },
         "parameters": [
           {
@@ -775,14 +841,75 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/routingEndpointsHealth": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "operationId": "IotHubResource_GetEndpointHealth",
+        "summary": "Get the health for routing endpoints",
+        "description": "Get the health for routing endpoints.",
+        "x-ms-examples": {
+          "IotHubResource_GetEndpointHealth": {
+            "$ref": "./examples/iothub_routingendpointhealth.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iotHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EndpointHealthDataListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkNameAvailability": {
       "post": {
-        "tags": [ "POST" ],
-        "summary": "Check if an IoT hub name is available.",
+        "tags": [
+          "POST"
+        ],
+        "summary": "Check if an IoT hub name is available",
         "description": "Check if an IoT hub name is available.",
         "operationId": "IotHubResource_CheckNameAvailability",
         "x-ms-examples": {
-          "IotHubResource_CheckNameAvailability": { "$ref": "./examples/checkNameAvailability.json" }
+          "IotHubResource_CheckNameAvailability": {
+            "$ref": "./examples/checkNameAvailability.json"
+          }
         },
         "parameters": [
           {
@@ -818,14 +945,194 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/usages": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the number of iot hubs in the subscription",
+        "description": "Get the number of free and paid iot hubs in the subscription",
+        "operationId": "ResourceProviderCommon_GetSubscriptionQuota",
+        "x-ms-examples": {
+          "ResourceProviderCommon_GetSubscriptionQuota": {
+            "$ref": "./examples/iothub_usages.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSubscriptionQuotaListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/routing/routes/$testall": {
+      "post": {
+        "tags": [
+          "POST"
+        ],
+        "operationId": "IotHubResource_TestAllRoutes",
+        "summary": "Test all routes",
+        "description": "Test all routes configured in this Iot Hub",
+        "x-ms-examples": {
+          "IotHubResource_TestAllRoutes": {
+            "$ref": "./examples/iothub_testallroutes.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Input for testing all routes",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestAllRoutesInput"
+            }
+          },
+          {
+            "name": "iotHubName",
+            "description": "IotHub to be tested",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "resource group which Iot Hub belongs to",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestAllRoutesResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/routing/routes/$testnew": {
+      "post": {
+        "tags": [
+          "POST"
+        ],
+        "operationId": "IotHubResource_TestRoute",
+        "summary": "Test the new route",
+        "description": "Test the new route for this Iot Hub",
+        "x-ms-examples": {
+          "IotHubResource_TestRoute": {
+            "$ref": "./examples/iothub_testnewroute.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "description": "Route that needs to be tested",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRouteInput"
+            }
+          },
+          {
+            "name": "iotHubName",
+            "description": "IotHub to be tested",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "resource group which Iot Hub belongs to",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestRouteResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys": {
       "post": {
-        "tags": [ "POST" ],
-        "summary": "Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
+        "tags": [
+          "POST"
+        ],
+        "summary": "Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security",
         "description": "Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "operationId": "IotHubResource_ListKeys",
         "x-ms-examples": {
-          "IotHubResource_ListKeys": { "$ref": "./examples/iothub_listkeys.json" }
+          "IotHubResource_ListKeys": {
+            "$ref": "./examples/iothub_listkeys.json"
+          }
         },
         "parameters": [
           {
@@ -863,12 +1170,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubKeys/{keyName}/listkeys": {
       "post": {
-        "tags": [ "POST" ],
-        "summary": "Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
+        "tags": [
+          "POST"
+        ],
+        "summary": "Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security",
         "description": "Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "operationId": "IotHubResource_GetKeysForKeyName",
         "x-ms-examples": {
-          "IotHubResource_GetKeysForKeyName": { "$ref": "./examples/iothub_getkey.json" }
+          "IotHubResource_GetKeysForKeyName": {
+            "$ref": "./examples/iothub_getkey.json"
+          }
         },
         "parameters": [
           {
@@ -910,12 +1221,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices": {
       "post": {
-        "tags": [ "POST" ],
-        "summary": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
+        "tags": [
+          "POST"
+        ],
+        "summary": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities",
         "description": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "operationId": "IotHubResource_ExportDevices",
         "x-ms-examples": {
-          "IotHubResource_ExportDevices": { "$ref": "./examples/iothub_exportdevices.json" }
+          "IotHubResource_ExportDevices": {
+            "$ref": "./examples/iothub_exportdevices.json"
+          }
         },
         "parameters": [
           {
@@ -959,12 +1274,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices": {
       "post": {
-        "tags": [ "POST" ],
-        "summary": "Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
+        "tags": [
+          "POST"
+        ],
+        "summary": "Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities",
         "description": "Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "operationId": "IotHubResource_ImportDevices",
         "x-ms-examples": {
-          "IotHubResource_ImportDevices": { "$ref": "./examples/iothub_importdevices.json" }
+          "IotHubResource_ImportDevices": {
+            "$ref": "./examples/iothub_importdevices.json"
+          }
         },
         "parameters": [
           {
@@ -1008,12 +1327,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates": {
       "get": {
-        "tags": [ "Certificates" ],
+        "tags": [
+          "Certificates"
+        ],
         "summary": "Get the certificate list.",
         "description": "Returns the list of certificates.",
         "operationId": "Certificates_ListByIotHub",
         "x-ms-examples": {
-          "Certificates_ListByIotHub": { "$ref": "./examples/iothub_listcertificates.json" }
+          "Certificates_ListByIotHub": {
+            "$ref": "./examples/iothub_listcertificates.json"
+          }
         },
         "parameters": [
           {
@@ -1048,12 +1371,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}": {
       "get": {
-        "tags": [ "Certificates" ],
+        "tags": [
+          "Certificates"
+        ],
         "summary": "Get the certificate.",
         "description": "Returns the certificate.",
         "operationId": "Certificates_Get",
         "x-ms-examples": {
-          "Certificates_Get": { "$ref": "./examples/iothub_getcertificate.json" }
+          "Certificates_Get": {
+            "$ref": "./examples/iothub_getcertificate.json"
+          }
         },
         "parameters": [
           {
@@ -1089,12 +1416,16 @@
         "deprecated": false
       },
       "put": {
-        "tags": [ "Certificates" ],
+        "tags": [
+          "Certificates"
+        ],
         "summary": "Upload the certificate to the IoT hub.",
         "description": "Adds new or replaces existing certificate.",
         "operationId": "Certificates_CreateOrUpdate",
         "x-ms-examples": {
-          "Certificates_CreateOrUpdate": { "$ref": "./examples/iothub_certificatescreateorupdate.json" }
+          "Certificates_CreateOrUpdate": {
+            "$ref": "./examples/iothub_certificatescreateorupdate.json"
+          }
         },
         "parameters": [
           {
@@ -1152,12 +1483,16 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [ "Certificates" ],
+        "tags": [
+          "Certificates"
+        ],
         "summary": "Delete an X509 certificate.",
         "description": "Deletes an existing X509 certificate or does nothing if it does not exist.",
         "operationId": "Certificates_Delete",
         "x-ms-examples": {
-          "Certificates_Delete": { "$ref": "./examples/iothub_certificatesdelete.json" }
+          "Certificates_Delete": {
+            "$ref": "./examples/iothub_certificatesdelete.json"
+          }
         },
         "parameters": [
           {
@@ -1186,7 +1521,7 @@
         "responses": {
           "200": {
             "description": "Certificate has been deleted."
-          },          
+          },
           "204": {
             "description": "Certificate does not exist."
           },
@@ -1202,12 +1537,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}/generateVerificationCode": {
       "post": {
-        "tags": [ "Certificates" ],
+        "tags": [
+          "Certificates"
+        ],
         "summary": "Generate verification code for proof of possession flow.",
         "description": "Generates verification code for proof of possession flow. The verification code will be used to generate a leaf certificate.",
         "operationId": "Certificates_GenerateVerificationCode",
         "x-ms-examples": {
-          "Certificates_GenerateVerificationCode": { "$ref": "./examples/iothub_generateverificationcode.json" }
+          "Certificates_GenerateVerificationCode": {
+            "$ref": "./examples/iothub_generateverificationcode.json"
+          }
         },
         "parameters": [
           {
@@ -1252,12 +1591,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/certificates/{certificateName}/verify": {
       "post": {
-        "tags": [ "Certificates" ],
+        "tags": [
+          "Certificates"
+        ],
         "summary": "Verify certificate's private key possession.",
         "description": "Verifies the certificate's private key possession by providing the leaf cert issued by the verifying pre uploaded certificate.",
         "operationId": "Certificates_Verify",
         "x-ms-examples": {
-          "Certificates_Verify": { "$ref": "./examples/iothub_certverify.json" }
+          "Certificates_Verify": {
+            "$ref": "./examples/iothub_certverify.json"
+          }
         },
         "parameters": [
           {
@@ -1277,9 +1620,9 @@
           },
           {
             "name": "certificateVerificationBody",
-            "in":"body",
-            "description":"The name of the certificate",
-            "required":true,
+            "in": "body",
+            "description": "The name of the certificate",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CertificateVerificationDescription"
             }
@@ -1311,22 +1654,12 @@
     }
   },
   "definitions": {
-    "CertificateVerificationDescription":{
+    "CertificateVerificationDescription": {
       "description": "The JSON-serialized leaf certificate",
       "type": "object",
       "properties": {
         "certificate": {
           "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
-          "type": "string"
-        }
-      }
-    },
-    "CertificateBodyDescription":{
-      "description": "The JSON-serialized X509 Certificate.",
-      "type": "object",
-      "properties": {
-        "certificate": {
-          "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
           "type": "string"
         }
       }
@@ -1344,11 +1677,21 @@
         }
       }
     },
+    "CertificateBodyDescription": {
+       "description": "The JSON-serialized X509 Certificate.",
+       "type": "object",
+       "properties": {
+         "certificate": {
+           "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
+           "type": "string"
+         }
+       }
+     },
     "CertificateDescription": {
       "description": "The X509 Certificate.",
       "type": "object",
       "properties": {
-        "properties" : {
+        "properties": {
           "$ref": "#/definitions/CertificateProperties"
         },
         "id": {
@@ -1375,12 +1718,12 @@
       "x-ms-azure-resource": true
     },
     "CertificateWithNonceDescription": {
-     "description": "The X509 Certificate.",
+      "description": "The X509 Certificate.",
       "type": "object",
       "properties": {
-        "properties" : {
+        "properties": {
           "$ref": "#/definitions/CertificatePropertiesWithNonce"
-          },
+        },
         "id": {
           "readOnly": true,
           "type": "string",
@@ -1451,91 +1794,98 @@
         "rights"
       ]
     },
-	"CertificateProperties":
-	{
-	  "description": "The description of an X509 CA Certificate.",
-	  "type": "object",
-	  "properties": {
-		"subject": {
-		  "description": "The certificate's subject name.",
-		  "type": "string",
-		  "readOnly": true
-		},
-		"expiry": {
-		  "description": "The certificate's expiration date and time.",
-		  "type": "string",
-		  "format": "date-time-rfc1123",
-		  "readOnly": true
-		},
-		"thumbprint": {
-		  "description": "The certificate's thumbprint.",
-		  "type": "string",
-		  "readOnly": true
-		},
-		"isVerified": {
-		  "description": "Determines whether certificate has been verified.",
-		  "type": "boolean",
-		  "readOnly": true
-		},
-		"created": {
-		  "description": "The certificate's create date and time.",
-		  "type": "string",
-		  "format": "date-time-rfc1123",
-		  "readOnly": true
-		},
-		"updated": {
-		  "description": "The certificate's last update date and time.",
-		  "type": "string",
-		  "format": "date-time-rfc1123",
-		  "readOnly": true
-		}
-	  }
-	},
-	"CertificatePropertiesWithNonce":
-	{
-	  "description": "The description of an X509 CA Certificate including the challenge nonce issued for the Proof-Of-Possession flow.",
-	  "type": "object",
-	  "properties": {
-		"subject": {
-		  "description": "The certificate's subject name.",
-		  "type": "string",
-		  "readOnly": true
-		},
-		"expiry": {
-		  "description": "The certificate's expiration date and time.",
-		  "type": "string",
-		  "format": "date-time-rfc1123",
-		  "readOnly": true
-		},
-		"thumbprint": {
-		  "description": "The certificate's thumbprint.",
-		  "type": "string",
-		  "readOnly": true
-		},
-		"isVerified": {
-		  "description": "Determines whether certificate has been verified.",
-		  "type": "boolean",
-		  "readOnly": true
-		},
-		"created": {
-		  "description": "The certificate's create date and time.",
-		  "type": "string",
-		  "format": "date-time-rfc1123",
-		  "readOnly": true
-		},
-		"updated": {
-		  "description": "The certificate's last update date and time.",
-		  "type": "string",
-		  "format": "date-time-rfc1123",
-		  "readOnly": true
-		},
-		"verificationCode": {
-		  "description": "The certificate's verification code that will be used for proof of possession.",
-		  "type": "string",
-		  "readOnly": true
-		}
-	  }
-	},
+    "CertificateProperties": {
+      "description": "The description of an X509 CA Certificate.",
+      "type": "object",
+      "properties": {
+        "subject": {
+          "description": "The certificate's subject name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiry": {
+          "description": "The certificate's expiration date and time.",
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "description": "The certificate's thumbprint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isVerified": {
+          "description": "Determines whether certificate has been verified.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The certificate's create date and time.",
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "The certificate's last update date and time.",
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "readOnly": true
+        },
+        "certificate": {
+          "description": "The certificate content",
+          "type": "string"
+        }
+      }
+    },
+    "CertificatePropertiesWithNonce": {
+      "description": "The description of an X509 CA Certificate including the challenge nonce issued for the Proof-Of-Possession flow.",
+      "type": "object",
+      "properties": {
+        "subject": {
+          "description": "The certificate's subject name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiry": {
+          "description": "The certificate's expiration date and time.",
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "description": "The certificate's thumbprint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isVerified": {
+          "description": "Determines whether certificate has been verified.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The certificate's create date and time.",
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "The certificate's last update date and time.",
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "readOnly": true
+        },
+        "verificationCode": {
+          "description": "The certificate's verification code that will be used for proof of possession.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificate": {
+          "description": "The certificate content",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "IotHubProperties": {
       "description": "The properties of an IoT hub.",
       "type": "object",
@@ -1560,7 +1910,7 @@
           "readOnly": true
         },
         "state": {
-          "description": "Thehub state state.",
+          "description": "The hub state.",
           "type": "string",
           "readOnly": true
         },
@@ -1609,7 +1959,10 @@
         },
         "features": {
           "description": "The capabilities and features enabled for the IoT hub.",
-          "enum": [ "None", "DeviceManagement" ],
+          "enum": [
+            "None",
+            "DeviceManagement"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "Capabilities",
@@ -1624,7 +1977,15 @@
       "properties": {
         "name": {
           "description": "The name of the SKU.",
-          "enum": [ "F1", "S1", "S2", "S3", "B1", "B2", "B3" ],
+          "enum": [
+            "F1",
+            "S1",
+            "S2",
+            "S3",
+            "B1",
+            "B2",
+            "B3"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "IotHubSku",
@@ -1633,7 +1994,11 @@
         },
         "tier": {
           "description": "The billing tier for the IoT hub.",
-          "enum": [ "Free", "Standard", "Basic" ],
+          "enum": [
+            "Free",
+            "Standard",
+            "Basic"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1690,7 +2055,7 @@
       "type": "object",
       "properties": {
         "sasTtlAsIso8601": {
-          "description": "The period of time for which the the SAS URI generated by IoT Hub for file upload is valid. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-file-upload#file-upload-notification-configuration-options.",
+          "description": "The period of time for which the SAS URI generated by IoT Hub for file upload is valid. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-file-upload#file-upload-notification-configuration-options.",
           "type": "string",
           "format": "duration"
         },
@@ -1759,7 +2124,12 @@
         "events": {
           "type": "object",
           "additionalProperties": {
-            "enum": [ "None", "Error", "Information", "Error, Information" ],
+            "enum": [
+              "None",
+              "Error",
+              "Information",
+              "Error, Information"
+            ],
             "description": "The operations monitoring level.",
             "type": "string",
             "x-ms-enum": {
@@ -1780,7 +2150,10 @@
         },
         "action": {
           "description": "The desired action for requests captured by this rule.",
-          "enum": [ "Accept", "Reject" ],
+          "enum": [
+            "Accept",
+            "Reject"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "IpFilterActionType",
@@ -1842,37 +2215,37 @@
       }
     },
     "RoutingEndpoints": {
-      "description": "The properties related to the custom endpoints to which your IoT hub routes messages based on the routing rules. A maximum of 10 custom endpoints are allowed across all endpoint types for paid hubs and only 1 custom endpoint is allowed across all endpoint types for free hubs.",      
+      "description": "The properties related to the custom endpoints to which your IoT hub routes messages based on the routing rules. A maximum of 10 custom endpoints are allowed across all endpoint types for paid hubs and only 1 custom endpoint is allowed across all endpoint types for free hubs.",
       "type": "object",
       "properties": {
         "serviceBusQueues": {
-          "description": "The list of Service Bus queue endpoints that IoT hub routes the messages to, based on the routing rules.",      
+          "description": "The list of Service Bus queue endpoints that IoT hub routes the messages to, based on the routing rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoutingServiceBusQueueEndpointProperties"
           }
         },
         "serviceBusTopics": {
-          "description": "The list of Service Bus topic endpoints that the IoT hub routes the messages to, based on the routing rules.",      
+          "description": "The list of Service Bus topic endpoints that the IoT hub routes the messages to, based on the routing rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoutingServiceBusTopicEndpointProperties"
           }
         },
         "eventHubs": {
-          "description": "The list of Event Hubs endpoints that IoT hub routes messages to, based on the routing rules. This list does not include the built-in Event Hubs endpoint.",      
+          "description": "The list of Event Hubs endpoints that IoT hub routes messages to, based on the routing rules. This list does not include the built-in Event Hubs endpoint.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoutingEventHubProperties"
           }
         },
         "storageContainers": {
-          "description": "The list of storage container endpoints that IoT hub routes messages to, based on the routing rules.",      
+          "description": "The list of storage container endpoints that IoT hub routes messages to, based on the routing rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoutingStorageContainerProperties"
           }
-       }
+        }
       }
     },
     "RoutingServiceBusQueueEndpointProperties": {
@@ -1900,7 +2273,7 @@
       "required": [
         "name",
         "connectionString"
-      ]      
+      ]
     },
     "RoutingServiceBusTopicEndpointProperties": {
       "description": "The properties related to service bus topic endpoint types.",
@@ -1927,7 +2300,7 @@
       "required": [
         "name",
         "connectionString"
-      ]      
+      ]
     },
     "RoutingEventHubProperties": {
       "description": "The properties related to an event hub endpoint.",
@@ -1954,7 +2327,7 @@
       "required": [
         "name",
         "connectionString"
-      ]      
+      ]
     },
     "RoutingStorageContainerProperties": {
       "description": "The properties related to a storage container endpoint.",
@@ -2000,7 +2373,7 @@
           "minimum": 10485760
         },
         "encoding": {
-          "description": "Encoding that is used to serialize messages to blobs. Supported values are 'avro' and 'avrodeflate'. Default value is 'avro'.",
+          "description": "Encoding that is used to serialize messages to blobs. Supported values are 'avro' and 'avroDeflate'. Default value is 'avro'.",
           "type": "string"
         }
       },
@@ -2008,20 +2381,26 @@
         "name",
         "connectionString",
         "containerName"
-      ]      
+      ]
     },
     "RouteProperties": {
-      "description": "The properties of a routing rule that your IoT hub uses to route messages to endpoints.",      
+      "description": "The properties of a routing rule that your IoT hub uses to route messages to endpoints.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the route. The name can only include alphanumeric characters, periods, underscores, hyphens, has a maximum length of 64 characters, and must be unique.",      
+          "description": "The name of the route. The name can only include alphanumeric characters, periods, underscores, hyphens, has a maximum length of 64 characters, and must be unique.",
           "type": "string",
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
         "source": {
           "description": "The source that the routing rule is to be applied to, such as DeviceMessages.",
-          "enum": ["DeviceMessages", "TwinChangeEvents", "DeviceLifecycleEvents", "DeviceJobLifecycleEvents"],
+          "enum": [
+            "Invalid",
+            "DeviceMessages",
+            "TwinChangeEvents",
+            "DeviceLifecycleEvents",
+            "DeviceJobLifecycleEvents"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "RoutingSource",
@@ -2029,12 +2408,12 @@
           }
         },
         "condition": {
-          "description": "The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language",      
+          "description": "The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language",
           "type": "string"
         },
         "endpointNames": {
           "description": "The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.",
-          "minItems": 1,      
+          "minItems": 1,
           "maxItems": 1,
           "type": "array",
           "items": {
@@ -2054,16 +2433,18 @@
       ]
     },
     "FallbackRouteProperties": {
-      "description": "The properties of the fallback route. IoT Hub uses these properties when it routes messages to the fallback endpoint.",      
+      "description": "The properties of the fallback route. IoT Hub uses these properties when it routes messages to the fallback endpoint.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the route. The name can only include alphanumeric characters, periods, underscores, hyphens, has a maximum length of 64 characters, and must be unique.",      
+          "description": "The name of the route. The name can only include alphanumeric characters, periods, underscores, hyphens, has a maximum length of 64 characters, and must be unique.",
           "type": "string"
         },
         "source": {
-          "description": "The source to which the routing rule is to be applied to. For example, DeviceMessages",      
-          "enum": ["DeviceMessages"],
+          "description": "The source to which the routing rule is to be applied to. For example, DeviceMessages",
+          "enum": [
+            "DeviceMessages"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "RoutingSource",
@@ -2071,12 +2452,12 @@
           }
         },
         "condition": {
-          "description": "The condition which is evaluated in order to apply the fallback route. If the condition is not provided it will evaluate to true by default. For grammar, See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language",      
+          "description": "The condition which is evaluated in order to apply the fallback route. If the condition is not provided it will evaluate to true by default. For grammar, See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language",
           "type": "string"
         },
         "endpointNames": {
           "description": "The list of endpoints to which the messages that satisfy the condition are routed to. Currently only 1 endpoint is allowed.",
-          "minItems": 1,      
+          "minItems": 1,
           "maxItems": 1,
           "type": "array",
           "items": {
@@ -2093,7 +2474,7 @@
         "source",
         "isEnabled"
       ]
-    },    
+    },
     "IotHubDescription": {
       "description": "The description of the IoT hub.",
       "type": "object",
@@ -2103,9 +2484,11 @@
           "type": "string"
         },
         "properties": {
+          "description": "IotHub properties",
           "$ref": "#/definitions/IotHubProperties"
         },
         "sku": {
+          "description": "IotHub SKU info",
           "$ref": "#/definitions/IotHubSkuInfo"
         }
       },
@@ -2115,7 +2498,7 @@
         }
       ],
       "required": [
-       "sku"
+        "sku"
       ]
     },
     "Resource": {
@@ -2265,6 +2648,48 @@
         }
       }
     },
+    "EndpointHealthDataListResult": {
+      "description": "The JSON-serialized array of EndpointHealthData objects with a next link.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "JSON-serialized array of Endpoint health data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointHealthData"
+          }
+        },
+        "nextLink": {
+          "description": "Link to more results",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EndpointHealthData": {
+      "description": "The health data for an endpoint",
+      "type": "object",
+      "properties": {
+        "endpointId": {
+          "description": "Id of the endpoint",
+          "type": "string"
+        },
+        "healthStatus": {
+          "description": "Health status",
+          "enum": [
+            "unknown",
+            "healthy",
+            "unhealthy",
+            "dead"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointHealthStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "RegistryStatistics": {
       "description": "Identity registry statistics.",
       "type": "object",
@@ -2301,7 +2726,7 @@
           }
         },
         "nextLink": {
-         "description": "The next link.",
+          "description": "The next link.",
           "type": "string",
           "readOnly": true
         }
@@ -2321,11 +2746,12 @@
           "$ref": "#/definitions/IotHubSkuInfo"
         },
         "capacity": {
+          "description": "IotHub capacity",
           "$ref": "#/definitions/IotHubCapacity"
         }
       },
       "required": [
-        "sku", 
+        "sku",
         "capacity"
       ]
     },
@@ -2366,7 +2792,11 @@
         },
         "scaleType": {
           "description": "The type of the scaling enabled.",
-          "enum": [ "Automatic", "Manual", "None" ],
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
           "readOnly": true,
           "type": "string",
           "x-ms-enum": {
@@ -2469,7 +2899,18 @@
         },
         "type": {
           "description": "The type of the job.",
-          "enum": [ "unknown", "export", "import", "backup", "readDeviceProperties", "writeDeviceProperties", "updateDeviceConfiguration", "rebootDevice", "factoryResetDevice", "firmwareUpdate" ],
+          "enum": [
+            "unknown",
+            "export",
+            "import",
+            "backup",
+            "readDeviceProperties",
+            "writeDeviceProperties",
+            "updateDeviceConfiguration",
+            "rebootDevice",
+            "factoryResetDevice",
+            "firmwareUpdate"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2479,7 +2920,14 @@
         },
         "status": {
           "description": "The status of the job.",
-          "enum": [ "unknown", "enqueued", "running", "completed", "failed", "cancelled" ],
+          "enum": [
+            "unknown",
+            "enqueued",
+            "running",
+            "completed",
+            "failed",
+            "cancelled"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2569,7 +3017,10 @@
         },
         "reason": {
           "description": "The reason for unavailability.",
-          "enum": [ "Invalid", "AlreadyExists" ],
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2580,6 +3031,279 @@
         "message": {
           "description": "The detailed reason message.",
           "type": "string"
+        }
+      }
+    },
+    "UserSubscriptionQuotaListResult": {
+      "type": "object",
+      "description": "Json-serialized array of User subscription quota response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserSubscriptionQuota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserSubscriptionQuota": {
+      "description": "User subscription quota response",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "IotHub type id",
+          "type": "string"
+        },
+        "type": {
+          "description": "Response type",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unit of IotHub type",
+          "type": "string"
+        },
+        "currentValue": {
+          "description": "Current number of IotHub type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "limit": {
+          "description": "Numerical limit on IotHub type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "description": "IotHub type",
+          "$ref": "#/definitions/Name"
+        }
+      }
+    },
+    "Name": {
+      "description": "Name of Iot Hub type",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "IotHub type",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Localized value of name",
+          "type": "string"
+        }
+      }
+    },
+    "TestAllRoutesInput": {
+      "description": "Input for testing all routes",
+      "type": "object",
+      "properties": {
+        "routingSource": {
+          "description": "Routing source",
+          "enum": [
+            "Invalid",
+            "DeviceMessages",
+            "TwinChangeEvents",
+            "DeviceLifecycleEvents",
+            "DeviceJobLifecycleEvents"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoutingSource",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Routing message",
+          "$ref": "#/definitions/RoutingMessage"
+        },
+        "twin": {
+          "description": "Routing Twin Reference",
+          "$ref": "#/definitions/RoutingTwin"
+        }
+      }
+    },
+    "RoutingTwin": {
+      "description": "Twin reference input parameter. This is an optional parameter",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Twin Tags",
+          "type": "object"
+        },
+        "properties": {
+          "properties": {
+            "desiredProperties" : {
+              "description": "Twin desired properties",
+              "type": "object"
+            },
+            "reportedProperties" : {
+              "description": "Twin desired properties",
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "RoutingMessage": {
+      "description": "Routing message",
+      "type": "object",
+      "properties": {
+        "body": {
+          "description": "Body of routing message",
+          "type": "string"
+        },
+        "appProperties": {
+          "description": "App properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemProperties": {
+          "description": "System properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TestAllRoutesResult": {
+      "description": "Result of testing all routes",
+      "type": "object",
+      "properties": {
+        "routes": {
+          "description": "JSON-serialized array of matched routes",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchedRoute"
+          }
+        }
+      }
+    },
+    "MatchedRoute": {
+      "description": "Routes that matched",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of routes that matched",
+          "$ref": "#/definitions/RouteProperties"
+        }
+      }
+    },
+    "TestRouteInput": {
+      "required": [
+        "route"
+      ],
+      "description": "Input for testing route",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Routing message",
+          "$ref": "#/definitions/RoutingMessage"
+        },
+        "route": {
+          "description": "Route properties",
+          "$ref": "#/definitions/RouteProperties"
+        },
+        "twin": {
+          "description": "Routing Twin Reference",
+          "$ref": "#/definitions/RoutingTwin"
+        }
+      }
+    },
+    "TestRouteResult": {
+      "description": "Result of testing one route",
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Result of testing route",
+          "enum": [
+            "undefined",
+            "false",
+            "true"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TestResultStatus",
+            "modelAsString": true
+          }
+        },
+        "details": {
+          "description": "Detailed result of testing route",
+          "$ref": "#/definitions/TestRouteResultDetails"
+        }
+      }
+    },
+    "TestRouteResultDetails": {
+      "description": "Detailed result of testing a route",
+      "type": "object",
+      "properties": {
+        "compilationErrors": {
+          "description": "JSON-serialized list of route compilation errors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteCompilationError"
+          }
+        }
+      }
+    },
+    "RouteCompilationError": {
+      "description": "Compilation error when evaluating route",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Route error message",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of the route error",
+          "enum": [
+            "error",
+            "warning"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RouteErrorSeverity",
+            "modelAsString": true
+          }
+        },
+        "location": {
+          "description": "Location where the route error happened",
+          "$ref": "#/definitions/RouteErrorRange"
+        }
+      }
+    },
+    "RouteErrorRange": {
+      "description": "Range of route errors",
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "Start where the route error happened",
+          "$ref": "#/definitions/RouteErrorPosition"
+        },
+        "end": {
+          "description": "End where the route error happened",
+          "$ref": "#/definitions/RouteErrorPosition"
+        }
+      }
+    },
+    "RouteErrorPosition": {
+      "description": "Position where the route error happened",
+      "type": "object",
+      "properties": {
+        "line": {
+          "description": "Line where the route error happened",
+          "format": "int32",
+          "type": "integer"
+        },
+        "column": {
+          "description": "Column where the route error happened",
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -2643,7 +3367,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "resourceName":{
+    "resourceName": {
       "name": "resourceName",
       "in": "path",
       "description": "The name of the IoT hub.",
@@ -2651,13 +3375,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "certificateName":{
+    "certificateName": {
       "name": "certificateName",
-      "in":"path",
-      "description":"The name of the certificate",
-      "required":true,
-      "type":"string",
-      "pattern":"^[A-Za-z0-9-._]{1,64}$",
+      "in": "path",
+      "description": "The name of the certificate",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-._]{1,64}$",
       "x-ms-parameter-location": "method"
     }
   }

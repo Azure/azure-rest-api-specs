@@ -56,10 +56,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WorkItemConfiguration"
-              }
+              "$ref": "#/definitions/WorkItemConfigurationsListResult"
             }
           },
           "default": {
@@ -149,15 +146,12 @@
             "WorkItemConfigurationsGetDefault": {
               "$ref": "./examples/WorkItemConfigDefaultGet.json"
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": null
           }
         }
       },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}": {
       "delete": {
-        "description": "Delete an workitem configuration of an Application Insights component.",
+        "description": "Delete a work item configuration of an Application Insights component.",
         "operationId": "WorkItemConfigurations_Delete",
         "parameters": [
           {
@@ -218,6 +212,19 @@
         }
       }
     },
+    "WorkItemConfigurationsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/WorkItemConfiguration"
+          },
+          "description": "An array of work item configurations."
+        }
+      },
+      "description": "Work item configuration list result."
+    },
     "WorkItemCreateConfiguration": {
       "type": "object",
       "description": "Work item configuration creation payload",
@@ -228,7 +235,7 @@
         },
         "ConnectorDataConfiguration": {
           "type": "string",
-          "description": "Serialized JSON object for detaile d properties"
+          "description": "Serialized JSON object for detailed properties"
         },
         "ValidateOnly": {
           "type": "boolean",

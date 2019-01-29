@@ -805,7 +805,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the specified table from the underying database and schema combination",
+            "description": "Successfully retrieved the specified table from the underlying database and schema combination",
             "schema": {
               "$ref": "#/definitions/USqlTable"
             }
@@ -816,6 +816,104 @@
             "$ref": "./examples/Catalog_GetTable.json"
           }
         }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/tablefragments": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_ListTableFragments",
+        "description": "Retrieves the list of table fragments from the Data Lake Analytics catalog.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table fragments."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table fragments."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table containing the table fragments."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of table fragments in the specified database and schema.",
+            "schema": {
+              "$ref": "#/definitions/USqlTableFragmentList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves the list of table fragments from the Data Lake Analytics catalog": {
+            "$ref": "./examples/Catalog_ListTableFragments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/USqlTableFragment"
       }
     },
     "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables": {
@@ -1043,7 +1141,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the specified table type from the underying database and schema combination",
+            "description": "Successfully retrieved the specified table type from the underlying database and schema combination",
             "schema": {
               "$ref": "#/definitions/USqlTableType"
             }
@@ -1182,7 +1280,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the specified package from the underying database and schema combination",
+            "description": "Successfully retrieved the specified package from the underlying database and schema combination",
             "schema": {
               "$ref": "#/definitions/USqlPackage"
             }
@@ -1321,7 +1419,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the specified view from the underying database and schema combination",
+            "description": "Successfully retrieved the specified view from the underlying database and schema combination",
             "schema": {
               "$ref": "#/definitions/USqlView"
             }
@@ -1578,6 +1676,77 @@
         "x-ms-odata": "#/definitions/USqlTableStatistics"
       }
     },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitions/{partitionName}/previewrows": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_PreviewTablePartition",
+        "description": "Retrieves a preview set of rows in given partition.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the partition."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the partition."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table containing the partition."
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table partition."
+          },
+          {
+            "name": "maxRows",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of preview rows to be retrieved.Rows returned may be less than or equal to this number depending on row sizes and number of rows in the partition."
+          },
+          {
+            "name": "maxColumns",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of columns to be retrieved."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved preview rows for the specified partition.",
+            "schema": {
+              "$ref": "#/definitions/USqlTablePreview"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a preview set of rows in given partition": {
+            "$ref": "./examples/Catalog_PreviewTablePartition.json"
+          }
+        }
+      }
+    },
     "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitions/{partitionName}": {
       "get": {
         "tags": [
@@ -1629,6 +1798,70 @@
         "x-ms-examples": {
           "Retrieves the specified table partition from the Data Lake Analytics catalog": {
             "$ref": "./examples/Catalog_GetTablePartition.json"
+          }
+        }
+      }
+    },
+    "/catalog/usql/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/previewrows": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "operationId": "Catalog_PreviewTable",
+        "description": "Retrieves a preview set of rows in given table.",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database containing the table."
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the schema containing the table."
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the table."
+          },
+          {
+            "name": "maxRows",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of preview rows to be retrieved. Rows returned may be less than or equal to this number depending on row sizes and number of rows in the table."
+          },
+          {
+            "name": "maxColumns",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum number of columns to be retrieved."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved preview rows for the specified table.",
+            "schema": {
+              "$ref": "#/definitions/USqlTablePreview"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a preview set of rows in given table": {
+            "$ref": "./examples/Catalog_PreviewTable.json"
           }
         }
       }
@@ -3473,7 +3706,7 @@
           "items": {
             "type": "string"
           },
-          "description": "the list of partion keys in the index"
+          "description": "the list of partition keys in the index"
         },
         "streamNames": {
           "type": "array",
@@ -3559,6 +3792,42 @@
       },
       "description": "A Data Lake Analytics catalog type field information item."
     },
+    "USqlTablePreview": {
+      "properties": {
+        "totalRowCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the total number of rows in the table or partition."
+        },
+        "totalColumnCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the total number of columns in the table or partition."
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "the rows of the table or partition preview, where each row is an array of string representations the row's values. Note: Byte arrays will appear as base-64 encoded values, SqlMap and SqlArray objects will appear as escaped JSON objects, and DateTime objects will appear as ISO formatted UTC date-times."
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "true if the amount of data in the response is less than expected due to the preview operation's size limitations. This can occur if the requested rows or row counts are too large."
+        },
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/USqlTableColumn"
+          },
+          "description": "the schema of the table or partition."
+        }
+      },
+      "description": "A Data Lake Analytics catalog table or partition preview rows item."
+    },
     "USqlTable": {
       "allOf": [
         {
@@ -3628,6 +3897,59 @@
         }
       },
       "description": "A Data Lake Analytics catalog U-SQL table item list."
+    },
+    "USqlTableFragment": {
+      "properties": {
+        "parentId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "the parent object Id of the table fragment. The parent could be a table or table partition."
+        },
+        "fragmentId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "the version of the catalog item."
+        },
+        "indexId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the ordinal of the index which contains the table fragment."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the data size of the table fragment in bytes."
+        },
+        "rowCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "the number of rows in the table fragment."
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the creation time of the table fragment."
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table fragment item."
+    },
+    "USqlTableFragmentList": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogItemList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/USqlTableFragment"
+          },
+          "description": "the list of table fragments in the database, schema and table combination"
+        }
+      },
+      "description": "A Data Lake Analytics catalog U-SQL table fragment item list."
     },
     "USqlTableType": {
       "allOf": [

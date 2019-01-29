@@ -422,7 +422,7 @@
         ],
         "operationId": "encrypt",
         "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
-        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encypt permission.",
+        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encrypt permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -1363,7 +1363,7 @@
           }
         }
       }
-    },    
+    },
     "/certificates": {
       "get": {
         "tags": [
@@ -3011,7 +3011,25 @@
           "enum": [ "P-256", "P-384", "P-521", "SECP256K1" ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "P-256",
+                "description": "The NIST P-256 elliptic curve, AKA SECG curve SECP256R1."
+              },
+              {
+                "value": "P-384",
+                "description": "The NIST P-384 elliptic curve, AKA SECG curve SECP384R1."
+              },
+              {
+                "value": "P-521",
+                "description": "The NIST P-521 elliptic curve, AKA SECG curve SECP521R1."
+              },
+              {
+                "value": "SECP256K1",
+                "description": "The SECG SECP256K1 elliptic curve."
+              }
+            ]
           }
         },
         "x": {
@@ -3040,7 +3058,25 @@
           "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                  "value": "Purgeable",
+                  "description": "Soft-delete is not enabled for this vault. A DELETE operation results in immediate and irreversible data loss."
+              },
+              {
+                  "value": "Recoverable+Purgeable",
+                  "description": "Soft-delete is enabled for this vault; A privileged user may trigger an immediate, irreversible deletion(purge) of a deleted entity."
+              },
+              {
+                  "value": "Recoverable",
+                  "description": "Soft-delete is enabled for this vault and purge has been disabled. A deleted entity will remain in this state until recovered, or the end of the retention interval."
+              },
+              {
+                  "value": "Recoverable+ProtectedSubscription",
+                  "description": "Soft-delete is enabled for this vault, and the subscription is protected against immediate deletion."
+              }
+            ]
           },
           "readOnly": true,
           "x-nullable": false
@@ -3565,7 +3601,7 @@
         "key_size": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bytes. For example;  1024 or 2048."
+          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
         },
         "reuse_key": {
           "type": "boolean",
@@ -3618,7 +3654,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "description": "The duration that the ceritifcate is valid in months."
+          "description": "The duration that the certificate is valid in months."
         }
       },
       "description": "Properties of the X509 component of a certificate."
@@ -3798,7 +3834,7 @@
         "email": {
           "x-ms-client-name": "EmailAddress",
           "type": "string",
-          "description": "Email addresss."
+          "description": "Email address."
         },
         "phone": {
           "type": "string",
@@ -3830,7 +3866,7 @@
         "email": {
           "x-ms-client-name": "EmailAddress",
           "type": "string",
-          "description": "Email addresss."
+          "description": "Email address."
         },
         "name": {
           "type": "string",
@@ -3858,7 +3894,7 @@
         "key_size": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bytes. For example, 1024 or 2048."
+          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
         },
         "key_ops": {
           "type": "array",
@@ -4412,7 +4448,7 @@
         }
       },
       "description": "The backup secret result, containing the backup blob."
-    },    
+    },
     "PendingCertificateSigningRequestResult": {
       "properties": {
         "value": {
@@ -4706,7 +4742,7 @@
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The URL to get the next set of SAS defintions."
+          "description": "The URL to get the next set of SAS definitions."
         }
       },
       "description": "The storage account SAS definition list result."

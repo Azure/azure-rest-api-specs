@@ -730,6 +730,9 @@
         ],
         "operationId": "PacketCaptures_GetStatus",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Query the status of a running packet capture session.",
         "parameters": [
           {
@@ -2807,7 +2810,7 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Connection monitor location."         
+          "description": "Connection monitor location."
         },
         "tags": {
           "type": "object",
@@ -2979,7 +2982,7 @@
           "description": "Information about connection states."
         }
       },
-      "description": "List of connection states snaphots."
+      "description": "List of connection states snapshots."
     },
     "ConnectionStateSnapshot": {
       "properties": {

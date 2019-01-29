@@ -894,7 +894,7 @@
             "url": "https://aka.ms/search-rp-info"
           },
           "x-ms-mutability": [
-            "create", 
+            "create",
             "read"
           ]
         },
@@ -904,6 +904,10 @@
             "type": "string"
           },
           "description": "Tags to help categorize the resource in the Azure portal."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "description": "Base type for all Azure resources.",
@@ -924,13 +928,13 @@
         "type": "object",
         "description": "Describes a particular API error with an error code and a message.",
         "properties": {
-            "code": { 
+            "code": {
               "type": "string",
-              "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases."
+              "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
             },
             "message": {
               "type": "string",
-              "description": "A message that describes the error in detail and provides debugging information." 
+              "description": "A message that describes the error in detail and provides debugging information."
             },
             "target": {
               "type": "string",
@@ -1000,6 +1004,35 @@
           "description": "The URL to get the next set of operation list results, if any."
         }
       }
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Identity for the resource."
     }
   },
   "parameters": {

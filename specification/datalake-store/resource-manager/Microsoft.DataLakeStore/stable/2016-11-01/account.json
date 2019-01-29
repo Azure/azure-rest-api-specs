@@ -443,7 +443,7 @@
           }
         },
         "x-ms-examples": {
-          "Lists the Data Lake Store firewall rules within the specified Data Lake Store account": {
+          "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.": {
             "$ref": "./examples/FirewallRules_ListByAccount.json"
           }
         },
@@ -539,7 +539,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets the specified Data Lake Store firewall rule": {
+          "Gets the specified Data Lake Store firewall rule.": {
             "$ref": "./examples/FirewallRules_Get.json"
           }
         }
@@ -589,7 +589,7 @@
           }
         },
         "x-ms-examples": {
-          "Updates the specified firewall rule": {
+          "Updates the specified firewall rule.": {
             "$ref": "./examples/FirewallRules_Update.json"
           }
         }
@@ -599,7 +599,7 @@
           "FirewallRules"
         ],
         "operationId": "FirewallRules_Delete",
-        "description": "Deletes the specified firewall rule from the specified Data Lake Store account",
+        "description": "Deletes the specified firewall rule from the specified Data Lake Store account.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -630,8 +630,231 @@
           }
         },
         "x-ms-examples": {
-          "Deletes the specified firewall rule from the specified Data Lake Store account": {
+          "Deletes the specified firewall rule from the specified Data Lake Store account.": {
             "$ref": "./examples/FirewallRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/virtualNetworkRules": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_ListByAccount",
+        "description": "Lists the Data Lake Store virtual network rules within the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual network rules.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRuleListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Data Lake Store virtual network rules within the specified Data Lake Store account.": {
+            "$ref": "./examples/VirtualNetworkRules_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+      "put": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_CreateOrUpdate",
+        "description": "Creates or updates the specified virtual network rule. During update, the virtual network rule with the specified name will be replaced with this new virtual network rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateVirtualNetworkRuleParameters"
+            },
+            "description": "Parameters supplied to create or update the virtual network rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the specified virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the specified virtual network rule. During update, the virtual network rule with the specified name will be replaced with this new virtual network rule.": {
+            "$ref": "./examples/VirtualNetworkRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_Get",
+        "description": "Gets the specified Data Lake Store virtual network rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Store virtual network rule.": {
+            "$ref": "./examples/VirtualNetworkRules_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_Update",
+        "description": "Updates the specified virtual network rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateVirtualNetworkRuleParameters"
+            },
+            "description": "Parameters supplied to update the virtual network rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the specified virtual network rule.": {
+            "$ref": "./examples/VirtualNetworkRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_Delete",
+        "description": "Deletes the specified virtual network rule from the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified virtual network rule."
+          },
+          "204": {
+            "description": "The specified virtual network rule does not exist or was already deleted."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified virtual network rule from the specified Data Lake Store account.": {
+            "$ref": "./examples/VirtualNetworkRules_Delete.json"
           }
         }
       }
@@ -1117,6 +1340,14 @@
           },
           "description": "The list of firewall rules associated with this Data Lake Store account."
         },
+        "virtualNetworkRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules associated with this Data Lake Store account."
+        },
         "firewallState": {
           "readOnly": true,
           "type": "string",
@@ -1410,6 +1641,50 @@
       },
       "description": "Data Lake Store firewall rule list information."
     },
+    "VirtualNetworkRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties."
+        }
+      },
+      "description": "Data Lake Store virtual network rule information."
+    },
+    "VirtualNetworkRuleProperties": {
+      "properties": {
+        "subnetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier for the subnet."
+        }
+      },
+      "description": "The virtual network rule properties."
+    },
+    "VirtualNetworkRuleListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Store virtual network rule list information."
+    },
     "TrustedIdProvider": {
       "allOf": [
         {
@@ -1645,6 +1920,13 @@
           },
           "description": "The list of firewall rules associated with this Data Lake Store account."
         },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateVirtualNetworkRuleWithAccountParameters"
+          },
+          "description": "The list of virtual network rules associated with this Data Lake Store account."
+        },
         "firewallState": {
           "type": "string",
           "enum": [
@@ -1740,6 +2022,13 @@
             "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
           },
           "description": "The list of firewall rules associated with this Data Lake Store account."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateVirtualNetworkRuleWithAccountParameters"
+          },
+          "description": "The list of virtual network rules associated with this Data Lake Store account."
         },
         "firewallState": {
           "type": "string",
@@ -1909,6 +2198,85 @@
         }
       },
       "description": "The firewall rule properties to use when updating a firewall rule."
+    },
+    "CreateOrUpdateVirtualNetworkRuleParameters": {
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when creating a new virtual network rule."
+        }
+      },
+      "description": "The parameters used to create a new virtual network rule."
+    },
+    "CreateVirtualNetworkRuleWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the virtual network rule to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when creating a new virtual network rule."
+        }
+      },
+      "description": "The parameters used to create a new virtual network rule while creating a new Data Lake Store account."
+    },
+    "CreateOrUpdateVirtualNetworkRuleProperties": {
+      "required": [
+        "subnetId"
+      ],
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The resource identifier for the subnet."
+        }
+      },
+      "description": "The virtual network rule properties to use when creating a new virtual network rule."
+    },
+    "UpdateVirtualNetworkRuleParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when updating a virtual network rule."
+        }
+      },
+      "description": "The parameters used to update a virtual network rule."
+    },
+    "UpdateVirtualNetworkRuleWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the virtual network rule to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when updating a virtual network rule."
+        }
+      },
+      "description": "The parameters used to update a virtual network rule while updating a Data Lake Store account."
+    },
+    "UpdateVirtualNetworkRuleProperties": {
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The resource identifier for the subnet."
+        }
+      },
+      "description": "The virtual network rule properties to use when updating a virtual network rule."
     },
     "CreateOrUpdateTrustedIdProviderParameters": {
       "required": [

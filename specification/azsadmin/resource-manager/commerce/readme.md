@@ -57,6 +57,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.AzureStack.Management.Commerce.Admin
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Commerce/Commerce.Admin/Generated
+  output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
 ```

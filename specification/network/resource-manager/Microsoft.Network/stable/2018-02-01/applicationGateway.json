@@ -40,6 +40,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_Delete",
+        "x-ms-examples": {
+          "Delete ApplicationGateway": {
+            "$ref": "./examples/ApplicationGatewayDelete.json"
+          }
+        },
         "description": "Deletes the specified application gateway.",
         "parameters": [
           {
@@ -81,6 +86,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_Get",
+        "x-ms-examples": {
+          "Get ApplicationGateway": {
+            "$ref": "./examples/ApplicationGatewayGet.json"
+          }
+        },
         "description": "Gets the specified application gateway.",
         "parameters": [
           {
@@ -118,6 +128,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayCreate.json"
+          }
+        },
         "description": "Creates or updates the specified application gateway.",
         "parameters": [
           {
@@ -171,6 +186,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_UpdateTags",
+        "x-ms-examples": {
+          "Update Application Gateway tags": {
+            "$ref": "./examples/ApplicationGatewayUpdateTags.json"
+          }
+        },
         "description": "Updates the specified application gateway tags.",
         "parameters": [
           {
@@ -211,9 +231,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Update Application Gateway tags": { "$ref": "./examples/ApplicationGatewayUpdateTags.json" }
-        },
         "x-ms-long-running-operation": true
       }
     },
@@ -223,6 +240,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_List",
+        "x-ms-examples": {
+          "Lists all application gateways in a resource group": {
+            "$ref": "./examples/ApplicationGatewayList.json"
+          }
+        },
         "description": "Lists all application gateways in a resource group.",
         "parameters": [
           {
@@ -258,6 +280,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_ListAll",
+        "x-ms-examples": {
+          "Lists all application gateways in a subscription": {
+            "$ref": "./examples/ApplicationGatewayListAll.json"
+          }
+        },
         "description": "Gets all the application gateways in a subscription.",
         "parameters": [
           {
@@ -286,6 +313,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_Start",
+        "x-ms-examples": {
+          "Start Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayStart.json"
+          }
+        },
         "description": "Starts the specified application gateway.",
         "parameters": [
           {
@@ -326,6 +358,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_Stop",
+        "x-ms-examples": {
+          "Stop Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayStop.json"
+          }
+        },
         "description": "Stops the specified application gateway in a resource group.",
         "parameters": [
           {
@@ -367,6 +404,11 @@
         ],
         "operationId": "ApplicationGateways_BackendHealth",
         "description": "Gets the backend health of the specified application gateway in a resource group.",
+        "x-ms-examples": {
+          "Get Backend Health": {
+            "$ref": "./examples/ApplicationGatewayBackendHealthGet.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -416,6 +458,11 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_ListAvailableWafRuleSets",
+        "x-ms-examples": {
+          "Get Available Waf Rule Sets": {
+            "$ref": "./examples/ApplicationGatewayAvailableWafRuleSetsGet.json"
+          }
+        },
         "description": "Lists all available web application firewall rule sets.",
         "parameters": [
           {
@@ -442,7 +489,9 @@
         ],
         "operationId": "ApplicationGateways_ListAvailableSslOptions",
         "x-ms-examples": {
-          "ApplicationGatewayAvailableSslOptionsGet": { "$ref": "./examples/ApplicationGatewayAvailableSslOptionsGet.json" }
+          "Get Available Ssl Options": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsGet.json"
+          }
         },
         "description": "Lists available Ssl options for configuring Ssl policy.",
         "parameters": [
@@ -470,7 +519,9 @@
         ],
         "operationId": "ApplicationGateways_ListAvailableSslPredefinedPolicies",
         "x-ms-examples": {
-          "ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet": { "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet.json" }
+          "Get Available Ssl Predefined Policies": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -501,7 +552,9 @@
         ],
         "operationId": "ApplicationGateways_GetSslPredefinedPolicy",
         "x-ms-examples": {
-          "ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet": { "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet.json" }
+          "Get Available Ssl Predefined Policy by name": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet.json"
+          }
         },
         "description": "Gets Ssl predefined policy with the specified policy name.",
         "parameters": [
@@ -1685,19 +1738,19 @@
             "$ref": "#/definitions/ApplicationGatewayFirewallDisabledRuleGroup"
           },
           "description": "The disabled rule groups."
-        }, 
-        "requestBodyCheck": { 
-          "type": "boolean", 
-          "description": "Whether allow WAF to check request Body." 
-        }, 
-        "maxRequestBodySize": { 
-          "type": "integer", 
-          "format": "int32", 
-          "maximum": 128, 
-          "exclusiveMaximum": false, 
-          "minimum": 8, 
-          "exclusiveMinimum": false, 
-          "description": "Maxium request body size for WAF."
+        },
+        "requestBodyCheck": {
+          "type": "boolean",
+          "description": "Whether allow WAF to check request Body."
+        },
+        "maxRequestBodySize": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 128,
+          "exclusiveMaximum": false,
+          "minimum": 8,
+          "exclusiveMinimum": false,
+          "description": "Maximum request body size for WAF."
         }
       },
       "required": [

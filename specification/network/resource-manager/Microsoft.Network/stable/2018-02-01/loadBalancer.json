@@ -1208,10 +1208,11 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The protocol of the end point. Possible values are: 'Http' or 'Tcp'. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
+          "description": "The protocol of the end point. Possible values are: 'Http', 'Tcp' or 'Https'. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
           "enum": [
             "Http",
-            "Tcp"
+            "Tcp",
+            "Https"
           ],
           "x-ms-enum": {
             "name": "ProbeProtocol",
@@ -1643,7 +1644,7 @@
     },
     "TransportProtocol": {
       "type": "string",
-      "description": "The transport protocol for the endpoint. Possible values are 'Udp' or 'Tcp' or 'All.'",
+      "description": "The transport protocol for the endpoint. Possible values are 'Udp' or 'Tcp' or 'All'.",
       "enum": [
         "Udp",
         "Tcp",

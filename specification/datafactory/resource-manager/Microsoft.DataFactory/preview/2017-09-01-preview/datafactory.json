@@ -105,6 +105,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo": {
+      "post": {
+        "tags": [
+          "configureFactoryRepo"
+        ],
+        "operationId": "Factories_ConfigureFactoryRepo",
+        "x-ms-examples": {
+          "Factories_ConfigureFactoryRepo": {
+            "$ref": "./examples/Factories_ConfigureFactoryRepo.json"
+          }
+        },
+        "description": "Updates a factory's repo information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "factoryRepoUpdate",
+            "description": "Update factory repo request definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FactoryRepoUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Factory"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -1007,7 +1055,7 @@
             "$ref": "./examples/IntegrationRuntimes_Upgrade.json"
           }
         },
-        "description": "Upgrade self-hosted integration runtime to latest version if availably.",
+        "description": "Upgrade self-hosted integration runtime to latest version if availability.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2854,6 +2902,56 @@
           "type": "object"
         }
       },
+      "FactoryVSTSConfiguration": {
+        "description": "Factory's VSTS repo information.",
+        "properties": {
+          "accountName": {
+            "description": "VSTS account name.",
+            "type": "string"
+          },
+          "projectName": {
+            "description": "VSTS project name.",
+            "type": "string"
+          },
+          "repositoryName": {
+            "description": "VSTS repository name.",
+            "type": "string"
+          },
+          "collaborationBranch": {
+            "description": "VSTS collaboration branch.",
+            "type": "string"
+          },
+          "rootFolder": {
+            "description": "VSTS root folder.",
+            "type": "string"
+          },
+          "lastCommitId": {
+            "description": "VSTS last commit id.",
+            "type": "string"
+          },
+          "tenantId": {
+            "description": "VSTS tenant id.",
+            "type": "string"
+          }
+        }
+      },
+      "FactoryRepoUpdate": {
+        "description": "Factory's VSTS repo information.",
+        "properties": {
+          "factoryResourceId": {
+            "description": "The factory resource id.",
+            "type": "string"
+          },
+          "resourceGroupName": {
+            "description": "The resource group name.",
+            "type": "string"
+          },
+          "vstsConfiguration": {
+            "$ref": "#/definitions/FactoryVSTSConfiguration",
+            "description": "VSTS repo information of the factory."
+          }
+        }
+      },
       "FactoryProperties": {
         "description": "Factory resource properties.",
         "properties": {
@@ -2872,6 +2970,10 @@
             "description": "Version of the factory.",
             "type": "string",
             "readOnly": true
+          },
+          "vstsConfiguration": {
+            "$ref": "#/definitions/FactoryVSTSConfiguration",
+            "description": "VSTS repo information of the factory."
           }
         }
       },
@@ -3696,6 +3798,14 @@
         "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
         "minLength": 3,
         "maxLength": 63,
+        "x-ms-parameter-location": "method"
+      },
+      "locationId": {
+        "name": "locationId",
+        "description": "The location identifier.",
+        "in": "path",
+        "required": true,
+        "type": "string",
         "x-ms-parameter-location": "method"
       },
       "linkedServiceName": {

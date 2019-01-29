@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -42,7 +42,7 @@
           "ConnectionType"
         ],
         "operationId": "ConnectionType_Delete",
-        "description": "Delete the connectiontype.",
+        "description": "Delete the connection type.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/connectiontypeoperations"
         },
@@ -53,27 +53,23 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "connectionTypeName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of connectiontype."
+            "description": "The name of connection type."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -86,7 +82,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -96,7 +92,7 @@
           "ConnectionType"
         ],
         "operationId": "ConnectionType_Get",
-        "description": "Retrieve the connectiontype identified by connectiontype name.",
+        "description": "Retrieve the connection type identified by connection type name.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/connectiontypeoperations"
         },
@@ -107,40 +103,36 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "connectionTypeName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of connectiontype."
+            "description": "The name of connection type."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionType"
+              "$ref": "#/definitions/ConnectionType"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -150,7 +142,7 @@
           "ConnectionType"
         ],
         "operationId": "ConnectionType_CreateOrUpdate",
-        "description": "Create a connectiontype.",
+        "description": "Create a connection type.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/connectiontypeoperations"
         },
@@ -161,55 +153,51 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "connectionTypeName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The parameters supplied to the create or update connectiontype operation."
+            "description": "The parameters supplied to the create or update connection type operation."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionTypeCreateOrUpdateParameters"
+              "$ref": "#/definitions/ConnectionTypeCreateOrUpdateParameters"
             },
-            "description": "The parameters supplied to the create or update connectiontype operation."
+            "description": "The parameters supplied to the create or update connection type operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionType"
+              "$ref": "#/definitions/ConnectionType"
             }
           },
           "409": {
             "description": "Conflict",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionType"
+              "$ref": "#/definitions/ConnectionType"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -221,7 +209,7 @@
           "ConnectionType"
         ],
         "operationId": "ConnectionType_ListByAutomationAccount",
-        "description": "Retrieve a list of connectiontypes.",
+        "description": "Retrieve a list of connection types.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/connectiontypeoperations"
         },
@@ -235,33 +223,29 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionTypeListResult"
+              "$ref": "#/definitions/ConnectionTypeListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -271,6 +255,139 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "FieldDefinition": {
+      "properties": {
+        "isEncrypted": {
+          "type": "boolean",
+          "description": "Gets or sets the isEncrypted flag of the connection field definition."
+        },
+        "isOptional": {
+          "type": "boolean",
+          "description": "Gets or sets the isOptional flag of the connection field definition."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the connection field definition."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Definition of the connection fields."
+    },
+    "ConnectionTypeProperties": {
+      "properties": {
+        "isGlobal": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value to indicate if the connection type is global."
+        },
+        "fieldDefinitions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FieldDefinition"
+          },
+          "readOnly": true,
+          "description": "Gets the field definitions of the connection type."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Properties of the connection type."
+    },
+    "ConnectionType": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name of the connection type."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionTypeProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the connection type."
+        }
+      },
+      "description": "Definition of the connection type."
+    },
+    "ConnectionTypeListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionType"
+          },
+          "description": "Gets or sets a list of connection types."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list connection type operation."
+    },
+    "ConnectionTypeCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection type."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionTypeCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the value of the connection type."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update connection type operation."
+    },
+    "ConnectionTypeCreateOrUpdateProperties": {
+      "properties": {
+        "isGlobal": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value to indicate if the connection type is global."
+        },
+        "fieldDefinitions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FieldDefinition"
+          },
+          "description": "Gets or sets the field definitions of the connection type."
+        }
+      },
+      "required": [
+        "fieldDefinitions"
+      ],
+      "description": "The properties of the create connection type."
+    }
+  },
   "parameters": {}
 }

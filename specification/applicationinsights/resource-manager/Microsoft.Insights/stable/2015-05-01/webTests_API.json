@@ -216,7 +216,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/webtests": {
       "get": {
-        "description": "Get all Application Insights web test alerts definitioned within a subscription.",
+        "description": "Get all Application Insights web test alerts definitions within a subscription.",
         "operationId": "WebTests_List",
         "parameters": [
           {
@@ -243,10 +243,46 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{componentName}/webtests": {
+      "get": {
+        "description": "Get all Application Insights web tests defined for the specified component.",
+        "operationId": "WebTests_ListByComponent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ComponentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more web test definitions.",
+            "schema": {
+              "$ref": "#/definitions/webTestListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "webTestListByComponent": {
+            "$ref": "./examples/WebTestListByComponent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
-    "Resource": {
+    "WebtestsResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -318,7 +354,7 @@
       "description": "An Application Insights web test definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/WebtestsResource"
         }
       ],
       "properties": {
@@ -455,6 +491,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ComponentNameParameter": {
+      "name": "componentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
       "x-ms-parameter-location": "method"
     },
     "WebTestNameParameter": {

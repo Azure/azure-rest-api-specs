@@ -138,7 +138,7 @@
           "GetManagementGroupWithExpand": {
             "$ref": "./examples/GetManagementGroupWithExpand.json"
           },
-          "GetManagementGroupsWithExpandAndResurse": {
+          "GetManagementGroupsWithExpandAndRecurse": {
             "$ref": "./examples/GetManagementGroupWithExpandAndRecurse.json"
           }
         }
@@ -1125,14 +1125,14 @@
         "type": {
           "type": "string",
           "enum": [
-            "/providers/Microsoft.Management/managementGroup"
+            "/providers/Microsoft.Management/managementGroups"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false,
             "values": [
               {
-                "value": "/providers/Microsoft.Management/managementGroup"
+                "value": "/providers/Microsoft.Management/managementGroups"
               }
             ]
           },
@@ -1164,7 +1164,7 @@
       "required": true,
       "type": "string",
       "description": "Subscription ID.",
-      "x-ms-parameter-location": "method"      
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",

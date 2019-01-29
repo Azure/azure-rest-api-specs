@@ -17,6 +17,8 @@
                         },
                         "properties": {
                             "hanaInstanceId": "00000000-0000-0000-0000-000000000000",
+                            "powerState": "started",
+                            "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
                             "hardwareProfile": {
                                 "hardwareType": "Cisco_UCS",
                                 "hanaInstanceSize": "S72"
@@ -49,9 +51,11 @@
                         },
                         "properties": {
                             "hanaInstanceId": "00000000-0000-0000-0000-000000000000",
+                            "powerState": "started",
+                            "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
                             "hardwareProfile": {
-                                "hardwareType": "Cisco_UCS",
-                                "hanaInstanceSize": "S72"
+                                "hardwareType": "HPE",
+                                "hanaInstanceSize": "S384"
                             },
                             "networkProfile": {
                                 "networkInterfaces": [
@@ -66,6 +70,68 @@
                             },
                             "osProfile": {
                                 "computerName": "myComputerName2",
+                                "osType": "SUSE",
+                                "version": "12 SP1"
+                            }
+                        }
+                    },
+                    {
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance3",
+                        "name": "myHanaInstance3",
+                        "type": "Microsoft.HanaOnAzure/hanaInstances",
+                        "location": "westus",
+                        "properties": {
+                            "hanaInstanceId": "00000000-0000-0000-0000-000000000000",
+                            "powerState": "started",
+                            "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+                            "hardwareProfile": {
+                                "hardwareType": "HPE",
+                                "hanaInstanceSize": "S960m"
+                            },
+                            "networkProfile": {
+                                "networkInterfaces": [
+                                    {
+                                        "ipAddress": "100.100.100.102"
+                                    }
+                                ],
+                                "circuitId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.Network/expressRouteCircuit"
+                            },
+                            "storageProfile": {
+                                "nfsIpAddress": "200.200.200.202"
+                            },
+                            "osProfile": {
+                                "computerName": "myComputerName3",
+                                "osType": "SUSE",
+                                "version": "12 SP1"
+                            }
+                        }
+                    },
+                    {
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance4",
+                        "name": "myHanaInstance4",
+                        "type": "Microsoft.HanaOnAzure/hanaInstances",
+                        "location": "westus",
+                        "properties": {
+                            "hanaInstanceId": "00000000-0000-0000-0000-000000000000",
+                            "powerState": "started",
+                            "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+                            "hardwareProfile": {
+                                "hardwareType": "Cisco_UCS",
+                                "hanaInstanceSize": "S96"
+                            },
+                            "networkProfile": {
+                                "networkInterfaces": [
+                                    {
+                                        "ipAddress": "100.100.100.103"
+                                    }
+                                ],
+                                "circuitId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.Network/expressRouteCircuit"
+                            },
+                            "storageProfile": {
+                                "nfsIpAddress": "200.200.200.203"
+                            },
+                            "osProfile": {
+                                "computerName": "myComputerName4",
                                 "osType": "SUSE",
                                 "version": "12 SP1"
                             }

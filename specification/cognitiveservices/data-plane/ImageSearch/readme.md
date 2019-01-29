@@ -29,9 +29,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_imagesearch']
 ```
 
 
@@ -71,33 +75,6 @@ python:
   output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-imagesearch
 ```
 
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: imagesearch
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_1_0
-```
-
-### Tag: release_1_0 and go
-
-These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/imagesearch
-```
-
 ## Suppressions
 Suppressing errors due to API design:
 ``` yaml
@@ -106,6 +83,9 @@ directive:
     reason: _type is a polymorphic discriminator that can't be changed.
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -115,9 +95,11 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.imagesearch
+  namespace: com.microsoft.azure.cognitiveservices.search.imagesearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/imagesearch
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/search/bingimagesearch
+  with-optional-parameters: true
+  prefix-model-type: Bing
+  with-single-async-method: true
 ```

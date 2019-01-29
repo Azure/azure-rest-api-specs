@@ -256,8 +256,7 @@
           "CreateSuppression": {
             "$ref": "./examples/EmptyResponse.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
@@ -759,6 +758,13 @@
           "type": "array",
           "items": {
             "format": "uuid",
+            "type": "string"
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }

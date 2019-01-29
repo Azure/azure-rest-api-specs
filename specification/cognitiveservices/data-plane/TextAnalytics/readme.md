@@ -1,7 +1,7 @@
 # Cognitive Services Language SDK
 
 The Cognitive Service Language SDK has support for the Text Analytics Cognitive Service.
-While this repository contains the [Autorest](https://aka.ms/autorest) generated SDK, the easiest way to consume the SDK is by installing the Nuget package for it.
+While this repository contains the [Autorest](https://aka.ms/autorest) generated SDK, the easiest way to consume the SDK is by installing the NuGet package for it.
 
 Note that the Cognitive Services Language SDK is simply a wrapper on top of the Text Analytics Cognitive service. As such, it will generate calls to the Azure service.
 
@@ -11,12 +11,12 @@ You must have a [Cognitive Services API account](https://docs.microsoft.com/azur
 
 You must also have the [endpoint and access key](../How-tos/text-analytics-how-to-access-key.md) that was generated for you during sign up.
 
-## Installing the Nuget SDK Package
+## Installing the NuGet SDK Package
 1. Create a new Console solution in Visual Studio.
 1. Right click on the solution and click **Manage NuGet Packages for Solution**
 1. Mark the **Include Prerelease** checkbox.
 1. Select the **Browse** tab, and Search for **Microsoft.Azure.CognitiveServices.Language**
-1. Select the Nuget package and install it.
+1. Select the NuGet package and install it.
 
 ## Calling the Text Analytics API using the SDK
 The following code snippets show to consume the SDK. Note that you will need to replace `client.SubscriptionKey` with the key you received when you signed up and `client.AzureRegion` with the region you signed up for.
@@ -109,21 +109,34 @@ namespace ConsoleApp1
     }
 }
 ```
-# Releases
+
+## Releases
 
 > see https://aka.ms/autorest
 
 The current release is `release_2_0`.
+A preview release `release_2_1` is also available.
+
 ``` yaml
-tag: release_2_0
+tag: release_2_1
 add-credentials: true
 ```
 
 ### Release 2.0
+
 These settings apply only when `--tag=release_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_0'
 input-file: stable/v2.0/TextAnalytics.json
+log-file: logs/log.txt
+```
+
+### Release 2.1-Preview
+
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file: preview/v2.1/TextAnalytics.json
 log-file: logs/log.txt
 ```
 
@@ -135,21 +148,26 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_textanalytics']
 ```
 
-
 ## CSharp Settings
+
 These settings apply only when `--csharp` is specified on the command line.
+
 ``` yaml $(csharp)
 csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.TextAnalytics
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/Microsoft.CognitiveServices.Language/Generated/TextAnalytics
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/TextAnalytics/Generated/TextAnalytics
   clear-output-folder: true
 ```
 
@@ -169,11 +187,13 @@ python:
   package-name: azure-cognitiveservices-language-textanalytics
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-textanalytics/azure/cognitiveservices/language/textanalytics
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -182,31 +202,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: textanalytics
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_2_0
-```
-
-### Tag: release_2_0 and go
-
-These settings apply only when `--tag=release_2_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_2_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/textanalytics
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -216,9 +212,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.cognitiveservices.textanalytics
+  namespace: com.microsoft.azure.cognitiveservices.language.textanalytics
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/textanalytics
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/language/textanalytics
+  with-optional-parameters: true
+  with-single-async-method: true
 ```

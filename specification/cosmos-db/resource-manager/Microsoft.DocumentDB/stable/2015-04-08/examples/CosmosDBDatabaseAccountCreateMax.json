@@ -11,6 +11,13 @@
       "properties": {
         "databaseAccountOfferType": "Standard",
         "ipRangeFilter": "10.10.10.10",
+        "isVirtualNetworkFilterEnabled": true,
+        "virtualNetworkRules": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+            "ignoreMissingVNetServiceEndpoint": false
+          }
+        ],
         "locations": [
           {
             "failoverPriority": 0,
@@ -41,6 +48,7 @@
         "properties": {
           "provisioningState": "Initializing",
           "ipRangeFilter": "10.10.10.10",
+          "isVirtualNetworkFilterEnabled": true,
           "databaseAccountOfferType": "Standard",
           "consistencyPolicy": {
             "defaultConsistencyLevel": "BoundedStaleness",
@@ -79,6 +87,11 @@
               "id": "ddb1-eastus",
               "locationName": "East US",
               "failoverPriority": 1
+            }
+          ],
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
             }
           ]
         }

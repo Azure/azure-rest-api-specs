@@ -5,7 +5,6 @@
 This is the AutoRest configuration file for ServiceFabricClient.
 
 
-
 ---
 ## Getting Started
 To build the SDK for ServiceFabricClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -26,52 +25,78 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.1'
+tag: '6.4'
 ```
 
+### Suppression
 
-### Tag: 1.0.0
+``` yaml
+directive:
+  - suppress: OperationIdNounVerb
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
+  - suppress: ListInOperationName
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
+  - suppress: GetInOperationName
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
+  - suppress: PutInOperationName
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
+  - suppress: HttpsSupportedScheme
+    reason: Service Fabric clusters are owned by the users and they can be configured to have a secure or un-secure client connection endpoint.
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    reason: Service Fabric platform has already established pattern for paged responses based on ContinuationToken parameter.
+  - suppress: SecurityDefinitionsStructure
+    reason: Service Fabric clusters support various security mechanism for the REST endpoint, this includes certificate, Kerberos, AD, AAD and others. The documentation for the REST API includes information on how to authenticate to the cluster endpoint secured with different mechanisms.
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: Service Fabric platform uses query based mechanism for some of the long running operations.
+  - suppress: PostOperationIdContainsUrlVerb
+    reason: The URL scheme for Service Fabric does not follow Azure Service rules. Service Fabric supports various functions on different entities that are modeled using POST.
+  - suppress: APIVersionPattern
+    reason: The URL scheme for Service Fabric does not follow Azure Service rules. Service Fabric supports various functions on different entities that are modeled using POST.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The property names for Service Fabric follow the naming scheme of existing property names in our client SDK and concepts.
+  - suppress: GuidUsage
+    reason: The IDs of the service partition in Service Fabric are GUIDs.
+  - suppress: EnumInsteadOfBoolean
+    reason:  The boolean properties are actually boolean value in the Service Fabric's application model.
+  - suppress: OperationsAPIImplementation
+    reason: Service Fabric client API is not an ARM based API and hence this rule is not applicable.
+  - suppress: XmsExamplesRequired
+    reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
 
-These settings apply only when `--tag=1.0.0` is specified on the command line.
-
-``` yaml $(tag) == '1.0.0'
-input-file:
-- Microsoft.ServiceFabric/stable/1.0.0/servicefabric.json
 ```
 
+### Tag: 6.2
 
-### Tag: 5.6
+These settings apply only when `--tag=6.2` is specified on the command line.
 
-These settings apply only when `--tag=5.6` is specified on the command line.
-
-``` yaml $(tag) == '5.6'
+``` yaml $(tag) == '6.2'
 input-file:
-- Microsoft.ServiceFabric/stable/5.6/servicefabric.json
+- Microsoft.ServiceFabric/stable/6.2/servicefabric.json
+
 ```
 
+### Tag: 6.3
 
-### Tag: 6.0
+These settings apply only when `--tag=6.3` is specified on the command line.
 
-These settings apply only when `--tag=6.0` is specified on the command line.
-
-``` yaml $(tag) == '6.0'
+``` yaml $(tag) == '6.3'
 input-file:
-- Microsoft.ServiceFabric/stable/6.0/servicefabric.json
+- Microsoft.ServiceFabric/stable/6.3/servicefabric.json
+
 ```
 
+### Tag: 6.4
 
-### Tag: 6.1
+These settings apply only when `--tag=6.4` is specified on the command line.
 
-These settings apply only when `--tag=6.1` is specified on the command line.
-
-``` yaml $(tag) == '6.1'
+``` yaml $(tag) == '6.4'
 input-file:
-- Microsoft.ServiceFabric/stable/6.1/servicefabric.json
+- Microsoft.ServiceFabric/stable/6.4/servicefabric.json
+
 ```
 
 ---
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -81,11 +106,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
-
 
 ## Python
 
@@ -100,7 +125,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.servicefabric
   package-name: azure-servicefabric
-  package-version: 6.1.2.9
+  package-version: 6.4.0.0
   add-credentials: true
   clear-output-folder: true
 ```
@@ -115,60 +140,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-servicefabric
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: servicefabric
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: "1.0.0"
-  - tag: "5.6"
-  - tag: "6.0"
-  - tag: "6.1"
-```
-
-### Tag: 1.0.0 and go
-
-These settings apply only when `--tag=1.0.0 --go` is specified on the command line.
-
-``` yaml $(tag) == '1.0.0' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/1.0.0/servicefabric
-```
-
-### Tag: 5.6 and go
-
-These settings apply only when `--tag=5.6 --go` is specified on the command line.
-
-``` yaml $(tag) == '5.6' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/5.6/servicefabric
-```
-
-### Tag: 6.0 and go
-
-These settings apply only when `--tag=6.0 --go` is specified on the command line.
-
-``` yaml $(tag) == '6.0' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.0/servicefabric
-```
-
-### Tag: 6.1 and go
-
-These settings apply only when `--tag=6.1 --go` is specified on the command line.
-
-``` yaml $(tag) == '6.1' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.1/servicefabric
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

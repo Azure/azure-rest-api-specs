@@ -168,7 +168,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or update elastic pool with mininum parameters": {
+          "Create or update elastic pool with minimum parameters": {
             "$ref": "./examples/ElasticPoolCreateOrUpdateMin.json"
           },
           "Create or update elastic pool with all parameter": {
@@ -279,7 +279,7 @@
           "Update an elastic pool with all parameter": {
             "$ref": "./examples/ElasticPoolUpdateMax.json"
           },
-          "Update an elastic pool with mininum parameters": {
+          "Update an elastic pool with minimum parameters": {
             "$ref": "./examples/ElasticPoolUpdateMin.json"
           }
         }
@@ -303,36 +303,6 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "Sku": {
-      "description": "An ARM Resource SKU.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
-        },
-        "size": {
-          "description": "Size of the particular SKU",
-          "type": "string"
-        },
-        "family": {
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Capacity of the particular SKU.",
-          "type": "integer"
         }
       }
     },
@@ -403,57 +373,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ElasticPool": {
       "description": "An elastic pool.",
       "required": [
@@ -462,12 +381,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../common/v1/types.json#/definitions/Sku"
         },
         "kind": {
           "description": "Kind of elastic pool. This is metadata used for the Azure portal experience.",
@@ -486,7 +405,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../common/v1/types.json#/definitions/Sku"
         },
         "properties": {
           "$ref": "#/definitions/ElasticPoolUpdateProperties",
@@ -532,16 +451,6 @@
           }
         }
       }
-    },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
     }
   },
   "parameters": {

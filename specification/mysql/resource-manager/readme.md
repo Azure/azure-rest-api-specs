@@ -30,16 +30,6 @@ tag: package-2017-12-01
 ```
 
 
-### Tag: package-2017-04-preview
-
-These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-04-preview'
-input-file:
-- Microsoft.DBforMySQL/preview/2017-04-30-preview/mysql.json
-```
-
-
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
@@ -50,14 +40,14 @@ input-file:
 ```
 
 
-### Tag: package-2017-12-01 
+### Tag: package-2017-12-01
 
-These settings apply only when `--tag=package-2017-12-01` is specified on the command line. 
+These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-12-01' 
-input-file: 
-- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json 
-``` 
+``` yaml $(tag) == 'package-2017-12-01'
+input-file:
+- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+```
 
 
 ---
@@ -72,8 +62,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -120,51 +111,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: mysql
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-12-01
-```
-
-### Tag: package-2017-04-preview and go
-
-These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-04-30-preview/mysql
-```
-
-### Tag: package-2017-12-01-preview and go
-
-These settings apply only when `--tag=package-2017-12-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-12-01-preview/mysql
-```
-
-### Tag: package-2017-12-01 and go 
-
-These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line. 
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`. 
-
-``` yaml $(tag) == 'package-2017-12-01' && $(go) 
-output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-12-01/mysql
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -172,11 +121,30 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.mysql
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mysql
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-12-01
+```
+
+### Tag: package-2017-12-01 and java
+
+These settings apply only when `--tag=package-2017-12-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.mysql
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mysql
+  namespace: com.microsoft.azure.management.mysql.v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/mysql/resource-manager/v2017_12_01
+regenerate-manager: true
+generate-interface: true
 ```

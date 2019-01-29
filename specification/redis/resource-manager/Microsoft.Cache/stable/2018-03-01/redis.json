@@ -77,7 +77,7 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityParameters"
             },
-            "description": "Parameters supplied to the CheckNameAvailability Redis operation."
+            "description": "Parameters supplied to the CheckNameAvailability Redis operation. The only supported resource type is 'Microsoft.Cache/redis'"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -864,10 +864,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/patchSchedules": {
+      "get": {
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
+        "operationId": "PatchSchedules_ListByRedisResource",
+        "description": "Gets all patch schedules in the specified redis cache (there is only one).",
+        "x-ms-examples": {
+          "RedisCachePatchSchedulesList": { "$ref": "./examples/RedisCachePatchSchedulesList.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the current patch schedules",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchScheduleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/{default}": {
       "put": {
         "tags": [
-          "Redis"
+          "Redis",
+          "PatchSchedules"
         ],
         "operationId": "PatchSchedules_CreateOrUpdate",
         "x-ms-examples": {
@@ -936,7 +983,8 @@
       },
       "delete": {
         "tags": [
-          "Redis"
+          "Redis",
+          "PatchSchedules"
         ],
         "operationId": "PatchSchedules_Delete",
         "x-ms-examples": {
@@ -990,7 +1038,8 @@
       },
       "get": {
         "tags": [
-          "Redis"
+          "Redis",
+          "PatchSchedules"
         ],
         "operationId": "PatchSchedules_Get",
         "x-ms-examples": {
@@ -1337,7 +1386,7 @@
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
-          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
+          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
         "staticIP": {
           "type": "string",
@@ -1630,7 +1679,7 @@
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Link for next set of locations."
+          "description": "Link for next page of results."
         }
       },
       "description": "The response of list firewall rules Redis operation."
@@ -1672,7 +1721,7 @@
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Link for next set of locations."
+          "description": "Link for next page of results."
         }
       },
       "description": "The response of list Redis operation."
@@ -1835,6 +1884,23 @@
       ],
       "description": "Response to put/get patch schedules for Redis cache."
     },
+    "RedisPatchScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisPatchSchedule"
+          },
+          "description": "Results of the list patch schedules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list patch schedules Redis operation."
+    },
     "RedisForceRebootResponse": {
       "properties": {
         "message": {
@@ -1892,7 +1958,7 @@
           "items": {
             "$ref": "#/definitions/RedisLinkedServerWithProperties"
           },
-          "description": "List of linked servers (with properites) of a Redis cache."
+          "description": "List of linked servers (with properties) of a Redis cache."
         },
         "nextLink": {
           "type": "string",
@@ -1900,7 +1966,7 @@
           "description": "Link for next set."
         }
       },
-      "description": "List of linked servers (with properites) of a Redis cache."
+      "description": "List of linked servers (with properties) of a Redis cache."
     },
     "RedisLinkedServerCreateProperties": {
       "description": "Create properties for a linked server",
@@ -1994,7 +2060,7 @@
       }
     },
     "CheckNameAvailabilityParameters": {
-      "description": "Parameters body to pass for  name availability check.",
+      "description": "Parameters body to pass for resource name availability check.",
       "properties": {
         "name": {
           "type": "string",
@@ -2002,9 +2068,13 @@
         },
         "type": {
           "type": "string",
-          "description": "Resource type."
+          "description": "Resource type. The only legal value of this property for checking redis cache name availability is 'Microsoft.Cache/redis'."
         }
-      }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
     },
     "UpgradeNotification": {
       "properties": {
@@ -2017,7 +2087,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when upgrade notification occured."
+          "description": "Timestamp when upgrade notification occurred."
         },
         "upsellNotification": {
           "readOnly": true,
@@ -2049,19 +2119,19 @@
     }
   },
   "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
-      }
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
+}

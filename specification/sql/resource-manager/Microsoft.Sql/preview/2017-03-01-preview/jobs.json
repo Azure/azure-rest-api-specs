@@ -147,7 +147,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 JobAgentDatabaseAlreadyLinked - The specified database is already linked to another job agent.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
           },
           "202": {
             "description": "Accepted"
@@ -161,8 +161,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or update a job agent": {
-            "$ref": "./examples/CreateOrUpdateJobAgent.json"
+          "Create or update a job agent with minimum properties": {
+            "$ref": "./examples/CreateOrUpdateJobAgentMin.json"
+          },
+          "Create or update a job agent with all properties": {
+            "$ref": "./examples/CreateOrUpdateJobAgentMax.json"
           }
         }
       },
@@ -258,7 +261,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified."
           },
           "202": {
             "description": "Accepted"
@@ -513,11 +516,57 @@
             "type": "string"
           },
           {
+            "name": "createTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions created at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "createTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions created before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions completed at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions completed before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "description": "If specified, only active or only completed job executions are included.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "$skip",
             "in": "query",
             "description": "The number of elements in the collection to skip.",
             "required": false,
-            "type": "string"
+            "type": "integer"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -543,6 +592,9 @@
         "x-ms-examples": {
           "List all job executions in a job agent.": {
             "$ref": "./examples/ListJobExecutionsByAgent.json"
+          },
+          "List all job executions in a job agent with filtering.": {
+            "$ref": "./examples/ListJobExecutionsByAgentWithFilter.json"
           }
         }
       }
@@ -691,11 +743,57 @@
             "type": "string"
           },
           {
+            "name": "createTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions created at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "createTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions created before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions completed at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions completed before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "description": "If specified, only active or only completed job executions are included.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "$skip",
             "in": "query",
             "description": "The number of elements in the collection to skip.",
             "required": false,
-            "type": "string"
+            "type": "integer"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -789,7 +887,7 @@
         "tags": [
           "JobExecutions"
         ],
-        "description": "Creates or updatess a job execution.",
+        "description": "Creates or updates a job execution.",
         "operationId": "JobExecutions_CreateOrUpdate",
         "parameters": [
           {
@@ -1073,6 +1171,191 @@
         "x-ms-examples": {
           "Delete a job": {
             "$ref": "./examples/DeleteJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps": {
+      "get": {
+        "tags": [
+          "JobStepExecutions"
+        ],
+        "description": "Lists the step executions of a job execution.",
+        "operationId": "JobStepExecutions_ListByJobExecution",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobExecutionId",
+            "in": "path",
+            "description": "The id of the job execution",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "createTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions created at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "createTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions created before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions completed at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions completed before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "description": "If specified, only active or only completed job executions are included.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the step executions.",
+            "schema": {
+              "$ref": "#/definitions/JobExecutionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List job step executions": {
+            "$ref": "./examples/ListJobExecutionSteps.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}": {
+      "get": {
+        "tags": [
+          "JobStepExecutions"
+        ],
+        "description": "Gets a step execution of a job execution.",
+        "operationId": "JobStepExecutions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobExecutionId",
+            "in": "path",
+            "description": "The unique id of the job execution",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the step execution.",
+            "schema": {
+              "$ref": "#/definitions/JobExecution"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get a job step execution": {
+            "$ref": "./examples/GetJobExecutionStep.json"
           }
         }
       }
@@ -1459,6 +1742,323 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/targets": {
+      "get": {
+        "tags": [
+          "JobTargetExecutions"
+        ],
+        "description": "Lists target executions for all steps of a job execution.",
+        "operationId": "JobTargetExecutions_ListByJobExecution",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobExecutionId",
+            "in": "path",
+            "description": "The id of the job execution",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "createTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions created at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "createTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions created before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions completed at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions completed before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "description": "If specified, only active or only completed job executions are included.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the target executions.",
+            "schema": {
+              "$ref": "#/definitions/JobExecutionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List job step target executions": {
+            "$ref": "./examples/ListJobExecutionTargetsByExecution.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets": {
+      "get": {
+        "tags": [
+          "JobTargetExecutions"
+        ],
+        "description": "Lists the target executions of a job step execution.",
+        "operationId": "JobTargetExecutions_ListByStep",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobExecutionId",
+            "in": "path",
+            "description": "The id of the job execution",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions created at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "createTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions created before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMin",
+            "in": "query",
+            "description": "If specified, only job executions completed at or after the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTimeMax",
+            "in": "query",
+            "description": "If specified, only job executions completed before the specified time are included.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "description": "If specified, only active or only completed job executions are included.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the target executions.",
+            "schema": {
+              "$ref": "#/definitions/JobExecutionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List job step target executions": {
+            "$ref": "./examples/ListJobExecutionTargetsByStep.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}": {
+      "get": {
+        "tags": [
+          "JobTargetExecutions"
+        ],
+        "description": "Gets a target execution.",
+        "operationId": "JobTargetExecutions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobExecutionId",
+            "in": "path",
+            "description": "The unique id of the job execution",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetId",
+            "in": "path",
+            "description": "The target id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the target execution.",
+            "schema": {
+              "$ref": "#/definitions/JobExecution"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get a job step target execution": {
+            "$ref": "./examples/GetJobExecutionTarget.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups": {
       "get": {
         "tags": [
@@ -1621,11 +2221,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a target group with minimal properties.": {
-            "$ref": "./examples/CreateOrUpdateJobTargetGroupMin.json"
-          },
           "Create or update a target group with all properties.": {
             "$ref": "./examples/CreateOrUpdateJobTargetGroupMax.json"
+          },
+          "Create or update a target group with minimal properties.": {
+            "$ref": "./examples/CreateOrUpdateJobTargetGroupMin.json"
           }
         }
       },
@@ -1833,56 +2433,21 @@
             "read",
             "create"
           ]
-        }
-      }
-    },
-    "Resource": {
-      "description": "ARM resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
         },
-        "name": {
-          "description": "Resource name.",
+        "state": {
+          "description": "The state of the job agent.",
+          "enum": [
+            "Creating",
+            "Ready",
+            "Updating",
+            "Deleting",
+            "Disabled"
+          ],
           "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobAgentState",
+            "modelAsString": true
           }
         }
       }
@@ -1895,10 +2460,14 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
         "properties": {
           "$ref": "#/definitions/JobAgentProperties",
           "description": "Resource properties.",
@@ -1960,22 +2529,12 @@
         }
       }
     },
-    "ProxyResource": {
-      "description": "ARM proxy resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {}
-    },
     "JobCredential": {
       "description": "A stored credential that can be used by a job to connect to target databases.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2147,7 +2706,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2232,7 +2791,7 @@
           "type": "boolean"
         },
         "interval": {
-          "description": "Value of the schedule's recurring interval, if the scheduletype is recurring. ISO8601 duration format.",
+          "description": "Value of the schedule's recurring interval, if the schedule type is recurring. ISO8601 duration format.",
           "type": "string"
         }
       }
@@ -2242,7 +2801,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2348,9 +2907,9 @@
     "JobStepOutput": {
       "description": "The output configuration of a job step.",
       "required": [
-        "server",
-        "database",
-        "table",
+        "serverName",
+        "databaseName",
+        "tableName",
         "credential"
       ],
       "type": "object",
@@ -2372,24 +2931,24 @@
           "description": "The output destination subscription id.",
           "type": "string"
         },
-        "resourceGroup": {
+        "resourceGroupName": {
           "description": "The output destination resource group.",
           "type": "string"
         },
-        "server": {
+        "serverName": {
           "description": "The output destination server name.",
           "type": "string"
         },
-        "database": {
+        "databaseName": {
           "description": "The output destination database.",
           "type": "string"
         },
-        "schema": {
+        "schemaName": {
           "description": "The output destination schema.",
           "default": "dbo",
           "type": "string"
         },
-        "table": {
+        "tableName": {
           "description": "The output destination table.",
           "type": "string"
         },
@@ -2440,7 +2999,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2548,7 +3107,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2583,7 +3142,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {}
@@ -2636,6 +3195,17 @@
       "description": "The name of the database.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
       "x-ms-parameter-location": "method"
     },
     "SqlVirtualMachineInstanceNameParameter": {

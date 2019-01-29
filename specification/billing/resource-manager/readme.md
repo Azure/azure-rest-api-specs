@@ -69,9 +69,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
 ```
 
 
@@ -88,6 +92,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Billing/Management.Billing/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
@@ -117,65 +125,66 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-billing
 ```
 
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: billing
-  clear-output-folder: true
-```
-
-### Go multi-api
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03-preview
-  - tag: package-2017-04-preview
-  - tag: package-2017-02-preview
-```
-
-### Tag: package-2018-03-preview and go
-
-These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/billing/mgmt/2018-03-01-preview/billing
-```
-
-### Tag: package-2017-04-preview and go
-
-These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/billing/mgmt/2017-04-24-preview/billing
-```
-
-### Tag: package-2017-02-preview and go
-
-These settings apply only when `--tag=package-2017-02-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/billing/mgmt/2017-02-27-preview/billing
-```
-
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.billing
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.billing
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-04-preview
+  - tag: package-2018-03-preview
+  - tag: package-2017-02-preview
+```
+
+### Tag: package-2017-04-preview and java
+
+These settings apply only when `--tag=package-2017-04-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_04_24_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-03-preview and java
+
+These settings apply only when `--tag=package-2018-03-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_03_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-02-preview and java
+
+These settings apply only when `--tag=package-2017-02-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2017_02_27_preview
+  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_02_27_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+

@@ -8,7 +8,6 @@
      "title": "iotDpsClient",
      "description": "API for using the Azure IoT Hub Device Provisioning Service features."
     },
-    
     "host": "management.azure.com",
     "schemes": [
      "https"
@@ -221,7 +220,7 @@
        ],
        "operationId": "DpsCertificate_Delete",
        "summary": "Delete the Provisioning Service Certificate.",
-       "description": "Deletes the specified certificate assosciated with the Provisioning Service",
+       "description": "Deletes the specified certificate associated with the Provisioning Service",
        "x-ms-examples": {
            "DPSDeleteCertificate": { "$ref": "./examples/DPSDeleteCertificate.json" }
        },
@@ -1009,7 +1008,7 @@
          "name": "request",
          "in": "body",
          "required": true,
-         "description": "The name of the certificate",         
+         "description": "The name of the certificate",
          "schema": {
           "$ref": "#/definitions/VerificationCodeRequest"
          }
@@ -1399,10 +1398,10 @@
      },
      "IotDpsSkuInfo": {
       "type": "object",
-      "description": "List of possible provisoning service SKUs.",
+      "description": "List of possible provisioning service SKUs.",
       "properties": {
        "name": {
-        "description": "Sku name.",        
+        "description": "Sku name.",
         "enum": [
          "S1"
         ],
@@ -1433,11 +1432,11 @@
         "type": "string"
        },
        "properties": {
-        "description": "Service specific properties for a provisioning service",   
+        "description": "Service specific properties for a provisioning service",
         "$ref": "#/definitions/IotDpsPropertiesDescription"
        },
        "sku": {
-        "description": "SKU info for a provisioning service.",        
+        "description": "SKU info for a provisioning service.",
         "$ref": "#/definitions/IotDpsSkuInfo"
        }
       },
@@ -1452,7 +1451,7 @@
       ]
      },
      "IotDpsPropertiesDescription": {
-      "description": "the service specific properties of a provisoning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
+      "description": "the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
       "type": "object",
       "properties": {
        "state": {
@@ -1483,7 +1482,7 @@
        },
        "iotHubs": {
         "type": "array",
-        "description": "List of IoT hubs assosciated with this provisioning service.",
+        "description": "List of IoT hubs associated with this provisioning service.",
         "items": {
          "$ref": "#/definitions/IotHubDefinitionDescription"
         }
@@ -1711,7 +1710,7 @@
       "description": "List of shared access keys.",
       "properties": {
        "value": {
-        "description": "The list of shared access policies.",        
+        "description": "The list of shared access policies.",
         "type": "array",
         "items": {
          "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
@@ -1729,14 +1728,14 @@
       "description": "List of available SKUs.",
       "properties": {
        "value": {
-        "description": "The list of SKU's",                
+        "description": "The list of SKUs",
         "type": "array",
         "items": {
          "$ref": "#/definitions/IotDpsSkuDefinition"
         }
        },
        "nextLink": {
-        "description": "The next link.",                
+        "description": "The next link.",
         "type": "string",
         "readOnly": true
        }
@@ -1744,10 +1743,10 @@
      },
      "IotDpsSkuDefinition": {
       "type": "object",
-      "description": "Available SKU's of tier and units.",
+      "description": "Available SKUs of tier and units.",
       "properties": {
        "name": {
-        "description": "SKU name.",     
+        "description": "SKU name.",
         "enum": [
          "S1"
         ],
@@ -1793,7 +1792,7 @@
         }
        },
        "message": {
-        "description": "message containing a etailed reason name is unavailable",
+        "description": "message containing a detailed reason name is unavailable",
         "type": "string"
        }
       }

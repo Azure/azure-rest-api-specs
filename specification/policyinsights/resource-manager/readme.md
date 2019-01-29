@@ -1,5 +1,5 @@
 # PolicyInsights
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for PolicyInsights.
@@ -21,13 +21,13 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the PolicyInsights API.
 
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2017-12
+tag: package-2018-07
 ```
 
 ### Validations
@@ -56,6 +56,30 @@ directive:
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
 
 ```
+
+### Tag: package-2018-07
+
+These settings apply only when `--tag=package-2018-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07'
+input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
+- Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
+- Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
+```
+
+
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
+- Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
+```
+
 
 ### Tag: package-2017-12
 
@@ -102,12 +126,14 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -148,54 +174,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: policyinsights
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-12
-  - tag: package-2017-10
-  - tag: package-2017-08
-```
-
-### Tag: package-2017-12 and go
-
-These settings apply only when `--tag=package-2017-12 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-12-12-preview/policyinsights
-```
-
-### Tag: package-2017-10 and go
-
-These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-10-17-preview/policyinsights
-```
-
-### Tag: package-2017-08 and go
-
-These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/policyinsights/mgmt/2017-08-09-preview/policyinsights
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -203,11 +184,45 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.policyinsights
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-policyinsights
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.policyinsights
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-policyinsights
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-07
+  - tag: package-2018-04
+```
+
+### Tag: package-2018-07 and java
+
+These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07' && $(java)
+java:
+  namespace: com.microsoft.azure.management.policyinsights.v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/policyinsights/resource-manager/v2018_07_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-04 and java
+
+These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04' && $(java)
+java:
+  namespace: com.microsoft.azure.management.policyinsights.v2018_04_04
+  output-folder: $(azure-libraries-for-java-folder)/policyinsights/resource-manager/v2018_04_04
+regenerate-manager: true
+generate-interface: true
+```
+

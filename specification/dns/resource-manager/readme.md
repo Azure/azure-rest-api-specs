@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for DNS.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for DNS, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,48 @@ To build the SDK for DNS, simply [Install AutoRest](https://aka.ms/autorest/inst
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2018-05
 ```
 
+
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-05'
+input-file:
+  - Microsoft.Network/stable/2018-05-01/dns.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+  - where:
+      - $.definitions.RecordSetProperties.properties.TTL
+      - $.definitions.RecordSetProperties.properties.ARecords
+      - $.definitions.RecordSetProperties.properties.AAAARecords
+      - $.definitions.RecordSetProperties.properties.MXRecords
+      - $.definitions.RecordSetProperties.properties.NSRecords
+      - $.definitions.RecordSetProperties.properties.PTRRecords
+      - $.definitions.RecordSetProperties.properties.SRVRecords
+      - $.definitions.RecordSetProperties.properties.TXTRecords
+      - $.definitions.RecordSetProperties.properties.CNAMERecord
+      - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetUpdateParameters.properties.RecordSet
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase  
+```
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
@@ -112,10 +140,7 @@ input-file:
 - Microsoft.Network/preview/2015-05-04-preview/dns.json
 ```
 
-
----
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -125,11 +150,17 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-dns
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-typescript
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_dns']
 ```
-
 
 ## C#
 
@@ -146,101 +177,9 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.dns
-  package-name: azure-mgmt-dns
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-dns/azure/mgmt/dns
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-dns
-```
-
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: dns
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03-preview
-  - tag: package-2017-10
-  - tag: package-2017-09
-  - tag: package-2016-04
-  - tag: package-2015-05-preview
-```
-
-### Tag: package-2018-03-preview and go
-
-These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/dns/mgmt/2018-03-01-preview/dns
-```
-
-### Tag: package-2017-10 and go
-
-These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2017-10-01/dns
-```
-
-### Tag: package-2017-09 and go
-
-These settings apply only when `--tag=package-2017-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-09' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2017-09-01/dns
-```
-
-### Tag: package-2016-04 and go
-
-These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-04' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2016-04-01/dns
-```
-
-### Tag: package-2015-05-preview and go
-
-These settings apply only when `--tag=package-2015-05-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2015-05-04-preview/dns
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -248,11 +187,44 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.dns
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dns
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-10
+  - tag: package-2016-04
+```
+
+### Tag: package-2017-10 and java
+
+These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.dns
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dns
+  namespace: com.microsoft.azure.management.dns.v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/dns/resource-manager/v2017_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2016-04 and java
+
+These settings apply only when `--tag=package-2016-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.dns.v2016_04_01
+  output-folder: $(azure-libraries-for-java-folder)/dns/resource-manager/v2016_04_01
+regenerate-manager: true
+generate-interface: true
 ```

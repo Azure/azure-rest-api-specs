@@ -1,0 +1,39 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ConnectToTargetSqlSqlDbSyncTaskInput": {
+      "type": "object",
+      "description": "Input for the task that validates connection to Azure SQL DB and target server requirements",
+      "properties": {
+        "sourceConnectionInfo": {
+          "description": "Connection information for source SQL Server",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "targetConnectionInfo": {
+          "description": "Connection information for target SQL DB",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        }
+      },
+      "required": [
+        "sourceConnectionInfo",
+        "targetConnectionInfo"
+      ]
+    }
+  }
+}

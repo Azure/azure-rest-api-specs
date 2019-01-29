@@ -53,7 +53,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of ExpressRouteCrossConnection resources. If there are no crossconnection resources an empty list is returned.",
+            "description": "Request successful. The operation returns a list of ExpressRouteCrossConnection resources. If there are no cross connection resources an empty list is returned.",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCrossConnectionListResult"
             }
@@ -93,7 +93,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful.The operation returns a list of ExpressRouteCrossConnection resources. If there are no crossconnection resources an empty list is returned.",
+            "description": "Request successful.The operation returns a list of ExpressRouteCrossConnection resources. If there are no cross connection resources an empty list is returned.",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCrossConnectionListResult"
             }
@@ -726,18 +726,15 @@
           "description": "The identifier of the circuit traffic."
         },
         "peeringLocation": {
-          "readOnly": true,
           "type": "string",
           "description": "The peering location of the ExpressRoute circuit."
         },
         "bandwidthInMbps": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The circuit bandwidth In Mbps."
         },
         "expressRouteCircuit": {
-          "readOnly": true,
           "$ref": "#/definitions/ExpressRouteCircuitReference",
           "description": "The ExpressRouteCircuit"
         },
@@ -870,7 +867,6 @@
           "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         },
         "gatewayManagerEtag": {
-          "readOnly": true,
           "type": "string",
           "description": "The GatewayManager Etag."
         },
