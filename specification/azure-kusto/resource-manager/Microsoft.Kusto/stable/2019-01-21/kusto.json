@@ -1410,7 +1410,8 @@
           "type": "string",
           "description": "GUID representing an external tenant."
         }
-      }
+      },
+	  "description": "Repersents a tenant ID that is trusted by the cluster."
     },
     "AvailabilityZone": {
       "properties": {
@@ -1418,7 +1419,8 @@
           "type": "string",
           "description": "Availability Zone where a cluster can be deployed to."
         }
-      }
+      },
+      "description": "Defines Azure availability zone where a cluster can be deployed to."
     },
     "AzureResourceSku": {
       "properties": {
@@ -1434,7 +1436,8 @@
           "$ref": "#/definitions/AzureCapacity",
           "description": "The SKU capacity."
         }
-      }
+      },
+      "description": "Azure resource SKU definition."
     },
     "AzureCapacity": {
       "type": "object",
@@ -1470,7 +1473,8 @@
           "description": "The default capacity that would be used.",
           "type": "integer"
         }
-      }
+      },
+      "description": "Azure capacity definition."
     },
     "AzureSku": {
       "type": "object",
@@ -1515,7 +1519,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "description": "Azure SKU definition."
     },
     "DatabaseStatistics": {
       "type": "object",
@@ -1525,7 +1530,8 @@
           "type": "number",
           "description": "The database size - the total size of compressed data and index in bytes."
         }
-      }
+      },
+      "description": "A class that contains database statistics information."
     },
     "DatabaseProperties": {
       "properties": {
@@ -1665,7 +1671,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterProperties"
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The cluster properties."
         }
       },
       "allOf": [
@@ -1704,6 +1711,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
+          "description": "The cluster properites.",
           "$ref": "#/definitions/ClusterProperties"
         }
       },
@@ -1723,12 +1731,13 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
+          "description": "The database properties.",
           "$ref": "#/definitions/DatabaseProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Class representing a Kusto database."
@@ -1746,6 +1755,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
+          "description": "The properties of the updated database.",
           "$ref": "#/definitions/DatabaseProperties"
         }
       },
@@ -1809,7 +1819,8 @@
           "description": "Application id - relevant only for application principal type.",
           "type": "string"
         }
-      }
+      },
+      "description": "A class representing database principal entity."
     },
     "ClusterListResult": {
       "properties": {
@@ -1884,7 +1895,8 @@
           "type": "string",
           "description": "A message which indicates a problem in data connection validation."
         }
-      }
+      },
+      "description": "The result returned from a data connection validation request."
     },
     "DatabasePrincipalListRequest": {
       "properties": {
@@ -1905,7 +1917,9 @@
           "description": "The name of the data connection."
         },
         "properties": {
-          "$ref": "#/definitions/DataConnection"
+          "$ref": "#/definitions/DataConnection",
+          "description": "The data connection properties to validate.",
+          "x-ms-client-flatten": true
         }
       },
       "description": "Class representing an data connection validation."
@@ -1914,6 +1928,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
+          "description": "The Event Hub data connection properties to validate.",
           "$ref": "#/definitions/EventHubConnectionProperties"
         }
       },
@@ -1929,6 +1944,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
+          "description": "The properties of the Event Grid data connection.",
           "$ref": "#/definitions/EventGridConnectionProperties"
         }
       },
@@ -1937,7 +1953,7 @@
           "$ref": "#/definitions/DataConnection"
         }
       ],
-      "description": "Class representing an event grid data connection.",
+      "description": "Class representing an Event Grid data connection.",
       "x-ms-discriminator-value": "EventGrid"
     },
     "DataConnectionValidationListResult": {
@@ -1968,7 +1984,8 @@
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from Kusto."
         }
       },
       "description": "An error response from Kusto."
@@ -1995,7 +2012,8 @@
       "required": [
         "name",
         "type"
-      ]
+      ],
+      "description": "The result returned from a cluster check name availability request."
     },
     "DatabaseCheckNameRequest": {
       "type": "object",
@@ -2019,7 +2037,8 @@
       "required": [
         "name",
         "type"
-      ]
+      ],
+      "description": "The result returned from a database check name availability request."
     },
     "CheckNameResult": {
       "type": "object",
@@ -2036,7 +2055,8 @@
           "type": "string",
           "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
         }
-      }
+      },
+	  "description": "The result returned from a check name availability request."
     },
     "ListResourceSkusResult": {
       "description": "List of available SKUs for an existing Kusto Cluster.",
@@ -2138,7 +2158,8 @@
         },
         "properties": {
           "title": "Properties of the operation.",
-          "type": "object"
+          "type": "object",
+          "x-ms-client-flatten": true
         }
       }
     }
@@ -2193,13 +2214,13 @@
   },
   "securityDefinitions": {
     "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+            "user_impersonation": "impersonate your user account"
+        }
     }
   }
 }
