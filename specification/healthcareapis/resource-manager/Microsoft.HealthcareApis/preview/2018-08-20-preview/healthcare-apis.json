@@ -471,8 +471,8 @@
           "$ref": "#/definitions/ServiceAccessPoliciesInfo",
           "description": "The access policies of the service instance."
         },
-        "cosmosDbSettings": {
-          "$ref": "#/definitions/ServiceCosmosDbSettingsInfo",
+        "cosmosDbConfiguration": {
+          "$ref": "#/definitions/ServiceCosmosDbConfigurationInfo",
           "description": "The settings for the Cosmos DB database backing the service."
         }
       },
@@ -499,7 +499,7 @@
         "objectId"
       ]
     },
-    "ServiceCosmosDbSettingsInfo": {
+    "ServiceCosmosDbConfigurationInfo": {
       "description": "The settings for the Cosmos DB database backing the service.",
       "type": "object",
       "properties": {
@@ -509,26 +509,6 @@
           "readOnly": false
         }
       }
-    },
-    "ServicesSkuInfo": {
-      "description": "Information about the SKU of the service instance.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU.",
-          "enum": [
-            "Standard"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServicesSku",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "ServicesDescription": {
       "description": "The description of the service.",
@@ -544,9 +524,6 @@
         {
           "$ref": "#/definitions/Resource"
         }
-      ],
-      "required": [
-        "sku"
       ]
     },
     "ServicesPatchDescription": {
@@ -559,10 +536,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "allOf": {
-          "description": "Sku details of a service.",
-          "$ref": "#/definitions/ServicesSkuInfo"
         }
       }
     },
@@ -604,10 +577,6 @@
             "type": "string"
           },
           "description": "The resource tags."
-        },
-        "sku": {
-          "description": "A valid instance SKU.",
-          "$ref": "#/definitions/ServicesSkuInfo"
         },
         "etag": {
           "description": "An etag associated with the resource, used for optimistic concurrency when editing it.",
