@@ -34,21 +34,21 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2018-11
 ```
 
-### Tag: package-2018-02
+### Tag: package-2018-11
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02'
+``` yaml $(tag) == 'package-2018-11'
 input-file:
 - Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
 - Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
 - Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
 - Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
 - Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
-- Microsoft.Web/stable/2018-02-01/Certificates.json
+- Microsoft.Web/stable/2018-11-01/Certificates.json
 - Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
 - Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
 - Microsoft.Web/stable/2018-02-01/Diagnostics.json
