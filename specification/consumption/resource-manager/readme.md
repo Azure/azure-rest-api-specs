@@ -26,7 +26,7 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-2019-01
 ```
 
 ### Tag: package-2017-11
@@ -96,6 +96,16 @@ These settings apply only when `--tag=package-2018-10` is specified on the comma
 ``` yaml $(tag) == 'package-2018-10'
 input-file:
 - Microsoft.Consumption/stable/2018-10-01/consumption.json
+```
+
+---
+### Tag: package-2019-01
+
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-01'
+input-file:
+- Microsoft.Consumption/stable/2019-01-01/consumption.json
 ```
 
 ## Suppression
@@ -217,6 +227,7 @@ batch:
   - tag: package-2018-06
   - tag: package-2018-08
   - tag: package-2018-10
+  - tag: package-2019-01
 ```
 
 ### Tag: package-2017-04-preview and java
@@ -332,6 +343,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_10_01
   output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-01 and java
+
+These settings apply only when `--tag=package-2019-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```
