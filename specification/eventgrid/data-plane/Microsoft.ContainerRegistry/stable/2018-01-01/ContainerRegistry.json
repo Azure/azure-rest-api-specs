@@ -25,6 +25,24 @@
             ],
             "properties": {}
         },
+		"ContainerRegistryChartPushedEventData": {
+            "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ContainerRegistryArtifactEventData"
+                }
+            ],
+            "properties": {}
+        },
+        "ContainerRegistryChartDeletedEventData": {
+            "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ContainerRegistryArtifactEventData"
+                }
+            ],
+            "properties": {}
+		},
         "ContainerRegistryEventData": {
             "description": "The content of the event request message.",
             "properties": {
@@ -59,6 +77,28 @@
                 }
             }
         },
+		"ContainerRegistryArtifactEventData": {
+            "description": "The content of the event request message.",
+            "properties": {
+                "id": {
+                    "description": "The event ID.",
+                    "type": "string"
+                },
+                "timestamp": {
+                    "format": "date-time",
+                    "description": "The time at which the event occurred.",
+                    "type": "string"
+                },
+                "action": {
+                    "description": "The action that encompasses the provided event.",
+                    "type": "string"
+                },
+                "target": {
+                    "$ref": "#/definitions/ContainerRegistryArtifactEventTarget",
+                    "description": "The target of the event."
+                }
+            }
+		},
         "ContainerRegistryEventTarget": {
             "description": "The target of the event.",
             "properties": {
@@ -90,6 +130,40 @@
                 },
                 "tag": {
                     "description": "The tag name.",
+                    "type": "string"
+                }
+            }
+        },
+		"ContainerRegistryArtifactEventTarget": {
+            "description": "The target of the event.",
+            "properties": {
+                "mediaType": {
+                    "description": "The MIME type of the referenced object.",
+                    "type": "string"
+                },
+                "size": {
+                    "format": "int64",
+                    "description": "The number of bytes of the content.",
+                    "type": "integer"
+                },
+                "digest": {
+                    "description": "The digest of the helm chart.",
+                    "type": "string"
+                },
+                "repository": {
+                    "description": "The repository name.",
+                    "type": "string"
+                },
+                "tag": {
+                    "description": "The tag name.",
+                    "type": "string"
+                },
+				"name": {
+                    "description": "The name of the helm chart.",
+                    "type": "string"
+                },
+				"version": {
+                    "description": "The version of the helm chart.",
                     "type": "string"
                 }
             }
