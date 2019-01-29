@@ -360,6 +360,7 @@
     "AlertRule": {
       "type": "object",
       "description": "Alert rule.",
+      "discriminator": "kind",
       "allOf": [
         {
             "$ref": "#/definitions/Resource"
@@ -408,6 +409,7 @@
         ],
         "properties": {
             "properties": {
+                "x-ms-client-flatten": true,
                 "description": "Scheduled alert rule properties",
                 "$ref": "#/definitions/ScheduledAlertRuleProperties"
             }
