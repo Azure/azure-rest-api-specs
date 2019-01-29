@@ -1,594 +1,599 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Security Insights",
-    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2019-01-01-preview"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "paths": {
-    "/providers/Microsoft.SecurityInsights/operations": {
-    "get": {
-      "operationId": "Operations_List",
-      "description": "Lists all operations available Azure Security Insights Resource Provider.",
-      "parameters": [
-        {
-          "$ref": "#/parameters/ApiVersion"
-        }
-      ],
-      "produces": [
+    "swagger": "2.0",
+    "info": {
+        "title": "Security Insights",
+        "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+        "version": "2019-01-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
         "application/json"
-      ],
-      "responses": {
-        "200": {
-          "description": "OK. Successfully retrieved operations list.",
-          "schema": {
-            "$ref": "#/definitions/operationsList"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules": {
-      "get": {
-        "x-ms-examples": {
-          "Get all scheduled alert rules.": {
-            "$ref": "./examples/GetScheduledAlertRules.json"
-          }
-        },
-        "tags": [
-          "Alert Rules"
-        ],
-        "description": "Gets all alert rules.",
-        "operationId": "AlertRules_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AlertRulesList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a scheduled alert rule.": {
-            "$ref": "./examples/GetScheduledAlertRuleById.json"
-          }
-        },
-        "tags": [
-          "Alert Rules"
-        ],
-        "description": "Gets a alert rule.",
-        "operationId": "AlertRules_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AlertRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Creates or updates a scheduled alert rule.": {
-            "$ref": "./examples/CreateScheduledAlertRule.json"
-          }
-        },
-        "tags": [
-          "Alert Rules"
-        ],
-        "description": "Creates or updates the alert rule.",
-        "operationId": "AlertRules_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/AlertRule"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AlertRule"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/AlertRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "x-ms-examples": {
-          "Delete a scheduled alert rule.": {
-            "$ref": "./examples/DeleteScheduledAlertRule.json"
-          }
-        },
-        "tags": [
-          "Alert Rules"
-        ],
-        "description": "Delete the alert rule.",
-        "operationId": "AlertRules_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "operation": {
-    "description": "Operation provided by provider",
-    "properties": {
-      "name": {
-        "type": "string",
-        "description": "Name of the operation"
-      },
-      "display": {
-        "type": "object",
-        "description": "Properties of the operation",
-        "properties": {
-          "provider": {
-            "type": "string",
-            "description": "Provider name"
-          },
-          "resource": {
-            "type": "string",
-            "description": "Resource name"
-          },
-          "operation": {
-            "type": "string",
-            "description": "Operation name"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the operation"
-          }
-        }
-      }
-    }
-    },
-    "operationsList": {
-      "description": "Lists the operations available in the SecurityInsights RP.",
-      "properties": {
-        "nextLink": {
-          "description": "URL to fetch the next set of operations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of operations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/operation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "type": "object",
-      "description": "Error response structure.",
-      "properties": {
-        "error": {
-          "x-ms-client-flatten": true,
-          "description": "Error data",
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      }
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "type": "object",
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        }
-      }
-    },
-    "AlertRulesList":{
-      "description": "List all the alert rules.",
-      "properties": {
-        "nextLink": {
-          "readOnly": true,
-          "description": "URL to fetch the next set of alert rules.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of alert rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AlertRule"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AlertRule": {
-      "type": "object",
-      "description": "Alert rule.",
-      "discriminator": "kind",
-      "allOf": [
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
         {
-            "$ref": "#/definitions/Resource"
-        },
-        {
-            "$ref": "#/definitions/AlertRuleKind"
+            "azure_auth": [
+                "user_impersonation"
+            ]
         }
-      ],
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Etag of the alert rule."
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
         }
-      }
     },
-    "AlertRuleKind": {
-        "type": "object",
-        "description": "Describes an Azure resource with kind.",
-        "properties": {
-            "kind": {
-                "type": "string",
-                "description": "The kind of the alert rule",
-                "enum": [
-                    "Scheduled"
+    "paths": {
+        "/providers/Microsoft.SecurityInsights/operations": {
+            "get": {
+                "operationId": "Operations_List",
+                "description": "Lists all operations available Azure Security Insights Resource Provider.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    }
                 ],
-                "x-ms-enum": {
-                    "name": "AlertRuleKind",
-                    "modelAsString": true,
-                    "values": [
-                        {
-                            "value": "Scheduled"
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. Successfully retrieved operations list.",
+                        "schema": {
+                            "$ref": "#/definitions/operationsList"
                         }
-                    ]
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all scheduled alert rules.": {
+                        "$ref": "./examples/GetScheduledAlertRules.json"
+                    }
+                },
+                "tags": [
+                    "Alert Rules"
+                ],
+                "description": "Gets all alert rules.",
+                "operationId": "AlertRules_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AlertRulesList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a scheduled alert rule.": {
+                        "$ref": "./examples/GetScheduledAlertRuleById.json"
+                    }
+                },
+                "tags": [
+                    "Alert Rules"
+                ],
+                "description": "Gets a alert rule.",
+                "operationId": "AlertRules_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AlertRule"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates a scheduled alert rule.": {
+                        "$ref": "./examples/CreateScheduledAlertRule.json"
+                    }
+                },
+                "tags": [
+                    "Alert Rules"
+                ],
+                "description": "Creates or updates the alert rule.",
+                "operationId": "AlertRules_Create",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    },
+                    {
+                        "$ref": "#/parameters/AlertRule"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AlertRule"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/AlertRule"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete a scheduled alert rule.": {
+                        "$ref": "./examples/DeleteScheduledAlertRule.json"
+                    }
+                },
+                "tags": [
+                    "Alert Rules"
+                ],
+                "description": "Delete the alert rule.",
+                "operationId": "AlertRules_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
                 }
             }
         }
     },
-    "ScheduledAlertRule": {
-        "x-ms-discriminator-value": "Scheduled",
-        "type": "object",
-        "description": "Represents scheduled alert rule.",
-        "allOf": [
-            {
-                "$ref": "#/definitions/AlertRule"
-            }
-        ],
-        "properties": {
+    "definitions": {
+        "operation": {
+            "description": "Operation provided by provider",
             "properties": {
-                "x-ms-client-flatten": true,
-                "description": "Scheduled alert rule properties",
-                "$ref": "#/definitions/ScheduledAlertRuleProperties"
+                "name": {
+                    "type": "string",
+                    "description": "Name of the operation"
+                },
+                "display": {
+                    "type": "object",
+                    "description": "Properties of the operation",
+                    "properties": {
+                        "provider": {
+                            "type": "string",
+                            "description": "Provider name"
+                        },
+                        "resource": {
+                            "type": "string",
+                            "description": "Resource name"
+                        },
+                        "operation": {
+                            "type": "string",
+                            "description": "Operation name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Description of the operation"
+                        }
+                    }
+                }
+            }
+        },
+        "operationsList": {
+            "description": "Lists the operations available in the SecurityInsights RP.",
+            "properties": {
+                "nextLink": {
+                    "description": "URL to fetch the next set of operations.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of operations",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/operation"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "CloudError": {
+            "x-ms-external": true,
+            "type": "object",
+            "description": "Error response structure.",
+            "properties": {
+                "error": {
+                    "x-ms-client-flatten": true,
+                    "description": "Error data",
+                    "$ref": "#/definitions/CloudErrorBody"
+                }
+            }
+        },
+        "CloudErrorBody": {
+            "x-ms-external": true,
+            "type": "object",
+            "description": "Error details.",
+            "properties": {
+                "code": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+                },
+                "message": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "A message describing the error, intended to be suitable for display in a user interface."
+                }
+            }
+        },
+        "AlertRulesList": {
+            "description": "List all the alert rules.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of alert rules.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of alert rules.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AlertRule"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "AlertRule": {
+            "type": "object",
+            "description": "Alert rule.",
+            "discriminator": "kind",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                },
+                {
+                    "$ref": "#/definitions/AlertRuleKind"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the alert rule."
+                }
+            }
+        },
+        "AlertRuleKind": {
+            "type": "object",
+            "description": "Describes an Azure resource with kind.",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the alert rule",
+                    "enum": [
+                        "Scheduled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "AlertRuleKind",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Scheduled"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "ScheduledAlertRule": {
+            "x-ms-discriminator-value": "Scheduled",
+            "type": "object",
+            "description": "Represents scheduled alert rule.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AlertRule"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Scheduled alert rule properties",
+                    "$ref": "#/definitions/ScheduledAlertRuleProperties"
+                }
+            }
+        },
+        "ScheduledAlertRuleProperties": {
+            "type": "object",
+            "description": "Alert rule property bag.",
+            "properties": {
+                "ruleName": {
+                    "type": "string",
+                    "description": "The name for alerts created by this alert rule."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the alert rule."
+                },
+                "severity": {
+                    "type": "string",
+                    "enum": [
+                        "Low",
+                        "Medium",
+                        "High",
+                        "Informational"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Severity",
+                        "modelAsString": false
+                    },
+                    "description": "The severity for alerts created by this alert rule."
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Determines whether this alert rule is enabled or disabled."
+                },
+                "query": {
+                    "type": "string",
+                    "description": "The query that creates alerts for this rule."
+                },
+                "queryFrequency": {
+                    "type": "string",
+                    "format": "duration",
+                    "description": "The frequency (in ISO 8601 duration format) for this alert rule to run."
+                },
+                "queryPeriod": {
+                    "type": "string",
+                    "format": "duration",
+                    "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
+                },
+                "triggerOperator": {
+                    "type": "string",
+                    "enum": [
+                        "GreaterThan",
+                        "LessThan",
+                        "Equal",
+                        "NotEqual"
+                    ],
+                    "x-ms-enum": {
+                        "name": "triggerOperator",
+                        "modelAsString": false
+                    },
+                    "description": "The operation against the threshold that triggers alert rule."
+                },
+                "triggerThreshold": {
+                    "type": "integer",
+                    "description": "The threshold triggers this alert rule."
+                },
+                "suppressionEnabled": {
+                    "type": "boolean",
+                    "description": "Determines whether the suppression for this alert rule is enabled or disabled."
+                },
+                "suppressionDuration": {
+                    "type": "string",
+                    "format": "duration",
+                    "description": "The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered."
+                },
+                "lastModifiedUtc": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The last time that this alert has been modified."
+                }
+            },
+            "required": [
+                "ruleName",
+                "description",
+                "severity",
+                "enabled",
+                "query",
+                "queryFrequency",
+                "queryPeriod",
+                "triggerOperator",
+                "triggerThreshold",
+                "suppressionEnabled",
+                "suppressionDuration"
+            ]
+        },
+        "Resource": {
+            "x-ms-azure-resource": true,
+            "description": "An azure resource object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Azure resource Id"
+                },
+                "type": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Azure resource type"
+                },
+                "name": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Azure resource name"
+                }
             }
         }
     },
-    "ScheduledAlertRuleProperties": {
-      "type": "object",
-      "description": "Alert rule property bag.",
-      "properties": {
-        "ruleName": {
-          "type": "string",
-          "description": "The name for alerts created by this alert rule."
+    "parameters": {
+        "SubscriptionId": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+            "type": "string",
+            "description": "Azure subscription ID"
         },
-        "description": {
-          "type": "string",
-          "description": "The description of the alert rule."
+        "ResourceGroupName": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90,
+            "x-ms-parameter-location": "method"
         },
-        "severity": {
-          "type": "string",
-          "enum": ["Low", "Medium", "High", "Informational"],
-          "x-ms-enum": {
-            "name": "Severity",
-            "modelAsString": false
-          },
-          "description": "The severity for alerts created by this alert rule."
+        "ApiVersion": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2019-01-01-preview"
+            ],
+            "description": "API version for the operation"
         },
-        "enabled": {
-          "type": "boolean",
-          "description": "Determines whether this alert rule is enabled or disabled."
+        "OperationalInsightsResourceProvider": {
+            "name": "operationalInsightsResourceProvider",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
+            "x-ms-parameter-location": "method"
         },
-        "query": {
-          "type": "string",
-          "description": "The query that creates alerts for this rule."
+        "WorkspaceName": {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace.",
+            "minLength": 1,
+            "maxLength": 90,
+            "x-ms-parameter-location": "method"
         },
-        "queryFrequency": {
-          "type": "string",
-          "format": "duration",
-          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run."
+        "RuleId": {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+            "type": "string",
+            "description": "Alert rule ID",
+            "x-ms-parameter-location": "method"
         },
-        "queryPeriod": {
-          "type": "string",
-          "format": "duration",
-          "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
-        },
-        "triggerOperator": {
-          "type": "string",
-          "enum": [
-            "GreaterThan",
-            "LessThan",
-            "Equal",
-            "NotEqual"
-          ],
-          "x-ms-enum": {
-            "name": "triggerOperator",
-            "modelAsString": false
-          },
-          "description": "The operation against the threshold that triggers alert rule."
-        },
-        "triggerThreshold": {
-          "type": "integer",
-          "description": "The threshold triggers this alert rule."
-        },
-        "suppressionEnabled": {
-          "type": "boolean",
-          "description": "Determines whether the suppression for this alert rule is enabled or disabled."
-        },
-        "suppressionDuration": {
-          "type": "string",
-          "format": "duration",
-          "description": "The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered."
-        },
-        "lastModifiedUtc": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The last time that this alert has been modified."
+        "AlertRule": {
+            "name": "alertRule",
+            "in": "body",
+            "description": "The alert rule",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/AlertRule"
+            },
+            "x-ms-parameter-location": "method"
         }
-      },
-      "required": [
-        "ruleName",
-        "description",
-        "severity",
-        "enabled",
-        "query",
-        "queryFrequency",
-        "queryPeriod",
-        "triggerOperator",
-        "triggerThreshold",
-        "suppressionEnabled",
-        "suppressionDuration"
-      ]
-    },
-    "Resource": {
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        }
-      }
     }
-  },
-  "parameters": {
-    "SubscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "type": "string",
-      "description": "Azure subscription ID"
-    },
-    "ResourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "2019-01-01-preview"
-      ],
-      "description": "API version for the operation"
-    },
-  "OperationalInsightsResourceProvider": {
-    "name": "operationalInsightsResourceProvider",
-    "in": "path",
-    "required": true,
-    "type": "string",
-    "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
-    "x-ms-parameter-location": "method"
-  },
-    "WorkspaceName": {
-      "name": "workspaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the workspace.",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method"
-    },
-    "RuleId": {
-      "name": "ruleId",
-      "in": "path",
-      "required": true,
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "type": "string",
-      "description": "Alert rule ID",
-      "x-ms-parameter-location": "method"
-    },
-    "AlertRule": {
-      "name": "alertRule",
-      "in": "body",
-      "description": "The alert rule",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/AlertRule"
-      },
-      "x-ms-parameter-location": "method"
-    }
-  }
 }
