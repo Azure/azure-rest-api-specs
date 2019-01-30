@@ -137,4 +137,8 @@ directive:
     from: cdn.json
     where: $.definitions.Operation.properties.display
     reason: lol
+  - suppress: ListInOperationName
+    from: cdn.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles"].get.operationId'
+    reason: test
 ```
