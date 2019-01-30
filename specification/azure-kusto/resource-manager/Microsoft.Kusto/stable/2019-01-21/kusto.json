@@ -1551,22 +1551,21 @@
             "modelAsString": true
           }
         },
-        "softDeletePeriodInDays": {
-          "type": "integer",
-          "description": "The number of days data should be kept before it stops being accessible to queries."
+        "softDeletePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time the data should be kept before it stops being accessible to queries in TimeSpan."
         },
-        "hotCachePeriodInDays": {
-          "type": "integer",
-          "description": "The number of days of data that should be kept in cache for fast queries."
+        "hotCachePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time the data that should be kept in cache for fast queries in TimeSpan."
         },
         "statistics": {
           "$ref": "#/definitions/DatabaseStatistics",
           "description": "The statistics of the database."
         }
       },
-      "required": [
-        "softDeletePeriodInDays"
-      ],
       "description": "Class representing the Kusto database properties."
     },
     "EventHubConnectionProperties": {
