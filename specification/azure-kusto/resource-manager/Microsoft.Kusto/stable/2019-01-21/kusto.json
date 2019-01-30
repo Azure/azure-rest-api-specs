@@ -1411,7 +1411,7 @@
           "description": "GUID representing an external tenant."
         }
       },
-	  "description": "Repersents a tenant ID that is trusted by the cluster."
+      "description": "Repersents a tenant ID that is trusted by the cluster."
     },
     "AvailabilityZone": {
       "properties": {
@@ -1729,6 +1729,10 @@
           "type": "string",
           "description": "An ETag of the resource created."
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The database properties.",
@@ -1918,8 +1922,7 @@
         },
         "properties": {
           "$ref": "#/definitions/DataConnection",
-          "description": "The data connection properties to validate.",
-          "x-ms-client-flatten": true
+          "description": "The data connection properties to validate."
         }
       },
       "description": "Class representing an data connection validation."
@@ -2056,7 +2059,7 @@
           "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
         }
       },
-	  "description": "The result returned from a check name availability request."
+      "description": "The result returned from a check name availability request."
     },
     "ListResourceSkusResult": {
       "description": "List of available SKUs for an existing Kusto Cluster.",
