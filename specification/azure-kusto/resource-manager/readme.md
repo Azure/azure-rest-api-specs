@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2019-01-21` is specified on the co
 ``` yaml $(tag) == 'package-2019-01-21'
 input-file:
  - Microsoft.Kusto/stable/2019-01-21/kusto.json
+```
 
 ### Tag: package-2018-09-07-preview
 
