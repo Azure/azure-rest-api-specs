@@ -141,4 +141,8 @@ directive:
     from: cdn.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles"].get.operationId'
     reason: test
+  - suppress: GetInOperationName
+    from: cdn.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles"].get.operationId'
+    reason: adsf
 ```
