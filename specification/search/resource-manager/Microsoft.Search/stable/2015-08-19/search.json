@@ -584,6 +584,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "Services_ListBySubscription",
+        "x-ms-examples": {
+          "SearchListServicesByResourceGroup": { "$ref": "./examples/SearchListServicesBySubscription.json" }
+        },
+        "description": "Gets a list of all Search services in the given subscription.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all Search service definitions for the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/SearchServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/checkNameAvailability": {
       "post": {
         "tags": [
