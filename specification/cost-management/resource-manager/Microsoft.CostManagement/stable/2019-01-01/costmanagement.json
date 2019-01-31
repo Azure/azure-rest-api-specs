@@ -2754,7 +2754,7 @@
         },
         "definition": {
           "description": "Has definition for the export.",
-          "$ref": "#/definitions/ExportDefinition"
+          "$ref": "#/definitions/QueryDefinition"
         }
       },
       "required": [
@@ -2812,47 +2812,6 @@
         "destination"
       ]
     },
-    "ExportDefinition": {
-      "description": "The definition of a export.",
-      "properties": {
-        "type": {
-          "description": "The type of the export.",
-          "type": "string",
-          "enum": [
-            "Usage"
-          ],
-          "x-ms-enum": {
-            "name": "ExportType",
-            "modelAsString": true
-          }
-        },
-        "timeframe": {
-          "description": "The time frame for pulling data for the export. If custom, then a specific time period must be provided.",
-          "type": "string",
-          "enum": [
-            "WeekToDate",
-            "MonthToDate",
-            "Custom"
-          ],
-          "x-ms-enum": {
-            "name": "TimeframeType",
-            "modelAsString": true
-          }
-        },
-        "timePeriod": {
-          "description": "Has time period for pulling data for the export.",
-          "$ref": "#/definitions/ExportTimePeriod"
-        },
-        "dataset": {
-          "description": "Has definition for data in this export.",
-          "$ref": "#/definitions/ExportDataset"
-        }
-      },
-      "required": [
-        "type",
-        "timeframe"
-      ]
-    },
     "ExportRecurrencePeriod": {
       "description": "The start and end date for recurrence schedule.",
       "properties": {
@@ -2892,154 +2851,6 @@
         "container"
       ]
     },
-    "ExportTimePeriod": {
-      "description": "The start and end date for pulling data for the export.",
-      "properties": {
-        "from": {
-          "description": "The start date to pull data from.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "to": {
-          "description": "The end date to pull data to.",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "from",
-        "to"
-      ]
-    },
-    "ExportDataset": {
-      "description": "The definition of data present in the export.",
-      "properties": {
-        "granularity": {
-          "description": "The granularity of rows in the export.",
-          "type": "string",
-          "enum": [
-            "Daily",
-            "Hourly"
-          ],
-          "x-ms-enum": {
-            "name": "GranularityType",
-            "modelAsString": true
-          }
-        },
-        "configuration": {
-          "description": "Has configuration information for the data in the export. The configuration will be ignored if aggregation and grouping are provided.",
-          "$ref": "#/definitions/ExportDatasetConfiguration"
-        },
-        "aggregation": {
-          "type": "object",
-          "description": "Dictionary of aggregation expression to use in the export. The key of each item in the dictionary is the alias for the aggregated column. Export can have up to 2 aggregation clauses.",
-          "additionalProperties": {
-            "type": "object",
-            "$ref": "#/definitions/ExportAggregation"
-          },
-          "maxItems": 2
-        },
-        "grouping": {
-          "description": "Array of group by expression to use in the export. Export can have up to 2 group by clauses.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportGrouping"
-          },
-          "maxItems": 2
-        },
-        "filter": {
-          "type": "object",
-          "description": "Has filter expression to use in the export.",
-          "$ref": "#/definitions/ExportFilter"
-        }
-      }
-    },
-    "ExportDatasetConfiguration": {
-      "description": "The configuration of dataset in the export.",
-      "properties": {
-        "columns": {
-          "description": "Array of column names to be included in the export. Any valid export column name is allowed. If not provided, then export includes all columns.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ExportAggregation": {
-      "description": "The aggregation expression to be used in the export.",
-      "properties": {
-        "name": {
-          "description": "The name of the column to aggregate.",
-          "type": "string"
-        },
-        "function": {
-          "description": "The name of the aggregation function to use.",
-          "type": "string",
-          "enum": [
-            "Sum"
-          ],
-          "x-ms-enum": {
-            "name": "FunctionType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name",
-        "function"
-      ]
-    },
-    "ExportGrouping": {
-      "description": "The group by expression to be used in the export.",
-      "properties": {
-        "type": {
-          "description": "Has type of the column to group.",
-          "$ref": "#/definitions/ExportColumnType"
-        },
-        "name": {
-          "description": "The name of the column to group.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "type",
-        "name"
-      ]
-    },
-    "ExportFilter": {
-      "description": "The filter expression to be used in the export.",
-      "properties": {
-        "and": {
-          "description": "The logical \"AND\" expression. Must have at least 2 items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportFilter"
-          },
-          "minItems": 2
-        },
-        "or": {
-          "description": "The logical \"OR\" expression. Must have at least 2 items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportFilter"
-          },
-          "minItems": 2
-        },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/ExportFilter"
-        },
-        "dimension": {
-          "description": "Has comparison expression for a dimension",
-          "$ref": "#/definitions/ExportComparisonExpression"
-        },
-        "tag": {
-          "description": "Has comparison expression for a tag",
-          "$ref": "#/definitions/ExportComparisonExpression"
-        }
-      }
-    },
     "ExportColumnType": {
       "description": "The type of the column in the export.",
       "type": "string",
@@ -3051,39 +2862,6 @@
         "name": "ExportColumnType",
         "modelAsString": true
       }
-    },
-    "ExportComparisonExpression": {
-      "description": "The comparison expression to be used in the export.",
-      "properties": {
-        "name": {
-          "description": "The name of the column to use in comparison.",
-          "type": "string"
-        },
-        "operator": {
-          "description": "The operator to use for comparison.",
-          "type": "string",
-          "enum": [
-            "In"
-          ],
-          "x-ms-enum": {
-            "name": "OperatorType",
-            "modelAsString": true
-          }
-        },
-        "values": {
-          "description": "Array of values to use for comparison",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "name",
-        "operator",
-        "values"
-      ]
     },
     "ExportExecutionListResult": {
       "description": "Result of listing exports execution history of a export by name",
