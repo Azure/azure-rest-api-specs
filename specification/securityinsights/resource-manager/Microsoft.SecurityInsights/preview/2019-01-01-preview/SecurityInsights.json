@@ -751,16 +751,6 @@
                 "etag": {
                     "type": "string",
                     "description": "Etag of the data connector."
-                },
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "description": "Data connector properties.",
-                    "properties": {
-                        "contextId": {
-                            "type": "string",
-                            "description": "The context id of the origin data source (Like tenantID, SubscriptionID etc.)."
-                        }
-                    }
                 }
             }
         },
@@ -802,6 +792,16 @@
                 }
             }
         },
+        "DataConnectorContextId": {
+            "type": "object",
+            "description": "Describes an Azure resource with kind.",
+            "properties": {
+                "contextId": {
+                    "type": "string",
+                    "description": "The context id of the origin data source (Like tenantID, SubscriptionID etc.)."
+                }
+            }
+        },
         "OfficeDataConnector": {
             "x-ms-discriminator-value": "Office365",
             "type": "object",
@@ -822,6 +822,11 @@
         "OfficeDataConnectorProperties": {
             "type": "object",
             "description": "Office data connector properties.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorContextId"
+                }
+            ],
             "properties": {
                 "dataTypes": {
                     "type": "object",
@@ -877,6 +882,11 @@
         "TIDataConnectorProperties": {
             "type": "object",
             "description": "TI data connector properties.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorContextId"
+                }
+            ],
             "properties": {
                 "dataTypes": {
                     "type": "object",
@@ -952,6 +962,11 @@
         "DataConnectorWithAlertsProperties": {
             "type": "object",
             "description": "Data connector properties.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorContextId"
+                }
+            ],
             "properties": {
                 "dataTypes": {
                     "type": "object",
