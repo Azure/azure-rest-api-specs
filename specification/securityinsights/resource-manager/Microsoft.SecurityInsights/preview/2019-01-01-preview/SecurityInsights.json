@@ -63,7 +63,7 @@
             "get": {
                 "x-ms-examples": {
                     "Get all scheduled alert rules.": {
-                        "$ref": "./examples/GetScheduledAlertRules.json"
+                        "$ref": "./examples/alertRulses/GetScheduledAlertRules.json"
                     }
                 },
                 "tags": [
@@ -111,7 +111,7 @@
             "get": {
                 "x-ms-examples": {
                     "Get a scheduled alert rule.": {
-                        "$ref": "./examples/GetScheduledAlertRuleById.json"
+                        "$ref": "./examples/alertRulses/GetScheduledAlertRuleById.json"
                     }
                 },
                 "tags": [
@@ -157,7 +157,7 @@
             "put": {
                 "x-ms-examples": {
                     "Creates or updates a scheduled alert rule.": {
-                        "$ref": "./examples/CreateScheduledAlertRule.json"
+                        "$ref": "./examples/alertRulses/CreateScheduledAlertRule.json"
                     }
                 },
                 "tags": [
@@ -212,7 +212,7 @@
             "delete": {
                 "x-ms-examples": {
                     "Delete a scheduled alert rule.": {
-                        "$ref": "./examples/DeleteScheduledAlertRule.json"
+                        "$ref": "./examples/alertRulses/DeleteScheduledAlertRule.json"
                     }
                 },
                 "tags": [
@@ -238,6 +238,215 @@
                     },
                     {
                         "$ref": "#/parameters/RuleId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all data connectors.": {
+                        "$ref": "./examples/dataConnectors/GetDataConnectors.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Gets all data connectors.",
+                "operationId": "DataConnectors_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnectorList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an Office365 data connector.": {
+                        "$ref": "./examples/dataConnectors/GetOfficeDataConnetorById.json"
+                    },
+                    "Get a TI data connector.": {
+                        "$ref": "./examples/dataConnectors/GetThreatIneleganceById.json"
+                    },
+                    "Get a MCAS data connector.": {
+                        "$ref": "./examples/dataConnectors/GetMicrosoftCloudAappSecurityById.json"
+                    },
+                    "Get a ASC data connector.": {
+                        "$ref": "./examples/dataConnectors/GetAzureSecurityCenterById.json"
+                    },
+                    "Get an AAD data connector.": {
+                        "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Gets a data connector.",
+                "operationId": "DataConnectors_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnectorId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnector"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates an Office365 data connector.": {
+                        "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Creates or updates the data connector.",
+                "operationId": "DataConnectors_Create",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnectorId"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnector"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnector"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnector"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete an Office365 data connector.": {
+                        "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Delete the data connector.",
+                "operationId": "DataConnectors_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnectorId"
                     }
                 ],
                 "responses": {
@@ -468,7 +677,7 @@
                         "NotEqual"
                     ],
                     "x-ms-enum": {
-                        "name": "triggerOperator",
+                        "name": "TriggerOperator",
                         "modelAsString": false
                     },
                     "description": "The operation against the threshold that triggers alert rule."
@@ -505,6 +714,263 @@
                 "suppressionEnabled",
                 "suppressionDuration"
             ]
+        },
+        "DataConnectorList": {
+            "description": "List all the data connectors.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of data connectors.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of data connectors.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataConnector"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "DataConnector": {
+            "type": "object",
+            "description": "Data connector.",
+            "discriminator": "kind",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                },
+                {
+                    "$ref": "#/definitions/DataConnectorKind"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the data connector."
+                },
+                "properties": {
+                    "type": "object",
+                    "description": "Data connector properties.",
+                    "properties": {
+                        "contextId": {
+                            "type": "string",
+                            "description": "The context id of the origin data source (Like tenantID, SubscriptionID etc.)."
+                        }
+                    }
+                }
+            }
+        },
+        "DataConnectorKind": {
+            "type": "object",
+            "description": "Describes an Azure resource with kind.",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the data connector",
+                    "enum": [
+                        "AzureActiveDirectory",
+                        "AzureSecurityCenter",
+                        "MicrosoftCloudAappSecurity",
+                        "ThreatInelegance",
+                        "Office365"
+                    ],
+                    "x-ms-enum": {
+                        "name": "DataConnectorKind",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "AzureActiveDirectory"
+                            },
+                            {
+                                "value": "AzureSecurityCenter"
+                            },
+                            {
+                                "value": "MicrosoftCloudAappSecurity"
+                            },
+                            {
+                                "value": "ThreatInelegance"
+                            },
+                            {
+                                "value": "Office365"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "OfficeDataConnector": {
+            "x-ms-discriminator-value": "Office365",
+            "type": "object",
+            "description": "Represents office data connector.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnector"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "description": "Office data connector properties.",
+                    "properties": {
+                        "dataTypes": {
+                            "x-ms-client-flatten": true,
+                            "description": "The available data types for the connector.",
+                            "$ref": "#/definitions/OfficeDataConnectorDataTypes"
+                        }
+                    }
+                }
+            }
+        },
+        "OfficeDataConnectorDataTypes": {
+            "type": "object",
+            "description": "The available data types for office data connector.",
+            "properties": {
+                "sharePoint": {
+                    "type": "object",
+                    "description": "SharePoint data type connection.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DataConnectorDataTypeCommon"
+                        }
+                    ]
+                },
+                "exchange": {
+                    "type": "object",
+                    "description": "Exchange data type connection.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DataConnectorDataTypeCommon"
+                        }
+                    ]
+                }
+            }
+        },
+        "TIDataConnector": {
+            "x-ms-discriminator-value": "ThreatInelegance",
+            "type": "object",
+            "description": "Represents threat inelegance data connector.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnector"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "description": "TI data connector properties.",
+                    "properties": {
+                        "dataTypes": {
+                            "x-ms-client-flatten": true,
+                            "description": "The available data types for the connector.",
+                            "$ref": "#/definitions/TIDataConnectorDataTypes"
+                        }
+                    }
+                }
+            }
+        },
+        "TIDataConnectorDataTypes": {
+            "type": "object",
+            "description": "The available data types for TI data connector.",
+            "properties": {
+                "indicators": {
+                    "type": "object",
+                    "description": "Data type for indicators connection.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DataConnectorDataTypeCommon"
+                        }
+                    ]
+                }
+            }
+        },
+        "AADDataConnector": {
+            "x-ms-discriminator-value": "AzureActiveDirectory",
+            "type": "object",
+            "description": "Represents AAD (Azure Active Directory) data connector.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorWithAlertsDataType"
+                }
+            ]
+        },
+        "ASCDataConnector": {
+            "x-ms-discriminator-value": "AzureSecurityCenter",
+            "type": "object",
+            "description": "Represents ASC (Azure Security Center) data connector.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorWithAlertsDataType"
+                }
+            ]
+        },
+        "MCASDataConnector": {
+            "x-ms-discriminator-value": "MicrosoftCloudAappSecurity",
+            "type": "object",
+            "description": "Represents MCAS (Microsoft Cloud Aapp Security) data connector.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorWithAlertsDataType"
+                }
+            ]
+        },
+        "DataConnectorWithAlertsDataType": {
+            "type": "object",
+            "description": "Data connector with alerts data type.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnector"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "description": "Data connector properties.",
+                    "properties": {
+                        "dataTypes": {
+                            "x-ms-client-flatten": true,
+                            "description": "The available data types for the connector.",
+                            "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
+                        }
+                    }
+                }
+            }
+        },
+        "AlertsDataTypeOfDataConnector": {
+            "type": "object",
+            "description": "Alerts data type for data connectors.",
+            "properties": {
+                "alerts": {
+                    "type": "object",
+                    "description": "Alerts data type connection.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DataConnectorDataTypeCommon"
+                        }
+                    ]
+                }
+            }
+        },
+        "DataConnectorDataTypeCommon": {
+            "type": "object",
+            "description": "Common field for data type in data connectors.",
+            "properties": {
+                "state": {
+                    "type": "string",
+                    "description": "Describe whther this data type connection is enabled or not.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "DataTypeState",
+                        "modelAsString": true
+                    }
+                }
+            }
         },
         "Resource": {
             "x-ms-azure-resource": true,
@@ -592,6 +1058,24 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/AlertRule"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "DataConnectorId": {
+            "name": "dataConnectorId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Connecto ID",
+            "x-ms-parameter-location": "method"
+        },
+        "DataConnector": {
+            "name": "dataConnector",
+            "in": "body",
+            "description": "The data connector",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/DataConnector"
             },
             "x-ms-parameter-location": "method"
         }
