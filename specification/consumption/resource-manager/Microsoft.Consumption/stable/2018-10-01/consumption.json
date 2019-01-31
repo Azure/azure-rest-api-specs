@@ -2984,6 +2984,9 @@
                       "$ref": "#/definitions/ErrorResponse"
                   }
               }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
           }
       }
     },
@@ -3029,6 +3032,9 @@
                       "$ref": "#/definitions/ErrorResponse"
                   }
               }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
           }
       }
     }
@@ -4915,7 +4921,8 @@
       "required": true,
       "type": "string",
       "format": "date-time",
-      "description": "The start of the date time range."
+      "description": "The start of the date time range.",
+      "x-ms-parameter-location": "method"
     },
     "endDateParameter": {
       "name": "endDate",
@@ -4923,14 +4930,16 @@
       "required": true,
       "type": "string",
       "format": "date-time",
-      "description": "The start of the date time range."
+      "description": "The start of the date time range.",
+      "x-ms-parameter-location": "method"
     },
     "lookBackPeriodParameter": {
       "name": "lookBackPeriod",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The number of days of usage data to look back into."
+      "description": "The number of days of usage data to look back into.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
