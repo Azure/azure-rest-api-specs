@@ -23,6 +23,7 @@ async function main() {
   for (const swagger of swaggersToProcess) {
     try {
       // await oav.validateExamples(swagger, null, {consoleLogLevel: 'error', pretty: true});
+      // run OAV as a separate process to avoid memory issues.
       const r = exec(`node node_modules/oav/dist/cli.js validate-example ${swagger} --pretty`)
       if (result === 0) {
         result = r
