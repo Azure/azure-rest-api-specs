@@ -1,13 +1,13 @@
 # Consumption
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Consumption.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Consumption, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for Consumption, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the Consumption API.
 
 ``` yaml
@@ -40,6 +40,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -50,15 +51,21 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: R2059
     from: consumption.json
     reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
-    approved-by: "@fearthecowboy"
+    approved-by: '@fearthecowboy'
+  - suppress: EnumInsteadOfBoolean
+    from: consumption.json
+    where: $.definitions.UsageDetailProperties.properties.isEstimated
+    reason: enum for this scenario does not make sense for the API
 ```
 
 ---
+
 ### Tag: package-2017-04-preview
 
 These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
@@ -69,6 +76,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2017-12-preview
 
 These settings apply only when `--tag=package-2017-12-preview` is specified on the command line.
@@ -79,8 +87,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -92,8 +100,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
 ```
 
-
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -124,17 +131,18 @@ python:
   package-version: 1.2.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption/azure/mgmt/consumption
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
-
 
 ## Go
 
@@ -148,6 +156,7 @@ go:
 ```
 
 ### Go multi-api
+
 ``` yaml $(go) && $(multiapi)
 batch:
    - tag: package-2017-04-preview
@@ -155,7 +164,6 @@ batch:
    - tag: package-2017-12-30-preview
    - tag: package-2018-01-31
 ```
- 
 
 ### Tag: package-2017-04-preview and go
 
@@ -167,6 +175,7 @@ output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-04-24-preview/con
 ```
 
 ### Tag: package-2017-11-30 and go
+
 These settings apply only when `--tag=package-2017-11-30 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
@@ -175,6 +184,7 @@ output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-11-30/consumption
 ```
 
 ### Tag: package-2017-12-30-preview and go
+
 These settings apply only when `--tag=package-2017-12-30-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
@@ -183,6 +193,7 @@ output-folder: $(go-sdk-folder)/services/consumption/mgmt/2017-12-30-preview/con
 ```
 
 ### Tag: package-2018-01-31 and go
+
 These settings apply only when `--tag=package-2018-01-31 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
