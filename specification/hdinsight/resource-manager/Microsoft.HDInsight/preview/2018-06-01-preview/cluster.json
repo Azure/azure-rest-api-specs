@@ -375,6 +375,58 @@
                     "nextLinkName": "nextLink"
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/rotatediskencryptionkey": {
+            "post": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_RotateDiskEncryptionKey",
+                "x-ms-examples": {
+                    "Rotate disk encryption key of the specified HDInsight cluster": {
+                        "$ref": "./examples/RotateLinuxHadoopClusterDiskEncryptionKey.json"
+                    }
+                },
+                "description": "Rotate disk encryption key of the specified HDInsight cluster.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClusterDiskEncryptionParameters"
+                        },
+                        "description": "The parameters for the disk encryption operation."
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "OK response definition."
+                    },
+                    "202": {
+                        "description": "Accepted response definition."
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
         }
     },
     "definitions": {
@@ -624,6 +676,14 @@
                 "key": {
                     "type": "string",
                     "description": "The storage account access key."
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The resource ID of storage account, only to be specified for Azure Data Lake Storage Gen 2."
+                },
+                "msiResourceId": {
+                    "type": "string",
+                    "description": "The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2."
                 }
             },
             "description": "The storage Account."
@@ -686,6 +746,10 @@
                 "storageProfile": {
                     "$ref": "#/definitions/StorageProfile",
                     "description": "The storage profile."
+                },
+                "diskEncryptionProperties": {
+                    "$ref": "#/definitions/DiskEncryptionProperties",
+                    "description": "The disk encryption properties."
                 }
             }
         },
@@ -854,6 +918,10 @@
                         "$ref": "#/definitions/ConnectivityEndpoint"
                     },
                     "description": "The list of connectivity endpoints."
+                },
+                "diskEncryptionProperties": {
+                    "$ref": "#/definitions/DiskEncryptionProperties",
+                    "description": "The disk encryption properties."
                 }
             },
             "required": [
@@ -1108,6 +1176,57 @@
                 }
             },
             "description": "The Resize Cluster request parameters."
+        },
+        "ClusterDiskEncryptionParameters": {
+            "properties": {
+                "vaultUri": {
+                    "type": "string",
+                    "description": "Base key vault URI where the customers key is located eg. https://myvault.vault.azure.net"
+                },
+                "keyName": {
+                    "type": "string",
+                    "description": "Key name that is used for enabling disk encryption."
+                },
+                "keyVersion": {
+                    "type": "string",
+                    "description": "Specific key version that is used for enabling disk encryption."
+                }
+            },
+            "description": "The Disk Encryption Cluster request parameters."
+        },
+        "DiskEncryptionProperties": {
+            "description": "The disk encryption properties",
+            "properties": {
+                "vaultUri": {
+                    "type": "string",
+                    "description": "Base key vault URI where the customers key is located eg. https://myvault.vault.azure.net"
+                },
+                "keyName": {
+                    "type": "string",
+                    "description": "Key name that is used for enabling disk encryption."
+                },
+                "keyVersion": {
+                    "type": "string",
+                    "description": "Specific key version that is used for enabling disk encryption."
+                },
+                "encryptionAlgorithm": {
+                    "type": "string",
+                    "description": "Algorithm identifier for encryption, default RSA-OAEP.",
+                    "enum": [
+                        "RSA-OAEP",
+                        "RSA-OAEP-256",
+                        "RSA1_5"
+                    ],
+                    "x-ms-enum": {
+                        "name": "JsonWebKeyEncryptionAlgorithm",
+                        "modelAsString": true
+                    }
+                },
+                "msiResourceId": {
+                    "type": "string",
+                    "description": "Resource ID of Managed Identity that is used to access the key vault."
+                }
+            }
         },
         "OperationResource": {
             "properties": {

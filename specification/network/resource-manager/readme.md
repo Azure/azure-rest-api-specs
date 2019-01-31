@@ -28,15 +28,97 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-08
+tag: package-2018-11
 ```
 
+
+### Tag: package-2018-11
+
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-11'
+input-file:
+  - Microsoft.Network/stable/2018-11-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-11-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-11-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-11-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-11-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-11-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-11-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2018-11-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-11-01/endpointService.json
+  - Microsoft.Network/stable/2018-11-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-11-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-11-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-11-01/expressRoutePort.json
+  - Microsoft.Network/stable/2018-11-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-11-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-11-01/network.json
+  - Microsoft.Network/stable/2018-11-01/networkInterface.json
+  - Microsoft.Network/stable/2018-11-01/networkProfile.json
+  - Microsoft.Network/stable/2018-11-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-11-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-11-01/operation.json
+  - Microsoft.Network/stable/2018-11-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-11-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-11-01/routeFilter.json
+  - Microsoft.Network/stable/2018-11-01/routeTable.json
+  - Microsoft.Network/stable/2018-11-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-11-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-11-01/usage.json
+  - Microsoft.Network/stable/2018-11-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-11-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-11-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-11-01/virtualWan.json
+  - Microsoft.Network/stable/2018-11-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2018-11-01/vmssPublicIpAddress.json
+```
+### Tag: package-2018-10
+
+These settings apply only when `--tag=package-2018-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10'
+input-file:
+  - Microsoft.Network/stable/2018-10-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-10-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-10-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-10-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-10-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-10-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-10-01/endpointService.json
+  - Microsoft.Network/stable/2018-10-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-10-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-10-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-10-01/expressRoutePort.json
+  - Microsoft.Network/stable/2018-10-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-10-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-10-01/network.json
+  - Microsoft.Network/stable/2018-10-01/networkInterface.json
+  - Microsoft.Network/stable/2018-10-01/networkProfile.json
+  - Microsoft.Network/stable/2018-10-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-10-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-10-01/operation.json
+  - Microsoft.Network/stable/2018-10-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-10-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-10-01/routeFilter.json
+  - Microsoft.Network/stable/2018-10-01/routeTable.json
+  - Microsoft.Network/stable/2018-10-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-10-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-10-01/usage.json
+  - Microsoft.Network/stable/2018-10-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-10-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-10-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-10-01/virtualWan.json
+  - Microsoft.Network/stable/2018-10-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2018-10-01/vmssPublicIpAddress.json
+```
 
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-08'
+``` yaml $(tag) == 'package-2018-08'
 input-file:
   - Microsoft.Network/stable/2018-08-01/applicationGateway.json
   - Microsoft.Network/stable/2018-08-01/applicationSecurityGroup.json
@@ -72,6 +154,7 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-08-01/vmssPublicIpAddress.json
 ```
+
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
@@ -642,6 +725,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ddosCustomPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: ddosProtectionPlan.json

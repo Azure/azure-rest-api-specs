@@ -24,7 +24,7 @@ These are the global settings for the Blueprint API.
 title: BlueprintManagementClient
 description: Blueprint Client
 openapi-type: arm
-tag: package-2017-11-preview
+tag: package-2018-11-preview
 ```
 
 
@@ -34,7 +34,19 @@ These settings apply only when `--tag=package-2017-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-11-preview'
 input-file:
-- Microsoft.Blueprint/preview/2017-11-11-preview/blueprint.json
+- Microsoft.Blueprint/preview/2017-11-11-preview/blueprintDefinition.json
+- Microsoft.Blueprint/preview/2017-11-11-preview/blueprintAssignment.json
+```
+
+### Tag: package-2018-11-preview
+
+These settings apply only when `--tag=package-2018-11-preview` is specified on the command line.
+ 
+``` yaml $(tag) == 'package-2018-11-preview'
+input-file:
+- Microsoft.Blueprint/preview/2018-11-01-preview/blueprintDefinition.json
+- Microsoft.Blueprint/preview/2018-11-01-preview/blueprintAssignment.json
+- Microsoft.Blueprint/preview/2018-11-01-preview/assignmentOperation.json
 ```
 
 ---
@@ -49,6 +61,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
 ```
 
 
@@ -121,18 +134,23 @@ java:
 
 ``` yaml
 directive:
-  - from: blueprint.json
-    suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
-    reason: properties etag defined as eTag in model
-  - from: blueprint.json
-    suppress: R3026 # Tracked resource 'XXX' must have patch operation that at least supports the update of tags.
+  - from: blueprintAssignment.json
+    suppress: TrackedResourcePatchOperation 
     reason: Assignment is proxy resource.
-  - from: blueprint.json
+  - from: blueprintDefinition.json
     suppress: UniqueResourcePaths
     where: $.paths
     reason: Microsoft.Management is a proxy resource provider
-  - from: blueprint.json
+  - from: blueprintAssignment.json
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI for Microsoft.Management is out of scope.
+  - from: blueprintDefinition.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI for Microsoft.Management is out of scope.    
+  - from: assignmentOperation.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI for Microsoft.Management is out of scope.    
 ```

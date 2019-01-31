@@ -9,7 +9,7 @@ The compute RP comprises of small services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
@@ -437,7 +437,7 @@ input-file:
 
 ### Tag: package-container-service-2015-11-preview
 
-These setings apply only when `--tag=package-container-service-2015-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-container-service-2015-11-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-container-service-2015-11-preview'
 input-file:
