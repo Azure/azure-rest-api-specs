@@ -428,7 +428,7 @@
         }
       }
     },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query": {
       "post": {
         "tags": [
           "Query"
@@ -1096,7 +1096,7 @@
         }
       }
     },
-   "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Forecast": {
+	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Forecast": {
       "post": {
         "tags": [
           "Forecast"
@@ -1310,7 +1310,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/exports": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/exports": {
       "get": {
         "tags": [
           "Exports"
@@ -1770,7 +1770,7 @@
 	   
       },
 																				 
-      "put": {Parameters supplied to the CreateOrUpdate 
+      "put": {
         "tags": [
           "Exports"
         ],
@@ -1866,7 +1866,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/exports/{exportName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/exports/{exportName}": {
       "get": {
         "tags": [
           "Exports"
@@ -2135,7 +2135,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
       "post": {
         "tags": [
           "Exports"
@@ -2327,7 +2327,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
       "get": {
         "tags": [
           "Exports"
@@ -2348,6 +2348,260 @@
           },
           {
             "$ref": "#/parameters/departmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExportExecutionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports": {
+      "get": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_ListByEnrollmentAccount",
+        "description": "Lists all exports for a enrollmentAccount.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExportList": {
+            "$ref": "./examples/ExportListByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}": {
+            "get": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_GetByEnrollmentAccounts",
+        "description": "Gets the export for a enrollmentAccount by export name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "Export": {
+            "$ref": "./examples/ExportByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_CreateOrUpdateByEnrollmentAccount",
+        "description": "The operation to create or update a export for enrollmentAccount. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateExport": {
+            "$ref": "./examples/ExportCreateOrUpdateByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Export"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Export operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_DeleteByEnrollmentAccount",
+        "description": "The operation to delete a export for enrollment account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DeleteExport": {
+            "$ref": "./examples/ExportDeleteByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+      },
+	 "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
+      "post": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_ExecuteByEnrollmentAccount",
+        "description": "The operation to execute a export by enrollment account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExecuteExport": {
+            "$ref": "./examples/ExportExecutionByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },	
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccount/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
+      "get": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_GetExecutionHistoryByEnrollmentAccount",
+        "description": "Gets the execution history of a export for a enrollment account by export name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExecutionHistoryExport": {
+            "$ref": "./examples/ExportExecutionListByEnrollmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountIdParameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
@@ -2455,268 +2709,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ReportConfigDefinition": {
-      "description": "The definition of a report config.",
-      "properties": {
-        "type": {
-          "description": "The type of the report.",
-          "type": "string",
-          "enum": [
-            "Usage"
-          ],
-          "x-ms-enum": {
-            "name": "ReportType",
-            "modelAsString": true
-          }
-        },
-        "timeframe": {
-          "description": "The time frame for pulling data for the report. If custom, then a specific time period must be provided.",
-          "type": "string",
-          "enum": [
-            "WeekToDate",
-            "MonthToDate",
-            "YearToDate",
-            "Custom"
-          ],
-          "x-ms-enum": {
-            "name": "TimeframeType",
-            "modelAsString": true
-          }
-        },
-        "timePeriod": {
-          "description": "Has time period for pulling data for the report.",
-          "$ref": "#/definitions/ReportConfigTimePeriod"
-        },
-        "dataset": {
-          "description": "Has definition for data in this report config.",
-          "$ref": "#/definitions/ReportConfigDataset"
-        }
-      },
-      "required": [
-        "type",
-        "timeframe"
-      ]
-    },
-    "ReportConfigTimePeriod": {
-      "description": "The start and end date for pulling data for the report.",
-      "properties": {
-        "from": {
-          "description": "The start date to pull data from.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "to": {
-          "description": "The end date to pull data to.",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "from",
-        "to"
-      ]
-    },
-    "ReportConfigDataset": {
-      "description": "The definition of data present in the report.",
-      "properties": {
-        "granularity": {
-          "description": "The granularity of rows in the report.",
-          "type": "string",
-          "enum": [
-            "Daily"
-          ],
-          "x-ms-enum": {
-            "name": "GranularityType",
-            "modelAsString": true
-          }
-        },
-        "configuration": {
-          "description": "Has configuration information for the data in the report. The configuration will be ignored if aggregation and grouping are provided.",
-          "$ref": "#/definitions/ReportConfigDatasetConfiguration"
-        },
-        "aggregation": {
-          "type": "object",
-          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
-          "additionalProperties": {
-            "type": "object",
-            "$ref": "#/definitions/ReportConfigAggregation"
-          },
-          "maxItems": 2
-        },
-        "grouping": {
-          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReportConfigGrouping"
-          },
-          "maxItems": 2
-        },
-        "sorting": {
-          "description": "Array of order by expression to use in the report.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReportConfigSorting"
-          }
-        },
-        "filter": {
-          "type": "object",
-          "description": "Has filter expression to use in the report.",
-          "$ref": "#/definitions/ReportConfigFilter"
-        }
-      }
-    },
-    "ReportConfigDatasetConfiguration": {
-      "description": "The configuration of dataset in the report.",
-      "properties": {
-        "columns": {
-          "description": "Array of column names to be included in the report. Any valid report column name is allowed. If not provided, then report includes all columns.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ReportConfigAggregation": {
-      "description": "The aggregation expression to be used in the report.",
-      "properties": {
-        "name": {
-          "description": "The name of the column to aggregate.",
-          "type": "string"
-        },
-        "function": {
-          "description": "The name of the aggregation function to use.",
-          "type": "string",
-          "enum": [
-            "Sum"
-          ],
-          "x-ms-enum": {
-            "name": "FunctionType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name",
-        "function"
-      ]
-    },
-    "ReportConfigSorting": {
-      "description": "The order by expression to be used in the report.",
-      "properties": {
-        "direction": {
-          "description": "Direction of sort.",
-          "type": "string",
-          "enum": [
-            "Ascending",
-            "Descending"
-          ]
-        },
-        "name": {
-          "description": "The name of the column to sort.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "ReportConfigGrouping": {
-      "description": "The group by expression to be used in the report.",
-      "properties": {
-        "type": {
-          "description": "Has type of the column to group.",
-          "$ref": "#/definitions/ReportConfigColumnType"
-        },
-        "name": {
-          "description": "The name of the column to group.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "type",
-        "name"
-      ]
-    },
-    "ReportConfigFilter": {
-      "description": "The filter expression to be used in the report.",
-      "properties": {
-        "and": {
-          "description": "The logical \"AND\" expression. Must have at least 2 items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReportConfigFilter"
-          },
-          "minItems": 2
-        },
-        "or": {
-          "description": "The logical \"OR\" expression. Must have at least 2 items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReportConfigFilter"
-          },
-          "minItems": 2
-        },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/ReportConfigFilter"
-        },
-        "dimension": {
-          "description": "Has comparison expression for a dimension",
-          "$ref": "#/definitions/ReportConfigComparisonExpression"
-        },
-        "tag": {
-          "description": "Has comparison expression for a tag",
-          "$ref": "#/definitions/ReportConfigComparisonExpression"
-        }
-      }
-    },
-    "ReportConfigColumnType": {
-      "description": "The type of the column in the report.",
-      "type": "string",
-      "enum": [
-        "Tag",
-        "Dimension"
-      ],
-      "x-ms-enum": {
-        "name": "ReportConfigColumnType",
-        "modelAsString": true
-      }
-    },
-    "ReportConfigComparisonExpression": {
-      "description": "The comparison expression to be used in the report.",
-      "properties": {
-        "name": {
-          "description": "The name of the column to use in comparison.",
-          "type": "string"
-        },
-        "operator": {
-          "description": "The operator to use for comparison.",
-          "type": "string",
-          "enum": [
-            "In",
-            "Contains"
-          ],
-          "x-ms-enum": {
-            "name": "OperatorType",
-            "modelAsString": true
-          }
-        },
-        "values": {
-          "description": "Array of values to use for comparison",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "name",
-        "operator",
-        "values"
-      ]
     },
     "DimensionsListResult": {
       "description": "Result of listing dimensions. It contains a list of available dimensions.",
