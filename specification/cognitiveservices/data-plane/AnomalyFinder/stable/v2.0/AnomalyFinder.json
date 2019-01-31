@@ -117,21 +117,25 @@
   "definitions": {
     "APIError": {
       "type": "object",
-      "description": "Error information returned by the API",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "Error body.",
+      "description": "Error information returned by the API.",
       "properties": {
         "code": {
-          "type": "string"
+          "description": "The error code.",
+          "enum": [
+            "InvalidCustomInterval",
+            "BadArgument",
+            "InvalidGranularity",
+            "InvalidPeriod",
+            "InvalidModelArgument",
+            "InvalidSeries"
+          ],
+          "x-ms-enum": {
+            "name": "AnomalyFinderErrorCodes",
+            "modelAsString": true
+          }
         },
         "message": {
+          "description": "A message explaining the error reported by the service.",
           "type": "string"
         }
       }
@@ -154,7 +158,19 @@
         },
         "Granularity": {
           "type": "string",
-          "description": "Can only be one of yearly, monthly, daily, hourly or minutely. Granularity is used for verify whether input series is valid."
+          "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
+          "x-ms-enum": {
+            "name": "Granularity",
+            "modelAsString": false
+          },
+          "enum": [
+            "yearly",
+            "monthly",
+            "weekly",
+            "daily",
+            "hourly",
+            "minutely"
+          ]
         },
         "CustomInterval": {
           "type": "integer",
@@ -164,22 +180,27 @@
           "type": "integer",
           "format": "int32",
           "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically.",
-          "minimum": 0
+          "minimum": 0,
+          "exclusiveMinimum": false
         },
         "MaxAnomalyRatio": {
           "type": "number",
           "format": "float",
-          "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
+          "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series. Must be between 0 and 0.5 (exclusive)",
           "minimum": 0,
+          "exclusiveMinimum": true,
           "maximum": 0.5,
+          "exclusiveMaximum": true,
           "default": 0.25
         },
         "Sensitivity": {
           "type": "number",
           "format": "float",
-          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted",
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted. Must be between 0 and 99 (inclusive)",
           "minimum": 0,
+          "exclusiveMinimum": false,
           "maximum": 99,
+          "exclusiveMaximum": false,
           "default": 99
         }
       }
