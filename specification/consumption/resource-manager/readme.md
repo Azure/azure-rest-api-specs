@@ -66,6 +66,10 @@ directive:
     from: consumption.json
     where: $.definitions.MarketplaceProperties.properties.isEstimated
     reason: enum for this scenario does not make sense for the API
+  - suppress: EnumInsteadOfBoolean
+    from: consumption.json
+    where: $.definitions.Notification.properties.enabled
+    reason: enum for this scenario does not make sense for the API
 ```
 
 ---
