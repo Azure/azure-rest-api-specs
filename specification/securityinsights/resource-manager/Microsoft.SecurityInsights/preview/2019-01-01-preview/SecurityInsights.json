@@ -753,7 +753,7 @@
                     "description": "Etag of the data connector."
                 },
                 "properties": {
-                    "type": "object",
+                    "x-ms-client-flatten": true,
                     "description": "Data connector properties.",
                     "properties": {
                         "contextId": {
@@ -813,14 +813,22 @@
             ],
             "properties": {
                 "properties": {
-                    "type": "object",
+                    "x-ms-client-flatten": true,
                     "description": "Office data connector properties.",
-                    "properties": {
-                        "dataTypes": {
-                            "x-ms-client-flatten": true,
-                            "description": "The available data types for the connector.",
-                            "$ref": "#/definitions/OfficeDataConnectorDataTypes"
-                        }
+                    "$ref": "#/definitions/OfficeDataConnectorProperties"
+                }
+            }
+        },
+        "OfficeDataConnectorProperties": {
+            "type": "object",
+            "description": "Office data connector properties.",
+            "properties": {
+                "dataTypes": {
+                    "type": "object",
+                    "description": "The available data types for the connector.",
+                    "additionalProperties": {
+                        "type": "object",
+                        "$ref": "#/definitions/OfficeDataConnectorDataTypes"
                     }
                 }
             }
@@ -860,14 +868,22 @@
             ],
             "properties": {
                 "properties": {
-                    "type": "object",
+                    "x-ms-client-flatten": true,
                     "description": "TI data connector properties.",
-                    "properties": {
-                        "dataTypes": {
-                            "x-ms-client-flatten": true,
-                            "description": "The available data types for the connector.",
-                            "$ref": "#/definitions/TIDataConnectorDataTypes"
-                        }
+                    "$ref": "#/definitions/TIDataConnectorProperties"
+                }
+            }
+        },
+        "TIDataConnectorProperties": {
+            "type": "object",
+            "description": "TI data connector properties.",
+            "properties": {
+                "dataTypes": {
+                    "type": "object",
+                    "description": "The available data types for the connector.",
+                    "additionalProperties": {
+                        "type": "object",
+                        "$ref": "#/definitions/TIDataConnectorDataTypes"
                     }
                 }
             }
@@ -893,7 +909,7 @@
             "description": "Represents AAD (Azure Active Directory) data connector.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/DataConnectorWithAlertsDataType"
+                    "$ref": "#/definitions/DataConnectorWithAlerts"
                 }
             ]
         },
@@ -903,7 +919,7 @@
             "description": "Represents ASC (Azure Security Center) data connector.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/DataConnectorWithAlertsDataType"
+                    "$ref": "#/definitions/DataConnectorWithAlerts"
                 }
             ]
         },
@@ -913,11 +929,11 @@
             "description": "Represents MCAS (Microsoft Cloud Aapp Security) data connector.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/DataConnectorWithAlertsDataType"
+                    "$ref": "#/definitions/DataConnectorWithAlerts"
                 }
             ]
         },
-        "DataConnectorWithAlertsDataType": {
+        "DataConnectorWithAlerts": {
             "type": "object",
             "description": "Data connector with alerts data type.",
             "allOf": [
@@ -927,14 +943,22 @@
             ],
             "properties": {
                 "properties": {
-                    "type": "object",
+                    "x-ms-client-flatten": true,
                     "description": "Data connector properties.",
-                    "properties": {
-                        "dataTypes": {
-                            "x-ms-client-flatten": true,
-                            "description": "The available data types for the connector.",
-                            "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
-                        }
+                    "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+                }
+            }
+        },
+        "DataConnectorWithAlertsProperties": {
+            "type": "object",
+            "description": "Data connector properties.",
+            "properties": {
+                "dataTypes": {
+                    "type": "object",
+                    "description": "The available data types for the connector.",
+                    "additionalProperties": {
+                        "type": "object",
+                        "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
                     }
                 }
             }
