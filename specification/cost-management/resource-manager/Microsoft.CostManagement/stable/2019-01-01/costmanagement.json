@@ -478,7 +478,8 @@
           "nextLinkName": null
         }
       }
-    },"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions": {
       "get": {
         "tags": [
           "Dimensions"
@@ -553,7 +554,8 @@
           "nextLinkName": null
         }
       }
-    },"/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query": {
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query": {
       "post": {
         "tags": [
           "Query"
@@ -609,7 +611,8 @@
           "nextLinkName": null
         }
       }
-    },"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query": {
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query": {
       "post": {
         "tags": [
           "Query"
@@ -662,8 +665,8 @@
           "nextLinkName": null
         }
       }
-    }, 
-	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Query": {
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Query": {
       "post": {
         "tags": [
           "Query"
@@ -777,7 +780,7 @@
         }
       }
     },
-	"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Query": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Query": {
       "post": {
         "tags": [
           "Query"
@@ -836,7 +839,6 @@
         "tags": [
           "Exports"
         ],
-												
         "operationId": "Exports_List",
         "description": "Lists all exports for a subscription.",
         "externalDocs": {
@@ -845,12 +847,6 @@
         "x-ms-examples": {
           "ExportList": {
             "$ref": "./examples/ExportList.json"
-			
-													   
-																			  
-			
-													 
-																			
           }
         },
         "parameters": [
@@ -858,9 +854,6 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-															
-			
-		   
             "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
@@ -898,26 +891,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
-																																							  
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-																																																																							 
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
-																											 
-						  
-							  
-							  
-						 
-						   
           }
         ],
         "responses": {
@@ -933,9 +912,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
       }
     },
@@ -944,7 +920,6 @@
         "tags": [
           "Exports"
         ],
-												
         "operationId": "Exports_ListByBillingAccount",
         "description": "Lists all exports for a billing account.",
         "externalDocs": {
@@ -953,12 +928,6 @@
         "x-ms-examples": {
           "ExportList": {
             "$ref": "./examples/ExportListByBillingAccount.json"
-			
-														  
-																				 
-			
-														
-																			   
           }
         },
         "parameters": [
@@ -970,20 +939,11 @@
           }
         ],
         "responses": {
-			
-		   
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ExportListResult"
             }
-			
-		   
-							  
-																																							  
-						  
-							  
-							
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1011,13 +971,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"	
-          },
-		  {
-            "$ref": "#/parameters/billingAccountIdParameter"	
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/departmentIdParameter"			   
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentIdParameter"
           }
         ],
         "responses": {
@@ -1033,9 +993,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
       }
     },
@@ -1044,7 +1001,6 @@
         "tags": [
           "Exports"
         ],
-												
         "operationId": "Exports_Get",
         "description": "Gets the export for a subscription by export name.",
         "externalDocs": {
@@ -1053,12 +1009,6 @@
         "x-ms-examples": {
           "Export": {
             "$ref": "./examples/Export.json"
-			
-												   
-																		  
-			
-												 
-																		
           }
         },
         "parameters": [
@@ -1104,28 +1054,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
-																																													   
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-																																							  
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/exportNameParameter"
-																																																																							 
-						  
-							  
-							
           },
           {
             "name": "parameters",
-																											 
             "in": "body",
             "required": true,
             "schema": {
@@ -1153,18 +1090,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
-	   
       },
-																																																																								  
       "delete": {
         "tags": [
           "Exports"
         ],
-												
         "operationId": "Exports_Delete",
         "description": "The operation to delete a export.",
         "externalDocs": {
@@ -1173,12 +1104,6 @@
         "x-ms-examples": {
           "DeleteExport": {
             "$ref": "./examples/ExportDelete.json"
-			
-														
-																			   
-			
-													  
-																			 
           }
         },
         "parameters": [
@@ -1223,26 +1148,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
-																																							  
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-																																																																							 
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/exportNameParameter"
-							  
-						 
-						   
           }
         ],
         "responses": {
@@ -1258,20 +1172,14 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
-	   
       },
-																					  
       "put": {
         "tags": [
           "Exports"
         ],
         "operationId": "Exports_CreateOrUpdateByResourceGroupName",
         "description": "The operation to create or update a export. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
-																  
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1288,29 +1196,13 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-							  
-																																													   
-						  
-							  
-							
-			
-		   
             "$ref": "#/parameters/resourceGroupNameParameter"
-																																							  
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/exportNameParameter"
-																																																																							 
-						  
-							  
-							
           },
           {
             "name": "parameters",
-																											 
             "in": "body",
             "required": true,
             "schema": {
@@ -1338,18 +1230,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
-	   
       },
-																																																																							 
       "delete": {
         "tags": [
           "Exports"
         ],
-												
         "operationId": "Exports_DeleteByResourceGroupName",
         "description": "The operation to delete a export.",
         "externalDocs": {
@@ -1405,26 +1291,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
-																																							  
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
-																																																																							 
-						  
-							  
-							
           },
           {
             "$ref": "#/parameters/exportNameParameter"
-																											 
-						  
-							  
-							  
-						 
-						   
           }
         ],
         "responses": {
@@ -1440,13 +1312,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
-	   
       },
-																				 
       "put": {
         "tags": [
           "Exports"
@@ -1459,9 +1326,6 @@
         "x-ms-examples": {
           "CreateOrUpdateExport": {
             "$ref": "./examples/ExportCreateOrUpdateByBillingAccount.json"
-			
-										 
-															   
           }
         },
         "parameters": [
@@ -1562,9 +1426,9 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/billingAccountIdParameter"
-          },		  
+          },
           {
             "$ref": "#/parameters/departmentIdParameter"
           },
@@ -1608,7 +1472,7 @@
           {
             "$ref": "#/parameters/departmentIdParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
@@ -1663,7 +1527,7 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
@@ -1699,9 +1563,6 @@
         "x-ms-examples": {
           "ExecuteExport": {
             "$ref": "./examples/ExportExecution.json"
-			
-										  
-																 
           }
         },
         "parameters": [
@@ -1713,12 +1574,6 @@
           },
           {
             "$ref": "#/parameters/exportNameParameter"
-						 
-							 
-					   
-															
-			  
-																							   
           }
         ],
         "responses": {
@@ -1773,9 +1628,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
       }
     },
@@ -1792,9 +1644,6 @@
         "x-ms-examples": {
           "ExecuteExport": {
             "$ref": "./examples/ExportExecutionByBillingAccount.json"
-			
-											 
-																	
           }
         },
         "parameters": [
@@ -1902,9 +1751,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
       }
     },
@@ -1921,9 +1767,6 @@
         "x-ms-examples": {
           "ExecutionHistoryExport": {
             "$ref": "./examples/ExportExecutionList.json"
-			
-									  
-															 
           }
         },
         "parameters": [
@@ -1938,12 +1781,6 @@
           },
           {
             "$ref": "#/parameters/exportNameParameter"
-						 
-							 
-					   
-															
-			  
-																							   
           }
         ],
         "responses": {
@@ -1959,9 +1796,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-		  
-						  
-							  
         }
       }
     },
@@ -1978,9 +1812,6 @@
         "x-ms-examples": {
           "ExecutionHistoryExport": {
             "$ref": "./examples/ExportExecutionListByBillingAccount.json"
-			
-										   
-																  
           }
         },
         "parameters": [
@@ -1992,12 +1823,6 @@
           },
           {
             "$ref": "#/parameters/exportNameParameter"
-						 
-							 
-					   
-															
-			  
-																							   
           }
         ],
         "responses": {
@@ -2061,7 +1886,7 @@
         }
       }
     },
-	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports": {
       "get": {
         "tags": [
           "Exports"
@@ -2103,8 +1928,8 @@
         }
       }
     },
-	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}": {
-            "get": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}": {
+      "get": {
         "tags": [
           "Exports"
         ],
@@ -2165,7 +1990,7 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
@@ -2223,7 +2048,7 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
@@ -2245,8 +2070,8 @@
           }
         }
       }
-      },
-	 "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
       "post": {
         "tags": [
           "Exports"
@@ -2287,7 +2112,7 @@
           }
         }
       }
-    },	
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccount/{enrollmentAccountId}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
       "get": {
         "tags": [
@@ -2598,7 +2423,7 @@
         }
       }
     },
-	"QueryDefinition": {
+    "QueryDefinition": {
       "description": "The definition of a query.",
       "properties": {
         "type": {
@@ -2617,11 +2442,11 @@
           "type": "string",
           "enum": [
             "WeekToDate",
-            "MonthToDate",			
-			"YearToDate",
-			"TheLastWeek",
-			"TheLastMonth",
-			"TheLastYear",
+            "MonthToDate",
+            "YearToDate",
+            "TheLastWeek",
+            "TheLastMonth",
+            "TheLastYear",
             "Custom"
           ],
           "x-ms-enum": {
@@ -2642,8 +2467,8 @@
         "type",
         "timeframe"
       ]
-    },	
-	"QueryTimePeriod" : {
+    },
+    "QueryTimePeriod": {
       "description": "The start and end date for pulling data for the query.",
       "properties": {
         "from": {
@@ -2662,7 +2487,7 @@
         "to"
       ]
     },
-	"QueryDataset" : {
+    "QueryDataset": {
       "description": "The definition of data present in the query.",
       "properties": {
         "granularity": {
@@ -2698,9 +2523,9 @@
           },
           "maxItems": 2
         },
-		"sorting" : {
-		  "type": "array",
-		  "description": "Array of sorting by columns in query.",
+        "sorting": {
+          "type": "array",
+          "description": "Array of sorting by columns in query.",
           "items": {
             "$ref": "#/definitions/QuerySortingConfiguration"
           }
@@ -2712,29 +2537,29 @@
         }
       }
     },
-	"QuerySortingConfiguration" : {
-		"description": "The configuration for sorting in the query.",
-		"type": "object",
-		"properties": {
-		  "querySortingDirection" : {			
-            "description": "The sorting direction",
-            "type": "string",
-            "enum": [
-              "Ascending",
-              "Descending"
-            ],
+    "QuerySortingConfiguration": {
+      "description": "The configuration for sorting in the query.",
+      "type": "object",
+      "properties": {
+        "querySortingDirection": {
+          "description": "The sorting direction",
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ],
           "x-ms-enum": {
             "name": "SortDirection",
             "modelAsString": true
           }
-        },			
-		"name": {
+        },
+        "name": {
           "description": "The name of the column to use in sorting.",
           "type": "string"
         }
-	}
-	},
-	"QueryDatasetConfiguration": {
+      }
+    },
+    "QueryDatasetConfiguration": {
       "description": "The configuration of dataset in the query.",
       "properties": {
         "columns": {
@@ -2746,7 +2571,7 @@
         }
       }
     },
-	"QueryAggregation" : {
+    "QueryAggregation": {
       "description": "The aggregation expression to be used in the query.",
       "properties": {
         "name": {
@@ -2770,7 +2595,7 @@
         "function"
       ]
     },
-	"QueryGrouping" : {
+    "QueryGrouping": {
       "description": "The group by expression to be used in the query.",
       "properties": {
         "type": {
@@ -2787,7 +2612,7 @@
         "name"
       ]
     },
-	"QueryFilter" : {
+    "QueryFilter": {
       "description": "The filter expression to be used in the export.",
       "properties": {
         "and": {
@@ -2820,7 +2645,7 @@
         }
       }
     },
-	"QueryColumnType" : {
+    "QueryColumnType": {
       "description": "The type of the column in the export.",
       "type": "string",
       "enum": [
@@ -2832,7 +2657,7 @@
         "modelAsString": true
       }
     },
-	"QueryComparisonExpression" : {
+    "QueryComparisonExpression": {
       "description": "The comparison expression to be used in the query.",
       "properties": {
         "name": {
@@ -2865,7 +2690,7 @@
         "values"
       ]
     },
-	"ExportListResult": {
+    "ExportListResult": {
       "description": "Result of listing exports. It contains a list of available exports in the scope provided.",
       "properties": {
         "value": {
@@ -2894,7 +2719,7 @@
         }
       }
     },
-	"ExportProperties": {
+    "ExportProperties": {
       "description": "The properties of the export.",
       "type": "object",
       "allOf": [
@@ -2975,7 +2800,7 @@
         "recurrence"
       ]
     },
-	"ExportDeliveryInfo": {
+    "ExportDeliveryInfo": {
       "description": "The delivery information associated with a export.",
       "properties": {
         "destination": {
