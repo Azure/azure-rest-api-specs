@@ -3805,10 +3805,19 @@
     },
     "RecognitionModel": {
       "type": "string",
-      "description": "Recognition model name, maximum length is 128.",
-      "maxLength": 128
+      "description": "Recognition model name.\nRecognition model is used when the face features are extracted, so a recognition model version could be provided when performing a Detection.\n",
+      "default": "Recognition_V01",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "RecognitionModel",
+        "modelAsString": false
+      },
+      "enum": [
+        "Recognition_V01",
+        "Recognition_V02"
+      ]
     },
-	"ApplyScope": {    
+    "ApplyScope": {
       "type": "array",
       "description": "Array of the target Face subscription ids for the snapshot, specified by the user who created the snapshot when calling Snapshot - Take. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.",
       "items": {
@@ -4175,13 +4184,21 @@
     },
     "RecognitionModel": {
       "name": "RecognitionModel",
-      "description": "Recognition model name, maximum length is 128.",
+      "description": "Recognition model name.\nRecognition model is used when the face features are extracted, so a recognition model version could be provided when performing a Detection.\n",
       "required": false,
       "type": "string",
       "in": "query",
-      "x-ms-parameter-location": "method",
-      "maxLength": 128,
-      "collectionFormat": "csv"
+      "x-ms-parameter-location": "method",   
+      "default": "Recognition_V01",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "RecognitionModel",
+        "modelAsString": false
+      },
+      "enum": [
+        "Recognition_V01",
+        "Recognition_V02"
+      ]
     }
   }
 }
