@@ -2617,7 +2617,11 @@
           "type": "string",
           "enum": [
             "WeekToDate",
-            "MonthToDate",
+            "MonthToDate",			
+			"YearToDate",
+			"TheLastWeek",
+			"TheLastMonth",
+			"TheLastYear",
             "Custom"
           ],
           "x-ms-enum": {
@@ -2694,6 +2698,13 @@
           },
           "maxItems": 2
         },
+		"sorting" : {
+		  "type": "array",
+		  "description": "Array of sorting by columns in query.",
+          "items": {
+            "$ref": "#/definitions/QuerySortingConfiguration"
+          }
+        },
         "filter": {
           "type": "object",
           "description": "Has filter expression to use in the query.",
@@ -2701,6 +2712,28 @@
         }
       }
     },
+	"QuerySortingConfiguration" : {
+		"description": "The configuration for sorting in the query.",
+		"type": "object",
+		"properties": {
+		  "querySortingDirection" : {			
+            "description": "The sorting direction",
+            "type": "string",
+            "enum": [
+              "Ascending",
+              "Descending"
+            ],
+          "x-ms-enum": {
+            "name": "SortDirection",
+            "modelAsString": true
+          }
+        },			
+		"name": {
+          "description": "The name of the column to use in sorting.",
+          "type": "string"
+        }
+	}
+	},
 	"QueryDatasetConfiguration": {
       "description": "The configuration of dataset in the query.",
       "properties": {
