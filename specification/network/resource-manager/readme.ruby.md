@@ -26,6 +26,16 @@ batch:
   - tag: package-2018-01-only
 ```
 
+### Tag: package-2018-12 and ruby
+
+These settings apply only when `--tag=package-2018-12 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2018-12' && $(ruby)
+  namespace: "Azure::Network::Mgmt::V2018_12_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_network/lib
+```
+
 ### Tag: package-2015-05-preview and ruby
 
 These settings apply only when `--tag=package-2015-05-preview --ruby` is specified on the command line.
