@@ -36,7 +36,7 @@ azure-validator: true
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01-01'
+```yaml $(tag) == 'package-2019-01'
 input-file:
   - Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
 ```
@@ -89,11 +89,11 @@ input-file:
 - Microsoft.CostManagement/preview/2018-12-01-preview/costmanagement.json
 ```
 
-### Tag: package-2019-01-01
+### Tag: package-2019-01
 
-These settings apply only when `--tag=package-2019-01-01` is specified on the command line.
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-01-01'
+``` yaml $(tag) == 'package-2019-01'
 input-file:
 - Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
 ```
