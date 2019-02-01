@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2.0",
-    "title": "Anomaly Finder",
-    "description": "The Anomaly Detection Service detects anomalies automatically in time series data. It supports two functionalities, one is for detecting the whole series with model trained by the timeseries, another is detecting last point with model trained by points before. By using this service, business customers can discover incidents and establish a logic flow for root cause analysis. Ensure online service quality is one of the main reasons we develop this service. Improving anomaly detection service to provide precise results will always be fundamental work of our team."
+    "title": "Anomaly Finder Client",
+    "description": "The Anomaly Finder API detects anomalies automatically in time series data. It supports two functionalities, one is for detecting the whole series with model trained by the timeseries, another is detecting last point with model trained by points before. By using this service, business customers can discover incidents and establish a logic flow for root cause analysis."
   },
   "securityDefinitions": {
     "apiKeyHeader": {
@@ -31,7 +31,7 @@
       "post": {
         "summary": "Find anomalies for the entire series in batch.",
         "description": "The operation will generate a model using the entire series, each point will be detected with the same model. In this method, points before and after a certain point will be used to determine whether it's an anomaly. The entire detection can give user an overall status of the time series.",
-        "operationId": "post-timeseries-entire-detect",
+        "operationId": "EntireDetect",
         "parameters": [
           {
             "name": "body",
@@ -74,7 +74,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
         "description": "The operation will generate a model using points before the latest one, In this method, only history points are used for determine whether the target point is an anomaly. Latest point detecting matches the scenario of real-time monitoring of business metrics.",
-        "operationId": "post-timeseries-last-detect",
+        "operationId": "LastDetect",
         "parameters": [
           {
             "name": "body",
@@ -150,8 +150,6 @@
         "series": {
           "type": "array",
           "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.",
-          "maxItems": 8640,
-          "minItems": 12,
           "items": {
             "$ref": "#/definitions/Point"
           }
@@ -179,29 +177,17 @@
         "period": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically.",
-          "minimum": 0,
-          "exclusiveMinimum": false
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
         },
         "maxAnomalyRatio": {
           "type": "number",
           "format": "float",
-          "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series. Must be between 0 and 0.5 (exclusive)",
-          "minimum": 0,
-          "exclusiveMinimum": true,
-          "maximum": 0.5,
-          "exclusiveMaximum": true,
-          "default": 0.25
+          "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series."
         },
         "sensitivity": {
           "type": "number",
           "format": "float",
-          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted. Must be between 0 and 99 (inclusive)",
-          "minimum": 0,
-          "exclusiveMinimum": false,
-          "maximum": 99,
-          "exclusiveMaximum": false,
-          "default": 99
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
         }
       }
     },
@@ -309,7 +295,7 @@
         "upperMargin": {
           "type": "number",
           "format": "float",
-          "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - sensitivity)*upperMargin. If the value of latest point is between upperBoudary and lowerBoudary, it should be treated as normal value. By adjusting sensitivity value, anomaly status of latest point can be changed."
+          "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - sensitivity)*upperMargin. If the value of latest point is between upperBoundary and lowerBoundary, it should be treated as normal value. By adjusting sensitivity value, anomaly status of latest point can be changed."
         },
         "lowerMargin": {
           "type": "number",
@@ -322,7 +308,7 @@
         },
         "isNegativeAnomaly": {
           "type": "boolean",
-          "description": "Anomaly status in negative direction of the latest point. True means the latest point is an anoamly and its real value is smaller than the expected one."
+          "description": "Anomaly status in negative direction of the latest point. True means the latest point is an anomaly and its real value is smaller than the expected one."
         },
         "isPositiveAnomaly": {
           "type": "boolean",
