@@ -1629,6 +1629,46 @@
           "$ref": "#/definitions/GenericDatasetTypeProperties"
         }
       }
+    },
+    "SapOpenHubTableDataset": {
+      "x-ms-discriminator-value": "SapOpenHubTable",
+      "description": "Sap Business Warehouse Open Hub Destination Table properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sap Business Warehouse Open Hub Destination Table properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapOpenHubTableDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapOpenHubTableDatasetTypeProperties": {
+      "description": "Sap Business Warehouse Open Hub Destination Table properties.",
+      "properties": {
+        "openHubDestinationName": {
+          "type": "object",
+          "description": "The name of the Open Hub Destination with destination type as Database Table. Type: string (or Expression with resultType string)."
+        },
+        "excludeLastRequest": {
+          "type": "object",
+          "description": "Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "baseRequestId": {
+          "type": "object",
+          "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
+        }
+      },
+      "required": [
+        "openHubDestinationName"
+      ]
     }
   }
 }
