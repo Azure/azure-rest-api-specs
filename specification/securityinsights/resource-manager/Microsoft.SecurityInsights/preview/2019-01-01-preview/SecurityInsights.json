@@ -63,7 +63,7 @@
             "get": {
                 "x-ms-examples": {
                     "Get all scheduled alert rules.": {
-                        "$ref": "./examples/alertRulses/GetScheduledAlertRules.json"
+                        "$ref": "./examples/alertRules/GetScheduledAlertRules.json"
                     }
                 },
                 "tags": [
@@ -111,7 +111,7 @@
             "get": {
                 "x-ms-examples": {
                     "Get a scheduled alert rule.": {
-                        "$ref": "./examples/alertRulses/GetScheduledAlertRuleById.json"
+                        "$ref": "./examples/alertRules/GetScheduledAlertRuleById.json"
                     }
                 },
                 "tags": [
@@ -157,7 +157,7 @@
             "put": {
                 "x-ms-examples": {
                     "Creates or updates a scheduled alert rule.": {
-                        "$ref": "./examples/alertRulses/CreateScheduledAlertRule.json"
+                        "$ref": "./examples/alertRules/CreateScheduledAlertRule.json"
                     }
                 },
                 "tags": [
@@ -212,7 +212,7 @@
             "delete": {
                 "x-ms-examples": {
                     "Delete a scheduled alert rule.": {
-                        "$ref": "./examples/alertRulses/DeleteScheduledAlertRule.json"
+                        "$ref": "./examples/alertRules/DeleteScheduledAlertRule.json"
                     }
                 },
                 "tags": [
@@ -311,10 +311,10 @@
                         "$ref": "./examples/dataConnectors/GetOfficeDataConnetorById.json"
                     },
                     "Get a TI data connector.": {
-                        "$ref": "./examples/dataConnectors/GetThreatIneleganceById.json"
+                        "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
                     },
                     "Get a MCAS data connector.": {
-                        "$ref": "./examples/dataConnectors/GetMicrosoftCloudAappSecurityById.json"
+                        "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
                     },
                     "Get a ASC data connector.": {
                         "$ref": "./examples/dataConnectors/GetAzureSecurityCenterById.json"
@@ -764,8 +764,8 @@
                     "enum": [
                         "AzureActiveDirectory",
                         "AzureSecurityCenter",
-                        "MicrosoftCloudAappSecurity",
-                        "ThreatInelegance",
+                        "MicrosoftCloudAppSecurity",
+                        "ThreatIntelligence",
                         "Office365"
                     ],
                     "x-ms-enum": {
@@ -779,10 +779,10 @@
                                 "value": "AzureSecurityCenter"
                             },
                             {
-                                "value": "MicrosoftCloudAappSecurity"
+                                "value": "MicrosoftCloudAppSecurity"
                             },
                             {
-                                "value": "ThreatInelegance"
+                                "value": "ThreatIntelligence"
                             },
                             {
                                 "value": "Office365"
@@ -859,9 +859,9 @@
             }
         },
         "TIDataConnector": {
-            "x-ms-discriminator-value": "ThreatInelegance",
+            "x-ms-discriminator-value": "ThreatIntelligence",
             "type": "object",
-            "description": "Represents threat inelegance data connector.",
+            "description": "Represents threat intelligence data connector.",
             "allOf": [
                 {
                     "$ref": "#/definitions/DataConnector"
@@ -926,9 +926,9 @@
             ]
         },
         "MCASDataConnector": {
-            "x-ms-discriminator-value": "MicrosoftCloudAappSecurity",
+            "x-ms-discriminator-value": "MicrosoftCloudAppSecurity",
             "type": "object",
-            "description": "Represents MCAS (Microsoft Cloud Aapp Security) data connector.",
+            "description": "Represents MCAS (Microsoft Cloud App Security) data connector.",
             "allOf": [
                 {
                     "$ref": "#/definitions/DataConnectorWithAlerts"
@@ -987,7 +987,7 @@
             "properties": {
                 "state": {
                     "type": "string",
-                    "description": "Describe whther this data type connection is enabled or not.",
+                    "description": "Describe whether this data type connection is enabled or not.",
                     "enum": [
                         "Enabled",
                         "Disabled"
@@ -1093,7 +1093,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Connecto ID",
+            "description": "Connector ID",
             "x-ms-parameter-location": "method"
         },
         "DataConnector": {
