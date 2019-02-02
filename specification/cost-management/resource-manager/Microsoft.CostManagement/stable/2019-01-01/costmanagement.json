@@ -33,7 +33,7 @@
     }
   },
   "paths": {
-    "/{scopeDimensionParameter}/providers/Microsoft.CostManagement/dimensions": {
+    "/{scope}/providers/Microsoft.CostManagement/dimensions": {
       "get": {
         "tags": [
           "Dimensions"
@@ -145,7 +145,7 @@
         }
       }
     },
-    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/query": {
+    "/{scope}/providers/Microsoft.CostManagement/query": {
       "post": {
         "tags": [
           "Query"
@@ -223,7 +223,7 @@
         }
       }
     },
-    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports": {
+    "/{scope}/providers/Microsoft.CostManagement/exports": {
       "get": {
         "tags": [
           "Exports"
@@ -274,7 +274,7 @@
         }
       }
     },
-    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports/{exportName}": {
+    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}": {
       "get": {
         "tags": [
           "Exports"
@@ -441,7 +441,7 @@
         }
       }
     },
-    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
+    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
       "post": {
         "tags": [
           "Exports"
@@ -492,7 +492,7 @@
         }
       }
     },
-    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
+    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
       "get": {
         "tags": [
           "Exports"
@@ -1331,7 +1331,7 @@
   },
   "parameters": {
     "scopeDimensionParameter": {
-      "name": "scopeDimensionParameter",
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
@@ -1340,7 +1340,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeQueryParameter": {
-      "name": "scopeQueryParameter",
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
