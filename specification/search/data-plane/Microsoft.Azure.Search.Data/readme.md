@@ -108,16 +108,20 @@ Use the below directives sparingly. Every modification we make in here, we poten
 
 ``` yaml $(csharp)
 directive:
-  # Make all Proxy types internal so we can version them freely.
-  - from: source-file-csharp
-    where: $
-    transform: return $.replace( /public partial interface IDocumentsProxyOperations/g, "internal partial interface IDocumentsProxyOperations" )
-
-  # Change the public property on ISearchIndexClient and SearchIndexClient to refer to our public interface instead of the internal one.
+  # Make the IDocumentsProxyOperations interface internal so we can version it freely. This requires three changes:
+  #   1. Make the interface itself internal
+  #   2. Make the DocumentsProxy property of SearchIndexClient internal
+  #   3. Rename the interface property and its type from DocumentsProxy to Documents, effectively removing the property
+  #      from the ISearchIndexClient interface
+  # Its replacement property, Documents of type IDocumentsOperations, is hand-written so that it can delegate to DocumentsProxy.
+  # This allows us to do two things:
+  #   1. Abstract away the detail of whether GET or POST is used for read operations (Search, Suggest, etc.)
+  #   2. Add methods with type parameters and custom serialization to make our SDK easier to use in strongly-typed scenarios
+  #      (i.e. -- where the customer is using a class to represent their model because its schema is known at design-time)
   - from: source-file-csharp
     where: $
     transform: >-
-      return $.replace( /Gets the IDocumentsProxyOperations./g, "Gets the IDocumentsOperations." ).
-        replace( /IDocumentsProxyOperations DocumentsProxy { get;/g, "IDocumentsOperations Documents { get;" ).
-        replace( /DocumentsProxy = new DocumentsProxyOperations\(this\);/g, "Documents = new DocumentsOperations\(this\);" )
+      return $.replace( /public (partial interface IDocumentsProxyOperations)/g, "internal $1" ).
+        replace( /public virtual (IDocumentsProxyOperations DocumentsProxy { get;)/g, "internal $1" ).
+        replace( /(Gets the )IDocumentsProxyOperations(.\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)IDocumentsProxyOperations DocumentsProxy ({ get; })/g, "$1IDocumentsOperations$2IDocumentsOperations Documents $3" )
 ```
