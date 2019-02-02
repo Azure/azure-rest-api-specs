@@ -101,3 +101,23 @@ csharp:
   clear-output-folder: true
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Data/Generated
 ```
+
+### Tweak generated code
+
+Use the below directives sparingly. Every modification we make in here, we potentially have to replicate for every target language.
+
+``` yaml $(csharp)
+directive:
+  # Make all Proxy types internal so we can version them freely.
+  - from: source-file-csharp
+    where: $
+    transform: return $.replace( /public partial interface IDocumentsProxyOperations/g, "internal partial interface IDocumentsProxyOperations" )
+
+  # Change the public property on ISearchIndexClient and SearchIndexClient to refer to our public interface instead of the internal one.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.replace( /Gets the IDocumentsProxyOperations./g, "Gets the IDocumentsOperations." ).
+        replace( /IDocumentsProxyOperations DocumentsProxy { get;/g, "IDocumentsOperations Documents { get;" ).
+        replace( /DocumentsProxy = new DocumentsProxyOperations\(this\);/g, "Documents = new DocumentsOperations\(this\);" )
+```
