@@ -33,7 +33,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.CostManagement/dimensions": {
+    "/{scopeDimensionParameter}/providers/Microsoft.CostManagement/dimensions": {
       "get": {
         "tags": [
           "Dimensions"
@@ -51,7 +51,7 @@
           "ResourceGroupDimensionsList": {
             "$ref": "./examples/ResourceGroupDimensionsList.json"
           },
-		  "ManagementGroupDimensionsList": {
+          "ManagementGroupDimensionsList": {
             "$ref": "./examples/ManagementGroupDimensionsList.json"
           },
           "ManagementGroupDimensionsListExpandAndTop": {
@@ -90,12 +90,7 @@
         },
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which to list dimensions. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/scopeDimensionParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -150,7 +145,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.CostManagement/query": {
+    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/query": {
       "post": {
         "tags": [
           "Query"
@@ -164,28 +159,28 @@
           "SubscriptionQuery": {
             "$ref": "./examples/SubscriptionQuery.json"
           },
-		  "ResourceGroupQuery": {
+          "ResourceGroupQuery": {
             "$ref": "./examples/ResourceGroupQuery.json"
           },
-		  "BillingAccountQuery": {
+          "BillingAccountQuery": {
             "$ref": "./examples/BillingAccountQuery.json"
           },
-		  "BillingAccountQueryGrouping": {
+          "BillingAccountQueryGrouping": {
             "$ref": "./examples/BillingAccountQueryGrouping.json"
           },
-		  "EnrollmentAccountQuery": {
+          "EnrollmentAccountQuery": {
             "$ref": "./examples/EnrollmentAccountQuery.json"
           },
           "EnrollmentAccountQueryGrouping": {
             "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
           },
-		  "DepartmentQuery": {
+          "DepartmentQuery": {
             "$ref": "./examples/DepartmentQuery.json"
           },
           "DepartmentQueryGrouping": {
             "$ref": "./examples/DepartmentQueryGrouping.json"
           },
-		  "ManagementGroupQuery": {
+          "ManagementGroupQuery": {
             "$ref": "./examples/ManagementGroupQuery.json"
           },
           "ManagementGroupQueryGrouping": {
@@ -194,12 +189,7 @@
         },
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which to query usage data. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/scopeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -232,8 +222,8 @@
           "nextLinkName": null
         }
       }
-	},
-    "/{scope}/providers/Microsoft.CostManagement/exports": {
+    },
+    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports": {
       "get": {
         "tags": [
           "Exports"
@@ -247,27 +237,22 @@
           "SubscriptionExportList": {
             "$ref": "./examples/ExportList.json"
           },
-		  "ResourceGroupExportList": {
+          "ResourceGroupExportList": {
             "$ref": "./examples/ExportList.json"
           },
-		  "BillingAccountExportList": {
+          "BillingAccountExportList": {
             "$ref": "./examples/ExportListByBillingAccount.json"
           },
-		  "DepartmentExportList": {
+          "DepartmentExportList": {
             "$ref": "./examples/ExportListByDepartment.json"
           },
-		  "EnrollmentAccountExportList": {
+          "EnrollmentAccountExportList": {
             "$ref": "./examples/ExportListByEnrollmentAccount.json"
-          }		  
+          }
         },
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which exports are requested. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/scopeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -288,8 +273,8 @@
           }
         }
       }
-    },      
-    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}": {
+    },
+    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports/{exportName}": {
       "get": {
         "tags": [
           "Exports"
@@ -303,24 +288,19 @@
           "SubscriptionExport": {
             "$ref": "./examples/Export.json"
           },
-		  "BillingAccountExport": {
+          "BillingAccountExport": {
             "$ref": "./examples/ExportByBillingAccount.json"
           },
-		  "DepartmentExport": {
+          "DepartmentExport": {
             "$ref": "./examples/ExportByDepartment.json"
           },
-		  "EnrollmentAccountExport": {
+          "EnrollmentAccountExport": {
             "$ref": "./examples/ExportByEnrollmentAccount.json"
           }
         },
         "parameters": [
-		{
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which the export name exist. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope.",
-            "x-ms-skip-url-encoding": true
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -357,27 +337,22 @@
           "SubscriptionCreateOrUpdateExport": {
             "$ref": "./examples/ExportCreateOrUpdate.json"
           },
-		  "ResourceGroupCreateOrUpdateExport": {
+          "ResourceGroupCreateOrUpdateExport": {
             "$ref": "./examples/ExportCreateOrUpdate.json"
           },
-		  "BillingAccountCreateOrUpdateExport": {
+          "BillingAccountCreateOrUpdateExport": {
             "$ref": "./examples/ExportCreateOrUpdateByBillingAccount.json"
           },
-		  "DepartmentCreateOrUpdateExport": {
+          "DepartmentCreateOrUpdateExport": {
             "$ref": "./examples/ExportCreateOrUpdateByDepartment.json"
           },
-		  "EnrollmentAccountCreateOrUpdateExport": {
+          "EnrollmentAccountCreateOrUpdateExport": {
             "$ref": "./examples/ExportCreateOrUpdateByEnrollmentAccount.json"
-          }		  
+          }
         },
         "parameters": [
-		{
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which the export name exist. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope.",
-            "x-ms-skip-url-encoding": true
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -429,28 +404,22 @@
           "SubscriptionDeleteExport": {
             "$ref": "./examples/ExportDelete.json"
           },
-		  "ResourceGroupDeleteExport": {
+          "ResourceGroupDeleteExport": {
             "$ref": "./examples/ExportDelete.json"
           },
-		  "BillingAccountDeleteExport": {
+          "BillingAccountDeleteExport": {
             "$ref": "./examples/ExportDeleteByBillingAccount.json"
           },
-		  
-		  "EnrollmentAccountDeleteExport": {
+          "EnrollmentAccountDeleteExport": {
             "$ref": "./examples/ExportDeleteByEnrollmentAccount.json"
           },
-		  "DepartmentDeleteExport": {
+          "DepartmentDeleteExport": {
             "$ref": "./examples/ExportDeleteByDepartment.json"
           }
         },
         "parameters": [
-		{
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which the export name exist. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope.",
-            "x-ms-skip-url-encoding": true
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -472,7 +441,7 @@
         }
       }
     },
-	"/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
+    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
       "post": {
         "tags": [
           "Exports"
@@ -486,27 +455,22 @@
           "SubscriptionExecuteExport": {
             "$ref": "./examples/ExportExecution.json"
           },
-		  "ResourceGroupExecuteExport": {
+          "ResourceGroupExecuteExport": {
             "$ref": "./examples/ExportExecution.json"
           },
-		  "BillingAccountExecuteExport": {
+          "BillingAccountExecuteExport": {
             "$ref": "./examples/ExportExecutionByBillingAccount.json"
           },
-		  "DepartmentExecuteExport": {
+          "DepartmentExecuteExport": {
             "$ref": "./examples/ExportExecutionByDepartment.json"
           },
-		  "EnrollmentAccountExecuteExport": {
+          "EnrollmentAccountExecuteExport": {
             "$ref": "./examples/ExportExecutionByEnrollmentAccount.json"
           }
         },
         "parameters": [
-		{
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which the export must be run. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope.",
-            "x-ms-skip-url-encoding": true
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -528,7 +492,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
+    "/{scopeQueryParameter}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
       "get": {
         "tags": [
           "Exports"
@@ -542,28 +506,22 @@
           "SubscriptionExecutionHistoryExport": {
             "$ref": "./examples/ExportExecutionList.json"
           },
-		  "ResourceGroupExecutionHistoryExport": {
+          "ResourceGroupExecutionHistoryExport": {
             "$ref": "./examples/ExportExecutionList.json"
           },
-		  "BillingAccountExecutionHistoryExport": {
+          "BillingAccountExecutionHistoryExport": {
             "$ref": "./examples/ExportExecutionListByBillingAccount.json"
           },
-		  "DepartmentExecutionHistoryExport": {
+          "DepartmentExecutionHistoryExport": {
             "$ref": "./examples/ExportExecutionListByDepartment.json"
           },
-		  "EnrollmentAccountExecutionHistoryExport": {
+          "EnrollmentAccountExecutionHistoryExport": {
             "$ref": "./examples/ExportExecutionListByEnrollmentAccount.json"
           }
-		  
         },
         "parameters": [
-		{
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope at which the export must be executed. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope.",
-            "x-ms-skip-url-encoding": true
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1372,6 +1330,24 @@
     }
   },
   "parameters": {
+    "scopeDimensionParameter": {
+      "name": "scopeDimensionParameter",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with dimension operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope..",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeQueryParameter": {
+      "name": "scopeQueryParameter",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope' for Management Group scope..",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
