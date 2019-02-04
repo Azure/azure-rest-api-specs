@@ -117,7 +117,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Gets a alert rule.",
+                "description": "Gets the alert rule.",
                 "operationId": "AlertRules_Get",
                 "parameters": [
                     {
@@ -464,6 +464,243 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions": {
+            "get": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Gets all actions of alert rule.",
+                "operationId": "Actions_ListByAlertRule",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ActionsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}": {
+            "get": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Gets the action of alert rule.",
+                "operationId": "AlertRules_GetAction",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Action"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Creates or updates the action of alert rule.",
+                "operationId": "AlertRules_CreateAction",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionId"
+                    },
+                    {
+                        "$ref": "#/parameters/Action"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Action"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Action"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Delete the action of alert rule.",
+                "operationId": "AlertRules_DeleteAction",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/actions": {
+            "get": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Gets all actions.",
+                "operationId": "Actions_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ActionsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
         }
     },
     "definitions": {
@@ -714,6 +951,61 @@
                 "suppressionEnabled",
                 "suppressionDuration"
             ]
+        },
+        "ActionsList": {
+            "description": "List all the actions.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of actions.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of actions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Action"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Action": {
+            "type": "object",
+            "description": "Action for alert rule.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the action."
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Action properties",
+                    "$ref": "#/definitions/ActionProperties"
+                }
+            }
+        },
+        "ActionProperties": {
+            "type": "object",
+            "description": "Action property bag.",
+            "properties": {
+                "triggerUri": {
+                    "type": "string",
+                    "description": "The uri for the action to trigger."
+                },
+                "ruleId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The unique identifier of the rule."
+                }
+            }
         },
         "DataConnectorList": {
             "description": "List all the data connectors.",
@@ -1085,6 +1377,24 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/AlertRule"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "ActionId": {
+            "name": "actionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Action ID",
+            "x-ms-parameter-location": "method"
+        },
+        "Action": {
+            "name": "action",
+            "in": "body",
+            "description": "The action",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Action"
             },
             "x-ms-parameter-location": "method"
         },
