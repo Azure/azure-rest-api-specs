@@ -566,49 +566,14 @@
         }
       }
     },
-	  "/skillsets('{skillsetName}')": {
-      "get": {
-        "tags": ["Skillsets"],
-        "operationId": "Skillsets_Get",
-        "x-ms-examples": {
-          "SearchServiceGetSkillset": { "$ref": "./examples/SearchServiceGetSkillset.json" }
-        },
-        "description": "Retrieves a cognitive skillset in an Azure Search service.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/rest/api/searchservice/get-skillset"
-        },
-        "parameters": [
-          {
-            "name": "skillsetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the skillset to retrieve."
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "The skillset is successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/Skillset"
-            }
-          }
-        }
-      },
+    "/skillsets('{skillsetName}')": {
       "put": {
         "tags": ["Skillsets"],
         "operationId": "Skillsets_CreateOrUpdate",
         "x-ms-examples": {
           "SearchServiceCreateOrUpdateSkillset": { "$ref": "./examples/SearchServiceCreateOrUpdateSkillset.json" }
         },
-        "description": "Creates a new cognitive skillset in an Azure Search service.",
+        "description": "Creates a new Azure search skillset or updates a skillset if it already exists.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/update-skillset"
         },
@@ -689,6 +654,41 @@
             "description": "The provided skillset name is not found."
           }
         }
+      },
+      "get": {
+        "tags": ["Skillsets"],
+        "operationId": "Skillsets_Get",
+        "x-ms-examples": {
+          "SearchServiceGetSkillset": { "$ref": "./examples/SearchServiceGetSkillset.json" }
+        },
+        "description": "Retrieves a cognitive skillset in an Azure Search service.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/get-skillset"
+        },
+        "parameters": [
+          {
+            "name": "skillsetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the skillset to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "The skillset is successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/Skillset"
+            }
+          }
+        }
       }
     },
     "/skillsets": {
@@ -718,15 +718,13 @@
               "$ref": "#/definitions/SkillsetListResult"
             }
           }
-		  }
-    },
-    "post": {
+        }
+      },
+      "post": {
         "tags": ["Skillsets"],
         "operationId": "Skillsets_Create",
         "x-ms-examples": {
-          "SearchServiceCreateSkillset": {
-            "$ref": "./examples/SearchServiceCreateSkillset.json"
-          }
+          "SearchServiceCreateSkillset": { "$ref": "./examples/SearchServiceCreateSkillset.json" }
         },
         "description": "Creates a new cognitive skillset in an Azure Search service.",
         "externalDocs": {
