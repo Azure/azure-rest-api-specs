@@ -3430,7 +3430,7 @@
           "type": "string",
           "description": "The name of the datasource from which this indexer reads data."
         },
-		"skillsetName": {
+        "skillsetName": {
           "type": "string",
           "description": "The name of the cognitive skillset executing with this indexer."
         },
@@ -3456,7 +3456,7 @@
             "url": "https://docs.microsoft.com/azure/search/search-indexer-field-mappings"
           }
         },
-		"outputFieldMappings": {
+        "outputFieldMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FieldMapping"
@@ -4025,10 +4025,10 @@
           "enum": [
             "analyzingInfixMatching"
           ],
-		  "x-ms-enum": {
-			"name": "searchMode",
-			"modelAsString": false
-		  },
+          "x-ms-enum": {
+            "name": "searchMode",
+            "modelAsString": false
+          },
           "description": "A value indicating the capabilities of the suggester."
         },
         "sourceFields": {
@@ -4183,6 +4183,10 @@
           },
           "description": "A list of skills in the skillset."
         },
+        "cognitiveServices": {
+          "$ref": "#/definitions/CognitiveServices",
+          "description": "Details about cognitive services to be used when running skills."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -4196,6 +4200,47 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-tutorial-blob"
         },
       "description": "A list of cognitive skills."
+    },
+    "CognitiveServices": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Abstract base class for describing any cognitive service resource attached to the skillset."
+    },
+    "DefaultCognitiveServices": {
+      "description": "An empty object that represents the default cognitive service resource for a skillset.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServices"
+        }
+      ]
+    },
+    "CognitiveServicesByKey": {
+      "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServices"
+        }
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "Skill": {
       "discriminator": "@odata.type",
@@ -4391,6 +4436,41 @@
         },
       "description": "A skill for merging two or more strings into a single unified string, with an optional user-defined delimiter separating each component part."
     },
+    "EntityRecognitionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.EntityRecognitionSkill",
+      "allOf": [{
+        "$ref": "#/definitions/Skill"
+      }],
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityCategory",
+            "x-nullable": false
+          },
+          "description": "A list of entity categories that should be extracted."
+        },
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/EntityRecognitionSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "description": "Unused at the moment. Reserved for future use."
+        },
+        "includeTypelessEntities": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Determines whether or not to include entities which are well known but don't conform to a type"
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/cognitive-search-skill-entity-recognition"
+        },
+      "description": "Text analytics entity recognition."
+    },
     "NamedEntityRecognitionSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
       "allOf": [{
@@ -4419,7 +4499,8 @@
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition"
         },
-      "description": "Text analytics named entity recognition."
+      "description": "Text analytics named entity recognition. This skill is deprecated in favor of EntityRecognitionSkill.",
+      "x-ms-external": true
     },
     "SentimentSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
@@ -4579,20 +4660,34 @@
           },
       "description": "A string indicating which domain-specific details to return."
     },
+    "EntityCategory": {
+      "type": "string",
+      "enum": [
+        "location",
+        "organization",
+        "person",
+        "quantity",
+        "datetime",
+        "url",
+        "email"
+      ],
+      "x-ms-enum": {
+        "name": "EntityCategory",
+        "modelAsString": false
+      },
+      "description": "A string indicating what entity categories to return."
+    },
     "NamedEntityCategory": {
       "type": "string",
-          "enum": [
-            "location",
-            "organization",
+      "enum": [
+        "location",
+        "organization",
         "person"
-          ],
-          "x-ms-enum": {
-            "name": "NamedEntityCategory",
-            "modelAsString": false
-          },
-      "description": "A string indicating which named entity categories to return."
+      ],
+      "description": "A string indicating which named entity categories to return.",
+      "x-ms-external": true
     },
-	  "SentimentSkillLanguage": {
+    "SentimentSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4601,7 +4696,7 @@
       "description": "The language codes supported for input text by SentimentSkill.",
       "x-ms-external": true
     },
-	  "KeyPhraseExtractionSkillLanguage": {
+    "KeyPhraseExtractionSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4610,7 +4705,7 @@
       "description": "The language codes supported for input text by KeyPhraseExtractionSkill.",
       "x-ms-external": true
     },
-	  "OcrSkillLanguage": {
+    "OcrSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4619,7 +4714,7 @@
       "description": "The language codes supported for input by OcrSkill.",
       "x-ms-external": true
     },
-	  "SplitSkillLanguage": {
+    "SplitSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4628,7 +4723,16 @@
       "description": "The language codes supported for input text by SplitSkill.",
       "x-ms-external": true
     },
-	  "NamedEntityRecognitionSkillLanguage": {
+    "EntityRecognitionSkillLanguage": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "description": "The language codes supported for input text by EntityRecognitionSkill.",
+      "x-ms-external": true
+    },
+    "NamedEntityRecognitionSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4637,7 +4741,7 @@
       "description": "The language codes supported for input text by NamedEntityRecognitionSkill.",
       "x-ms-external": true
     },
-	  "ImageAnalysisSkillLanguage": {
+    "ImageAnalysisSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
