@@ -901,6 +901,23 @@
           }
         }
       }
+    }, 
+    "providers/Microsoft.Authorization/elevateAccess": {
+			"post": {
+				"tags": [
+					"ElevateAccess"
+				],
+				"operationId": "ElevateAccess_Post",
+				"description": "Elevates access for a Global Administrator.",
+				"parameters": {
+                    "$ref": "#/parameters/ApiVersionParameter"
+                },
+				"responses": {
+					"200": {
+						"description": "OK - Returns an HttpResponseMessage with HttpStatusCode 200."
+					}
+				}
+			}
     }
   },
   "definitions": {
