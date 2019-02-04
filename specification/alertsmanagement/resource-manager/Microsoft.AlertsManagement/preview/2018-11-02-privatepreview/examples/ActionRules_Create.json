@@ -13,9 +13,22 @@
 					"values": ["/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"]
 				},
 				"conditions": {
-					"severity": [ "Sev0", "Sev2" ],
-					"monitorService": [ "Platform", "Application Insights" ],
-					"targetResourceType": [ "Microsoft.Compute/VirtualMachines" ]
+					"severity": {
+						"operator": "Equals",
+						"values": [ "Sev0", "Sev2" ]
+					},
+					"monitorService": {
+						"operator": "Equals",
+						"values":[ "Platform", "Application Insights" ]
+					},
+					"monitorCondition": {
+						"operator": "Equals",
+						"values":[ "Fired" ]
+					},
+					"targetResourceType": {
+						"operator": "NotEquals",
+						"values":[ "Microsoft.Compute/VirtualMachines" ]
+					}
 				},
 				"suppressionConfig": {
 					"recurrenceType" : "Daily",
@@ -41,9 +54,22 @@
 						"values": ["/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"]
 					},
 					"conditions": {
-						"severity": [ "Sev0", "Sev2" ],
-						"monitorService": [ "Platform", "Application Insights" ],
-						"targetResourceType": [ "Microsoft.Compute/VirtualMachines" ]
+						"severity": {
+							"operator": "Equals",
+							"values": [ "Sev0", "Sev2" ]
+						},
+						"monitorService": {
+							"operator": "Equals",
+							"values":[ "Platform", "Application Insights" ]
+						},
+						"monitorCondition": {
+							"operator": "Equals",
+							"values":[ "Fired" ]
+						},
+						"targetResourceType": {
+							"operator": "NotEquals",
+							"values":[ "Microsoft.Compute/VirtualMachines" ]
+						}
 					},
 					"suppressionConfig": {
 						"recurrenceType" : "Daily",

@@ -723,14 +723,14 @@
             "required": true,
             "type": "string"
           },
-		  {
-			"name": "actionRulePatch",
-			"in": "body",
-			"required": true,
-			"schema": {
-				"$ref": "#/definitions/patchObject"
-			},
-			"description": "Parameters supplied to the operation."
+          {
+            "name": "actionRulePatch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/patchObject"
+            },
+            "description": "Parameters supplied to the operation."
           }
         ],
         "responses": {
@@ -1140,33 +1140,33 @@
         }
       }
     },
-	"ManagedResource": {
+    "ManagedResource": {
       "x-ms-azure-resource": true,
       "description": "An azure managed resource object",
-	  "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
-		"location": {
-		  "type": "string",
-		  "description": "Resource location",
-		  "x-ms-mutability": [
-		    "create",
-			"read"
-		  ]
-		},
-		"tags": {
-		  "additionalProperties": {
-			"type": "string"
-		  },
-		  "description": "Resource tags"
-		}
-	  },
-		"required": [
-		"location"
-		]
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ]
     },
     "alert": {
       "description": "An alert created in alert management service.",
@@ -1916,30 +1916,69 @@
         }
       }
     },
+    "condition": {
+      "type": "object",
+      "description": "condition to trigger an action rule",
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "operator for a given condition",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "Contains",
+            "DoesNotContain"
+          ],
+          "x-ms-enum": {
+            "name": "ScopeType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "list of values to match for a given condition.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "conditions": {
       "type": "object",
-      "description": "Conditions in alert instance to be matched for a given action rule",
+      "description": "Conditions in alert instance to be matched for a given action rule. Default value is all. Multiple values could be provided with comma separation.",
       "properties": {
         "severity": {
-          "type": "array",
-          "description": "Severity of alert for which the action rule is applicable. Default value is all. Multiple values could be provided with comma separation.",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/condition"
         },
         "monitorService": {
-          "type": "array",
-          "description": "Monitor service of alert for which the action rule is applicable. Default value is all. Multiple values could be provided with comma separation.",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/condition"
+        },
+        "monitorCondition": {
+          "$ref": "#/definitions/condition"
+        },
+        "signalType": {
+          "$ref": "#/definitions/condition"
+        },
+        "targetResource": {
+          "$ref": "#/definitions/condition"
+        },
+        "targetResourceGroup": {
+          "$ref": "#/definitions/condition"
         },
         "targetResourceType": {
-          "type": "array",
-          "description": "Resource type of target resource of alert for which the action rule is applicable. Default value is all. Multiple values could be provided with comma separation.",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/condition"
+        },
+        "alertRuleId": {
+          "$ref": "#/definitions/condition"
+        },
+        "description": {
+          "$ref": "#/definitions/condition"
+        },
+        "logAnalyticsSearchResults": {
+          "$ref": "#/definitions/condition"
+        },
+        "applicationInsightsSearchResults": {
+          "$ref": "#/definitions/condition"
         }
       }
     },
@@ -2034,30 +2073,30 @@
           "description": "Resource group where action rule is stored",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Creation time of action rule. Date-Time in ISO-8601 format.",
           "readOnly": true
         },
-        "lastModifiedDateTime": {
+        "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Last updated time of action rule. Date-Time in ISO-8601 format.",
           "readOnly": true
         },
-        "createdUserName": {
+        "createdBy": {
           "type": "string",
           "description": "Created by user name.",
           "readOnly": true
         },
-        "lastModifiedUserName": {
+        "lastModifiedBy": {
           "type": "string",
           "description": "Last modified by user name.",
           "readOnly": true
         },
         "status": {
-		  "type": "string",
+          "type": "string",
           "description": "Indicates if the given action rule is enabled or disabled",
           "enum": [
             "enabled",
@@ -2090,7 +2129,7 @@
       "description": "Properties supported by patch",
       "properties": {
         "status": {
-		  "type": "string",
+          "type": "string",
           "description": "Indicates if the given action rule is enabled or disabled",
           "enum": [
             "enabled",
