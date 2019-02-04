@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2018-12 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2018-12' && $(ruby)
-  namespace: "Azure::Network::Mgmt::V2018_12_01"
+namespace: "Azure::Network::Mgmt::V2018_12_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_network/lib
 ```
 
