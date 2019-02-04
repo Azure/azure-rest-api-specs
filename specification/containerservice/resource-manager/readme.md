@@ -32,11 +32,20 @@ To see additional help and options, run:
 
 These are the global settings for the ContainerServices API.
 
-```yaml
+``` yaml
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2019-02
 ```
 
+
+### Tag: package-2019-02
+
+These settings apply only when `--tag=package-2019-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-02'
+input-file:
+  - Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
+```
 ### Tag: package-2018-08-preview
 
 These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
@@ -191,7 +200,6 @@ input-file:
 ---
 
 # Code Generation
-
 
 ## Swagger to SDK
 
