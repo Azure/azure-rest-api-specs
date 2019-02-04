@@ -161,8 +161,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == '2019-01-21' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.kusto.v2019-01-21
-  output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019-01-21
+  namespace: com.microsoft.azure.management.kusto.v2019_01_21
+  output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019_01_21
 regenerate-manager: true
 generate-interface: true
 ```
