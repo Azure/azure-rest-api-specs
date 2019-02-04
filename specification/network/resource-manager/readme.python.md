@@ -45,7 +45,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-12' && $(python)
 python:
   namespace: azure.mgmt.network.v2018_12_01
-output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2018_12_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2018_12_01
 ```
 
 ### Tag: package-2018-10 and python
