@@ -3259,10 +3259,10 @@
         }
       }
     },
-    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/GetAllBlobUri": {
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/blobUris": {
       "get": {
         "tags": [ "Reports" ],
-        "description": "Gets all the blob uris for the Risky IP reports requested for a given service in the last 7 days.",
+        "description": "Gets all Risky IP report URIs for the last 7 days.",
         "x-ms-examples": {
           "services_listAllRiskyIpDownloadReport": {
             "$ref": "./examples/RiskyIpDownload.json"
@@ -3283,7 +3283,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of blob uris for the Risky IP download report requested for a given service for last 7 days.",
+            "description": "Risky IP report URIs for the last 7 days.",
             "schema": {
               "$ref": "#/definitions/RiskyIPBlobUris"
             }
@@ -3294,10 +3294,10 @@
         }
       }
     },
-    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/GetBlobUri": {
-      "get": {
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/blobUri": {
+      "post": {
         "tags": [ "Reports" ],
-        "description": "Initiate the generation of a new Risky IP report. Returns the URI for the new one, along with all the blob uris for the Risky IP reports requested in the last 7 days.",
+        "description": "Initiate the generation of a new Risky IP report. Returns the URI for the new one.",
         "x-ms-examples": {
           "services_listCurrentRiskyIpDownloadReport": {
             "$ref": "./examples/RiskyIpDownload.json"
@@ -3318,7 +3318,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list containing the uri to the newly requested Risky IP report, along with the blob uris for the Risky IP reports requested in the last 7 days.",
+            "description": "The URI of the Risky IP report that was requested.",
             "schema": {
               "$ref": "#/definitions/RiskyIPBlobUris"
             }
