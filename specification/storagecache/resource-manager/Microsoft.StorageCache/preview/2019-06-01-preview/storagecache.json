@@ -1,0 +1,1569 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "An Avere vFXT cluster provides scalable caching services for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage clusters.",
+    "title": "Microsoft.StorageCache resource provider.",
+    "version": "2019-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },  
+  "paths": {
+    "/providers/Microsoft.StorageCache/operations": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApiOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "Operations_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/skus": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of SKU descriptors.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Skus_List": {
+            "$ref": "./examples/Skus_List.json"
+          }
+        },
+        "tags": [
+          "SKUs"
+        ],
+        "description": "Get the list of StorageCache.Cluster SKUs available to this subscription.",
+        "operationId": "Skus_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/usageModels": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of UsageModel descriptors.",
+            "schema": {
+              "$ref": "#/definitions/UsageModelsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "UsageModels_List": {
+            "$ref": "./examples/UsageModels_List.json"
+          }
+        },                
+        "tags": [
+          "UsageModels"
+        ],
+        "description": "Get the list of Avere.Cluster Usage Models available to this subscription.",
+        "operationId": "UsageModels_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/clusters": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of Cluster objects.  Note that entity references might replace complete Cluster objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Cluster"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_List": {
+            "$ref": "./examples/Clusters_List.json"
+          }
+        },
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Returns all Clusters the user has access to under a subscription.",
+        "operationId": "Clusters_List"
+      }
+    },    
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of Cluster objects.  Note that entity references might replace complete Cluster objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Cluster"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_ListByResourceGroup": {
+            "$ref": "./examples/Clusters_ListByResourceGroup.json"
+          }
+        },
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Returns all Clusters the user has access to under a resource group and subscription.",
+        "operationId": "Clusters_ListByResourceGroup"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started the Cluster's transition to Deleted state."
+          },
+          "204": {
+            "description": "Cluster deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Delete": {
+            "$ref": "./examples/Clusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,        
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Schedules a Cluster for deletion.",
+        "operationId": "Clusters_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Cluster object corresponding to clusterId.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Get": {
+            "$ref": "./examples/Clusters_Get.json"
+          }
+        },
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Returns a Cluster.",
+        "operationId": "Clusters_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Object containing the user selectable properties of the new cluster.  If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "cluster",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cluster creation has been initiated.  Poll the new Cluster's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "400": {
+            "description": "Specified a changed value for a read-only property.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Create": {
+            "$ref": "./examples/Clusters_Create.json"
+          }
+        },
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Create/update a Cluster instance.",
+        "operationId": "Clusters_Create"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Object containing the user selectable properties of the new cluster.  If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "cluster",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Patched the Cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "400": {
+            "description": "Specified a changed value for a read-only property.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Update": {
+            "$ref": "./examples/Clusters_Update.json"
+          }
+        },        
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Update a Cluster instance.",
+        "operationId": "Clusters_Update"
+      }      
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/flush": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All cluster data is clean."
+          },
+          "202": {
+            "description": "Cluster has started flushing."
+          },
+          "400": {
+            "description": "Cluster is not in a state where a flush is allowed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Flush": {
+            "$ref": "./examples/Clusters_Flush.json"
+          }
+        },
+        "x-ms-long-running-operation": true,                
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Tells a cluster to write all dirty data to the StorageTarget(s).  During the flush, clients will see errors returned until the flush is complete.",
+        "operationId": "Clusters_Flush"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/start": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster is Active."
+          },
+          "202": {
+            "description": "Cluster has started the transition to Active."
+          },
+          "400": {
+            "description": "Cluster is not in a state where a transition to Active is allowed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Start": {
+            "$ref": "./examples/Clusters_Start.json"
+          }
+        },
+        "x-ms-long-running-operation": true,                  
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Tells a Stopped state cluster to transition to Active state.",
+        "operationId": "Clusters_Start"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/stop": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster is stopped."
+          },
+          "202": {
+            "description": "Cluster has started the transition to Stopped."
+          },
+          "400": {
+            "description": "Cluster is not in a state where a transition to Stopped is allowed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_Stop": {
+            "$ref": "./examples/Clusters_Stop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,                
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Tells an Active cluster to transition to Stopped state.",
+        "operationId": "Clusters_Stop"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storagetargets": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of storage targets defined by clusterId.",
+            "schema": {
+              "$ref": "#/definitions/StorageTargetsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_List": {
+            "$ref": "./examples/StorageTargets_List.json"
+          }
+        },        
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },        
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Returns the StorageTargets for this cluster in the subscription and resource group.",
+        "operationId": "StorageTargets_List"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storagetargets/{storageTargetName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of storage target.",
+            "in": "path",
+            "name": "storageTargetName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Storage target deleted."
+          },
+          "202": {
+            "description": "Started the storage target's deletion."
+          },
+          "204": {
+            "description": "Storage target deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Delete": {
+            "$ref": "./examples/StorageTargets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,                
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Removes a storage target from a cluster.  This operation is allowed at any time, but if the cluster is down or unhealthy, the actual removal of the storage target may be delayed until the cluster is healthy again.",
+        "operationId": "StorageTargets_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of storage target.",
+            "in": "path",
+            "name": "storageTargetName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Storage Target object corresponding to storageTargetName.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Get": {
+            "$ref": "./examples/StorageTargets_Get.json"
+          }
+        },        
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Returns a storage target from a cluster.",
+        "operationId": "StorageTargets_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of storage target.",
+            "in": "path",
+            "name": "storageTargetName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Object containing the definition of a storage target.",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Storage Target has been created.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Create": {
+            "$ref": "./examples/StorageTargets_Create.json"
+          }
+        },        
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Create/update a storage target.  This operation is allowed at any time, but if the cluster is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cluster is healthy again.",
+        "operationId": "StorageTargets_Create"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of storage target.",
+            "in": "path",
+            "name": "storageTargetName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Object containing the definition of a storage target.",
+            "in": "body",
+            "name": "storagetarget",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Storage Target has been patched.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageTargets_Update": {
+            "$ref": "./examples/StorageTargets_Update.json"
+          }
+        },        
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Update a storage target.  This operation is allowed at any time, but if the cluster is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cluster is healthy again.",
+        "operationId": "StorageTargets_Update"
+      }      
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/upgrade": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Target resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The API version to use for this operation.",
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of cluster.",
+            "in": "path",
+            "name": "clusterName",
+            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cluster firmware is up to date."
+          },
+          "202": {
+            "description": "Cluster has started the upgrade."
+          },
+          "400": {
+            "description": "No new firmware image is available.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_UpgradeFirmware": {
+            "$ref": "./examples/Clusters_UpgradeFirmware.json"
+          }
+        },        
+        "x-ms-long-running-operation": true,                
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Tells a cluster to upgrade its firmware.",
+        "operationId": "Clusters_UpgradeFirmware"
+      }
+    }
+  },
+  "definitions": {
+    "ApiOperation": {
+      "description": "REST API operation description: see https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#r3023-operationsapiimplementation",
+      "properties": {
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "provider": {
+              "description": "Service provider: Microsoft.StorageCache",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: cluster, etc.",
+              "type": "string"
+            }
+          }
+        },
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ApiOperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Resource Provider operations supported by the Microsoft.StorageCache resource provider.",
+          "items": {
+            "$ref": "#/definitions/ApiOperation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ClfsTarget": {
+      "description": "Storage container for use as a CLFS StorageTarget.",
+      "properties": {
+        "target": {
+          "description": "URL of storage container.",
+          "$ref": "#/definitions/URLString"
+        }
+      },
+      "type": "object"
+    },
+    "CloudError": {
+      "description": "An error response.",
+      "properties": {
+        "error": {
+          "description": "The body of the error.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "type": "object"
+    },
+    "CloudErrorBody": {
+      "description": "An error response.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "type": "string"
+        },
+        "details": {
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error. For example, the name of the property in error.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Cluster": {
+      "description": "An Avere cache instance.  Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "properties": {
+        "tags": {
+          "description": "ARM tags as name/value pairs.",
+          "type": "object"
+        },
+        "id": {
+          "description": "Fully qualified URL of the cluster.",
+          "readOnly": true,
+          "$ref": "#/definitions/URLString"
+        },
+        "location": {
+          "description": "Region name string.",
+          "pattern": "^[-.0-9a-zA-Z_]+$",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of cluster.",
+          "readOnly": true,          
+          "$ref": "#/definitions/ResourceName"
+        },
+        "type": {
+          "description": "Type for the cluster; Microsoft.StorageCache/Cluster",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for the cluster.",
+          "properties": {
+            "cacheSize": {
+              "description": "The size of this cluster's cache, in GB.",
+              "type": "integer"
+            },
+            "health": {
+              "description": "Health of the cluster.",
+              "$ref": "#/definitions/ClusterHealth"
+            },
+            "mountAddresses": {
+              "description": "Array of IP addresses that can be used by clients mounting this Cluster.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "provisioningState": {
+              "description": "see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+              "type": "string"
+            },
+            "statusMessage": {
+              "description": "If present, a message describing an exceptional cluster state, such as an explanation of why the health is \"degraded\".",
+              "type": "string"
+            },
+            "subnet": {
+              "description": "Subnet used for the cluster.",
+              "$ref": "#/definitions/URLString"
+            },
+            "upgradeStatus": {
+              "description": "Upgrade status of the cluster.",
+              "$ref": "#/definitions/ClusterUpgradeStatus"
+            }
+          },
+          "type": "object"
+        },
+        "sku": {
+          "description": "Sku for the cluster.",
+          "properties": {
+            "name": {
+              "description": "Sku name for this cluster.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ClusterHealth": {
+      "description": "An indication of cluster health.",
+      "enum": [
+        "healthy",
+        "degraded",
+        "down",
+        "transitioning",
+        "stopping",
+        "stopped",
+        "upgrading",
+        "flushing"
+      ],
+      "type": "string"
+    },
+    "ClusterUpgradeStatus": {
+      "description": "Properties describing the software upgrade state of the cluster",
+      "properties": {
+        "currentFirmwareVersion": {
+          "description": "Version string of the firmware currently installed on this cluster.",
+          "type": "string"
+        },
+        "firmwareUpdateStatus": {
+          "description": "True if there is a firmware update ready to install on this cluster.  The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
+          "enum": [
+            "available",
+            "unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "FirmwareStatusType",
+            "modelAsString": false
+          },          
+          "type": "string"
+        },
+        "firmwareUpdateDeadline": {
+          "description": "Time at which the pending firmware update will automatically be installed on the cluster.",
+          "format": "date",
+          "type": "string"
+        },
+        "lastFirmwareUpdate": {
+          "description": "Time of the last successful firmware update.",
+          "format": "date",
+          "type": "string"
+        },
+        "pendingFirmwareVersion": {
+          "description": "When firmwareUpdateAvailable is true, this field holds the version string for the update.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Nfs3Target": {
+      "description": "An NFS mount point for use as a StorageTarget.",
+      "properties": {
+        "target": {
+          "description": "Mount string of an NFS Storage Target, ie: 10.0.44.44:/exp1",
+          "pattern": "^[.0-9a-zA-Z]+:/.*$",
+          "type": "string"
+        },
+        "usageModel": {
+          "description": "Identifies the primary usage model to be used for this storage target.   GET choices from .../usageModels",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceName": {
+      "description": "Schema for the name of resources served by this provider.   Note that objects will contain an odata @id annotation as appropriate, this will contain the complete URL of the object.   These names are case-preserving, but not case sensistive.",
+      "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+      "type": "string"
+    },
+    "ResourceSku": {
+      "description": "A resource SKU",
+      "properties": {
+        "cacheSizes": {
+          "description": "A list of cache sizes that are valid for this Sku (in GB)",
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "capabilities": {
+          "description": "A list of capabilities of this SKU, such as throughput or ops/sec",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "type": "array"
+        },
+        "locations": {
+          "description": "The set of locations that the SKU is available.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The name of this sku.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceSkuCapabilities": {
+      "description": "A resource SKU capability.",
+      "properties": {
+        "name": {
+          "description": "Name of a capability, such as ops/sec",
+          "type": "string"
+        },
+        "value": {
+          "description": "Quantity, if the capability is measured by quantity",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceSkuLocationInfo": {
+      "description": "Resource SKU location information.",
+      "properties": {
+        "location": {
+          "description": "Location where this Sku is available",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceSkusResult": {
+      "description": "A list of vFXT cluster Skus.",
+      "properties": {
+        "nextLink": {
+          "description": "The uri to fetch the next page of vFXT Cluster Skus.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of skus available for the subscription.",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "StorageTarget": {
+      "description": "A storage system being cached by a Cluster.",
+      "type": "object",
+      "discriminator": "targetType",
+      "properties": {
+        "name": {
+          "description":"A fully qualified URL.",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceName"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "type": {
+          "description": "Type for the storage target; Microsoft.StorageCache/Cluster/StorageTarget",
+          "readOnly": true,
+          "type": "string"
+        },        
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the storage target.",
+          "type": "object",
+          "properties": {
+            "targetType": {
+              "description": "Type for storage target.",
+              "readOnly": true,
+              "enum": [
+                "nfs3",
+                "clfs"
+              ],
+              "x-ms-enum": {
+                "name": "StorageTargetType",
+                "modelAsString": false
+              },
+              "type": "string"
+            },
+            "nfs3": {
+              "description": "Properties when nfs3 target.",
+              "$ref": "#/definitions/Nfs3Target"
+            },
+            "clfs": {
+              "description": "Properties when clfs target.",              
+              "$ref": "#/definitions/ClfsTarget"
+            }
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "StorageTargetsResult": {
+      "description": "A list of storage targets.",
+      "properties": {
+        "nextLink": {
+          "description": "The uri to fetch the next page of storage targets.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of storage targets defined for the cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageTarget"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "URLString": {
+      "description": "A fully qualified URL.",
+      "type": "string"
+    },
+    "UsageModel": {
+      "description": "A usage model.",
+      "properties": {
+        "display": {
+          "description": "Localized information describing this usage model.",
+          "properties": {
+            "description": {
+              "description": "Localized string describing this usage model",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "description": "Non localized keyword naming this usage model.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of Storage Target to which this model is applicable (only nfs for now)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UsageModelsResult": {
+      "description": "A list of vFXT usage models.",
+      "properties": {
+        "nextLink": {
+          "description": "The uri to fetch the next page of vFXT usage models.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of usage models available for the subscription.",
+          "items": {
+            "$ref": "#/definitions/UsageModel"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "x-components": {
+    "parameters": {
+      "ApiVersionParameter": {
+        "description": "The API version to use for this operation.",
+        "in": "query",
+        "name": "api-version",
+        "required": true,
+        "type": "string"
+      },
+      "ClusterNameParameter": {
+        "description": "Name of cluster.",
+        "in": "path",
+        "name": "clusterName",
+        "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+        "required": true,
+        "type": "string"
+      },
+      "ResourceGroupNameParameter": {
+        "description": "Target resource group.",
+        "in": "path",
+        "name": "resourceGroupName",
+        "required": true,
+        "type": "string"
+      },
+      "StorageTargetNameParameter": {
+        "description": "Name of storage target.",
+        "in": "path",
+        "name": "storageTargetName",
+        "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+        "required": true,
+        "type": "string"
+      },
+      "SubscriptionIdParameter": {
+        "description": "Target subscription ID.",
+        "in": "path",
+        "name": "subscriptionId",
+        "required": true,
+        "type": "string"
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }  
+}
