@@ -232,7 +232,6 @@ batch:
   - tag: package-2017-11
   - tag: package-2018-01
   - tag: package-2018-03
-  - tag: package-2017-12-preview
   - tag: package-2018-05
   - tag: package-2018-06
   - tag: package-2018-08
@@ -290,6 +289,16 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_03_31
 regenerate-manager: true
 generate-interface: true
+directive: 
+ - rename-model: 
+     from: CostTags 
+     to: CostTagsModel
+ - rename-model:
+     from: Tags 
+     to: TagsModel
+ - rename-model:
+     from: ReservationRecommendations
+     to: ReservationRecommendationsModel
 ```
 
 ### Tag: package-2017-12-preview and java
