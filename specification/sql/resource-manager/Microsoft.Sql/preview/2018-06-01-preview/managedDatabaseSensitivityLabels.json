@@ -274,11 +274,7 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
-            "type": "string"
+			"$ref": "#/parameters/FilterParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -336,11 +332,7 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
-            "type": "string"
+			"$ref": "#/parameters/FilterParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -523,5 +515,13 @@
         "user_impersonation": "impersonate your user account"
       }
     }
-  }
+  },
+  "FilterParameter": {
+	"name": "$filter",
+    "in": "query",
+    "description": "An OData filter expression that filters elements in the collection.",
+    "required": false,
+    "type": "string"
+  },
+  
 }
