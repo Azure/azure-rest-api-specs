@@ -177,6 +177,14 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase
 
+  - where:
+      - $.definitions.ContainerService
+    suppress:
+      - TrackedResourcePatchOperation
+    reason:
+      - ACS service is deprecated so a PATCH endpoint won't be implemented
+
+
 ```
 ### Tag: package-2018-10-01
 
