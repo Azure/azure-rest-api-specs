@@ -274,7 +274,11 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-			"$ref": "#/parameters/FilterParameter"
+	        "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -329,10 +333,11 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-			"$ref": "#/parameters/FilterParameter"
+		    "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -503,14 +508,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-	"FilterParameter": {
-	  "name": "$filter",
-      "in": "query",
-      "description": "An OData filter expression that filters elements in the collection.",
-      "required": false,
-      "type": "string"
-	}
+    }
   },
   "securityDefinitions": {
     "azure_auth": {
