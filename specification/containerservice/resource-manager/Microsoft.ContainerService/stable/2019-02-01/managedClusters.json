@@ -754,6 +754,27 @@
       ],
       "x-ms-azure-resource": true
     },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "Reference to another subresource.",
+      "x-ms-azure-resource": true
+    },
     "TagsObject": {
       "properties": {
         "tags": {
@@ -1043,12 +1064,8 @@
       ],
       "description": "Profile for the container service master."
     },
-    "ManagedClusterAgentPoolProfile": {
+    "ManagedClusterAgentPoolProfileProperties": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
-        },
         "count": {
           "type": "integer",
           "format": "int32",
@@ -1095,12 +1112,39 @@
         "type": {
           "$ref": "#/definitions/AgentPoolType",
           "description": "AgentPoolType represents types of an agent pool"
+        },
+        "orchestratorVersion": {
+          "type": "string",
+          "description": "Version of orchestrator specified when creating the managed cluster."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response."
         }
       },
       "required": [
-        "name",
         "vmSize",
         "count"
+      ],
+      "description": "Properties for the container service agent pool profile."
+    },
+    "ManagedClusterAgentPoolProfile": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedClusterAgentPoolProfileProperties"
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
+            }
+          }
+        }
+      ],
+      "required": [
+        "name"
       ],
       "description": "Profile for the container service agent pool."
     },
@@ -1115,6 +1159,40 @@
         "modelAsString": true
       },
       "description": "AgentPoolType represents types of an agent pool"
+    },
+    "AgentPoolListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentPool"
+          },
+          "description": "The list of agent pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of agent pool results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Agent Pools operation."
+    },
+    "AgentPool": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        },
+        {
+          "properties": {
+            "properties": {
+              "description": "Properties of an agent pool.",
+              "$ref": "#/definitions/ManagedClusterAgentPoolProfileProperties",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ],
+      "description": "Agent Pool."
     },
     "ContainerServiceWindowsProfile": {
       "properties": {
