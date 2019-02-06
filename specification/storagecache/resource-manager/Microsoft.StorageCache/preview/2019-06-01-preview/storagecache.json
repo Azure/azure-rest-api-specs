@@ -41,12 +41,8 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -75,7 +71,7 @@
           "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
-        }
+        }	
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/skus": {
@@ -84,13 +80,12 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          }
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  }
         ],
         "responses": {
           "200": {
@@ -127,13 +122,12 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          }
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  }
         ],
         "responses": {
           "200": {
@@ -170,13 +164,12 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          }
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  }
         ],
         "responses": {
           "200": {
@@ -220,13 +213,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          }
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  }	  
         ],
         "responses": {
           "200": {
@@ -269,14 +261,7 @@
             "name": "resourceGroupName",
             "required": true,
             "type": "string"
-          },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          },
+          },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -284,7 +269,14 @@
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
-          }
+          },
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  }
+	  
         ],
         "responses": {
           "202": {
@@ -325,20 +317,20 @@
             "type": "string"
           },
           {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
-          },
-          {
             "description": "Name of cluster.",
             "in": "path",
             "name": "clusterName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
-          }
+          },
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  }
+	  
         ],
         "responses": {
           "200": {
@@ -380,13 +372,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -450,13 +441,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -519,13 +509,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -581,13 +570,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -643,13 +631,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -705,13 +692,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -763,13 +749,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -828,13 +813,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -892,13 +876,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -964,13 +947,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -1035,13 +1017,12 @@
             "required": true,
             "type": "string"
           },
-          {
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+	  {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
+	  {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+	  },	  
           {
             "description": "Name of cluster.",
             "in": "path",
