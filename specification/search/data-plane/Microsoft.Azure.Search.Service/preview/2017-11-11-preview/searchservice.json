@@ -4468,15 +4468,10 @@
           "$ref": "#/definitions/EntityRecognitionSkillLanguage",
           "description": "A value indicating which language code to use. Default is en."
         },
-        "minimumPrecision": {
-          "type": "number",
-          "format": "double",
-          "x-nullable": true,
-          "description": "Reserved for future use."
-        },
         "includeTypelessEntities": {
           "type": "boolean",
-          "description": "Determines whether or not to include entities which are well known but don't conform to a type."
+          "x-nullable": true,
+          "description": "Determines whether or not to include entities which are well known but don't conform to a type. If this configuration is not set (default), set to null or set to false, entities which don't have a type will not be surfaced."
         }
       },
       "externalDocs": {
