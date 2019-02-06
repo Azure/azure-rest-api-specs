@@ -63,15 +63,15 @@
           "Operations"
         ],
         "description": "Lists all of the available RP operations.",
+        "x-ms-examples": {
+          "StorageTargets_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },        	
         "operationId": "Operations_List",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        }	
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/skus": {
@@ -297,7 +297,7 @@
             "$ref": "./examples/Clusters_Delete.json"
           }
         },
-        "x-ms-long-running-operation": true,        
+        "x-ms-long-running-operation": true,
         "tags": [
           "Clusters"
         ],
@@ -396,6 +396,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Cluster created or already exists.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
           "201": {
             "description": "Cluster creation has been initiated.  Poll the new Cluster's provisioningState property to monitor creation progress.",
             "schema": {
@@ -420,6 +426,7 @@
             "$ref": "./examples/Clusters_Create.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "tags": [
           "Clusters"
         ],
@@ -549,7 +556,7 @@
             "$ref": "./examples/Clusters_Flush.json"
           }
         },
-        "x-ms-long-running-operation": true,                
+        "x-ms-long-running-operation": true,
         "tags": [
           "Clusters"
         ],
@@ -723,7 +730,7 @@
         },
         "x-ms-examples": {
           "StorageTargets_List": {
-            "$ref": "./examples/StorageTargets_List.json"
+            "$ref": "./examples/StorageTargets_ListByCluster.json"
           }
         },        
         "x-ms-pageable": {
@@ -733,7 +740,7 @@
           "StorageTargets"
         ],
         "description": "Returns the StorageTargets for this cluster in the subscription and resource group.",
-        "operationId": "StorageTargets_List"
+        "operationId": "StorageTargets_ListByCluster"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storagetargets/{storageTargetName}": {
@@ -901,7 +908,7 @@
           {
             "description": "Object containing the definition of a storage target.",
             "in": "body",
-            "name": "body",
+            "name": "storagetarget",
             "schema": {
               "$ref": "#/definitions/StorageTarget"
             }
@@ -1170,7 +1177,6 @@
         },
         "location": {
           "description": "Region name string.",
-          "pattern": "^[-.0-9a-zA-Z_]+$",
           "type": "string"
         },
         "name": {
@@ -1187,7 +1193,7 @@
           "x-ms-client-flatten": true,
           "description": "Properties for the cluster.",
           "properties": {
-            "cacheSize": {
+            "cacheSizeGB": {
               "description": "The size of this cluster's cache, in GB.",
               "type": "integer"
             },
@@ -1232,6 +1238,7 @@
           "type": "object"
         }
       },
+      "x-ms-azure-resource": true,      
       "type": "object"
     },
     "ClusterHealth": {
@@ -1269,12 +1276,12 @@
         },
         "firmwareUpdateDeadline": {
           "description": "Time at which the pending firmware update will automatically be installed on the cluster.",
-          "format": "date",
+          "format": "date-time",
           "type": "string"
         },
         "lastFirmwareUpdate": {
           "description": "Time of the last successful firmware update.",
-          "format": "date",
+          "format": "date-time",
           "type": "string"
         },
         "pendingFirmwareVersion": {
@@ -1307,7 +1314,7 @@
     "ResourceSku": {
       "description": "A resource SKU",
       "properties": {
-        "cacheSizes": {
+        "cacheSizesGB": {
           "description": "A list of cache sizes that are valid for this Sku (in GB)",
           "items": {
             "type": "integer"
