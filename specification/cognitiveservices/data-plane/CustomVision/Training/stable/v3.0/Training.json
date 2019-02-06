@@ -1,11 +1,11 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "version": "2.2",
+    "version": "3.0",
     "title": "Custom Vision Training Client"
   },
   "host": "southcentralus.api.cognitive.microsoft.com",
-  "basePath": "/customvision/v2.2/Training",
+  "basePath": "/customvision/v3.0/training",
   "schemes": [
     "https"
   ],
@@ -38,6 +38,12 @@
                 "$ref": "#/definitions/Domain"
               },
               "x-nullable": true
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -81,6 +87,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -150,6 +162,12 @@
               "type": "integer",
               "x-nullable": false
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -204,6 +222,12 @@
               "format": "int32",
               "type": "integer",
               "x-nullable": false
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -262,6 +286,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ImageTagCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -322,6 +352,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -381,6 +417,12 @@
             "schema": {
               "$ref": "#/definitions/ImageRegionCreateSummary"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -427,6 +469,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -527,6 +575,12 @@
               },
               "x-nullable": true
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -614,6 +668,12 @@
               },
               "x-nullable": true
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -684,6 +744,12 @@
               },
               "x-nullable": true
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -751,6 +817,12 @@
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -797,6 +869,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -855,6 +933,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -915,6 +999,12 @@
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -974,6 +1064,12 @@
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -983,7 +1079,7 @@
         }
       }
     },
-    "/{projectId}/images/{imageId}/regionproposals": {
+    "/projects/{projectId}/images/{imageId}/regionproposals": {
       "post": {
         "tags": [
           "ImageRegionProposalApi"
@@ -1024,6 +1120,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ImageRegionProposal"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -1073,6 +1175,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1140,6 +1248,12 @@
             "schema": {
               "$ref": "#/definitions/ImagePrediction"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1202,6 +1316,12 @@
             "schema": {
               "$ref": "#/definitions/ImagePrediction"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1259,6 +1379,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PredictionQueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -1327,6 +1453,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/IterationPerformance"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -1428,6 +1560,12 @@
               },
               "x-nullable": true
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1496,6 +1634,12 @@
               "type": "integer",
               "x-nullable": false
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1533,6 +1677,12 @@
                 "$ref": "#/definitions/Project"
               },
               "x-nullable": true
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -1603,6 +1753,12 @@
             "schema": {
               "$ref": "#/definitions/Project"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1646,6 +1802,12 @@
             "schema": {
               "$ref": "#/definitions/Project"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1679,6 +1841,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1735,6 +1903,12 @@
             "schema": {
               "$ref": "#/definitions/Project"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1781,6 +1955,12 @@
                 "$ref": "#/definitions/Iteration"
               },
               "x-nullable": true
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -1834,6 +2014,12 @@
             "schema": {
               "$ref": "#/definitions/Iteration"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1876,6 +2062,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1941,6 +2133,12 @@
             "schema": {
               "$ref": "#/definitions/Iteration"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -1975,6 +2173,43 @@
             "x-nullable": false
           },
           {
+            "name": "trainingType",
+            "in": "query",
+            "description": "The type of training to use to train the project (default: Regular).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Regular",
+              "Advanced"
+            ],
+            "x-nullable": false
+          },
+          {
+            "name": "reservedBudgetInHours",
+            "in": "query",
+            "description": "The number of hours reserved as budget for training (if applicable).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "forceTrain",
+            "in": "query",
+            "description": "Whether to force train even if dataset and configuration does not change (default: false).",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "notificationEmailAddress",
+            "in": "query",
+            "description": "The email address to send notification to when training finishes (default: null).",
+            "required": false,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
             "$ref": "#/parameters/ApiKey"
           }
         ],
@@ -1984,11 +2219,141 @@
             "schema": {
               "$ref": "#/definitions/Iteration"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
           "Successful TrainProject request": {
             "$ref": "./examples/TrainProject.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/iterations/{iterationId}/publish": {
+      "post": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Publish a specific iteration.",
+        "operationId": "PublishIteration",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The updated iteration name.",
+            "required": true,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean",
+              "x-nullable": false
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful PublishIteration request": {
+            "$ref": "./examples/PublishIteration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Unpublish a specific iteration.",
+        "operationId": "UnpublishIteration",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "The iteration id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean",
+              "x-nullable": false
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful UnpublishIteration request": {
+            "$ref": "./examples/UnpublishIteration.json"
           }
         }
       }
@@ -2039,6 +2404,12 @@
                 "$ref": "#/definitions/Export"
               },
               "x-nullable": true
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -2104,7 +2475,8 @@
               "Linux",
               "Windows",
               "ONNX10",
-              "ONNX12"
+              "ONNX12",
+              "ARM"
             ],
             "x-nullable": true
           },
@@ -2117,6 +2489,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -2179,6 +2557,12 @@
             "schema": {
               "$ref": "#/definitions/Tag"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2221,6 +2605,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2286,6 +2676,12 @@
             "schema": {
               "$ref": "#/definitions/Tag"
             }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2341,6 +2737,12 @@
                 "$ref": "#/definitions/Tag"
               },
               "x-nullable": true
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -2410,6 +2812,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Tag"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
             }
           }
         },
@@ -2555,21 +2963,25 @@
         },
         "left": {
           "format": "float",
+          "description": "Coordinate of the left boundary.",
           "type": "number",
           "x-nullable": false
         },
         "top": {
           "format": "float",
+          "description": "Coordinate of the top boundary.",
           "type": "number",
           "x-nullable": false
         },
         "width": {
           "format": "float",
+          "description": "Width.",
           "type": "number",
           "x-nullable": false
         },
         "height": {
           "format": "float",
+          "description": "Height.",
           "type": "number",
           "x-nullable": false
         }
@@ -2637,21 +3049,25 @@
         },
         "left": {
           "format": "float",
+          "description": "Coordinate of the left boundary.",
           "type": "number",
           "x-nullable": false
         },
         "top": {
           "format": "float",
+          "description": "Coordinate of the top boundary.",
           "type": "number",
           "x-nullable": false
         },
         "width": {
           "format": "float",
+          "description": "Width.",
           "type": "number",
           "x-nullable": false
         },
         "height": {
           "format": "float",
+          "description": "Height.",
           "type": "number",
           "x-nullable": false
         }
@@ -2780,21 +3196,25 @@
         },
         "left": {
           "format": "float",
+          "description": "Coordinate of the left boundary.",
           "type": "number",
           "x-nullable": false
         },
         "top": {
           "format": "float",
+          "description": "Coordinate of the top boundary.",
           "type": "number",
           "x-nullable": false
         },
         "width": {
           "format": "float",
+          "description": "Width.",
           "type": "number",
           "x-nullable": false
         },
         "height": {
           "format": "float",
+          "description": "Height.",
           "type": "number",
           "x-nullable": false
         }
@@ -2926,21 +3346,25 @@
         },
         "left": {
           "format": "float",
+          "description": "Coordinate of the left boundary.",
           "type": "number",
           "x-nullable": false
         },
         "top": {
           "format": "float",
+          "description": "Coordinate of the top boundary.",
           "type": "number",
           "x-nullable": false
         },
         "width": {
           "format": "float",
+          "description": "Width.",
           "type": "number",
           "x-nullable": false
         },
         "height": {
           "format": "float",
+          "description": "Height.",
           "type": "number",
           "x-nullable": false
         }
@@ -2973,6 +3397,7 @@
       "type": "object",
       "properties": {
         "url": {
+          "description": "Url of the image.",
           "type": "string",
           "x-nullable": true
         },
@@ -3022,6 +3447,7 @@
       "properties": {
         "id": {
           "format": "uuid",
+          "description": "Id of the image.",
           "type": "string",
           "x-nullable": false
         },
@@ -3087,25 +3513,30 @@
       "x-nullable": true
     },
     "BoundingBox": {
+      "description": "Bounding box that defines a region of an image.",
       "type": "object",
       "properties": {
         "left": {
           "format": "float",
+          "description": "Coordinate of the left boundary.",
           "type": "number",
           "x-nullable": false
         },
         "top": {
           "format": "float",
+          "description": "Coordinate of the top boundary.",
           "type": "number",
           "x-nullable": false
         },
         "width": {
           "format": "float",
+          "description": "Width.",
           "type": "number",
           "x-nullable": false
         },
         "height": {
           "format": "float",
+          "description": "Height.",
           "type": "number",
           "x-nullable": false
         }
@@ -3113,9 +3544,11 @@
       "x-nullable": true
     },
     "ImageUrl": {
+      "description": "Image url.",
       "type": "object",
       "properties": {
         "url": {
+          "description": "Url of the image.",
           "type": "string",
           "x-nullable": true
         }
@@ -3123,33 +3556,39 @@
       "x-nullable": true
     },
     "ImagePrediction": {
+      "description": "Result of an image prediction request.",
       "type": "object",
       "properties": {
         "id": {
           "format": "uuid",
+          "description": "Prediction Id.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "project": {
           "format": "uuid",
+          "description": "Project Id.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "iteration": {
           "format": "uuid",
+          "description": "Iteration Id.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "created": {
           "format": "date-time",
+          "description": "Date this prediction was created.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "predictions": {
+          "description": "List of predictions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Prediction"
@@ -3161,27 +3600,32 @@
       "x-nullable": true
     },
     "Prediction": {
+      "description": "Prediction result.",
       "type": "object",
       "properties": {
         "probability": {
           "format": "float",
+          "description": "Probability of the tag.",
           "type": "number",
           "readOnly": true,
           "x-nullable": false
         },
         "tagId": {
           "format": "uuid",
+          "description": "Id of the predicted tag.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "tagName": {
+          "description": "Name of the predicted tag.",
           "type": "string",
           "readOnly": true,
           "x-nullable": true
         },
         "boundingBox": {
           "$ref": "#/definitions/BoundingBox",
+          "description": "Bounding box of the prediction.",
           "readOnly": true
         }
       },
@@ -3318,29 +3762,34 @@
         },
         "id": {
           "format": "uuid",
+          "description": "Prediction Id.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "project": {
           "format": "uuid",
+          "description": "Project Id.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "iteration": {
           "format": "uuid",
+          "description": "Iteration Id.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "created": {
           "format": "date-time",
+          "description": "Date this prediction was created.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "predictions": {
+          "description": "List of predictions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Prediction"
@@ -3520,165 +3969,6 @@
       },
       "x-nullable": true
     },
-    "Project": {
-      "description": "Represents a project.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "uuid",
-          "description": "Gets The project id.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "name": {
-          "description": "Gets or sets the name of the project.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "Gets or sets the description of the project.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "Gets or sets the project settings."
-        },
-        "created": {
-          "format": "date-time",
-          "description": "Gets the date this project was created.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "lastModified": {
-          "format": "date-time",
-          "description": "Gets the date this project was last modified.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "thumbnailUri": {
-          "description": "Gets the thumbnail url representing the project.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true
-        }
-      },
-      "x-nullable": true
-    },
-    "ProjectSettings": {
-      "description": "Represents settings associated with a project.",
-      "type": "object",
-      "properties": {
-        "domainId": {
-          "format": "uuid",
-          "description": "Gets or sets the id of the Domain to use with this project.",
-          "type": "string",
-          "x-nullable": false
-        },
-        "classificationType": {
-          "description": "Gets or sets the classification type of the project.",
-          "enum": [
-            "Multiclass",
-            "Multilabel"
-          ],
-          "type": "string",
-          "x-nullable": true,
-          "x-ms-enum": {
-            "name": "Classifier",
-            "modelAsString": true
-          }
-        }
-      },
-      "x-nullable": true
-    },
-    "Iteration": {
-      "description": "Iteration model to be sent over JSON.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "uuid",
-          "description": "Gets the id of the iteration.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "name": {
-          "description": "Gets or sets the name of the iteration.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "isDefault": {
-          "description": "Gets or sets a value indicating whether the iteration is the default iteration for the project.",
-          "type": "boolean",
-          "x-nullable": false
-        },
-        "status": {
-          "description": "Gets the current iteration status.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "created": {
-          "format": "date-time",
-          "description": "Gets the time this iteration was completed.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "lastModified": {
-          "format": "date-time",
-          "description": "Gets the time this iteration was last modified.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "trainedAt": {
-          "format": "date-time",
-          "description": "Gets the time this iteration was last modified.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "projectId": {
-          "format": "uuid",
-          "description": "Gets The project id. of the iteration.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "exportable": {
-          "description": "Whether the iteration can be exported to another format for download.",
-          "type": "boolean",
-          "readOnly": true,
-          "x-nullable": false
-        },
-        "domainId": {
-          "format": "uuid",
-          "description": "Get or sets a guid of the domain the iteration has been trained on.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "classificationType": {
-          "description": "Gets the classification type of the project.",
-          "enum": [
-            "Multiclass",
-            "Multilabel"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true,
-          "x-ms-enum": {
-            "name": "Classifier",
-            "modelAsString": true
-          }
-        }
-      },
-      "x-nullable": true
-    },
     "Export": {
       "type": "object",
       "properties": {
@@ -3744,6 +4034,159 @@
       },
       "x-nullable": true
     },
+    "Project": {
+      "description": "Represents a project.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Gets the project id.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "name": {
+          "description": "Gets or sets the name of the project.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "Gets or sets the description of the project.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Gets or sets the project settings."
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Gets the date this project was created.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Gets the date this project was last modified.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "thumbnailUri": {
+          "description": "Gets the thumbnail url representing the image.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "drModeEnabled": {
+          "description": "Gets if the DR mode is on.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
+      "x-nullable": true
+    },
+    "ProjectSettings": {
+      "description": "Represents settings associated with a project.",
+      "type": "object",
+      "properties": {
+        "domainId": {
+          "format": "uuid",
+          "description": "Gets or sets the id of the Domain to use with this project.",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "x-nullable": true
+    },
+    "Iteration": {
+      "description": "Iteration model to be sent over JSON.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Gets the id of the iteration.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "name": {
+          "description": "Gets or sets the name of the iteration.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "status": {
+          "description": "Gets the current iteration status.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "created": {
+          "format": "date-time",
+          "description": "Gets the time this iteration was completed.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Gets the time this iteration was last modified.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "trainedAt": {
+          "format": "date-time",
+          "description": "Gets the time this iteration was last modified.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "projectId": {
+          "format": "uuid",
+          "description": "Gets the project id of the iteration.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "exportable": {
+          "description": "Whether the iteration can be exported to another format for download.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "domainId": {
+          "format": "uuid",
+          "description": "Get or sets a guid of the domain the iteration has been trained on.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "classificationType": {
+          "description": "Gets the classification type of the project.",
+          "enum": [
+            "Multiclass",
+            "Multilabel"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "Classifier",
+            "modelAsString": true
+          }
+        },
+        "publishName": {
+          "description": "Name of the published model.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "x-nullable": true
+    },
     "Tag": {
       "description": "Represents a Tag.",
       "type": "object",
@@ -3787,12 +4230,142 @@
         }
       },
       "x-nullable": true
+    },
+    "CustomVisionError": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "enum": [
+            "NoError",
+            "BadRequest",
+            "BadRequestExceededBatchSize",
+            "BadRequestNotSupported",
+            "BadRequestInvalidIds",
+            "BadRequestProjectName",
+            "BadRequestProjectNameNotUnique",
+            "BadRequestProjectDescription",
+            "BadRequestProjectUnknownDomain",
+            "BadRequestProjectUnknownClassification",
+            "BadRequestProjectUnsupportedDomainTypeChange",
+            "BadRequestIterationName",
+            "BadRequestIterationNameNotUnique",
+            "BadRequestIterationDescription",
+            "BadRequestIterationIsNotTrained",
+            "BadRequestWorkspaceCannotBeModified",
+            "BadRequestWorkspaceNotDeletable",
+            "BadRequestTagName",
+            "BadRequestTagNameNotUnique",
+            "BadRequestTagDescription",
+            "BadRequestTagType",
+            "BadRequestMultipleNegativeTag",
+            "BadRequestImageTags",
+            "BadRequestImageRegions",
+            "BadRequestNegativeAndRegularTagOnSameImage",
+            "BadRequestIterationIsPublished",
+            "BadRequestInvalidPublishName",
+            "BadRequestSubscriptionApi",
+            "BadRequestPublishFailed",
+            "BadRequestUnpublishFailed",
+            "BadRequestExceedProjectLimit",
+            "BadRequestExceedIterationPerProjectLimit",
+            "BadRequestExceedTagPerProjectLimit",
+            "BadRequestExceedTagPerImageLimit",
+            "BadRequestExceededQuota",
+            "BadRequestCannotMigrateProjectWithName",
+            "BadRequestNotLimitedTrial",
+            "BadRequestImageBatch",
+            "BadRequestImageStream",
+            "BadRequestImageUrl",
+            "BadRequestImageFormat",
+            "BadRequestImageSizeBytes",
+            "BadRequestImageExceededCount",
+            "BadRequestTrainingNotNeeded",
+            "BadRequestTrainingValidationFailed",
+            "BadRequestClassificationTrainingValidationFailed",
+            "BadRequestMultiClassClassificationTrainingValidationFailed",
+            "BadRequestMultiLabelClassificationTrainingValidationFailed",
+            "BadRequestDetectionTrainingValidationFailed",
+            "BadRequestTrainingAlreadyInProgress",
+            "BadRequestDetectionTrainingNotAllowNegativeTag",
+            "BadRequestExportValidationFailed",
+            "BadRequestExportAlreadyInProgress",
+            "BadRequestPredictionIdsMissing",
+            "BadRequestPredictionIdsExceededCount",
+            "BadRequestPredictionTagsExceededCount",
+            "BadRequestPredictionResultsExceededCount",
+            "BadRequestPredictionInvalidApplicationName",
+            "BadRequestPredictionInvalidQueryParameters",
+            "BadRequestInvalid",
+            "UnsupportedMediaType",
+            "Forbidden",
+            "ForbiddenUser",
+            "ForbiddenUserResource",
+            "ForbiddenUserSignupDisabled",
+            "ForbiddenUserSignupAllowanceExceeded",
+            "ForbiddenUserDoesNotExist",
+            "ForbiddenUserDisabled",
+            "ForbiddenUserInsufficientCapability",
+            "ForbiddenDRModeEnabled",
+            "ForbiddenInvalid",
+            "NotFound",
+            "NotFoundProject",
+            "NotFoundProjectDefaultIteration",
+            "NotFoundIteration",
+            "NotFoundIterationPerformance",
+            "NotFoundTag",
+            "NotFoundImage",
+            "NotFoundDomain",
+            "NotFoundApimSubscription",
+            "NotFoundInvalid",
+            "Conflict",
+            "ConflictInvalid",
+            "ErrorUnknown",
+            "ErrorProjectInvalidWorkspace",
+            "ErrorProjectInvalidPipelineConfiguration",
+            "ErrorProjectInvalidDomain",
+            "ErrorProjectTrainingRequestFailed",
+            "ErrorProjectExportRequestFailed",
+            "ErrorFeaturizationServiceUnavailable",
+            "ErrorFeaturizationQueueTimeout",
+            "ErrorFeaturizationInvalidFeaturizer",
+            "ErrorFeaturizationAugmentationUnavailable",
+            "ErrorFeaturizationUnrecognizedJob",
+            "ErrorFeaturizationAugmentationError",
+            "ErrorExporterInvalidPlatform",
+            "ErrorExporterInvalidFeaturizer",
+            "ErrorExporterInvalidClassifier",
+            "ErrorPredictionServiceUnavailable",
+            "ErrorPredictionModelNotFound",
+            "ErrorPredictionModelNotCached",
+            "ErrorPrediction",
+            "ErrorPredictionStorage",
+            "ErrorRegionProposal",
+            "ErrorInvalid"
+          ],
+          "type": "string",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "CustomVisionErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
     "ApiKey": {
       "name": "Training-Key",
       "in": "header",
+      "description": "API key.",
       "required": true,
       "type": "string",
       "x-ms-client-name": "ApiKey",
@@ -3801,7 +4374,7 @@
     "Endpoint": {
       "name": "Endpoint",
       "in": "path",
-      "description": "Supported Cognitive Services endpoints",
+      "description": "Supported Cognitive Services endpoints.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client",
