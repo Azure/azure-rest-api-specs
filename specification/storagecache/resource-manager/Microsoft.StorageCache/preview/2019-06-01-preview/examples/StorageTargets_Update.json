@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2019-06-01-preview",
+    "clusterName": "sc1",
+    "storageTargetName": "st1",
+    "storagetarget": {
+      "properties": {
+        "targetType": "nfs3"
+      },
+      "nfs3": {
+        "target": "10.0.44.44:/exp1",
+        "usageModel": "read heavy, frequent changes"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "st1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/clusters/sc1/storagetargets/st1",
+        "type": "Microsoft.StorageCache/Cluster/StorageTarget",
+        "properties": {
+          "targetType": "nfs3",
+          "nfs3": {
+	    "target": "10.0.44.44:/exp1",
+	    "usageModel": "read heavy, frequent changes"
+          }			
+        }
+      }
+    }
+  }
+}

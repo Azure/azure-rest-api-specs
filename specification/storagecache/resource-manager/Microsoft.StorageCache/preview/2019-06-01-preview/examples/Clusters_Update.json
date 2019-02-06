@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "clusterName": "sc1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2019-06-01-preview",
+    "cluster": {
+      "tags": {
+        "Dept": "Initech"
+      },
+      "location": "westus",
+      "properties": {
+        "cacheSizeGB": 3072,
+        "mountAddresses": [
+          "192.168.1.1",
+          "192.168.1.2"
+        ],
+        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1"
+      },      
+      "sku": {
+        "name": "Storage Cache A123"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "Initech"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/clusters/sc1",
+        "location": "westus",
+        "name": "sc1",
+        "type": "Microsoft.StorageCache/Cluster",
+        "properties": {
+          "cacheSizeGB": 3072,
+          "health": "transitioning",
+          "mountAddresses": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],          
+          "provisioningState": "Allocating",
+          "statusMessage": "Cluster is being created.",
+          "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+          "upgradeStatus": {
+            "currentFirmwareVersion": "AvereOS V5.1.1.2",
+            "firmwareUpdateStatus": "available",
+            "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
+            "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
+            "pendingFirmwareVersion": "AvereOS V5.1.1.32"
+          }
+        },
+        "sku": {
+          "name": "Storage Cache A123"
+        }
+      }
+    },
+    "400": {
+      "body": {
+	"error": {
+	  "code": "Error 523",
+	  "details": [
+	  ],
+	  "message": "Specified a changed value for a read-only property.",
+	  "target": "health"
+	}
+      }
+    }
+  }
+}
