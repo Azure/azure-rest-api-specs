@@ -3358,8 +3358,9 @@
                 },
                  "syncStatus": {
                     "type": "object",
-                    "$ref": "#/definitions/ServerEndpointHealth",
-                    "description": "Server Endpoint properties."
+                    "$ref": "#/definitions/ServerEndpointSyncStatus",
+                    "description": "Server Endpoint sync status",
+                    "readOnly": true
                 },
                 "offlineDataTransfer": {
                     "$ref": "#/definitions/FeatureStatus",
@@ -3381,43 +3382,68 @@
                 }
             }
         },
-        "ServerEndpointHealth": {
+        "ServerEndpointSyncStatus": {
             "type": "object",
-            "description": "ServerEndpoint Health object.",
+            "description": "Server Endpoint sync status",
             "properties": {
                 "downloadHealth": {
                     "$ref": "#/definitions/HealthState",
-                    "description": "Download Health Status."
+                    "description": "Download Health Status.",
+                    "readOnly": true
                 },
-                 "uploadHealth": {
+                "uploadHealth": {
                     "$ref": "#/definitions/HealthState",
-                    "description": "Upload Health Status."
+                    "description": "Upload Health Status.",
+                    "readOnly": true
                 },
-                 "combinedHealth": {
+                "combinedHealth": {
                     "$ref": "#/definitions/HealthState",
-                    "description": "Combined Health Status."
+                    "description": "Combined Health Status.",
+                    "readOnly": true
+                },
+                "syncActivity": {
+                    "$ref": "#/definitions/SyncActivityState",
+                    "description": "Sync activity (upload/download)",
+                    "readOnly": true
+                },
+                "totalPersistentFilesNotSyncingCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Total count of persistent files not syncing (combined upload + download)",
+                    "readOnly": true
                 },
                 "lastUpdatedTimestamp": {
                     "type" : "string",
                     "format" : "date-time",
-                    "description": "Last Updated Timestamp"
+                    "description": "Last Updated Timestamp",
+                    "readOnly": true
                 },
-                 "uploadStatus": {
+                "uploadStatus": {
                     "$ref": "#/definitions/SyncSessionStatus",
-                    "description": "Upload Status"
+                    "description": "Upload Status",
+                    "readOnly": true
                 },
-                 "downloadStatus": {
+                "downloadStatus": {
                     "$ref": "#/definitions/SyncSessionStatus",
-                    "description": "Download Status"
+                    "description": "Download Status",
+                    "readOnly": true
                 },
-                 "currentProgress": {
-                    "$ref": "#/definitions/SyncProgressStatus",
-                    "description": "Current progress"
+                "uploadActivity": {
+                    "$ref": "#/definitions/SyncActivity",
+                    "description": "Upload sync activity",
+                    "readOnly": true
                 },
-                 "offlineDataTransferStatus": {
+                "downloadActivity": {
+                    "$ref": "#/definitions/SyncActivity",
+                    "description": "Download sync activity",
+                    "readOnly": true
+                },
+                "offlineDataTransferStatus": {
                     "$ref": "#/definitions/OfflineDataTransferState",
-                    "description": "Offline Data Transfer State"
-                }                
+                    "description": "Offline Data Transfer State",
+                    "readOnly": true
+                }
             }
         },
         "SyncSessionStatus": {
@@ -3426,68 +3452,114 @@
             "properties": {
                 "lastSyncResult": {
                     "type": "integer",
-                    "description": "Last sync status"
+                    "description": "Last sync status",
+                    "readOnly": true
                 },
-                 "lastSyncTimestamp": {
+                "lastSyncTimestamp": {
                     "type" : "string",
                     "format" : "date-time",
-                    "description": "Last sync timestamp"
+                    "description": "Last sync timestamp",
+                    "readOnly": true
                 },
-                 "lastSyncSuccessTimestamp": {
-                     "type" : "string",
-                     "format" : "date-time",
-                    "description": "Last sync success timestamp"
+                "lastSyncSuccessTimestamp": {
+                    "type" : "string",
+                    "format" : "date-time",
+                    "description": "Last sync success timestamp",
+                    "readOnly": true
                 },
-                "lastSyncPerItemErrorCount": {
+                "persistentFilesNotSyncingCount": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 2147483647,
-                    "description": "Last sync per item error count."
+                    "description": "Count of persistent files not syncing",
+                    "readOnly": true
+                },
+                "transientFilesNotSyncingCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Count of transient files not syncing",
+                    "readOnly": true
+                },
+                "filesNotSyncingErrors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FilesNotSyncingError"
+                    },
+                    "description": "Array of per-item errors coming from the last sync session",
+                    "readOnly": true
                 }
             }
         },
-        "SyncProgressStatus": {
+        "SyncActivity": {
             "type": "object",
             "description": "Sync Session status object.",
             "properties": {
-                "progressTimestamp": {
+                "timestamp": {
                     "type" : "string",
                     "format" : "date-time",
-                    "description": "Progress timestamp"
+                    "description": "Timestamp when properties were updated",
+                    "readOnly": true
                 },
-                 "syncDirection": {
-                     "$ref": "#/definitions/ProgressType",
-                    "description": "Sync direction."
-                },
-                 "perItemErrorCount": {
+                "perItemErrorCount": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 2147483647,
-                    "description": "Per item error count"
+                    "description": "Per item error count",
+                    "readOnly": true
                 },
                 "appliedItemCount": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 2147483647,
-                    "description": "Applied item count."
+                    "description": "Applied item count.",
+                    "readOnly": true
                 },
                 "totalItemCount": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 2147483647,
-                    "description": "Total item count"
+                    "description": "Total item count (if available)",
+                    "readOnly": true
                 },
                 "appliedBytes": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 2147483647,
-                    "description": "Applied bytes"
+                    "description": "Applied bytes",
+                    "readOnly": true
                 },
                 "totalBytes": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 2147483647,
-                    "description": "Total bytes"
+                    "description": "Total bytes (if available)",
+                    "readOnly": true
+                }
+            }
+        },
+        "FilesNotSyncingError": {
+            "type": "object",
+            "description": "Files not syncing error object",
+            "properties": {
+                "ErrorCode": {
+                    "type": "integer",
+                    "description": "Error code",
+                    "readOnly": true
+                },
+                "persistentCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Count of persistent files not syncing with the specified error code",
+                    "readOnly": true
+                },
+                "transientCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "Count of transient files not syncing with the specified error code",
+                    "readOnly": true
                 }
             }
         },
@@ -3520,6 +3592,16 @@
                "SyncBlockedForRestore",
                "SyncBlockedForChangeDetectionPostRestore",
                "NoActivity"
+            ]
+        },
+        "SyncActivityState": {
+            "type": "string",
+            "description": "Type of the sync activity state",
+            "enum": [
+               "None",
+               "Upload",
+               "Download",
+               "UploadAndDownload"
             ]
         },
         "OfflineDataTransferState": {
