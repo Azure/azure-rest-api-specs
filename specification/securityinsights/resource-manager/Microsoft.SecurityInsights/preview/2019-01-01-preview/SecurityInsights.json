@@ -803,6 +803,225 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents": {
+            "get": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Office Consents"
+                ],
+                "description": "Gets all office365 consents.",
+                "operationId": "OfficeConsents_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OfficeConsentList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents/{consentId}": {
+            "get": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Office Consents"
+                ],
+                "description": "Gets an office365 consent.",
+                "operationId": "OfficeConsents_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/ConsentId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OfficeConsent"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Office Consents"
+                ],
+                "description": "Delete the office365 consent.",
+                "operationId": "OfficeConsents_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/ConsentId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
+            "get": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Settings"
+                ],
+                "description": "Gets a stting.",
+                "operationId": "ProductSettings_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/SettingsName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Settings"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {},
+                "tags": [
+                    "Settings"
+                ],
+                "description": "Creates or updates the setting.",
+                "operationId": "ProductSettings_Create",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/SettingsName"
+                    },
+                    {
+                        "$ref": "#/parameters/Settings"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Settings"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1635,6 +1854,57 @@
                 }
             }
         },
+        "OfficeConsentList": {
+            "description": "List of all the office365 consents.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of office consents.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of the consents.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OfficeConsent"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "OfficeConsent": {
+            "type": "object",
+            "description": "Consent for Office365 tenant that already made.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Office consent properties",
+                    "$ref": "#/definitions/OfficeConsentProperties"
+                }
+            }
+        },
+        "OfficeConsentProperties": {
+            "type": "object",
+            "description": "Consent property bag.",
+            "properties": {
+                "tenantId": {
+                    "type": "string",
+                    "description": "The tenantId of the Office365 with the concesnt."
+                },
+                "tenantName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The tenant name of the Office365 with the concesnt."
+                }
+            }
+        },
         "Resource": {
             "x-ms-azure-resource": true,
             "description": "An azure resource object",
@@ -1653,6 +1923,117 @@
                     "type": "string",
                     "readOnly": true,
                     "description": "Azure resource name"
+                }
+            }
+        },
+        "Settings": {
+            "type": "object",
+            "description": "The Setting.",
+            "discriminator": "kind",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                },
+                {
+                    "$ref": "#/definitions/SettingsKind"
+                }
+            ]
+        },
+        "SettingsKind": {
+            "type": "object",
+            "description": "Describes an Azure resource with kind.",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the setting",
+                    "enum": [
+                        "UebaSettings",
+                        "ToggleSettings"
+                    ],
+                    "x-ms-enum": {
+                        "name": "SettingKind",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "UebaSettings": {
+            "x-ms-discriminator-value": "UebaSettings",
+            "type": "object",
+            "description": "Represents settings for UEBA enablement.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Settings"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "UEBA settings properties",
+                    "$ref": "#/definitions/UebaSettingsProperties"
+                }
+            }
+        },
+        "UebaSettingsProperties": {
+            "type": "object",
+            "description": "UEBA settings property bag.",
+            "properties": {
+                "isEnabled": {
+                    "type": "boolean",
+                    "description": "Determines whether UEBA is enabled for this workspace."
+                },
+                "statusInMcas": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Determines whether UEBA is enabled from MCAS.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "StatusInMcas",
+                        "modelAsString": true
+                    }
+                },
+                "atpLicenseStatus": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": "Determines whether the tenant .",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LicenseStatus",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "ToggleSettings": {
+            "x-ms-discriminator-value": "ToggleSettings",
+            "type": "object",
+            "description": "Settings with single toggle.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Settings"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "toggle properties",
+                    "$ref": "#/definitions/ToggleSettingsProperties"
+                }
+            }
+        },
+        "ToggleSettingsProperties": {
+            "type": "object",
+            "description": "toggle property bag.",
+            "properties": {
+                "isEnabled": {
+                    "type": "boolean",
+                    "description": "Determines whether the setting is enable or disabled."
                 }
             }
         }
@@ -1766,6 +2147,32 @@
             "required": true,
             "type": "string",
             "description": "entity ID",
+            "x-ms-parameter-location": "method"
+        },
+        "ConsentId": {
+            "name": "consentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "consent ID",
+            "x-ms-parameter-location": "method"
+        },
+        "SettingsName": {
+            "name": "settingsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The setting name. Supports- Fusion, EUBA",
+            "x-ms-parameter-location": "method"
+        },
+        "Settings": {
+            "name": "settings",
+            "in": "body",
+            "description": "The setting",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Settings"
+            },
             "x-ms-parameter-location": "method"
         }
     }
