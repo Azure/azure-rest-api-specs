@@ -493,6 +493,203 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all cases.": {
+                        "$ref": "./examples/cases/GetCases.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Gets all cases.",
+                "operationId": "Cases_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CaseList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a case.": {
+                        "$ref": "./examples/cases/GetCaseById.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Gets a case.",
+                "operationId": "Cases_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/CaseId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Case"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates a case.": {
+                        "$ref": "./examples/cases/CreateCase.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Creates or updates the case.",
+                "operationId": "Cases_Create",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/CaseId"
+                    },
+                    {
+                        "$ref": "#/parameters/Case"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Case"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Case"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete a case.": {
+                        "$ref": "./examples/cases/DeleteCase.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Delete the case.",
+                "operationId": "Cases_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/CaseId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
             "get": {
                 "x-ms-examples": {
@@ -1328,6 +1525,196 @@
                 }
             }
         },
+        "CaseList": {
+            "description": "List all the cases.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of cases.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of cases.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Case"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Case": {
+            "type": "object",
+            "description": "Represents a case in Azure Security Insights.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the alert rule."
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Case data",
+                    "$ref": "#/definitions/CaseProperties"
+                }
+            }
+        },
+        "CaseProperties": {
+            "type": "object",
+            "description": "Describes case properties",
+            "properties": {
+                "lastUpdatedTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last time the case was updated"
+                },
+                "createdTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The time the case was created"
+                },
+                "endTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The end time of the case"
+                },
+                "startTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The start time of the case"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Tag"
+                    },
+                    "description": "List of tags"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the case"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the case"
+                },
+                "assignedTo": {
+                    "type": "string",
+                    "description": "The person the case is assigned to"
+                },
+                "severity": {
+                    "type": "string",
+                    "description": "The severity of the case",
+                    "enum": [
+                        "Critical",
+                        "High",
+                        "Medium",
+                        "Low",
+                        "Informational"
+                    ],
+                    "x-ms-enum": {
+                        "name": "severity",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Critical",
+                                "description": "Critical severity"
+                            },
+                            {
+                                "value": "High",
+                                "description": "High severity"
+                            },
+                            {
+                                "value": "Medium",
+                                "description": "Medium severity"
+                            },
+                            {
+                                "value": "Low",
+                                "description": "Low severity"
+                            },
+                            {
+                                "value": "Informational",
+                                "description": "Informational severity"
+                            }
+                        ]
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The status of the case",
+                    "enum": [
+                        "Draft",
+                        "Open",
+                        "InProgress",
+                        "Closed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "status",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Draft",
+                                "description": "Case is in draft status"
+                            },
+                            {
+                                "value": "Open",
+                                "description": "Case is in open status"
+                            },
+                            {
+                                "value": "InProgress",
+                                "description": "Case is in progress status"
+                            },
+                            {
+                                "value": "Closed",
+                                "description": "Case is in closed status"
+                            }
+                        ]
+                    }
+                },
+                "closeReason": {
+                    "type": "string",
+                    "description": "The reason the case was closed",
+                    "enum": [
+                        "Resolved",
+                        "Dismissed",
+                        "Other"
+                    ],
+                    "x-ms-enum": {
+                        "name": "status",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Resolved",
+                                "description": "Case was resolved"
+                            },
+                            {
+                                "value": "Dismissed",
+                                "description": "Case was dismissed"
+                            },
+                            {
+                                "value": "Other",
+                                "description": "Case was closed for another reason"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "title",
+                "severity",
+                "status"
+            ]
+        },
+        "Tag": {
+            "description": "The name for alerts created by this alert rule.",
+            "type": "string"
+        },
         "DataConnectorList": {
             "description": "List all the data connectors.",
             "properties": {
@@ -2120,6 +2507,25 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/Action"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "CaseId": {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+            "type": "string",
+            "description": "Case ID",
+            "x-ms-parameter-location": "method"
+        },
+        "Case": {
+            "name": "case",
+            "in": "body",
+            "description": "The case",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Case"
             },
             "x-ms-parameter-location": "method"
         },
