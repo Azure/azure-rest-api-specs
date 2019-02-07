@@ -2017,6 +2017,30 @@
                 "reportedSeverity": {
                     "readOnly": true,
                     "type": "string",
+                    "enum": [
+                        "Silent",
+                        "Information",
+                        "Low",
+                        "High"
+                    ],
+					"x-ms-enum": {
+                        "name": "reportedSeverity",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Silent"
+                            },
+                            {
+                                "value": "Information"
+                            },
+                            {
+                                "value": "Low"
+                            },
+                            {
+                                "value": "High"
+                            }
+                        ]
+                    },
                     "description": "Estimated severity of this alert"
                 },
                 "compromisedEntity": {
@@ -2041,6 +2065,11 @@
                     "readOnly": true,
                     "type": "boolean",
                     "description": "Whether this alert can be investigated with Azure Security Center"
+                },
+                "isIncident": {
+                    "readOnly": true,
+                    "type": "boolean",
+                    "description": "Whether this alert is for incident type or not (otherwise - single alert)"
                 },
                 "entities": {
                     "type": "array",

@@ -686,6 +686,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "supportCredentials": {
+          "description": "Gets or sets whether CORS requests with credentials are allowed. See \nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials\nfor more details.",
+          "type": "boolean"
         }
       }
     },
@@ -760,7 +764,7 @@
       "type": "object",
       "properties": {
         "unit": {
-          "description": "Units of measurement for the quota resourse.",
+          "description": "Units of measurement for the quota resource.",
           "type": "string"
         },
         "nextResetTime": {
@@ -2336,7 +2340,7 @@
         },
         "experiments": {
           "$ref": "#/definitions/Experiments",
-          "description": "This is work around for polymophic types."
+          "description": "This is work around for polymorphic types."
         },
         "limits": {
           "$ref": "#/definitions/SiteLimits",
@@ -2394,11 +2398,22 @@
           "type": "integer"
         },
         "ipSecurityRestrictions": {
-          "description": "IP security restrictions.",
+          "description": "IP security restrictions for main.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpSecurityRestriction"
           }
+        },
+        "scmIpSecurityRestrictions": {
+          "description": "IP security restrictions for scm.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
+        },
+        "scmIpSecurityRestrictionsUseMain": {
+          "description": "IP security restrictions for scm to use main.",
+          "type": "boolean"
         },
         "http20Enabled": {
           "description": "Http20Enabled: configures a web site to allow clients to connect over http2.0",
@@ -2929,6 +2944,10 @@
             "dnsServers": {
               "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
               "type": "string"
+            },
+            "isSwift": {
+              "description": "Flag that is used to denote if this is VNET injection",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
