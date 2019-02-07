@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BlueprintClient",
-    "description": "Azure Blueprint Client.",
+    "description": "Azure Blueprints Client provides access to blueprint definitions, assignments, and artifacts, and related blueprint operations.",
     "version": "2018-11-01-preview"
   },
   "host": "management.azure.com",
@@ -40,7 +40,7 @@
           "Blueprint"
         ],
         "operationId": "Blueprints_CreateOrUpdate",
-        "description": "Create or update Blueprint definition.",
+        "description": "Create or update a blueprint definition.",
         "x-ms-examples": {
           "SubscriptionBlueprint": {
             "$ref": "./examples/subscriptionBPDef/Blueprint_Create.json"
@@ -71,7 +71,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created -- Blueprint definition saved.",
+            "description": "Created -- blueprint definition saved.",
             "schema": {
               "$ref": "#/definitions/Blueprint"
             }
@@ -139,13 +139,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- blueprint definition deleted",
+            "description": "OK -- blueprint definition deleted.",
             "schema": {
               "$ref": "#/definitions/Blueprint"
             }
           },
           "204": {
-            "description": "no content"
+            "description": "No Content"
           }
         }
       }
@@ -156,7 +156,7 @@
           "Blueprint"
         ],
         "operationId": "Blueprints_List",
-        "description": "Create or update blueprint definition.",
+        "description": "List blueprint definitions.",
         "x-ms-examples": {
           "SubscriptionBlueprint": {
             "$ref": "./examples/subscriptionBPDef/Blueprint_List.json"
@@ -175,7 +175,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- retrieved Blueprints in this ManagementGroup.",
+            "description": "OK -- retrieved list of blueprint definitions.",
             "schema": {
               "$ref": "#/definitions/BlueprintList"
             }
@@ -192,7 +192,7 @@
           "Artifact"
         ],
         "operationId": "Artifacts_CreateOrUpdate",
-        "description": "Create or update Blueprint artifact.",
+        "description": "Create or update blueprint artifact.",
         "x-ms-examples": {
           "Sub-ARMTemplateArtifact": {
             "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Create.json"
@@ -233,12 +233,12 @@
             "schema": {
               "$ref": "#/definitions/Artifact"
             },
-            "description": "Blueprint artifact to save."
+            "description": "Blueprint artifact to create or update."
           }
         ],
         "responses": {
           "201": {
-            "description": "Created -- Blueprint artifact created/updated.",
+            "description": "Created -- blueprint artifact created/updated.",
             "schema": {
               "$ref": "#/definitions/Artifact"
             }
@@ -250,7 +250,7 @@
           "Artifact"
         ],
         "operationId": "Artifacts_Get",
-        "description": "Get a Blueprint artifact.",
+        "description": "Get a blueprint artifact.",
         "x-ms-examples": {
           "Sub-ARMTemplateArtifact": {
             "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Get.json"
@@ -287,7 +287,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Blueprint artifact retrieved.",
+            "description": "OK -- blueprint artifact retrieved.",
             "schema": {
               "$ref": "#/definitions/Artifact"
             }
@@ -299,7 +299,7 @@
           "Artifact"
         ],
         "operationId": "Artifacts_Delete",
-        "description": "Delete a Blueprint artifact.",
+        "description": "Delete a blueprint artifact.",
         "x-ms-examples": {
           "Sub-ARMTemplateArtifact": {
             "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Delete.json"
@@ -336,7 +336,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Blueprint artifact deleted.",
+            "description": "OK -- blueprint artifact deleted.",
             "schema": {
               "$ref": "#/definitions/Artifact"
             }
@@ -353,7 +353,7 @@
           "Artifact"
         ],
         "operationId": "Artifacts_List",
-        "description": "List artifacts for a given Blueprint.",
+        "description": "List artifacts for a given blueprint definition.",
         "x-ms-examples": {
           "Sub-ArtifactList": {
             "$ref": "./examples/subscriptionBPDef/Artifact_List.json"
@@ -375,7 +375,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Blueprint artifacts retrieved.",
+            "description": "OK -- blueprint artifacts retrieved.",
             "schema": {
               "$ref": "#/definitions/ArtifactList"
             }
@@ -392,7 +392,7 @@
           "PublishedBlueprint"
         ],
         "operationId": "PublishedBlueprints_Create",
-        "description": "Publish a new version of the Blueprint with the latest artifacts. Published Blueprints are immutable.",
+        "description": "Publish a new version of the blueprint definition with the latest artifacts. Published blueprint definitions are immutable.",
         "x-ms-examples": {
           "PublishedSubscriptionBlueprint_Publish": {
             "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Publish.json"
@@ -417,7 +417,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created -- published Blueprint.",
+            "description": "Created -- blueprint definition published.",
             "schema": {
               "$ref": "#/definitions/PublishedBlueprint"
             }
@@ -429,7 +429,7 @@
           "PublishedBlueprint"
         ],
         "operationId": "PublishedBlueprints_Get",
-        "description": "Get a published Blueprint.",
+        "description": "Get a published version of a blueprint definition.",
         "x-ms-examples": {
           "PublishedSubscriptionBlueprint": {
             "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Get.json"
@@ -454,7 +454,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- published Blueprint retrieved.",
+            "description": "OK -- published blueprint definition retrieved.",
             "schema": {
               "$ref": "#/definitions/PublishedBlueprint"
             }
@@ -466,7 +466,7 @@
           "PublishedBlueprint"
         ],
         "operationId": "PublishedBlueprints_Delete",
-        "description": "Delete a published Blueprint.",
+        "description": "Delete a published version of a blueprint definition.",
         "x-ms-examples": {
           "PublishedSubscriptionBlueprint": {
             "$ref": "./examples/subscriptionBPDef/SealedBlueprint_Delete.json"
@@ -491,7 +491,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- published Blueprint deleted.",
+            "description": "OK -- published version of blueprint definition deleted.",
             "schema": {
               "$ref": "#/definitions/PublishedBlueprint"
             }
@@ -508,7 +508,7 @@
           "PublishedBlueprint"
         ],
         "operationId": "PublishedBlueprints_List",
-        "description": "List published versions of given Blueprint.",
+        "description": "List published versions of given blueprint definition.",
         "x-ms-examples": {
           "PublishedSubscriptionBlueprint": {
             "$ref": "./examples/subscriptionBPDef/SealedBlueprint_List.json"
@@ -530,7 +530,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- all published Blueprint retrieved.",
+            "description": "OK -- all published versions of blueprint definition retrieved.",
             "schema": {
               "$ref": "#/definitions/PublishedBlueprintList"
             }
@@ -547,7 +547,7 @@
           "PublishedArtifact"
         ],
         "operationId": "PublishedArtifacts_Get",
-        "description": "Get an artifact for a published Blueprint.",
+        "description": "Get an artifact for a published blueprint definition.",
         "x-ms-examples": {
           "Sub-ARMTemplateArtifact": {
             "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Get.json"
@@ -587,7 +587,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- published artifact retrieved.",
+            "description": "OK -- artifact of published blueprint definition retrieved.",
             "schema": {
               "$ref": "#/definitions/Artifact"
             }
@@ -601,7 +601,7 @@
           "PublishedArtifact"
         ],
         "operationId": "PublishedArtifacts_List",
-        "description": "List artifacts for a published Blueprint.",
+        "description": "List artifacts for a version of a published blueprint definition.",
         "x-ms-examples": {
           "Sub-ArtifactList": {
             "$ref": "./examples/subscriptionBPDef/SealedArtifact_List.json"
@@ -626,7 +626,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- all published artifact retrieved.",
+            "description": "OK -- artifacts of a version of published blueprint definition retrieved.",
             "schema": {
               "$ref": "#/definitions/ArtifactList"
             }
@@ -649,7 +649,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Detailed properties for blueprint",
+          "description": "Detailed properties for blueprint definition.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BlueprintProperties"
         }
@@ -661,7 +661,7 @@
     "Artifact": {
       "type": "object",
       "discriminator": "kind",
-      "description": "Represents a Blueprint artifact.",
+      "description": "Represents a blueprint artifact.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureResourceBase"
@@ -670,7 +670,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Specifies the kind of Blueprint artifact.",
+          "description": "Specifies the kind of blueprint artifact.",
           "enum": [
             "template",
             "roleAssignment",
@@ -688,7 +688,7 @@
     },
     "PublishedBlueprint": {
       "type": "object",
-      "description": "Represents a published Blueprint.",
+      "description": "Represents a published blueprint.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureResourceBase"
@@ -696,7 +696,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Detailed properties for published Blueprint",
+          "description": "Detailed properties for published blueprint.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PublishedBlueprintProperties"
         }
@@ -708,11 +708,11 @@
     "BlueprintList": {
       "type": "object",
       "title": "BlueprintList",
-      "description": "List of Blueprint definitions.",
+      "description": "List of blueprint definitions.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Blueprint definitions.",
+          "description": "List of blueprint definitions.",
           "items": {
             "$ref": "#/definitions/Blueprint"
           }
@@ -727,11 +727,11 @@
     "PublishedBlueprintList": {
       "type": "object",
       "title": "BlueprintList",
-      "description": "List of published Blueprints",
+      "description": "List of published blueprint definitions.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of published Blueprints.",
+          "description": "List of published blueprint definitions.",
           "items": {
             "$ref": "#/definitions/PublishedBlueprint"
           }
@@ -745,11 +745,11 @@
     },
     "ArtifactList": {
       "type": "object",
-      "description": "List of Blueprint artifacts",
+      "description": "List of blueprint artifacts.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Blueprint artifacts.",
+          "description": "List of blueprint artifacts.",
           "items": {
             "$ref": "#/definitions/Artifact"
           }
@@ -762,7 +762,7 @@
       }
     },
     "ResourceProviderOperationList": {
-      "description": "Result of the request to list operations.",
+      "description": "Results of the request to list operations.",
       "readOnly": true,
       "properties": {
         "value": {
@@ -775,7 +775,7 @@
       }
     },
     "ResourceProviderOperation": {
-      "description": "Supported operation of this resource provider.",
+      "description": "Supported operations of this resource provider.",
       "readOnly": true,
       "properties": {
         "name": {
@@ -811,13 +811,13 @@
       "x-ms-external": true,
       "properties": {
         "status": {
-          "description": "Status of the Blueprint. This field is readonly.",
+          "description": "Status of the blueprint. This field is readonly.",
           "readOnly": true,
           "$ref": "#/definitions/BlueprintStatus"
         },
         "targetScope": {
           "type": "string",
-          "description": "The scope where this Blueprint can be applied.",
+          "description": "The scope where this blueprint definition can be assigned.",
           "enum": [
             "subscription",
             "managementGroup"
@@ -828,11 +828,11 @@
           }
         },
         "parameters": {
-          "description": "Parameters required by this Blueprint definition.",
+          "description": "Parameters required by this blueprint definition.",
           "$ref": "#/definitions/ParameterDefinitionCollection"
         },
         "resourceGroups": {
-          "description": "Resource group placeholders defined by this Blueprint definition.",
+          "description": "Resource group placeholders defined by this blueprint definition.",
           "$ref": "#/definitions/ResourceGroupDefinitionCollection"
         }
       },
@@ -843,7 +843,7 @@
       ]
     },
     "BlueprintProperties": {
-      "description": "Schema for Blueprint properties.",
+      "description": "Schema for blueprint definition properties.",
       "type": "object",
       "x-ms-external": true,
       "allOf": [
@@ -852,11 +852,11 @@
       "properties": {
         "versions": {
           "type": "object",
-          "description": "Published versions of this blueprint."
+          "description": "Published versions of this blueprint definition."
         },
         "layout": {
           "type": "object",
-          "description": "Layout view of the blueprint, for UI reference."
+          "description": "Layout view of the blueprint definition for UI reference."
         }
       },
       "required": [
@@ -864,7 +864,7 @@
       ]
     },
     "PublishedBlueprintProperties": {
-      "description": "Schema for published Blueprint properties.",
+      "description": "Schema for published blueprint definition properties.",
       "type": "object",
       "x-ms-external": true,
       "allOf": [
@@ -872,11 +872,11 @@
       ],
       "properties": {
         "blueprintName": {
-          "description": "Name of the Blueprint definition.",
+          "description": "Name of the published blueprint definition.",
           "type": "string"
         },
         "changeNotes": {
-          "description": "Version-specific change notes",
+          "description": "Version-specific change notes.",
           "type": "string",
           "maxLength": 500
         }
@@ -893,18 +893,18 @@
     },
     "TemplateArtifactProperties": {
       "type": "object",
-      "description": "Properties of a Template Artifact.",
+      "description": "Properties of a Resource Manager template blueprint artifact.",
       "properties": {
         "template": {
           "type": "object",
-          "description": "The Azure Resource Manager template body."
+          "description": "The Resource Manager template blueprint artifact body."
         },
         "resourceGroup": {
           "type": "string",
-          "description": "If applicable, the name of the resource group placeholder to which the template will be deployed."
+          "description": "If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed."
         },
         "parameters": {
-          "description": "Template parameter values.",
+          "description": "Resource Manager template blueprint artifact parameter values.",
           "$ref": "#/definitions/ParameterValueCollection"
         }
       },
@@ -922,12 +922,12 @@
       ]
     },
     "TemplateArtifact": {
-      "description": "Blueprint artifact deploys Azure resource manager template.",
+      "description": "Blueprint artifact that deploys a Resource Manager template.",
       "type": "object",
       "x-ms-discriminator-value": "template",
       "properties": {
         "properties": {
-          "description": "Properties for template artifact",
+          "description": "Properties for a Resource Manager template blueprint artifact.",
           "$ref": "#/definitions/TemplateArtifactProperties",
           "x-ms-client-flatten": true
         }
@@ -943,18 +943,18 @@
     },
     "RoleAssignmentArtifactProperties": {
       "type": "object",
-      "description": "Properties of the Role assignment artifact.",
+      "description": "Properties of a Role assignment blueprint artifact.",
       "properties": {
         "roleDefinitionId": {
           "type": "string",
           "description": "Azure resource ID of the RoleDefinition."
         },
         "principalIds": {
-          "description": "Array of user or group identities in Azure Active Directory. The roleDefinition will apply to these identity."
+          "description": "Array of user or group identities in Azure Active Directory. The roleDefinition will apply to each identity."
         },
         "resourceGroup": {
           "type": "string",
-          "description": "RoleAssignment will be scope to this resourceGroup, if left empty, it would scope to the subscription."
+          "description": "RoleAssignment will be scope to this resourceGroup. If empty, it scopes to the subscription."
         }
       },
       "allOf": [
@@ -971,12 +971,12 @@
       ]
     },
     "RoleAssignmentArtifact": {
-      "description": "Blueprint artifact applies Azure role assignment.",
+      "description": "Blueprint artifact that applies a Role assignment.",
       "type": "object",
       "x-ms-discriminator-value": "roleAssignment",
       "properties": {
         "properties": {
-          "description": "Properties for roleAssignment artifact.",
+          "description": "Properties for a Role assignment blueprint artifact.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RoleAssignmentArtifactProperties"
         }
@@ -992,7 +992,7 @@
     },
     "PolicyAssignmentArtifactProperties": {
       "type": "object",
-      "description": "PolicyAssignment properties",
+      "description": "Properties of a Policy assignment blueprint artifact.",
       "properties": {
         "policyDefinitionId": {
           "type": "string",
@@ -1021,7 +1021,7 @@
       ]
     },
     "PolicyAssignmentArtifact": {
-      "description": "Blueprint artifact applies Policy assignments.",
+      "description": "Blueprint artifact that applies a Policy assignment.",
       "type": "object",
       "x-ms-discriminator-value": "policyAssignment",
       "properties": {
@@ -1045,7 +1045,7 @@
       "type": "object",
       "properties": {},
       "additionalProperties": {
-        "description": "keyValue pair of parameter fulfillment.",
+        "description": "Key/Value pair of parameter fulfillment.",
         "$ref": "#/definitions/ParameterValueBase"
       }
     },
@@ -1054,7 +1054,7 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "Optional property, just to establish ParameterValueBase as a BaseClass.",
+          "description": "Optional property. Establishes ParameterValueBase as a BaseClass.",
           "type": "string"
         }
       }
@@ -1087,11 +1087,11 @@
       ]
     },
     "SecretValueReference": {
-      "description": "Reference to a KeyVault secret.",
+      "description": "Reference to a Key Vault secret.",
       "type": "object",
       "properties": {
         "keyVault": {
-          "description": "Specifies the reference to a given Azure KeyVault.",
+          "description": "Specifies the reference to a given Azure Key Vault.",
           "$ref": "#/definitions/keyVaultReference"
         },
         "secretName": {
@@ -1099,7 +1099,7 @@
           "type": "string"
         },
         "secretVersion": {
-          "description": "Version of the secret, (if there are multiple versions)",
+          "description": "If multiple versions, the version of the secret.",
           "type": "string"
         }
       },
@@ -1109,22 +1109,22 @@
       ]
     },
     "keyVaultReference": {
-      "description": "Specifies the link to a KeyVault.",
+      "description": "Specifies the link to a Key Vault.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Azure resource ID of the KeyVault.",
+          "description": "Azure resource ID of the Key Vault.",
           "type": "string"
         }
       },
       "required": [ "id" ]
     },
     "ParameterDefinitionCollection": {
-      "description": "A dictionary hold parameter name and it's metadata.",
+      "description": "A dictionary hold parameter name and its metadata.",
       "type": "object",
       "properties": {},
       "additionalProperties": {
-        "description": "named collection of parameter metadata.",
+        "description": "Named collection of parameter metadata.",
         "$ref": "#/definitions/ParameterDefinition"
       }
     },
@@ -1134,7 +1134,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Allowed data types for Azure Resource Manager template parameters.",
+          "description": "Allowed data types for Resource Manager template parameters.",
           "enum": [
             "string",
             "array",
@@ -1174,23 +1174,23 @@
       "type": "object",
       "properties": {},
       "additionalProperties": {
-        "description": "named collection for resourceGroupDefinition",
+        "description": "Named collection for resourceGroupDefinition.",
         "$ref": "#/definitions/ResourceGroupDefinition"
       }
     },
     "ResourceGroupDefinition": {
-      "description": "Represents an Azure resource group in a Blueprint definition.",
+      "description": "Represents an Azure resource group in a blueprint definition.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of this resourceGroup, leave empty if the resource group name will be specified during the Blueprint assignment.",
+          "description": "Name of this resourceGroup. Leave empty if the resource group name will be specified during the blueprint assignment.",
           "minLength": 1,
           "maxLength": 90
         },
         "location": {
           "type": "string",
-          "description": "Location of this resourceGroup, leave empty if the resource group location will be specified during the Blueprint assignment.",
+          "description": "Location of this resourceGroup. Leave empty if the resource group location will be specified during the blueprint assignment.",
           "maxLength": 90
         },
         "metadata": {
@@ -1224,7 +1224,7 @@
         },
         "strongType": {
           "type": "string",
-          "description": "StrongType for UI to render rich experience during assignment time.",
+          "description": "StrongType for UI to render rich experience during blueprint assignment.",
           "maxLength": 64
         }
       }
@@ -1243,13 +1243,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the resource group",
+          "description": "Name of the resource group.",
           "minLength": 1,
           "maxLength": 90
         },
         "location": {
           "type": "string",
-          "description": "Location of the resource group"
+          "description": "Location of the resource group."
         }
       }
     },
@@ -1291,7 +1291,7 @@
       }
     },
     "BlueprintResourcePropertiesBase": {
-      "description": "Shared properties between all Blueprint resources.",
+      "description": "Shared properties between all blueprint resources.",
       "type": "object",
       "x-ms-external": true,
       "properties": {
@@ -1308,7 +1308,7 @@
       }
     },
     "BlueprintResourceStatusBase": {
-      "description": "Shared status properties between all Blueprint resources.",
+      "description": "Shared status properties between all blueprint resources.",
       "type": "object",
       "properties": {
         "timeCreated": {
@@ -1340,7 +1340,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "name of the blueprint."
+      "description": "Name of the blueprint definition."
     },
     "ArtifactNameParameter": {
       "name": "artifactName",
@@ -1348,7 +1348,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "name of the artifact."
+      "description": "Name of the blueprint artifact."
     },
     "PublishedBlueprintVersionIdParameter": {
       "name": "versionId",
@@ -1356,7 +1356,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "version of the published blueprint."
+      "description": "Version of the published blueprint definition."
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -1364,7 +1364,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client",
-      "description": "Client Api Version."
+      "description": "Client API Version."
     }
   }
 }
