@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-06'
 input-file:
-- Microsoft.HybridData/stable/2016-06-01/HybridData.json
+- Microsoft.HybridData/stable/2016-06-01/hybriddata.json
 directive:
   - suppress:
     - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
@@ -72,7 +72,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.HybridDataManager
+  namespace: Microsoft.Azure.Management.HybridData
   output-folder: $(csharp-sdks-folder)/HybridDataManager/Management.HybridData/Generated
   clear-output-folder: true
 ```
