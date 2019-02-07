@@ -690,6 +690,203 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all bookmarks.": {
+                        "$ref": "./examples/bookmarks/GetBookmarks.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Gets all bookmarks.",
+                "operationId": "Bookmarks_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/BookmarkList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a bookmark.": {
+                        "$ref": "./examples/bookmarks/GetBookmarkById.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Gets a bookmark.",
+                "operationId": "Bookmarks_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/BookmarkId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bookmark"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates a bookmark.": {
+                        "$ref": "./examples/bookmarks/CreateBookmark.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Creates or updates the bookmark.",
+                "operationId": "Bookmarks_Create",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/BookmarkId"
+                    },
+                    {
+                        "$ref": "#/parameters/Bookmark"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bookmark"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Bookmark"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete a bookmark.": {
+                        "$ref": "./examples/bookmarks/DeleteBookmark.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Delete the bookmark.",
+                "operationId": "Bookmarks_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/BookmarkId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
             "get": {
                 "x-ms-examples": {
@@ -1711,6 +1908,121 @@
                 "status"
             ]
         },
+        "BookmarkList": {
+            "description": "List all the bookmarks.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of cases.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of bookmarks.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Bookmark"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Bookmark": {
+            "type": "object",
+            "description": "Represents a bookmark in Azure Security Insights.",
+            "allOf": [{
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the bookmark."
+                },
+				"properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Bookmark data",
+                    "$ref": "#/definitions/BookmarkProperties"
+                }
+            }
+        },
+		"BookmarkProperties": {
+            "type": "object",
+            "description": "Describes bookmark properties",
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "The display name of the bookmark"
+                },
+                "lastUpdatedTimeUtc": {
+                    "type": "string",
+					"format": "date-time",
+                    "description": "The last time the bookmark was updated"
+                },
+				"createdTimeUtc": {
+                    "type": "string",
+					"format": "date-time",
+                    "description": "The time the bookmark was created"
+                },
+                "createdBy": {
+                    "type": "object",
+                    "description": "Describes a user that created the bookmark",
+                    "properties": {
+                        "objectId": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "The object id of the user."
+                        },
+                        "email": {
+                            "type": "string",
+                            "description": "The email of the user."
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the user."
+                        }                        
+                    }   
+                },
+                "updatedBy": {
+                    "type": "object",
+                    "description": "Describes a user that updated the bookmark",
+                    "properties": {
+                        "objectId": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "The object id of the user."
+                        },
+                        "email": {
+                            "type": "string",
+                            "description": "The email of the user."
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the user."
+                        }                        
+                    }
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "The notes of the bookmark"
+                },                
+                "tags": {
+					"type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Tag"
+                    },
+                    "description": "List of tags"
+                },
+                "query": {
+                    "type": "string",
+                    "description": "The query of the bookmark."
+                }
+            },
+            "required": [
+                "displayName"
+            ]
+        },
         "Tag": {
             "description": "The name for alerts created by this alert rule.",
             "type": "string"
@@ -2526,6 +2838,25 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/Case"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "BookmarkId": {
+            "name": "bookmarkId",
+            "in": "path",
+            "required": true,
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+            "type": "string",
+            "description": "Bookmark ID",
+            "x-ms-parameter-location": "method"
+        },
+        "Bookmark": {
+            "name": "bookmark",
+            "in": "body",
+            "description": "The bookmark",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Bookmark"
             },
             "x-ms-parameter-location": "method"
         },
