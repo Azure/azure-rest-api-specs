@@ -701,6 +701,108 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all entities.": {
+                        "$ref": "./examples/entities/GetEntities.json"
+                    }
+                },
+                "tags": [
+                    "Entities"
+                ],
+                "description": "Gets all entities.",
+                "operationId": "Entities_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/EntityList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an account entity.": {
+                        "$ref": "./examples/entities/GetAccountEntityById.json"
+                    },
+                    "Get an host entity.": {
+                        "$ref": "./examples/entities/GetHostEntityById.json"
+                    },
+                    "Get an file entity.": {
+                        "$ref": "./examples/entities/GetFileEntityById.json"
+                    }
+                },
+                "tags": [
+                    "Entities"
+                ],
+                "description": "Gets an entity.",
+                "operationId": "Entities_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/EntityId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Entity"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1291,6 +1393,248 @@
                 }
             }
         },
+        "EntityList": {
+            "description": "List of all the entities.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of entities.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of etnties.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Entity"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Entity": {
+            "type": "object",
+            "description": "Specific entity.",
+            "discriminator": "kind",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                },
+                {
+                    "$ref": "#/definitions/EntityKind"
+                }
+            ]
+        },
+        "EntityKind": {
+            "type": "object",
+            "description": "Describes an Azure resource with kind.",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the entity",
+                    "enum": [
+                        "Account",
+                        "Host",
+                        "File"
+                    ],
+                    "x-ms-enum": {
+                        "name": "EntityKind",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Account"
+                            },
+                            {
+                                "value": "Host"
+                            },
+                            {
+                                "value": "File"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "AccountEntity": {
+            "x-ms-discriminator-value": "Account",
+            "type": "object",
+            "description": "Represents an account entity.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Entity"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Account entity properties",
+                    "$ref": "#/definitions/AccountEntityProperties"
+                }
+            }
+        },
+        "AccountEntityProperties": {
+            "type": "object",
+            "description": "Account entity property bag.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The name of the account. This field should hold only the name without any domain added to it, i.e. administrator."
+                },
+                "ntDomain": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The NETBIOS domain name as it appears in the alert format – domain\\username. Examples: NT AUTHORITY."
+                },
+                "upnSuffix": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com."
+                },
+                "sid": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The account security identifier, e.g. S-1-5-18."
+                },
+                "aadTenantId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The AAD tenant id."
+                },
+                "aadUserId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The AAD user id."
+                },
+                "puid": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The AAD Passport User ID."
+                },
+                "isDomainJoined": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": "Determines whether this is a domain account."
+                },
+                "objectGuid": {
+                    "type": "string",
+                    "readOnly": true,
+                    "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+                    "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory."
+                }
+            }
+        },
+        "HostEntity": {
+            "x-ms-discriminator-value": "Host",
+            "type": "object",
+            "description": "Represents a host entity.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Entity"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Host entity properties",
+                    "$ref": "#/definitions/HostEntityProperties"
+                }
+            }
+        },
+        "HostEntityProperties": {
+            "type": "object",
+            "description": "Host entity property bag.",
+            "properties": {
+                "dnsDomain": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The DNS domain that this host belongs to. Should contain the compete DNS suffix for the domain"
+                },
+                "ntDomain": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The NT domain that this host belongs to."
+                },
+                "hostName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The hostname without the domain suffix."
+                },
+                "netBiosName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The host name (pre-windows2000)."
+                },
+                "azureID": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The azure resource id of the VM."
+                },
+                "omsAgentID": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The OMS agent id, if the host has OMS agent installed."
+                },
+                "osFamily": {
+                    "type": "string",
+                    "enum": [
+                        "Linux",
+                        "Windows",
+                        "Android",
+                        "IOS"
+                    ],
+                    "x-ms-enum": {
+                        "name": "OSFamily",
+                        "modelAsString": false
+                    },
+                    "description": "The operartion system type."
+                },
+                "osVersion": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "A free text representation of the operating system. This field is meant to hold specific versions the are more fine grained than OSFamily or future values not supported by OSFamily enumeration"
+                },
+                "isDomainJoined": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": "Determines whether this host belongs to a domain."
+                }
+            }
+        },
+        "FileEntity": {
+            "x-ms-discriminator-value": "File",
+            "type": "object",
+            "description": "Represents a file entity.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Entity"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "File entity properties",
+                    "$ref": "#/definitions/FileEntityProperties"
+                }
+            }
+        },
+        "FileEntityProperties": {
+            "type": "object",
+            "description": "File entity property bag.",
+            "properties": {
+                "directory": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The full path to the file."
+                },
+                "name": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The file name without path (some alerts might not include path)."
+                }
+            }
+        },
         "Resource": {
             "x-ms-azure-resource": true,
             "description": "An azure resource object",
@@ -1414,6 +1758,14 @@
             "schema": {
                 "$ref": "#/definitions/DataConnector"
             },
+            "x-ms-parameter-location": "method"
+        },
+        "EntityId": {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "entity ID",
             "x-ms-parameter-location": "method"
         }
     }
