@@ -1,13 +1,14 @@
 #HybridDataManager
-# DataBox
 
 > see https://aka.ms/autorest
 
+This is the AutoRest configuration file for HybridDataManager.
 
 
 
 ---
 ## Getting Started
+To build the SDK for HybridDataManager, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -21,14 +22,25 @@ To see additional help and options, run:
 
 
 ### Basic Information
+These are the global settings for the HybridDataManager API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2016-06
 ```
 
 
+### Tag: package-2016-06
 
+These settings apply only when `--tag=package-2016-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-06'
 input-file:
+- Microsoft.HybridData/stable/2016-06-01/HybridData.json
+directive:
+  - suppress:
+    - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
+    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
 ```
 
 ---
@@ -42,9 +54,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
     after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybriddatamanager']
 ```
+
 
 ## C#
 
@@ -55,6 +72,26 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.HybridDataManager
+  output-folder: $(csharp-sdks-folder)/HybridDataManager/Management.HybridData/Generated
   clear-output-folder: true
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.management.hybriddata
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybriddatamanager
+```
