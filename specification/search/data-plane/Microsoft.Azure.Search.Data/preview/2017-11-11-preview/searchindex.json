@@ -64,6 +64,54 @@
         }
       }
     },
+    "/docs('{key}')": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_Get",        
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/lookup-document"
+        },
+        "x-ms-examples": {
+          "SearchIndexGetDocument": { "$ref": "./examples/SearchIndexGetDocument.json" }
+        },
+        "description": "Retrieves a document from the Azure Search index.",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "description": "The key of the document to retrieve.",
+            "type": "string"
+          },
+          {
+            "name":"$select",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document.",
+            "x-ms-client-name": "SelectedFields"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
     "/docs/autocomplete": {
       "get": {
         "tags": [
@@ -74,7 +122,7 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
         },
         "x-ms-examples": {
-          "SearchIndexGetAutocomplete": { "$ref": "./examples/SearchIndexGetAutocomplete.json" }
+          "SearchIndexAutocompleteDocumentsGet": { "$ref": "./examples/SearchIndexAutocompleteDocumentsGet.json" }
         },
         "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",
         "parameters": [
@@ -198,7 +246,7 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
         },
         "x-ms-examples": {
-          "SearchIndexPostAutocomplete": { "$ref": "./examples/SearchIndexPostAutocomplete.json" }
+          "SearchIndexAutocompleteDocumentsPost": { "$ref": "./examples/SearchIndexAutocompleteDocumentsPost.json" }
         },
         "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",
         "parameters": [
