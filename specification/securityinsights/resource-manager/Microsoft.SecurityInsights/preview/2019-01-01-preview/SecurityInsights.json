@@ -256,215 +256,6 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
-            "get": {
-                "x-ms-examples": {
-                    "Get all data connectors.": {
-                        "$ref": "./examples/dataConnectors/GetDataConnectors.json"
-                    }
-                },
-                "tags": [
-                    "Data Connectors"
-                ],
-                "description": "Gets all data connectors.",
-                "operationId": "DataConnectors_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceName"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnectorList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get an Office365 data connector.": {
-                        "$ref": "./examples/dataConnectors/GetOfficeDataConnetorById.json"
-                    },
-                    "Get a TI data connector.": {
-                        "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
-                    },
-                    "Get a MCAS data connector.": {
-                        "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
-                    },
-                    "Get a ASC data connector.": {
-                        "$ref": "./examples/dataConnectors/GetAzureSecurityCenterById.json"
-                    },
-                    "Get an AAD data connector.": {
-                        "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
-                    }
-                },
-                "tags": [
-                    "Data Connectors"
-                ],
-                "description": "Gets a data connector.",
-                "operationId": "DataConnectors_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceName"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnectorId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnector"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Creates or updates an Office365 data connector.": {
-                        "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
-                    }
-                },
-                "tags": [
-                    "Data Connectors"
-                ],
-                "description": "Creates or updates the data connector.",
-                "operationId": "DataConnectors_Create",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceName"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnectorId"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnector"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnector"
-                        }
-                    },
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/DataConnector"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Delete an Office365 data connector.": {
-                        "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
-                    }
-                },
-                "tags": [
-                    "Data Connectors"
-                ],
-                "description": "Delete the data connector.",
-                "operationId": "DataConnectors_Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceName"
-                    },
-                    {
-                        "$ref": "#/parameters/DataConnectorId"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "No Content"
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                }
-            }
-        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions": {
             "get": {
                 "x-ms-examples": {},
@@ -699,6 +490,215 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all data connectors.": {
+                        "$ref": "./examples/dataConnectors/GetDataConnectors.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Gets all data connectors.",
+                "operationId": "DataConnectors_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnectorList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an Office365 data connector.": {
+                        "$ref": "./examples/dataConnectors/GetOfficeDataConnetorById.json"
+                    },
+                    "Get a TI data connector.": {
+                        "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
+                    },
+                    "Get a MCAS data connector.": {
+                        "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
+                    },
+                    "Get a ASC data connector.": {
+                        "$ref": "./examples/dataConnectors/GetAzureSecurityCenterById.json"
+                    },
+                    "Get an AAD data connector.": {
+                        "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Gets a data connector.",
+                "operationId": "DataConnectors_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnectorId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnector"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates an Office365 data connector.": {
+                        "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Creates or updates the data connector.",
+                "operationId": "DataConnectors_Create",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnectorId"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnector"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnector"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/DataConnector"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete an Office365 data connector.": {
+                        "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
+                    }
+                },
+                "tags": [
+                    "Data Connectors"
+                ],
+                "description": "Delete the data connector.",
+                "operationId": "DataConnectors_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/DataConnectorId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
                 }
             }
         }
