@@ -1,0 +1,41 @@
+definitions:
+  Description: |- 
+    **Search Geofence Get API**
+    
+    **Applies to:** S1 Pricing tier.
+
+    The Geofence Get API allows you to retrieve the proximity of a coordinate to a 
+    geofence that has been uploaded to the Data service. You can use the 
+    [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/upload) to upload 
+    a geofence or set of fences. See [Geofencing GeoJSON data](https://docs.microsoft.com/en-us/azure/azure-maps/geofence-geojson) 
+    for more details on the geofence data format. To query the proximity of a coordinate, you supply the location of the object you are tracking as well
+    as the ID for the fence or set of fences, and the response will contain information about
+    the distance from the outer edge of the geofence. A negative value signifies that the 
+    coordinate is inside of the fence while a positive value means that it is outside of the
+    fence.<br><br>This API can be used for a variety of scenarios that include things like asset 
+    tracking, fleet management, or setting up alerts for moving objects.
+
+    The API supports [integration with Event Grid](https://docs.microsoft.com/azure/azure-maps/azure-maps-event-grid-integration). The isAsync parameter is used to enable integration with Event Grid (disabled by default).
+    To test this API, you can upload the sample data from Post Geofence API examples(Request Body) via Data Upload API and replace the [udid] from the sample request below with the udid returned by Data Upload API.
+    
+    
+    ### Geofencing InnerError code
+
+    In geofencing response error contract, `innererror` is  an object containing service specific information about the error. `code` is a property in `innererror` which can map to a specific geofencing error type. The table belows shows the code mapping between all the known client error type to the corresponding geofencing error `message`.
+
+    innererror.code | error.message
+    ---------------------------- | -------------------------------------- 
+    NullDeviceId  | Device Id should not be null.
+    NullUdid	  | Udid should not be null.
+    UdidWrongFormat| Udid should be acquired from user data ingestion API.
+    InvalidUserTime| Usertime is invalid.
+    InvalidSearchBuffer| Searchbuffer is invalid.
+    InvalidSearchRange| The value range of searchbuffer should be from 0 to 500 meters.
+    InvalidLatLon| Lat and/or lon parameters are invalid.
+    InvalidIsAsyncValue| The IsAsync parameter is invalid.
+    InvalidModeValue| The mode parameter invalid.
+    InvalidJson| Geofencing data is not a valid json file.
+    NotSupportedGeoJson| Geofencing data can't be read as a Feature or FeatureCollections.
+    InvalidGeoJson| Geofencing data is invalid.
+    NoUserDataWithAccountOrSubscription| Can't find user geofencing data with provided account-id and/or subscription-id.
+    NoUserDataWithUdid|	Can't find user geofencing data with provided udId.

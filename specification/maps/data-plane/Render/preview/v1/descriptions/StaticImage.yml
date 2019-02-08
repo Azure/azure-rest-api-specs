@@ -170,12 +170,12 @@ definitions:
     To render a circle with radius 100 meters and center point at latitude 45°N and longitude 122°W using the default style, add the
     querystring parameter 
 
-    `path=r100||-122 45` 
+    `path=ra100||-122 45` 
 
     Note that the longitude comes before the latitude.
     After URL encoding this will look like
 
-    `path=r100%7C%7C45+-122`
+    `path=ra100%7C%7C45+-122`
 
     All of the examples here show the path parameter without URL encoding, for clarity.
 
@@ -186,6 +186,8 @@ definitions:
     To render a polygon, last location must be equal to the start location. For example, use
 
     `path=||-122 45|-119.5 43.2|-121.67 47.12|-122 45`
+
+    Longitude and latitude values for locations of lines and polygons can be in the range from -360 to 360 to allow for rendering of geometries crossing the anti-meridian.
 
     ### Style Modifiers
 
@@ -198,6 +200,10 @@ definitions:
     a deep pink color which you would specify as #FF1493 in CSS, use
     
     `path=lcFF1493||-122 45|-119.5 43.2`
+
+    Multiple style modifiers may be combined together to create a more complex visual style.
+
+    `lc0000FF|lw3|la0.60|fa0.50||-122.2 47.6|-122.2 47.7|-122.3 47.7|-122.3 47.6|-122.2 47.6`
 
     ### Getting Path locations from Azure Maps Data Storage
 

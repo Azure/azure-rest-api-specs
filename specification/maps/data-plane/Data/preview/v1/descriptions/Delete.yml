@@ -1,0 +1,21 @@
+definitions:
+  Description: |-
+    **Data Delete API**
+
+    **Applies to:** S1 pricing tier.
+    <br>
+
+    This API allows the caller to delete a previously uploaded data content.<br>    
+    You can use this API in a scenario like removing geofences previously uploaded using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). You can also use this API to delete old/unused uploaded content and create space for new content.
+
+    
+    ### Submit Delete Request
+
+    To delete your content you will issue a `DELETE` request where the path will contain the `udid` of the data to delete.<br>    
+    For example, to delete a collection of geofences previously uploaded using the Upload API, set the `udid` parameter in the path to the `udid` of the data received previously in the upload API response. 
+   
+    
+    ### Delete Data Response
+
+    The Data Delete API returns a HTTP `204 No Content` response with an empty body, if the data resource was deleted successfully.<br>    
+    A HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.    
