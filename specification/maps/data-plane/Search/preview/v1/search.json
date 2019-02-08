@@ -15,20 +15,25 @@
     "application/xml"
   ],
   "securityDefinitions": {
-    "apiKeyHeader": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
     },
     "apiKeyQuery": {
       "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
       "name": "subscription-key",
       "in": "query"
     }
   },
   "security": [
     {
-      "apiKeyHeader": []
+      "azure_auth": []
     },
     {
       "apiKeyQuery": []
@@ -39,7 +44,7 @@
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
       "schema": {
         "type": "object",
-        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry.      "
+        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry."
       },
       "headers": {
         "Location": {
@@ -55,9 +60,15 @@
       }
     },
     "401": {
-      "description": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.",
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
         "$ref": "#/definitions/ErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
       }
     },
     "403": {
@@ -80,12 +91,20 @@
     }
   },
   "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
     "SubscriptionKey": {
       "name": "subscription-key",
-      "description": "Azure Maps subscription key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Refer to the subscription-key security definition.",
       "type": "string",
       "in": "query",
-      "required": true,
+      "required": false,
       "x-ms-parameter-location": "client"
     },
     "ApiVersion": {
@@ -324,10 +343,10 @@
       "type": "number",
       "x-ms-parameter-location": "method"
     },
-    "FuzzyQuery": {
+    "PoiQuery": {
       "name": "query",
       "in": "query",
-      "description": "The applicable query string (e.g., \"burger joints\", \"pizza\"). Can _also_ be specified as a comma separated string composed by latitude followed by longitude (e.g., \"47.641268, -122.125679\"). Must be properly URL encoded.",
+      "description": "The POI name to search for (e.g., \"statue of liberty\", \"starbucks\", \"pizza\"). Must be properly URL encoded.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -337,14 +356,17 @@
     "/search/polygon/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Get Polygon**\n\n**Applies to**: S1 pricing tier. Access from S0 pricing tier will be deprecated after February 4th' 2019.\n\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry  ID is returned in the dataSources object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
-        "operationId": "Search_GetSearchPolygonPreview",
+        "description": "**Get Polygon**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry  ID is returned in the dataSources object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
+        "operationId": "Search_GetSearchPolygon",
         "x-ms-examples": {
           "Get the Geometry using the geometry id returned by the previous Search": {
             "$ref": "./examples/GetSearchPolygon.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -399,6 +421,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -508,7 +533,7 @@
     "/search/poi/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Get POI by Name**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nIf your search use case only requires POI results, you may use the POI endpoint for searching. This endpoint will only return POI results.",
+        "description": "**Get POI by Name**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Search allows you to request POI results by name.  Search supports additional query parameters such as language and filtering results by area of interest driven by country or bounding box.  Endpoint will return only POI results matching the query string. Response includes POI details such as address, coordinate location and category.",
         "operationId": "Search_GetSearchPOI",
         "x-ms-examples": {
           "Search for juice bars within 5 miles of Seattle Downtown and limit the response to 5 results": {
@@ -516,6 +541,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -611,6 +639,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/SubscriptionKey"
           },
           {
@@ -683,7 +714,7 @@
     "/search/poi/category/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Get POI by Category**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nIf your search use case only requires POI results filtered by category, you may use the category endpoint. This endpoint will only return POI results which are categorized as specified.<br><br>List of available categories can be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/search-categories).",
+        "description": "**Get POI by Category**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nPoints of Interest (POI) Category Search allows you to request POI results from given category. Search allows to query POIs from one category at a time.  Endpoint will only return POI results which are categorized as specified.  Response includes POI details such as address, coordinate location and category.<br><br>List of available categories can be found [here](https://docs.microsoft.com/en-us/azure/azure-maps/search-categories).",
         "operationId": "Search_GetSearchPOICategory",
         "x-ms-examples": {
           "Search for atm's within 2 miles of Times Square NY and return the top 3 results": {
@@ -691,6 +722,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -775,6 +809,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -868,6 +905,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -985,6 +1025,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/SubscriptionKey"
           },
           {
@@ -1048,6 +1091,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -1194,13 +1240,16 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/SubscriptionKey"
           },
           {
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/FuzzyQuery"
+            "$ref": "#/parameters/PoiQuery"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -1264,13 +1313,16 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/SubscriptionKey"
           },
           {
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/FuzzyQuery"
+            "$ref": "#/parameters/PoiQuery"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -1330,7 +1382,7 @@
     "/search/fuzzy/batch/{format}": {
       "post": {
         "x-publish": true,
-        "description": "## Search Fuzzy Batch API\n\n**Applies to**: S1 pricing tier. Access from S0 pricing tier will be deprecated after February 4th' 2019.\n\nThe Search Fuzzy Batch API allows the caller to batch up to 10,000 [Search Fuzzy API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search fuzzy_ queries you will use a `POST` request where the request body will contain the `queries` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search fuzzy_ queries:\n<br>\n```json\n{\n    \"queries\": [\n        \"?query=atm&lat=47.639769&lon=-122.128362&radius=5000&limit=5\",\n        \"?query=Statue Of Liberty&limit=2\",\n        \"?query=Starbucks&lat=47.639769&lon=-122.128362&radius=5000\",\n        \"?query=Space Needle\",\n        \"?query=pizza&limit=10\"\n    ]\n}\n```    \n<br> A _search fuzzy_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search fuzzy_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy#uri-parameters). The string values in the _search fuzzy_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.     \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.    \n<br>\nPlease note that the Search Fuzzy Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Fuzzy Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}    \n```\n<br>     Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchFuzzyResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy#searchfuzzyresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n\n<br>     Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"query\": \"atm\"\n            },\n            \"results\": [\n                {\n                    \"type\": \"POI\",\n                    \"poi\": {\n                        \"name\": \"ATM at Wells Fargo\"\n                    },\n                    \"address\": {\n                        \"country\": \"United States Of America\",\n                        \"freeformAddress\": \"3240 157th Ave NE, Redmond, WA 98052\"\n                    }\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"query\": \"statue of liberty\"\n            },\n            \"results\": [\n                {\n                    \"type\": \"POI\",\n                    \"poi\": {\n                        \"name\": \"Statue of Liberty\"\n                    },\n                    \"address\": {\n                        \"country\": \"United States Of America\",\n                        \"freeformAddress\": \"New York, NY 10004\"\n                    }\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
+        "description": "**Search Fuzzy Batch API**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Search Fuzzy Batch API allows the caller to batch up to 10,000 [Search Fuzzy API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search fuzzy_ queries you will use a `POST` request where the request body will contain the `queries` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search fuzzy_ queries:\n<br>\n```json\n{\n    \"queries\": [\n        \"?query=atm&lat=47.639769&lon=-122.128362&radius=5000&limit=5\",\n        \"?query=Statue Of Liberty&limit=2\",\n        \"?query=Starbucks&lat=47.639769&lon=-122.128362&radius=5000\",\n        \"?query=Space Needle\",\n        \"?query=pizza&limit=10\"\n    ]\n}\n```    \n<br> A _search fuzzy_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search fuzzy_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy#uri-parameters). The string values in the _search fuzzy_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.     \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.    \n<br>\nPlease note that the Search Fuzzy Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Fuzzy Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}    \n```\n<br>     Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchFuzzyResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchfuzzy#searchfuzzyresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n\n<br>     Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"query\": \"atm\"\n            },\n            \"results\": [\n                {\n                    \"type\": \"POI\",\n                    \"poi\": {\n                        \"name\": \"ATM at Wells Fargo\"\n                    },\n                    \"address\": {\n                        \"country\": \"United States Of America\",\n                        \"freeformAddress\": \"3240 157th Ave NE, Redmond, WA 98052\"\n                    }\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"query\": \"statue of liberty\"\n            },\n            \"results\": [\n                {\n                    \"type\": \"POI\",\n                    \"poi\": {\n                        \"name\": \"Statue of Liberty\"\n                    },\n                    \"address\": {\n                        \"country\": \"United States Of America\",\n                        \"freeformAddress\": \"New York, NY 10004\"\n                    }\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
         "operationId": "Search_PostSearchFuzzyBatchPreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -1342,6 +1394,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -1392,7 +1447,7 @@
     "/search/address/batch/{format}": {
       "post": {
         "x-publish": true,
-        "description": "\n## Search Address Batch API\n\n**Applies to**: S1 pricing tier. Access from S0 pricing tier will be deprecated after February 4th' 2019.\n\nThe Search Address Batch API allows the caller to batch up to 10,000 [Search Address API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search address_ queries you will use a `POST` request where the request body will contain the `queries` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search address_ queries:  \n<br>\n```json\n{\n    \"queries\": [\n        \"?query=400 Broad St, Seattle, WA 98109&limit=3\",\n        \"?query=One, Microsoft Way, Redmond, WA 98052&limit=3\",\n        \"?query=350 5th Ave, New York, NY 10118&limit=1\",\n        \"?query=Pike Pl, Seattle, WA 98101&lat=47.610970&lon=-122.342469&radius=1000\",\n        \"?query=Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France&limit=1\"\n    ]\n}\n```\n<br> A _search address_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search address_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress#uri-parameters). The string values in the _search address_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.    \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.   \n<br>\nPlease note that the Search Address Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Address Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n<br> Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchAddressResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress#searchaddressresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n  \n<br> Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"query\": \"one microsoft way redmond wa 98052\"\n            },\n            \"results\": [\n                {\n                    \"position\": {\n                        \"lat\": 47.63989,\n                        \"lon\": -122.12509\n                    }\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"query\": \"pike pl seattle wa 98101\"\n            },\n            \"results\": [\n                {\n                    \"position\": {\n                        \"lat\": 47.60963,\n                        \"lon\": -122.34215\n                    }\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
+        "description": "**Search Address Batch API**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Search Address Batch API allows the caller to batch up to 10,000 [Search Address API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search address_ queries you will use a `POST` request where the request body will contain the `queries` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search address_ queries:  \n<br>\n```json\n{\n    \"queries\": [\n        \"?query=400 Broad St, Seattle, WA 98109&limit=3\",\n        \"?query=One, Microsoft Way, Redmond, WA 98052&limit=3\",\n        \"?query=350 5th Ave, New York, NY 10118&limit=1\",\n        \"?query=Pike Pl, Seattle, WA 98101&lat=47.610970&lon=-122.342469&radius=1000\",\n        \"?query=Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France&limit=1\"\n    ]\n}\n```\n<br> A _search address_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search address_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress#uri-parameters). The string values in the _search address_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.    \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.   \n<br>\nPlease note that the Search Address Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Address Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n<br> Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchAddressResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddress#searchaddressresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n  \n<br> Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"query\": \"one microsoft way redmond wa 98052\"\n            },\n            \"results\": [\n                {\n                    \"position\": {\n                        \"lat\": 47.63989,\n                        \"lon\": -122.12509\n                    }\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"query\": \"pike pl seattle wa 98101\"\n            },\n            \"results\": [\n                {\n                    \"position\": {\n                        \"lat\": 47.60963,\n                        \"lon\": -122.34215\n                    }\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
         "operationId": "Search_PostSearchAddressBatchPreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -1404,6 +1459,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -1454,7 +1512,7 @@
     "/search/address/reverse/batch/{format}": {
       "post": {
         "x-publish": true,
-        "description": "## Search Address Reverse Batch API\n\n**Applies to**: S1 pricing tier. Access from S0 pricing tier will be deprecated after February 4th' 2019.\n\nThe Search Address Reverse Batch API allows the caller to batch up to 10,000 [Search Address Reverse API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search address reverse_ queries you will use a `POST` request where the request body will contain the `queries` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search address reverse_ queries:\n<br>\n```json\n{\n    \"queries\": [\n        \"?query=48.858561,2.294911\",\n        \"?query=47.639765,-122.127896&radius=5000&limit=2\",\n        \"?query=47.621028,-122.348170\",\n        \"?query=43.722990,10.396695\",\n        \"?query=40.750958,-73.982336\"\n    ]\n}\n```\n<br> A _search address reverse_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search address reverse_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse#uri-parameters). The string values in the _search address reverse_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.  \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.   \n<br>\nPlease note that the Search Address Reverse Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Address Reverse Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:   \n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n<br> Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchAddressReverseResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse#searchaddressreverseresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n  \n<br> Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"queryTime\": 11\n            },\n            \"addresses\": [\n                {\n                    \"address\": {\n                        \"country\": \"France\",\n                        \"freeformAddress\": \"Avenue Anatole France, 75007 Paris\"\n                    },\n                    \"position\": \"48.858490,2.294820\"\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"queryTime\": 1\n            },\n            \"addresses\": [\n                {\n                    \"address\": {\n                        \"country\": \"United States of America\",\n                        \"freeformAddress\": \"157th Pl NE, Redmond WA 98052\"\n                    },\n                    \"position\": \"47.640470,-122.129430\"\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
+        "description": "**Search Address Reverse Batch API**\n\n\n**Applies to**: S1 pricing tier.\n\n\nThe Search Address Reverse Batch API allows the caller to batch up to 10,000 [Search Address Reverse API](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _search address reverse_ queries you will use a `POST` request where the request body will contain the `queries` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 5 _search address reverse_ queries:\n<br>\n```json\n{\n    \"queries\": [\n        \"?query=48.858561,2.294911\",\n        \"?query=47.639765,-122.127896&radius=5000&limit=2\",\n        \"?query=47.621028,-122.348170\",\n        \"?query=43.722990,10.396695\",\n        \"?query=40.750958,-73.982336\"\n    ]\n}\n```\n<br> A _search address reverse_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _search address reverse_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse#uri-parameters). The string values in the _search address reverse_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.  \n<br>\nThe maximum number of queries that can be specified in the batch is **10,000** and the batch should contain at least **1** query.   \n<br>\nPlease note that the Search Address Reverse Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Search Address Reverse Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n<br>\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:   \n<br>\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n<br> Here's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n<br>\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchResults` array which contains a response for each and every query in the batch request. Also, the `batchResults` will contain the results in the exact same order the original queries were sent in the batch request. Each entry in `batchResults` is of one of the following types:\n\n  - [`SearchAddressReverseResponse`](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchaddressreverse#searchaddressreverseresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The result will contain a `status code` and a `message` in this case.\n  \n<br> Here's a sample Batch Response with 2 _successful_ and 1 _failed_ result:\n<br>\n```json\n{\n    \"summary\": {\n        \"successfulRequests\": 2,\n        \"totalRequests\": 3\n    },\n    \"batchResults\": [\n        {\n            \"summary\": {\n                \"queryTime\": 11\n            },\n            \"addresses\": [\n                {\n                    \"address\": {\n                        \"country\": \"France\",\n                        \"freeformAddress\": \"Avenue Anatole France, 75007 Paris\"\n                    },\n                    \"position\": \"48.858490,2.294820\"\n                }\n            ]\n        },\n        {\n            \"summary\": {\n                \"queryTime\": 1\n            },\n            \"addresses\": [\n                {\n                    \"address\": {\n                        \"country\": \"United States of America\",\n                        \"freeformAddress\": \"157th Pl NE, Redmond WA 98052\"\n                    },\n                    \"position\": \"47.640470,-122.129430\"\n                }\n            ]\n        },\n        {\n            \"statusCode\": 400,\n            \"message\": \"Bad Request\"\n        }\n    ]\n}\n```\n<br>\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `400 Bad Request` response.\n<br>",
         "operationId": "Search_PostSearchAddressReverseBatchPreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -1466,6 +1524,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
@@ -2656,7 +2717,7 @@
           "readOnly": true
         },
         "categories": {
-          "description": "Categories array",
+          "description": "__[Deprecated]__ Use classifications instead. Categories array",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -2890,7 +2951,7 @@
       }
     },
     "DataSources": {
-      "description": "Optional section. Reference ids for use with the [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygonpreview) API.",
+      "description": "Optional section. Reference ids for use with the [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API.",
       "type": "object",
       "properties": {
         "geometry": {
@@ -2903,7 +2964,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Pass this as geometryId to the [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygonpreview) API to fetch geometry information for this result.",
+          "description": "Pass this as geometryId to the [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API to fetch geometry information for this result.",
           "type": "string",
           "readOnly": true
         }
