@@ -377,7 +377,12 @@
           "type": "boolean"
         },
         "proxyOverride": {
-          "description": "Proxy override of the managed instance.",
+          "description": "Connection type used for connecting to the instance.",
+          "enum": ["Proxy", "Redirect", "Default"],
+          "x-ms-enum":{
+            "name": "ManagedInstanceProxyOverride",
+            "modelAsString": true
+		      },
           "type": "string"
         }
       }
