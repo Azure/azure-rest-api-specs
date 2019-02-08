@@ -124,9 +124,30 @@ directive:
   - from: source-file-csharp
     where: $
     transform: >-
-      return $.replace( /DocumentsOperations/g, "DocumentsProxyOperations" ).
+      return $.
+        replace( /DocumentsOperations/g, "DocumentsProxyOperations" ).
         replace( /public (partial interface IDocumentsProxyOperations)/g, "internal $1" ).
-        replace( /public virtual IDocumentsProxyOperations Documents ({ get;)/g, "internal IDocumentsProxyOperations DocumentsProxy $1" ).
+        replace( /public virtual (IDocumentsProxyOperations) Documents ({ get;)/g, "internal $1 DocumentsProxy $2" ).
         replace( /Documents = new DocumentsProxyOperations\(this\);/g, "DocumentsProxy = new DocumentsProxyOperations\(this\);" ).
         replace( /(Gets the) IDocumentsProxyOperations(.\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)IDocumentsProxyOperations (Documents { get; })/g, "$1 IDocumentsOperations$2IDocumentsOperations $3" )
+####
+  # Adds extra JsonSerializerSettings parameters to all operation methods. This enables the SDK to delegate serialization/de-serialization to the custom serializer on a per-call basis.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(Async\(.*, CancellationToken cancellationToken = default\(CancellationToken\))/g, "$1, Newtonsoft.Json.JsonSerializerSettings requestSerializerSettings = null, Newtonsoft.Json.JsonSerializerSettings responseDeserializerSettings = null" ).
+        replace( /(DeserializeObject<.+>\(.+), Client\.DeserializationSettings/g, "$1, responseDeserializerSettings ?? Client.DeserializationSettings" ).
+        replace( /(SerializeObject\(.+), Client\.SerializationSettings/g , "$1, requestSerializerSettings ?? Client.SerializationSettings" )
+####
+  # Make GetWithHttpMessagesAsync generic so we can tell the deserializer what type to instantiate.
+  # ASSUMPTION: Only GetWithHttpMessagesAsync makes a call to DeserializeObject<object>(), and only when it's deserializing the non-error response.
+  # Ideally we'd be able to more finely target these transform rules.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(Task<AzureOperationResponse)<object>(> GetWithHttpMessagesAsync)/g, "$1<T>$2<T>" ).
+        replace( /(DeserializeObject)<object>/g, "$1<T>" ).
+        replace( /(var _result = new AzureOperationResponse)<object>/g, "$1<T>" )
 ```
