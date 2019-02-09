@@ -1961,7 +1961,7 @@
           "OAuth2Permissions_get"
         ],
         "operationId": "OAuth2_Get",
-        "description": "Queries OAuth2 permissions for the relevant SP ObjectId of an app.",
+        "description": "Queries OAuth2 permissions grants for the relevant SP ObjectId of an app.",
         "produces": [ "application/json" ],
         "parameters": [
           {
@@ -1986,6 +1986,10 @@
               "$ref": "#/definitions/PermissionsListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "PermissionsGrants_ListNext"
         }
       },
       "post": {
