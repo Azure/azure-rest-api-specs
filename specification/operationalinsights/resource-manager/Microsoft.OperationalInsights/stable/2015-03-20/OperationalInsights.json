@@ -681,7 +681,7 @@
           "Workspaces"
         ],
         "x-ms-examples": {
-          "SharedKeysList": { "$ref": "./examples/WorkspacesRegenerateSharedKeys.json" }
+          "RegenerateSharedKeys": { "$ref": "./examples/WorkspacesRegenerateSharedKeys.json" }
           },
         "operationId": "Workspaces_RegenerateSharedKeys",
         "description": "Regenerates the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.",
@@ -705,6 +705,40 @@
             "schema": {
               "$ref": "#/definitions/SharedKeys"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/gateways/{gatewayId}": {
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "x-ms-examples": {
+          "DeleteGateways": { "$ref": "./examples/WorkspacesDeleteGateways.json" }
+          },
+        "operationId": "Workspaces_DeleteGateways",
+        "description": "Delete a Log Analytics gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The specified gateway was deleted successfully."
           }
         }
       }
@@ -1487,6 +1521,14 @@
       "type": "string",
       "description": "In a purge status request, this is the Id of the operation the status of which is returned.",
       "x-ms-parameter-location": "client"
+    },
+    "GatewayIdParameter": {
+      "name": "gatewayId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Log Analytics gateway Id.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
