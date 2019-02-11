@@ -258,7 +258,11 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions": {
             "get": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Get all actions of alert rule.": {
+                        "$ref": "./examples/actions/GetAllActionsByAlertRule.json"
+                    }
+                },
                 "tags": [
                     "Actions"
                 ],
@@ -305,7 +309,11 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}": {
             "get": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Get an action of alert rule.": {
+                        "$ref": "./examples/actions/GetActionOfAlertRuleById.json"
+                    }
+                },
                 "tags": [
                     "Actions"
                 ],
@@ -350,7 +358,11 @@
                 }
             },
             "put": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Creates or updates an action of alert rule.": {
+                        "$ref": "./examples/actions/CreateActionOfAlertRule.json"
+                    }
+                },
                 "tags": [
                     "Actions"
                 ],
@@ -404,7 +416,11 @@
                 }
             },
             "delete": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Delete an action of alert rule.": {
+                        "$ref": "./examples/actions/DeleteActionOfAlertRule.json"
+                    }
+                },
                 "tags": [
                     "Actions"
                 ],
@@ -451,7 +467,11 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/actions": {
             "get": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Get all actions.": {
+                        "$ref": "./examples/actions/GetAllActions.json"
+                    }
+                },
                 "tags": [
                     "Actions"
                 ],
@@ -1200,7 +1220,11 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents": {
             "get": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Get all office consents.": {
+                        "$ref": "./examples/officeConsents/GetOfficeConsents.json"
+                    }
+                },
                 "tags": [
                     "Office Consents"
                 ],
@@ -1244,7 +1268,11 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents/{consentId}": {
             "get": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Get an office consent.": {
+                        "$ref": "./examples/officeConsents/GetOfficeConsentsById.json"
+                    }
+                },
                 "tags": [
                     "Office Consents"
                 ],
@@ -1286,7 +1314,11 @@
                 }
             },
             "delete": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Delete an office consent.": {
+                        "$ref": "./examples/officeConsents/DeleteOfficeConsents.json"
+                    }
+                },
                 "tags": [
                     "Office Consents"
                 ],
@@ -1330,7 +1362,14 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
             "get": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Get UEBA settings.": {
+                        "$ref": "./examples/settings/GetUebaSettings.json"
+                    },
+                    "Get fusion settings.": {
+                        "$ref": "./examples/settings/GetFusionSettings.json"
+                    }
+                },
                 "tags": [
                     "Settings"
                 ],
@@ -1372,7 +1411,11 @@
                 }
             },
             "put": {
-                "x-ms-examples": {},
+                "x-ms-examples": {
+                    "Update UEBA settings.": {
+                        "$ref": "./examples/settings/UpdateUebaSettings.json"
+                    }
+                },
                 "tags": [
                     "Settings"
                 ],
@@ -1591,14 +1634,32 @@
                 "severity": {
                     "type": "string",
                     "enum": [
-                        "Low",
-                        "Medium",
                         "High",
+                        "Medium",
+                        "Low",
                         "Informational"
                     ],
                     "x-ms-enum": {
-                        "name": "Severity",
-                        "modelAsString": false
+                        "name": "AlertSeverity",
+                        "modelAsString": false,
+                        "values": [
+                            {
+                                "value": "High",
+                                "description": "High severity"
+                            },
+                            {
+                                "value": "Medium",
+                                "description": "Medium severity"
+                            },
+                            {
+                                "value": "Low",
+                                "description": "Low severity"
+                            },
+                            {
+                                "value": "Informational",
+                                "description": "Informational severity"
+                            }
+                        ]
                     },
                     "description": "The severity for alerts created by this alert rule."
                 },
@@ -1816,7 +1877,7 @@
                         "Informational"
                     ],
                     "x-ms-enum": {
-                        "name": "severity",
+                        "name": "CaseSeverity",
                         "modelAsString": true,
                         "values": [
                             {
@@ -1931,7 +1992,8 @@
         "Bookmark": {
             "type": "object",
             "description": "Represents a bookmark in Azure Security Insights.",
-            "allOf": [{
+            "allOf": [
+                {
                     "$ref": "#/definitions/Resource"
                 }
             ],
@@ -1940,14 +2002,14 @@
                     "type": "string",
                     "description": "Etag of the bookmark."
                 },
-				"properties": {
+                "properties": {
                     "x-ms-client-flatten": true,
                     "description": "Bookmark data",
                     "$ref": "#/definitions/BookmarkProperties"
                 }
             }
         },
-		"BookmarkProperties": {
+        "BookmarkProperties": {
             "type": "object",
             "description": "Describes bookmark properties",
             "properties": {
@@ -1957,12 +2019,12 @@
                 },
                 "lastUpdatedTimeUtc": {
                     "type": "string",
-					"format": "date-time",
+                    "format": "date-time",
                     "description": "The last time the bookmark was updated"
                 },
-				"createdTimeUtc": {
+                "createdTimeUtc": {
                     "type": "string",
-					"format": "date-time",
+                    "format": "date-time",
                     "description": "The time the bookmark was created"
                 },
                 "createdBy": {
@@ -1981,8 +2043,8 @@
                         "name": {
                             "type": "string",
                             "description": "The name of the user."
-                        }                        
-                    }   
+                        }
+                    }
                 },
                 "updatedBy": {
                     "type": "object",
@@ -2000,15 +2062,15 @@
                         "name": {
                             "type": "string",
                             "description": "The name of the user."
-                        }                        
+                        }
                     }
                 },
                 "notes": {
                     "type": "string",
                     "description": "The notes of the bookmark"
-                },                
+                },
                 "tags": {
-					"type": "array",
+                    "type": "array",
                     "items": {
                         "$ref": "#/definitions/Tag"
                     },
