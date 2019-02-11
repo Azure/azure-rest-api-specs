@@ -34,6 +34,71 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VirtualMachineImages/imageTemplates": {
+      "get": {
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "operationId": "VirtualMachineImageTemplate_List",
+        "description": "Gets information about the VM image templates associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates": {
+      "get": {
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "operationId": "VirtualMachineImageTemplate_ListByResourceGroup",
+        "description": "Gets information about the VM image templates associated with the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}": {
       "put": {
         "tags": [
@@ -65,10 +130,22 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplate"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/ImageTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -80,6 +157,50 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via":"azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "operationId": "VirtualMachineImageTemplate_Patch",
+        "description": "Update the tags for this Virtual Machine Image Template",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageTemplateUpdateParameters"
+            },
+            "description": "Additional parameters for Image Template update."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageTemplateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
         }
       },
       "get": {
@@ -108,6 +229,12 @@
             "schema": {
               "$ref": "#/definitions/ImageTemplate"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       },
@@ -132,11 +259,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
           "202": {
-            "description": "Accepted"
+            "description": "The operation will be completed asynchronously."
           },
           "204": {
-            "description": "No content"
+            "description": "NoContent -- VM image template does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -167,48 +303,22 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "The operation was successful."
+          },
           "202": {
-            "description": "Accepted"
+            "description": "The operation will be completed asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via":"azure-async-operation"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operationId}": {
-      "get": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
-        "operationId": "VirtualMachineImageTemplate_GetOperationResult",
-        "description": "Get status of a long running operation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            }
-          }
         }
       }
     },
@@ -241,6 +351,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RunOutputCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
             }
           }
         }
@@ -276,12 +392,59 @@
             "schema": {
               "$ref": "#/definitions/RunOutput"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
+        }
+      }
+    },
+    "/providers/Microsoft.VirtualMachineImages/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the Microsoft.VirtualMachineImages provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
+    "ImageTemplateListResult" : {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTemplate"
+          }
+        }
+      }
+    },
     "ImageTemplateSource": {
       "discriminator": "type",
       "properties": {
@@ -589,6 +752,18 @@
         }
       ]
     },
+    "ImageTemplateUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the image template."
+        }
+      },
+      "description": "Parameters for updating an image template."
+    },
     "RunOutput": {
       "properties": {
         "properties": {
@@ -611,38 +786,6 @@
           }
         }
       }
-    },
-    "OperationStatusResponse": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation ID"
-        },
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation status"
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the operation"
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the operation"
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error"
-        }
-      },
-      "description": "Operation status response"
     },
     "Resource": {
       "description": "The Resource model definition.",
@@ -678,6 +821,63 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "Operation": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "title": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationListResult": {
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
     },
     "ApiErrorBase": {
       "properties": {
