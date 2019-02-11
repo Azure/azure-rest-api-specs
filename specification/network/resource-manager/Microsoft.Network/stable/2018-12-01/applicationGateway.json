@@ -452,123 +452,6 @@
         "x-ms-long-running-operation": true
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables": {
-      "get": {
-        "tags": [
-          "ApplicationGateways"
-        ],
-        "operationId": "ApplicationGateways_ListAvailableServerVariables",
-        "x-ms-examples": {
-          "Get Available Server Variables": {
-            "$ref": "./examples/ApplicationGatewayAvailableServerVariablesGet.json"
-          }
-        },
-        "description": "Lists all available server variables.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The operation returns a list of all available server variables.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGatewayAvailableServerVariablesResult"
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-  },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableRequestHeaders": {
-     "get": {
-        "tags": [
-          "ApplicationGateways"
-        ],
-        "operationId": "ApplicationGateways_ListAvailableRequestHeaders",
-        "x-ms-examples": {
-          "Get Available Request Headers": {
-            "$ref": "./examples/ApplicationGatewayAvailableRequestHeadersGet.json"
-          }
-        },
-        "description": "Lists all available request headers.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The operation returns a list of all available request headers.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGatewayAvailableRequestHeadersResult"
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-       "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-  },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders": {
-      "get": {
-        "tags": [
-          "ApplicationGateways"
-        ],
-        "operationId": "ApplicationGateways_ListAvailableResponseHeaders",
-        "x-ms-examples": {
-          "Get Available Response Headers": {
-            "$ref": "./examples/ApplicationGatewayAvailableResponseHeadersGet.json"
-          }
-        },
-        "description": "Lists all available response headers.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The operation returns a list of all available response headers.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGatewayAvailableResponseHeadersResult"
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets": {
       "get": {
         "tags": [
@@ -1649,17 +1532,6 @@
           "type": "string",
           "description": "Name of the rewrite rule that is unique within an Application Gateway."
         },
-        "ruleSequence": {
-          "type": "integer",
-          "description": "Rule Sequence of the rewrite rule that determines the order of execution of a particular rule in a RewriteRuleSet."
-        },
-        "conditions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApplicationGatewayRewriteRuleCondition"
-          },
-          "description": "Conditions based on which the action set execution will be evaluated."
-        },
         "actionSet": {
           "type": "object",
           "$ref": "#/definitions/ApplicationGatewayRewriteRuleActionSet",
@@ -1667,27 +1539,6 @@
         }
       },
       "description": "Rewrite rule of an application gateway."
-    },
-    "ApplicationGatewayRewriteRuleCondition": {
-      "properties": {
-        "variable": {
-          "type": "string",
-          "description": "The condition parameter of the RewriteRuleCondition."
-        },
-        "pattern": {
-          "type": "string",
-          "description": "The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition"
-        },
-        "ignoreCase": {
-          "type": "boolean",
-          "description": "Setting this paramter to truth value with force the pattern to do a case in-sensitive comparison."
-        },
-        "negate": {
-          "type": "boolean",
-          "description": "Setting this value as truth will force to check the negation of the condition given by the user."
-        }
-      },
-      "description": "Set of conditions in the Rewrite Rule in Application Gateway."
     },
     "ApplicationGatewayRewriteRuleActionSet": {
       "properties": {
@@ -1925,6 +1776,10 @@
           "$ref": "#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration",
           "description": "Web application firewall configuration."
         },
+        "firewallPolicy": {
+          "$ref": "./webapplicationfirewall.json#/definitions/WebApplicationFirewallPolicy",
+          "description": "Web application firewall policy."
+        },
         "enableHttp2": {
           "type": "boolean",
           "description": "Whether HTTP2 is enabled on the application gateway resource."
@@ -2146,13 +2001,6 @@
           "minimum": 2,
           "exclusiveMinimum": false,
           "description": "Lower bound on number of Application Gateway instances"
-        },
-        "maxCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 2,
-          "exclusiveMinimum": false,
-          "description": "Upper bound on number of Application Gateway capacity"
         }
       },
       "required": [
@@ -2202,27 +2050,6 @@
         "ruleGroupName"
       ],
       "description": "Allows to disable rules within a rule group or an entire rule group."
-    },
-	  "ApplicationGatewayAvailableServerVariablesResult": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Response for ApplicationGatewayAvailableServerVariables API service call."
-    },
-	  "ApplicationGatewayAvailableRequestHeadersResult": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Response for ApplicationGatewayAvailableRequestHeaders API service call."
-    },
-	  "ApplicationGatewayAvailableResponseHeadersResult": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Response for ApplicationGatewayAvailableResponseHeaders API service call."
     },
     "ApplicationGatewayFirewallExclusion": {
       "properties": {
