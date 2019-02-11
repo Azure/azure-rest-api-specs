@@ -1863,8 +1863,9 @@
                     "description": "The title of the case"
                 },
                 "assignedTo": {
-                    "type": "string",
-                    "description": "The person the case is assigned to"
+                    "type": "object",
+                    "description": "Describes a user that the case is assigned to",
+                    "$ref": "#/definitions/UserInfo"
                 },
                 "severity": {
                     "type": "string",
@@ -2030,21 +2031,7 @@
                 "createdBy": {
                     "type": "object",
                     "description": "Describes a user that created the bookmark",
-                    "properties": {
-                        "objectId": {
-                            "type": "string",
-                            "format": "uuid",
-                            "description": "The object id of the user."
-                        },
-                        "email": {
-                            "type": "string",
-                            "description": "The email of the user."
-                        },
-                        "name": {
-                            "type": "string",
-                            "description": "The name of the user."
-                        }
-                    }
+                    "$ref": "#/definitions/UserInfo"
                 },
                 "updatedBy": {
                     "type": "object",
@@ -2084,6 +2071,25 @@
             "required": [
                 "displayName"
             ]
+        },
+        "UserInfo": {
+            "type": "object",
+            "description": "User information that made some action",
+            "properties": {
+                "objectId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The object id of the user."
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email of the user."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the user."
+                }
+            }
         },
         "Tag": {
             "description": "The name for alerts created by this alert rule.",
