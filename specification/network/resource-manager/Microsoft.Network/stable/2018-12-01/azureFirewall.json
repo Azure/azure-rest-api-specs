@@ -335,6 +335,10 @@
             "provisioningState":{  
                "description":"The provisioning state of the resource.",
                "$ref":"#/definitions/ProvisioningState"
+            },
+            "threatIntelMode":{
+               "description":"The operation mode for Threat Intelligence.",
+               "$ref":"#/definitions/AzureFirewallThreatIntelMode"
             }
          },
          "description":"Properties of the Azure Firewall."
@@ -373,6 +377,19 @@
             }
          },
          "description":"Response for ListAzureFirewalls API service call."
+      },
+      "AzureFirewallThreatIntelMode":{
+         "type":"string",
+         "description":"The operation mode for Threat Intel",
+         "enum":[
+            "Alert",
+            "Deny",
+            "Off"
+         ],
+         "x-ms-enum":{
+            "name":"AzureFirewallThreatIntelMode",
+            "modelAsString":true
+         }
       },
       "AzureFirewallApplicationRuleCollectionPropertiesFormat":{  
          "properties":{  
@@ -714,7 +731,8 @@
          "description":"The action type of a rule collection",
          "enum":[  
             "Allow",
-            "Deny"
+            "Deny",
+            "Alert"
          ],
          "x-ms-enum":{  
             "name":"AzureFirewallRCActionType",
