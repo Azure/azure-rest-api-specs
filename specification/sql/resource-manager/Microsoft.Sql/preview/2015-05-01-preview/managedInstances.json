@@ -371,6 +371,19 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "publicDataEndpointEnabled": {
+          "description": "Whether or not the public data endpoint is enabled.",
+          "type": "boolean"
+        },
+        "proxyOverride": {
+          "description": "Connection type used for connecting to the instance.",
+          "enum": ["Proxy", "Redirect", "Default"],
+          "x-ms-enum":{
+            "name": "ManagedInstanceProxyOverride",
+            "modelAsString": true
+		      },
+          "type": "string"
         }
       }
     },
