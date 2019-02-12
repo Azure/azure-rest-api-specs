@@ -34,16 +34,16 @@
     "/docs/$count": {
       "get": {
         "tags": [
-          "DocumentsProxy"
+          "Documents"
         ],
-        "operationId": "DocumentsProxy_Count",
+        "operationId": "Documents_Count",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Count-Documents"
+        },
         "x-ms-examples": {
           "SearchIndexCountDocuments": { "$ref": "./examples/SearchIndexCountDocuments.json" }
         },
         "description": "Queries the number of documents in the Azure Search index.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/rest/api/searchservice/Count-Documents"
-        },
         "parameters": [
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -64,14 +64,65 @@
         }
       }
     },
+    "/docs('{key}')": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_Get",        
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/lookup-document"
+        },
+        "x-ms-examples": {
+          "SearchIndexGetDocument": { "$ref": "./examples/SearchIndexGetDocument.json" }
+        },
+        "description": "Retrieves a document from the Azure Search index.",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "description": "The key of the document to retrieve.",
+            "type": "string"
+          },
+          {
+            "name":"$select",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document.",
+            "x-ms-client-name": "SelectedFields"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
     "/docs/autocomplete": {
       "get": {
         "tags": [
-          "Autocomplete"
+          "Documents"
         ],
-        "operationId": "DocumentsProxy_AutocompleteGet",
+        "operationId": "Documents_AutocompleteGet",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
+        },
         "x-ms-examples": {
-          "SearchIndexGetAutocomplete": { "$ref": "./examples/SearchIndexGetAutocomplete.json" }
+          "SearchIndexAutocompleteDocumentsGet": { "$ref": "./examples/SearchIndexAutocompleteDocumentsGet.json" }
         },
         "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",
         "parameters": [
@@ -147,7 +198,7 @@
             "in": "query",
             "type": "number",
             "format": "double",
-            "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by am autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
+            "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
             "x-ms-parameter-grouping": {
               "name": "AutocompleteParameters"
             }
@@ -188,11 +239,14 @@
       },
       "post": {
         "tags": [
-          "Autocomplete"
+          "Documents"
         ],
-        "operationId": "DocumentsProxy_AutocompletePost",
+        "operationId": "Documents_AutocompletePost",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
+        },
         "x-ms-examples": {
-          "SearchIndexPostAutocomplete": { "$ref": "./examples/SearchIndexPostAutocomplete.json" }
+          "SearchIndexAutocompleteDocumentsPost": { "$ref": "./examples/SearchIndexAutocompleteDocumentsPost.json" }
         },
         "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",
         "parameters": [
@@ -203,7 +257,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "AutocompleteRequest",
+            "name": "autocompleteRequest",
             "in": "body",
             "required": true,
             "schema": {
@@ -353,7 +407,7 @@
         "orderby": {
           "x-ms-client-name": "OrderBy",
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to the geo.distance() function. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses."
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses."
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
@@ -364,7 +418,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name:value. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation:-122.2,44.8\"(without the quotes)."
+          "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\"(without the quotes)."
         },
         "scoringProfile": {
           "type": "string",
@@ -375,7 +429,7 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Simple-query-syntax-in-Azure-Search"
           },
           "type": "string",
-          "description": "A full-text search query expression; Use null or \"*\" to match all documents."
+          "description": "A full-text search query expression; Use \"*\" or omit this parameter to match all documents."
         },
         "searchFields": {
           "type": "string",
@@ -434,7 +488,7 @@
         "orderby": {
           "x-ms-client-name": "OrderBy",
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to the geo.distance() function. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses."
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses."
         },
         "search": {
           "type": "string",
@@ -487,7 +541,7 @@
         "minimumCoverage": {
           "type": "number",
           "format": "double",
-          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by am autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
         },
         "searchFields": {
           "type": "string",

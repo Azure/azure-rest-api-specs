@@ -63,9 +63,12 @@ java:
 regenerate-manager: true
 generate-interface: true
 directive: 
-  rename-model: 
-    from: DataWarehouseUserActivities 
-    to: DataWarehouseUserActivity
+  - rename-model: 
+      from: DataWarehouseUserActivities 
+      to: DataWarehouseUserActivity
+  - rename-operation: 
+      from: SensitivityLabels_ListRecommendedByDatabase 
+      to: RecommendedSensitivityLabels_ListByDatabase
 ```
 
 ### Tag: package-pure-2017-10-preview and java
