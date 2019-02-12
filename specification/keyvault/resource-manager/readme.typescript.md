@@ -10,4 +10,5 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-keyvault"
   generate-metadata: true
   generate-readme-md: true
+  auto-publish: true
 ```
