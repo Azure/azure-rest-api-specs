@@ -9,5 +9,5 @@ typescript:
   package-name: "@azure/arm-keyvault"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-keyvault"
   generate-metadata: true
-  generate-readme-md: false
+  generate-readme-md: true
 ```
