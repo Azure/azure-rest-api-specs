@@ -131,6 +131,15 @@ input-file: stable/v2.0/TextAnalytics.json
 log-file: logs/log.txt
 ```
 
+### Release 2.1
+
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file: stable/v2.1/TextAnalytics.json
+log-file: logs/log.txt
+```
+
 ### Release 2.1-Preview
 
 These settings apply only when `--tag=release_2_1` is specified on the command line.

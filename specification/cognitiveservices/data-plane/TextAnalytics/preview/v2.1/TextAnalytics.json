@@ -342,11 +342,11 @@
     "EntitiesErrorRecord": {
       "type": "object",
       "properties": {
-        "id": {
+        "Id": {
           "description": "Input document unique identifier the error refers to.",
           "type": "string"
         },
-        "message": {
+        "Message": {
           "description": "Error message.",
           "type": "string"
         }
@@ -355,16 +355,30 @@
     "EntitiesErrorResponse": {
       "type": "object",
       "properties": {
-        "code": {
+        "Code": {
           "type": "string"
         },
-        "message": {
+        "Message": {
           "type": "string"
         },
-        "target": {
+        "Target": {
           "type": "string"
         },
-        "innerError": {
+        "InnerError": {
+          "$ref": "#/definitions/EntitiesInternalError"
+        }
+      }
+    },
+    "EntitiesInternalError": {
+      "type": "object",
+      "properties": {
+        "Code": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "InnerError": {
           "$ref": "#/definitions/InternalError"
         }
       }
