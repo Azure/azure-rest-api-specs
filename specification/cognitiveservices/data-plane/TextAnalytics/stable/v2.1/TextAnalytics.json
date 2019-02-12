@@ -35,11 +35,11 @@
         "/languages": {
             "post": {
               "tags": [
-                "Languages"
+                "Detect Language"
               ],
-                "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.",
-                "operationId": "56f30ceeeda5650db055a3c7",
-                "summary": "Detect Language",
+                "description": "Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.",
+                "operationId": "Detect Language",
+                "summary": "The API returns the detected language and a numeric score between 0 and 1.",
                 "parameters": [{
                     "name": "showStats",
                     "in": "query",
@@ -70,7 +70,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Detect Language request": {
-                    "$ref": "./examples//SuccessfulLanguagesRequest.json"
+                    "$ref": ".//examples//SuccessfulLanguagesRequest.json"
                     }
                 },
                 "deprecated": false,  
@@ -82,9 +82,9 @@
               "tags": [
                 "Entities"
               ],
-                "description": "The API returns a list of known entities and general named entities (\\\"Person\\\", \\\"Location\\\", \\\"Organization\\\" etc) in a given document. Known entities are returned with Wikipedia Id and Wikipedia link, and also Bing Id which can be used in Bing Entity Search API. General named entities are returned with entity types. If a general named entity is also a known entity, then all information regarding it (Wikipedia Id, Bing Id, entity type etc) will be returned. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a> for the list of supported Entity Types. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
-                "operationId": "5ac4251d5b4ccd1554da7634",
-                "summary": "Entities",
+                "description": "To get even more information on each recognized entity we recommend using the Bing Entity Search API by querying for the recognized entities names. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+                "operationId": "Entities",
+                "summary": "The API returns a list of recognized entities in a given document.",
                 "parameters": [{
                     "name": "showStats",
                     "in": "query",
@@ -115,7 +115,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Detect Language request": {
-                    "$ref": "./examples//SuccessfulEntitiesRequest.json"
+                    "$ref": ".//examples//SuccessfulEntitiesRequest.json"
                     }
                 },
                 "deprecated": false,
@@ -127,9 +127,9 @@
               "tags": [
                 "Key Phrases"
               ],
-                "description": "The API returns a list of strings denoting the key talking points in the input text. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-                "operationId": "56f30ceeeda5650db055a3c6",
-                "summary": "Key Phrases",
+                "description": "See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.",
+                "operationId": "Key Phrases",
+                "summary": "The API returns a list of strings denoting the key talking points in the input text.",
                 "parameters": [{
                     "name": "showStats",
                     "in": "query",
@@ -160,7 +160,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Detect Language request": {
-                    "$ref": "./examples//SuccessfulKeyPhrasesRequest.json"
+                    "$ref": ".//examples//SuccessfulKeyPhrasesRequest.json"
                     }
                 },
                 "deprecated": false,                
@@ -172,9 +172,9 @@
               "tags": [
                 "Sentiment"
               ],
-                "description": "The API returns a numeric score between 0 and 1. Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. A score of 0.5 indicates the lack of sentiment (e.g. a factoid statement). See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-                "operationId": "56f30ceeeda5650db055a3c9",
-                "summary": "Sentiment",
+                "description": "Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. A score of 0.5 indicates the lack of sentiment (e.g. a factoid statement). See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.",
+                "operationId": "Sentiment",
+                "summary": "The API returns a numeric score between 0 and 1.",
                 "parameters": [{
                     "name": "showStats",
                     "in": "query",
@@ -205,7 +205,7 @@
                 },
                 "x-ms-examples": {
                     "Successful Detect Language request": {
-                    "$ref": "./examples//SuccessfulSentimentRequest.json"
+                    "$ref": ".//examples//SuccessfulSentimentRequest.json"
                     }
                 },
                 "deprecated": false,
