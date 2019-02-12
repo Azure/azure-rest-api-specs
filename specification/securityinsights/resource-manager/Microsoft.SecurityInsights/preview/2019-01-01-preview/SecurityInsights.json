@@ -465,54 +465,6 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/actions": {
-            "get": {
-                "x-ms-examples": {
-                    "Get all actions.": {
-                        "$ref": "./examples/actions/GetAllActions.json"
-                    }
-                },
-                "tags": [
-                    "Actions"
-                ],
-                "description": "Gets all actions.",
-                "operationId": "Actions_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersion"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
-                    },
-                    {
-                        "$ref": "#/parameters/WorkspaceName"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ActionsList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
             "get": {
                 "x-ms-examples": {
@@ -1623,9 +1575,9 @@
             "type": "object",
             "description": "Alert rule property bag.",
             "properties": {
-                "ruleName": {
+                "displayName": {
                     "type": "string",
-                    "description": "The name for alerts created by this alert rule."
+                    "description": "The display name for alerts created by this alert rule."
                 },
                 "description": {
                     "type": "string",
@@ -1775,11 +1727,6 @@
                 "triggerUri": {
                     "type": "string",
                     "description": "The uri for the action to trigger."
-                },
-                "ruleId": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "The unique identifier of the rule."
                 }
             }
         },
@@ -2535,7 +2482,7 @@
                 "objectGuid": {
                     "type": "string",
                     "readOnly": true,
-                    "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+                    "format": "uuid",
                     "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory."
                 }
             }
@@ -2904,7 +2851,6 @@
             "name": "ruleId",
             "in": "path",
             "required": true,
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
             "type": "string",
             "description": "Alert rule ID",
             "x-ms-parameter-location": "method"
@@ -2941,7 +2887,6 @@
             "name": "caseId",
             "in": "path",
             "required": true,
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
             "type": "string",
             "description": "Case ID",
             "x-ms-parameter-location": "method"
@@ -2960,7 +2905,6 @@
             "name": "bookmarkId",
             "in": "path",
             "required": true,
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
             "type": "string",
             "description": "Bookmark ID",
             "x-ms-parameter-location": "method"
