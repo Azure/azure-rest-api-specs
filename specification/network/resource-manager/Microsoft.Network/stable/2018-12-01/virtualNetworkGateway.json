@@ -795,7 +795,7 @@
             "description": "Accepted and the operation will complete asynchronously."
           },
           "200": {
-            "description": "Request successful. The operation sets the specificed vpnclient ipsec parameters for P2S client of the virtual network gateway.",
+            "description": "Request successful. The operation sets the specified vpnclient ipsec parameters for P2S client of the virtual network gateway.",
             "schema": {
               "$ref": "#/definitions/VpnClientIPsecParameters"
             }
@@ -807,7 +807,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
       "post": {
         "tags": [
           "VirtualNetworkGateways"
@@ -846,9 +846,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Get VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json" } 
-        }               
-
+          "Get VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json" }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
@@ -1760,13 +1759,13 @@
           },
           "description": "VpnClientProtocols for Virtual network gateway."
         },
-		"vpnClientIpsecPolicies": {
+    "vpnClientIpsecPolicies": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpsecPolicy"
           },
           "description": "VpnClientIpsecPolicies for virtual network gateway P2S client."
-        },		
+        },
         "radiusServerAddress": {
           "type": "string",
           "description": "The radius server address property of the VirtualNetworkGateway resource for vpn client connection."
@@ -2279,7 +2278,7 @@
           "description": "The virtual network connection shared key value."
         }
       },
-	  "allOf": [
+      "allOf": [
         {
           "$ref": "./network.json#/definitions/SubResource"
         }
@@ -2399,7 +2398,7 @@
             "ECP384",
             "PFS24",
             "PFS14",
-            "PFSMM"		
+            "PFSMM"
           ],
           "x-ms-enum": {
             "name": "PfsGroup",
@@ -2560,7 +2559,7 @@
         "pfsGroup"
       ],
       "description": "An IPSec parameters for a virtual network gateway P2S connection."
-    },	
+    },
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
