@@ -3,7 +3,7 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml $(ruby)
-package-name: azure_mgmt_edgedateway
+package-name: azure_mgmt_edgegateway
 package-version: "0.0.1"
 azure-arm: true
 ```
