@@ -34,6 +34,9 @@
     "paths": {
         "/languages": {
             "post": {
+              "tags": [
+                "Languages"
+              ],
                 "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.",
                 "operationId": "56f30ceeeda5650db055a3c7",
                 "summary": "Detect Language",
@@ -76,6 +79,9 @@
         },
         "/entities": {
             "post": {
+              "tags": [
+                "Entities"
+              ],
                 "description": "The API returns a list of known entities and general named entities (\\\"Person\\\", \\\"Location\\\", \\\"Organization\\\" etc) in a given document. Known entities are returned with Wikipedia Id and Wikipedia link, and also Bing Id which can be used in Bing Entity Search API. General named entities are returned with entity types. If a general named entity is also a known entity, then all information regarding it (Wikipedia Id, Bing Id, entity type etc) will be returned. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a> for the list of supported Entity Types. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
                 "operationId": "5ac4251d5b4ccd1554da7634",
                 "summary": "Entities",
@@ -118,6 +124,9 @@
         },
         "/keyPhrases": {
             "post": {
+              "tags": [
+                "Key Phrases"
+              ],
                 "description": "The API returns a list of strings denoting the key talking points in the input text. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
                 "operationId": "56f30ceeeda5650db055a3c6",
                 "summary": "Key Phrases",
@@ -160,6 +169,9 @@
         },
         "/sentiment": {
             "post": {
+              "tags": [
+                "Sentiment"
+              ],
                 "description": "The API returns a numeric score between 0 and 1. Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. A score of 0.5 indicates the lack of sentiment (e.g. a factoid statement). See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
                 "operationId": "56f30ceeeda5650db055a3c9",
                 "summary": "Sentiment",
@@ -618,5 +630,15 @@
             }
         }
     },
-    "tags": []
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }
