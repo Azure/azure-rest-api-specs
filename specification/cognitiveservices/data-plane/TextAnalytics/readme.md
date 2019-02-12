@@ -142,9 +142,9 @@ log-file: logs/log.txt
 
 ### Release 2.1-Preview
 
-These settings apply only when `--tag=release_2_1` is specified on the command line.
+These settings apply only when `--tag=release_2_1_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2_1'
+``` yaml $(tag) == 'release_2_1_preview'
 input-file: preview/v2.1/TextAnalytics.json
 log-file: logs/log.txt
 ```
