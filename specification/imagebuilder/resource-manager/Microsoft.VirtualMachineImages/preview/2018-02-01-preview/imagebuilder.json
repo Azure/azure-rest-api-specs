@@ -62,6 +62,9 @@
               "$ref": "#/definitions/ApiError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -96,6 +99,9 @@
               "$ref": "#/definitions/ApiError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -334,9 +340,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SkipTokenParam"
-          },
-          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -359,6 +362,9 @@
               "$ref": "#/definitions/ApiError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -442,6 +448,10 @@
           "items": {
             "$ref": "#/definitions/ImageTemplate"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
         }
       }
     },
@@ -784,6 +794,10 @@
           "items": {
             "$ref": "#/definitions/RunOutput"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
         }
       }
     },
@@ -986,14 +1000,6 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    },
-    "SkipTokenParam": {
-      "name": "$skiptoken",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Used for pagination of a large data set",
-      "x-ms-parameter-location": "method"
     }
   }
 }
