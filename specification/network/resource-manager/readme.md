@@ -918,6 +918,9 @@ directive:
   - suppress: BodyTopLevelProperties
     from: virtualNetworkGateway.json
     reason: shipped. fixing this causes breaking change in resource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: webapplicationfirewall.json
+    reason: name, id and type properties are inherited from the upper level
 ```
 
 ---
