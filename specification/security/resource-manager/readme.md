@@ -25,7 +25,7 @@ To see additional help and options, run:
 ```yaml
 directive:
   - suppress: ValidFormats
-    from: security.json
+    from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
     reason: email format is allowed
 ```
