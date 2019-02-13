@@ -456,6 +456,35 @@
         }
       }
     },
+	"SapOpenHubSource": {
+      "description": "A copy activity source for SAP Business Warehouse Open Hub Destination source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {}
+    },
+	"RestSource": {
+      "description": "A copy activity Rest service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "requestInterval": {
+          "type": "object",
+          "description": "The time to await before sending next page request. "
+        }
+      }
+    },
     "SqlSource": {
       "description": "A copy activity SQL source.",
       "type": "object",
@@ -1680,6 +1709,10 @@
         "schemaMapping": {
           "type": "object",
           "description": "The schema mapping to map between tabular data and hierarchical data. Example: {\"Column1\": \"$.Column1\", \"Column2\": \"$.Column2.Property1\", \"Column3\": \"$.Column2.Property2\"}. Type: object (or Expression with resultType object)."
+        },
+		    "collectionReference": {
+          "type": "object",
+          "description": "The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object)."
         }
       }
     },
