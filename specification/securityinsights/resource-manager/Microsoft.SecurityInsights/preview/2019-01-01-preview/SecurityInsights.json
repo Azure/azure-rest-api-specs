@@ -117,7 +117,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Gets a alert rule.",
+                "description": "Gets the alert rule.",
                 "operationId": "AlertRules_Get",
                 "parameters": [
                     {
@@ -164,7 +164,7 @@
                     "Alert Rules"
                 ],
                 "description": "Creates or updates the alert rule.",
-                "operationId": "AlertRules_Create",
+                "operationId": "AlertRules_CreateOrUpdate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersion"
@@ -238,6 +238,609 @@
                     },
                     {
                         "$ref": "#/parameters/RuleId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all actions of alert rule.": {
+                        "$ref": "./examples/actions/GetAllActionsByAlertRule.json"
+                    }
+                },
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Gets all actions of alert rule.",
+                "operationId": "Actions_ListByAlertRule",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ActionsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an action of alert rule.": {
+                        "$ref": "./examples/actions/GetActionOfAlertRuleById.json"
+                    }
+                },
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Gets the action of alert rule.",
+                "operationId": "AlertRules_GetAction",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Action"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates an action of alert rule.": {
+                        "$ref": "./examples/actions/CreateActionOfAlertRule.json"
+                    }
+                },
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Creates or updates the action of alert rule.",
+                "operationId": "AlertRules_CreateOrUpdateAction",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionId"
+                    },
+                    {
+                        "$ref": "#/parameters/Action"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Action"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Action"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete an action of alert rule.": {
+                        "$ref": "./examples/actions/DeleteActionOfAlertRule.json"
+                    }
+                },
+                "tags": [
+                    "Actions"
+                ],
+                "description": "Delete the action of alert rule.",
+                "operationId": "AlertRules_DeleteAction",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/RuleId"
+                    },
+                    {
+                        "$ref": "#/parameters/ActionId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all cases.": {
+                        "$ref": "./examples/cases/GetCases.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Gets all cases.",
+                "operationId": "Cases_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/CaseList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a case.": {
+                        "$ref": "./examples/cases/GetCaseById.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Gets a case.",
+                "operationId": "Cases_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/CaseId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Case"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates a case.": {
+                        "$ref": "./examples/cases/CreateCase.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Creates or updates the case.",
+                "operationId": "Cases_CreateOrUpdate",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/CaseId"
+                    },
+                    {
+                        "$ref": "#/parameters/Case"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Case"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Case"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete a case.": {
+                        "$ref": "./examples/cases/DeleteCase.json"
+                    }
+                },
+                "tags": [
+                    "Cases"
+                ],
+                "description": "Delete the case.",
+                "operationId": "Cases_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/CaseId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all bookmarks.": {
+                        "$ref": "./examples/bookmarks/GetBookmarks.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Gets all bookmarks.",
+                "operationId": "Bookmarks_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/BookmarkList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get a bookmark.": {
+                        "$ref": "./examples/bookmarks/GetBookmarkById.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Gets a bookmark.",
+                "operationId": "Bookmarks_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/BookmarkId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bookmark"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Creates or updates a bookmark.": {
+                        "$ref": "./examples/bookmarks/CreateBookmark.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Creates or updates the bookmark.",
+                "operationId": "Bookmarks_CreateOrUpdate",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/BookmarkId"
+                    },
+                    {
+                        "$ref": "#/parameters/Bookmark"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bookmark"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Bookmark"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete a bookmark.": {
+                        "$ref": "./examples/bookmarks/DeleteBookmark.json"
+                    }
+                },
+                "tags": [
+                    "Bookmarks"
+                ],
+                "description": "Delete the bookmark.",
+                "operationId": "Bookmarks_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/BookmarkId"
                     }
                 ],
                 "responses": {
@@ -373,7 +976,7 @@
                     "Data Connectors"
                 ],
                 "description": "Creates or updates the data connector.",
-                "operationId": "DataConnectors_Create",
+                "operationId": "DataConnectors_CreateOrUpdate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersion"
@@ -455,6 +1058,350 @@
                     },
                     "204": {
                         "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all entities.": {
+                        "$ref": "./examples/entities/GetEntities.json"
+                    }
+                },
+                "tags": [
+                    "Entities"
+                ],
+                "description": "Gets all entities.",
+                "operationId": "Entities_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/EntityList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an account entity.": {
+                        "$ref": "./examples/entities/GetAccountEntityById.json"
+                    },
+                    "Get an host entity.": {
+                        "$ref": "./examples/entities/GetHostEntityById.json"
+                    },
+                    "Get an file entity.": {
+                        "$ref": "./examples/entities/GetFileEntityById.json"
+                    }
+                },
+                "tags": [
+                    "Entities"
+                ],
+                "description": "Gets an entity.",
+                "operationId": "Entities_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/EntityId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Entity"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all office consents.": {
+                        "$ref": "./examples/officeConsents/GetOfficeConsents.json"
+                    }
+                },
+                "tags": [
+                    "Office Consents"
+                ],
+                "description": "Gets all office365 consents.",
+                "operationId": "OfficeConsents_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OfficeConsentList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents/{consentId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an office consent.": {
+                        "$ref": "./examples/officeConsents/GetOfficeConsentsById.json"
+                    }
+                },
+                "tags": [
+                    "Office Consents"
+                ],
+                "description": "Gets an office365 consent.",
+                "operationId": "OfficeConsents_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/ConsentId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OfficeConsent"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-ms-examples": {
+                    "Delete an office consent.": {
+                        "$ref": "./examples/officeConsents/DeleteOfficeConsents.json"
+                    }
+                },
+                "tags": [
+                    "Office Consents"
+                ],
+                "description": "Delete the office365 consent.",
+                "operationId": "OfficeConsents_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/ConsentId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get UEBA settings.": {
+                        "$ref": "./examples/settings/GetUebaSettings.json"
+                    },
+                    "Get Fusion settings.": {
+                        "$ref": "./examples/settings/GetFusionSettings.json"
+                    }
+                },
+                "tags": [
+                    "Settings"
+                ],
+                "description": "Gets a stting.",
+                "operationId": "ProductSettings_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/SettingsName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Settings"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-ms-examples": {
+                    "Update UEBA settings.": {
+                        "$ref": "./examples/settings/UpdateUebaSettings.json"
+                    }
+                },
+                "tags": [
+                    "Settings"
+                ],
+                "description": "Updates the setting.",
+                "operationId": "ProductSettings_Update",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/SettingsName"
+                    },
+                    {
+                        "$ref": "#/parameters/Settings"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Settings"
+                        }
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -628,9 +1575,9 @@
             "type": "object",
             "description": "Alert rule property bag.",
             "properties": {
-                "ruleName": {
+                "displayName": {
                     "type": "string",
-                    "description": "The name for alerts created by this alert rule."
+                    "description": "The display name for alerts created by this alert rule."
                 },
                 "description": {
                     "type": "string",
@@ -639,14 +1586,32 @@
                 "severity": {
                     "type": "string",
                     "enum": [
-                        "Low",
-                        "Medium",
                         "High",
+                        "Medium",
+                        "Low",
                         "Informational"
                     ],
                     "x-ms-enum": {
-                        "name": "Severity",
-                        "modelAsString": false
+                        "name": "AlertSeverity",
+                        "modelAsString": false,
+                        "values": [
+                            {
+                                "value": "High",
+                                "description": "High severity"
+                            },
+                            {
+                                "value": "Medium",
+                                "description": "Medium severity"
+                            },
+                            {
+                                "value": "Low",
+                                "description": "Low severity"
+                            },
+                            {
+                                "value": "Informational",
+                                "description": "Informational severity"
+                            }
+                        ]
                     },
                     "description": "The severity for alerts created by this alert rule."
                 },
@@ -702,7 +1667,7 @@
                 }
             },
             "required": [
-                "ruleName",
+                "displayName",
                 "description",
                 "severity",
                 "enabled",
@@ -714,6 +1679,355 @@
                 "suppressionEnabled",
                 "suppressionDuration"
             ]
+        },
+        "ActionsList": {
+            "description": "List all the actions.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of actions.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of actions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Action"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Action": {
+            "type": "object",
+            "description": "Action for alert rule.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the action."
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Action properties",
+                    "$ref": "#/definitions/ActionProperties"
+                }
+            }
+        },
+        "ActionProperties": {
+            "type": "object",
+            "description": "Action property bag.",
+            "properties": {
+                "triggerUri": {
+                    "type": "string",
+                    "description": "The uri for the action to trigger."
+                }
+            }
+        },
+        "CaseList": {
+            "description": "List all the cases.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of cases.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of cases.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Case"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Case": {
+            "type": "object",
+            "description": "Represents a case in Azure Security Insights.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the alert rule."
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Case properties",
+                    "$ref": "#/definitions/CaseProperties"
+                }
+            }
+        },
+        "CaseProperties": {
+            "type": "object",
+            "description": "Describes case properties",
+            "properties": {
+                "lastUpdatedTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last time the case was updated"
+                },
+                "createdTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The time the case was created"
+                },
+                "endTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The end time of the case"
+                },
+                "startTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The start time of the case"
+                },
+                "labels": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Label"
+                    },
+                    "description": "List of labels relevant to this case"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the case"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the case"
+                },
+                "assignedTo": {
+                    "type": "object",
+                    "description": "Describes a user that the case is assigned to",
+                    "$ref": "#/definitions/UserInfo"
+                },
+                "severity": {
+                    "type": "string",
+                    "description": "The severity of the case",
+                    "enum": [
+                        "Critical",
+                        "High",
+                        "Medium",
+                        "Low",
+                        "Informational"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CaseSeverity",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Critical",
+                                "description": "Critical severity"
+                            },
+                            {
+                                "value": "High",
+                                "description": "High severity"
+                            },
+                            {
+                                "value": "Medium",
+                                "description": "Medium severity"
+                            },
+                            {
+                                "value": "Low",
+                                "description": "Low severity"
+                            },
+                            {
+                                "value": "Informational",
+                                "description": "Informational severity"
+                            }
+                        ]
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The status of the case",
+                    "enum": [
+                        "Draft",
+                        "Open",
+                        "InProgress",
+                        "Closed"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CaseStatus",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Draft",
+                                "description": "Case that wasn't promoted yet to active"
+                            },
+                            {
+                                "value": "Open",
+                                "description": "An active case which isn't handled currently"
+                            },
+                            {
+                                "value": "InProgress",
+                                "description": "An active case which is handled"
+                            },
+                            {
+                                "value": "Closed",
+                                "description": "A non active case"
+                            }
+                        ]
+                    }
+                },
+                "closeReason": {
+                    "type": "string",
+                    "description": "The reason the case was closed",
+                    "enum": [
+                        "Resolved",
+                        "Dismissed",
+                        "Other"
+                    ],
+                    "x-ms-enum": {
+                        "name": "CloseReason",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Resolved",
+                                "description": "Case was resolved"
+                            },
+                            {
+                                "value": "Dismissed",
+                                "description": "Case was dismissed"
+                            },
+                            {
+                                "value": "Other",
+                                "description": "Case was closed for another reason"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "title",
+                "severity",
+                "status"
+            ]
+        },
+        "BookmarkList": {
+            "description": "List all the bookmarks.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of cases.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of bookmarks.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Bookmark"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Bookmark": {
+            "type": "object",
+            "description": "Represents a bookmark in Azure Security Insights.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the bookmark."
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Bookmark properties",
+                    "$ref": "#/definitions/BookmarkProperties"
+                }
+            }
+        },
+        "BookmarkProperties": {
+            "type": "object",
+            "description": "Describes bookmark properties",
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "The display name of the bookmark"
+                },
+                "lastUpdatedTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last time the bookmark was updated"
+                },
+                "createdTimeUtc": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The time the bookmark was created"
+                },
+                "createdBy": {
+                    "type": "object",
+                    "description": "Describes a user that created the bookmark",
+                    "$ref": "#/definitions/UserInfo"
+                },
+                "updatedBy": {
+                    "type": "object",
+                    "description": "Describes a user that updated the bookmark",
+                    "$ref": "#/definitions/UserInfo"
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "The notes of the bookmark"
+                },
+                "labels": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Label"
+                    },
+                    "description": "List of labels relevant to this bookmark"
+                },
+                "query": {
+                    "type": "string",
+                    "description": "The query of the bookmark."
+                }
+            },
+            "required": [
+                "displayName",
+                "query"
+            ]
+        },
+        "UserInfo": {
+            "type": "object",
+            "description": "User information that made some action",
+            "properties": {
+                "objectId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The object id of the user."
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email of the user."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the user."
+                }
+            }
+        },
+        "Label": {
+            "description": "Label that will be used to tag and filter on.",
+            "type": "string"
         },
         "DataConnectorList": {
             "description": "List all the data connectors.",
@@ -792,13 +2106,13 @@
                 }
             }
         },
-        "DataConnectorContextId": {
+        "DataConnectorTenantId": {
             "type": "object",
-            "description": "Describes an Azure resource with kind.",
+            "description": "Properties data connector on tenant level.",
             "properties": {
-                "contextId": {
+                "tenantId": {
                     "type": "string",
-                    "description": "The context id of the origin data source (Like tenantID, SubscriptionID etc.)."
+                    "description": "The tenant id to connect to, and get the data from."
                 }
             }
         },
@@ -824,7 +2138,7 @@
             "description": "Office data connector properties.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/DataConnectorContextId"
+                    "$ref": "#/definitions/DataConnectorTenantId"
                 }
             ],
             "properties": {
@@ -870,17 +2184,17 @@
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "description": "TI data connector properties.",
+                    "description": "TI (Threat Intelligence) data connector properties.",
                     "$ref": "#/definitions/TIDataConnectorProperties"
                 }
             }
         },
         "TIDataConnectorProperties": {
             "type": "object",
-            "description": "TI data connector properties.",
+            "description": "TI (Threat Intelligence) data connector properties.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/DataConnectorContextId"
+                    "$ref": "#/definitions/DataConnectorTenantId"
                 }
             ],
             "properties": {
@@ -892,7 +2206,7 @@
         },
         "TIDataConnectorDataTypes": {
             "type": "object",
-            "description": "The available data types for TI data connector.",
+            "description": "The available data types for TI (Threat Intelligence) data connector.",
             "properties": {
                 "indicators": {
                     "type": "object",
@@ -911,7 +2225,26 @@
             "description": "Represents AAD (Azure Active Directory) data connector.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/DataConnectorWithAlerts"
+                    "$ref": "#/definitions/DataConnector"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "AAD (Azure Active Directory) data connector properties.",
+                    "$ref": "#/definitions/AADDataConnectorProperties"
+                }
+            }
+        },
+        "AADDataConnectorProperties": {
+            "type": "object",
+            "description": "AAD (Azure Active Directory) data connector properties.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorTenantId"
+                },
+                {
+                    "$ref": "#/definitions/DataConnectorWithAlertsProperties"
                 }
             ]
         },
@@ -921,23 +2254,36 @@
             "description": "Represents ASC (Azure Security Center) data connector.",
             "allOf": [
                 {
-                    "$ref": "#/definitions/DataConnectorWithAlerts"
+                    "$ref": "#/definitions/DataConnector"
                 }
-            ]
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "ASC (Azure Security Center) data connector properties.",
+                    "$ref": "#/definitions/ASCDataConnectorProperties"
+                }
+            }
+        },
+        "ASCDataConnectorProperties": {
+            "type": "object",
+            "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+                }
+            ],
+            "properties": {
+                "subscriptionId": {
+                    "type": "string",
+                    "description": "The subscription id to connect to, and get the data from."
+                }
+            }
         },
         "MCASDataConnector": {
             "x-ms-discriminator-value": "MicrosoftCloudAppSecurity",
             "type": "object",
             "description": "Represents MCAS (Microsoft Cloud App Security) data connector.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DataConnectorWithAlerts"
-                }
-            ]
-        },
-        "DataConnectorWithAlerts": {
-            "type": "object",
-            "description": "Data connector with alerts data type.",
             "allOf": [
                 {
                     "$ref": "#/definitions/DataConnector"
@@ -946,19 +2292,26 @@
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "description": "Data connector properties.",
-                    "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+                    "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+                    "$ref": "#/definitions/MCASDataConnectorProperties"
                 }
             }
+        },
+        "MCASDataConnectorProperties": {
+            "type": "object",
+            "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorTenantId"
+                },
+                {
+                    "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+                }
+            ]
         },
         "DataConnectorWithAlertsProperties": {
             "type": "object",
             "description": "Data connector properties.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/DataConnectorContextId"
-                }
-            ],
             "properties": {
                 "dataTypes": {
                     "description": "The available data types for the connector.",
@@ -999,6 +2352,320 @@
                 }
             }
         },
+        "EntityList": {
+            "description": "List of all the entities.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of entities.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of etnties.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Entity"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "Entity": {
+            "type": "object",
+            "description": "Specific entity.",
+            "discriminator": "kind",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                },
+                {
+                    "$ref": "#/definitions/EntityKind"
+                }
+            ]
+        },
+        "EntityKind": {
+            "type": "object",
+            "description": "Describes an Azure resource with kind.",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the entity",
+                    "enum": [
+                        "Account",
+                        "Host",
+                        "File"
+                    ],
+                    "x-ms-enum": {
+                        "name": "EntityKind",
+                        "modelAsString": true,
+                        "values": [
+                            {
+                                "value": "Account",
+                                "description": "Entity represents account in the system."
+                            },
+                            {
+                                "value": "Host",
+                                "description": "Entity represents host in the system."
+                            },
+                            {
+                                "value": "File",
+                                "description": "Entity represents file in the system."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "AccountEntity": {
+            "x-ms-discriminator-value": "Account",
+            "type": "object",
+            "description": "Represents an account entity.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Entity"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Account entity properties",
+                    "$ref": "#/definitions/AccountEntityProperties"
+                }
+            }
+        },
+        "AccountEntityProperties": {
+            "type": "object",
+            "description": "Account entity property bag.",
+            "properties": {
+                "accountName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The name of the account. This field should hold only the name without any domain added to it, i.e. administrator."
+                },
+                "ntDomain": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The NETBIOS domain name as it appears in the alert format – domain\\username. Examples: NT AUTHORITY."
+                },
+                "upnSuffix": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com."
+                },
+                "sid": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The account security identifier, e.g. S-1-5-18."
+                },
+                "aadTenantId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The Azure Active Directory tenant id."
+                },
+                "aadUserId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The Azure Active Directory user id."
+                },
+                "puid": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The Azure Active Directory Passport User ID."
+                },
+                "isDomainJoined": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": "Determines whether this is a domain account."
+                },
+                "objectGuid": {
+                    "type": "string",
+                    "readOnly": true,
+                    "format": "uuid",
+                    "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory."
+                }
+            }
+        },
+        "HostEntity": {
+            "x-ms-discriminator-value": "Host",
+            "type": "object",
+            "description": "Represents a host entity.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Entity"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Host entity properties",
+                    "$ref": "#/definitions/HostEntityProperties"
+                }
+            }
+        },
+        "HostEntityProperties": {
+            "type": "object",
+            "description": "Host entity property bag.",
+            "properties": {
+                "dnsDomain": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The DNS domain that this host belongs to. Should contain the compete DNS suffix for the domain"
+                },
+                "ntDomain": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The NT domain that this host belongs to."
+                },
+                "hostName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The hostname without the domain suffix."
+                },
+                "netBiosName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The host name (pre-windows2000)."
+                },
+                "azureID": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The azure resource id of the VM."
+                },
+                "omsAgentID": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The OMS agent id, if the host has OMS agent installed."
+                },
+                "osFamily": {
+                    "type": "string",
+                    "enum": [
+                        "Linux",
+                        "Windows",
+                        "Android",
+                        "IOS"
+                    ],
+                    "x-ms-enum": {
+                        "name": "OSFamily",
+                        "modelAsString": false,
+                        "values": [
+                            {
+                                "value": "Linux",
+                                "description": "Host with Linux operartion system."
+                            },
+                            {
+                                "value": "Windows",
+                                "description": "Host with Windows operartion system."
+                            },
+                            {
+                                "value": "Android",
+                                "description": "Host with Android operartion system."
+                            },
+                            {
+                                "value": "IOS",
+                                "description": "Host with IOS operartion system."
+                            }
+                        ]
+                    },
+                    "description": "The operartion system type."
+                },
+                "osVersion": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "A free text representation of the operating system. This field is meant to hold specific versions the are more fine grained than OSFamily or future values not supported by OSFamily enumeration"
+                },
+                "isDomainJoined": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": "Determines whether this host belongs to a domain."
+                }
+            }
+        },
+        "FileEntity": {
+            "x-ms-discriminator-value": "File",
+            "type": "object",
+            "description": "Represents a file entity.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Entity"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "File entity properties",
+                    "$ref": "#/definitions/FileEntityProperties"
+                }
+            }
+        },
+        "FileEntityProperties": {
+            "type": "object",
+            "description": "File entity property bag.",
+            "properties": {
+                "directory": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The full path to the file."
+                },
+                "fileName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The file name without path (some alerts might not include path)."
+                }
+            }
+        },
+        "OfficeConsentList": {
+            "description": "List of all the office365 consents.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of office consents.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of the consents.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OfficeConsent"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "OfficeConsent": {
+            "type": "object",
+            "description": "Consent for Office365 tenant that already made.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Office consent properties",
+                    "$ref": "#/definitions/OfficeConsentProperties"
+                }
+            }
+        },
+        "OfficeConsentProperties": {
+            "type": "object",
+            "description": "Consent property bag.",
+            "properties": {
+                "tenantId": {
+                    "type": "string",
+                    "description": "The tenantId of the Office365 with the concesnt."
+                },
+                "tenantName": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The tenant name of the Office365 with the concesnt."
+                }
+            }
+        },
         "Resource": {
             "x-ms-azure-resource": true,
             "description": "An azure resource object",
@@ -1017,6 +2684,117 @@
                     "type": "string",
                     "readOnly": true,
                     "description": "Azure resource name"
+                }
+            }
+        },
+        "Settings": {
+            "type": "object",
+            "description": "The Setting.",
+            "discriminator": "kind",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                },
+                {
+                    "$ref": "#/definitions/SettingsKind"
+                }
+            ]
+        },
+        "SettingsKind": {
+            "type": "object",
+            "description": "Describes an Azure resource with kind.",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "description": "The kind of the setting",
+                    "enum": [
+                        "UebaSettings",
+                        "ToggleSettings"
+                    ],
+                    "x-ms-enum": {
+                        "name": "SettingKind",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "UebaSettings": {
+            "x-ms-discriminator-value": "UebaSettings",
+            "type": "object",
+            "description": "Represents settings for User and Entity Behavior Analytics enablement.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Settings"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "User and Entity Behavior Analytics settings properties",
+                    "$ref": "#/definitions/UebaSettingsProperties"
+                }
+            }
+        },
+        "UebaSettingsProperties": {
+            "type": "object",
+            "description": "User and Entity Behavior Analytics settings property bag.",
+            "properties": {
+                "isEnabled": {
+                    "type": "boolean",
+                    "description": "Determines whether User and Entity Behavior Analytics is enabled for this workspace."
+                },
+                "statusInMcas": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Determines whether User and Entity Behavior Analytics is enabled from MCAS (Microsoft Cloud App Security).",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "StatusInMcas",
+                        "modelAsString": true
+                    }
+                },
+                "atpLicenseStatus": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LicenseStatus",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "ToggleSettings": {
+            "x-ms-discriminator-value": "ToggleSettings",
+            "type": "object",
+            "description": "Settings with single toggle.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Settings"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "toggle properties",
+                    "$ref": "#/definitions/ToggleSettingsProperties"
+                }
+            }
+        },
+        "ToggleSettingsProperties": {
+            "type": "object",
+            "description": "toggle property bag.",
+            "properties": {
+                "isEnabled": {
+                    "type": "boolean",
+                    "description": "Determines whether the setting is enable or disabled."
                 }
             }
         }
@@ -1073,7 +2851,6 @@
             "name": "ruleId",
             "in": "path",
             "required": true,
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
             "type": "string",
             "description": "Alert rule ID",
             "x-ms-parameter-location": "method"
@@ -1085,6 +2862,60 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/AlertRule"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "ActionId": {
+            "name": "actionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Action ID",
+            "x-ms-parameter-location": "method"
+        },
+        "Action": {
+            "name": "action",
+            "in": "body",
+            "description": "The action",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Action"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "CaseId": {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Case ID",
+            "x-ms-parameter-location": "method"
+        },
+        "Case": {
+            "name": "case",
+            "in": "body",
+            "description": "The case",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Case"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "BookmarkId": {
+            "name": "bookmarkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Bookmark ID",
+            "x-ms-parameter-location": "method"
+        },
+        "Bookmark": {
+            "name": "bookmark",
+            "in": "body",
+            "description": "The bookmark",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Bookmark"
             },
             "x-ms-parameter-location": "method"
         },
@@ -1103,6 +2934,40 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/DataConnector"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "EntityId": {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "entity ID",
+            "x-ms-parameter-location": "method"
+        },
+        "ConsentId": {
+            "name": "consentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "consent ID",
+            "x-ms-parameter-location": "method"
+        },
+        "SettingsName": {
+            "name": "settingsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The setting name. Supports- Fusion, UEBA",
+            "x-ms-parameter-location": "method"
+        },
+        "Settings": {
+            "name": "settings",
+            "in": "body",
+            "description": "The setting",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/Settings"
             },
             "x-ms-parameter-location": "method"
         }
