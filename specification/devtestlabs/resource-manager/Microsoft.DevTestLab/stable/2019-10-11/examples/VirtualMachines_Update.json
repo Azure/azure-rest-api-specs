@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "labName": "{devtestlab-name}",
+    "name": "{virtualmachine-name}",
+    "api-version": "2018-09-15",
+    "labVirtualMachine": {
+      "properties": {
+        "notes": "Updated notes"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ownerObjectId": "",
+          "ownerUserPrincipalName": "",
+          "createdByUserId": "",
+          "createdByUser": "",
+          "createdDate": "2018-10-01T16:53:02.4830866-07:00",
+          "computeId": "/subscriptions/{subscription-id}/resourceGroups/{devtestlab-name}-{virtualmachine-name}-{random-suffix}/providers/Microsoft.Compute/virtualMachines/{virtualmachine-name}",
+          "osType": "Linux",
+          "size": "Standard_A2_v2",
+          "userName": "{user-name}",
+          "labSubnetName": "{virtualnetwork-name}Subnet",
+          "labVirtualNetworkId": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+          "disallowPublicIpAddress": true,
+          "artifactDeploymentStatus": {
+            "artifactsApplied": 0,
+            "totalArtifacts": 0
+          },
+          "galleryImageReference": {
+            "offer": "UbuntuServer",
+            "publisher": "Canonical",
+            "sku": "16.04-LTS",
+            "osType": "Linux",
+            "version": "Latest"
+          },
+          "networkInterface": {},
+          "allowClaim": true,
+          "storageType": "Standard",
+          "virtualMachineCreationSource": "FromGalleryImage",
+          "dataDiskParameters": [],
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{unique-identifier}"
+        },
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualmachines/{virtualmachine-name}",
+        "name": "{virtualmachine-name}",
+        "type": "Microsoft.DevTestLab/labs/virtualMachines",
+        "location": "{azure-location}",
+        "tags": {
+          "MyTag": "MyValue"
+        }
+      }
+    }
+  }
+}
