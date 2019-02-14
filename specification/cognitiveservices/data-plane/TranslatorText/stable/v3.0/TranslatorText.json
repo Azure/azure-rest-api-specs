@@ -9,22 +9,36 @@
       "email": "translator@microsoft.com",
       "url": "https://www.microsoft.com/translator"
     },
-    "description": "# Introduction\n\nThe Microsoft Translator Text API provides a JSON-based Web API. It provides:\n\n  * Translation between any supported languages to any other supported language.\n  * Translation to multiple languages in one request.\n  * Transliteration to convert text from one script to another script of the same language.\n  * Language detection, translation, and transliteration in one request.\n  * Dictionary to lookup alternative translations of a term, to find back-translations and examples showing terms used in context.\n  * Rich language detection.\n# Base URLs\n\nThe Translator Text API is available in the following clouds:\n\n| Description | Region    | Base URL                                |\n| -------     | --------  | -------                                 |\n| Azure       | Global    | api.cognitive.microsofttranslator.com   |\n| Azure       | Europe    | api-eur.cognitive.microsofttranslator.com |\n\n\n# Authentication\n\nSubscribe to the Translator Text API, part of Azure Cognitive Services, and use your subscription key from the Azure portal to authenticate. You can follow the steps in https://docs.microsoft.com/en-us/azure/cognitive-services/translator/translator-text-how-to-signup.\n\n\nThe simplest way is to pass your Azure secret key to the Translator service using the http request header `Ocp-Apim-Subscription-Key`.\n\nIf you prefer using a short-lived authentication, you may use your secret key to obtain an authorization token from the token service. In that case you pass the authorization token to the Translator service using the `Authorization` request header. To obtain an authorization token, make a `POST` request to the following URL:\n\n| Environment | Authentication service URL                                |\n| ----------  | ----------                                                |\n| Azure       | `https://api.cognitive.microsoft.com/sts/v1.0/issueToken` |\n\nHere are example requests to obtain a token with a lifetime of 10 minutes, given a secret key:\n\n```python\n// Pass secret key using header\ncurl --header 'Ocp-Apim-Subscription-Key: <your-key>' --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken'\n// Pass secret key using query string parameter\ncurl --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key=<your-key>'\n```\n\nA successful request returns the encoded access token as plain text in the response body. The valid token is passed to the Translator service as a bearer token in the Authorization. \n\n```\nAuthorization: Bearer <Base64-access_token>\n```\n\nAn authentication token is valid for 10 minutes. The token should be re-used when making multiple calls to the Translator APIs. If you make requests to the Translator API over an extended period of time,  you  must request a new access token at regular intervals before the token expires, for instance every 9 minutes.\n\nTo summarize, a client request to the Translator API will include one authorization header taken from the following table:\n\n| Headers       | Description  |\n| ----------    | ----------   |\n| Ocp-Apim-Subscription-key    | Use with Cognitive Services subscription if you are passing your secret key.                               The value is the Azure secret key for your subscription to Translator Text API.                         |\n| Authorization                | Use with Cognitive Services subscription if you are passing an authentication token. The value is the Bearer token: `Bearer <token>`.       |\n\n# Errors\n\nA standard error response is a JSON object with name/value pair named `error`. The value is also a JSON object with properties:\n  * `code`: A server-defined error code.\n  * `message`: A string giving a human-readable representation of the error.\n\nFor example, a customer with a free trial subscription receives the following error once the free quota is exhausted:\n\n```json\n{\n  \"error\": {\n  \"code\":403000,\n  \"message\":\"The subscription has exceeded its free quota.\"\n  }\n}\n```\n"
+    "description": "# Introduction\n\nThe Microsoft Translator Text API provides a JSON-based Web API. It provides:\n\n  * Translation between any supported languages to any other supported language.\n  * Translation to multiple languages in one request.\n  * Transliteration to convert text from one script to another script of the same language.\n  * Language detection, translation, and transliteration in one request.\n  * Dictionary to lookup alternative translations of a term, to find back-translations and examples showing terms used in context.\n  * Rich language detection.\n# Base URLs\n\nThe Translator Text API is available in the following clouds:\n\n| Description | Region    | Base URL                                |\n| -------     | --------  | -------                                 |\n| Azure       | Global    | api.cognitive.microsofttranslator.com   |\n| Azure       | Europe    | api-eur.cognitive.microsofttranslator.com |\n\n\n# Authentication\n\nSubscribe to the Translator Text API, part of Azure Cognitive Services, and use your subscription key from the Azure portal to authenticate. You can follow the steps in https://docs.microsoft.com/en-us/azure/cognitive-services/translator/translator-text-how-to-signup.\n\n\nThe simplest way is to pass your Azure secret key to the Translator service using the http request header `Ocp-Apim-Subscription-Key`.\n\nIf you prefer using a short-lived authentication, you may use your secret key to obtain an authorization token from the token service. In that case you pass the authorization token to the Translator service using the `Authorization` request header. To obtain an authorization token, make a `POST` request to the following URL:\n\n| Environment | Authentication service URL                                |\n| ----------  | ----------                                                |\n| Azure       | `https://api.cognitive.microsoft.com/sts/v1.0/issueToken` |\n\nHere are example requests to obtain a token with a lifetime of 10 minutes, given a secret key:\n\n```python\n// Pass secret key using header\ncurl --header 'Ocp-Apim-Subscription-Key: <your-key>' --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken'\n// Pass secret key using query string parameter\ncurl --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key=<your-key>'\n```\n\nA successful request returns the encoded access token as plain text in the response body. The valid token is passed to the Translator service as a bearer token in the Authorization. \n\n```\nAuthorization: Bearer <Base64-access_token>\n```\n\nAn authentication token is valid for 10 minutes. The token should be re-used when making multiple calls to the Translator APIs. If you make requests to the Translator API over an extended period of time,  you  must request a new access token at regular intervals before the token expires, for instance every 9 minutes.\n\nTo summarize, a client request to the Translator API will include one authorization header taken from the following table:\n\n| Headers       | Description  |\n| ----------    | ----------   |\n| Ocp-Apim-Subscription-key    | Use with Cognitive Services subscription if you are passing your secret key.                               The value is the Azure secret key for your subscription to Translator Text API.                         |\n| Authorization                | Use with Cognitive Services subscription if you are passing an authentication token. The value is the Bearer token: `Bearer <token>`.       |\n\n## All-in-one subscription\nThe last authentication option is to use a Cognitive Service’s all-in-one subscription. This allows you to use a single secret key to authenticate requests for multiple services.\nWhen you use an all-in-one secret key, you must include two authentication headers with your request. The first passes the secret key, the second specifies the region associated with your subscription.\n`Ocp-Api-Subscription-Key` `Ocp-Apim-Subscription-Region`\nIf you pass the secret key in the query string with the parameter `Subscription-Key`, then you must specify the region with query parameter `Subscription-Region`.\nIf you use a bearer token, you must obtain the token from the region endpoint:\n`https://<your-region>.api.cognitive.microsoft.com/sts/v1.0/issueToken`.\n\nAvailable regions are: `australiaeast`, `brazilsouth`, `canadacentral`, `centralindia`, `centraluseuap`, `eastasia`, `eastus`, `eastus2`, `japaneast`, `northeurope`, `southcentralus`, `southeastasia`, `uksouth`, `westcentralus`, `westeurope`, `westus`, and `westus2`.\n\nRegion is required for the all-in-one Text API subscription.\n\n\n# Errors\n\nA standard error response is a JSON object with name/value pair named `error`. The value is also a JSON object with properties:\n  * `code`: A server-defined error code.\n  * `message`: A string giving a human-readable representation of the error.\n\nFor example, a customer with a free trial subscription receives the following error once the free quota is exhausted:\n\n```json\n{\n  \"error\": {\n  \"code\":403000,\n  \"message\":\"The subscription has exceeded its free quota.\"\n  }\n}\n```\n# Enter your subcription keys to try out Microsoft Translator.\nSelect the `Authorize` button and enter your Microsoft Translator subscription key, OR your `all in one Cognitive Services` subscription key. If you are using the all in one Cognitive Services key you will need to also enter your subscription region.\n## Available regions are:\n\n  `australiaeast`, `brazilsouth`, `canadacentral`, `centralindia`, `centraluseuap`, `eastasia`, `eastus`, `eastus2`, `japaneast`, `northeurope`, `southcentralus`, `southeastasia`, `uksouth`, `westcentralus`, `westeurope`, `westus`, `westus2`.\n"
   },
-  
   "securityDefinitions": {
     "apim_key": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "api_key_all_in_one": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "api_region_all_in_one": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Region",
       "in": "header"
     }
   },
   "security": [
     {
       "apim_key": []
+    },
+    {
+      "api_key_all_in_one": []
+    },
+    {
+      "api_region_all_in_one": []
     }
   ],
-  
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,
@@ -51,7 +65,7 @@
         "tags": [
           "BreakSentence"
         ],
-        "operationId": "BreakSentence_BreakSentencePost",
+        "operationId": "Translator_BreakSentence",
         "consumes": [
           "application/json"
         ],
@@ -60,11 +74,7 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "description": "Version of the API requested by the client. Value must be **3.0**.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "Language",
@@ -81,11 +91,7 @@
             "type": "string"
           },
           {
-            "name": "ClientTraceId",
-            "description": "A client-generated GUID to uniquely identify the request. You can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-            "in": "header",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ClientTraceId"
           },
           {
             "name": "text",
@@ -104,7 +110,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/BreakSentenceSuccess"
+              "$ref": "#/definitions/BreakSentenceResult"
             }
           },
           "default": {
@@ -128,7 +134,7 @@
         "tags": [
           "Detect"
         ],
-        "operationId": "Detect_DetectPost",
+        "operationId": "Translator_Detect",
         "consumes": [
           "application/json"
         ],
@@ -137,18 +143,10 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "description": "Version of the API requested by the client. Value must be **3.0**.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "name": "ClientTraceId",
-            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-            "in": "header",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ClientTraceId"
           },
           {
             "name": "text",
@@ -167,7 +165,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DetectSuccess"
+              "$ref": "#/definitions/DetectResult"
             }
           },
           "default": {
@@ -191,7 +189,7 @@
         "tags": [
           "Dictionary/Lookup"
         ],
-        "operationId": "Dictionary_LookupPost",
+        "operationId": "Translator_DictionaryLookup",
         "consumes": [
           "application/json"
         ],
@@ -200,11 +198,7 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "description": "Version of the API requested by the client. Value must be **3.0**.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "from",
@@ -221,11 +215,7 @@
             "type": "string"
           },
           {
-            "name": "X-ClientTraceId",
-            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-            "in": "header",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ClientTraceId"
           },
           {
             "name": "text",
@@ -244,7 +234,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DictionaryLookupSuccess"
+              "$ref": "#/definitions/DictionaryLookupResult"
             }
           },
           "default": {
@@ -268,7 +258,7 @@
         "tags": [
           "DictionaryExamples"
         ],
-        "operationId": "DictionaryExamples_ExamplesPost",
+        "operationId": "Translator_DictionaryExamples",
         "consumes": [
           "application/json"
         ],
@@ -277,11 +267,7 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "description": "Version of the API requested by the client. Value must be **3.0**.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "from",
@@ -298,11 +284,7 @@
             "type": "string"
           },
           {
-            "name": "X-ClientTraceId",
-            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-            "in": "header",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ClientTraceId"
           },
           {
             "name": "text",
@@ -321,7 +303,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DictionaryExampleSuccess"
+              "$ref": "#/definitions/DictionaryExampleResult"
             }
           },
           "default": {
@@ -345,25 +327,28 @@
         "tags": [
           "Languages"
         ],
-        "operationId": "LanguagesTextTranslationV3",
+        "operationId": "Translator_Languages",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "description": "Version of the API requested by the client. Value must be **3.0**.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "scope",
             "description": "A comma-separated list of names defining the group of languages to return. Allowed group names are- `translation`, `transliteration` and `dictionary`. If no scope is given, then all groups are returned, which is equivalent to passing `scope=translation,transliteration,dictionary`. To decide which set of supported languages is appropriate for your scenario, see the description of the response object.",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 3,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [translation, transliteration, dictionary]
+            }
           },
           {
             "name": "Accept-Language",
@@ -373,18 +358,14 @@
             "required": false
           },
           {
-            "name": "X-ClientTraceId",
-            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-            "in": "header",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ClientTraceId"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/LanguageExampleSuccess"
+              "$ref": "#/definitions/LanguagesResult"
             }
           },
           "default": {
@@ -408,7 +389,7 @@
         "tags": [
           "Translate"
         ],
-        "operationId": "Translate_TranslatePost",
+        "operationId": "Translator_Translate",
         "consumes": [
           "application/json"
         ],
@@ -417,22 +398,18 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "description": "Version of the API requested by the client. Value must be **3.0**.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "from",
-            "description": "Specifies the language of the input text. Find which languages are available to translate from by looking up supported languages using the `translation` scope. If the `from` parameter is not specified, automatic language detection is applied to determine the source language.\n",
+            "description": "Specifies the language of the input text. Find which languages are available to translate from by using the languages method. If the `from` parameter is not specified, automatic language detection is applied to determine the source language.\n",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "to",
-            "description": "Specifies the language of the output text. The target language must be one of the supported languages included in the `translation` scope. For example, use `to=de` to translate to German.\n  It's possible to translate to multiple languages simultaneously by repeating the `to` parameter in the query string. For example, use `to=de&to=it` to translate to German and Italian in the same request.\n",
+            "description": "Specifies the language of the output text. Find which languages are available to translate to by using the languages method. For example, use `to=de` to translate to German.\n  It's possible to translate to multiple languages simultaneously by repeating the `to` parameter in the query string. For example, use `to=de&to=it` to translate to German and Italian in the same request.\n",
             "in": "query",
             "required": true,
             "type": "array",
@@ -445,7 +422,8 @@
             "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, complete HTML element. Possible values are `plain` (default) or `html`\n",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [plain, html]
           },
           {
             "name": "category",
@@ -459,7 +437,8 @@
             "description": "Specifies how profanities should be treated in translations. Possible values are: `NoAction` (default), `Marked` or `Deleted`.\n### Handling Profanity\nNormally the Translator service will retain profanity that is present in the source in the translation. The degree of profanity and the context that makes words profane differ between cultures, and as a result the degree of profanity in the target language may be amplified or reduced.\n\nIf you want to avoid getting profanity in the translation, regardless of the presence of profanity in the source text, you can use the profanity filtering option. The option allows you to choose whether you want to see profanity deleted, whether you want to mark profanities with appropriate tags (giving you the option to add your own post-processing), or you want no action taken. The accepted values of `ProfanityAction` are `Deleted`, `Marked` and `NoAction` (default).\n\n| ProfanityAction | Action                                                                    |\n| ----------      | ----------                                                                |\n| `NoAction`      | This is the default behavior. Profanity will pass from source to target.  |\n|                 | Example Source (Japanese)- 彼はジャッカスです。                           |\n|                 | Example Translation (English)- He is a jackass.                           |\n|                 |                                                                           |\n| `Deleted`       | Profane words will be removed from the output without replacement.        |\n|                 | Example Source (Japanese)- 彼はジャッカスです。                           |\n|                 | Example Translation (English)- He is a.                                   |\n| `Marked`        | Profane words are replaced by a marker in the output. The marker depends on the `ProfanityMarker` parameter.\n|                 | For `ProfanityMarker=Asterisk`, profane words are replaced with `***`     |\n|                 | Example Source (Japanese)- 彼はジャッカスです。                           |\n|                 | Example Translation (English)- He is a ***.                               |\n|                 | For `ProfanityMarker=Tag`, profane words are surrounded by XML tags <profanity> and </profanity>\n|                 | Example Source (Japanese)- 彼はジャッカスです。                           |\n|                 | Example Translation (English)- He is a <profanity>jackass</profanity>.\n",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [NoAction, Marked, Deleted]
           },
           {
             "name": "profanityMarker",
@@ -473,14 +452,14 @@
             "description": "Specifies whether to include alignment projection from source text to translated text. Possible values are- `true` or `false` (default).\n",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "includeSentenceLength",
             "description": "Specifies whether to include sentence boundaries for the input text and the translated text. Possible values are- `true` or `false` (default).\n",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "suggestedFrom",
@@ -491,14 +470,14 @@
           },
           {
             "name": "fromScript",
-            "description": "Specifies the script of the input text.",
+            "description": "Specifies the script of the input text. Supported scripts are available from the languages method",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "toScript",
-            "description": "Specifies the script of the translated text.",
+            "description": "Specifies the script of the translated text. Supported scripts are available from the languages method",
             "in": "query",
             "required": false,
             "type": "array",
@@ -507,11 +486,7 @@
             }
           },
           {
-            "name": "X-ClientTraceId",
-            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-            "in": "header",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ClientTraceId"
           },
           {
             "name": "text",
@@ -521,7 +496,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "$ref": "#/definitions/TranslateTextInput"                
               }
             }
           }
@@ -530,7 +505,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TranslateSuccess"
+              "$ref": "#/definitions/TranslateResultAll"
             }
           },
           "default": {
@@ -554,7 +529,7 @@
         "tags": [
           "Transliterate"
         ],
-        "operationId": "Transliterate_Post",
+        "operationId": "Translator_Transliterate",
         "consumes": [
           "application/json"
         ],
@@ -563,11 +538,7 @@
         ],
         "parameters": [
           {
-            "name": "api-version",
-            "description": "Version of the API requested by the client. Value must be **3.0**.",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "language",
@@ -591,11 +562,7 @@
             "type": "string"
           },
           {
-            "name": "X-ClientTraceId",
-            "description": "A client-generated GUID to uniquely identify the request. You can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-            "in": "header",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ClientTraceId"
           },
           {
             "name": "texts",
@@ -614,7 +581,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TransliterateSuccess"
+              "$ref": "#/definitions/TransliterateResult"
             }
           },
           "default": {
@@ -634,7 +601,8 @@
     }
   },
   "definitions": {
-    "LanguageExampleSuccess": {
+    
+    "LanguagesResult": {
       "type": "object",
       "description": "Example of a successful languages request",
       "properties": {
@@ -754,7 +722,7 @@
         }
       }
     },
-    "DictionaryExampleSuccess": {
+    "DictionaryExampleResult": {
       "type": "array",
       "description": "Example of a successful dictionary example request",
       "items": {
@@ -795,7 +763,7 @@
         }
       }
     },
-    "DictionaryLookupSuccess": {
+    "DictionaryLookupResult": {
       "type": "array",
       "description": "Example of a successful dictionary lookup request",
       "items": {
@@ -853,7 +821,7 @@
         }
       }
     },
-    "TranslateSuccess": {
+    "TranslateResult": {
       "type": "array",
       "description": "Example of a successful translate request",
       "items": {
@@ -876,7 +844,87 @@
         }
       }
     },
-    "BreakSentenceSuccess": {
+    
+    "TranslateResultAll": {
+      "type": "array",
+      "description": "Example of a successful translate request, including all optional parameters.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "detectedLanguage": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "string",
+              },
+              "score": {
+                "type": "integer",
+              }
+            }
+          },
+          "translations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "transliteration": {
+                  "type": "object", 
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      },
+                      "script": {
+                        "type": "string"
+                      }
+                    }
+                },
+                "to": {
+                  "type": "string"
+                },
+                "alignment": {
+                  "type": "object",
+                    "properties": {
+                      "proj": {
+                        "type": "string"
+                      }
+                    }
+                },
+                "sentLen": {
+                  "type": "object",
+                    "properties": {
+                      "srcSentLen": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "integer": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      },
+                      "transSentLen": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "integer": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "BreakSentenceResult": {
       "type": "array",
       "description": "Example of a successful breaksentence request",
       "items": {
@@ -891,7 +939,7 @@
         }
       }
     },
-    "TransliterateSuccess": {
+    "TransliterateResult": {
       "type": "array",
       "description": "Example of a successful transliterate request",
       "items": {
@@ -910,7 +958,7 @@
         }
       }
     },
-    "DetectSuccess": {
+    "DetectResult": {
       "type": "array",
       "description": "Example of a successful detect request",
       "items": {
@@ -1030,6 +1078,21 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
-    }
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version of the API requested by the client. Value must be **3.0**.",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "default": "3.0"
+    },
+    "ClientTraceId":{
+      "name": "X-ClientTraceId",
+      "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+      "in": "header",
+      "required": false,
+      "type": "string"
+    }    
   }
 }
