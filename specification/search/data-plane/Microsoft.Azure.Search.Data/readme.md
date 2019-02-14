@@ -157,4 +157,39 @@ directive:
     transform: >-
       return $.
         replace( /public (partial class) (Suggest|Search|Autocomplete)(Request)/g, "internal $1 $2$3" )
+####
+  # Change the documentation for $select for Suggest. The .NET SDK treats this property differently than the REST API
+  # does by default, and we don't want to change it for backwards compatibility reasons.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(The comma-separated list of fields to retrieve. If unspecified,) only the key field will be included in the results./g, "$1 all fields marked as retrievable in the schema are included." )
+####
+  # Make SuggestResult and DocumentSuggestResult generic so we can tell the deserializer what type to instantitate.
+  # For SuggestResult, this means we also have to replace AdditionalProperties with a property of the generic type.
+  # ASSUMPTION: We only use AdditionalProperties in situations where they should be replace by a document of generic
+  # type T.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(public partial class DocumentSuggestResult)/g, "$1<T>" ).
+        replace( /(IList<SuggestResult)/g, "$1<T>" ).
+        replace( /(public partial class SuggestResult)/g, "$1<T>" ).
+        replace( /\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\n\s*\/\/\/ message are deserialized this collection<\/param>/g, "/// <param name=\"document\">The document on which the suggested text is based.</param>" ).
+        replace( /(public SuggestResult)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
+        replace( /AdditionalProperties = additionalProperties;/g, "Document = document;" ).
+        replace( /(\/\/\/ <summary>\s*\n\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\n\s*\/\/\/ this collection(\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)\[JsonExtensionData\]\s*\n\s*public IDictionary<string, object> AdditionalProperties ({ get; set; })/g, "$1 Gets the document on which the suggested text is based. $2public T Document $3" ).
+        replace( /(SuggestGetWithHttpMessagesAsync)/g, "$1<T>" ).
+        replace( /(SuggestPostWithHttpMessagesAsync)/g, "$1<T>" ).
+        replace( /(AzureOperationResponse<DocumentSuggestResult)/g, "$1<T>" ).
+        replace( /(DeserializeObject<DocumentSuggestResult)/g, "$1<T>" )
+####
+  # Improve documentation for SuggestParameters.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(\/\/\/) Additional parameters for SuggestGet operation./g, "$1 Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors." )
 ```
