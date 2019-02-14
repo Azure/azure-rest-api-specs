@@ -1090,6 +1090,145 @@
             }
           }
         }
+      },
+      "put": {
+        "operationId": "HubVirtualNetworkConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionPut": {
+            "$ref": "./examples/HubVirtualNetworkConnectionPut.json"
+          }
+        },
+        "description": "Creates a HubVirtualNetworkConnection resource if it doesn't exist. Updates the HubVirtualNetworkConnection if one exists.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the HubVirtualNetworkConnection."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the parent Virtual Hub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the HubVirtualNetworkConnection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "hubVirtualNetworkConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            },
+            "description": "Parameters supplied to create or update HubVirtualNetworkConnection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the HubVirtualNetworkConnection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the HubVirtualNetworkConnection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VirtualWANs"
+        ],
+        "operationId": "HubVirtualNetworkConnections_UpdateTags",
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionUpdate": {
+            "$ref": "./examples/HubVirtualNetworkConnectionUpdateTags.json"
+          }
+        },
+        "description": "Updates HubVirtualNetworkConnection tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the HubVirtualNetworkConnection."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the parent Virtual Hub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the HubVirtualNetworkConnection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "hubVirtualNetworkConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update HubVirtualNetworkConnection tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the HubVirtualNetworkConnection updated.",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the HubVirtualNetworkConnection updated.",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections": {
@@ -2248,7 +2387,9 @@
           }
         },
         "x-ms-examples": {
-          "GenerateP2SVpnGatewayVPNProfile": { "$ref": "./examples/P2SVpnGatewayGenerateVpnProfile.json" }
+          "GenerateP2SVpnGatewayVPNProfile": {
+            "$ref": "./examples/P2SVpnGatewayGenerateVpnProfile.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -2476,32 +2617,32 @@
       "description": "Parameters for VirtualHub"
     },
     "VirtualHubRouteTable": {
-      "properties" : {
+      "properties": {
         "routes": {
-            "type": "array",
-            "description": "list of all routes.",
-            "items": {
-                "$ref": "#/definitions/VirtualHubRoute"
-            }
+          "type": "array",
+          "description": "list of all routes.",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRoute"
+          }
         }
       },
-      "description" : "VirtualHub route table"
+      "description": "VirtualHub route table"
     },
     "VirtualHubRoute": {
-      "properties" : {
+      "properties": {
         "addressPrefixes": {
-            "type": "array",
-            "description": "list of all addressPrefixes.",
-            "items": {
-                "type": "string"
-            }
+          "type": "array",
+          "description": "list of all addressPrefixes.",
+          "items": {
+            "type": "string"
+          }
         },
         "nextHopIpAddress": {
-            "type": "string",
-            "description": "NextHop ip address."
+          "type": "string",
+          "description": "NextHop ip address."
         }
       },
-      "description" : "VirtualHub route"
+      "description": "VirtualHub route"
     },
     "VirtualHub": {
       "required": [
@@ -2625,7 +2766,7 @@
         },
         "vpnConnectionProtocolType": {
           "description": "Connection protocol used for this connection",
-          "$ref":  "./virtualNetworkGateway.json#/definitions/ConnectionProtocol"
+          "$ref": "./virtualNetworkGateway.json#/definitions/ConnectionProtocol"
         },
         "ingressBytesTransferred": {
           "type": "integer",
@@ -2997,7 +3138,7 @@
       ],
       "description": "Properties of Radius Server root certificate of P2SVpnServerConfiguration."
     },
-  "P2SVpnServerConfigRadiusServerRootCertificate": {
+    "P2SVpnServerConfigRadiusServerRootCertificate": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3097,7 +3238,7 @@
       ],
       "description": "Radius client root certificate of P2SVpnServerConfiguration."
     },
-  "P2SVpnServerConfigurationProperties": {
+    "P2SVpnServerConfigurationProperties": {
       "properties": {
         "name": {
           "type": "string",
@@ -3249,7 +3390,7 @@
       },
       "description": "VpnClientConnectionHealth properties"
     },
-  "P2SVpnGatewayProperties": {
+    "P2SVpnGatewayProperties": {
       "properties": {
         "virtualHub": {
           "$ref": "./network.json#/definitions/SubResource",
