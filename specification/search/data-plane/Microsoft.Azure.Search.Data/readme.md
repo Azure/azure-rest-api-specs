@@ -150,4 +150,11 @@ directive:
         replace( /(Task<AzureOperationResponse)<object>(> GetWithHttpMessagesAsync)/g, "$1<T>$2<T>" ).
         replace( /(DeserializeObject)<object>/g, "$1<T>" ).
         replace( /(var _result = new AzureOperationResponse)<object>/g, "$1<T>" )
+####
+  # Make SearchRequest/SuggestRequest/AutocompleteRequest internal, since they are implementation details.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /public (partial class) (Suggest|Search|Autocomplete)(Request)/g, "internal $1 $2$3" )
 ```
