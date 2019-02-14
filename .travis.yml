@@ -64,28 +64,28 @@ script:
     fi
   - >-
     if [[ $MODE == 'syntax' ]]; then
-      npm install
+      npm ci
       npm test -- test/syntax.js
     fi
   - >-
     if [[ $MODE == 'semantic' ]]; then
-      npm install
+      npm ci
       node scripts/semanticValidation.js
     fi
   - >-
     if [[ $MODE == 'model' ]]; then
-      npm install
+      npm ci
       node scripts/modelValidation.js
     fi
   - >-
     if [[ $MODE == 'BreakingChange' ]]; then
       scripts/install-dotnet.sh
-      npm install
+      npm ci
       node -- scripts/breaking-change.js
     fi
   - >-
     if [[ $MODE == 'lintdiff' ]]; then
       scripts/install-dotnet.sh
-      npm install
+      npm ci
       node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js
     fi
