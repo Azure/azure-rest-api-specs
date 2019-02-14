@@ -172,6 +172,7 @@
         },
         "customInterval": {
           "type": "integer",
+          "format": "int32",
           "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
         },
         "period": {
@@ -185,8 +186,8 @@
           "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series."
         },
         "sensitivity": {
-          "type": "number",
-          "format": "float",
+          "type": "integer",
+          "format": "int32",
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
         }
       }
@@ -201,7 +202,7 @@
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of a data point. Please make sure it aligns with the midnight, and use a UTC date time string, e.g., 2017-08-01T00:00:00Z."
+          "description": "Timestamp of a data point (ISO8601 format)."
         },
         "value": {
           "type": "number",
