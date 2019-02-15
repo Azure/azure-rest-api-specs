@@ -1034,7 +1034,7 @@
         "tableName"
       ]
     },
-    "RestServiceDataset": {
+    "RestResourceDataset": {
       "x-ms-discriminator-value": "RestResource",
       "description": "A Rest service dataset.",
       "type": "object",
@@ -1047,11 +1047,11 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RestServiceDatasetTypeProperties"
+          "$ref": "#/definitions/RestResourceDatasetTypeProperties"
         }
       }
     },
-    "RestServiceDatasetTypeProperties": {
+    "RestResourceDatasetTypeProperties": {
       "description": "Properties specific to this dataset type.",
       "properties": {
         "relativeUrl": {
@@ -1071,8 +1071,8 @@
           "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
         },
         "paginationRules": {
-          "description": "The pagination rules to compose next page requests.",
           "type": "object"
+          "description": "The pagination rules to compose next page requests. Type: string (or Expression with resultType string).",
         }
       }
     },
