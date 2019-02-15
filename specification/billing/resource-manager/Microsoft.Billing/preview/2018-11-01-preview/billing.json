@@ -50,45 +50,43 @@
             }
           }
         }
-      }
-    },
-    "paths": {
-        "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/rename": {
-          "post": {
-            "operationId": "RenameSubscription",
-            "description": "Renames the subscription",
-            "parameters": [
-              {
-                "name": "subscriptionId",
-                "in": "path",
-                "description": "Subscription Id.",
-                "required": true,
-                "type": "string"
-              },
-              {
-                "$ref": "#/parameters/apiVersionParameter"
+      },
+      "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/rename": {
+        "post": {
+          "operationId": "RenameSubscription",
+          "description": "Renames the subscription",
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "description": "Subscription Id.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
+            }
+          ],
+          "tags": [
+            "SubscriptionController"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "schema": {
+                "$ref": "#/definitions/RenameSubscriptionResult"
               }
-            ],
-            "tags": [
-              "SubscriptionController"
-            ],
-            "responses": {
-              "200": {
-                "description": "OK. The request has succeeded.",
-                "schema": {
-                  "$ref": "#/definitions/RenameSubscriptionResult"
-                }
-              },
-              "default": {
-                "description": "Error response describing why the operation failed.",
-                "schema": {
-                  "$ref": "#/definitions/ErrorResponse"
-                }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
               }
             }
           }
         }
-      },
+      }
+    },
     "definitions": {
       "CancelSubscriptionResult": {
         "description": "Canceled Subscription Id",
