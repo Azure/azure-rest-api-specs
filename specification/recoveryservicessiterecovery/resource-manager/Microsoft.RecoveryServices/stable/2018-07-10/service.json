@@ -2755,6 +2755,83 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/addDisks": {
+      "post": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Add disk(s) for protection.",
+        "description": "Operation to add disks(s) to the replication protected item.",
+        "operationId": "ReplicationProtectedItems_AddDisks",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "Replication protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addDisksInput",
+            "in": "body",
+            "description": "Add disks input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddDisksInput"
+            }
+          }
+        ],
+        "responses": {
+		 "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Add disk(s) for protection.": {
+            "$ref": "./examples/ReplicationProtectedItems_AddDisks.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/applyRecoveryPoint": {
       "post": {
         "tags": [
@@ -3180,6 +3257,83 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/removeDisks": {
+      "post": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Removes disk(s).",
+        "description": "Operation to remove disk(s) from the replication protected item.",
+        "operationId": "ReplicationProtectedItems_RemoveDisks",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "Replication protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "removeDisksInput",
+            "in": "body",
+            "description": "Remove disks input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveDisksInput"
+            }
+          }
+        ],
+        "responses": {
+		 "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Removes disk(s).": {
+            "$ref": "./examples/ReplicationProtectedItems_RemoveDisks.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/repairReplication": {
       "post": {
         "tags": [
@@ -3318,6 +3472,83 @@
         "x-ms-examples": {
           "Execute Reverse Replication\\Reprotect": {
             "$ref": "./examples/ReplicationProtectedItems_Reprotect.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/ResolveHealthErrors": {
+      "post": {
+        "tags": [
+          "ReplicationProtectedItems"
+        ],
+        "summary": "Resolve health errors.",
+        "description": "Operation to resolve health issues of the replication protected item.",
+        "operationId": "ReplicationProtectedItems_ResolveHealthErrors",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Unique fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicatedProtectedItemName",
+            "in": "path",
+            "description": "Replication protected item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resolveHealthInput",
+            "in": "body",
+            "description": "Health issue input object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResolveHealthInput"
+            }
+          }
+        ],
+        "responses": {
+		 "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectedItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Resolve health errors.": {
+            "$ref": "./examples/ReplicationProtectedItems_ResolveHealthErrors.json"
           }
         }
       }
@@ -6759,6 +6990,45 @@
         }
       }
     },
+	"/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationSupportedOperatingSystems": {
+      "get": {
+        "tags": [
+          "SupportedOperatingSystems"
+        ],
+        "summary": "Gets the data of supported OSes by SRS.",
+        "operationId": "SupportedOperatingSystems_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SupportedOperatingSystems"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the data of supported OSes by SRS.": {
+            "$ref": "./examples/SupportedOperatingSystems_Get.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationVaultHealth": {
       "get": {
         "tags": [
@@ -6887,6 +7157,32 @@
     }
   },
   "definitions": {
+    "A2AAddDisksInput": {
+      "description": "A2A add disk(s) input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AddDisksProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "vmDisks": {
+          "description": "The list of vm disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AVmDiskInputDetails"
+          }
+        },
+        "vmManagedDisks": {
+          "description": "The list of vm managed disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AVmManagedDiskInputDetails"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "A2AApplyRecoveryPointInput": {
       "description": "ApplyRecoveryPoint input specific to A2A provider.",
       "type": "object",
@@ -7189,6 +7485,17 @@
           "description": "The data pending at source virtual machine in MB.",
           "type": "number"
         },
+        "diskState": {
+          "description": "The disk state.",
+          "type": "string"
+        },
+        "allowedDiskLevelOperation": {
+          "description": "The disk level operations list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "isDiskEncrypted": {
           "description": "A value indicating whether vm has encrypted os disk or not.",
           "type": "boolean"
@@ -7283,6 +7590,17 @@
           "description": "The data pending at source virtual machine in MB.",
           "type": "number"
         },
+        "diskState": {
+          "description": "The disk state.",
+          "type": "string"
+        },
+        "allowedDiskLevelOperation": {
+          "description": "The disk level operations list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "isDiskEncrypted": {
           "description": "A value indicating whether vm has encrypted os disk or not.",
           "type": "boolean"
@@ -7364,6 +7682,32 @@
           "x-ms-enum": {
             "name": "RecoveryPointSyncType",
             "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
+	"A2ARemoveDisksInput": {
+      "description": "A2A remove disk(s) input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RemoveDisksProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "vmDisksUris": {
+          "description": "The list of vm disk vhd URIs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmManagedDisksIds": {
+          "description": "The list of vm managed disk Ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       },
@@ -7743,6 +8087,37 @@
           "type": "string"
         }
       }
+    },
+	 "AddDisksInput": {
+      "description": "Input for add disk(s) operation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddDisksInputProperties",
+          "description": "Add disks input properties."
+        }
+      }
+    },
+    "AddDisksInputProperties": {
+      "description": "Add Disks input properties.",
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/AddDisksProviderSpecificInput",
+          "description": "The ReplicationProviderInput. For HyperVReplicaAzure provider, it will be AzureEnableProtectionInput object. For San provider, it will be SanEnableProtectionInput object. For HyperVReplicaAzure provider, it can be null."
+        }
+      }
+    },
+    "AddDisksProviderSpecificInput": {
+      "description": "Add Disks provider specific input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "AddRecoveryServicesProviderInput": {
       "description": "Input required to add a provider.",
@@ -8125,13 +8500,6 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "roleAssignments": {
-          "description": "The Azure role assignments.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleAssignment"
           }
         },
         "inputEndpoints": {
@@ -9232,6 +9600,22 @@
         "entityId": {
           "description": "ID of the entity.",
           "type": "string"
+        },
+		 "errorId": {
+          "description": "The health error unique id.",
+          "type": "string"
+        },
+        "customerResolvability": {
+		 "description": "Value indicating whether the health error is customer resolvable.",
+          "enum": [
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthErrorCustomerResolvability",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -10511,11 +10895,35 @@
       },
       "x-ms-discriminator-value": "InMageAzureV2"
     },
+    "InMageAzureV2DiskInputDetails": {
+      "description": "Disk input details.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The DiskId.",
+          "type": "string"
+        },
+        "logStorageAccountId": {
+          "description": "The LogStorageAccountId.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "The DiskType.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DiskAccountType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "InMageAzureV2EnableProtectionInput": {
       "description": "VMware Azure specific enable protection input.",
-      "required": [
-        "storageAccountId"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -10551,7 +10959,7 @@
           "description": "The disks to include list.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/InMageAzureV2DiskInputDetails"
           }
         },
         "targetAzureNetworkId": {
@@ -10582,9 +10990,18 @@
           "description": "The Id of the target resource group (for resource manager deployment) in which the failover VM is to be created.",
           "type": "string"
         },
-        "useManagedDisks": {
-          "description": "A value indicating whether managed disks should be used during failover.",
-          "type": "string"
+        "diskType": {
+          "description": "The DiskType.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DiskAccountType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -10648,6 +11065,24 @@
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
+    },
+    "InMageAzureV2ManagedDiskDetails": {
+      "description": "InMageAzureV2 Managed disk details.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk id.",
+          "type": "string"
+        },
+        "seedManagedDiskId": {
+          "description": "Seed managed disk Id.",
+          "type": "string"
+        },
+        "replicaDiskType": {
+          "description": "The replica disk type.",
+          "type": "string"
+        }
+      }
     },
     "InMageAzureV2PolicyDetails": {
       "description": "InMage Azure v2 specific protection profile details.",
@@ -11052,6 +11487,13 @@
         "osVersion": {
           "description": "The OS Version of the protected item.",
           "type": "string"
+        },
+        "protectedManagedDisks": {
+          "description": "The list of protected managed disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageAzureV2ManagedDiskDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -12731,6 +13173,7 @@
         },
         "productType": {
           "description": "Product type.",
+
           "type": "string"
         },
         "osEdition": {
@@ -12765,6 +13208,20 @@
         },
         "vhdName": {
           "description": "The OS disk VHD name.",
+          "type": "string"
+        }
+      }
+    },
+    "OSVersionWrapper": {
+      "description": "Wrapper model for OSVersion to include version and service pack info.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The version.",
+          "type": "string"
+        },
+        "servicePack": {
+          "description": "Service pack.",
           "type": "string"
         }
       }
@@ -14290,6 +14747,37 @@
         }
       }
     },
+	"RemoveDisksInput": {
+      "description": "Input for remove disk(s) operation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemoveDisksInputProperties",
+          "description": "Remove disk input properties."
+        }
+      }
+    },
+    "RemoveDisksInputProperties": {
+      "description": "Remove Disk input properties.",
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/RemoveDisksProviderSpecificInput",
+          "description": "The ReplicationProviderInput. For HyperVReplicaAzure provider, it will be AzureEnableProtectionInput object. For San provider, it will be SanEnableProtectionInput object. For HyperVReplicaAzure provider, it can be null."
+        }
+      }
+    },
+    "RemoveDisksProviderSpecificInput": {
+      "description": "Remove Disk provider specific input.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
     "RemoveProtectionContainerMappingInput": {
       "description": "Container unpairing input.",
       "type": "object",
@@ -14549,6 +15037,39 @@
         }
       },
       "discriminator": "instanceType"
+    },
+	"ResolveHealthError": {
+      "description": "Resolve health errors input properties.",
+      "type": "object",
+      "properties": {
+        "healthErrorId": {
+          "description": "Health error id.",
+          "type": "string"
+        }
+      }
+    },
+    "ResolveHealthInput": {
+      "description": "Resolve health input.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResolveHealthInputProperties",
+          "description": "Disable resolve health input properties."
+        }
+      }
+    },
+    "ResolveHealthInputProperties": {
+      "description": "Resolve health input properties.",
+      "type": "object",
+      "properties": {
+        "healthErrors": {
+          "description": "Health errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResolveHealthError"
+          }
+        }
+      }
     },
     "Resource": {
       "description": "Azure resource.",
@@ -14899,6 +15420,73 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "SupportedOperatingSystems": {
+      "description": "Response object for supported operating systems API.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportedOSProperties",
+          "description": "Properties model for supported OS API."
+        }
+      }
+    },
+    "SupportedOSDetails": {
+      "description": "Supported Operating system details.",
+      "type": "object",
+      "properties": {
+        "osName": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "The type.",
+          "type": "string"
+        },
+        "osVersions": {
+          "description": "List of version for OS.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OSVersionWrapper"
+          }
+        }
+      }
+    },
+    "SupportedOSProperties": {
+      "description": "Properties model for supported OS API.",
+      "type": "object",
+      "properties": {
+        "supportedOsList": {
+          "description": "The supported OS List.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedOSProperty"
+          }
+        }
+      }
+    },
+    "SupportedOSProperty": {
+      "description": "Property object for supported OS api.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the replication provider type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedOs": {
+          "description": "List of supported OS.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedOSDetails"
           }
         }
       }
