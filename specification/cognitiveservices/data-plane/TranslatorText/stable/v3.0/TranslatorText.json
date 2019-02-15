@@ -91,7 +91,11 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ClientTraceId"
+            "name": "X-ClientTraceId",
+            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "text",
@@ -146,7 +150,11 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/ClientTraceId"
+            "name": "X-ClientTraceId",
+            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "text",
@@ -215,7 +223,11 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ClientTraceId"
+            "name": "X-ClientTraceId",
+            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "text",
@@ -284,7 +296,11 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ClientTraceId"
+            "name": "X-ClientTraceId",
+            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "text",
@@ -357,7 +373,11 @@
             "required": false
           },
           {
-            "$ref": "#/parameters/ClientTraceId"
+            "name": "X-ClientTraceId",
+            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+            "in": "header",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -485,7 +505,11 @@
             }
           },
           {
-            "$ref": "#/parameters/ClientTraceId"
+            "name": "X-ClientTraceId",
+            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+            "in": "header",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "text",
@@ -561,7 +585,11 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ClientTraceId"
+            "name": "X-ClientTraceId",
+            "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+            "in": "header",
+            "required": false,
+             "type": "string"
           },
           {
             "name": "texts",
@@ -1085,13 +1113,6 @@
       "required": true,
       "type": "string",
       "default": "3.0"
-    },
-    "ClientTraceId":{
-      "name": "X-ClientTraceId",
-      "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
-      "in": "header",
-      "required": false,
-      "type": "string"
-    }    
+    }
   }
 }
