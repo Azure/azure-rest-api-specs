@@ -7,3 +7,6 @@ steps:
   displayName: 'npm install'
   inputs:
     verbose: false
+
+- script: 'scripts/install-dotnet.sh'
+- script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
