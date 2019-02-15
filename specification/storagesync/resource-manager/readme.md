@@ -29,11 +29,19 @@ openapi-type: arm
 tag: package-2018-10-01
 ```
 
+### Tag: package-2019-02-01
+
+These settings apply only when `--tag=package-2019-02-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-01'
+input-file:
+- Microsoft.StorageSync/preview/2019-02-01/storagesync.json
+```
 
 
 ### Tag: package-2018-10-01
 
-These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
+These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-10-01'
 input-file:
