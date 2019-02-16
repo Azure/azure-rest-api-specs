@@ -1,6 +1,9 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
+variables:
+  'Travis.Pull.Request': $(System.PullRequest.PullRequestId)
+
 steps:
 
 - task: Npm@1
