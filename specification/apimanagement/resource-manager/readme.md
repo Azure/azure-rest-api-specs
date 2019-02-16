@@ -47,6 +47,7 @@ input-file:
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimemailtemplate.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimgroups.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimidentityprovider.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimissues.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimloggers.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnotifications.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnetworkstatus.json

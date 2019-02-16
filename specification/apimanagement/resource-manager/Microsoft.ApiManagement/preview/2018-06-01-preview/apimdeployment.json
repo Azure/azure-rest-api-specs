@@ -390,10 +390,14 @@
           "200": {
             "description": "Service was successfully deleted."
           },
+          "202": {
+            "description": "The service delete request was Accepted."
+          },
           "204": {
-            "description": "Service is already deleted."
+            "description": "The service does not exist."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
@@ -582,103 +586,6 @@
           },
           "200": {
             "description": "Network configuration updates were successfully applied on the Api Management service.",
-            "schema": {
-              "$ref": "#/definitions/ApiManagementServiceResource"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatecertificate": {
-      "post": {
-        "tags": [
-          "ApiManagementService"
-        ],
-        "operationId": "ApiManagementService_UploadCertificate",
-        "description": "Upload Custom Domain SSL certificate for an API Management service. This operation will be deprecated in future releases.",
-        "x-ms-examples": {
-          "ApiManagementServiceUploadProxyCertificate": {
-            "$ref": "./examples/ApiManagementServiceUploadProxyCertificate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApiManagementServiceUploadCertificateParameters"
-            },
-            "description": "Parameters supplied to the Upload SSL certificate for an API Management service operation."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully uploaded certificate to the API Management Service.",
-            "schema": {
-              "$ref": "#/definitions/CertificateInformation"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatehostname": {
-      "post": {
-        "tags": [
-          "ApiManagementService"
-        ],
-        "operationId": "ApiManagementService_UpdateHostname",
-        "description": "Creates, updates, or deletes the custom hostnames for an API Management service. The custom hostname can be applied to the Proxy and Portal endpoint. This is a long running operation and could take several minutes to complete. This operation will be deprecated in the next version update.",
-        "x-ms-examples": {
-          "ApiManagementServiceUpdateHostName": {
-            "$ref": "./examples/ApiManagementServiceUpdateHostName.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApiManagementServiceUpdateHostnameParameters"
-            },
-            "description": "Parameters supplied to the UpdateHostname operation."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Service was successfully updated with desired hostnames.",
-            "schema": {
-              "$ref": "#/definitions/ApiManagementServiceResource"
-            }
-          },
-          "202": {
-            "description": "Accepted. The location header contains the URL where the status of the long running operation can be checked. The response also includes the unmodified ApiManagementServiceResource.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceResource"
             }
@@ -1416,38 +1323,6 @@
       },
       "description": "Parameter supplied to the Apply Network configuration operation."
     },
-    "ApiManagementServiceUploadCertificateParameters": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Hostname type.",
-          "enum": [
-            "Proxy",
-            "Portal",
-            "Management",
-            "Scm"
-          ],
-          "x-ms-enum": {
-            "name": "HostnameType",
-            "modelAsString": false
-          }
-        },
-        "certificate": {
-          "type": "string",
-          "description": "Base64 Encoded certificate."
-        },
-        "certificate_password": {
-          "type": "string",
-          "description": "Certificate password."
-        }
-      },
-      "required": [
-        "type",
-        "certificate",
-        "certificate_password"
-      ],
-      "description": "Parameters supplied to the Upload SSL certificate for an API Management service operation."
-    },
     "ApiManagementServiceIdentity": {
       "description": "Identity properties of the Api Management service resource.",
       "properties": {
@@ -1478,67 +1353,6 @@
       "required": [
         "type"
       ]
-    },
-    "HostnameConfigurationOld": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Hostname type.",
-          "enum": [
-            "Proxy",
-            "Portal",
-            "Management",
-            "Scm"
-          ],
-          "x-ms-enum": {
-            "name": "HostnameType",
-            "modelAsString": false
-          }
-        },
-        "hostname": {
-          "type": "string",
-          "description": "Hostname to configure."
-        },
-        "certificate": {
-          "$ref": "#/definitions/CertificateInformation",
-          "description": "Certificate information."
-        }
-      },
-      "required": [
-        "type",
-        "hostname",
-        "certificate"
-      ],
-      "description": "Custom hostname configuration."
-    },
-    "ApiManagementServiceUpdateHostnameParameters": {
-      "properties": {
-        "update": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HostnameConfigurationOld"
-          },
-          "description": "Hostnames to create or update."
-        },
-        "delete": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Proxy",
-              "Portal",
-              "Management",
-              "Scm"
-            ],
-            "x-ms-enum": {
-              "name": "HostnameType",
-              "modelAsString": false
-            }
-          },
-          "description": "Hostnames types to delete."
-        }
-      },
-      "description": "Parameters supplied to the UpdateHostname operation."
     },
     "Operation": {
       "description": "REST API operation",
