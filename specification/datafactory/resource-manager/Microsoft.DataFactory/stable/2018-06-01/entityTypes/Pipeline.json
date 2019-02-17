@@ -703,26 +703,12 @@
           "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
         },
         "cursorMethods": {
-          "project": {
-            "type": "object",
-            "description": "Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string)."
-          },
-          "sort": {
-            "type": "object",
-            "description": "Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
-          },
-          "skip": {
-            "type": "object",
-            "description": "Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer)."
-          },
-          "limit": {
-            "type": "object",
-            "description": "Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer)."
-          }
+          "description": "Cursor methods for Mongodb query",
+          "$ref": "#/definitions/MongoDbCursorMethodsProperties"
         },
         "batchSize": {
           "type": "object",
-          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property’s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This propertyï¿½s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
         }
       }
     },
@@ -740,27 +726,38 @@
           "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
         },
         "cursorMethods": {
-          "project": {
-            "type": "object",
-            "description": "Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string)."
-          },
-          "sort": {
-            "type": "object",
-            "description": "Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
-          },
-          "skip": {
-            "type": "object",
-            "description": "Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer)."
-          },
-          "limit": {
-            "type": "object",
-            "description": "Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer)."
-          }
+          "description": "Cursor methods for Mongodb query.",
+          "$ref": "#/definitions/MongoDbCursorMethodsProperties"
         },
         "batchSize": {
           "type": "object",
-          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property’s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This propertyï¿½s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
         }
+      }
+    },
+    "MongoDbCursorMethodsProperties": {
+      "description": "Cursor methods for Mongodb query",
+      "type": "object",
+      "properties": {
+        "project": {
+          "type": "object",
+          "description": "Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string)."
+        },
+        "sort": {
+          "type": "object",
+          "description": "Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "skip": {
+          "type": "object",
+          "description": "Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer)."
+        },
+        "limit": {
+          "type": "object",
+          "description": "Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "Office365Source": {
@@ -1886,7 +1883,7 @@
         },
         "writeBatchSize": {
           "type": "object",
-          "description": "Inserts data into the CosmosDB (MongoDB API) collection when the document count reaches this property’s value. The default value is 5. Type: integer (or Expression with resultType integer)."
+          "description": "Inserts data into the CosmosDB (MongoDB API) collection when the document count reaches this propertyï¿½s value. The default value is 5. Type: integer (or Expression with resultType integer)."
         },
         "writeBatchTimeout": {
           "type": "object",
