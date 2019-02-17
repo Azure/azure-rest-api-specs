@@ -276,6 +276,14 @@
         "redirectIncompatibleRowSettings": {
           "description": "Redirect incompatible row settings when EnableSkipIncompatibleRow is true.",
           "$ref": "#/definitions/RedirectIncompatibleRowSettings"
+        },
+        "preserveRules":{
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Preserve Rules."
         }
       },
       "required": [
@@ -576,6 +584,32 @@
         }
       }
     },
+    "AzureDataExplorerSource": {
+      "description": "A copy activity Azure Data Explorer (Kusto) source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Should be a Kusto Query Language (KQL) query. Type: string (or Expression with resultType string)."
+        },
+        "noTruncation": {
+          "type": "object",
+          "description": "The name of the Boolean option that controls whether truncation is applied to result-sets that go beyond a certain row-count limit."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
     "OracleSource": {
       "description": "A copy activity Oracle source.",
       "type": "object",
@@ -655,6 +689,90 @@
         }
       }
     },
+    "MongoDbV2Source": {
+      "description": "A copy activity source for a MongoDB database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
+        },
+        "cursorMethods": {
+          "project": {
+            "type": "object",
+            "description": "Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string)."
+          },
+          "sort": {
+            "type": "object",
+            "description": "Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+          },
+          "skip": {
+            "type": "object",
+            "description": "Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer)."
+          },
+          "limit": {
+            "type": "object",
+            "description": "Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer)."
+          }
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property’s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        }
+      }
+    },
+    "CosmosDbMongoDbApiSource": {
+      "description": "A copy activity source for a CosmosDB (MongoDB API) database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
+        },
+        "cursorMethods": {
+          "project": {
+            "type": "object",
+            "description": "Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string)."
+          },
+          "sort": {
+            "type": "object",
+            "description": "Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+          },
+          "skip": {
+            "type": "object",
+            "description": "Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer)."
+          },
+          "limit": {
+            "type": "object",
+            "description": "Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer)."
+          }
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property’s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        }
+      }
+    },
+    "Office365Source": {
+      "description": "A copy activity source for an Office365 service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {}
+    },
     "AzureDataLakeStoreSource": {
       "description": "A copy activity Azure Data Lake source.",
       "type": "object",
@@ -664,6 +782,29 @@
         }
       ],
       "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "AzureBlobFSSource": {
+      "description": "A copy activity Azure BlobFS source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "treatEmptyAsNull": {
+          "type": "object",
+          "description": "Treat empty as null. Type: boolean (or Expression with resultType boolean)."
+        },
+        "skipHeaderLineCount": {
+          "type": "object",
+          "description": "Number of header lines to skip from each blob. Type: integer (or Expression with resultType integer)."
+        },
         "recursive": {
           "type": "object",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
@@ -1135,6 +1276,51 @@
         }
       }
     },
+    "DynamicsAXSource": {
+      "description": "A copy activity Dynamics AX source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleServiceCloudSource": {
+      "description": "A copy activity Oracle Service Cloud source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GoogleAdWordsSource": {
+      "description": "A copy activity Google AdWords service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
@@ -1549,6 +1735,21 @@
         }
       }
     },
+    "AzureBlobFSSink": {
+      "description": "A copy activity Azure Data Lake Storage Gen2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "copyBehavior": {
+          "description": "The type of copy behavior for copy sink.",
+          "$ref": "#/definitions/CopyBehaviorType"
+        }
+      }
+    },
     "AzureSearchIndexSink": {
       "description": "A copy activity Azure Search Index sink.",
       "type": "object",
@@ -1616,6 +1817,29 @@
         "writeBehavior"
       ]
     },
+    "AzureDataExplorerSink": {
+      "description": "A copy activity Azure Data Explorer sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "ingestionMappingName": {
+          "type": "object",
+          "description": "A name of a pre-created csv mapping that was defined on the target Kusto table. Type: string."
+        },
+        "ingestionMappingAsJson": {
+          "type": "object",
+          "description": "An explicit column mapping description provided in a json format. Type: string."
+        },
+        "flushImmediately": {
+          "type": "object",
+          "description": "If set to true, any aggregation will be skipped. Default is false. Type: boolean."
+        }
+      }
+    },
     "SalesforceSink": {
       "description": "A copy activity Salesforce sink.",
       "type": "object",
@@ -1644,6 +1868,29 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "CosmosDbMongoDbApiSink": {
+      "description": "A copy activity sink for a CosmosDB (MongoDB API) database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "writeBatchSize": {
+          "type": "object",
+          "description": "Inserts data into the CosmosDB (MongoDB API) collection when the document count reaches this property’s value. The default value is 5. Type: integer (or Expression with resultType integer)."
+        },
+        "writeBatchTimeout": {
+          "type": "object",
+          "description": "The wait time for the batch insert operation to finish before it times out. The allowed value is timespan. Example: \"00:30:00\" (30 minutes). Type: string (or Expression with resultType string)."
         }
       }
     },
