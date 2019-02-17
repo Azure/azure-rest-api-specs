@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-12
   - tag: package-2018-11
   - tag: package-2018-10
   - tag: package-2018-08
@@ -35,6 +36,17 @@ batch:
   - tag: package-2016-12
   - tag: package-2016-09
   - tag: package-2015-06split
+```
+
+### Tag: package-2018-12 and python
+
+These settings apply only when `--tag=package-2018-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-12' && $(python)
+python:
+  namespace: azure.mgmt.network.v2018_12_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-network/azure/mgmt/network/v2018_12_01
 ```
 
 ### Tag: package-2018-11 and python
