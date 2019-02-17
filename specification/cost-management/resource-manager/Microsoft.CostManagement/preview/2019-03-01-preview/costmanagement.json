@@ -1688,7 +1688,85 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/operations": {
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Showback": {
+      "get": {
+        "tags": [
+          "Showback"
+        ],
+        "operationId": "ShowbackRules_List",
+        "description": "Get list all Showback Rules.",
+        "x-ms-examples": {
+          "ShowbackRules_List": {
+            "$ref": "./examples/ShowbackRulesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ShowbackRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Showback/{ruleName}": {
+      "get": {
+        "tags": [
+          "Showback"
+        ],
+        "operationId": "ShowbackRule_GetBillingAccountId",
+        "description": "Gets the showback rule by rule name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ShowbackRule": {
+            "$ref": "./examples/ShowbackRule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ShowbackRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+	"/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -2772,6 +2850,123 @@
           }
         }
       }
+    },
+    "ShowbackRuleListResult": {
+      "description": "Result of listing showback rules. It contains a list of available rules in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of showback rules.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ShowbackRule"
+          }
+        }
+      }
+    },
+    "ShowbackRule": {
+      "type": "object",
+      "description": "The showback rule model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ShowbackRuleProperties",
+          "description": "Showback rule properties"
+        }
+      }
+    },
+    "ShowbackRuleProperties": {
+      "description": "The properties of a showback rule.",
+      "properties": {
+        "Id": {
+          "description": "The id of the showback rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of a showback rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ruleType": {
+          "description": "The showback rule type",
+          "type": "string",
+          "enum": [
+            "CustomPrice",
+            "CustomChange",
+			"CostAllocation"
+          ],
+          "x-ms-enum": {
+            "name": "RuleType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "details": {
+          "description": "Specific details of showback rule - key-value dictionary.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+		  "readOnly": true
+        },
+        "status": {
+          "description": "The current status of the showback rule.",
+          "type": "string",
+          "enum": [
+            "NotActive",
+            "Active"
+          ],
+          "x-ms-enum": {
+            "name": "ShowbackRuleStatus",
+            "modelAsString": true
+          }
+        },
+		"version": {
+          "description": "The current version of showback rule.",
+          "type": "integer",
+          "readOnly": true
+        },
+		  "creationTime": {
+          "format": "date-time",
+          "description": "The time when the showback rule was created.",
+          "type": "string",
+          "readOnly": true
+        },
+		"deprecationTime": {
+          "description": "The current time when showback rule was deprecate.",
+		  "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+		"modificationTime": {
+          "description": "The current status when showback rule was modified.",
+		  "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+		"modificationUsername": {
+          "description": "The username who modified the showback rule.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -2867,6 +3062,14 @@
       ],
       "x-ms-parameter-location": "method",
       "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call."
+    },
+	"ruleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "description": "Showback rule name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
