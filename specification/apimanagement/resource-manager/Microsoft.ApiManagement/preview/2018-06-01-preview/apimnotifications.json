@@ -72,6 +72,12 @@
             "schema": {
               "$ref": "#/definitions/NotificationCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -128,7 +134,7 @@
           "Notification"
         ],
         "operationId": "Notification_CreateOrUpdate",
-        "description": "Updates an Notification.",
+        "description": "Create or Update API Management publisher notification.",
         "x-ms-examples": {
           "ApiManagementGetNotification": {
             "$ref": "./examples/ApiManagementGetNotification.json"
@@ -250,9 +256,6 @@
         "responses": {
           "204": {
             "description": "The User is subscribed to receive the notification."
-          },
-          "404" : {
-            "description": "Entity does not exists."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -441,9 +444,6 @@
         "responses": {
           "204": {
             "description": "The Users is subscribed to receive the notification."
-          },
-          "404" : {
-            "description": "The Users is not subscribed to receive the notification."
           },
           "default": {
             "description": "Error response describing why the operation failed.",

@@ -234,12 +234,24 @@
             "description": "Group was created successfully.",
             "schema": {
               "$ref": "#/definitions/GroupContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "Group already exists.",
             "schema": {
               "$ref": "#/definitions/GroupContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -447,7 +459,7 @@
           "204": {
             "description": "Entity exists"
           },
-          "404" : {
+          "404": {
             "description": "Entity does not exists."
           },
           "default": {
@@ -458,7 +470,7 @@
           }
         }
       },
-	  "put": {
+      "put": {
         "tags": [
           "GroupUsers"
         ],

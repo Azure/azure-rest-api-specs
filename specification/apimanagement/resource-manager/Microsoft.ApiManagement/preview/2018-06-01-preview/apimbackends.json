@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| host  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|title | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|url | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -93,7 +93,7 @@
         "x-ms-odata": "#/definitions/BackendContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}": {
       "head": {
         "tags": [
           "Backends"
@@ -235,12 +235,24 @@
         "responses": {
           "201": {
             "description": "Backend was successfully created.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/BackendContract"
             }
           },
           "200": {
             "description": "The existing backend was successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/BackendContract"
             }
@@ -310,12 +322,12 @@
           "Backends"
         ],
         "operationId": "Backend_Delete",
+        "description": "Deletes the specified backend.",
         "x-ms-examples": {
           "ApiManagementDeleteBackend": {
             "$ref": "./examples/ApiManagementDeleteBackend.json"
           }
         },
-        "description": "Deletes the specified backend.",
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -352,7 +364,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}/reconnect": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}/reconnect": {
       "post": {
         "tags": [
           "Backends"
@@ -756,7 +768,7 @@
   },
   "parameters": {
     "BackendIdParameter": {
-      "name": "backendid",
+      "name": "backendId",
       "in": "path",
       "required": true,
       "type": "string",

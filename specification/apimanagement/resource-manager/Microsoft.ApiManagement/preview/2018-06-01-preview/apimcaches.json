@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApiManagementClient",
-    "description": "Use these REST APIs for performing operations on logger entity Azure API Management deployment.The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure EventHub.",
+    "description": "Use these REST APIs for performing operations on Cache entity in your Azure API Management deployment. Azure API Management also allows for caching responses in an external Azure Cache for Redis. For more information refer to [External Redis Cache in ApiManagement](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-cache-external).",
     "version": "2018-06-01-preview"
   },
   "host": "management.azure.com",
@@ -34,19 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/caches": {
       "get": {
         "tags": [
-          "Loggers"
+          "Caches"
         ],
-        "operationId": "Logger_ListByService",
-        "description": "Lists a collection of loggers in the specified service instance.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-log-event-hubs"
-        },
+        "operationId": "Cache_ListByService",
+        "description": "Lists a collection of all external Caches in the specified service instance.",
         "x-ms-examples": {
-          "ApiManagementListLoggers": {
-            "$ref": "./examples/ApiManagementListLoggers.json"
+          "ApiManagementListCaches": {
+            "$ref": "./examples/ApiManagementListCaches.json"
           }
         },
         "parameters": [
@@ -55,13 +52,6 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|loggerType | eq |    |\n|resourceId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -78,9 +68,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists a collection of Logger entities.",
+            "description": "Returns a collection of Cache entity.",
             "schema": {
-              "$ref": "#/definitions/LoggerCollection"
+              "$ref": "#/definitions/CacheCollection"
             }
           },
           "default": {
@@ -93,19 +83,19 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/LoggerContract"
+        "x-ms-odata": "#/definitions/CacheContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/caches/{cacheId}": {
       "head": {
         "tags": [
-          "Loggers"
+          "Caches"
         ],
-        "operationId": "Logger_GetEntityTag",
-        "description": "Gets the entity state (Etag) version of the logger specified by its identifier.",
+        "operationId": "Cache_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the Cache specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementHeadLogger": {
-            "$ref": "./examples/ApiManagementHeadLogger.json"
+          "ApiManagementHeadCache": {
+            "$ref": "./examples/ApiManagementHeadCache.json"
           }
         },
         "parameters": [
@@ -116,7 +106,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "#/parameters/CacheIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -127,7 +117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Specified logger entity exists and current entity state version is present in the ETag header.",
+            "description": "Specified Cache entity exists and current entity state version is present in the ETag header.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -145,13 +135,13 @@
       },
       "get": {
         "tags": [
-          "Loggers"
+          "Caches"
         ],
-        "operationId": "Logger_Get",
-        "description": "Gets the details of the logger specified by its identifier.",
+        "operationId": "Cache_Get",
+        "description": "Gets the details of the Cache specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementGetLogger": {
-            "$ref": "./examples/ApiManagementGetLogger.json"
+          "ApiManagementGetCache": {
+            "$ref": "./examples/ApiManagementGetCache.json"
           }
         },
         "parameters": [
@@ -162,7 +152,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "#/parameters/CacheIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -173,9 +163,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The response body contains the specified Logger entity.",
+            "description": "The response body contains the specified Cache entity.",
             "schema": {
-              "$ref": "#/definitions/LoggerContract"
+              "$ref": "#/definitions/CacheContract"
             },
             "headers": {
               "ETag": {
@@ -194,16 +184,17 @@
       },
       "put": {
         "tags": [
-          "Loggers"
+          "Caches"
         ],
-        "operationId": "Logger_CreateOrUpdate",
-        "description": "Creates or Updates a logger.",
+        "operationId": "Cache_CreateOrUpdate",
+        "description": "Creates or updates an External Cache to be used in Api Management instance.",
+        "externalDocs": {
+          "description": "Use an external cache in Azure API Management",
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-cache-external"
+        },
         "x-ms-examples": {
-          "ApiManagementCreateEHLogger": {
-            "$ref": "./examples/ApiManagementCreateEHLogger.json"
-          },
-          "ApiManagementCreateAILogger": {
-            "$ref": "./examples/ApiManagementCreateAILogger.json"
+          "ApiManagementCreateCache": {
+            "$ref": "./examples/ApiManagementCreateCache.json"
           }
         },
         "parameters": [
@@ -214,16 +205,16 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "#/parameters/CacheIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoggerContract"
+              "$ref": "#/definitions/CacheContract"
             },
-            "description": "Create parameters."
+            "description": "Create or Update parameters."
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
@@ -237,27 +228,27 @@
         ],
         "responses": {
           "201": {
-            "description": "Logger was successfully created.",
-            "schema": {
-              "$ref": "#/definitions/LoggerContract"
-            },
+            "description": "The new Cache was successfully added.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/CacheContract"
             }
           },
           "200": {
-            "description": "The existing logger was successfully updated.",
-            "schema": {
-              "$ref": "#/definitions/LoggerContract"
-            },
+            "description": "The Cache details were successfully updated.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/CacheContract"
             }
           },
           "default": {
@@ -270,13 +261,13 @@
       },
       "patch": {
         "tags": [
-          "Loggers"
+          "Caches"
         ],
-        "operationId": "Logger_Update",
-        "description": "Updates an existing logger.",
+        "operationId": "Cache_Update",
+        "description": "Updates the details of the cache specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementUpdateLogger": {
-            "$ref": "./examples/ApiManagementUpdateLogger.json"
+          "ApiManagementUpdateCache": {
+            "$ref": "./examples/ApiManagementUpdateCache.json"
           }
         },
         "parameters": [
@@ -287,14 +278,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "#/parameters/CacheIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoggerUpdateContract"
+              "$ref": "#/definitions/CacheUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -310,7 +301,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The existing logger was successfully updated."
+            "description": "The cache details were successfully updated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -322,13 +313,13 @@
       },
       "delete": {
         "tags": [
-          "Loggers"
+          "Caches"
         ],
-        "operationId": "Logger_Delete",
-        "description": "Deletes the specified logger.",
+        "operationId": "Cache_Delete",
+        "description": "Deletes specific Cache.",
         "x-ms-examples": {
-          "ApiManagementDeleteLogger": {
-            "$ref": "./examples/ApiManagementDeleteLogger.json"
+          "ApiManagementDeleteCache": {
+            "$ref": "./examples/ApiManagementDeleteCache.json"
           }
         },
         "parameters": [
@@ -339,17 +330,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "#/parameters/CacheIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
-          },
-          {
-            "name": "force",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Force deletion even if diagnostic is attached."
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -360,10 +344,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The logger was successfully deleted."
+            "description": "The Cache was successfully deleted."
           },
           "204": {
-            "description": "The logger was successfully deleted."
+            "description": "The Cache was successfully deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -376,33 +360,28 @@
     }
   },
   "definitions": {
-    "LoggerCollection": {
+    "CacheCollection": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LoggerContract"
+            "$ref": "#/definitions/CacheContract"
           },
-          "description": "Logger values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
+          "description": "Page values."
         },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
         }
       },
-      "description": "Paged Logger list representation."
+      "description": "Paged Caches list representation."
     },
-    "LoggerContract": {
+    "CacheContract": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LoggerContractProperties",
-          "description": "Logger entity contract properties."
+          "$ref": "#/definitions/CacheContractProperties",
+          "description": "Cache properties details."
         }
       },
       "allOf": [
@@ -410,125 +389,72 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Logger details."
+      "description": "Cache details."
     },
-    "LoggerContractProperties": {
+    "CacheContractProperties": {
       "properties": {
-        "loggerType": {
-          "type": "string",
-          "description": "Logger type.",
-          "enum": [
-            "azureEventHub",
-            "applicationInsights"
-          ],
-          "x-ms-enum": {
-            "name": "LoggerType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "azureEventHub",
-                "description": "Azure Event Hub as log destination."
-              },
-              {
-                "value": "applicationInsights",
-                "description": "Azure Application Insights as log destination."
-              }
-            ]
-          }
-        },
         "description": {
           "type": "string",
-          "description": "Logger description.",
-          "maxLength": 256
+          "description": "Cache description",
+          "maxLength": 2000
         },
-        "credentials": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The name and SendRule connection string of the event hub for azureEventHub logger.\nInstrumentation key for applicationInsights logger.",
-          "example": {
-            "name": "apim",
-            "connectionString": "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
-          }
-        },
-        "isBuffered": {
-          "type": "boolean",
-          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
+        "connectionString": {
+          "type": "string",
+          "description": "Runtime connection string to cache",
+          "maxLength": 300
         },
         "resourceId": {
           "type": "string",
-          "description": "Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource)."
+          "description": "Original uri of entity in external system cache points to",
+          "maxLength": 2000
         }
       },
       "required": [
-        "loggerType",
-        "credentials"
+        "connectionString"
       ],
-      "description": "The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs."
+      "description": "Properties of the Cache contract."
     },
-    "LoggerUpdateContract": {
+    "CacheUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LoggerUpdateParameters",
-          "description": "Logger entity update contract properties."
+          "$ref": "#/definitions/CacheUpdateProperties",
+          "description": "Cache update properties details."
         }
       },
-      "description": "Logger update contract."
+      "description": "Cache update details."
     },
-    "LoggerUpdateParameters": {
+    "CacheUpdateProperties": {
       "properties": {
-        "loggerType": {
-          "type": "string",
-          "description": "Logger type.",
-          "enum": [
-            "azureEventHub",
-            "applicationInsights"
-          ],
-          "x-ms-enum": {
-            "name": "LoggerType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "azureEventHub",
-                "description": "Azure Event Hub as log destination."
-              },
-              {
-                "value": "applicationInsights",
-                "description": "Azure Application Insights as log destination."
-              }
-            ]
-          }
-        },
         "description": {
           "type": "string",
-          "description": "Logger description."
+          "description": "Cache description",
+          "maxLength": 2000
         },
-        "credentials": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Logger credentials."
+        "connectionString": {
+          "type": "string",
+          "description": "Runtime connection string to cache",
+          "maxLength": 300
         },
-        "isBuffered": {
-          "type": "boolean",
-          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
+        "resourceId": {
+          "type": "string",
+          "description": "Original uri of entity in external system cache points to",
+          "maxLength": 2000
         }
       },
-      "description": "Parameters supplied to the Update Logger operation."
+      "description": "Parameters supplied to the Update Cache operation."
     }
   },
   "parameters": {
-    "LoggerIdParameter": {
-      "name": "loggerid",
+    "CacheIdParameter": {
+      "name": "CacheId",
       "in": "path",
       "required": true,
       "type": "string",
-      "maxLength": 256,
-      "pattern": "^[^*#&+:<>?]+$",
-      "description": "Logger identifier. Must be unique in the API Management service instance.",
+      "description": "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier).",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
       "x-ms-parameter-location": "method"
     }
   }

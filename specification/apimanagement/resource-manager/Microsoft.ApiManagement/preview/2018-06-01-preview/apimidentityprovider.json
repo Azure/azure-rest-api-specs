@@ -51,9 +51,6 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -61,11 +58,11 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "200": {
             "description": "Lists a collection of Identity Providers.",
@@ -79,6 +76,9 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -96,9 +96,6 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -109,16 +106,19 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Specified identity provider entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -142,9 +142,6 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -155,6 +152,9 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -221,12 +221,24 @@
         "responses": {
           "201": {
             "description": "IdentityProvider configuration were successfully created.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/IdentityProviderContract"
             }
           },
           "200": {
             "description": "The existing Identity Provider was successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/IdentityProviderContract"
             }
