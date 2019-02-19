@@ -962,6 +962,46 @@
         "path"
       ]
     },
+    "SapOpenHubTableDataset": {
+      "x-ms-discriminator-value": "SapOpenHubTable",
+      "description": "Sap Business Warehouse Open Hub Destination Table properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sap Business Warehouse Open Hub Destination Table properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapOpenHubTableDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapOpenHubTableDatasetTypeProperties": {
+      "description": "Sap Business Warehouse Open Hub Destination Table properties.",
+      "properties": {
+        "openHubDestinationName": {
+          "type": "object",
+          "description": "The name of the Open Hub Destination with destination type as Database Table. Type: string (or Expression with resultType string)."
+        },
+        "excludeLastRequest": {
+          "type": "object",
+          "description": "Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "baseRequestId": {
+          "type": "object",
+          "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
+        }
+      },
+      "required": [
+        "openHubDestinationName"
+      ]
+    },
     "SqlServerTableDataset": {
       "x-ms-discriminator-value": "SqlServerTable",
       "description": "The on-premises SQL Server dataset.",
@@ -993,6 +1033,48 @@
       "required": [
         "tableName"
       ]
+    },
+    "RestResourceDataset": {
+      "x-ms-discriminator-value": "RestResource",
+      "description": "A Rest service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestResourceDatasetTypeProperties"
+        }
+      }
+    },
+    "RestResourceDatasetTypeProperties": {
+      "description": "Properties specific to this dataset type.",
+      "properties": {
+        "relativeUrl": {
+          "type": "object",
+          "description": "The relative URL to the resource that the RESTful API provides. Type: string (or Expression with resultType string)."
+        },
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
+        },
+        "requestBody": {
+          "type": "object",
+          "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+        },
+        "paginationRules": {
+          "type": "object",
+          "description": "The pagination rules to compose next page requests. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "WebTableDataset": {
       "x-ms-discriminator-value": "WebTable",
@@ -1632,3 +1714,4 @@
     }
   }
 }
+

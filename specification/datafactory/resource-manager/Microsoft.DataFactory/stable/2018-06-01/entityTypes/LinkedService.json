@@ -1603,6 +1603,143 @@
         "url"
       ]
     },
+    "SapOpenHubLinkedService": {
+      "x-ms-discriminator-value": "SapOpenHub",
+      "description": "SAP Business Warehouse Open Hub Destination Linked Service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to SAP Business Warehouse Open Hub Destination linked service type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapOpenHubLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapOpenHubLinkedServiceTypeProperties": {
+      "description": "Properties specific to SAP Business Warehouse Open Hub Destination linked service type.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Host name of the SAP BW instance where the open hub destination is located. Type: string (or Expression with resultType string)."
+        },
+        "systemNumber": {
+          "type": "object",
+          "description": "System number of the BW system where the open hub destination is located. (Usually a two-digit decimal number represented as a string.) Type: string (or Expression with resultType string)."
+        },
+        "clientId": {
+          "type": "object",
+          "description": "Client ID of the client on the BW system where the open hub destination is located. (Usually a three-digit decimal number represented as a string) Type: string (or Expression with resultType string)."
+        },
+        "language": {
+          "type": "object",
+          "description": "Language of the BW system where the open hub destination is located. The default value is EN. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "Username to access the SAP BW server where the open hub destination is located. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to access the SAP BW server where the open hub destination is located.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "server",
+        "systemNumber",
+        "clientId"
+      ]
+    },
+	"RestServiceLinkedService": {
+      "x-ms-discriminator-value": "RestService",
+      "description": "Rest Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Rest Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestServiceLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "RestServiceLinkedServiceTypeProperties": {
+      "description": "Rest Service linked service properties.",
+      "properties": {
+        "url": {
+          "description": "The base URL of the REST service.",
+          "type": "object"
+        },
+        "enableServerCertificateValidation": {
+          "type": "object",
+          "description": "Whether to validate server side SSL certificate when connecting to the endpoint.The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "authenticationType": {
+          "description": "Type of authentication used to connect to the REST service.",
+          "type": "string",
+          "enum": [
+            "Anonymous",
+            "Basic",
+            "AadServicePrincipal",
+            "ManagedServiceIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "RestServiceAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "userName": {
+          "description": "The user name used in Basic authentication type.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password used in Basic authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalId": {
+          "description": "The application's client ID used in AadServicePrincipal authentication type.",
+          "type": "object"
+        },
+        "servicePrincipalKey": {
+          "description": "The application's key used in AadServicePrincipal authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "description": "The tenant information (domain name or tenant ID) used in AadServicePrincipal authentication type under which your application resides.",
+          "type": "object"
+        },
+        "aadResourceId": {
+          "description": "The resource you are requesting authorization to use.",
+          "type": "object"
+        },
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "url",
+        "authenticationType"
+      ]
+    },
     "AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",
       "description": "Linked service for Amazon S3.",
