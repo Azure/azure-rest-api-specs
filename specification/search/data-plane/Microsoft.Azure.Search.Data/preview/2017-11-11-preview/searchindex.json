@@ -112,7 +112,7 @@
         }
       }
     },
-    "/docs/suggest": {
+    "/docs/search.suggest": {
       "get": {
         "tags": [
           "Documents"
@@ -252,7 +252,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/docs/search.post.suggest": {
       "post": {
         "tags": [
           "Documents"
@@ -293,7 +295,54 @@
         }
       }
     },
-    "/docs/autocomplete": {
+    "/docs/search.index": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "operationId": "Documents_Index",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents"
+        },
+        "x-ms-examples": {
+          "SearchIndexIndex": { "$ref": "./examples/SearchIndexIndexDocuments.json" }
+        },        
+        "description": "Sends a batch of document write actions to the Azure Search index.",
+        "parameters": [
+          {
+            "name": "batch",
+            "in": "body",
+            "description": "The batch of index actions.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IndexBatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing the status of operations for all actions in the batch.",
+            "schema": {
+              "$ref": "#/definitions/DocumentIndexResult"
+            }
+          },
+          "207": {
+            "description": "Response containing the status of operations for all actions in the batch.",
+            "schema": {
+              "$ref": "#/definitions/DocumentIndexResult"
+            }
+          }
+        }
+      }
+    },
+    "/docs/search.autocomplete": {
       "get": {
         "tags": [
           "Documents"
@@ -417,7 +466,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/docs/search.post.autocomplete": {
       "post": {
         "tags": [
           "Documents"
@@ -493,6 +544,39 @@
       "additionalProperties": true,
       "description": "A result containing a document found by a suggestion query, plus associated metadata."
     },
+    "IndexBatch": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexAction"
+          },
+          "description": "The actions in the batch.",
+          "x-ms-client-name": "Actions"
+        }
+      },
+      "required": ["value"],
+      "description": "Contains a batch of document write actions to send to the Azure Search index."
+    },
+    "IndexAction": {
+      "properties": {
+        "@search.action": {
+          "type": "string",
+          "enum": [
+            "upload",
+            "merge",
+            "mergeOrUpload",
+            "delete"
+          ],
+          "x-ms-enum": { "name": "IndexActionType" },
+          "x-ms-client-name": "ActionType",
+          "x-nullable": false,
+          "description": "The operation to perform on a document in an indexing batch."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Represents an index action that operates on a document."
+    },
     "IndexingResult": {
       "properties": {
         "key": {
@@ -535,17 +619,6 @@
         }
       },
       "description": "Response containing the status of operations for all documents in the indexing request."
-    },
-    "IndexActionType": {
-      "type": "string",
-      "enum": [
-        "upload",
-        "merge",
-        "mergeOrUpload",
-        "delete"
-      ],
-      "x-ms-enum": { "name": "IndexActionType" },
-      "description": "Specifies the operation to perform on a document in an indexing batch."
     },
     "SearchMode": {
       "type": "string",

@@ -108,6 +108,8 @@ Use the below directives sparingly. Every modification we make in here, we poten
 
 ``` yaml $(csharp)
 directive:
+  # TODO: Simplify all the below regexes once we gain the ability to target them at specific files.
+
   # Rename the IDocumentsOperations interface and implementation, then make the interface internal so we can version it freely.
   # This requires these changes:
   #   1. Globally rename the interface and implementation class, along with comments and constructors
@@ -129,7 +131,7 @@ directive:
         replace( /public (partial interface IDocumentsProxyOperations)/g, "internal $1" ).
         replace( /public virtual (IDocumentsProxyOperations) Documents ({ get;)/g, "internal $1 DocumentsProxy $2" ).
         replace( /Documents = new DocumentsProxyOperations\(this\);/g, "DocumentsProxy = new DocumentsProxyOperations\(this\);" ).
-        replace( /(Gets the) IDocumentsProxyOperations(.\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)IDocumentsProxyOperations (Documents { get; })/g, "$1 IDocumentsOperations$2IDocumentsOperations $3" )
+        replace( /(Gets the) IDocumentsProxyOperations(.\s*\/\/\/ <\/summary>\s*)IDocumentsProxyOperations (Documents { get; })/g, "$1 IDocumentsOperations$2IDocumentsOperations $3" )
 ####
   # Adds extra JsonSerializerSettings parameters to all operation methods. This enables the SDK to delegate serialization/de-serialization to the custom serializer on a per-call basis.
   - from: source-file-csharp
@@ -168,8 +170,6 @@ directive:
 ####
   # Make SuggestResult and DocumentSuggestResult generic so we can tell the deserializer what type to instantitate.
   # For SuggestResult, this means we also have to replace AdditionalProperties with a property of the generic type.
-  # ASSUMPTION: We only use AdditionalProperties in situations where they should be replace by a document of generic
-  # type T.
   - from: source-file-csharp
     where: $
     transform: >-
@@ -177,10 +177,10 @@ directive:
         replace( /(public partial class DocumentSuggestResult)/g, "$1<T>" ).
         replace( /(IList<SuggestResult)/g, "$1<T>" ).
         replace( /(public partial class SuggestResult)/g, "$1<T>" ).
-        replace( /\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\n\s*\/\/\/ message are deserialized this collection<\/param>/g, "/// <param name=\"document\">The document on which the suggested text is based.</param>" ).
+        replace( /(SuggestResult class.\s*\/\/\/ <\/summary>\s*)\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\/\/\/ message are deserialized this collection<\/param>/g, "$1/// <param name=\"document\">The document on which the suggested text is based.</param>" ).
         replace( /(public SuggestResult)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
-        replace( /AdditionalProperties = additionalProperties;/g, "Document = document;" ).
-        replace( /(\/\/\/ <summary>\s*\n\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\n\s*\/\/\/ this collection(\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)\[JsonExtensionData\]\s*\n\s*public IDictionary<string, object> AdditionalProperties ({ get; set; })/g, "$1 Gets the document on which the suggested text is based. $2public T Document $3" ).
+        replace( /(public SuggestResult\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
+        replace( /(\/\/\/ <summary>\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\/\/\/ this collection(\s*\/\/\/ <\/summary>\s*)\[JsonExtensionData\]\s*public IDictionary<string, object> AdditionalProperties ({ get; set; }\s*.*\s*\/\/\/ Gets or sets the text of the suggestion result.)/g, "$1 Gets the document on which the suggested text is based. $2public T Document $3" ).
         replace( /(SuggestGetWithHttpMessagesAsync)/g, "$1<T>" ).
         replace( /(SuggestPostWithHttpMessagesAsync)/g, "$1<T>" ).
         replace( /(AzureOperationResponse<DocumentSuggestResult)/g, "$1<T>" ).
@@ -192,4 +192,20 @@ directive:
     transform: >-
       return $.
         replace( /(\/\/\/) Additional parameters for SuggestGet operation./g, "$1 Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors." )
+####
+  # Make IndexBatch and IndexAction generic so we can provide a strongly-typed interface all the way down.
+  # For IndexAction, this means we also have to replace AdditionalProperties with a property of the generic type.
+  # Also use IEnumerable<IndexAction> instead of IList for backwards compatibility.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(public partial class IndexBatch)/g, "$1<T>" ).
+        replace( /IList<IndexAction>/g, "IEnumerable<IndexAction<T>>" ).
+        replace( /(public partial class IndexAction)/g, "$1<T>" ).
+        replace( /(IndexAction class.\s*\/\/\/ <\/summary>\s*)\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\n\s*\/\/\/ message are deserialized this collection<\/param>/g, "$1/// <param name=\"document\">The document on which the action will be performed.</param>" ).
+        replace( /(public IndexAction)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
+        replace( /(public IndexAction\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
+        replace( /(\/\/\/ <summary>\s*\n\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\n\s*\/\/\/ this collection(\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)\[JsonExtensionData\]\s*\n\s*public IDictionary<string, object> AdditionalProperties ({ get; set; }\s*.*\s*\/\/\/ Gets or sets the operation to perform on a document)/g, "$1 Gets the document on which the action will be performed; Fields other than the key are ignored for delete actions. $2public T Document $3" ).
+        replace( /(IndexWithHttpMessagesAsync)\((IndexBatch)/g, "$1<T>($2<T>" )
 ```
