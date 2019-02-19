@@ -307,6 +307,10 @@
         "sourceRetryWait": {
           "type": "object",
           "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count connectioned to source data store. Type: integer (or Expression with resultType integer)."
         }
       },
       "additionalProperties": {
@@ -1409,6 +1413,10 @@
         "sinkRetryWait": {
           "type": "object",
           "description": "Sink retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count connectioned to sink data store. Type: integer (or Expression with resultType integer)."
         }
       },
       "additionalProperties": {
