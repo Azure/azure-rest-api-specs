@@ -47,7 +47,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.TranslatorText
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/TranslatorText/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/TranslatorText/TranslatorText/Generated
   clear-output-folder: true
 ```
 
@@ -127,7 +127,6 @@ nodejs:
   package-name: azure-cognitiveservices-newssearch
   package-version: 3.0.0
   output-folder: $(node-sdks-folder)/lib/services/translatorText
-  override-client-name: TranslatorTextAPIClient
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
