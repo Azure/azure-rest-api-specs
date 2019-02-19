@@ -56,6 +56,12 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Successful completion of the asynchronous operation",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
           "202": {
             "description": "Accepted. Subscription update is in progress.",
             "headers": {
@@ -67,12 +73,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "integer"
               }
-            }
-          },
-          "200": {
-            "description": "Successful completion of the asynchronous operation",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionCreationResult"
             }
           }
         },
@@ -156,6 +156,70 @@
           }
         ]
       }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/cancel": {
+      "post": {
+        "operationId": "CancelSubscription",
+        "description": "Cancels the subscription",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CanceledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/rename": {
+      "post": {
+        "operationId": "RenameSubscription",
+        "description": "Renames the subscription",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RenamedSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -191,10 +255,10 @@
           "description": "rbac owner of the subscription",
           "$ref": "#/definitions/AdPrincipal"
         },
-        "additionalParameters": {  
+        "additionalParameters": {
           "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
           "type": "object",
-          "additionalProperties": {  
+          "additionalProperties": {
             "type": "object"
           }
         }
@@ -296,6 +360,26 @@
               "type": "string"
             }
           }
+        }
+      }
+    },
+    "CanceledSubscriptionId": {
+      "description": "Canceled Subscription Id",
+      "properties": {
+        "value": {
+          "description": "Canceled Subscription Id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RenamedSubscriptionId": {
+      "description": "Renamed Subscription Id",
+      "properties": {
+        "value": {
+          "description": "Renamed Subscription Id",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
