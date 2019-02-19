@@ -3,7 +3,7 @@
   "info": {
     "title": "DiskResourceProviderClient",
     "description": "The Disk Resource Provider Client.",
-    "version": "2018-06-01"
+    "version": "2018-09-30"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -858,6 +858,18 @@
             "modelAsString": false
           }
         },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        },
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
@@ -867,9 +879,9 @@
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
-        "encryptionSettings": {
-          "$ref": "#/definitions/EncryptionSettings",
-          "description": "Encryption settings for disk or snapshot"
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used for Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
         },
         "provisioningState": {
           "readOnly": true,
@@ -877,14 +889,31 @@
           "description": "The disk provisioning state."
         },
         "diskIOPSReadWrite": {
-            "type":"integer",
-            "format": "int64",
-            "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes. For a description of the range of values you can set, see [Ultra SSD Managed Disk Offerings](https://docs.microsoft.com/azure/virtual-machines/windows/disks-ultra-ssd#ultra-ssd-managed-disk-offerings)."
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes."
         },
         "diskMBpsReadWrite": {
-            "type":"integer",
-            "format": "int32",
-            "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10. For a description of the range of values you can set, see [Ultra SSD Managed Disk Offerings](https://docs.microsoft.com/azure/virtual-machines/windows/disks-ultra-ssd#ultra-ssd-managed-disk-offerings)."
+          "type": "integer",
+          "format": "int32",
+          "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "diskState": {
+          "type": "string",
+          "description": "The state of the disk.",
+          "readOnly": true,
+          "enum": [
+            "Unattached",
+            "Attached",
+            "Reserved",
+            "ActiveSAS",
+            "ReadyToUpload",
+            "ActiveUpload"
+          ],
+          "x-ms-enum": {
+            "name": "DiskState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -912,6 +941,18 @@
             "modelAsString": false
           }
         },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
+        },
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
@@ -921,9 +962,9 @@
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
-        "encryptionSettings": {
-          "$ref": "#/definitions/EncryptionSettings",
-          "description": "Encryption settings for disk or snapshot"
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
         },
         "provisioningState": {
           "readOnly": true,
@@ -936,22 +977,36 @@
       ],
       "description": "Snapshot resource properties."
     },
-    "EncryptionSettings": {
+    "EncryptionSettingsCollection": {
       "properties": {
         "enabled": {
           "type": "boolean",
           "description": "Set this flag to true and provide DiskEncryptionKey and optional KeyEncryptionKey to enable encryption. Set this flag to false and remove DiskEncryptionKey and KeyEncryptionKey to disable encryption. If EncryptionSettings is null in the request object, the existing settings remain unchanged."
         },
+        "encryptionSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncryptionSettingsElement"
+          },
+          "description": "A collection of encryption settings, one for each disk volume."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Encryption settings for disk or snapshot"
+    },
+    "EncryptionSettingsElement": {
+      "properties": {
         "diskEncryptionKey": {
           "$ref": "#/definitions/KeyVaultAndSecretReference",
           "description": "Key Vault Secret Url and vault id of the disk encryption key"
         },
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyVaultAndKeyReference",
-          "description": "Key Vault Key Url and vault id of the key encryption key"
+          "description": "Key Vault Key Url and vault id of the key encryption key. KeyEncryptionKey is optional and when provided is used to unwrap the disk encryption key."
         }
-      },
-      "description": "Encryption settings for disk or snapshot"
+      }
     },
     "KeyVaultAndSecretReference": {
       "properties": {
@@ -1015,19 +1070,19 @@
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
-        "encryptionSettings": {
-          "$ref": "#/definitions/EncryptionSettings",
-          "description": "Encryption settings for disk or snapshot"
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
         },
         "diskIOPSReadWrite": {
-          "type":"integer",
+          "type": "integer",
           "format": "int64",
           "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes."
         },
         "diskMBpsReadWrite": {
-            "type":"integer",
-            "format": "int32",
-            "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+          "type": "integer",
+          "format": "int32",
+          "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
         }
       },
       "description": "Disk resource update properties."
@@ -1051,9 +1106,9 @@
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
-        "encryptionSettings": {
-          "$ref": "#/definitions/EncryptionSettings",
-          "description": "Encryption settings for disk or snapshot"
+        "encryptionSettingsCollection": {
+          "$ref": "#/definitions/EncryptionSettingsCollection",
+          "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
         }
       },
       "description": "Snapshot resource update properties."
@@ -1068,7 +1123,8 @@
             "FromImage",
             "Import",
             "Copy",
-            "Restore"
+            "Restore",
+            "Upload"
           ],
           "x-ms-enum": {
             "name": "DiskCreateOption",
@@ -1121,7 +1177,8 @@
           "type": "string",
           "enum": [
             "None",
-            "Read"
+            "Read",
+            "Write"
           ],
           "x-ms-enum": {
             "name": "AccessLevel",
