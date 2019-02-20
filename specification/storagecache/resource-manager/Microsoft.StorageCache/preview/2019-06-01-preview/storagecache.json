@@ -41,7 +41,7 @@
           "application/json"
         ],
         "parameters": [
-	  {
+      	  {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -80,12 +80,12 @@
           "application/json"
         ],
         "parameters": [
-	  {
+      	  {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+      	  {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  }
+	        }
         ],
         "responses": {
           "200": {
@@ -122,12 +122,12 @@
           "application/json"
         ],
         "parameters": [
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  }
+	        }
         ],
         "responses": {
           "200": {
@@ -164,12 +164,12 @@
           "application/json"
         ],
         "parameters": [
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  }
+	        }
         ],
         "responses": {
           "200": {
@@ -213,12 +213,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  }	  
+	        }	  
         ],
         "responses": {
           "200": {
@@ -270,15 +270,17 @@
             "required": true,
             "type": "string"
           },
-	  {
+      	  {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+      	  {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  }
-	  
+	        }
         ],
         "responses": {
+          "200": {
+            "description": "Cluster deleted."
+          },
           "202": {
             "description": "Started the Cluster's transition to Deleted state."
           },
@@ -324,13 +326,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  }
-	  
+	        }
         ],
         "responses": {
           "200": {
@@ -372,12 +373,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+      	  {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -406,12 +407,6 @@
             "description": "Cluster creation has been initiated.  Poll the new Cluster's provisioningState property to monitor creation progress.",
             "schema": {
               "$ref": "#/definitions/Cluster"
-            }
-          },
-          "400": {
-            "description": "Specified a changed value for a read-only property.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
             }
           },
           "default": {
@@ -448,12 +443,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  	  
+	        },	  	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -476,12 +471,6 @@
             "description": "Patched the Cluster.",
             "schema": {
               "$ref": "#/definitions/Cluster"
-            }
-          },
-          "400": {
-            "description": "Specified a changed value for a read-only property.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
             }
           },
           "default": {
@@ -516,12 +505,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -537,12 +526,6 @@
           },
           "202": {
             "description": "Cluster has started flushing."
-          },
-          "400": {
-            "description": "Cluster is not in a state where a flush is allowed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -577,12 +560,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -598,12 +581,6 @@
           },
           "202": {
             "description": "Cluster has started the transition to Active."
-          },
-          "400": {
-            "description": "Cluster is not in a state where a transition to Active is allowed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -638,12 +615,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -659,12 +636,6 @@
           },
           "202": {
             "description": "Cluster has started the transition to Stopped."
-          },
-          "400": {
-            "description": "Cluster is not in a state where a transition to Stopped is allowed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -686,7 +657,7 @@
         "operationId": "Clusters_Stop"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storagetargets": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storageTargets": {
       "get": {
         "produces": [
           "application/json"
@@ -699,12 +670,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -743,7 +714,7 @@
         "operationId": "StorageTargets_ListByCluster"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storagetargets/{storageTargetName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storageTargets/{storageTargetName}": {
       "delete": {
         "produces": [
           "application/json"
@@ -756,12 +727,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -820,12 +791,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -883,12 +854,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -954,12 +925,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -1024,12 +995,12 @@
             "required": true,
             "type": "string"
           },
-	  {
+	        {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	  {
+	        {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	  },	  
+	        },	  
           {
             "description": "Name of cluster.",
             "in": "path",
@@ -1045,12 +1016,6 @@
           },
           "202": {
             "description": "Cluster has started the upgrade."
-          },
-          "400": {
-            "description": "No new firmware image is available.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1210,10 +1175,14 @@
             },
             "provisioningState": {
               "description": "see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-              "type": "string"
-            },
-            "statusMessage": {
-              "description": "If present, a message describing an exceptional cluster state, such as an explanation of why the health is \"degraded\".",
+              "enum":[
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "Creating",
+                "Configuring",
+                "Booting"
+              ],
               "type": "string"
             },
             "subnet": {
@@ -1243,17 +1212,30 @@
     },
     "ClusterHealth": {
       "description": "An indication of cluster health.",
-      "enum": [
-        "healthy",
-        "degraded",
-        "down",
-        "transitioning",
-        "stopping",
-        "stopped",
-        "upgrading",
-        "flushing"
-      ],
-      "type": "string"
+      "properties": {
+        "state": {
+          "description": "List of cluster health states.",
+          "enum": [
+            "healthy",
+            "degraded",
+            "down",
+            "transitioning",
+            "stopping",
+            "stopped",
+            "upgrading",
+            "flushing"
+          ],
+          "x-ms-enum": {
+            "name": "HealthStateType",
+            "modelAsString": false
+          },          
+          "type": "string"
+        },
+        "statusDescription": {
+          "description": "Describes explanation of state.",
+          "type": "string"
+        }
+      }
     },
     "ClusterUpgradeStatus": {
       "description": "Properties describing the software upgrade state of the cluster",
@@ -1271,22 +1253,26 @@
           "x-ms-enum": {
             "name": "FirmwareStatusType",
             "modelAsString": false
-          },          
+          },
+          "readOnly": true,          
           "type": "string"
         },
         "firmwareUpdateDeadline": {
           "description": "Time at which the pending firmware update will automatically be installed on the cluster.",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastFirmwareUpdate": {
           "description": "Time of the last successful firmware update.",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true          
         },
         "pendingFirmwareVersion": {
           "description": "When firmwareUpdateAvailable is true, this field holds the version string for the update.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true          
         }
       },
       "type": "object"
