@@ -108,7 +108,8 @@ directive:
     where: $
     transform: >
       if ( $.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") || 
-        $.includes("class IndexesOperations") ||  $.includes("class SynonymMapsOperations") ) 
+        $.includes("class IndexesOperations") ||  $.includes("class SynonymMapsOperations") ||
+        $.includes("class SkillsetsOperations") ) 
         
         return $.
           replace(/this.SearchServiceName/g,"Client.SearchServiceName").

@@ -248,6 +248,7 @@
                     "HanaOnAzure"
                 ],
                 "operationId": "HanaInstances_Restart",
+                "x-ms-long-running-operation": true,
                 "description": "The operation to restart a SAP HANA instance.",
                 "x-ms-examples": {
                     "Restart a HANA instance": {
@@ -275,6 +276,9 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
                     "202": {
                         "description": "Accepted"
                     }
@@ -387,6 +391,16 @@
                         "modelAsString": true
                     },
                     "description": "Resource power state"
+                },
+                "proximityPlacementGroup": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Resource proximity placement group"
+                },
+                "hwRevision": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Hardware revision of a HANA instance"
                 }
             },
             "description": "Describes the properties of a HANA instance."

@@ -101,3 +101,53 @@ csharp:
   clear-output-folder: true
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Data/Generated
 ```
+
+### Tweak generated code
+
+Use the below directives sparingly. Every modification we make in here, we potentially have to replicate for every target language.
+
+``` yaml $(csharp)
+directive:
+  # Rename the IDocumentsOperations interface and implementation, then make the interface internal so we can version it freely.
+  # This requires these changes:
+  #   1. Globally rename the interface and implementation class, along with comments and constructors
+  #   2. Make the interface itself internal
+  #   3. Make the SearchIndexClient.Documents property internal and rename it to DocumentsProxy
+  #   4. Rename the type of the ISearchIndexClient.Documents property back to IDocumentsOperations, effectively removing the
+  #      generated property from the interface (this reverses step 1 above just for this case)
+  #
+  # The ISearchIndexClient.Documents property is of type IDocumentsOperations, which is hand-written and delegates to DocumentsProxy.
+  # This allows us to do two things:
+  #   1. Abstract away the detail of whether GET or POST is used for read operations (Search, Suggest, etc.)
+  #   2. Add methods with type parameters and custom serialization to make our SDK easier to use in strongly-typed scenarios
+  #      (i.e. -- where the customer is using a class to represent their model because its schema is known at design-time)
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /DocumentsOperations/g, "DocumentsProxyOperations" ).
+        replace( /public (partial interface IDocumentsProxyOperations)/g, "internal $1" ).
+        replace( /public virtual (IDocumentsProxyOperations) Documents ({ get;)/g, "internal $1 DocumentsProxy $2" ).
+        replace( /Documents = new DocumentsProxyOperations\(this\);/g, "DocumentsProxy = new DocumentsProxyOperations\(this\);" ).
+        replace( /(Gets the) IDocumentsProxyOperations(.\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)IDocumentsProxyOperations (Documents { get; })/g, "$1 IDocumentsOperations$2IDocumentsOperations $3" )
+####
+  # Adds extra JsonSerializerSettings parameters to all operation methods. This enables the SDK to delegate serialization/de-serialization to the custom serializer on a per-call basis.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(Async\(.*, CancellationToken cancellationToken = default\(CancellationToken\))/g, "$1, Newtonsoft.Json.JsonSerializerSettings requestSerializerSettings = null, Newtonsoft.Json.JsonSerializerSettings responseDeserializerSettings = null" ).
+        replace( /(DeserializeObject<.+>\(.+), Client\.DeserializationSettings/g, "$1, responseDeserializerSettings ?? Client.DeserializationSettings" ).
+        replace( /(SerializeObject\(.+), Client\.SerializationSettings/g , "$1, requestSerializerSettings ?? Client.SerializationSettings" )
+####
+  # Make GetWithHttpMessagesAsync generic so we can tell the deserializer what type to instantiate.
+  # ASSUMPTION: Only GetWithHttpMessagesAsync makes a call to DeserializeObject<object>(), and only when it's deserializing the non-error response.
+  # Ideally we'd be able to more finely target these transform rules.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(Task<AzureOperationResponse)<object>(> GetWithHttpMessagesAsync)/g, "$1<T>$2<T>" ).
+        replace( /(DeserializeObject)<object>/g, "$1<T>" ).
+        replace( /(var _result = new AzureOperationResponse)<object>/g, "$1<T>" )
+```
