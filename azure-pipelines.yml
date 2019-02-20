@@ -7,10 +7,11 @@ variables:
 
 steps:
 
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    verbose: false
+#- task: Npm@1
+#  displayName: 'npm install'
+#  inputs:
+#    verbose: false
+#- script: 'scripts/install-dotnet.sh'
+#- script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
 
-- script: 'scripts/install-dotnet.sh'
-- script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
+- script: "scripts/swagger-to-sdk.sh Azure/azure-sdk-for-ruby -v"
