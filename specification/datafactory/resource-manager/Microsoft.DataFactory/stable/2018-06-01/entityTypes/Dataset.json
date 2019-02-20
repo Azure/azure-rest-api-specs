@@ -362,6 +362,14 @@
           "type": "object",
           "description": "The version for the S3 object. Type: string (or Expression with resultType string)."
         },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of S3 object's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of S3 object's modified datetime. Type: string (or Expression with resultType string)."
+        },
         "format": {
           "description": "The format of files.",
           "$ref": "#/definitions/DatasetStorageFormat"
@@ -409,6 +417,14 @@
         "fileName": {
           "type": "object",
           "description": "The name of the Azure Blob. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
         },
         "format": {
           "description": "The format of the Azure Blob storage.",
@@ -673,6 +689,121 @@
         "folderPath"
       ]
     },
+    "AzureBlobFSDataset": {
+      "x-ms-discriminator-value": "AzureBlobFSFile",
+      "description": "The Azure Data Lake Storage Gen2 storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Data Lake Storage Gen2 dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBlobFSDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureBlobFSDatasetTypeProperties": {
+      "description": "Azure Data Lake Storage Gen2 dataset properties.",
+      "properties": {
+        "folderPath": {
+          "type": "object",
+          "description": "The path of the Azure Data Lake Storage Gen2 storage. Type: string (or Expression with resultType string)."
+        },
+        "fileName": {
+          "type": "object",
+          "description": "The name of the Azure Data Lake Storage Gen2. Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of the Azure Data Lake Storage Gen2 storage.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "compression": {
+          "description": "The data compression method used for the blob storage.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      }
+    },
+    "Office365Dataset": {
+      "x-ms-discriminator-value": "Office365Table",
+      "description": "The Office365 account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Office365 dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Office365DatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "Office365DatasetTypeProperties": {
+      "description": "Office365 dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "Name of the dataset to extract from Office 365. Type: string (or Expression with resultType string)."
+        },
+        "predicate": {
+          "type": "object",
+          "description": "A predicate expression that can be used to filter the specific rows to extract from Office 365. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "tableName"
+      ]
+    },
+    "AzureDataLakeStoreCosmosStructuredStreamDataset": {
+      "x-ms-discriminator-value": "AzureDataLakeStoreCosmosStructuredStreamFile",
+      "description": "Azure Data Lake Store Cosmos Structured Stream dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Data Lake Store Cosmos Structured Stream dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDataLakeStoreCosmosStructuredStreamDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureDataLakeStoreCosmosStructuredStreamDatasetTypeProperties": {
+      "description": "Azure Data Lake Store Cosmos Structured Stream dataset properties.",
+      "properties": {
+        "folderPath": {
+          "type": "object",
+          "description": "Path to the folder in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
+        },
+        "fileName": {
+          "type": "object",
+          "description": "The name of the file in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
+        },
+        "generatedFromActivity": {
+          "type": "object",
+          "description": "Flag to indicate if this dataset is been generated from Compilation Activity. Type: boolean (or Expression with resultType boolean)."
+        }
+      },
+      "required": [
+        "folderPath",
+        "fileName"
+      ]
+    },
     "FileShareDataset": {
       "x-ms-discriminator-value": "FileShare",
       "description": "An on-premises file system dataset.",
@@ -703,6 +834,14 @@
         "fileName": {
           "type": "object",
           "description": "The name of the on-premises file system. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "format": {
           "description": "The format of the files.",
@@ -748,6 +887,70 @@
       },
       "required": [
         "collectionName"
+      ]
+    },
+    "MongoDbV2CollectionDataset": {
+      "x-ms-discriminator-value": "MongoDbV2Collection",
+      "description": "The MongoDB database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MongoDB database dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoDbV2CollectionDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MongoDbV2CollectionDatasetTypeProperties": {
+      "description": "MongoDB database dataset properties.",
+      "properties": {
+        "collection": {
+          "type": "object",
+          "description": "The collection name of the MongoDB database. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "collection"
+      ]
+    },
+    "CosmosDbMongoDbApiCollectionDataset": {
+      "x-ms-discriminator-value": "CosmosDbMongoDbApiCollection",
+      "description": "The CosmosDB (MongoDB API) database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "CosmosDB (MongoDB API) database dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CosmosDbMongoDbApiCollectionDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CosmosDbMongoDbApiCollectionDatasetTypeProperties": {
+      "description": "CosmosDB (MongoDB API) database dataset properties.",
+      "properties": {
+        "collection": {
+          "type": "object",
+          "description": "The collection name of the CosmosDB (MongoDB API) database. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "collection"
       ]
     },
     "ODataResourceDataset": {
@@ -1698,6 +1901,101 @@
     "ResponsysObjectDataset": {
       "x-ms-discriminator-value": "ResponsysObject",
       "description": "Responsys dataset.",
+      "type": "object",
+      "allOf": [
+        {
+            "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
+    },
+    "DynamicsAXResourceDataset": {
+      "x-ms-discriminator-value": "DynamicsAXResource",
+      "description": "The path of the Dynamics AX OData entity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dynamics AX OData resource dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DynamicsAXResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DynamicsAXResourceDatasetTypeProperties": {
+      "description": "Dynamics AX OData resource dataset properties.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "OracleServiceCloudObjectDataset": {
+      "x-ms-discriminator-value": "OracleServiceCloudObject",
+      "description": "Oracle Service Cloud dataset.",
+      "type": "object",
+      "allOf": [
+        {
+            "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureDataExplorerTableDataset": {
+      "x-ms-discriminator-value": "AzureDataExplorerTable",
+      "description": "The Azure Data Explorer (Kusto) dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Data Explorer (Kusto) dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDataExplorerDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureDataExplorerDatasetTypeProperties": {
+      "description": "Azure Data Explorer (Kusto) dataset properties.",
+      "properties": {
+        "table": {
+          "type": "object",
+          "description": "The table name of the Azure Data Explorer database. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GoogleAdWordsObjectDataset": {
+      "x-ms-discriminator-value": "GoogleAdWordsObject",
+      "description": "Google AdWords service dataset.",
       "type": "object",
       "allOf": [
         {
