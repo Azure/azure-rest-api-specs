@@ -16,13 +16,15 @@
           "type": "Microsoft.StorageCache/Cluster",
           "properties": {
             "cacheSizeGB": 3072,
-            "health": "transitioning",
+            "health": {
+              "state": "transitioning",
+              "statusDescription": "Cluster is being created."
+            },
             "mountAddresses": [
               "192.168.1.1",
               "192.168.1.2"
             ],          
-            "provisioningState": "Allocating",
-            "statusMessage": "Cluster is being created.",
+            "provisioningState": "Booting",
             "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
             "upgradeStatus": {
               "currentFirmwareVersion": "AvereOS V5.1.1.2",
@@ -46,13 +48,15 @@
           "type": "Microsoft.StorageCache/Cluster",
           "properties": {
             "cacheSizeGB": 3072,
-            "health": "transitioning",
+            "health": {
+              "state": "transitioning",
+              "statusDescription": "Cluster is being created."
+            },
             "mountAddresses": [
               "192.168.1.1",
               "192.168.1.2"
             ],          
-            "provisioningState": "Allocating",
-            "statusMessage": "Cluster is being created.",
+            "provisioningState": "Configuring",
             "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub2",
             "upgradeStatus": {
               "currentFirmwareVersion": "AvereOS V5.1.1.2",
