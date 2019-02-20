@@ -1559,6 +1559,24 @@
               "$ref": "#/definitions/Resource"
           }]
       },
+      "WorkspaceSettingProperties": {
+          "type": "object",
+          "description": "Workspace setting data",
+          "properties": {
+              "workspaceId": {
+                  "type": "string",
+                  "description": "The full Azure ID of the workspace to save the data in"
+              },
+              "scope": {
+                  "type": "string",
+                  "description": "All the VMs in this scope will send their security data to the mentioned workspace unless overridden by a setting with more specific scope"
+              }
+          },
+          "required": [
+              "workspaceId",
+              "scope"
+          ]
+      },
       "IoTSecuritySolutionsList": {
           "description": "List of iot solutions",
           "required": [
@@ -1638,24 +1656,6 @@
           "required": [
               "iotHubs",
               "displayName"
-          ]
-      },
-      "WorkspaceSettingProperties": {
-          "type": "object",
-          "description": "Workspace setting data",
-          "properties": {
-              "workspaceId": {
-                  "type": "string",
-                  "description": "The full Azure ID of the workspace to save the data in"
-              },
-              "scope": {
-                  "type": "string",
-                  "description": "All the VMs in this scope will send their security data to the mentioned workspace unless overridden by a setting with more specific scope"
-              }
-          },
-          "required": [
-              "workspaceId",
-              "scope"
           ]
       },
       "AutoProvisioningSettingList": {
@@ -2056,13 +2056,6 @@
           "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
           "type": "string",
           "description": "Azure subscription ID"
-      },
-      "Location": {
-          "name": "location",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "Azure location"
       },
       "ResourceGroupName": {
           "name": "resourceGroupName",
