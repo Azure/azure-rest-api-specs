@@ -817,6 +817,9 @@
                   },
                   {
                       "$ref": "#/parameters/SolutionName"
+                  },
+                  {
+                    "$ref": "#/parameters/IotSecuritySolutionData"
                   }
                 ],
                 "responses": {
@@ -1646,10 +1649,15 @@
                     ],
                     "type": "string",
                     "x-ms-enum":{
-                      "name": "ExtraData"
+                      "name": "ExtraData",
+                      "modelAsString": true,
+                      "values": [
+                        {"value": "RawEvents", "description": "Export the raw events into the security solution workspace"},
+                        {"value": "TwinData", "description": "Export the twin data into the analysis process"}
+                      ]
                     }
                   },
-                  "description": "Wether to save the raw events to the given workspace."
+                  "description": "list of additional data to export by the system"
                 },
                 "iotHubs": {
                     "type": "array",
