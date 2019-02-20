@@ -16,19 +16,19 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns": {
       "get": {
         "tags": [
-          "ManagedDatabaseColumns"
+          "DatabaseColumns"
         ],
-        "description": "List managed database columns",
-        "operationId": "ManagedDatabaseColumns_ListByTable",
+        "description": "List database columns",
+        "operationId": "DatabaseColumns_ListByTable",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
-		  {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          {
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved managed database columns.",
+            "description": "Successfully retrieved database columns.",
             "schema": {
               "$ref": "#/definitions/DatabaseColumnListResult"
             }
@@ -77,25 +77,25 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List managed database columns": {
-            "$ref": "./examples/ManagedDatabaseColumnListByTable.json"
+          "List database columns": {
+            "$ref": "./examples/DatabaseColumnListByTable.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}": {
       "get": {
         "tags": [
-          "ManagedDatabaseColumns"
+          "DatabaseColumns"
         ],
-        "description": "Get managed database column",
-        "operationId": "ManagedDatabaseColumns_Get",
+        "description": "Get database column",
+        "operationId": "DatabaseColumns_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -130,7 +130,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved managed database column.",
+            "description": "Successfully retrieved database column.",
             "schema": {
               "$ref": "#/definitions/DatabaseColumn"
             }
@@ -140,25 +140,25 @@
           }
         },
         "x-ms-examples": {
-          "Get managed database column": {
-            "$ref": "./examples/ManagedDatabaseColumnGet.json"
+          "Get database column": {
+            "$ref": "./examples/DatabaseColumnGet.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas": {
       "get": {
         "tags": [
-          "ManagedDatabaseSchemas"
+          "DatabaseSchemas"
         ],
-        "description": "List managed database schemas",
-        "operationId": "ManagedDatabaseSchemas_ListByDatabase",
+        "description": "List database schemas",
+        "operationId": "DatabaseSchemas_ListByDatabase",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -179,7 +179,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved managed database schemas.",
+            "description": "Successfully retrieved database schemas.",
             "schema": {
               "$ref": "#/definitions/DatabaseSchemaListResult"
             }
@@ -193,25 +193,25 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List managed database schemas": {
-            "$ref": "./examples/ManagedDatabaseSchemaListByDatabase.json"
+          "List database schemas": {
+            "$ref": "./examples/DatabaseSchemaListByDatabase.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}": {
       "get": {
         "tags": [
-          "ManagedDatabaseSchemas"
+          "DatabaseSchemas"
         ],
-        "description": "Get managed database schema",
-        "operationId": "ManagedDatabaseSchemas_Get",
+        "description": "Get database schema",
+        "operationId": "DatabaseSchemas_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -232,7 +232,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved managed database schema.",
+            "description": "Successfully retrieved database schema.",
             "schema": {
               "$ref": "#/definitions/DatabaseSchema"
             }
@@ -242,25 +242,25 @@
           }
         },
         "x-ms-examples": {
-          "Get managed database schema": {
-            "$ref": "./examples/ManagedDatabaseSchemaGet.json"
+          "Get database schema": {
+            "$ref": "./examples/DatabaseSchemaGet.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables": {
       "get": {
         "tags": [
-          "ManagedDatabaseTables"
+          "DatabaseTables"
         ],
-        "description": "List managed database tables",
-        "operationId": "ManagedDatabaseTables_ListBySchema",
+        "description": "List database tables",
+        "operationId": "DatabaseTables_ListBySchema",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -288,7 +288,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved managed database tables.",
+            "description": "Successfully retrieved database tables.",
             "schema": {
               "$ref": "#/definitions/DatabaseTableListResult"
             }
@@ -302,25 +302,25 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List managed database tables": {
-            "$ref": "./examples/ManagedDatabaseTableListBySchema.json"
+          "List  database tables": {
+            "$ref": "./examples/DatabaseTableListBySchema.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}": {
       "get": {
         "tags": [
-          "ManagedDatabaseTables"
+          "DatabaseTables"
         ],
-        "description": "Get managed database table",
-        "operationId": "ManagedDatabaseTables_Get",
+        "description": "Get database table",
+        "operationId": "DatabaseTables_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/DatabaseNameParameter"
@@ -348,7 +348,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved managed database table.",
+            "description": "Successfully retrieved database table.",
             "schema": {
               "$ref": "#/definitions/DatabaseTable"
             }
@@ -358,8 +358,8 @@
           }
         },
         "x-ms-examples": {
-          "Get managed database table": {
-            "$ref": "./examples/ManagedDatabaseTableGet.json"
+          "Get database table": {
+            "$ref": "./examples/DatabaseTableGet.json"
           }
         }
       }
@@ -563,14 +563,6 @@
       "name": "resourceGroupName",
       "in": "path",
       "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ManagedInstanceNameParameter": {
-      "name": "managedInstanceName",
-      "in": "path",
-      "description": "The name of the managed instance.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
