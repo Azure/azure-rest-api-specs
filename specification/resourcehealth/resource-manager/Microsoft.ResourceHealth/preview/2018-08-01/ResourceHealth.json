@@ -523,11 +523,7 @@
               "type": "object",
               "description": "Recommended actions of event.",
               "properties": {
-                "groupId": {
-                  "type": "integer",
-                  "description": "Recommended action group Id for the service health event."
-                },
-                "title": {
+                "message": {
                   "type": "string",
                   "description": "Recommended action title for the service health event."
                 },
@@ -535,8 +531,7 @@
                   "type": "array",
                   "description": "Recommended actions for the service health event.",
                   "items": {
-                    "type": "string",
-                    "description": "Recommended action for the service health event."
+                    "$ref": "#/definitions/recommendedAction"
                   }
                 },
                 "localeCode": {
@@ -572,7 +567,10 @@
               "type": "string",
               "description": "It provides the Timestamp for when the health impacting event was last updated.",
               "format": "date-time"
-            }
+            },
+            "hIRStage": {
+            "type": "string",
+            "description": "Tells the stage of HIR Document"
           }
         }
       },
@@ -639,6 +637,19 @@
         "localeCode": {
           "type": "string",
           "description": "FAQ locale for the service health event."
+        }
+      }
+    },
+    "recommendedAction": {
+      "description": "Recommended Action for the service health event",
+      "properties": {
+        "groupId": {
+          "type": "integer",
+          "description": "Recommended Action group Id for the service health event."
+        },
+        "actionText": {
+          "type": "string",
+          "description": "Recommended Action for the service health event."
         }
       }
     },
