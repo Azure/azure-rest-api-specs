@@ -2269,6 +2269,22 @@
             "x-ms-parameter-location": "method"
           },
           {
+            "name": "isRecovery",
+            "description": "Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "startActivityName",
+            "description": "In recovery mode, the specified startActivityName will be the first activity in the pipeline to be run. If not specified, all activities will run",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "name": "parameters",
             "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
             "in": "body",
@@ -4093,7 +4109,9 @@
             "ActivityRunEnd",
             "ActivityType",
             "TriggerName",
-            "TriggerRunTimestamp"
+            "TriggerRunTimestamp",
+            "RunGroupId",
+            "LatestOnly"
           ],
           "x-ms-enum": {
             "name": "RunQueryFilterOperand",
@@ -4196,6 +4214,16 @@
         "runId": {
           "description": "Identifier of a run.",
           "type": "string",
+          "readOnly": true
+        },
+        "runGroupId": {
+          "description": "Identifier that correlates all the recovery runs of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isLatest": {
+          "description": "True for the last recovered pipeline run.",
+          "type": "boolean",
           "readOnly": true
         },
         "pipelineName": {
