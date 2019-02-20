@@ -785,7 +785,7 @@
                   "200": {
                       "description": "OK",
                       "schema": {
-                          "$ref": "#/definitions/IoTSecuritySolution"
+                          "$ref": "#/definitions/IoTSecuritySolutionModel"
                       }
                   },
                   "default": {
@@ -823,13 +823,13 @@
                   "200": {
                       "description": "Updated",
                       "schema": {
-                          "$ref": "#/definitions/IoTSecuritySolution"
+                          "$ref": "#/definitions/IoTSecuritySolutionModel"
                       }
                   },
                   "201": {
                     "description": "Created",
                     "schema": {
-                        "$ref": "#/definitions/IoTSecuritySolution"
+                        "$ref": "#/definitions/IoTSecuritySolutionModel"
                     }
                   },
                   "default": {
@@ -876,7 +876,7 @@
                   "200": {
                       "description": "Updated",
                       "schema": {
-                          "$ref": "#/definitions/IoTSecuritySolution"
+                          "$ref": "#/definitions/IoTSecuritySolutionModel"
                       }
                   },
                   "default": {
@@ -1587,7 +1587,7 @@
                   "type": "array",
                   "description": "List of security solutions",
                   "items": {
-                      "$ref": "#/definitions/IoTSecuritySolution"
+                      "$ref": "#/definitions/IoTSecuritySolutionModel"
                   }
               },
               "nextLink": {
@@ -1597,7 +1597,7 @@
               }
           }
       },
-      "IoTSecuritySolution": {
+      "IoTSecuritySolutionModel": {
           "type": "object",
           "description": "Security Solution",
           "properties": {
@@ -1644,7 +1644,6 @@
                     "name": "ExtraData"
                   }
                 },
-                "default": ["TwinData"],
                 "description": "Wether to save the raw events to the given workspace."
               },
               "iotHubs": {
@@ -2236,7 +2235,7 @@
         "required": true,
         "description": "The security solution data",
         "schema": {
-          "$ref": "#/definitions/IoTSecuritySolution"
+          "$ref": "#/definitions/IoTSecuritySolutionModel"
         },
         "x-ms-parameter-location": "method"
       },
