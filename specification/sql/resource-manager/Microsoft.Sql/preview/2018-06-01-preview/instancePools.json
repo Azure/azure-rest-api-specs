@@ -262,36 +262,6 @@
     }
   },
   "definitions": {
-    "Sku": {
-      "description": "An ARM Resource SKU.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
-        },
-        "size": {
-          "description": "Size of the particular SKU",
-          "type": "string"
-        },
-        "family": {
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Capacity of the particular SKU.",
-          "type": "integer"
-        }
-      }
-    },
     "InstancePoolProperties": {
       "description": "Properties of an instance pool.",
       "required": [
@@ -350,35 +320,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "InstancePool": {
       "description": "An Azure SQL instance pool.",
       "required": [
@@ -387,12 +328,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "The name and tier of the SKU."
         },
         "properties": {
