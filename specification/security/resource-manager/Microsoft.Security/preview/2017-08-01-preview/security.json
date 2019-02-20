@@ -681,13 +681,17 @@
               "tags": ["IoT Security Solutions"],
               "description": "List of security solutions",
               "operationId": "IoTSecuritySolutions_List",
-              "parameters": [{
+              "parameters": [
+                {
                   "$ref": "#/parameters/ApiVersion"
-              }, {
+                },
+                {
                   "$ref": "#/parameters/SubscriptionId"
-              }, {
-                "$ref": "#/parameters/IotHubId"
-            }],
+                },
+                {
+                  "$ref": "#/parameters/FilterParam"
+                }
+              ],
               "responses": {
                   "200": {
                       "description": "OK",
@@ -707,7 +711,53 @@
               }
           }
       },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/Locations/{location}/IoTSecuritySolutions/{solutionName}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/IoTSecuritySolutions": {
+          "get": {
+              "x-ms-examples": {
+                  "Get Security Solutions list": {
+                      "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByRg_example.json"
+                  },
+                  "Get Security Solutions list By IotHub": {
+                      "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHubAndRg_example.json"
+                  }
+              },
+              "tags": ["IoT Security Solutions"],
+              "description": "List of security solutions",
+              "operationId": "IoTSecuritySolutionsResourceGroup_List",
+              "parameters": [
+                {
+                  "$ref": "#/parameters/ApiVersion"
+                },
+                {
+                  "$ref": "#/parameters/SubscriptionId"
+                },
+                {
+                  "$ref": "#/parameters/ResourceGroupName"
+                },
+                {
+                  "$ref": "#/parameters/FilterParam"
+                }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/IoTSecuritySolutionsList"
+                      }
+                  },
+                  "default": {
+                      "description": "Error response describing why the operation failed.",
+                      "schema": {
+                          "$ref": "#/definitions/CloudError"
+                      }
+                  }
+              },
+              "x-ms-pageable": {
+                  "nextLinkName": "nextLink"
+              }
+          }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/IoTSecuritySolutions/{solutionName}": {
           "get": {
               "x-ms-examples": {
                   "Get an iot security solution": {
@@ -717,15 +767,20 @@
               "tags": ["IoT Security Solutions"],
               "description": "Details of a specific iot security solution",
               "operationId": "IotSecuritySolution_Get",
-              "parameters": [{
-                  "$ref": "#/parameters/ApiVersion"
-              }, {
-                  "$ref": "#/parameters/SubscriptionId"
-              }, {
-                "$ref": "#/parameters/Location"
-              }, {
-                  "$ref": "#/parameters/SolutionName"
-              }],
+              "parameters": [
+                {
+                    "$ref": "#/parameters/ApiVersion"
+                },
+                {
+                    "$ref": "#/parameters/SubscriptionId"
+                },
+                {
+                  "$ref": "#/parameters/ResourceGroupName"
+                },
+                {
+                    "$ref": "#/parameters/SolutionName"
+                }
+              ],
               "responses": {
                   "200": {
                       "description": "OK",
@@ -750,17 +805,20 @@
               "tags": ["IoT Security Solutions"],
               "description": "Create new solution manager",
               "operationId": "IotSecuritySolution_Create",
-              "parameters": [{
-                  "$ref": "#/parameters/ApiVersion"
-              }, {
-                  "$ref": "#/parameters/SubscriptionId"
-              }, {
-                "$ref": "#/parameters/Location"
-              }, {
-                  "$ref": "#/parameters/SolutionName"
-              }, {
-                  "$ref": "#/parameters/IotSecuritySolutionData"
-              }],
+              "parameters": [
+                {
+                    "$ref": "#/parameters/ApiVersion"
+                },
+                {
+                    "$ref": "#/parameters/SubscriptionId"
+                },
+                {
+                  "$ref": "#/parameters/ResourceGroupName"
+                },
+                {
+                    "$ref": "#/parameters/SolutionName"
+                }
+              ],
               "responses": {
                   "200": {
                       "description": "Updated",
@@ -782,6 +840,53 @@
                   }
               }
           },
+          "patch": {
+              "x-ms-examples": {
+                  "Create an iot security solution": {
+                      "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution_example.json"
+                  }
+              },
+              "tags": ["IoT Security Solutions"],
+              "description": "update exists Security Solution tags. to update other fields use the CreateOrUpdate method",
+              "operationId": "IotSecuritySolution_Update",
+              "parameters": [
+                {
+                    "$ref": "#/parameters/ApiVersion"
+                },
+                {
+                    "$ref": "#/parameters/SubscriptionId"
+                },
+                {
+                  "$ref": "#/parameters/ResourceGroupName"
+                },
+                {
+                    "$ref": "#/parameters/SolutionName"
+                },
+                {
+                  "name": "SecuritySolutionTags",
+                  "in": "body",
+                  "required": true,
+                  "description": "Updated tag information to set into the iot hub instance.",
+                  "schema": {
+                    "$ref": "#/definitions/TagsResource"
+                  }
+                }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Updated",
+                      "schema": {
+                          "$ref": "#/definitions/IoTSecuritySolution"
+                      }
+                  },
+                  "default": {
+                      "description": "Error response describing why the operation failed.",
+                      "schema": {
+                          "$ref": "#/definitions/CloudError"
+                      }
+                  }
+              }
+          },
           "delete": {
               "x-ms-examples": {
                   "Create an iot security solution": {
@@ -791,15 +896,20 @@
               "tags": ["IoT Security Solutions"],
               "description": "Create new solution manager",
               "operationId": "IotSecuritySolution_Delete",
-              "parameters": [{
-                  "$ref": "#/parameters/ApiVersion"
-              }, {
-                  "$ref": "#/parameters/SubscriptionId"
-              }, {
-                "$ref": "#/parameters/Location"
-              }, {
-                  "$ref": "#/parameters/SolutionName"
-              }],
+              "parameters": [
+                {
+                    "$ref": "#/parameters/ApiVersion"
+                },
+                {
+                    "$ref": "#/parameters/SubscriptionId"
+                },
+                {
+                  "$ref": "#/parameters/ResourceGroupName"
+                },
+                {
+                    "$ref": "#/parameters/SolutionName"
+                }
+              ],
               "responses": {
                   "200": {
                       "description": "Security Solution deleted"
@@ -1244,6 +1354,17 @@
           },
           "x-ms-azure-resource": true
       },
+      "TagsResource": {
+        "properties": {
+          "tags": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Resource tags"
+          }
+        },
+        "description": "A container holding only the Tags for a resource, allowing the user to update the tags."
+      },
       "Kind": {
           "type": "object",
           "description": "Describes an Azure resource with kind",
@@ -1470,7 +1591,7 @@
           },
           "allOf": [{
               "$ref": "#/definitions/Resource"
-          }]
+          }, {"$ref": "#/definitions/TagsResource"}]
       },
       "IoTSecuritySolutionProperties": {
           "type": "object",
@@ -1493,19 +1614,29 @@
                   "default": true,
                   "description": "Is the solution Enabled for the customer."
               },
-              "exportRawEventsToLogAnalytics": {
-                  "type": "boolean",
-                  "default": false,
-                  "description": "Wether to save the raw events to the given workspace."
+              "export": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "RawEvents",
+                    "TwinData"
+                  ],
+                  "type": "string",
+                  "x-ms-enum":{
+                    "name": "ExtraData"
+                  }
+                },
+                "default": ["TwinData"],
+                "description": "Wether to save the raw events to the given workspace."
               },
-              "iotHubResources": {
+              "iotHubs": {
                   "type": "array",
                   "description": "Related iot hub resources ID",
-                  "items": {"type": "string"}
+                  "items": { "type": "string" }
               }
           },
           "required": [
-              "iotHubResources",
+              "iotHubs",
               "displayName"
           ]
       },
@@ -2116,11 +2247,11 @@
         },
         "x-ms-parameter-location": "method"
       },
-      "IotHubId": {
-        "name": "iotHubResourceId",
+      "FilterParam": {
+        "name": "$filter",
         "in": "query",
         "required": false,
-        "description": "The resource id of the iot hub",
+        "description": "filter the Security Solution with OData syntax. supporting filter by iotHubs",
         "type": "string",
         "x-ms-parameter-location": "method"
       }

@@ -2,7 +2,7 @@
     "parameters": {
         "api-version": "2017-08-01-preview",
         "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-        "$filter": "properties.iotHubs/any(i eq \"/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub\")"
+        "resourceGroupName" : "MyGroup"
     },
     "responses": {
         "200": {
@@ -10,14 +10,14 @@
                 "value": [{
                         "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default",
                         "name": "default",
-                        "type": "Microsoft.Security/IoTSecuritySolutions",
                         "location": "East Us",
+                        "type": "Microsoft.Security/IoTSecuritySolutions",
                         "tags": {},
                         "properties": {
                             "workspaceResourceId": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1",
                             "workspaceCustomerId": "9daae1f7-1c44-4de3-8d38-504d6c185afc",
                             "enabled": true,
-                            "export": ["TwinData", "RawEvents"],
+                            "export": ["TwinData"],
                             "displayName": "Solution Default",
                             "iotHubs": [
                               "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub"
