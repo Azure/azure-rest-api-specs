@@ -863,7 +863,7 @@
                     "$ref": "#/parameters/SolutionName"
                 },
                 {
-                  "name": "SecuritySolutionTags",
+                  "name": "securitySolutionTags",
                   "in": "body",
                   "required": true,
                   "description": "Updated tag information to set into the iot hub instance.",
@@ -1357,6 +1357,7 @@
       "TagsResource": {
         "properties": {
           "tags": {
+            "type": "object",
             "additionalProperties": {
               "type": "string"
             },
@@ -1601,6 +1602,10 @@
           "type": "object",
           "description": "Security Solution",
           "properties": {
+              "location": {
+                "type": "string",
+                "description": "The resource location."
+              },
               "properties": {
                   "x-ms-client-flatten": true,
                   "description": "Security Solution data",
