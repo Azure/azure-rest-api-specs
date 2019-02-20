@@ -3408,8 +3408,7 @@
                 },
                 "totalPersistentFilesNotSyncingCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Total count of persistent files not syncing (combined upload + download). Reserved for future use.",
                     "readOnly": true
                 },
@@ -3452,7 +3451,8 @@
             "properties": {
                 "lastSyncResult": {
                     "type": "integer",
-                    "description": "Last sync status",
+                    "format": "int32",
+                    "description": "Last sync result (HResult)",
                     "readOnly": true
                 },
                 "lastSyncTimestamp": {
@@ -3469,21 +3469,18 @@
                 },
                 "lastSyncPerItemErrorCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Last sync per item error count."
                 },
                 "persistentFilesNotSyncingCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Count of persistent files not syncing. Reserved for future use.",
                     "readOnly": true
                 },
                 "transientFilesNotSyncingCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Count of transient files not syncing. Reserved for future use.",
                     "readOnly": true
                 },
@@ -3509,36 +3506,31 @@
                 },
                 "perItemErrorCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Per item error count",
                     "readOnly": true
                 },
                 "appliedItemCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Applied item count.",
                     "readOnly": true
                 },
                 "totalItemCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Total item count (if available)",
                     "readOnly": true
                 },
                 "appliedBytes": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Applied bytes",
                     "readOnly": true
                 },
                 "totalBytes": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Total bytes (if available)",
                     "readOnly": true
                 }
@@ -3550,20 +3542,19 @@
             "properties": {
                 "errorCode": {
                     "type": "integer",
-                    "description": "Error code",
+                    "format": "int32",
+                    "description": "Error code (HResult)",
                     "readOnly": true
                 },
                 "persistentCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Count of persistent files not syncing with the specified error code",
                     "readOnly": true
                 },
                 "transientCount": {
                     "type": "integer",
-                    "minimum": 0,
-                    "maximum": 2147483647,
+                    "format": "int64",
                     "description": "Count of transient files not syncing with the specified error code",
                     "readOnly": true
                 }
