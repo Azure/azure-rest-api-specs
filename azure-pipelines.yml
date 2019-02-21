@@ -1,6 +1,8 @@
 variables:
+  TRAVIS: 'true'
   TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestId)
   TRAVIS_REPO_SLUG: $(Build.Repository.Name)
+  TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
 
 jobs:
 - job: "linter"
@@ -8,8 +10,10 @@ jobs:
     vmImage: 'Ubuntu 16.04'
   steps:
   - script: |
+      echo System.PullRequest.PullRequestId: $(System.PullRequest.PullRequestId)
       echo Build.Repository.Name: $(Build.Repository.Name)
       echo Build.Repository.Uri: $(Build.Repository.Uri)
+      echo Build.SourceVersion: $(Build.SourceVersion)
   - task: Npm@1
     displayName: 'npm install'
     inputs:
