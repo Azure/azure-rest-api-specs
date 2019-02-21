@@ -3,15 +3,17 @@ pool:
 
 variables:
   TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestId)
-  TRAVIS_REPO_SLUG: $(Build.SourceBranchName)
+#  TRAVIS_REPO_SLUG: $(Build.SourceBranchName)
 
-steps:
-
-#- task: Npm@1
-#  displayName: 'npm install'
-#  inputs:
-#    verbose: false
-#- script: 'scripts/install-dotnet.sh'
-#- script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
-
-- script: "scripts/swagger-to-sdk.sh Azure/azure-sdk-for-ruby -v"
+jobs:
+- job: "linter"
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+    verbose: false
+  - script: 'scripts/install-dotnet.sh'
+  - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
+- job: "ruby"
+  steps:
+  - script: "scripts/swagger-to-sdk.sh Azure/azure-sdk-for-ruby -v"
