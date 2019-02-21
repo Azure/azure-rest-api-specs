@@ -10,7 +10,7 @@ const exec = require('child_process').exec,
 
 let configsToProcess = utils.getConfigFilesChangedInPR();
 let pullRequestNumber = utils.getPullRequestNumber();
-let linterCmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json `;
+let linterCmd = `npx autorest --validation --azure-validator --message-format=json `;
 var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {};
