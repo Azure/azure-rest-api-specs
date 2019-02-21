@@ -8,8 +8,8 @@ jobs:
     vmImage: 'Ubuntu 16.04'
   steps:
   - task: Npm@1
-      displayName: 'npm install'
-      inputs:
+    displayName: 'npm install'
+    inputs:
       verbose: false
   - script: 'scripts/install-dotnet.sh'
   - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
