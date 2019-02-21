@@ -1,6 +1,6 @@
 variables:
   TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestId)
-  TRAVIS_REPO_SLUG: $(Build.SourceBranchName)
+  TRAVIS_REPO_SLUG: $(Build.Repository.Uri)
 
 jobs:
 - job: "linter"
