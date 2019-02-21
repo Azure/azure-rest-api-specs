@@ -20,7 +20,38 @@ jobs:
       verbose: false
   - script: 'npm test -- test/syntax.js'
 
-- job: "linter"
+- job: "semantic"
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'node scripts/semanticValidation.js'
+
+- job: "model"
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'node scripts/modelValidation.js'
+
+- job: "Breaking Changes"
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - script: 'scripts/install-dotnet.sh'
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'node scripts/breaking-change.js'
+
+- job: "lintdiff"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
