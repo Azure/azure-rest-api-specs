@@ -49,7 +49,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 InstancePoolNotFound - An instance pool cannot be found."
+            "description": "*** Error Responses: ***\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
           }
         },
         "x-ms-examples": {
@@ -99,7 +99,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is rerquired.\n\n * 400 InstancePoolRequestedVcoreCountIsInvalid - Requested VCore count for instance pool is invalid.\n\n * 400 InstancePoolRequestMissingSku - Instance Pool request is missing Sku.\n\n * 400 InstancePoolRequestMissingSkuTier - Instance Pool request is missing Sku Tier.\n\n * 400 InstancePoolRequestMissingSkuFamily - Instance Pool request is missing Sku Family.\n\n * 400 InstancePoolRequestedSubnetResourceIdIsInvalid - Subnet Resource Id for instance pool is Null or empty.\n\n * 400 InstancePoolRequestedLicenseTypeIsInvalid - License Type for instacne pool is Null or empty.\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InstancePoolRequestedVcoreCountIsInvalid - Requested vcore count for instance pool is invalid\n\n * 400 InstancePoolRequestMissingSku - Instance pool request is missing sku\n\n * 400 InstancePoolRequestMissingSkuTier - Instance pool request is missing sku tier\n\n * 400 InstancePoolRequestMissingSkuFamily - Instance pool request is missing sku family\n\n * 400 InstancePoolRequestedSubnetResourceIdIsInvalid - Subnet id for instance pool is null or empty\n\n * 400 InstancePoolRequestedLicenseTypeIsInvalid - License type for instance pool is null or empty\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation"
           },
           "202": {
             "description": "Accepted"
@@ -150,7 +150,7 @@
             "description": "Successfully deleted the instance pool."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InstancePoolNotEmpty - An instance pool is not empty.\n\n * 404 InstancePoolNotFound - An instance pool cannot be found.\n\n * 404 InstancePoolNotFound - An instance pool cannot be found.\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation."
+            "description": "*** Error Responses: ***\n\n * 400 InstancePoolNotEmpty - An instance pool is not empty\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 404 InstancePoolNotFound - An instance pool cannot be found\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation"
           },
           "202": {
             "description": "Accepted"
@@ -262,6 +262,36 @@
     }
   },
   "definitions": {
+    "Sku": {
+      "description": "An ARM Resource SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the particular SKU",
+          "type": "string"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Capacity of the particular SKU.",
+          "type": "integer"
+        }
+      }
+    },
     "InstancePoolProperties": {
       "description": "Properties of an instance pool.",
       "required": [
@@ -320,6 +350,35 @@
       },
       "x-ms-azure-resource": true
     },
+    "TrackedResource": {
+      "description": "ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "InstancePool": {
       "description": "An Azure SQL instance pool.",
       "required": [
@@ -328,12 +387,12 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "sku": {
-          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "The name and tier of the SKU."
         },
         "properties": {
