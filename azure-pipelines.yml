@@ -10,7 +10,7 @@ variables:
 
 jobs:
 
-- job: "syntax"
+- job: "Syntax"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
@@ -20,7 +20,7 @@ jobs:
       verbose: false
   - script: 'npm test -- test/syntax.js'
 
-- job: "semantic"
+- job: "Semantic"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
@@ -30,7 +30,7 @@ jobs:
       verbose: false
   - script: 'node scripts/semanticValidation.js'
 
-- job: "model"
+- job: "ModelValidation"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
@@ -40,7 +40,7 @@ jobs:
       verbose: false
   - script: 'node scripts/modelValidation.js'
 
-- job: "breaking_change"
+- job: "BreakingChange"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
@@ -51,7 +51,7 @@ jobs:
       verbose: false
   - script: 'node scripts/breaking-change.js'
 
-- job: "lintdiff"
+- job: "LintDiff"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
