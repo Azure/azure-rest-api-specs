@@ -1,6 +1,6 @@
 variables:
   TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestId)
-  TRAVIS_REPO_SLUG: $(Build.Repository.Uri)
+  TRAVIS_REPO_SLUG: $(Build.Repository.Name)
 
 jobs:
 - job: "linter"
@@ -9,6 +9,7 @@ jobs:
   steps:
   - script: |
       echo Build.Repository.Name: $(Build.Repository.Name)
+      echo Build.Repository.Uri: $(Build.Repository.Uri)
   - task: Npm@1
     displayName: 'npm install'
     inputs:
