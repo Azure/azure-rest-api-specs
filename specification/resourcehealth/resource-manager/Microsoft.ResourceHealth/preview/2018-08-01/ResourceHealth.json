@@ -410,17 +410,34 @@
           "type": "object",
           "description": "Properties of event.",
           "properties": {
-            "eventType": {
+            "article": {
+              "type": "object",
+              "description": "Article of event.",
+              "properties": {
+                "articleContent": {
+                  "type": "string",
+                  "description": "Article content of event."
+                }
+              }
+            },
+            "enableChatWithUs": {
+              "type": "boolean",
+              "description": "Tells if we want to enable or disable Microsoft Support for this event."
+            },
+            "enableMicrosoftSupport": {
+              "type": "boolean",
+              "description": "Tells if we want to enable or disable Microsoft Support for this event."
+            },
+            "eventLevel": {
               "type": "string",
-              "description": "Type of event.",
+              "description": "Level of event.",
               "enum": [
-                "ServiceIssue",
-                "PlannedMaintenance",
-                "HealthAdvisory",
-                "RCA"
+                "Critical",
+                "Warning",
+                "Informational"
               ],
               "x-ms-enum": {
-                "name": "EventTypeValues",
+                "name": "EventLevelValues",
                 "modelAsString": true
               }
             },
@@ -436,29 +453,60 @@
                 "modelAsString": true
               }
             },
-            "status": {
+            "eventType": {
               "type": "string",
-              "description": "Current status of event.",
+              "description": "Type of event.",
               "enum": [
-                "Active",
-                "Resolved"
+                "ServiceIssue",
+                "PlannedMaintenance",
+                "HealthAdvisory",
+                "RCA"
               ],
               "x-ms-enum": {
-                "name": "EventStatusValues",
+                "name": "EventTypeValues",
                 "modelAsString": true
               }
             },
-            "title": {
-              "type": "string",
-              "description": "Title text of event."
-            },
-            "summary": {
-              "type": "string",
-              "description": "Summary text of event."
+            "faqs": {
+              "type": "array",
+              "description": "Frequently asked questions for the service health event.",
+              "items": {
+                "$ref": "#/definitions/faq"
+              }
             },
             "header": {
               "type": "string",
               "description": "Header text of event."
+            },
+            "hIRStage": {
+              "description": "Tells the stage of HIR Document",
+              "type": "string"
+            },
+            "impact": {
+              "type": "array",
+              "description": "List services impacted by the service health event.",
+              "items": {
+                "$ref": "#/definitions/impact"
+              }
+            },
+            "impactMitigationTime": {
+              "type": "string",
+              "description": "It provides the Timestamp for when the health impacting event resolved.",
+              "format": "date-time"
+            },
+            "impactStartTime": {
+              "type": "string",
+              "description": "It provides the Timestamp for when the health impacting event started.",
+              "format": "date-time"
+            },
+            "isHIR": {
+              "type": "boolean",
+              "description": "It provides information if the event is High incident rate event or not."
+            },
+            "lastUpdateTime": {
+              "type": "string",
+              "description": "It provides the Timestamp for when the health impacting event was last updated.",
+              "format": "date-time"
             },
             "level": {
               "type": "string",
@@ -472,29 +520,6 @@
                 "modelAsString": true
               }
             },
-            "eventLevel": {
-              "type": "string",
-              "description": "Level of event.",
-              "enum": [
-                "Critical",
-                "Warning",
-                "Informational"
-              ],
-              "x-ms-enum": {
-                "name": "EventLevelValues",
-                "modelAsString": true
-              }
-            },
-            "article": {
-              "type": "object",
-              "description": "Article of event.",
-              "properties": {
-                "articleContent": {
-                  "type": "string",
-                  "description": "Article content of event."
-                }
-              }
-            },
             "links": {
               "type": "array",
               "description": "Useful links of event.",
@@ -502,22 +527,9 @@
                 "$ref": "#/definitions/link"
               }
             },
-            "impactStartTime": {
-              "type": "string",
-              "description": "It provides the Timestamp for when the health impacting event started.",
-              "format": "date-time"
-            },
-            "impactMitigationTime": {
-              "type": "string",
-              "description": "It provides the Timestamp for when the health impacting event resolved.",
-              "format": "date-time"
-            },
-            "impact": {
-              "type": "array",
-              "description": "List services impacted by the service health event.",
-              "items": {
-                "$ref": "#/definitions/impact"
-              }
+            "priority": {
+              "type": "integer",
+              "description": "Priority level of the event."
             },
             "recommendedActions": {
               "type": "object",
@@ -540,37 +552,25 @@
                 }
               }
             },
-            "faqs": {
-              "type": "array",
-              "description": "Frequently asked questions for the service health event.",
-              "items": {
-                "$ref": "#/definitions/faq"
+            "status": {
+              "type": "string",
+              "description": "Current status of event.",
+              "enum": [
+                "Active",
+                "Resolved"
+              ],
+              "x-ms-enum": {
+                "name": "EventStatusValues",
+                "modelAsString": true
               }
             },
-            "isHIR": {
-              "type": "boolean",
-              "description": "It provides information if the event is High incident rate event or not."
-            },
-            "enableMicrosoftSupport": {
-              "type": "boolean",
-              "description": "Tells if we want to enable or disable Microsoft Support for this event."
-            },
-            "enableChatWithUs": {
-              "type": "boolean",
-              "description": "Tells if we want to enable or disable Microsoft Support for this event."
-            },
-            "priority": {
-              "type": "integer",
-              "description": "Priority level of the event."
-            },
-            "lastUpdateTime": {
+            "summary": {
               "type": "string",
-              "description": "It provides the Timestamp for when the health impacting event was last updated.",
-              "format": "date-time"
+              "description": "Summary text of event."
             },
-            "hIRStage": {
-              "description": "Tells the stage of HIR Document",
-              "type": "string"
+            "title": {
+              "type": "string",
+              "description": "Title text of event."
             }
           }
         },
@@ -641,17 +641,17 @@
         }
       },
       "recommendedAction": {
-          "description": "Recommended Action for the service health event",
-          "properties": {
-            "groupId": {
-              "type": "integer",
-              "description": "Recommended Action group Id for the service health event."
-            },
-            "actionText": {
-              "type": "string",
-              "description": "Recommended Action for the service health event."
-            }
+        "description": "Recommended Action for the service health event",
+        "properties": {
+          "groupId": {
+            "type": "integer",
+            "description": "Recommended Action group Id for the service health event."
+          },
+          "actionText": {
+            "type": "string",
+            "description": "Recommended Action for the service health event."
           }
+        }
       },
       "impact": {
         "description": "Azure service impacted by the service health event.",
@@ -942,7 +942,7 @@
                 "type": "array",
                 "description": "Lists actions the user can take based on the current availabilityState of the resource.",
                 "items": {
-                  "$ref": "#/definitions/recommendedAction"
+                  "$ref": "#/definitions/recommendedActionAvailabilityStatus"
                 }
               },
               "serviceImpactingEvents": {
@@ -956,7 +956,7 @@
           }
         }
       },
-      "recommendedAction": {
+      "recommendedActionAvailabilityStatus": {
         "description": "Lists actions the user can take based on the current availabilityState of the resource.",
         "properties": {
           "action": {
@@ -1092,51 +1092,52 @@
         }
       }
     },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN",
-      "x-ms-parameter-location": "method"
-    },
-    "ExpandParameter": {
-      "name": "$expand",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Setting $expand=recommendedactions in url query expands the recommendedactions in the response.",
-      "x-ms-parameter-location": "method"
-    },
-    "EventIdParameter": {
-      "name": "eventId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "EventId for the Service health event"
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      },
+      "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the resource group.",
+        "x-ms-parameter-location": "method"
+      },
+      "FilterParameter": {
+        "name": "$filter",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "description": "The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN",
+        "x-ms-parameter-location": "method"
+      },
+      "ExpandParameter": {
+        "name": "$expand",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "description": "Setting $expand=recommendedactions in url query expands the recommendedactions in the response.",
+        "x-ms-parameter-location": "method"
+      },
+      "EventIdParameter": {
+        "name": "eventId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "EventId for the Service health event"
+      }
     }
   }
 }
