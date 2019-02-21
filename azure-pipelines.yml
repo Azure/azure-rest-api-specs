@@ -21,8 +21,22 @@ jobs:
       verbose: false
   - script: 'scripts/install-dotnet.sh'
   - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
-- job: "ruby"
+- job: "SDK"
+  strategy:
+    matrix:
+      ruby:
+        AZURE_SDK_REPO: azure-sdk-for-ruby
+      java:
+        AZURE_SDK_REPO: azure-sdk-for-java
+      javascript:
+        AZURE_SDK_REPO: azure-sdk-for-js
+      node:
+        AZURE_SDK_REPO: azure-sdk-for-node
+      python:
+        AZURE_SDK_REPO: azure-sdk-for-python
+      go:
+        AZURE_SDK_REPO: azure-sdk-for-go
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
-  - script: "scripts/swagger-to-sdk.sh Azure/azure-sdk-for-ruby -v"
+  - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v"
