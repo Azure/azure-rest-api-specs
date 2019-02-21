@@ -1,12 +1,11 @@
-pool:
-  vmImage: 'Ubuntu 16.04'
-
 variables:
   TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestId)
   TRAVIS_REPO_SLUG: $(Build.SourceBranchName)
 
 jobs:
 - job: "linter"
+  pool:
+    vmImage: 'Ubuntu 16.04'
   steps:
   - task: Npm@1
     displayName: 'npm install'
@@ -15,5 +14,7 @@ jobs:
   - script: 'scripts/install-dotnet.sh'
   - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
 - job: "ruby"
+  pool:
+    vmImage: 'Ubuntu 16.04'
   steps:
   - script: "scripts/swagger-to-sdk.sh Azure/azure-sdk-for-ruby -v"
