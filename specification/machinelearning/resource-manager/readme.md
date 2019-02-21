@@ -49,6 +49,14 @@ input-file:
 - Microsoft.MachineLearning/stable/2017-01-01/webservices.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: webservices.json
+    reason: The webservice's location and properties must be required when creating a web service. They can’t be changed without breaking Patch API.
+```
+
 ### Tag: package-commitmentPlans-2016-05-preview
 
 These settings apply only when `--tag=package-commitmentPlans-2016-05-preview` is specified on the command line.
