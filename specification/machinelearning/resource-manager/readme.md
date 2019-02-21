@@ -77,6 +77,16 @@ input-file:
 ```
 
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: commitmentPlans.json
+    where: $.definitions.CommitmentAssociation
+    reason: The CommitmentAssociation is an internal asscociation from a Web Service to a Commitment Plan, which can only be created or updated by Web Service Resource Provider.
+```
+
+
 ---
 # Code Generation
 
