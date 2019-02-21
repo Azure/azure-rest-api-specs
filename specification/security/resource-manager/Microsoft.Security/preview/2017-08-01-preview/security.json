@@ -1623,50 +1623,70 @@
             "type": "object",
             "description": "Security Solution setting data",
             "properties": {
-                "workspaceResourceId": {
+                "workspace": {
                     "type": "string",
-                    "description": "The full Azure ID of the workspace to save the data in"
-                },
-                "workspaceCustomerId": {
-                    "type": "string",
-                    "description": "the customer id associate with the workspace"
+                    "description": "Workspace resource ID"
                 },
                 "displayName": {
                     "type": "string",
-                    "description": "The display name."
+                    "description": "Resource display name."
                 },
-                "enabled": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Is the solution Enabled for the customer."
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "default": "Enabled",
+                    "description": "Security solution status",
+                    "x-ms-enum":{
+                        "name": "SecuritySolutionStatus",
+                        "modelAsString": true
+                    }
                 },
                 "export": {
                   "type": "array",
                   "items": {
                     "enum": [
-                      "RawEvents",
-                      "TwinData"
+                      "RawEvents"
                     ],
                     "type": "string",
                     "x-ms-enum":{
-                      "name": "ExtraData",
+                      "name": "ExportData",
                       "modelAsString": true,
                       "values": [
-                        {"value": "RawEvents", "description": "Export the raw events into the security solution workspace"},
-                        {"value": "TwinData", "description": "Export the twin data into the analysis process"}
+                        {"value": "RawEvents", "description": "Agent raw events"}
                       ]
                     }
                   },
-                  "description": "list of additional data to export by the system"
+                  "description": "List of additional export to workspace data options"
+                },
+                "disabledDataSources": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "TwinData"
+                      ],
+                      "type": "string",
+                      "x-ms-enum":{
+                        "name": "DataSource",
+                        "modelAsString": true,
+                        "values": [
+                          {"value": "TwinData", "description": "Devices twin data"}
+                        ]
+                      }
+                    },
+                    "description": "Disabled data sources. Disabling these data sources compromises the system."
                 },
                 "iotHubs": {
                     "type": "array",
-                    "description": "Related iot hub resources ID",
+                    "description": "IoT Hub resource IDs",
                     "items": { "type": "string" }
                 }
             },
             "required": [
                 "iotHubs",
+                "workspace",
                 "displayName"
             ]
         },
