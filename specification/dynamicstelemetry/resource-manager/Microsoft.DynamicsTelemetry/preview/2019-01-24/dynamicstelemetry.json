@@ -25,7 +25,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_Get",
+        "operationId": "Operations_List",
         "produces": [
           "application/json"
         ],
@@ -34,22 +34,26 @@
             "x-nullable": true,
             "description": "",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Operation"
-              }
+              "$ref": "#/definitions/OperationList"
             }
           }
         },
         "x-ms-examples": {
-          "Get Operations": {
-            "$ref": "./examples/GetOperations.json"
+          "List Operations": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "OperationList": {
+      "type": "array",
+      "description": "List of supported operations.",
+      "items": {
+        "$ref": "#/definitions/Operation"
+      }
+    },
     "Operation": {
       "type": "object",
       "additionalProperties": false,
