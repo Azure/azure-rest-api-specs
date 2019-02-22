@@ -163,11 +163,7 @@
         "description": "Cancels the subscription",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -190,16 +186,15 @@
       }
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/rename": {
-      "patch": {
+      "post": {
         "operationId": "RenameSubscription",
         "description": "Renames the subscription",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -382,6 +377,16 @@
           "readOnly": true
         }
       }
+    },
+    "getSubscriptionName": {
+      "type": "object",
+      "description": "New name of the subscription.",
+      "properties": {
+        "subscriptionName": {
+          "type": "string",
+          "description": "New subscription name"
+        }
+      }
     }
   },
   "parameters": {
@@ -390,7 +395,24 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2015-06-01"
+      "description": "Version of the API to be used with the client request. Current version is 2018-11-01-preview"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription Id."
+    },
+    "subscriptionNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Subscription Name",
+      "schema": {
+        "$ref": "#/definitions/getSubscriptionName"
+      }
     }
   },
   "security": [
