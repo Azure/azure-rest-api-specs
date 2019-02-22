@@ -168,7 +168,7 @@ directive:
       return $.
         replace( /(The comma-separated list of fields to retrieve. If unspecified,) only the key field will be included in the results./g, "$1 all fields marked as retrievable in the schema are included." )
 ####
-  # Make SuggestResult and DocumentSuggestResult generic so we can tell the deserializer what type to instantitate.
+  # Make SuggestResult and DocumentSuggestResult generic so we can tell the deserializer what type to instantiate.
   # For SuggestResult, this means we also have to replace AdditionalProperties with a property of the generic type.
   - from: source-file-csharp
     where: $
