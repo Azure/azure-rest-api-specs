@@ -21,6 +21,8 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
+  - script: 'npm run travis-env'
+  - script: 'echo $TRAVIS_BRANCH'
   - script: 'npm test -- test/syntax.js'
 
 - job: "Semantic"
