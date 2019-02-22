@@ -33,10 +33,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-nodejs
- 
-  
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_translatortext']
 ```
 
 ## CSharp Settings
