@@ -10,7 +10,7 @@ const exec = require('child_process').exec,
 
 let configsToProcess = utils.getConfigFilesChangedInPR();
 let pullRequestNumber = utils.getPullRequestNumber();
-let linterCmd = `npx autorest@2.0.4152 --validation --azure-validator --message-format=json `;
+let linterCmd = `npx autorest --validation --azure-validator --message-format=json `;
 var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {};
@@ -59,12 +59,16 @@ async function getLinterResult(swaggerPath) {
         (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
 
     if (err && stderr.indexOf("Process() cancelled due to exception") !== -1) {
-        console.log(`AutoRest exited with code ${err.code}`);
-        console.log(stderr);
+        console.error(`AutoRest exited with code ${err.code}`);
+        console.error(stderr);
         throw new Error("AutoRest failed");
     }
 
-    let resultString = stdout + stderr;
+    if (stderr !== "") {
+        console.error(`Error: ${stderr}`)
+        process.exit(1)
+    }
+    let resultString = stdout;
     if (resultString.indexOf('{') !== -1) {
         resultString = resultString.replace(/Processing batch task - {.*} \.\n/g, "");
         resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";
@@ -76,7 +80,7 @@ async function getLinterResult(swaggerPath) {
             //console.dir(resultObject, {depth: null, colors: true});
             return jsonResult;
         } catch (e) {
-            console.log(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
+            console.error(`An error occurred while executing JSON.parse() on the linter output for ${swaggerPath}:`);
             console.dir(resultString);
             console.dir(e, { depth: null, colors: true });
             process.exit(1)
