@@ -4,7 +4,8 @@ trigger: none
 
 variables:
   TRAVIS: 'true'
-  TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestId)
+  TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
+  TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
   TRAVIS_REPO_SLUG: $(Build.Repository.Name)
   TRAVIS_PULL_REQUEST_SLUG: $(Build.Repository.Name)
   TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
@@ -16,6 +17,14 @@ jobs:
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
+  - script: |
+      echo TRAVIS: $(TRAVIS)
+      echo TRAVIS_BRANCH: $(TRAVIS_BRANCH)
+      echo TRAVIS_REPO_SLUG: $(TRAVIS_REPO_SLUG)
+      echo TRAVIS_PULL_REQUEST: $(TRAVIS_PULL_REQUEST)
+      echo TRAVIS_PULL_REQUEST_SLUG: $(TRAVIS_PULL_REQUEST_SLUG)
+      echo TRAVIS_PULL_REQUEST_SHA: $(TRAVIS_PULL_REQUEST_SHA)
+      echo PR_ONLY: $(PR_ONLY)
   - task: Npm@1
     displayName: 'npm install'
     inputs:
@@ -71,14 +80,19 @@ jobs:
     matrix:
       ruby:
         AZURE_SDK_REPO: azure-sdk-for-ruby
+        AZURE_SDK_PARAMS: ''
       java:
         AZURE_SDK_REPO: azure-sdk-for-java
+        AZURE_SDK_PARAMS: ''
       javascript:
         AZURE_SDK_REPO: azure-sdk-for-js
+        AZURE_SDK_PARAMS: ''
       node:
         AZURE_SDK_REPO: azure-sdk-for-node
+        AZURE_SDK_PARAMS: ''
       python:
         AZURE_SDK_REPO: azure-sdk-for-python
+        AZURE_SDK_PARAMS: ''
       go:
         AZURE_SDK_REPO: azure-sdk-for-go
         AZURE_SDK_PARAMS: '-o latest'
