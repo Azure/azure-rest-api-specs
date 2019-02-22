@@ -4,6 +4,7 @@ trigger: none
 
 variables:
   TRAVIS: 'true'
+  TRAVIS_BRANCH: $(Build.SourceBranchName)
   TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestId)
   TRAVIS_REPO_SLUG: $(Build.Repository.Name)
   TRAVIS_PULL_REQUEST_SLUG: $(Build.Repository.Name)
