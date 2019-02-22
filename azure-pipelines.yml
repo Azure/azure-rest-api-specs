@@ -20,9 +20,11 @@ jobs:
   - script: |
       echo TRAVIS: $(TRAVIS)
       echo TRAVIS_BRANCH: $(TRAVIS_BRANCH)
+      echo TRAVIS_REPO_SLUG: $(TRAVIS_REPO_SLUG)
       echo TRAVIS_PULL_REQUEST: $(TRAVIS_PULL_REQUEST)
       echo TRAVIS_PULL_REQUEST_SLUG: $(TRAVIS_PULL_REQUEST_SLUG)
       echo TRAVIS_PULL_REQUEST_SHA: $(TRAVIS_PULL_REQUEST_SHA)
+      echo PR_ONLY: $(PR_ONLY)
   - task: Npm@1
     displayName: 'npm install'
     inputs:
