@@ -108,6 +108,8 @@ Use the below directives sparingly. Every modification we make in here, we poten
 
 ``` yaml $(csharp)
 directive:
+  # TODO: Simplify all the below regexes once we gain the ability to target them at specific files.
+
   # Rename the IDocumentsOperations interface and implementation, then make the interface internal so we can version it freely.
   # This requires these changes:
   #   1. Globally rename the interface and implementation class, along with comments and constructors
@@ -129,7 +131,7 @@ directive:
         replace( /public (partial interface IDocumentsProxyOperations)/g, "internal $1" ).
         replace( /public virtual (IDocumentsProxyOperations) Documents ({ get;)/g, "internal $1 DocumentsProxy $2" ).
         replace( /Documents = new DocumentsProxyOperations\(this\);/g, "DocumentsProxy = new DocumentsProxyOperations\(this\);" ).
-        replace( /(Gets the) IDocumentsProxyOperations(.\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)IDocumentsProxyOperations (Documents { get; })/g, "$1 IDocumentsOperations$2IDocumentsOperations $3" )
+        replace( /(Gets the) IDocumentsProxyOperations(.\s*\/\/\/ <\/summary>\s*)IDocumentsProxyOperations (Documents { get; })/g, "$1 IDocumentsOperations$2IDocumentsOperations $3" )
 ####
   # Adds extra JsonSerializerSettings parameters to all operation methods. This enables the SDK to delegate serialization/de-serialization to the custom serializer on a per-call basis.
   - from: source-file-csharp
@@ -150,4 +152,60 @@ directive:
         replace( /(Task<AzureOperationResponse)<object>(> GetWithHttpMessagesAsync)/g, "$1<T>$2<T>" ).
         replace( /(DeserializeObject)<object>/g, "$1<T>" ).
         replace( /(var _result = new AzureOperationResponse)<object>/g, "$1<T>" )
+####
+  # Make SearchRequest/SuggestRequest/AutocompleteRequest internal, since they are implementation details.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /public (partial class) (Suggest|Search|Autocomplete)(Request)/g, "internal $1 $2$3" )
+####
+  # Change the documentation for $select for Suggest. The .NET SDK treats this property differently than the REST API
+  # does by default, and we don't want to change it for backwards compatibility reasons.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(The comma-separated list of fields to retrieve. If unspecified,) only the key field will be included in the results./g, "$1 all fields marked as retrievable in the schema are included." )
+####
+  # Make SuggestResult and DocumentSuggestResult generic so we can tell the deserializer what type to instantitate.
+  # For SuggestResult, this means we also have to replace AdditionalProperties with a property of the generic type.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(public partial class DocumentSuggestResult)/g, "$1<T>" ).
+        replace( /(IList<SuggestResult)/g, "$1<T>" ).
+        replace( /(public partial class SuggestResult)/g, "$1<T>" ).
+        replace( /(SuggestResult class.\s*\/\/\/ <\/summary>\s*)\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\/\/\/ message are deserialized this collection<\/param>/g, "$1/// <param name=\"document\">The document on which the suggested text is based.</param>" ).
+        replace( /(public SuggestResult)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
+        replace( /(public SuggestResult\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
+        replace( /(\/\/\/ <summary>\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\/\/\/ this collection(\s*\/\/\/ <\/summary>\s*)\[JsonExtensionData\]\s*public IDictionary<string, object> AdditionalProperties ({ get; set; }\s*.*\s*\/\/\/ Gets or sets the text of the suggestion result.)/g, "$1 Gets the document on which the suggested text is based. $2public T Document $3" ).
+        replace( /(SuggestGetWithHttpMessagesAsync)/g, "$1<T>" ).
+        replace( /(SuggestPostWithHttpMessagesAsync)/g, "$1<T>" ).
+        replace( /(AzureOperationResponse<DocumentSuggestResult)/g, "$1<T>" ).
+        replace( /(DeserializeObject<DocumentSuggestResult)/g, "$1<T>" )
+####
+  # Improve documentation for SuggestParameters.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(\/\/\/) Additional parameters for SuggestGet operation./g, "$1 Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors." )
+####
+  # Make IndexBatch and IndexAction generic so we can provide a strongly-typed interface all the way down.
+  # For IndexAction, this means we also have to replace AdditionalProperties with a property of the generic type.
+  # Also use IEnumerable<IndexAction> instead of IList for backwards compatibility.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /(public partial class IndexBatch)/g, "$1<T>" ).
+        replace( /IList<IndexAction>/g, "IEnumerable<IndexAction<T>>" ).
+        replace( /(public partial class IndexAction)/g, "$1<T>" ).
+        replace( /(IndexAction class.\s*\/\/\/ <\/summary>\s*)\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\n\s*\/\/\/ message are deserialized this collection<\/param>/g, "$1/// <param name=\"document\">The document on which the action will be performed.</param>" ).
+        replace( /(public IndexAction)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
+        replace( /(public IndexAction\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
+        replace( /(\/\/\/ <summary>\s*\n\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\n\s*\/\/\/ this collection(\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)\[JsonExtensionData\]\s*\n\s*public IDictionary<string, object> AdditionalProperties ({ get; set; }\s*.*\s*\/\/\/ Gets or sets the operation to perform on a document)/g, "$1 Gets the document on which the action will be performed; Fields other than the key are ignored for delete actions. $2public T Document $3" ).
+        replace( /(IndexWithHttpMessagesAsync)\((IndexBatch)/g, "$1<T>($2<T>" )
 ```
