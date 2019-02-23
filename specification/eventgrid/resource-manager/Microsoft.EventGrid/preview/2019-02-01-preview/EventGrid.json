@@ -476,6 +476,63 @@
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{domainTopicName}": {
+            "get": {
+                "tags": [
+                    "DomainTopics"
+                ],
+                "summary": "Get a domain topic",
+                "description": "Get properties of a domain topic",
+                "operationId": "DomainTopics_Get",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group within the user's subscription.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainName",
+                        "in": "path",
+                        "description": "Name of the domain",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "domainTopicName",
+                        "in": "path",
+                        "description": "Name of the topic",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DomainTopic"
+                        }
+                    },
+                    "default": {
+                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+                    }
+                },
+                "x-ms-examples": {
+                    "DomainTopics_Get": {
+                        "$ref": "./examples/DomainTopics_Get.json"
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "DomainTopics"
@@ -591,65 +648,6 @@
                     }
                 },
                 "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}": {
-            "get": {
-                "tags": [
-                    "DomainTopics"
-                ],
-                "summary": "Get a domain topic",
-                "description": "Get properties of a domain topic",
-                "operationId": "DomainTopics_Get",
-                "consumes": [],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "description": "The name of the resource group within the user's subscription.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "domainName",
-                        "in": "path",
-                        "description": "Name of the domain",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "topicName",
-                        "in": "path",
-                        "description": "Name of the topic",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/DomainTopic"
-                        }
-                    },
-                    "default": {
-                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
-                    }
-                },
-                "x-ms-examples": {
-                    "DomainTopics_Get": {
-                        "$ref": "./examples/DomainTopics_Get.json"
-                    }
-                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics": {
@@ -2451,7 +2449,8 @@
                     "x-ms-enum": {
                         "name": "InputSchema",
                         "modelAsString": true
-                    }
+                    },
+                    "default": "EventGridSchema"
                 },
                 "inputSchemaMapping": {
                     "$ref": "#/definitions/InputSchemaMapping",
@@ -2638,9 +2637,7 @@
                     "description": "The event delivery schema for the event subscription.",
                     "enum": [
                         "EventGridSchema",
-                        "InputEventSchema",
                         "CloudEventV01Schema",
-                        "GraphApiEventSchema",
                         "CustomInputSchema"
                     ],
                     "type": "string",
@@ -2826,8 +2823,8 @@
             ],
             "properties": {
                 "value": {
-                    "description": "The filter value",
                     "format": "double",
+                    "description": "The filter value",
                     "type": "number"
                 }
             },
@@ -2843,8 +2840,8 @@
             ],
             "properties": {
                 "value": {
-                    "description": "The filter value",
                     "format": "double",
+                    "description": "The filter value",
                     "type": "number"
                 }
             },
@@ -2860,8 +2857,8 @@
             ],
             "properties": {
                 "value": {
-                    "description": "The filter value",
                     "format": "double",
+                    "description": "The filter value",
                     "type": "number"
                 }
             },
@@ -2877,8 +2874,8 @@
             ],
             "properties": {
                 "value": {
-                    "description": "The filter value",
                     "format": "double",
+                    "description": "The filter value",
                     "type": "number"
                 }
             },
@@ -3250,9 +3247,7 @@
                     "description": "The event delivery schema for the event subscription.",
                     "enum": [
                         "EventGridSchema",
-                        "InputEventSchema",
                         "CloudEventV01Schema",
-                        "GraphApiEventSchema",
                         "CustomInputSchema"
                     ],
                     "type": "string",
@@ -3393,7 +3388,8 @@
                     "x-ms-enum": {
                         "name": "InputSchema",
                         "modelAsString": true
-                    }
+                    },
+                    "default": "EventGridSchema"
                 },
                 "inputSchemaMapping": {
                     "$ref": "#/definitions/InputSchemaMapping",
