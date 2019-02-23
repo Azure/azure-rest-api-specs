@@ -72,7 +72,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-03-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -99,7 +99,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-03-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -125,7 +125,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -149,7 +149,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -173,7 +173,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
