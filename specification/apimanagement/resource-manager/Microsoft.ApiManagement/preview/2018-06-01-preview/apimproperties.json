@@ -45,8 +45,8 @@
           "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-properties"
         },
         "x-ms-examples": {
-          "ApiManagementListProperties": {
-            "$ref": "./examples/ApiManagementListProperties.json"
+          "ApiManagementListPropertys": {
+            "$ref": "./examples/ApiManagementListPropertys.json"
           }
         },
         "parameters": [
@@ -61,7 +61,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|tags | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|tags | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -81,6 +81,12 @@
             "description": "A Collection of the Property entities for the specified API Management service instance.",
             "schema": {
               "$ref": "#/definitions/PropertyCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -110,7 +116,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -156,7 +162,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -205,7 +211,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "name": "parameters",
@@ -278,7 +284,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "name": "parameters",
@@ -330,7 +336,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -469,16 +475,5 @@
       "description": "Property Entity Base Parameters set."
     }
   },
-  "parameters": {
-    "PropertyIdParameter": {
-      "name": "propId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the property.",
-      "maxLength": 256,
-      "pattern": "^[^*#&+:<>?]+$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

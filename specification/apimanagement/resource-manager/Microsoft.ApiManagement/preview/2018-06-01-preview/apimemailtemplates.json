@@ -54,6 +54,13 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
           {
@@ -71,6 +78,12 @@
             "description": "A Collection of the Email Template for the specified API Management service instance.",
             "schema": {
               "$ref": "#/definitions/EmailTemplateCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -99,7 +112,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/TemplateNameParameter"
+            "$ref": "./apimanagement.json#/parameters/TemplateNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -145,7 +158,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/TemplateNameParameter"
+            "$ref": "./apimanagement.json#/parameters/TemplateNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -194,7 +207,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/TemplateNameParameter"
+            "$ref": "./apimanagement.json#/parameters/TemplateNameParameter"
           },
           {
             "name": "parameters",
@@ -255,7 +268,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/TemplateNameParameter"
+            "$ref": "./apimanagement.json#/parameters/TemplateNameParameter"
           },
           {
             "name": "parameters",
@@ -304,7 +317,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/TemplateNameParameter"
+            "$ref": "./apimanagement.json#/parameters/TemplateNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -472,34 +485,5 @@
       "description": "Email Template Parameter contract."
     }
   },
-  "parameters": {
-    "TemplateNameParameter": {
-      "name": "templateName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "applicationApprovedNotificationMessage",
-        "accountClosedDeveloper",
-        "quotaLimitApproachingDeveloperNotificationMessage",
-        "newDeveloperNotificationMessage",
-        "emailChangeIdentityDefault",
-        "inviteUserNotificationMessage",
-        "newCommentNotificationMessage",
-        "confirmSignUpIdentityDefault",
-        "newIssueNotificationMessage",
-        "purchaseDeveloperNotificationMessage",
-        "passwordResetIdentityDefault",
-        "passwordResetByAdminNotificationMessage",
-        "rejectDeveloperNotificationMessage",
-        "requestDeveloperNotificationMessage"
-      ],
-      "x-ms-enum": {
-        "name": "TemplateName",
-        "modelAsString": true
-      },
-      "description": "Email Template Name Identifier.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }

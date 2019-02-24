@@ -61,6 +61,7 @@ input-file:
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproductsByTags.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproperties.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimquotas.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimregions.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimreports.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimsubscriptions.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimtagresources.json

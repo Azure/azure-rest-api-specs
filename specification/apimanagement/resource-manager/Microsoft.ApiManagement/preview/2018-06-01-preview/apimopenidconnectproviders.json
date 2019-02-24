@@ -37,10 +37,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders": {
       "get": {
         "tags": [
-          "OpenIdConnectProviders"
+          "OpenidConnectProvider"
         ],
         "operationId": "OpenIdConnectProvider_ListByService",
-        "description": "Lists all OpenID Connect Providers.",
+        "description": "Lists of all the OpenId Connect Providers.",
         "x-ms-examples": {
           "ApiManagementListOpenIdConnectProviders": {
             "$ref": "./examples/ApiManagementListOpenIdConnectProviders.json"
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -96,7 +96,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}": {
       "head": {
         "tags": [
-          "OpenIdConnectProviders"
+          "OpenidConnectProvider"
         ],
         "operationId": "OpenIdConnectProvider_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.",
@@ -113,7 +113,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/OpenIdConnectIdParameter"
+            "$ref": "./apimanagement.json#/parameters/OpenIdConnectIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -142,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "OpenIdConnectProviders"
+          "OpenidConnectProvider"
         ],
         "operationId": "OpenIdConnectProvider_Get",
         "description": "Gets specific OpenID Connect Provider.",
@@ -159,7 +159,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/OpenIdConnectIdParameter"
+            "$ref": "./apimanagement.json#/parameters/OpenIdConnectIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -191,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "OpenIdConnectProviders"
+          "OpenidConnectProvider"
         ],
         "operationId": "OpenIdConnectProvider_CreateOrUpdate",
         "description": "Creates or updates the OpenID Connect Provider.",
@@ -208,7 +208,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/OpenIdConnectIdParameter"
+            "$ref": "./apimanagement.json#/parameters/OpenIdConnectIdParameter"
           },
           {
             "name": "parameters",
@@ -264,7 +264,7 @@
       },
       "patch": {
         "tags": [
-          "OpenIdConnectProviders"
+          "OpenidConnectProvider"
         ],
         "operationId": "OpenIdConnectProvider_Update",
         "description": "Updates the specific OpenID Connect Provider.",
@@ -281,7 +281,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/OpenIdConnectIdParameter"
+            "$ref": "./apimanagement.json#/parameters/OpenIdConnectIdParameter"
           },
           {
             "name": "parameters",
@@ -316,7 +316,7 @@
       },
       "delete": {
         "tags": [
-          "OpenIdConnectProviders"
+          "OpenidConnectProvider"
         ],
         "operationId": "OpenIdConnectProvider_Delete",
         "description": "Deletes specific OpenID Connect Provider of the API Management service instance.",
@@ -333,7 +333,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/OpenIdConnectIdParameter"
+            "$ref": "./apimanagement.json#/parameters/OpenIdConnectIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -462,16 +462,5 @@
       "description": "Parameters supplied to the Update OpenID Connect Provider operation."
     }
   },
-  "parameters": {
-    "OpenIdConnectIdParameter": {
-      "name": "opid",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the OpenID Connect Provider.",
-      "maxLength": 256,
-      "pattern": "^[^*#&+:<>?]+$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }

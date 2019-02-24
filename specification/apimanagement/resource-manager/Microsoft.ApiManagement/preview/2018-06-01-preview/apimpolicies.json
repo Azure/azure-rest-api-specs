@@ -42,8 +42,8 @@
         "operationId": "Policy_ListByService",
         "description": "Lists all the Global Policy definitions of the Api Management service.",
         "x-ms-examples": {
-          "ApiManagementListPolicies": {
-            "$ref": "./examples/ApiManagementListPolicies.json"
+          "ApiManagementListPolicys": {
+            "$ref": "./examples/ApiManagementListPolicys.json"
           }
         },
         "parameters": [
@@ -96,7 +96,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -142,7 +142,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -153,7 +153,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the Policy Contracts.",
+            "description": "Get the Global policy definition of the Api Management service.",
             "schema": {
               "$ref": "#/definitions/PolicyContract"
             },
@@ -191,7 +191,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "name": "parameters",
@@ -264,7 +264,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -371,21 +371,5 @@
       "description": "Policy contract Properties."
     }
   },
-  "parameters": {
-    "PolicyIdParameter": {
-      "name": "policyId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "policy"
-      ],
-      "description": "The identifier of the Policy.",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "PolicyIdName"
-      },
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }

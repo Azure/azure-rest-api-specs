@@ -102,7 +102,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -129,7 +129,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "IdentityProvider"
         ],
@@ -148,7 +148,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -197,7 +197,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "name": "parameters",
@@ -253,7 +253,7 @@
       },
       "patch": {
         "tags": [
-          "IdentityProviders"
+          "IdentityProvider"
         ],
         "operationId": "IdentityProvider_Update",
         "description": "Updates an existing IdentityProvider configuration.",
@@ -270,7 +270,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "name": "parameters",
@@ -322,7 +322,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -517,52 +517,5 @@
       "description": "Identity Provider Base Parameter Properties."
     }
   },
-  "parameters": {
-    "IdentityProviderNameParameter": {
-      "name": "identityProviderName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "facebook",
-        "google",
-        "microsoft",
-        "twitter",
-        "aad",
-        "aadB2C"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityProviderType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "facebook",
-            "description": "Facebook as Identity provider."
-          },
-          {
-            "value": "google",
-            "description": "Google as Identity provider."
-          },
-          {
-            "value": "microsoft",
-            "description": "Microsoft Live as Identity provider."
-          },
-          {
-            "value": "twitter",
-            "description": "Twitter as Identity provider."
-          },
-          {
-            "value": "aad",
-            "description": "Azure Active Directory as Identity provider."
-          },
-          {
-            "value": "aadB2C",
-            "description": "Azure Active Directory B2C as Identity provider."
-          }
-        ]
-      },
-      "description": "Identity Provider Type identifier.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {  }
 }

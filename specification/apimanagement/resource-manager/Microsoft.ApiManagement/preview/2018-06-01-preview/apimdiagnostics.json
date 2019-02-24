@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics": {
       "get": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_ListByService",
         "description": "Lists all diagnostics of the API Management service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -96,7 +96,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}": {
       "head": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Diagnostic specified by its identifier.",
@@ -113,7 +113,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -124,7 +124,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully.",
+            "description": "Gets the entity tag of the diagnostic",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -142,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_Get",
         "description": "Gets the details of the Diagnostic specified by its identifier.",
@@ -159,7 +159,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -191,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_CreateOrUpdate",
         "description": "Creates a new Diagnostic or updates an existing one.",
@@ -208,7 +208,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "name": "parameters",
@@ -243,7 +243,7 @@
             }
           },
           "200": {
-            "description": "Diagnostic was successfully updated.",
+            "description": "Diagnostic successfully updated",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -264,7 +264,7 @@
       },
       "patch": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_Update",
         "description": "Updates the details of the Diagnostic specified by its identifier.",
@@ -281,7 +281,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "name": "parameters",
@@ -316,7 +316,7 @@
       },
       "delete": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_Delete",
         "description": "Deletes the specified Diagnostic.",
@@ -333,7 +333,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -509,17 +509,5 @@
       "description": "Diagnostic Entity Properties"
     }
   },
-  "parameters": {
-    "DiagnosticIdParameter": {
-      "name": "diagnosticId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Diagnostic identifier. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {  }
 }

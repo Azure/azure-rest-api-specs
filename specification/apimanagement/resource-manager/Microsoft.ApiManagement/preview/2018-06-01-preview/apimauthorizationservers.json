@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers": {
       "get": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_ListByService",
         "description": "Lists a collection of authorization servers defined within a service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -96,7 +96,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}": {
       "head": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the authorizationServer specified by its identifier.",
@@ -113,7 +113,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -142,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_Get",
         "description": "Gets the details of the authorization server specified by its identifier.",
@@ -159,7 +159,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -191,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_CreateOrUpdate",
         "description": "Creates new authorization server or updates an existing authorization server.",
@@ -208,7 +208,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "name": "parameters",
@@ -264,7 +264,7 @@
       },
       "patch": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_Update",
         "description": "Updates the details of the authorization server specified by its identifier.",
@@ -281,7 +281,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "name": "parameters",
@@ -316,7 +316,7 @@
       },
       "delete": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_Delete",
         "description": "Deletes specific authorization server instance.",
@@ -333,7 +333,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -684,17 +684,5 @@
       "description": "OAuth acquire token request body parameter (www-url-form-encoded)."
     }
   },
-  "parameters": {
-    "AuthenticationServerIdParameter": {
-      "name": "authsid",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the authorization server.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {  }
 }

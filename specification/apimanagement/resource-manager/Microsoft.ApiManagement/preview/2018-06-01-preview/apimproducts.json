@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products": {
       "get": {
         "tags": [
-          "Products"
+          "Product"
         ],
         "operationId": "Product_ListByService",
         "description": "Lists a collection of products in the specified service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|terms | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|groups |     |    |\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|terms | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|groups |     |    |\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -110,7 +110,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}": {
       "head": {
         "tags": [
-          "Products"
+          "Product"
         ],
         "operationId": "Product_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the product specified by its identifier.",
@@ -127,7 +127,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -156,7 +156,7 @@
       },
       "get": {
         "tags": [
-          "Products"
+          "Product"
         ],
         "operationId": "Product_Get",
         "description": "Gets the details of the product specified by its identifier.",
@@ -173,7 +173,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -205,13 +205,13 @@
       },
       "put": {
         "tags": [
-          "Products"
+          "Product"
         ],
         "operationId": "Product_CreateOrUpdate",
         "description": "Creates or Updates a product.",
         "x-ms-examples": {
-          "ApiManagementCreateProductBasic": {
-            "$ref": "./examples/ApiManagementCreateProductBasic.json"
+          "ApiManagementCreateProduct": {
+            "$ref": "./examples/ApiManagementCreateProduct.json"
           }
         },
         "parameters": [
@@ -222,7 +222,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "name": "parameters",
@@ -248,12 +248,24 @@
             "description": "Product was successfully created.",
             "schema": {
               "$ref": "#/definitions/ProductContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "Product was successfully updated.",
             "schema": {
               "$ref": "#/definitions/ProductContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -266,13 +278,13 @@
       },
       "patch": {
         "tags": [
-          "Products"
+          "Product"
         ],
         "operationId": "Product_Update",
         "description": "Update existing product details.",
         "x-ms-examples": {
-          "ApiManagementUpdateProductBasic": {
-            "$ref": "./examples/ApiManagementUpdateProductBasic.json"
+          "ApiManagementUpdateProduct": {
+            "$ref": "./examples/ApiManagementUpdateProduct.json"
           }
         },
         "parameters": [
@@ -283,7 +295,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "name": "parameters",
@@ -318,7 +330,7 @@
       },
       "delete": {
         "tags": [
-          "Products"
+          "Product"
         ],
         "operationId": "Product_Delete",
         "description": "Delete product.",
@@ -335,7 +347,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -356,10 +368,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Product successfully removed"
+            "description": "Product was successfully removed."
           },
           "204": {
-            "description": "Product successfully removed by previous request or does not exist"
+            "description": "Product was successfully removed by previous request or does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -373,7 +385,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis": {
       "get": {
         "tags": [
-          "ProductApis"
+          "ProductApi"
         ],
         "operationId": "ProductApi_ListByProduct",
         "description": "Lists a collection of the APIs associated with a product.",
@@ -390,14 +402,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|serviceUrl | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|path | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|serviceUrl | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|path | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -435,7 +447,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}": {
       "head": {
         "tags": [
-          "ProductApis"
+          "ProductApi"
         ],
         "operationId": "ProductApi_CheckEntityExists",
         "description": "Checks that API entity specified by identifier is associated with the Product entity.",
@@ -452,10 +464,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -468,9 +480,6 @@
           "204": {
             "description": "Entity exists"
           },
-          "404": {
-            "description": "API is not associated with the product."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -481,7 +490,7 @@
       },
       "put": {
         "tags": [
-          "ProductApis"
+          "ProductApi"
         ],
         "operationId": "ProductApi_CreateOrUpdate",
         "description": "Adds an API to the specified product.",
@@ -498,10 +507,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -533,7 +542,7 @@
       },
       "delete": {
         "tags": [
-          "ProductApis"
+          "ProductApi"
         ],
         "operationId": "ProductApi_Delete",
         "description": "Deletes the specified API from the specified product.",
@@ -550,10 +559,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+            "$ref": "./apimanagement.json#/parameters/ApiIdRevParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -581,7 +590,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups": {
       "get": {
         "tags": [
-          "ProductGroups"
+          "ProductGroup"
         ],
         "operationId": "ProductGroup_ListByProduct",
         "description": "Lists the collection of developer groups associated with the specified product.",
@@ -598,14 +607,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt |    |\n|name | eq, ne |    |\n|description | eq, ne |    |\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt |    |\n|displayName | eq, ne |    |\n|description | eq, ne |    |\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -643,7 +652,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}": {
       "head": {
         "tags": [
-          "ProductGroups"
+          "ProductGroup"
         ],
         "operationId": "ProductGroup_CheckEntityExists",
         "description": "Checks that Group entity specified by identifier is associated with the Product entity.",
@@ -660,10 +669,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimgroups.json#/parameters/GroupIdParameter"
+            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -686,7 +695,7 @@
       },
       "put": {
         "tags": [
-          "ProductGroups"
+          "ProductGroup"
         ],
         "operationId": "ProductGroup_CreateOrUpdate",
         "description": "Adds the association between the specified developer group with the specified product.",
@@ -703,10 +712,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimgroups.json#/parameters/GroupIdParameter"
+            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -738,7 +747,7 @@
       },
       "delete": {
         "tags": [
-          "ProductGroups"
+          "ProductGroup"
         ],
         "operationId": "ProductGroup_Delete",
         "description": "Deletes the association between the specified group and product.",
@@ -755,10 +764,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimgroups.json#/parameters/GroupIdParameter"
+            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -786,7 +795,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions": {
       "get": {
         "tags": [
-          "ProductSubscriptions"
+          "ProductSubscription"
         ],
         "operationId": "ProductSubscriptions_List",
         "description": "Lists the collection of subscriptions to the specified product.",
@@ -803,14 +812,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|ownerId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|scope | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|userId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|productId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|user |     |    |\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|ownerId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|scope | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|userId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|productId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|user |     |    |\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -853,8 +862,8 @@
         "operationId": "ProductPolicy_ListByProduct",
         "description": "Get the policy configuration at the Product level.",
         "x-ms-examples": {
-          "ApiManagementListProductPolicy": {
-            "$ref": "./examples/ApiManagementListProductPolicy.json"
+          "ApiManagementListProductPolicys": {
+            "$ref": "./examples/ApiManagementListProductPolicys.json"
           }
         },
         "parameters": [
@@ -865,7 +874,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -878,7 +887,7 @@
           "200": {
             "description": "Product Policy information.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyCollection"
+              "$ref": "./apimpolicies.json#/definitions/PolicyCollection"
             }
           },
           "default": {
@@ -910,10 +919,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimpolicies.json#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -959,10 +968,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimpolicies.json#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -975,7 +984,7 @@
           "200": {
             "description": "Product Policy information.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1011,10 +1020,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimpolicies.json#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
@@ -1024,7 +1033,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
             },
             "description": "The policy contents to apply."
           },
@@ -1039,7 +1048,7 @@
           "201": {
             "description": "Product policy configuration was successfully created.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1051,7 +1060,7 @@
           "200": {
             "description": "Product policy configuration of the tenant was successfully updated.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/PolicyContract"
+              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1087,10 +1096,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "./apimpolicies.json#/parameters/PolicyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PolicyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -1121,7 +1130,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags": {
       "get": {
         "tags": [
-          "ProductTags"
+          "ProductTag"
         ],
         "operationId": "Tag_ListByProduct",
         "description": "Lists all Tags associated with the Product.",
@@ -1138,14 +1147,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -1183,7 +1192,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}": {
       "head": {
         "tags": [
-          "ProductTags"
+          "ProductTag"
         ],
         "operationId": "Tag_GetEntityStateByProduct",
         "description": "Gets the entity state version of the tag specified by its identifier.",
@@ -1200,10 +1209,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#/parameters/TagIdParameter"
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1232,7 +1241,7 @@
       },
       "get": {
         "tags": [
-          "ProductTags"
+          "ProductTag"
         ],
         "operationId": "Tag_GetByProduct",
         "description": "Get tag associated with the Product.",
@@ -1249,10 +1258,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#/parameters/TagIdParameter"
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1284,7 +1293,7 @@
       },
       "put": {
         "tags": [
-          "ProductTags"
+          "ProductTag"
         ],
         "operationId": "Tag_AssignToProduct",
         "description": "Assign tag to the Product.",
@@ -1301,13 +1310,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#/parameters/TagIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1339,7 +1345,7 @@
       },
       "delete": {
         "tags": [
-          "ProductTags"
+          "ProductTag"
         ],
         "operationId": "Tag_DetachFromProduct",
         "description": "Detach the tag from the Product.",
@@ -1356,13 +1362,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+            "$ref": "./apimanagement.json#/parameters/ProductIdParameter"
           },
           {
-            "$ref": "#/parameters/TagIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -1506,17 +1509,5 @@
       "description": "Parameters supplied to the Update Product operation."
     }
   },
-  "parameters": {
-    "ProductIdParameter": {
-      "name": "productId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Product identifier. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 256,
-      "pattern": "^[^*#&+:<>?]+$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }

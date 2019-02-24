@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends": {
       "get": {
         "tags": [
-          "Backends"
+          "Backend"
         ],
         "operationId": "Backend_ListByService",
         "description": "Lists a collection of backends in the specified service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|id | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|title | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|url | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|title | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|url | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -96,7 +96,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}": {
       "head": {
         "tags": [
-          "Backends"
+          "Backend"
         ],
         "operationId": "Backend_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the backend specified by its identifier.",
@@ -113,7 +113,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/BackendIdParameter"
+            "$ref": "./apimanagement.json#/parameters/BackendIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -142,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "Backends"
+          "Backend"
         ],
         "operationId": "Backend_Get",
         "description": "Gets the details of the backend specified by its identifier.",
@@ -159,7 +159,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/BackendIdParameter"
+            "$ref": "./apimanagement.json#/parameters/BackendIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -191,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "Backends"
+          "Backend"
         ],
         "operationId": "Backend_CreateOrUpdate",
         "description": "Creates or Updates a backend.",
@@ -211,7 +211,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/BackendIdParameter"
+            "$ref": "./apimanagement.json#/parameters/BackendIdParameter"
           },
           {
             "name": "parameters",
@@ -267,7 +267,7 @@
       },
       "patch": {
         "tags": [
-          "Backends"
+          "Backend"
         ],
         "operationId": "Backend_Update",
         "description": "Updates an existing backend.",
@@ -284,7 +284,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/BackendIdParameter"
+            "$ref": "./apimanagement.json#/parameters/BackendIdParameter"
           },
           {
             "name": "parameters",
@@ -319,7 +319,7 @@
       },
       "delete": {
         "tags": [
-          "Backends"
+          "Backend"
         ],
         "operationId": "Backend_Delete",
         "description": "Deletes the specified backend.",
@@ -336,7 +336,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/BackendIdParameter"
+            "$ref": "./apimanagement.json#/parameters/BackendIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -367,7 +367,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}/reconnect": {
       "post": {
         "tags": [
-          "Backends"
+          "BackendReconnect"
         ],
         "operationId": "Backend_Reconnect",
         "description": "Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.",
@@ -384,7 +384,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/BackendIdParameter"
+            "$ref": "./apimanagement.json#/parameters/BackendIdParameter"
           },
           {
             "name": "parameters",
@@ -766,17 +766,5 @@
       "description": "Properties to control reconnect requests."
     }
   },
-  "parameters": {
-    "BackendIdParameter": {
-      "name": "backendId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {  }
 }
