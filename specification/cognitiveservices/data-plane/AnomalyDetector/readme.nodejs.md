@@ -5,8 +5,8 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 
 ``` yaml $(nodejs)
 nodejs:
-  package-name: azure-cognitiveservices-anomalyfinder
-  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesAnomalyFinder
+  package-name: azure-cognitiveservices-anomalydetector
+  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesAnomalyDetector
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
