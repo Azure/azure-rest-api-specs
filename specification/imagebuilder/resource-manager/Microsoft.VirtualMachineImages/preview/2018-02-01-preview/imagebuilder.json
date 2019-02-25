@@ -65,6 +65,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List images by subscription.": {
+            "$ref": "./examples/ListImageTemplates.json"
+          }
         }
       }
     },
@@ -102,6 +107,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List images by resource group": {
+            "$ref": "./examples/ListImageTemplatesByRg.json"
+          }
         }
       }
     },
@@ -157,7 +167,7 @@
         },
         "x-ms-examples": {
           "Create an Image Template.": {
-            "$ref": "./examples/CreateAnImageTemplate.json"
+            "$ref": "./examples/CreateImageTemplate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -169,7 +179,7 @@
         "tags": [
           "VirtualMachineImageTemplate"
         ],
-        "operationId": "VirtualMachineImageTemplate_Patch",
+        "operationId": "VirtualMachineImageTemplate_Update",
         "description": "Update the tags for this Virtual Machine Image Template",
         "parameters": [
           {
@@ -207,6 +217,11 @@
               "$ref": "#/definitions/ApiError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update the tags for an Image Template.": {
+            "$ref": "./examples/UpdateImageTemplateTags.json"
+          }
         }
       },
       "get": {
@@ -241,6 +256,11 @@
             "schema": {
               "$ref": "#/definitions/ApiError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve an Image Template.": {
+            "$ref": "./examples/GetImageTemplate.json"
           }
         }
       },
@@ -284,6 +304,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via":"azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete an Image Template.": {
+            "$ref": "./examples/DeleteImageTemplate.json"
+          }
         }
       }
     },
@@ -293,7 +318,7 @@
           "VirtualMachineImageTemplate"
         ],
         "operationId": "VirtualMachineImageTemplate_run",
-        "description": "Create artifacts from a Existing Template",
+        "description": "Create artifacts from a existing Image Template",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -325,6 +350,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via":"azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create image(s) from existing imageTemplate.": {
+            "$ref": "./examples/RunImageTemplate.json"
+          }
         }
       }
     },
@@ -333,8 +363,8 @@
         "tags": [
           "VirtualMachineImageTemplate"
         ],
-        "operationId": "VirtualMachineImageTemplate_GetRunOutputs",
-        "description": "Get run outputs for the specified Template resource",
+        "operationId": "VirtualMachineImageTemplate_ListRunOutputs",
+        "description": "List all run outputs for the specified Image Template resource",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -365,10 +395,15 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Retrieve a list of all outputs created by the last run of an Image Template": {
+            "$ref": "./examples/ListRunOutputs.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/runOutputs/{RunOutputName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/runOutputs/{runOutputName}": {
       "get": {
         "tags": [
           "VirtualMachineImageTemplate"
@@ -404,6 +439,11 @@
             "schema": {
               "$ref": "#/definitions/ApiError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve single runOutput": {
+            "$ref": "./examples/GetRunOutput.json"
           }
         }
       }
@@ -775,17 +815,18 @@
       "description": "Parameters for updating an image template."
     },
     "RunOutput": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RunOutputProperties"
-        }
-      },
+      "description": "Represents an output that was created by running an image template.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SubResource"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunOutputProperties",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "RunOutputCollection": {
       "properties": {
@@ -821,7 +862,8 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [ "create", "read" ]
         },
         "tags": {
           "type": "object",
@@ -835,6 +877,28 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "The Sub Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "Operation": {
       "title": "A REST API operation",
@@ -978,7 +1042,7 @@
       "x-ms-parameter-location": "method"
     },
     "RunOutputNameParameter": {
-      "name": "RunOutputName",
+      "name": "runOutputName",
       "in": "path",
       "required": true,
       "type": "string",
