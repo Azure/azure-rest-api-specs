@@ -690,6 +690,116 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}": {
+      "get": {
+        "tags": [
+          "PeerExpressRouteCircuitConnections"
+        ],
+        "operationId": "PeerExpressRouteCircuitConnections_Get",
+        "description": "Gets the specified Peer Express Route Circuit Connection from the specified express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peer express route circuit connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Peer Express Route Circuit Connection resource.",
+            "schema": {
+              "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PeerExpressRouteCircuitConnectionGet": {
+            "$ref": "./examples/PeerExpressRouteCircuitConnectionGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections": {
+      "get": {
+        "tags": [
+          "PeerExpressRouteCircuitConnections"
+        ],
+        "operationId": "PeerExpressRouteCircuitConnections_List",
+        "description": "Gets all global reach peer connections associated with a private peering in an express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the circuit."
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the peering."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of PeerExpressRouteCircuitConnections resources.",
+            "schema": {
+              "$ref": "#/definitions/PeerExpressRouteCircuitConnectionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": { 
+          "List Peer ExpressRouteCircuit Connection": { "$ref": "./examples/PeerExpressRouteCircuitConnectionList.json" } 
+        }
+      }
+    },        
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}": {
       "delete": {
         "tags": [
@@ -1510,6 +1620,14 @@
             "$ref": "#/definitions/ExpressRouteCircuitConnection"
           },
           "description": "The list of circuit connections associated with Azure Private Peering for this circuit."
+        },
+        "peeredConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
+          },
+          "readOnly": true,
+          "description": "The list of peered circuit connections associated with Azure Private Peering for this circuit."
         }
       }
     },
@@ -1655,6 +1773,88 @@
       },
       "description": "Response for ListConnections API service call retrieves all global reach connections that belongs to a Private Peering for an ExpressRouteCircuit."
     },
+    "PeerExpressRouteCircuitConnectionPropertiesFormat": {
+      "properties": {
+        "expressRouteCircuitPeering": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to Express Route Circuit Private Peering Resource of the circuit."
+        },
+        "peerExpressRouteCircuitPeering": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to Express Route Circuit Private Peering Resource of the peered circuit."
+        },
+        "addressPrefix": {
+          "type": "string",
+          "description": "/29 IP address space to carve out Customer addresses for tunnels."
+        },
+        "circuitConnectionStatus": {
+          "type": "string",
+          "description": "Express Route Circuit Connection State. Possible values are: 'Connected' and 'Disconnected'.",
+          "enum": [
+            "Connected",
+            "Connecting",
+            "Disconnected"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "circuitConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "The name of the express route circuit connection resource."
+        },
+        "authResourceGuid": {
+          "type": "string",
+          "description": "The resource guid of the authorization used for the express route circuit connection."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the peer express route circuit connection resource. Possible values are: 'Succeded', 'Updating', 'Deleting', and 'Failed'."
+        }
+      }
+    },
+    "PeerExpressRouteCircuitConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PeerExpressRouteCircuitConnectionPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Peer Express Route Circuit Connection in an ExpressRouteCircuitPeering resource."
+    },
+    "PeerExpressRouteCircuitConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
+          },
+          "description": "The global reach peer circuit connection associated with Private Peering in an ExpressRoute Circuit."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListPeeredConnections API service call retrieves all global reach peer circuit connections that belongs to a Private Peering for an ExpressRouteCircuit."
+    },    
     "ExpressRouteCircuitSku": {
       "properties": {
         "name": {
@@ -1779,9 +1979,9 @@
           "type": "string",
           "description": "The GatewayManager Etag."
         },
-        "allowGlobalReach": {
+        "globalReachEnabled": {
           "type": "boolean",
-          "description": "Flag to enable Global Reach on the circuit."
+          "description": "Flag denoting Global reach status."
         }
       },
       "description": "Properties of ExpressRouteCircuit."
