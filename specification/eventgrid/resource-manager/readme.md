@@ -205,6 +205,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventgrid
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-02-preview
+  - tag: package-2019-01
   - tag: package-2018-09-preview
   - tag: package-2018-05-preview
   - tag: package-2018-01
