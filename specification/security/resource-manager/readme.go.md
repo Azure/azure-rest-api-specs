@@ -9,11 +9,12 @@ go:
   clear-output-folder: true
 ```
 
-### Go multi-api
+### Common Go settings
 
 ```yaml $(go) && $(multiapi)
 batch:
   - tag: package-composite-v1
+  - tag: package-composite-v2
 ```
 
 ### Tag: package-composite-v1 and go
@@ -23,4 +24,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ```yaml $(tag) == 'package-composite-v1' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2017-08-01-preview/$(namespace)
+```
+
+### Tag: package-composite-v2 and go
+
+These settings apply only when `--tag=package-composite-v2 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-composite-v2' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/composite-v2/$(namespace)
 ```
