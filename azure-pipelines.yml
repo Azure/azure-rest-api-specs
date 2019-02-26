@@ -76,6 +76,7 @@ jobs:
   - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
 
 - job: "SDK"
+  timeoutInMinutes: 120
   strategy:
     matrix:
       ruby:
