@@ -1652,10 +1652,10 @@
 				}
 			}
 		},
-		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Showback": {
+		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/ShowbackRules": {
 			"get": {
 				"tags": [
-					"Showback"
+					"ShowbackRules"
 				],
 				"operationId": "ShowbackRules_List",
 				"description": "Get list all Showback Rules.",
@@ -1687,10 +1687,10 @@
 				}
 			}
 		},
-		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Showback/{ruleName}": {
+		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/ShowbackRules/{ruleName}": {
 			"get": {
 				"tags": [
-					"Showback"
+					"ShowbackRules"
 				],
 				"operationId": "ShowbackRule_GetBillingAccountId",
 				"description": "Gets the showback rule by rule name.",
@@ -1698,7 +1698,7 @@
 					"url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
 				},
 				"x-ms-examples": {
-					"ShowbackRule": {
+					"ShowbackRules": {
 						"$ref": "./examples/ShowbackRule.json"
 					}
 				},
@@ -1729,12 +1729,12 @@
 			},
 			"put": {
 				"tags": [
-					"Showback"
+					"ShowbackRules"
 				],
 				"operationId": "ShowbackRule_CreateUpdateRule",
 				"description": "Create/Update showback rule for billing account.",
 				"x-ms-examples": {
-					"ShowbackRule": {
+					"ShowbackRules": {
 						"$ref": "./examples/ShowbackRule.json"
 					}
 				},
@@ -2893,36 +2893,11 @@
 		},
 		"ShowbackRuleProperties": {
 			"description": "The properties of a showback rule.",
+			"discriminator": "RuleType",
 			"properties": {
-				"Id": {
-					"description": "The id of the showback rule.",
-					"type": "string",
-					"readOnly": true
-				},
 				"description": {
 					"description": "Description of a showback rule.",
 					"type": "string"
-				},
-				"ruleType": {
-					"description": "The showback rule type",
-					"type": "string",
-					"enum": [
-						"CustomPrice",
-						"CustomChange",
-						"CostAllocation"
-					],
-					"x-ms-enum": {
-						"name": "RuleType",
-						"modelAsString": true
-					}
-				},
-				"details": {
-					"description": "Specific details of showback rule - key-value dictionary.",
-					"x-ms-client-flatten": true,
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					}
 				},
 				"status": {
 					"description": "The current status of the showback rule.",
@@ -2944,7 +2919,6 @@
 				"scopes": {
 					"description": "List of authorized assigned scopes.",
 					"type": "array",
-					"readOnly": true,
 					"items": {
 						"$ref": "#/definitions/Scope"
 					}
@@ -2966,11 +2940,131 @@
 					"format": "date-time",
 					"type": "string",
 					"readOnly": true
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/ShowbackRulesKind"
+			}]
+		},
+		"CustomPrice": {
+			"x-ms-discriminator-value": "CustomPrice",
+			"type": "object",
+			"description": "Represents Custom price showback rule model",
+			"allOf": [{
+				"$ref": "#/definitions/ShowbackRuleProperties"
+			}],
+			"properties": {
+				"details": {
+					"$ref": "#/definitions/CustomPriceProperties"
+				}
+			}
+		},
+		"CustomPriceProperties": {
+			"type": "object",
+			"title": "Custom price showback rule properties",
+			"properties": {
+				"pricesheet": {
+					"type": "string"
 				},
-				"modificationUsername": {
-					"description": "The username who modified the showback rule.",
+				"benefits": {
+					"description": "Array of benefits.",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"None", "All", "AHUB", "Reservations"
+						],
+						"x-ms-enum": {
+							"name": "FunctionType",
+							"modelAsString": true
+						}
+					}
+				},
+				"markups": {
+					"description": "List of markups.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Markup"
+					}
+				}
+			}
+		},
+		"CustomCharge": {
+			"x-ms-discriminator-value": "CustomCharge",
+			"type": "object",
+			"description": "Represents custom charge showback rule model",
+			"allOf": [{
+				"$ref": "#/definitions/ShowbackRuleProperties"
+			}],
+			"properties": {
+				"details": {
+					"$ref": "#/definitions/CustomChargeProperties"
+				}
+			}
+		},
+		"CustomChargeProperties": {
+			"type": "object",
+			"title": "Custom charge showback rule properties",
+			"properties": {
+				"recurring": {
+					"type": "boolean"
+				},
+				"chargeType": {
+					"type": "string"
+				},
+				"ChargeValue": {
+					"type": "string"
+				},
+				"EffectiveMonth": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"EndMonth": {
+					"format": "date-time",
+					"type": "string"
+				}
+			}
+		},
+		"CostAllocation": {
+			"x-ms-discriminator-value": "CostAllocation",
+			"type": "object",
+			"description": "Represents cost allocation showback rule model",
+			"allOf": [{
+				"$ref": "#/definitions/ShowbackRuleProperties"
+			}],
+			"properties": {
+				"details": {
+					"$ref": "#/definitions/CostAllocationProperties"
+				}
+			}
+		},
+		"CostAllocationProperties": {
+			"type": "object",
+			"title": "Cost allocation showback rule properties",
+			"properties": {}
+		},
+		"ShowbackRulesKind": {
+			"type": "object",
+			"description": "Describes Showback rule with rule type",
+			"properties": {
+				"RuleType": {
 					"type": "string",
-					"readOnly": true
+					"description": "The rule type of the showback rule solution",
+					"enum": ["CustomPrice", "CustomChange", "CostAllocation"],
+					"x-ms-enum": {
+						"name": "ShowbackRulesKind",
+						"modelAsString": true,
+						"values": [{
+								"value": "CustomPrice"
+							},
+							{
+								"value": "CustomCharge"
+							},
+							{
+								"value": "CostAllocation"
+							}
+						]
+					}
 				}
 			}
 		},
@@ -2992,6 +3086,15 @@
 				},
 				"childScope": {
 					"$ref": "#/definitions/Scope"
+				}
+			}
+		},
+		"Markup": {
+			"type": "object",
+			"description": "The Markup model definition",
+			"properties": {
+				"percentage": {
+					"type": "string"
 				}
 			}
 		}
