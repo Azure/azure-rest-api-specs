@@ -156,65 +156,6 @@
           }
         ]
       }
-    },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/cancel": {
-      "post": {
-        "operationId": "CancelSubscription",
-        "description": "Cancels the subscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CanceledSubscriptionId"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/rename": {
-      "post": {
-        "operationId": "RenameSubscription",
-        "description": "Renames the subscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RenamedSubscriptionId"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -357,36 +298,6 @@
           }
         }
       }
-    },
-    "CanceledSubscriptionId": {
-      "description": "Canceled Subscription Id",
-      "properties": {
-        "value": {
-          "description": "Canceled Subscription Id",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "RenamedSubscriptionId": {
-      "description": "Renamed Subscription Id",
-      "properties": {
-        "value": {
-          "description": "Renamed Subscription Id",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SubscriptionName": {
-      "type": "object",
-      "description": "New name of the subscription.",
-      "properties": {
-        "subscriptionName": {
-          "type": "string",
-          "description": "New subscription name"
-        }
-      }
     }
   },
   "parameters": {
@@ -396,23 +307,6 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. Current version is 2018-11-01-preview"
-    },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription Id."
-    },
-    "subscriptionNameParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Subscription Name",
-      "schema": {
-        "$ref": "#/definitions/SubscriptionName"
-      }
     }
   },
   "security": [
