@@ -1036,6 +1036,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1090,6 +1093,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1144,6 +1150,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1205,6 +1214,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1259,6 +1271,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1320,6 +1335,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1381,6 +1399,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1449,6 +1470,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1524,6 +1548,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -1592,6 +1619,9 @@
                     },
                     {
                         "$ref": "#/parameters/TopParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LabelFilterParameter"
                     }
                 ],
                 "responses": {
@@ -3622,14 +3652,24 @@
             "in": "query",
             "description": "Filter the results using OData syntax.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
         },
         "TopParameter": {
             "name": "$top",
             "in": "query",
             "description": "The number of results to return.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "x-ms-parameter-location": "method"
+        },
+        "LabelFilterParameter": {
+            "name": "LABEL",
+            "in": "query",
+            "description": "The label used to filter the results for event subscriptions list.",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
         }
     },
     "securityDefinitions": {
