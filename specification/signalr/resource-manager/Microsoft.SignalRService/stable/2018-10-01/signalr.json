@@ -243,7 +243,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}": {
       "get": {
         "tags": [
           "SignalR"
@@ -408,7 +408,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/restart": {
       "post": {
         "tags": [
           "SignalR"
@@ -432,97 +432,15 @@
         "responses": {
           "202": {
             "description": "Accepted. The response indicates the restart operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the operation is successful and no content will be returned."
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "SignalR_Restart": {
             "$ref": "./examples/SignalR_Restart.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/switchFeatures": {
-      "post": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "Switch on/off SignalR resource features.",
-        "operationId": "SignalR_SwitchFeatures",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters that describes the SignalR resource features opreation.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/SignalRFeaturesParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/SignalRServiceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response indicates the operation is successful and contains a list of features.",
-            "schema": {
-              "$ref": "#/definitions/SignalRFeatureList"
-            }
-          },
-          "202": {
-            "description": "Accepted. The response indicates a longer time operation is performed in the background."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "SignalR_SwitchFeatures": {
-            "$ref": "./examples/SignalR_SwitchFeatures.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/listFeatures": {
-      "get": {
-        "tags": [
-          "SignalR"
-        ],
-        "description": "List SignalR resource features.",
-        "operationId": "SignalR_ListFeatures",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/SignalRServiceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response indicates the operation is successful and contains a list of features.",
-            "schema": {
-              "$ref": "#/definitions/SignalRFeatureList"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SignalR_ListFeatures": {
-            "$ref": "./examples/SignalR_ListFeatures.json"
           }
         }
       }
@@ -1042,75 +960,6 @@
           "$ref": "#/definitions/SignalRCreateOrUpdateProperties",
           "description": "Settings used to provision or configure the resource",
           "x-ms-client-flatten": false
-        }
-      }
-    },
-    "SignalRFeaturesParameters": {
-      "description": "Parameters for SignalR service instance features management opreations.",
-      "required": [
-        "features"
-      ],
-      "type": "object",
-      "properties": {
-        "features": {
-          "description": "List of features.\r\n\r\nIf certain feature is not present, SignalR service will remain it unchanged or use the global default value.\r\nNote that, default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
-          "minLength": 1,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SignalRFeature"
-          }
-        }
-      }
-    },
-    "SignalRFeature": {
-      "description": "Feature of a SignalR resource, which controls the SignalR runtime behavior.",
-      "required": [
-        "flag",
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "flag": {
-          "description": "Name of the feature. Required.",
-          "enum": [
-            "ServiceMode"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "FeatureFlags",
-            "modelAsString": true
-          }
-        },
-        "value": {
-          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/en-us/azure/azure-signalr/ for allowed values.",
-          "maxLength": 128,
-          "minLength": 1,
-          "type": "string"
-        },
-        "properties": {
-          "description": "Optional properties related to this feature.",
-          "type": "object",
-          "x-ms-client-flatten": false,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SignalRFeatureList": {
-      "description": "A class that represents a list of SignalRFeatures related to SignalR resource.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of features.\r\nNote that, if a feature is not included in the list, which only means user never set it explicitly rather than 'false'.\r\nIn this case, SignalR service will use a globally default value which might be 'true' or 'false'.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SignalRFeature"
-          }
-        },
-        "nextLink": {
-          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-          "type": "string"
         }
       }
     },
