@@ -43,11 +43,11 @@ input-file:
 
 ``` yaml
 directive:
-  - suppress: XmsExamplesRequired
+  - suppress: D5001
     reason: this spec never has examples. It is owned by the SDK group and we already have CLI commands testing it
-  - suppress: XmsPathsMustOverloadPaths
+  - suppress: R2058
     reason: existing since the spec started
-  - suppress: DefinitionsPropertiesNamesCamelCase
+  - suppress: R3016
     reason: existing since the spec started
 ```
 
