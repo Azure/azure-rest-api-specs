@@ -151,7 +151,8 @@
           "type": "array",
           "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.",
           "items": {
-            "$ref": "#/definitions/Point"
+            "$ref": "#/definitions/Point",
+            "x-nullable": false
           }
         },
         "granularity": {
@@ -233,7 +234,8 @@
           "description": "ExpectedValues contain expected value for each input point. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         },
         "upperMargins": {
@@ -241,7 +243,8 @@
           "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - sensitivity)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting sensitivity value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         },
         "lowerMargins": {
@@ -249,34 +252,48 @@
           "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - sensitivity)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         },
         "isAnomaly": {
           "type": "array",
           "description": "IsAnomaly contains anomaly properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         },
         "isNegativeAnomaly": {
           "type": "array",
           "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input point. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         },
         "isPositiveAnomaly": {
           "type": "array",
           "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input point. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         }
       }
     },
     "LastDetectResponse": {
       "type": "object",
+      "required": [
+        "expectedValue",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly",
+        "lowerMargin",
+        "period",
+        "upperMargin",
+        "suggestedWindow"
+      ],
       "properties": {
         "period": {
           "type": "integer",
