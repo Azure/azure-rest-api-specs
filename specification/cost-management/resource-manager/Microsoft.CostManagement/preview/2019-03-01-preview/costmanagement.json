@@ -1652,7 +1652,7 @@
 				}
 			}
 		},
-		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/ShowbackRules": {
+		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules": {
 			"get": {
 				"tags": [
 					"ShowbackRules"
@@ -1687,7 +1687,7 @@
 				}
 			}
 		},
-		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/ShowbackRules/{ruleName}": {
+		"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}": {
 			"get": {
 				"tags": [
 					"ShowbackRules"
@@ -3007,7 +3007,17 @@
 			"title": "Custom charge showback rule properties",
 			"properties": {
 				"recurring": {
-					"type": "boolean"
+					"description": "Recurring of the charge.",
+					"type": "string",
+					"readOnly": true,
+					"enum": [
+						"true",
+						"false"
+					],
+					"x-ms-enum": {
+						"name": "CustomChargeRecurring",
+						"modelAsString": true
+					}
 				},
 				"chargeType": {
 					"type": "string"
