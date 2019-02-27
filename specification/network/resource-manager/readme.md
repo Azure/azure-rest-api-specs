@@ -51,7 +51,6 @@ input-file:
   - Microsoft.Network/stable/2018-12-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-12-01/expressRouteGateway.json
   - Microsoft.Network/stable/2018-12-01/expressRoutePort.json
-  - Microsoft.Network/stable/2018-12-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-12-01/loadBalancer.json
   - Microsoft.Network/stable/2018-12-01/network.json
   - Microsoft.Network/stable/2018-12-01/networkInterface.json
@@ -93,7 +92,6 @@ input-file:
   - Microsoft.Network/stable/2018-12-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-12-01/expressRouteGateway.json
   - Microsoft.Network/stable/2018-12-01/expressRoutePort.json
-  - Microsoft.Network/stable/2018-12-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-12-01/loadBalancer.json
   - Microsoft.Network/stable/2018-12-01/network.json
   - Microsoft.Network/stable/2018-12-01/networkInterface.json
@@ -133,7 +131,6 @@ input-file:
   - Microsoft.Network/stable/2018-11-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-11-01/expressRouteGateway.json
   - Microsoft.Network/stable/2018-11-01/expressRoutePort.json
-  - Microsoft.Network/stable/2018-11-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-11-01/loadBalancer.json
   - Microsoft.Network/stable/2018-11-01/network.json
   - Microsoft.Network/stable/2018-11-01/networkInterface.json
@@ -174,7 +171,6 @@ input-file:
   - Microsoft.Network/stable/2018-10-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-10-01/expressRouteGateway.json
   - Microsoft.Network/stable/2018-10-01/expressRoutePort.json
-  - Microsoft.Network/stable/2018-10-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-10-01/loadBalancer.json
   - Microsoft.Network/stable/2018-10-01/network.json
   - Microsoft.Network/stable/2018-10-01/networkInterface.json
@@ -215,7 +211,6 @@ input-file:
   - Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2018-08-01/expressRouteGateway.json
   - Microsoft.Network/stable/2018-08-01/expressRoutePort.json
-  - Microsoft.Network/stable/2018-08-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2018-08-01/loadBalancer.json
   - Microsoft.Network/stable/2018-08-01/network.json
   - Microsoft.Network/stable/2018-08-01/networkInterface.json
@@ -874,9 +869,6 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
-    reason: name, id and type properties are inherited from the upper level
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: interfaceEndpoint.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkProfile.json
