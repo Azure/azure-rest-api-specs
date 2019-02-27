@@ -838,72 +838,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/listResults": {
-      "post": {
-        "tags": [
-          "JobDefinitions"
-        ],
-        "description": "This method returns a list of data service results specific to a job definition.",
-        "operationId": "JobDefinitions_ListResults",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "dataServiceName",
-            "in": "path",
-            "description": "The data service type of the job definition.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobDefinitionName",
-            "in": "path",
-            "description": "Name of the job definition.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/dataManagerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "dataServiceResultQuery",
-            "in": "body",
-            "description": "Query to retrieve data service results based on the query type.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataServiceResultQuery"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of data service results based on the query.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DataServiceResult"
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/run": {
       "post": {
         "tags": [
@@ -1700,47 +1634,6 @@
         }
       }
     },
-    "DataServiceResult": {
-      "description": "Query result for a particular data service.",
-      "type": "object",
-      "properties": {
-        "queryType": {
-          "description": "The type of result which is returned after the execution of the query.",
-          "enum": [
-            "FileMetadata",
-            "SnapshotFileMetadata"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataServiceResultQueryType",
-            "modelAsString": false
-          }
-        }
-      },
-      "discriminator": "queryType"
-    },
-    "DataServiceResultQuery": {
-      "description": "Query for a particular data service result.",
-      "required": [
-        "queryType"
-      ],
-      "type": "object",
-      "properties": {
-        "queryType": {
-          "description": "Query type which specifies which data service result needs to be queried.",
-          "enum": [
-            "FileMetadata",
-            "SnapshotFileMetadata"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataServiceResultQueryType",
-            "modelAsString": false
-          }
-        }
-      },
-      "discriminator": "queryType"
-    },
     "DataStore": {
       "description": "Data store.",
       "required": [
@@ -1758,8 +1651,7 @@
           "description": "DataStore properties.",
           "x-ms-client-flatten": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "DataStoreFilter": {
       "description": "Contains the information about the filters for the DataStore.",
@@ -1967,73 +1859,6 @@
         }
       }
     },
-    "FileMetadata": {
-      "description": "Data service result for query type FileMetadata.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataServiceResult"
-        }
-      ],
-      "properties": {
-        "fileId": {
-          "description": "Unique identifier for a file.",
-          "type": "string"
-        },
-        "fileName": {
-          "description": "Name of the file.",
-          "type": "string"
-        },
-        "path": {
-          "description": "Path of the file.",
-          "type": "string"
-        },
-        "extension": {
-          "description": "Extension of the file.",
-          "type": "string"
-        },
-        "createdBy": {
-          "description": "User who created the file.",
-          "type": "string"
-        },
-        "creationDate": {
-          "format": "date-time",
-          "description": "Date when the file was created.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "FileMetadata"
-    },
-    "FileMetadataQuery": {
-      "description": "Query for File Metadata.",
-      "required": [
-        "searchCriteria",
-        "queryType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataServiceResultQuery"
-        }
-      ],
-      "properties": {
-        "searchCriteria": {
-          "description": "Criteria which governs the search.",
-          "type": "string"
-        },
-        "fileCreationSearchStartDate": {
-          "format": "date-time",
-          "description": "The start date after which the files created need to be searched.",
-          "type": "string"
-        },
-        "fileCreationSearchEndDate": {
-          "format": "date-time",
-          "description": "The end date before which the files created need to be searched.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "FileMetadata"
-    },
     "Job": {
       "description": "Data service job.",
       "required": [
@@ -2103,8 +1928,7 @@
           "description": "JobDefinition properties.",
           "x-ms-client-flatten": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "JobDefinitionFilter": {
       "description": "Contains the supported job definition filters.",
@@ -2611,108 +2435,6 @@
           "type": "string"
         }
       }
-    },
-    "SnapshotFileMetadata": {
-      "description": "Data service result for query type SnapshotFileMetadata.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataServiceResult"
-        }
-      ],
-      "properties": {
-        "fileId": {
-          "description": "Unique identifier for file.",
-          "type": "string"
-        },
-        "snapshotId": {
-          "description": "Unique identifier for snapshot.",
-          "type": "string"
-        },
-        "length": {
-          "format": "int64",
-          "description": "Size of the file.",
-          "type": "integer"
-        },
-        "lastModifiedBy": {
-          "description": "User who last modified the file.",
-          "type": "string"
-        },
-        "lastModifiedDate": {
-          "format": "date-time",
-          "description": "Date when the file was last modified.",
-          "type": "string"
-        },
-        "lastAccessedBy": {
-          "description": "User who last accessed the file.",
-          "type": "string"
-        },
-        "lastAccessedDate": {
-          "format": "date-time",
-          "description": "Date when the file was last accessed.",
-          "type": "string"
-        },
-        "isDeleted": {
-          "description": "Is the file deleted.",
-          "enum": [
-            "NotDeleted",
-            "Deleted"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IsSnapshotDeleted",
-            "modelAsString": false
-          }
-        },
-        "versionNumber": {
-          "description": "Version number of the file.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Tags associated with the file.",
-          "type": "string"
-        },
-        "snapshotName": {
-          "description": "The snapshot name with which the metadata is associated.",
-          "type": "string"
-        },
-        "snapshotCreationDate": {
-          "format": "date-time",
-          "description": "The creation date of the snapshot with which the metadata is associated.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "SnapshotFileMetadata"
-    },
-    "SnapshotFileMetadataQuery": {
-      "description": "Query for Snapshot File Metadata.",
-      "required": [
-        "fileId",
-        "queryType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataServiceResultQuery"
-        }
-      ],
-      "properties": {
-        "fileId": {
-          "description": "Unique identifier for file.",
-          "type": "string"
-        },
-        "snapshotCreationSearchStartDate": {
-          "format": "date-time",
-          "description": "The start date after which the snapshots created need to be searched.",
-          "type": "string"
-        },
-        "snapshotCreationSearchEndDate": {
-          "format": "date-time",
-          "description": "The end date before which the snapshots created need to be searched.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "SnapshotFileMetadata"
     }
   },
   "parameters": {
