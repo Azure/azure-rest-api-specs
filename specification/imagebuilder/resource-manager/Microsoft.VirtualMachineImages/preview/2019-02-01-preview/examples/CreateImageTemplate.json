@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2018-02-01-preview",
+    "api-version": "2019-02-01-preview",
     "imageTemplateName": "myImageTemplate",
     "parameters": {
       "location": "westus",
@@ -12,20 +12,19 @@
       },
       "properties": {
         "source": {
-          "type": "ISO",
-          "sourceURI": "http://redhat.com/path/to/installation.iso",
-          "sha256Checksum": "120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f"
+          "type": "ManagedImage",
+          "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
         },
         "customize": [
           {
-            "type": "shell",
+            "type": "Shell",
             "name": "Shell Customizer Example",
             "script": "https://example.com/path/to/script.sh"
           }
         ],
         "distribute": [
           {
-            "type": "managedImage",
+            "type": "ManagedImage",
             "location": "1_location",
             "runOutputName": "image_it_pir_1",
             "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
@@ -46,20 +45,19 @@
         "type": "Microsoft.VirtualMachineImages/imageTemplate",
         "properties": {
           "source": {
-            "type": "ISO",
-            "sourceURI": "http://redhat.com/path/to/installation.iso",
-            "sha256Checksum": "120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f"
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/images/source_image"
           },
           "customize": [
             {
-              "type": "shell",
+              "type": "Shell",
               "name": "Shell Customizer Example",
               "script": "https://example.com/path/to/script.sh"
             }
           ],
           "distribute": [
             {
-              "type": "managedImage",
+              "type": "ManagedImage",
               "location": "1_location",
               "runOutputName": "image_it_pir_1",
               "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",

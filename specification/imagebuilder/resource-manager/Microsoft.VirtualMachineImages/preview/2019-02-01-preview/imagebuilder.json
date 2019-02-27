@@ -3,7 +3,7 @@
   "info": {
     "title": "VirtualMachineImageTemplate",
     "description": "Virtual Machine Image Template",
-    "version": "2018-02-01-preview"
+    "version": "2019-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -121,7 +121,7 @@
           "VirtualMachineImageTemplate"
         ],
         "operationId": "VirtualMachineImageTemplate_CreateOrUpdate",
-        "description": "Create or Update a Virtual Machine Image Template",
+        "description": "Create or update a virtual machine image template",
         "parameters": [
           {
             "name": "parameters",
@@ -130,7 +130,7 @@
             "schema": {
               "$ref": "#/definitions/ImageTemplate"
             },
-            "description": "Parameters supplied to the Create Image Template"
+            "description": "Parameters supplied to the CreateImageTemplate operation"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -229,7 +229,7 @@
           "VirtualMachineImageTemplate"
         ],
         "operationId": "VirtualMachineImageTemplate_Get",
-        "description": "Get Information about Virtual Machine Image Template",
+        "description": "Get information about a virtual machine image template",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -269,7 +269,7 @@
           "VirtualMachineImageTemplate"
         ],
         "operationId": "VirtualMachineImageTemplate_Delete",
-        "description": "Delete Virtual Machine Image Template",
+        "description": "Delete a virtual machine image template",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -317,8 +317,8 @@
         "tags": [
           "VirtualMachineImageTemplate"
         ],
-        "operationId": "VirtualMachineImageTemplate_run",
-        "description": "Create artifacts from a existing Image Template",
+        "operationId": "VirtualMachineImageTemplate_Run",
+        "description": "Create artifacts from a existing image template",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -409,7 +409,7 @@
           "VirtualMachineImageTemplate"
         ],
         "operationId": "VirtualMachineImageTemplate_GetRunOutput",
-        "description": "Get the specified run output for the specified Template resource",
+        "description": "Get the specified run output for the specified image template resource",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -518,7 +518,7 @@
       "properties": {
         "sourceURI": {
           "type": "string",
-          "description": "URL to get the ISO image. This URL has to be accessible to the resource provider at the time of the imageTemplate creation."
+          "description": "URI to get the ISO image. This URI has to be accessible to the resource provider at the time of the image template creation."
         },
         "sha256Checksum": {
           "type": "string",
@@ -557,12 +557,30 @@
         }
       }
     },
+    "ImageTemplateManagedImageSource": {
+      "description": "Describes an image source that is a managed image in customer subscription.",
+      "x-ms-discriminator-value": "ManagedImage",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateSource"
+        } 
+      ],
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "description": "ARM resource id of the managed image in customer subscription"
+        } 
+      },
+      "required": [
+        "imageId"
+      ]
+    },
     "ImageTemplateCustomizer": {
       "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of customization tool you want to use on the Image. For example, \"shell\" can be shellCustomizer"
+          "description": "The type of customization tool you want to use on the Image. For example, \"Shell\" can be shell customizer"
         },
         "name": {
           "type": "string",
@@ -574,8 +592,8 @@
       ]
     },
     "ImageTemplateShellCustomizer": {
-      "description": "Runs a shell script during the customization phase",
-      "x-ms-discriminator-value": "shell",
+      "description": "Runs a shell script during the customization phase (Linux)",
+      "x-ms-discriminator-value": "Shell",
       "allOf": [
         {
           "$ref": "#/definitions/ImageTemplateCustomizer"
@@ -585,6 +603,50 @@
         "script": {
           "type": "string",
           "description": "The shell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        }
+      }
+    },
+    "ImageTemplateRestartCustomizer": {
+      "description": "Reboots a VM and waits for it to come back online (Windows). Corresponds to Packer windows-restart provisioner",
+      "x-ms-discriminator-value": "WindowsRestart",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "properties": {
+        "restartCommand": {
+          "type": "string",
+          "description": "Command to execute the restart [Default: 'shutdown /r /f /t 0 /c \"packer restart\"']"
+        },
+        "restartCheckCommand": {
+          "type": "string",
+          "description": "Command to check if restart succeeded [Default: '']"
+        },
+        "restartTimeout": {
+          "type": "string",
+          "description": "Restart timeout specified as a string of magnitude and unit, e.g. '5m' (5 minutes) or '2h' (2 hours) [Default: '5m']"
+        }
+      }
+    },
+    "ImageTemplatePowerShellCustomizer": {
+      "description": "Runs the specified PowerSehll on the VM (Windows). Corresponds to Packer powershell provisioner",
+      "x-ms-discriminator-value": "PowerShell",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "The PowerShell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "validExitCodes" : {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
         }
       }
     },
@@ -616,7 +678,7 @@
       ]
     },
     "ImageTemplateManagedImageDistributor": {
-      "x-ms-discriminator-value": "managedImage",
+      "x-ms-discriminator-value": "ManagedImage",
       "description": "Distribute as a Managed Disk Image.",
       "type": "object",
       "allOf": [
@@ -640,7 +702,7 @@
       ]
     },
     "ImageTemplateSharedImageDistributor": {
-      "x-ms-discriminator-value": "sharedImage",
+      "x-ms-discriminator-value": "SharedImage",
       "description": "Distribute via Shared Image Gallery.",
       "type": "object",
       "allOf": [
@@ -665,6 +727,16 @@
         "replicationRegions"
       ]
     },
+    "ImageTemplateVhdDistributor": {
+      "x-ms-discriminator-value": "VHD",
+      "description": "Distribute via VHD in a storage account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateDistributor"
+        }
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "enum": [
@@ -683,8 +755,12 @@
             "BadSourceType",
             "BadPIRSource",
             "BadISOSource",
+            "BadManagedImageSource",
             "BadCustomizerType",
-            "NoCustomizerShellScript",
+            "UnsupportedCustomizerType",
+            "NoCustomizerScript",
+            "BadDistributeType",
+            "BadSharedImageDistribute",
             "ServerError",
             "Other"
           ],
@@ -711,23 +787,22 @@
         "runState": {
           "type": "string",
           "enum": [
-            "ready",
-            "running",
-            "succeeded",
-            "partiallySucceeded",
-            "failed"
+            "Running",
+            "Succeeded",
+            "PartiallySucceeded",
+            "Failed"
           ],
           "description": "State of the last run"
         },
         "runSubState": {
           "type": "string",
           "enum": [
-            "queued",
-            "building",
-            "customizing",
-            "distributing"
+            "Queued",
+            "Building",
+            "Customizing",
+            "Distributing"
           ],
-          "description": "Sub state of the last run"
+          "description": "Sub-state of the last run"
         },
         "message": {
           "type": "string",
@@ -781,6 +856,10 @@
         "artifactId": {
           "type": "string",
           "description": "The resource id of the artifact."
+        },
+        "artifactLocation": {
+          "type": "string",
+          "description": "The URL location of the artifact."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -976,11 +1055,11 @@
     },
     "InnerError": {
       "properties": {
-        "exceptiontype": {
+        "exceptionType": {
           "type": "string",
           "description": "The exception type."
         },
-        "errordetail": {
+        "errorDetail": {
           "type": "string",
           "description": "The internal error message or exception dump."
         }
@@ -996,7 +1075,7 @@
           },
           "description": "The Api error details"
         },
-        "innererror": {
+        "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "The Api inner error"
         },
@@ -1022,7 +1101,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription Id forms part of the URI for every service call."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",

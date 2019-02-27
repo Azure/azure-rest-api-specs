@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2018-02-01-preview",
+    "api-version": "2019-02-01-preview",
     "imageTemplateName": "myImageTemplate"
   },
   "responses": {
@@ -20,14 +20,14 @@
           },
           "customize": [
             {
-              "type": "shell",
+              "type": "Shell",
               "name": "Shell Customizer Example",
               "script": "https://example.com/path/to/script.sh"
             }
           ],
           "distribute": [
             {
-              "type": "managedImage",
+              "type": "ManagedImage",
               "location": "1_location",
               "runOutputName": "image_it_pir_1",
               "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
