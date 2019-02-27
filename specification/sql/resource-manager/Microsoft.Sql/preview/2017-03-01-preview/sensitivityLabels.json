@@ -135,7 +135,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/recommended/enable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable": {
       "post": {
         "tags": [
           "SensitivityLabels"
@@ -174,6 +174,19 @@
             "type": "string"
           },
           {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -185,7 +198,7 @@
             "description": "Successfully enabled the sensitivity recommendations on the given column."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
           }
         },
         "x-ms-examples": {
@@ -195,7 +208,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/recommended/disable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable": {
       "post": {
         "tags": [
           "SensitivityLabels"
@@ -234,6 +247,19 @@
             "type": "string"
           },
           {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -245,7 +271,7 @@
             "description": "Successfully disabled the sensitivity recommendation on the given column."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 404 SensitivityLabelsColumnNotFound - The specified column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
           }
         },
         "x-ms-examples": {
