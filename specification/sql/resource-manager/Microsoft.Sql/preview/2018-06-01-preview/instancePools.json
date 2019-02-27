@@ -99,7 +99,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InstancePoolRequestedVcoreCountIsInvalid - Requested vcore count for instance pool is invalid\n\n * 400 InstancePoolRequestMissingSku - Instance pool request is missing sku\n\n * 400 InstancePoolRequestMissingSkuTier - Instance pool request is missing sku tier\n\n * 400 InstancePoolRequestMissingSkuFamily - Instance pool request is missing sku family\n\n * 400 InstancePoolRequestedSubnetResourceIdIsInvalid - Subnet id for instance pool is null or empty\n\n * 400 InstancePoolRequestedLicenseTypeIsInvalid - License type for instance pool is null or empty\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation"
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InstancePoolRequestedVcoreCountIsInvalid - Requested vcore count for instance pool is invalid\n\n * 400 InstancePoolRequestMissingSku - Instance pool request is missing sku\n\n * 400 InstancePoolRequestMissingSkuTier - Instance pool request is missing sku tier\n\n * 400 InstancePoolRequestMissingSkuFamily - Instance pool request is missing sku family\n\n * 400 InstancePoolRequestedSubnetResourceIdIsInvalid - Subnet id for instance pool is null or empty\n\n * 409 InstancePoolBusy - An instance pool is busy with another ongoing operation"
           },
           "202": {
             "description": "Accepted"
@@ -255,7 +255,43 @@
         },
         "x-ms-examples": {
           "List instance pools by resource group": {
-            "$ref": "./examples/ListInstancePools.json"
+            "$ref": "./examples/ListInstancePoolsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/instancePools": {
+      "get": {
+        "tags": [
+          "InstancePools"
+        ],
+        "description": "Gets a list of all instance pools in the subscription.",
+        "operationId": "InstancePools_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of instance pools in a subscription.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List instance pools in the subscription": {
+            "$ref": "./examples/ListInstancePoolsBySubscriptionId.json"
           }
         }
       }
@@ -289,8 +325,16 @@
           ]
         },
         "licenseType": {
-          "description": "License Type of this instance pool.",
+          "description": "The license type. Possible values are 'LicenseIncluded' (price for SQL license is included) and 'BasePrice' (without SQL license price).",
+          "enum": [
+            "LicenseIncluded",
+            "BasePrice"
+          ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "InstancePoolLicenseType",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read",
             "create"
