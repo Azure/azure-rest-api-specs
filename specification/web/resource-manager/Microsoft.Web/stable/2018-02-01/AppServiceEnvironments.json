@@ -544,8 +544,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get the network endpoints of all inbound dependencies of an ase.",
-        "description": "Get the network endpoints of all inbound dependencies of an ase.",
+        "summary": "Get the network endpoints of all inbound dependencies of an App Service Environment.",
+        "description": "Get the network endpoints of all inbound dependencies of an App Service Environment.",
         "operationId": "AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints",
         "parameters": [
           {
@@ -1259,8 +1259,8 @@
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get the network endpoints of all outbound dependencies of an ase.",
-        "description": "Get the network endpoints of all outbound dependencies of an ase.",
+        "summary": "Get the network endpoints of all outbound dependencies of an App Service Environment.",
+        "description": "Get the network endpoints of all outbound dependencies of an App Service Environment.",
         "operationId": "AppServiceEnvironments_GetOutboundNetworkDependenciesEndpoints",
         "parameters": [
           {
@@ -2222,7 +2222,7 @@
       }
     },
     "AppServiceEnvironmentPatchResource": {
-      "description": "ARM resource for a app service enviroment.",
+      "description": "ARM resource for a app service environment.",
       "type": "object",
       "allOf": [
         {
@@ -2254,6 +2254,7 @@
       }
     },
     "EndpointDependency": {
+      "description": "A domain name that a service is reached at, including details of the current connection status.",
       "type": "object",
       "properties": {
         "domainName": {
@@ -2270,6 +2271,7 @@
       }
     },
     "EndpointDetail": {
+      "description": "Current TCP connectivity information from the App Service Environment to a single endpoint.",
       "type": "object",
       "properties": {
         "ipAddress": {
@@ -2283,11 +2285,11 @@
         },
         "latency": {
           "format": "double",
-          "description": "The time in milliseconds it takes to connect to this IpAddress at this Port.",
+          "description": "The time in milliseconds it takes for a TCP connection to be created from the App Service Environment to this IpAddress at this Port.",
           "type": "number"
         },
         "isAccessable": {
-          "description": "Whether it is possible to connect to IpAddress.",
+          "description": "Whether it is possible to create a TCP connection from the App Service Environment to this IpAddress at this Port.",
           "type": "boolean"
         }
       }
@@ -2307,22 +2309,22 @@
       }
     },
     "InboundEnvironmentEndpoint": {
-      "description": "Endpoints for a particular type",
+      "description": "The IP Addresses and Ports that require inbound network access to and within the subnet of the App Service Environment.",
       "type": "object",
       "properties": {
         "description": {
-          "description": "Text describing the endpoints.",
+          "description": "Short text describing the purpose of the network traffic.",
           "type": "string"
         },
         "endpoints": {
-          "description": "The endpoint ip addresses in cidr notation.",
+          "description": "The IP addresses that network traffic will originate from in cidr notation.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "ports": {
-          "description": "The ports",
+          "description": "The ports that network traffic will arrive to the App Service Environment at.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2385,15 +2387,15 @@
       }
     },
     "OutboundEnvironmentEndpoint": {
-      "description": "Endpoints of a common type.",
+      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
       "type": "object",
       "properties": {
         "category": {
-          "description": "Short description of the endpoints.",
+          "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
           "type": "string"
         },
         "endpoints": {
-          "description": "The endpoint's domain name and the IP Addresses it currently resolves to.",
+          "description": "The endpoints that the App Service Environment reaches the service at.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDependency"
