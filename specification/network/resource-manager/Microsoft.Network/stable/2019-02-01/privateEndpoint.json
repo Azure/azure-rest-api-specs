@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interfaceEndpoints/{interfaceEndpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}": {
       "delete": {
         "tags": [
-          "InterfaceEndpoints"
+          "PrivateEndpoints"
         ],
-        "operationId": "InterfaceEndpoints_Delete",
-        "description": "Deletes the specified interface endpoint.",
+        "operationId": "PrivateEndpoints_Delete",
+        "description": "Deletes the specified private endpoint.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -50,11 +50,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "interfaceEndpointName",
+            "name": "privateEndpointName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the interface endpoint."
+            "description": "The name of the private endpoint."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -76,15 +76,15 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete interface endpoint": { "$ref": "./examples/InterfaceEndpointDelete.json" }
+          "Delete private endpoint": { "$ref": "./examples/PrivateEndpointDelete.json" }
         }
       },
       "get": {
         "tags": [
-          "InterfaceEndpoints"
+          "PrivateEndpoints"
         ],
-        "operationId": "InterfaceEndpoints_Get",
-        "description": "Gets the specified interface endpoint by resource group.",
+        "operationId": "PrivateEndpoints_Get",
+        "description": "Gets the specified private endpoint by resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -94,11 +94,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "interfaceEndpointName",
+            "name": "privateEndpointName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the interface endpoint."
+            "description": "The name of the private endpoint."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -116,22 +116,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting InterfaceEndpoint resource.",
+            "description": "Request successful. The operation returns the resulting PrivateEndpoint resource.",
             "schema": {
-              "$ref": "#/definitions/InterfaceEndpoint"
+              "$ref": "#/definitions/PrivateEndpoint"
             }
           }
         },
         "x-ms-examples": {
-          "Get interface endpoint": { "$ref": "./examples/InterfaceEndpointGet.json" }
+          "Get private endpoint": { "$ref": "./examples/PrivateEndpointGet.json" }
         }
       },
       "put": {
         "tags": [
-          "InterfaceEndpoints"
+          "PrivateEndpoints"
         ],
-        "operationId": "InterfaceEndpoints_CreateOrUpdate",
-        "description": "Creates or updates an interface endpoint in the specified resource group.",
+        "operationId": "PrivateEndpoints_CreateOrUpdate",
+        "description": "Creates or updates an private endpoint in the specified resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -141,20 +141,20 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "interfaceEndpointName",
+            "name": "privateEndpointName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the interface endpoint."
+            "description": "The name of the private endpoint."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InterfaceEndpoint"
+              "$ref": "#/definitions/PrivateEndpoint"
             },
-            "description": "Parameters supplied to the create or update interface endpoint operation"
+            "description": "Parameters supplied to the create or update private endpoint operation"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -165,31 +165,31 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting InterfaceEndpoint resource.",
+            "description": "Update successful. The operation returns the resulting PrivateEndpoint resource.",
             "schema": {
-              "$ref": "#/definitions/InterfaceEndpoint"
+              "$ref": "#/definitions/PrivateEndpoint"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting InterfaceEndpoint resource.",
+            "description": "Create successful. The operation returns the resulting PrivateEndpoint resource.",
             "schema": {
-              "$ref": "#/definitions/InterfaceEndpoint"
+              "$ref": "#/definitions/PrivateEndpoint"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create interface endpoint": { "$ref": "./examples/InterfaceEndpointCreate.json" }
+          "Create private endpoint": { "$ref": "./examples/PrivateEndpointCreate.json" }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interfaceEndpoints": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints": {
       "get": {
         "tags": [
-          "InterfaceEndpoints"
+          "PrivateEndpoints"
         ],
-        "operationId": "InterfaceEndpoints_List",
-        "description": "Gets all interface endpoints in a resource group.",
+        "operationId": "PrivateEndpoints_List",
+        "description": "Gets all private endpoints in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -207,27 +207,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of InterfaceEndpoint resources.",
+            "description": "Request successful. The operation returns a list of PrivateEndpoint resources.",
             "schema": {
-              "$ref": "#/definitions/InterfaceEndpointListResult"
+              "$ref": "#/definitions/PrivateEndpointListResult"
             }
           }
         },
         "x-ms-examples": {
-          "List interface endpoints in resource group": { "$ref": "./examples/InterfaceEndpointList.json" }
+          "List private endpoints in resource group": { "$ref": "./examples/PrivateEndpointList.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/interfaceEndpoints": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/privateEndpoints": {
       "get": {
         "tags": [
-          "InterfaceEndpoints"
+          "PrivateEndpoints"
         ],
-        "operationId": "InterfaceEndpoints_ListBySubscription",
-        "description": "Gets all interface endpoints in a subscription.",
+        "operationId": "PrivateEndpoints_ListBySubscription",
+        "description": "Gets all private endpoints in a subscription.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -238,14 +238,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of InterfaceEndpoint resources.",
+            "description": "Request successful. The operation returns a list of PrivateEndpoint resources.",
             "schema": {
-              "$ref": "#/definitions/InterfaceEndpointListResult"
+              "$ref": "#/definitions/PrivateEndpointListResult"
             }
           }
         },
         "x-ms-examples": {
-          "List all interface endpoints": { "$ref": "./examples/InterfaceEndpointListAll.json" }
+          "List all private endpoints": { "$ref": "./examples/PrivateEndpointListAll.json" }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -254,12 +254,12 @@
     }
   },
   "definitions": {
-    "InterfaceEndpoint": {
+    "PrivateEndpoint": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InterfaceEndpointProperties",
-          "description": "Properties of the interface endpoint."
+          "$ref": "#/definitions/PrivateEndpointProperties",
+          "description": "Properties of the private endpoint."
         },
         "etag": {
           "type": "string",
@@ -271,13 +271,13 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "Interface endpoint resource."
+      "description": "Private endpoint resource."
     },
-    "InterfaceEndpointProperties": {
+    "PrivateEndpointProperties": {
       "properties": {
         "fqdn": {
           "type": "string",
-          "description": "A first-party service's FQDN that is mapped to the private IP allocated via this interface endpoint."
+          "description": "A first-party service's FQDN that is mapped to the private IP allocated via this private endpoint."
         },
         "endpointService": {
           "$ref": "#/definitions/EndpointService",
@@ -293,38 +293,38 @@
           "items": {
             "$ref": "./networkInterface.json#/definitions/NetworkInterface"
           },
-          "description": "Gets an array of references to the network interfaces created for this interface endpoint."
+          "description": "Gets an array of references to the network interfaces created for this private endpoint."
         },
         "owner": {
           "type": "string",
           "readOnly": true,
-          "description": "A read-only property that identifies who created this interface endpoint."
+          "description": "A read-only property that identifies who created this private endpoint."
         },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the interface endpoint. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "description": "The provisioning state of the private endpoint. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "description": "Properties of the interface endpoint."
+      "description": "Properties of the private endpoint."
     },
     "EndpointService": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "A unique identifier of the service being referenced by the interface endpoint."
+          "description": "A unique identifier of the service being referenced by the private endpoint."
         }
       },
       "description": "Identifies the service being brought into the virtual network."
     },
-    "InterfaceEndpointListResult": {
+    "PrivateEndpointListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InterfaceEndpoint"
+            "$ref": "#/definitions/PrivateEndpoint"
           },
-          "description": "Gets a list of InterfaceEndpoint resources in a resource group."
+          "description": "Gets a list of PrivateEndpoint resources in a resource group."
         },
         "nextLink": {
           "type": "string",
@@ -332,7 +332,7 @@
           "readOnly": true
         }
       },
-      "description": "Response for the ListInterfaceEndpoints API service call."
+      "description": "Response for the ListPrivateEndpoints API service call."
     }
   }
 }

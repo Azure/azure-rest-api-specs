@@ -876,7 +876,7 @@ directive:
     from: virtualNetworkGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: interfaceEndpoint.json
+    from: privateEndpoint.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkProfile.json
