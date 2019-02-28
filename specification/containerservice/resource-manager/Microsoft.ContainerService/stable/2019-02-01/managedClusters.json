@@ -1256,7 +1256,8 @@
         "networkPolicy": {
           "type": "string",
           "enum": [
-            "calico"
+            "calico",
+            "azure"
           ],
           "x-ms-enum": {
             "name": "NetworkPolicy",
@@ -1442,6 +1443,13 @@
         "aadProfile": {
           "$ref": "#/definitions/ManagedClusterAADProfile",
           "description": "Profile of Azure Active Directory configuration."
+        },
+        "apiServerAuthorizedIPRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Authorized IP Ranges to kubernetes API server."
         }
       },
       "description": "Properties of the managed cluster."
