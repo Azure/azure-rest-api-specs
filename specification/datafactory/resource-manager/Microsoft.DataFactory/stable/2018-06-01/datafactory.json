@@ -443,6 +443,34 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/upgrade": {
+      "post": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_Upgrade",
+        "x-ms-examples": {
+          "Factories_Upgrade": {
+            "$ref": "./examples/Factories_Upgrade.json"
+          }
+        },
+        "description": "Upgrade preview version factory to G.A. version.",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Factory"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken": {
       "post": {
         "tags": [
