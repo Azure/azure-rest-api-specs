@@ -3,15 +3,20 @@
     "api-version": "2019-02-01",
     "subscriptionId" : "subId",
     "resourceGroupName": "rg1",
-    "privateEndpointName": "testIe",
+    "privateEndpointName": "testPe",
     "parameters": {
       "properties": {
-        "fqdn": "uniqueIdentifier.fqdn.windows.net",
+        "privateLinkServiceConnection": {
+          "properties": {
+            "endpointServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/resourceName",
+            "groupIds": [
+              "groupIdFromResource"
+            ],
+            "requestMessage": "Please approve my connection."
+          }
+        },
         "subnet": {
           "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-        },
-        "endpointService": {
-          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/resourceName"
         }
       }
     }
@@ -19,22 +24,31 @@
   "responses" : {
     "200" : {
       "body" : {
-        "name" : "testIe",
-        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testIe",
+        "name" : "testPe",
+        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
         "location" : "eastus",
         "properties" : {
-          "fqdn": "uniqueIdentifier.fqdn.windows.net",
           "provisioningState": "Succeded",
-          "owner": "User",
-          "endpointService": {
-            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/resourceName"
+          "privateLinkServiceConnection": {
+            "properties": {
+              "endpointServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/resourceName",
+              "groupIds": [
+                "groupIdFromResource"
+              ],
+              "requestMessage": "Please approve my connection.",
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              }
+            }
           },
           "subnet": {
             "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
           },
           "networkInterfaces": [
             {
-              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testIe.nic.abcd1234"
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPe.nic.abcd1234"
             }
           ]
         }
@@ -42,22 +56,31 @@
     },
     "201" : {
       "body" : {
-        "name" : "testIe",
-        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testIe",
+        "name" : "testPe",
+        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
         "location" : "eastus",
         "properties" : {
           "provisioningState" : "Succeeded",
-          "fqdn": "uniqueIdentifier.fqdn.windows.net",
-          "owner": "User",
-          "endpointService": {
-            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/resourceName"
+          "privateLinkServiceConnection": {
+            "properties": {
+              "endpointServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Provider/resourceType/resourceName",
+              "groupIds": [
+                "groupIdFromResource"
+              ],
+              "requestMessage": "Please approve my connection.",
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              }
+            }
           },
           "subnet": {
             "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
           },
           "networkInterfaces": [
             {
-              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testIe.nic.abcd1234"
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPe.nic.abcd1234"
             }
           ]
         }
