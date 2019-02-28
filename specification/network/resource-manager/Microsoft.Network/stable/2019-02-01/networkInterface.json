@@ -846,6 +846,25 @@
             "modelAsString": true
           }
         },
+        "privateLinkConnectionProperties": {
+          "properties": {
+            "groupId": {
+              "type": "string",
+              "description": "An ID provided by the remote service. Populated when this network interface was created for private endpoints."
+            },
+            "requiredMemberName": {
+              "type": "string",
+              "description": "A specific member from the specified groupId mapped to this ipConfiguration."
+            },
+            "fqdns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The fqdns that should resolve to the ipConfiguration's private IP address."
+            }
+          }
+        },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "Subnet bound to the IP configuration."
