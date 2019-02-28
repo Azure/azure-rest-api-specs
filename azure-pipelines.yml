@@ -25,11 +25,13 @@ jobs:
       echo TRAVIS_PULL_REQUEST_SLUG: $(TRAVIS_PULL_REQUEST_SLUG)
       echo TRAVIS_PULL_REQUEST_SHA: $(TRAVIS_PULL_REQUEST_SHA)
       echo PR_ONLY: $(PR_ONLY)
+    displayName: "Info"
   - task: Npm@1
     displayName: 'npm install'
     inputs:
       verbose: false
   - script: 'npm test -- test/syntax.js'
+    displayName: 'Syntax validation'
 
 - job: "Semantic"
   pool:
@@ -40,6 +42,7 @@ jobs:
     inputs:
       verbose: false
   - script: 'node scripts/semanticValidation.js'
+    displayName: 'Semantic Validation'
 
 - job: "ModelValidation"
   pool:
@@ -50,17 +53,20 @@ jobs:
     inputs:
       verbose: false
   - script: 'node scripts/modelValidation.js'
+    displayName: 'Model Validation'
 
 - job: "BreakingChange"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
   - script: 'scripts/install-dotnet.sh'
+    displayName: 'Insall .Net'
   - task: Npm@1
     displayName: 'npm install'
     inputs:
       verbose: false
   - script: 'node scripts/breaking-change.js'
+    displayName: 'Breaking Changes'
 
 - job: "LintDiff"
   variables:
@@ -73,9 +79,12 @@ jobs:
     inputs:
       verbose: false
   - script: 'scripts/install-dotnet.sh'
+    displayName: 'install .Net'
   - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
+    displayName: 'LintDiff'
 
 - job: "SDK"
+  timeoutInMinutes: 120
   strategy:
     matrix:
       ruby:
@@ -100,3 +109,4 @@ jobs:
     vmImage: 'Ubuntu 16.04'
   steps:
   - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
+    displayName: "Swagger to SDK script"

@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ApplicationInsights.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,23 +15,24 @@ To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ApplicationInsights API.
 
 ``` yaml
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2015-05
+tag: package-2019-03
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: LongRunningOperationsWithLongRunningExtension
@@ -237,6 +238,16 @@ directive:
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
 ```
 
+
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.Insights/stable/2019-03-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2019-03-01/eaSubscriptionMigration_API.json
+```
 ### Tag: package-2015-05
 
 These settings apply only when `--tag=package-2015-05` is specified on the command line.
@@ -276,9 +287,10 @@ These settings apply only when `--tag=package-2018-06-17-preview` is specified o
 input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
----
-# Code Generation
 
+---
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -293,7 +305,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
-
 
 ## Python
 
@@ -312,11 +323,13 @@ python:
   package-version: 0.1.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true

@@ -53,6 +53,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-js
 ```
 
 
@@ -63,3 +64,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## JavaScript/TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
