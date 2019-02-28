@@ -1,26 +1,9 @@
 {
   "parameters": {
     "resourceGroupName": "scgroup",
-    "clusterName": "sc1",
+    "cacheName": "sc1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2019-06-01-preview",
-    "cluster": {
-      "tags": {
-        "Dept": "Initech"
-      },
-      "location": "westus",
-      "properties": {
-        "cacheSizeGB": 3072,
-        "mountAddresses": [
-          "192.168.1.1",
-          "192.168.1.2"
-        ],
-        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1"
-      },      
-      "sku": {
-        "name": "Storage Cache A123"
-      }
-    }
+    "api-version": "2019-06-01-preview"
   },
   "responses": {
     "200": {
@@ -28,15 +11,15 @@
         "tags": {
           "Dept": "Initech"
         },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/clusters/sc1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
         "location": "westus",
         "name": "sc1",
-        "type": "Microsoft.StorageCache/Cluster",
+        "type": "Microsoft.StorageCache/Cache",
         "properties": {
           "cacheSizeGB": 3072,
           "health": {
             "state": "transitioning",
-            "statusDescription": "Cluster is being created."
+            "statusDescription": "Cache is being created."
           },
           "mountAddresses": [
             "192.168.1.1",
@@ -53,7 +36,7 @@
           }
         },
         "sku": {
-          "name": "Storage Cache A123"
+          "name": "A123"
         }
       }
     }

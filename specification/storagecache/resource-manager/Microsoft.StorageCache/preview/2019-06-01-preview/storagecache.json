@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "An Avere vFXT cluster provides scalable caching services for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage clusters.",
+    "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage caches.",
     "title": "Microsoft.StorageCache resource provider.",
     "version": "2019-06-01-preview"
   },
@@ -112,7 +112,7 @@
         "tags": [
           "SKUs"
         ],
-        "description": "Get the list of StorageCache.Cluster SKUs available to this subscription.",
+        "description": "Get the list of StorageCache.Cache SKUs available to this subscription.",
         "operationId": "Skus_List"
       }
     },
@@ -154,11 +154,11 @@
         "tags": [
           "UsageModels"
         ],
-        "description": "Get the list of Avere.Cluster Usage Models available to this subscription.",
+        "description": "Get the list of cache Usage Models available to this subscription.",
         "operationId": "UsageModels_List"
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/clusters": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/caches": {
       "get": {
         "produces": [
           "application/json"
@@ -173,10 +173,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of Cluster objects.  Note that entity references might replace complete Cluster objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of Cache objects.  Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
               "items": {
-                "$ref": "#/definitions/Cluster"
+                "$ref": "#/definitions/Cache"
               },
               "type": "array"
             }
@@ -189,18 +189,18 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_List": {
-            "$ref": "./examples/Clusters_List.json"
+          "Caches_List": {
+            "$ref": "./examples/Caches_List.json"
           }
         },
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Returns all Clusters the user has access to under a subscription.",
-        "operationId": "Clusters_List"
+        "description": "Returns all Caches the user has access to under a subscription.",
+        "operationId": "Caches_List"
       }
     },    
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches": {
       "get": {
         "produces": [
           "application/json"
@@ -222,10 +222,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of Cluster objects.  Note that entity references might replace complete Cluster objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of Cache objects.  Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
               "items": {
-                "$ref": "#/definitions/Cluster"
+                "$ref": "#/definitions/Cache"
               },
               "type": "array"
             }
@@ -238,18 +238,18 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_ListByResourceGroup": {
-            "$ref": "./examples/Clusters_ListByResourceGroup.json"
+          "Caches_ListByResourceGroup": {
+            "$ref": "./examples/Caches_ListByResourceGroup.json"
           }
         },
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Returns all Clusters the user has access to under a resource group and subscription.",
-        "operationId": "Clusters_ListByResourceGroup"
+        "description": "Returns all Caches the user has access to under a resource group and subscription.",
+        "operationId": "Caches_ListByResourceGroup"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}": {
       "delete": {
         "produces": [
           "application/json"
@@ -263,9 +263,9 @@
             "type": "string"
           },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -279,13 +279,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cluster deleted."
+            "description": "Cache deleted."
           },
           "202": {
-            "description": "Started the Cluster's transition to Deleted state."
+            "description": "Started the Cache's transition to Deleted state."
           },
           "204": {
-            "description": "Cluster deleted."
+            "description": "Cache deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -295,16 +295,16 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_Delete": {
-            "$ref": "./examples/Clusters_Delete.json"
+          "Caches_Delete": {
+            "$ref": "./examples/Caches_Delete.json"
           }
         },
         "x-ms-long-running-operation": true,
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Schedules a Cluster for deletion.",
-        "operationId": "Clusters_Delete"
+        "description": "Schedules a Cache for deletion.",
+        "operationId": "Caches_Delete"
       },
       "get": {
         "produces": [
@@ -319,9 +319,9 @@
             "type": "string"
           },
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -335,9 +335,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the Cluster object corresponding to clusterId.",
+            "description": "Returns the Cache object corresponding to cacheId.",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/Cache"
             }
           },
           "default": {
@@ -348,15 +348,15 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_Get": {
-            "$ref": "./examples/Clusters_Get.json"
+          "Caches_Get": {
+            "$ref": "./examples/Caches_Get.json"
           }
         },
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Returns a Cluster.",
-        "operationId": "Clusters_Get"
+        "description": "Returns a Cache.",
+        "operationId": "Caches_Get"
       },
       "put": {
         "consumes": [
@@ -380,33 +380,33 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Object containing the user selectable properties of the new cluster.  If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user selectable properties of the new cache.  If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
-            "name": "cluster",
+            "name": "cache",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/Cache"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Cluster created or already exists.",
+            "description": "Cache created or already exists.",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/Cache"
             }
           },
           "201": {
-            "description": "Cluster creation has been initiated.  Poll the new Cluster's provisioningState property to monitor creation progress.",
+            "description": "Cache creation has been initiated.  Poll the new Cache's provisioningState property to monitor creation progress.",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/Cache"
             }
           },
           "default": {
@@ -417,16 +417,16 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_Create": {
-            "$ref": "./examples/Clusters_Create.json"
+          "Caches_Create": {
+            "$ref": "./examples/Caches_Create.json"
           }
         },
         "x-ms-long-running-operation": true,
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Create/update a Cluster instance.",
-        "operationId": "Clusters_Create"
+        "description": "Create/update a Cache instance.",
+        "operationId": "Caches_Create"
       },
       "patch": {
         "consumes": [
@@ -450,27 +450,27 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Object containing the user selectable properties of the new cluster.  If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user selectable properties of the new cache.  If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
-            "name": "cluster",
+            "name": "cache",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/Cache"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Patched the Cluster.",
+            "description": "Patched the Cache.",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/Cache"
             }
           },
           "default": {
@@ -481,18 +481,18 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_Update": {
-            "$ref": "./examples/Clusters_Update.json"
+          "Caches_Update": {
+            "$ref": "./examples/Caches_Update.json"
           }
         },        
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Update a Cluster instance.",
-        "operationId": "Clusters_Update"
+        "description": "Update a Cache instance.",
+        "operationId": "Caches_Update"
       }      
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/flush": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush": {
       "post": {
         "produces": [
           "application/json"
@@ -512,9 +512,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -522,10 +522,10 @@
         ],
         "responses": {
           "200": {
-            "description": "All cluster data is clean."
+            "description": "All cache data is clean."
           },
           "202": {
-            "description": "Cluster has started flushing."
+            "description": "Cache has started flushing."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -535,19 +535,19 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_Flush": {
-            "$ref": "./examples/Clusters_Flush.json"
+          "Caches_Flush": {
+            "$ref": "./examples/Caches_Flush.json"
           }
         },
         "x-ms-long-running-operation": true,
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Tells a cluster to write all dirty data to the StorageTarget(s).  During the flush, clients will see errors returned until the flush is complete.",
-        "operationId": "Clusters_Flush"
+        "description": "Tells a cache to write all dirty data to the StorageTarget(s).  During the flush, clients will see errors returned until the flush is complete.",
+        "operationId": "Caches_Flush"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/start": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/start": {
       "post": {
         "produces": [
           "application/json"
@@ -567,9 +567,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -577,10 +577,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Cluster is Active."
+            "description": "Cache is Active."
           },
           "202": {
-            "description": "Cluster has started the transition to Active."
+            "description": "Cache has started the transition to Active."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -590,19 +590,19 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_Start": {
-            "$ref": "./examples/Clusters_Start.json"
+          "Caches_Start": {
+            "$ref": "./examples/Caches_Start.json"
           }
         },
         "x-ms-long-running-operation": true,                  
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Tells a Stopped state cluster to transition to Active state.",
-        "operationId": "Clusters_Start"
+        "description": "Tells a Stopped state cache to transition to Active state.",
+        "operationId": "Caches_Start"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/stop": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stop": {
       "post": {
         "produces": [
           "application/json"
@@ -622,9 +622,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -632,10 +632,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Cluster is stopped."
+            "description": "Cache is stopped."
           },
           "202": {
-            "description": "Cluster has started the transition to Stopped."
+            "description": "Cache has started the transition to Stopped."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -645,19 +645,19 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_Stop": {
-            "$ref": "./examples/Clusters_Stop.json"
+          "Caches_Stop": {
+            "$ref": "./examples/Caches_Stop.json"
           }
         },
         "x-ms-long-running-operation": true,                
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Tells an Active cluster to transition to Stopped state.",
-        "operationId": "Clusters_Stop"
+        "description": "Tells an Active cache to transition to Stopped state.",
+        "operationId": "Caches_Stop"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storageTargets": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets": {
       "get": {
         "produces": [
           "application/json"
@@ -677,9 +677,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -687,7 +687,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the list of storage targets defined by clusterId.",
+            "description": "Returns the list of storage targets defined by cacheId.",
             "schema": {
               "$ref": "#/definitions/StorageTargetsResult"
             }
@@ -701,7 +701,7 @@
         },
         "x-ms-examples": {
           "StorageTargets_List": {
-            "$ref": "./examples/StorageTargets_ListByCluster.json"
+            "$ref": "./examples/StorageTargets_ListByCache.json"
           }
         },        
         "x-ms-pageable": {
@@ -710,11 +710,11 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Returns the StorageTargets for this cluster in the subscription and resource group.",
-        "operationId": "StorageTargets_ListByCluster"
+        "description": "Returns the StorageTargets for this cache in the subscription and resource group.",
+        "operationId": "StorageTargets_ListByCache"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/storageTargets/{storageTargetName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}": {
       "delete": {
         "produces": [
           "application/json"
@@ -734,9 +734,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -776,7 +776,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Removes a storage target from a cluster.  This operation is allowed at any time, but if the cluster is down or unhealthy, the actual removal of the storage target may be delayed until the cluster is healthy again.",
+        "description": "Removes a storage target from a cache.  This operation is allowed at any time, but if the cache is down or unhealthy, the actual removal of the storage target may be delayed until the cache is healthy again.",
         "operationId": "StorageTargets_Delete"
       },
       "get": {
@@ -798,9 +798,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -836,7 +836,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Returns a storage target from a cluster.",
+        "description": "Returns a storage target from a cache.",
         "operationId": "StorageTargets_Get"
       },
       "put": {
@@ -861,9 +861,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -907,7 +907,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Create/update a storage target.  This operation is allowed at any time, but if the cluster is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cluster is healthy again.",
+        "description": "Create/update a storage target.  This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cache is healthy again.",
         "operationId": "StorageTargets_Create"
       },
       "patch": {
@@ -932,9 +932,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -978,11 +978,11 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Update a storage target.  This operation is allowed at any time, but if the cluster is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cluster is healthy again.",
+        "description": "Update a storage target.  This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cache is healthy again.",
         "operationId": "StorageTargets_Update"
       }      
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/clusters/{clusterName}/upgrade": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
       "post": {
         "produces": [
           "application/json"
@@ -1002,9 +1002,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
 	        },	  
           {
-            "description": "Name of cluster.",
+            "description": "Name of cache.",
             "in": "path",
-            "name": "clusterName",
+            "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
             "required": true,
             "type": "string"
@@ -1012,10 +1012,10 @@
         ],
         "responses": {
           "201": {
-            "description": "Cluster firmware is up to date."
+            "description": "Cache firmware is up to date."
           },
           "202": {
-            "description": "Cluster has started the upgrade."
+            "description": "Cache has started the upgrade."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1025,16 +1025,16 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_UpgradeFirmware": {
-            "$ref": "./examples/Clusters_UpgradeFirmware.json"
+          "Caches_UpgradeFirmware": {
+            "$ref": "./examples/Caches_UpgradeFirmware.json"
           }
         },        
         "x-ms-long-running-operation": true,                
         "tags": [
-          "Clusters"
+          "Caches"
         ],
-        "description": "Tells a cluster to upgrade its firmware.",
-        "operationId": "Clusters_UpgradeFirmware"
+        "description": "Tells a cache to upgrade its firmware.",
+        "operationId": "Caches_UpgradeFirmware"
       }
     }
   },
@@ -1054,7 +1054,7 @@
               "type": "string"
             },
             "resource": {
-              "description": "Resource on which the operation is performed: cluster, etc.",
+              "description": "Resource on which the operation is performed: cache, etc.",
               "type": "string"
             }
           }
@@ -1079,16 +1079,6 @@
             "$ref": "#/definitions/ApiOperation"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ClfsTarget": {
-      "description": "Storage container for use as a CLFS StorageTarget.",
-      "properties": {
-        "target": {
-          "description": "URL of storage container.",
-          "$ref": "#/definitions/URLString"
         }
       },
       "type": "object"
@@ -1128,15 +1118,15 @@
       },
       "type": "object"
     },
-    "Cluster": {
-      "description": "An Avere cache instance.  Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+    "Cache": {
+      "description": "A cache instance.  Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "properties": {
         "tags": {
           "description": "ARM tags as name/value pairs.",
           "type": "object"
         },
         "id": {
-          "description": "Fully qualified URL of the cluster.",
+          "description": "Fully qualified URL of the cache.",
           "readOnly": true,
           "$ref": "#/definitions/URLString"
         },
@@ -1145,29 +1135,31 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of cluster.",
-          "readOnly": true,          
+          "description": "Name of cache.",
+          "readOnly": true,
           "$ref": "#/definitions/ResourceName"
         },
         "type": {
-          "description": "Type for the cluster; Microsoft.StorageCache/Cluster",
+          "description": "Type for the cache; Microsoft.StorageCache/Cache",
           "readOnly": true,
           "type": "string"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties for the cluster.",
+          "description": "Properties for the cache.",
           "properties": {
             "cacheSizeGB": {
-              "description": "The size of this cluster's cache, in GB.",
+              "description": "The size of this cache's cache, in GB.",
               "type": "integer"
             },
             "health": {
-              "description": "Health of the cluster.",
-              "$ref": "#/definitions/ClusterHealth"
+              "description": "Health of the cache.",
+              "readOnly": true,
+              "$ref": "#/definitions/CacheHealth"
             },
             "mountAddresses": {
-              "description": "Array of IP addresses that can be used by clients mounting this Cluster.",
+              "description": "Array of IP addresses that can be used by clients mounting this Cache.",
+              "readOnly": true,
               "items": {
                 "type": "string"
               },
@@ -1183,24 +1175,28 @@
                 "Configuring",
                 "Booting"
               ],
+              "x-ms-enum": {
+                "name": "ProvisioningStateType",
+                "modelAsString": true
+              },
               "type": "string"
             },
             "subnet": {
-              "description": "Subnet used for the cluster.",
+              "description": "Subnet used for the cache.",
               "$ref": "#/definitions/URLString"
             },
             "upgradeStatus": {
-              "description": "Upgrade status of the cluster.",
-              "$ref": "#/definitions/ClusterUpgradeStatus"
+              "description": "Upgrade status of the cache.",
+              "$ref": "#/definitions/CacheUpgradeStatus"
             }
           },
           "type": "object"
         },
         "sku": {
-          "description": "Sku for the cluster.",
+          "description": "Sku for the cache.",
           "properties": {
             "name": {
-              "description": "Sku name for this cluster.",
+              "description": "Sku name for this cache.",
               "type": "string"
             }
           },
@@ -1210,11 +1206,11 @@
       "x-ms-azure-resource": true,      
       "type": "object"
     },
-    "ClusterHealth": {
-      "description": "An indication of cluster health.",
+    "CacheHealth": {
+      "description": "An indication of cache health.",
       "properties": {
         "state": {
-          "description": "List of cluster health states.",
+          "description": "List of cache health states.",
           "enum": [
             "healthy",
             "degraded",
@@ -1227,8 +1223,8 @@
           ],
           "x-ms-enum": {
             "name": "HealthStateType",
-            "modelAsString": false
-          },          
+            "modelAsString": true
+          },
           "type": "string"
         },
         "statusDescription": {
@@ -1237,28 +1233,29 @@
         }
       }
     },
-    "ClusterUpgradeStatus": {
-      "description": "Properties describing the software upgrade state of the cluster",
+    "CacheUpgradeStatus": {
+      "description": "Properties describing the software upgrade state of the cache",
       "properties": {
         "currentFirmwareVersion": {
-          "description": "Version string of the firmware currently installed on this cluster.",
-          "type": "string"
+          "description": "Version string of the firmware currently installed on this cache.",
+          "type": "string",
+          "readOnly": true          
         },
         "firmwareUpdateStatus": {
-          "description": "True if there is a firmware update ready to install on this cluster.  The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
+          "description": "True if there is a firmware update ready to install on this cache.  The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
           "enum": [
             "available",
             "unavailable"
           ],
           "x-ms-enum": {
             "name": "FirmwareStatusType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "readOnly": true,          
           "type": "string"
         },
         "firmwareUpdateDeadline": {
-          "description": "Time at which the pending firmware update will automatically be installed on the cluster.",
+          "description": "Time at which the pending firmware update will automatically be installed on the cache.",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -1267,7 +1264,7 @@
           "description": "Time of the last successful firmware update.",
           "format": "date-time",
           "type": "string",
-          "readOnly": true          
+          "readOnly": true
         },
         "pendingFirmwareVersion": {
           "description": "When firmwareUpdateAvailable is true, this field holds the version string for the update.",
@@ -1276,6 +1273,13 @@
         }
       },
       "type": "object"
+    },
+    "UnknownProperties": {
+      "description": "Properties of an unknown type of StorageTarget",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "Nfs3Target": {
       "description": "An NFS mount point for use as a StorageTarget.",
@@ -1290,8 +1294,31 @@
           "type": "string"
         }
       },
+      "x-ms-discriminator-value": "nfs3",
       "type": "object"
     },
+    "ClfsTarget": {
+      "description": "Storage container for use as a CLFS StorageTarget.",
+      "properties": {
+        "target": {
+          "description": "URL of storage container.",
+          "$ref": "#/definitions/URLString"
+        }
+      },
+      "x-ms-discriminator-value": "clfs",      
+      "type": "object"
+    },
+    "UnknownTarget": {
+      "description": "Storage container for use as a Unknown StorageTarget.",
+      "properties": {
+        "unknownMap": {
+          "description": "Dictionary of string->string pairs containing information about the StorageTarget.",
+          "$ref": "#/definitions/UnknownProperties"
+        }
+      },
+      "x-ms-discriminator-value": "unknown",      
+      "type": "object"
+    },    
     "ResourceName": {
       "description": "Schema for the name of resources served by this provider.   Note that objects will contain an odata @id annotation as appropriate, this will contain the complete URL of the object.   These names are case-preserving, but not case sensistive.",
       "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -1353,10 +1380,10 @@
       "type": "object"
     },
     "ResourceSkusResult": {
-      "description": "A list of vFXT cluster Skus.",
+      "description": "A list of cache Skus.",
       "properties": {
         "nextLink": {
-          "description": "The uri to fetch the next page of vFXT Cluster Skus.",
+          "description": "The uri to fetch the next page of cache Skus.",
           "type": "string"
         },
         "value": {
@@ -1370,7 +1397,7 @@
       "type": "object"
     },
     "StorageTarget": {
-      "description": "A storage system being cached by a Cluster.",
+      "description": "A storage system being cached by a Cache.",
       "type": "object",
       "discriminator": "targetType",
       "properties": {
@@ -1385,7 +1412,7 @@
           "description": "Resource Id"
         },
         "type": {
-          "description": "Type for the storage target; Microsoft.StorageCache/Cluster/StorageTarget",
+          "description": "Type for the storage target; Microsoft.StorageCache/Cache/StorageTarget",
           "readOnly": true,
           "type": "string"
         },        
@@ -1394,21 +1421,23 @@
           "description": "Properties of the storage target.",
           "type": "object",
           "properties": {
-            "path": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Path to target in cluster namespace."          
-            },    
+            "junctions": {
+              "description": "List of cache namespace to target namespace associations.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NamespaceJunction"
+              }
+            },
             "targetType": {
               "description": "Type for storage target.",
-              "readOnly": true,
               "enum": [
                 "nfs3",
-                "clfs"
+                "clfs",
+                "unknown"
               ],
               "x-ms-enum": {
                 "name": "StorageTargetType",
-                "modelAsString": false
+                "modelAsString": true
               },
               "type": "string"
             },
@@ -1419,11 +1448,29 @@
             "clfs": {
               "description": "Properties when clfs target.",              
               "$ref": "#/definitions/ClfsTarget"
-            }
+            },
+            "unknown": {
+              "description": "Properties when unknown target.",
+              "$ref": "#/definitions/UnknownTarget"
+            }            
           }
         }
       },
       "x-ms-azure-resource": true
+    },
+    "NamespaceJunction": {
+      "description": "A namespace junction.",
+      "type": "object",
+      "properties": {
+        "namespacePath": {
+            "description": "Namespace path on a cache for a storage target.",
+            "type": "string"
+        },
+        "targetPath": {
+            "description": "Path in storage target to which namespacePath points.",
+            "type": "string"
+        }
+      }
     },
     "StorageTargetsResult": {
       "description": "A list of storage targets.",
@@ -1433,7 +1480,7 @@
           "type": "string"
         },
         "value": {
-          "description": "The list of storage targets defined for the cluster.",
+          "description": "The list of storage targets defined for the cache.",
           "items": {
             "$ref": "#/definitions/StorageTarget"
           },
@@ -1451,13 +1498,7 @@
       "properties": {
         "display": {
           "description": "Localized information describing this usage model.",
-          "properties": {
-            "description": {
-              "description": "Localized string describing this usage model",
-              "type": "string"
-            }
-          },
-          "type": "object"
+          "type": "string"
         },
         "name": {
           "description": "Non localized keyword naming this usage model.",
@@ -1471,10 +1512,10 @@
       "type": "object"
     },
     "UsageModelsResult": {
-      "description": "A list of vFXT usage models.",
+      "description": "A list of cache usage models.",
       "properties": {
         "nextLink": {
-          "description": "The uri to fetch the next page of vFXT usage models.",
+          "description": "The uri to fetch the next page of cache usage models.",
           "type": "string"
         },
         "value": {
@@ -1486,47 +1527,6 @@
         }
       },
       "type": "object"
-    }
-  },
-  "x-components": {
-    "parameters": {
-      "ApiVersionParameter": {
-        "description": "The API version to use for this operation.",
-        "in": "query",
-        "name": "api-version",
-        "required": true,
-        "type": "string"
-      },
-      "ClusterNameParameter": {
-        "description": "Name of cluster.",
-        "in": "path",
-        "name": "clusterName",
-        "pattern": "^[-0-9a-zA-Z_]{1,31}$",
-        "required": true,
-        "type": "string"
-      },
-      "ResourceGroupNameParameter": {
-        "description": "Target resource group.",
-        "in": "path",
-        "name": "resourceGroupName",
-        "required": true,
-        "type": "string"
-      },
-      "StorageTargetNameParameter": {
-        "description": "Name of storage target.",
-        "in": "path",
-        "name": "storageTargetName",
-        "pattern": "^[-0-9a-zA-Z_]{1,31}$",
-        "required": true,
-        "type": "string"
-      },
-      "SubscriptionIdParameter": {
-        "description": "Target subscription ID.",
-        "in": "path",
-        "name": "subscriptionId",
-        "required": true,
-        "type": "string"
-      }
     }
   },
   "parameters": {
