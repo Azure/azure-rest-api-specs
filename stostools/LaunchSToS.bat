@@ -28,4 +28,4 @@ dotnet msbuild %startupProj% /t:StartNetSdkCodeGeneration /v:%LogVerbosity% /p:g
 
 REM dotnet msbuild stos.proj /t:StartNetSdkCodeGeneration /v:N /p:githubprnumber=63 /p:githubcommitid=b5ee45302838515adc14857ed45c44ed99a1e517 /p:giturl=https://github.com/Azure/AzSwaggerSpecsTestClone  /p:DebugMode=false /p:triggercomment=startbuild
 REM LaunchSToS.bat stos.proj 63 b5ee45302838515adc14857ed45c44ed99a1e517 https://github.com/Azure/AzSwaggerSpecsTestClone startbuild false D
-REM endlocal
+REM stostools\LaunchSToS.bat SToS.proj %ghprbPullId% %ghprbActualCommit% %GIT_URL% %ghprbCommentBody% false n
