@@ -54,6 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-go
 ```
 
 
@@ -68,3 +69,7 @@ See configuration in [readme.python.md](./readme.python.md)
 ## JavaScript/TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
