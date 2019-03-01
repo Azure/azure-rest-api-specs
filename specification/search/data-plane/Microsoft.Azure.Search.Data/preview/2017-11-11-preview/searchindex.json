@@ -197,7 +197,7 @@
               "type": "string"
             },
             "x-ms-client-name": "OrderBy",
-            "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
+            "description": "The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -209,7 +209,7 @@
             "items": {
               "type": "string"
             },
-            "description": "The list of comma-separated field names to search for the specified search text. Target fields must be included in the specified suggester.",
+            "description": "The list of field names to search for the specified search text. Target fields must be included in the specified suggester.",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -221,7 +221,7 @@
             "items": {
               "type": "string"
             },
-            "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results.",
+            "description": "The list of fields to retrieve. If unspecified, only the key field will be included in the results.",
             "x-ms-parameter-grouping": {
               "name": "SuggestParameters"
             }
@@ -440,7 +440,7 @@
             "items": {
               "type": "string"
             },
-            "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
+            "description": "The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
             "x-ms-parameter-grouping": {
               "name": "AutocompleteParameters"
             }
@@ -513,7 +513,6 @@
   },
   "definitions": {
     "DocumentSuggestResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -533,7 +532,6 @@
       "description": "Response containing suggestion query results from an Azure Search index."
     },
     "SuggestResult": {
-      "type": "object",
       "properties": {
         "@search.text": {
           "type": "string",
@@ -626,7 +624,10 @@
         "any",
         "all"
       ],
-      "x-ms-enum": { "name": "SearchMode" },
+      "x-ms-enum": {
+        "name": "SearchMode",
+        "modelAsString": false
+      },
       "description": "Specifies whether any or all of the search terms must be matched in order to count the document as a match."
     },
     "QueryType": {
@@ -635,7 +636,10 @@
         "simple",
         "full"
       ],
-      "x-ms-enum": { "name": "QueryType" },
+      "x-ms-enum": {
+        "name": "QueryType",
+        "modelAsString": false
+      },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
     "AutocompleteMode": {
@@ -645,8 +649,10 @@
         "twoTerms",
         "oneTermWithContext"
       ],
-      "x-ms-enum": { "name": "AutocompleteMode",
-                     "modelAsString" : false  },
+      "x-ms-enum": {
+        "name": "AutocompleteMode",
+        "modelAsString" : false
+      },
       "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms."
     },
     "SearchRequest": {
@@ -696,23 +702,20 @@
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
-          "description": "Gets or sets a value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
+          "description": "A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
         },
         "scoringParameters": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\"(without the quotes)."
+          "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\" (without the quotes)."
         },
         "scoringProfile": {
           "type": "string",
           "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
         },
         "search": {
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/rest/api/searchservice/Simple-query-syntax-in-Azure-Search"
-          },
           "type": "string",
           "description": "A full-text search query expression; Use \"*\" or omit this parameter to match all documents."
         },
@@ -731,15 +734,12 @@
         "skip": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use Skip due to this limitation, consider using $orderby on a totally-ordered key and Filter with a range query instead."
+          "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use skip due to this limitation, consider using orderby on a totally-ordered key and filter with a range query instead."
         },
         "top": {
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/rest/api/searchservice/Search-Documents"
-          },
           "type": "integer",
           "format": "int32",
-          "description": "The number of search results to retrieve. This can be used in conjunction with Skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be passed to ContinueSearch to retrieve the next page of results. See DocumentSearchResponse.ContinuationToken for more information."
+          "description": "The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results."
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
