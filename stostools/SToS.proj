@@ -1,0 +1,97 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="Directory.Build.props" />
+    <!-- <Import Project="SToS.props" Sdk="Microsoft.Internal.SwaggerToSdk.Tools" Version="0.9.0" /> -->
+    <!-- <Import Project="Directory.Build.props" />     -->
+    <Import Condition=" '$(DevMode)' != 'true' " Project="SToS.props" Sdk="Microsoft.Internal.SwaggerToSdk.Tools" Version="0.9.0" />
+    <Import Condition=" '$(DevMode)' == 'true' AND Exists('$(DevMode_SDK_SToSPropsFile)') " Project="$(DevMode_SDK_SToSPropsFile)" />
+    
+
+  <PropertyGroup>
+    <DotNetRuntimeContext>$(MSBuildRuntimeType)</DotNetRuntimeContext>
+    <FxVersionTasksToUse Condition=" '$(DotNetRuntimeContext)' == 'Core' ">netstandard2.0</FxVersionTasksToUse>
+    <FxVersionTasksToUse Condition=" '$(FxVersionTasksToUse)' == '' AND '$(DotNetRuntimeContext)' == 'Full' ">net461</FxVersionTasksToUse>
+  </PropertyGroup>
+  <Target Name="Fn">
+    <Message Text="FxVersionTasksToUse is ......... $(FxVersionTasksToUse)" />
+  </Target>
+
+<Target Name="StartNetSdkCodeGeneration">
+<Message Text="Commencing code generation"  Importance = "High"/>
+ <StartNetSdkCodeGeneration
+        GitHubPRNumber="$(githubprnumber)" 
+            GitHubCommitId="$(githubcommitid)"
+            GithubRepositoryUrl="$(giturl)"
+            TriggerComment="$(triggercomment)"
+            DebugMode="$(debugmode)"
+ >
+    <Output TaskParameter="NetSdkPRMetadataRowId" PropertyName="NetSdkPRMetadataRowId" />
+ </StartNetSdkCodeGeneration>
+</Target>
+
+<Target Name="HandleClosedOrMergedRestApiPrs">
+<Message Text="Handling closed or merged PRs"  Importance = "High"/>
+ <HandleClosedOrMergedRestApiPrs
+        RepositoryUrl="$(RepositoryUrl)"
+ >   
+ </HandleClosedOrMergedRestApiPrs>
+</Target>
+
+    <Target Name="KV">
+        <DebugTask />
+        <GetKVSecrets>
+            <Output TaskParameter="Email" PropertyName="EmailAddress" />
+        </GetKVSecrets>
+
+        <Message Text="Email is $(EmailAddress)" />
+    </Target>
+</Project>
+
+
+<!--
+    <Target Name="GRS">
+        <Message Text="Executing GetBuildMetadata"/>
+        <GetBuildMetadata
+            GitHubPRNumber = "$(ghprbPullId)" 
+            GitHubCommitId = "$(ghprbActualCommit)"
+            GithubRepositoryUrl = "$(GIT_URL)"
+            TriggerComment = "$(ghprbCommentBody)"
+            JobName = "$(JOB_NAME)"
+        >
+            <Output TaskParameter="PREventType" PropertyName="PREventType" />
+            <Output TaskParameter="GitHubFork" PropertyName="GitHubFork" />
+            <Output TaskParameter="GitHubRepo" PropertyName="GitHubRepo" />
+
+        </GetBuildMetadata>
+        <Message Text="Event type: $(PREventType)" />
+        <Message Text="fork is $(GitHubFork)" />
+        <Message Text="repo name is $(GitHubRepo)" />
+        
+        <Message Text="Executing GetResourceProviderFromPR" />
+        <GetResourceProviderFromPR
+            GitHubFork ="$(GitHubFork)"
+            GitHubPRNumber ="$(ghprbPullId)"
+            GitHubRepo ="$(GitHubRepo)"
+            >
+            <Output TaskParameter="ResourceProvider" PropertyName="ResourceProvider" />
+        </GetResourceProviderFromPR>
+        <Message Text="rp calculated as $(ResourceProvider)" Importance="High" />
+        <GetRestApiSpecPRMetadataTask
+            GitHubPRNumber = "$(ghprbPullId)"
+            GitHubFork = "$(GitHubFork)"
+            GitHubRepo = "$(GitHubRepo)"
+            GitHubRepoUrl = "$(GIT_URL)"
+            ResourceProvider = "$(ResourceProvider)"
+        >
+            <Output TaskParameter="RestApiSpecMetadataRowId" PropertyName="RestApiSpecMetadataRowId" />
+        </GetRestApiSpecPRMetadataTask>
+
+        <Message Text="Executing GetNetSdkPRMetadataTask" />
+        <GetNetSdkPRMetadataTask
+            RestApiSpecPRMetadataRowId="$(RestApiSpecMetadataRowId)"
+            ResourceProvider="$(ResourceProvider)"
+            NetSdkLocalRepoRoot="C:\"
+        >
+            <Output TaskParameter="NetSdkPRMetadataRowId" PropertyName="NetSdkPRMetadataRowId"/>
+        </GetNetSdkPRMetadataTask>
+    </Target>
+<-->
