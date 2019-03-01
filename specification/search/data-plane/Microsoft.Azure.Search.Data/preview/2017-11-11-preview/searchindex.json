@@ -519,11 +519,13 @@
           "items": {
             "$ref": "#/definitions/SuggestResult"
           },
+          "readOnly": true,
           "x-ms-client-name": "Results",
           "description": "The sequence of results returned by the query."
         },
         "@search.coverage": {
           "type": "number",
+          "readOnly": true,
           "format": "double",
           "x-ms-client-name": "Coverage",
           "description": "A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request."
@@ -535,6 +537,7 @@
       "properties": {
         "@search.text": {
           "type": "string",
+          "readOnly": true,
           "description": "The text of the suggestion result.",
           "x-ms-client-name": "Text"
         }
@@ -862,10 +865,12 @@
       "properties": {
         "text": {
           "type": "string",
+          "readOnly": true,
           "description": "The completed term."
         },
         "queryPlusText": {
           "type": "string",
+          "readOnly": true,
           "description": "The query along with the completed term."
         }
       },

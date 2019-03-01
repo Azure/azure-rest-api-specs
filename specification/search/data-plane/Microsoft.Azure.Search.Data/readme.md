@@ -180,7 +180,7 @@ directive:
         replace( /(SuggestResult class.\s*\/\/\/ <\/summary>\s*)\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\/\/\/ message are deserialized this collection<\/param>/g, "$1/// <param name=\"document\">The document on which the suggested text is based.</param>" ).
         replace( /(public SuggestResult)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
         replace( /(public SuggestResult\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
-        replace( /(\/\/\/ <summary>\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\/\/\/ this collection(\s*\/\/\/ <\/summary>\s*)\[JsonExtensionData\]\s*public IDictionary<string, object> AdditionalProperties ({ get; set; }\s*.*\s*\/\/\/ Gets or sets the text of the suggestion result.)/g, "$1 Gets the document on which the suggested text is based. $2public T Document $3" ).
+        replace( /(\/\/\/ <summary>\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\/\/\/ this collection(\s*\/\/\/ <\/summary>\s*)\[JsonExtensionData\]\s*public IDictionary<string, object> AdditionalProperties { get; set; }(\s*.*\s*\/\/\/ Gets the text of the suggestion result.)/g, "$1 Gets the document on which the suggested text is based. $2public T Document { get; private set; }$3" ).
         replace( /(SuggestGetWithHttpMessagesAsync)/g, "$1<T>" ).
         replace( /(SuggestPostWithHttpMessagesAsync)/g, "$1<T>" ).
         replace( /(AzureOperationResponse<DocumentSuggestResult)/g, "$1<T>" ).
