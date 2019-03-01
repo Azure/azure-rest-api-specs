@@ -28,7 +28,7 @@ These are the global settings for the MariaDB API.
 title: MariaDBManagementClient
 description: MariaDB Client
 openapi-type: arm
-tag: package-2018-06-01-preview
+tag: package-2018-06-01
 ```
 
 ### Tag: package-2018-06-01-preview
