@@ -105,6 +105,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/privatedns/resource-manager/v2018_09_01
 regenerate-manager: true
 generate-interface: true
+fconfig: '{"moduleName": "privatedns"}'
 ```
 
 ## Suppression
