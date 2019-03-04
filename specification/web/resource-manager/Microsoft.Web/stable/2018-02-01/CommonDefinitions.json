@@ -1326,12 +1326,23 @@
           "type": "string",
           "readOnly": true
         },
-        "identityIds": {
-          "description": "Array of UserAssigned managed service identities.",
-          "type": "array",
-          "items": {
-            "description": "Resource Id for UserAssigned managed service identity",
-            "type": "string"
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              }
+            }
           }
         }
       }
