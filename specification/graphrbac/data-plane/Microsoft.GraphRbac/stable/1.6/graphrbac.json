@@ -2748,27 +2748,15 @@
       ],
       "description": "Specifies an OAuth 2.0 permission scope or an app role that an application requires. The resourceAccess property of the RequiredResourceAccess type is a collection of ResourceAccess."
     },
-    "ApplicationCreateParameters": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Application"
-        }
-      ],
-      "required": [
-        "availableToOtherTenants",
-        "displayName",
-        "identifierUris"
-      ],
-      "description": "Request parameters for creating a new application."
-    },
-    "Application": {
+
+    "ApplicationBase": {
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DirectoryObject"
         }
       ],
+      "description": "Common properties used by GET, POST and PATCH",
       "properties": {
         "allowGuestsSignIn": {
           "description": "A property on the application to indicate if the application accepts other IDPs or not or partially accepts.",
@@ -2777,10 +2765,6 @@
         "allowPassthroughUsers": {
           "description": "Indicates that the application supports pass through users who have no presence in the resource tenant.",
           "type": "boolean"
-        },
-        "appId": {
-          "type": "string",
-          "description": "The application ID."
         },
         "appLogoUrl": {
           "description": "The url for the application logo image stored in a CDN.",
@@ -2925,6 +2909,43 @@
         "wwwHomepage": {
           "description": "The primary Web page.",
           "type": "string"
+        }
+      }
+    },
+    "ApplicationCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationBase"
+        }
+      ],
+      "required": [
+        "availableToOtherTenants",
+        "displayName",
+        "identifierUris"
+      ],
+      "description": "Request parameters for creating a new application."
+    },
+    "ApplicationUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationBase"
+        }
+      ],
+      "description": "Request parameters for updating a new application."
+    },
+    "Application": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationBase"
+        }
+      ],
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The application ID."
         }
       },
       "description": "Active Directory application information."
