@@ -363,6 +363,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/detailedusages": {
+      "get": {
+        "tags": [
+          "DetailedUsage"
+        ],
+        "operationId": "DetailedUsages_List",
+        "description": "Gets the current detailed (workspace, cluster level) usage information as well as limits for AML resources for given subscription and location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListDetailedUsagesResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Usages": {
+            "$ref": "./examples/ListDetailedUsages.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages": {
       "get": {
         "tags": [
@@ -1100,6 +1141,78 @@
         }
       },
       "description": "The Usage Names."
+    },
+    "ClusterName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Cluster name"
+        }
+      }
+    },
+    "WorkspaceClusterUsage": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "WorkspaceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the workspace"
+        },
+        "TotalClusterCount":  {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Total number of clusters used in workspace"
+        },
+        "Clusters": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterName"
+          }
+        }
+      }
+    },
+    "VMFamilyDetailedUsage": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "VMFamilyName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "VM Family name"
+        },
+        "TotalWorkspaceCount": {
+          "readOnly": true,
+          "type": "integer"s
+        },
+        "Workspaces": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceClusterUsage"
+          }
+        }
+      }
+    },
+    "ListVMFamilyDetailedUsagesResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMFamilyDetailedUsage"
+          },
+          "description": "The list of all VM Family detailed workspace and cluster usages"
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page of AML resource usage information. Call ListNext() with this to fetch the next page of AML resource usage information."
+        }
+      },
+      "description": "The List VM Family Detailed usages operation response."
     },
     "Usage": {
       "properties": {
