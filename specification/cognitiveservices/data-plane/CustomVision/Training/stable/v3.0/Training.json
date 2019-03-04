@@ -1744,6 +1744,26 @@
             "x-nullable": false
           },
           {
+            "name": "targetExportPlatforms",
+            "in": "query",
+            "description": "List of platforms the trained model is intending exporting to.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "CoreML",
+                "TensorFlow",
+                "DockerFile",
+                "ONNX",
+                "VAIDK"
+              ],
+              "x-nullable": false
+            },
+            "collectionFormat": "multi",
+            "x-nullable": true
+          },
+          {
             "$ref": "#/parameters/ApiKey"
           }
         ],
@@ -2271,6 +2291,14 @@
             "name": "name",
             "in": "query",
             "description": "The updated iteration name.",
+            "required": true,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "name": "predictionId",
+            "in": "query",
+            "description": "The id of the prediction resource to publish to.",
             "required": true,
             "type": "string",
             "x-nullable": true
@@ -3969,71 +3997,6 @@
       },
       "x-nullable": true
     },
-    "Export": {
-      "type": "object",
-      "properties": {
-        "platform": {
-          "description": "Platform of the export.",
-          "enum": [
-            "CoreML",
-            "TensorFlow",
-            "DockerFile",
-            "ONNX"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false,
-          "x-ms-enum": {
-            "name": "ExportPlatformModel",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "Status of the export.",
-          "enum": [
-            "Exporting",
-            "Failed",
-            "Done"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false,
-          "x-ms-enum": {
-            "name": "ExportStatusModel",
-            "modelAsString": true
-          }
-        },
-        "downloadUri": {
-          "description": "URI used to download the model.",
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "flavor": {
-          "description": "Flavor of the export.",
-          "enum": [
-            "Linux",
-            "Windows",
-            "ONNX10",
-            "ONNX12"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true,
-          "x-ms-enum": {
-            "name": "ExportFlavorModel",
-            "modelAsString": true
-          }
-        },
-        "newerVersionAvailable": {
-          "description": "Indicates an updated version of the export package is available and should be re-exported for the latest changes.",
-          "type": "boolean",
-          "readOnly": true,
-          "x-nullable": false
-        }
-      },
-      "x-nullable": true
-    },
     "Project": {
       "description": "Represents a project.",
       "type": "object",
@@ -4097,6 +4060,35 @@
           "description": "Gets or sets the id of the Domain to use with this project.",
           "type": "string",
           "x-nullable": false
+        },
+        "classificationType": {
+          "description": "Gets or sets the classification type of the project.",
+          "enum": [
+            "Multiclass",
+            "Multilabel"
+          ],
+          "type": "string",
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "Classifier",
+            "modelAsString": true
+          }
+        },
+        "targetExportPlatforms": {
+          "description": "A list of ExportPlatform that the trained model should be able to support.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "CoreML",
+              "TensorFlow",
+              "DockerFile",
+              "ONNX",
+              "VAIDK"
+            ],
+            "type": "string",
+            "x-nullable": false
+          },
+          "x-nullable": true
         }
       },
       "x-nullable": true
@@ -4157,6 +4149,23 @@
           "readOnly": true,
           "x-nullable": false
         },
+        "exportableTo": {
+          "description": "A set of platforms this iteration can export to.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "CoreML",
+              "TensorFlow",
+              "DockerFile",
+              "ONNX",
+              "VAIDK"
+            ],
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": true,
+          "x-nullable": true
+        },
         "domainId": {
           "format": "uuid",
           "description": "Get or sets a guid of the domain the iteration has been trained on.",
@@ -4178,11 +4187,99 @@
             "modelAsString": true
           }
         },
+        "trainingType": {
+          "description": "Gets the training type of the iteration.",
+          "enum": [
+            "Regular",
+            "Advanced"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "TrainingType",
+            "modelAsString": true
+          }
+        },
+        "reservedBudgetInHours": {
+          "format": "int32",
+          "description": "Gets the reserved baking budget for the iteration.",
+          "type": "integer",
+          "readOnly": true,
+          "x-nullable": false
+        },
         "publishName": {
           "description": "Name of the published model.",
           "type": "string",
           "readOnly": true,
           "x-nullable": true
+        }
+      },
+      "x-nullable": true
+    },
+    "Export": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "description": "Platform of the export.",
+          "enum": [
+            "CoreML",
+            "TensorFlow",
+            "DockerFile",
+            "ONNX",
+            "VAIDK"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ExportPlatform",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Status of the export.",
+          "enum": [
+            "Exporting",
+            "Failed",
+            "Done"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ExportStatus",
+            "modelAsString": true
+          }
+        },
+        "downloadUri": {
+          "description": "URI used to download the model.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "flavor": {
+          "description": "Flavor of the export.",
+          "enum": [
+            "Linux",
+            "Windows",
+            "ONNX10",
+            "ONNX12",
+            "ARM"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "ExportFlavor",
+            "modelAsString": true
+          }
+        },
+        "newerVersionAvailable": {
+          "description": "Indicates an updated version of the export package is available and should be re-exported for the latest changes.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
         }
       },
       "x-nullable": true
@@ -4252,6 +4349,7 @@
             "BadRequestProjectUnknownDomain",
             "BadRequestProjectUnknownClassification",
             "BadRequestProjectUnsupportedDomainTypeChange",
+            "BadRequestProjectUnsupportedExportPlatform",
             "BadRequestIterationName",
             "BadRequestIterationNameNotUnique",
             "BadRequestIterationDescription",
@@ -4285,6 +4383,7 @@
             "BadRequestImageSizeBytes",
             "BadRequestImageExceededCount",
             "BadRequestTrainingNotNeeded",
+            "BadRequestTrainingNotNeededButTrainingPipelineUpdated",
             "BadRequestTrainingValidationFailed",
             "BadRequestClassificationTrainingValidationFailed",
             "BadRequestMultiClassClassificationTrainingValidationFailed",
@@ -4292,6 +4391,8 @@
             "BadRequestDetectionTrainingValidationFailed",
             "BadRequestTrainingAlreadyInProgress",
             "BadRequestDetectionTrainingNotAllowNegativeTag",
+            "BadRequestInvalidEmailAddress",
+            "BadRequestBakingAlreadyInProgress",
             "BadRequestExportValidationFailed",
             "BadRequestExportAlreadyInProgress",
             "BadRequestPredictionIdsMissing",
