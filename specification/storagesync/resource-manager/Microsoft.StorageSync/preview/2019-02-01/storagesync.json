@@ -3346,15 +3346,18 @@
                 },
                 "provisioningState": {
                     "type": "string",
-                    "description": "ServerEndpoint Provisioning State"
+                    "description": "ServerEndpoint Provisioning State",
+                    "readOnly": true
                 },
                 "lastWorkflowId": {
                     "type": "string",
-                    "description": "ServerEndpoint lastWorkflowId"
+                    "description": "ServerEndpoint lastWorkflowId",
+                    "readOnly": true
                 },
                 "lastOperationName": {
                     "type": "string",
-                    "description": "Resource Last Operation Name"
+                    "description": "Resource Last Operation Name",
+                    "readOnly": true
                 },
                  "syncStatus": {
                     "type": "object",
@@ -3448,6 +3451,11 @@
         "SyncSessionStatus": {
             "type": "object",
             "description": "Sync Session status object.",
+            "required": [
+                "lastSyncResult",
+                "lastSyncTimestamp",
+                "lastSyncPerItemErrorCount"
+            ],
             "properties": {
                 "lastSyncResult": {
                     "type": "integer",
@@ -3470,7 +3478,8 @@
                 "lastSyncPerItemErrorCount": {
                     "type": "integer",
                     "format": "int64",
-                    "description": "Last sync per item error count."
+                    "description": "Last sync per item error count.",
+                    "readOnly": true
                 },
                 "persistentFilesNotSyncingCount": {
                     "type": "integer",
@@ -3497,6 +3506,12 @@
         "SyncActivityStatus": {
             "type": "object",
             "description": "Sync Session status object.",
+            "required": [
+                "timestamp",
+                "perItemErrorCount",
+                "appliedItemCount",
+                "appliedBytes"
+            ],
             "properties": {
                 "timestamp": {
                     "type" : "string",
@@ -3539,6 +3554,11 @@
         "FilesNotSyncingError": {
             "type": "object",
             "description": "Files not syncing error object",
+            "required": [
+                "errorCode",
+                "persistentCount",
+                "transientCount"
+            ],
             "properties": {
                 "errorCode": {
                     "type": "integer",
