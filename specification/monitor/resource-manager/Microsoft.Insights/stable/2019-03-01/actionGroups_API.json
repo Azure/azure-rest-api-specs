@@ -504,9 +504,9 @@
                     "type": "string",
                     "description": "The email address of this receiver."
                 },
-                "useUnifiedSchema": {
+                "useCommonAlertSchema": {
                     "type": "boolean",
-                    "description": "Indicates whether to use unified schema."
+                    "description": "Indicates whether to use common alert schema."
                 },
                 "status": {
                     "readOnly": true,
@@ -517,7 +517,7 @@
             "required": [
                 "name",
                 "emailAddress",
-                "useUnifiedSchema"
+                "useCommonAlertSchema"
             ]
         },
         "SmsReceiver": {
@@ -558,15 +558,15 @@
                     "type": "string",
                     "description": "The URI where webhooks should be sent."
                 },
-                "useUnifiedSchema": {
+                "useCommonAlertSchema": {
                     "type": "boolean",
-                    "description": "Indicates whether to use unified schema."
+                    "description": "Indicates whether to use common alert schema."
                 }
             },
             "required": [
                 "name",
                 "serviceUri",
-                "useUnifiedSchema"
+                "useCommonAlertSchema"
             ]
         },
         "ItsmReceiver": {
@@ -645,9 +645,9 @@
                     "type": "string",
                     "description": "The URI where webhooks should be sent."
                 },
-                "useUnifiedSchema": {
+                "useCommonAlertSchema": {
                     "type": "boolean",
-                    "description": "Indicates whether to use unified schema."
+                    "description": "Indicates whether to use common alert schema."
                 }
             },
             "required": [
@@ -655,7 +655,7 @@
                 "runbookName",
                 "webhookResourceId",
                 "isGlobalRunbook",
-                "useUnifiedSchema"
+                "useCommonAlertSchema"
             ]
         },
         "VoiceReceiver": {
@@ -695,16 +695,16 @@
                     "type": "string",
                     "description": "The callback url where http request sent to."
                 },
-                "useUnifiedSchema": {
+                "useCommonAlertSchema": {
                     "type": "boolean",
-                    "description": "Indicates whether to use unified schema."
+                    "description": "Indicates whether to use common alert schema."
                 }
             },
             "required": [
                 "name",
                 "resourceId",
                 "callbackUrl",
-                "useUnifiedSchema"
+                "useCommonAlertSchema"
             ]
         },
         "AzureFunctionReceiver": {
@@ -726,9 +726,9 @@
                     "type": "string",
                     "description": "The http trigger url where http request sent to."
                 },
-                "useUnifiedSchema": {
+                "useCommonAlertSchema": {
                     "type": "boolean",
-                    "description": "Indicates whether to use unified schema."
+                    "description": "Indicates whether to use common alert schema."
                 }
             },
             "required": [
@@ -736,7 +736,7 @@
                 "functionAppResourceId",
                 "functionName",
                 "httpTriggerUrl",
-                "useUnifiedSchema"
+                "useCommonAlertSchema"
             ]
         },
         "ArmRoleReceiver": {
@@ -750,15 +750,15 @@
                     "type": "string",
                     "description": "The arm role id."
                 },
-                "useUnifiedSchema": {
+                "useCommonAlertSchema": {
                     "type": "boolean",
-                    "description": "Indicates whether to use unified schema."
+                    "description": "Indicates whether to use common alert schema."
                 }
             },
             "required": [
                 "name",
                 "roleId",
-                "useUnifiedSchema"
+                "useCommonAlertSchema"
             ]
         },
         "ReceiverStatus": {
