@@ -3,17 +3,17 @@
         "api-version": "2015-06-01-preview",
         "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
         "resourceGroupName": "rg1",
-        "extendedResourceProvider": "Microsoft.Compute",
-        "extendedResourceType": "virtualMachines",
-        "extendedResourceName": "vm1",
-        "adaptiveNetworkControlsResourceName": "77d1fe4b880e2af0922e556392aa45953fc2a308"
+        "resourceNamespace": "Microsoft.Compute",
+        "resourceType": "virtualMachines",
+        "resourceName": "vm1",
+        "adaptiveNetworkHardeningsResourceName": "default"
     },
     "responses": {
         "200": {
             "body": {
-                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Security/adaptiveNetworkControls/77d1fe4b880e2af0922e556392aa45953fc2a308",
-                "name": "77d1fe4b880e2af0922e556392aa45953fc2a308",
-                "type": "Microsoft.Security/adaptiveNetworkControls",
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Security/adaptiveNetworkHardenings/default",
+                "name": "default",
+                "type": "Microsoft.Security/adaptiveNetworkHardenings",
                 "properties": {
                     "rulesCalculationTime": "2018-08-15T00:00:00.0000000Z",
                     "rules": [
@@ -27,7 +27,7 @@
                             "ipAddresses": [
                                 "100.10.1.1",
                                 "200.20.2.2",
-                                "50.5.5.5-50.5.5.6"
+                                "81.199.3.0/24"
                             ]
                         },
                         {
