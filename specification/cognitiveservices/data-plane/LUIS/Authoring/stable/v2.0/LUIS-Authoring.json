@@ -792,7 +792,7 @@
     },
     "/apps/{appId}/versions/{versionId}/entities": {
       "post": {
-        "description": "Adds an entity extractor to the application.",
+        "description": "Adds a simple entity extractor to the application.",
         "operationId": "Model_AddEntity",
         "parameters": [
           {
@@ -808,7 +808,7 @@
             "schema": {
               "$ref": "#/definitions/ModelCreateObject"
             },
-            "description": "A model object containing the name for the new entity extractor."
+            "description": "A model object containing the name for the new simple entity extractor."
           }
         ],
         "consumes": [
@@ -2444,7 +2444,7 @@
     },
     "/apps/import": {
       "post": {
-        "description": "Imports an application to LUIS, the application's structure should be included in in the request body.",
+        "description": "Imports an application to LUIS, the application's structure should be included in the request body.",
         "operationId": "Apps_Import",
         "parameters": [
           {
@@ -2719,6 +2719,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/ForcePath"
           }
         ],
         "responses": {
@@ -2815,7 +2818,13 @@
         ],
         "responses": {
           "201": {
-            "description": "An object containing the application endpoint URL and its assigned endpoint key.",
+            "description": "An object containing the application endpoint URL, its assigned endpoint key and publishing status.",
+            "schema": {
+              "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
+            }
+          },
+          "207": {
+            "description": "An object containing the application endpoint URL, its assigned endpoint key and publishing status in case that publishing one or more regions failed.",
             "schema": {
               "$ref": "#/definitions/ProductionOrStagingEndpointInfo"
             }
@@ -5293,7 +5302,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of the explict list items",
+            "description": "A list of the explicit list items",
             "schema": {
               "$ref": "#/definitions/ExplicitListItemList"
             }
@@ -7557,8 +7566,247 @@
           }
         }
       }
+    },
+    "/apps/{appId}/azureaccounts": {
+      "post": {
+        "description": "Assigns an azure account to the application.",
+        "operationId": "AzureAccounts_AssignToApp",
+        "summary": "apps - Assign a LUIS azure account to an application",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "name": "azureAccountInfoObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoObject"
+            },
+            "description": "The azure account information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Assign azure account request": {
+            "$ref": "./examples/stats/SuccessfulAssignAzureAccountRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the LUIS azure accounts assigned to the application for the user using his ARM token.",
+        "operationId": "AzureAccounts_GetAssigned",
+        "summary": "apps - Get LUIS azure accounts assigned to the application",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of azure account information objects.",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get assigned azure accounts request": {
+            "$ref": "./examples/stats/SuccessfulGetAssignedAzureAccountsRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes assigned azure account from the application.",
+        "operationId": "AzureAccounts_RemoveFromApp",
+        "summary": "apps - Removes an assigned LUIS azure account from an application",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "name": "azureAccountInfoObject",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoObject"
+            },
+            "description": "The azure account information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful delete assigned azure account request": {
+            "$ref": "./examples/stats/SuccessfulDeleteAssignedAzureAccountRequest.json"
+          }
+        }
+      }
+    },
+    "/azureaccounts": {
+      "get": {
+        "description": "Gets the LUIS azure accounts for the user using his ARM token.",
+        "operationId": "AzureAccounts_GetUserLUISAccounts",
+        "summary": "user - Get LUIS azure accounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/BearerAuthPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of azure account information objects.",
+            "schema": {
+              "$ref": "#/definitions/AzureAccountInfoList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get azure accounts request": {
+            "$ref": "./examples/stats/SuccessfulGetAzureAccountsRequest.json"
+          }
+        }
+      }
+    },
+    "/package/{appId}/slot/{slotName}/gzip": {
+      "get": {
+        "description": "Packages published LUIS application as GZip.",
+        "operationId": "Apps_PackagePublishedApplicationAsGzip",
+        "summary": "package - Gets published LUIS application package in binary stream GZip format",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SlotNameInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The GZip binary stream of the published application package.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get published application package request": {
+            "$ref": "./examples/package/SuccessfulGetTrainedApplicationPackageRequest.json"
+          }
+        }
+      }
+    },
+    "/package/{appId}/versions/{versionId}/gzip": {
+      "get": {
+        "description": "Packages trained LUIS application as GZip.",
+        "operationId": "Apps_PackageTrainedApplicationAsGzip",
+        "summary": "package - Gets trained LUIS application package in binary stream GZip format",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The GZip binary stream of the trained application package.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get published application package request": {
+            "$ref": "./examples/package/SuccessfulGetPublishedApplicationPackageRequest.json"
+          }
+        }
+      }
     }
-  },
+  }, 
   "definitions": {
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
@@ -7728,7 +7976,7 @@
       "type": "object",
       "properties": {
         "sentimentAnalysis": {
-          "description": "Setting sentiment analysis as true returns the Sentiment of the input utterance along with the resopnse",
+          "description": "Setting sentiment analysis as true returns the Sentiment of the input utterance along with the response",
           "type": "boolean",
           "x-nullable": false
         },
@@ -7753,7 +8001,7 @@
           "type": "string"
         },
         "entityLabels": {
-          "description": "The idenfied entities within the utterance.",
+          "description": "The identified entities within the utterance.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/EntityLabelObject"
@@ -7761,7 +8009,7 @@
           "type": "array"
         },
         "intentName": {
-          "description": "The idenfitied intent representing the utterance.",
+          "description": "The identified intent representing the utterance.",
           "type": "string"
         }
       }
@@ -7833,7 +8081,7 @@
       }
     },
     "PrebuiltExtractorNames": {
-      "description": "Objet model for adding a prebuilt entity to the application.",
+      "description": "Object model for adding a prebuilt entity to the application.",
       "type": "array",
       "items": {
         "type": "string"
@@ -9113,6 +9361,10 @@
           "type": "string",
           "description": "The endpoint's region."
         },
+        "failedRegions": {
+          "type": "string",
+          "description": "Regions where publishing failed."
+        },
         "publishedDateTime": {
           "description": "Timestamp when was last published.",
           "type": "string"
@@ -9192,7 +9444,7 @@
           "format": "uuid"
         },
         "sentimentAnalysis": {
-          "description": "Setting sentiment analysis as true returns the Sentiment of the input utterance along with the resopnse",
+          "description": "Setting sentiment analysis as true returns the Sentiment of the input utterance along with the response",
           "type": "boolean",
           "x-nullable": false,
           "x-ms-client-name": "IsSentimentAnalysisEnabled"
@@ -9818,6 +10070,36 @@
           "type": "string"
         }
       }
+    },
+    "AzureAccountInfoList": {
+      "description": "List of Azure account info objects.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AzureAccountInfoObject"
+      }
+    },
+    "AzureAccountInfoObject": {
+      "description": "Defines the azure account information object.",
+      "type": "object",
+      "required": [
+        "azureSubscriptionId",
+        "resourceGroup",
+        "accountName"
+      ],
+      "properties": {
+        "azureSubscriptionId": {
+          "description": "The id for the azure subscription.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The azure resource group name.",
+          "type": "string"
+        },
+        "accountName": {
+          "description": "The azure account name.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -9865,6 +10147,15 @@
       "format": "uuid",
       "x-ms-parameter-location": "method"
     },
+    "SlotNameInPath": {
+      "name": "slotName",
+      "in": "path",
+      "description": "The publishing slot name.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
     "SkipInPath": {
       "name": "skip",
       "in": "query",
@@ -9884,6 +10175,14 @@
       "maximum": 500,
       "x-ms-parameter-location": "method"
     },
+    "ForcePath": {
+      "name": "force",
+      "in": "query",
+      "description": "A flag to indicate whether to force an operation.",
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
     "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
@@ -9892,6 +10191,14 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "BearerAuthPath": {
+      "name": "Authorization",
+      "in": "header",
+      "description": "The bearer authorization header to use; containing the user's ARM token used to validate azure accounts information.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }

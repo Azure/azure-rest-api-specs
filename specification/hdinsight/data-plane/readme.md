@@ -65,8 +65,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.HDInsight
-  output-folder: $(csharp-sdks-folder)/HDInsight/DataPlane/Microsoft.Azure.Management.HDInsight.Job/Generated
+  namespace: Microsoft.Azure.HDInsight.Job
+  output-folder: $(csharp-sdks-folder)/HDInsight/DataPlane/Microsoft.Azure.HDInsight.Job/Generated
   clear-output-folder: true
 ```
 
@@ -83,7 +83,7 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  package-name: azure-mgmt-hdinsight-job
+  package-name: azure-hdinsight-job
   clear-output-folder: true
   no-namespace-folders: true
 ```
@@ -95,8 +95,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2018-11-preview' && $(python)
 python:
-  namespace: azure.mgmt.hdinsight.job
-  output-folder: $(python-sdks-folder)/azure-mgmt-hdinsight-job/azure/mgmt/hdinsight/job
+  namespace: azure.hdinsight.job
+  output-folder: $(python-sdks-folder)/azure-hdinsight-job/azure/hdinsight/job
 ```
 
 ## Java
@@ -110,7 +110,7 @@ java:
   namespace: com.microsoft.azure.hdinsight.job
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight-job
+  output-folder: $(azure-libraries-for-java-folder)/azure-hdinsight-job
 ```
 
 ### Java multi-api
@@ -127,7 +127,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2018-11-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.hdinsight.job.v2018_11_01_preview
+  namespace: com.microsoft.azure.hdinsight.job.v2018_11_01_preview
   output-folder: $(azure-libraries-for-java-folder)/hdinsight/data-plane/v2018_11_01_preview
 regenerate-manager: true
 generate-interface: true

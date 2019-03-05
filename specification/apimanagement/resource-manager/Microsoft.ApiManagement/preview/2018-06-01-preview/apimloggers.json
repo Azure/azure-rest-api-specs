@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers": {
       "get": {
         "tags": [
-          "Loggers"
+          "Logger"
         ],
         "operationId": "Logger_ListByService",
         "description": "Lists a collection of loggers in the specified service instance.",
@@ -61,7 +61,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type  | eq                     |                                             |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|loggerType | eq |    |\n|resourceId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -96,10 +96,10 @@
         "x-ms-odata": "#/definitions/LoggerContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerId}": {
       "head": {
         "tags": [
-          "Loggers"
+          "Logger"
         ],
         "operationId": "Logger_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the logger specified by its identifier.",
@@ -116,7 +116,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/LoggerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -129,10 +129,10 @@
           "200": {
             "description": "Specified logger entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -143,9 +143,9 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
-          "Loggers"
+          "Logger"
         ],
         "operationId": "Logger_Get",
         "description": "Gets the details of the logger specified by its identifier.",
@@ -162,7 +162,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/LoggerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -194,7 +194,7 @@
       },
       "put": {
         "tags": [
-          "Loggers"
+          "Logger"
         ],
         "operationId": "Logger_CreateOrUpdate",
         "description": "Creates or Updates a logger.",
@@ -214,7 +214,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/LoggerIdParameter"
           },
           {
             "name": "parameters",
@@ -240,12 +240,24 @@
             "description": "Logger was successfully created.",
             "schema": {
               "$ref": "#/definitions/LoggerContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "The existing logger was successfully updated.",
             "schema": {
               "$ref": "#/definitions/LoggerContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -258,7 +270,7 @@
       },
       "patch": {
         "tags": [
-          "Loggers"
+          "Logger"
         ],
         "operationId": "Logger_Update",
         "description": "Updates an existing logger.",
@@ -275,7 +287,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/LoggerIdParameter"
           },
           {
             "name": "parameters",
@@ -310,7 +322,7 @@
       },
       "delete": {
         "tags": [
-          "Loggers"
+          "Logger"
         ],
         "operationId": "Logger_Delete",
         "description": "Deletes the specified logger.",
@@ -327,10 +339,17 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/LoggerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/LoggerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force deletion even if diagnostic is attached."
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -501,16 +520,5 @@
       "description": "Parameters supplied to the Update Logger operation."
     }
   },
-  "parameters": {
-    "LoggerIdParameter": {
-      "name": "loggerid",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "description": "Logger identifier. Must be unique in the API Management service instance.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }

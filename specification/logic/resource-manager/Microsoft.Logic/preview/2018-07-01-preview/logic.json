@@ -7142,23 +7142,23 @@
     "AS2MdnSettings": {
       "type": "object",
       "required": [
-        "needMdn",
-        "signMdn",
-        "sendMdnAsynchronously",
-        "signOutboundMdnIfOptional",
-        "sendInboundMdnToMessageBox",
+        "needMDN",
+        "signMDN",
+        "sendMDNAsynchronously",
+        "signOutboundMDNIfOptional",
+        "sendInboundMDNToMessageBox",
         "micHashingAlgorithm"
       ],
       "properties": {
-        "needMdn": {
+        "needMDN": {
           "type": "boolean",
           "description": "The value indicating whether to send or request a MDN."
         },
-        "signMdn": {
+        "signMDN": {
           "type": "boolean",
           "description": "The value indicating whether the MDN needs to be signed or not."
         },
-        "sendMdnAsynchronously": {
+        "sendMDNAsynchronously": {
           "type": "boolean",
           "description": "The value indicating whether to send the asynchronous MDN."
         },
@@ -7170,7 +7170,7 @@
           "type": "string",
           "description": "The disposition notification to header value."
         },
-        "signOutboundMdnIfOptional": {
+        "signOutboundMDNIfOptional": {
           "type": "boolean",
           "description": "The value indicating whether to sign the outbound MDN if optional."
         },
@@ -7178,7 +7178,7 @@
           "type": "string",
           "description": "The MDN text."
         },
-        "sendInboundMdnToMessageBox": {
+        "sendInboundMDNToMessageBox": {
           "type": "boolean",
           "description": "The value indicating whether to send inbound MDN to message box."
         },
@@ -7193,12 +7193,12 @@
       "type": "object",
       "required": [
         "overrideGroupSigningCertificate",
-        "enableNrrForInboundEncodedMessages",
-        "enableNrrForInboundDecodedMessages",
-        "enableNrrForOutboundMdn",
-        "enableNrrForOutboundEncodedMessages",
-        "enableNrrForOutboundDecodedMessages",
-        "enableNrrForInboundMdn"
+        "enableNRRForInboundEncodedMessages",
+        "enableNRRForInboundDecodedMessages",
+        "enableNRRForOutboundMDN",
+        "enableNRRForOutboundEncodedMessages",
+        "enableNRRForOutboundDecodedMessages",
+        "enableNRRForInboundMDN"
       ],
       "properties": {
         "overrideGroupSigningCertificate": {
@@ -7213,27 +7213,27 @@
           "type": "string",
           "description": "The name of the encryption certificate."
         },
-        "enableNrrForInboundEncodedMessages": {
+        "enableNRRForInboundEncodedMessages": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for inbound encoded messages."
         },
-        "enableNrrForInboundDecodedMessages": {
+        "enableNRRForInboundDecodedMessages": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for inbound decoded messages."
         },
-        "enableNrrForOutboundMdn": {
+        "enableNRRForOutboundMDN": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for outbound MDN."
         },
-        "enableNrrForOutboundEncodedMessages": {
+        "enableNRRForOutboundEncodedMessages": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for outbound encoded messages."
         },
-        "enableNrrForOutboundDecodedMessages": {
+        "enableNRRForOutboundDecodedMessages": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for outbound decoded messages."
         },
-        "enableNrrForInboundMdn": {
+        "enableNRRForInboundMDN": {
           "type": "boolean",
           "description": "The value indicating whether to enable NRR for inbound MDN."
         },
@@ -7339,14 +7339,14 @@
       "type": "object",
       "required": [
         "suspendDuplicateMessage",
-        "resendIfMdnNotReceived"
+        "resendIfMDNNotReceived"
       ],
       "properties": {
         "suspendDuplicateMessage": {
           "type": "boolean",
           "description": "The value indicating whether to suspend duplicate message."
         },
-        "resendIfMdnNotReceived": {
+        "resendIfMDNNotReceived": {
           "type": "boolean",
           "description": "The value indicating whether to resend message If MDN is not received."
         }
@@ -7481,8 +7481,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEdiTypes",
-        "validateXsdTypes",
+        "validateEDITypes",
+        "validateXSDTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -7509,11 +7509,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEdiTypes": {
+        "validateEDITypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXsdTypes": {
+        "validateXSDTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -7930,8 +7930,8 @@
       "type": "object",
       "required": [
         "messageId",
-        "validateEdiTypes",
-        "validateXsdTypes",
+        "validateEDITypes",
+        "validateXSDTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "validateCharacterSet",
         "trimLeadingAndTrailingSpacesAndZeroes",
@@ -7942,11 +7942,11 @@
           "type": "string",
           "description": "The message id on which the validation settings has to be applied."
         },
-        "validateEdiTypes": {
+        "validateEDITypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXsdTypes": {
+        "validateXSDTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },
@@ -8324,8 +8324,8 @@
         "interchangeControlNumberValidityDays",
         "checkDuplicateGroupControlNumber",
         "checkDuplicateTransactionSetControlNumber",
-        "validateEdiTypes",
-        "validateXsdTypes",
+        "validateEDITypes",
+        "validateXSDTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trimLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy"
@@ -8352,11 +8352,11 @@
           "type": "boolean",
           "description": "The value indicating whether to check for duplicate transaction set control number."
         },
-        "validateEdiTypes": {
+        "validateEDITypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate EDI types."
         },
-        "validateXsdTypes": {
+        "validateXSDTypes": {
           "type": "boolean",
           "description": "The value indicating whether to Whether to validate XSD types."
         },
@@ -8867,8 +8867,8 @@
       "required": [
         "messageId",
         "enforceCharacterSet",
-        "validateEdiTypes",
-        "validateXsdTypes",
+        "validateEDITypes",
+        "validateXSDTypes",
         "allowLeadingAndTrailingSpacesAndZeroes",
         "trailingSeparatorPolicy",
         "trimLeadingAndTrailingSpacesAndZeroes"
@@ -8882,11 +8882,11 @@
           "type": "boolean",
           "description": "The value indicating whether to validate character Set."
         },
-        "validateEdiTypes": {
+        "validateEDITypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate EDI types."
         },
-        "validateXsdTypes": {
+        "validateXSDTypes": {
           "type": "boolean",
           "description": "The value indicating whether to validate XSD types."
         },

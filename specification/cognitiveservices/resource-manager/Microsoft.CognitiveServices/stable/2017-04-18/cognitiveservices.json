@@ -714,32 +714,7 @@
     },
     "CognitiveServicesAccountKind": {
       "type": "string",
-      "description": "Required. Indicates the type of cognitive service account.",
-      "enum": [
-        "Bing.Autosuggest.v7",
-        "Bing.CustomSearch",
-        "Bing.Search.v7",
-        "Bing.Speech",
-        "Bing.SpellCheck.v7",
-        "ComputerVision",
-        "ContentModerator",
-        "CustomSpeech",
-        "CustomVision.Prediction",
-        "CustomVision.Training",
-        "Emotion",
-        "Face",
-        "LUIS",
-        "QnAMaker",
-        "SpeakerRecognition",
-        "SpeechTranslation",
-        "TextAnalytics",
-        "TextTranslation",
-        "WebLM"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true
-      }
+      "description": "Required. Indicates the type of cognitive service account."
     },
     "CognitiveServicesAccountUpdateParameters": {
       "properties": {
@@ -785,24 +760,7 @@
     },
     "SkuName": {
       "type": "string",
-      "description": "The name of SKU.",
-      "enum": [
-        "F0",
-        "P0",
-        "P1",
-        "P2",
-        "S0",
-        "S1",
-        "S2",
-        "S3",
-        "S4",
-        "S5",
-        "S6"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true
-      }
+      "description": "The name of SKU."
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
@@ -897,6 +855,10 @@
         "internalId": {
           "type": "string",
           "description": "The internal identifier."
+        },
+        "customSubDomainName": {
+          "type": "string",
+          "description": "Optional subdomain name used for token-based authentication."
         }
       },
       "description": "Properties of Cognitive Services account."
