@@ -97,18 +97,18 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/adaptiveNetworkHardenings/{adaptiveNetworkHardeningsResourceName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/adaptiveNetworkHardenings/{adaptiveNetworkHardeningResourceName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get a single Adaptive Network Hardenings resource": {
-                        "$ref": "./examples/AdaptiveNetworkHardenings/GetAdaptiveNetworkHardenings_example.json"
+                    "Get a single Adaptive Network Hardening resource": {
+                        "$ref": "./examples/AdaptiveNetworkHardenings/GetAdaptiveNetworkHardening_example.json"
                     }
                 },
                 "tags": [
                     "AdaptiveNetworkHardenings"
                 ],
-                "description": "Gets a single Adaptive Network Hardenings resource",
-                "operationId": "AdaptiveNetworkHardenings_Get",
+                "description": "Gets a single Adaptive Network Hardening resource",
+                "operationId": "AdaptiveNetworkHardening_Get",
                 "parameters": [
                     {
                         "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
@@ -138,7 +138,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/AdaptiveNetworkHardeningsResourceName"
+                        "$ref": "#/parameters/AdaptiveNetworkHardeningResourceName"
                     },
                     {
                         "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -148,7 +148,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AdaptiveNetworkHardenings"
+                            "$ref": "#/definitions/AdaptiveNetworkHardening"
                         }
                     },
                     "default": {
@@ -160,12 +160,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/adaptiveNetworkHardenings/{adaptiveNetworkHardeningsResourceName}/{adaptiveNetworkHardeningsEnforceAction}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/adaptiveNetworkHardenings/{adaptiveNetworkHardeningResourceName}/{adaptiveNetworkHardeningEnforceAction}": {
             "post": {
                 "x-ms-long-running-operation": true,
                 "x-ms-examples": {
                     "Enforces the given rules on the NSG(s) listed in the request": {
-                        "$ref": "./examples/AdaptiveNetworkHardenings/EnforceAdaptiveNetworkHardeningsRules_example.json"
+                        "$ref": "./examples/AdaptiveNetworkHardenings/EnforceAdaptiveNetworkHardeningRules_example.json"
                     }
                 },
                 "tags": [
@@ -202,10 +202,10 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/AdaptiveNetworkHardeningsResourceName"
+                        "$ref": "#/parameters/AdaptiveNetworkHardeningResourceName"
                     },
                     {
-                        "$ref": "#/parameters/AdaptiveNetworkHardeningsEnforceAction"
+                        "$ref": "#/parameters/AdaptiveNetworkHardeningEnforceAction"
                     },
                     {
                         "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -297,8 +297,8 @@
                 }
             }
         },
-        "AdaptiveNetworkHardeningsProperties": {
-            "description": "Adaptive Network Hardenings resource properties",
+        "AdaptiveNetworkHardeningProperties": {
+            "description": "Adaptive Network Hardening resource properties",
             "properties": {
                 "rules": {
                     "description": "The security rules which are recommended to be effective on the VM",
@@ -321,13 +321,13 @@
                 }
             }
         },
-        "AdaptiveNetworkHardenings": {
-            "description": "The resource whose properties describes the Adaptive Network Hardenings settings for some Azure resource",
+        "AdaptiveNetworkHardening": {
+            "description": "The resource whose properties describes the Adaptive Network Hardening settings for some Azure resource",
             "properties": {
                 "properties": {
-                    "description": "Properties of the Adaptive Network Hardenings resource",
+                    "description": "Properties of the Adaptive Network Hardening resource",
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/AdaptiveNetworkHardeningsProperties"
+                    "$ref": "#/definitions/AdaptiveNetworkHardeningProperties"
                 }
             },
             "allOf": [
@@ -343,7 +343,7 @@
                     "description": "A list of Adaptive Network Hardenings resources",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/AdaptiveNetworkHardenings"
+                        "$ref": "#/definitions/AdaptiveNetworkHardening"
                     }
                 },
                 "nextLink": {
@@ -354,16 +354,16 @@
         }
     },
     "parameters": {
-        "AdaptiveNetworkHardeningsResourceName": {
-            "name": "adaptiveNetworkHardeningsResourceName",
+        "AdaptiveNetworkHardeningResourceName": {
+            "name": "adaptiveNetworkHardeningResourceName",
             "in": "path",
-            "description": "The name of the Adaptive Network Hardenings resource.",
+            "description": "The name of the Adaptive Network Hardening resource.",
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
         },
-        "AdaptiveNetworkHardeningsEnforceAction": {
-            "name": "adaptiveNetworkHardeningsEnforceAction",
+        "AdaptiveNetworkHardeningEnforceAction": {
+            "name": "adaptiveNetworkHardeningEnforceAction",
             "type": "string",
             "in": "path",
             "required": true,
