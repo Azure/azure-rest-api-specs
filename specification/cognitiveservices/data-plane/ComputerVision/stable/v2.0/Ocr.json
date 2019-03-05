@@ -280,24 +280,28 @@
   "definitions": {
     "TextOperationResult": {
       "type": "object",
+      "description": "Result of recognition text operation.",
       "properties": {
         "status": {
           "description": "Status of the text operation.",
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/OperationStatus"
         },
         "recognitionResult": {
-          "$ref": "#/definitions/TextRecognitionResult"
+          "$ref": "#/definitions/TextRecognitionResult",
+          "description": "Text recognition result of the text operation."
         }
       }
     },
     "ReadOperationResult": {
       "type": "object",
+      "description": "OCR result of the read operation.",
       "properties": {
         "status": {
-          "description": "Status of the text operation.",
-          "$ref": "#/definitions/Status"
+          "description": "Status of the read operation.",
+          "$ref": "#/definitions/OperationStatus"
         },
         "recognitionResults": {
+          "description": "A array of text recognition result of the read operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextRecognitionResult"
@@ -305,8 +309,9 @@
         }
       }
     },
-    "Status": {
+    "OperationStatus": {
       "type": "string",
+      "description": "Status code of the text operation.",
       "enum": [
         "Not Started",
         "Running",
@@ -320,30 +325,30 @@
       "x-nullable": false
     },
     "TextRecognitionResult": {
+      "description": "Json object representing a recognized text region",
       "type": "object",
       "required": [
         "lines"
       ],
       "properties": {
-        "lines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Line"
-          }
-        },
         "page": {
+          "description": "The page number of the recognition result.",
           "type": "integer"
         },
-        "width": {
+        "clockwiseOrientation": {
+          "description": "The orientation of the image in degrees in the clockwise direction. Range between [0, 360).",
+          "type": "number"
+        },
+         "width": {
+          "description": "The width of the image in pixels or the PDF in inches.",
           "type": "number"
         },
         "height": {
+          "description": "The height of the image in pixels or the PDF in inches.",
           "type": "number"
         },
-        "clockwiseOrientation": {
-          "type": "number"
-        },
-        "unit": {
+       "unit": {
+          "description": "The unit used in the Width, Height and BoundingBox. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".",
           "type": "string",
           "enum": [
             "pixel",
@@ -354,19 +359,30 @@
             "modelAsString": false
           },
           "x-nullable": true
+        },
+        "lines": {
+          "description": "A list of recognized text lines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Line"
+          }
         }
       }
     },
     "Line": {
+      "description": "Json object representing a recognized text line.",
       "type": "object",
       "properties": {
         "boundingBox": {
+          "description": "Bounding box of a recognized line.",
           "$ref": "#/definitions/BoundingBox"
         },
         "text": {
+          "description": "The text content of the line.",
           "type": "string"
         },
         "words": {
+          "description": "List of words in the text line.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Word"
@@ -375,6 +391,7 @@
       }
     },
     "Word": {
+      "description": "Json object representing a recognized word.",
       "type": "object",
       "required": [
         "boundingBox",
@@ -382,12 +399,15 @@
       ],
       "properties": {
         "boundingBox": {
+          "description": "Bounding box of a recognized word.",
           "$ref": "#/definitions/BoundingBox"
         },
         "text": {
+          "description": "The text content of the word.",
           "type": "string"
         },
         "confidence": {
+          "description": "Qualitative confidence measure.",
           "type": "string",
           "enum": [
             "High",
@@ -402,6 +422,7 @@
       }
     },
     "BoundingBox": {
+      "description": "Quadrangle bounding box, with coordinates in original image. The eight numbers represent the four points (x-coordinate, y-coordinate from the left-top corner of the image) of the detected rectangle from the left-top corner in the clockwise direction. For images, coordinates are in pixels. For PDF, coordinates are in inches.",
       "type": "array",
       "items": {
         "type": "integer",
