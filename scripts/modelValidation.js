@@ -3,18 +3,38 @@
 'use strict';
 
 const utils = require('../test/util/utils')
-const oav = require('oav');
+const cp = require("child_process")
+
+const exec = (cmd, options) => {
+  const result = cp.spawnSync(
+    cmd,
+    {
+      ...options,
+      shell: true,
+      stdio: [process.stdin, process.stdout, process.stderr]
+    }
+  )
+  return result.status
+}
 
 async function main() {
   const swaggersToProcess = utils.getFilesChangedInPR();
-  // Useful when debugging a test for a particular swagger.
-  // Just update the regex. That will return an array of filtered items.
-  // swaggersToProcess = swaggersToProcess.filter(function(item) {
-  //   return (item.match(/.*Microsoft.Logic.*2016-06-01.*/ig) !== null);
-  // });
+  let result = 0
   for (const swagger of swaggersToProcess) {
-    await oav.validateExamples(swagger, null, {consoleLogLevel: 'error', pretty: true});
+    try {
+      // await oav.validateExamples(swagger, null, {consoleLogLevel: 'error', pretty: true});
+      // run OAV as a separate process to avoid memory issues.
+      const r = exec(`node node_modules/oav/dist/cli.js validate-example ${swagger} --pretty`)
+      if (result === 0) {
+        result = r
+      }
+    } catch (e) {
+      console.error("error: ")
+      console.error(e)
+      result = 1
+    }
   }
+  return result
 }
 
 main()
