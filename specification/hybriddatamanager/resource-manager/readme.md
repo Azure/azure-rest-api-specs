@@ -39,8 +39,7 @@ input-file:
 - Microsoft.HybridData/stable/2016-06-01/hybriddata.json
 directive:
   - suppress:
-    - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
-    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
+    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
 ```
 
 ---
