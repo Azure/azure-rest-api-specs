@@ -42,7 +42,7 @@
         "operationId": "Notification_ListByService",
         "description": "Lists a collection of properties defined within a service instance.",
         "x-ms-examples": {
-          "ApiManagementListNotification": {
+          "ApiManagementListNotifications": {
             "$ref": "./examples/ApiManagementListNotifications.json"
           }
         },
@@ -72,6 +72,12 @@
             "schema": {
               "$ref": "#/definitions/NotificationCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -99,7 +105,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -128,10 +134,10 @@
           "Notification"
         ],
         "operationId": "Notification_CreateOrUpdate",
-        "description": "Updates an Notification.",
+        "description": "Create or Update API Management publisher notification.",
         "x-ms-examples": {
-          "ApiManagementGetNotification": {
-            "$ref": "./examples/ApiManagementGetNotification.json"
+          "ApiManagementCreateNotification": {
+            "$ref": "./examples/ApiManagementCreateNotification.json"
           }
         },
         "parameters": [
@@ -142,7 +148,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
@@ -173,13 +179,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers": {
       "get": {
         "tags": [
-          "Notification"
+          "NotificationRecipientUser"
         ],
         "operationId": "NotificationRecipientUser_ListByNotification",
         "description": "Gets the list of the Notification Recipient User subscribed to the notification.",
         "x-ms-examples": {
-          "ApiManagementListNotificationRecipientUser": {
-            "$ref": "./examples/ApiManagementListNotificationRecipientUser.json"
+          "ApiManagementListNotificationRecipientUsers": {
+            "$ref": "./examples/ApiManagementListNotificationRecipientUsers.json"
           }
         },
         "parameters": [
@@ -190,7 +196,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -215,7 +221,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers/{uid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers/{userId}": {
       "head": {
         "tags": [
           "NotificationRecipientUser"
@@ -235,10 +241,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
-            "$ref": "./apimusers.json#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -250,9 +256,6 @@
         "responses": {
           "204": {
             "description": "The User is subscribed to receive the notification."
-          },
-          "404" : {
-            "description": "Entity does not exists."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -269,8 +272,8 @@
         "operationId": "NotificationRecipientUser_CreateOrUpdate",
         "description": "Adds the API Management User to the list of Recipients for the Notification.",
         "x-ms-examples": {
-          "ApiManagementCreateRecipientUser": {
-            "$ref": "./examples/ApiManagementCreateRecipientUser.json"
+          "ApiManagementCreateNotificationRecipientUser": {
+            "$ref": "./examples/ApiManagementCreateNotificationRecipientUser.json"
           }
         },
         "parameters": [
@@ -281,10 +284,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
-            "$ref": "./apimusers.json#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -333,10 +336,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
-            "$ref": "./apimusers.json#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -369,8 +372,8 @@
         "operationId": "NotificationRecipientEmail_ListByNotification",
         "description": "Gets the list of the Notification Recipient Emails subscribed to a notification.",
         "x-ms-examples": {
-          "ApiManagementListNotificationRecipientEmail": {
-            "$ref": "./examples/ApiManagementListNotificationRecipientEmail.json"
+          "ApiManagementListNotificationRecipientEmails": {
+            "$ref": "./examples/ApiManagementListNotificationRecipientEmails.json"
           }
         },
         "parameters": [
@@ -381,7 +384,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -426,10 +429,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
-            "$ref": "#/parameters/EmailParameter"
+            "$ref": "./apimanagement.json#/parameters/EmailParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -441,9 +444,6 @@
         "responses": {
           "204": {
             "description": "The Users is subscribed to receive the notification."
-          },
-          "404" : {
-            "description": "The Users is not subscribed to receive the notification."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -460,8 +460,8 @@
         "operationId": "NotificationRecipientEmail_CreateOrUpdate",
         "description": "Adds the Email address to the list of Recipients for the Notification.",
         "x-ms-examples": {
-          "ApiManagementCreateRecipientEmail": {
-            "$ref": "./examples/ApiManagementCreateRecipientEmail.json"
+          "ApiManagementCreateNotificationRecipientEmail": {
+            "$ref": "./examples/ApiManagementCreateNotificationRecipientEmail.json"
           }
         },
         "parameters": [
@@ -472,10 +472,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
-            "$ref": "#/parameters/EmailParameter"
+            "$ref": "./apimanagement.json#/parameters/EmailParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -524,10 +524,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/NotificationNameParameter"
+            "$ref": "./apimanagement.json#/parameters/NotificationNameParameter"
           },
           {
-            "$ref": "#/parameters/EmailParameter"
+            "$ref": "./apimanagement.json#/parameters/EmailParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -707,65 +707,5 @@
       "description": "Recipient Email Contract Properties."
     }
   },
-  "parameters": {
-    "NotificationNameParameter": {
-      "name": "notificationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "RequestPublisherNotificationMessage",
-        "PurchasePublisherNotificationMessage",
-        "NewApplicationNotificationMessage",
-        "BCC",
-        "NewIssuePublisherNotificationMessage",
-        "AccountClosedPublisher",
-        "QuotaLimitApproachingPublisherNotificationMessage"
-      ],
-      "x-ms-enum": {
-        "name": "NotificationName",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "RequestPublisherNotificationMessage",
-            "description": "The following email recipients and users will receive email notifications about subscription requests for API products requiring approval."
-          },
-          {
-            "value": "PurchasePublisherNotificationMessage",
-            "description": "The following email recipients and users will receive email notifications about new API product subscriptions."
-          },
-          {
-            "value": "NewApplicationNotificationMessage",
-            "description": "The following email recipients and users will receive email notifications when new applications are submitted to the application gallery."
-          },
-          {
-            "value": "BCC",
-            "description": "The following recipients will receive blind carbon copies of all emails sent to developers."
-          },
-          {
-            "value": "NewIssuePublisherNotificationMessage",
-            "description": "The following email recipients and users will receive email notifications when a new issue or comment is submitted on the developer portal."
-          },
-          {
-            "value": "AccountClosedPublisher",
-            "description": "The following email recipients and users will receive email notifications when developer closes his account."
-          },
-          {
-            "value": "QuotaLimitApproachingPublisherNotificationMessage",
-            "description": "The following email recipients and users will receive email notifications when subscription usage gets close to usage quota."
-          }
-        ]
-      },
-      "description": "Notification Name Identifier.",
-      "x-ms-parameter-location": "method"
-    },
-    "EmailParameter": {
-      "name": "email",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Email identifier.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }

@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '8'
+  - '10'
 services:
   - docker
 env:
@@ -16,8 +16,9 @@ env:
     - MODE=semantic PR_ONLY=true CHECK_NAME="Semantic Validator"
     - MODE=semantic PR_ONLY=false
     - MODE=model PR_ONLY=true CHECK_NAME="Model Validator"
+    # - MODE=model PR_ONLY=false
     - MODE=BreakingChange PR_ONLY=true CHECK_NAME="Breaking Changes"
-    - MODE=lintdiff PR_ONLY=true CHECK_NAME="Linter Diff"
+    - MODE=lintdiff PR_ONLY=true CHECK_NAME="Linter Diff" NODE_OPTIONS=--max-old-space-size=8192
 matrix:
   fast_finish: true
   allow_failures:
@@ -27,6 +28,7 @@ matrix:
     - env: MODE=java CHECK_NAME="SDK Generation - Java"
     - env: MODE=go CHECK_NAME="SDK Generation - Go"
     - env: MODE=semantic PR_ONLY=false
+    - env: MODE=model PR_ONLY=false
     - env: MODE=model PR_ONLY=true CHECK_NAME="Model Validator"
     - env: MODE=BreakingChange PR_ONLY=true CHECK_NAME="Breaking Changes"
 install: true

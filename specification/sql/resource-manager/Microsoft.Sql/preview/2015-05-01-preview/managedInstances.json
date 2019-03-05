@@ -371,6 +371,27 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "publicDataEndpointEnabled": {
+          "description": "Whether or not the public data endpoint is enabled.",
+          "type": "boolean"
+        },
+        "proxyOverride": {
+          "description": "Connection type used for connecting to the instance.",
+          "enum": ["Proxy", "Redirect", "Default"],
+          "x-ms-enum":{
+            "name": "ManagedInstanceProxyOverride",
+            "modelAsString": true
+		      },
+          "type": "string"
+        },
+        "timezoneId": {
+          "description": "Id of the timezone. Allowed values are timezones supported by Windows.\r\nWinodws keeps details on supported timezones, including the id, in registry under\r\nKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones.\r\nYou can get those registry values via SQL Server by querying SELECT name AS timezone_id FROM sys.time_zone_info.\r\nList of Ids can also be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.\r\nAn example of valid timezone id is \"Pacific Standard Time\" or \"W. Europe Standard Time\".",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
