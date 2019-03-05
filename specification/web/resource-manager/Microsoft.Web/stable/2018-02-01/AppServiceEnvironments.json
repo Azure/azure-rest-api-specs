@@ -569,10 +569,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/InboundEnvironmentEndpoint"
-              }
+              "$ref": "#/definitions/InboundEnvironmentEndpointCollection"
             }
           },
           "default": {
@@ -586,6 +583,9 @@
           "Get Inbound Network Dependencies Endpoints": {
             "$ref": "./examples/GetInboundNetworkDependenciesEndpoints.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1289,10 +1289,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-              }
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
             }
           },
           "default": {
@@ -1306,6 +1303,9 @@
           "Get Outbound Network Dependencies Endpoints": {
             "$ref": "./examples/GetOutboundNetworkDependenciesEndpoints.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2342,6 +2342,27 @@
         }
       }
     },
+    "InboundEnvironmentEndpointCollection": {
+      "description": "Collection of Inbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "MetricAvailabilily": {
       "description": "Metric availability and retention.",
       "type": "object",
@@ -2410,6 +2431,27 @@
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "description": "Collection of Outbound Environment Endpoints",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
