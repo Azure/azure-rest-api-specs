@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies": {
       "get": {
         "tags": [
-          "ListWebApplicationFirewallPolicies"
+          "WebApplicationFirewallPolicies"
         ],
         "description": "Lists all of the protection policies within a resource group.",
-        "operationId": "Policies_List",
+        "operationId": "WebApplicationFirewallPolicies_List",
         "x-ms-examples": {
           "Lists all WAF policies in a resource group": {
             "$ref": "./examples/WafListPolicies.json"
@@ -49,12 +49,6 @@
             "schema": {
               "$ref": "#/definitions/WebApplicationFirewallPolicyListResult"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WebApplicationFirewallErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
@@ -65,9 +59,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies": {
       "get": {
         "tags": [
-          "ListWebApplicationFirewallPolicies"
+          "WebApplicationFirewallPolicies"
         ],
-        "operationId": "WebApplicationFirewallPolicyListAll",
+        "operationId": "WebApplicationFirewallPolicies_ListAll",
         "x-ms-examples": {
           "Lists all WAF policies in a subscription": {
             "$ref": "./examples/WafListAllPolicies.json"
@@ -88,23 +82,20 @@
             "schema": {
               "$ref": "#/definitions/WebApplicationFirewallPolicyListResult"
             }
-          },
-        "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WebApplicationFirewallErrorResponse"
-            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-      }
     }
 	},
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/{policyName}": {
       "get": {
         "tags": [
-          "GetWebApplicationFirewallPolicy"
+          "WebApplicationFirewallPolicies"
         ],
         "description": "Retrieve protection policy with specified name within a resource group.",
-        "operationId": "Policies_Get",
+        "operationId": "WebApplicationFirewallPolicies_Get",
         "x-ms-examples": {
           "Gets a WAF policy within a resource group": {
             "$ref": "./examples/WafPolicyGet.json"
@@ -139,21 +130,15 @@
             "schema": {
               "$ref": "#/definitions/WebApplicationFirewallPolicy"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WebApplicationFirewallErrorResponse"
-            }
           }
         }
       },
       "put": {
         "tags": [
-          "CreateOrUpdateWebApplicationFirewallPolicy"
+          "WebApplicationFirewallPolicies"
         ],
         "description": "Creates or update policy with specified rule set name within a resource group.",
-        "operationId": "Policies_CreateOrUpdate",
+        "operationId": "WebApplicationFirewallPolicies_CreateOrUpdate",
         "x-ms-examples": {
           "Creates or updates a WAF policy within a resource group": {
             "$ref": "./examples/WafPolicyCreateOrUpdate.json"
@@ -203,21 +188,15 @@
             "schema": {
               "$ref": "#/definitions/WebApplicationFirewallPolicy"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WebApplicationFirewallErrorResponse"
-            }
           }
         }
       },
       "delete": {
         "tags": [
-          "DeleteWebApplicationFirewallPolicy"
+          "WebApplicationFirewallPolicies"
         ],
         "description": "Deletes Policy",
-        "operationId": "Policies_Delete",
+        "operationId": "WebApplicationFirewallPolicies_Delete",
         "x-ms-examples": {
           "Deletes a WAF policy within a resource group": {
             "$ref": "./examples/WafPolicyDelete.json"
@@ -256,7 +235,7 @@
           "200": {
             "description": "Delete successful."
           }
-        },        
+        },
         "x-ms-long-running-operation": true
       }
     }
@@ -290,7 +269,10 @@
         },
         "customRules": {
           "description": "Describes custom rules inside the policy",
-          "$ref": "#/definitions/CustomRules"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRule"
+          }
         },
         "applicationGateways": {
           "readOnly": true,
@@ -318,7 +300,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "WebApplicationFirewallPolicy",
+            "name": "WebApplicationFirewallPolicyPropertiesFormat",
             "modelAsString": true
           }
         }
@@ -345,7 +327,7 @@
       "description": "Defines contents of a web application firewall global configuration",
       "properties": {
         "enabledState": {
-          "description": "describes if the policy is in enabled state or disabled state", 
+          "description": "describes if the policy is in enabled state or disabled state",
           "type": "string",
           "enum": [
             "Disabled",
@@ -354,7 +336,7 @@
           "x-ms-enum": {
             "name": "WebApplicationFirewallEnabledState",
             "modelAsString": true
-          }          
+          }
         },
         "mode": {
           "description": "Describes if it is in detection mode  or prevention mode at policy level",
@@ -370,26 +352,14 @@
         }
       }
     },
-    "CustomRules": {
-      "description": "Defines contents of custom rules",
-      "properties": {
-        "rules": {
-          "description": "List of rules",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomRule"
-          }
-        }
-      }
-    },
     "CustomRule": {
       "description": "Defines contents of a web application rule",
-      "required": [  
-        "priority",  
-        "ruleType",  
-        "matchConditions",  
-        "action"  
-      ], 	  
+      "required": [
+        "priority",
+        "ruleType",
+        "matchConditions",
+        "action"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -400,16 +370,17 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
-        },        
+        },
         "priority": {
           "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value",
           "type": "integer"
-        },        
+        },
         "ruleType": {
           "description": "Describes type of rule",
           "type": "string",
           "enum": [
-            "MatchRule"
+            "MatchRule",
+            "Invalid"
           ],
           "x-ms-enum": {
             "name": "WebApplicationFirewallRuleType",
@@ -456,11 +427,11 @@
     },
     "MatchVariable": {
       "description": "Define match variables",
-      "required": [  
-        "name"
+      "required": [
+        "variableName"
       ],
       "properties": {
-        "name": {
+        "variableName": {
           "description": "Match Variable",
           "type": "string",
           "enum": [
@@ -486,9 +457,9 @@
     },
     "MatchCondition": {
       "description": "Define match conditions",
-      "required": [  
-        "matchVariables",  
-        "operator", 
+      "required": [
+        "matchVariables",
+        "operator",
         "matchValues"
       ],
       "properties": {
@@ -519,7 +490,7 @@
             "modelAsString": true
           }
         },
-        "negateCondition": {
+        "negationConditon": {
           "description": "Describes if this is negate condition or not",
           "type": "boolean"
         },
@@ -536,22 +507,6 @@
           "items": {
             "$ref": "#/definitions/Transform"
           }
-        }
-      }
-    },
-    "WebApplicationFirewallErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "readOnly": true,
-          "type": "string"
         }
       }
     }
