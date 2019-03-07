@@ -83,7 +83,7 @@
           "SignInSettings"
         ],
         "operationId": "SignInSettings_Get",
-        "description": "Get Sign-In settings.",
+        "description": "Get Sign In Settings for the Portal",
         "x-ms-examples": {
           "ApiManagementPortalSettingsGetSignIn": {
             "$ref": "./examples/ApiManagementPortalSettingsGetSignIn.json"
@@ -114,6 +114,12 @@
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -195,6 +201,9 @@
             "description": "Create or update parameters."
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -266,7 +275,7 @@
           "SignUpSettings"
         ],
         "operationId": "SignUpSettings_Get",
-        "description": "Get Sign-Up settings.",
+        "description": "Get Sign Up Settings for the Portal",
         "x-ms-examples": {
           "ApiManagementPortalSettingsGetSignUp": {
             "$ref": "./examples/ApiManagementPortalSettingsGetSignUp.json"
@@ -297,6 +306,12 @@
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -378,6 +393,9 @@
             "description": "Create or update parameters."
           },
           {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -449,7 +467,7 @@
           "DelegationSettings"
         ],
         "operationId": "DelegationSettings_Get",
-        "description": "Get Delegation settings.",
+        "description": "Get Delegation Settings for the Portal.",
         "x-ms-examples": {
           "ApiManagementPortalSettingsGetDelegation": {
             "$ref": "./examples/ApiManagementPortalSettingsGetDelegation.json"
@@ -480,6 +498,12 @@
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -559,6 +583,9 @@
               "$ref": "#/definitions/PortalDelegationSettings"
             },
             "description": "Create or update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
