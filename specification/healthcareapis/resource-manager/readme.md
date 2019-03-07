@@ -120,7 +120,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.healthcareapis.v2018_08_20_preview
-  output-folder: $(azure-libraries-for-java-folder)/healthcareapis/resource-manager/v2017_11_03_preview
+  output-folder: $(azure-libraries-for-java-folder)/healthcareapis/resource-manager/v2018_08_20_preview
 regenerate-manager: true
 generate-interface: true
 ```
