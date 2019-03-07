@@ -19,7 +19,7 @@
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/updateRuns": {
             "get": {
                 "x-ms-examples": {
-                    "Get the list of update run.": {
+                    "Get the list of update runs of the specified update.": {
                         "$ref": "./examples/UpdateRuns/List.json"
                     }
                 },
@@ -61,14 +61,14 @@
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/updateRuns/{runName}": {
             "get": {
                 "x-ms-examples": {
-                    "Get an update run.": {
+                    "Get the update run with the specified ID.": {
                         "$ref": "./examples/UpdateRuns/Get.json"
                     }
                 },
                 "tags": [
                     "UpdateRuns"
                 ],
-                "description": "Get the list of update locations",
+                "description": "Get the list of update runs",
                 "operationId": "UpdateRuns_Get",
                 "parameters": [
                     {
@@ -100,6 +100,45 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updateRuns": {
+            "get": {
+                "x-ms-examples": {
+                    "Get the update runs of all updates.": {
+                        "$ref": "./examples/UpdateRuns/Get.json"
+                    }
+                },
+                "tags": [
+                    "UpdateRuns"
+                ],
+                "description": "Get the list of update runs",
+                "operationId": "UpdateRuns_ListAll",
+                "parameters": [
+                    {
+                        "$ref": "Update.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Update.json#/parameters/ResourceGroupParameter"
+                    },
+                    {
+                        "$ref": "UpdateLocations.json#/parameters/UpdateLocationParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/UpdateRunParameter"
+                    },
+                    {
+                        "$ref": "Update.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateRun"
+                        }
+                    }
+                }
+            }
+        },      
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Update.Admin/updateLocations/{updateLocation}/updates/{updateName}/updateRuns/{runName}/rerun": {
             "post": {
                 "x-ms-examples": {
