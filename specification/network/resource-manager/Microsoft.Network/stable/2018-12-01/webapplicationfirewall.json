@@ -15,6 +15,24 @@
   "produces": [
     "application/json"
   ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies": {
       "get": {
@@ -271,7 +289,7 @@
           "description": "Describes custom rules inside the policy",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomRule"
+            "$ref": "#/definitions/WebApplicationFirewallCustomRule"
           }
         },
         "applicationGateways": {
@@ -300,7 +318,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "WebApplicationFirewallPolicyPropertiesFormat",
+            "name": "WebApplicationFirewallPolicyResourceState",
             "modelAsString": true
           }
         }
@@ -318,6 +336,7 @@
           "description": "List of WebApplicationFirewallPolicies within a resource group."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
           "description": "URL to get the next set of WebApplicationFirewallPolicy objects if there are any."
         }
@@ -327,7 +346,7 @@
       "description": "Defines contents of a web application firewall global configuration",
       "properties": {
         "enabledState": {
-          "description": "describes if the policy is in enabled state or disabled state",
+          "description": "Describes if the policy is in enabled state or disabled state",
           "type": "string",
           "enum": [
             "Disabled",
@@ -352,7 +371,7 @@
         }
       }
     },
-    "CustomRule": {
+    "WebApplicationFirewallCustomRule": {
       "description": "Defines contents of a web application rule",
       "required": [
         "priority",
