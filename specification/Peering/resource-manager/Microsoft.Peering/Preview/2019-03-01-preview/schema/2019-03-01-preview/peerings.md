@@ -34,6 +34,7 @@ To create a Microsoft.Peering/peerings resource, add the following JSON to the r
           }
         }
       ],
+      "peerAsn": "integer",
       "useForPeeringService": "boolean"
     },
     "exchange": {
@@ -50,7 +51,8 @@ To create a Microsoft.Peering/peerings resource, add the following JSON to the r
             "md5AuthenticationKey": "string"
           }
         }
-      ]
+      ],
+      "peerAsn": "integer"
     },
     "peeringLocation": "string"
   },
@@ -92,14 +94,15 @@ The following tables describe the values you need to set in the schema.
 |  ---- | ---- | ---- | ---- |
 |  direct | object | No | The properties that define a direct peering. - [PeeringPropertiesDirect object](#PeeringPropertiesDirect) |
 |  exchange | object | No | The properties that define an exchange peering. - [PeeringPropertiesExchange object](#PeeringPropertiesExchange) |
-|  peeringLocation | string | Yes | The location of the peering. |
+|  peeringLocation | string | No | The location of the peering. |
 
 
 <a id="PeeringPropertiesDirect" />
 ### PeeringPropertiesDirect object
 |  Name | Type | Required | Value |
 |  ---- | ---- | ---- | ---- |
-|  connections | array | Yes | The set of connections that constitute a direct peering. - [DirectConnection object](#DirectConnection) |
+|  connections | array | No | The set of connections that constitute a direct peering. - [DirectConnection object](#DirectConnection) |
+|  peerAsn | integer | No | The Autonomous System Number (ASN) associated with the peering. |
 |  useForPeeringService | boolean | No | The flag that indicates whether or not the peering is used for peering service. |
 
 
@@ -107,7 +110,8 @@ The following tables describe the values you need to set in the schema.
 ### PeeringPropertiesExchange object
 |  Name | Type | Required | Value |
 |  ---- | ---- | ---- | ---- |
-|  connections | array | Yes | The set of connections that constitute an exchange peering. - [ExchangeConnection object](#ExchangeConnection) |
+|  connections | array | No | The set of connections that constitute an exchange peering. - [ExchangeConnection object](#ExchangeConnection) |
+|  peerAsn | integer | No | The Autonomous System Number (ASN) associated with the peering. |
 
 
 <a id="DirectConnection" />

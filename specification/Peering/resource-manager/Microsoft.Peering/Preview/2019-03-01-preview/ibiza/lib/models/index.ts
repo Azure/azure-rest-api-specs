@@ -165,10 +165,15 @@ export interface DirectConnection {
  */
 export interface PeeringPropertiesDirect {
   /**
-   * @member {DirectConnection[]} connections The set of connections that
+   * @member {DirectConnection[]} [connections] The set of connections that
    * constitute a direct peering.
    */
-  connections: DirectConnection[];
+  connections?: DirectConnection[];
+  /**
+   * @member {number} [peerAsn] The Autonomous System Number (ASN) associated
+   * with the peering.
+   */
+  peerAsn?: number;
   /**
    * @member {boolean} [useForPeeringService] The flag that indicates whether
    * or not the peering is used for peering service.
@@ -212,10 +217,15 @@ export interface ExchangeConnection {
  */
 export interface PeeringPropertiesExchange {
   /**
-   * @member {ExchangeConnection[]} connections The set of connections that
+   * @member {ExchangeConnection[]} [connections] The set of connections that
    * constitute an exchange peering.
    */
-  connections: ExchangeConnection[];
+  connections?: ExchangeConnection[];
+  /**
+   * @member {number} [peerAsn] The Autonomous System Number (ASN) associated
+   * with the peering.
+   */
+  peerAsn?: number;
 }
 
 /**
@@ -248,9 +258,9 @@ export interface Peering extends BaseResource {
    */
   exchange?: PeeringPropertiesExchange;
   /**
-   * @member {string} peeringLocation The location of the peering.
+   * @member {string} [peeringLocation] The location of the peering.
    */
-  peeringLocation: string;
+  peeringLocation?: string;
   /**
    * @member {ProvisioningState} [provisioningState] The provisioning state of
    * the resource. Possible values include: 'Succeeded', 'Updating',
@@ -407,6 +417,12 @@ export interface PeerInfo {
    * @member {string} [peerName] The name of the peer.
    */
   peerName?: string;
+  /**
+   * @member {ValidationState} [validationState] The validation state of the
+   * ASN associated with the peer. Possible values include: 'None', 'Pending',
+   * 'Approved', 'Failed'
+   */
+  validationState?: ValidationState;
 }
 
 /**
@@ -735,6 +751,14 @@ export type SessionStateV6 = 'None' | 'Idle' | 'Connect' | 'Active' | 'OpenSent'
 export type ProvisioningState = 'Succeeded' | 'Updating' | 'Deleting' | 'Failed';
 
 /**
+ * Defines values for ValidationState.
+ * Possible values include: 'None', 'Pending', 'Approved', 'Failed'
+ * @readonly
+ * @enum {string}
+ */
+export type ValidationState = 'None' | 'Pending' | 'Approved' | 'Failed';
+
+/**
  * Defines values for Kind1.
  * Possible values include: 'Direct', 'Exchange'
  * @readonly
@@ -791,7 +815,7 @@ export type OperationsListResponse = OperationListResult & {
 /**
  * Contains response data for the getPeerInfo operation.
  */
-export type GetPeerInfoResponse = PeerInfo & {
+export type GetPeerInfoResponse = Array<PeerInfo> & {
   /**
    * The underlying HTTP response.
    */
@@ -803,14 +827,14 @@ export type GetPeerInfoResponse = PeerInfo & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: PeerInfo;
+      parsedBody: PeerInfo[];
     };
 };
 
 /**
  * Contains response data for the updatePeerInfo operation.
  */
-export type UpdatePeerInfoResponse = PeerInfo & {
+export type UpdatePeerInfoResponse = Array<PeerInfo> & {
   /**
    * The underlying HTTP response.
    */
@@ -822,7 +846,7 @@ export type UpdatePeerInfoResponse = PeerInfo & {
       /**
        * The response body as parsed JSON or XML
        */
-      parsedBody: PeerInfo;
+      parsedBody: PeerInfo[];
     };
 };
 

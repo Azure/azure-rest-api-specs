@@ -39,12 +39,12 @@ namespace Microsoft.Azure.PowerShell.Cmdlets.Peering.Models
         /// peering.</param>
         /// <param name="kind">The kind of the peering. Possible values
         /// include: 'Direct', 'Exchange'</param>
-        /// <param name="peeringLocation">The location of the peering.</param>
         /// <param name="location">The location of the resource.</param>
         /// <param name="direct">The properties that define a direct
         /// peering.</param>
         /// <param name="exchange">The properties that define an exchange
         /// peering.</param>
+        /// <param name="peeringLocation">The location of the peering.</param>
         /// <param name="provisioningState">The provisioning state of the
         /// resource. Possible values include: 'Succeeded', 'Updating',
         /// 'Deleting', 'Failed'</param>
@@ -52,7 +52,7 @@ namespace Microsoft.Azure.PowerShell.Cmdlets.Peering.Models
         /// <param name="name">The name of the resource.</param>
         /// <param name="id">The ID of the resource.</param>
         /// <param name="type">The type of the resource.</param>
-        public PSPeering(PSPeeringSku sku, string kind, string peeringLocation, string location, PSPeeringPropertiesDirect direct = default(PSPeeringPropertiesDirect), PSPeeringPropertiesExchange exchange = default(PSPeeringPropertiesExchange), string provisioningState = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string name = default(string), string id = default(string), string type = default(string))
+        public PSPeering(PSPeeringSku sku, string kind, string location, PSPeeringPropertiesDirect direct = default(PSPeeringPropertiesDirect), PSPeeringPropertiesExchange exchange = default(PSPeeringPropertiesExchange), string peeringLocation = default(string), string provisioningState = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string name = default(string), string id = default(string), string type = default(string))
         {
             Sku = sku;
             Kind = kind;
@@ -157,21 +157,9 @@ namespace Microsoft.Azure.PowerShell.Cmdlets.Peering.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Kind");
             }
-            if (PeeringLocation == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "PeeringLocation");
-            }
             if (Location == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Location");
-            }
-            if (Direct != null)
-            {
-                Direct.Validate();
-            }
-            if (Exchange != null)
-            {
-                Exchange.Validate();
             }
         }
     }

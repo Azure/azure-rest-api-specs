@@ -2,19 +2,18 @@
   "parameters": {
     "subscriptionId": "subId",
     "resourceGroupName": "rgName",
-    "peeringName": "peeringName",
     "api-version": "2019-03-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "sku": {
-          "name": "Premium_Direct_Free",
-          "tier": "Premium",
-          "family": "Direct",
+          "name": "Basic_Exchange_Free",
+          "tier": "Basic",
+          "family": "Exchange",
           "size": "Free"
         },
-        "kind": "Direct",
+        "kind": "Exchange",
         "properties": {
           "exchange": {
             "connections": [
@@ -48,7 +47,8 @@
                   "md5AuthenticationKey": "test-md5-auth-key"
                 }
               }
-            ]
+            ],
+            "peerAsn": 65000
           },
           "peeringLocation": "peeringLocation0",
           "provisioningState": "Succeeded"

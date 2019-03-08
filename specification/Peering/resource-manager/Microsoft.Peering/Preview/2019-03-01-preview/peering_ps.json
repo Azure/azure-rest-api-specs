@@ -136,7 +136,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PSPeerInfo"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PSPeerInfo"
+              }
             }
           }
         }
@@ -171,7 +174,10 @@
             "description": "The peer info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PSPeerInfo"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PSPeerInfo"
+              }
             }
           },
           {
@@ -186,7 +192,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PSPeerInfo"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PSPeerInfo"
+              }
             }
           }
         }
@@ -699,9 +708,6 @@
     },
     "PSPeeringProperties": {
       "description": "The properties that define connectivity to the Microsoft Cloud Edge.",
-      "required": [
-        "peeringLocation"
-      ],
       "type": "object",
       "properties": {
         "direct": {
@@ -735,9 +741,6 @@
     },
     "PSPeeringPropertiesDirect": {
       "description": "The properties that define a direct peering.",
-      "required": [
-        "connections"
-      ],
       "type": "object",
       "properties": {
         "connections": {
@@ -747,38 +750,35 @@
             "$ref": "#/definitions/PSDirectConnection"
           }
         },
+        "peerAsn": {
+          "format": "int32",
+          "description": "The Autonomous System Number (ASN) associated with the peering.",
+          "type": "integer"
+        },
         "useForPeeringService": {
           "description": "The flag that indicates whether or not the peering is used for peering service.",
           "type": "boolean"
         }
       }
     },
-    "PSPeeringPropertiesPartner": {
-      "description": "The peering properties carrier class.",
+    "PSErrorResponse": {
+      "description": "The error response that indicates why an operation has failed.",
       "type": "object",
       "properties": {
-        "partnerName": {
-          "description": "Gets or sets the carrier name.",
-          "type": "string"
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
         },
-        "serviceTag": {
-          "description": "Gets or sets the service tag. Not set by frontend (readonly to user)",
-          "type": "string"
-        },
-        "prefixes": {
-          "description": "Gets or sets the list of prefixes. Set not by AddOrUpdate (hidden to user in AddOrUpdate)",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/PSPeeringPrefix"
-          }
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "PSPeeringPropertiesExchange": {
       "description": "The properties that define an exchange peering.",
-      "required": [
-        "connections"
-      ],
       "type": "object",
       "properties": {
         "connections": {
@@ -787,6 +787,11 @@
           "items": {
             "$ref": "#/definitions/PSExchangeConnection"
           }
+        },
+        "peerAsn": {
+          "format": "int32",
+          "description": "The Autonomous System Number (ASN) associated with the peering.",
+          "type": "integer"
         }
       }
     },
@@ -833,88 +838,6 @@
           "description": "The BGP session associated with the connection."
         }
       }
-    },
-    "PSBgpCommunity": {
-      "description": "The BGP community class.",
-      "type": "object",
-      "properties": {
-        "community": {
-          "description": "Gets or sets the community.",
-          "type": "string"
-        },
-        "metro": {
-          "description": "Gets or sets the metro.",
-          "type": "string"
-        }
-      }
-    },
-    "PSResourceIdentifier": {
-      "description": "ResourceIdentifier class",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "description": "Gets or sets the subscription id.",
-          "type": "string"
-        },
-        "peeringName": {
-          "description": "Gets or sets the peering name.",
-          "type": "string"
-        },
-        "resourceGroupName": {
-          "description": "Gets or sets the resource group name.",
-          "type": "string"
-        },
-        "isValid": {
-          "description": "Gets whether this resource id is valid or not",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "PSPeeringPrefix": {
-      "description": "The peering prefix class.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PSPeeringPrefixProperties",
-          "description": "Gets or sets the peering prefix properties.",
-          "x-ms-client-flatten": true
-        },
-        "location": {
-          "description": "The location of the resource.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "The resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The ID of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "PSExchangeConnection": {
       "description": "The properties that define an exchange connection.",
@@ -1038,60 +961,6 @@
         }
       }
     },
-    "PSPeeringPrefixProperties": {
-      "description": "The peering prefix properties class.",
-      "type": "object",
-      "properties": {
-        "prefix": {
-          "description": "Gets or sets the prefix.",
-          "type": "string"
-        },
-        "validationState": {
-          "description": "Gets or sets the prefix validation state.",
-          "enum": [
-            "None",
-            "Invalid",
-            "Verified",
-            "Failed",
-            "Pending",
-            "Unknown"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "validationState",
-            "modelAsString": true
-          }
-        },
-        "learnedType": {
-          "description": "Gets or sets the prefix path.",
-          "enum": [
-            "None",
-            "ViaPartner",
-            "ViaSession"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "learnedType",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "description": "The provisioning state of the resource.",
-          "enum": [
-            "Succeeded",
-            "Updating",
-            "Deleting",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "PSOperationListResult": {
       "description": "The paginated list of [T].",
       "type": "object",
@@ -1172,6 +1041,20 @@
         "peerName": {
           "description": "The name of the peer.",
           "type": "string"
+        },
+        "validationState": {
+          "description": "The validation state of the ASN associated with the peer.",
+          "enum": [
+            "None",
+            "Pending",
+            "Approved",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "validationState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1393,22 +1276,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "PSErrorResponse": {
-      "description": "The error response that indicates why an operation has failed.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }

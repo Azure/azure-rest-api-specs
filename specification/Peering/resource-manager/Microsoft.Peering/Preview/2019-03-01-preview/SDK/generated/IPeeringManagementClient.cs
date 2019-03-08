@@ -98,7 +98,7 @@ namespace Microsoft.Azure.Management.Peering
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<PeerInfo>> GetPeerInfoWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<IList<PeerInfo>>> GetPeerInfoWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Updates the peer info associated with the specified subscription.
@@ -112,7 +112,7 @@ namespace Microsoft.Azure.Management.Peering
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<PeerInfo>> UpdatePeerInfoWithHttpMessagesAsync(PeerInfo peerInfo, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<IList<PeerInfo>>> UpdatePeerInfoWithHttpMessagesAsync(IList<PeerInfo> peerInfo, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

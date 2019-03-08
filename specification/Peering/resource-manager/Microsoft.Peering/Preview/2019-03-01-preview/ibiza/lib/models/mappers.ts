@@ -177,7 +177,6 @@ export const PeeringPropertiesDirect: msRest.CompositeMapper = {
     className: "PeeringPropertiesDirect",
     modelProperties: {
       connections: {
-        required: true,
         serializedName: "connections",
         type: {
           name: "Sequence",
@@ -187,6 +186,12 @@ export const PeeringPropertiesDirect: msRest.CompositeMapper = {
               className: "DirectConnection"
             }
           }
+        }
+      },
+      peerAsn: {
+        serializedName: "peerAsn",
+        type: {
+          name: "Number"
         }
       },
       useForPeeringService: {
@@ -236,7 +241,6 @@ export const PeeringPropertiesExchange: msRest.CompositeMapper = {
     className: "PeeringPropertiesExchange",
     modelProperties: {
       connections: {
-        required: true,
         serializedName: "connections",
         type: {
           name: "Sequence",
@@ -246,6 +250,12 @@ export const PeeringPropertiesExchange: msRest.CompositeMapper = {
               className: "ExchangeConnection"
             }
           }
+        }
+      },
+      peerAsn: {
+        serializedName: "peerAsn",
+        type: {
+          name: "Number"
         }
       }
     }
@@ -288,7 +298,6 @@ export const Peering: msRest.CompositeMapper = {
         }
       },
       peeringLocation: {
-        required: true,
         serializedName: "properties.peeringLocation",
         type: {
           name: "String"
@@ -491,6 +500,12 @@ export const PeerInfo: msRest.CompositeMapper = {
       },
       peerName: {
         serializedName: "peerName",
+        type: {
+          name: "String"
+        }
+      },
+      validationState: {
+        serializedName: "validationState",
         type: {
           name: "String"
         }

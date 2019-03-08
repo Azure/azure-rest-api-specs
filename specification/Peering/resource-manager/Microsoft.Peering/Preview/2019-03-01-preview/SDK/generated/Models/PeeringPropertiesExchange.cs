@@ -6,7 +6,6 @@
 
 namespace Microsoft.Azure.Management.Peering.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -30,9 +29,12 @@ namespace Microsoft.Azure.Management.Peering.Models
         /// </summary>
         /// <param name="connections">The set of connections that constitute an
         /// exchange peering.</param>
-        public PeeringPropertiesExchange(IList<ExchangeConnection> connections)
+        /// <param name="peerAsn">The Autonomous System Number (ASN) associated
+        /// with the peering.</param>
+        public PeeringPropertiesExchange(IList<ExchangeConnection> connections = default(IList<ExchangeConnection>), int? peerAsn = default(int?))
         {
             Connections = connections;
+            PeerAsn = peerAsn;
             CustomInit();
         }
 
@@ -49,17 +51,11 @@ namespace Microsoft.Azure.Management.Peering.Models
         public IList<ExchangeConnection> Connections { get; set; }
 
         /// <summary>
-        /// Validate the object.
+        /// Gets or sets the Autonomous System Number (ASN) associated with the
+        /// peering.
         /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-            if (Connections == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Connections");
-            }
-        }
+        [JsonProperty(PropertyName = "peerAsn")]
+        public int? PeerAsn { get; set; }
+
     }
 }

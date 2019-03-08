@@ -9,6 +9,8 @@ namespace Microsoft.Azure.Management.Peering
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -23,7 +25,7 @@ namespace Microsoft.Azure.Management.Peering
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static PeerInfo GetPeerInfo(this IPeeringManagementClient operations)
+            public static IList<PeerInfo> GetPeerInfo(this IPeeringManagementClient operations)
             {
                 return operations.GetPeerInfoAsync().GetAwaiter().GetResult();
             }
@@ -37,7 +39,7 @@ namespace Microsoft.Azure.Management.Peering
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<PeerInfo> GetPeerInfoAsync(this IPeeringManagementClient operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<PeerInfo>> GetPeerInfoAsync(this IPeeringManagementClient operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetPeerInfoWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -54,7 +56,7 @@ namespace Microsoft.Azure.Management.Peering
             /// <param name='peerInfo'>
             /// The peer info.
             /// </param>
-            public static PeerInfo UpdatePeerInfo(this IPeeringManagementClient operations, PeerInfo peerInfo)
+            public static IList<PeerInfo> UpdatePeerInfo(this IPeeringManagementClient operations, IList<PeerInfo> peerInfo)
             {
                 return operations.UpdatePeerInfoAsync(peerInfo).GetAwaiter().GetResult();
             }
@@ -71,7 +73,7 @@ namespace Microsoft.Azure.Management.Peering
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<PeerInfo> UpdatePeerInfoAsync(this IPeeringManagementClient operations, PeerInfo peerInfo, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<PeerInfo>> UpdatePeerInfoAsync(this IPeeringManagementClient operations, IList<PeerInfo> peerInfo, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdatePeerInfoWithHttpMessagesAsync(peerInfo, null, cancellationToken).ConfigureAwait(false))
                 {

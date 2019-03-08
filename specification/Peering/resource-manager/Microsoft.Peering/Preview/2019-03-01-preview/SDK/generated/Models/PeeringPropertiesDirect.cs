@@ -6,7 +6,6 @@
 
 namespace Microsoft.Azure.Management.Peering.Models
 {
-    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -30,11 +29,14 @@ namespace Microsoft.Azure.Management.Peering.Models
         /// </summary>
         /// <param name="connections">The set of connections that constitute a
         /// direct peering.</param>
+        /// <param name="peerAsn">The Autonomous System Number (ASN) associated
+        /// with the peering.</param>
         /// <param name="useForPeeringService">The flag that indicates whether
         /// or not the peering is used for peering service.</param>
-        public PeeringPropertiesDirect(IList<DirectConnection> connections, bool? useForPeeringService = default(bool?))
+        public PeeringPropertiesDirect(IList<DirectConnection> connections = default(IList<DirectConnection>), int? peerAsn = default(int?), bool? useForPeeringService = default(bool?))
         {
             Connections = connections;
+            PeerAsn = peerAsn;
             UseForPeeringService = useForPeeringService;
             CustomInit();
         }
@@ -52,24 +54,18 @@ namespace Microsoft.Azure.Management.Peering.Models
         public IList<DirectConnection> Connections { get; set; }
 
         /// <summary>
+        /// Gets or sets the Autonomous System Number (ASN) associated with the
+        /// peering.
+        /// </summary>
+        [JsonProperty(PropertyName = "peerAsn")]
+        public int? PeerAsn { get; set; }
+
+        /// <summary>
         /// Gets or sets the flag that indicates whether or not the peering is
         /// used for peering service.
         /// </summary>
         [JsonProperty(PropertyName = "useForPeeringService")]
         public bool? UseForPeeringService { get; set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-            if (Connections == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Connections");
-            }
-        }
     }
 }

@@ -46,13 +46,13 @@ class PeeringManagementClient extends PeeringManagementClientContext {
   /**
    * @param callback The callback
    */
-  getPeerInfo(callback: msRest.ServiceCallback<Models.PeerInfo>): void;
+  getPeerInfo(callback: msRest.ServiceCallback<Models.PeerInfo[]>): void;
   /**
    * @param options The optional parameters
    * @param callback The callback
    */
-  getPeerInfo(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PeerInfo>): void;
-  getPeerInfo(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PeerInfo>, callback?: msRest.ServiceCallback<Models.PeerInfo>): Promise<Models.GetPeerInfoResponse> {
+  getPeerInfo(options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PeerInfo[]>): void;
+  getPeerInfo(options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PeerInfo[]>, callback?: msRest.ServiceCallback<Models.PeerInfo[]>): Promise<Models.GetPeerInfoResponse> {
     return this.sendOperationRequest(
       {
         options
@@ -67,19 +67,19 @@ class PeeringManagementClient extends PeeringManagementClientContext {
    * @param [options] The optional parameters
    * @returns Promise<Models.UpdatePeerInfoResponse>
    */
-  updatePeerInfo(peerInfo: Models.PeerInfo, options?: msRest.RequestOptionsBase): Promise<Models.UpdatePeerInfoResponse>;
+  updatePeerInfo(peerInfo: Models.PeerInfo[], options?: msRest.RequestOptionsBase): Promise<Models.UpdatePeerInfoResponse>;
   /**
    * @param peerInfo The peer info.
    * @param callback The callback
    */
-  updatePeerInfo(peerInfo: Models.PeerInfo, callback: msRest.ServiceCallback<Models.PeerInfo>): void;
+  updatePeerInfo(peerInfo: Models.PeerInfo[], callback: msRest.ServiceCallback<Models.PeerInfo[]>): void;
   /**
    * @param peerInfo The peer info.
    * @param options The optional parameters
    * @param callback The callback
    */
-  updatePeerInfo(peerInfo: Models.PeerInfo, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PeerInfo>): void;
-  updatePeerInfo(peerInfo: Models.PeerInfo, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PeerInfo>, callback?: msRest.ServiceCallback<Models.PeerInfo>): Promise<Models.UpdatePeerInfoResponse> {
+  updatePeerInfo(peerInfo: Models.PeerInfo[], options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.PeerInfo[]>): void;
+  updatePeerInfo(peerInfo: Models.PeerInfo[], options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.PeerInfo[]>, callback?: msRest.ServiceCallback<Models.PeerInfo[]>): Promise<Models.UpdatePeerInfoResponse> {
     return this.sendOperationRequest(
       {
         peerInfo,
@@ -106,7 +106,18 @@ const getPeerInfoOperationSpec: msRest.OperationSpec = {
   ],
   responses: {
     200: {
-      bodyMapper: Mappers.PeerInfo
+      bodyMapper: {
+        serializedName: "parsedResponse",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PeerInfo"
+            }
+          }
+        }
+      }
     },
     default: {
       bodyMapper: Mappers.ErrorResponse
@@ -130,13 +141,33 @@ const updatePeerInfoOperationSpec: msRest.OperationSpec = {
   requestBody: {
     parameterPath: "peerInfo",
     mapper: {
-      ...Mappers.PeerInfo,
-      required: true
+      required: true,
+      serializedName: "peerInfo",
+      type: {
+        name: "Sequence",
+        element: {
+          type: {
+            name: "Composite",
+            className: "PeerInfo"
+          }
+        }
+      }
     }
   },
   responses: {
     200: {
-      bodyMapper: Mappers.PeerInfo
+      bodyMapper: {
+        serializedName: "parsedResponse",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "PeerInfo"
+            }
+          }
+        }
+      }
     },
     default: {
       bodyMapper: Mappers.ErrorResponse

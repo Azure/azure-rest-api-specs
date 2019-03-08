@@ -396,7 +396,7 @@ namespace Microsoft.Azure.Management.Peering
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<PeerInfo>> GetPeerInfoWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IList<PeerInfo>>> GetPeerInfoWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (SubscriptionId == null)
             {
@@ -513,7 +513,7 @@ namespace Microsoft.Azure.Management.Peering
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<PeerInfo>();
+            var _result = new AzureOperationResponse<IList<PeerInfo>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -526,7 +526,7 @@ namespace Microsoft.Azure.Management.Peering
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<PeerInfo>(_responseContent, DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<PeerInfo>>(_responseContent, DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -572,7 +572,7 @@ namespace Microsoft.Azure.Management.Peering
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<PeerInfo>> UpdatePeerInfoWithHttpMessagesAsync(PeerInfo peerInfo, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IList<PeerInfo>>> UpdatePeerInfoWithHttpMessagesAsync(IList<PeerInfo> peerInfo, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (peerInfo == null)
             {
@@ -700,7 +700,7 @@ namespace Microsoft.Azure.Management.Peering
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<PeerInfo>();
+            var _result = new AzureOperationResponse<IList<PeerInfo>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -713,7 +713,7 @@ namespace Microsoft.Azure.Management.Peering
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<PeerInfo>(_responseContent, DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<PeerInfo>>(_responseContent, DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

@@ -30,11 +30,15 @@ namespace Microsoft.Azure.Management.Peering.Models
         /// <param name="peerContactInfo">The contact information of the
         /// peer.</param>
         /// <param name="peerName">The name of the peer.</param>
-        public PeerInfo(int? peerAsn = default(int?), ContactInfo peerContactInfo = default(ContactInfo), string peerName = default(string))
+        /// <param name="validationState">The validation state of the ASN
+        /// associated with the peer. Possible values include: 'None',
+        /// 'Pending', 'Approved', 'Failed'</param>
+        public PeerInfo(int? peerAsn = default(int?), ContactInfo peerContactInfo = default(ContactInfo), string peerName = default(string), string validationState = default(string))
         {
             PeerAsn = peerAsn;
             PeerContactInfo = peerContactInfo;
             PeerName = peerName;
+            ValidationState = validationState;
             CustomInit();
         }
 
@@ -60,6 +64,14 @@ namespace Microsoft.Azure.Management.Peering.Models
         /// </summary>
         [JsonProperty(PropertyName = "peerName")]
         public string PeerName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the validation state of the ASN associated with the
+        /// peer. Possible values include: 'None', 'Pending', 'Approved',
+        /// 'Failed'
+        /// </summary>
+        [JsonProperty(PropertyName = "validationState")]
+        public string ValidationState { get; set; }
 
     }
 }
