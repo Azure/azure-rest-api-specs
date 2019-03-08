@@ -409,7 +409,7 @@
         ],
         "operationId": "Namespaces_ListAuthorizationRules",
         "x-ms-examples": {
-          "NameSpaceAutorizationRuleListAll": { "$ref": "./examples/NameSpaces/SBNameSpaceAutorizationRuleListAll.json" }
+          "NameSpaceAuthorizationRuleListAll": { "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json" }
         },
         "description": "Gets the authorization rules for a namespace.",
         "externalDocs": {
@@ -508,7 +508,7 @@
         ],
         "operationId": "Namespaces_DeleteAuthorizationRule",
         "x-ms-examples": {
-          "NameSpaceAutorizationRuleDelete": { "$ref": "./examples/NameSpaces/SBNameSpaceAutorizationRuleDelete.json" }
+          "NameSpaceAuthorizationRuleDelete": { "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleDelete.json" }
         },
         "description": "Deletes a namespace authorization rule.",
         "externalDocs": {
@@ -552,7 +552,7 @@
         ],
         "operationId": "Namespaces_GetAuthorizationRule",
         "x-ms-examples": {
-          "NameSpaceAutorizationRuleGet": { "$ref": "./examples/NameSpaces/SBNameSpaceAutorizationRuleGet.json" }
+          "NameSpaceAuthorizationRuleGet": { "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleGet.json" }
         },
         "description": "Gets an authorization rule for a namespace by rule name.",
         "externalDocs": {
@@ -644,7 +644,7 @@
         ],
         "operationId": "Namespaces_RegenerateKeys",
         "x-ms-examples": {
-          "NameSpaceAuthorizationRuleRegenrateKey": { "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenrateKey.json" }
+          "NameSpaceAuthorizationRuleRegenerateKey": { "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenerateKey.json" }
         },
         "description": "Regenerates the primary or secondary connection strings for the namespace.",
         "externalDocs": {
@@ -727,7 +727,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Migrate Namepsace type is successful."
+            "description": "Migrate Namespace type is successful."
           },
           "default": {
             "description": "ServiceBus error response describing why the operation failed.",
@@ -1013,7 +1013,7 @@
         "x-ms-examples": {
           "SBAliasFailOver": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasFailOver.json" }
         },
-        "description": "envokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
+        "description": "Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1051,7 +1051,7 @@
         ],
         "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
         "x-ms-examples": {
-          "NameSpaceAutorizationRuleListAll": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasAutorizationRuleListAll.json" }
+          "NameSpaceAuthorizationRuleListAll": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasAuthorizationRuleListAll.json" }
         },
         "description": "Gets the authorization rules for a namespace.",
         "externalDocs": {
@@ -1100,7 +1100,7 @@
         ],
         "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
         "x-ms-examples": {
-          "DisasterRecoveryConfigsAutorizationRuleGet": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasAutorizationRuleGet.json" }
+          "DisasterRecoveryConfigsAuthorizationRuleGet": { "$ref": "./examples/disasterRecoveryConfigs/SBAliasAuthorizationRuleGet.json" }
         },
         "description": "Gets an authorization rule for a namespace by rule name.",
         "externalDocs": {
@@ -1243,7 +1243,7 @@
         "x-ms-examples": {
           "MigrationConfigurationsStartMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCreateAndStartMigration.json" }
         },
-        "description": "Creates Migration configuration and starts migration of enties from Standard to Premium namespace",
+        "description": "Creates Migration configuration and starts migration of entities from Standard to Premium namespace",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1381,7 +1381,7 @@
         "x-ms-examples": {
           "MigrationConfigurationsCompleteMigration": { "$ref": "./examples/Migrationconfigurations/SBMigrationconfigurationCompleteMigration.json" }
         },
-        "description": "This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any enties created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.",
+        "description": "This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any entities created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1654,7 +1654,7 @@
         ],
         "operationId": "Queues_ListAuthorizationRules",
         "x-ms-examples": {
-          "QueueAutorizationRuleListAll": { "$ref": "./examples/Queues/SBQueueAutorizationRuleListAll.json" }
+          "QueueAuthorizationRuleListAll": { "$ref": "./examples/Queues/SBQueueAuthorizationRuleListAll.json" }
         },
         "description": "Gets all authorization rules for a queue.",
         "externalDocs": {
@@ -1756,7 +1756,7 @@
         ],
         "operationId": "Queues_DeleteAuthorizationRule",
         "x-ms-examples": {
-          "QueueAutorizationRuleDelete": { "$ref": "./examples/Queues/SBQueueAutorizationRuleDelete.json" }
+          "QueueAuthorizationRuleDelete": { "$ref": "./examples/Queues/SBQueueAuthorizationRuleDelete.json" }
         },
         "description": "Deletes a queue authorization rule.",
         "externalDocs": {
@@ -1803,7 +1803,7 @@
         ],
         "operationId": "Queues_GetAuthorizationRule",
         "x-ms-examples": {
-          "QueueAutorizationRuleGet": { "$ref": "./examples/Queues/SBQueueAutorizationRuleGet.json" }
+          "QueueAuthorizationRuleGet": { "$ref": "./examples/Queues/SBQueueAuthorizationRuleGet.json" }
         },
         "description": "Gets an authorization rule for a queue by rule name.",
         "externalDocs": {
@@ -1901,7 +1901,7 @@
         ],
         "operationId": "Queues_RegenerateKeys",
         "x-ms-examples": {
-          "QueueAuthorizationRuleRegenrateKey": { "$ref": "./examples/Queues/SBQueueAuthorizationRuleRegenrateKey.json" }
+          "QueueAuthorizationRuleRegenerateKey": { "$ref": "./examples/Queues/SBQueueAuthorizationRuleRegenerateKey.json" }
         },
         "description": "Regenerates the primary or secondary connection strings to the queue.",
         "externalDocs": {
@@ -2154,7 +2154,7 @@
         ],
         "operationId": "Topics_ListAuthorizationRules",
         "x-ms-examples": {
-          "TopicAutorizationRuleListAll": { "$ref": "./examples/Topics/SBTopicAutorizationRuleListAll.json" }
+          "TopicAuthorizationRuleListAll": { "$ref": "./examples/Topics/SBTopicAuthorizationRuleListAll.json" }
         },
         "description": "Gets authorization rules for a topic.",
         "externalDocs": {
@@ -2205,7 +2205,7 @@
         "x-ms-examples": {
           "TopicAuthorizationRuleCreate": { "$ref": "./examples/Topics/SBTopicAuthorizationRuleCreate.json" }
         },
-        "description": "Creates an authorizatio rule for the specified topic.",
+        "description": "Creates an authorization rule for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
         },
@@ -2259,7 +2259,7 @@
         ],
         "operationId": "Topics_GetAuthorizationRule",
         "x-ms-examples": {
-          "TopicAutorizationRuleGet": { "$ref": "./examples/Topics/SBTopicAutorizationRuleGet.json" }
+          "TopicAuthorizationRuleGet": { "$ref": "./examples/Topics/SBTopicAuthorizationRuleGet.json" }
         },
         "description": "Returns the specified authorization rule.",
         "externalDocs": {
@@ -2306,7 +2306,7 @@
         ],
         "operationId": "Topics_DeleteAuthorizationRule",
         "x-ms-examples": {
-          "TopicAutorizationRuleDelete": { "$ref": "./examples/Topics/SBTopicAutorizationRuleDelete.json" }
+          "TopicAuthorizationRuleDelete": { "$ref": "./examples/Topics/SBTopicAuthorizationRuleDelete.json" }
         },
         "description": "Deletes a topic authorization rule.",
         "externalDocs": {
@@ -2404,7 +2404,7 @@
         ],
         "operationId": "Topics_RegenerateKeys",
         "x-ms-examples": {
-          "TopicAuthorizationRuleRegenrateKey": { "$ref": "./examples/Topics/SBTopicAuthorizationRuleRegenrateKey.json" }
+          "TopicAuthorizationRuleRegenerateKey": { "$ref": "./examples/Topics/SBTopicAuthorizationRuleRegenerateKey.json" }
         },
         "description": "Regenerates primary or secondary connection strings for the topic.",
         "externalDocs": {
@@ -2725,8 +2725,8 @@
         "operationId": "Rules_CreateOrUpdate",
         "x-ms-examples": {
           "RulesCreateOrUpdate": { "$ref": "./examples/Rules/RuleCreate.json" },
-          "RulesCreateSQLFilter": { "$ref": "./examples/Rules/RuleCreate_sqlfilter.json" },
-          "RulesCreateCorelationFilter": { "$ref": "./examples/Rules/RuleCreate_Corelationfilter.json" }
+          "RulesCreateSqlFilter": { "$ref": "./examples/Rules/RuleCreate_SqlFilter.json" },
+          "RulesCreateCorrelationFilter": { "$ref": "./examples/Rules/RuleCreate_CorrelationFilter.json" }
         },
         "description": "Creates a new rule and updates an existing rule",
         "parameters": [
@@ -3091,7 +3091,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/SBSku",
-          "description": "Porperties of Sku"
+          "description": "Properties of Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3110,7 +3110,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/SBSku",
-          "description": "Porperties of Sku"
+          "description": "Properties of Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3358,7 +3358,7 @@
       "required": [
         "keyType"
       ],
-      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key neeeds to be reset."
+      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset."
     },
     "SBQueueListResult": {
       "properties": {
@@ -3599,7 +3599,7 @@
         "countDetails": {
           "readOnly": true,
           "$ref": "#/definitions/MessageCountDetails",
-          "description": "Message count deatils"
+          "description": "Message count details"
         },
         "defaultMessageTimeToLive": {
           "format": "duration",
@@ -3646,7 +3646,7 @@
           "description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
         }
       },
-      "description": "The Tpoic Properties definition."
+      "description": "The Topic Properties definition."
     },
     "SBSubscriptionListResult": {
       "properties": {
@@ -3805,7 +3805,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
+          "description": "The Name to check the namespace name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
         }
       },
       "required": [
@@ -3881,7 +3881,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {
@@ -4268,7 +4268,7 @@
               "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
             }
           },
-          "description": "Properties describing the storage account, blob container and acrchive name format for capture destination"
+          "description": "Properties describing the storage account, blob container and archive name format for capture destination"
         }
       },
       "description": "Capture storage details for capture description"
@@ -4300,11 +4300,11 @@
             },
             "partnerNamespace": {
               "type": "string",
-              "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+              "description": "ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairing"
             },
             "alternateName": {
               "type": "string",
-              "description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairning"
+              "description": "Primary/Secondary eventhub namespace name, which is part of GEO DR pairing"
             },
             "role": {
               "readOnly": true,
@@ -4453,7 +4453,7 @@
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The authorizationrule name."
+      "description": "The authorization rule name."
     },
     "QueueNameParameter": {
       "name": "queueName",

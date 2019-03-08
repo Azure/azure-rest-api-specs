@@ -1,4 +1,4 @@
-# Sql
+﻿# Sql
 
 > see https://aka.ms/autorest
 
@@ -81,6 +81,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -89,12 +90,15 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
@@ -110,8 +114,10 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+- Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 
 
 # Needed when there is more than one input file
@@ -166,6 +172,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -174,13 +181,16 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -193,8 +203,10 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+- Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 
 # Needed when there is more than one input file
 override-info:
@@ -243,6 +255,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -250,13 +263,16 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -269,8 +285,10 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+- Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 
 # Needed when there is more than one input file
 override-info:
@@ -318,6 +336,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
@@ -328,9 +347,11 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 
 # Needed when there is more than one input file
@@ -380,6 +401,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
@@ -461,6 +483,7 @@ input-file:
  - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
  - ./Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+ - ./Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
 
 # Needed when there is more than one input file
 override-info:
@@ -489,13 +512,16 @@ input-file:
  - ./Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/sensitivityLabels.json
 
 # Needed when there is more than one input file
 override-info:
@@ -528,6 +554,7 @@ input-file:
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/usages.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
@@ -580,6 +607,14 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: restorableDroppedManagedDatabases.json
+    reason: dropped database shouldn’t support patch
 ```
 
 ---
