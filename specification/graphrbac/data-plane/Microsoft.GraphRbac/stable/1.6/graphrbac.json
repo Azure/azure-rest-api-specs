@@ -2782,10 +2782,6 @@
           "type": "boolean",
           "description": "Whether the application is available to other tenants."
         },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the application."
-        },
         "errorUrl": {
           "description": "A URL provided by the author of the application to report errors when using the application.",
           "type": "string"
@@ -2793,13 +2789,6 @@
         "homepage": {
           "type": "string",
           "description": "The home page of the application."
-        },
-        "identifierUris": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A collection of URIs for the application."
         },
         "informationalUrls": {
           "$ref": "#/definitions/InformationalUrl",
@@ -2914,10 +2903,22 @@
         }
       ],
       "required": [
-        "availableToOtherTenants",
         "displayName",
         "identifierUris"
       ],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the application."
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of URIs for the application."
+        }
+      },
       "description": "Request parameters for creating a new application."
     },
     "ApplicationUpdateParameters": {
@@ -2927,7 +2928,20 @@
           "$ref": "#/definitions/ApplicationBase"
         }
       ],
-      "description": "Request parameters for updating a new application."
+      "description": "Request parameters for updating a new application.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the application."
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of URIs for the application."
+        }
+      }
     },
     "Application": {
       "type": "object",
