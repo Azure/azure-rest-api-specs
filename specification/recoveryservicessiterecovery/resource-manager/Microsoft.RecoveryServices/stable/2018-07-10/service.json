@@ -7287,6 +7287,18 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information."
+        },
+        "recoveryAvailabilityZone": {
+          "description": "The recovery availability zone.",
+          "type": "string"
+        },
+        "recoveryAzureNetworkId": {
+          "description": "The recovery Azure virtual network ARM id.",
+          "type": "string"
+        },
+        "recoverySubnetName": {
+          "description": "The recovery subnet name.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -7872,6 +7884,10 @@
         "lastRpoCalculatedTime": {
           "format": "date-time",
           "description": "The time (in UTC) when the last RPO value was calculated by Protection Service.",
+          "type": "string"
+        },
+        "recoveryAvailabilityZone": {
+          "description": "The recovery availability zone.",
           "type": "string"
         }
       },
