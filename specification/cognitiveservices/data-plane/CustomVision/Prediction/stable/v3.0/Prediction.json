@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/{projectId}/classify/models/{publishedModelName}/url": {
+    "/{projectId}/classify/iterations/{publishedName}/url": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -41,7 +41,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -51,7 +51,7 @@
           {
             "name": "imageUrl",
             "in": "body",
-            "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated.",
+            "description": "An ImageUrl that contains the url of the image to be evaluated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImageUrl"
@@ -90,7 +90,7 @@
         }
       }
     },
-    "/{projectId}/classify/models/{publishedModelName}/image": {
+    "/{projectId}/classify/iterations/{publishedName}/image": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -118,7 +118,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -136,7 +136,7 @@
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.",
             "required": true,
             "type": "file"
           },
@@ -165,7 +165,7 @@
         }
       }
     },
-    "/{projectId}/classify/models/{publishedModelName}/url/nostore": {
+    "/{projectId}/classify/iterations/{publishedName}/url/nostore": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -196,7 +196,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -245,7 +245,7 @@
         }
       }
     },
-    "/{projectId}/classify/models/{publishedModelName}/image/nostore": {
+    "/{projectId}/classify/iterations/{publishedName}/image/nostore": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -273,7 +273,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -291,7 +291,7 @@
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.",
             "required": true,
             "type": "file"
           },
@@ -320,7 +320,7 @@
         }
       }
     },
-    "/{projectId}/detect/models/{publishedModelName}/url": {
+    "/{projectId}/detect/iterations/{publishedName}/url": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -351,7 +351,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -361,7 +361,7 @@
           {
             "name": "imageUrl",
             "in": "body",
-            "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated.",
+            "description": "An ImageUrl that contains the url of the image to be evaluated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImageUrl"
@@ -400,7 +400,7 @@
         }
       }
     },
-    "/{projectId}/detect/models/{publishedModelName}/image": {
+    "/{projectId}/detect/iterations/{publishedName}/image": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -428,7 +428,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -446,7 +446,7 @@
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.",
             "required": true,
             "type": "file"
           },
@@ -475,7 +475,7 @@
         }
       }
     },
-    "/{projectId}/detect/models/{publishedModelName}/url/nostore": {
+    "/{projectId}/detect/iterations/{publishedName}/url/nostore": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -506,7 +506,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -555,7 +555,7 @@
         }
       }
     },
-    "/{projectId}/detect/models/{publishedModelName}/image/nostore": {
+    "/{projectId}/detect/iterations/{publishedName}/image/nostore": {
       "post": {
         "tags": [
           "ImagePredictionApi"
@@ -583,7 +583,7 @@
             "x-nullable": false
           },
           {
-            "name": "publishedModelName",
+            "name": "publishedName",
             "in": "path",
             "description": "Specifies the name of the model to evaluate against.",
             "required": true,
@@ -601,7 +601,7 @@
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.",
             "required": true,
             "type": "file"
           },
@@ -789,9 +789,9 @@
             "BadRequestNegativeAndRegularTagOnSameImage",
             "BadRequestIterationIsPublished",
             "BadRequestInvalidPublishName",
-            "BadRequestSubscriptionApi",
-            "BadRequestPublishFailed",
+            "BadRequestInvalidPublishTarget",
             "BadRequestUnpublishFailed",
+            "BadRequestSubscriptionApi",
             "BadRequestExceedProjectLimit",
             "BadRequestExceedIterationPerProjectLimit",
             "BadRequestExceedTagPerProjectLimit",

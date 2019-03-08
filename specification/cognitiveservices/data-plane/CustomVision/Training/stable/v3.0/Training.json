@@ -330,6 +330,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 64,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -343,6 +345,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -460,6 +464,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 64,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -529,6 +535,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -550,7 +558,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 50
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
           },
           {
             "name": "skip",
@@ -643,7 +653,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 50
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
           },
           {
             "name": "skip",
@@ -719,6 +731,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 256,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -798,12 +812,14 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0,
             "x-nullable": true
           },
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 6MB.",
             "required": true,
             "type": "file"
           },
@@ -860,6 +876,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 256,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -1166,6 +1184,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 64,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -1223,7 +1243,7 @@
           {
             "name": "imageUrl",
             "in": "body",
-            "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated.",
+            "description": "An ImageUrl that contains the url of the image to be evaluated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImageUrl"
@@ -1302,7 +1322,7 @@
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 6MB.",
             "required": true,
             "type": "file"
           },
@@ -1514,6 +1534,8 @@
               "x-nullable": false
             },
             "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0,
             "x-nullable": true
           },
           {
@@ -1535,7 +1557,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 50
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
           },
           {
             "name": "skip",
@@ -1760,7 +1784,7 @@
               ],
               "x-nullable": false
             },
-            "collectionFormat": "multi",
+            "collectionFormat": "csv",
             "x-nullable": true
           },
           {
@@ -1938,6 +1962,94 @@
         }
       }
     },
+    "/projects/{projectId}/train": {
+      "post": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Queues project for training.",
+        "operationId": "TrainProject",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "trainingType",
+            "in": "query",
+            "description": "The type of training to use to train the project (default: Regular).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Regular",
+              "Advanced"
+            ],
+            "x-nullable": false
+          },
+          {
+            "name": "reservedBudgetInHours",
+            "in": "query",
+            "description": "The number of hours reserved as budget for training (if applicable).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "forceTrain",
+            "in": "query",
+            "description": "Whether to force train even if dataset and configuration does not change (default: false).",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "notificationEmailAddress",
+            "in": "query",
+            "description": "The email address to send notification to when training finishes (default: null).",
+            "required": false,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful TrainProject request": {
+            "$ref": "./examples/TrainProject.json"
+          }
+        }
+      }
+    },
     "/projects/{projectId}/iterations": {
       "get": {
         "tags": [
@@ -1945,7 +2057,9 @@
         ],
         "summary": "Get iterations for the project.",
         "operationId": "GetIterations",
-        "consumes": [],
+        "consumes": [
+
+        ],
         "produces": [
           "application/json",
           "text/json",
@@ -2168,92 +2282,6 @@
         }
       }
     },
-    "/projects/{projectId}/train": {
-      "post": {
-        "tags": [
-          "ProjectApi"
-        ],
-        "summary": "Queues project for training.",
-        "operationId": "TrainProject",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "The project id.",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "x-nullable": false
-          },
-          {
-            "name": "trainingType",
-            "in": "query",
-            "description": "The type of training to use to train the project (default: Regular).",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Regular",
-              "Advanced"
-            ],
-            "x-nullable": false
-          },
-          {
-            "name": "reservedBudgetInHours",
-            "in": "query",
-            "description": "The number of hours reserved as budget for training (if applicable).",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
-          },
-          {
-            "name": "forceTrain",
-            "in": "query",
-            "description": "Whether to force train even if dataset and configuration does not change (default: false).",
-            "required": false,
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "name": "notificationEmailAddress",
-            "in": "query",
-            "description": "The email address to send notification to when training finishes (default: null).",
-            "required": false,
-            "type": "string",
-            "x-nullable": true
-          },
-          {
-            "$ref": "#/parameters/ApiKey"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Iteration"
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/CustomVisionError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful TrainProject request": {
-            "$ref": "./examples/TrainProject.json"
-          }
-        }
-      }
-    },
     "/projects/{projectId}/iterations/{iterationId}/publish": {
       "post": {
         "tags": [
@@ -2261,7 +2289,9 @@
         ],
         "summary": "Publish a specific iteration.",
         "operationId": "PublishIteration",
-        "consumes": [],
+        "consumes": [
+
+        ],
         "produces": [
           "application/json",
           "text/json",
@@ -2288,9 +2318,9 @@
             "x-nullable": false
           },
           {
-            "name": "name",
+            "name": "publishName",
             "in": "query",
-            "description": "The updated iteration name.",
+            "description": "The name to give the published iteration.",
             "required": true,
             "type": "string",
             "x-nullable": true
@@ -2489,7 +2519,8 @@
               "CoreML",
               "TensorFlow",
               "DockerFile",
-              "ONNX"
+              "ONNX",
+              "VAIDK"
             ],
             "x-nullable": true
           },
@@ -4366,9 +4397,9 @@
             "BadRequestNegativeAndRegularTagOnSameImage",
             "BadRequestIterationIsPublished",
             "BadRequestInvalidPublishName",
-            "BadRequestSubscriptionApi",
-            "BadRequestPublishFailed",
+            "BadRequestInvalidPublishTarget",
             "BadRequestUnpublishFailed",
+            "BadRequestSubscriptionApi",
             "BadRequestExceedProjectLimit",
             "BadRequestExceedIterationPerProjectLimit",
             "BadRequestExceedTagPerProjectLimit",
