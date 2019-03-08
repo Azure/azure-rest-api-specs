@@ -180,6 +180,57 @@
             "$ref": "./examples/DdosProtectionPlanCreate.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "DdosProtectionPlans"
+        ],
+        "operationId": "DdosProtectionPlans_Update",
+        "description": "Update a DDoS protection plan",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ddosProtectionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DDoS protection plan."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the update DDoS protection plan resource."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful.",
+            "schema": {
+              "$ref": "#/definitions/DdosProtectionPlan"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DDoS protection plan Update tags": {
+            "$ref": "./examples/DdosProtectionPlanUpdate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ddosProtectionPlans": {
