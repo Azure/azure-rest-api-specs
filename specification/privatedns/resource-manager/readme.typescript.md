@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: arm-privatedns
-  output-folder: $(typescript-sdks-folder)/packages/arm-privatedns
+  package-name: "@azure/arm-privatedns"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-privatedns"
   generate-metadata: true
 ```
