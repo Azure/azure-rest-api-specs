@@ -209,6 +209,9 @@
                     },
                     {
                         "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/AdaptiveNetworkHardeningEnforceRequest"
                     }
                 ],
                 "responses": {
@@ -351,6 +354,29 @@
                     "type": "string"
                 }
             }
+        },
+        "AdaptiveNetworkHardeningEnforceRequest": {
+            "type": "object",
+            "properties": {
+                "rules": {
+                    "type": "array",
+                    "description": "The rules to enforce",
+                    "items": {
+                        "$ref": "#/definitions/Rule"
+                    }
+                },
+                "networkSecurityGroups": {
+                    "type": "array",
+                    "description": "The Azure resource IDs of the effective network security groups that will be updated with the created security rules from the Adaptive Network Hardening rules",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "rules",
+                "networkSecurityGroups"
+            ]
         }
     },
     "parameters": {
@@ -371,6 +397,15 @@
             "enum": [
                 "enforce"
             ],
+            "x-ms-parameter-location": "method"
+        },
+        "AdaptiveNetworkHardeningEnforceRequest": {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/AdaptiveNetworkHardeningEnforceRequest"
+            },
             "x-ms-parameter-location": "method"
         }
     }
