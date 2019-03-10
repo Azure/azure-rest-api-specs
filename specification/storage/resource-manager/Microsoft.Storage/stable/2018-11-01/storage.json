@@ -2125,18 +2125,6 @@
     },
     "ManagementPolicySchema":{
       "properties": {
-        "version" : {
-          "type": "string",
-          "description": "The policy version expressed as x.x."
-          "enum": [
-            "0.5",
-            "1.0"
-          ],
-          "x-ms-enum": {
-            "name": "version",
-            "modelAsString": true
-          }
-        },
         "rules": {
           "type": "array",
           "items": {
@@ -2145,8 +2133,8 @@
           "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
         }
       },
-      "required": ["version", "rules"],
-      "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+      "required": ["rules"],
+      "description": "The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
     },
     "ManagementPolicyRule": {
       "properties": {
