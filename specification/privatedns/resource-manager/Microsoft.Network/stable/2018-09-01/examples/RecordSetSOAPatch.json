@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "SOA",
+    "relativeRecordSetName": "@",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/SOA/@",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "@",
+        "type": "Microsoft.Network/privateDnsZones/SOA",
+        "properties": {
+          "metadata": {
+            "key2": "value2"
+          },
+          "ttl": 3600,
+          "fqdn": "privatezone1.com.",
+          "isAutoRegistered": false,
+          "soaRecord": {
+            "host": "azureprivatedns.net",
+            "email": "azureprivatedns-hostmaster.microsoft.com",
+            "serialNumber": 1,
+            "refreshTime": 3600,
+            "retryTime": 300,
+            "expireTime": 2419200,
+            "minimumTtl": 300
+          }
+        }
+      }
+    }
+  }
+}

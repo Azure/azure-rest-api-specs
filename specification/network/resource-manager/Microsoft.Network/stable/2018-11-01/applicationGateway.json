@@ -2102,9 +2102,16 @@
         "minCapacity": {
           "type": "integer",
           "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false,
+          "description": "Lower bound on number of Application Gateway capacity"
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
           "minimum": 2,
           "exclusiveMinimum": false,
-          "description": "Lower bound on number of Application Gateway instances"
+          "description": "Upper bound on number of Application Gateway capacity"
         }
       },
       "required": [
