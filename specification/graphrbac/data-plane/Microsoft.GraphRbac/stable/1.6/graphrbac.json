@@ -1958,9 +1958,9 @@
     "/{tenantID}/oauth2PermissionGrants": {
       "get": {
         "tags": [
-          "OAuth2Permissions_get"
+          "OAuth2PermissionGrant_List"
         ],
-        "operationId": "OAuth2_Get",
+        "operationId": "OAuth2PermissionGrant_List",
         "description": "Queries OAuth2 permissions grants for the relevant SP ObjectId of an app.",
         "produces": [ "application/json" ],
         "parameters": [
@@ -1983,17 +1983,18 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/PermissionsListResult"
+              "$ref": "#/definitions/OAuth2PermissionGrantListResult"
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "odata.nextLink"
+          "nextLinkName": "odata.nextLink",
+          "operationName": "OAuth2PermissionGrant_ListNext"
         }
       },
       "post": {
         "tags": [
-          "OAuth2Permissions_Grant"
+          "OAuth2PermissionGrant_Create"
         ],
         "consumes": [ "application/json" ],
         "operationId": "OAuth2_Grant",
@@ -2006,7 +2007,7 @@
             "required": false,
             "description": "The relevant app Service Principal Object Id and the Service Principal Object Id you want to grant.",
             "schema": {
-              "$ref": "#/definitions/Permissions"
+              "$ref": "#/definitions/OAuth2PermissionGrant"
             },
             "x-examples": {
               "application/json": "{\n\t\"odata.type\": \"Microsoft.DirectoryServices.OAuth2PermissionGrant\",\n\t\"clientId\": \"39afbaa2-4a5c-4f5b-9ee3-2c83f09bbc87\", \n\t\"consentType\": \"AllPrincipals\",\n\t\"principalId\": null,\n\t\"resourceId\": \"d3247842-c517-4520-80a7-332690ae2fe4\",\n\t\"scope\": \"user_impersonation\",\n    \"startTime\": \"0001-01-01T00:00:00\",\n    \"expiryTime\": \"9000-01-01T00:00:00\"\n}",
@@ -2024,7 +2025,7 @@
           "201": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/Permissions"
+              "$ref": "#/definitions/OAuth2PermissionGrant"
             }
           }
         }
@@ -2033,7 +2034,7 @@
     "/{tenantID}/oauth2PermissionGrants/{objectId}": {
       "delete": {
         "tags": [
-          "OAuth2Permissions_delete"
+          "OAuth2PermissionGrant_delete"
         ],
         "operationId": "OAuth2_Delete",
         "description": "Delete a OAuth2 permission grant for the relevant resource Ids of an app.",
@@ -2067,6 +2068,49 @@
     }
   },
   "x-ms-paths": {
+    "/{tenantID}/{nextLink}?OAuth2PermissionGrant_ListNext": {
+        "get": {
+          "tags": [
+            "OAuth2PermissionGrant_ListNext"
+          ],
+          "operationId": "OAuth2PermissionGrant_ListNext",
+          "description": "Gets the next page of OAuth2 permission grants",
+          "parameters": [
+            {
+              "name": "nextLink",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Next link for the list operation.",
+              "x-ms-skip-url-encoding": true
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/tenantIDInPath"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The operation was successful.",
+              "schema": {
+                "$ref": "#/definitions/OAuth2PermissionGrantListResult"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/GraphError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "odata.nextLink",
+            "operationName": "OAuth2PermissionGrant_ListNext"
+          }
+        }
+      },
     "/{tenantID}/{nextLink}?SignedInUser_ListOwnedObjectsNext": {
       "get": {
         "tags": [
@@ -3941,7 +3985,7 @@
       },
       "description": "Server response for Get tenant domains API call."
     },
-    "Permissions": {
+    "OAuth2PermissionGrant": {
       "properties": {
         "odata.type": {
           "type": "string",
@@ -3949,27 +3993,35 @@
         },
         "clientId": {
           "type": "string",
-          "description": "The objectId of the Service Principal associated with the app"
+          "description": "The id of the resource's service principal granted consent to impersonate the user when accessing the resource (represented by the resourceId property)."
         },
         "objectId": {
           "type": "string",
-          "description": "The objectId of the permission grant"
+          "description": "The id of the permission grant"
         },
         "consentType": {
           "type": "string",
-          "description": "Typically set to AllPrincipals"
+          "description": "Indicates if consent was provided by the administrator (on behalf of the organization) or by an individual.",
+          "enum": [
+            "AllPrincipals",
+            "Principal"
+          ],
+          "x-ms-enum": {
+            "name": "ConsentType",
+            "modelAsString": true
+          }
         },
         "principalId": {
-          "type": "object",
-          "description": "Set to null if AllPrincipals is set"
+          "type": "string",
+          "description": "When consent type is Principal, this property specifies the id of the user that granted consent and applies only for that user."
         },
         "resourceId": {
           "type": "string",
-          "description": "Service Principal Id of the resource you want to grant"
+          "description": "Object Id of the resource you want to grant"
         },
         "scope": {
           "type": "string",
-          "description": "Typically set to user_impersonation"
+          "description": "Specifies the value of the scope claim that the resource application should expect in the OAuth 2.0 access token. For example, User.Read"
         },
         "startTime": {
           "type": "string",
@@ -3991,22 +4043,22 @@
         "startTime": "startTime"
       }
     },
-    "PermissionsListResult": {
+    "OAuth2PermissionGrantListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Permissions"
+            "$ref": "#/definitions/OAuth2PermissionGrant"
           },
-          "description": "the list of permissions grants"
+          "description": "the list of oauth2 permissions grants"
         },
         "odata.nextLink": {
           "type": "string",
           "description": "the URL to get the next set of results."
         }
       },
-      "description": "Server response for get permissions grants"
+      "description": "Server response for get oauth2 permissions grants"
     }
   },
   "parameters": {
