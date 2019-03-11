@@ -768,6 +768,10 @@
             "name": "ApplicationGatewayBackendHealthServerHealth",
             "modelAsString": true
           }
+        },
+        "healthProbeLog": {
+          "type": "string",
+          "description": "Health Probe Log."
         }
       },
       "description": "Application gateway backendhealth http settings."
@@ -1924,6 +1928,10 @@
         "webApplicationFirewallConfiguration": {
           "$ref": "#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration",
           "description": "Web application firewall configuration."
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the FirewallPolicy resource."
         },
         "enableHttp2": {
           "type": "boolean",
