@@ -84,6 +84,8 @@ jobs:
     displayName: 'LintDiff'
 
 - job: "SDK"
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
   timeoutInMinutes: 120
   strategy:
     matrix:
