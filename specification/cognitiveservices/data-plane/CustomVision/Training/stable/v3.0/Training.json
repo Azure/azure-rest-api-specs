@@ -35,8 +35,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Domain"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -142,10 +141,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
-            "collectionFormat": "csv",
-            "x-nullable": true
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -156,8 +155,7 @@
             "description": "OK",
             "schema": {
               "format": "int32",
-              "type": "integer",
-              "x-nullable": false
+              "type": "integer"
             }
           },
           "default": {
@@ -216,8 +214,7 @@
             "description": "OK",
             "schema": {
               "format": "int32",
-              "type": "integer",
-              "x-nullable": false
+              "type": "integer"
             }
           },
           "default": {
@@ -321,12 +318,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 64,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "name": "tagIds",
@@ -336,12 +333,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 20,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -453,12 +450,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 64,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -523,12 +520,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 20,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "name": "orderBy",
@@ -540,7 +537,7 @@
               "Newest",
               "Oldest"
             ],
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "name": "take",
@@ -573,8 +570,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Image"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -634,7 +630,7 @@
               "Newest",
               "Oldest"
             ],
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "name": "take",
@@ -667,8 +663,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Image"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -717,12 +712,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 256,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "name": "iterationId",
@@ -744,8 +739,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Image"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -797,12 +791,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 20,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "name": "imageData",
@@ -861,12 +855,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 256,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -1162,12 +1156,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 64,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -1505,12 +1499,12 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
             "collectionFormat": "csv",
             "maxItems": 20,
-            "minItems": 0,
-            "x-nullable": true
+            "minItems": 0
           },
           {
             "name": "orderBy",
@@ -1522,7 +1516,7 @@
               "Newest",
               "Oldest"
             ],
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "name": "take",
@@ -1555,8 +1549,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ImagePerformance"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -1614,10 +1607,10 @@
             "type": "array",
             "items": {
               "type": "string",
+              "format": "uuid",
               "x-nullable": false
             },
-            "collectionFormat": "csv",
-            "x-nullable": true
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -1628,8 +1621,7 @@
             "description": "OK",
             "schema": {
               "format": "int32",
-              "type": "integer",
-              "x-nullable": false
+              "type": "integer"
             }
           },
           "default": {
@@ -1671,8 +1663,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Project"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -1706,16 +1697,14 @@
             "in": "query",
             "description": "Name of the project.",
             "required": true,
-            "type": "string",
-            "x-nullable": true
+            "type": "string"
           },
           {
             "name": "description",
             "in": "query",
             "description": "The description of the project.",
             "required": false,
-            "type": "string",
-            "x-nullable": true
+            "type": "string"
           },
           {
             "name": "domainId",
@@ -1735,8 +1724,7 @@
             "enum": [
               "Multiclass",
               "Multilabel"
-            ],
-            "x-nullable": false
+            ]
           },
           {
             "name": "targetExportPlatforms",
@@ -1752,11 +1740,9 @@
                 "DockerFile",
                 "ONNX",
                 "VAIDK"
-              ],
-              "x-nullable": false
+              ]
             },
-            "collectionFormat": "csv",
-            "x-nullable": true
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -1964,8 +1950,7 @@
             "enum": [
               "Regular",
               "Advanced"
-            ],
-            "x-nullable": false
+            ]
           },
           {
             "name": "reservedBudgetInHours",
@@ -2053,8 +2038,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Iteration"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -2284,16 +2268,14 @@
             "in": "query",
             "description": "The name to give the published iteration.",
             "required": true,
-            "type": "string",
-            "x-nullable": true
+            "type": "string"
           },
           {
             "name": "predictionId",
             "in": "query",
             "description": "The id of the prediction resource to publish to.",
             "required": true,
-            "type": "string",
-            "x-nullable": true
+            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -2303,8 +2285,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "boolean",
-              "x-nullable": false
+              "type": "boolean"
             }
           },
           "default": {
@@ -2359,8 +2340,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "boolean",
-              "x-nullable": false
+              "type": "boolean"
             }
           },
           "default": {
@@ -2420,8 +2400,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Export"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -2713,7 +2692,9 @@
         ],
         "summary": "Get the tags for a given project and iteration.",
         "operationId": "GetTags",
-        "consumes": [],
+        "consumes": [
+
+        ],
         "produces": [
           "application/json",
           "application/xml",
@@ -2749,8 +2730,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Tag"
-              },
-              "x-nullable": true
+              }
             }
           },
           "default": {
@@ -2793,16 +2773,14 @@
             "in": "query",
             "description": "The tag name.",
             "required": true,
-            "type": "string",
-            "x-nullable": true
+            "type": "string"
           },
           {
             "name": "description",
             "in": "query",
             "description": "Optional description for the tag.",
             "required": false,
-            "type": "string",
-            "x-nullable": true
+            "type": "string"
           },
           {
             "name": "type",
@@ -2813,8 +2791,7 @@
             "enum": [
               "Regular",
               "Negative"
-            ],
-            "x-nullable": false
+            ]
           },
           {
             "$ref": "#/parameters/ApiKey"
@@ -2844,6 +2821,13 @@
   },
   "definitions": {
     "Domain": {
+      "required": [
+        "id",
+        "name",
+        "type",
+        "exportable",
+        "enabled"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -2854,8 +2838,7 @@
         },
         "name": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "type": {
           "enum": [
@@ -2864,7 +2847,6 @@
           ],
           "type": "string",
           "readOnly": true,
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "DomainType",
             "modelAsString": true
@@ -2872,16 +2854,13 @@
         },
         "exportable": {
           "type": "boolean",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "enabled": {
           "type": "boolean",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageTagCreateBatch": {
       "description": "Batch of image tags.",
@@ -2893,10 +2872,9 @@
           "items": {
             "$ref": "#/definitions/ImageTagCreateEntry"
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageTagCreateEntry": {
       "description": "Entry associating a tag to an image.",
@@ -2906,16 +2884,17 @@
           "format": "uuid",
           "description": "Id of the image.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "tagId": {
           "format": "uuid",
           "description": "Id of the tag.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageTagCreateSummary": {
       "type": "object",
@@ -2925,6 +2904,7 @@
           "items": {
             "$ref": "#/definitions/ImageTagCreateEntry"
           },
+          "readOnly": false,
           "x-nullable": true
         },
         "duplicated": {
@@ -2932,6 +2912,7 @@
           "items": {
             "$ref": "#/definitions/ImageTagCreateEntry"
           },
+          "readOnly": false,
           "x-nullable": true
         },
         "exceeded": {
@@ -2939,10 +2920,10 @@
           "items": {
             "$ref": "#/definitions/ImageTagCreateEntry"
           },
+          "readOnly": false,
           "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageRegionCreateBatch": {
       "description": "Batch of image region information to create.",
@@ -2953,53 +2934,61 @@
           "items": {
             "$ref": "#/definitions/ImageRegionCreateEntry"
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageRegionCreateEntry": {
       "description": "Entry associating a region to an image.",
+      "required": [
+        "imageId",
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
       "type": "object",
       "properties": {
         "imageId": {
           "format": "uuid",
           "description": "Id of the image.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "tagId": {
           "format": "uuid",
           "description": "Id of the tag associated with this region.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "left": {
           "format": "float",
           "description": "Coordinate of the left boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "top": {
           "format": "float",
           "description": "Coordinate of the top boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "width": {
           "format": "float",
           "description": "Width.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "height": {
           "format": "float",
           "description": "Height.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageRegionCreateSummary": {
       "type": "object",
@@ -3009,6 +2998,7 @@
           "items": {
             "$ref": "#/definitions/ImageRegionCreateResult"
           },
+          "readOnly": false,
           "x-nullable": true
         },
         "duplicated": {
@@ -3016,6 +3006,7 @@
           "items": {
             "$ref": "#/definitions/ImageRegionCreateEntry"
           },
+          "readOnly": false,
           "x-nullable": true
         },
         "exceeded": {
@@ -3023,12 +3014,23 @@
           "items": {
             "$ref": "#/definitions/ImageRegionCreateEntry"
           },
+          "readOnly": false,
           "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageRegionCreateResult": {
+      "required": [
+        "imageId",
+        "regionId",
+        "tagName",
+        "created",
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
       "type": "object",
       "properties": {
         "imageId": {
@@ -3045,50 +3047,57 @@
         },
         "tagName": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "created": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "tagId": {
           "format": "uuid",
           "description": "Id of the tag associated with this region.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "left": {
           "format": "float",
           "description": "Coordinate of the left boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "top": {
           "format": "float",
           "description": "Coordinate of the top boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "width": {
           "format": "float",
           "description": "Width.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "height": {
           "format": "float",
           "description": "Height.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "Image": {
       "description": "Image model to be sent as JSON.",
+      "required": [
+        "id",
+        "created",
+        "width",
+        "height",
+        "resizedImageUri",
+        "thumbnailUri",
+        "originalImageUri"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3102,40 +3111,34 @@
           "format": "date-time",
           "description": "Date the image was created.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "width": {
           "format": "int32",
           "description": "Width of the image.",
           "type": "integer",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "height": {
           "format": "int32",
           "description": "Height of the image.",
           "type": "integer",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "resizedImageUri": {
           "description": "The URI to the (resized) image used for training.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "thumbnailUri": {
           "description": "The URI to the thumbnail of the original image.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "originalImageUri": {
           "description": "The URI to the original uploaded image.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "tags": {
           "description": "Tags associated with this image.",
@@ -3155,10 +3158,14 @@
           "readOnly": true,
           "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageTag": {
+      "required": [
+        "tagId",
+        "tagName",
+        "created"
+      ],
       "type": "object",
       "properties": {
         "tagId": {
@@ -3169,19 +3176,26 @@
         },
         "tagName": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "created": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageRegion": {
+      "required": [
+        "regionId",
+        "tagName",
+        "created",
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
       "type": "object",
       "properties": {
         "regionId": {
@@ -3192,56 +3206,57 @@
         },
         "tagName": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "created": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "tagId": {
           "format": "uuid",
           "description": "Id of the tag associated with this region.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "left": {
           "format": "float",
           "description": "Coordinate of the left boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "top": {
           "format": "float",
           "description": "Coordinate of the top boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "width": {
           "format": "float",
           "description": "Width.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "height": {
           "format": "float",
           "description": "Height.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageCreateSummary": {
+      "required": [
+        "isBatchSuccessful",
+        "images"
+      ],
       "type": "object",
       "properties": {
         "isBatchSuccessful": {
           "description": "True if all of the images in the batch were created successfully, otherwise false.",
           "type": "boolean",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "images": {
           "description": "List of the image creation results.",
@@ -3249,20 +3264,22 @@
           "items": {
             "$ref": "#/definitions/ImageCreateResult"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageCreateResult": {
+      "required": [
+        "sourceUrl",
+        "status",
+        "image"
+      ],
       "type": "object",
       "properties": {
         "sourceUrl": {
           "description": "Source URL of the image.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "status": {
           "description": "Status of the image creation.",
@@ -3281,7 +3298,6 @@
           ],
           "type": "string",
           "readOnly": true,
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "ImageCreateStatus",
             "modelAsString": true
@@ -3292,8 +3308,7 @@
           "description": "The image.",
           "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageFileCreateBatch": {
       "type": "object",
@@ -3303,7 +3318,7 @@
           "items": {
             "$ref": "#/definitions/ImageFileCreateEntry"
           },
-          "x-nullable": true
+          "readOnly": false
         },
         "tagIds": {
           "type": "array",
@@ -3312,22 +3327,21 @@
             "type": "string",
             "x-nullable": false
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageFileCreateEntry": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "contents": {
           "format": "byte",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "tagIds": {
           "type": "array",
@@ -3336,53 +3350,59 @@
             "type": "string",
             "x-nullable": false
           },
-          "x-nullable": true
+          "readOnly": false
         },
         "regions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Region"
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "Region": {
+      "required": [
+        "tagId",
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
       "type": "object",
       "properties": {
         "tagId": {
           "format": "uuid",
           "description": "Id of the tag associated with this region.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "left": {
           "format": "float",
           "description": "Coordinate of the left boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "top": {
           "format": "float",
           "description": "Coordinate of the top boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "width": {
           "format": "float",
           "description": "Width.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "height": {
           "format": "float",
           "description": "Height.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageUrlCreateBatch": {
       "type": "object",
@@ -3392,7 +3412,7 @@
           "items": {
             "$ref": "#/definitions/ImageUrlCreateEntry"
           },
-          "x-nullable": true
+          "readOnly": false
         },
         "tagIds": {
           "type": "array",
@@ -3401,18 +3421,20 @@
             "type": "string",
             "x-nullable": false
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageUrlCreateEntry": {
+      "required": [
+        "url"
+      ],
       "type": "object",
       "properties": {
         "url": {
           "description": "Url of the image.",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "tagIds": {
           "type": "array",
@@ -3421,17 +3443,16 @@
             "type": "string",
             "x-nullable": false
           },
-          "x-nullable": true
+          "readOnly": false
         },
         "regions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Region"
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageIdCreateBatch": {
       "type": "object",
@@ -3441,7 +3462,7 @@
           "items": {
             "$ref": "#/definitions/ImageIdCreateEntry"
           },
-          "x-nullable": true
+          "readOnly": false
         },
         "tagIds": {
           "type": "array",
@@ -3450,10 +3471,9 @@
             "type": "string",
             "x-nullable": false
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageIdCreateEntry": {
       "type": "object",
@@ -3462,6 +3482,7 @@
           "format": "uuid",
           "description": "Id of the image.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "tagIds": {
@@ -3471,19 +3492,23 @@
             "type": "string",
             "x-nullable": false
           },
-          "x-nullable": true
+          "readOnly": false
         },
         "regions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Region"
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageRegionProposal": {
+      "required": [
+        "projectId",
+        "imageId",
+        "proposals"
+      ],
       "type": "object",
       "properties": {
         "projectId": {
@@ -3503,73 +3528,87 @@
           "items": {
             "$ref": "#/definitions/RegionProposal"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "RegionProposal": {
+      "required": [
+        "confidence",
+        "boundingBox"
+      ],
       "type": "object",
       "properties": {
         "confidence": {
           "format": "float",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "boundingBox": {
           "$ref": "#/definitions/BoundingBox",
           "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "BoundingBox": {
       "description": "Bounding box that defines a region of an image.",
+      "required": [
+        "left",
+        "top",
+        "width",
+        "height"
+      ],
       "type": "object",
       "properties": {
         "left": {
           "format": "float",
           "description": "Coordinate of the left boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "top": {
           "format": "float",
           "description": "Coordinate of the top boundary.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "width": {
           "format": "float",
           "description": "Width.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         },
         "height": {
           "format": "float",
           "description": "Height.",
           "type": "number",
-          "x-nullable": false
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImageUrl": {
       "description": "Image url.",
+      "required": [
+        "url"
+      ],
       "type": "object",
       "properties": {
         "url": {
           "description": "Url of the image.",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImagePrediction": {
       "description": "Result of an image prediction request.",
+      "required": [
+        "id",
+        "project",
+        "iteration",
+        "created",
+        "predictions"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3597,8 +3636,7 @@
           "format": "date-time",
           "description": "Date this prediction was created.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "predictions": {
           "description": "List of predictions.",
@@ -3606,22 +3644,23 @@
           "items": {
             "$ref": "#/definitions/Prediction"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "Prediction": {
       "description": "Prediction result.",
+      "required": [
+        "probability",
+        "tagId"
+      ],
       "type": "object",
       "properties": {
         "probability": {
           "format": "float",
           "description": "Probability of the tag.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "tagId": {
           "format": "uuid",
@@ -3639,26 +3678,26 @@
         "boundingBox": {
           "$ref": "#/definitions/BoundingBox",
           "description": "Bounding box of the prediction.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "PredictionQueryToken": {
       "type": "object",
       "properties": {
         "session": {
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "continuation": {
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "maxCount": {
           "format": "int32",
           "type": "integer",
-          "x-nullable": false
+          "readOnly": false
         },
         "orderBy": {
           "enum": [
@@ -3667,7 +3706,7 @@
             "Suggested"
           ],
           "type": "string",
-          "x-nullable": false,
+          "readOnly": false,
           "x-ms-enum": {
             "name": "OrderBy",
             "modelAsString": true
@@ -3678,31 +3717,38 @@
           "items": {
             "$ref": "#/definitions/PredictionQueryTag"
           },
-          "x-nullable": true
+          "readOnly": false
         },
         "iterationId": {
           "format": "uuid",
           "type": "string",
+          "readOnly": false,
           "x-nullable": true
         },
         "startTime": {
           "format": "date-time",
           "type": "string",
+          "readOnly": false,
           "x-nullable": true
         },
         "endTime": {
           "format": "date-time",
           "type": "string",
+          "readOnly": false,
           "x-nullable": true
         },
         "application": {
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "PredictionQueryTag": {
+      "required": [
+        "id",
+        "minThreshold",
+        "maxThreshold"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3714,19 +3760,20 @@
         "minThreshold": {
           "format": "float",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "maxThreshold": {
           "format": "float",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "PredictionQueryResult": {
+      "required": [
+        "token",
+        "results"
+      ],
       "type": "object",
       "properties": {
         "token": {
@@ -3738,33 +3785,39 @@
           "items": {
             "$ref": "#/definitions/StoredImagePrediction"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "StoredImagePrediction": {
       "description": "result of an image classification request.",
+      "required": [
+        "resizedImageUri",
+        "thumbnailUri",
+        "originalImageUri",
+        "domain",
+        "id",
+        "project",
+        "iteration",
+        "created",
+        "predictions"
+      ],
       "type": "object",
       "properties": {
         "resizedImageUri": {
           "description": "The URI to the (resized) prediction image.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "thumbnailUri": {
           "description": "The URI to the thumbnail of the original prediction image.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "originalImageUri": {
           "description": "The URI to the original prediction image.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "domain": {
           "format": "uuid",
@@ -3798,8 +3851,7 @@
           "format": "date-time",
           "description": "Date this prediction was created.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "predictions": {
           "description": "List of predictions.",
@@ -3807,14 +3859,19 @@
           "items": {
             "$ref": "#/definitions/Prediction"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "IterationPerformance": {
       "description": "Represents the detailed performance data for a trained iteration.",
+      "required": [
+        "perTagPerformance",
+        "precision",
+        "precisionStdDeviation",
+        "recall",
+        "recallStdDeviation"
+      ],
       "type": "object",
       "properties": {
         "perTagPerformance": {
@@ -3823,36 +3880,31 @@
           "items": {
             "$ref": "#/definitions/TagPerformance"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "precision": {
           "format": "float",
           "description": "Gets the precision.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "precisionStdDeviation": {
           "format": "float",
           "description": "Gets the standard deviation for the precision.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "recall": {
           "format": "float",
           "description": "Gets the recall.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "recallStdDeviation": {
           "format": "float",
           "description": "Gets the standard deviation for the recall.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "averagePrecision": {
           "format": "float",
@@ -3861,11 +3913,18 @@
           "readOnly": true,
           "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "TagPerformance": {
       "description": "Represents performance data for a particular tag in a trained iteration.",
+      "required": [
+        "id",
+        "name",
+        "precision",
+        "precisionStdDeviation",
+        "recall",
+        "recallStdDeviation"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3876,36 +3935,31 @@
         },
         "name": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "precision": {
           "format": "float",
           "description": "Gets the precision.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "precisionStdDeviation": {
           "format": "float",
           "description": "Gets the standard deviation for the precision.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "recall": {
           "format": "float",
           "description": "Gets the recall.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "recallStdDeviation": {
           "format": "float",
           "description": "Gets the standard deviation for the recall.",
           "type": "number",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "averagePrecision": {
           "format": "float",
@@ -3914,11 +3968,18 @@
           "readOnly": true,
           "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ImagePerformance": {
       "description": "Image performance model.",
+      "required": [
+        "id",
+        "created",
+        "width",
+        "height",
+        "imageUri",
+        "thumbnailUri"
+      ],
       "type": "object",
       "properties": {
         "predictions": {
@@ -3938,30 +3999,25 @@
         "created": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "width": {
           "format": "int32",
           "type": "integer",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "height": {
           "format": "int32",
           "type": "integer",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "imageUri": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "thumbnailUri": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "tags": {
           "type": "array",
@@ -3979,11 +4035,19 @@
           "readOnly": true,
           "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "Project": {
       "description": "Represents a project.",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "settings",
+        "created",
+        "lastModified",
+        "thumbnailUri"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3996,45 +4060,42 @@
         "name": {
           "description": "Gets or sets the name of the project.",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "description": {
           "description": "Gets or sets the description of the project.",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "settings": {
           "$ref": "#/definitions/ProjectSettings",
-          "description": "Gets or sets the project settings."
+          "description": "Gets or sets the project settings.",
+          "readOnly": false
         },
         "created": {
           "format": "date-time",
           "description": "Gets the date this project was created.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "lastModified": {
           "format": "date-time",
           "description": "Gets the date this project was last modified.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "thumbnailUri": {
           "description": "Gets the thumbnail url representing the image.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "drModeEnabled": {
           "description": "Gets if the DR mode is on.",
           "type": "boolean",
           "readOnly": true,
-          "x-nullable": false
+          "x-nullable": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "ProjectSettings": {
       "description": "Represents settings associated with a project.",
@@ -4044,6 +4105,7 @@
           "format": "uuid",
           "description": "Gets or sets the id of the Domain to use with this project.",
           "type": "string",
+          "readOnly": false,
           "x-nullable": false
         },
         "classificationType": {
@@ -4053,6 +4115,7 @@
             "Multilabel"
           ],
           "type": "string",
+          "readOnly": false,
           "x-nullable": true,
           "x-ms-enum": {
             "name": "Classifier",
@@ -4070,16 +4133,27 @@
               "ONNX",
               "VAIDK"
             ],
-            "type": "string",
-            "x-nullable": false
+            "type": "string"
           },
-          "x-nullable": true
+          "readOnly": false
         }
-      },
-      "x-nullable": true
+      }
     },
     "Iteration": {
       "description": "Iteration model to be sent over JSON.",
+      "required": [
+        "id",
+        "name",
+        "status",
+        "created",
+        "lastModified",
+        "projectId",
+        "exportable",
+        "exportableTo",
+        "trainingType",
+        "reservedBudgetInHours",
+        "publishName"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -4092,27 +4166,24 @@
         "name": {
           "description": "Gets or sets the name of the iteration.",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "status": {
           "description": "Gets the current iteration status.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "created": {
           "format": "date-time",
           "description": "Gets the time this iteration was completed.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "lastModified": {
           "format": "date-time",
           "description": "Gets the time this iteration was last modified.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "trainedAt": {
           "format": "date-time",
@@ -4131,8 +4202,7 @@
         "exportable": {
           "description": "Whether the iteration can be exported to another format for download.",
           "type": "boolean",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "exportableTo": {
           "description": "A set of platforms this iteration can export to.",
@@ -4145,11 +4215,9 @@
               "ONNX",
               "VAIDK"
             ],
-            "type": "string",
-            "x-nullable": false
+            "type": "string"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "domainId": {
           "format": "uuid",
@@ -4180,7 +4248,6 @@
           ],
           "type": "string",
           "readOnly": true,
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "TrainingType",
             "modelAsString": true
@@ -4188,21 +4255,24 @@
         },
         "reservedBudgetInHours": {
           "format": "int32",
-          "description": "Gets the reserved baking budget for the iteration.",
+          "description": "Gets the reserved advanced training budget for the iteration.",
           "type": "integer",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         },
         "publishName": {
           "description": "Name of the published model.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "Export": {
+      "required": [
+        "platform",
+        "status",
+        "downloadUri",
+        "newerVersionAvailable"
+      ],
       "type": "object",
       "properties": {
         "platform": {
@@ -4216,7 +4286,6 @@
           ],
           "type": "string",
           "readOnly": true,
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "ExportPlatform",
             "modelAsString": true
@@ -4231,7 +4300,6 @@
           ],
           "type": "string",
           "readOnly": true,
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "ExportStatus",
             "modelAsString": true
@@ -4240,8 +4308,7 @@
         "downloadUri": {
           "description": "URI used to download the model.",
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         },
         "flavor": {
           "description": "Flavor of the export.",
@@ -4263,14 +4330,19 @@
         "newerVersionAvailable": {
           "description": "Indicates an updated version of the export package is available and should be re-exported for the latest changes.",
           "type": "boolean",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "Tag": {
       "description": "Represents a Tag.",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "type",
+        "imageCount"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -4283,12 +4355,12 @@
         "name": {
           "description": "Gets or sets the name of the tag.",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "description": {
           "description": "Gets or sets the description of the tag.",
           "type": "string",
-          "x-nullable": true
+          "readOnly": false
         },
         "type": {
           "description": "Gets or sets the type of the tag.",
@@ -4297,7 +4369,7 @@
             "Negative"
           ],
           "type": "string",
-          "x-nullable": false,
+          "readOnly": false,
           "x-ms-enum": {
             "name": "TagType",
             "modelAsString": true
@@ -4307,11 +4379,9 @@
           "format": "int32",
           "description": "Gets the number of images with this tag.",
           "type": "integer",
-          "readOnly": true,
-          "x-nullable": false
+          "readOnly": true
         }
-      },
-      "x-nullable": true
+      }
     },
     "CustomVisionError": {
       "required": [
@@ -4349,6 +4419,7 @@
             "BadRequestImageTags",
             "BadRequestImageRegions",
             "BadRequestNegativeAndRegularTagOnSameImage",
+            "BadRequestRequiredParamIsNull",
             "BadRequestIterationIsPublished",
             "BadRequestInvalidPublishName",
             "BadRequestInvalidPublishTarget",
@@ -4377,7 +4448,9 @@
             "BadRequestTrainingAlreadyInProgress",
             "BadRequestDetectionTrainingNotAllowNegativeTag",
             "BadRequestInvalidEmailAddress",
-            "BadRequestBakingAlreadyInProgress",
+            "BadRequestDomainNotSupportedForAdvancedTraining",
+            "BadRequestExportPlatformNotSupportedForAdvancedTraining",
+            "BadRequestReservedBudgetInHoursNotEnoughForAdvancedTraining",
             "BadRequestExportValidationFailed",
             "BadRequestExportAlreadyInProgress",
             "BadRequestPredictionIdsMissing",
@@ -4434,7 +4507,6 @@
             "ErrorInvalid"
           ],
           "type": "string",
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "CustomVisionErrorCodes",
             "modelAsString": true
