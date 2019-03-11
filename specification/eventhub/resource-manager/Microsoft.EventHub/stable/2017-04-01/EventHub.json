@@ -1857,7 +1857,7 @@
         }
       }
     },    
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSet/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default": {
       "put": {
         "tags": [
           "Namespaces"
@@ -2893,6 +2893,25 @@
       "minimum": 1,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
-    }     
+    },
+    "ipFilterRuleNameParameter": {
+      "name": "ipFilterRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The IP Filter Rule name."
+    },
+    "virtualNetworkRuleNameParameter": {
+      "name": "virtualNetworkRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The Virtual Network Rule name."
+    }
+      
   }
 }
