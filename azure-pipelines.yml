@@ -84,8 +84,6 @@ jobs:
     displayName: 'LintDiff'
 
 - job: "SDK"
-  variables:
-    NODE_OPTIONS: '--max-old-space-size=8192'
   timeoutInMinutes: 120
   strategy:
     matrix:
@@ -104,11 +102,14 @@ jobs:
       python:
         AZURE_SDK_REPO: azure-sdk-for-python
         AZURE_SDK_PARAMS: ''
+    NODE_OPTIONS: '--max-old-space-size=16384'
       go:
         AZURE_SDK_REPO: azure-sdk-for-go
         AZURE_SDK_PARAMS: '-o latest'
   pool:
     vmImage: 'Ubuntu 16.04'
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=16384'
   steps:
   - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
     displayName: "Swagger to SDK script"
