@@ -111,5 +111,6 @@ jobs:
   variables:
     NODE_OPTIONS: '--max-old-space-size=16384'
   steps:
+  - script: echo $(NODE_OPTIONS)
   - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
     displayName: "Swagger to SDK script"
