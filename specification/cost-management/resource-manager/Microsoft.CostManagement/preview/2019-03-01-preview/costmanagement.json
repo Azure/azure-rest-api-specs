@@ -1323,13 +1323,13 @@
         "tags": [
           "CloudConnectors"
         ],
-        "operationId": "CloudConnector_Update",
-        "description": "Update a cloud connector definition",
+        "operationId": "CloudConnector_Verify",
+        "description": "Verify a cloud connector definition",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "CloudConnector_Patch": {
+          "CloudConnector_Verify": {
             "$ref": "./examples/CloudConnectorPatch.json"
           }
         },
@@ -1339,15 +1339,6 @@
           },
           {
             "$ref": "#/parameters/connectorNameParameter"
-          },
-          {
-            "name": "connector",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectorDefinition"
-            },
-            "description": "Connector details"
           }
         ],
         "responses": {
