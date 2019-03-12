@@ -622,19 +622,13 @@
         "url": {
           "description": "Url of the image.",
           "type": "string",
-          "readOnly": false
+          "readOnly": false,
+          "x-nullable": false
         }
       }
     },
     "ImagePrediction": {
       "description": "Result of an image prediction request.",
-      "required": [
-        "id",
-        "project",
-        "iteration",
-        "created",
-        "predictions"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -662,13 +656,15 @@
           "format": "date-time",
           "description": "Date this prediction was created.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": false
         },
         "predictions": {
           "description": "List of predictions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Prediction"
+            "$ref": "#/definitions/Prediction",
+            "x-nullable": false
           },
           "readOnly": true
         }
@@ -676,17 +672,14 @@
     },
     "Prediction": {
       "description": "Prediction result.",
-      "required": [
-        "probability",
-        "tagId"
-      ],
       "type": "object",
       "properties": {
         "probability": {
           "format": "float",
           "description": "Probability of the tag.",
           "type": "number",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": false
         },
         "tagId": {
           "format": "uuid",
@@ -723,25 +716,29 @@
           "format": "float",
           "description": "Coordinate of the left boundary.",
           "type": "number",
-          "readOnly": false
+          "readOnly": false,
+          "x-nullable": false
         },
         "top": {
           "format": "float",
           "description": "Coordinate of the top boundary.",
           "type": "number",
-          "readOnly": false
+          "readOnly": false,
+          "x-nullable": false
         },
         "width": {
           "format": "float",
           "description": "Width.",
           "type": "number",
-          "readOnly": false
+          "readOnly": false,
+          "x-nullable": false
         },
         "height": {
           "format": "float",
           "description": "Height.",
           "type": "number",
-          "readOnly": false
+          "readOnly": false,
+          "x-nullable": false
         }
       }
     },
