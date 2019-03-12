@@ -3,7 +3,8 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml
-package-name: package-2019-03-01-preview
+package-name: azure_mgmt_peering
+package-version: "2019-03-01-preview"
 azure-arm: true
 ```
 
