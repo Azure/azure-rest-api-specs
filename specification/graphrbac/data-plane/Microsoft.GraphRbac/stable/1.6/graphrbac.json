@@ -2792,6 +2792,18 @@
       ],
       "description": "Specifies an OAuth 2.0 permission scope or an app role that an application requires. The resourceAccess property of the RequiredResourceAccess type is a collection of ResourceAccess."
     },
+    "GroupMembershipClaims": {
+      "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.",
+      "enum": [
+        "None",
+        "SecurityGroup",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "GroupMembershipClaimTypes",
+        "modelAsString": true
+      }
+    },
     "ApplicationBase": {
       "type": "object",
       "description": "Active Directive Application common properties shared among GET, POST and PATCH",
@@ -2829,6 +2841,10 @@
         "errorUrl": {
           "description": "A URL provided by the author of the application to report errors when using the application.",
           "type": "string"
+        },
+        "groupMembershipClaims": {
+          "$ref": "#/definitions/GroupMembershipClaims",
+          "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects."
         },
         "homepage": {
           "type": "string",
@@ -3036,6 +3052,10 @@
         "errorUrl": {
           "description": "A URL provided by the author of the application to report errors when using the application.",
           "type": "string"
+        },
+        "groupMembershipClaims": {
+          "$ref": "#/definitions/GroupMembershipClaims",
+          "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects."
         },
         "homepage": {
           "type": "string",
@@ -3459,6 +3479,14 @@
       "type": "object",
       "description": "Active Directory service principal common perperties shared among GET, POST and PATCH",
       "properties": {
+        "accountEnabled": {
+          "description": "whether or not the service principal account is enabled",
+          "type": "string"
+        },
+        "appRoleAssignmentRequired": {
+          "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.",
+          "type": "boolean"
+        },       
         "keyCredentials": {
           "description": "The collection of key credentials associated with the service principal.",
           "type": "array",
@@ -3476,10 +3504,6 @@
         "servicePrincipalType": {
           "type": "string",
           "description": "the type of the servie principal"
-        },
-        "accountEnabled": {
-          "description": "whether or not the service principal account is enabled",
-          "type": "string"
         },
         "tags": {
           "description": "Optional list of tags that you can apply to your service principals. Not nullable.",
