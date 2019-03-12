@@ -32,11 +32,23 @@ To see additional help and options, run:
 
 These are the global settings for the ContainerServices API.
 
-```yaml
+``` yaml
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2019-02
 ```
 
+
+### Tag: package-2019-02
+
+These settings apply only when `--tag=package-2019-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-02'
+input-file:
+- Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
+```
 ### Tag: package-2018-08-preview
 
 These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
@@ -100,6 +112,15 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+```
+
+### Tag: package-2019-02-only
+
+These settings apply only when `--tag=package-2019-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
 ```
 
 ### Tag: package-2018-08-preview-only
@@ -191,7 +212,6 @@ input-file:
 ---
 
 # Code Generation
-
 
 ## Swagger to SDK
 

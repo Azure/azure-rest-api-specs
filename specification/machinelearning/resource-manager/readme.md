@@ -83,7 +83,7 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: commitmentPlans.json
     where: $.definitions.CommitmentAssociation
-    reason: The CommitmentAssociation is an internal asscociation from a Web Service to a Commitment Plan, which can only be created or updated by Web Service Resource Provider.
+    reason: The CommitmentAssociation is an internal association from a Web Service to a Commitment Plan, which can only be created or updated by Web Service Resource Provider.
 ```
 
 

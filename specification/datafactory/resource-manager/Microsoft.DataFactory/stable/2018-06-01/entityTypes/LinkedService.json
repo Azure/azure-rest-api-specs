@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
-    "version": "2017-09-01-preview"
+    "version": "2018-06-01"
   },
   "paths": {},
   "definitions": {
@@ -28,7 +28,7 @@
           "description": "Parameters for linked service."
         },
         "annotations": {
-          "description": "List of tags that can be used for describing the Dataset.",
+          "description": "List of tags that can be used for describing the linked service.",
           "type": "array",
           "items": {
             "type": "object"
@@ -4585,6 +4585,18 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "newClusterDriverNodeType": {
+          "type": "object",
+          "description": "The driver node type for the new cluster. Type: string (or Expression with resultType string)."
+        },
+        "newClusterInitScripts": {
+          "type": "object",
+          "description": "User-defined initialization scripts for the new cluster. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "newClusterEnableElasticDisk": {
+          "type": "object",
+          "description": "Enable the elastic disk on the new cluster. Type: boolean (or Expression with resultType boolean)."
         },
         "encryptedCredential": {
           "type": "object",

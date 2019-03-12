@@ -331,7 +331,8 @@
         ],
         "operationId": "Services_CreateOrUpdate",
         "x-ms-examples": {
-          "SearchCreateOrUpdateService": { "$ref": "./examples/SearchCreateOrUpdateService.json" }
+          "SearchCreateOrUpdateService": { "$ref": "./examples/SearchCreateOrUpdateService.json" },
+          "SearchCreateOrUpdateServiceWithIdentity": { "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json" }
         },
         "description": "Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.",
         "externalDocs": {
@@ -395,7 +396,8 @@
         ],
         "operationId": "Services_Update",
         "x-ms-examples": {
-          "SearchUpdateService": { "$ref": "./examples/SearchUpdateService.json" }
+          "SearchUpdateService": { "$ref": "./examples/SearchUpdateService.json" },
+          "SearchUpdateServiceToRemoveIdentity": { "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json" }
         },
         "description": "Updates an existing Search service in the given resource group.",
         "externalDocs": {
@@ -571,6 +573,49 @@
         "responses": {
           "200": {
             "description": "The operation succeeded. The response contains the list of all Search service definitions for the given resource group.",
+            "schema": {
+              "$ref": "#/definitions/SearchServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "Services_ListBySubscription",
+        "x-ms-examples": {
+          "SearchListServicesBySubscription": { "$ref": "./examples/SearchListServicesBySubscription.json" }
+        },
+        "description": "Gets a list of all Search services in the given subscription.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all Search service definitions for the given subscription.",
             "schema": {
               "$ref": "#/definitions/SearchServiceListResult"
             }
@@ -1021,6 +1066,7 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
+            "None",
             "SystemAssigned"
           ],
           "x-ms-enum": {
