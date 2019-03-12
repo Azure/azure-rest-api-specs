@@ -29,6 +29,14 @@ title: KustoManagementClient
 description: The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.
 openapi-type: arm
 tag: package-2019-01-21
+
+directive:
+  - where:
+      - $.definitions.DataConnection.required
+    suppress:
+      - R2016
+	reason:
+      - Implements kind which is required also in patch
 ```
 
 ### Tag: package-2019-01-21
