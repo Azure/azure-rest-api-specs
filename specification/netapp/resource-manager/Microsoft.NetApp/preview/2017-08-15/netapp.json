@@ -902,6 +902,9 @@
         "operationId": "Snapshots_Delete",
         "description": "Delete snapshot",
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
           },
@@ -1116,9 +1119,33 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
         "tags": {
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "NetApp Account properties",
+          "$ref": "#/definitions/accountProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1130,6 +1157,45 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure lifecycle management"
+        },
+        "activeDirectories": {
+          "description": "Active Directories",
+          "type": "array",
+          "$ref": "#/definitions/activeDirectories"
+        }
+      }
+    },
+    "activeDirectories": {
+      "description": "Active Directories",
+      "type": "object",
+      "properties": {
+        "activeDirectoryId": {
+          "type": "string",
+          "description": "Id of the active drectory"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username of Active Directory domain administrator"
+        },
+        "password": {
+          "type": "string",
+          "description": "Plain text password of Active Directory domain administrator"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Name of the Active Directory domain"
+        },
+        "dNS": {
+          "type": "string",
+          "description": "Comma separated list of DNS server IP addresses for the Active Directory domain"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the active drectory"
+        },
+        "sMBServerName": {
+          "type": "string",
+          "description": "NetBIOS name of the SMB server. This name will be registered as a computer account in the AD and used to mount volumes"
         }
       }
     },
@@ -1189,17 +1255,6 @@
         }
       }
     },
-    "capacityPoolPatch": {
-      "description": "Capacity pool patch resource",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
-        }
-      }
-    },
     "poolProperties": {
       "description": "Pool properties",
       "type": "object",
@@ -1230,7 +1285,7 @@
           "enum": [
             "Standard",
             "Premium",
-            "Extreme"
+            "Ultra"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
@@ -1245,18 +1300,98 @@
                 "description": "Premium service level"
               },
               {
-                "value": "Extreme",
-                "description": "Extreme service level"
+                "value": "Ultra",
+                "description": "Ultra service level"
               }
             ]
           },
-          "example": "Extreme",
+          "example": "Ultra",
           "default": "Premium"
         },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
           "description": "Azure lifecycle management"
+        }
+      }
+    },
+    "capacityPoolPatch": {
+      "description": "Capacity pool patch resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Capacity pool properties",
+          "$ref": "#/definitions/poolPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "poolPatchProperties": {
+      "description": "Patchable pool properties",
+      "type": "object",
+      "properties": {
+        "size": {
+          "title": "size",
+          "type": "integer",
+          "format": "int64",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
+          "minimum": 4398046511104,
+          "maximum": 549755813888000,
+          "default": 4398046511104
+        },
+        "serviceLevel": {
+          "title": "serviceLevel",
+          "type": "string",
+          "description": "The service level of the file system",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard service level"
+              },
+              {
+                "value": "Premium",
+                "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
+              }
+            ]
+          },
+          "example": "Ultra",
+          "default": "Premium"
         }
       }
     },
@@ -1353,7 +1488,7 @@
           "enum": [
             "Standard",
             "Premium",
-            "Extreme"
+            "Ultra"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
@@ -1368,12 +1503,12 @@
                 "description": "Premium service level"
               },
               {
-                "value": "Extreme",
-                "description": "Extreme service level"
+                "value": "Ultra",
+                "description": "Ultra service level"
               }
             ]
           },
-          "example": "Extreme",
+          "example": "Ultra",
           "default": "Premium"
         },
         "usageThreshold": {
@@ -1386,6 +1521,11 @@
           "default": 107374182400,
           "example": 107374182400
         },
+        "exportPolicy": {
+          "description": "Export policy rule",
+          "type": "array",
+          "$ref": "#/definitions/exportPolicyRule"
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -1394,6 +1534,40 @@
         "subnetId": {
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        }
+      }
+    },
+    "exportPolicyRule": {
+      "description": "Volume Export Policy Rule",
+      "type": "object",
+      "properties": {
+        "ruleIndex": {
+          "type": "integer",
+          "description": "Order index"
+        },
+        "unixReadOnly": {
+          "type": "boolean",
+          "description": "Read only access"
+        },
+        "unixReadWrite": {
+          "type": "boolean",
+          "description": "Read and write access"
+        },
+        "cifs": {
+          "type": "boolean",
+          "description": "Allows CIFS protocol"
+        },
+        "nfsv3": {
+          "type": "boolean",
+          "description": "Allows NFSv3 protocol"
+        },
+        "nfsv4": {
+          "type": "boolean",
+          "description": "Allows NFSv4 protocol"
+        },
+        "allowedClients": {
+          "type": "string",
+          "description": "Client ingress specification as comma seperated string with IPv4 CIDRs, IPv4 host addresses and host names"
         }
       }
     },
@@ -1443,7 +1617,7 @@
           "enum": [
             "Standard",
             "Premium",
-            "Extreme"
+            "Ultra"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
@@ -1458,12 +1632,12 @@
                 "description": "Premium service level"
               },
               {
-                "value": "Extreme",
-                "description": "Extreme service level"
+                "value": "Ultra",
+                "description": "Ultra service level"
               }
             ]
           },
-          "example": "Extreme",
+          "example": "Ultra",
           "default": "Premium"
         },
         "usageThreshold": {
@@ -1475,6 +1649,11 @@
           "maximum": 109951162777600,
           "default": 107374182400,
           "example": 107374182400
+        },
+        "exportPolicy": {
+          "description": "Export policy rule",
+          "type": "array",
+          "$ref": "#/definitions/exportPolicyRule"
         }
       }
     },
