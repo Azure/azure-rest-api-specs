@@ -28,7 +28,7 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2018-11-preview
+tag: package-2019-03
 ```
 
 ### Tag: package-2019-03
