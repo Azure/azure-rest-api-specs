@@ -5,11 +5,52 @@
     "version": "2.0"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/luis/api/v2.0",
-    "useSchemePrefix": false,
+    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.{AzureCloud}/luis/api/v2.0",
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "name": "AzureRegion",
+        "description": "Supported Azure regions for Cognitive Services endpoints",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-enum": {
+          "name": "AzureRegions",
+          "modelAsString": false
+        },
+        "enum": [
+          "westus",
+          "westeurope",
+          "southeastasia",
+          "eastus2",
+          "westcentralus",
+          "westus2",
+          "eastus",
+          "southcentralus",
+          "northeurope",
+          "eastasia",
+          "australiaeast",
+          "brazilsouth",
+          "virginia"
+        ]
+      },
+      {
+        "name": "AzureCloud",
+        "description": "Supported Azure Clouds for Cognitive Services endpoints",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-enum": {
+          "name": "AzureClouds",
+          "modelAsString": false
+        },
+        "enum": [
+          "com",
+          "us"
+        ]
       }
     ]
   },
@@ -76,7 +117,7 @@
       },
       "get": {
         "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets all the pattern features.",
-        "operationId": "Features_GetApplicationVersionPatternFeatures",
+        "operationId": "Features_ListApplicationVersionPatternFeatures",
         "deprecated": true,
         "parameters": [
           {
@@ -2188,7 +2229,8 @@
             "in": "path",
             "description": "The sublist ID.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format":  "int64"
           }
         ],
         "responses": {
@@ -2237,7 +2279,8 @@
             "in": "path",
             "description": "The sublist ID.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           {
             "name": "wordListBaseUpdateObject",
@@ -2279,7 +2322,7 @@
     "/apps/{appId}/versions/{versionId}/intents/{intentId}/suggest": {
       "get": {
         "description": "Suggests examples that would improve the accuracy of the intent model.",
-        "operationId": "Model_GetIntentSuggestions",
+        "operationId": "Model_ListIntentSuggestions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -2321,7 +2364,7 @@
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/suggest": {
       "get": {
         "description": "Get suggestion examples that would improve the accuracy of the entity model.",
-        "operationId": "Model_GetEntitySuggestions",
+        "operationId": "Model_ListEntitySuggestions",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -2762,6 +2805,7 @@
           {
             "name": "versionCloneObject",
             "in": "body",
+            "required":  "true",
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
@@ -3593,7 +3637,8 @@
           "201": {
             "description": "The ID of the newly created list.",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64"
             }
           },
           "default": {
@@ -4330,7 +4375,7 @@
     "/apps/{appId}/versions/{versionId}/regexentities": {
       "get": {
         "summary": "Gets information about the regex entity models.",
-        "operationId": "Model_GetRegexEntityInfos",
+        "operationId": "Model_ListRegexEntityInfos",
         "produces": [
           "application/json"
         ],
@@ -4419,7 +4464,7 @@
     "/apps/{appId}/versions/{versionId}/patternanyentities": {
       "get": {
         "summary": "Get information about the Pattern.Any entity models.",
-        "operationId": "Model_GetPatternAnyEntityInfos",
+        "operationId": "Model_ListPatternAnyEntityInfos",
         "produces": [
           "application/json"
         ],
@@ -4508,7 +4553,7 @@
     "/apps/{appId}/versions/{versionId}/entities/{entityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetEntityRoles",
+        "operationId": "Model_ListEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4607,7 +4652,7 @@
     "/apps/{appId}/versions/{versionId}/prebuilts/{entityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetPrebuiltEntityRoles",
+        "operationId": "Model_ListPrebuiltEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4706,7 +4751,7 @@
     "/apps/{appId}/versions/{versionId}/closedlists/{entityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetClosedListEntityRoles",
+        "operationId": "Model_ListClosedListEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4805,7 +4850,7 @@
     "/apps/{appId}/versions/{versionId}/regexentities/{entityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetRegexEntityRoles",
+        "operationId": "Model_ListRegexEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4904,7 +4949,7 @@
     "/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetCompositeEntityRoles",
+        "operationId": "Model_ListCompositeEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -4993,7 +5038,7 @@
     "/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetPatternAnyEntityRoles",
+        "operationId": "Model_ListPatternAnyEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -5092,7 +5137,7 @@
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetHierarchicalEntityRoles",
+        "operationId": "Model_ListHierarchicalEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -5181,7 +5226,7 @@
     "/apps/{appId}/versions/{versionId}/customprebuiltentities/{entityId}/roles": {
       "get": {
         "summary": "Get All Entity Roles for a given entity",
-        "operationId": "Model_GetCustomPrebuiltEntityRoles",
+        "operationId": "Model_ListCustomPrebuiltEntityRoles",
         "produces": [
           "application/json"
         ],
@@ -7152,7 +7197,7 @@
     "/apps/{appId}/versions/{versionId}/patternrules": {
       "get": {
         "summary": "Returns an application version's patterns.",
-        "operationId": "Pattern_GetPatterns",
+        "operationId": "Pattern_ListPatterns",
         "produces": [
           "application/json"
         ],
@@ -7440,7 +7485,7 @@
     "/apps/{appId}/versions/{versionId}/intents/{intentId}/patternrules": {
       "get": {
         "summary": "Returns patterns to be retrieved for the specific intent.",
-        "operationId": "Pattern_GetIntentPatterns",
+        "operationId": "Pattern_ListIntentPatterns",
         "produces": [
           "application/json"
         ],
@@ -7535,7 +7580,10 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AppVersionSettingObject"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AppVersionSettingObject"
+              }
             },
             "description": "A list of the updated application version settings."
           }
@@ -7699,7 +7747,7 @@
     "/azureaccounts": {
       "get": {
         "description": "Gets the LUIS azure accounts for the user using his ARM token.",
-        "operationId": "AzureAccounts_GetUserLUISAccounts",
+        "operationId": "AzureAccounts_ListUserLUISAccounts",
         "summary": "user - Get LUIS azure accounts",
         "parameters": [
           {
@@ -7967,7 +8015,8 @@
         "public": {
           "description": "Setting your application as public allows other people to use your application's endpoint using their own keys.",
           "type": "boolean",
-          "x-nullable": false
+          "x-nullable": false,
+          "x-ms-client-name": "isPublic"
         }
       }
     },
@@ -10153,7 +10202,6 @@
       "description": "The publishing slot name.",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "x-ms-parameter-location": "method"
     },
     "SkipInPath": {
@@ -10182,15 +10230,6 @@
       "type": "boolean",
       "default": false,
       "x-ms-parameter-location": "method"
-    },
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
     },
     "BearerAuthPath": {
       "name": "Authorization",

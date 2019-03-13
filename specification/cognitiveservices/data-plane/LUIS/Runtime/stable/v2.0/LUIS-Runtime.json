@@ -5,11 +5,52 @@
     "version": "2.0"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/luis/v2.0",
-    "useSchemePrefix": false,
+    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.{AzureCloud}/luis/v2.0",
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "name": "AzureRegion",
+        "description": "Supported Azure regions for Cognitive Services endpoints",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-enum": {
+          "name": "AzureRegions",
+          "modelAsString": false
+        },
+        "enum": [
+          "westus",
+          "westeurope",
+          "southeastasia",
+          "eastus2",
+          "westcentralus",
+          "westus2",
+          "eastus",
+          "southcentralus",
+          "northeurope",
+          "eastasia",
+          "australiaeast",
+          "brazilsouth",
+          "virginia"
+        ]
+      },
+      {
+        "name": "AzureCloud",
+        "description": "Supported Azure Clouds for Cognitive Services endpoints",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-enum": {
+          "name": "AzureClouds",
+          "modelAsString": false
+        },
+        "enum": [
+          "com",
+          "us"
+        ]
       }
     ]
   },
@@ -35,6 +76,7 @@
             "name": "appId",
             "in": "path",
             "type": "string",
+            "format": "uuid",
             "required": true,
             "description": "The LUIS application ID (guid)."
           },
@@ -115,6 +157,7 @@
             "name": "appId",
             "in": "path",
             "type": "string",
+            "format":  "uuid",
             "required": true,
             "description": "The LUIS application ID (Guid)."
           },
@@ -406,14 +449,5 @@
     }
   },
   "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    }
   }
 }
