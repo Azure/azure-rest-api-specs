@@ -1741,11 +1741,11 @@
           "readOnly": true,
           "example": "1.2.3.4"
         },
-        "vlanId": {
-          "title": "vlanid",
-          "type": "integer",
-          "description": "Vlan Id",
-          "example": 1337
+        "subnet": {
+          "title": "subnet",
+          "type": "string",
+          "description": "The subnet",
+          "example": "1.2.3.4"
         },
         "startIp": {
           "title": "startIp",
@@ -1754,7 +1754,7 @@
           "example": "1.2.3.4"
         },
         "endIp": {
-          "title": "startIp",
+          "title": "endIp",
           "description": "The end of IPv4 address range to use when creating a new mount target",
           "type": "string",
           "example": "1.2.3.4"
@@ -1770,6 +1770,12 @@
           "description": "The netmask of the IPv4 address range to use when creating a new mount target",
           "type": "string",
           "example": "255.255.255.0"
+        },
+        "smbServerFqdn": {
+          "title": "smbServerFQDN",
+          "description": "The SMB server's Fully Qualified Doman Name, FQDN",
+          "type": "string",
+          "example": "fullyqualified.domainname.com"
         },
         "provisioningState": {
           "type": "string",
