@@ -21,6 +21,6 @@ These settings apply only when `--tag=package-2019-03-01-preview --ruby` is spec
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2019-03-01-preview' && $(ruby)
-namespace: "Azure::Peering::Mgmt::V2019_03_01"
+namespace: "Azure::Peering::Mgmt::V2019_03_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_peering/lib
 ```
