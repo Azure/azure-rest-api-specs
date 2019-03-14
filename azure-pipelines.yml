@@ -56,6 +56,7 @@ jobs:
     displayName: 'Model Validation'
 
 - job: "BreakingChange"
+  condition: "not(variables['PRIVATE'])"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
@@ -69,6 +70,7 @@ jobs:
     displayName: 'Breaking Changes'
 
 - job: "LintDiff"
+  condition: "not(variables['PRIVATE'])"
   variables:
     NODE_OPTIONS: '--max-old-space-size=8192'
   pool:
