@@ -286,7 +286,8 @@
           "description": "Lock mode.",
           "enum": [
             "None",
-            "AllResources"
+            "AllResourcesReadOnly",
+            "AllResourcesDoNotDelete"
           ],
           "x-ms-enum": {
             "name": "AssignmentLockMode",
@@ -411,7 +412,7 @@
           "type": "string"
         },
         "secretVersion": {
-          "description": "If multiple versions, the version of the secret.",
+          "description": "The version of the secret to use. If left blank, the latest version of the secret is used.",
           "type": "string"
         }
       },

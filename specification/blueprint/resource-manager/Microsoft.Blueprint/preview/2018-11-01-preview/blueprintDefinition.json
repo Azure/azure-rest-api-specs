@@ -1099,7 +1099,7 @@
           "type": "string"
         },
         "secretVersion": {
-          "description": "If multiple versions, the version of the secret.",
+          "description": "The version of the secret to use. If left blank, the latest version of the secret is used.",
           "type": "string"
         }
       },
@@ -1205,7 +1205,19 @@
             "type": "string",
             "description": "Name of peer artifact."
           }
+        },
+        "tags": {
+          "description": "Tags to be assigned to this resource group.",
+          "$ref": "#/definitions/ResourceGroupTagCollection"
         }
+      }
+    },
+    "ResourceGroupTagCollection": {
+      "description": "A dictionary of resource group tag values.",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "ParameterDefinitionMetadata": {

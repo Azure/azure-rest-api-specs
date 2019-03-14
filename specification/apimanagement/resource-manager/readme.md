@@ -39,29 +39,36 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 input-file:
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimanagement.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapis.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimapisByTags.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimauthorizationservers.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimbackends.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimcaches.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimcertificates.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimdeployment.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimdiagnostics.json
-- Microsoft.ApiManagement/preview/2018-06-01-preview/apimemailtemplate.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimemailtemplates.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimgroups.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimidentityprovider.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimissues.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimloggers.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnotifications.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnetworkstatus.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimpolicies.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimpolicysnippets.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimportalsettings.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproducts.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimproductsByTags.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproperties.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimquotas.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimregions.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimreports.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimsubscriptions.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimtagresources.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimtags.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimtenant.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimusers.json
-- Microsoft.ApiManagement/preview/2018-06-01-preview/apimversionsets.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimapiversionsets.json
 ```
 
 ## Suppression
