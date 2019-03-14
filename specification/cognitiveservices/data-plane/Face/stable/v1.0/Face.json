@@ -1026,7 +1026,7 @@
             "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
           },
           {
-            "$ref": "#/parameters/RecognitionModel"
+            "$ref": "#/parameters/recognitionModel"
           }
         ],
         "consumes": [
@@ -2475,7 +2475,7 @@
             "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
           },
           {
-            "$ref": "#/parameters/RecognitionModel"
+            "$ref": "#/parameters/recognitionModel"
           }
         ],
         "consumes": [
@@ -3805,7 +3805,7 @@
     },
     "RecognitionModel": {
       "type": "string",
-      "description": "Recognition model name. Recognition model is used when the face features are extracted and associated with (Large)FaceList or (Large)PersonGroup. So a recognition model version could be provided when performing a Detection and create (Large)FaceList or (Large)PersonGroup create. If the user does not provide recognition model, default is 'recognition_v01'.",
+      "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds, (Large)FaceList or (Large)PersonGroup. A recognition model name can be provided when performing Face - Detect or (Large)FaceList - Create or (Large)PersonGroup - Create. The default value is 'recognition_v01', if latest model needed, please explicitly specify the model you need.",
       "default": "recognition_v01",
       "x-nullable": false,
       "x-ms-enum": {
@@ -4182,9 +4182,9 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
-    "RecognitionModel": {
-      "name": "RecognitionModel",
-      "description": "Recognition model name. Recognition model is used when the face features are extracted and associated with (Large)FaceList or (Large)PersonGroup. So a recognition model version could be provided when performing a Detection and create (Large)FaceList or (Large)PersonGroup create. If the user does not provide recognition model, default is 'recognition_v01'.",
+    "recognitionModel": {
+      "name": "recognitionModel",
+      "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds, (Large)FaceList or (Large)PersonGroup. A recognition model name can be provided when performing Face - Detect or (Large)FaceList - Create or (Large)PersonGroup - Create. The default value is 'recognition_v01', if latest model needed, please explicitly specify the model you need.",
       "default": "recognition_v01",
       "required": false,
       "type": "string",
