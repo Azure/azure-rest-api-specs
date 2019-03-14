@@ -1,3 +1,9 @@
+# Latest Stable  
+
+> see https://aka.ms/autorest
+
+This profile definition was created based on 2019-03-01-hybrid, 2018-03-01-hybrid and 2017-03-09-profile.
+
 
 ``` yaml
 profiles:
