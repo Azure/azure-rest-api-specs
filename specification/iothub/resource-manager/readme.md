@@ -26,7 +26,16 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-04
+tag: package-2018-12-preview
+```
+
+### Tag: package-2018-12-preview
+
+These settings apply only when `--tag=package-2018-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12-preview'
+input-file:
+- Microsoft.Devices/preview/2018-12-01-preview/iothub.json
 ```
 
 ### Tag: package-2018-04
@@ -132,7 +141,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-iothub
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-12-preview
   - tag: package-2018-04
+```
+
+### Tag: package-2018-12-preview and java
+
+These settings apply only when `--tag=package-2018-12-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-12-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.iothub.v2018_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/iothub/resource-manager/v2018_12_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-04 and java

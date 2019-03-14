@@ -1,60 +1,27 @@
 language: node_js
 node_js:
-  - '8'
+  - '10'
 services:
   - docker
 env:
   matrix:
     - MODE=branchStrategy
     - MODE=syntax CHECK_NAME="Syntax Validator"
-    - MODE=python CHECK_NAME="SDK Generation - Python"
-    - MODE=node CHECK_NAME="SDK Generation - Node"
-    - MODE=typescript CHECK_NAME="SDK Generation - TypeScript"
-    - MODE=ruby CHECK_NAME="SDK Generation - Ruby"
-    - MODE=java CHECK_NAME="SDK Generation - Java"
-    - MODE=go CHECK_NAME="SDK Generation - Go"
     - MODE=semantic PR_ONLY=true CHECK_NAME="Semantic Validator"
     - MODE=semantic PR_ONLY=false
     - MODE=model PR_ONLY=true CHECK_NAME="Model Validator"
+    # - MODE=model PR_ONLY=false
     - MODE=BreakingChange PR_ONLY=true CHECK_NAME="Breaking Changes"
-    - MODE=lintdiff PR_ONLY=true CHECK_NAME="Linter Diff"
+    - MODE=lintdiff PR_ONLY=true CHECK_NAME="Linter Diff" NODE_OPTIONS=--max-old-space-size=8192
 matrix:
   fast_finish: true
   allow_failures:
-    - env: MODE=node CHECK_NAME="SDK Generation - Node"
-    - env: MODE=typescript CHECK_NAME="SDK Generation - TypeScript"
-    - env: MODE=ruby CHECK_NAME="SDK Generation - Ruby"
-    - env: MODE=java CHECK_NAME="SDK Generation - Java"
-    - env: MODE=go CHECK_NAME="SDK Generation - Go"
     - env: MODE=semantic PR_ONLY=false
+    - env: MODE=model PR_ONLY=false
     - env: MODE=model PR_ONLY=true CHECK_NAME="Model Validator"
     - env: MODE=BreakingChange PR_ONLY=true CHECK_NAME="Breaking Changes"
 install: true
 script:
-  - >-
-    if [[ $MODE == 'python' ]]; then
-      travis_wait 30 scripts/swagger-to-sdk.sh Azure/azure-sdk-for-python -v
-    fi
-  - >-
-    if [[ $MODE == 'node' ]]; then
-      travis_wait 30 scripts/swagger-to-sdk.sh Azure/azure-sdk-for-node -v
-    fi
-  - >-
-    if [[ $MODE == 'typescript' ]]; then
-      travis_wait 30 scripts/swagger-to-sdk.sh Azure/azure-sdk-for-js -v
-    fi
-  - >-
-    if [[ $MODE == 'ruby' ]]; then
-      travis_wait 30 scripts/swagger-to-sdk.sh Azure/azure-sdk-for-ruby -v
-    fi
-  - >-
-    if [[ $MODE == 'go' ]]; then
-      travis_wait 30 scripts/swagger-to-sdk.sh Azure/azure-sdk-for-go -o latest -v
-    fi
-  - >-
-    if [[ $MODE == 'java' ]]; then
-      travis_wait 30 scripts/swagger-to-sdk.sh Azure/azure-sdk-for-java -v
-    fi
   - >-
     if [[ $MODE == 'branchStrategy' ]]; then
       # Check to ensure CI is not executing for a PR against the master branch in the private repository

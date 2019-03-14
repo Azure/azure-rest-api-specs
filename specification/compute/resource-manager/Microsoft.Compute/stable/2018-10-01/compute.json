@@ -2159,13 +2159,13 @@
             "type": "string",
             "description": "The name of the virtual machine."
           },
-          { 
+          {
             "name": "parameters",
             "in": "body",
             "required": false,
             "schema": {
               "$ref": "#/definitions/VirtualMachineReimageParameters"
-             },
+            },
             "description": "Parameters supplied to the Reimage Virtual Machine operation."
           },
           {
@@ -4430,10 +4430,10 @@
         "Aligned"
       ],
       "x-ms-enum": {
-        "name": "AvailabilitySetSkuTypes",        
+        "name": "AvailabilitySetSkuTypes",
         "modelAsString": true
       }
-    },    
+    },
     "AvailabilitySet": {
       "properties": {
         "properties": {
@@ -4814,8 +4814,8 @@
     "AutomaticOSUpgradeProperties": {
       "properties": {
         "automaticOSUpgradeSupported": {
-           "type": "boolean",
-           "description": "Specifies whether automatic OS upgrade is supported on the image."
+          "type": "boolean",
+          "description": "Specifies whether automatic OS upgrade is supported on the image."
         }
       },
       "required": [
@@ -5395,7 +5395,7 @@
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         },
         "diffDiskSettings": {
-         "$ref": "#/definitions/DiffDiskSettings",
+          "$ref": "#/definitions/DiffDiskSettings",
           "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
         },
         "createOption": {
@@ -5647,7 +5647,7 @@
         },
         "certificateStore": {
           "type": "string",
-          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbprint>.prv for private key. Both of these files are .pem formatted."
+          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name &lt;UppercaseThumbprint&gt;.crt for the X509 certificate file and &lt;UppercaseThumbprint&gt;.prv for private key. Both of these files are .pem formatted."
         }
       },
       "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
@@ -5672,7 +5672,7 @@
       "properties": {
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
         },
         "adminUsername": {
           "type": "string",
@@ -6566,7 +6566,7 @@
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diffDiskSettings": {
-         "$ref": "#/definitions/DiffDiskSettings",
+          "$ref": "#/definitions/DiffDiskSettings",
           "description": "Specifies the ephemeral disk Settings for the operating system disk used by the virtual machine scale set."
         },
         "diskSizeGB": {
@@ -7800,6 +7800,10 @@
           "readOnly": true,
           "type": "boolean",
           "description": "Specifies whether the latest model has been applied to the virtual machine."
+        },
+        "protectFromScaleIn" : {
+          "type": "boolean",
+          "description": "Specifies whether the virtual machine instance shouldn't be considered for deletion during a scale-in operation"
         },
         "vmId": {
           "readOnly": true,

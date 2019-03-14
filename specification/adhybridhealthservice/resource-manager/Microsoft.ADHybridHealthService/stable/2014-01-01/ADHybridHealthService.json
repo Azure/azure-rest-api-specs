@@ -195,7 +195,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Sucessfully updated service.",
+            "description": "Successfully updated service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -2787,7 +2787,7 @@
           {
             "name": "serviceMemberId",
             "in": "path",
-            "description": "The server Id for which the laert details needs to be queried.",
+            "description": "The server Id for which the alert details needs to be queried.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3258,6 +3258,76 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/blobUris": {
+      "get": {
+        "tags": [ "Reports" ],
+        "description": "Gets all Risky IP report URIs for the last 7 days.",
+        "x-ms-examples": {
+          "services_listAllRiskyIpDownloadReport": {
+            "$ref": "./examples/RiskyIpDownload.json"
+          }
+        },
+        "operationId": "services_listAllRiskyIpDownloadReport",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },          
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Risky IP report URIs for the last 7 days.",
+            "schema": {
+              "$ref": "#/definitions/RiskyIPBlobUris"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/generateBlobUri": {
+      "post": {
+        "tags": [ "Reports" ],
+        "description": "Initiate the generation of a new Risky IP report. Returns the URI for the new one.",
+        "x-ms-examples": {
+          "services_listCurrentRiskyIpDownloadReport": {
+            "$ref": "./examples/RiskyIpDownload.json"
+          }
+        },
+        "operationId": "services_listCurrentRiskyIpDownloadReport",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },          
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The URI of the Risky IP report that was requested.",
+            "schema": {
+              "$ref": "#/definitions/RiskyIPBlobUris"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -3287,7 +3357,7 @@
       }
     },
     "AdditionalInformation": {
-      "description": "The addtional information for a property.",
+      "description": "The additional information for a property.",
       "type": "object",
       "properties": {
         "titleName": {
@@ -3374,7 +3444,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -3416,7 +3486,7 @@
           "format": "date-time"
         },
         "lastUpdated": {
-          "description": "The date and time, in UTC, when the server proeprties were last updated.",
+          "description": "The date and time, in UTC, when the server properties were last updated.",
           "type": "string",
           "format": "date-time"
         },
@@ -3577,7 +3647,7 @@
           }
         },
         "state": {
-          "description": "The alert state which can be either active or resolved with multile resolution types.",
+          "description": "The alert state which can be either active or resolved with multiple resolution types.",
           "type": "string",
           "enum": [
             "Active",
@@ -3684,7 +3754,7 @@
           "type": "string"
         },
         "state": {
-          "description": "The alert state which can be either active or resolved with multile resolution types.",
+          "description": "The alert state which can be either active or resolved with multiple resolution types.",
           "type": "string"
         },
         "shortName": {
@@ -3964,7 +4034,7 @@
             "Update",
             "Delete",
             "Obsolete",
-            "DeletAdd"
+            "DeleteAdd"
           ],
           "x-ms-enum": {
             "name": "DeltaOperationType",
@@ -3990,7 +4060,7 @@
           "type": "string"
         },
         "objectClasses": {
-          "description": "The olist of object classes.",
+          "description": "The list of object classes.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4144,7 +4214,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The time when the connection error occured.",
+          "description": "The time when the connection error occurred.",
           "type": "string",
           "format": "date-time"
         },
@@ -4196,7 +4266,7 @@
           "type": "string"
         },
         "entryNumber": {
-          "description": "The entry number for object error occured.",
+          "description": "The entry number for object error occurred.",
           "type": "integer"
         },
         "lineNumber": {
@@ -4208,7 +4278,7 @@
           "type": "integer"
         },
         "dn": {
-          "description": "The distingished name of the object.",
+          "description": "The distinguished name of the object.",
           "type": "string"
         },
         "anchor": {
@@ -4482,7 +4552,7 @@
           "type": "string"
         },
         "timeFirstOccured": {
-          "description": "The date and time when the export error first occured.",
+          "description": "The date and time when the export error first occurred.",
           "type": "string",
           "format": "date-time"
         },
@@ -4563,7 +4633,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The date and time of occurance.",
+          "description": "The date and time of occurrence.",
           "type": "string",
           "format": "date-time"
         },
@@ -4601,7 +4671,7 @@
           "format": "date-time"
         },
         "modifiedAttributeValue": {
-          "description": "The modified atttribute value.",
+          "description": "The modified attribute value.",
           "type": "string"
         }
       }
@@ -4956,7 +5026,7 @@
           "type": "string"
         },
         "consecutiveFailureCount": {
-          "description": "The number of consecutive faulire counts.",
+          "description": "The number of consecutive failure counts.",
           "type": "integer"
         },
         "namingContext": {
@@ -5106,7 +5176,7 @@
           "$ref": "#/definitions/AssociatedObject"
         },
         "modifiedOrRemovedAttributeValue": {
-          "description": "The modified or removed attribute vlaue.",
+          "description": "The modified or removed attribute value.",
           "type": "string"
         },
         "runStepResultId": {
@@ -5232,7 +5302,7 @@
           "type": "string"
         },
         "minValue": {
-          "description": "The minimun value.",
+          "description": "The minimum value.",
           "type": "integer"
         },
         "maxValue": {
@@ -5355,7 +5425,7 @@
       }
     },
     "ObjectWithSyncError": {
-      "description": "The objects withg sync errors.",
+      "description": "The objects with sync errors.",
       "type": "object",
       "properties": {
         "sourceOfAuthority": {
@@ -5391,7 +5461,7 @@
           "type": "string"
         },
         "attributeMultiValues": {
-          "description": "Indicates if the atttibute is multi-valued or not.",
+          "description": "Indicates if the attribute is multi-valued or not.",
           "type": "boolean"
         },
         "minLimit": {
@@ -5411,7 +5481,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The date and time of occurance.",
+          "description": "The date and time of occurrence.",
           "type": "string",
           "format": "date-time"
         },
@@ -5452,7 +5522,7 @@
           "readOnly": true
         },
         "value": {
-          "description": "List of operations supported by the Microsoft.ADHybridhHealthService resource provider.",
+          "description": "List of operations supported by the Microsoft.ADHybridHealthService resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -5460,7 +5530,7 @@
           }
         },
         "totalCount": {
-          "description": "The total count of opertaions.",
+          "description": "The total count of operations.",
           "type": "integer"
         },
         "continuationToken": {
@@ -5564,7 +5634,7 @@
           "type": "string"
         },
         "connectionTimeout": {
-          "description": "Connection timeoit for password extension.",
+          "description": "Connection timeout for password extension.",
           "type": "integer"
         },
         "user": {
@@ -5597,7 +5667,7 @@
           "type": "boolean"
         },
         "unlockAccount": {
-          "description": "Indicates if accounts should be unloacked when resetting password.",
+          "description": "Indicates if accounts should be unlocked when resetting password.",
           "type": "boolean"
         }
       }
@@ -5650,7 +5720,7 @@
           "type": "string"
         },
         "totalDcCount": {
-          "description": "The total numbe of domain controllers for a given forest.",
+          "description": "The total number of domain controllers for a given forest.",
           "type": "integer"
         },
         "errorDcCount": {
@@ -5721,6 +5791,51 @@
         }
       }
     },
+    "RiskyIPBlobUri": {
+      "description": "The blob uri pointing to Risky IP Report.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id for whom the report belongs to.",
+          "type": "string"
+        },
+        "serviceId": {
+          "description": "The service id for whom the report belongs to.",
+          "type": "string"
+        },
+        "resultSasUri": {
+          "description": "The blob uri for the report.",
+          "type": "string"
+        },
+        "blobCreateDateTime": {
+          "description": "Time at which the the new Risky IP report was requested.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "jobCompletionTime": {
+          "description": "Time at which the blob creation job for the new Risky IP report was completed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "Status of the Risky IP report generation.",
+          "type": "string"
+        }
+      }
+    },
+    "RiskyIPBlobUris": {
+      "description": "The list containing blob uris.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of blob uris.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RiskyIPBlobUri"
+          }
+        }
+      }
+    },
     "RuleErrorInfo": {
       "description": "The error details in legacy rule processing.",
       "type": "object",
@@ -5756,7 +5871,7 @@
           "type": "integer"
         },
         "objectProcessLimit": {
-          "description": "The obect processing limit.",
+          "description": "The object processing limit.",
           "type": "integer"
         },
         "objectDeleteLimit": {
@@ -5768,7 +5883,7 @@
           "type": "integer"
         },
         "partitionId": {
-          "description": "The Id of the partition that a current run setp operation is executing.",
+          "description": "The Id of the partition that a current run step operation is executing.",
           "type": "string"
         },
         "operationType": {
@@ -5879,7 +5994,7 @@
           "format": "date-time"
         },
         "customNotificationEmails": {
-          "description": "The list of additional emails that are configured to recieve notifications about the service.",
+          "description": "The list of additional emails that are configured to receive notifications about the service.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6027,7 +6142,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -6069,7 +6184,7 @@
           "format": "date-time"
         },
         "lastUpdated": {
-          "description": "The date and time, in UTC, when the server proeprties were last updated.",
+          "description": "The date and time, in UTC, when the server properties were last updated.",
           "type": "string",
           "format": "date-time"
         },
@@ -6216,7 +6331,7 @@
         },
         "alertSuppressionTimeInMins": {
           "type": "integer",
-          "description": "The time in minutues after which an alert will be autosupressed."
+          "description": "The time in minutes after which an alert will be auto-suppressed."
         },
         "consentedToMicrosoftDevOps": {
           "type": "boolean",
@@ -6245,11 +6360,11 @@
           "description": "The reason due to which the tenant was disabled in Azure Active Directory Connect Health."
         },
         "globalAdminsEmail": {
-          "type": "object",
+          "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The list of golbal administrators for the tenant."
+          "description": "The list of global administrators for the tenant."
         },
         "initialDomain": {
           "type": "string",

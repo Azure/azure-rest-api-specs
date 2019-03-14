@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Consumption.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Consumption, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for Consumption, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-2019-01
 ```
 
+
+### Tag: package-2019-01
+
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-01'
+input-file:
+  - Microsoft.Consumption/stable/2019-01-01/consumption.json
+```
 ### Tag: package-2017-11
 
 These settings apply only when `--tag=package-2017-11` is specified on the command line.
@@ -39,6 +48,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -49,6 +59,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
@@ -59,6 +70,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2018-05
 
 These settings apply only when `--tag=package-2018-05` is specified on the command line.
@@ -69,6 +81,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
@@ -79,6 +92,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
@@ -89,6 +103,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
@@ -99,6 +114,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: R2059
@@ -108,6 +124,7 @@ directive:
 ```
 
 ---
+
 ### Tag: package-2017-04-preview
 
 These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
@@ -118,6 +135,7 @@ input-file:
 ```
 
 ---
+
 ### Tag: package-2017-12-preview
 
 These settings apply only when `--tag=package-2017-12-preview` is specified on the command line.
@@ -128,8 +146,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -140,13 +158,13 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
 ```
-
 
 ## C#
 
@@ -179,11 +197,13 @@ python:
   package-version: 1.2.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-consumption/azure/mgmt/consumption
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -212,11 +232,11 @@ batch:
   - tag: package-2017-11
   - tag: package-2018-01
   - tag: package-2018-03
-  - tag: package-2017-12-preview
   - tag: package-2018-05
   - tag: package-2018-06
   - tag: package-2018-08
   - tag: package-2018-10
+  - tag: package-2019-01
 ```
 
 ### Tag: package-2017-04-preview and java
@@ -269,6 +289,16 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_03_31
 regenerate-manager: true
 generate-interface: true
+directive: 
+ - rename-model: 
+     from: CostTags 
+     to: CostTagsModel
+ - rename-model:
+     from: Tags 
+     to: TagsModel
+ - rename-model:
+     from: ReservationRecommendations
+     to: ReservationRecommendationsModel
 ```
 
 ### Tag: package-2017-12-preview and java
@@ -336,3 +366,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2019-01 and java
+
+These settings apply only when `--tag=package-2019-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.consumption.v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2019_01_01
+regenerate-manager: true
+generate-interface: true
+```
