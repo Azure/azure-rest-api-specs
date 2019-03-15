@@ -158,8 +158,8 @@
     },
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}" : {
       "put" : {
-        "summary" : "Place reservation purchase order",
-        "description" : "Place an order for `Reservation` and create `ReservationOrder` resource under the specificed URI\n",
+        "summary" : "Purchase `ReservationOrder`",
+        "description" : "Purchase `ReservationOrder` and create resource under the specificed URI\n",
         "operationId" : "ReservationOrder_Purchase",
         "x-ms-examples" : {
           "Purchase" : {
@@ -167,6 +167,9 @@
           }
         },
         "x-ms-long-running-operation" : true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "parameters" : [ {
           "$ref" : "#/parameters/ReservationOrderIdParameter"
         }, {
@@ -176,6 +179,12 @@
         } ],
         "tags" : [ "Reservation, Purchase" ],
         "responses" : {
+          "200" : {
+            "description" : "The resource has been created",
+            "schema" : {
+              "$ref" : "#/definitions/ReservationOrderResponse"
+            }
+          },
           "202" : {
             "description" : "The request is accepted and is being processed",
             "schema" : {
