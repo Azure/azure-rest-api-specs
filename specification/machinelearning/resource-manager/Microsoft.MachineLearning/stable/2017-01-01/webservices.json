@@ -152,7 +152,7 @@
             "description": "The payload to use to patch the web service.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WebService"
+              "$ref": "#/definitions/PatchedWebService"
             }
           },
           {
@@ -443,9 +443,42 @@
         }
       }
     },
+    "PatchedResource": {
+      "description": "Azure resource.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Specifies the resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Specifies the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string",
+		  "readOnly": true
+        },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "WebService": {
       "type": "object",
-      "description": "Instance of an Azure ML web service resource.",
+      "description": "Instance of an Patched Azure ML web service resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -460,6 +493,21 @@
       "required": [
         "properties"
       ]
+    },
+	"PatchedWebService": {
+      "type": "object",
+      "description": "Instance of an Patched Azure ML web service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebServiceProperties",
+          "description": "Contains the property payload that describes the web service."
+        }
+      }
     },
     "WebServiceProperties": {
       "type": "object",
