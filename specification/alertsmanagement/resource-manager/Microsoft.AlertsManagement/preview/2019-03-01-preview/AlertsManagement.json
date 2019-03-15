@@ -1178,11 +1178,23 @@
     "ProxyResource": {
       "x-ms-azure-esource": true,
       "description": "Proxy Resource",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
         }
-      ]
+      }
     },
     "alert": {
       "description": "An alert created in alert management service.",
@@ -1886,10 +1898,6 @@
           },
           "type": "array",
           "description": "Summary of alertSeverities in the smart group"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts."
         }
       }
     },
