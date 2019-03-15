@@ -61,7 +61,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field | Supported operators    | Supported functions                                   |\n|-------|------------------------|-------------------------------------------------------|\n| tags  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith           |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|tags | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -81,6 +81,12 @@
             "description": "A Collection of the Property entities for the specified API Management service instance.",
             "schema": {
               "$ref": "#/definitions/PropertyCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -110,7 +116,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -123,10 +129,10 @@
           "200": {
             "description": "Specified Property entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -137,7 +143,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Property"
         ],
@@ -156,7 +162,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -205,7 +211,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "name": "parameters",
@@ -231,12 +237,24 @@
             "description": "Property was successfully created.",
             "schema": {
               "$ref": "#/definitions/PropertyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "Property was successfully updated.",
             "schema": {
               "$ref": "#/definitions/PropertyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -266,7 +284,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "name": "parameters",
@@ -318,7 +336,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -457,16 +475,5 @@
       "description": "Property Entity Base Parameters set."
     }
   },
-  "parameters": {
-    "PropertyIdParameter": {
-      "name": "propId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the property.",
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

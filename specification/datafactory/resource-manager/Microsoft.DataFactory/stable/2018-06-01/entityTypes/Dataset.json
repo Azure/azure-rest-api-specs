@@ -763,47 +763,6 @@
         "tableName"
       ]
     },
-    "AzureDataLakeStoreCosmosStructuredStreamDataset": {
-      "x-ms-discriminator-value": "AzureDataLakeStoreCosmosStructuredStreamFile",
-      "description": "Azure Data Lake Store Cosmos Structured Stream dataset.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Dataset"
-        }
-      ],
-      "properties": {
-        "typeProperties": {
-          "description": "Azure Data Lake Store Cosmos Structured Stream dataset properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AzureDataLakeStoreCosmosStructuredStreamDatasetTypeProperties"
-        }
-      },
-      "required": [
-        "typeProperties"
-      ]
-    },
-    "AzureDataLakeStoreCosmosStructuredStreamDatasetTypeProperties": {
-      "description": "Azure Data Lake Store Cosmos Structured Stream dataset properties.",
-      "properties": {
-        "folderPath": {
-          "type": "object",
-          "description": "Path to the folder in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
-        },
-        "fileName": {
-          "type": "object",
-          "description": "The name of the file in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
-        },
-        "generatedFromActivity": {
-          "type": "object",
-          "description": "Flag to indicate if this dataset is been generated from Compilation Activity. Type: boolean (or Expression with resultType boolean)."
-        }
-      },
-      "required": [
-        "folderPath",
-        "fileName"
-      ]
-    },
     "FileShareDataset": {
       "x-ms-discriminator-value": "FileShare",
       "description": "An on-premises file system dataset.",
