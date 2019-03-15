@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Reservations RP.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Reservations, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for Reservations, simply [Install AutoRest](https://aka.ms/auto
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06
+tag: package-preview-2019-04
 ```
 
+
+### Tag: package-preview-2019-04
+
+These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-04'
+input-file:
+  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+```
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
@@ -48,8 +57,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -95,11 +104,13 @@ python:
   package-version: 0.3.2
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-reservations/azure/mgmt/reservations
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
