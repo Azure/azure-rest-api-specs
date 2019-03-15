@@ -2983,7 +2983,7 @@
             }
           },
           "default": {
-            "description": "Eventhub error response describing why the operation failed.",
+            "description": "ServiceBus error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -4507,6 +4507,9 @@
           "description": "Resource ID of Virtual Network Subnet"
         }
       },
+      "required": [
+        "id"
+      ],
       "description": "Properties supplied for Subnet"
     },
     "NWRuleSetIpRules": {
@@ -4529,7 +4532,7 @@
           "default": "Allow"
         }
       },
-      "description": "The response from the List namespace operation."
+      "description": "Description of NetWorkRuleSet - IpRules resource."
     },
     "NWRuleSetVirtualNetworkRules": {
       "x-ms-client-flatten": true,
@@ -4543,7 +4546,7 @@
           "description": "Value that indicates whether to ignore missing VNet Service Endpoint"
         }
       },
-      "description": "The response from the List namespace operation."
+      "description": "Description of VirtualNetworkRules - NetworkRules resource."
     },
     "NetworkRuleSet": {
       "properties": {
