@@ -1176,25 +1176,13 @@
       ]
     },
     "ProxyResource": {
-      "x-ms-azure-esource": true,
+      "x-ms-azure-resource": true,
       "description": "Proxy Resource",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
         }
-      }
+      ]
     },
     "alert": {
       "description": "An alert created in alert management service.",
