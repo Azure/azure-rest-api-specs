@@ -1,0 +1,63 @@
+{
+  "title": "Get a list of saved queries",
+  "description": "Get a list of saved queries within subscription id and resource group.",
+  "parameters": {
+    "subscriptionId": "024e2271-06fa-46b6-9079-f1ed3c7b070e",
+    "resourceGroupName": "My Resource Group",
+    "api-version": "2019-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/87f4f8b0-83c1-4aa9-b318-5237aeb15264/resources/rid1/providers/Microsoft.ResourceGraph/savedQueries/MyDockerVMs",
+            "name": "MyDockerVMs",
+            "type": "Microsoft.ResourceGraph/savedQueries",
+            "location": "west us",
+            "kind": "shared",
+            "tags": null,
+            "properties": {
+              "description": "Docker VMs in PROD",
+              "query": "where isnotnull(tags['Prod']) and properties.extensions[0].Name == 'docker'",
+              "queryType": "basic",
+              "scope": {
+                "list": [
+                  "55cfeab8-a07c-4e98-a527-a885fd696771",
+                  "f6a1a30a-a540-4465-be3c-d842fa368cef",
+                  "b2ce8b12-33b9-4b52-b735-3d04a6389687"
+                ],
+                "type": "sub"
+              },
+              "timeModified": "2019-03-12T13:51:13-07:00",
+              "modifiedBy": "{userId}"
+            }
+          },
+          {
+            "id": "/subscriptions/6abb2f31-3e6a-4134-9968-219a596012a0/resources/rid2/providers/Microsoft.ResourceGraph/savedQueries/MyTestVMs",
+            "name": "MyTestVMs",
+            "type": "Microsoft.ResourceGraph/savedQueries",
+            "location": "west us",
+            "kind": "shared",
+            "tags": null,
+            "properties": {
+              "description": "Test VMs in PROD",
+              "query": "where isnotnull(tags['Prod']) and properties.extensions[0].Name == 'test'",
+              "queryType": "basic",
+              "scope": {
+                "list": [
+                  "55cfeab8-a07c-4e98-a527-a885fd696771",
+                  "f6a1a30a-a540-4465-be3c-d842fa368cef",
+                  "b2ce8b12-33b9-4b52-b735-3d04a6389687"
+                ],
+                "type": "sub"
+              },
+              "timeModified": "2019-03-13T13:51:13-07:00",
+              "modifiedBy": "{userId}"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

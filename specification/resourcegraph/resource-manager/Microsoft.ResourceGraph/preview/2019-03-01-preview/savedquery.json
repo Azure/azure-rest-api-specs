@@ -1,0 +1,601 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Resource Graph Saved Query",
+    "description": "Azure Resource Graph Saved Query API Reference",
+    "version": "2019-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/savedQuery": {
+      "get": {
+        "description": "Get all saved query defined within a specified subscription and resource group.",
+        "operationId": "SavedQuery_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more saved queries.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get a list of Saved Queries": {
+            "$ref": "./examples/SavedQueryList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/savedQuery/{resourceName}": {
+      "get": {
+        "description": "Get a single saved query by its resourceName.",
+        "operationId": "SavedQuery_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A saved query definition.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Saved Query": {
+            "$ref": "./examples/SavedQueryGet.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a saved query.",
+        "operationId": "SavedQuery_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The saved query has been successfully deleted."
+          },
+          "204": {
+            "description": "The resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Saved Query": {
+            "$ref": "./examples/SavedQueryDelete.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new saved query.",
+        "operationId": "SavedQuery_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "savedQueryProperties",
+            "description": "Properties that need to be specified to create a new saved query.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavedQueryResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The newly created saved query.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryResource"
+            }
+          },
+          "201": {
+            "description": "The newly created saved query.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Saved Query": {
+            "$ref": "./examples/SavedQueryAdd.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates a saved query that has already been added.",
+        "operationId": "SavedQuery_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "SavedQueryUpdateParameters",
+            "description": "Properties that need to be specified to create a new saved query.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavedQueryUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The saved query definition updated.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/SavedQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Saved Query": {
+            "$ref": "./examples/SavedQueryUpdate.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceGraph/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "SharedTypeKind",
+            "modelAsString": true
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "SavedQueryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SavedQueryResource"
+          },
+          "description": "An array of saved queries."
+        }
+      },
+      "description": "Saved query list result."
+    },
+    "SavedQueryResource": {
+      "description": "Saved Query entity definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a saved query for an Azure resource.",
+          "$ref": "#/definitions/SavedQueryProperties"
+        }
+      }
+    },
+    "Scope": {
+      "description": "Contains a list of subscriptions or management groups.",
+      "properties": {
+        "list": {
+          "type": "string",
+          "description": "The list of subscriptions or management groups."
+        },
+        "type": {
+          "description": "Enum indicating a type of a list. it is 'sub' for subscriptions or 'mg' for management group",
+          "x-ms-client-name": "type",
+          "default": "sub",
+          "type": "string",
+          "enum": [
+            "sub",
+            "mg"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SavedQueryProperties": {
+      "description": "Properties that contain a saved query.",
+      "required": [
+        "query",
+        "queryType"
+      ],
+      "properties": {
+        "timeModified": {
+          "type": "string",
+          "description": "Date and time in UTC of the last modification that was made to this saved query definition.",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "Unique user id of the specific user that owns this saved query."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of a saved query."
+        },
+        "scope": {
+          "description": "Scope of saved query.",
+          "$ref": "#/definitions/Scope"
+        },
+        "query": {
+          "type": "string",
+          "description": "KQL query that will be saved."
+        },
+        "queryType": {
+          "description": "Enum indicating a type saved query.",
+          "x-ms-client-name": "queryType",
+          "default": "basic",
+          "type": "string",
+          "enum": [
+            "basic",
+            "extended"
+          ],
+          "x-ms-enum": {
+            "name": "QueryType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SavedQueryUpdateParameters": {
+      "properties": {
+        "kind": {
+            "type": "string",
+            "description": "The kind of saved query. Choices are user and shared.",
+            "enum": [
+                "user",
+                "shared"
+            ],
+            "x-ms-enum": {
+                "name": "SharedTypeKind",
+                "modelAsString": true
+            }
+        },
+        "properties": {
+            "x-ms-client-flatten": true,
+            "description": "Metadata describing a saved query for an Azure resource.",
+            "$ref": "#/definitions/SavedQueryPropertiesUpdateParameters"
+        }
+    },
+    "description": "The parameters that can be provided when updating workbook properties properties."
+  },
+  "SavedQueryPropertiesUpdateParameters": {
+      "description": "Properties that contain a workbook for PATCH operation.",
+      "properties": {
+        "modifiedBy": {
+          "type": "string",
+          "description": "Unique user id of the specific user that owns this saved query."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of a saved query."
+        },
+        "scope": {
+          "description": "Scope of saved query.",
+          "$ref": "#/definitions/Scope"
+        },
+        "query": {
+          "type": "string",
+          "description": "KQL query that will be saved."
+        },
+        "queryType": {
+          "description": "Enum indicating a type saved query.",
+          "x-ms-client-name": "queryType",
+          "default": "basic",
+          "type": "string",
+          "enum": [
+            "basic",
+            "extended"
+          ],
+          "x-ms-enum": {
+            "name": "QueryType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "SavedQueryError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error message body that will indicate why the operation failed."
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Graph operations supported by the Resource Graph resource provider."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Resource Graph REST API operation definition.",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft Resource Graph.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description for the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of operations."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "SavedQueryResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Saved Query resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
