@@ -35,58 +35,12 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}": {
-      "head": {
-        "tags": [
-          "TenantAccess"
-        ],
-        "operationId": "TenantAccess_GetEntityTag",
-        "description": "Tenant access metadata",
-        "x-ms-examples": {
-          "ApiManagementHeadTenantAccess": {
-            "$ref": "./examples/ApiManagementHeadTenantAccess.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "get": {
         "tags": [
           "TenantAccess"
         ],
         "operationId": "TenantAccess_Get",
-        "description": "Get tenant access information details",
+        "description": "Get tenant access information details.",
         "x-ms-examples": {
           "ApiManagementGetTenantAccess": {
             "$ref": "./examples/ApiManagementGetTenantAccess.json"
@@ -106,7 +60,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+            "$ref": "#/parameters/AccessParameter"
           }
         ],
         "responses": {
@@ -120,12 +74,6 @@
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -158,7 +106,7 @@
             "description": "Parameters supplied to retrieve the Tenant Access Information."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+            "$ref": "#/parameters/AccessParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -189,7 +137,7 @@
           "TenantAccess"
         ],
         "operationId": "TenantAccess_RegeneratePrimaryKey",
-        "description": "Regenerate primary access key",
+        "description": "Regenerate primary access key.",
         "x-ms-examples": {
           "ApiManagementTenantAccessRegenerateKey": {
             "$ref": "./examples/ApiManagementTenantAccessRegenerateKey.json"
@@ -209,7 +157,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+            "$ref": "#/parameters/AccessParameter"
           }
         ],
         "responses": {
@@ -231,7 +179,7 @@
           "TenantAccess"
         ],
         "operationId": "TenantAccess_RegenerateSecondaryKey",
-        "description": "Regenerate secondary access key",
+        "description": "Regenerate secondary access key.",
         "x-ms-examples": {
           "ApiManagementTenantAccessRegenerateKey": {
             "$ref": "./examples/ApiManagementTenantAccessRegenerateKey.json"
@@ -251,7 +199,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+            "$ref": "#/parameters/AccessParameter"
           }
         ],
         "responses": {
@@ -293,7 +241,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+            "$ref": "#/parameters/AccessParameter"
           }
         ],
         "responses": {
@@ -344,7 +292,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+            "$ref": "#/parameters/AccessParameter"
           }
         ],
         "responses": {
@@ -386,7 +334,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+            "$ref": "#/parameters/AccessParameter"
           }
         ],
         "responses": {
@@ -441,7 +389,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+            "$ref": "#/parameters/ConfigurationParameter"
           }
         ],
         "responses": {
@@ -503,7 +451,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+            "$ref": "#/parameters/ConfigurationParameter"
           }
         ],
         "responses": {
@@ -561,7 +509,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+            "$ref": "#/parameters/ConfigurationParameter"
           }
         ],
         "responses": {
@@ -610,7 +558,7 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+            "$ref": "#/parameters/ConfigurationParameter"
           }
         ],
         "responses": {
@@ -789,5 +737,36 @@
       "description": "Tenant Configuration Synchronization State."
     }
   },
-  "parameters": {}
+  "parameters": {
+    "AccessParameter": {
+      "name": "accessName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "access"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AccessIdName"
+      },
+      "description": "The identifier of the Access configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "configuration"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "configurationIdName"
+      },
+      "description": "The identifier of the Git Configuration Operation.",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

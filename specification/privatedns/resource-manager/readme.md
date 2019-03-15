@@ -50,6 +50,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-typescript
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
 ```
@@ -105,7 +107,6 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/privatedns/resource-manager/v2018_09_01
 regenerate-manager: true
 generate-interface: true
-fconfig: '{"moduleName": "privatedns"}'
 ```
 
 ## Suppression

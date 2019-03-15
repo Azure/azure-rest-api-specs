@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups": {
       "get": {
         "tags": [
-          "Group"
+          "Groups"
         ],
         "operationId": "Group_ListByService",
         "description": "Lists a collection of groups defined within a service instance.",
@@ -61,7 +61,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|aadObjectId | eq |    |\n"
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| type        | eq, ne                 | N/A                                         |"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -82,12 +82,6 @@
             "schema": {
               "$ref": "#/definitions/GroupCollection"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
@@ -99,7 +93,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}": {
       "head": {
         "tags": [
-          "Group"
+          "Groups"
         ],
         "operationId": "Group_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the group specified by its identifier.",
@@ -116,7 +110,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -145,7 +139,7 @@
       },
       "get": {
         "tags": [
-          "Group"
+          "Groups"
         ],
         "operationId": "Group_Get",
         "description": "Gets the details of the group specified by its identifier.",
@@ -162,7 +156,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -194,7 +188,7 @@
       },
       "put": {
         "tags": [
-          "Group"
+          "Groups"
         ],
         "operationId": "Group_CreateOrUpdate",
         "description": "Creates or Updates a group.",
@@ -214,7 +208,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "name": "parameters",
@@ -240,24 +234,12 @@
             "description": "Group was created successfully.",
             "schema": {
               "$ref": "#/definitions/GroupContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
             }
           },
           "200": {
             "description": "Group already exists.",
             "schema": {
               "$ref": "#/definitions/GroupContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -270,7 +252,7 @@
       },
       "patch": {
         "tags": [
-          "Group"
+          "Groups"
         ],
         "operationId": "Group_Update",
         "description": "Updates the details of the group specified by its identifier.",
@@ -287,7 +269,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "name": "parameters",
@@ -322,7 +304,7 @@
       },
       "delete": {
         "tags": [
-          "Group"
+          "Groups"
         ],
         "operationId": "Group_Delete",
         "description": "Deletes specific group of the API Management service instance.",
@@ -339,7 +321,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -370,10 +352,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users": {
       "get": {
         "tags": [
-          "GroupUser"
+          "GroupUsers"
         ],
         "operationId": "GroupUser_List",
-        "description": "Lists a collection of user entities associated with the group.",
+        "description": "Lists a collection of the members of the group, specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementListGroupUsers": {
             "$ref": "./examples/ApiManagementListGroupUsers.json"
@@ -387,14 +369,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|firstName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|lastName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|email | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|registrationDate | ge, le, eq, ne, gt, lt |    |\n|note | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field            | Supported operators    | Supported functions               |\n|------------------|------------------------|-----------------------------------|\n| id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state            | eq                     | N/A                               |\n| registrationDate | ge, le, eq, ne, gt, lt | N/A                               |\n| note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -429,10 +411,10 @@
         "x-ms-odata": "./apimusers.json#/definitions/UserContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{uid}": {
       "head": {
         "tags": [
-          "GroupUser"
+          "GroupUsers"
         ],
         "operationId": "GroupUser_CheckEntityExists",
         "description": "Checks that user entity specified by identifier is associated with the group entity.",
@@ -449,10 +431,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
+            "$ref": "./apimusers.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -465,7 +447,7 @@
           "204": {
             "description": "Entity exists"
           },
-          "404": {
+          "404" : {
             "description": "Entity does not exists."
           },
           "default": {
@@ -476,12 +458,12 @@
           }
         }
       },
-      "put": {
+	  "put": {
         "tags": [
-          "GroupUser"
+          "GroupUsers"
         ],
         "operationId": "GroupUser_Create",
-        "description": "Add existing user to existing group",
+        "description": "Adds a user to the specified group.",
         "x-ms-examples": {
           "ApiManagementCreateGroupUser": {
             "$ref": "./examples/ApiManagementCreateGroupUser.json"
@@ -495,10 +477,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
+            "$ref": "./apimusers.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -530,7 +512,7 @@
       },
       "delete": {
         "tags": [
-          "GroupUser"
+          "GroupUsers"
         ],
         "operationId": "GroupUser_Delete",
         "description": "Remove existing user from existing group.",
@@ -547,10 +529,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GroupIdParameter"
+            "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
+            "$ref": "./apimusers.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -737,5 +719,17 @@
       "description": "Parameters supplied to the Update Group operation."
     }
   },
-  "parameters": {  }
+  "parameters": {
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Group identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

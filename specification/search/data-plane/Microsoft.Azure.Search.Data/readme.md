@@ -180,7 +180,7 @@ directive:
         replace( /(SuggestResult class.\s*\/\/\/ <\/summary>\s*)\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\/\/\/ message are deserialized this collection<\/param>/g, "$1/// <param name=\"document\">The document on which the suggested text is based.</param>" ).
         replace( /(public SuggestResult)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
         replace( /(public SuggestResult\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
-        replace( /(\/\/\/ <summary>\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\/\/\/ this collection(\s*\/\/\/ <\/summary>\s*)\[JsonExtensionData\]\s*public IDictionary<string, object> AdditionalProperties { get; set; }(\s*.*\s*\/\/\/ Gets the text of the suggestion result.)/g, "$1 Gets the document on which the suggested text is based. $2public T Document { get; private set; }$3" ).
+        replace( /(\/\/\/ <summary>\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\/\/\/ this collection(\s*\/\/\/ <\/summary>\s*)\[JsonExtensionData\]\s*public IDictionary<string, object> AdditionalProperties ({ get; set; }\s*.*\s*\/\/\/ Gets or sets the text of the suggestion result.)/g, "$1 Gets the document on which the suggested text is based. $2public T Document $3" ).
         replace( /(SuggestGetWithHttpMessagesAsync)/g, "$1<T>" ).
         replace( /(SuggestPostWithHttpMessagesAsync)/g, "$1<T>" ).
         replace( /(AzureOperationResponse<DocumentSuggestResult)/g, "$1<T>" ).
@@ -208,69 +208,4 @@ directive:
         replace( /(public IndexAction\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
         replace( /(\/\/\/ <summary>\s*\n\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\n\s*\/\/\/ this collection(\s*\n\s*\/\/\/ <\/summary>\s*\n\s*)\[JsonExtensionData\]\s*\n\s*public IDictionary<string, object> AdditionalProperties ({ get; set; }\s*.*\s*\/\/\/ Gets or sets the operation to perform on a document)/g, "$1 Gets the document on which the action will be performed; Fields other than the key are ignored for delete actions. $2public T Document $3" ).
         replace( /(IndexWithHttpMessagesAsync)\((IndexBatch)/g, "$1<T>($2<T>" )
-####
-  # Make the constructors and AdditionalProperties property of FacetResult internal.
-  - from: source-file-csharp
-    where: $
-    transform: >-
-      return $.
-        replace( /public (FacetResult\()/g, "internal $1" ).
-        replace( /public (IDictionary<string, object> AdditionalProperties { get; set; }\s*.*\s*\/\/\/ Gets the approximate count of documents falling within the bucket)/g, "internal $1" )
-####
-  # Make SearchResult and DocumentSearchResult generic so we can tell the deserializer what type to instantiate.
-  # For SearchResult, this means we also have to replace AdditionalProperties with a property of the generic type.
-  - from: source-file-csharp
-    where: $
-    transform: >-
-      return $.
-        replace( /(public partial class DocumentSearchResult)/g, "$1<T>" ).
-        replace( /(IList<SearchResult)/g, "$1<T>" ).
-        replace( /(public partial class SearchResult)/g, "$1<T>" ).
-        replace( /(SearchResult class.\s*\/\/\/ <\/summary>\s*)\/\/\/ <param name="additionalProperties">Unmatched properties from the\s*\/\/\/ message are deserialized this collection<\/param>/g, "$1/// <param name=\"document\">The document found by the search query.</param>" ).
-        replace( /(public SearchResult)\(IDictionary<string, object> additionalProperties = default\(IDictionary<string, object>\),/g, "$1(T document = default(T)," ).
-        replace( /(public SearchResult\(.*\)\s*{\s*)AdditionalProperties = additionalProperties;/g, "$1Document = document;" ).
-        replace( /(\/\/\/ <summary>\s*\/\/\/) Gets or sets unmatched properties from the message are deserialized\s*\/\/\/ this collection(\s*\/\/\/ <\/summary>\s*)\[JsonExtensionData\]\s*public IDictionary<string, object> AdditionalProperties { get; set; }(\s*.*\s*\/\/\/ Gets the relevance score of the document compared to other)/g, "$1 Gets the document found by the search query. $2public T Document { get; private set; }$3" ).
-        replace( /(SearchGetWithHttpMessagesAsync)/g, "$1<T>" ).
-        replace( /(SearchPostWithHttpMessagesAsync)/g, "$1<T>" ).
-        replace( /(AzureOperationResponse<DocumentSearchResult)/g, "$1<T>" ).
-        replace( /(DeserializeObject<DocumentSearchResult)/g, "$1<T>" )
-####
-  # Make DocumentSearchResult.NextPageParameters and NextLink internal. The public interface for continuations has
-  # historically been the custom-written SearchContinuationToken class, and we want to maintain that for backward
-  # compatibility. Also, NextPageParameters is of type SearchRequest, which is internal. For this reason, we also need
-  # to make the DocumentSearchResult constructors internal.
-  - from: source-file-csharp
-    where: $
-    transform: >-
-      return $.
-        replace( /public (SearchRequest NextPageParameters { get; private set; })/g, "internal $1" ).
-        replace( /public (string NextLink { get; private set; })/g, "internal $1" ).
-        replace( /public (DocumentSearchResult\()/g, "internal $1" )
-####
-  # Improve documentation for SearchParameters and make the ScoringParameters property strongly-typed for ease of use
-  # and backward compatibility.
-  # TODO: Remove the check for JsonIgnore in the ScoringParameters regex below once we have the ability to target
-  # specific files. It is currently necessary in order to only modify the property in SearchParameters and not
-  # SearchRequest.
-  - from: source-file-csharp
-    where: $
-    transform: >-
-      return $.
-        replace( /(\/\/\/) Additional parameters for SearchGet operation./g, "$1 Parameters for filtering, sorting, faceting, paging, and other search query behaviors." ).
-        replace( /(public SearchParameters\(.*IList<)string(> scoringParameters = default\(IList<)string/g, "$1ScoringParameter$2ScoringParameter" ).
-        replace( /(public IList<)string(> ScoringParameters { get; set; }\s*.*\s*.*\s*.*\s*.*\s*\[Newtonsoft.Json.JsonIgnore\])/g, "$1ScoringParameter$2" ).
-        replace( /(IList<)string(> scoringParameters = default\(IList<)string(>\);\s*if \(searchParameters != null\))/g, "$1ScoringParameter$2ScoringParameter$3" )
-####
-  # Split the generated SearchGet and SearchPost methods into separate parts so we can re-use them for ContinueSearch.
-  # TODO: Simplify the regexes below once we have the ability to target specific files. Later, remove this entirely once
-  # AutoRest has more flexibility around paging (the current x-ms-pageable implementation doesn't work for us because it
-  # doesn't model additional top-level response properties or continuation POST requests).
-  - from: source-file-csharp
-    where: $
-    transform: >-
-      return $.
-        replace( /(Task<AzureOperationResponse<DocumentSearchResult<T>>>) (SearchGetWithHttpMessagesAsync<T>)\((.*), (Newtonsoft.Json.JsonSerializerSettings requestSerializerSettings = null, Newtonsoft.Json.JsonSerializerSettings responseDeserializerSettings = null)\);/g, "$1 $2($3, $4);\n\n        $1 Continue$2(string url, System.Guid? clientRequestId, Dictionary<string, List<string>> customHeaders, bool shouldTrace, string invocationId, CancellationToken cancellationToken, $4);\n" ).
-        replace( /(Task<AzureOperationResponse<DocumentSearchResult<T>>>) (SearchPostWithHttpMessagesAsync<T>)\((.*), (Newtonsoft.Json.JsonSerializerSettings requestSerializerSettings = null, Newtonsoft.Json.JsonSerializerSettings responseDeserializerSettings = null)\);/g, "$1 $2($3, $4);\n\n        $1 Continue$2(string url, SearchRequest searchRequest, System.Guid? clientRequestId, Dictionary<string, List<string>> customHeaders, bool shouldTrace, string invocationId, CancellationToken cancellationToken, $4);\n" ).
-        replace( /(_queryParameters.Add\(string.Format\("searchMode=\{0\}",.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*)(\/\/ Create HTTP transport objects)/g, "$1return await ContinueSearchGetWithHttpMessagesAsync<T>(_url, clientRequestId, customHeaders, _shouldTrace, _invocationId, cancellationToken, requestSerializerSettings, responseDeserializerSettings).ConfigureAwait(false);\n        }\n\n        public async Task<AzureOperationResponse<DocumentSearchResult<T>>> ContinueSearchGetWithHttpMessagesAsync<T>(string _url, System.Guid? clientRequestId, Dictionary<string, List<string>> customHeaders, bool _shouldTrace, string _invocationId, CancellationToken cancellationToken, JsonSerializerSettings requestSerializerSettings, JsonSerializerSettings responseDeserializerSettings)\n        {\n            $2" ).
-        replace( /(docs\/search.post.search.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*.*\s*)(\/\/ Create HTTP transport objects)/g, "$1return await ContinueSearchPostWithHttpMessagesAsync<T>(_url, searchRequest, clientRequestId, customHeaders, _shouldTrace, _invocationId, cancellationToken, requestSerializerSettings, responseDeserializerSettings);\n        }\n\n        public async Task<AzureOperationResponse<DocumentSearchResult<T>>> ContinueSearchPostWithHttpMessagesAsync<T>(string _url, SearchRequest searchRequest, System.Guid? clientRequestId, Dictionary<string, List<string>> customHeaders, bool _shouldTrace, string _invocationId, CancellationToken cancellationToken, JsonSerializerSettings requestSerializerSettings, JsonSerializerSettings responseDeserializerSettings)\n        {\n            $2" )
 ```

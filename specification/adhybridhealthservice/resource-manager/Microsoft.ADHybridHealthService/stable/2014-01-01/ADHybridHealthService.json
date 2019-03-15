@@ -3258,76 +3258,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/blobUris": {
-      "get": {
-        "tags": [ "Reports" ],
-        "description": "Gets all Risky IP report URIs for the last 7 days.",
-        "x-ms-examples": {
-          "services_listAllRiskyIpDownloadReport": {
-            "$ref": "./examples/RiskyIpDownload.json"
-          }
-        },
-        "operationId": "services_listAllRiskyIpDownloadReport",
-        "parameters": [
-          {
-            "name": "serviceName",
-            "in": "path",
-            "description": "The name of the service.",
-            "required": true,
-            "type": "string"
-          },          
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Risky IP report URIs for the last 7 days.",
-            "schema": {
-              "$ref": "#/definitions/RiskyIPBlobUris"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/generateBlobUri": {
-      "post": {
-        "tags": [ "Reports" ],
-        "description": "Initiate the generation of a new Risky IP report. Returns the URI for the new one.",
-        "x-ms-examples": {
-          "services_listCurrentRiskyIpDownloadReport": {
-            "$ref": "./examples/RiskyIpDownload.json"
-          }
-        },
-        "operationId": "services_listCurrentRiskyIpDownloadReport",
-        "parameters": [
-          {
-            "name": "serviceName",
-            "in": "path",
-            "description": "The name of the service.",
-            "required": true,
-            "type": "string"
-          },          
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The URI of the Risky IP report that was requested.",
-            "schema": {
-              "$ref": "#/definitions/RiskyIPBlobUris"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
     }
   },
   "definitions": {
@@ -5788,51 +5718,6 @@
         "value": {
           "description": "The value.",
           "type": "boolean"
-        }
-      }
-    },
-    "RiskyIPBlobUri": {
-      "description": "The blob uri pointing to Risky IP Report.",
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "description": "The tenant id for whom the report belongs to.",
-          "type": "string"
-        },
-        "serviceId": {
-          "description": "The service id for whom the report belongs to.",
-          "type": "string"
-        },
-        "resultSasUri": {
-          "description": "The blob uri for the report.",
-          "type": "string"
-        },
-        "blobCreateDateTime": {
-          "description": "Time at which the the new Risky IP report was requested.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "jobCompletionTime": {
-          "description": "Time at which the blob creation job for the new Risky IP report was completed.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "description": "Status of the Risky IP report generation.",
-          "type": "string"
-        }
-      }
-    },
-    "RiskyIPBlobUris": {
-      "description": "The list containing blob uris.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of blob uris.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RiskyIPBlobUri"
-          }
         }
       }
     },

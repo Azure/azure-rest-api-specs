@@ -64,7 +64,11 @@ async function getLinterResult(swaggerPath) {
         throw new Error("AutoRest failed");
     }
 
-    let resultString = stdout + stderr;
+    if (stderr !== "") {
+        console.error(`Error: ${stderr}`)
+        process.exit(1)
+    }
+    let resultString = stdout;
     if (resultString.indexOf('{') !== -1) {
         resultString = resultString.replace(/Processing batch task - {.*} \.\n/g, "");
         resultString = "[" + resultString.substring(resultString.indexOf('{')).trim().replace(/\}\n\{/g, "},\n{") + "]";

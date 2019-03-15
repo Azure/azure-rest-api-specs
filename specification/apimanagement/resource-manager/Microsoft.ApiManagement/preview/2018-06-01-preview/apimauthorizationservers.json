@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers": {
       "get": {
         "tags": [
-          "AuthorizationServer"
+          "AuthorizationServers"
         ],
         "operationId": "AuthorizationServer_ListByService",
         "description": "Lists a collection of authorization servers defined within a service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -79,12 +79,6 @@
             "schema": {
               "$ref": "#/definitions/AuthorizationServerCollection"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
@@ -96,7 +90,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}": {
       "head": {
         "tags": [
-          "AuthorizationServer"
+          "AuthorizationServers"
         ],
         "operationId": "AuthorizationServer_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the authorizationServer specified by its identifier.",
@@ -113,7 +107,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
+            "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -142,7 +136,7 @@
       },
       "get": {
         "tags": [
-          "AuthorizationServer"
+          "AuthorizationServers"
         ],
         "operationId": "AuthorizationServer_Get",
         "description": "Gets the details of the authorization server specified by its identifier.",
@@ -159,7 +153,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
+            "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -191,7 +185,7 @@
       },
       "put": {
         "tags": [
-          "AuthorizationServer"
+          "AuthorizationServers"
         ],
         "operationId": "AuthorizationServer_CreateOrUpdate",
         "description": "Creates new authorization server or updates an existing authorization server.",
@@ -208,7 +202,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
+            "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
             "name": "parameters",
@@ -232,24 +226,12 @@
         "responses": {
           "201": {
             "description": "Authorization server was successfully registered.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/AuthorizationServerContract"
             }
           },
           "200": {
             "description": "Authorization server is already registered.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/AuthorizationServerContract"
             }
@@ -264,7 +246,7 @@
       },
       "patch": {
         "tags": [
-          "AuthorizationServer"
+          "AuthorizationServers"
         ],
         "operationId": "AuthorizationServer_Update",
         "description": "Updates the details of the authorization server specified by its identifier.",
@@ -281,7 +263,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
+            "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
             "name": "parameters",
@@ -316,7 +298,7 @@
       },
       "delete": {
         "tags": [
-          "AuthorizationServer"
+          "AuthorizationServers"
         ],
         "operationId": "AuthorizationServer_Delete",
         "description": "Deletes specific authorization server instance.",
@@ -333,7 +315,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
+            "$ref": "#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -684,5 +666,17 @@
       "description": "OAuth acquire token request body parameter (www-url-form-encoded)."
     }
   },
-  "parameters": {  }
+  "parameters": {
+    "AuthenticationServerIdParameter": {
+      "name": "authsid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the authorization server.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

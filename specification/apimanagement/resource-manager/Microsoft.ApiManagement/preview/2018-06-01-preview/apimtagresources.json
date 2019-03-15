@@ -9,9 +9,7 @@
   "schemes": [
     "https"
   ],
-  "consumes": [
-    "application/json"
-  ],
+  "consumes": [],
   "produces": [
     "application/json"
   ],
@@ -37,7 +35,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tagResources": {
       "get": {
         "tags": [
-          "TagResource"
+          "TagResources"
         ],
         "operationId": "TagResource_ListByService",
         "description": "Lists a collection of resources associated with tags.",
@@ -58,7 +56,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|aid | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|apiName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|path | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|serviceUrl | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|method | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|urlTemplate | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|terms | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|isCurrent | eq |    |\n"
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| aid         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| apiName     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| path        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| serviceUrl  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| method      | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| urlTemplate | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| terms       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| isCurrent   | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -78,12 +76,6 @@
             "description": "Lists a collection of TagResource entities.",
             "schema": {
               "$ref": "#/definitions/TagResourceCollection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
