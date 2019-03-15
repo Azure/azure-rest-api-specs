@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags": {
       "get": {
         "tags": [
-          "Tag"
+          "Tags"
         ],
         "operationId": "Tag_ListByService",
         "description": "Lists a collection of tags defined within a service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -67,48 +67,42 @@
             "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
           },
           {
-            "name": "scope",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Scope like 'apis', 'products' or 'apis/{apiId}"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Scope like 'apis', 'products' or 'apis/{apiId}"
           }
         ],
         "responses": {
           "200": {
             "description": "Lists a collection of Tag entities.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagCollection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/TagCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimtags.json#/definitions/TagContract"
+        "x-ms-odata": "#/definitions/TagContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}": {
       "head": {
         "tags": [
-          "Tag"
+          "Tags"
         ],
         "operationId": "Tag_GetEntityState",
         "description": "Gets the entity state version of the tag specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementHeadTag": {
+          "ApiManagementGetTag": {
             "$ref": "./examples/ApiManagementHeadTag.json"
           }
         },
@@ -120,7 +114,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+            "$ref": "#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -149,7 +143,7 @@
       },
       "get": {
         "tags": [
-          "Tag"
+          "Tags"
         ],
         "operationId": "Tag_Get",
         "description": "Gets the details of the tag specified by its identifier.",
@@ -166,7 +160,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+            "$ref": "#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -179,7 +173,7 @@
           "200": {
             "description": "The response body contains the specified Tag entity.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -198,7 +192,7 @@
       },
       "put": {
         "tags": [
-          "Tag"
+          "Tags"
         ],
         "operationId": "Tag_CreateOrUpdate",
         "description": "Creates a tag.",
@@ -215,7 +209,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+            "$ref": "#/parameters/TagIdParameter"
           },
           {
             "name": "parameters",
@@ -227,9 +221,6 @@
             "description": "Create parameters."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
           },
           {
@@ -239,26 +230,14 @@
         "responses": {
           "201": {
             "description": "Tag was created successfully.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            },
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "#/definitions/TagContract"
             }
           },
           "200": {
             "description": "Tag already exists.",
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            },
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "#/definitions/TagContract"
             }
           },
           "default": {
@@ -271,7 +250,7 @@
       },
       "patch": {
         "tags": [
-          "Tag"
+          "Tags"
         ],
         "operationId": "Tag_Update",
         "description": "Updates the details of the tag specified by its identifier.",
@@ -288,7 +267,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+            "$ref": "#/parameters/TagIdParameter"
           },
           {
             "name": "parameters",
@@ -323,7 +302,7 @@
       },
       "delete": {
         "tags": [
-          "Tag"
+          "Tags"
         ],
         "operationId": "Tag_Delete",
         "description": "Deletes specific tag of the API Management service instance.",
@@ -340,7 +319,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+            "$ref": "#/parameters/TagIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -354,10 +333,1174 @@
         ],
         "responses": {
           "200": {
-            "description": "Tag successfully removed"
+            "description": "The tag was successfully deleted."
           },
           "204": {
-            "description": "Tag successfully removed by previous request or does not exist"
+            "description": "The tag was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags": {
+      "get": {
+        "tags": [
+          "ApiTags"
+        ],
+        "operationId": "Tag_ListByApi",
+        "description": "Lists all Tags associated with the API.",
+        "x-ms-examples": {
+          "ApiManagementGetTagsForApi": {
+            "$ref": "./examples/ApiManagementGetTagsForApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation returns a collection of tags associated with the Api entity.",
+            "schema": {
+              "$ref": "#/definitions/TagCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/TagContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}": {
+      "head": {
+        "tags": [
+          "ApiTags"
+        ],
+        "operationId": "Tag_GetEntityStateByApi",
+        "description": "Gets the entity state version of the tag specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiTag": {
+            "$ref": "./examples/ApiManagementHeadApiTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response body, ETag header entity state version.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApiTags"
+        ],
+        "operationId": "Tag_GetByApi",
+        "description": "Get tag associated with the API.",
+        "x-ms-examples": {
+          "ApiManagementGetApiTag": {
+            "$ref": "./examples/ApiManagementGetApiTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the details of the tag specified by its identifier.",
+            "schema": {
+              "$ref": "#/definitions/TagContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiTags"
+        ],
+        "operationId": "Tag_AssignToApi",
+        "description": "Assign tag to the Api.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiTag": {
+            "$ref": "./examples/ApiManagementCreateApiTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tag was assigned to the Api.",
+            "schema": {
+              "$ref": "#/definitions/TagContract"
+            }
+          },
+          "200": {
+            "description": "Tag is already assigned to the Api.",
+            "schema": {
+              "$ref": "#/definitions/TagContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiTags"
+        ],
+        "operationId": "Tag_DetachFromApi",
+        "description": "Detach the tag from the Api.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiTag": {
+            "$ref": "./examples/ApiManagementDeleteApiTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully detached the tag from the Api."
+          },
+          "204": {
+            "description": "Successfully detached the tag from the Api."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tagDescriptions": {
+      "get": {
+        "tags": [
+          "ApiTagDescriptions"
+        ],
+        "operationId": "TagDescription_ListByApi",
+        "description": "Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations",
+        "x-ms-examples": {
+          "ApiManagementGetTagDescriptionsForApi": {
+            "$ref": "./examples/ApiManagementGetTagDescriptionsForApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation returns a collection of tagDescriptions associated with the Api entity.",
+            "schema": {
+              "$ref": "#/definitions/TagDescriptionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/TagDescriptionContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tagDescriptions/{tagId}": {
+      "head": {
+        "tags": [
+          "ApiTagDescriptions"
+        ],
+        "operationId": "TagDescription_GetEntityState",
+        "description": "Gets the entity state version of the tag specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiTagDescription": {
+            "$ref": "./examples/ApiManagementHeadApiTagDescription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response body, ETag header entity state version.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApiTagDescriptions"
+        ],
+        "operationId": "TagDescription_Get",
+        "description": "Get tag associated with the API.",
+        "x-ms-examples": {
+          "ApiManagementGetApiTagDescription": {
+            "$ref": "./examples/ApiManagementGetApiTagDescription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the description of the tag specified by its identifier in scope if the Api.",
+            "schema": {
+              "$ref": "#/definitions/TagDescriptionContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiTagDescriptions"
+        ],
+        "operationId": "TagDescription_CreateOrUpdate",
+        "description": "Create/Update tag description in scope of the Api.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiTagDescription": {
+            "$ref": "./examples/ApiManagementCreateApiTagDescription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagDescriptionCreateParameters"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tag Description was created for the Api.",
+            "schema": {
+              "$ref": "#/definitions/TagDescriptionContract"
+            }
+          },
+          "200": {
+            "description": "Tag Description was updated for the Api.",
+            "schema": {
+              "$ref": "#/definitions/TagDescriptionContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiTagDescriptions"
+        ],
+        "operationId": "TagDescription_Delete",
+        "description": "Delete tag description for the Api.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiTagDescription": {
+            "$ref": "./examples/ApiManagementDeleteApiTagDescription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted tag description for the Api."
+          },
+          "204": {
+            "description": "Successfully deleted tag description for the Api."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/tags": {
+      "get": {
+        "tags": [
+          "OperationTags"
+        ],
+        "operationId": "Tag_ListByOperation",
+        "description": "Lists all Tags associated with the Operation.",
+        "x-ms-examples": {
+          "ApiManagementGetTagsForOperation": {
+            "$ref": "./examples/ApiManagementGetTagsForOperation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/OperationIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| method     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| urlTemplate | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation returns a collection of tags associated with the Operation entity.",
+            "schema": {
+              "$ref": "#/definitions/TagCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/TagContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/tags/{tagId}": {
+      "head": {
+        "tags": [
+          "OperationTags"
+        ],
+        "operationId": "Tag_GetEntityStateByOperation",
+        "description": "Gets the entity state version of the tag specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadOperationTag": {
+            "$ref": "./examples/ApiManagementHeadOperationTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response body, ETag header entity state version.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OperationTags"
+        ],
+        "operationId": "Tag_GetByOperation",
+        "description": "Get tag associated with the Operation.",
+        "x-ms-examples": {
+          "ApiManagementGetOperationTag": {
+            "$ref": "./examples/ApiManagementGetOperationTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the details of the tag specified by its identifier.",
+            "schema": {
+              "$ref": "#/definitions/TagContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OperationTags"
+        ],
+        "operationId": "Tag_AssignToOperation",
+        "description": "Assign tag to the Operation.",
+        "x-ms-examples": {
+          "ApiManagementCreateOperationTag": {
+            "$ref": "./examples/ApiManagementCreateOperationTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tag was assigned to the Operation.",
+            "schema": {
+              "$ref": "#/definitions/TagContract"
+            }
+          },
+          "200": {
+            "description": "Tag is already assigned to the Operation.",
+            "schema": {
+              "$ref": "#/definitions/TagContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OperationTags"
+        ],
+        "operationId": "Tag_DetachFromOperation",
+        "description": "Detach the tag from the Operation.",
+        "x-ms-examples": {
+          "ApiManagementDeleteOperationTag": {
+            "$ref": "./examples/ApiManagementDeleteOperationTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully detached the tag from the Operation."
+          },
+          "204": {
+            "description": "Successfully detached the tag from the Operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags": {
+      "get": {
+        "tags": [
+          "OperationsByTags"
+        ],
+        "operationId": "Operation_ListByTags",
+        "description": "Lists a collection of operations associated with tags.",
+        "x-ms-examples": {
+          "ApiManagementListOperationsByTags": {
+            "$ref": "./examples/ApiManagementListOperationsByTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdRevParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| apiName     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| method      | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| urlTemplate | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "includeNotTaggedOperations",
+            "in": "query",
+            "type": "boolean",
+            "required": false,
+            "default": false,
+            "description": "Include not tagged operations in response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of TagResource entities.",
+            "schema": {
+              "$ref": "./apimtagresources.json#/definitions/TagResourceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./apimtagresources.json#/definitions/TagResourceContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags": {
+      "get": {
+        "tags": [
+          "ProductTags"
+        ],
+        "operationId": "Tag_ListByProduct",
+        "description": "Lists all Tags associated with the Product.",
+        "x-ms-examples": {
+          "ApiManagementGetTagsForProduct": {
+            "$ref": "./examples/ApiManagementGetTagsForProduct.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation returns a collection of tags associated with the Product entity.",
+            "schema": {
+              "$ref": "./apimtags.json#/definitions/TagCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./apimtags.json#/definitions/TagContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}": {
+      "head": {
+        "tags": [
+          "ProductTags"
+        ],
+        "operationId": "Tag_GetEntityStateByProduct",
+        "description": "Gets the entity state version of the tag specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadProductTag": {
+            "$ref": "./examples/ApiManagementHeadProductTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response body, ETag header entity state version.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ProductTags"
+        ],
+        "operationId": "Tag_GetByProduct",
+        "description": "Get tag associated with the Product.",
+        "x-ms-examples": {
+          "ApiManagementGetProductTag": {
+            "$ref": "./examples/ApiManagementGetProductTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the details of the tag specified by its identifier.",
+            "schema": {
+              "$ref": "./apimtags.json#/definitions/TagContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProductTags"
+        ],
+        "operationId": "Tag_AssignToProduct",
+        "description": "Assign tag to the Product.",
+        "x-ms-examples": {
+          "ApiManagementCreateProductTag": {
+            "$ref": "./examples/ApiManagementCreateProductTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tag was assigned to the Product.",
+            "schema": {
+              "$ref": "./apimtags.json#/definitions/TagContract"
+            }
+          },
+          "200": {
+            "description": "Tag is already assigned to the Product.",
+            "schema": {
+              "$ref": "./apimtags.json#/definitions/TagContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProductTags"
+        ],
+        "operationId": "Tag_DetachFromProduct",
+        "description": "Detach the tag from the Product.",
+        "x-ms-examples": {
+          "ApiManagementDeleteProductTag": {
+            "$ref": "./examples/ApiManagementDeleteProductTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimproducts.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully detached the tag from the Product."
+          },
+          "204": {
+            "description": "Successfully detached the tag from the Product."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -375,7 +1518,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "./apimtags.json#/definitions/TagContract"
+            "$ref": "#/definitions/TagContract"
           },
           "description": "Page values."
         },
@@ -430,7 +1573,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "./apimtags.json#/definitions/TagDescriptionContract"
+            "$ref": "#/definitions/TagDescriptionContract"
           },
           "description": "Page values."
         },
@@ -501,5 +1644,17 @@
       "description": "Parameters supplied to the Create TagDescription operation."
     }
   },
-  "parameters": {}
+  "parameters": {
+    "TagIdParameter": {
+      "name": "tagId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Tag identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

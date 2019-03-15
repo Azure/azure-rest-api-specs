@@ -26,31 +26,7 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-11
-```
-
-### Tag: package-2018-11
-
-These settings apply only when `--tag=package-2018-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-11'
-input-file:
-- Microsoft.Storage/stable/2018-11-01/storage.json
-- Microsoft.Storage/stable/2018-11-01/blob.json
-
-directive:
-  - suppress: R3018
-    reason: Existing boolean properties
-    approved-by: "@fearthecowboy"
-
-  - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
-    suppress: R1003
-    reason: APIs return array of values, is not actually a 'list' operation
-    approved-by: "@fearthecowboy"
-
+tag: package-2018-07
 ```
 
 ### Tag: package-2018-07

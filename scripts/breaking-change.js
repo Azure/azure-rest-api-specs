@@ -7,7 +7,7 @@ const utils = require('../test/util/utils'),
   fs = require('fs-extra'),
   os = require('os'),
   exec = require('util').promisify(require('child_process').exec),
-  oad = require('@azure/oad');
+  oad = require('oad');
 
 // This map is used to store the mapping between files resolved and stored location
 var resolvedMapForNewSpecs = {};

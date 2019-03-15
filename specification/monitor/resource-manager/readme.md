@@ -28,35 +28,7 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2019-03
-```
-
-### Tag: package-2019-03
-
-These settings apply only when `--tag=package-2019-03` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-03'
-input-file:
-- Microsoft.Insights/stable/2015-04-01/autoscale_API.json
-- Microsoft.Insights/stable/2015-04-01/operations_API.json
-- Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-- Microsoft.Insights/stable/2016-03-01/alertRules_API.json
-- Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
-- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
-- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2019-03-01/actionGroups_API.json
-- Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
-- Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
-- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
-- Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
-- Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json
-- Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
-- Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
-- Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
-- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
-- Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+tag: package-2018-11-preview
 ```
 
 ### Tag: package-2018-11-preview
@@ -127,7 +99,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2018-03-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -153,7 +125,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -177,7 +149,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -225,7 +197,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 

@@ -25,20 +25,12 @@ These are the global settings for the Mixed Reality Azure Resource Management Cl
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2019-02-preview
-```
-
-### Tag: package-2019-02-preview
-
-These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-02-preview'
-input-file:
-- Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
+input-file: Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
 ```
 
 ---
 # Code Generation
+
 
 ## Swagger to SDK
 
@@ -49,9 +41,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-go
 ```
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -94,7 +84,3 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-mixedreality
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
