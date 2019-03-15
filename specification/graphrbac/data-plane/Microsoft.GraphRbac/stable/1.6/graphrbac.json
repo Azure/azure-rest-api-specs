@@ -1284,6 +1284,40 @@
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
     },
+    "/{tenantID}/servicePrincipalsByAppId/{applicationID}/objectId": {
+      "get": {
+        "tags": [
+          "ServicePrincipalsByAppId"
+        ],
+        "operationId": "ServicePrincipalsByAppId_Get",
+        "description": "Gets an object id for a given application id from the current tenant.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          },
+          {
+            "$ref": "#/parameters/applicationIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalObjectResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/servicePrincipals/{objectId}": {
       "patch": {
         "tags": [
@@ -3191,6 +3225,20 @@
       },
       "description": "Application list operation result."
     },
+    "ServicePrincipalObjectResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Service Principal Application Object Id"
+        },
+        "odata.metadata": {
+          "type": "string",
+          "description": "The URL representing edm equivalent."
+        }
+      },
+      "description": "Service Principal Object Result."
+    },
     "AppRole": {
       "type": "object",
       "properties": {
@@ -4099,6 +4147,14 @@
       "required": true,
       "type": "string",
       "description": "The tenant ID.",
+      "x-ms-parameter-location": "client"
+    },
+    "applicationIdInPath": {
+      "name": "applicationID",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The application ID.",
       "x-ms-parameter-location": "client"
     }
   }
