@@ -1,0 +1,56 @@
+﻿{
+	"parameters": {
+		"api-version": "2018-06-01",
+		"body": {
+			"sku": {
+				"name": "standard_D1"
+			},
+			"location": "westus",
+			"properties": {
+				"reservedResourceType": "VirtualMachines",
+				"billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+				"term": "P1Y",
+				"quantity": "1",
+				"displayName": "TestReservationOrder",
+				"appliedScopes": null,
+				"appliedScopeType": "Shared",
+				"instanceFlexibility": "On"
+			}
+		}
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"properties": {
+					"billingCurrencyTotal": {
+                        "currencyCode": "USD",
+						"estimatedTotal": 466.0
+                    }
+					"isTaxIncluded": false,
+					"purchaseRequest": {
+						"sku": {
+							"name": "standard_D1"
+						},
+						"location": "westus",
+						"properties": {
+							"billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+							"term": "P1Y",
+							"quantity": 1,
+							"displayName": "TestReservationOrder",
+							"appliedScopeType": "Shared",
+							"reservedResourceType": "VirtualMachines",
+							"instanceFlexibility": "On"
+						}
+					},
+					"reservationOrderId": "6d9cec54-7de8-abcd-9de7-80f5d634f2d2",
+					"skuTitle": "Reserved VM Instance, Standard_D1, US West, 1 Year",
+					"skuDescription": "standard_D1",
+					"pricingCurrencyTotal": {
+						"currencyCode": "USD",
+						"estimatedTotal": 466.0
+					}
+				}
+			}
+		}
+	}
+}
