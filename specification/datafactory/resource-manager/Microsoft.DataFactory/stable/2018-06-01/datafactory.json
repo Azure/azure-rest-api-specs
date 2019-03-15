@@ -156,6 +156,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_GetFeatureValue",
+        "x-ms-examples": {
+          "ExposureControl_GetFeatureValue": {
+            "$ref": "./examples/ExposureControl_GetFeatureValue.json"
+          }
+        },
+        "description": "Get exposure control feature for specific location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "The exposure control request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -385,6 +433,108 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken": {
+      "post": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_GetGitHubAccessToken",
+        "x-ms-examples": {
+          "Factories_GetGitHubAccessToken": {
+            "$ref": "./examples/Factories_GetGitHubAccessToken.json"
+          }
+        },
+        "description": "Get GitHub Access Token.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "gitHubAccessTokenRequest",
+            "description": "Get GitHub access token request definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GitHubAccessTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneAccess": {
+      "post": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_GetDataPlaneAccess",
+        "x-ms-examples": {
+          "Factories_GetDataPlaneAccess": {
+            "$ref": "./examples/Factories_GetDataPlaneAccess.json"
+          }
+        },
+        "description": "Get Data Plane access.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "policy",
+            "description": "Data Plane user access policy definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserAccessPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResponse"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -1031,7 +1181,7 @@
             "$ref": "./examples/IntegrationRuntimes_Upgrade.json"
           }
         },
-        "description": "Upgrade self-hosted integration runtime to latest version if availably.",
+        "description": "Upgrade self-hosted integration runtime to latest version if availability.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1062,7 +1212,261 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/removeLinks": {
+      "post": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_RemoveLinks",
+        "x-ms-examples": {
+          "IntegrationRuntimes_Upgrade": {
+            "$ref": "./examples/IntegrationRuntimes_RemoveLinks.json"
+          }
+        },
+        "description": "Remove all linked integration runtimes under specific data factory in a self-hosted integration runtime.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "linkedIntegrationRuntimeRequest",
+            "description": "The data factory name for the linked integration runtime.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedIntegrationRuntimeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/linkedIntegrationRuntime": {
+      "post": {
+        "tags": [
+          "integrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_CreateLinkedIntegrationRuntime",
+        "x-ms-examples": {
+          "IntegrationRuntimes_CreateLinkedIntegrationRuntime": {
+            "$ref": "./examples/IntegrationRuntimes_CreateLinkedIntegrationRuntime.json"
+          }
+        },
+        "description": "Create a linked integration runtime entry in a shared integration runtime.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "createLinkedIntegrationRuntimeRequest",
+            "description": "The linked integration runtime properties.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateLinkedIntegrationRuntimeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata": {
+      "post": {
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
+        "operationId": "IntegrationRuntimeObjectMetadata_Refresh",
+        "x-ms-examples": {
+          "IntegrationRuntimeObjectMetadata_Refresh": {
+            "$ref": "./examples/IntegrationRuntimeObjectMetadata_Refresh.json"
+          }
+        },
+        "description": "Refresh a SSIS integration runtime object metadata.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SsisObjectMetadataStatusResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getObjectMetadata": {
+      "post": {
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
+        "operationId": "IntegrationRuntimeObjectMetadata_Get",
+        "x-ms-examples": {
+          "IntegrationRuntimeObjectMetadata_Get": {
+            "$ref": "./examples/IntegrationRuntimeObjectMetadata_Get.json"
+          }
+        },
+        "description": "Get a SSIS integration runtime object metadata by specified path. The return is pageable metadata list.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "name": "getMetadataRequest",
+            "description": "The parameters for getting a SSIS object metadata.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GetSsisObjectMetadataRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/SsisObjectMetadataListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
+      "get": {
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
+        "operationId": "IntegrationRuntimeNodes_Get",
+        "x-ms-examples": {
+          "IntegrationRuntimeNodes_Get": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Get.json"
+          }
+        },
+        "description": "Gets a self-hosted integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/nodeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/SelfHostedIntegrationRuntimeNode"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "integrationRuntimeNodes"
@@ -1858,7 +2262,23 @@
           },
           {
             "name": "referencePipelineRunId",
-            "description": "The pipeline run identifier. If run ID is specified the parameters of the the specified run will be used to create a new run.",
+            "description": "The pipeline run identifier. If run ID is specified the parameters of the specified run will be used to create a new run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "isRecovery",
+            "description": "Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "startActivityName",
+            "description": "In recovery mode, the rerun will start from this activity. If not specified, all activities will run.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -2064,6 +2484,13 @@
           },
           {
             "$ref": "#/parameters/runId"
+          },
+          {
+            "name": "isRecursive",
+            "description": "If true, cancel all the Child pipelines that are triggered by the current pipeline.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2370,6 +2797,249 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}": {
+      "put": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Create",
+        "x-ms-examples": {
+          "RerunTriggers_Create": {
+            "$ref": "./examples/RerunTriggers_Create.json"
+          }
+        },
+        "description": "Creates a rerun trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "rerunTumblingWindowTriggerActionParameters",
+            "description": "Rerun tumbling window trigger action parameters.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RerunTumblingWindowTriggerActionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/TriggerResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/start": {
+      "post": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Start",
+        "x-ms-examples": {
+          "Triggers_Start": {
+            "$ref": "./examples/RerunTriggers_Start.json"
+          }
+        },
+        "description": "Starts a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been started successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/stop": {
+      "post": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Stop",
+        "x-ms-examples": {
+          "Triggers_Stop": {
+            "$ref": "./examples/RerunTriggers_Stop.json"
+          }
+        },
+        "description": "Stops a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been stopped successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}/cancel": {
+      "post": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_Cancel",
+        "x-ms-examples": {
+          "Triggers_Cancel": {
+            "$ref": "./examples/RerunTriggers_Cancel.json"
+          }
+        },
+        "description": "Cancels a trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/rerunTriggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger has been canceled successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers": {
+      "get": {
+        "tags": [
+          "rerunTriggers"
+        ],
+        "operationId": "RerunTriggers_ListByTrigger",
+        "x-ms-examples": {
+          "RerunTriggers_List": {
+            "$ref": "./examples/RerunTriggers_ListByTrigger.json"
+          }
+        },
+        "description": "Lists rerun triggers by an original trigger name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RerunTriggerListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2718,6 +3388,42 @@
         }
       }
     },
+    "LinkedIntegrationRuntimeRequest": {
+      "description": "Data factory name for linked integration runtime request.",
+      "type": "object",
+      "properties": {
+        "factoryName": {
+          "description": "The data factory name for linked integration runtime.",
+          "type": "string",
+          "x-ms-client-name": "linkedFactoryName"
+        }
+      },
+      "required": [
+        "factoryName"
+      ]
+    },
+    "CreateLinkedIntegrationRuntimeRequest": {
+      "description": "The linked integration runtime information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the linked integration runtime.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The ID of the subscription that the linked integration runtime belongs to.",
+          "type": "string"
+        },
+        "dataFactoryName": {
+          "description": "The name of the data factory that the linked integration runtime belongs to.",
+          "type": "string"
+        },
+        "dataFactoryLocation": {
+          "description": "The location of the data factory that the linked integration runtime belongs to.",
+          "type": "string"
+        }
+      }
+    },
     "LinkedServiceListResponse": {
       "description": "A list of linked service resources.",
       "type": "object",
@@ -2856,6 +3562,39 @@
         "message"
       ]
     },
+    "VariableDefinitionSpecification": {
+      "description": "Definition of variable for a Pipeline.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/VariableSpecification"
+      }
+    },
+    "VariableSpecification": {
+      "description": "Definition of a single variable for a Pipeline.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Variable type.",
+          "enum": [
+            "String",
+            "Bool",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "VariableType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of variable."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "ParameterDefinitionSpecification": {
       "description": "Definition of all parameters for an entity.",
       "type": "object",
@@ -2914,7 +3653,7 @@
           "type": "string"
         },
         "repositoryName": {
-          "description": "Rrepository name.",
+          "description": "Repository name.",
           "type": "string"
         },
         "collaborationBranch": {
@@ -2962,7 +3701,7 @@
       ]
     },
     "FactoryGitHubConfiguration": {
-      "x-ms-discriminator-value": "FactoryGithubConfiguration",
+      "x-ms-discriminator-value": "FactoryGitHubConfiguration",
       "description": "Factory's GitHub repo information.",
       "type": "object",
       "allOf": [
@@ -2972,8 +3711,7 @@
       ],
       "properties": {
         "hostName": {
-          "description": "GitHub repo host name.",
-          "readOnly": true,
+          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
           "type": "string"
         }
       }
@@ -2988,6 +3726,78 @@
         "repoConfiguration": {
           "$ref": "#/definitions/FactoryRepoConfiguration",
           "description": "Git repo information of the factory."
+        }
+      }
+    },
+    "GitHubAccessTokenRequest": {
+      "description": "Get GitHub access token request definition.",
+      "properties": {
+        "gitHubAccessCode": {
+          "description": "GitHub access code.",
+          "type": "string"
+        },
+        "gitHubClientId": {
+          "description": "GitHub application client ID.",
+          "type": "string"
+        },
+        "gitHubAccessTokenBaseUrl": {
+          "description": "GitHub access token base URL.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gitHubAccessCode",
+        "gitHubAccessTokenBaseUrl"
+      ]
+    },
+    "GitHubAccessTokenResponse": {
+      "description": "Get GitHub access token response definition.",
+      "properties": {
+        "gitHubAccessToken": {
+          "description": "GitHub access token.",
+          "type": "string"
+        }
+      }
+    },
+    "UserAccessPolicy": {
+      "description": "Get Data Plane read only token request definition.",
+      "properties": {
+        "permissions" : {
+          "description": "The string with permissions for Data Plane access. Currently only 'r' is supported which grants read only access.",
+          "type": "string"
+        },
+        "accessResourcePath" : {
+          "description": "The resource path to get access relative to factory. Currently only empty string is supported which corresponds to the factory resource.",
+          "type": "string"
+        },
+        "profileName" : {
+          "description": "The name of the profile. Currently only the default is supported. The default value is DefaultProfile.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time for the token. If not specified the current time will be used.",
+          "type": "string"
+        },
+        "expireTime": {
+          "description": "Expiration time for the token. Maximum duration for the token is eight hours and by default the token will expire in eight hours.",
+          "type": "string"
+        }
+      }
+    },
+    "AccessPolicyResponse": {
+      "description": "Get Data Plane read only token response definition.",
+      "properties": {
+        "policy" : {
+          "description": "The user access policy.",
+          "$ref": "#/definitions/UserAccessPolicy"
+        },
+        "accessToken": {
+          "description": "Data Plane read only access token.",
+          "type": "string"
+        },
+        "dataPlaneUrl": {
+          "description": "Data Plane service base URL.",
+          "type": "string"
         }
       }
     },
@@ -3299,7 +4109,9 @@
             "ActivityRunEnd",
             "ActivityType",
             "TriggerName",
-            "TriggerRunTimestamp"
+            "TriggerRunTimestamp",
+            "RunGroupId",
+            "LatestOnly"
           ],
           "x-ms-enum": {
             "name": "RunQueryFilterOperand",
@@ -3402,6 +4214,16 @@
         "runId": {
           "description": "Identifier of a run.",
           "type": "string",
+          "readOnly": true
+        },
+        "runGroupId": {
+          "description": "Identifier that correlates all the recovery runs of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isLatest": {
+          "description": "Indicates if the recovered pipeline run is the latest in its group.",
+          "type": "boolean",
           "readOnly": true
         },
         "pipelineName": {
@@ -3662,6 +4484,71 @@
         "type": "object"
       }
     },
+    "RerunTumblingWindowTriggerActionParameters": {
+      "description": "Rerun tumbling window trigger Parameters.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxConcurrency": {
+          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "maxConcurrency"
+      ]
+    },
+    "RerunTriggerListResponse": {
+      "description": "A list of rerun triggers.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of rerun triggers.",
+          "items": {
+            "$ref": "#/definitions/RerunTriggerResource"
+          }
+        },
+        "nextLink": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RerunTriggerResource": {
+      "description": "RerunTrigger resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Trigger.json#/definitions/RerunTumblingWindowTrigger",
+          "description": "Properties of the rerun trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "OperationListResponse": {
       "description": "A list of operations that can be performed by the Data Factory service.",
       "properties": {
@@ -3850,6 +4737,68 @@
           "type": "boolean"
         }
       }
+    },
+    "GetSsisObjectMetadataRequest": {
+      "type": "object",
+      "description": "The request payload of get SSIS object metadata.",
+      "properties": {
+          "metadataPath": {
+              "type": "string",
+              "description": "Metadata path."
+          }
+      }
+    },
+    "SsisObjectMetadataStatusResponse": {
+      "type": "object",
+      "description": "The status of the operation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "string",
+          "description": "The operation properties."
+        },
+        "error": {
+          "type": "string",
+          "description": "The operation error message."
+        }
+      }
+    },
+    "ExposureControlRequest": {
+      "type": "object",
+      "description": "The exposure control request.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name."
+        },
+        "featureType": {
+          "type": "string",
+          "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlResponse": {
+      "type": "object",
+      "description": "The exposure control response.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "The feature value.",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -3926,6 +4875,17 @@
     "triggerName": {
       "name": "triggerName",
       "description": "The trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "rerunTriggerName": {
+      "name": "rerunTriggerName",
+      "description": "The rerun trigger name.",
       "in": "path",
       "required": true,
       "type": "string",

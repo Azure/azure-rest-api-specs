@@ -7,7 +7,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-containerinstance
-  package-version: 1.2.0-preview
   output-folder: $(node-sdks-folder)/lib/services/containerinstanceManagement
   generate-license-txt: true
   generate-package-json: true

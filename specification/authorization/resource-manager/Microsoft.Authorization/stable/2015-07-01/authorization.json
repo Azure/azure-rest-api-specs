@@ -864,6 +864,25 @@
           }
         }
       }
+    },    
+    "/providers/Microsoft.Authorization/elevateAccess": {
+			"post": {
+				"tags": [
+					"ElevateAccess"
+				],
+				"operationId": "ElevateAccess_Post",
+				"description": "Elevates access for a Global Administrator.",
+				"parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+				"responses": {
+					"200": {
+						"description": "OK - Returns an HttpResponseMessage with HttpStatusCode 200."
+					}
+				}
+			}
     }
   },
   "x-ms-paths": {
@@ -1121,6 +1140,10 @@
           "description": "The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group."
         }
       },
+      "required": [
+        "roleDefinitionId",
+        "principalId"
+      ],
       "description": "Role assignment properties."
     },
     "RoleAssignmentCreateParameters": {
@@ -1130,6 +1153,9 @@
           "description": "Role assignment properties."
         }
       },
+      "required": [
+        "properties"
+      ],
       "description": "Role assignment create parameters."
     },
     "RoleDefinitionProperties": {

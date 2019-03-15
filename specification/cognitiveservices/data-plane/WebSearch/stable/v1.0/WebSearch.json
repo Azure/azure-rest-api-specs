@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Web Search API",
+    "title": "Web Search Client",
     "description": "The Web Search API lets you send a search query to Bing and get back search results that include links to webpages, images, and more.",
     "version": "1.0"
   },
@@ -22,11 +22,20 @@
       ]
     }
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
+  },
   "host": "api.cognitive.microsoft.com",
+  "basePath": "/bing/v7.0",
   "schemes": [
     "https"
   ],
-  "basePath": "/bing/v7.0",
   "produces": [
     "application/json"
   ],
@@ -294,9 +303,9 @@
           }
         },
         "x-ms-examples": {
-            "Successful query": {
-                "$ref": "./examples//SuccessfulQueryRequest.json"
-            }
+          "Successful query": {
+            "$ref": "./examples//SuccessfulQueryRequest.json"
+          }
         }
       }
     }

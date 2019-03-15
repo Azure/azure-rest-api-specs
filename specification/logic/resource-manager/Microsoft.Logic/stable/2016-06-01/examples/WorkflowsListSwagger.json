@@ -57,15 +57,6 @@
                   "description": "The SHA 256 hash of the entire request URI with an internal key.",
                   "required": true,
                   "type": "string"
-                },
-                {
-                  "name": "body",
-                  "in": "body",
-                  "description": "The request body.",
-                  "required": false,
-                  "schema": {
-                    "$ref": "#/definitions/request-simpleManualTrigger"
-                  }
                 }
               ],
               "responses": {
@@ -75,21 +66,6 @@
                     "type": "object"
                   }
                 }
-              }
-            }
-          }
-        },
-        "definitions": {
-          "request-simpleManualTrigger": {
-            "type": "object",
-            "properties": {
-              "title": {
-                "type": "string",
-                "description": "Title."
-              },
-              "sendEmail": {
-                "type": "boolean",
-                "description": "Whether to send email."
               }
             }
           }

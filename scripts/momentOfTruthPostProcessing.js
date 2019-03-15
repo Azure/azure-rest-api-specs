@@ -3,13 +3,13 @@
 
 'use strict';
 
-const octokit = require('@octokit/rest')(),
-      fs = require('fs'),
-      crypto = require('crypto'),
+const fs = require('fs'),
       utils = require('../test/util/utils'),
-      path = require('path');
+      path = require('path'),
+      gitHubPost = require('./postToGitHub');
 
 let pullRequestNumber = utils.getPullRequestNumber();
+let targetBranch = utils.getTargetBranch();
 let filename = `${pullRequestNumber}.json`;
 let logFilepath = path.join(getLogDir(), filename);
 
@@ -18,87 +18,97 @@ function getLogDir() {
     return logDir;
 }
 
-let githubTemplate = `
-<h1>
-    AutoRest linter results for {title}
-</h1>
+let githubTemplate = (title, contact_message, file_summaries) => `# AutoRest linter results for ${title}\n${contact_message}\n\n${file_summaries}`;
 
-{contact_message}
+let tooManyResults = "# Result limit exceeded, check build output\n" +
+    "The linter diff produced too many results to display here. Please view the build output to see the results. " +
+    "For help with SDK-related validation Errors / Warnings, reach out to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com). " +
+    "For help with ARM-related validation Errors / Warnings, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com).\n\n" +
+    `### [View Build Output](https://travis-ci.org/${process.env.TRAVIS_REPO_SLUG}/jobs/${process.env.TRAVIS_JOB_ID})`;
 
-{file_summaries}
+let githubFooter = `[AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | ` +
+    `[AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | ` +
+    `Send ${emailLink("feedback", "azure-swag-tooling@microsoft.com", "Feedback | AutoRest Linter Diff Tool")}` +
+    `\n\nThanks for your co-operation.`;
 
-[AutoRest Linter Guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) | [AutoRest Linter Issues](https://github.com/Azure/azure-openapi-validator/issues) | Send <a href='mailto:azure-swag-tooling@microsoft.com?subject=Feedback%20|%20AutoRest%20Linter%20Azure%20Bot'>feedback</a>
-
-Thanks for your co-operation.
-`;
-
-let fileSummaryTemplate = `
-
-**File**: {file_name}
-
-<details>
-    <summary>:warning:<strong>{new_warnings}</strong> new Warnings.(<strong>{total_warnings}</strong> total)</summary>
-    <br/>
-    {potential_new_warnings}
-</details>
-
-<details>
-    <summary>:x:<strong>{new_errors}</strong> new Errors.(<strong>{total_errors}</strong> total)</summary>
-    <br/>
-    {potential_new_errors}
-</details>
-
-`;
+let fileSummaryHeader = (file_name, file_href) => `## Config file: [${file_name}](${file_href})\n`;
+let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `<details><summary><h3 style="display: inline"><a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}</h3></summary><br>\n\n${issue_table}\n</details>`;
+let fileSummaryExistingTemplate = (issue_type, issue_count, issue_table) => `<details><summary>${iconFor(issue_type)} ${issue_count} existing ${pluralize(issue_type, issue_count)}</summary><br>\n\n${issue_table}\n</details>\n\n`;
 
 let potentialNewWarningErrorSummaryHeader = `
-|   Code  |  Id |  Source   |   Message  |
-|---------|----------|-------|-----------|
-{list_of_new_warnings_errors}
+| | Rule | Location | Message |
+|-|------|----------|---------|
 `;
 
-let potentialNewWarningErrorSummary = `| {warning_error_code} | {warning_error_id} | [Link]({warning_error_source}) | {warning_error_message} |
-`;
+let potentialNewWarningErrorSummaryMarkdown = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
+    `|${count}|[${warning_error_id} - ${warning_error_code}](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#${warning_error_id})|` +
+    `[${shortName(warning_error_file)}:${warning_error_line}](${blobHref(warning_error_file)}#L${warning_error_line} "${warning_error_file}")|` +
+    `${warning_error_message}|\n`;
 
-let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reachout to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";;
-let armContactMessage = "These errors are reported by the ARM team's validation tools, reachout to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
+let potentialNewWarningErrorSummaryPlain = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
+    `${warning_error_id} - ${warning_error_code}\n` +
+    `${warning_error_message}\n` +
+    `  at ${warning_error_file}:${warning_error_line}\n\n`;
+
+let sdkContactMessage = "These errors are reported by the SDK team's validation tools, reach out to [ADX Swagger Reviewers](mailto:adxsr@microsoft.com) directly for any questions or concerns.";
+let armContactMessage = "These errors are reported by the ARM team's validation tools, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
 
-let data = fs.readFileSync(logFilepath, 'utf8');
-let jsonData = JSON.parse(data);
-
-let token = process.env.GH_TOKEN;
-
-octokit.authenticate({
-    type: 'token',
-    token: token
-});
+let data = undefined;
+let jsonData = undefined;
+try {
+    data = fs.readFileSync(logFilepath, 'utf8');
+    jsonData = JSON.parse(data);
+} catch (e) {
+    console.log(`Failed to read diff results from file ${logFilepath}`);
+    console.log("File content:");
+    console.log(data);
+    process.exit(1)
+}
 
 function compareJsonRef(beforeJsonRef, afterJsonRef) {
-    return (beforeJsonRef.replace(/json:\d+:\d+/, '') == afterJsonRef.replace(/json:\d+:\d+/, ''));
+    beforeJsonRef = beforeJsonRef.replace(/.*\.json:\d+:\d+/, '')
+    afterJsonRef = afterJsonRef.replace(/.*\.json:\d+:\d+/, '')
+
+    return (beforeJsonRef == afterJsonRef);
 }
 
-function postGithubComment(owner, repository, prNumber, commentBody) {
-    octokit.issues.createComment({
-        "owner": owner,
-        "repo": repository,
-        "number": prNumber,
-        "body": commentBody
-    }).then(data => {
-        console.log("Comment has been posted");
-    }). catch(err => {
-        console.log(err);
-    });
+function getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount) {
+    const totalNewErrors = newSDKErrorsCount + newARMErrorsCount;
+    const totalNewWarnings = newSDKWarningsCount + newARMWarningsCount;
+
+    const title = `${totalNewErrors} new ${pluralize('error', totalNewErrors)} / ${totalNewWarnings} new ${pluralize('warning', totalNewWarnings)}`;
+    let summary = `Compared to the target branch (**${targetBranch}**), this pull request introduces:\n\n`;
+    summary += formatSummaryLine("SDK Error", newSDKErrorsCount);
+    summary += formatSummaryLine("ARM Error", newARMErrorsCount);
+    summary += formatSummaryLine("SDK Warning", newSDKWarningsCount);
+    summary += formatSummaryLine("ARM Warning", newARMWarningsCount);
+
+    return [title, summary];
 }
 
-function postSummariesToGithub(summaryTitle, fileSummaries, org, repository, prNumber, contactMessage) {
-    let githubTemplateCopy = githubTemplate;
-    githubTemplateCopy = githubTemplateCopy.replace("{title}", summaryTitle);
-    githubTemplateCopy = githubTemplateCopy.replace("{file_summaries}", fileSummaries);
-    githubTemplateCopy = githubTemplateCopy.replace("{contact_message}", contactMessage);
-    postGithubComment(org, repository, prNumber, githubTemplateCopy);
+function formatSummaryLine(issueType, count) {
+    let line = `&nbsp;&nbsp;&nbsp;${iconFor(issueType, count)}&nbsp;&nbsp;&nbsp;`;
+    if (count > 0) {
+        line += '[';
+    }
+    line += `**${count}** new ${pluralize(issueType, count)}`;
+    if (count > 0) {
+        line += `](#user-content-${issueType.replace(/\s/g, "-")}s)`;
+    }
+    line += "\n\n";
+    return line;
 }
 
-function compareBeforeAfterArrays(afterArray, beforeArray, newArray) {
+function getSummaryBlock(summaryTitle, fileSummaries, contactMessage) {
+    return githubTemplate(
+        summaryTitle,
+        contactMessage,
+        fileSummaries !== "" ? fileSummaries : `**There were no files containing ${summaryTitle}.**`
+    );
+}
+
+function compareBeforeAfterArrays(afterArray, beforeArray, existingArray, newArray) {
     if(afterArray.length > beforeArray.length){
         afterArray.forEach(afterValue => {
             let errorFound = false;
@@ -117,89 +127,181 @@ function compareBeforeAfterArrays(afterArray, beforeArray, newArray) {
                     errorFound = true;
                 }
             });
-            if(!errorFound) {
+            if(errorFound) {
+                existingArray.push(afterValue);
+            } else {
                 newArray.push(afterValue);
             }
         });
     }
 }
 
-function getLink(jsonRef, prNumber){    
-    let line = "1";
+function iconFor(type, num = undefined) {
+    if (num === 0) {
+        return ':white_check_mark:';
+    }
     
+    if (type.toLowerCase().includes('error')) {
+        return ':x:';
+    } else {
+        return ':warning:';
+    }
+}
+
+function pluralize(word, num) {
+    return num !== 1 ? `${word}s` : word;
+}
+
+function getLine(jsonRef) {
     try {
-        line = jsonRef.substr(jsonRef.indexOf(".json:") + 6).split(':')[0];
-    } catch(error) {
-        line = "1";
+        return jsonRef.substr(jsonRef.indexOf(".json:") + 6).split(':')[0];
+    } catch (error) {
+        return undefined;
+    }
+}
+
+function getFile(jsonRef) {
+    try {
+        const start = jsonRef.indexOf("specification");
+        return jsonRef.substr(start, (jsonRef.indexOf(".json") + 5) - start);
+    } catch (error) {
+        return undefined;
+    }
+}
+
+function shortName(filePath) {
+    return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
+}
+
+function blobHref(file) {
+    return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
+}
+
+function getFileSummaryTable(issues, header, formatter) {
+    let potentialNewIssues = header;
+
+    issues.sort((a, b) => {
+        if (!a.filePath) {
+            a.filePath = getFile(a.jsonref) || "";
+            a.lineNumber = getLine(a.jsonref) || "1";
+        }
+
+        if (!b.filePath) {
+            b.filePath = getFile(b.jsonref) || "";
+            b.lineNumber = getLine(b.jsonref) || "1";
+        }
+
+        const comparison = a.filePath.localeCompare(b.filePath);
+        if (comparison !== 0) {
+            return comparison;
+        } else if (a.lineNumber !== b.lineNumber) {
+            return a.lineNumber - b.lineNumber;
+        } else {
+            return a.id.localeCompare(b.id);
+        }
+    });
+
+    issues.forEach(function (issue, count) {
+        if (!issue.filePath) {
+            issue.filePath = getFile(issue.jsonref) || "";
+            issue.lineNumber = getLine(issue.jsonref) || "1";
+        }
+
+        potentialNewIssues += formatter(
+            count + 1,
+            issue.id,
+            issue.code,
+            issue.filePath,
+            issue.lineNumber,
+            issue.message
+        );
+    });
+
+    return potentialNewIssues;
+}
+
+function getFileSummary(issueType, fileName, existingWarnings, existingErrors, newWarnings, newErrors) {
+    let fileSummary = "";
+
+    if (newErrors.length > 0) {
+        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
     }
 
-    let fileName = jsonRef.substr(jsonRef.indexOf("specification"), (jsonRef.indexOf(".json") + 5) - jsonRef.indexOf("specification"));
-    let md5 = crypto.createHash('md5').update(fileName).digest("hex");
+    if (existingErrors.length > 0) {
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Error`, existingErrors.length, getFileSummaryTable(existingErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
+    }
 
-    let link = "https://github.com/" + process.env.TRAVIS_REPO_SLUG + "/pull/"
-                        + prNumber 
-                        + "/files?diff=unified#diff-" 
-                        + md5 + "R" + line;
+    if (fileSummary !== "") {
+        fileSummary += "<br>\n\n";
+    }
+
+    if (newWarnings.length > 0) {
+        fileSummary += fileSummaryNewTemplate(`${issueType} Warning`, newWarnings.length, getFileSummaryTable(newWarnings, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
+    }
+
+    if (existingWarnings.length > 0) {
+        fileSummary += fileSummaryExistingTemplate(`${issueType} Warning`, existingWarnings.length, getFileSummaryTable(existingWarnings, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
+    }
+
+    if (fileSummary !== "") {
+        return fileSummaryHeader(fileName, blobHref(fileName)) + fileSummary;
+    } else {
+        return "";
+    }
+}
+
+function emailLink(title, addr, subject = "", body = "") {
+    let link = `<a href='mailto:${addr}`;
+    let sep = "?";
+    if (subject && subject.length > 0) {
+        link += `${sep}subject=${encodeURIComponent(subject)}`;
+        sep = "&";
+    }
+    if (body && body.length > 0) {
+        link += `${sep}body=${encodeURIComponent(body)}`;
+    }
+    link += `'>${title}</a>`;
 
     return link;
 }
 
-function getFileSummary(fileName, beforeWarningsArray, afterWarningsArray, beforeErrorsArray, afterErrorsArray, newWarnings, newErrors, prNumber) {
-    let fileSummaryCopy = fileSummaryTemplate;
-    fileSummaryCopy = fileSummaryCopy.replace("{file_name}", fileName);
-    fileSummaryCopy = fileSummaryCopy.replace("{before_warnings}", beforeWarningsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{after_warnings}", afterWarningsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{before_errors}", beforeErrorsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{after_errors}", afterErrorsArray.length);
-
-    
-    fileSummaryCopy = fileSummaryCopy.replace("{new_warnings}", newWarnings.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{new_errors}", newErrors.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{total_warnings}", afterWarningsArray.length);
-    fileSummaryCopy = fileSummaryCopy.replace("{total_errors}", afterErrorsArray.length);
-
-    if(newWarnings.length > 0){
-        let potentialNewWarnings = '';
-        newWarnings.forEach(function(newWarning) {
-            let potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummary;
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_code}", newWarning.code);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_message}", newWarning.message);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_id}", newWarning.id);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_source}", getLink(newWarning.jsonref, prNumber));
-            potentialNewWarnings = potentialNewWarnings.concat(potentialNewWarningErrorSummaryCopy);
-        });
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_warnings}", potentialNewWarningErrorSummaryHeader.replace("{list_of_new_warnings_errors}", potentialNewWarnings).replace("{table_title}", "Potential New Warnings"))
-    } else {
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_warnings}", "");
-    }
-
-    if(newErrors.length > 0){
-        let potentialNewErrors = '';
-        newErrors.forEach(function(newError) {
-            let potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummary;
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_code}", newError.code);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_message}", newError.message);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_id}", newError.id);
-            potentialNewWarningErrorSummaryCopy = potentialNewWarningErrorSummaryCopy.replace("{warning_error_source}", getLink(newError.jsonref, prNumber));
-            potentialNewErrors = potentialNewErrors.concat(potentialNewWarningErrorSummaryCopy);
-        });
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_errors}", potentialNewWarningErrorSummaryHeader.replace("{list_of_new_warnings_errors}", potentialNewErrors).replace("{table_title}", "Potential New Errors"))
-    } else {
-        fileSummaryCopy = fileSummaryCopy.replace("{potential_new_errors}", "");
-    }
-
-    return fileSummaryCopy;
-}
-
 function postProcessing() {
-    for(var fileName in jsonData['files']) {
+    let newSDKErrorsCount = 0, newARMErrorsCount = 0, newSDKWarningsCount = 0, newARMWarningsCount = 0;
+
+    console.log("\n---------- Linter Diff Results ----------\n")
+
+    if (!jsonData) {
+        const reportLink = emailLink(
+            "report this failure",
+            "azure-swag-tooling@microsoft.com",
+            "Failure | AutoRest Linter Diff Tool",
+            `Please examine the failure in PR https://github.com/${process.env.TRAVIS_REPO_SLUG}/pull/${pullRequestNumber}\r\nThe failing job is https://travis-ci.org/${process.env.TRAVIS_REPO_SLUG}/jobs/${process.env.TRAVIS_JOB_ID}`
+        );
+
+        const output = {
+            title: "Failed to produce a result",
+            summary: `The Linter Diff tool failed to produce a result. Work with your reviewer to examine the lint results manually before merging.\n\nPlease ${reportLink}!`
+        };
+
+        console.log("---output");
+        console.log(JSON.stringify(output));
+        console.log("---");
+
+        return;
+    }
+
+    const configFiles = Object.keys(jsonData['files']);
+    configFiles.sort();
+
+    for (const fileName of configFiles) {
         let beforeErrorsSDKArray = [], beforeWarningsSDKArray = [], beforeErrorsARMArray = [], beforeWarningsARMArray = [];
         let afterErrorsSDKArray = [], afterWarningsSDKArray = [], afterErrorsARMArray = [], afterWarningsARMArray = [];
         let newSDKErrors = [], newSDKWarnings = [], newARMErrors = [], newARMWarnings = [];
+        let existingSDKErrors = [], existingSDKWarnings = [], existingARMErrors = [], existingARMWarnings = [];
 
         let beforeErrorsAndWarningsArray = jsonData['files'][fileName]['before'];
         beforeErrorsAndWarningsArray.forEach(beforeErrorOrWarning => {
-            if(beforeErrorOrWarning.type.toLowerCase() == 'warning'){
+            if(beforeErrorOrWarning.type != undefined && beforeErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(beforeErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     beforeWarningsSDKArray.push(beforeErrorOrWarning);
                 } else {
@@ -207,7 +309,7 @@ function postProcessing() {
                 }
             }
 
-            if(beforeErrorOrWarning.type.toLowerCase() == 'error'){
+            if(beforeErrorOrWarning.type != undefined && beforeErrorOrWarning.type.toLowerCase() == 'error'){
                 if(beforeErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     beforeErrorsSDKArray.push(beforeErrorOrWarning);
                 } else {
@@ -218,7 +320,7 @@ function postProcessing() {
 
         let afterErrorsAndWarningsArray = jsonData['files'][fileName]['after'];
         afterErrorsAndWarningsArray.forEach(afterErrorOrWarning => {
-            if(afterErrorOrWarning.type.toLowerCase() == 'warning'){
+            if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     afterWarningsSDKArray.push(afterErrorOrWarning);
                 } else {
@@ -226,7 +328,7 @@ function postProcessing() {
                 }
             }
 
-            if(afterErrorOrWarning.type.toLowerCase() == 'error'){
+            if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'error'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
                     afterErrorsSDKArray.push(afterErrorOrWarning);
                 } else {
@@ -235,17 +337,20 @@ function postProcessing() {
             }
         });
 
-        compareBeforeAfterArrays(afterErrorsARMArray, beforeErrorsARMArray, newARMErrors);
-        compareBeforeAfterArrays(afterErrorsSDKArray, beforeErrorsSDKArray, newSDKErrors);
-        compareBeforeAfterArrays(afterWarningsARMArray, beforeWarningsARMArray, newARMWarnings);
-        compareBeforeAfterArrays(afterWarningsSDKArray, beforeWarningsSDKArray, newSDKWarnings);
+        compareBeforeAfterArrays(afterErrorsARMArray, beforeErrorsARMArray, existingARMErrors, newARMErrors);
+        compareBeforeAfterArrays(afterErrorsSDKArray, beforeErrorsSDKArray, existingSDKErrors, newSDKErrors);
+        compareBeforeAfterArrays(afterWarningsARMArray, beforeWarningsARMArray, existingARMWarnings, newARMWarnings);
+        compareBeforeAfterArrays(afterWarningsSDKArray, beforeWarningsSDKArray, existingSDKWarnings, newSDKWarnings);
 
+        console.log(`Config file: ${fileName}\n`)
         console.log("SDK Errors/Warnings");
         console.log("===================");
         console.log("Errors:    Before: ", beforeErrorsSDKArray.length, " - After: ", afterErrorsSDKArray.length);
         console.log("Warnings:  Before: ", beforeWarningsSDKArray.length, " - After: ", afterWarningsSDKArray.length);
         console.log("New SDK Errors: ", newSDKErrors.length);
         console.log("New SDK Warnings: ", newSDKWarnings.length);
+        console.log("Existing SDK Errors: ", existingSDKErrors.length);
+        console.log("Existing SDK Warnings: ", existingSDKWarnings.length);
         console.log();
         console.log("ARM Errors/Warnings");
         console.log("===================");
@@ -253,18 +358,66 @@ function postProcessing() {
         console.log("Warnings:  Before: ", beforeWarningsARMArray.length, " - After: ", afterWarningsARMArray.length);
         console.log("New ARM Errors: ", newARMErrors.length);
         console.log("New ARM Warnings: ", newARMWarnings.length);
+        console.log("Existing ARM Errors: ", existingARMErrors.length);
+        console.log("Existing ARM Warnings: ", existingARMWarnings.length);
         console.log();
 
-        let fileSummaryCopy = getFileSummary(fileName, beforeWarningsSDKArray, afterWarningsSDKArray, beforeErrorsSDKArray, afterErrorsSDKArray, newSDKWarnings, newSDKErrors, pullRequestNumber);
-        sdkFileSummaries = sdkFileSummaries.concat(fileSummaryCopy);
-        fileSummaryCopy = getFileSummary(fileName, beforeWarningsARMArray, afterWarningsARMArray, beforeErrorsARMArray, afterErrorsARMArray, newARMWarnings, newARMErrors, pullRequestNumber);
-        armFileSummaries = armFileSummaries.concat(fileSummaryCopy);
+        if (newSDKErrors.length > 0) {
+            console.log(`Potential new SDK errors`)
+            console.log("========================");
+            console.log(getFileSummaryTable(newSDKErrors, "", potentialNewWarningErrorSummaryPlain));
+        }
+        if (newSDKWarnings.length > 0) {
+            console.log(`Potential new SDK warnings`)
+            console.log("==========================");
+            console.log(getFileSummaryTable(newSDKWarnings, "", potentialNewWarningErrorSummaryPlain));
+        }
+        if (newARMErrors.length > 0) {
+            console.log(`Potential new ARM errors`)
+            console.log("========================");
+            console.log(getFileSummaryTable(newARMErrors, "", potentialNewWarningErrorSummaryPlain));
+        }
+        if (newARMWarnings.length > 0) {
+            console.log(`Potential new ARM warnings`)
+            console.log("==========================");
+            console.log(getFileSummaryTable(newARMWarnings, "", potentialNewWarningErrorSummaryPlain));
+        }
+
+        console.log("-----------------------------------------\n")
+
+        newSDKErrorsCount += newSDKErrors.length;
+        newARMErrorsCount += newARMErrors.length;
+        newSDKWarningsCount += newSDKWarnings.length;
+        newARMWarningsCount += newARMWarnings.length;
+
+        sdkFileSummaries += getFileSummary("SDK", fileName, existingSDKWarnings, existingSDKErrors, newSDKWarnings, newSDKErrors);
+        armFileSummaries += getFileSummary("ARM", fileName, existingARMWarnings, existingARMErrors, newARMWarnings, newARMErrors);
     }
 
-    let slug = process.env.TRAVIS_REPO_SLUG;
-    slug = slug.split("/")[1];
-    postSummariesToGithub("SDK Related Validation Errors/Warnings", sdkFileSummaries, "Azure", slug, pullRequestNumber, sdkContactMessage);
-    postSummariesToGithub("ARM Related Validation Errors/Warnings", armFileSummaries, "Azure", slug, pullRequestNumber, armContactMessage);
+    const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
+    const armSummary = getSummaryBlock("ARM-related validation Errors / Warnings", armFileSummaries, armContactMessage);
+    const text = `${sdkSummary}<br><br>\n\n${armSummary}<br><br>\n\n${githubFooter}`;
+    
+    const [title, summary] = getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount);
+    const output = {
+        title,
+        summary,
+        text: text.length <= 65535 ? text : `${tooManyResults}<br><br>\n\n${githubFooter}`
+    }
+
+    console.log("---output");
+    console.log(JSON.stringify(output, null, 2));
+    console.log("---");
+
+    if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
+        let slug = process.env.TRAVIS_REPO_SLUG;
+        slug = slug.split("/")[1];
+        gitHubPost.postGithubComment("Azure", slug, pullRequestNumber, output.text);
+    }
+
+    if (newSDKErrorsCount > 0 || newARMErrorsCount > 0) {
+        process.exitCode = 1;
+    }
 }
 
 postProcessing();

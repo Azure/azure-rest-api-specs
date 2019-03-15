@@ -13,16 +13,21 @@
     "@microsoft.azure/async-io": "^1.0.21",
     "@microsoft.azure/literate": "^1.0.21",
     "@microsoft.azure/polyfill": "^1.0.17",
+    "@ts-common/commonmark-to-markdown": "^1.1.10",
+    "@ts-common/fs": "0.1.0",
+    "@types/js-yaml": "^3.12.0",
     "fs-extra": "^3.0.1",
     "glob": "^5.0.14",
-    "js-yaml": "^3.8.2",
+    "js-yaml": "^3.12.2",
     "json-schema-ref-parser": "^3.1.2",
     "mocha": "*",
-    "oad": "^0.1.11",
-    "oav": "^0.4.44",
+    "@azure/oad": "^0.2.1",
+    "oav": "^0.14.5",
     "request": "^2.61.0",
     "request-promise-native": "^1.0.5",
-    "z-schema": "^3.16.1"
+    "typescript": "^3.2.4",
+    "z-schema": "^3.25.1",
+    "ts-node": "^8.0.3"
   },
   "dependencies": {
     "@octokit/rest": "^15.2.6"
@@ -36,6 +41,9 @@
     "url": "http://github.com/azure/azure-rest-api-specs/issues"
   },
   "scripts": {
-    "test": "mocha -t 500000 --reporter min"
+    "test": "mocha -t 500000 --reporter min",
+    "oav": "oav",
+    "tsc": "tsc",
+    "multiapi": "ts-node ./scripts/multiapi.ts"
   }
 }

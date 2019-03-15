@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
-    "version": "2017-09-01-preview"
+    "version": "2018-06-01"
   },
   "paths": {},
   "definitions": {
@@ -156,7 +156,7 @@
           "enum": [
             "Standard",
             "Enterprise"
-          ], 
+          ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeEdition",
             "modelAsString": true
@@ -226,6 +226,74 @@
         {
           "$ref": "#/definitions/IntegrationRuntime"
         }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SelfHostedIntegrationRuntimeTypeProperties"
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntimeTypeProperties": {
+      "description": "The self-hosted integration runtime properties.",
+      "type": "object",
+      "properties": {
+        "linkedInfo": {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeType"
+        }
+      }
+    },
+    "LinkedIntegrationRuntimeType": {
+      "description": "The base definition of a linked integration runtime.",
+      "discriminator": "authorizationType",
+      "type": "object",
+      "properties": {
+        "authorizationType": {
+          "type": "string",
+          "description": "The authorization type for integration runtime sharing."
+        }
+      },
+      "required": [
+        "authorizationType"
+      ]
+    },
+    "LinkedIntegrationRuntimeKeyAuthorization": {
+      "x-ms-discriminator-value": "Key",
+      "description": "The key authorization type integration runtime.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeType"
+        }
+      ],
+      "properties": {
+        "key": {
+          "description": "The key used for authorization.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "LinkedIntegrationRuntimeRbacAuthorization": {
+      "x-ms-discriminator-value": "RBAC",
+      "description": "The role based access control (RBAC) authorization type integration runtime.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeType"
+        }
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "The resource identifier of the integration runtime to be shared.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId"
       ]
     },
     "IntegrationRuntimeStatus": {
@@ -240,7 +308,7 @@
         "dataFactoryName": {
           "description": "The data factory name which the integration runtime belong to.",
           "type": "string",
-          "readOnly":  true
+          "readOnly": true
         },
         "state": {
           "description": "The state of integration runtime.",
@@ -265,7 +333,8 @@
         "NeedRegistration",
         "Online",
         "Limited",
-        "Offline"
+        "Offline",
+        "AccessDenied"
       ],
       "x-ms-enum": {
         "name": "IntegrationRuntimeState",
@@ -540,6 +609,13 @@
           "type": "string",
           "readOnly": true
         },
+        "links": {
+          "description": "The list of linked integration runtimes that are created to share with this integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedIntegrationRuntime"
+          }
+        },
         "pushedVersion": {
           "description": "The version that the integration runtime is going to update to.",
           "type": "string",
@@ -548,6 +624,12 @@
         "latestVersion": {
           "description": "The latest version on download center.",
           "type": "string",
+          "readOnly": true
+        },
+        "autoUpdateETA": {
+          "description": "The estimated time when the self-hosted integration runtime will be updated.",
+          "type": "string",
+          "format": "date-time",
           "readOnly": true
         }
       }
@@ -563,6 +645,38 @@
       "x-ms-enum": {
         "name": "IntegrationRuntimeAutoUpdate",
         "modelAsString": true
+      }
+    },
+    "LinkedIntegrationRuntime": {
+      "description": "The linked integration runtime information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the linked integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The subscription ID for which the linked integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFactoryName": {
+          "description": "The name of the data factory for which the linked integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFactoryLocation": {
+          "description": "The location of the data factory for which the linked integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "The creating time of the linked integration runtime.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
       }
     },
     "SelfHostedIntegrationRuntimeNode": {
@@ -653,6 +767,7 @@
           "description": "The result of the last integration runtime node update.",
           "type": "string",
           "enum": [
+            "None",
             "Succeed",
             "Fail"
           ],
@@ -840,6 +955,61 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "SsisObjectMetadataListResponse": {
+      "type": "object",
+      "description": "A list of SSIS object metadata.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SSIS object metadata.",
+          "items": {
+            "$ref": "#/definitions/SsisObjectMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results, if any remaining results exist."
+        }
+      }
+    },
+    "SsisObjectMetadata": {
+      "type": "object",
+      "description": "SSIS object metadata.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "Type of metadata.",
+          "$ref": "#/definitions/SsisObjectMetadataType"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Metadata id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Metadata name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Metadata description."
+        }
+      }
+    },
+    "SsisObjectMetadataType": {
+      "description": "The type of SSIS object metadata.",
+      "type": "string",
+      "enum": [
+        "Folder",
+        "Project",
+        "Package",
+        "Environment"
+      ],
+      "x-ms-enum": {
+        "name": "SsisObjectMetadataType",
+        "modelAsString": true
       }
     }
   }

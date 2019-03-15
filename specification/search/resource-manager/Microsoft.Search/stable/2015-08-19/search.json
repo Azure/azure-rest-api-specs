@@ -331,7 +331,8 @@
         ],
         "operationId": "Services_CreateOrUpdate",
         "x-ms-examples": {
-          "SearchCreateOrUpdateService": { "$ref": "./examples/SearchCreateOrUpdateService.json" }
+          "SearchCreateOrUpdateService": { "$ref": "./examples/SearchCreateOrUpdateService.json" },
+          "SearchCreateOrUpdateServiceWithIdentity": { "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json" }
         },
         "description": "Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.",
         "externalDocs": {
@@ -395,7 +396,8 @@
         ],
         "operationId": "Services_Update",
         "x-ms-examples": {
-          "SearchUpdateService": { "$ref": "./examples/SearchUpdateService.json" }
+          "SearchUpdateService": { "$ref": "./examples/SearchUpdateService.json" },
+          "SearchUpdateServiceToRemoveIdentity": { "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json" }
         },
         "description": "Updates an existing Search service in the given resource group.",
         "externalDocs": {
@@ -571,6 +573,49 @@
         "responses": {
           "200": {
             "description": "The operation succeeded. The response contains the list of all Search service definitions for the given resource group.",
+            "schema": {
+              "$ref": "#/definitions/SearchServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "Services_ListBySubscription",
+        "x-ms-examples": {
+          "SearchListServicesBySubscription": { "$ref": "./examples/SearchListServicesBySubscription.json" }
+        },
+        "description": "Gets a list of all Search services in the given subscription.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all Search service definitions for the given subscription.",
             "schema": {
               "$ref": "#/definitions/SearchServiceListResult"
             }
@@ -894,7 +939,7 @@
             "url": "https://aka.ms/search-rp-info"
           },
           "x-ms-mutability": [
-            "create", 
+            "create",
             "read"
           ]
         },
@@ -904,6 +949,10 @@
             "type": "string"
           },
           "description": "Tags to help categorize the resource in the Azure portal."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "description": "Base type for all Azure resources.",
@@ -924,13 +973,13 @@
         "type": "object",
         "description": "Describes a particular API error with an error code and a message.",
         "properties": {
-            "code": { 
+            "code": {
               "type": "string",
-              "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases."
+              "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
             },
             "message": {
               "type": "string",
-              "description": "A message that describes the error in detail and provides debugging information." 
+              "description": "A message that describes the error in detail and provides debugging information."
             },
             "target": {
               "type": "string",
@@ -1000,6 +1049,36 @@
           "description": "The URL to get the next set of operation list results, if any."
         }
       }
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Identity for the resource."
     }
   },
   "parameters": {
