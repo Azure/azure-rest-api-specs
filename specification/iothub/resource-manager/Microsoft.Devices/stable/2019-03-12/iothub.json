@@ -1954,9 +1954,6 @@
           "description": "IoT hub comments.",
           "type": "string"
         },
-        "operationsMonitoringProperties": {
-          "$ref": "#/definitions/OperationsMonitoringProperties"
-        },
         "features": {
           "description": "The capabilities and features enabled for the IoT hub.",
           "enum": [
@@ -2114,29 +2111,6 @@
         },
         "feedback": {
           "$ref": "#/definitions/FeedbackProperties"
-        }
-      }
-    },
-    "OperationsMonitoringProperties": {
-      "description": "The operations monitoring properties for the IoT hub. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations, Routes, D2CTwinOperations, C2DTwinOperations, TwinQueries, JobsOperations, DirectMethods.",
-      "type": "object",
-      "properties": {
-        "events": {
-          "type": "object",
-          "additionalProperties": {
-            "enum": [
-              "None",
-              "Error",
-              "Information",
-              "Error, Information"
-            ],
-            "description": "The operations monitoring level.",
-            "type": "string",
-            "x-ms-enum": {
-              "name": "OperationMonitoringLevel",
-              "modelAsString": true
-            }
-          }
         }
       }
     },
