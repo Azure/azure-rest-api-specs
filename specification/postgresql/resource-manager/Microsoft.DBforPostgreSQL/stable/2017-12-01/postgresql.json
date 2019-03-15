@@ -49,7 +49,10 @@
           },
           "Create a server as a geo restore ": {
             "$ref": "./examples/ServerCreateGeoRestoreMode.json"
-          }
+          },
+          "Create a replica server": {
+            "$ref": "./examples/ServerCreateReplicaMode.json"
+          } 
         },
         "description": "Creates a new server, or will overwrite an existing server.",
         "parameters": [
@@ -268,6 +271,45 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/Replicas": {
+      "get": {
+        "tags": [
+          "Replicas"
+        ],
+        "operationId": "Replicas_ListByServer",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/ReplicasListByServer.json"
+          }
+        },
+        "description": "List all the replicas for a given server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -1363,6 +1405,20 @@
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
+        },
+        "replicationRole": {
+          "type": "string",
+          "description": "The replication role of the server."
+        },
+        "masterServerId": {
+          "type": "string",
+          "description": "The master server id of a replica server."
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The maximum number of replicas that a master server can have."
         }
       },
       "description": "The properties of a server."
@@ -1417,7 +1473,8 @@
           "enum": [
             "Default",
             "PointInTimeRestore",
-            "GeoRestore"
+            "GeoRestore",
+            "Replica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1492,6 +1549,24 @@
         "sourceServerId"
       ],
       "description": "The properties used to create a new server by restoring to a different region from a geo replicated backup."
+    },
+    "ServerPropertiesForReplica": {
+      "x-ms-discriminator-value": "Replica",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
+      "properties": {
+        "sourceServerId": {
+          "type": "string",
+          "description": "The master server id to create replica from."
+        }
+      },
+      "required": [
+        "sourceServerId"
+      ],
+      "description": "The properties to create a new replica."
     },
     "Sku": {
       "properties": {
