@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for StorageSync.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Storage, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,29 @@ To build the SDK for Storage, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10-01
+tag: package-2019-03
 ```
 
 
+### Tag: package-2019-03
 
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.StorageSync/stable/2019-03-01/storagesync.json
+```
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
@@ -39,7 +46,6 @@ These settings apply only when `--tag=package-2018-07-01` is specified on the co
 input-file:
 - Microsoft.StorageSync/stable/2018-10-01/storagesync.json
 ```
-
 
 ### Tag: package-2018-07-01
 
@@ -50,7 +56,6 @@ input-file:
 - Microsoft.StorageSync/stable/2018-07-01/storagesync.json
 ```
 
-
 ### Tag: package-2018-04-02
 
 These settings apply only when `--tag=package-2018-04-02` is specified on the command line.
@@ -59,7 +64,6 @@ These settings apply only when `--tag=package-2018-04-02` is specified on the co
 input-file:
 - Microsoft.StorageSync/stable/2018-04-02/storagesync.json
 ```
-
 
 ### Tag: package-2017-06-05-preview
 
@@ -70,8 +74,8 @@ input-file:
 - Microsoft.StorageSync/preview/2017-06-05-preview/storagesync.json
 ```
 
-
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -120,11 +124,13 @@ python:
   package-version: 1.0.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-storagesync/azure/mgmt/storagesync
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
