@@ -7,154 +7,155 @@ This profile definition was created based on 2019-03-01-hybrid, 2018-03-01-hybri
 
 ``` yaml
 profiles:
+  stable-2019-01:
     microsoft.resources:
-        '2018-05-01':
-            - deployments
-            - deployments/operations
-            - links
-            - locations
-            - operations
-            - providers
-            - resourceGroups
-            - resources
-            - subscriptions
-            - subscriptions/locations
-            - subscriptions/operationresults
-            - subscriptions/providers
-            - subscriptions/resourceGroups
-            - subscriptions/resourceGroups/resources
-            - subscriptions/resources
-            - subscriptions/tagNames
-            - subscriptions/tagNames/tagValues
-            - tenants
-    microsoft.web:
+      '2018-05-01':
+        - deployments
+        - deployments/operations
+        - links
+        - locations
+        - operations
+        - providers
+        - resourceGroups
+        - resources
+        - subscriptions
+        - subscriptions/locations
+        - subscriptions/operationresults
+        - subscriptions/providers
+        - subscriptions/resourceGroups
+        - subscriptions/resourceGroups/resources
+        - subscriptions/resources
+        - subscriptions/tagNames
+        - subscriptions/tagNames/tagValues
+        - tenants
+      microsoft.web:
         '2018-02-01':
-            - certificates
-            - checknameavailability
-            - operations
-            - serverFarms
-            - sites
-            - sites/domainOwnershipIdentifiers
-            - sites/extensions
-            - sites/hostNameBindings
-            - sites/instances
-            - sites/instances/extensions
-            - sites/slots
-            - sites/slots/hostNameBindings
-            - sites/slots/instances
-            - sites/slots/instances/extensions
+          - certificates
+          - checknameavailability
+          - operations
+          - serverFarms
+          - sites
+          - sites/domainOwnershipIdentifiers
+          - sites/extensions
+          - sites/hostNameBindings
+          - sites/instances
+          - sites/instances/extensions
+          - sites/slots
+          - sites/slots/hostNameBindings
+          - sites/slots/instances
+          - sites/slots/instances/extensions
         '2016-09-01':
-            - serverFarms/metricDefinitions
-            - serverFarms/metrics
-            - serverFarms/usages
+          - serverFarms/metricDefinitions
+          - serverFarms/metrics
+          - serverFarms/usages
         '2016-08-01':
-            - availableStacks
-            - ishostnameavailable
-            - isusernameavailable
-            - metadata
-            - publishingUsers
-            - sites/metricDefinitions
-            - sites/metrics
-            - sites/recommendations
-            - sites/slots/extensions
-            - sites/slots/metricDefinitions
-            - sites/slots/metrics
-            - sourceControls
+          - availableStacks
+          - ishostnameavailable
+          - isusernameavailable
+          - metadata
+          - publishingUsers
+          - sites/metricDefinitions
+          - sites/metrics
+          - sites/recommendations
+          - sites/slots/extensions
+          - sites/slots/metricDefinitions
+          - sites/slots/metrics
+          - sourceControls
         '2016-03-01':
-            - deploymentLocations
-            - georegions
-            - listSitesAssignedToHostName
-            - recommendations
-            - runtimes
-            - validate
-    microsoft.eventhub:
+          - deploymentLocations
+          - georegions
+          - listSitesAssignedToHostName
+          - recommendations
+          - runtimes
+          - validate
+      microsoft.eventhub:
         2018-01-01-preview:
-            - checkNameAvailability
-            - namespaces
-            - operations
-            - sku
+          - checkNameAvailability
+          - namespaces
+          - operations
+          - sku
         '2015-08-01':
-            - checkNamespaceAvailability
-    microsoft.insights:
+          - checkNamespaceAvailability
+      microsoft.insights:
         '2018-01-01':
-            - metricDefinitions
-            - metrics
+          - metricDefinitions
+          - metrics
         2017-05-01-preview:
-            - diagnosticSettingCategories
-            - diagnosticSettings
+          - diagnosticSettingCategories
+          - diagnosticSettings
         '2015-04-01':
-            - eventCategories
-            - eventTypes
-            - operations
-    microsoft.compute:
+          - eventCategories
+          - eventTypes
+          - operations
+      microsoft.compute:
         '2017-12-01':
-            - availabilitySets
-            - images
-            - locations
-            - locations/operations
-            - locations/publishers
-            - locations/usages
-            - locations/vmSizes
-            - operations
-            - virtualMachineScaleSets
-            - virtualMachineScaleSets/extensions
-            - virtualMachineScaleSets/virtualMachines
-            - virtualMachineScaleSets/virtualMachines/networkInterfaces
-            - virtualMachines
-            - virtualMachines/extensions
-            - virtualmachineScaleSets/networkInterfaces
+          - availabilitySets
+          - images
+          - locations
+          - locations/operations
+          - locations/publishers
+          - locations/usages
+          - locations/vmSizes
+          - operations
+          - virtualMachineScaleSets
+          - virtualMachineScaleSets/extensions
+          - virtualMachineScaleSets/virtualMachines
+          - virtualMachineScaleSets/virtualMachines/networkInterfaces
+          - virtualMachines
+          - virtualMachines/extensions
+          - virtualmachineScaleSets/networkInterfaces
         '2017-03-30':
-            - diskoperations
-            - disks
-            - locations/diskoperations
-            - snapshots
-            - virtualMachineScaleSets/networkInterfaces
-    microsoft.network:
+          - diskoperations
+          - disks
+          - locations/diskoperations
+          - snapshots
+          - virtualMachineScaleSets/networkInterfaces
+      microsoft.network:
         '2017-10-01':
-            - connections
-            - loadBalancers
-            - localNetworkGateways
-            - locations
-            - locations/operationResults
-            - locations/operations
-            - locations/usages
-            - networkInterfaces
-            - networkSecurityGroups
-            - operations
-            - publicIpAddresses
-            - routeTables
-            - virtualNetworkGateways
-            - virtualNetworks
+          - connections
+          - loadBalancers
+          - localNetworkGateways
+          - locations
+          - locations/operationResults
+          - locations/operations
+          - locations/usages
+          - networkInterfaces
+          - networkSecurityGroups
+          - operations
+          - publicIpAddresses
+          - routeTables
+          - virtualNetworkGateways
+          - virtualNetworks
         '2016-04-01':
-            - dnsZones
-    microsoft.storage:
+          - dnsZones
+      microsoft.storage:
         '2017-10-01':
-            - checkNameAvailability
-            - locations
-            - locations/quotas
-            - operations
-            - storageAccounts
-            - storageAccounts/blobServices
-            - storageAccounts/queueServices
-            - storageAccounts/tableServices
-            - usages
-    microsoft.authorization:
+          - checkNameAvailability
+          - locations
+          - locations/quotas
+          - operations
+          - storageAccounts
+          - storageAccounts/blobServices
+          - storageAccounts/queueServices
+          - storageAccounts/tableServices
+          - usages
+      microsoft.authorization:
         '2016-12-01':
-            - policyAssignments
-            - policyDefinitions
+          - policyAssignments
+          - policyDefinitions
         '2016-09-01':
-            - locks
+          - locks
         2015-07-01-preview:
-            - providerOperations
+          - providerOperations
         '2015-07-01':
-            - operations
-            - permissions
-            - roleAssignments
-            - roleDefinitions
-    microsoft.keyvault:
+          - operations
+          - permissions
+          - roleAssignments
+          - roleDefinitions
+      microsoft.keyvault:
         '2016-10-01':
-            - operations
-            - vaults
-            - vaults/accessPolicies
-            - vaults/secrets
+          - operations
+          - vaults
+          - vaults/accessPolicies
+          - vaults/secrets
 ```
