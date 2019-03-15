@@ -1632,180 +1632,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkConfig/virtualNetwork": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a Swift Virtual Network connection.",
-        "description": "Gets a Swift Virtual Network connection.",
-        "operationId": "WebApps_GetSwiftVirtualNetworkConnection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
-        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
-        "operationId": "WebApps_DeleteSwiftVirtualNetwork",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted virtual network."
-          },
-          "404": {
-            "description": "Virtual network does not exist."
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web": {
       "get": {
         "tags": [
@@ -5046,6 +4872,180 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrateMySqlStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkConfig/virtualNetwork": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a Swift Virtual Network connection.",
+        "description": "Gets a Swift Virtual Network connection.",
+        "operationId": "WebApps_GetSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "operationId": "WebApps_DeleteSwiftVirtualNetwork",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted virtual network."
+          },
+          "404": {
+            "description": "Virtual network does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
             }
           },
           "default": {
@@ -8723,208 +8723,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkConfig/virtualNetwork": {
-      "get": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a Swift Virtual Network connection.",
-        "description": "Gets a Swift Virtual Network connection.",
-        "operationId": "WebApps_GetSwiftVirtualNetworkConnectionSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will get a gateway for the production slot's Virtual Network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
-        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
-        "operationId": "WebApps_DeleteSwiftVirtualNetworkSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will delete the connection for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted virtual network."
-          },
-          "404": {
-            "description": "Virtual network does not exist."
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/web": {
       "get": {
         "tags": [
@@ -12509,6 +12307,208 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrateMySqlStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkConfig/virtualNetwork": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a Swift Virtual Network connection.",
+        "description": "Gets a Swift Virtual Network connection.",
+        "operationId": "WebApps_GetSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get a gateway for the production slot's Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "operationId": "WebApps_DeleteSwiftVirtualNetworkSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will delete the connection for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted virtual network."
+          },
+          "404": {
+            "description": "Virtual network does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
             }
           },
           "default": {
@@ -20826,6 +20826,10 @@
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
+            "clientCertExclusionPaths": {
+              "description": "client certificate authentication comma-separated exclusion paths",
+              "type": "string"
+            },
             "hostNamesDisabled": {
               "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
@@ -20892,6 +20896,35 @@
             "httpsOnly": {
               "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
               "type": "boolean"
+            },
+            "redundancyMode": {
+              "description": "Site redundancy mode",
+              "enum": [
+                "None",
+                "Manual",
+                "Failover",
+                "ActiveActive",
+                "GeoRedundant"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "RedundancyMode",
+                "modelAsString": false
+              }
+            },
+            "inProgressOperationId": {
+              "format": "uuid",
+              "description": "Specifies an operation id if this site has a pending operation.",
+              "type": "string",
+              "readOnly": true,
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "geoDistributions": {
+              "description": "GeoDistributions for this site",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/GeoDistribution"
+              }
             }
           },
           "x-ms-client-flatten": true

@@ -51,9 +51,6 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -61,11 +58,11 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "200": {
             "description": "Lists a collection of Identity Providers.",
@@ -79,6 +76,9 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -96,29 +96,29 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Specified identity provider entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -129,7 +129,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "IdentityProvider"
         ],
@@ -142,19 +142,19 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -197,7 +197,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "name": "parameters",
@@ -221,12 +221,24 @@
         "responses": {
           "201": {
             "description": "IdentityProvider configuration were successfully created.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/IdentityProviderContract"
             }
           },
           "200": {
             "description": "The existing Identity Provider was successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/IdentityProviderContract"
             }
@@ -241,7 +253,7 @@
       },
       "patch": {
         "tags": [
-          "IdentityProviders"
+          "IdentityProvider"
         ],
         "operationId": "IdentityProvider_Update",
         "description": "Updates an existing IdentityProvider configuration.",
@@ -258,7 +270,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "name": "parameters",
@@ -310,7 +322,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/IdentityProviderNameParameter"
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -477,6 +489,10 @@
           "maxItems": 32,
           "description": "List of Allowed Tenants when configuring Azure Active Directory login."
         },
+        "authority":{
+          "type": "string",
+          "description": "OpenID Connect discovery endpoint hostname for AAD or AAD B2C."
+        },
         "signupPolicyName": {
           "type": "string",
           "description": "Signup Policy Name. Only applies to AAD B2C Identity Provider.",
@@ -501,52 +517,5 @@
       "description": "Identity Provider Base Parameter Properties."
     }
   },
-  "parameters": {
-    "IdentityProviderNameParameter": {
-      "name": "identityProviderName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "facebook",
-        "google",
-        "microsoft",
-        "twitter",
-        "aad",
-        "aadB2C"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityProviderType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "facebook",
-            "description": "Facebook as Identity provider."
-          },
-          {
-            "value": "google",
-            "description": "Google as Identity provider."
-          },
-          {
-            "value": "microsoft",
-            "description": "Microsoft Live as Identity provider."
-          },
-          {
-            "value": "twitter",
-            "description": "Twitter as Identity provider."
-          },
-          {
-            "value": "aad",
-            "description": "Azure Active Directory as Identity provider."
-          },
-          {
-            "value": "aadB2C",
-            "description": "Azure Active Directory B2C as Identity provider."
-          }
-        ]
-      },
-      "description": "Identity Provider Type identifier.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {  }
 }

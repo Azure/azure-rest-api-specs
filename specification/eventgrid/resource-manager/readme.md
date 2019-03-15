@@ -26,7 +26,16 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-01
+tag: package-2019-02-preview
+```
+
+### Tag: package-2019-02-preview
+
+These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-preview'
+input-file:
+- Microsoft.EventGrid/preview/2019-02-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2019-01
@@ -196,9 +205,25 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventgrid
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-02-preview
+  - tag: package-2019-01
   - tag: package-2018-09-preview
   - tag: package-2018-05-preview
   - tag: package-2018-01
+```
+
+### Tag: package-2019-02-preview and java
+
+These settings apply only when `--tag=package-2019-02-preview --java` is specified on the command line.
+
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.eventgrid.v2019_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2019_02_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-01 and java
