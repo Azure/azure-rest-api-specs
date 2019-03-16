@@ -165,7 +165,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "savedQueryProperties",
+            "name": "properties",
             "description": "Properties that need to be specified to create a new saved query.",
             "in": "body",
             "required": true,
@@ -217,7 +217,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "SavedQueryUpdateParameters",
+            "name": "body",
             "description": "Properties that need to be specified to create a new saved query.",
             "in": "body",
             "required": true,
@@ -359,13 +359,17 @@
       }
     },
     "Scope": {
+      "type": "object",
       "description": "Contains a list of subscriptions or management groups.",
       "properties": {
         "list": {
-          "type": "string",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "description": "The list of subscriptions or management groups."
         },
-        "type": {
+        "scopeType": {
           "description": "Enum indicating a type of a list. it is 'sub' for subscriptions or 'mg' for management group",
           "x-ms-client-name": "type",
           "default": "sub",
@@ -375,7 +379,7 @@
             "mg"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "ScopeType",
             "modelAsString": true
           }
         }
@@ -411,7 +415,6 @@
         },
         "queryType": {
           "description": "Enum indicating a type saved query.",
-          "x-ms-client-name": "queryType",
           "default": "basic",
           "type": "string",
           "enum": [
@@ -428,26 +431,33 @@
     "SavedQueryUpdateParameters": {
       "properties": {
         "kind": {
-            "type": "string",
-            "description": "The kind of saved query. Choices are user and shared.",
-            "enum": [
-                "user",
-                "shared"
-            ],
-            "x-ms-enum": {
-                "name": "SharedTypeKind",
-                "modelAsString": true
-            }
+          "type": "string",
+          "description": "The kind of saved query. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "SharedTypeKind",
+            "modelAsString": true
+          }
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         },
         "properties": {
-            "x-ms-client-flatten": true,
-            "description": "Metadata describing a saved query for an Azure resource.",
-            "$ref": "#/definitions/SavedQueryPropertiesUpdateParameters"
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a saved query for an Azure resource.",
+          "$ref": "#/definitions/SavedQueryPropertiesUpdateParameters"
         }
+      },
+      "description": "The parameters that can be provided when updating workbook properties properties."
     },
-    "description": "The parameters that can be provided when updating workbook properties properties."
-  },
-  "SavedQueryPropertiesUpdateParameters": {
+    "SavedQueryPropertiesUpdateParameters": {
       "description": "Properties that contain a workbook for PATCH operation.",
       "properties": {
         "modifiedBy": {
@@ -468,7 +478,6 @@
         },
         "queryType": {
           "description": "Enum indicating a type saved query.",
-          "x-ms-client-name": "queryType",
           "default": "basic",
           "type": "string",
           "enum": [
