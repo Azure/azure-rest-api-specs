@@ -1335,14 +1335,16 @@
         "tokenFilters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TokenFilterName"
+            "$ref": "#/definitions/TokenFilterName",
+            "x-nullable": false
           },
           "description": "An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
         },
         "charFilters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CharFilterName"
+            "$ref": "#/definitions/CharFilterName",
+            "x-nullable": false
           },
           "description": "An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter."
         }
@@ -1393,73 +1395,235 @@
       "description": "Information about a token returned by an analyzer."
     },
     "AnalyzerName": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "ar.microsoft",
+        "ar.lucene",
+        "hy.lucene",
+        "bn.microsoft",
+        "eu.lucene",
+        "bg.microsoft",
+        "bg.lucene",
+        "ca.microsoft",
+        "ca.lucene",
+        "zh-Hans.microsoft",
+        "zh-Hans.lucene",
+        "zh-Hant.microsoft",
+        "zh-Hant.lucene",
+        "hr.microsoft",
+        "cs.microsoft",
+        "cs.lucene",
+        "da.microsoft",
+        "da.lucene",
+        "nl.microsoft",
+        "nl.lucene",
+        "en.microsoft",
+        "en.lucene",
+        "et.microsoft",
+        "fi.microsoft",
+        "fi.lucene",
+        "fr.microsoft",
+        "fr.lucene",
+        "gl.lucene",
+        "de.microsoft",
+        "de.lucene",
+        "el.microsoft",
+        "el.lucene",
+        "gu.microsoft",
+        "he.microsoft",
+        "hi.microsoft",
+        "hi.lucene",
+        "hu.microsoft",
+        "hu.lucene",
+        "is.microsoft",
+        "id.microsoft",
+        "id.lucene",
+        "ga.lucene",
+        "it.microsoft",
+        "it.lucene",
+        "ja.microsoft",
+        "ja.lucene",
+        "kn.microsoft",
+        "ko.microsoft",
+        "ko.lucene",
+        "lv.microsoft",
+        "lv.lucene",
+        "lt.microsoft",
+        "ml.microsoft",
+        "ms.microsoft",
+        "mr.microsoft",
+        "nb.microsoft",
+        "no.lucene",
+        "fa.lucene",
+        "pl.microsoft",
+        "pl.lucene",
+        "pt-BR.microsoft",
+        "pt-BR.lucene",
+        "pt-PT.microsoft",
+        "pt-PT.lucene",
+        "pa.microsoft",
+        "ro.microsoft",
+        "ro.lucene",
+        "ru.microsoft",
+        "ru.lucene",
+        "sr-cyrillic.microsoft",
+        "sr-latin.microsoft",
+        "sk.microsoft",
+        "sl.microsoft",
+        "es.microsoft",
+        "es.lucene",
+        "sv.microsoft",
+        "sv.lucene",
+        "ta.microsoft",
+        "te.microsoft",
+        "th.microsoft",
+        "th.lucene",
+        "tr.microsoft",
+        "tr.lucene",
+        "uk.microsoft",
+        "ur.microsoft",
+        "vi.microsoft",
+        "standard.lucene",
+        "standardasciifolding.lucene",
+        "keyword",
+        "pattern",
+        "simple",
+        "stop",
+        "whitespace"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzerName",
+        "modelAsString": false
       },
       "description": "Defines the names of all text analyzers supported by Azure Search.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
-      },
-      "x-ms-external": true
+      }
     },
     "TokenizerName": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "classic",
+        "edgeNGram",
+        "keyword_v2",
+        "letter",
+        "lowercase",
+        "microsoft_language_tokenizer",
+        "microsoft_language_stemming_tokenizer",
+        "nGram",
+        "path_hierarchy_v2",
+        "pattern",
+        "standard_v2",
+        "uax_url_email",
+        "whitespace"
+      ],
+      "x-ms-enum": {
+        "name": "TokenizerName",
+        "modelAsString": false
       },
       "description": "Defines the names of all tokenizers supported by Azure Search.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
-      },
-      "x-ms-external": true
+      }
     },
     "TokenFilterName": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "arabic_normalization",
+        "apostrophe",
+        "asciifolding",
+        "cjk_bigram",
+        "cjk_width",
+        "classic",
+        "common_grams",
+        "edgeNGram_v2",
+        "elision",
+        "german_normalization",
+        "hindi_normalization",
+        "indic_normalization",
+        "keyword_repeat",
+        "kstem",
+        "length",
+        "limit",
+        "lowercase",
+        "nGram_v2",
+        "persian_normalization",
+        "phonetic",
+        "porter_stem",
+        "reverse",
+        "scandinavian_normalization",
+        "scandinavian_folding",
+        "shingle",
+        "snowball",
+        "sorani_normalization",
+        "stemmer",
+        "stopwords",
+        "trim",
+        "truncate",
+        "unique",
+        "uppercase",
+        "word_delimiter"
+      ],
+      "x-ms-enum": {
+        "name": "TokenFilterName",
+        "modelAsString": false
       },
       "description": "Defines the names of all token filters supported by Azure Search.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
-      },
-      "x-ms-external": true
+      }
     },
     "CharFilterName": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "html_strip"
+      ],
+      "x-ms-enum": {
+        "name": "CharFilterName",
+        "modelAsString": false
       },
       "description": "Defines the names of all character filters supported by Azure Search.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
-      },
-      "x-ms-external": true
+      }
     },
     "RegexFlags": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "CANON_EQ",
+        "CASE_INSENSITIVE",
+        "COMMENTS",
+        "DOTALL",
+        "LITERAL",
+        "MULTILINE",
+        "UNICODE_CASE",
+        "UNIX_LINES"
+      ],
+      "x-ms-enum": {
+        "name": "RegexFlags",
+        "modelAsString": false
       },
       "description": "Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer.",
       "externalDocs": {
         "url": "http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary"
-      },
-      "x-ms-external": true
+      }
     },
     "DataType": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "Edm.String",
+        "Edm.Int32",
+        "Edm.Int64",
+        "Edm.Double",
+        "Edm.Boolean",
+        "Edm.DateTimeOffset",
+        "Edm.GeographyPoint"
+      ],
+      "x-ms-enum": {
+        "name": "DataType",
+        "modelAsString": false
       },
-      "description": "Defines the data type of a field in an Azure Search index.",
-      "x-ms-external": true
+      "description": "Defines the data type of a field in an Azure Search index."
     },
     "Analyzer": {
       "discriminator": "@odata.type",
@@ -1495,14 +1659,16 @@
         "tokenFilters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TokenFilterName"
+            "$ref": "#/definitions/TokenFilterName",
+            "x-nullable": false
           },
           "description": "A list of token filters used to filter out or modify the tokens generated by a tokenizer. For example, you can specify a lowercase filter that converts all characters to lowercase. The filters are run in the order in which they are listed."
         },
         "charFilters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CharFilterName"
+            "$ref": "#/definitions/CharFilterName",
+            "x-nullable": false
           },
           "description": "A list of character filters used to prepare input text before it is processed by the tokenizer. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed."
         }
@@ -3252,13 +3418,18 @@
       }
     },
     "DataSourceType": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "azuresql",
+        "cosmosdb",
+        "azureblob",
+        "azuretable"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": false
       },
-      "description": "Defines the type of an Azure Search datasource.",
-      "x-ms-external": true
+      "description": "Defines the type of an Azure Search datasource."
     },
     "DataSource": {
       "properties": {
@@ -4257,7 +4428,7 @@
         },
         "context": {
           "type": "string",
-          "description": "Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content)."
+          "description": "Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document."
         },
         "inputs": {
           "type": "array",
@@ -4275,7 +4446,7 @@
         }
       },
       "required": [
-          "@odata.type", "description", "context", "inputs", "outputs"
+          "@odata.type"
       ],
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-predefined-skills"
@@ -4595,11 +4766,11 @@
         }
       },
       "required": [
-            "uri", "httpHeaders", "httpMethod"
-          ],
+        "uri", "httpHeaders", "httpMethod"
+      ],
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-interface"
-        },
+      },
       "description": "A skill that can call a Web API endpoint, allowing you to extend a skillset by having it call your custom code."
     },
     "WebApiHttpHeaders": {
@@ -4629,54 +4800,54 @@
     },
     "TextExtractionAlgorithm": {
       "type": "string",
-          "enum": [
-            "printed",
-            "handwritten"
-          ],
-          "x-ms-enum": {
-            "name": "TextExtractionAlgorithm",
-            "modelAsString": false
-          },
+      "enum": [
+        "printed",
+        "handwritten"
+      ],
+      "x-ms-enum": {
+        "name": "TextExtractionAlgorithm",
+        "modelAsString": false
+      },
       "description": "A value indicating which algorithm to use. Default is printed."
     },
     "TextSplitMode": {
       "type": "string",
-          "enum": [
-            "pages",
-            "sentences"
-          ],
-          "x-ms-enum": {
-            "name": "TextSplitMode",
-            "modelAsString": false
-          },
+      "enum": [
+        "pages",
+        "sentences"
+      ],
+      "x-ms-enum": {
+        "name": "TextSplitMode",
+        "modelAsString": false
+      },
       "description": "A value indicating which split mode to perform."
     },
     "VisualFeature": {
       "type": "string",
-          "enum": [
-            "categories",
-            "tags",
+      "enum": [
+        "categories",
+        "tags",
         "description",
         "faces",
         "imageType",
         "color"
-          ],
-          "x-ms-enum": {
-            "name": "VisualFeature",
-            "modelAsString": false
-          },
+      ],
+      "x-ms-enum": {
+        "name": "VisualFeature",
+        "modelAsString": false
+      },
       "description": "The strings indicating what visual feature types to return."
     },
     "ImageDetail": {
       "type": "string",
-          "enum": [
-            "celebrities",
-            "landmarks"
-          ],
-          "x-ms-enum": {
-            "name": "ImageDetail",
-            "modelAsString": false
-          },
+      "enum": [
+        "celebrities",
+        "landmarks"
+      ],
+      "x-ms-enum": {
+        "name": "ImageDetail",
+        "modelAsString": false
+      },
       "description": "A string indicating which domain-specific details to return."
     },
     "EntityCategory": {
@@ -4707,76 +4878,161 @@
       "x-ms-external": true
     },
     "SentimentSkillLanguage": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "da",
+        "nl",
+        "en",
+        "fi",
+        "fr",
+        "de",
+        "el",
+        "it",
+        "no",
+        "pl",
+        "pt-PT",
+        "ru",
+        "es",
+        "sv",
+        "tr"
+      ],
+      "x-ms-enum": {
+        "name": "SentimentSkillLanguage",
+        "modelAsString": false
       },
-      "description": "The language codes supported for input text by SentimentSkill.",
-      "x-ms-external": true
+      "description": "The language codes supported for input text by SentimentSkill."
     },
     "KeyPhraseExtractionSkillLanguage": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "da",
+        "nl",
+        "en",
+        "fi",
+        "fr",
+        "de",
+        "it",
+        "ja",
+        "ko",
+        "no",
+        "pl",
+        "pt-PT",
+        "pt-BR",
+        "ru",
+        "es",
+        "sv"
+      ],
+      "x-ms-enum": {
+        "name": "KeyPhraseExtractionSkillLanguage",
+        "modelAsString": false
       },
-      "description": "The language codes supported for input text by KeyPhraseExtractionSkill.",
-      "x-ms-external": true
+      "description": "The language codes supported for input text by KeyPhraseExtractionSkill."
     },
     "OcrSkillLanguage": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "zh-Hans",
+        "zh-Hant",
+        "cs",
+        "da",
+        "nl",
+        "en",
+        "fi",
+        "fr",
+        "de",
+        "el",
+        "hu",
+        "it",
+        "ja",
+        "ko",
+        "nb",
+        "pl",
+        "pt",
+        "ru",
+        "es",
+        "sv",
+        "tr",
+        "ar",
+        "ro",
+        "sr-Cyrl",
+        "sr-Latn",
+        "sk"
+      ],
+      "x-ms-enum": {
+        "name": "OcrSkillLanguage",
+        "modelAsString": false
       },
-      "description": "The language codes supported for input by OcrSkill.",
-      "x-ms-external": true
+      "description": "The language codes supported for input by OcrSkill."
     },
     "SplitSkillLanguage": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "da",
+        "de",
+        "en",
+        "es",
+        "fi",
+        "fr",
+        "it",
+        "ko",
+        "pt"
+      ],
+      "x-ms-enum": {
+        "name": "SplitSkillLanguage",
+        "modelAsString": false
       },
-      "description": "The language codes supported for input text by SplitSkill.",
-      "x-ms-external": true
+      "description": "The language codes supported for input text by SplitSkill."
     },
     "EntityRecognitionSkillLanguage": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "de",
+        "en",
+        "es",
+        "fr",
+        "it"
+      ],
+      "x-ms-enum": {
+        "name": "EntityRecognitionSkillLanguage",
+        "modelAsString": false
       },
-      "description": "The language codes supported for input text by EntityRecognitionSkill.",
-      "x-ms-external": true
+      "description": "The language codes supported for input text by EntityRecognitionSkill."
     },
     "NamedEntityRecognitionSkillLanguage": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "ar",
+        "cs",
+        "da",
+        "de",
+        "en",
+        "es",
+        "fi",
+        "fr",
+        "he",
+        "hu",
+        "it",
+        "ko",
+        "pt-br",
+        "pt"
+      ],
+      "x-ms-enum": {
+        "name": "NamedEntityRecognitionSkillLanguage",
+        "modelAsString": false
       },
-      "description": "The language codes supported for input text by NamedEntityRecognitionSkill.",
-      "x-ms-external": true
+      "description": "The language codes supported for input text by NamedEntityRecognitionSkill."
     },
     "ImageAnalysisSkillLanguage": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
+      "type": "string",
+      "enum": [
+        "en",
+        "zh"
+      ],
+      "x-ms-enum": {
+        "name": "ImageAnalysisSkillLanguage",
+        "modelAsString": false
       },
-      "description": "The language codes supported for input by ImageAnalysisSkill.",
-      "x-ms-external": true
-    },
-    "SynonymMapFormat": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "description": "The format of the synonym map. Only the 'solr' format is currently supported.",
-      "x-ms-external": true
+      "description": "The language codes supported for input by ImageAnalysisSkill."
     },
     "SynonymMap": {
       "properties": {
@@ -4788,7 +5044,14 @@
           "description": "The name of the synonym map."
         },
         "format": {
-          "$ref": "#/definitions/SynonymMapFormat",
+          "type": "string",
+          "enum": [
+            "solr"
+          ],
+          "x-ms-enum": {
+            "name": "SynonymMapFormat",
+            "modelAsString": false
+          },
           "description": "The format of the synonym map. Only the 'solr' format is currently supported."
         },
         "synonyms": {
