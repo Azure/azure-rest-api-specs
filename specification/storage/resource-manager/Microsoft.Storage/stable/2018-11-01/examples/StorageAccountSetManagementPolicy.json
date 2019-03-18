@@ -1,100 +1,100 @@
-{
-  "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "res7687",
-    "accountName": "sto9699",
-    "managementPolicyName": "default",
-    "api-version": "2018-11-01",
-    "monitor": "true",
-    "properties": {
-      "properties": {
-        "policy": {
-          "version": "0.5",
-          "rules": [
-            {
-              "name": "olcmtest",
-              "type": "Lifecycle",
-              "definition": {
-                "filters": {
-                  "blobTypes": [
-                    "blockBlob"
-                  ],
-                  "prefixMatch": [
-                    "olcmtestcontainer"
-                  ]
-                },
-                "actions": {
-                  "baseBlob": {
-                    "tierToCool": {
-                      "daysAfterModificationGreaterThan": 30
-                    },
-                    "tierToArchive": {
-                      "daysAfterModificationGreaterThan": 90
-                    },
-                    "delete": {
-                      "daysAfterModificationGreaterThan": 1000
-                    }
-                  },
-                  "snapshot": {
-                    "delete": {
-                      "daysAfterCreationGreaterThan": 30
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
-        "name": "DefaultManagementPolicy",
-        "type": "Microsoft.Storage/storageAccounts/managementPolicies",
-        "properties": {
-          "policy": {
-            "version": "0.5",
-            "rules": [
-              {
-                "name": "olcmtest",
-                "type": "Lifecycle",
-                "definition": {
-                  "filters": {
-                    "blobTypes": [
-                      "blockBlob"
-                    ],
-                    "prefixMatch": [
-                      "olcmtestcontainer"
-                    ]
-                  },
-                  "actions": {
-                    "baseBlob": {
-                      "tierToCool": {
-                        "daysAfterModificationGreaterThan": 30
-                      },
-                      "tierToArchive": {
-                        "daysAfterModificationGreaterThan": 90
-                      },
-                      "delete": {
-                        "daysAfterModificationGreaterThan": 1000
-                      }
-                    },
-                    "snapshot": {
-                      "delete": {
-                        "daysAfterCreationGreaterThan": 30
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          },
-          "lastModifiedTime": "2018-06-08T02:53:39.0932539Z"
-        }
-      }
-    }
-  }
-}
+1 { 
+2   "parameters": { 
+3     "subscriptionId": "{subscription-id}", 
+4     "resourceGroupName": "res7687", 
+5     "accountName": "sto9699", 
+6     "managementPolicyName": "default", 
+7     "api-version": "2018-11-01", 
+8     "monitor": "true", 
+9     "properties": { 
+10       "properties": { 
+11         "policy": { 
+13           "rules": [ 
+14             { 
+                 "enabled": true,
+15               "name": "olcmtest", 
+16               "type": "Lifecycle", 
+17               "definition": { 
+18                 "filters": { 
+19                   "blobTypes": [ 
+20                     "blockBlob" 
+21                   ], 
+22                   "prefixMatch": [ 
+23                     "olcmtestcontainer" 
+24                   ] 
+25                 }, 
+26                 "actions": { 
+27                   "baseBlob": { 
+28                     "tierToCool": { 
+29                       "daysAfterModificationGreaterThan": 30 
+30                     }, 
+31                     "tierToArchive": { 
+32                       "daysAfterModificationGreaterThan": 90 
+33                     }, 
+34                     "delete": { 
+35                       "daysAfterModificationGreaterThan": 1000 
+36                     } 
+37                   }, 
+38                   "snapshot": { 
+39                     "delete": { 
+40                       "daysAfterCreationGreaterThan": 30 
+41                     } 
+42                   } 
+43                 } 
+44               } 
+45             } 
+46           ] 
+47         } 
+48       } 
+49     } 
+50   }, 
+51   "responses": { 
+52     "200": { 
+53       "body": { 
+54         "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default", 
+55         "name": "DefaultManagementPolicy", 
+56         "type": "Microsoft.Storage/storageAccounts/managementPolicies", 
+57         "properties": { 
+58           "policy": { 
+60             "rules": [ 
+61               { 
+                   "enabled": true,
+62                 "name": "olcmtest", 
+63                 "type": "Lifecycle", 
+64                 "definition": { 
+65                   "filters": { 
+66                     "blobTypes": [ 
+67                       "blockBlob" 
+68                     ], 
+69                     "prefixMatch": [ 
+70                       "olcmtestcontainer" 
+71                     ] 
+72                   }, 
+73                   "actions": { 
+74                     "baseBlob": { 
+75                       "tierToCool": { 
+76                         "daysAfterModificationGreaterThan": 30 
+77                       }, 
+78                       "tierToArchive": { 
+79                         "daysAfterModificationGreaterThan": 90 
+80                       }, 
+81                       "delete": { 
+82                         "daysAfterModificationGreaterThan": 1000 
+83                       } 
+84                     }, 
+85                     "snapshot": { 
+86                       "delete": { 
+87                         "daysAfterCreationGreaterThan": 30 
+88                       } 
+89                     } 
+90                   } 
+91                 } 
+92               } 
+93             ] 
+94           }, 
+95           "lastModifiedTime": "2018-06-08T02:53:39.0932539Z" 
+96         } 
+97       } 
+98     } 
+99   } 
+100 } 
