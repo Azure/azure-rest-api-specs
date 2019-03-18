@@ -1,0 +1,625 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RunScripts API",
+    "description": "APIs for managing RunScript jobs.",
+    "version": "2019-05-01-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/scriptJobs/{jobName}": {
+      "get": {
+        "tags": [
+          "RunScript Job"
+        ],
+        "description": "Retrieves the job identified by the job name.",
+        "externalDocs": {
+          "url": "TBD"
+        },
+        "operationId": "ScriptJob_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description":"Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get RunScript Job": {
+            "$ref": "./examples/GetRunScriptJob.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RunScript Job"
+        ],
+        "description": "Creates or updates a RunScript Job.",
+        "operationId": "ScriptJob_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobCreateParameters"
+            },
+            "description": "The parameters necessary for the Create Job operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description":"Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a runScript job.": {
+              "$ref": "./examples/CreateRunScriptJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/scriptJobs": {
+      "get": {
+        "tags": [
+          "RunScript Jobs"
+        ],
+        "description": "Retrieves list of runScript jobs for the virtual machine.",
+        "externalDocs": {
+          "url": "TBD"
+        },
+        "operationId": "ScriptJobs_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The page-continuation token to use with a paged version of this API.",
+            "required": false,
+            "type": "string"
+          }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description":"Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get RunScript Job": {
+            "$ref": "./examples/ListRunScriptJobs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/JobCollectionItem"
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+        "description": "ARM proxy resource.",
+        "type": "object",
+        "allOf": [
+            {
+                "$ref": "#/definitions/Resource"
+            }
+        ],
+        "properties": {}
+    },
+    "FileUri": {
+      "properties":{
+        "uri": {
+          "type": "string",
+          "description": "Fully qualified Uri (e.g. SAS Token) of the file to be downloaded."
+        }
+      },
+      "description": "Details of the file."
+    },
+    "JobCreateProperties": {
+      "description": "Properties supplied to create a job.",
+      "properties": {
+        "fileUris": {
+          "description": "Details of the files to be downloaded for this job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileUri"
+          }
+        },
+        "commandToExecute": {
+          "type": "string",
+          "description": "The command or script content to be executed in the VM.  For Windows VM, this can be PowerShell cmdlet.  Maximum of 256KB."
+        }
+      }
+    },
+    "JobCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Sets the list of job properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters necessary for the Create Job operation."
+    },
+    "JobProvisioningStateProperty": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The provisioning state of the Job resource.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Processing",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "JobProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "JobProperties": {
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/JobProvisioningStateProperty"
+        },
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the job was created."
+        },
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the job was last modified."
+        },
+        "error": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Any exception from job execution."
+        }
+      },
+      "description": "Definition of job properties."
+    },
+    "Job": {
+      "description": "Definition of the job.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobStatus": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code."
+        },
+        "level": {
+          "type": "string",
+          "description": "The level code.",
+          "enum": [
+            "Info",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusLevelTypes",
+            "modelAsString": false
+          }
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "The short localizable label for the status."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed status message, including for alerts and error messages."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the status."
+        }
+      },
+      "description": "Instance view status."
+    },
+    "JobOutputList": {
+      "properties":{
+        "output": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobOutputProperties",
+            "readOnly": true
+          },
+          "description": "Output or Warning or Error from the job."
+        }
+      },
+      "description": "Output, including Warnings and Errors from the job."
+    },
+    "JobOutputProperties": {
+      "properties": {
+        "code": {
+          "description": "Code that identifies the type of Output.",
+          "$ref": "#/definitions/JobOutputPropertyCode"
+        },
+        "displayStatus": {
+          "description": "Localizable string label for the type of Output.",
+          "$ref": "#/definitions/JobOutputPropertyDisplayStatus"
+        },
+        "level": {
+          "description": "Level of the Output.",
+          "$ref": "#/definitions/JobOutputPropertyLevel"
+        },
+        "message": {
+          "description": "The Output or Warning or Error stream.  Each of these is concatenated to its corresponding stream.",
+          "$ref": "#/definitions/JobOutputPropertyMessage"
+        }
+      },
+      "description": "Output or Warning or Error from the job."
+    },
+    "JobOutputPropertyCode": {
+      "type": "string",
+      "description": "Code that identifies the type of Output.",
+      "enum": [
+        "scriptJobs/output",
+        "scriptJobs/warning",
+        "scriptJobs/error"
+      ]
+    },
+    "JobOutputPropertyDisplayStatus": {
+      "type": "string",
+      "description": "Localizable string label for the type of Output.",
+      "enum": [
+        "Output",
+        "Warning",
+        "Error"
+      ]
+    },
+    "JobOutputPropertyLevel": {
+      "type": "string",
+      "description": "Level of the Output.",
+      "enum": [
+        "Info",
+        "Warning",
+        "Error"
+      ]
+    },
+    "JobOutputPropertyMessage": {
+      "description": "The Output or Warning or Error stream.  Each of these is concatenated to its corresponding stream.",
+      "type": "string"
+    },
+    "JobListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobCollectionItem",
+            "readOnly": true
+          },
+          "description": "List of jobs."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The  link to the next page."
+        }
+      },
+      "description": "The response model for the list job operation."
+    },
+    "JobCollectionItem": {
+      "description": "Job collection item properties.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Job properties.",
+          "$ref": "#/definitions/Job"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "OperationStatusResponse": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation ID"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation status"
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the operation"
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the operation"
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApiError",
+          "description": "Api error"
+        }
+      },
+      "description": "Operation status response"
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response of an operation failure",
+      "properties": {
+        "code": {
+            "description": "Error code",
+            "type": "string"
+        },
+        "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string"
+        },
+        "target": {
+            "description": "Target of the error - fileUris/commandToExecute",
+            "type": "string"
+        }
+      }
+    },
+    "ApiErrorBase": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error base."
+    },
+    "InnerError": {
+      "properties": {
+        "exceptiontype": {
+          "type": "string",
+          "description": "The exception type."
+        },
+        "errordetail": {
+          "type": "string",
+          "description": "The internal error message or exception dump."
+        }
+      },
+      "description": "Inner error details."
+    },
+    "ApiError": {
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiErrorBase"
+          },
+          "description": "The Api error details"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "The Api inner error"
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "Api error."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "VmNameParameter": {
+      "name": "vmName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual machine.",
+      "x-ms-parameter-location": "method"
+    },
+    "JobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the run script job that is being created. The name must be unique. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 50 characters.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

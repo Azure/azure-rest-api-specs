@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVirtualMachine",
+    "jobName": "logCleanup-01May2019",
+    "api-version": "2019-05-01-preview",
+    "parameters": {
+      "properties": {
+        "properties": {
+          "fileUris": [
+            {
+              "uri": "https://mystore.blob.core.windows.net/abcblob/LogCleanup.ps1?sp=r&st=2019-04-30T14:28:24Z&se=2019-04-30T22:28:24Z&spr=https&sv=2018-03-28&sig=OuQaYlyEDGhr7NuC1bdwnZbGVrYeuy35S%2BQdoJreO1g%3D&sr=b"
+            },
+            {
+              "uri": "https://mystore.blob.core.windows.net/abcblob/ExcludeLogs.ps1?sp=r&st=2019-04-30T14:28:30Z&se=2019-04-30T22:28:30Z&spr=https&sv=2018-03-28&sig=PuMaYlyBAGhr7NuC1bdwnZbGVrYeuy35S%2ATdoWueO1g%4B&ss=a"
+            }
+          ],
+          "commandToExecute": "LogCleanup.ps1 -hours 5"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "description": "Details of the ScriptJob with its current status.",
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVirtualMachine/scriptJobs/logCleanup-01May2019",
+        "type": "Microsoft.Compute/VirtualMachines/ScriptJobs",
+        "properties": {
+          "creationTime": "2019-04-30T14:50:00.245+00:00",
+          "provisioningState": "Processing",
+          "error": null,
+          "lastModifiedTime": "2018-04-30T14:50:00.257+00:00"
+        }
+      }
+    }
+  }
+}

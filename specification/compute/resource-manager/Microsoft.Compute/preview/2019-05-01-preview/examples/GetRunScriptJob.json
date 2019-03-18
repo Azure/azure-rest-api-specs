@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVirtualMachine",
+    "jobName": "logCleanup-01May2019",
+    "api-version": "2019-05-01-preview",
+    "expand": "output"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the ScriptJob with its current status.",
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVirtualMachine/scriptJobs/logCleanup-01May2019",
+        "type": "Microsoft.Compute/VirtualMachines/ScriptJobs",
+        "properties": {
+          "creationTime": "2019-04-30T14:50:00.245+00:00",
+          "provisioningState": "Processing",
+          "error": null,
+          "lastModifiedTime": "2018-04-30T14:50:00.257+00:00",
+          "output": [{
+            "code" : "scriptJobs/output",
+            "displayStatus": "output",
+            "level": "Info",
+            "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          },
+          {
+            "code" : "scriptJobs/warning",
+            "displayStatus": "warning",
+            "level": "Info",
+            "message": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+          },
+          {
+            "code" : "scriptJobs/error",
+            "displayStatus": "error",
+            "level": "error",
+            "message": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          }]
+          }
+      }
+    }
+  }
+}
