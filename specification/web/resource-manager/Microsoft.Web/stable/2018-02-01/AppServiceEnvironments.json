@@ -539,13 +539,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/inboundNetworkDependenciesEndpoints": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/inboundnetworkdependenciesendpoints": {
       "get": {
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get the network endpoints of all inbound dependencies of an App Service Environment.",
-        "description": "Get the network endpoints of all inbound dependencies of an App Service Environment.",
+        "summary": "Get the network endpoints of all inbound dependencies of an ase.",
+        "description": "Get the network endpoints of all inbound dependencies of an ase.",
         "operationId": "AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints",
         "parameters": [
           {
@@ -569,7 +569,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/InboundEnvironmentEndpointCollection"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InboundEnvironmentEndpoint"
+              }
             }
           },
           "default": {
@@ -578,14 +581,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Inbound Network Dependencies Endpoints": {
-            "$ref": "./examples/GetInboundNetworkDependenciesEndpoints.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1259,13 +1254,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/outboundNetworkDependenciesEndpoints": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/outboundnetworkdependenciesendpoints": {
       "get": {
         "tags": [
           "AppServiceEnvironments"
         ],
-        "summary": "Get the network endpoints of all outbound dependencies of an App Service Environment.",
-        "description": "Get the network endpoints of all outbound dependencies of an App Service Environment.",
+        "summary": "Get the network endpoints of all outbound dependencies of an ase.",
+        "description": "Get the network endpoints of all outbound dependencies of an ase.",
         "operationId": "AppServiceEnvironments_GetOutboundNetworkDependenciesEndpoints",
         "parameters": [
           {
@@ -1289,7 +1284,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+              }
             }
           },
           "default": {
@@ -1298,14 +1296,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Outbound Network Dependencies Endpoints": {
-            "$ref": "./examples/GetOutboundNetworkDependenciesEndpoints.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2264,11 +2254,10 @@
       }
     },
     "EndpointDependency": {
-      "description": "A domain name that a service is reached at, including details of the current connection status.",
       "type": "object",
       "properties": {
         "domainName": {
-          "description": "The domain name of the dependency.",
+          "description": "The Domain Name of the dependency.",
           "type": "string"
         },
         "endpointDetails": {
@@ -2281,7 +2270,6 @@
       }
     },
     "EndpointDetail": {
-      "description": "Current TCP connectivity information from the App Service Environment to a single endpoint.",
       "type": "object",
       "properties": {
         "ipAddress": {
@@ -2295,11 +2283,11 @@
         },
         "latency": {
           "format": "double",
-          "description": "The time in milliseconds it takes for a TCP connection to be created from the App Service Environment to this IpAddress at this Port.",
+          "description": "The time in milliseconds it takes to connect to this IpAddress at this Port.",
           "type": "number"
         },
         "isAccessable": {
-          "description": "Whether it is possible to create a TCP connection from the App Service Environment to this IpAddress at this Port.",
+          "description": "Whether it is possible to connect to IpAddress.",
           "type": "boolean"
         }
       }
@@ -2319,47 +2307,26 @@
       }
     },
     "InboundEnvironmentEndpoint": {
-      "description": "The IP Addresses and Ports that require inbound network access to and within the subnet of the App Service Environment.",
+      "description": "Endpoints for a particular type",
       "type": "object",
       "properties": {
         "description": {
-          "description": "Short text describing the purpose of the network traffic.",
+          "description": "Text describing the endpoints.",
           "type": "string"
         },
         "endpoints": {
-          "description": "The IP addresses that network traffic will originate from in cidr notation.",
+          "description": "The endpoint ip addresses in cidr notation.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "ports": {
-          "description": "The ports that network traffic will arrive to the App Service Environment at.",
+          "description": "The ports",
           "type": "array",
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "InboundEnvironmentEndpointCollection": {
-      "description": "Collection of Inbound Environment Endpoints",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InboundEnvironmentEndpoint"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -2418,40 +2385,19 @@
       }
     },
     "OutboundEnvironmentEndpoint": {
-      "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
+      "description": "Endpoints of a common type.",
       "type": "object",
       "properties": {
         "category": {
-          "description": "The type of service accessed by the App Service Environment, e.g., Azure Storage, Azure SQL Database, and Azure Active Directory.",
+          "description": "Short description of the endpoints.",
           "type": "string"
         },
         "endpoints": {
-          "description": "The endpoints that the App Service Environment reaches the service at.",
+          "description": "The endpoint's domain name and the IP Addresses it currently resolves to.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           }
-        }
-      }
-    },
-    "OutboundEnvironmentEndpointCollection": {
-      "description": "Collection of Outbound Environment Endpoints",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },

@@ -49,10 +49,11 @@ input-file:
 - Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
 - Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
 - Microsoft.Web/stable/2018-11-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/ClassicMobileServices.json
 - Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
 - Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
 - Microsoft.Web/stable/2018-02-01/Diagnostics.json
-- Microsoft.Web/stable/2018-02-01/Provider.json
+- Microsoft.Web/stable/2018-11-01/Provider.json
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
 - Microsoft.Web/stable/2018-02-01/WebApps.json

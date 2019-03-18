@@ -2999,7 +2999,7 @@
             }
           },
           "404": {
-            "description": "Function with an name of {functionName} is not running."
+            "description": "Function with an name of {functionName} does not exist."
           }
         }
       },
@@ -3102,6 +3102,174 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a function secret.",
+        "description": "Add or update a function secret.",
+        "operationId": "WebApps_CreateOrUpdateFunctionSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a function secret.",
+        "description": "Delete a function secret.",
+        "operationId": "WebApps_DeleteFunctionSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function keys for a function in a web site, or a deployment slot.",
+        "description": "Get function keys for a function in a web site, or a deployment slot.",
+        "operationId": "WebApps_ListFunctionKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function keys returned.",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listsecrets": {
       "post": {
         "tags": [
@@ -3139,7 +3307,7 @@
           "200": {
             "description": "Function secrets returned.",
             "schema": {
-              "$ref": "#/definitions/FunctionSecrets"
+              "$ref": "#/definitions/FunctionKeys"
             }
           },
           "default": {
@@ -3147,6 +3315,321 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get the status of a function (e.g. errors, etc.)",
+        "description": "Get the status of a function (e.g. errors, etc.)",
+        "operationId": "WebApps_GetFunctionStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function status returned.",
+            "schema": {
+              "$ref": "#/definitions/FunctionStatus"
+            }
+          },
+          "404": {
+            "description": "Function with an name of {functionName} does not exist."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get host secrets for a function app.",
+        "description": "Get host secrets for a function app.",
+        "operationId": "WebApps_ListHostKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Host secrets returned.",
+            "schema": {
+              "$ref": "#/definitions/HostKeys"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listsyncstatus": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "This is to allow calling via powershell and ARM template.",
+        "operationId": "WebApps_ListSyncStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the current Function host status.",
+        "description": "Gets the current Function host status.",
+        "operationId": "WebApps_GetHostStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/sync": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
+        "operationId": "WebApps_SyncFunctions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a host level secret.",
+        "description": "Add or update a host level secret.",
+        "operationId": "WebApps_CreateOrUpdateHostSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a host level secret.",
+        "description": "Delete a host level secret.",
+        "operationId": "WebApps_DeleteHostSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
           }
         }
       }
@@ -4585,14 +5068,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listsyncfunctiontriggerstatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listbackups": {
       "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "This is to allow calling via powershell and ARM template.",
-        "description": "This is to allow calling via powershell and ARM template.",
-        "operationId": "WebApps_ListSyncFunctionTriggers",
+        "summary": "Gets existing backups of an app.",
+        "description": "Gets existing backups of an app.",
+        "operationId": "WebApps_ListSiteBackups",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -4615,7 +5098,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/FunctionSecrets"
+              "$ref": "#/definitions/BackupItemCollection"
             }
           },
           "default": {
@@ -4623,6 +5106,42 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listsyncfunctiontriggerstatus": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "This is to allow calling via powershell and ARM template.",
+        "operationId": "WebApps_ListSyncFunctionTriggersStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -7012,6 +7531,52 @@
             "description": "SiteExtension with an ID of {siteExtensionId} is not running."
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slotcopy": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Copies a deployment slot to another deployment slot of an app.",
+        "description": "Copies a deployment slot to another deployment slot of an app.",
+        "operationId": "WebApps_CopyProductionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "copySlotEntity",
+            "in": "body",
+            "description": "JSON object that contains the target slot name and site config properties to override the source slot config. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmCopySlotEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots": {
@@ -10300,7 +10865,7 @@
             }
           },
           "404": {
-            "description": "Function with an name of {functionName} is not running."
+            "description": "Function with an name of {functionName} does not exist."
           }
         }
       },
@@ -10417,6 +10982,195 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/keys/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a function secret.",
+        "description": "Add or update a function secret.",
+        "operationId": "WebApps_CreateOrUpdateFunctionSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a function secret.",
+        "description": "Delete a function secret.",
+        "operationId": "WebApps_DeleteFunctionSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function keys for a function in a web site, or a deployment slot.",
+        "description": "Get function keys for a function in a web site, or a deployment slot.",
+        "operationId": "WebApps_ListFunctionKeysSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function keys returned.",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/listsecrets": {
       "post": {
         "tags": [
@@ -10425,6 +11179,62 @@
         "summary": "Get function secrets for a function in a web site, or a deployment slot.",
         "description": "Get function secrets for a function in a web site, or a deployment slot.",
         "operationId": "WebApps_ListFunctionSecretsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function secrets returned.",
+            "schema": {
+              "$ref": "#/definitions/FunctionKeys"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get the status of a function (e.g. errors, etc.)",
+        "description": "Get the status of a function (e.g. errors, etc.)",
+        "operationId": "WebApps_GetFunctionStatusSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -10459,9 +11269,55 @@
         ],
         "responses": {
           "200": {
-            "description": "Function secrets returned.",
+            "description": "Function status returned.",
             "schema": {
-              "$ref": "#/definitions/FunctionSecrets"
+              "$ref": "#/definitions/FunctionStatus"
+            }
+          },
+          "404": {
+            "description": "Function with an name of {functionName} does not exist."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get host secrets for a function app.",
+        "description": "Get host secrets for a function app.",
+        "operationId": "WebApps_ListHostKeysSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Host secrets returned.",
+            "schema": {
+              "$ref": "#/definitions/HostKeys"
             }
           },
           "default": {
@@ -10469,6 +11325,268 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/listsyncstatus": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "This is to allow calling via powershell and ARM template.",
+        "operationId": "WebApps_ListSyncStatusSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/status": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the current Function host status.",
+        "description": "Gets the current Function host status.",
+        "operationId": "WebApps_GetHostStatusSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostStatus"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/sync": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
+        "operationId": "WebApps_SyncFunctionsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a host level secret.",
+        "description": "Add or update a host level secret.",
+        "operationId": "WebApps_CreateOrUpdateHostSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a host level secret.",
+        "description": "Delete a host level secret.",
+        "operationId": "WebApps_DeleteHostSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
           }
         }
       }
@@ -12103,6 +13221,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/listbackups": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets existing backups of an app.",
+        "description": "Gets existing backups of an app.",
+        "operationId": "WebApps_ListSiteBackupsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get backups of the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupItemCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/listsyncfunctiontriggerstatus": {
       "post": {
         "tags": [
@@ -12110,7 +13280,7 @@
         ],
         "summary": "This is to allow calling via powershell and ARM template.",
         "description": "This is to allow calling via powershell and ARM template.",
-        "operationId": "WebApps_ListSyncFunctionTriggersSlot",
+        "operationId": "WebApps_ListSyncFunctionTriggersStatusSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -12137,17 +13307,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FunctionSecrets"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
+          "204": {
+            "description": "No Content"
           }
         }
       }
@@ -14757,6 +15918,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/slotcopy": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Copies a deployment slot to another deployment slot of an app.",
+        "description": "Copies a deployment slot to another deployment slot of an app.",
+        "operationId": "WebApps_CopySlotSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "copySlotEntity",
+            "in": "body",
+            "description": "JSON object that contains the target slot name and site config properties to override the source slot config. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmCopySlotEntity"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the source slot. If a slot is not specified, the production slot is used as the source slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Operation is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/slotsdiffs": {
       "post": {
         "tags": [
@@ -15477,8 +16691,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the scale controller",
-        "description": "Syncs function trigger metadata to the scale controller",
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
         "operationId": "WebApps_SyncFunctionTriggersSlot",
         "parameters": [
           {
@@ -17109,8 +18323,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the scale controller",
-        "description": "Syncs function trigger metadata to the scale controller",
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
         "operationId": "WebApps_SyncFunctionTriggers",
         "parameters": [
           {
@@ -18055,6 +19269,54 @@
         }
       }
     },
+    "AzureStorageInfoValue": {
+      "description": "Azure Files or Blob Storage access information value for dictionary storage.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of storage.",
+          "enum": [
+            "AzureFiles",
+            "AzureBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureStorageType",
+            "modelAsString": false
+          }
+        },
+        "accountName": {
+          "description": "Name of the storage account.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "Name of the file share (container name, for Blob storage).",
+          "type": "string"
+        },
+        "accessKey": {
+          "description": "Access key for the storage account.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path to mount the storage within the site's runtime environment.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the storage account.",
+          "enum": [
+            "Ok",
+            "InvalidCredentials",
+            "InvalidShare"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureStorageState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "AzureStoragePropertyDictionaryResource": {
       "description": "AzureStorageInfo dictionary resource.",
       "type": "object",
@@ -18068,7 +19330,7 @@
           "description": "Azure storage accounts.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "./CommonDefinitions.json#/definitions/AzureStorageInfoValue"
+            "$ref": "#/definitions/AzureStorageInfoValue"
           },
           "x-ms-client-flatten": true
         }
@@ -18486,6 +19748,24 @@
         }
       }
     },
+    "CsmCopySlotEntity": {
+      "description": "Copy deployment slot parameters.",
+      "required": [
+        "targetSlot",
+        "siteConfig"
+      ],
+      "type": "object",
+      "properties": {
+        "targetSlot": {
+          "description": "Destination deployment slot during copy operation.",
+          "type": "string"
+        },
+        "siteConfig": {
+          "$ref": "./CommonDefinitions.json#/definitions/SiteConfig",
+          "description": "The site object which will be merged with the source slot site\nto produce new destination slot site object.\n<code>null</code> to just copy source slot content. Otherwise a <code>Site</code>\nobject with properties to override source slot site."
+        }
+      }
+    },
     "CsmPublishingProfileOptions": {
       "description": "Publishing options for requested profile.",
       "type": "object",
@@ -18817,7 +20097,7 @@
       }
     },
     "FunctionEnvelope": {
-      "description": "Web Job Information.",
+      "description": "Function information.",
       "type": "object",
       "allOf": [
         {
@@ -18844,6 +20124,10 @@
               "description": "Config URI.",
               "type": "string"
             },
+            "test_data_href": {
+              "description": "Test data URI.",
+              "type": "string"
+            },
             "secrets_file_href": {
               "description": "Secrets file URI.",
               "type": "string"
@@ -18865,6 +20149,14 @@
             },
             "test_data": {
               "description": "Test data used when testing via the Azure Portal.",
+              "type": "string"
+            },
+            "invoke_url_template": {
+              "description": "The invocation URL",
+              "type": "string"
+            },
+            "language": {
+              "description": "The function language",
               "type": "string"
             }
           },
@@ -18893,8 +20185,8 @@
         }
       }
     },
-    "FunctionSecrets": {
-      "description": "Function secrets.",
+    "FunctionKeys": {
+      "description": "Function keys.",
       "type": "object",
       "allOf": [
         {
@@ -18903,7 +20195,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "FunctionSecrets resource specific properties",
+          "description": "FunctionKeys resource specific properties",
           "properties": {
             "key": {
               "description": "Secret key.",
@@ -18912,6 +20204,65 @@
             "trigger_url": {
               "description": "Trigger URL.",
               "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FunctionStatus": {
+      "description": "Function status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "FunctionStatus resource specific properties",
+          "properties": {
+            "errors": {
+              "description": "Collection of initialization errors for the function.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HostKeys": {
+      "description": "Functions host level keys.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HostKeys resource specific properties",
+          "properties": {
+            "masterKey": {
+              "description": "Secret key.",
+              "type": "string"
+            },
+            "functionKeys": {
+              "description": "Host level function keys.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "systemKeys": {
+              "description": "System keys.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           },
           "x-ms-client-flatten": true
@@ -19058,6 +20409,39 @@
         }
       }
     },
+    "HostStatus": {
+      "description": "Function host status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HostStatus resource specific properties",
+          "properties": {
+            "id": {
+              "description": "The host id.",
+              "type": "string"
+            },
+            "state": {
+              "description": "The current host state.",
+              "type": "string"
+            },
+            "version": {
+              "description": "The Function runtime version.",
+              "type": "string"
+            },
+            "versionDetails": {
+              "description": "The Function runtime version details.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "HttpLogsConfig": {
       "description": "Http logs configuration.",
       "type": "object",
@@ -19069,6 +20453,31 @@
         "azureBlobStorage": {
           "$ref": "#/definitions/AzureBlobStorageHttpLogsConfig",
           "description": "Http logs to azure blob storage configuration."
+        }
+      }
+    },
+    "KeyInfo": {
+      "description": "Function key info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "KeyInfo resource specific properties",
+          "properties": {
+            "name": {
+              "description": "Key name",
+              "type": "string"
+            },
+            "value": {
+              "description": "Key value",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -20918,13 +22327,6 @@
               "type": "string",
               "readOnly": true,
               "example": "00000000-0000-0000-0000-000000000000"
-            },
-            "geoDistributions": {
-              "description": "GeoDistributions for this site",
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/GeoDistribution"
-              }
             }
           },
           "x-ms-client-flatten": true

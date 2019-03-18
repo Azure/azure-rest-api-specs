@@ -26,6 +26,16 @@
         }
       }
     },
+    "ApiManagementConfig": {
+      "description": "Azure API management (APIM) configuration linked to the app.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "APIM-Api Identifier.",
+          "type": "string"
+        }
+      }
+    },
     "AppServiceEnvironment": {
       "description": "Description of an App Service Environment.",
       "required": [
@@ -517,54 +527,6 @@
         }
       }
     },
-    "AzureStorageInfoValue": {
-      "description": "Azure Files or Blob Storage access information value for dictionary storage.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of storage.",
-          "enum": [
-            "AzureFiles",
-            "AzureBlob"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AzureStorageType",
-            "modelAsString": false
-          }
-        },
-        "accountName": {
-          "description": "Name of the storage account.",
-          "type": "string"
-        },
-        "shareName": {
-          "description": "Name of the file share (container name, for Blob storage).",
-          "type": "string"
-        },
-        "accessKey": {
-          "description": "Access key for the storage account.",
-          "type": "string"
-        },
-        "mountPath": {
-          "description": "Path to mount the storage within the site's runtime environment.",
-          "type": "string"
-        },
-        "state": {
-          "description": "State of the storage account.",
-          "enum": [
-            "Ok",
-            "InvalidCredentials",
-            "InvalidShare"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AzureStorageState",
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "Capability": {
       "description": "Describes the capabilities/features allowed for a specific SKU.",
       "type": "object",
@@ -987,21 +949,6 @@
         }
       }
     },
-    "GeoDistribution": {
-      "description": "A global distribution definition.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Location.",
-          "type": "string"
-        },
-        "numberOfWorkers": {
-          "format": "int32",
-          "description": "NumberOfWorkers.",
-          "type": "integer"
-        }
-      }
-    },
     "HandlerMapping": {
       "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \nFor example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
       "type": "object",
@@ -1326,23 +1273,12 @@
           "type": "string",
           "readOnly": true
         },
-        "userAssignedIdentities": {
-          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "description": "Principal Id of user assigned identity",
-                "type": "string",
-                "readOnly": true
-              },
-              "clientId": {
-                "description": "Client Id of user assigned identity",
-                "type": "string",
-                "readOnly": true
-              }
-            }
+        "identityIds": {
+          "description": "Array of UserAssigned managed service identities.",
+          "type": "array",
+          "items": {
+            "description": "Resource Id for UserAssigned managed service identity",
+            "type": "string"
           }
         }
       }
@@ -1604,7 +1540,7 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
@@ -2191,13 +2127,6 @@
               "type": "string",
               "readOnly": true,
               "example": "00000000-0000-0000-0000-000000000000"
-            },
-            "geoDistributions": {
-              "description": "GeoDistributions for this site",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GeoDistribution"
-              }
             }
           },
           "x-ms-client-flatten": true
@@ -2287,13 +2216,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
-        },
-        "azureStorageAccounts": {
-          "description": "User-provided Azure storage accounts.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AzureStorageInfoValue"
           }
         },
         "connectionStrings": {
@@ -2444,6 +2366,10 @@
           "$ref": "#/definitions/ApiDefinitionInfo",
           "description": "Information about the formal API definition for the app."
         },
+        "apiManagementConfig": {
+          "$ref": "#/definitions/ApiManagementConfig",
+          "description": "Azure API management settings linked to the app."
+        },
         "autoSwapSlotName": {
           "description": "Auto-swap slot name.",
           "type": "string"
@@ -2512,12 +2438,16 @@
             "modelAsString": true
           }
         },
-        "reservedInstanceCount": {
+        "preWarmedInstanceCount": {
           "format": "int32",
-          "description": "Number of reserved instances.\nThis setting only applies to the Consumption Plan",
+          "description": "Number of preWarmed instances.\nThis setting only applies to the Consumption and Elastic Plans",
           "maximum": 10,
           "minimum": 0,
           "type": "integer"
+        },
+        "healthCheckPath": {
+          "description": "Health check path",
+          "type": "string"
         }
       }
     },
