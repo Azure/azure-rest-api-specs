@@ -109,14 +109,21 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/getPeerInfo": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}": {
       "get": {
         "tags": [
-          "PeerInfo"
+          "PeerAsns"
         ],
-        "description": "Gets the peer info associated with the specified subscription.",
-        "operationId": "GetPeerInfo",
+        "description": "Gets the peer ASN with the specified name under the given subscription.",
+        "operationId": "PeerAsns_Get",
         "parameters": [
+          {
+            "name": "peerAsnName",
+            "in": "path",
+            "description": "The peer ASN name.",
+            "required": true,
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -128,10 +135,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PeerInfo"
-              }
+              "$ref": "#/definitions/PeerAsn"
             }
           },
           "default": {
@@ -142,30 +146,32 @@
           }
         },
         "x-ms-examples": {
-          "Get peer info": {
-            "$ref": "./examples/GetPeerInfo.json"
+          "Get a peer ASN": {
+            "$ref": "./examples/GetPeerAsn.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/updatePeerInfo": {
-      "post": {
+      },
+      "put": {
         "tags": [
-          "PeerInfo"
+          "PeerAsns"
         ],
-        "description": "Updates the peer info associated with the specified subscription.",
-        "operationId": "UpdatePeerInfo",
+        "description": "Creates a new peer ASN or updates an existing peer ASN with the specified name under the given subscription.",
+        "operationId": "PeerAsns_CreateOrUpdate",
         "parameters": [
+          {
+            "name": "peerAsnName",
+            "in": "path",
+            "description": "The peer ASN name.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "peerInfo",
             "in": "body",
             "description": "The peer info.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PeerInfo"
-              }
+              "$ref": "#/definitions/PeerAsnProperties"
             }
           },
           {
@@ -179,10 +185,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PeerInfo"
-              }
+              "$ref": "#/definitions/PeerAsn"
             }
           },
           "default": {
@@ -193,9 +196,89 @@
           }
         },
         "x-ms-examples": {
-          "Update peer info": {
-            "$ref": "./examples/UpdatePeerInfo.json"
+          "Create a peer ASN": {
+            "$ref": "./examples/CreatePeerAsn.json"
           }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PeerAsns"
+        ],
+        "description": "Deletes an existing peer ASN with the specified name under the given subscription.",
+        "operationId": "PeerAsns_Delete",
+        "parameters": [
+          {
+            "name": "peerAsnName",
+            "in": "path",
+            "description": "The peer ASN name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a peer ASN": {
+            "$ref": "./examples/DeletePeerAsn.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns": {
+      "get": {
+        "tags": [
+          "PeerAsns"
+        ],
+        "description": "Lists all of the peer ASNs under the given subscription.",
+        "operationId": "PeerAsns_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeerAsnListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peer ASNs in a subscription": {
+            "$ref": "./examples/ListPeerAsnsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1017,8 +1100,34 @@
         }
       }
     },
-    "PeerInfo": {
-      "description": "The essential information related to the peer.",
+    "PeerAsn": {
+      "description": "The essential information related to the pee's ASN.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PeerAsnProperties",
+          "description": "The properties that define a peer's ASN.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The ID of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PeerAsnProperties": {
+      "description": "The properties that define a peer's ASN.",
       "type": "object",
       "properties": {
         "peerAsn": {
@@ -1067,6 +1176,23 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "PeerAsnListResult": {
+      "description": "The paginated list of [T].",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of [T].",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeerAsn"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of [T].",
+          "type": "string"
         }
       }
     },

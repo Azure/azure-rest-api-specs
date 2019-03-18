@@ -1,12 +1,13 @@
 {
   "parameters": {
     "subscriptionId": "subId",
+    "peerAsnName": "peerAsnName",
     "api-version": "2019-03-01-preview"
   },
   "responses": {
     "200": {
-      "body": [
-        {
+      "body": {
+        "properties": {
           "peerAsn": 65000,
           "peerContactInfo": {
             "emails": [
@@ -19,8 +20,11 @@
           },
           "peerName": "Contoso",
           "validationState": "Approved"
-        }
-      ]
+        },
+        "name": "peerAsnName",
+        "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/peerAsnName",
+        "type": "Microsoft.Peering/peerAsns"
+      }
     }
   }
 }
