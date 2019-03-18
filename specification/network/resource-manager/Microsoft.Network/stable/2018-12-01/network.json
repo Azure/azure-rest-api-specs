@@ -192,6 +192,21 @@
         }
       },
       "description": "Identity for the resource."
+    },
+    "ProvisioningState":{
+      "type":"string",
+      "readOnly":true,
+      "description": "The current provisioning state.",
+      "enum":[
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum":{
+        "name":"ProvisioningState",
+        "modelAsString":true
+      }
     }
   },
   "parameters": {

@@ -2294,14 +2294,14 @@
         },
         "p2SVpnServerConfigurations": {
           "type": "array",
-          "description": "list of all P2SVpnServerConfigurations associated with the virtual wan.",
+          "description": "List of all P2SVpnServerConfigurations associated with the virtual wan.",
           "items": {
             "$ref": "#/definitions/P2SVpnServerConfiguration"
           }
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "./network.json#/definitions/ProvisioningState"
         }
       },
       "description": "Parameters for VirtualWAN"
@@ -2372,7 +2372,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "./network.json#/definitions/ProvisioningState"
         },
         "isSecuritySite": {
           "type": "boolean",
@@ -2455,7 +2455,7 @@
         },
         "virtualNetworkConnections": {
           "type": "array",
-          "description": "list of all vnet connections with this VirtualHub.",
+          "description": "List of all vnet connections with this VirtualHub.",
           "items": {
             "$ref": "#/definitions/HubVirtualNetworkConnection"
           }
@@ -2470,7 +2470,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "./network.json#/definitions/ProvisioningState"
         }
       },
       "description": "Parameters for VirtualHub"
@@ -2479,7 +2479,7 @@
       "properties" : {
         "routes": {
             "type": "array",
-            "description": "list of all routes.",
+            "description": "List of all routes.",
             "items": {
                 "$ref": "#/definitions/VirtualHubRoute"
             }
@@ -2491,7 +2491,7 @@
       "properties" : {
         "addressPrefixes": {
             "type": "array",
-            "description": "list of all addressPrefixes.",
+            "description": "List of all addressPrefixes.",
             "items": {
                 "type": "string"
             }
@@ -2549,7 +2549,7 @@
         },
         "connections": {
           "type": "array",
-          "description": "list of all vpn connections to the gateway.",
+          "description": "List of all vpn connections to the gateway.",
           "items": {
             "$ref": "#/definitions/VpnConnection"
           }
@@ -2560,7 +2560,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "./network.json#/definitions/ProvisioningState"
         },
         "vpnGatewayScaleUnit": {
           "type": "integer",
@@ -2617,7 +2617,7 @@
         "routingWeight": {
           "type": "integer",
           "format": "int32",
-          "description": "routing weight for vpn connection."
+          "description": "Routing weight for vpn connection."
         },
         "connectionStatus": {
           "description": "The connection status.",
@@ -2669,7 +2669,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "./network.json#/definitions/ProvisioningState"
         }
       },
       "description": "Parameters for VpnConnection"
@@ -2733,7 +2733,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "./network.json#/definitions/ProvisioningState"
         }
       },
       "description": "Parameters for HubVirtualNetworkConnection"
@@ -2833,21 +2833,6 @@
       },
       "description": "Collection of SecurityProviders."
     },
-    "ProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Updating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
-      }
-    },
     "VpnConnectionStatus": {
       "type": "string",
       "description": "The current state of the vpn connection.",
@@ -2859,7 +2844,7 @@
         "NotConnected"
       ],
       "x-ms-enum": {
-        "name": "vpnConnectionStatus",
+        "name": "VpnConnectionStatus",
         "modelAsString": true
       }
     },
@@ -2874,7 +2859,7 @@
         "NotConnected"
       ],
       "x-ms-enum": {
-        "name": "tunnelConnectionStatus",
+        "name": "TunnelConnectionStatus",
         "modelAsString": true
       }
     },
@@ -2893,11 +2878,7 @@
         "modelAsString": true
       }
     },
-    "disableVpnEncryption": {
-      "type": "boolean",
-      "description": "Vpn encryption to be disabled or not."
-    },
-    "access": {
+    "Access": {
       "type": "string",
       "description": "Access to be allowed or denied.",
       "enum": [
@@ -2905,7 +2886,7 @@
         "Deny"
       ],
       "x-ms-enum": {
-        "name": "access",
+        "name": "Access",
         "modelAsString": true
       }
     },
@@ -2920,7 +2901,7 @@
         "None"
       ],
       "x-ms-enum": {
-        "name": "officeTrafficCategory",
+        "name": "OfficeTrafficCategory",
         "modelAsString": true
       }
     },
@@ -2933,7 +2914,7 @@
         "Native"
       ],
       "x-ms-enum": {
-        "name": "virtualWanSecurityProviderType",
+        "name": "VirtualWanSecurityProviderType",
         "modelAsString": true
       }
     },
@@ -3117,7 +3098,7 @@
               "modelAsString": true
             }
           },
-          "description": "vpnProtocols for the P2SVpnServerConfiguration."
+          "description": "VPN protocols for the P2SVpnServerConfiguration."
         },
         "p2SVpnServerConfigVpnClientRootCertificates": {
           "type": "array",
@@ -3257,7 +3238,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "./network.json#/definitions/ProvisioningState"
         },
         "vpnGatewayScaleUnit": {
           "type": "integer",
