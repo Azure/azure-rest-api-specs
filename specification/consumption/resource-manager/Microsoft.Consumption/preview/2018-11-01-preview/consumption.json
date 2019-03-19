@@ -831,6 +831,38 @@
         }
       }
     },
+    "InvoiceSection": {
+      "description": "An InvoiceSection resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The InvoiceSection.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InvoiceSectionProperties"
+        }
+      }
+    },
+    "InvoiceSectionProperties": {
+      "description": "The properties of an InvoiceSection.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the InvoiceSection.",
+          "type": "string"
+        },
+        "billingProfiles": {
+          "description": "The billing profiles associated to the billing account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingProfile"
+          }
+        }
+      }
+    },
     "Amount": {
       "description": "Object to represent monetary quantities.",
       "properties": {
@@ -1527,34 +1559,34 @@
       "x-ms-azure-resource": true
     },
     "Resource": {
-			"description": "The Resource model definition.",
-			"properties": {
-				"id": {
-					"readOnly": true,
-					"type": "string",
-					"description": "Resource Id."
-				},
-				"name": {
-					"readOnly": true,
-					"type": "string",
-					"description": "Resource name."
-				},
-				"type": {
-					"readOnly": true,
-					"type": "string",
-					"description": "Resource type."
-				},
-				"tags": {
-					"readOnly": true,
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					},
-					"description": "Resource tags."
-				}
-			},
-			"x-ms-azure-resource": true
-		}
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    }
   },
   "parameters": {
     "apiVersionParameter": {
