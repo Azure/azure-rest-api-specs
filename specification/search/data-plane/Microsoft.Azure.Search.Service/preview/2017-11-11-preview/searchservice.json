@@ -3907,22 +3907,51 @@
     "Field": {
       "properties": {
         "name": {
+          "type": "string",
+          "description": "The name of the field.",
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
-          },
-          "type": "string",
-          "description": "The name of the field."
+          }
         },
         "type": {
           "$ref": "#/definitions/DataType",
-          "description": "The data type of the field."
+          "description": "The data type of the field.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/supported-data-types"
+          }
+        },
+        "key": {
+          "type": "boolean",
+          "default": false,
+          "description": "A value indicating whether the field uniquely identifies documents in the index. Exactly one field in each index must be chosen as the key field and it must be of type Edm.String. Key fields can be used to look up documents directly and update or delete specific documents. Default is false."
+        },
+        "retrievable": {
+          "type": "boolean",
+          "default": true,
+          "description": "A value indicating whether the field can be returned in a search result. This is useful when you want to use a field (for example, margin) as a filter, sorting, or scoring mechanism but do not want the field to be visible to the end user. This property must be true for key fields. This property can be changed on existing fields. Enabling this property does not cause any increase in index storage requirements. All fields are retrievable by default."
+        },
+        "searchable": {
+          "type": "boolean",
+          "description": "A value indicating whether the field is full-text search-able. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like \"sunny day\", internally it will be split into the individual tokens \"sunny\" and \"day\". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. Fields of other types are not searchable. Note: searchable fields consume extra space in your index since Azure Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false."
+        },
+        "filterable": {
+          "type": "boolean",
+          "description": "A value indicating whether to enable the field to be referenced in $filter queries. filterable differs from searchable in how strings are handled. Fields of type Edm.String or Collection(Edm.String) that are filterable do not undergo word-breaking, so comparisons are for exact matches only. For example, if you set such a field f to \"sunny day\", $filter=f eq 'sunny' will find no matches, but $filter=f eq 'sunny day' will. All fields are filterable by default."
+        },
+        "sortable": {
+          "type": "boolean",
+          "description": "A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Search sorts results by score, but in many experiences users will want to sort by fields in the documents. Fields of type Collection(Edm.String) cannot be sortable. All other fields are sortable by default."
+        },
+        "facetable": {
+          "type": "boolean",
+          "description": "A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This option cannot be used with fields of type Edm.GeographyPoint. All other fields are facetable by default."
         },
         "analyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
           "$ref": "#/definitions/AnalyzerName",
-          "description": "The name of the analyzer to use for the field at search time and indexing time. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field."
+          "description": "The name of the language analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field."
         },
         "searchAnalyzer": {
           "externalDocs": {
@@ -3946,44 +3975,7 @@
           "items": {
             "type": "string"
           },
-          "description": "A list of synonym maps to apply in query expansion. Only one synonym map is allowed in the list currently. Synonym maps must be uploaded first to be referenced. This option can be used only with searchable fields."
-        },
-        "key": {
-          "x-ms-client-name": "isKey",
-          "type": "boolean",
-          "x-nullable": false,
-          "description": "A value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field."
-        },
-        "searchable": {
-          "x-ms-client-name": "isSearchable",
-          "type": "boolean",
-          "x-nullable": false,
-          "description": "A value indicating whether the field is included in full-text searches. Valid only for string or string collection fields. Default is false."
-        },
-        "filterable": {
-          "x-ms-client-name": "isFilterable",
-          "type": "boolean",
-          "x-nullable": false,
-          "description": "A value indicating whether the field can be used in filter expressions. Default is false."
-        },
-        "sortable": {
-          "x-ms-client-name": "isSortable",
-          "type": "boolean",
-          "x-nullable": false,
-          "description": "A value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false."
-        },
-        "facetable": {
-          "x-ms-client-name": "isFacetable",
-          "type": "boolean",
-          "x-nullable": false,
-          "description": "A value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false."
-        },
-        "retrievable": {
-          "x-ms-client-name": "isRetrievable",
-          "type": "boolean",
-          "x-nullable": false,
-          "default": true,
-          "description": "A value indicating whether the field can be returned in a search result. Default is true."
+          "description": "A list of synonym map names that associates synonym maps with the field. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields."
         }
       },
       "required": [
@@ -3993,8 +3985,7 @@
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Index"
       },
-      "description": "Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field.",
-      "x-ms-external": true
+      "description": "Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field."
     },
     "TextWeights": {
       "properties": {

@@ -117,4 +117,23 @@ directive:
           replace( /\"Client.SearchServiceName\"/g, "\"this.Client.SearchServiceName\"" ).
           replace( /\"Client.SearchDnsSuffix\"/g, "\"this.Client.SearchDnsSuffix\"" );
       return $;  
+####
+  # The following regex are required to make the generated Field class conform to the needs of the custom implementation
+  # that we've had in the Azure Search .NET SDK since it was first released. We've decided to keep the custom behavior of
+  # Field just for .NET for the sake of backward compatibility, but for other languages the client behavior will conform
+  # to the REST API.
+  # 
+  # To achieve this, we need to make the generated constructors internal, as well as some of the generated properties.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+        return $.
+          replace( /public (Field\(\))/g, "internal $1" ).
+          replace( /public (Field\(string name,)/g, "internal $1" ).
+          replace( /public (bool\? Key { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Retrievable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Searchable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Filterable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Sortable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Facetable { get; set; })/g, "internal $1" );
 ```
