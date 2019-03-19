@@ -1899,6 +1899,38 @@
       }
     }
   },
+    "/providers/Microsoft.Billing/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available billing REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
   "definitions": {
     "TransferProductRequestProperties": {
       "description": "The properties of the product to initiate a transfer.",
@@ -3332,6 +3364,55 @@
             "name": "UpdateAutoRenew",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Billing REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Billing.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Invoice, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result listing billing operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of billing operations supported by the Microsoft.Billing resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
