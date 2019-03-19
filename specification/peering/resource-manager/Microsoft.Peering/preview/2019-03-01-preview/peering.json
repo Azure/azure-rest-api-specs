@@ -665,6 +665,7 @@
       "required": [
         "sku",
         "kind",
+        "properties",
         "location"
       ],
       "type": "object",
@@ -721,6 +722,7 @@
           "readOnly": true
         }
       },
+      "discriminator": "kind",
       "x-ms-azure-resource": true
     },
     "PeeringSku": {
@@ -824,16 +826,16 @@
             "$ref": "#/definitions/DirectConnection"
           }
         },
-        "peerAsn": {
-          "format": "int32",
-          "description": "The Autonomous System Number (ASN) associated with the peering.",
-          "type": "integer"
-        },
         "useForPeeringService": {
           "description": "The flag that indicates whether or not the peering is used for peering service.",
           "type": "boolean"
+        },
+        "peerAsn": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference of the peer ASN."
         }
-      }
+      },
+      "x-ms-discriminator-value": "Direct"
     },
     "ErrorResponse": {
       "description": "The error response that indicates why an operation has failed.",
@@ -863,11 +865,11 @@
           }
         },
         "peerAsn": {
-          "format": "int32",
-          "description": "The Autonomous System Number (ASN) associated with the peering.",
-          "type": "integer"
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference of the peer ASN."
         }
-      }
+      },
+      "x-ms-discriminator-value": "Exchange"
     },
     "DirectConnection": {
       "description": "The properties that define a direct connection.",
@@ -910,6 +912,16 @@
         "bgpSession": {
           "$ref": "#/definitions/BgpSession",
           "description": "The BGP session associated with the connection."
+        }
+      }
+    },
+    "SubResource": {
+      "description": "The sub resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The identifier of the referenced resource.",
+          "type": "string"
         }
       }
     },
@@ -1249,7 +1261,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "kind"
     },
     "PeeringLocationProperties": {
       "description": "The properties that define a peering location.",
@@ -1295,7 +1308,8 @@
             "$ref": "#/definitions/PeeringBandwidthOffer"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "Direct"
     },
     "PeeringLocationPropertiesExchange": {
       "description": "The properties that define an exchange peering location.",
@@ -1308,7 +1322,8 @@
             "$ref": "#/definitions/ExchangePeeringFacility"
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "Exchange"
     },
     "DirectPeeringFacility": {
       "description": "The properties that define a direct peering facility.",
