@@ -334,6 +334,7 @@
           "BillingProfiles"
         ],
         "operationId": "BillingProfiles_Update",
+        "x-ms-long-running-operation": true,
         "description": "The operation to update a billing profile.",
         "x-ms-examples": {
           "UpdateBillingProfile": {
@@ -452,6 +453,7 @@
           "InvoiceSections"
         ],
         "operationId": "InvoiceSections_Create",
+        "x-ms-long-running-operation": true,
         "description": "The operation to create a InvoiceSection.",
         "x-ms-examples": {
           "CreateInvoiceSection": {
@@ -614,6 +616,7 @@
           "InvoiceSections"
         ],
         "operationId": "InvoiceSections_Update",
+        "x-ms-long-running-operation": true,
         "description": "The operation to update a InvoiceSection.",
         "x-ms-examples": {
           "UpdateInvoiceSection": {
@@ -1280,9 +1283,6 @@
         "description": "Transfers the GTM subscription from one invoice section to another within a billing account.",
         "operationId": "BillingSubscription_Transfer",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "TransferBillingSubscription": {
             "$ref": "./examples/TransferBillingSubscription.json"
@@ -1299,10 +1299,22 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/transferBillingSubscriptionRequestParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+            },
+            "description": "Parameters supplied to the Transfer Billing Subscription operation."
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransferBillingSubscriptionResult"
+            }
+          },
           "202": {
             "description": "Accepted. Billing Subscription transfer is in progress.",
             "headers": {
@@ -1383,7 +1395,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "Products_ByInvoiceSection_List",
+        "operationId": "ProductsByInvoiceSection_List",
         "description": "Lists products by invoiceSectionId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1460,7 +1472,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProductsSummary"
+              "$ref": "#/definitions/ProductSummary"
             }
           },
           "default": {
@@ -1502,12 +1514,18 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferProductProperties"
+              "$ref": "#/definitions/TransferProductRequestProperties"
             },
             "description": "Parameters supplied to the Transfer Product operation."
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductSummary"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1560,10 +1578,18 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/startDateParameter"
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/endDateParameter"
+            "name": "endDate",
+            "in": "query",
+            "description": "End date",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -1621,10 +1647,18 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/startDateParameter"
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/endDateParameter"
+            "name": "endDate",
+            "in": "query",
+            "description": "End date",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -1689,9 +1723,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "put": {
@@ -1788,7 +1819,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "ProductCancelForBillingAccount",
+        "operationId": "UpdateAutoRenewForBillingAccount",
         "description": "Cancel product by product id",
         "x-ms-examples": {
           "ProductsCancelByBillingAccount": {
@@ -1806,7 +1837,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UpdateAutoRenewRequestParameter"
+            "$ref": "#/parameters/updateAutoRenewRequestParameter"
           }
         ],
         "responses": {
@@ -1830,7 +1861,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "ProductCancelForInvoiceSection",
+        "operationId": "UpdateAutoRenewForInvoiceSection",
         "description": "Cancel auto renew for product by product id",
         "x-ms-examples": {
           "CancelProductForInvoiceSection": {
@@ -1851,7 +1882,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UpdateAutoRenewRequestParameter"
+            "$ref": "#/parameters/updateAutoRenewRequestParameter"
           }
         ],
         "responses": {
@@ -1872,12 +1903,33 @@
     }
   },
   "definitions": {
-    "TransferProductProperties": {
+    "TransferProductRequestProperties": {
       "description": "The properties of the product to initiate a transfer.",
       "properties": {
         "destinationInvoiceSectionId": {
           "description": "Destination invoice section id.",
           "type": "string"
+        }
+      }
+    },
+    "TransferBillingSubscriptionResult": {
+      "type": "object",
+      "description": "Request parameters to transfer billing subscription.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to transfer billing subscription.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TransferBillingSubscriptionResultProperties"
+        }
+      }
+    },
+    "TransferBillingSubscriptionResultProperties": {
+      "type": "object",
+      "description": "Transfer billing subscription result properties.",
+      "properties": {
+        "billingSubscriptionId": {
+          "type": "string",
+          "description": "The destination billing subscription id."
         }
       }
     },
@@ -1888,11 +1940,11 @@
         "properties": {
           "description": "Request parameters to transfer billing subscription.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TransferBillingSubscriptionProperties"
+          "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
         }
       }
     },
-    "TransferBillingSubscriptionProperties": {
+    "TransferBillingSubscriptionRequestProperties": {
       "type": "object",
       "description": "Request parameters to transfer billing subscription.",
       "properties": {
@@ -1987,14 +2039,6 @@
         "country": {
           "description": "The country associated with billing account..",
           "type": "string",
-          "readOnly": true
-        },
-        "agreements": {
-          "description": "Agreements.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
           "readOnly": true
         },
         "invoiceSections": {
@@ -2343,7 +2387,7 @@
           "type": "boolean",
           "readOnly": true
         },
-        "IsClassic": {
+        "isClassic": {
           "description": "Is OMS bootstrapped billing profile.",
           "type": "boolean",
           "readOnly": true
@@ -2354,7 +2398,7 @@
           "readOnly": true
         },
         "currency": {
-          "description": "Currency.",
+          "description": "The currency associated with the billing profile.",
           "type": "string",
           "readOnly": true
         },
@@ -2377,61 +2421,44 @@
     "Address": {
       "description": "Address details.",
       "properties": {
-        "FirstName": {
+        "firstName": {
           "description": "First Name.",
           "type": "string"
         },
-        "LastName": {
+        "lastName": {
           "description": "Last Name.",
           "type": "string"
         },
-        "CompanyName": {
+        "companyName": {
           "description": "Company Name.",
           "type": "string"
         },
-        "AddressLine1": {
+        "addressLine1": {
           "description": "Address Line1.",
           "type": "string"
         },
-        "AddressLine2": {
+        "addressLine2": {
           "description": "Address Line2.",
           "type": "string"
         },
-        "AddressLine3": {
+        "addressLine3": {
           "description": "Address Line3.",
           "type": "string"
         },
-        "City": {
-          "description": "City.",
+        "city": {
+          "description": "Address City.",
           "type": "string"
         },
-        "Region": {
-          "description": "Region.",
+        "region": {
+          "description": "Address Region.",
           "type": "string"
         },
-        "Country": {
+        "country": {
           "description": "Country code uses ISO2, 2-digit format.",
           "type": "string"
         },
-        "PostalCode": {
-          "description": "Postal Code.",
-          "type": "string"
-        }
-      }
-    },
-    "BillingContact": {
-      "description": "Billing Contact details.",
-      "properties": {
-        "Name": {
-          "description": "Name.",
-          "type": "string"
-        },
-        "EmailAddress": {
-          "description": "Email address.",
-          "type": "string"
-        },
-        "PhoneNumber": {
-          "description": "Phone number.",
+        "postalCode": {
+          "description": "Address Postal Code.",
           "type": "string"
         }
       }
@@ -2750,7 +2777,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ProductsSummary"
+            "$ref": "#/definitions/ProductSummary"
           }
         },
         "nextLink": {
@@ -2760,7 +2787,7 @@
         }
       }
     },
-    "ProductsSummary": {
+    "ProductSummary": {
       "description": "A product summary resource.",
       "type": "object",
       "allOf": [
@@ -2771,12 +2798,12 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProductsSummaryProperties",
+          "$ref": "#/definitions/ProductSummaryProperties",
           "title": "Product summary properties"
         }
       }
     },
-    "ProductsSummaryProperties": {
+    "ProductSummaryProperties": {
       "description": "The properties of the product summary.",
       "properties": {
         "displayName": {
@@ -2849,7 +2876,7 @@
           "readOnly": true
         },
         "quantity": {
-          "description": "Currency Code",
+          "description": "The purchased product quantity.",
           "type": "number",
           "readOnly": true
         },
@@ -3287,7 +3314,7 @@
           "readOnly": true
         },
         "currency": {
-          "description": "Currency code",
+          "description": "The currency associated with the payment method.",
           "type": "string",
           "readOnly": true
         }
@@ -3367,7 +3394,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "UpdateAutoRenewRequestParameter": {
+    "updateAutoRenewRequestParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
       "in": "body",
@@ -3401,16 +3428,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "transferBillingSubscriptionRequestParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Transfer billing subscription parameters.",
-      "schema": {
-        "$ref": "#/definitions/TransferBillingSubscriptionRequest"
-      }
-    },
     "billingSubscriptionIdParameter": {
       "name": "billingSubscriptionId",
       "in": "path",
@@ -3418,20 +3435,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "startDateParameter": {
-      "name": "startDate",
-      "in": "query",
-      "description": "Start date",
-      "required": true,
-      "type": "string"
-    },
-    "endDateParameter": {
-      "name": "endDate",
-      "in": "query",
-      "description": "End date",
-      "required": true,
-      "type": "string"
     }
   },
   "security": [
