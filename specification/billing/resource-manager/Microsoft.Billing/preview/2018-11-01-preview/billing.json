@@ -190,9 +190,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -478,6 +475,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
