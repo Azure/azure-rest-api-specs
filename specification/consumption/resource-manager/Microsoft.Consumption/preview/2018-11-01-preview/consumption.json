@@ -816,35 +816,35 @@
     "Address": {
 			"description": "Address details.",
 			"properties": {
-				"AddressLine1": {
+				"addressLine1": {
 					"description": "Address Line1.",
 					"type": "string"
 				},
-				"AddressLine2": {
+				"addressLine2": {
 					"description": "Address Line2.",
 					"type": "string"
 				},
-				"AddressLine3": {
+				"addressLine3": {
 					"description": "Address Line3.",
 					"type": "string"
 				},
-				"City": {
-					"description": "City.",
+				"city": {
+					"description": "Address City.",
 					"type": "string"
 				},
-				"Region": {
-					"description": "Region.",
+				"region": {
+					"description": "Address Region.",
 					"type": "string"
 				},
-				"Country": {
+				"country": {
 					"description": "Country code uses ISO2, 2-digit format..",
 					"type": "string"
 				},
-				"PostalCode": {
+				"postalCode": {
 					"description": "Postal Code.",
 					"type": "string"
 				},
-				"PhoneNumber": {
+				"phoneNumber": {
 					"description": "Phone Number.",
 					"type": "string"
 				}
@@ -937,7 +937,7 @@
           "readOnly": true
         },
         "agreements": {
-          "description": "Agreements.",
+          "description": "Agreements associated with billing account",
           "type": "string",
           "readOnly": true
         },
@@ -1028,7 +1028,7 @@
           "readOnly": true
         },
         "currency": {
-          "description": "Currency.",
+          "description": "Currency on the billing profile.",
           "type": "string",
           "readOnly": true
         }
@@ -1363,7 +1363,6 @@
         "description": {
           "description": "Transaction description.",
           "type": "string",
-          "format": "string",
           "readOnly": true
         },
         "newCredit": {
@@ -1372,7 +1371,7 @@
           "$ref": "#/definitions/Amount"
         },
         "adjustments": {
-          "description": "Adjustments.",
+          "description": "Credit Adjustments.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
@@ -1382,7 +1381,7 @@
           "$ref": "#/definitions/Amount"
         },
         "charges": {
-          "description": "Charges.",
+          "description": "Credit Eligible Charges.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
@@ -1407,7 +1406,6 @@
         "invoiceNumber": {
           "description": "Invoice Number.",
           "type": "string",
-          "format": "string",
           "readOnly": true
         }
       }
@@ -1482,7 +1480,6 @@
         "poNumber": {
           "description": "PO Number.",
           "type": "string",
-          "format": "string",
           "readOnly": true
         }
       }
@@ -1636,13 +1633,11 @@
         "usageStart": {
           "description": "Billing period start date.",
           "type": "string",
-          "format": "string",
           "readOnly": true
         },
         "usageEnd": {
           "description": "Billing period end date.",
           "type": "string",
-          "format": "string",
           "readOnly": true
         },
         "azureCharges": {
@@ -1866,14 +1861,16 @@
 			"in": "query",
 			"description": "Start date",
 			"required": true,
-			"type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
 		},
 		"endDateParameter": {
 			"name": "endDate",
 			"in": "query",
 			"description": "End date",
 			"required": true,
-			"type": "string"
+			"type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
