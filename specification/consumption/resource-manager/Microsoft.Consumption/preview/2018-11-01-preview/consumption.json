@@ -1494,11 +1494,6 @@
           "items": {
             "$ref": "#/definitions/ChargeSummaryByBillingAccount"
           }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1512,11 +1507,6 @@
           "items": {
             "$ref": "#/definitions/ChargeSummaryByBillingProfile"
           }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1530,11 +1520,6 @@
           "items": {
             "$ref": "#/definitions/ChargeSummaryByInvoiceSection"
           }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1549,22 +1534,10 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ChargeSummaryPropertiesByBillingAccount",
+          "$ref": "#/definitions/ChargeSummaryProperties",
           "title": "Charge summary properties"
         }
       }
-    },
-    "ChargeSummaryPropertiesByBillingAccount": {
-      "description": "The properties of the charge summary by billing account.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChargeSummaryProperties"
-        },
-        {
-          "$ref": "#/definitions/BillingAccount"
-        }
-      ]
     },
     "ChargeSummaryByBillingProfile": {
       "description": "A charge summary resource by billing profile.",
@@ -1577,22 +1550,10 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ChargeSummaryPropertiesByBillingProfile",
+          "$ref": "#/definitions/ChargeSummaryProperties",
           "title": "Charge summary properties"
         }
       }
-    },
-    "ChargeSummaryPropertiesByBillingProfile": {
-      "description": "The properties of the charge summary by billing profile.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChargeSummaryProperties"
-        },
-        {
-          "$ref": "#/definitions/BillingProfile"
-        }
-      ]
     },
     "ChargeSummaryByInvoiceSection": {
       "description": "A charge summary resource by invoiceSection.",
@@ -1605,22 +1566,10 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ChargeSummaryPropertiesByInvoiceSection",
+          "$ref": "#/definitions/ChargeSummaryProperties",
           "title": "Charge summary properties"
         }
       }
-    },
-    "ChargeSummaryPropertiesByInvoiceSection": {
-      "description": "The properties of the charge summary by invoiceSection.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChargeSummaryProperties"
-        },
-        {
-          "$ref": "#/definitions/InvoiceSection"
-        }
-      ]
     },
     "ChargeSummaryProperties": {
       "description": "The properties of the charge summary.",
