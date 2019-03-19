@@ -1290,7 +1290,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/BillingAccountIdParameter"
+            "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
             "$ref": "#/parameters/InvoiceSectionIdParameter"
@@ -1884,6 +1884,27 @@
         "destinationInvoiceSectionId": {
           "description": "Destination invoice section id.",
           "type": "string"
+        }
+      }
+    },
+    "TransferBillingSubscriptionRequest": {
+      "type": "object",
+      "description": "Request parameters to transfer billing subscription.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to transfer billing subscription.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TransferBillingSubscriptionProperties"
+        }
+      }
+    },
+    "TransferBillingSubscriptionProperties": {
+      "type": "object",
+      "description": "Request parameters to transfer billing subscription.",
+      "properties": {
+        "destinationInvoiceSectionId": {
+          "type": "string",
+          "description": "The destination invoiceSectionId."
         }
       }
     },
