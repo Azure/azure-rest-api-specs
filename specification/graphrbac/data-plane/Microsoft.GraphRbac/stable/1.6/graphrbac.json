@@ -1299,7 +1299,11 @@
             "$ref": "#/parameters/tenantIDInPath"
           },
           {
-            "$ref": "#/parameters/applicationIdInPath"
+            "name": "applicationID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The application ID."
           }
         ],
         "responses": {
@@ -4151,14 +4155,6 @@
       "required": true,
       "type": "string",
       "description": "The tenant ID.",
-      "x-ms-parameter-location": "client"
-    },
-    "applicationIdInPath": {
-      "name": "applicationID",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The application ID.",
       "x-ms-parameter-location": "client"
     }
   }
