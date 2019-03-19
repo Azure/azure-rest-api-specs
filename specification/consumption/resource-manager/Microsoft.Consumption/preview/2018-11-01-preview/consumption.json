@@ -424,7 +424,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DownloadUrl"
+              "$ref": "#/definitions/PricesheetDownloadResponse"
             }
           },
           "202": {
@@ -496,7 +496,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DownloadUrl"
+              "$ref": "#/definitions/PricesheetDownloadResponse"
             }
           },
           "202": {
@@ -1081,17 +1081,32 @@
         }
       }
     },
+    "PricesheetDownloadResponse": {
+      "description": "Download response of Pricesheets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DownloadUrl",
+          "title": "Download url properties."
+        }
+      }
+    },
     "DownloadUrl": {
       "description": "A secure URL that can be used to download a an entity until the URL expires.",
       "properties": {
-        "expiryTime": {
-          "description": "The time in UTC at which this download URL will expire.",
+        "downloadUrl": {
+          "description": "The URL to the PDF file.",
           "type": "string",
-          "format": "date-time",
           "readOnly": true
         },
-        "url": {
-          "description": "The URL to the PDF file.",
+        "expiryTime": {
+          "description": "The time in UTC at which this download URL will expire.",
           "type": "string",
           "readOnly": true
         }
