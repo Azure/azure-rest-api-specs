@@ -72,7 +72,7 @@
             "$ref": "./examples/BillingAccountsListWithCreateInvoiceSectionPermission.json"
           }
         },
-        "operationId": "BillingAccounts_ListWithCreateInvoiceSectionPermission",
+        "operationId": "BillingAccountsWithCreateInvoiceSectionPermission_List",
         "description": "Lists all billing accounts with create invoiceSection permission for a user.",
         "parameters": [
           {
@@ -251,7 +251,7 @@
             "$ref": "./examples/BillingProfilesListByBillingAccountId.json"
           }
         },
-        "operationId": "BillingProfiles_ListByBillingAccountId",
+        "operationId": "BillingProfilesByBillingAccountId_List",
         "description": "Lists all billing profiles for a user which that user has access to.",
         "parameters": [
           {
@@ -403,7 +403,7 @@
             "$ref": "./examples/InvoiceSectionsListByBillingAccountIdWithExpand.json"
           }
         },
-        "operationId": "InvoiceSections_ListByBillingAccountId",
+        "operationId": "InvoiceSectionsByBillingAccountId_List",
         "description": "Lists all invoice sections for a user which he has access to.",
         "parameters": [
           {
@@ -517,7 +517,7 @@
             "$ref": "./examples/InvoiceSectionsListByBillingAccountIdWithExpandAndCreateSubPermission.json"
           }
         },
-        "operationId": "InvoiceSections_ListWithCreateSubscriptionPermission",
+        "operationId": "InvoiceSectionsWithCreateSubscriptionPermission_List",
         "description": "Lists all invoiceSections with create subscription permission for a user.",
         "parameters": [
           {
@@ -685,7 +685,7 @@
             "$ref": "./examples/DepartmentsListByBillingAccountIdWithExpand.json"
           }
         },
-        "operationId": "Departments_ListByBillingAccountId",
+        "operationId": "DepartmentsByBillingAccountId_List",
         "description": "Lists all departments for a user which he has access to.",
         "parameters": [
           {
@@ -794,7 +794,7 @@
             "$ref": "./examples/EnrollmentAccountsListByBillingAccountIdWithExpand.json"
           }
         },
-        "operationId": "EnrollmentAccounts_ListByBillingAccountId",
+        "operationId": "EnrollmentAccountsByBillingAccountId_List",
         "description": "Lists all Enrollment Accounts for a user which he has access to.",
         "parameters": [
           {
@@ -900,7 +900,7 @@
             "$ref": "./examples/BillingAccountInvoicesList.json"
           }
         },
-        "operationId": "Invoices_ListByBillingAccount",
+        "operationId": "InvoicesByBillingAccount_List",
         "description": "List of invoices for a billing account.",
         "parameters": [
           {
@@ -1022,7 +1022,7 @@
             "$ref": "./examples/InvoicesListByBillingProfile.json"
           }
         },
-        "operationId": "Invoices_ListByBillingProfile",
+        "operationId": "InvoicesByBillingProfile_List",
         "description": "List of invoices for a billing profile.",
         "parameters": [
           {
@@ -1112,7 +1112,7 @@
         "tags": [
           "BillingSubscriptions"
         ],
-        "operationId": "Products_ByBillingSubscriptions_List",
+        "operationId": "ProductsByBillingSubscriptions_List",
         "description": "Lists billing subscriptions by billingAccountId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1154,7 +1154,7 @@
         "tags": [
           "BillingSubscriptions"
         ],
-        "operationId": "BillingSubscriptions_ByBillingProfile_List",
+        "operationId": "BillingSubscriptionsByBillingProfile_List",
         "description": "Lists billing subscriptions by billingProfileId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1196,7 +1196,7 @@
         "tags": [
           "BillingSubscriptions"
         ],
-        "operationId": "BillingSubscription_ByInvoiceSection_List",
+        "operationId": "BillingSubscriptionsByInvoiceSection_List",
         "description": "Lists billing subscription by invoiceSectionId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1346,7 +1346,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "Products_ByBillingAccount_List",
+        "operationId": "ProductsByBillingAccount_List",
         "description": "Lists products by billingAccountId.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1808,9 +1808,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3231,7 +3228,7 @@
     "AvailableBalanceProperties": {
       "description": "The properties of available balance.",
       "properties": {
-        "Amount": {
+        "amount": {
           "description": "Balance Amount.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
