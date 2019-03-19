@@ -24,6 +24,12 @@ To see additional help and options, run:
 
 These are the global settings for the MonitorClient API.
 
+``` yaml
+title: MonitorClient
+description: Monitor Management Client
+openapi-type: arm
+tag: package-2019-03
+```
 
 ### Tag: package-2019-03
 
@@ -51,13 +57,6 @@ input-file:
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
-```
-
-``` yaml
-title: MonitorClient
-description: Monitor Management Client
-openapi-type: arm
-tag: package-2018-11-preview
 ```
 
 ### Tag: package-2018-11-preview

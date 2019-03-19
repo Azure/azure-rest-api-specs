@@ -31,8 +31,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2019-02-only' && $(python)
 python:
-  namespace: azure.mgmt.containerservice.v2019_02_01_preview
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_02_01_preview
+  namespace: azure.mgmt.containerservice.v2019_02_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_02_01
 ```
 
 ### Tag: package-2018-09-preview-only and python
