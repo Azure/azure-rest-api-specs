@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Kusto.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Kusto, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,31 @@ To build the SDK for Kusto, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Kusto API.
 
 ``` yaml
 title: KustoManagementClient
-description: The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.
+description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2019-01-21
+tag: package-2019-03
 ```
 
+
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.Kusto/stable/2019-03-20/kusto.json
+```
 ### Tag: package-2019-01-21
 
 These settings apply only when `--tag=package-2019-01-21` is specified on the command line.
@@ -92,7 +101,6 @@ input-file:
 ```
 
 # Code Generation
-
 
 ## Swagger to SDK
 
