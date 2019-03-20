@@ -581,6 +581,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/personGroupId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "responses": {
@@ -700,6 +703,9 @@
             "minimum": 1,
             "maximum": 1000,
             "default": 1000
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "produces": [
@@ -804,6 +810,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/faceListId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "produces": [
@@ -897,7 +906,11 @@
       "get": {
         "description": "List face lists’ faceListId, name, userData and recognitionModel. <br /> \nTo get face information inside faceList use [FaceList - Get](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524c)\n",
         "operationId": "FaceList_List",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          }
+		],
         "responses": {
           "200": {
             "description": "A successful call returns an array of faceList.",
@@ -1027,6 +1040,9 @@
           },
           {
             "$ref": "#/parameters/recognitionModel"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "consumes": [
@@ -1483,6 +1499,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "responses": {
@@ -1602,6 +1621,9 @@
             "minimum": 1,
             "maximum": 1000,
             "default": 1000
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "produces": [
@@ -1754,6 +1776,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "produces": [
@@ -1880,7 +1905,11 @@
       "get": {
         "description": "List large face lists’ information of largeFaceListId, name, userData and recognitionModel. <br /> \nTo get face information inside largeFaceList use [LargeFaceList Face - Get](/docs/services/563879b61984550e40cbbe8d/operations/5a158cf2d2de3616c086f2d5)<br />\n* Large face lists are stored in alphabetical order of largeFaceListId.\n* \"start\" parameter (string, optional) is a user-provided largeFaceListId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last retuned entry’s Id of the current call.\n<br />\nFor example, total 5 large person lists: \"list1\", ..., \"list5\".\n<br /> \"start=&top=\" will return all 5 lists.\n<br /> \"start=&top=2\" will return \"list1\", \"list2\".\n<br /> \"start=list2&top=3\" will return \"list3\", \"list4\", \"list5\".\n",
         "operationId": "LargeFaceList_List",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          }
+		],
         "responses": {
           "200": {
             "description": "A successful call returns an array of largeFaceList.",
@@ -2476,6 +2505,9 @@
           },
           {
             "$ref": "#/parameters/recognitionModel"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "consumes": [
@@ -2723,8 +2755,7 @@
     "DetectedFace": {
       "type": "object",
       "required": [
-        "faceRectangle",
-        "recognitionModel"
+        "faceRectangle"
       ],
       "description": "Detected Face object.",
       "properties": {
@@ -4199,6 +4230,16 @@
         "recognition_01",
         "recognition_02"
       ]
+    },    
+    "returnRecognitionModel": {
+      "name": "returnRecognitionModel",
+      "description": "Whether to return the 'RecognitionModel' required for the current operation.",
+      "default": false,
+      "required": false,
+      "type": "boolean",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-nullable": false
     }
   }
 }
