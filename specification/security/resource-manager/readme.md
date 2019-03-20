@@ -104,7 +104,6 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
->>>>>>> master
 ```
 
 ---

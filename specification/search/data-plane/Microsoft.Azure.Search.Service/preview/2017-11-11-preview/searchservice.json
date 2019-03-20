@@ -566,49 +566,14 @@
         }
       }
     },
-	"/skillsets('{skillsetName}')": {
-      "get": {
-        "tags": ["Skillsets"],
-        "operationId": "Skillsets_Get",
-        "x-ms-examples": {
-          "SearchServiceGetSkillset": { "$ref": "./examples/SearchServiceGetSkillset.json" }
-        },
-        "description": "Retrieves a cognitive skillset in an Azure Search service.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/rest/api/searchservice/get-skillset"
-        },
-        "parameters": [
-          {
-            "name": "skillsetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the skillset to retrieve."
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "The skillset is successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/Skillset"
-            }
-          }
-        }
-      },
+    "/skillsets('{skillsetName}')": {
       "put": {
         "tags": ["Skillsets"],
         "operationId": "Skillsets_CreateOrUpdate",
         "x-ms-examples": {
           "SearchServiceCreateOrUpdateSkillset": { "$ref": "./examples/SearchServiceCreateOrUpdateSkillset.json" }
         },
-        "description": "Creates a new cognitive skillset in an Azure Search service.",
+        "description": "Creates a new cognitive skillset in an Azure Search service or updates the skillset if it already exists.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/update-skillset"
         },
@@ -656,7 +621,7 @@
         }
       },
       "delete": {
-        "tags": ["skillsetName"],
+        "tags": ["Skillsets"],
         "operationId": "Skillsets_Delete",
         "x-ms-examples": {
           "SearchServiceDeleteSkillset": { "$ref": "./examples/SearchServiceDeleteSkillset.json" }
@@ -689,6 +654,41 @@
             "description": "The provided skillset name is not found."
           }
         }
+      },
+      "get": {
+        "tags": ["Skillsets"],
+        "operationId": "Skillsets_Get",
+        "x-ms-examples": {
+          "SearchServiceGetSkillset": { "$ref": "./examples/SearchServiceGetSkillset.json" }
+        },
+        "description": "Retrieves a cognitive skillset in an Azure Search service.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/get-skillset"
+        },
+        "parameters": [
+          {
+            "name": "skillsetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the skillset to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "The skillset is successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/Skillset"
+            }
+          }
+        }
       }
     },
     "/skillsets": {
@@ -718,15 +718,13 @@
               "$ref": "#/definitions/SkillsetListResult"
             }
           }
-		}
+        }
       },
       "post": {
         "tags": ["Skillsets"],
         "operationId": "Skillsets_Create",
         "x-ms-examples": {
-          "SearchServiceCreateSkillset": {
-            "$ref": "./examples/SearchServiceCreateSkillset.json"
-          }
+          "SearchServiceCreateSkillset": { "$ref": "./examples/SearchServiceCreateSkillset.json" }
         },
         "description": "Creates a new cognitive skillset in an Azure Search service.",
         "externalDocs": {
@@ -3432,7 +3430,7 @@
           "type": "string",
           "description": "The name of the datasource from which this indexer reads data."
         },
-		"skillsetName": {
+        "skillsetName": {
           "type": "string",
           "description": "The name of the cognitive skillset executing with this indexer."
         },
@@ -3458,7 +3456,7 @@
             "url": "https://docs.microsoft.com/azure/search/search-indexer-field-mappings"
           }
         },
-		"outputFieldMappings": {
+        "outputFieldMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FieldMapping"
@@ -4027,10 +4025,10 @@
           "enum": [
             "analyzingInfixMatching"
           ],
-		  "x-ms-enum": {
-			"name": "searchMode",
-			"modelAsString": false
-		  },
+          "x-ms-enum": {
+            "name": "searchMode",
+            "modelAsString": false
+          },
           "description": "A value indicating the capabilities of the suggester."
         },
         "sourceFields": {
@@ -4168,433 +4166,544 @@
       },
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
     },
-	"Skillset": {
-		"properties": {
-			"name": {
-				"type": "string",
-				"description": "The name of the skillset."
-			},
-			"description": {
-				"type": "string",
-				"description": "The description of the skillset."
-			},
-			"skills": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/Skill"
-				},
-				"description": "A list of skills in the skillset."
-			},
-			"@odata.etag": {
-				"x-ms-client-name": "ETag",
-				"type": "string",
-				"description": "The ETag of the skillset."
-			}
-		},
-		"required": [
-		    "name", "description", "skills"
-		],
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-tutorial-blob"
-	    },
-		"description": "A list of cognitive skills."
-	},
-	"Skill": {
-		"discriminator": "@odata.type",
-		"properties": {
-			"@odata.type": {
-				"type": "string"
-			},
-			"description": {
-				"type": "string",
-				"description": "The description of the skill which describes the inputs, outputs, and usage of the skill."
-			},
-			"context": {
-				"type": "string",
-				"description": "Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content)."
-			},
-			"inputs": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/InputFieldMappingEntry"
-				},
-				"description": "Inputs of the skills could be a column in the source data set, or the output of an upstream skill."
-			},
-			"outputs": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/OutputFieldMappingEntry"
-				},
-				"description": "The output of a skill is either a field in an Azure Search index, or a value that can be consumed as an input by another skill."
-			}
-		},
-		"required": [
-		    "@odata.type", "description", "context", "inputs", "outputs"
-		],
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-predefined-skills"
-	    },
-		"description": "Abstract base class for skills."
-	},
-	"InputFieldMappingEntry": {
-		"properties": {
-			"name": {
-				"type": "string",
-				"description": "The name of the input."
-			},
-			"source": {
-				"type": "string",
-				"description": "The source of the input."
-			}
-		},
-		"required": [
-		    "name", "source"
-		],
-		"description": "Input field mapping for a skill."
-	},
-	"OutputFieldMappingEntry": {
-		"properties": {
-			"name": {
-				"type": "string",
-				"description": "The name of the output defined by the skill."
-			},
-			"targetName": {
-				"type": "string",
-				"description": "The target name of the output. It is optional and default to name."
-			}
-		},
-		"required": [
-		    "name"
-		],
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/rest/api/searchservice/naming-rules"
-	    },
-		"description": "Output field mapping for a skill."
-	},
-	"KeyPhraseExtractionSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"defaultLanguageCode": {
-				"$ref": "#/definitions/KeyPhraseExtractionSkillLanguage",
-				"description": "A value indicating which language code to use. Default is en."
-			},
-			"maxKeyPhraseCount": {
-				"type": "integer",
-				"format": "int32",
-				"x-nullable": true,
-				"description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
-			}
-		},
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-keyphrases"
-	    },
-		"description": "A skill that uses text analytics for key phrase extraction."
-	},
-	"OcrSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Vision.OcrSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"textExtractionAlgorithm": {
-				"$ref": "#/definitions/TextExtractionAlgorithm",
-				"description": "A value indicating which algorithm to use for extracting text. Default is printed."
-			},
-			"defaultLanguageCode": {
-				"$ref": "#/definitions/OcrSkillLanguage",
-				"description": "A value indicating which language code to use. Default is en."
-			},
-			"detectOrientation": {
-			    "x-ms-client-name": "ShouldDetectOrientation",
-				"type": "boolean",
-				"default": false,
-				"description": "A value indicating to turn orientation detection on or not. Default is false."
-			}
-		},
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-ocr"
-	    },
-		"description": "A skill that extracts text from image files."
-	},
-	"ImageAnalysisSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Vision.ImageAnalysisSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"defaultLanguageCode": {
-				"$ref": "#/definitions/ImageAnalysisSkillLanguage",
-				"description": "A value indicating which language code to use. Default is en."
-			},
-			"visualFeatures": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/VisualFeature",
-					"x-nullable": false
-				},
-				"description": "A list of visual features."
-			},
-			"details": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/ImageDetail",
-					"x-nullable": false
-				},
-				"description": "A string indicating which domain-specific details to return."
-			}
-		},
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-image-analysis"
-	    },
-		"description": "A skill that analyzes image files. It extracts a rich set of visual features based on the image content."
-	},
-	"LanguageDetectionSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Text.LanguageDetectionSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
-	    },
-		"description": "A skill that detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis."
-	},
-	"ShaperSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Util.ShaperSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-shaper"
-	    },
-		"description": "A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields)."
-	},
-	"MergeSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Text.MergeSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"insertPreTag": {
-				"type": "string",
-				"default": " ",
-				"description": "The tag indicates the start of the merged text. By default, the tag is an empty space."
-			},
-			"insertPostTag": {
-				"type": "string",
-				"default": " ",
-				"description": "The tag indicates the end of the merged text. By default, the tag is an empty space."
-			}
-		},
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-textmerger"
-	    },
-		"description": "A skill for merging two or more strings into a single unified string, with an optional user-defined delimiter separating each component part."
-	},
-	"NamedEntityRecognitionSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"categories": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/NamedEntityCategory",
-					"x-nullable": false
-				},
-				"description": "A list of named entity categories."
-			},
-			"defaultLanguageCode": {
-				"$ref": "#/definitions/NamedEntityRecognitionSkillLanguage",
-				"description": "A value indicating which language code to use. Default is en."
-			},
-			"minimumPrecision": {
-				"type": "number",
-				"format": "double",
-				"x-nullable": true,
-				"description": "A value between 0 and 1 to indicate the confidence of the results."
-			}
-		},
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition"
-	    },
-		"description": "Text analytics named entity recognition."
-	},
-	"SentimentSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"defaultLanguageCode": {
-				"$ref": "#/definitions/SentimentSkillLanguage",
-				"description": "A value indicating which language code to use. Default is en."
-			}
-		},
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-sentiment"
-	    },
-		"description": "Text analytics positive-negative sentiment analysis, scored as a floating point value in a range of zero to 1."
-	},
-	"SplitSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Text.SplitSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"defaultLanguageCode": {
-				"$ref": "#/definitions/SplitSkillLanguage",
-				"description": "A value indicating which language code to use. Default is en."
-			},
-			"textSplitMode": {
-				"$ref": "#/definitions/TextSplitMode",
-				"x-nullable": false,
-				"description": "A value indicating which split mode to perform."
-			},
-			"maximumPageLength": {
-				"type": "integer",
-				"format": "int32",
-				"x-nullable": true,
-				"description": "The desired maximum page length. Default is 10000."
-			}
-		},
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-textsplit"
-	    },
-		"description": "A skill to split a string into chunks of text."
-	},
-	"WebApiSkill": {
-		"x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
-		"allOf": [{
-			"$ref": "#/definitions/Skill"
-		}],
-		"properties": {
-			"uri": {
-				"type": "string",
-				"description": "The url for the Web API."
-			},
-			"httpHeaders": {
-				"$ref": "#/definitions/WebApiHttpHeaders",
-				"description": "The headers required to make the http request."
-			},
-			"httpMethod": {
-				"type": "string",
-				"description": "The method for the http request."
-			},
-			"timeout": {
-				"type": "string",
-				"format": "duration",
-				"description": "The desired timeout for the request. Default is 30 seconds."
-			},
-			"batchSize": {
-				"type": "integer",
-				"format": "int32",
-				"x-nullable": true,
-				"description": "The desired batch size which indicates number of documents."
-			}
-		},
-		"required": [
-          "uri", "httpHeaders", "httpMethod"
-        ],
-		"externalDocs": {
-			"url": "https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-interface"
-	    },
-		"description": "A skill that can call a Web API endpoint, allowing you to extend a skillset by having it call your custom code."
-	},
-	"WebApiHttpHeaders": {
-		"properties": {
-			"headers": {
-				"type": "object",
-				"additionalProperties": {
-					"type": "string"
-				},
-				"description": "A dictionary of http request headers."
-			}
-		}
-	},
-	"SkillsetListResult": {
-		"properties": {
-			"value": {
-				"x-ms-client-name": "Skillsets",
-				"type": "array",
-				"readOnly": true,
-				"items": {
-					"$ref": "#/definitions/Skillset"
-				},
-				"description": "The skillsets defined in the Search service."
-			}
-		},
-		"description": "Response from a list Skillset request. If successful, it includes the full definitions of all skillsets."
-	},
-	"TextExtractionAlgorithm": {
-		"type": "string",
-        "enum": [
-          "printed",
-          "handwritten"
-        ],
-        "x-ms-enum": {
-          "name": "TextExtractionAlgorithm",
-          "modelAsString": false
+    "Skillset": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the skillset."
         },
-		"description": "A value indicating which algorithm to use. Default is printed."
-	},
-	"TextSplitMode": {
-		"type": "string",
-        "enum": [
-          "pages",
-          "sentences"
-        ],
-        "x-ms-enum": {
-          "name": "TextSplitMode",
-          "modelAsString": false
+        "description": {
+          "type": "string",
+          "description": "The description of the skillset."
         },
-		"description": "A value indicating which split mode to perform."
-	},
-	"VisualFeature": {
-		"type": "string",
-        "enum": [
-          "categories",
-          "tags",
-		  "description",
-		  "faces",
-		  "imageType",
-		  "color"
-        ],
-        "x-ms-enum": {
-          "name": "VisualFeature",
-          "modelAsString": false
+        "skills": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Skill"
+          },
+          "description": "A list of skills in the skillset."
         },
-		"description": "The strings indicating what visual feature types to return."
-	},
-	"ImageDetail": {
-		"type": "string",
-        "enum": [
-          "celebrities",
-          "landmarks"
-        ],
-        "x-ms-enum": {
-          "name": "ImageDetail",
-          "modelAsString": false
+        "cognitiveServices": {
+          "$ref": "#/definitions/CognitiveServices",
+          "description": "Details about cognitive services to be used when running skills."
         },
-		"description": "A string indicating which domain-specific details to return."
-	},
-	"NamedEntityCategory": {
-		"type": "string",
-        "enum": [
-          "location",
-          "organization",
-		  "person"
-        ],
-        "x-ms-enum": {
-          "name": "NamedEntityCategory",
-          "modelAsString": false
+        "@odata.etag": {
+          "x-ms-client-name": "ETag",
+          "type": "string",
+          "description": "The ETag of the skillset."
+        }
+      },
+      "required": [
+          "name", "description", "skills"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-tutorial-blob"
         },
-		"description": "A string indicating which named entity categories to return."
-	},
-	"SentimentSkillLanguage": {
+      "description": "A list of cognitive skills."
+    },
+    "CognitiveServices": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Abstract base class for describing any cognitive service resource attached to the skillset."
+    },
+    "DefaultCognitiveServices": {
+      "description": "An empty object that represents the default cognitive service resource for a skillset.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServices"
+        }
+      ]
+    },
+    "CognitiveServicesByKey": {
+      "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServices"
+        }
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "Skill": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the skill which describes the inputs, outputs, and usage of the skill."
+        },
+        "context": {
+          "type": "string",
+          "description": "Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content)."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "Inputs of the skills could be a column in the source data set, or the output of an upstream skill."
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputFieldMappingEntry"
+          },
+          "description": "The output of a skill is either a field in an Azure Search index, or a value that can be consumed as an input by another skill."
+        }
+      },
+      "required": [
+          "@odata.type", "description", "context", "inputs", "outputs"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-predefined-skills"
+        },
+      "description": "Abstract base class for skills."
+    },
+    "InputFieldMappingEntry": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the input."
+        },
+        "source": {
+          "type": "string",
+          "description": "The source of the input."
+        }
+      },
+      "required": [
+          "name", "source"
+      ],
+      "description": "Input field mapping for a skill."
+    },
+    "OutputFieldMappingEntry": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the output defined by the skill."
+        },
+        "targetName": {
+          "type": "string",
+          "description": "The target name of the output. It is optional and default to name."
+        }
+      },
+      "required": [
+          "name"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/naming-rules"
+        },
+      "description": "Output field mapping for a skill."
+    },
+    "KeyPhraseExtractionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/KeyPhraseExtractionSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "maxKeyPhraseCount": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-keyphrases"
+        },
+      "description": "A skill that uses text analytics for key phrase extraction."
+    },
+    "OcrSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Vision.OcrSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "textExtractionAlgorithm": {
+          "$ref": "#/definitions/TextExtractionAlgorithm",
+          "description": "A value indicating which algorithm to use for extracting text. Default is printed."
+        },
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/OcrSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "detectOrientation": {
+            "x-ms-client-name": "ShouldDetectOrientation",
+          "type": "boolean",
+          "default": false,
+          "description": "A value indicating to turn orientation detection on or not. Default is false."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-ocr"
+        },
+      "description": "A skill that extracts text from image files."
+    },
+    "ImageAnalysisSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Vision.ImageAnalysisSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/ImageAnalysisSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "visualFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VisualFeature",
+            "x-nullable": false
+          },
+          "description": "A list of visual features."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDetail",
+            "x-nullable": false
+          },
+          "description": "A string indicating which domain-specific details to return."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-image-analysis"
+        },
+      "description": "A skill that analyzes image files. It extracts a rich set of visual features based on the image content."
+    },
+    "LanguageDetectionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.LanguageDetectionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
+        },
+      "description": "A skill that detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis."
+    },
+    "ShaperSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.ShaperSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-shaper"
+        },
+      "description": "A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields)."
+    },
+    "MergeSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.MergeSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "insertPreTag": {
+          "type": "string",
+          "default": " ",
+          "description": "The tag indicates the start of the merged text. By default, the tag is an empty space."
+        },
+        "insertPostTag": {
+          "type": "string",
+          "default": " ",
+          "description": "The tag indicates the end of the merged text. By default, the tag is an empty space."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-textmerger"
+        },
+      "description": "A skill for merging two or more strings into a single unified string, with an optional user-defined delimiter separating each component part."
+    },
+    "EntityRecognitionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.EntityRecognitionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityCategory",
+            "x-nullable": false
+          },
+          "description": "A list of entity categories that should be extracted."
+        },
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/EntityRecognitionSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "includeTypelessEntities": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Determines whether or not to include entities which are well known but don't conform to a type. If this configuration is not set (default), set to null or set to false, entities which don't have a type will not be surfaced."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition"
+      },
+      "description": "Text analytics entity recognition."
+    },
+    "NamedEntityRecognitionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamedEntityCategory",
+            "x-nullable": false
+          },
+          "description": "A list of named entity categories."
+        },
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/NamedEntityRecognitionSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "description": "A value between 0 and 1 to indicate the confidence of the results."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition"
+        },
+      "description": "Text analytics named entity recognition. This skill is deprecated in favor of EntityRecognitionSkill.",
+      "x-ms-external": true
+    },
+    "SentimentSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/SentimentSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-sentiment"
+        },
+      "description": "Text analytics positive-negative sentiment analysis, scored as a floating point value in a range of zero to 1."
+    },
+    "SplitSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.SplitSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/SplitSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "textSplitMode": {
+          "$ref": "#/definitions/TextSplitMode",
+          "x-nullable": false,
+          "description": "A value indicating which split mode to perform."
+        },
+        "maximumPageLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The desired maximum page length. Default is 10000."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-textsplit"
+        },
+      "description": "A skill to split a string into chunks of text."
+    },
+    "WebApiSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The url for the Web API."
+        },
+        "httpHeaders": {
+          "$ref": "#/definitions/WebApiHttpHeaders",
+          "description": "The headers required to make the http request."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The method for the http request."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "The desired timeout for the request. Default is 30 seconds."
+        },
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The desired batch size which indicates number of documents."
+        }
+      },
+      "required": [
+            "uri", "httpHeaders", "httpMethod"
+          ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-interface"
+        },
+      "description": "A skill that can call a Web API endpoint, allowing you to extend a skillset by having it call your custom code."
+    },
+    "WebApiHttpHeaders": {
+      "properties": {
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A dictionary of http request headers."
+        }
+      }
+    },
+    "SkillsetListResult": {
+      "properties": {
+        "value": {
+          "x-ms-client-name": "Skillsets",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Skillset"
+          },
+          "description": "The skillsets defined in the Search service."
+        }
+      },
+      "description": "Response from a list Skillset request. If successful, it includes the full definitions of all skillsets."
+    },
+    "TextExtractionAlgorithm": {
+      "type": "string",
+          "enum": [
+            "printed",
+            "handwritten"
+          ],
+          "x-ms-enum": {
+            "name": "TextExtractionAlgorithm",
+            "modelAsString": false
+          },
+      "description": "A value indicating which algorithm to use. Default is printed."
+    },
+    "TextSplitMode": {
+      "type": "string",
+          "enum": [
+            "pages",
+            "sentences"
+          ],
+          "x-ms-enum": {
+            "name": "TextSplitMode",
+            "modelAsString": false
+          },
+      "description": "A value indicating which split mode to perform."
+    },
+    "VisualFeature": {
+      "type": "string",
+          "enum": [
+            "categories",
+            "tags",
+        "description",
+        "faces",
+        "imageType",
+        "color"
+          ],
+          "x-ms-enum": {
+            "name": "VisualFeature",
+            "modelAsString": false
+          },
+      "description": "The strings indicating what visual feature types to return."
+    },
+    "ImageDetail": {
+      "type": "string",
+          "enum": [
+            "celebrities",
+            "landmarks"
+          ],
+          "x-ms-enum": {
+            "name": "ImageDetail",
+            "modelAsString": false
+          },
+      "description": "A string indicating which domain-specific details to return."
+    },
+    "EntityCategory": {
+      "type": "string",
+      "enum": [
+        "location",
+        "organization",
+        "person",
+        "quantity",
+        "datetime",
+        "url",
+        "email"
+      ],
+      "x-ms-enum": {
+        "name": "EntityCategory",
+        "modelAsString": false
+      },
+      "description": "A string indicating what entity categories to return."
+    },
+    "NamedEntityCategory": {
+      "type": "string",
+      "enum": [
+        "location",
+        "organization",
+        "person"
+      ],
+      "description": "A string indicating which named entity categories to return.",
+      "x-ms-external": true
+    },
+    "SentimentSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4603,7 +4712,7 @@
       "description": "The language codes supported for input text by SentimentSkill.",
       "x-ms-external": true
     },
-	"KeyPhraseExtractionSkillLanguage": {
+    "KeyPhraseExtractionSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4612,7 +4721,7 @@
       "description": "The language codes supported for input text by KeyPhraseExtractionSkill.",
       "x-ms-external": true
     },
-	"OcrSkillLanguage": {
+    "OcrSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4621,7 +4730,7 @@
       "description": "The language codes supported for input by OcrSkill.",
       "x-ms-external": true
     },
-	"SplitSkillLanguage": {
+    "SplitSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4630,7 +4739,16 @@
       "description": "The language codes supported for input text by SplitSkill.",
       "x-ms-external": true
     },
-	"NamedEntityRecognitionSkillLanguage": {
+    "EntityRecognitionSkillLanguage": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "description": "The language codes supported for input text by EntityRecognitionSkill.",
+      "x-ms-external": true
+    },
+    "NamedEntityRecognitionSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
@@ -4639,7 +4757,7 @@
       "description": "The language codes supported for input text by NamedEntityRecognitionSkill.",
       "x-ms-external": true
     },
-	"ImageAnalysisSkillLanguage": {
+    "ImageAnalysisSkillLanguage": {
       "properties": {
         "name": {
           "type": "string"
