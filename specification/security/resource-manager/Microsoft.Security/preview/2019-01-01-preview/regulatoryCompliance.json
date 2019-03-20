@@ -523,7 +523,7 @@
         "state": {
           "type": "string",
           "description": "Aggregative state based on the assessment's scanned resources states",
-          "enum": ["Passed", "Failed", "Skipped"],
+          "enum": ["Passed", "Failed", "Skipped", "Unsupported"],
           "x-ms-enum": {
             "name": "state",
             "modelAsString": true,
@@ -539,6 +539,10 @@
               {
                 "value": "Skipped",
                 "description": "The given assessment skipped on all related resources"
+              },
+              {
+                "value": "Unsupported",
+                "description": "The given assessment has no supported resources"
               }
             ]
           }
@@ -557,6 +561,11 @@
           "readOnly": true,
           "type": "integer",
           "description": "The given assessment's related resources count with skipped state."
+        },
+        "unsupportedResources": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "The given assessment's related resources count with unsupported state."
         }
       }
     }
