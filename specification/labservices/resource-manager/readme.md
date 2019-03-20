@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for LabServices.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for LabServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for LabServices, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the LabServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10
+tag: package-2019-09
 ```
 
 
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-09'
+input-file:
+  - Microsoft.LabServices/stable/2019-09-09/ML.json
+```
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
@@ -40,8 +48,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -59,7 +67,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_labservices']
 ```
-
 
 ## C#
 
@@ -91,11 +98,13 @@ python:
   package-name: azure-mgmt-labservices
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-labservices/azure/mgmt/labservices
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -139,6 +148,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
