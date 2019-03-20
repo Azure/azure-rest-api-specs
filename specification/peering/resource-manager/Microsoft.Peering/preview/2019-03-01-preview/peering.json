@@ -665,7 +665,6 @@
       "required": [
         "sku",
         "kind",
-        "properties",
         "location"
       ],
       "type": "object",
@@ -722,7 +721,6 @@
           "readOnly": true
         }
       },
-      "discriminator": "kind",
       "x-ms-azure-resource": true
     },
     "PeeringSku": {
@@ -834,8 +832,7 @@
           "$ref": "#/definitions/SubResource",
           "description": "The reference of the peer ASN."
         }
-      },
-      "x-ms-discriminator-value": "Direct"
+      }
     },
     "ErrorResponse": {
       "description": "The error response that indicates why an operation has failed.",
@@ -868,8 +865,7 @@
           "$ref": "#/definitions/SubResource",
           "description": "The reference of the peer ASN."
         }
-      },
-      "x-ms-discriminator-value": "Exchange"
+      }
     },
     "DirectConnection": {
       "description": "The properties that define a direct connection.",
@@ -1261,8 +1257,7 @@
           "type": "string",
           "readOnly": true
         }
-      },
-      "discriminator": "kind"
+      }
     },
     "PeeringLocationProperties": {
       "description": "The properties that define a peering location.",
@@ -1308,8 +1303,7 @@
             "$ref": "#/definitions/PeeringBandwidthOffer"
           }
         }
-      },
-      "x-ms-discriminator-value": "Direct"
+      }
     },
     "PeeringLocationPropertiesExchange": {
       "description": "The properties that define an exchange peering location.",
@@ -1322,8 +1316,7 @@
             "$ref": "#/definitions/ExchangePeeringFacility"
           }
         }
-      },
-      "x-ms-discriminator-value": "Exchange"
+      }
     },
     "DirectPeeringFacility": {
       "description": "The properties that define a direct peering facility.",
