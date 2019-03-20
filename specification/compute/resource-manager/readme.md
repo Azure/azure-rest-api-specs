@@ -176,6 +176,20 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 ```
 
+### Tag: package-2019-05-01-ScriptJobs
+
+These settings apply only when `--tag=package-2019-05-01-ScriptJobs` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-01-ScriptJobs'
+input-file:
+- Microsoft.Compute/preview/2019-05-01-preview/compute.json
+- Microsoft.Compute/preview/2019-05-01-preview/runCommands.json
+- Microsoft.Compute/preview/2019-05-01-preview/scriptJob.json
+- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2018-09-30/disk.json
+- Microsoft.Compute/stable/2018-06-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
 
 ### Tag: package-preview-2019-05
 
