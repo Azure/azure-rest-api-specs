@@ -21,16 +21,7 @@
         "user_impersonation"
       ]
     }
-  ],
-  "tags": [
-    {
-      "name": "Budgets-Preview",
-      "description": "Perform CRUD (Create, Update, Read, Delete) operations on the budget entity at the Subscription scope.",
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-      }
-    }
-  ],
+  ], 
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -40,7 +31,7 @@
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
-    }
+    }       
   },
   "paths": {
     "/{scope}/providers/Microsoft.Consumption/tags": {
@@ -80,9 +71,9 @@
             }
           }
         }
-      }   
-  }
-},
+      }
+    }
+  },
   "definitions": {   
     "TagsResult": {
       "description": "A resource listing all tags.",
