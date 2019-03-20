@@ -11,7 +11,7 @@ This is the AutoRest configuration file for Security.
 To build the SDK for Security, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 
-- Microsoft.Security/preview/2019-01-01-preview/.json> `autorest`
+> `autorest`
 
 To see additional help and options, run:
 
