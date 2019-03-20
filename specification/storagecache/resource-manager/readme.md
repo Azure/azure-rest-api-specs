@@ -47,8 +47,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagecache']
 ```
 
 ## Python
