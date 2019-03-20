@@ -3329,7 +3329,7 @@
         }
       }
     },
-    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/connectormetadata":
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}":
     {
       "get": {
         "tags": ["Metrics"],
@@ -3351,10 +3351,17 @@
           {
             "name": "serviceMemberId",
             "in": "path",
-            "description": "The server id.",
+            "description": "The servic member id.",
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+		  {
+            "name": "metricName",
+            "in": "path",
+            "description": "The name of the metric.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -4300,7 +4307,7 @@
       }
     },
     "ConnectorMetadataDetails": {
-      "description": "Details of the connector. Only has ConnectorId & Display Name.",
+      "description": "Details of the connector.",
       "type": "object",
       "properties": {
         "connectorId": {
