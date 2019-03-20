@@ -21,7 +21,7 @@
         "user_impersonation"
       ]
     }
-  ], 
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -31,10 +31,10 @@
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
-    }       
+    }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Consumption/tags": {
+    "/providers/Microsoft.billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/tags": {
       "get": {
         "tags": [
           "Tags"
@@ -48,15 +48,7 @@
           "Tags_Get": {
             "$ref": "./examples/Tags.json"
           }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeTagsParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
+        },       
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -74,7 +66,7 @@
       }
     }
   },
-  "definitions": {   
+  "definitions": {
     "TagsResult": {
       "description": "A resource listing all tags.",
       "type": "object",
@@ -163,16 +155,7 @@
       "x-ms-azure-resource": true
     }
   },
-  "parameters": {
-    "scopeTagsParameter": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The scope associated with tags operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope..",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
+  "parameters": {   
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
