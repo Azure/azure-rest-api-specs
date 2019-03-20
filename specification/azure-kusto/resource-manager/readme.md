@@ -35,7 +35,7 @@ directive:
       - $.definitions.DataConnection.required
     suppress:
       - R2016
-	reason:
+    reason:
       - Implements kind which is required also in patch
 ```
 
