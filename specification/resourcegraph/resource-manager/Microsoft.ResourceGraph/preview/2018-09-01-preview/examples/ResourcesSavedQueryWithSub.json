@@ -1,0 +1,81 @@
+{
+  "title": "Basic Query",
+  "description": "A simple resources query.",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "savedQuery": {
+        "savedQueryId": "/subscriptions/024e2271-06fa-46b6-9079-f1ed3c7b070e/resources/my-resource-group/providers/Microsoft.ResourceGraph/savedQueries/MyDockerVMs",
+        "scope": {
+          "list": [
+            "55cfeab8-a07c-4e98-a527-a885fd696771",
+            "f6a1a30a-a540-4465-be3c-d842fa368cef",
+            "b2ce8b12-33b9-4b52-b735-3d04a6389687"
+          ],
+          "scopeType": "sub"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "count": 3,
+        "resultTruncated": "false",
+        "data": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "name": "tags",
+              "type": "object"
+            }
+          ],
+          "rows": [
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Network/networkInterfaces/myNetworkInterface",
+              "myNetworkInterface",
+              "microsoft.network/networkinterfaces",
+              "centralus",
+              {
+                "tag1": "Value1"
+              }
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/virtualNetworks/myVnet",
+              "myVnet",
+              "microsoft.network/virtualnetworks",
+              "westus",
+              {}
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/publicIPAddresses/myPublicIp",
+              "myPublicIp",
+              "microsoft.network/publicipaddresses",
+              "westus",
+              {}
+            ]
+          ]
+        }
+      }
+    }
+  }
+}
