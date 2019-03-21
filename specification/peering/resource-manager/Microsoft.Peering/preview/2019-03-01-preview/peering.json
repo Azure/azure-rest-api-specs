@@ -674,6 +674,11 @@
         "location"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "sku": {
           "$ref": "#/definitions/PeeringSku",
@@ -710,24 +715,8 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The ID of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "PeeringSku": {
       "description": "The SKU that defines the tier and kind of the peering.",
@@ -1049,6 +1038,28 @@
         }
       }
     },
+    "Resource": {
+      "description": "The ARM resource class.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The ID of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "OperationListResult": {
       "description": "The paginated list of peering API operations.",
       "type": "object",
@@ -1116,29 +1127,18 @@
     "PeerAsn": {
       "description": "The essential information related to the peer's ASN.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/PeerAsnProperties",
           "description": "The properties that define a peer's ASN.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The ID of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "PeerAsnProperties": {
       "description": "The properties that define a peer's ASN.",
@@ -1230,6 +1230,11 @@
     "PeeringLocation": {
       "description": "Peering location is where connectivity could be established to the Microsoft Cloud Edge.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "kind": {
           "description": "The kind of peering that the peering location supports.",
@@ -1247,21 +1252,6 @@
           "$ref": "#/definitions/PeeringLocationProperties",
           "description": "The properties that define a peering location.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The ID of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
