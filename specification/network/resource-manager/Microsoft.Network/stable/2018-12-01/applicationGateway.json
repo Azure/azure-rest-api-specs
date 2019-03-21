@@ -485,9 +485,6 @@
               "$ref": "./network.json#/definitions/Error"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
   },
@@ -524,9 +521,6 @@
               "$ref": "./network.json#/definitions/Error"
             }
           }
-        },
-       "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
   },
@@ -563,9 +557,6 @@
               "$ref": "./network.json#/definitions/Error"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -768,6 +759,10 @@
             "name": "ApplicationGatewayBackendHealthServerHealth",
             "modelAsString": true
           }
+        },
+        "healthProbeLog": {
+          "type": "string",
+          "description": "Health Probe Log."
         }
       },
       "description": "Application gateway backendhealth http settings."
@@ -1463,7 +1458,7 @@
         "timeout": {
           "type": "integer",
           "format": "int32",
-          "description": "the probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds."
+          "description": "The probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds."
         },
         "unhealthyThreshold": {
           "type": "integer",
@@ -1924,6 +1919,10 @@
         "webApplicationFirewallConfiguration": {
           "$ref": "#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration",
           "description": "Web application firewall configuration."
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the FirewallPolicy resource."
         },
         "enableHttp2": {
           "type": "boolean",

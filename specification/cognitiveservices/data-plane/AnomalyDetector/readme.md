@@ -1,25 +1,25 @@
-# Cognitive Services Anomaly Finder SDK
+# Cognitive Services Anomaly Detector SDK
 
 > see https://aka.ms/autorest
 
-Configuration for generating Anomaly Finder SDK.
+Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_2_0`.
+The current release is `release_1_0`.
 
 ``` yaml
 
-tag: release_2_0
+tag: release_1_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
 
-### Release 2.0
-These settings apply only when `--tag=release_2_0` is specified on the command line.
+### Release 1.0
+These settings apply only when `--tag=release_1_0` is specified on the command line.
 
-``` yaml $(tag) == 'release_2_0'
-input-file: stable/v2.0/AnomalyFinder.json
+``` yaml $(tag) == 'release_1_0'
+input-file: preview/v1.0/AnomalyDetector.json
 ```
 
 ## Swagger to SDK
@@ -36,7 +36,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_anomalyfinder']
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_anomalydetector']
 ```
 
 ## CSharp Settings
@@ -48,8 +48,8 @@ csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.AnomalyFinder
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/AnomalyFinder/AnomalyFinder/Generated
+  namespace: Microsoft.Azure.CognitiveServices.AnomalyDetector
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/AnomalyDetector/AnomalyDetector/Generated
   clear-output-folder: true
 ```
 
@@ -69,10 +69,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.anomalyfinder
+  namespace: com.microsoft.azure.cognitiveservices.anomalydetector
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/anomalyfinder
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/anomalydetector
   with-optional-parameters: true
   with-single-async-method: true
 ```

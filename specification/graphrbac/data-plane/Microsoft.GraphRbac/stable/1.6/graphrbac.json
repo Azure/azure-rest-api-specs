@@ -1284,6 +1284,44 @@
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
     },
+    "/{tenantID}/servicePrincipalsByAppId/{applicationID}/objectId": {
+      "get": {
+        "tags": [
+          "ServicePrincipalsByAppId"
+        ],
+        "operationId": "Applications_GetServicePrincipalsIdByAppId",
+        "description": "Gets an object id for a given application id from the current tenant.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          },
+          {
+            "name": "applicationID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The application ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalObjectResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/servicePrincipals/{objectId}": {
       "patch": {
         "tags": [
@@ -2551,7 +2589,7 @@
           "type": "string"
         },
         "essential": {
-          "description": "Is this a requied claim.",
+          "description": "Is this a required claim.",
           "type": "boolean"
         },
         "additionalProperties": {
@@ -2917,7 +2955,7 @@
           "items": {
             "$ref": "#/definitions/PreAuthorizedApplication"
           },
-          "description": "list of pre-authorizaed applications."
+          "description": "list of pre-authorized applications."
         },
         "publicClient": {
           "description": "Specifies whether this application is a public client (such as an installed application running on a mobile device). Default is false.",
@@ -2946,7 +2984,7 @@
           "type": "string"
         },
         "signInAudience": {
-          "description": "Audience for signing in to the application (AzureADMyOrganizatio, AzureADAllorganizations, AzureADAndMicrosofAccounts).",
+          "description": "Audience for signing in to the application (AzureADMyOrganization, AzureADAllOrganizations, AzureADAndMicrosoftAccounts).",
           "type": "string"
         },
         "wwwHomepage": {
@@ -2963,8 +3001,7 @@
         }
       ],
       "required": [
-        "displayName",
-        "identifierUris"
+        "displayName"
       ],
       "properties": {
         "displayName": {
@@ -3135,7 +3172,7 @@
           "items": {
             "$ref": "#/definitions/PreAuthorizedApplication"
           },
-          "description": "list of pre-authorizaed applications."
+          "description": "list of pre-authorized applications."
         },
         "publicClient": {
           "description": "Specifies whether this application is a public client (such as an installed application running on a mobile device). Default is false.",
@@ -3164,7 +3201,7 @@
           "type": "string"
         },
         "signInAudience": {
-          "description": "Audience for signing in to the application (AzureADMyOrganizatio, AzureADAllorganizations, AzureADAndMicrosofAccounts).",
+          "description": "Audience for signing in to the application (AzureADMyOrganization, AzureADAllOrganizations, AzureADAndMicrosoftAccounts).",
           "type": "string"
         },
         "wwwHomepage": {
@@ -3190,6 +3227,20 @@
         }
       },
       "description": "Application list operation result."
+    },
+    "ServicePrincipalObjectResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+            "type": "string",
+            "description": "The Object ID of the service principal with the specified application ID."
+        },
+       "odata.metadata": {
+          "type": "string",
+          "description": "The URL representing edm equivalent."
+        }
+      },
+      "description": "Service Principal Object Result."
     },
     "AppRole": {
       "type": "object",
@@ -3477,7 +3528,7 @@
     },
     "ServicePrincipalBase": {
       "type": "object",
-      "description": "Active Directory service principal common perperties shared among GET, POST and PATCH",
+      "description": "Active Directory service principal common properties shared among GET, POST and PATCH",
       "properties": {
         "accountEnabled": {
           "description": "whether or not the service principal account is enabled",
@@ -3486,7 +3537,7 @@
         "appRoleAssignmentRequired": {
           "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.",
           "type": "boolean"
-        },       
+        },
         "keyCredentials": {
           "description": "The collection of key credentials associated with the service principal.",
           "type": "array",
@@ -3503,7 +3554,7 @@
         },
         "servicePrincipalType": {
           "type": "string",
-          "description": "the type of the servie principal"
+          "description": "the type of the service principal"
         },
         "tags": {
           "description": "Optional list of tags that you can apply to your service principals. Not nullable.",
@@ -3555,7 +3606,7 @@
           "type": "string"
         },
         "alternativeNames": {
-          "description": "altenative names",
+          "description": "alternative names",
           "type": "array",
           "items": {
             "type": "string"
@@ -3625,7 +3676,7 @@
           }
         },
         "preferredTokenSigningKeyThumbprint": {
-          "description": "The thubmbprint of preferred certificate to sign the token",
+          "description": "The thumbprint of preferred certificate to sign the token",
           "type": "string"
         },
         "publisherName": {
@@ -3652,7 +3703,7 @@
         },
         "servicePrincipalType": {
           "type": "string",
-          "description": "the type of the servie principal"
+          "description": "the type of the service principal"
         },
         "tags": {
           "description": "Optional list of tags that you can apply to your service principals. Not nullable.",

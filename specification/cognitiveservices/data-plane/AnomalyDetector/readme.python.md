@@ -10,17 +10,17 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.anomalyfinder
-  package-name: azure-cognitiveservices-anomalyfinder
+  namespace: azure.cognitiveservices.anomalydetector
+  package-name: azure-cognitiveservices-anomalydetector
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-anomalyfinder/azure/cognitiveservices/anomalyfinder
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-anomalydetector/azure/cognitiveservices/anomalydetector
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-anomalyfinder
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-anomalydetector
 ```

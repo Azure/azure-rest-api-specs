@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.0",
-    "title": "Anomaly Finder Client",
-    "description": "The Anomaly Finder API detects anomalies automatically in time series data. It supports two functionalities, one is for detecting the whole series with model trained by the timeseries, another is detecting last point with model trained by points before. By using this service, business customers can discover incidents and establish a logic flow for root cause analysis."
+    "version": "1.0",
+    "title": "Anomaly Detector Client",
+    "description": "The Anomaly Detector API detects anomalies automatically in time series data. It supports two functionalities, one is for detecting the whole series with model trained by the timeseries, another is detecting last point with model trained by points before. By using this service, business customers can discover incidents and establish a logic flow for root cause analysis."
   },
   "securityDefinitions": {
     "apiKeyHeader": {
@@ -18,7 +18,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/anomalyfinder/v2.0",
+    "hostTemplate": "{Endpoint}/anomalydetector/v1.0",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -29,8 +29,8 @@
   "paths": {
     "/timeseries/entire/detect": {
       "post": {
-        "summary": "Find anomalies for the entire series in batch.",
-        "description": "The operation will generate a model using the entire series, each point will be detected with the same model. In this method, points before and after a certain point will be used to determine whether it's an anomaly. The entire detection can give user an overall status of the time series.",
+        "summary": "Detect anomalies for the entire series in batch.",
+        "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
         "operationId": "EntireDetect",
         "parameters": [
           {
@@ -73,7 +73,7 @@
     "/timeseries/last/detect": {
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
-        "description": "The operation will generate a model using points before the latest one, In this method, only history points are used for determine whether the target point is an anomaly. Latest point detecting matches the scenario of real-time monitoring of business metrics.",
+        "description": "This operation generates a model using points before the latest one. With this method, only historical points are used to determine whether the target point is an anomaly. The latest point detecting operation matches the scenario of real-time monitoring of business metrics.",
         "operationId": "LastDetect",
         "parameters": [
           {
@@ -130,7 +130,7 @@
             "InvalidSeries"
           ],
           "x-ms-enum": {
-            "name": "AnomalyFinderErrorCodes",
+            "name": "AnomalyDetectorErrorCodes",
             "modelAsString": true
           }
         },
@@ -233,50 +233,66 @@
           "description": "ExpectedValues contain expected value for each input point. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         },
         "upperMargins": {
           "type": "array",
-          "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - sensitivity)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting sensitivity value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
+          "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         },
         "lowerMargins": {
           "type": "array",
-          "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - sensitivity)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
+          "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         },
         "isAnomaly": {
           "type": "array",
           "description": "IsAnomaly contains anomaly properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         },
         "isNegativeAnomaly": {
           "type": "array",
           "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input point. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         },
         "isPositiveAnomaly": {
           "type": "array",
           "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input point. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         }
       }
     },
     "LastDetectResponse": {
       "type": "object",
+      "required": [
+        "expectedValue",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly",
+        "lowerMargin",
+        "period",
+        "upperMargin",
+        "suggestedWindow"
+      ],
       "properties": {
         "period": {
           "type": "integer",
@@ -296,12 +312,12 @@
         "upperMargin": {
           "type": "number",
           "format": "float",
-          "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - sensitivity)*upperMargin. If the value of latest point is between upperBoundary and lowerBoundary, it should be treated as normal value. By adjusting sensitivity value, anomaly status of latest point can be changed."
+          "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. If the value of latest point is between upperBoundary and lowerBoundary, it should be treated as normal value. By adjusting marginScale value, anomaly status of latest point can be changed."
         },
         "lowerMargin": {
           "type": "number",
           "format": "float",
-          "description": "Lower margin of the latest point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - sensitivity)*lowerMargin. "
+          "description": "Lower margin of the latest point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. "
         },
         "isAnomaly": {
           "type": "boolean",
