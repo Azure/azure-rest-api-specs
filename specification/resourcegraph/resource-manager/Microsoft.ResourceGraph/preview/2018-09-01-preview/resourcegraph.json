@@ -85,7 +85,6 @@
           "First page query": { "$ref": "./examples/ResourcesFirstPageQuery.json" },
           "Next page query": { "$ref": "./examples/ResourcesNextPageQuery.json" },
           "Random page query": { "$ref": "./examples/ResourcesRandomPageQuery.json" },
-          "Saved query with subscriptions": {"$ref": "./examples/ResourcesSavedQueryWithMG.json"},
           "Saved query with management groups": {"$ref": "./examples/ResourcesSavedQueryWithSub.json"}
         }
       }
@@ -146,13 +145,6 @@
           "items": {
             "$ref": "#/definitions/FacetRequest"
           }
-        },
-        "savedQuery": {
-          "description": "Optional. When it is presented, it will be used to get a saved query by id and execute the query to fetch data",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SavedQuery"
-          }
         }
       },
       "required": [
@@ -179,6 +171,13 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
+        },
+        "savedQuery": {
+          "description": "Optional. When it is presented, it will be used to get a saved query by id and execute the query to fetch data",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SavedQuery"
+          }
         }
       }
     },
@@ -423,8 +422,7 @@
               "default": "sub",
               "type": "string",
               "enum": [
-                "sub",
-                "mg"
+                "sub"
               ],
               "x-ms-enum": {
                 "name": "ScopeType",
