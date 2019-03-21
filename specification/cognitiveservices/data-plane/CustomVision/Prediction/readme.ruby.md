@@ -23,7 +23,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'release_1_0' && $(ruby)
 namespace: "Azure::CognitiveServices::CustomVision::Prediction::V1_0"
-output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_customvision_prediction/lib
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_customvisionprediction/lib
 title: "PredictionClient"
 ```
 
@@ -34,6 +34,6 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'release_1_0' && $(ruby)
 namespace: "Azure::CognitiveServices::CustomVision::Prediction::V3_0"
-output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_customvision_prediction/lib
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_customvisionprediction/lib
 title: "PredictionClient"
 ```
