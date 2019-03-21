@@ -185,8 +185,8 @@
         "tags": [
           "DdosProtectionPlans"
         ],
-        "operationId": "DdosProtectionPlans_Update",
-        "description": "Update a DDoS protection plan",
+        "operationId": "DdosProtectionPlans_UpdateTags",
+        "description": "Update a DDoS protection plan tags",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -209,7 +209,7 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to the update DDoS protection plan resource."
+            "description": "Parameters supplied to the update DDoS protection plan resource tags."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -220,7 +220,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful.",
+            "description": "Update successful. The operation returns the resulting DDoS protection plan resource.",
             "schema": {
               "$ref": "#/definitions/DdosProtectionPlan"
             }
@@ -228,8 +228,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DDoS protection plan Update": {
-            "$ref": "./examples/DdosProtectionPlanUpdate.json"
+          "DDoS protection plan Update tags": {
+            "$ref": "./examples/DdosProtectionPlanUpdateTags.json"
           }
         }
       }
