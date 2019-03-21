@@ -37,7 +37,7 @@ async function main() {
     }
   }
   console.log(`errors: ${errorNumbers}`)
-  return errorNumbers == 0 ? 0 : 1
+  return errorNumbers === 0 ? 0 : 1
 }
 
-main()
+main().then(process.exit)
