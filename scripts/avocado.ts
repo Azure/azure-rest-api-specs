@@ -2,6 +2,7 @@ const utils = require('../test/util/utils')
 import * as path from "path"
 import * as avocado from "@azure/avocado"
 import * as openApiMarkDown from "@azure/openapi-markdown"
+import * as yaml from "js-yaml"
 
 async function main() {
   const swaggersToProcess = utils.getFilesChangedInPR();
@@ -27,7 +28,7 @@ async function main() {
       console.log(swagger)
       const errors = avocado.avocado(swagger)
       for await (const e of errors) {
-        console.error(e)
+        console.error(yaml.safeDump(e))
         ++errorNumbers
       }
     } catch (e) {
