@@ -18,7 +18,7 @@ async function main() {
   }
   for (const swagger of set) {
     try {
-      const errors = avocado.avocado(path.dirname(swagger))
+      const errors = avocado.avocado(swagger)
       for await (const e of errors) {
         console.error(e)
         ++errorNumbers
