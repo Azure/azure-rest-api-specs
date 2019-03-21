@@ -8,16 +8,17 @@ async function main() {
   let errorNumbers = 0
   const set = new Set<string>()
   for (const swagger of swaggersToProcess) {
-    const dir = await openApiMarkDown.findReadMe(path.dirname(swagger))
-    if (dir === undefined) {
+    const rm = await openApiMarkDown.findReadMe(path.dirname(swagger))
+    if (rm === undefined) {
       console.error(`No readme.md for ${swagger}`)
       ++errorNumbers
     } else {
-      set.add(dir)
+      set.add(path.dirname(rm))
     }
   }
   for (const swagger of set) {
     try {
+      console.log(swagger)
       const errors = avocado.avocado(swagger)
       for await (const e of errors) {
         console.error(e)
@@ -26,6 +27,7 @@ async function main() {
     } catch (e) {
       console.error("fatal error:")
       console.error(e)
+      ++errorNumbers
     }
   }
   console.log(`errors: ${errorNumbers}`)
