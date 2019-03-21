@@ -58,6 +58,7 @@ jobs:
 - job: "Avocado"
   pool:
     vmImage: 'Ubuntu 16.04'
+  continueOnError: true
   steps:
   - task: Npm@1
     displayName: 'npm install'
