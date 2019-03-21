@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.managedservices
   package-name: azure-mgmt-managedservices
-  package-version: 1.0.0
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -23,5 +23,6 @@ python:
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-managedservices
   output-folder: $(python-sdks-folder)/azure-mgmt-managedservices
 ```
