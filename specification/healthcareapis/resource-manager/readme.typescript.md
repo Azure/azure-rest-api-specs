@@ -5,8 +5,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ``` yaml $(typescript)
 typescript:
-  package-name: "@azure/cognitiveservices-anomalyfinder"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-anomalyfinder"
-  azure-arm: false
+  azure-arm: true
+  package-name: "@azure/arm-healthcareapis"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-healthcareapis"
   generate-metadata: true
 ```
