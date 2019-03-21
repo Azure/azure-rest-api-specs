@@ -28,7 +28,23 @@ These are the global settings for the FrontDoor API.
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2019-03-preview
+```
+
+### Tag: package-2019-03-preview
+
+These settings apply only when `--tag=package-2019-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-preview'
+input-file:
+- Microsoft.Network/preview/2018-08-01-preview/frontdoor.json
+- Microsoft.Network/preview/2018-08-01-preview/network.json
+- Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
 ```
 
 ### Tag: package-2018-08-preview
