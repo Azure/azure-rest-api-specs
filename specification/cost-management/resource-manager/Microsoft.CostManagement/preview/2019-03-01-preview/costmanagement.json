@@ -1339,6 +1339,15 @@
           },
           {
             "$ref": "#/parameters/connectorNameParameter"
+          },
+          {
+            "name": "connector",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorDefinition"
+            },
+            "description": "Connector details"
           }
         ],
         "responses": {
@@ -1621,49 +1630,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
-      },
-      "put": {
-        "tags": [
-          "ExternalSubscriptions"
-        ],
-        "operationId": "ExternalSubscription_ManyUpdateManagementGroup",
-        "description": "Updates the management group of many ExternalSubscriptions",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ManagementGroupExternalSubscription_Put": {
-            "$ref": "./examples/ManagementGroupExternalSubscriptionManyUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/managementGroupIdParameter"
-          },
-          {
-            "name": "externalSubscriptionsToUpdate",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExternalSubscriptionIdListRequest"
-            },
-            "description": "List of ExternalSubscriptions to update"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
