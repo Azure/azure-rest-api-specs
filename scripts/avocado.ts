@@ -13,7 +13,13 @@ async function main() {
       console.error(`No readme.md for ${swagger}`)
       ++errorNumbers
     } else {
-      set.add(path.dirname(rm))
+      const dir = path.dirname(rm)
+      if (dir.includes("specification")) {
+        set.add(dir)
+      } else {
+        console.error(`No readme.md for ${swagger}`)
+        ++errorNumbers
+      }
     }
   }
   for (const swagger of set) {
