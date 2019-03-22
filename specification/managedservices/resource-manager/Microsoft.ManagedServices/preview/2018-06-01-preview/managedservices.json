@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.ManagedServices/registrationDefinitions/{registratonDefinitionId}": {
+    "/{scope}/providers/Microsoft.ManagedServices/registrationDefinitions/{registrationDefinitionId}": {
       "get": {
         "tags": [
           "RegistrationDefinitions"
@@ -46,7 +46,7 @@
             "$ref": "#/parameters/ScopeParameter"
           },
           {
-            "$ref": "#/parameters/RegistratonDefinitionIdParameter"
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -80,7 +80,7 @@
         "description": "Deletes the registration definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/RegistratonDefinitionIdParameter"
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -120,7 +120,7 @@
         "description": "Creates or updates a registration definition.",
         "parameters": [
           {
-            "$ref": "#/parameters/RegistratonDefinitionIdParameter"
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -456,7 +456,7 @@
             "items": {
               "$ref": "#/definitions/Authorization"
             },
-            "description": "Authorization tuple containing prinicpal id of the user/security group or service principal and id of the build-in role."
+            "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
           },
           "registrationDefinitionName": {
             "type": "string",
@@ -589,7 +589,7 @@
                   "items": {
                     "$ref": "#/definitions/Authorization"
                   },
-                  "description": "Authorization tuple containing prinicpal id of the user/security group or service principal and id of the build-in role."
+                  "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
                 },
                 "registrationDefinitionName": {
                   "type": "string",
@@ -741,7 +741,7 @@
         }
       },
       "type": "object",
-      "description": "Object that desctibes a single Microsoft.ManagedServices operation."
+      "description": "Object that describes a single Microsoft.ManagedServices operation."
     },
     "OperationList": {
       "properties": {
@@ -808,7 +808,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true,
       "type": "string",
-      "description": "Id of the source subscription."
+      "description": "Scope of the resource."
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -826,8 +826,8 @@
       "type": "string",
       "description": "Guid of the registration assignment."
     },
-    "RegistratonDefinitionIdParameter": {
-      "name": "registratonDefinitionId",
+    "registrationDefinitionIdParameter": {
+      "name": "registrationDefinitionId",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method",
@@ -839,7 +839,7 @@
       "in": "query",
       "x-ms-parameter-location": "method",
       "type": "boolean",
-      "description": "Tells whether to return registration definition details also along with registration assingmnet details."
+      "description": "Tells whether to return registration definition details also along with registration assignment details."
     }
   }
 }
