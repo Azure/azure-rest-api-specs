@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates": {
       "get": {
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "operationId": "Certificate_ListByService",
         "description": "Lists a collection of all certificates in the specified service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field          | Supported operators    | Supported functions                         |\n|----------------|------------------------|---------------------------------------------|\n| id             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| subject        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| thumbprint     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| expirationDate | ge, le, eq, ne, gt, lt | N/A                                         |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|subject | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|thumbprint | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|expirationDate | ge, le, eq, ne, gt, lt |    |\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -96,7 +96,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}": {
       "head": {
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "operationId": "Certificate_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the certificate specified by its identifier.",
@@ -113,7 +113,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/CertificateIdParameter"
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -142,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "operationId": "Certificate_Get",
         "description": "Gets the details of the certificate specified by its identifier.",
@@ -159,7 +159,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/CertificateIdParameter"
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -191,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "operationId": "Certificate_CreateOrUpdate",
         "description": "Creates or updates the certificate being used for authentication with the backend.",
@@ -212,7 +212,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/CertificateIdParameter"
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
           },
           {
             "name": "parameters",
@@ -236,12 +236,24 @@
         "responses": {
           "201": {
             "description": "The new certificate was successfully added.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/CertificateContract"
             }
           },
           "200": {
             "description": "The certificate details were successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/CertificateContract"
             }
@@ -256,7 +268,7 @@
       },
       "delete": {
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "operationId": "Certificate_Delete",
         "description": "Deletes specific certificate.",
@@ -273,7 +285,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/CertificateIdParameter"
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -385,17 +397,5 @@
       "description": "Parameters supplied to the CreateOrUpdate certificate operation."
     }
   },
-  "parameters": {
-    "CertificateIdParameter": {
-      "name": "certificateId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the certificate entity. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }

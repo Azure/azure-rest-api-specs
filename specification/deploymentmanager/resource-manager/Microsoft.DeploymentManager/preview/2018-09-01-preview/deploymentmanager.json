@@ -84,7 +84,7 @@
           "ServiceTopologies"
         ],
         "operationId": "ServiceTopologies_Get",
-        "summary": "Gets a topology resource.",
+        "summary": "Gets the service topology.",
         "x-ms-examples": {
           "Get topology": {
             "$ref": "./examples/servicetopology_get.json"
@@ -124,7 +124,7 @@
           "ServiceTopologies"
         ],
         "operationId": "ServiceTopologies_Delete",
-        "summary": "Deletes a topology resource.",
+        "summary": "Deletes the service topology.",
         "x-ms-examples": {
           "Delete topology": {
             "$ref": "./examples/servicetopology_delete.json"
@@ -146,7 +146,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The topology was successfully deleted"
+            "description": "The topology was successfully deleted."
           },
           "204": {
             "description": "The topology was not found and the operation is considered success."
@@ -166,7 +166,7 @@
           "Services"
         ],
         "operationId": "Services_CreateOrUpdate",
-        "summary": "Creates or updates a service in the topology.",
+        "summary": "Creates or updates a service in the service topology.",
         "description": "Synchronously creates a new service or updates an existing service.",
         "x-ms-examples": {
           "Create service": {
@@ -192,7 +192,7 @@
           {
             "in": "body",
             "name": "serviceInfo",
-            "description": "The topoogy group resource object",
+            "description": "The service object",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceResource"
@@ -219,7 +219,7 @@
           "Services"
         ],
         "operationId": "Services_Get",
-        "summary": "Gets a service resource.",
+        "summary": "Gets the service.",
         "x-ms-examples": {
           "Get service": {
             "$ref": "./examples/service_get.json"
@@ -262,7 +262,7 @@
           "Services"
         ],
         "operationId": "Services_Delete",
-        "summary": "Deletes a service resource.",
+        "summary": "Deletes the service.",
         "x-ms-examples": {
           "Delete service": {
             "$ref": "./examples/service_delete.json"
@@ -287,7 +287,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The service was successfully deleted"
+            "description": "The service was successfully deleted."
           },
           "204": {
             "description": "The service was not found and the operation is considered success."
@@ -308,7 +308,7 @@
         ],
         "operationId": "ServiceUnits_CreateOrUpdate",
         "x-ms-long-running-operation": true,
-        "summary": "Creates or updates a service unit in the service within the referenced topology resource.",
+        "summary": "Creates or updates a service unit under the service in the service topology.",
         "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
         "x-ms-examples": {
           "Create service unit using relative paths into the artifact source": {
@@ -373,7 +373,7 @@
           "ServiceUnits"
         ],
         "operationId": "ServiceUnits_Get",
-        "summary": "Gets a service unit resource.",
+        "summary": "Gets the service unit.",
         "x-ms-examples": {
           "Get service unit": {
             "$ref": "./examples/serviceunit_get.json"
@@ -419,7 +419,7 @@
           "ServiceUnits"
         ],
         "operationId": "ServiceUnits_Delete",
-        "summary": "Deletes a service unit resource.",
+        "summary": "Deletes the service unit.",
         "x-ms-examples": {
           "Delete service unit": {
             "$ref": "./examples/serviceunit_delete.json"
@@ -447,7 +447,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The service unit was successfully deleted"
+            "description": "The service unit was successfully deleted."
           },
           "204": {
             "description": "The service unit was not found and the operation is considered success."
@@ -467,7 +467,7 @@
           "Steps"
         ],
         "operationId": "Steps_CreateOrUpdate",
-        "summary": "Creates or updates a deployment step.",
+        "summary": "Creates or updates a rollout step with the given step properties.",
         "description": "Synchronously creates a new step or updates an existing step.",
         "x-ms-examples": {
           "Create deployment step": {
@@ -490,7 +490,7 @@
           {
             "in": "body",
             "name": "stepInfo",
-            "description": "The resource object.",
+            "description": "The step object.",
             "schema": {
               "$ref": "#/definitions/StepResource"
             }
@@ -516,7 +516,7 @@
           "Steps"
         ],
         "operationId": "Steps_Get",
-        "summary": "Gets a topology resource.",
+        "summary": "Gets the step.",
         "x-ms-examples": {
           "Get deployment step": {
             "$ref": "./examples/step_get.json"
@@ -556,7 +556,7 @@
           "Steps"
         ],
         "operationId": "Steps_Delete",
-        "summary": "Deletes a deployment step.",
+        "summary": "Deletes the step.",
         "x-ms-examples": {
           "Delete deployment step": {
             "$ref": "./examples/step_delete.json"
@@ -578,7 +578,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The step was successfully deleted"
+            "description": "The step was successfully deleted."
           },
           "204": {
             "description": "The step was not found and the operation is considered success."
@@ -654,7 +654,7 @@
           "Rollouts"
         ],
         "operationId": "Rollouts_Get",
-        "summary": "Gets detailed information of an ongoing or completed rollout.",
+        "summary": "Gets detailed information of a rollout.",
         "x-ms-examples": {
           "Get rollout": {
             "$ref": "./examples/rollout_get.json"
@@ -698,7 +698,7 @@
         ],
         "operationId": "Rollouts_Delete",
         "summary": "Deletes a rollout resource.",
-        "description": "A rollout can only be deleted if it is in a terminal state.",
+        "description": "Only rollouts in terminal state can be deleted.",
         "x-ms-examples": {
           "Delete rollout": {
             "$ref": "./examples/rollout_delete.json"
@@ -720,7 +720,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The rollout was successfully deleted"
+            "description": "The rollout was successfully deleted."
           },
           "204": {
             "description": "The rollout was not found and the operation is considered success."
@@ -741,7 +741,7 @@
         ],
         "operationId": "Rollouts_Cancel",
         "summary": "Stops a running rollout.",
-        "description": "A rollout can be canceled only if it is in running state.",
+        "description": "Only running rollouts can be canceled.",
         "x-ms-examples": {
           "Cancel rollout": {
             "$ref": "./examples/rollout_post_cancel.json"
@@ -784,7 +784,7 @@
         ],
         "operationId": "Rollouts_Restart",
         "summary": "Restarts a failed rollout and optionally skips all succeeded steps.",
-        "description": "A rollout can be restarted only if is in a terminal state and failed.",
+        "description": "Only failed rollouts can be restarted.",
         "x-ms-examples": {
           "Restart rollout": {
             "$ref": "./examples/rollout_post_restart.json"
@@ -833,7 +833,7 @@
           "ArtifactSources"
         ],
         "operationId": "ArtifactSources_CreateOrUpdate",
-        "summary": "Creates or updates an Artifact source.",
+        "summary": "Creates or updates an artifact source.",
         "description": "Synchronously creates a new artifact source or updates an existing artifact source.",
         "x-ms-examples": {
           "Create artifact source": {
@@ -885,7 +885,7 @@
           "ArtifactSources"
         ],
         "operationId": "ArtifactSources_Get",
-        "summary": "Gets an artifact resource.",
+        "summary": "Gets an artifact source.",
         "x-ms-examples": {
           "Get artifact source": {
             "$ref": "./examples/artifactsource_get.json"
@@ -925,7 +925,7 @@
           "ArtifactSources"
         ],
         "operationId": "ArtifactSources_Delete",
-        "summary": "Deletes an artifact source resource.",
+        "summary": "Deletes an artifact source.",
         "x-ms-examples": {
           "Delete artifact source": {
             "$ref": "./examples/artifactsource_delete.json"
@@ -947,7 +947,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The artifact source was successfully deleted"
+            "description": "The artifact source was successfully deleted."
           },
           "204": {
             "description": "The artifact source was not found and the operation is considered success."
@@ -1005,12 +1005,14 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The identity type."
+          "description": "The identity type.",
+          "example": "userAssigned"
         },
         "identityIds": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "example": "/subscriptions/mySubId/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userassignedidentities/myIdentity"
           },
           "description": "The list of identities."
         }
@@ -1021,7 +1023,7 @@
       ]
     },
     "RolloutRequest": {
-      "description": "Defines the resource format for creating a rollout.",
+      "description": "Defines the PUT rollout request body.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
@@ -1053,16 +1055,16 @@
         },
         "artifactSourceId": {
           "type": "string",
-          "description": "The reference to the ARM resource Id where the payload is located.",
+          "description": "The reference to the artifact source resource Id where the payload is located.",
           "example": "Microsoft.DeploymentManager/artifactSources/payloadStore1"
         },
         "targetServiceTopologyId": {
           "type": "string",
-          "description": "The reference to the resource Id of the service topology from which services are chosen to be deployed.",
+          "description": "The resource Id of the service topology from which service units are being referenced in step groups to be deployed.",
           "example": "Microsoft.DeploymentManager/serviceTopologies/myServiceTopology"
         },
         "stepGroups": {
-          "description": "The list of steps that define the orchestration.",
+          "description": "The list of step groups that define the orchestration.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Step"
@@ -1079,11 +1081,11 @@
       "description": "The properties that define an Azure Deployment Manager step.",
       "properties": {
         "name": {
-          "description": "The name of the step.",
+          "description": "The name of the step group.",
           "type": "string"
         },
-        "dependsOnStepGroup": {
-          "description": "The list of step names on which this step depends.",
+        "dependsOnStepGroups": {
+          "description": "The list of step group names on which this step group depends on.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1094,19 +1096,19 @@
           ]
         },
         "preDeploymentSteps": {
-          "description": "The list of step names to be run before deploying the target.",
+          "description": "The list of steps to be run before deploying the target.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrePostStep"
           }
         },
         "deploymentTargetId": {
-          "description": "The reference to the ARM service unit resource to be deployed.",
+          "description": "The resource Id of service unit to be deployed. The service unit should be from the service topology referenced in targetServiceTopologyId",
           "type": "string",
           "example": "Microsoft.DeploymentManager/serviceTopologies/myServiceTopology/services/myService/serviceUnits/database"
         },
         "postDeploymentSteps": {
-          "description": "The list of step names to be run after deploying the target.",
+          "description": "The list of steps to be run after deploying the target.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrePostStep"
@@ -1123,7 +1125,7 @@
       "properties": {
         "stepId": {
           "type": "string",
-          "description": "The reference to the ARM resource Id of a step.",
+          "description": "The resource Id of the step to be run.",
           "example": "Microsoft.DeploymentManager/steps/healthCheckStep1"
         }
       },
@@ -1132,7 +1134,7 @@
       ]
     },
     "ArtifactSource": {
-      "description": "The resource that define the source location where the artifacts are located.",
+      "description": "The resource that defines the source location where the artifacts are located.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
@@ -1140,7 +1142,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "Defines the properties that make up an artifact source.",
+          "description": "The properties that define the artifact source.",
           "x-ms-client-flatten": true,
           "allOf": [
             {
@@ -1160,7 +1162,8 @@
         },
         "artifactRoot": {
           "type": "string",
-          "description": "The root folder under which all artifacts for all environments are expected to be organized."
+          "description": "The path from the location that the 'authentication' property [say, a SAS URI to the blob container] refers to, to the location of the artifacts. This can be used to differentiate different versions of the artifacts. Or, different types of artifacts like binaries or templates. The location referenced by the authentication property concatenated with this optional artifactRoot path forms the artifact source location where the artifacts are expected to be found.",
+          "example": "binaries/2018.09.24"
         },
         "authentication": {
           "description": "The authentication method to use to access the artifact source.",
@@ -1189,7 +1192,7 @@
     "SasAuthentication": {
       "x-ms-discriminator-value": "Sas",
       "type": "object",
-      "description": "Defines the authentication properties to access the artifacts using Azure Storage SAS URI.",
+      "description": "Defines the properties to access the artifacts using an Azure Storage SAS URI.",
       "allOf": [
         {
           "$ref": "#/definitions/Authentication"
@@ -1208,7 +1211,7 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "description": "The complete SAS URI to the location of the artifacts."
+          "description": "The SAS URI to the Azure Storage blob container. Any offset from the root of the container to where the artifacts are located can be defined in the artifactRoot."
         }
       },
       "required": [
@@ -1216,7 +1219,7 @@
       ]
     },
     "Rollout": {
-      "description": "Defines the rollout resource.",
+      "description": "Defines the rollout.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
@@ -1266,7 +1269,7 @@
           "items": {
             "$ref": "#/definitions/Service"
           },
-          "description": "Set of detailed step result information on target resource groups."
+          "description": "The detailed information on the services being deployed."
         }
       }
     },
@@ -1277,12 +1280,12 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "description": "The ordinal count of retry attempt. 0 if no retries of the rollout have been performed."
+          "description": "The ordinal count of the number of retry attempts on a rollout. 0 if no retries of the rollout have been performed. If the rollout is updated with a PUT, this count is reset to 0."
         },
         "skipSucceededOnRetry": {
           "type": "boolean",
           "readOnly": true,
-          "description": "True if skipping all successful steps in the given retry attempt was chosen. False otherwise."
+          "description": "True, if all steps that succeeded on the previous run/attempt were chosen to be skipped in this retry attempt. False, otherwise."
         },
         "startTime": {
           "type": "string",
@@ -1312,7 +1315,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "The properties that define the service.",
+          "description": "The properties that define the service topology.",
           "x-ms-client-flatten": true,
           "allOf": [
             {
@@ -1330,12 +1333,12 @@
       "properties": {
         "artifactSourceId": {
           "type": "string",
-          "description": "The artifact source that contains the artifacts that can be referenced in the service units."
+          "description": "The resource Id of the artifact source that contains the artifacts that can be referenced in the service units."
         }
       }
     },
     "ServiceResource": {
-      "description": "The resource representation of a service in a topology.",
+      "description": "The resource representation of a service in a service topology.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
@@ -1343,7 +1346,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "The properties that define a service in a topology.",
+          "description": "The properties that define a service in a service topology.",
           "x-ms-client-flatten": true,
           "allOf": [
             {
@@ -1382,11 +1385,11 @@
       "properties": {
         "targetLocation": {
           "type": "string",
-          "description": "The Azure location to which the resources in the service belong to."
+          "description": "The Azure location to which the resources in the service belong to or should be deployed to."
         },
         "targetSubscriptionId": {
           "type": "string",
-          "description": "The subscription to which the resources in the service belong to."
+          "description": "The subscription to which the resources in the service belong to or should be deployed to."
         }
       },
       "required": [
@@ -1442,7 +1445,7 @@
       "properties": {
         "targetResourceGroup": {
           "type": "string",
-          "description": "The Azure Resource Group to which the resources in the service unit belong to."
+          "description": "The Azure Resource Group to which the resources in the service unit belong to or should be deployed to."
         },
         "deploymentMode": {
           "type": "string",
@@ -1498,7 +1501,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the step as specified in the rollout specification input artifact."
+          "description": "Name of the step."
         },
         "status": {
           "type": "string",
@@ -1520,7 +1523,7 @@
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
-          "description": "Set of resource operations that were performed on the Azure resource that the action acted upon."
+          "description": "Set of resource operations that were performed, if any, on an Azure resource."
         },
         "messages": {
           "type": "array",
@@ -1536,12 +1539,12 @@
       ]
     },
     "StepOperationInfo": {
-      "description": "Detailed information of specific step execution.",
+      "description": "Detailed information of a specific step run.",
       "properties": {
         "deploymentName": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the Azure Resource Manager deployment initiated as part of the step."
+          "description": "The name of the ARM deployment initiated as part of the step."
         },
         "correlationId": {
           "type": "string",
@@ -1573,7 +1576,7 @@
       }
     },
     "ResourceOperation": {
-      "description": "Individial resource operation information.",
+      "description": "Individual resource operation information.",
       "properties": {
         "resourceName": {
           "type": "string",
@@ -1708,7 +1711,7 @@
       }
     },
     "StepResource": {
-      "description": "The resource representation of a deployment step.",
+      "description": "The resource representation of a rollout step.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
@@ -1716,7 +1719,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "The properties for the resource.",
+          "description": "The properties that define the step.",
           "$ref": "#/definitions/StepProperties"
         }
       },
@@ -1761,7 +1764,8 @@
       "properties": {
         "duration": {
           "type": "string",
-          "description": "The duration in ISO 8601 format of how long the wait should be."
+          "description": "The duration in ISO 8601 format of how long the wait should be.",
+          "example": "PT30M"
         }
       },
       "required": [

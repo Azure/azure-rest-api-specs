@@ -71,7 +71,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -153,7 +153,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -235,7 +235,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -314,7 +314,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -387,7 +387,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -463,7 +463,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -517,6 +517,9 @@
         "x-ms-examples": {
           "SubscriptionQuery": {
             "$ref": "./examples/SubscriptionQuery.json"
+          },
+           "SubscriptionQueryGrouping": {
+            "$ref": "./examples/SubscriptionQueryGrouping.json"
           }
         },
         "parameters": [
@@ -568,6 +571,9 @@
         "x-ms-examples": {
           "ResourceGroupQuery": {
             "$ref": "./examples/ResourceGroupQuery.json"
+          },
+          "ResourceGroupQueryGrouping": {
+            "$ref": "./examples/ResourceGroupQueryGrouping.json"
           }
         },
         "parameters": [
@@ -622,6 +628,9 @@
         "x-ms-examples": {
           "BillingAccountQuery": {
             "$ref": "./examples/BillingAccountQuery.json"
+          },
+          "BillingAccountQueryGrouping": {
+            "$ref": "./examples/BillingAccountQueryGrouping.json"
           }
         },
         "parameters": [
@@ -673,6 +682,9 @@
         "x-ms-examples": {
           "EnrollmentAccountQuery": {
             "$ref": "./examples/EnrollmentAccountQuery.json"
+          },
+          "EnrollmentAccountQueryGrouping": {
+            "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
           }
         },
         "parameters": [
@@ -727,6 +739,9 @@
         "x-ms-examples": {
           "DepartmentQuery": {
             "$ref": "./examples/DepartmentQuery.json"
+          },
+          "DepartmentQueryGrouping": {
+            "$ref": "./examples/DepartmentQueryGrouping.json"
           }
         },
         "parameters": [
@@ -774,13 +789,16 @@
           "Query"
         ],
         "operationId": "Query_UsageByManagmentGroup",
-        "description": "Lists the usage data for managment group.",
+        "description": "Lists the usage data for management group.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "ManagmentGroupQuery": {
+          "ManagementGroupQuery": {
             "$ref": "./examples/ManagementGroupQuery.json"
+          },
+          "ManagementGroupQueryGrouping": {
+            "$ref": "./examples/ManagementGroupQueryGrouping.json"
           }
         },
         "parameters": [
@@ -987,7 +1005,7 @@
         },
         "aggregation": {
           "type": "object",
-          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
           "additionalProperties": {
             "type": "object",
             "$ref": "#/definitions/ReportConfigAggregation"
@@ -995,12 +1013,19 @@
           "maxItems": 2
         },
         "grouping": {
-          "description": "Array of group by expression to use in the report. Report can have upto 2 group by clauses.",
+          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigGrouping"
           },
           "maxItems": 2
+        },
+        "sorting": {
+          "description": "Array of order by expression to use in the report.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigSorting"
+          }
         },
         "filter": {
           "type": "object",
@@ -1045,10 +1070,30 @@
         "function"
       ]
     },
+    "ReportConfigSorting": {
+      "description": "The order by expression to be used in the report.",
+      "properties": {
+        "direction": {
+          "description": "Direction of sort.",
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        "name": {
+          "description": "The name of the column to sort.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "ReportConfigGrouping": {
       "description": "The group by expression to be used in the report.",
       "properties": {
-        "columnType": {
+        "type": {
           "description": "Has type of the column to group.",
           "$ref": "#/definitions/ReportConfigColumnType"
         },
@@ -1058,7 +1103,7 @@
         }
       },
       "required": [
-        "columnType",
+        "type",
         "name"
       ]
     },
@@ -1066,7 +1111,7 @@
       "description": "The filter expression to be used in the report.",
       "properties": {
         "and": {
-          "description": "The logical \"AND\" expression. Must have atleast 2 items.",
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
@@ -1074,7 +1119,7 @@
           "minItems": 2
         },
         "or": {
-          "description": "The logical \"OR\" expression. Must have atleast 2 items.",
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
@@ -1111,7 +1156,7 @@
       "description": "The comparison expression to be used in the report.",
       "properties": {
         "name": {
-          "description": "The name of the column to use in comaprison.",
+          "description": "The name of the column to use in comparison.",
           "type": "string"
         },
         "operator": {
