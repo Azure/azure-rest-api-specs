@@ -115,6 +115,7 @@ python:
   package-name: azure-mgmt-deploymentmanager
   package-version: 0.9.0
   clear-output-folder: true
+  override-client-name: DeploymentManagerClient
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
