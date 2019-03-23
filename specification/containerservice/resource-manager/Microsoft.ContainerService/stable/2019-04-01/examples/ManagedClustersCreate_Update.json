@@ -31,6 +31,10 @@
             ]
           }
         },
+        "windowsProfile": {
+          "adminUsername": "azureuser",
+          "adminPassword": "replacePassword1234$"
+        },
         "servicePrincipalProfile": {
           "clientId": "clientid",
           "secret": "secret"
@@ -55,6 +59,7 @@
         "type": "Microsoft.ContainerService/ManagedClusters",
         "properties": {
           "provisioningState": "Succeeded",
+          "maxAgentPools": 1,
           "kubernetesVersion": "1.9.6",
           "dnsPrefix": "dnsprefix1",
           "agentPoolProfiles": [
@@ -77,6 +82,9 @@
                 }
               ]
             }
+          },
+          "windowsProfile": {
+            "adminUsername": "azureuser"
           },
           "servicePrincipalProfile": {
             "clientId": "clientid"
@@ -107,6 +115,7 @@
         "type": "Microsoft.ContainerService/ManagedClusters",
         "properties": {
           "provisioningState": "Creating",
+          "maxAgentPools": 1,
           "kubernetesVersion": "1.9.6",
           "dnsPrefix": "dnsprefix1",
           "agentPoolProfiles": [
@@ -129,6 +138,9 @@
                 }
               ]
             }
+          },
+          "windowsProfile": {
+            "adminUsername": "azureuser"
           },
           "servicePrincipalProfile": {
             "clientId": "clientid"

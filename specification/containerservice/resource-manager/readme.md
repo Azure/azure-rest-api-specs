@@ -44,7 +44,10 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-04'
 input-file:
+  - Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
+  - Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 ### Tag: package-2019-02
 

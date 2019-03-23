@@ -1527,8 +1527,7 @@
         }
       },
       "required": [
-        "adminUsername",
-        "adminPassword"
+        "adminUsername"
       ],
       "description": "Profile for Windows VMs in the container service cluster."
     },
@@ -1701,6 +1700,12 @@
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
         },
+        "maxAgentPools": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of agent pools for the managed cluster."
+        },
         "kubernetesVersion": {
           "type": "string",
           "description": "Version of Kubernetes specified when creating the managed cluster."
@@ -1724,6 +1729,10 @@
         "linuxProfile": {
           "$ref": "#/definitions/ContainerServiceLinuxProfile",
           "description": "Profile for Linux VMs in the container service cluster."
+        },
+        "windowsProfile": {
+          "$ref": "#/definitions/ContainerServiceWindowsProfile",
+          "description": "Profile for Windows VMs in the container service cluster."
         },
         "servicePrincipalProfile": {
           "$ref": "#/definitions/ManagedClusterServicePrincipalProfile",
