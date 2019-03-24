@@ -57,6 +57,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
+- Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
 - Microsoft.Security/preview/2017-08-01-preview/settings.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
@@ -86,6 +87,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
+- Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
 - Microsoft.Security/preview/2017-08-01-preview/settings.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
