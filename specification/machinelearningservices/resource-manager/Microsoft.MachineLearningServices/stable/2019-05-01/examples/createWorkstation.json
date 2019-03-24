@@ -1,0 +1,112 @@
+{
+    "parameters": {
+        "subscriptionId": "00000000-0000-0000-0000-000000000000",
+        "resourceGroupName": "testrg123",
+        "workspaceName": "workspaces123",
+        "workstationName": "workstation123",
+        "api-version": "2019-05-01",
+        "parameters": {
+            "location": "eastus",
+            "properties": {
+                "vmSize": "Standard_DS3_v2",
+                "osProfile": {
+                    "adminUsername": "username",
+                    "adminPassword": "password",
+                    "computerName": "my-workstation"
+                },
+                "networkProfile": {
+                    "profileType": "subnet",
+                    "properties": {
+                        "subnetId": {
+                            "id": "subnet_resource_ID"
+                        }
+                    }
+                },
+                "additionalComponents": [
+                    {
+                        "name": "component_1"
+                    }
+                ],
+                "aadLogin": {
+                    "enabled": true,
+                    "administratorLogins": ["admin1", "admin2"],
+                    "userLogins": ["user1"]
+                }
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/workstations/workstation123",
+                "type": "Microsoft.MachineLearningServices/workspaces/workstations",
+                "name": "workstation123",
+                "location": "eastus",
+                "properties": {
+                    "vmSize": "Standard_DS3_v2",
+                    "osProfile": {
+                        "adminUsername": "admin",
+                        "computerName": "my-workstation"
+                    },
+                    "networkProfile": {
+                        "profileType": "subnet",
+                        "properties": {
+                            "subnetId": {
+                                "id": "subnet_resource_ID"
+                            }
+                        }
+                    },
+                    "additionalComponents": [
+                        {
+                            "name": "component_1"
+                        }
+                    ],
+                    "aadLogin": {
+                        "enabled": true,
+                        "administratorLogins": ["admin1", "admin2"],
+                        "userLogins": ["user1"]
+                    },
+                    "provisioningState": "Succeeded"
+                }
+            }
+        },
+        "201": {
+            "body": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/workstation/workstation123",
+                "type": "Microsoft.MachineLearningServices/workspaces/computes",
+                "name": "compute123",
+                "location": "eastus",
+                "properties": {
+                    "vmSize": "Standard_DS3_v2",
+                    "osProfile": {
+                        "adminUsername": "foo",
+                        "computerName": "my-workstation"
+                    },
+                    "networkProfile": {
+                        "profileType": "subnet",
+                        "properties": {
+                            "subnetId": {
+                                "id": "subnet_resource_ID"
+                            }
+                        }
+                    },
+                    "additionalComponents": [
+                        {
+                            "name": "component_1"
+                        }
+                    ],
+                    "aadLogin": {
+                        "enabled": true,
+                        "administratorLogins": ["admin1", "admin2"],
+                        "userLogins": ["user1"]
+                    },
+                    "provisioningState": "Succeeded"
+                }
+            }
+        }
+    }
+}
+
+
+
+

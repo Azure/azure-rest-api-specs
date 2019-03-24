@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2018-11-19"
+    "version": "2019-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -833,6 +833,335 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations/{workstationName}": {
+      "put": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_CreateOrUpdate",
+        "description": "Creates or updates a workstation in the given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the workstation entity.",
+            "schema": {
+              "$ref": "#/definitions/Workstation"
+            }
+          },
+          "201": {
+            "description": "Compute creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Workstation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a workstations": { "$ref": "./examples/putWorkstation.json" }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Delete",
+        "description": "Deletes a workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a workstation": { "$ref": "./examples/deleteWorkstation.json" }
+        }
+      },
+      "get": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Get",
+        "description": "Gets information about a Workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the workstation.",
+            "schema": {
+              "$ref": "#/definitions/Workstation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workstation's information": {
+            "$ref": "./examples/getWorkstation.json"
+          }
+        }
+      },
+      "patch": {
+          "tags": [
+            "Workstation"
+          ],
+          "operationId": "Workstations_Update",
+          "description": "Updates properties of a Workstation. This call will overwrite a workstation if it exists. This is a nonrecoverable operation.",
+          "x-ms-examples": {
+            "Update a Workstation": { "$ref": "./examples/patchWorkstation.json" }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "$ref": "#/parameters/WorkstationNameParameter"
+            },
+            {
+              "$ref": "#/parameters/APIVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/WorkstationUpdateParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The operation was successful.",
+              "schema": {
+                "$ref": "#/definitions/Workstation"
+              }
+            },
+            "201": {
+              "description": "The update was initiated",
+              "schema": {
+                "$ref": "#/definitions/Workstation"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                  "$ref": "#/definitions/MachineLearningServiceError"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations/{workstationName}/deallocate": {
+      "post": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Deallocate",
+        "description": "Deallocates a workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deallocates a workstation": { "$ref": "./examples/deallocateWorkstation.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations/{workstationName}/start": {
+      "post": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Start",
+        "description": "Starts a workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start a workstation": { "$ref": "./examples/startWorkstation.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations": {
+      "get": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_List",
+        "description": "Gets a list of workstations associated with the specified workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of workstations and their properties.",
+            "schema": {
+              "$ref": "#/definitions/WorkstationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workstations": { "$ref": "./examples/listWorkstationsByWorkspace.json" }
+        }
+      }
     }
   },
   "parameters": {
@@ -931,7 +1260,35 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
-}
+    },
+    "WorkstationDefinitionParameter": {
+      "in": "body",
+      "name": "parameters",
+      "description": "Payload with workstation definition.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Workstation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WorkstationUpdateParameter": {
+      "in": "body",
+      "name": "parameters",
+      "description": "Payload with workstation update definition.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkstationUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WorkstationNameParameter": {
+      "name": "workstationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the workstation."
+    }
   },
   "definitions": {
     "Operation": {
@@ -2176,6 +2533,239 @@
       "required": [
         "code",
         "message"
+      ]
+    },
+    "WorkstationUpdate": {
+      "description": "An object that represents a workstation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/WorkstationUpdateProperties",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ]
+    },
+    "Workstation": {
+      "description": "An object that represents a workstation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkstationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkstationUpdateProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
+        },
+        "aadLogin": {
+          "$ref": "#/definitions/AADLogin"
+        }
+      },
+      "description": "The update properties of a workstation."
+    },
+    "UpdateResource": {
+      "description": "The Update Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "WorkstationProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile"
+        },
+        "additionalComponents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          }
+        },
+        "aadLogin": {
+          "$ref": "#/definitions/AADLogin"
+        }
+      },
+      "required": [
+        "vmSize",
+        "osProfile",
+        "networkProfile"
+      ],
+      "description": "The properties of a workstation."
+    },
+    "WorkstationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workstation"
+          },
+          "description": "The collection of workstations."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the workstation list operation."
+    },
+    "OSProfile": {
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "description": "Specifies the host OS name of the workstation."
+        },
+        "adminUsername": {
+          "type": "string",
+          "description": "Specifies the name of the administrator account."
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "Specifies the password of the administrator account."
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "Specifies the public key of the administrator account."
+        }
+      },
+      "required": [
+        "computerName",
+        "adminUsername"
+      ],
+      "description": "Specifies the operating system settings for the virtual machine."
+    },
+    "NetworkProfile": {
+      "description": "Network profile for the workstation",
+      "discriminator": "profileType",
+      "properties": {
+        "profileType": {
+          "$ref": "#/definitions/NetworkProfileType"
+        }
+      },
+      "required": [
+        "profileType"
+      ]
+    },
+    "NetworkProfileType": {
+      "type": "string",
+      "description": "The type of network profile",
+      "enum": [
+        "new",
+        "subnet"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkProfileType",
+        "modelAsString": true
+      }
+    },
+    "NewNetworkProfile": {
+      "description": "A new network profile.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "new"
+    },
+    "SubnetNetworkProfile": {
+      "description": "A subnet network profile.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkProfile"
+        },
+        {
+          "type": "object",
+          "properties":{
+            "properties": {
+              "description": "Subnet profile",
+              "type": "object",
+              "properties": {
+                "subnetId": {
+                  "description": "Subnet ID",
+                  "$ref": "#/definitions/ResourceId"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "subnet"
+    },
+    "Component": {
+      "description": "An additional component for a workstation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the additional component for a workstation"
+        }
+      }
+    },
+    "AADLogin": {
+      "description": "AAD Login information for a workstation",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether AAD login is enabled"
+        },
+        "administratorLogins": {
+          "description": "A list of users with administrative login privileges",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "User account"
+          }
+        },
+        "userLogins": {
+          "description": "A list of users with non-administrative login privileges",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "User account"
+          }
+        }
+      },
+      "required": [
+        "enabled"
       ]
     }
   }
