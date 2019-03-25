@@ -1932,24 +1932,17 @@
           "readOnly": true,
           "x-nullable": false,
           "type": "string",
-          "description": "The name of the VM family."
+          "description": "The Virtual Machine family name."
         },
         "coreQuota": {
           "readOnly": true,
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "description": "The core quota for this VM family for this Batch account."          
+          "description": "The core quota for the VM family for the Batch account."          
         }
       },
-      "description": "A VM Family and its associated core quota for this Batch account."
-    },
-    "PerVMFamilyCoreQuotaList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
-      },
-      "description": "A list of VM Families for this Batch account and their core quota."
+      "description": "A VM Family and its associated core quota for the Batch account."
     },
     "BatchAccountProperties": {
       "properties": {
@@ -2023,26 +2016,29 @@
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "title": "The dedicated core quota for this Batch account."
+          "title": "The dedicated core quota for the Batch account."
         },
         "lowPriorityCoreQuota": {
           "readOnly": true,
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "title": "The low-priority core quota for this Batch account."
+          "title": "The low-priority core quota for the Batch account."
         },
         "dedicatedCoreQuotaPerVMFamily": {
           "readOnly": true,
           "x-nullable": true,
-          "$ref": "#/definitions/PerVMFamilyCoreQuotaList",
-          "title": "The dedicated core quota per Virtual Machine family for this Batch account."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
+          },
+          "description": "A list of the dedicated core quota per Virtual Machine family for the Batch account."
         },
         "dedicatedCoreQuotaPerVMFamilyEnforced": {
           "readOnly": true,
           "x-nullable": false,
           "type": "boolean",
-          "title": "A value indicating whether the core quota for this Batch Account is enforced per Virtual Machine family or not.",
+          "title": "A value indicating whether the core quota for the Batch Account is enforced per Virtual Machine family or not.",
           "description": "Batch is transitioning its core quota system for dedicated cores to be enforced per Virtual Machine family. During this transitionary phase, the dedicated core quota per Virtual Machine family may not yet be enforced. If this flag is false, dedicated core quota is enforced via the old dedicatedCoreQuota property on the account and does not consider Virtual Machine family. If this flag is true, dedicated core quota is enforced via the dedicatedCoreQuotaPerVMFamily property on the account, and the old dedicatedCoreQuota does not apply."
         },
         "poolQuota": {
@@ -2050,14 +2046,14 @@
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "title": "The pool quota for this Batch account."
+          "title": "The pool quota for the Batch account."
         },
         "activeJobAndJobScheduleQuota": {
           "readOnly": true,
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "title": "The active job and job schedule quota for this Batch account."
+          "title": "The active job and job schedule quota for the Batch account."
         }
       },
       "description": "Account specific properties."
