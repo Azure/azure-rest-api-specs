@@ -1926,6 +1926,31 @@
       ],
       "description": "Contains information about the auto-storage account associated with a Batch account."
     },
+    "VirtualMachineFamilyCoreQuota": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "string",
+          "description": "The name of the VM family."
+        },
+        "coreQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "The core quota for this VM family for this Batch account."          
+        }
+      },
+      "description": "A VM Family and its associated core quota for this Batch account."
+    },
+    "PerVMFamilyCoreQuotaList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
+      },
+      "description": "A list of VM Families for this Batch account and their core quota."
+    },
     "BatchAccountProperties": {
       "properties": {
         "accountEndpoint": {
@@ -2006,6 +2031,19 @@
           "type": "integer",
           "format": "int32",
           "title": "The low-priority core quota for this Batch account."
+        },
+        "dedicatedCoreQuotaPerVMFamily": {
+          "readOnly": true,
+          "x-nullable": true,
+          "$ref": "#/definitions/PerVMFamilyCoreQuotaList",
+          "title": "The dedicated core quota per Virtual Machine family for this Batch account."
+        },
+        "dedicatedCoreQuotaPerVMFamilyEnforced": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "boolean",
+          "title": "A value indicating whether the core quota for this Batch Account is enforced per Virtual Machine family or not.",
+          "description": "Batch is transitioning its core quota system for dedicated cores to be enforced per Virtual Machine family. During this transitionary phase, the dedicated core quota per Virtual Machine family may not yet be enforced. If this flag is false, dedicated core quota is enforced via the old dedicatedCoreQuota property on the account and does not consider Virtual Machine family. If this flag is true, dedicated core quota is enforced via the dedicatedCoreQuotaPerVMFamily property on the account, and the old dedicatedCoreQuota does not apply."
         },
         "poolQuota": {
           "readOnly": true,
