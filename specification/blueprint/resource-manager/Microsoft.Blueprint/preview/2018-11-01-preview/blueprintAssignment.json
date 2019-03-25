@@ -139,6 +139,24 @@
             "description": "No Content"
           }
         }
+      },
+      "post": {
+        "operationId": "WhoIsBlueprint",
+        "description": "Get Blueprints service SPN objectId",
+        "x-ms-examples": {
+          "Assignment_Delete": {
+            "$ref": "./examples/WhoIsBlueprint_Action.json"
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Blueprints service SPN objectId",
+            "schema":{
+              "$ref": "#/definitions/WhoIsBlueprintContract"
+            }
+          }
+        }
       }
     },
     "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments": {
@@ -292,6 +310,13 @@
           "x-ms-enum": {
             "name": "AssignmentLockMode",
             "modelAsString": true
+          }
+        },
+        "excludedPrincipals": {
+          "type": "array",
+          "description": "List of up to 5 service principal GUIDs.",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -523,6 +548,15 @@
           "type": "string",
           "readOnly": true,
           "description": "Last modified time of this blueprint definition."
+        }
+      }
+    },
+    "WhoIsBlueprintContract":{
+      "description": "ObjectID of the Blueprints service SPN",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Identifier."
         }
       }
     }
