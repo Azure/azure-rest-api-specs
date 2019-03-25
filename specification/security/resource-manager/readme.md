@@ -70,6 +70,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
+- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -101,6 +102,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
+- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 
 # Needed when there is more than one input file
 override-info:
