@@ -1909,13 +1909,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/BillingAccountNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/InvoiceSectionNameParameter"
+            "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
-            "$ref": "#/parameters/InitiateTransferRequestParameter"
+            "$ref": "#/parameters/initiateTransferRequestParameter"
           }
         ],
         "tags": [
@@ -1948,13 +1948,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/BillingAccountNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/InvoiceSectionNameParameter"
+            "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
-            "$ref": "#/parameters/TransferNameParameter"
+            "$ref": "#/parameters/transferNameParameter"
           }
         ],
         "tags": [
@@ -1985,13 +1985,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/BillingAccountNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/InvoiceSectionNameParameter"
+            "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
-            "$ref": "#/parameters/TransferNameParameter"
+            "$ref": "#/parameters/transferNameParameter"
           }
         ],
         "tags": [
@@ -2024,10 +2024,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/BillingAccountNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/InvoiceSectionNameParameter"
+            "$ref": "#/parameters/invoiceSectionNameParameter"
           }
         ],
         "tags": [
@@ -2063,10 +2063,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/TransferNameParameter"
+            "$ref": "#/parameters/transferNameParameter"
           },
           {
-            "$ref": "#/parameters/AcceptTransferRequestParameter"
+            "$ref": "#/parameters/acceptTransferRequestParameter"
           }
         ],
         "tags": [
@@ -2099,7 +2099,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/TransferNameParameter"
+            "$ref": "#/parameters/transferNameParameter"
           }
         ],
         "tags": [
@@ -2132,7 +2132,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/TransferNameParameter"
+            "$ref": "#/parameters/transferNameParameter"
           }
         ],
         "tags": [
@@ -5182,6 +5182,34 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "transferNameParameter": {
+      "name": "transferName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Transfer Name."
+    },
+    "initiateTransferRequestParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Initiate transfer parameters.",
+      "schema": {
+        "$ref": "#/definitions/InitiateTransferRequest"
+      }
+    },
+    "acceptTransferRequestParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Accept transfer parameters.",
+      "schema": {
+        "$ref": "#/definitions/AcceptTransferRequest"
+      }
     }
   },
   "security": [
