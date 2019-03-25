@@ -24,5 +24,4 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-managedservices
-  output-folder: $(python-sdks-folder)/azure-mgmt-managedservices
 ```
