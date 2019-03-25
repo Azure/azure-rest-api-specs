@@ -29,6 +29,14 @@ title: KustoManagementClient
 description: The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.
 openapi-type: arm
 tag: package-2019-01-21
+
+directive:
+  - where:
+      - $.definitions.DataConnection.required
+    suppress:
+      - R2016
+    reason:
+      - Implements kind which is required also in patch
 ```
 
 ### Tag: package-2019-01-21
@@ -157,10 +165,10 @@ generate-interface: true
 
 ### Tag: package-2019-01-21 and java
 
-These settings apply only when `--tag=2019-01-21 --java` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-21 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == '2019-01-21' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2019-01-21' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.kusto.v2019_01_21
   output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019_01_21
