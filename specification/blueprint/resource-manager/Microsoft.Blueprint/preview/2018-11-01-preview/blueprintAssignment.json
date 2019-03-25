@@ -144,7 +144,7 @@
         "operationId": "WhoIsBlueprint",
         "description": "Get Blueprints service SPN objectId",
         "x-ms-examples": {
-          "Assignment_Delete": {
+          "WhoIsBlueprint_Action": {
             "$ref": "./examples/WhoIsBlueprint_Action.json"
           }
         },
@@ -314,7 +314,7 @@
         },
         "excludedPrincipals": {
           "type": "array",
-          "description": "List of up to 5 service principal GUIDs.",
+          "description": "List of AAD principals excluded from blueprint locks. Up to 5 principals permitted.",
           "items": {
             "type": "string"
           }
@@ -552,7 +552,7 @@
       }
     },
     "WhoIsBlueprintContract":{
-      "description": "ObjectID of the Blueprints service SPN",
+      "description": "AAD object Id of the Azure Blueprints service principal in the tenant.",
       "properties": {
         "objectId": {
           "type": "string",
