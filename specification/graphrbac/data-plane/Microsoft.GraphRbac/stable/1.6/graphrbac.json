@@ -1284,6 +1284,44 @@
         "x-ms-odata": "#/definitions/ServicePrincipal"
       }
     },
+    "/{tenantID}/servicePrincipalsByAppId/{applicationID}/objectId": {
+      "get": {
+        "tags": [
+          "ServicePrincipalsByAppId"
+        ],
+        "operationId": "Applications_GetServicePrincipalsIdByAppId",
+        "description": "Gets an object id for a given application id from the current tenant.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          },
+          {
+            "name": "applicationID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The application ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalObjectResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/servicePrincipals/{objectId}": {
       "patch": {
         "tags": [
@@ -2852,7 +2890,7 @@
         },
         "informationalUrls": {
           "$ref": "#/definitions/InformationalUrl",
-          "description": "urls with more informations of the application."
+          "description": "URLs with more information about the application."
         },
         "isDeviceOnlyAuthSupported": {
           "description": "Specifies whether this application supports device authentication without a user. The default is false.",
@@ -2963,8 +3001,7 @@
         }
       ],
       "required": [
-        "displayName",
-        "identifierUris"
+        "displayName"
       ],
       "properties": {
         "displayName": {
@@ -3070,7 +3107,7 @@
         },
         "informationalUrls": {
           "$ref": "#/definitions/InformationalUrl",
-          "description": "urls with more informations of the application."
+          "description": "URLs with more information about the application."
         },
         "isDeviceOnlyAuthSupported": {
           "description": "Specifies whether this application supports device authentication without a user. The default is false.",
@@ -3190,6 +3227,20 @@
         }
       },
       "description": "Application list operation result."
+    },
+    "ServicePrincipalObjectResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+            "type": "string",
+            "description": "The Object ID of the service principal with the specified application ID."
+        },
+       "odata.metadata": {
+          "type": "string",
+          "description": "The URL representing edm equivalent."
+        }
+      },
+      "description": "Service Principal Object Result."
     },
     "AppRole": {
       "type": "object",

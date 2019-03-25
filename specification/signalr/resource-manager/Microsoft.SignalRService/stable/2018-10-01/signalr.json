@@ -40,8 +40,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOperations": {
-            "$ref": "./examples/ListOperations.json"
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
@@ -86,8 +86,8 @@
           }
         },
         "x-ms-examples": {
-          "CheckNameAvailability": {
-            "$ref": "./examples/CheckNameAvailability.json"
+          "SignalR_CheckNameAvailability": {
+            "$ref": "./examples/SignalR_CheckNameAvailability.json"
           }
         }
       }
@@ -119,8 +119,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListBySubscription": {
-            "$ref": "./examples/ListBySubscription.json"
+          "SignalR_ListBySubscription": {
+            "$ref": "./examples/SignalR_ListBySubscription.json"
           }
         }
       }
@@ -155,8 +155,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListByResourceGroup": {
-            "$ref": "./examples/ListByResourceGroup.json"
+          "SignalR_ListByResourceGroup": {
+            "$ref": "./examples/SignalR_ListByResourceGroup.json"
           }
         }
       }
@@ -191,8 +191,8 @@
           }
         },
         "x-ms-examples": {
-          "ListKeys": {
-            "$ref": "./examples/ListKeys.json"
+          "SignalR_ListKeys": {
+            "$ref": "./examples/SignalR_ListKeys.json"
           }
         }
       }
@@ -237,13 +237,13 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "RegenerateKey": {
-            "$ref": "./examples/RegenerateKey.json"
+          "SignalR_RegenerateKey": {
+            "$ref": "./examples/SignalR_RegenerateKey.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}": {
       "get": {
         "tags": [
           "SignalR"
@@ -266,15 +266,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describe the corresponding SignalR service.",
+            "description": "Success. The response describes the corresponding SignalR service.",
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
           }
         },
         "x-ms-examples": {
-          "Get": {
-            "$ref": "./examples/Get.json"
+          "SignalR_Get": {
+            "$ref": "./examples/SignalR_Get.json"
           }
         }
       },
@@ -315,13 +315,13 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result.."
+            "description": "Accepted. The response indicates the exiting SignalR service is now updating and contains a Location header to query the operation result.."
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "CreateOrUpdate": {
-            "$ref": "./examples/CreateOrUpdate.json"
+          "SignalR_CreateOrUpdate": {
+            "$ref": "./examples/SignalR_CreateOrUpdate.json"
           }
         }
       },
@@ -355,8 +355,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete": {
-            "$ref": "./examples/Delete.json"
+          "SignalR_Delete": {
+            "$ref": "./examples/SignalR_Delete.json"
           }
         }
       },
@@ -402,8 +402,45 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update": {
-            "$ref": "./examples/Update.json"
+          "SignalR_Update": {
+            "$ref": "./examples/SignalR_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/restart": {
+      "post": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to restart a SignalR service.",
+        "operationId": "SignalR_Restart",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SignalRServiceName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the restart operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the operation is successful and no content will be returned."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalR_Restart": {
+            "$ref": "./examples/SignalR_Restart.json"
           }
         }
       }
@@ -442,8 +479,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListUsagesByLocation": {
-            "$ref": "./examples/ListUsagesByLocation.json"
+          "Usages_List": {
+            "$ref": "./examples/Usages_List.json"
           }
         }
       }
@@ -751,7 +788,7 @@
           "type": "string"
         },
         "tier": {
-          "description": "Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead for Basic tier.",
+          "description": "Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead.",
           "enum": [
             "Free",
             "Basic",
@@ -820,13 +857,13 @@
         },
         "publicPort": {
           "format": "int32",
-          "description": "The publicly accessibly port of the SignalR service which is designed for browser/client side usage.",
+          "description": "The publicly accessible port of the SignalR service which is designed for browser/client side usage.",
           "type": "integer",
           "readOnly": true
         },
         "serverPort": {
           "format": "int32",
-          "description": "The publicly accessibly port of the SignalR service which is designed for customer server side usage.",
+          "description": "The publicly accessible port of the SignalR service which is designed for customer server side usage.",
           "type": "integer",
           "readOnly": true
         },
