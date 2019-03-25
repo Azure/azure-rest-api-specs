@@ -1901,7 +1901,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/initiateTransfer": {
       "post": {
         "description": "Initiates the request to transfer the GTM or legacy subscriptions or RIs to GTM.",
-        "operationId": "Transfer_Initiate",
+        "operationId": "Transfers_Initiate",
         "x-ms-examples": {
           "InitiateTransfer": {
             "$ref": "./examples/InitiateTransfer.json"
@@ -1940,7 +1940,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}": {
       "get": {
         "description": "Gets the transfer details for given transfer Id.",
-        "operationId": "Transfer_Get",
+        "operationId": "Transfers_Get",
         "x-ms-examples": {
           "TransferGet": {
             "$ref": "./examples/GetTransfer.json"
@@ -1977,7 +1977,7 @@
       },
       "delete": {
         "description": "Cancels the transfer for given transfer Id.",
-        "operationId": "Transfer_Cancel",
+        "operationId": "Transfers_Cancel",
         "x-ms-examples": {
           "TransferCancel": {
             "$ref": "./examples/CancelTransfer.json"
@@ -2055,7 +2055,7 @@
     "/providers/Microsoft.Billing/transfers/{transferName}/acceptTransfer": {
       "post": {
         "summary": "Accepts the transfer with given transfer Id.",
-        "operationId": "Transfer_Accept",
+        "operationId": "RecipientTransfers_Accept",
         "x-ms-examples": {
           "AcceptTransfer": {
             "$ref": "./examples/AcceptTransfer.json"
@@ -2091,7 +2091,7 @@
     "/providers/Microsoft.Billing/transfers/{transferName}/declineTransfer": {
       "post": {
         "summary": "Declines the transfer with given transfer Id.",
-        "operationId": "Transfer_Decline",
+        "operationId": "RecipientTransfers_Decline",
         "x-ms-examples": {
           "DeclineTransfer": {
             "$ref": "./examples/DeclineTransfer.json"
@@ -2124,7 +2124,7 @@
     "/providers/Microsoft.Billing/transfers/{transferName}/": {
       "get": {
         "summary": "Gets the transfer with given transfer Id.",
-        "operationId": "RecipientTransfer_Get",
+        "operationId": "RecipientTransfers_Get",
         "x-ms-examples": {
           "RecipientTransferGet": {
             "$ref": "./examples/GetRecipientTransfer.json"
@@ -2157,7 +2157,7 @@
     "/providers/Microsoft.Billing/transfers": {
       "get": {
         "summary": "Lists the transfers received by caller.",
-        "operationId": "RecipientTransfer_List",
+        "operationId": "RecipientTransfers_List",
         "x-ms-examples": {
           "RecipientTransfersList": {
             "$ref": "./examples/ListRecipientTransfers.json"
