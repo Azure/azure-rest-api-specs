@@ -1898,6 +1898,293 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/initiateTransfer": {
+      "post": {
+        "description": "Initiates the request to transfer the GTM or legacy subscriptions or RIs to GTM.",
+        "operationId": "Transfer_Initiate",
+        "x-ms-examples": {
+          "InitiateTransfer": {
+            "$ref": "./examples/InitiateTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InitiateTransferRequestParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Initiated transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}": {
+      "get": {
+        "description": "Gets the transfer details for given transfer Id.",
+        "operationId": "Transfer_Get",
+        "x-ms-examples": {
+          "TransferGet": {
+            "$ref": "./examples/GetTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TransferNameParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of transfer.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Cancels the transfer for given transfer Id.",
+        "operationId": "Transfer_Cancel",
+        "x-ms-examples": {
+          "TransferCancel": {
+            "$ref": "./examples/CancelTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TransferNameParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of canceled transfer.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/transfers": {
+      "get": {
+        "description": "Lists all transfer's details initiated from given invoice section.",
+        "operationId": "Transfers_List",
+        "x-ms-examples": {
+          "TransfersList": {
+            "$ref": "./examples/ListTransfers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InvoiceSectionNameParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transfers initiated from this invoice section.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers/{transferName}/acceptTransfer": {
+      "post": {
+        "summary": "Accepts the transfer with given transfer Id.",
+        "operationId": "Transfer_Accept",
+        "x-ms-examples": {
+          "AcceptTransfer": {
+            "$ref": "./examples/AcceptTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TransferNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptTransferRequestParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the accepted transfer.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers/{transferName}/declineTransfer": {
+      "post": {
+        "summary": "Declines the transfer with given transfer Id.",
+        "operationId": "Transfer_Decline",
+        "x-ms-examples": {
+          "DeclineTransfer": {
+            "$ref": "./examples/DeclineTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TransferNameParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the declined transfer.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers/{transferName}/": {
+      "get": {
+        "summary": "Gets the transfer with given transfer Id.",
+        "operationId": "RecipientTransfer_Get",
+        "x-ms-examples": {
+          "RecipientTransferGet": {
+            "$ref": "./examples/GetRecipientTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TransferNameParameter"
+          }
+        ],
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the transfers with given Id.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/transfers": {
+      "get": {
+        "summary": "Lists the transfers received by caller.",
+        "operationId": "RecipientTransfer_List",
+        "x-ms-examples": {
+          "RecipientTransfersList": {
+            "$ref": "./examples/ListRecipientTransfers.json"
+          }
+        },
+        "tags": [
+          "AIPController"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transfers received by caller.",
+            "schema": {
+              "$ref": "#/definitions/RecipientTransferDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/operations": {
       "get": {
         "tags": [
@@ -2777,6 +3064,349 @@
     }
   },
   "definitions": {
+    "InitiateTransferRequest": {
+      "type": "object",
+      "description": "Request parameters to initiate transfer.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to initiate transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InitiateTransferProperties"
+        }
+      }
+    },
+    "InitiateTransferProperties": {
+      "type": "object",
+      "description": "Request parameters to initiate transfer.",
+      "properties": {
+        "billingProfileId": {
+          "type": "string",
+          "description": "Target Usage context for devTest subscriptions."
+        },
+        "recipientEmailId": {
+          "type": "string",
+          "description": "Email Id of recipient for transfer."
+        }
+      }
+    },
+    "AcceptTransferRequest": {
+      "type": "object",
+      "description": "Request parameters to accept transfer.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to accept transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AcceptTransferProperties"
+        }
+      }
+    },
+    "AcceptTransferProperties": {
+      "type": "object",
+      "description": "Request parameters to accept transfer.",
+      "properties": {
+        "productDetails": {
+          "description": "Request parameters to accept transfer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductDetails"
+          }
+        }
+      }
+    },
+    "ProductDetails": {
+      "type": "object",
+      "description": "Details of the product to be transferred.",
+      "properties": {
+        "productType": {
+          "description": "Type of the prouct to be transferred.",
+          "$ref": "#/definitions/ProductType"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Id of product to be transferred."
+        }
+      }
+    },
+    "ProductType": {
+      "type": "string",
+      "description": "Type of the product to be transferred.",
+      "enum": [
+        "AzureSubscription",
+        "AzureReservation"
+      ],
+      "x-ms-enum": {
+        "name": "productType",
+        "modelAsString": true
+      }
+    },
+    "TransferDetails": {
+      "type": "object",
+      "description": "Details of the transfer.",
+      "properties": {
+        "properties": {
+          "description": "Details of the transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TransferProperties"
+        }
+      }
+    },
+    "RecipientTransferDetails": {
+      "type": "object",
+      "description": "Details of the transfer.",
+      "properties": {
+        "properties": {
+          "description": "Details of the transfer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RecipientTransferProperties"
+        }
+      }
+    },
+    "DetailedTransferStatus": {
+      "type": "object",
+      "description": "Detailed transfer status.",
+      "properties": {
+        "productType": {
+          "type": "string",
+          "$ref": "#/definitions/ProductType",
+          "readOnly": true,
+          "description": "Type of product being transferred."
+        },
+        "productId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Id of product being transferred."
+        },
+        "transferStatus": {
+          "type": "string",
+          "$ref": "#/definitions/ProductTransferStatus",
+          "readOnly": true,
+          "description": "Transfer status."
+        },
+        "errorDetails": {
+          "description": "Error details for transfer execution.",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "description": "Error details for transfer execution.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Error code."
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Error message."
+        }
+      }
+    },
+    "EligibleProductType": {
+      "type": "string",
+      "description": "Type of the products that can be transferred.",
+      "enum": [
+        "DevTestAzureSubscription",
+        "StandardAzureSubscription",
+        "AzureReservation"
+      ],
+      "x-ms-enum": {
+        "name": "eligibleProductType",
+        "modelAsString": true
+      }
+    },
+    "TransferProperties": {
+      "description": "Transfer details",
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Transfer creation time.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Transfer expiration time."
+        },
+        "invoiceSectionId": {
+          "type": "string",
+          "description": "Target invoice setion Id.",
+          "readOnly": true
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "Target billing account Id.",
+          "readOnly": true
+        },
+        "transferStatus": {
+          "type": "string",
+          "$ref": "#/definitions/TransferStatus",
+          "description": "Overall transfer status.",
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Email Id of recipient of transfer."
+        },
+        "initiatorEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Email Id of initiator of transfer."
+        },
+        "canceledBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Email Id who user canceled the transfer."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Transfer last modification time."
+        },
+        "detailedTransferStatus": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Detailed transfer status.",
+          "items": {
+            "$ref": "#/definitions/DetailedTransferStatus"
+          }
+        }
+      }
+    },
+    "RecipientTransferProperties": {
+      "description": "Transfer Details.",
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Transfer creation time.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Transfer expiration time."
+        },
+        "allowedProductType": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Type of subscriptions that can be transferred.",
+          "items": {
+            "$ref": "#/definitions/EligibleProductType"
+          }
+        },
+        "transferStatus": {
+          "type": "string",
+          "$ref": "#/definitions/TransferStatus",
+          "description": "Overall transfer status.",
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Email Id of recipient of transfer."
+        },
+        "initiatorEmailId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Email Id of initiator of transfer."
+        },
+        "canceledBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Email Id who user canceled the transfer."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Transfer last modification time."
+        },
+        "detailedTransferStatus": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Detailed transfer status.",
+          "items": {
+            "$ref": "#/definitions/DetailedTransferStatus"
+          }
+        }
+      }
+    },
+    "TransferStatus": {
+      "type": "string",
+      "description": "Possible transfer status.",
+      "enum": [
+        "Pending",
+        "InProgress",
+        "Completed",
+        "CompletedWithErrors",
+        "Failed",
+        "Canceled",
+        "Declined"
+      ],
+      "x-ms-enum": {
+        "name": "transferStatus",
+        "modelAsString": true
+      }
+    },
+    "ProductTransferStatus": {
+      "type": "string",
+      "description": "Possible transfer status.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "productTransferStatus",
+        "modelAsString": true
+      }
+    },
+    "RecipientTransferDetailsListResult": {
+      "description": "Result of listing details of the transfer received by caller.",
+      "properties": {
+        "value": {
+          "description": "The list of transfers received by caller.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RecipientTransferDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TransferDetailsListResult": {
+      "description": "Result of listing details of the transfer initiated by caller.",
+      "properties": {
+        "value": {
+          "description": "The list of transfers initiated by caller.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TransferDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "TransferProductRequestProperties": {
       "description": "The properties of the product to initiate a transfer.",
       "properties": {
