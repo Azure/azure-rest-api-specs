@@ -52,59 +52,59 @@ directive:
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
   - suppress: TrackedResourcePatchOperation
     from: cosmos-db.json
-    where: $.definitions.DatabaseResource
-    reason: The DatabaseResource doesn't support Path operation
+    where: $.definitions.SqlDatabaseResource
+    reason: The SqlDatabaseResource doesn't support Patch operation
   - suppress: TrackedResourcePatchOperation
     from: cosmos-db.json
-    where: $.definitions.CollectionResource
-    reason: The CollectionResource doesn't support Path operation
+    where: $.definitions.SqlContainerResource
+    reason: The SqlContainerResource doesn't support Patch operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
     reason: The Metrics API has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.GeneralResourceProperties.properties._rid
+    where: $.definitions.ExtenedResourceProperties.properties._rid
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.GeneralResourceProperties.properties._ts
+    where: $.definitions.ExtenedResourceProperties.properties._ts
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.GeneralResourceProperties.properties._self
+    where: $.definitions.ExtenedResourceProperties.properties._self
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.GeneralResourceProperties.properties._etag
+    where: $.definitions.ExtenedResourceProperties.properties._etag
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.DatabaseProperties.properties._colls
+    where: $.definitions.SqlDatabaseResourceProperties.properties._colls
     reason: The database has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.DatabaseProperties.properties._users
+    where: $.definitions.SqlDatabaseResourceProperties.properties._users
     reason: The database has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.CollectionProperties.properties._doc
+    where: $.definitions.SqlContainerResourceProperties.properties._doc
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.CollectionProperties.properties._sprocs
+    where: $.definitions.SqlContainerResourceProperties.properties._sprocs
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.CollectionProperties.properties._triggers
+    where: $.definitions.SqlContainerResourceProperties.properties._triggers
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.CollectionProperties.properties._udfs
+    where: $.definitions.SqlContainerResourceProperties.properties._udfs
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.CollectionProperties.properties._conflicts
+    where: $.definitions.SqlContainerResourceProperties.properties._conflicts
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json

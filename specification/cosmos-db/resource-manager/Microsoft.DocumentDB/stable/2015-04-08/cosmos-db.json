@@ -1369,13 +1369,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases": {
       "get": {
-        "operationId": "DatabaseAccounts_ListDatabases",
+        "operationId": "DatabaseAccounts_ListSqlDatabases",
         "x-ms-examples": {
-          "CosmosDBDatabaseList": { "$ref": "./examples/CosmosDBDatabaseList.json" }
+          "CosmosDBSqlDatabaseList": { "$ref": "./examples/CosmosDBSqlDatabaseList.json" }
         },
-        "description": "Lists the databases under an existing Azure Cosmos DB database account.",
+        "description": "Lists the SQL databases under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1392,9 +1392,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The database properties were retrieved successfully.",
+            "description": "The SQL database properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseListResult"
+              "$ref": "#/definitions/SqlDatabaseListResult"
             }
           }
         },
@@ -1403,11 +1403,11 @@
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateDatabase",
+        "operationId": "DatabaseAccounts_CreateSqlDatabase",
         "x-ms-examples": {
-          "CosmosDBDatabaseCreate": { "$ref": "./examples/CosmosDBDatabaseCreate.json" }
+          "CosmosDBSqlDatabaseCreate": { "$ref": "./examples/CosmosDBSqlDatabaseCreate.json" }
         },
-        "description": "Creates an Azure Cosmos DB database",
+        "description": "Creates an Azure Cosmos DB SQL database",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1423,220 +1423,32 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createDatabaseParameters",
+            "name": "createSqlDatabaseParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseCreateUpdateParameters"
+              "$ref": "#/definitions/SqlDatabaseCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current database."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The database create operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DatabaseResource"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}": {
-      "get": {
-        "operationId": "DatabaseAccounts_GetDatabase",
-        "x-ms-examples": {
-          "CosmosDBDatabaseGet": { "$ref": "./examples/CosmosDBDatabaseGet.json" }
-        },
-        "description": "Gets the databases under an existing Azure Cosmos DB database account with the provided id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/databaseRidParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The database properties were retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/DatabaseResource"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "DatabaseAccounts_UpdateDatabase",
-        "x-ms-examples": {
-          "CosmosDBDatabaseReplace": { "$ref": "./examples/CosmosDBDatabaseReplace.json" }
-        },
-        "description": "Updates an existing Azure Cosmos DB database",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/databaseRidParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "updateDatabaseParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DatabaseCreateUpdateParameters"
-            },
-            "description": "The parameters to provide for the current database."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The database create operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DatabaseResource"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DatabaseAccounts_DeleteDatabase",
-        "x-ms-examples": {
-          "CosmosDBDatabaseDelete": { "$ref": "./examples/CosmosDBDatabaseDelete.json" }
-        },
-        "description": "Deletes an existing Azure Cosmos DB database.",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/databaseRidParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The database delete operation will complete asynchronously."
-          },
-          "204": {
-            "description": "The specified database does not exist in the subscription."
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/containers": {
-      "get": {
-        "operationId": "DatabaseAccounts_ListCollections",
-        "x-ms-examples": {
-          "CosmosDBCollectionList": { "$ref": "./examples/CosmosDBCollectionList.json" }
-        },
-        "description": "Lists the collections under an existing Azure Cosmos DB database account.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/databaseRidParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The collection properties were retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/CollectionListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      },
-      "put": {
-        "operationId": "DatabaseAccounts_CreateCollection",
-        "x-ms-examples": {
-          "CosmosDBCollectionCreate": { "$ref": "./examples/CosmosDBCollectionCreate.json" }
-        },
-        "description": "Creates an Azure Cosmos DB collection",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/databaseRidParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "createCollectionParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CollectionCreateUpdateParameters"
-            },
-            "description": "The parameters to provide for the current collection."
+            "description": "The parameters to provide for the current SQL database."
           }
         ],
         "responses": {
           "201": {
-            "description": "The collection create operation was successful",
+            "description": "The SQL database create operation was succesful.",
             "schema": {
-              "$ref": "#/definitions/CollectionResource"
+              "$ref": "#/definitions/SqlDatabaseResource"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/containers/{collectionRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetCollection",
+        "operationId": "DatabaseAccounts_GetSqlDatabase",
         "x-ms-examples": {
-          "CosmosDBCollectionGet": { "$ref": "./examples/CosmosDBCollectionGet.json" }
+          "CosmosDBSqlDatabaseGet": { "$ref": "./examples/CosmosDBSqlDatabaseGet.json" }
         },
-        "description": "Gets the collection under an existing Azure Cosmos DB database account.",
+        "description": "Gets the SQL databases under an existing Azure Cosmos DB database account with the provided id.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1651,27 +1463,24 @@
             "$ref": "#/parameters/databaseRidParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The collection properties were retrieved successfully.",
+            "description": "The SQL database property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/CollectionResource"
+              "$ref": "#/definitions/SqlDatabaseResource"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateCollection",
+        "operationId": "DatabaseAccounts_UpdateSqlDatabase",
         "x-ms-examples": {
-          "CosmosDBCollectionReplace": { "$ref": "./examples/CosmosDBCollectionReplace.json" }
+          "CosmosDBSqlDatabaseReplace": { "$ref": "./examples/CosmosDBSqlDatabaseReplace.json" }
         },
-        "description": "Updates an existing Azure Cosmos DB collection",
+        "description": "Updates an existing Azure Cosmos DB SQL database",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1687,36 +1496,33 @@
             "$ref": "#/parameters/databaseRidParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "updateCollectionParameters",
+            "name": "updateSqlDatabaseParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CollectionCreateUpdateParameters"
+              "$ref": "#/definitions/SqlDatabaseCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current collection."
+            "description": "The parameters to provide for the current SQL database."
           }
         ],
         "responses": {
           "200": {
-            "description": "The collection create operation will complete asynchronously.",
+            "description": "The SQL database update operation was successful.",
             "schema": {
-              "$ref": "#/definitions/CollectionResource"
+              "$ref": "#/definitions/SqlDatabaseResource"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteCollection",
+        "operationId": "DatabaseAccounts_DeleteSqlDatabase",
         "x-ms-examples": {
-          "CosmosDBCollectionDelete": { "$ref": "./examples/CosmosDBCollectionDelete.json" }
+          "CosmosDBSqlDatabaseDelete": { "$ref": "./examples/CosmosDBSqlDatabaseDelete.json" }
         },
-        "description": "Deletes an existing Azure Cosmos DB collection.",
+        "description": "Deletes an existing Azure Cosmos DB SQL database.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1732,18 +1538,206 @@
             "$ref": "#/parameters/databaseRidParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL database delete operation was successful."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}/containers": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListSqlContainers",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerList": { "$ref": "./examples/CosmosDBSqlContainerList.json" }
+        },
+        "description": "Lists the SQL container under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "202": {
-            "description": "The collection delete operation will complete asynchronously."
+          "200": {
+            "description": "The SQL container properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlContainerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateSqlContainer",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerCreate": { "$ref": "./examples/CosmosDBSqlContainerCreate.json" }
+        },
+        "description": "Creates an Azure Cosmos DB SQL container",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
-          "204": {
-            "description": "The specified collection does not exist in the subscription."
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createSqlContainerParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlContainerCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL container."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The SQL container create operation was successful",
+            "schema": {
+              "$ref": "#/definitions/SqlContainerResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}/containers/{containerRid}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetSqlContainer",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerGet": { "$ref": "./examples/CosmosDBSqlContainerGet.json" }
+        },
+        "description": "Gets the SQL container under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/containerRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL container property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlContainerResource"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateSqlContainer",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerReplace": { "$ref": "./examples/CosmosDBSqlContainerReplace.json" }
+        },
+        "description": "Updates an existing Azure Cosmos DB SQL container",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/containerRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateSqlContainerParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlContainerCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL container."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL container update operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/SqlContainerResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteSqlContainer",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerDelete": { "$ref": "./examples/CosmosDBSqlContainerDelete.json" }
+        },
+        "description": "Deletes an existing Azure Cosmos DB SQL container.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/containerRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL container delete operation was successful."
           }
         }
       }
@@ -1763,31 +1757,31 @@
       },
       "description": "The List operation response, that contains the database accounts and their properties."
     },
-    "DatabaseListResult": {
+    "SqlDatabaseListResult": {
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DatabaseResource"
+            "$ref": "#/definitions/SqlDatabaseResource"
           },
-          "description": "List of databases and their properties."
+          "description": "List of SQL databases and their properties."
         }
       },
-      "description": "The List operation response, that contains the databases and their properties."
+      "description": "The List operation response, that contains the SQL databases and their properties."
     },
-    "CollectionListResult": {
+    "SqlContainerListResult": {
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CollectionResource"
+            "$ref": "#/definitions/SqlContainerResource"
           },
-          "description": "List of collections and their properties."
+          "description": "List of SQL containers and their properties."
         }
       },
-      "description": "The List operation response, that contains the collections and their properties."
+      "description": "The List operation response, that contains the SQL containers and their properties."
     },
     "ErrorResponse": {
       "properties": {
@@ -1940,8 +1934,8 @@
         }
       ]
     },
-    "GeneralResourceProperties": {
-      "description": "The general system generated resource properties associated with Databases and Collections.",
+    "ExtenedResourceProperties": {
+      "description": "The system generated resource properties associated with SQL databases and SQL containers.",
       "type": "object",
       "properties": {
         "_rid": {
@@ -1961,9 +1955,9 @@
         }
       }
     },
-    "AccountResource": {
+    "GenericResourceProperties": {
       "type": "object",
-      "description": "A database or collection resource.",
+      "description": "The general properties associated with all API resource.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1986,24 +1980,24 @@
       ],
       "x-ms-azure-resource": true
     },
-    "DatabaseResource":{
-      "description": "An Azure Cosmos DB database.",
+    "SqlDatabaseResource":{
+      "description": "An Azure Cosmos DB SQL database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "The properties of an Azure Cosmos DB database",
-          "$ref": "#/definitions/DatabaseProperties"
+          "description": "The properties of an Azure Cosmos DB SQL database",
+          "$ref": "#/definitions/SqlDatabaseResourceProperties"
         }        
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AccountResource"
+          "$ref": "#/definitions/GenericResourceProperties"
         }
       ]
     },
-    "DatabaseProperties": {
-      "description": "The properties of an Azure Cosmos DB database",
+    "SqlDatabaseResourceProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
       "properties": {
         "_colls": {
@@ -2017,31 +2011,31 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/DatabaseCreateUpdateResource"
+          "$ref": "#/definitions/SqlDatabaseCreateUpdateResource"
         },
         {
-          "$ref": "#/definitions/GeneralResourceProperties"
+          "$ref": "#/definitions/ExtenedResourceProperties"
         }
       ]
     },
-    "CollectionResource":{
-      "description": "An Azure Cosmos DB collection.",
+    "SqlContainerResource":{
+      "description": "An Azure Cosmos DB SQL container.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "The properties of an Azure Cosmos DB collection",
-          "$ref": "#/definitions/CollectionProperties"
+          "description": "The properties of an Azure Cosmos DB SQL container",
+          "$ref": "#/definitions/SqlContainerResourceProperties"
         }   
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AccountResource"
+          "$ref": "#/definitions/GenericResourceProperties"
         }
       ]
     },
-    "CollectionProperties": {
-      "description": "The properties of an Azure Cosmos DB collection",
+    "SqlContainerResourceProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL container",
       "type": "object",
       "properties": {
         "_doc": {
@@ -2067,10 +2061,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CollectionCreateUpdateResource"
+          "$ref": "#/definitions/SqlContainerCreateUpdateResource"
         },
         {
-          "$ref": "#/definitions/GeneralResourceProperties"
+          "$ref": "#/definitions/ExtenedResourceProperties"
         }
       ]
     },
@@ -2397,32 +2391,27 @@
         "modelAsString": false
       }
     },
-    "DatabaseCreateUpdateParameters": {
-      "description": "Parameters to create and update Cosmos DB database.",
+    "SqlDatabaseCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB SQL database.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The name of the database",
-          "type": "string"
-        },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB database.",
-          "$ref": "#/definitions/DatabaseCreateUpdateProperties"
+          "description": "Properties to create and update Azure Cosmos DB SQL database.",
+          "$ref": "#/definitions/SqlDatabaseCreateUpdateProperties"
         }
       },
       "required": [
-        "id",
         "properties"
       ]
     },
-    "DatabaseCreateUpdateProperties": {
-      "description": "Properties to create and update Azure Cosmos DB database.",
+    "SqlDatabaseCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB SQL database.",
       "type": "object",
       "properties": {
         "resource": {
-          "description": "The standard JSON format of a database",
-          "$ref": "#/definitions/DatabaseCreateUpdateResource"
+          "description": "The standard JSON format of a SQL database",
+          "$ref": "#/definitions/SqlDatabaseCreateUpdateResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -2434,32 +2423,27 @@
         "options"
       ]
     },
-    "CollectionCreateUpdateParameters": {
-      "description": "Parameters to create and update Cosmos DB collection.",
+    "SqlContainerCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB SQL container.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The name of the collection",
-          "type": "string"
-        },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB collection.",
-          "$ref": "#/definitions/CollectionCreateUpdateProperties"
+          "description": "Properties to create and update Azure Cosmos DB SQL container.",
+          "$ref": "#/definitions/SqlContainerCreateUpdateProperties"
         }
       },
       "required": [
-        "id",
         "properties"
       ]
     },
-    "CollectionCreateUpdateProperties": {
-      "description": "Properties to create and update Azure Cosmos DB collection.",
+    "SqlContainerCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB SQL container.",
       "type": "object",
       "properties": {
         "resource": {
-          "description": "The standard JSON format of a collection",
-          "$ref": "#/definitions/CollectionCreateUpdateResource"
+          "description": "The standard JSON format of a SQL container",
+          "$ref": "#/definitions/SqlContainerCreateUpdateResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -2471,30 +2455,30 @@
         "options"
       ]
     },
-    "DatabaseCreateUpdateResource": {
+    "SqlDatabaseCreateUpdateResource": {
       "type": "object",
-      "description": "Cosmos DB database id object",
+      "description": "Cosmos DB SQL database id object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Name of the Cosmos DB database"
+          "description": "Name of the Cosmos DB SQL database"
         }
       },
       "required": [
         "id"
       ]
     },
-    "CollectionCreateUpdateResource": {
+    "SqlContainerCreateUpdateResource": {
       "type": "object",
-      "description": "Cosmos DB collection resource object",
+      "description": "Cosmos DB SQL container resource object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Name of the Cosmos DB collection"
+          "description": "Name of the Cosmos DB SQL container"
         },
         "indexingPolicy": {
           "$ref": "#/definitions/IndexingPolicy",
-          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the collection"
+          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the SQL container"
         },
         "partitionKey": {
           "$ref": "#/definitions/PartitionKey",
@@ -2502,7 +2486,7 @@
         },
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
-          "description": "The conflict resolution policy for the collection."
+          "description": "The conflict resolution policy for the SQL container."
         }
       },
       "required": [
@@ -2614,7 +2598,7 @@
       "description": "The configuration of the partition key to be used for partitioning data into multiple partitions",
       "properties": {
         "paths": {
-          "description": "List of paths using which data within the collection can be parititoned",
+          "description": "List of paths using which data within the SQL container can be parititoned",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Path"
@@ -2637,7 +2621,7 @@
     },
     "ConflictResolutionPolicy": {
       "type": "object",
-      "description": "The conflict resolution policy for the collection.",
+      "description": "The conflict resolution policy for the SQL container.",
       "properties": {
         "mode": {
           "description": "Indicates the conflict resolution mode.",
@@ -3249,6 +3233,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB collection rid."
+    },
+    "containerRidParameter": {
+      "name": "containerRid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB container rid."
     },
     "regionParameter": {
       "name": "region",
