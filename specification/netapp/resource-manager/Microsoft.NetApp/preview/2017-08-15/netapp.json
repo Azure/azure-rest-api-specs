@@ -169,6 +169,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - account updated",
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
           "201": {
             "description": "Account created",
             "schema": {
@@ -1161,12 +1167,14 @@
         "activeDirectories": {
           "description": "Active Directories",
           "type": "array",
-          "$ref": "#/definitions/activeDirectories"
+          "items": {
+            "$ref": "#/definitions/activeDirectory"
+          }
         }
       }
     },
-    "activeDirectories": {
-      "description": "Active Directories",
+    "activeDirectory": {
+      "description": "Active Directory",
       "type": "object",
       "properties": {
         "activeDirectoryId": {
@@ -1527,8 +1535,14 @@
         },
         "exportPolicy": {
           "description": "Export policy rule",
-          "type": "array",
-          "$ref": "#/definitions/exportPolicyRule"
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+              "$ref": "#/definitions/exportPolicyRule"
+              }
+            }
+          }
         },
         "provisioningState": {
           "type": "string",
@@ -1656,8 +1670,14 @@
         },
         "exportPolicy": {
           "description": "Export policy rule",
-          "type": "array",
-          "$ref": "#/definitions/exportPolicyRule"
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+              "$ref": "#/definitions/exportPolicyRule"
+              }
+            }
+          }
         }
       }
     },
