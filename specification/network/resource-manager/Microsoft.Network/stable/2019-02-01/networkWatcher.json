@@ -1864,7 +1864,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkWatcherPropertiesFormat"
+          "$ref": "#/definitions/NetworkWatcherPropertiesFormat",
+          "description": "Properties of the network watcher."
         }
       },
       "allOf": [
@@ -1900,10 +1901,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkWatcher"
-          }
+          },
+          "description": "List of network watcher resources."
         }
       },
-      "description": "List of network watcher resources."
+      "description": "Response for ListNetworkWatchers API service call."
     },
     "TopologyParameters": {
       "properties": {
@@ -1945,7 +1947,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TopologyResource"
-          }
+          },
+          "description": "A list of topology resources."
         }
       },
       "description": "Topology of the specified resource group."
@@ -2169,7 +2172,8 @@
           "description": "ID of the network interface."
         },
         "securityRuleAssociations": {
-          "$ref": "#/definitions/SecurityRuleAssociations"
+          "$ref": "#/definitions/SecurityRuleAssociations",
+          "description": "All security rules associated with the network interface."
         }
       }
     },
@@ -2177,10 +2181,12 @@
       "description": "All security rules associated with the network interface.",
       "properties": {
         "networkInterfaceAssociation": {
-          "$ref": "#/definitions/NetworkInterfaceAssociation"
+          "$ref": "#/definitions/NetworkInterfaceAssociation",
+          "description": "Network interface and it's custom security rules."
         },
         "subnetAssociation": {
-          "$ref": "#/definitions/SubnetAssociation"
+          "$ref": "#/definitions/SubnetAssociation",
+          "description": "Subnet and it's custom security rules."
         },
         "defaultSecurityRules": {
           "type": "array",
@@ -2216,7 +2222,7 @@
       }
     },
     "SubnetAssociation": {
-      "description": "Network interface and its custom security rules.",
+      "description": "Subnet and it's custom security rules.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2236,7 +2242,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PacketCaptureParameters"
+          "$ref": "#/definitions/PacketCaptureParameters",
+          "description": "Properties of the packet capture."
         }
       },
       "required": [
@@ -2266,13 +2273,15 @@
           "description": "Maximum duration of the capture session in seconds."
         },
         "storageLocation": {
-          "$ref": "#/definitions/PacketCaptureStorageLocation"
+          "$ref": "#/definitions/PacketCaptureStorageLocation",
+          "description": "Describes the storage location for a packet capture session."
         },
         "filters": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PacketCaptureFilter"
-          }
+          },
+          "description": "A list of packet capture filters."
         }
       },
       "required": [
@@ -2359,11 +2368,13 @@
         },
         "etag": {
           "type": "string",
-          "default": "A unique read-only string that changes whenever the resource is updated."
+          "default": "A unique read-only string that changes whenever the resource is updated.",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PacketCaptureResultProperties"
+          "$ref": "#/definitions/PacketCaptureResultProperties",
+          "description": "Properties of the packet capture result."
         }
       },
       "description": "Information about packet capture session."
@@ -2460,7 +2471,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TroubleshootingProperties"
+          "$ref": "#/definitions/TroubleshootingProperties",
+          "description": "Properties of the troubleshooting resource."
         }
       }
     },
@@ -2584,10 +2596,12 @@
           "type": "boolean"
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicyParameters"
+          "$ref": "#/definitions/RetentionPolicyParameters",
+          "description": "Parameters that define the retention policy for flow log."
         },
         "format": {
-          "$ref": "#/definitions/FlowLogFormatParameters"
+          "$ref": "#/definitions/FlowLogFormatParameters",
+          "description": "Parameters that define the flow log format."
         }
       }
     },
@@ -2652,10 +2666,12 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FlowLogProperties"
+          "$ref": "#/definitions/FlowLogProperties",
+          "description": "Properties of the flow log."
         },
         "flowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsProperties"
+          "$ref": "#/definitions/TrafficAnalyticsProperties",
+          "description": "Parameters that define the configuration of traffic analytics."
         }
       }
     },
@@ -2666,7 +2682,8 @@
       ],
       "properties": {
         "networkWatcherFlowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties"
+          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties",
+          "description": "Parameters that define the configuration of traffic analytics."
         }
       }
     },
@@ -2709,10 +2726,12 @@
       ],
       "properties": {
         "source": {
-          "$ref": "#/definitions/ConnectivitySource"
+          "$ref": "#/definitions/ConnectivitySource",
+          "description": "Describes the source of the connection."
         },
         "destination": {
-          "$ref": "#/definitions/ConnectivityDestination"
+          "$ref": "#/definitions/ConnectivityDestination",
+          "description": "Describes the destination of connection."
         },
         "protocol": {
           "type": "string",
@@ -2729,7 +2748,8 @@
           }
         },
         "protocolConfiguration": {
-          "$ref": "#/definitions/ProtocolConfiguration"
+          "$ref": "#/definitions/ProtocolConfiguration",
+          "description": "Configuration of the protocol."
         }
       }
     },
@@ -2931,7 +2951,8 @@
       "description": "Configuration of the protocol.",
       "properties": {
         "HTTPConfiguration": {
-          "$ref": "#/definitions/HTTPConfiguration"
+          "$ref": "#/definitions/HTTPConfiguration",
+          "description": "HTTP configuration of the connectivity check."
         }
       }
     },
@@ -2981,7 +3002,8 @@
     "AzureReachabilityReportParameters": {
       "properties": {
         "providerLocation": {
-          "$ref": "#/definitions/AzureReachabilityReportLocation"
+          "$ref": "#/definitions/AzureReachabilityReportLocation",
+          "description": "Parameters that define a geographic location."
         },
         "providers": {
           "type": "array",
@@ -3042,7 +3064,8 @@
           "description": "The aggregation level of Azure reachability report. Can be Country, State or City."
         },
         "providerLocation": {
-          "$ref": "#/definitions/AzureReachabilityReportLocation"
+          "$ref": "#/definitions/AzureReachabilityReportLocation",
+          "description": "Parameters that define a geographic location."
         },
         "reachabilityReport": {
           "type": "array",
@@ -3211,7 +3234,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectionMonitorParameters"
+          "$ref": "#/definitions/ConnectionMonitorParameters",
+          "description": "Properties of the connection monitor."
         }
       },
       "required": [
@@ -3222,10 +3246,12 @@
     "ConnectionMonitorParameters": {
       "properties": {
         "source": {
-      "$ref": "#/definitions/ConnectionMonitorSource"
+          "$ref": "#/definitions/ConnectionMonitorSource",
+          "description": "Describes the source of connection monitor."
         },
         "destination": {
-      "$ref": "#/definitions/ConnectionMonitorDestination"
+          "$ref": "#/definitions/ConnectionMonitorDestination",
+          "description": "Describes the destination of connection monitor."
         },
         "autoStart": {
           "type": "boolean",
@@ -3304,7 +3330,8 @@
         },
         "etag": {
           "type": "string",
-          "default": "A unique read-only string that changes whenever the resource is updated."
+          "default": "A unique read-only string that changes whenever the resource is updated.",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
           "readOnly": true,
@@ -3324,7 +3351,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectionMonitorResultProperties"
+          "$ref": "#/definitions/ConnectionMonitorResultProperties",
+          "description": "Properties of the connection monitor result."
         }
       },
       "description": "Information about the connection monitor."
@@ -3546,10 +3574,12 @@
       "description": "Network configuration diagnostic result corresponded to provided traffic query.",
       "properties": {
         "profile": {
-          "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
+          "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile",
+          "description": "Network configuration diagnostic profile."
         },
         "networkSecurityGroupResult": {
-          "$ref": "#/definitions/NetworkSecurityGroupResult"
+          "$ref": "#/definitions/NetworkSecurityGroupResult",
+          "description": "Network security group result."
         }
       }
     },
@@ -3590,7 +3620,8 @@
           "description": "Resource ID of nic or subnet to which network security group is applied."
         },
         "matchedRule": {
-          "$ref": "#/definitions/MatchedRule"
+          "$ref": "#/definitions/MatchedRule",
+          "description": "Matched network security rule."
         },
         "rulesEvaluationResult": {
           "readOnly": true,
