@@ -17,26 +17,15 @@
                         "properties": {
                             "vmSize": "Standard_DS3_v2",
                             "osProfile": {
-                                "adminUsername": "admin",
-                                "computerName": "my-workstation"
+                                "adminUserName": "admin"
                             },
                             "networkProfile": {
-                                "profileType": "subnet",
-                                "properties": {
-                                    "subnetId": {
-                                        "id": "subnet_resource_ID"
-                                    }
+                                "subnetId": {
+                                    "id": "subnet_resource_ID"
+                                },
+                                "networkInterface": {
+                                    "id": "network_interface_ID"
                                 }
-                            },
-                            "additionalComponents": [
-                                {
-                                    "name": "component_1"
-                                }
-                            ],
-                            "aadLogin": {
-                                "enabled": true,
-                                "administratorLogins": ["admin1", "admin2"],
-                                "userLogins": ["user1"]
                             },
                             "provisioningState": "Succeeded"
                         }

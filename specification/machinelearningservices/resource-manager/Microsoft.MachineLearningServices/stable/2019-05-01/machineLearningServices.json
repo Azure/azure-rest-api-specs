@@ -843,6 +843,9 @@
         "description": "Creates or updates a workstation in the given workspace.",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -853,9 +856,6 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/WorkstationDefinitionParameter"
@@ -883,7 +883,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a workstations": { "$ref": "./examples/putWorkstation.json" }
+          "Create a workstations": { "$ref": "./examples/createWorkstation.json" }
         }
       },
       "delete": {
@@ -893,6 +893,9 @@
         "operationId": "Workstations_Delete",
         "description": "Deletes a workstation.",
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
@@ -904,9 +907,6 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -939,6 +939,9 @@
         "description": "Gets information about a Workstation.",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -949,9 +952,6 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1035,6 +1035,9 @@
         "description": "Deallocates a workstation.",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -1045,9 +1048,6 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1079,6 +1079,9 @@
         "description": "Starts a workstation.",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -1089,9 +1092,6 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1123,6 +1123,9 @@
         "description": "Gets a list of workstations associated with the specified workspace.",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -1130,9 +1133,6 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2555,9 +2555,28 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/WorkstationProperties",
-          "x-ms-client-flatten": true
-        }
+          "provisioningState": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The provisioning state of the workstation, which only appears in the response."
+          },
+          "vmSize": {
+            "type": "string",
+            "title": "VM size.",
+            "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
+          },
+          "osProfile": {
+            "$ref": "#/definitions/UserAccountCredentials"
+          },
+          "networkProfile": {
+            "$ref": "#/definitions/NetworkProfile"
+          }
+      },
+      "required": [
+        "vmSize",
+        "osProfile"
+      ],
+      "description": "The properties of a workstation."
       }
     },
     "WorkstationUpdateProperties": {
@@ -2571,9 +2590,6 @@
           "type": "string",
           "title": "VM size.",
           "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
-        },
-        "aadLogin": {
-          "$ref": "#/definitions/AADLogin"
         }
       },
       "description": "The update properties of a workstation."
@@ -2590,41 +2606,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "WorkstationProperties": {
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "vmSize": {
-          "type": "string",
-          "title": "VM size.",
-          "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OSProfile"
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile"
-        },
-        "additionalComponents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Component"
-          }
-        },
-        "aadLogin": {
-          "$ref": "#/definitions/AADLogin"
-        }
-      },
-      "required": [
-        "vmSize",
-        "osProfile",
-        "networkProfile"
-      ],
-      "description": "The properties of a workstation."
     },
     "WorkstationListResult": {
       "properties": {
@@ -2643,124 +2624,19 @@
       },
       "description": "Values returned by the workstation list operation."
     },
-    "OSProfile": {
-      "properties": {
-        "computerName": {
-          "type": "string",
-          "description": "Specifies the host OS name of the workstation."
-        },
-        "adminUsername": {
-          "type": "string",
-          "description": "Specifies the name of the administrator account."
-        },
-        "adminPassword": {
-          "type": "string",
-          "description": "Specifies the password of the administrator account."
-        },
-        "publicKey": {
-          "type": "string",
-          "description": "Specifies the public key of the administrator account."
-        }
-      },
-      "required": [
-        "computerName",
-        "adminUsername"
-      ],
-      "description": "Specifies the operating system settings for the virtual machine."
-    },
     "NetworkProfile": {
       "description": "Network profile for the workstation",
-      "discriminator": "profileType",
       "properties": {
-        "profileType": {
-          "$ref": "#/definitions/NetworkProfileType"
-        }
-      },
-      "required": [
-        "profileType"
-      ]
-    },
-    "NetworkProfileType": {
-      "type": "string",
-      "description": "The type of network profile",
-      "enum": [
-        "new",
-        "subnet"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkProfileType",
-        "modelAsString": true
-      }
-    },
-    "NewNetworkProfile": {
-      "description": "A new network profile.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NetworkProfile"
-        }
-      ],
-      "x-ms-discriminator-value": "new"
-    },
-    "SubnetNetworkProfile": {
-      "description": "A subnet network profile.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NetworkProfile"
+        "subnetId": {
+          "description": "Subnet ID",
+          "$ref": "#/definitions/ResourceId"
         },
-        {
-          "type": "object",
-          "properties":{
-            "properties": {
-              "description": "Subnet profile",
-              "type": "object",
-              "properties": {
-                "subnetId": {
-                  "description": "Subnet ID",
-                  "$ref": "#/definitions/ResourceId"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "subnet"
-    },
-    "Component": {
-      "description": "An additional component for a workstation",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the additional component for a workstation"
+        "networkInterface": {
+          "description": "The network interface",
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
         }
       }
-    },
-    "AADLogin": {
-      "description": "AAD Login information for a workstation",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether AAD login is enabled"
-        },
-        "administratorLogins": {
-          "description": "A list of users with administrative login privileges",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "User account"
-          }
-        },
-        "userLogins": {
-          "description": "A list of users with non-administrative login privileges",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "User account"
-          }
-        }
-      },
-      "required": [
-        "enabled"
-      ]
     }
   }
 }
