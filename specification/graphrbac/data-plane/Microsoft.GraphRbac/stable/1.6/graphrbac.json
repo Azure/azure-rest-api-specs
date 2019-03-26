@@ -1289,7 +1289,7 @@
         "tags": [
           "ServicePrincipalsByAppId"
         ],
-        "operationId": "ServicePrincipalsByAppId_Get",
+        "operationId": "Applications_GetServicePrincipalsIdByAppId",
         "description": "Gets an object id for a given application id from the current tenant.",
         "parameters": [
           {
@@ -1299,7 +1299,11 @@
             "$ref": "#/parameters/tenantIDInPath"
           },
           {
-            "$ref": "#/parameters/applicationIdInPath"
+            "name": "applicationID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The application ID."
           }
         ],
         "responses": {
@@ -2886,7 +2890,7 @@
         },
         "informationalUrls": {
           "$ref": "#/definitions/InformationalUrl",
-          "description": "urls with more informations of the application."
+          "description": "URLs with more information about the application."
         },
         "isDeviceOnlyAuthSupported": {
           "description": "Specifies whether this application supports device authentication without a user. The default is false.",
@@ -2997,8 +3001,7 @@
         }
       ],
       "required": [
-        "displayName",
-        "identifierUris"
+        "displayName"
       ],
       "properties": {
         "displayName": {
@@ -3104,7 +3107,7 @@
         },
         "informationalUrls": {
           "$ref": "#/definitions/InformationalUrl",
-          "description": "urls with more informations of the application."
+          "description": "URLs with more information about the application."
         },
         "isDeviceOnlyAuthSupported": {
           "description": "Specifies whether this application supports device authentication without a user. The default is false.",
@@ -3229,10 +3232,10 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "string",
-          "description": "Service Principal Application Object Id"
+            "type": "string",
+            "description": "The Object ID of the service principal with the specified application ID."
         },
-        "odata.metadata": {
+       "odata.metadata": {
           "type": "string",
           "description": "The URL representing edm equivalent."
         }
@@ -4147,14 +4150,6 @@
       "required": true,
       "type": "string",
       "description": "The tenant ID.",
-      "x-ms-parameter-location": "client"
-    },
-    "applicationIdInPath": {
-      "name": "applicationID",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The application ID.",
       "x-ms-parameter-location": "client"
     }
   }

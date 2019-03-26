@@ -180,7 +180,7 @@ directive:
   - where:
       - $.definitions.ContainerService
     suppress:
-      - TrackedResourcePatchOperation 
+      - TrackedResourcePatchOperation
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
@@ -221,6 +221,15 @@ These settings apply only when `--tag=package-2018-10-01-only` is specified on t
 input-file:
 - Microsoft.Compute/stable/2018-10-01/compute.json
 - Microsoft.Compute/stable/2018-10-01/runCommands.json
+```
+
+### Tag: package-2018-09-30-only
+
+These settings apply only when `--tag=package-2018-09-30-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-30-only'
+input-file:
+- Microsoft.Compute/stable/2018-09-30/disk.json
 ```
 
 ### Tag: package-2018-06-exclude-gallery

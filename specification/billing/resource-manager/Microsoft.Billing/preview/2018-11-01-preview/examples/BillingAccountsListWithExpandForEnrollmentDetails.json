@@ -1,0 +1,109 @@
+{
+	"parameters": {
+		"api-version": "2018-11-01-preview",
+		"$expand": "properties/enrollmentDetails, properties/departments, properties/enrollmentAccounts"
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"id": "/providers/Microsoft.Billing/billingAccounts/7645820",
+				"name": "7645820",
+				"type": "Microsoft.Billing/billingAccounts",
+				"properties": {
+					"company": "XYZ Services Group, LLC.",
+					"accountType": "Enrollment",
+					"address": {
+						"AddressLine1": "Test Address",
+						"AddressLine2": "Test Address",
+						"AddressLine3": "Test Address",
+						"City": "City",
+						"PostalCode": "00000",
+						"Region": "WA",
+						"Country": "US",
+						"PhoneNumber": "000-000-0000"
+					},
+					"country": "United States",
+					"agreements": [
+						"wwww.contoso.com/agreements"
+					],
+					"enrollmentDetails": {
+						"startDate": "2018-05-01",
+						"endDate": "2019-05-31",
+						"currency": "USD",
+						"channel": "EaDirect",
+						"language": "en",
+						"countryCode": "US",
+						"status": "Active",
+						"billingCycle": "Monthly",
+						"policies": {
+							"accountOwnerViewCharges": true,
+							"departmentAdminViewCharges": true,
+							"marketplacesEnabled": true,
+							"reservedInstancesEnabled": true
+						}
+					},
+					"departments": [
+						{
+							"id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/departmentId1",
+							"name": "departmentId1",
+							"type": "Microsoft.Billing/departments",
+							"properties": {
+								"departmentName": "departmentName1",
+								"costCenter": "C1",
+								"status": "Active"
+							}
+						},
+						{
+							"id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/departmentId2",
+							"name": "departmentId2",
+							"type": "Microsoft.Billing/departments",
+							"properties": {
+								"departmentName": "departmentName2",
+								"costCenter": "C4",
+								"status": "Active"
+							}
+						}
+					],
+					"enrollmentAccounts": [
+						{
+							"id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/accountId0",
+							"name": "accountId0",
+							"type": "Microsoft.Billing/enrollmentAccounts",
+							"properties": {
+								"accountName": "AccountName0",
+								"costCenter": "C0",
+								"status": "Active",
+								"startDate": "2018-05-01",
+								"endDate": "2019-05-31"
+							}
+						},
+						{
+							"id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/accountId1",
+							"name": "accountId1",
+							"type": "Microsoft.Billing/enrollmentAccounts",
+							"properties": {
+								"accountName": "AccountName1",
+								"costCenter": "C4",
+								"status": "Active",
+								"startDate": "2018-05-01",
+								"endDate": "2019-05-31"
+							}
+						},
+						{
+							"id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/accountId2",
+							"name": "accountId2",
+							"type": "Microsoft.Billing/enrollmentAccounts",
+							"properties": {
+								"accountName": "AccountName2",
+								"costCenter": "C4",
+								"status": "Active",
+								"startDate": "2018-05-01",
+								"endDate": "2019-05-31"
+							}
+						}
+					]
+				}
+			}
+		}
+	}
+}
