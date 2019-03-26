@@ -504,6 +504,65 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections": {
+      "get": {
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "InvoiceSectionsListByBillingProfileName": {
+            "$ref": "./examples/InvoiceSectionsListByBillingProfileName.json"
+          }
+        },
+        "operationId": "InvoiceSectionsByBillingProfileName_List",
+        "description": "Lists all invoice sections under a billing profile for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the billingProfiles.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. InvoiceSection creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
       "get": {
         "tags": [
