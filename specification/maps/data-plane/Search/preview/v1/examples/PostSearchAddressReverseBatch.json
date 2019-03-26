@@ -4,10 +4,10 @@
     "api-version": "1.0",
     "subscription-key": "[subscription-key]",
     "searchAddressReverseBatchRequestBody": {
-      "queries": [
-        "?query=48.858561,2.294911",
-        "?query=47.639765,-122.127896&radius=5000&limit=2",
-        "?query=47.621028,-122.348170"
+      "batchItems": [
+          {"query": "?query=48.858561,2.294911"},
+          {"query": "?query=47.639765,-122.127896&radius=5000&limit=2"},
+          {"query": "?query=47.621028,-122.348170"}
       ]
     }
   },
@@ -16,100 +16,117 @@
       "headers": {},
       "body": {
         "summary": {
-          "successfulRequests": 3,
-          "totalRequests": 3
+            "successfulRequests": 3,
+            "totalRequests": 3
         },
-        "batchResults": [
-          {
-            "summary": {
-              "queryTime": 1,
-              "numResults": 1
+        "batchItems": [
+            {
+                "statusCode": 200,
+                "response": {
+                    "summary": {
+                        "queryTime": 8,
+                        "numResults": 1
+                    },
+                    "addresses": [
+                        {
+                            "address": {
+                                "buildingNumber": "7",
+                                "streetNumber": "7",
+                                "routeNumbers": [],
+                                "street": "Avenue Anatole France",
+                                "streetName": "Avenue Anatole France",
+                                "streetNameAndNumber": "7 Avenue Anatole France",
+                                "countryCode": "FR",
+                                "countrySubdivision": "Île-de-France",
+                                "countrySecondarySubdivision": "Paris",
+                                "municipality": "Paris",
+                                "postalCode": "75007",
+                                "municipalitySubdivision": "7ème Arrondissement",
+                                "country": "France",
+                                "countryCodeISO3": "FRA",
+                                "freeformAddress": "7 Avenue Anatole France, Paris, 75007",
+                                "boundingBox": {
+                                    "northEast": "48.858321,2.295167",
+                                    "southWest": "48.858136,2.295027",
+                                    "entity": "position"
+                                }
+                            },
+                            "position": "48.858231,2.295089"
+                        }
+                    ]
+                }
             },
-            "addresses": [
-              {
-                "address": {
-                  "routeNumbers": [],
-                  "street": "Avenue Anatole France",
-                  "streetName": "Avenue Anatole France",
-                  "countryCode": "FR",
-                  "municipality": "Paris",
-                  "postalCode": "75007",
-                  "municipalitySubdivision": "7e Arrondissement",
-                  "country": "France",
-                  "countryCodeISO3": "FRA",
-                  "freeformAddress": "Avenue Anatole France, 75007 Paris",
-                  "boundingBox": {
-                    "northEast": "48.862990,2.301650",
-                    "southWest": "48.853990,2.287990",
-                    "entity": "position"
-                  }
-                },
-                "position": "48.858490,2.294820"
-              }
-            ]
-          },
-          {
-            "summary": {
-              "queryTime": 1,
-              "numResults": 1
+            {
+                "statusCode": 200,
+                "response": {
+                    "summary": {
+                        "queryTime": 8,
+                        "numResults": 1
+                    },
+                    "addresses": [
+                        {
+                            "address": {
+                                "routeNumbers": [],
+                                "countryCode": "US",
+                                "countrySubdivision": "WA",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "municipality": "Redmond",
+                                "postalCode": "98052",
+                                "country": "United States",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "Redmond, WA 98052",
+                                "boundingBox": {
+                                    "northEast": "47.639765,-122.128661",
+                                    "southWest": "47.639502,-122.129456",
+                                    "entity": "position"
+                                },
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": "47.639687,-122.128677"
+                        }
+                    ]
+                }
             },
-            "addresses": [
-              {
-                "address": {
-                  "routeNumbers": [],
-                  "street": "157th Pl NE",
-                  "streetName": "157th Pl NE",
-                  "countryCode": "US",
-                  "countrySubdivision": "WA",
-                  "countrySubdivisionName": "Washington",
-                  "municipality": "Redmond",
-                  "postalCode": "98052",
-                  "country": "United States of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "157th Pl NE, Redmond WA 98052",
-                  "boundingBox": {
-                    "northEast": "47.644970,-122.122760",
-                    "southWest": "47.635970,-122.136100",
-                    "entity": "position"
-                  }
-                },
-                "position": "47.640470,-122.129430"
-              }
-            ]
-          },
-          {
-            "summary": {
-              "queryTime": 1,
-              "numResults": 1
-            },
-            "addresses": [
-              {
-                "address": {
-                  "buildingNumber": "442",
-                  "streetNumber": "442",
-                  "routeNumbers": [],
-                  "street": "Thomas St",
-                  "streetName": "Thomas St",
-                  "streetNameAndNumber": "442 Thomas St",
-                  "countryCode": "US",
-                  "countrySubdivision": "WA",
-                  "countrySubdivisionName": "Washington",
-                  "municipality": "Seattle",
-                  "postalCode": "98109",
-                  "municipalitySubdivision": "Lower Queen Anne",
-                  "country": "United States of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "442 Thomas St, Seattle WA 98109",
-                  "boundingBox": {
-                    "northEast": "47.625440,-122.341470",
-                    "southWest": "47.616440,-122.354810",
-                    "entity": "position"
-                  }
-                },
-                "position": "47.620940,-122.348140"
-              }
-            ]
-          }
+            {
+                "statusCode": 200,
+                "response": {
+                    "summary": {
+                        "queryTime": 19,
+                        "numResults": 1
+                    },
+                    "addresses": [
+                        {
+                            "address": {
+                                "buildingNumber": "410",
+                                "streetNumber": "410",
+                                "routeNumbers": [],
+                                "street": "Thomas Street",
+                                "streetName": "Thomas Street",
+                                "streetNameAndNumber": "410 Thomas Street",
+                                "countryCode": "US",
+                                "countrySubdivision": "WA",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle",
+                                "municipality": "Seattle",
+                                "postalCode": "98109",
+                                "municipalitySubdivision": "Seattle, Lower Queen Anne",
+                                "country": "United States",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "410 Thomas Street, Seattle, WA 98109",
+                                "boundingBox": {
+                                    "northEast": "47.620954,-122.347601",
+                                    "southWest": "47.620944,-122.348498",
+                                    "entity": "position"
+                                },
+                                "extendedPostalCode": "981094621",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": "47.620945,-122.348175"
+                        }
+                    ]
+                }
+            }
         ]
       }
     },

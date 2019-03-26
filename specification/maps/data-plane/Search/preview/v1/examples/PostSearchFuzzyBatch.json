@@ -4,10 +4,10 @@
     "api-version": "1.0",
     "subscription-key": "[subscription-key]",
     "searchFuzzyBatchRequestBody": {
-      "queries": [
-        "?query=atm&lat=47.639769&lon=-122.128362&radius=5000&limit=5",
-        "?query=Statue Of Liberty&limit=2",
-        "?query=Starbucks&lat=47.639769&lon=-122.128362&radius=5000"
+      "batchItems": [
+          {"query": "?query=atm&lat=47.639769&lon=-122.128362&radius=5000&limit=5"},
+          {"query": "?query=Statue Of Liberty&limit=2"},
+          {"query": "?query=Starbucks&lat=47.639769&lon=-122.128362&radius=5000"}
       ]
     }
   },
@@ -16,1237 +16,1290 @@
       "headers": {},
       "body": {
         "summary": {
-          "successfulRequests": 3,
-          "totalRequests": 3
+            "successfulRequests": 3,
+            "totalRequests": 3
         },
-        "batchResults": [
-          {
-            "summary": {
-              "query": "atm",
-              "queryType": "NON_NEAR",
-              "queryTime": 56,
-              "numResults": 5,
-              "offset": 0,
-              "totalResults": 243,
-              "fuzzyLevel": 1,
-              "geoBias": {
-                "lat": 47.639769,
-                "lon": -122.128362
-              }
+        "batchItems": [
+            {
+                "statusCode": 200,
+                "response": {
+                    "summary": {
+                        "query": "atm",
+                        "queryType": "NON_NEAR",
+                        "queryTime": 6,
+                        "numResults": 5,
+                        "offset": 0,
+                        "totalResults": 262,
+                        "fuzzyLevel": 1,
+                        "geoBias": {
+                            "lat": 47.639769,
+                            "lon": -122.128362
+                        }
+                    },
+                    "results": [
+                        {
+                            "type": "POI",
+                            "id": "US/POI/p1/4883988",
+                            "score": 2.575,
+                            "dist": 181.53554506106167,
+                            "info": "search:ta:840539001226445-US",
+                            "poi": {
+                                "name": "ATM at Wells Fargo",
+                                "brands": [
+                                    {
+                                        "name": "Wells Fargo"
+                                    }
+                                ],
+                                "categories": [
+                                    "cash dispenser"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CASH_DISPENSER",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "cash dispenser"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "3240",
+                                "streetName": "157th Ave NE",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980525395",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "3240 157th Ave NE, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.63904,
+                                "lon": -122.13053
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.63994,
+                                    "lon": -122.13186
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.63814,
+                                    "lon": -122.1292
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.63904,
+                                        "lon": -122.1306
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "POI",
+                            "id": "US/POI/p0/7750886",
+                            "score": 2.575,
+                            "dist": 263.5164362019097,
+                            "info": "search:ta:840539001776164-US",
+                            "poi": {
+                                "name": "FIRST TECHNOLOGY FCU",
+                                "categories": [
+                                    "cash dispenser"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CASH_DISPENSER",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "cash dispenser"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "3089",
+                                "streetName": "157th Ave NE",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980525342",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "3089 157th Ave NE, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.63836,
+                                "lon": -122.13119
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.63926,
+                                    "lon": -122.13252
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.63746,
+                                    "lon": -122.12986
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.63832,
+                                        "lon": -122.13117
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "POI",
+                            "id": "US/POI/p0/4095653",
+                            "score": 2.574,
+                            "dist": 312.06842961967754,
+                            "info": "search:ta:840539001780065-US",
+                            "poi": {
+                                "name": "FIRST TECHNOLOGY FCU",
+                                "categories": [
+                                    "cash dispenser"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CASH_DISPENSER",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "cash dispenser"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "16041",
+                                "streetName": "NE 36th Way",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980526301",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "16041 NE 36th Way, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.64218,
+                                "lon": -122.12623
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.64308,
+                                    "lon": -122.12756
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.64128,
+                                    "lon": -122.1249
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.64223,
+                                        "lon": -122.12622
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "POI",
+                            "id": "US/POI/p1/427396",
+                            "score": 2.574,
+                            "dist": 320.81751337794861,
+                            "info": "search:ta:840539001783662-US",
+                            "poi": {
+                                "name": "FIRST TECHNOLOGY FCU",
+                                "categories": [
+                                    "cash dispenser"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CASH_DISPENSER",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "cash dispenser"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "16071",
+                                "streetName": "NE 36th Way",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980526301",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "16071 NE 36th Way, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.64218,
+                                "lon": -122.12601
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.64308,
+                                    "lon": -122.12734
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.64128,
+                                    "lon": -122.12468
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.64222,
+                                        "lon": -122.12601
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "POI",
+                            "id": "US/POI/p0/4009416",
+                            "score": 2.574,
+                            "dist": 328.8257606254669,
+                            "info": "search:ta:840539000384928-US",
+                            "poi": {
+                                "name": "ATM",
+                                "categories": [
+                                    "cash dispenser"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CASH_DISPENSER",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "cash dispenser"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "16070",
+                                "streetName": "Northeast 36th Way",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980526301",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "16070 Northeast 36th Way, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.64227,
+                                "lon": -122.12602
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.64317,
+                                    "lon": -122.12735
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.64137,
+                                    "lon": -122.12469
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.64222,
+                                        "lon": -122.12601
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
             },
-            "results": [
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2473233",
-                "score": 5.589,
-                "dist": 181.53554506106167,
-                "info": "search:ta:840539001226445-US",
-                "poi": {
-                  "name": "ATM at Wells Fargo",
-                  "categories": [
-                    "cash dispenser"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CASH_DISPENSER",
-                      "names": [
+            {
+                "statusCode": 200,
+                "response": {
+                    "summary": {
+                        "query": "statue of liberty",
+                        "queryType": "NON_NEAR",
+                        "queryTime": 42,
+                        "numResults": 2,
+                        "offset": 0,
+                        "totalResults": 18,
+                        "fuzzyLevel": 1
+                    },
+                    "results": [
                         {
-                          "nameLocale": "en-US",
-                          "name": "cash dispenser"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "3240",
-                  "streetName": "157th Ave NE",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980525395",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "3240 157th Ave NE, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.63904,
-                  "lon": -122.13053
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.63994,
-                    "lon": -122.13186
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.63814,
-                    "lon": -122.1292
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.63904,
-                      "lon": -122.1306
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p0/2418147",
-                "score": 5.588,
-                "dist": 263.5164362019097,
-                "info": "search:ta:840539001776164-US",
-                "poi": {
-                  "name": "First Technology Fcu",
-                  "categories": [
-                    "cash dispenser"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CASH_DISPENSER",
-                      "names": [
+                            "type": "POI",
+                            "id": "US/POI/p1/4066424",
+                            "score": 6.942,
+                            "info": "search:ta:840369001174316-US",
+                            "poi": {
+                                "name": "Statue of Liberty",
+                                "categories": [
+                                    "important tourist attraction",
+                                    "monument"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "IMPORTANT_TOURIST_ATTRACTION",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "monument"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "important tourist attraction"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "municipalitySubdivision": "New York",
+                                "municipality": "New York",
+                                "countrySecondarySubdivision": "New York",
+                                "countryTertiarySubdivision": "Manhattan",
+                                "countrySubdivision": "NY",
+                                "postalCode": "10004",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "New York, NY 10004",
+                                "countrySubdivisionName": "New York"
+                            },
+                            "position": {
+                                "lat": 40.68955,
+                                "lon": -74.04483
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 40.69045,
+                                    "lon": -74.04602
+                                },
+                                "btmRightPoint": {
+                                    "lat": 40.68865,
+                                    "lon": -74.04364
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 40.69001,
+                                        "lon": -74.04683
+                                    }
+                                }
+                            ]
+                        },
                         {
-                          "nameLocale": "en-US",
-                          "name": "cash dispenser"
+                            "type": "POI",
+                            "id": "US/POI/p0/7323273",
+                            "score": 6.942,
+                            "info": "search:ta:840019000670588-US",
+                            "poi": {
+                                "name": "Statue of Liberty",
+                                "phone": "+(1)-(205)-9700251",
+                                "url": "www.1bsa.org",
+                                "categories": [
+                                    "important tourist attraction"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "IMPORTANT_TOURIST_ATTRACTION",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "important tourist attraction"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "516",
+                                "streetName": "Liberty Pkwy",
+                                "municipality": "Vestavia Hills, Birmingham",
+                                "countrySecondarySubdivision": "Jefferson",
+                                "countryTertiarySubdivision": "Leeds",
+                                "countrySubdivision": "AL",
+                                "postalCode": "35242",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "516 Liberty Pkwy, Vestavia Hills, AL 35242",
+                                "countrySubdivisionName": "Alabama"
+                            },
+                            "position": {
+                                "lat": 33.48234,
+                                "lon": -86.70719
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 33.48324,
+                                    "lon": -86.70827
+                                },
+                                "btmRightPoint": {
+                                    "lat": 33.48144,
+                                    "lon": -86.70611
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 33.48129,
+                                        "lon": -86.7065
+                                    }
+                                }
+                            ]
                         }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "3089",
-                  "streetName": "157th Ave NE",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980525342",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "3089 157th Ave NE, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.63836,
-                  "lon": -122.13119
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.63926,
-                    "lon": -122.13252
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.63746,
-                    "lon": -122.12986
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.63832,
-                      "lon": -122.13117
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2439113",
-                "score": 5.588,
-                "dist": 312.06842961967754,
-                "info": "search:ta:840539001780065-US",
-                "poi": {
-                  "name": "First Technology Fcu",
-                  "categories": [
-                    "cash dispenser"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CASH_DISPENSER",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "cash dispenser"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "16041",
-                  "streetName": "NE 36th Way",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980526301",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "16041 NE 36th Way, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.64218,
-                  "lon": -122.12623
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.64308,
-                    "lon": -122.12756
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.64128,
-                    "lon": -122.1249
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.64223,
-                      "lon": -122.12622
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/3968568",
-                "score": 5.588,
-                "dist": 320.81751337794861,
-                "info": "search:ta:840539001783662-US",
-                "poi": {
-                  "name": "First Technology Fcu",
-                  "categories": [
-                    "cash dispenser"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CASH_DISPENSER",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "cash dispenser"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "16071",
-                  "streetName": "NE 36th Way",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980526301",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "16071 NE 36th Way, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.64218,
-                  "lon": -122.12601
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.64308,
-                    "lon": -122.12734
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.64128,
-                    "lon": -122.12468
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.64222,
-                      "lon": -122.12601
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2539167",
-                "score": 5.588,
-                "dist": 328.8257606254669,
-                "info": "search:ta:840539000384928-US",
-                "poi": {
-                  "name": "ATM",
-                  "categories": [
-                    "cash dispenser"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CASH_DISPENSER",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "cash dispenser"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "16070",
-                  "streetName": "NE 36th Way",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980526301",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "16070 NE 36th Way, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.64227,
-                  "lon": -122.12602
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.64317,
-                    "lon": -122.12735
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.64137,
-                    "lon": -122.12469
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.64222,
-                      "lon": -122.12601
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "summary": {
-              "query": "statue of liberty",
-              "queryType": "NON_NEAR",
-              "queryTime": 41,
-              "numResults": 2,
-              "offset": 0,
-              "totalResults": 17,
-              "fuzzyLevel": 1
+                    ]
+                }
             },
-            "results": [
-              {
-                "type": "POI",
-                "id": "US/POI/p1/5753969",
-                "score": 9.204,
-                "info": "search:ta:840369001174316-US",
-                "poi": {
-                  "name": "Statue of Liberty",
-                  "categories": [
-                    "important tourist attraction",
-                    "monument"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "IMPORTANT_TOURIST_ATTRACTION",
-                      "names": [
+            {
+                "statusCode": 200,
+                "response": {
+                    "summary": {
+                        "query": "starbucks",
+                        "queryType": "NON_NEAR",
+                        "queryTime": 47,
+                        "numResults": 10,
+                        "offset": 0,
+                        "totalResults": 17,
+                        "fuzzyLevel": 1,
+                        "geoBias": {
+                            "lat": 47.639769,
+                            "lon": -122.128362
+                        }
+                    },
+                    "results": [
                         {
-                          "nameLocale": "en-US",
-                          "name": "important tourist attraction"
+                            "type": "POI",
+                            "id": "US/POI/p0/3657722",
+                            "score": 2.405,
+                            "dist": 1206.8488178244172,
+                            "info": "search:ta:840531000006554-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-8695816",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/site-selector",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "15000",
+                                "streetName": "NE 24th St",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980525522",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "15000 NE 24th St, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.63265,
+                                "lon": -122.14052
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.63355,
+                                    "lon": -122.14185
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.63175,
+                                    "lon": -122.13919
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "minor",
+                                    "position": {
+                                        "lat": 47.63156,
+                                        "lon": -122.14056
+                                    }
+                                },
+                                {
+                                    "type": "minor",
+                                    "position": {
+                                        "lat": 47.63156,
+                                        "lon": -122.14058
+                                    }
+                                },
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.63156,
+                                        "lon": -122.14048
+                                    }
+                                },
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.6324,
+                                        "lon": -122.13938
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "monument"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "municipalitySubdivision": "New York City, New York, NYC",
-                  "municipality": "New York City, New York, NYC, NY City, NY, Manhattan, Bowling Green",
-                  "countrySecondarySubdivision": "New York",
-                  "countryTertiarySubdivision": "Manhattan",
-                  "countrySubdivision": "NY",
-                  "postalCode": "10004",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "New York, NY 10004",
-                  "countrySubdivisionName": "New York"
-                },
-                "position": {
-                  "lat": 40.68955,
-                  "lon": -74.04483
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 40.69045,
-                    "lon": -74.04602
-                  },
-                  "btmRightPoint": {
-                    "lat": 40.68865,
-                    "lon": -74.04364
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 40.69001,
-                      "lon": -74.04683
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p0/235647",
-                "score": 9.204,
-                "info": "search:ta:840019000670588-US",
-                "poi": {
-                  "name": "Statue of Liberty",
-                  "phone": "+(1)-(205)-9700251",
-                  "url": "www.1bsa.org",
-                  "categories": [
-                    "important tourist attraction"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "IMPORTANT_TOURIST_ATTRACTION",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "important tourist attraction"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "516",
-                  "streetName": "Liberty Pkwy",
-                  "municipalitySubdivision": "Vestavia Hills, Vestavia",
-                  "municipality": "Vestavia Hills, Vestavia HLS, Vestavia, Shoal Creek, Meadowbrook, Birmingham",
-                  "countrySecondarySubdivision": "Jefferson",
-                  "countryTertiarySubdivision": "Leeds",
-                  "countrySubdivision": "AL",
-                  "postalCode": "35242",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "516 Liberty Pkwy, Vestavia Hills, AL 35242",
-                  "countrySubdivisionName": "Alabama"
-                },
-                "position": {
-                  "lat": 33.48234,
-                  "lon": -86.70719
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 33.48324,
-                    "lon": -86.70827
-                  },
-                  "btmRightPoint": {
-                    "lat": 33.48144,
-                    "lon": -86.70611
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 33.48129,
-                      "lon": -86.7065
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "summary": {
-              "query": "starbucks",
-              "queryType": "NON_NEAR",
-              "queryTime": 40,
-              "numResults": 10,
-              "offset": 0,
-              "totalResults": 14,
-              "fuzzyLevel": 1,
-              "geoBias": {
-                "lat": 47.639769,
-                "lon": -122.128362
-              }
-            },
-            "results": [
-              {
-                "type": "POI",
-                "id": "US/POI/p0/2561063",
-                "score": 5.581,
-                "dist": 1206.8488178244172,
-                "info": "search:ta:840531000006554-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-8695816",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
+                            "type": "POI",
+                            "id": "US/POI/p0/5559828",
+                            "score": 2.404,
+                            "dist": 1979.2222952267998,
+                            "info": "search:ta:840539001950429-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-7470690",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/site-selector",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "1350",
+                                "streetName": "156th Ave NE",
+                                "municipalitySubdivision": "Crossroads, Bellevue",
+                                "municipality": "Bellevue",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98007",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "1350 156th Ave NE, Bellevue, WA 98007",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.62212,
+                                "lon": -122.13179
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.62302,
+                                    "lon": -122.13312
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.62122,
+                                    "lon": -122.13046
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.62213,
+                                        "lon": -122.13236
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "15000",
-                  "streetName": "NE 24th St",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980525593",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "15000 NE 24th St, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.63265,
-                  "lon": -122.14052
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.63355,
-                    "lon": -122.14185
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.63175,
-                    "lon": -122.13919
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "minor",
-                    "position": {
-                      "lat": 47.63156,
-                      "lon": -122.14056
-                    }
-                  },
-                  {
-                    "type": "minor",
-                    "position": {
-                      "lat": 47.63156,
-                      "lon": -122.14058
-                    }
-                  },
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.63156,
-                      "lon": -122.14048
-                    }
-                  },
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.6324,
-                      "lon": -122.13938
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2532156",
-                "score": 5.57,
-                "dist": 2490.3337046455963,
-                "info": "search:ta:840539001015090-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-4556500",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
+                            "type": "POI",
+                            "id": "US/POI/p1/8396372",
+                            "score": 2.403,
+                            "dist": 2315.294397491255,
+                            "info": "search:ta:840539000484552-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-6436471",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/store/15097",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "15600",
+                                "streetName": "NE 8th St",
+                                "municipalitySubdivision": "Crossroads, Bellevue",
+                                "municipality": "Bellevue",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98008",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "15600 NE 8th St, Bellevue, WA 98008",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.61896,
+                                "lon": -122.12945
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.61986,
+                                    "lon": -122.13078
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.61806,
+                                    "lon": -122.12812
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.619,
+                                        "lon": -122.12945
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "1645",
-                  "streetName": "140th Ave NE",
-                  "municipalitySubdivision": "Crossroads, Bellevue",
-                  "municipality": "Bellevue",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98005",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "1645 140th Ave NE, Bellevue, WA 98005",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.62626,
-                  "lon": -122.15487
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.62716,
-                    "lon": -122.1562
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.62536,
-                    "lon": -122.15354
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.62645,
-                      "lon": -122.15446
-                    }
-                  },
-                  {
-                    "type": "minor",
-                    "position": {
-                      "lat": 47.62579,
-                      "lon": -122.15377
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p0/2596848",
-                "score": 5.57,
-                "dist": 2509.1728575654024,
-                "info": "search:ta:840539000484552-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-6436471",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
+                            "type": "POI",
+                            "id": "US/POI/p1/4002413",
+                            "score": 2.403,
+                            "dist": 2490.3337046455963,
+                            "info": "search:ta:840539001015090-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-4556500",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "https://www.starbucks.com/store-locator/store/15901",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "1645",
+                                "streetName": "140th Ave NE",
+                                "municipalitySubdivision": "Crossroads, Bellevue",
+                                "municipality": "Bellevue",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98005",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "1645 140th Ave NE, Bellevue, WA 98005",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.62626,
+                                "lon": -122.15487
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.62716,
+                                    "lon": -122.1562
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.62536,
+                                    "lon": -122.15354
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.62645,
+                                        "lon": -122.15446
+                                    }
+                                },
+                                {
+                                    "type": "minor",
+                                    "position": {
+                                        "lat": 47.62579,
+                                        "lon": -122.15377
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "15600",
-                  "streetName": "NE 8th St",
-                  "municipalitySubdivision": "Crossroads, Bellevue",
-                  "municipality": "Bellevue",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98008",
-                  "extendedPostalCode": "980083906",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "15600 NE 8th St, Bellevue, WA 98008",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.61726,
-                  "lon": -122.13073
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.61816,
-                    "lon": -122.13206
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.61636,
-                    "lon": -122.1294
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.61701,
-                      "lon": -122.13228
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p0/2565873",
-                "score": 5.566,
-                "dist": 3005.0070397916561,
-                "info": "search:ta:840539000788200-US",
-                "poi": {
-                  "name": "Starbuck's Towing",
-                  "phone": "+(1)-(425)-4541800",
-                  "categories": [
-                    "public amenity",
-                    "road rescue"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "PUBLIC_AMENITY",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "public amenity"
+                            "type": "POI",
+                            "id": "US/POI/p1/7751122",
+                            "score": 2.401,
+                            "dist": 3479.393294615887,
+                            "info": "search:ta:840539000326896-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-8619198",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/site-selector",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "7425",
+                                "streetName": "166th Ave NE",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980527708",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "7425 166th Ave NE, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.67055,
+                                "lon": -122.12001
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.67145,
+                                    "lon": -122.12135
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.66965,
+                                    "lon": -122.11867
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.67069,
+                                        "lon": -122.11889
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "road rescue"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "13234",
-                  "streetName": "NE 16th St",
-                  "municipalitySubdivision": "Willburton, Bellevue",
-                  "municipality": "Bellevue",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98005",
-                  "extendedPostalCode": "980052352",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "13234 NE 16th St, Bellevue, WA 98005",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.62582,
-                  "lon": -122.16271
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.62672,
-                    "lon": -122.16404
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.62492,
-                    "lon": -122.16138
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.62439,
-                      "lon": -122.16271
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p0/2418369",
-                "score": 5.562,
-                "dist": 3479.393294615887,
-                "info": "search:ta:840539000326896-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-8619198",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
+                            "type": "POI",
+                            "id": "US/POI/p0/7271612",
+                            "score": 2.401,
+                            "dist": 3529.7080738812224,
+                            "info": "search:ta:840539001033722-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-3789496",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/site-selector",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "180",
+                                "streetName": "148th Ave SE",
+                                "municipalitySubdivision": "West Lake Hills, Bellevue",
+                                "municipality": "Bellevue",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98007",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "180 148th Ave SE, Bellevue, WA 98007",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.60901,
+                                "lon": -122.14
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.60991,
+                                    "lon": -122.14133
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.60811,
+                                    "lon": -122.13867
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.60901,
+                                        "lon": -122.14008
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "7425",
-                  "streetName": "166th Ave NE",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980527833",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "7425 166th Ave NE, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.67055,
-                  "lon": -122.12001
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.67145,
-                    "lon": -122.12135
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.66965,
-                    "lon": -122.11867
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.67069,
-                      "lon": -122.11889
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p0/2585044",
-                "score": 5.562,
-                "dist": 3529.7080738812224,
-                "info": "search:ta:840539001033722-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-3789496",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
+                            "type": "POI",
+                            "id": "US/POI/p0/3696734",
+                            "score": 2.401,
+                            "dist": 3622.4410746187291,
+                            "info": "search:ta:840531000006551-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-8822881",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/store/15022",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "7625",
+                                "streetName": "170th Ave NE",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980520910",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "7625 170th Ave NE, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.67086,
+                                "lon": -122.11392
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.67176,
+                                    "lon": -122.11526
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.66996,
+                                    "lon": -122.11258
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.67073,
+                                        "lon": -122.1135
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "180",
-                  "streetName": "148th Ave SE",
-                  "municipalitySubdivision": "West Lake Hills, Bellevue",
-                  "municipality": "Eastgate, Bellevue",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98007",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "180 148th Ave SE, Bellevue, WA 98007",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.60901,
-                  "lon": -122.14
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.60991,
-                    "lon": -122.14133
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.60811,
-                    "lon": -122.13867
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.60901,
-                      "lon": -122.14008
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2540885",
-                "score": 5.561,
-                "dist": 3588.9186387942409,
-                "info": "search:ta:840539001247584-US",
-                "poi": {
-                  "name": "Starbuck's Towing",
-                  "phone": "+(1)-(425)-4541800",
-                  "categories": [
-                    "company",
-                    "transport"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "COMPANY",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "company"
+                            "type": "POI",
+                            "id": "US/POI/p0/7623295",
+                            "score": 2.401,
+                            "dist": 3818.293513029088,
+                            "info": "search:ta:840539000640782-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-8853323",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/site-selector",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "17246",
+                                "streetName": "Redmond Way",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980524403",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "17246 Redmond Way, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.67174,
+                                "lon": -122.10976
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.67264,
+                                    "lon": -122.1111
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.67084,
+                                    "lon": -122.10842
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.6706,
+                                        "lon": -122.11026
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "transport"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "1503",
-                  "streetName": "128th Pl NE",
-                  "municipalitySubdivision": "Willburton, Bellevue",
-                  "municipality": "Bellevue",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98005",
-                  "extendedPostalCode": "980052216",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "1503 128th Pl NE, Bellevue, WA 98005",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.6234,
-                  "lon": -122.16964
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.6243,
-                    "lon": -122.17097
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.6225,
-                    "lon": -122.16831
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.62332,
-                      "lon": -122.16942
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2537733",
-                "score": 5.561,
-                "dist": 3622.4410746187291,
-                "info": "search:ta:840531000006551-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-8822881",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
+                            "type": "POI",
+                            "id": "US/POI/p0/3692951",
+                            "score": 2.4,
+                            "dist": 3987.80992387863,
+                            "info": "search:ta:840531000006669-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-8818265",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/site-selector",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "6617",
+                                "streetName": "132Nd Ave Ne Bridle Trails Shopping Center",
+                                "municipalitySubdivision": "Kirkland, Bridle Trails",
+                                "municipality": "Kirkland",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98033",
+                                "extendedPostalCode": "980338234",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "6617 132Nd Ave Ne Bridle Trails Shopping Center, Kirkland, WA 98033",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.66514,
+                                "lon": -122.16599
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.66604,
+                                    "lon": -122.16733
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.66424,
+                                    "lon": -122.16465
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.666,
+                                        "lon": -122.16669
+                                    }
+                                },
+                                {
+                                    "type": "minor",
+                                    "position": {
+                                        "lat": 47.66553,
+                                        "lon": -122.16405
+                                    }
+                                }
+                            ]
                         },
                         {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
+                            "type": "POI",
+                            "id": "US/POI/p1/4009804",
+                            "score": 2.4,
+                            "dist": 4009.9222051470738,
+                            "info": "search:ta:840531000006548-US",
+                            "poi": {
+                                "name": "Starbucks",
+                                "phone": "+(1)-(425)-8859590",
+                                "brands": [
+                                    {
+                                        "name": "Starbucks"
+                                    }
+                                ],
+                                "url": "www.starbucks.com/site-selector",
+                                "categories": [
+                                    "café/pub",
+                                    "coffee shop"
+                                ],
+                                "classifications": [
+                                    {
+                                        "code": "CAFE_PUB",
+                                        "names": [
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "coffee shop"
+                                            },
+                                            {
+                                                "nameLocale": "en-US",
+                                                "name": "café/pub"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "address": {
+                                "streetNumber": "15738",
+                                "streetName": "Redmond Way Pad 3 Redmond Center",
+                                "municipality": "Redmond",
+                                "countrySecondarySubdivision": "King",
+                                "countryTertiarySubdivision": "Seattle East",
+                                "countrySubdivision": "WA",
+                                "postalCode": "98052",
+                                "extendedPostalCode": "980523830",
+                                "countryCode": "US",
+                                "country": "United States Of America",
+                                "countryCodeISO3": "USA",
+                                "freeformAddress": "15738 Redmond Way Pad 3 Redmond Center, Redmond, WA 98052",
+                                "countrySubdivisionName": "Washington"
+                            },
+                            "position": {
+                                "lat": 47.67583,
+                                "lon": -122.12877
+                            },
+                            "viewport": {
+                                "topLeftPoint": {
+                                    "lat": 47.67673,
+                                    "lon": -122.13011
+                                },
+                                "btmRightPoint": {
+                                    "lat": 47.67493,
+                                    "lon": -122.12743
+                                }
+                            },
+                            "entryPoints": [
+                                {
+                                    "type": "minor",
+                                    "position": {
+                                        "lat": 47.67456,
+                                        "lon": -122.12887
+                                    }
+                                },
+                                {
+                                    "type": "main",
+                                    "position": {
+                                        "lat": 47.67668,
+                                        "lon": -122.12829
+                                    }
+                                }
+                            ]
                         }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "7625",
-                  "streetName": "170th Ave NE",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980520910",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "7625 170th Ave NE, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.67086,
-                  "lon": -122.11392
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.67176,
-                    "lon": -122.11526
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.66996,
-                    "lon": -122.11258
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.67073,
-                      "lon": -122.1135
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2533945",
-                "score": 5.558,
-                "dist": 3987.80992387863,
-                "info": "search:ta:840531000006669-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-8818265",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
-                        },
-                        {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "6617",
-                  "streetName": "132nd Ave NE",
-                  "municipalitySubdivision": "Kirkland, Bridle Trails",
-                  "municipality": "Totem Lake, Redmond, Kirkland, Juanita, Houghton",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98033",
-                  "extendedPostalCode": "980338666",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "6617 132nd Ave NE, Kirkland, WA 98033",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.66514,
-                  "lon": -122.16599
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.66604,
-                    "lon": -122.16733
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.66424,
-                    "lon": -122.16465
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "minor",
-                    "position": {
-                      "lat": 47.66557,
-                      "lon": -122.16404
-                    }
-                  },
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.66614,
-                      "lon": -122.16669
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "POI",
-                "id": "US/POI/p1/2539561",
-                "score": 5.558,
-                "dist": 4009.9222051470738,
-                "info": "search:ta:840531000006548-US",
-                "poi": {
-                  "name": "Starbucks",
-                  "phone": "+(1)-(425)-8859590",
-                  "url": "www.starbucks.com",
-                  "categories": [
-                    "café/pub",
-                    "coffee shop"
-                  ],
-                  "classifications": [
-                    {
-                      "code": "CAFE_PUB",
-                      "names": [
-                        {
-                          "nameLocale": "en-US",
-                          "name": "coffee shop"
-                        },
-                        {
-                          "nameLocale": "en-US",
-                          "name": "café/pub"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "address": {
-                  "streetNumber": "15738",
-                  "streetName": "Redmond Way",
-                  "municipalitySubdivision": "Redmond",
-                  "municipality": "Redmond, Earlmount, Avondale, Ames Lake, Adelaide",
-                  "countrySecondarySubdivision": "King",
-                  "countryTertiarySubdivision": "Seattle East",
-                  "countrySubdivision": "WA",
-                  "postalCode": "98052",
-                  "extendedPostalCode": "980523896",
-                  "countryCode": "US",
-                  "country": "United States Of America",
-                  "countryCodeISO3": "USA",
-                  "freeformAddress": "15738 Redmond Way, Redmond, WA 98052",
-                  "countrySubdivisionName": "Washington"
-                },
-                "position": {
-                  "lat": 47.67583,
-                  "lon": -122.12877
-                },
-                "viewport": {
-                  "topLeftPoint": {
-                    "lat": 47.67673,
-                    "lon": -122.13011
-                  },
-                  "btmRightPoint": {
-                    "lat": 47.67493,
-                    "lon": -122.12743
-                  }
-                },
-                "entryPoints": [
-                  {
-                    "type": "minor",
-                    "position": {
-                      "lat": 47.67456,
-                      "lon": -122.12887
-                    }
-                  },
-                  {
-                    "type": "main",
-                    "position": {
-                      "lat": 47.67668,
-                      "lon": -122.12829
-                    }
-                  }
-                ]
-              }
-            ]
-          }
+                    ]
+                }
+            }
         ]
       }
     },
