@@ -340,38 +340,10 @@
         }
       }
     },
-    "Scope": {
-      "type": "object",
-      "description": "Contains a list of subscriptions or management groups.",
-      "properties": {
-        "list": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of subscriptions or management groups."
-        },
-        "scopeType": {
-          "description": "Enum indicating a type of a list. it is 'sub' for subscriptions or 'mg' for management group",
-          "x-ms-client-name": "type",
-          "default": "sub",
-          "type": "string",
-          "enum": [
-            "sub",
-            "mg"
-          ],
-          "x-ms-enum": {
-            "name": "ScopeType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "SavedQueryProperties": {
       "description": "Properties that contain a saved query.",
       "required": [
-        "query",
-        "queryType"
+        "query"
       ],
       "properties": {
         "timeModified": {
@@ -379,24 +351,17 @@
           "description": "Date and time in UTC of the last modification that was made to this saved query definition.",
           "readOnly": true
         },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "Unique user id of the specific user that owns this saved query."
-        },
         "description": {
           "type": "string",
           "description": "The description of a saved query."
-        },
-        "scope": {
-          "description": "Scope of saved query.",
-          "$ref": "#/definitions/Scope"
         },
         "query": {
           "type": "string",
           "description": "KQL query that will be saved."
         },
-        "queryType": {
-          "description": "Enum indicating a type saved query.",
+        "resultKind": {
+          "description": "Enum indicating a type of saved query.",
+          "readOnly": true,
           "default": "basic",
           "type": "string",
           "enum": [
@@ -404,7 +369,7 @@
             "extended"
           ],
           "x-ms-enum": {
-            "name": "QueryType",
+            "name": "ResultKind",
             "modelAsString": true
           }
         }
@@ -430,24 +395,16 @@
     "SavedQueryPropertiesUpdateParameters": {
       "description": "Properties that contain a workbook for PATCH operation.",
       "properties": {
-        "modifiedBy": {
-          "type": "string",
-          "description": "Unique user id of the specific user that owns this saved query."
-        },
         "description": {
           "type": "string",
           "description": "The description of a saved query."
-        },
-        "scope": {
-          "description": "Scope of saved query.",
-          "$ref": "#/definitions/Scope"
         },
         "query": {
           "type": "string",
           "description": "KQL query that will be saved."
         },
-        "queryType": {
-          "description": "Enum indicating a type saved query.",
+        "resultKind": {
+          "description": "Enum indicating a type of saved query.",
           "default": "basic",
           "type": "string",
           "enum": [
@@ -455,7 +412,7 @@
             "extended"
           ],
           "x-ms-enum": {
-            "name": "QueryType",
+            "name": "ResultKind",
             "modelAsString": true
           }
         }

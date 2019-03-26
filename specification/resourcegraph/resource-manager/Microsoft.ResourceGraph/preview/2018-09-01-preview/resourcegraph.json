@@ -84,8 +84,7 @@
           "Query options": { "$ref": "./examples/ResourcesQueryOptions.json" },
           "First page query": { "$ref": "./examples/ResourcesFirstPageQuery.json" },
           "Next page query": { "$ref": "./examples/ResourcesNextPageQuery.json" },
-          "Random page query": { "$ref": "./examples/ResourcesRandomPageQuery.json" },
-          "Saved query with management groups": {"$ref": "./examples/ResourcesSavedQueryWithSub.json"}
+          "Random page query": { "$ref": "./examples/ResourcesRandomPageQuery.json" }
         }
       }
     },
@@ -171,13 +170,6 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
-        },
-        "savedQuery": {
-          "description": "Optional. When it is presented, it will be used to get a saved query by id and execute the query to fetch data",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SavedQuery"
-          }
         }
       }
     },
@@ -396,42 +388,6 @@
           "$ref": "#/definitions/Facet"
         }
       ]
-    },
-    "SavedQuery": {
-      "type":"object",
-      "description": "Optional. When it is presented, it will be used to get a saved query by id and execute the query to fetch data",
-      "properties": {
-        "savedQueryId": {
-          "description": "The saved query id that will be used to fetch the content of query.",
-          "type": "string"
-        },
-        "scope": {
-          "type": "object",
-          "description": "Contains a list of subscriptions or management groups.",
-          "properties": {
-            "list": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "The list of subscriptions or management groups."
-            },
-            "scopeType": {
-              "description": "Enum indicating a type of a list. it is 'sub' for subscriptions or 'mg' for management group",
-              "x-ms-client-name": "type",
-              "default": "sub",
-              "type": "string",
-              "enum": [
-                "sub"
-              ],
-              "x-ms-enum": {
-                "name": "ScopeType",
-                "modelAsString": true
-              }
-            }
-          }
-        }
-      }
     },
     "FacetError" : {
       "x-ms-discriminator-value": "FacetError",
