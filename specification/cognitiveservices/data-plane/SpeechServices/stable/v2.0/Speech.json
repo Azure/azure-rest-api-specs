@@ -1792,46 +1792,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "title": "IReadOnlyDictionary`2",
-              "type": "object",
-              "properties": {
-                "None": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "Language": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "Acoustic": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "Pronunciation": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "CustomVoice": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "LanguageGeneration": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/IReadOnlyDict"
             },
             "headers": {
               "X-RateLimit-Limit": {
@@ -12274,6 +12235,48 @@
     }
   },
   "definitions": {
+    "ReadOnlyDict": {
+    "title": "IReadOnlyDictionary`2",
+    "type": "object",
+    "properties": {
+      "None": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "Language": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "Acoustic": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "Pronunciation": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "CustomVoice": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "LanguageGeneration": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
     "Test": {
       "title": "Test",
       "required": [
