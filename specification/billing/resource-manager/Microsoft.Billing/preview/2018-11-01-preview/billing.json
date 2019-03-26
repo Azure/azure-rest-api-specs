@@ -1950,10 +1950,10 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/elevate": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/elevate": {
       "post": {
         "description": "Elevates the caller's access to match their billing profile access.",
-        "operationId": "BillingProfileInvoiceSection_Elevate",
+        "operationId": "InvoiceSection_Elevate",
         "x-ms-examples": {
           "Elevate": {
             "$ref": "./examples/ElevateInvoiceSection.json"
@@ -1962,9 +1962,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
             "$ref": "#/parameters/invoiceSectionNameParameter"
