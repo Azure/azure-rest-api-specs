@@ -50,10 +50,78 @@ directive:
     from: cosmos-db.json
     where: $.definitions.DatabaseAccountCreateUpdateParameters
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.DatabaseResource
+    reason: The DatabaseResource doesn't support Path operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.CollectionResource
+    reason: The CollectionResource doesn't support Path operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
-    reason: The Metrics API has has a property name with a leading underscore character
+    reason: The Metrics API has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GeneralResourceProperties.properties._rid
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GeneralResourceProperties.properties._ts
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GeneralResourceProperties.properties._self
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GeneralResourceProperties.properties._etag
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.DatabaseProperties.properties._colls
+    reason: The database has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.DatabaseProperties.properties._users
+    reason: The database has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CollectionProperties.properties._doc
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CollectionProperties.properties._sprocs
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CollectionProperties.properties._triggers
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CollectionProperties.properties._udfs
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CollectionProperties.properties._conflicts
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CreateUpdateOptions.properties.If-Match
+    reason: The option has a property name with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CreateUpdateOptions.properties.If-None-Match
+    reason: The option has a property name with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CreateUpdateOptions.properties.Session-Token
+    reason: The option has a property name with leading capital letters
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.CreateUpdateOptions.properties.Throughput
+    reason: The option has a property name with leading capital letters
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P10
