@@ -1,6 +1,6 @@
 # Public Preview API specification for FrontDoor Azure Resource
 
-This directory contains preview schema specifications for the new Front Door Azure Resource.  The API will be added to support Front Door on Azure Resource Manager.
+This directory contains the schema specifications for the Front Door Azure Resource.  The API will be added to support Front Door on Azure Resource Manager.
 
 The base swagger document for new features in this preview: [FrontDoor.json](./FrontDoor.json)
 

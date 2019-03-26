@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-08-01",
+    "api-version": "2019-04-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "frontDoorName": "frontDoor1",
@@ -30,9 +30,12 @@
               "patternsToMatch": [
                 "/*"
               ],
-              "backendPool": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
-              },
+              "routeConfiguration": {
+                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                "backendPool": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                }
+              },			  
               "enabledState": "Enabled"
             }
           }
@@ -111,6 +114,9 @@
             }
           }
         ],
+        "backendPoolsSettings": {
+          "enforceCertificateNameCheck": "Enabled"
+        },
         "enabledState": "Enabled"
       }
     }
@@ -146,10 +152,13 @@
                 "patternsToMatch": [
                   "/*"
                 ],
-                "customForwardingPath": "",
-                "forwardingProtocol": "MatchRequest",
-                "backendPool": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                "routeConfiguration": {
+                  "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+   	              "customForwardingPath": "",
+                  "forwardingProtocol": "MatchRequest",
+                  "backendPool": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                  }
                 },
                 "enabledState": "Enabled"
               }
@@ -235,6 +244,9 @@
               }
             }
           ],
+          "backendPoolsSettings": {
+            "enforceCertificateNameCheck": "Enabled"
+          },
           "enabledState": "Enabled",
           "resourceState": "Creating",
           "provisioningState": "Succeeded",
@@ -272,10 +284,13 @@
                 "patternsToMatch": [
                   "/*"
                 ],
-                "customForwardingPath": "",
-                "forwardingProtocol": "MatchRequest",
-                "backendPool": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                "routeConfiguration": {
+                  "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+   	              "customForwardingPath": "",
+                  "forwardingProtocol": "MatchRequest",
+                  "backendPool": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                  }
                 },
                 "enabledState": "Enabled"
               }
@@ -361,6 +376,9 @@
               }
             }
           ],
+          "backendPoolsSettings": {
+            "enforceCertificateNameCheck": "Enabled"
+          },
           "enabledState": "Enabled",
           "resourceState": "Creating",
           "provisioningState": "Provisioning",
@@ -398,10 +416,13 @@
                 "patternsToMatch": [
                   "/*"
                 ],
-                "customForwardingPath": "",
-                "forwardingProtocol": "MatchRequest",
-                "backendPool": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                "routeConfiguration": {
+                  "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+   	              "customForwardingPath": "",
+                  "forwardingProtocol": "MatchRequest",
+                  "backendPool": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                  }
                 },
                 "enabledState": "Enabled"
               }
@@ -487,6 +508,9 @@
               }
             }
           ],
+          "backendPoolsSettings": {
+            "enforceCertificateNameCheck": "Enabled"
+          },
           "enabledState": "Enabled",
           "resourceState": "Creating",
           "provisioningState": "Provisioning",

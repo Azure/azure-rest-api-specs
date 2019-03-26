@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-08-01",
+    "version": "2019-04-01",
     "title": "FrontDoorManagementClient",
     "description": "Use these APIs to manage Azure Front Door resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -431,8 +431,11 @@
           }
         },
         "x-ms-examples": {
-          "Get Routing Rule": {
+          "Get Forwarding Routing Rule": {
             "$ref": "./examples/FrontdoorRoutingRuleGet.json"
+          },
+          "Get Redirect Routing Rule": {
+            "$ref": "./examples/FrontdoorRedirectRoutingRuleGet.json"
           }
         }
       },
@@ -495,8 +498,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update specific Routing Rule": {
+          "Create or update specific Forwarding Routing Rule": {
             "$ref": "./examples/FrontdoorRoutingRuleCreate.json"
+          },
+          "Create or update specific Redirect Routing Rule": {
+            "$ref": "./examples/FrontdoorRedirectRoutingRuleCreate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1610,6 +1616,10 @@
             "$ref": "#/definitions/FrontendEndpoint"
           }
         },
+        "backendPoolsSettings": {
+          "description": "Settings for all backendPools",
+          "$ref": "#/definitions/BackendPoolsSettings"
+        },
         "enabledState": {
           "description": "Operational status of the Front Door load balancer. Permitted values are 'Enabled' or 'Disabled'",
           "enum": [
@@ -1772,6 +1782,40 @@
             "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
           }
         },
+        "enabledState": {
+          "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "routingRuleEnabledState",
+            "modelAsString": true
+          }
+        },
+        "routeConfiguration": {
+          "description": "A reference to the routing configuration.",
+          "$ref": "#/definitions/RouteConfiguration"
+        }
+      }
+    },
+    "RouteConfiguration": {
+      "discriminator": "@odata.type",
+      "description": "Base class for all types of Route.",
+      "properties": {
+          "@odata.type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@odata.type"
+      ]
+    },
+    "ForwardingConfiguration": {
+      "description": "Describes Forwarding Route.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+      "properties": {
         "customForwardingPath": {
           "description": "A custom path used to rewrite resource paths matched by this rule. Leave empty to use incoming path.",
           "type": "string"
@@ -1796,20 +1840,67 @@
         "backendPool": {
           "description": "A reference to the BackendPool which this rule routes to.",
           "$ref": "./network.json#/definitions/SubResource"
-        },
-        "enabledState": {
-          "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteConfiguration"
+        }
+      ]
+    },
+    "RedirectConfiguration": {
+      "description": "Describes Redirect Route.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+      "properties": {
+        "redirectType": {
+          "description": "The redirect type the rule will use when redirecting traffic.",
           "type": "string",
+          "enum": [
+            "Moved",
+            "Found",
+            "TemporaryRedirect",
+            "PermanentRedirect"
+          ],
           "x-ms-enum": {
-            "name": "FrontDoorEnabledState",
+            "name": "FrontDoorRedirectType",
             "modelAsString": true
           }
+        },
+        "redirectProtocol": {
+          "description": "The protocol of the destination to where the traffic is redirected",
+          "type": "string",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorRedirectProtocol",
+            "modelAsString": true
+          }
+        },
+        "customHost": {
+          "type": "string",
+          "description": "Host to redirect. Leave empty to use use the incoming host as the destination host."
+        },
+        "customPath": {
+          "type": "string",
+          "description": "The full path to redirect. Path cannot be empty and must start with /. Leave empty to use the incoming path as destination path."
+        },
+        "customFragment": {
+          "type": "string",
+          "description": "Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #."
+        },
+        "customQueryString": {
+          "description": "The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in <key>=<value> format. The first ? and & will be added automatically so do not include them in the front, but do separate multiple query strings with &.",
+          "type": "string"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteConfiguration"
+        }
+      ]
     },
     "Backend": {
       "description": "Backend address of a frontDoor load balancer.",
@@ -1843,7 +1934,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "FrontDoorEnabledState",
+            "name": "backendEnabledState",
             "modelAsString": true
           }
         },
@@ -2335,6 +2426,25 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of frontend endpoints if there are any."
+        }
+      }
+    },
+    "BackendPoolsSettings": {
+      "description": "Settings that apply to all backend pools.",
+      "type":"object",
+      "properties": {
+        "enforceCertificateNameCheck": {
+          "description": "Whether to enforce certificate name check on HTTPS requests to all backend pools. No effect on non-HTTPS requests.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "enforceCertificateNameCheckEnabledState",
+            "modelAsString": true
+          },
+          "default": "Enabled"
         }
       }
     },

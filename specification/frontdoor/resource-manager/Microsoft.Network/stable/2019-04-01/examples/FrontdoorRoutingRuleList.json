@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-08-01",
+    "api-version": "2019-04-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "frontDoorName": "frontDoor1"
@@ -10,7 +10,7 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRule1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/routingRule1",
             "name": "routingRule1",
             "properties": {
               "frontendEndpoints": [
@@ -27,10 +27,43 @@
               "patternsToMatch": [
                 "/*"
               ],
-              "customForwardingPath": "",
-              "forwardingProtocol": "MatchRequest",
-              "backendPool": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+              "routeConfiguration": {
+                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                "customForwardingPath": "",
+                "forwardingProtocol": "MatchRequest",
+                "backendPool": {
+                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                }
+              },
+              "enabledState": "Enabled"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/redirectRoutingRule1",
+            "name": "redirectRoutingRule1",
+            "properties": {
+              "frontendEndpoints": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/default"
+                }
+              ],
+              "acceptedProtocols": [
+                "Https"
+              ],
+              "patternsToMatch": [
+                "/*"
+              ],
+              "routeConfiguration": {
+                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                "redirectType": "Moved",
+                "redirectProtocol": "HttpsOnly",
+                "customHost": "www.bing.com",
+                "customPath": "/api",
+                "customFragment": "fragment",
+                "customQueryString": "a=b"
               },
               "enabledState": "Enabled"
             }
