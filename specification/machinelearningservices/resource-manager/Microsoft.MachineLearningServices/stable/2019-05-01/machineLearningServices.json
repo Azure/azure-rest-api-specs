@@ -2555,29 +2555,35 @@
       ],
       "properties": {
         "properties": {
-          "provisioningState": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The provisioning state of the workstation, which only appears in the response."
-          },
-          "vmSize": {
-            "type": "string",
-            "title": "VM size.",
-            "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
-          },
-          "osProfile": {
-            "$ref": "#/definitions/UserAccountCredentials"
-          },
-          "networkProfile": {
-            "$ref": "#/definitions/NetworkProfile"
-          }
+          "$ref": "#/definitions/WorkstationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkstationProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the workstation, which only appears in the response."
+        },
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/UserAccountCredentials"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile"
+        }
       },
       "required": [
         "vmSize",
         "osProfile"
       ],
       "description": "The properties of a workstation."
-      }
     },
     "WorkstationUpdateProperties": {
       "properties": {
