@@ -49,6 +49,15 @@ input-file:
 - Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
 ```
 
+### Tag: package-2019-03-preview
+
+These settings apply only when `--tag=package-2019-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-preview'
+input-file:
+- Microsoft.ResourceGraph/preview/2019-03-01-preview/savedquery.json
+```
+
 # Code Generation
 
 
