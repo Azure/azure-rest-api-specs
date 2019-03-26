@@ -1898,6 +1898,39 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfile}/invoiceSections/{invoiceSectionName}/elevate": {
+      "post": {
+        "description": "Elevates the caller's access to match their billing profile access.",
+        "operationId": "InvoiceSection_Elevate",
+        "x-ms-examples": {
+          "InitiateTransfer": {
+            "$ref": "./examples/ElevateInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Elevated the caller's access to the invoice section.",
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/initiateTransfer": {
       "post": {
         "description": "Initiates the request to transfer the GTM or legacy subscriptions or RIs to GTM.",
@@ -1917,9 +1950,6 @@
           {
             "$ref": "#/parameters/initiateTransferRequestParameter"
           }
-        ],
-        "tags": [
-          "AIPController"
         ],
         "responses": {
           "200": {
@@ -1957,9 +1987,6 @@
             "$ref": "#/parameters/transferNameParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of transfer.",
@@ -1994,9 +2021,6 @@
             "$ref": "#/parameters/transferNameParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of canceled transfer.",
@@ -2029,9 +2053,6 @@
           {
             "$ref": "#/parameters/invoiceSectionNameParameter"
           }
-        ],
-        "tags": [
-          "AIPController"
         ],
         "responses": {
           "200": {
@@ -2069,9 +2090,6 @@
             "$ref": "#/parameters/acceptTransferRequestParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of the accepted transfer.",
@@ -2101,9 +2119,6 @@
           {
             "$ref": "#/parameters/transferNameParameter"
           }
-        ],
-        "tags": [
-          "AIPController"
         ],
         "responses": {
           "200": {
@@ -2135,9 +2150,6 @@
             "$ref": "#/parameters/transferNameParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of the transfers with given Id.",
@@ -2163,9 +2175,6 @@
             "$ref": "./examples/ListRecipientTransfers.json"
           }
         },
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "List of transfers received by caller.",
