@@ -7831,18 +7831,9 @@
           "$ref": "#/definitions/NetworkProfile",
           "description": "Specifies the network interfaces of the virtual machine."
         },
-		"networkProfileConfiguration": {
-		  "$ref": "#/definition/VirtualMachineScaleSetVMNetworkProfileConfiguration",
+        "networkProfileConfiguration": {
+		  "$ref": "#/definitions/VirtualMachineScaleSetVMNetworkProfileConfiguration",
 		  "description": "Specifies the network profile configuration of the virtual machine."
-		},
-        "modelDefinitionApplied": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine."
-        },
-		"protectionPolicy": {
-		  "$ref": "#/definition/VirtualMachineScaleSetVMProtectionPolicy",
-		  "description": "Specifies the protection policy of the virtual machine."
 		},
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
@@ -7860,7 +7851,16 @@
         "licenseType": {
           "type": "string",
           "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
-        }
+        },
+		"modelDefinitionApplied": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine."
+        },
+		"protectionPolicy": {
+		  "$ref": "#/definitions/VirtualMachineScaleSetVMProtectionPolicy",
+		  "description": "Specifies the protection policy of the virtual machine."
+		}
       },
       "description": "Describes the properties of a virtual machine scale set virtual machine."
     },
@@ -7969,7 +7969,7 @@
       },
       "description": "The instance view of a virtual machine scale set VM."
     },
-    "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
+	"VirtualMachineScaleSetVMNetworkProfileConfiguration": {
       "properties": {
         "networkInterfaceConfigurations": {
            "type": "array",
@@ -7983,16 +7983,14 @@
     },
 	"VirtualMachineScaleSetVMProtectionPolicy": {
 	  "properties": {
-	    "protectFromScaleIn": {
-		  "required": false,
-	      "type": "boolean",
-		  "description": "Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation."
-		},
+        "protectFromScaleIn": {
+          "type": "boolean",
+          "description": "Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation."
+        },
 		"protectFromScaleSetActions": {
-		  "required": false,
-		  "type": "boolean",
-		  "description": "Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM."
-		}
+          "type": "boolean",
+          "description": "Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM."
+        }
 	  },
 	  "description": "The protection policy of a virtual machine scale set VM."
 	},
