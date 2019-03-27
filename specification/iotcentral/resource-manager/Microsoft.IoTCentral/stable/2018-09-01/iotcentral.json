@@ -416,11 +416,14 @@
           "Apps"
         ],
         "description": "Get all available application templates.",
-        "operationId": "Apps_Templates",
+        "operationId": "Apps_ListTemplates",
         "x-ms-examples": {
-          "Apps_Templates": {
+          "Apps_ListTemplates": {
             "$ref": "./examples/Apps_Templates.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -622,6 +625,7 @@
       "description": "Error details.",
       "properties": {
         "error": {
+          "description": "Error response body.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ErrorResponseBody"
         }
