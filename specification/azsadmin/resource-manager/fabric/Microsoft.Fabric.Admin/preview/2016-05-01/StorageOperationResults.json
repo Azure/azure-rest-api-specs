@@ -49,7 +49,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/StorageOperationResults"
+                            "$ref": "#/definitions/StorageOperationResult"
                         }
                     },
                     "404": {
@@ -62,7 +62,7 @@
             "get": {
                 "x-ms-examples": {
                     "Returns a list of all storage operation results at a location.": {
-                        "$ref": "./examples/StorageOperationResults/List.json"
+                        "$ref": "./examples/StorageOperationResult/List.json"
                     }
                 },
                 "tags": [
@@ -91,7 +91,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/StorageOperationResultsList"
+                            "$ref": "#/definitions/StorageOperationResultList"
                         }
                     },
                     "404": {
@@ -126,13 +126,16 @@
             "description": "Storage operation result properties.",
             "type": "object",
             "properties": {
+                "instances": {
+                    "description": "List of operation result instances.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "provisioningState": {
                     "description": "Success or failure of operation.",
                     "type": "string"
-                },
-                "error": {
-                    "code": "Programmatic error code.",
-                    "message": "User readable error message."
                 }
             }
         },

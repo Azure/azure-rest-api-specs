@@ -49,7 +49,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ApplicationOperationResults"
+                            "$ref": "#/definitions/ApplicationOperationResult"
                         }
                     },
                     "404": {
@@ -62,7 +62,7 @@
             "get": {
                 "x-ms-examples": {
                     "Returns a list of all application operation results at a location.": {
-                        "$ref": "./examples/ApplicationOperationResults/List.json"
+                        "$ref": "./examples/ApplicationOperationResult/List.json"
                     }
                 },
                 "tags": [
@@ -91,7 +91,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ApplicationOperationResultsList"
+                            "$ref": "#/definitions/ApplicationOperationResultList"
                         }
                     },
                     "404": {
@@ -126,13 +126,16 @@
             "description": "Application operation result properties.",
             "type": "object",
             "properties": {
+                "instances": {
+                    "description": "List of operation result instances.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "provisioningState": {
                     "description": "Success or failure of operation.",
                     "type": "string"
-                },
-                "error": {
-                    "code": "Programmatic error code.",
-                    "message": "User readable error message."
                 }
             }
         },
