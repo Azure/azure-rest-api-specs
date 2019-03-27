@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/azure-mgmt-blueprint"
+  package-name: "@azure/arm-blueprint"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-blueprint"
   generate-metadata: true
 ```
