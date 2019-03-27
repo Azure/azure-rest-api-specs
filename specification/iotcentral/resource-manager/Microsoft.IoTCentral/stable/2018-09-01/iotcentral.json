@@ -416,10 +416,10 @@
           "Apps"
         ],
         "description": "Get all available application templates.",
-        "operationId": "Apps_Templates",
+        "operationId": "App_Templates",
         "x-ms-examples": {
-          "Apps_Templates": {
-            "$ref": "./examples/Apps_Templates.json"
+          "App_Templates": {
+            "$ref": "./examples/App_Templates.json"
           }
         },
         "parameters": [
@@ -432,9 +432,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains all the non-security properties of the IoT Central application templates. Security-related properties are set to null.",
+            "description": "The body contains all the of the filtered IoT Central application templates.",
             "schema": {
-              "$ref": "#/definitions/AppTemplates"
+              "$ref": "#/definitions/AppTemplatesResult"
             }
           },
           "default": {
@@ -791,7 +791,7 @@
           "readOnly": true
         },
         "title": {
-          "description": "The localized title of the template.",
+          "description": "The title of the template.",
           "type": "string",
           "readOnly": true
         },
@@ -807,7 +807,7 @@
         }
       }
     },
-    "AppTemplates": {
+    "AppTemplatesResult": {
       "description": "A list of IoT Central Application Templates with a next link.",
       "type": "object",
       "properties": {
