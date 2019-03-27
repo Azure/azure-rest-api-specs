@@ -28,7 +28,7 @@ These are the global settings for the Virtual Machine Image Builder API.
 title: ImageBuilderClient
 description: Azure Virtual Machine Image Builder Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2019-02
 azure-arm: true
 ```
 
@@ -40,6 +40,15 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
 - Microsoft.VirtualMachineImages/preview/2018-02-01-preview/imagebuilder.json
+```
+
+### Tag: package-2019-02
+
+These settings apply only when `--tag=package-2019-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02'
+input-file:
+- Microsoft.VirtualMachineImages/preview/2019-02-01-preview/imagebuilder.json
 ```
 
 # Code Generation
@@ -109,7 +118,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-imagebuilder
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-02
+  - tag: package-2019-02
 ```
 
 ### Tag: package-2018-02 and java
@@ -125,4 +134,16 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2019-02 and java
+
+These settings apply only when `--tag=package-2019-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.imagebuilder.v2019_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/imagebuilder/resource-manager/v2019_02_01_preview
+regenerate-manager: true
+generate-interface: true
+```
 

@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountId": "2000200",
+    "periodStartDate": "2018-01-01",
+    "periodEndDate": "2018-06-30",
+    "$filter": "invoicePeriodStartDate le 2018-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/2000200/billingProfile/345986/invoices/1383723",
+            "name": "1383723",
+            "type": "Microsoft.Billing/invoices",
+            "properties": {
+              "dueDate": "2018-01-16",
+              "invoiceDate": "2018-01-01",
+              "status": "Due",
+              "amountDue": {
+                "currency": "USD",
+                "value": 2000.00
+              },
+              "billedAmount": {
+                "currency": "USD",
+                "value": 2000.00
+              },
+              "invoicePeriodStartDate": "2018-01-01",
+              "invoicePeriodEndDate": "2018-01-15",
+              "billingProfile": "345986",
+              "billingProfileName": "Contoso Operations Billing",
+              "purchaseOrderNumber": "123456",
+              "documentUrls": [
+                {
+                  "kind": "Invoice",
+                  "url": "https://microsoft.com/invoice.pdf"
+                }
+              ],
+              "payments": [
+                {
+                  "date": "2018-01-14",
+                  "paymentType": "credited",
+                  "amount": {
+                    "currency": "USD",
+                    "value": 2000.00
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/2000200/billingProfile/345987/invoices/1383724",
+            "name": "1383724",
+            "type": "Microsoft.Billing/invoices",
+            "properties": {
+              "dueDate": "2018-03-01",
+              "invoiceDate": "2018-02-01",
+              "status": "PastDue",
+              "amountDue": {
+                "currency": "USD",
+                "value": 2000.00
+              },
+              "billedAmount": {
+                "currency": "USD",
+                "value": 2000.00
+              },
+              "invoicePeriodStartDate": "2018-02-01",
+              "invoicePeriodEndDate": "2018-02-30",
+              "billingProfile": "345987",
+              "billingProfileName": "Contoso Operations Billing",
+              "purchaseOrderNumber": "123456",
+              "documentUrls": [
+                {
+                  "kind": "VoidNote",
+                  "url": "https://microsoft.com/voidNote.pdf"
+                }
+              ],
+              "payments": [
+                {
+                  "date": "2018-01-14",
+                  "paymentType": "credited",
+                  "amount": {
+                    "currency": "USD",
+                    "value": 2000.00
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

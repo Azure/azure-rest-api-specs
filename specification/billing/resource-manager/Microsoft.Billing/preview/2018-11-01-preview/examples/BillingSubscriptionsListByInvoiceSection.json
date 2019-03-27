@@ -1,0 +1,100 @@
+{
+    "parameters": {
+        "api-version": "2018-11-01-preview",
+        "billingAccountId": "1234",
+        "invoiceSectionId": "12345",
+        "$expand": "billingProfile"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                    {
+                        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/invoiceSections/12345/billingSubscriptions/billinSubscriptionId1",
+                        "name": "billinSubscriptionId1",
+                        "type": "Microsoft.Billing/billingSubscriptions",
+                        "properties": {
+                            "displayName": "AIP Dev",
+                            "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
+                            "subscriptionBillingStatus": "Active",
+                            "monthToDateCharges": {
+                                "currency": "USD",
+                                "value": 1000.00
+                            },
+                            "lastMonthCharges": {
+                                "currency": "USD",
+                                "value": 5000.00
+                            },
+                            "enrollmentAccountContext": {
+                                "costCenter": "Cost center A",
+                                "startDate": "Date",
+                                "endDate": "Date",
+                                "enrollmentAccountId": "providers/Microsoft.Billing/billingAccount/100/enrollmentAccounts/12345"
+                            },
+                            "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
+                            "billingProfileName": "BillingProfileId1",
+                            "skuId": "0001",
+                            "skuDescription": "Microsoft Azure Dev/Test"
+                        }
+                    },
+                    {
+                        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/invoiceSections/12345/billingSubscriptions/billinSubscriptionId2",
+                        "name": "billinSubscriptionId2",
+                        "type": "Microsoft.Billing/billingSubscriptions",
+                        "properties": {
+                            "displayName": "AIP Int",
+                            "subscriptionId": "6b96d3f2-9008-4a9d-912f-6b96d3f2",
+                            "subscriptionBillingStatus": "Active",
+                            "monthToDateCharges": {
+                                "currency": "USD",
+                                "value": 2000.00
+                            },
+                            "lastMonthCharges": {
+                                "currency": "USD",
+                                "value": 1000.00
+                            },
+                            "enrollmentAccountContext": {
+                                "costCenter": "Cost center A",
+                                "startDate": "Date",
+                                "endDate": "Date",
+                                "enrollmentAccountId": "providers/Microsoft.Billing/billingAccount/100/enrollmentAccounts/12345"
+                            },
+                            "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
+                            "billingProfileName": "BillingProfileId2",
+                            "skuId": "0001",
+                            "skuDescription": "Microsoft Azure Dev/Test"
+                        }
+                    },
+                    {
+                        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/invoiceSections/12345/billingSubscriptions/billinSubscriptionId3",
+                        "name": "billinSubscriptionId3",
+                        "type": "Microsoft.Billing/billingSubscriptions",
+                        "properties": {
+                            "displayName": "AIP Prod",
+                            "subscriptionId": "6b96d3f2-4a9d-9008-912f-f87744185aa3",
+                            "subscriptionBillingStatus": "Active",
+                            "monthToDateCharges": {
+                                "currency": "USD",
+                                "value": 4000.00
+                            },
+                            "lastMonthCharges": {
+                                "currency": "USD",
+                                "value": 6000.00
+                            },
+                            "enrollmentAccountContext": {
+                                "costCenter": "Cost center A",
+                                "startDate": "Date",
+                                "endDate": "Date",
+                                "enrollmentAccountId": "providers/Microsoft.Billing/billingAccount/100/enrollmentAccounts/12345"
+                            },
+                            "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId3",
+                            "billingProfileName": "BillingProfileId3",
+                            "skuId": "0001",
+                            "skuDescription": "Microsoft Azure Dev/Test"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
