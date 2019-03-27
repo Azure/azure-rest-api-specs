@@ -1434,7 +1434,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The SQL database create operation was succesful.",
+            "description": "The SQL database create operation was successful.",
             "schema": {
               "$ref": "#/definitions/SqlDatabaseResource"
             }
@@ -1934,7 +1934,7 @@
         }
       ]
     },
-    "ExtenedResourceProperties": {
+    "ExtendedResourceProperties": {
       "description": "The system generated resource properties associated with SQL databases and SQL containers.",
       "type": "object",
       "properties": {
@@ -1975,9 +1975,6 @@
           "description": "The type of Azure resource."
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "SqlDatabaseResource":{
@@ -2014,7 +2011,7 @@
           "$ref": "#/definitions/SqlDatabaseCreateUpdateResource"
         },
         {
-          "$ref": "#/definitions/ExtenedResourceProperties"
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
@@ -2064,7 +2061,7 @@
           "$ref": "#/definitions/SqlContainerCreateUpdateResource"
         },
         {
-          "$ref": "#/definitions/ExtenedResourceProperties"
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
@@ -2541,7 +2538,7 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with windcard (/path/*)"
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
         },
         "indexes": {
           "description": "List of indexes for this path",
@@ -2598,7 +2595,7 @@
       "description": "The configuration of the partition key to be used for partitioning data into multiple partitions",
       "properties": {
         "paths": {
-          "description": "List of paths using which data within the SQL container can be parititoned",
+          "description": "List of paths using which data within the SQL container can be partitioned",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Path"
@@ -2648,25 +2645,10 @@
     },
     "CreateUpdateOptions": {
       "type": "object",
-      "description": "Cosmos DB create database options",
-      "properties": {
-        "If-Match": {
-          "type": "string",
-          "description": "The If-Match header for the request"
-        },
-        "If-None-Match": {
-          "type": "string",
-          "description": "The If-Non-Match header for the request"
-        },
-        "Session-Token": {
-          "type": "string",
-          "description": "The x-ms-session-token header for the request"
-        },
-        "Throughput": {
-          "type": "string",
-          "description": "The x-ms-offer-throughput header for the request"
-        }
-      }
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "CreateUpdateOptions are a list of key-value pairs that describe the resource. Supported keys are \"If-Match\", \"If-None-Match\", \"Session-Token\" and \"Throughput\""
     },
     "Capability": {
       "type": "object",
