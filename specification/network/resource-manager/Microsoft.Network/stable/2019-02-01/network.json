@@ -39,37 +39,47 @@
     "ErrorDetails": {
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "Error code."
         },
         "target": {
-          "type": "string"
+          "type": "string",
+          "description": "Error target."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Error message."
         }
-      }
+      },
+      "description": "Common error details representation."
     },
     "Error": {
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "Error code."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Error message."
         },
         "target": {
-          "type": "string"
+          "type": "string",
+          "description": "Error target."
         },
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
-          }
+          },
+          "description": "Error details."
         },
         "innerError": {
-          "type": "string"
+          "type": "string",
+          "description": "Inner error message."
         }
-      }
+      },
+      "description": "Common error representation."
     },
     "AzureAsyncOperationResult": {
       "properties": {
@@ -87,7 +97,8 @@
           }
         },
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/Error",
+          "description": "Details of the error occurred during specified asynchronous operation."
         }
       },
       "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."

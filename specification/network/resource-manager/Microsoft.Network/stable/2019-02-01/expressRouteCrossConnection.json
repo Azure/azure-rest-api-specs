@@ -704,7 +704,8 @@
           "type":"string",
           "description": "Corresponding Express Route Circuit Id."
         }
-      }
+      },
+      "description": "Reference to an express route circuit."
     },
     "ExpressRouteCrossConnectionProperties": {
       "properties": {
@@ -773,7 +774,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExpressRouteCrossConnectionProperties"
+          "$ref": "#/definitions/ExpressRouteCrossConnectionProperties",
+          "description": "Properties of the express route cross connection."
         },
         "etag": {
           "readOnly": true,
@@ -876,13 +878,15 @@
           "$ref": "./expressRouteCircuit.json#/definitions/Ipv6ExpressRouteCircuitPeeringConfig",
           "description": "The IPv6 peering configuration."
         }
-      }
+      },
+      "description": "Properties of express route cross connection peering."
     },
     "ExpressRouteCrossConnectionPeering": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringProperties"
+          "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringProperties",
+          "description": "Properties of the express route cross connection peering."
         },
         "name": {
           "type": "string",

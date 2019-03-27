@@ -1221,7 +1221,8 @@
           "description": "The reference of the load balancer probe used by the load balancing rule."
         },
         "protocol": {
-          "$ref": "#/definitions/TransportProtocol"
+          "$ref": "#/definitions/TransportProtocol",
+          "description": "The reference to the transport protocol used by the load balancing rule."
         },
         "loadDistribution": {
           "type": "string",
@@ -1385,7 +1386,8 @@
           "description": "A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP."
         },
         "protocol": {
-          "$ref": "#/definitions/TransportProtocol"
+          "$ref": "#/definitions/TransportProtocol",
+          "description": "The reference to the transport protocol used by the load balancing rule."
         },
         "frontendPort": {
           "type": "integer",
@@ -1447,7 +1449,8 @@
           "description": "A reference to frontend IP addresses."
         },
         "protocol": {
-          "$ref": "#/definitions/TransportProtocol"
+          "$ref": "#/definitions/TransportProtocol",
+          "description": "The reference to the transport protocol used by the inbound NAT pool."
         },
         "frontendPortRangeStart": {
           "type": "integer",
@@ -1536,13 +1539,17 @@
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }, 
         "protocol": {
-           "type": "string",
-           "description": "Protocol - TCP, UDP or All",
-           "enum": [
+          "type": "string",
+          "description": "The protocol for the outbound rule in load balancer. Possible values are: 'Tcp', 'Udp', and 'All'.",
+          "enum": [
             "Tcp",
-            "Udp", 
+            "Udp",
             "All"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerOutboundRuleProtocol",
+            "modelAsString": true
+          }
         },
         "enableTcpReset": {
            "type": "boolean",
