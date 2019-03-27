@@ -82,6 +82,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete ExpressRouteCircuit Authorization": { "$ref": "./examples/ExpressRouteCircuitAuthorizationDelete.json" }
         }
@@ -192,6 +195,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create ExpressRouteCircuit Authorization": { "$ref": "./examples/ExpressRouteCircuitAuthorizationCreate.json" }
         }
@@ -290,6 +296,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete ExpressRouteCircuit Peerings": { "$ref": "./examples/ExpressRouteCircuitPeeringDelete.json" }
         }
@@ -400,6 +409,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create ExpressRouteCircuit Peerings": { "$ref": "./examples/ExpressRouteCircuitPeeringCreate.json" }
         }
@@ -507,7 +519,10 @@
         "x-ms-examples": {
           "Delete ExpressRouteCircuit": { "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -635,7 +650,10 @@
             "$ref": "./examples/ExpressRouteCircuitConnectionCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections": {
@@ -795,11 +813,11 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-examples": { 
-          "List Peer ExpressRouteCircuit Connection": { "$ref": "./examples/PeerExpressRouteCircuitConnectionList.json" } 
+        "x-ms-examples": {
+          "List Peer ExpressRouteCircuit Connection": { "$ref": "./examples/PeerExpressRouteCircuitConnectionList.json" }
         }
       }
-    },        
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}": {
       "delete": {
         "tags": [
@@ -841,6 +859,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete ExpressRouteCircuit": { "$ref": "./examples/ExpressRouteCircuitDelete.json" }
         }
@@ -937,6 +958,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create ExpressRouteCircuit": { "$ref": "./examples/ExpressRouteCircuitCreate.json" }
         }
@@ -1049,6 +1073,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "List ARP Table": { "$ref": "./examples/ExpressRouteCircuitARPTableList.json" }
         }
@@ -1109,6 +1136,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "List Route Tables": { "$ref": "./examples/ExpressRouteCircuitRouteTableList.json" }
         }
@@ -1169,6 +1199,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "List Route Table Summary": { "$ref": "./examples/ExpressRouteCircuitRouteTableSummaryList.json" }
         }
@@ -1862,7 +1895,7 @@
         }
       },
       "description": "Response for ListPeeredConnections API service call retrieves all global reach peer circuit connections that belongs to a Private Peering for an ExpressRouteCircuit."
-    },    
+    },
     "ExpressRouteCircuitSku": {
       "properties": {
         "name": {

@@ -147,7 +147,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_Delete",
-        "x-ms-long-running-operation": true,
         "description": "Deletes the specified network watcher resource.",
         "parameters": [
           {
@@ -187,6 +186,10 @@
         },
         "x-ms-examples": {
           "Delete network watcher": { "$ref": "./examples/NetworkWatcherDelete.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -391,7 +394,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_VerifyIPFlow",
-        "x-ms-long-running-operation": true,
         "description": "Verify IP flow from the specified VM to a location given the currently configured NSG rules.",
         "parameters": [
           {
@@ -446,6 +448,10 @@
         },
         "x-ms-examples": {
           "Ip flow verify": { "$ref": "./examples/NetworkWatcherIpFlowVerify.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -455,7 +461,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetNextHop",
-        "x-ms-long-running-operation": true,
         "description": "Gets the next hop from the specified VM.",
         "parameters": [
           {
@@ -510,6 +515,10 @@
         },
         "x-ms-examples": {
           "Get next hop": { "$ref": "./examples/NetworkWatcherNextHopGet.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -519,7 +528,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetVMSecurityRules",
-        "x-ms-long-running-operation": true,
         "description": "Gets the configured and effective security group rules on the specified VM.",
         "parameters": [
           {
@@ -574,6 +582,10 @@
         },
         "x-ms-examples": {
           "Get security group view": { "$ref": "./examples/NetworkWatcherSecurityGroupViewGet.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -583,7 +595,6 @@
           "PacketCaptures"
         ],
         "operationId": "PacketCaptures_Create",
-        "x-ms-long-running-operation": true,
         "description": "Create and start a packet capture on the specified VM.",
         "parameters": [
           {
@@ -639,6 +650,10 @@
         },
         "x-ms-examples": {
           "Create packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureCreate.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -699,7 +714,6 @@
           "PacketCaptures"
         ],
         "operationId": "PacketCaptures_Delete",
-        "x-ms-long-running-operation": true,
         "description": "Deletes the specified packet capture session.",
         "parameters": [
           {
@@ -746,6 +760,10 @@
         },
         "x-ms-examples": {
           "Delete packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -755,7 +773,6 @@
           "PacketCaptures"
         ],
         "operationId": "PacketCaptures_Stop",
-        "x-ms-long-running-operation": true,
         "description": "Stops a specified packet capture session.",
         "parameters": [
           {
@@ -802,6 +819,10 @@
         },
         "x-ms-examples": {
           "Stop packet capture": { "$ref": "./examples/NetworkWatcherPacketCaptureStop.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -811,10 +832,6 @@
           "PacketCaptures"
         ],
         "operationId": "PacketCaptures_GetStatus",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "description": "Query the status of a running packet capture session.",
         "parameters": [
           {
@@ -867,6 +884,10 @@
         },
         "x-ms-examples": {
           "Query packet capture status": { "$ref": "./examples/NetworkWatcherPacketCaptureQueryStatus.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -927,7 +948,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetTroubleshooting",
-        "x-ms-long-running-operation": true,
         "description": "Initiate troubleshooting on a specified resource",
         "parameters": [
           {
@@ -982,6 +1002,10 @@
         },
         "x-ms-examples": {
           "Get troubleshooting": { "$ref": "./examples/NetworkWatcherTroubleshootGet.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -991,7 +1015,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetTroubleshootingResult",
-        "x-ms-long-running-operation": true,
         "description": "Get the last completed troubleshooting result on a specified resource",
         "parameters": [
           {
@@ -1046,6 +1069,10 @@
         },
         "x-ms-examples": {
           "Get troubleshoot result": { "$ref": "./examples/NetworkWatcherTroubleshootResultQuery.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1056,7 +1083,6 @@
           "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_SetFlowLogConfiguration",
-        "x-ms-long-running-operation": true,
         "description": "Configures flow log  and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
@@ -1111,6 +1137,10 @@
         },
         "x-ms-examples": {
           "Configure flow log": { "$ref": "./examples/NetworkWatcherFlowLogConfigure.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1121,7 +1151,6 @@
           "TrafficAnalytics"
         ],
         "operationId": "NetworkWatchers_GetFlowLogStatus",
-        "x-ms-long-running-operation": true,
         "description": "Queries status of flow log and traffic analytics (optional) on a specified resource.",
         "parameters": [
           {
@@ -1176,6 +1205,10 @@
         },
         "x-ms-examples": {
           "Get flow log status": { "$ref": "./examples/NetworkWatcherFlowLogStatusQuery.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1185,7 +1218,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_CheckConnectivity",
-        "x-ms-long-running-operation": true,
         "description": "Verifies the possibility of establishing a direct TCP connection from a virtual machine to a given endpoint including another VM or an arbitrary remote server.",
         "parameters": [
           {
@@ -1240,6 +1272,10 @@
         },
         "x-ms-examples": {
           "Check connectivity": { "$ref": "./examples/NetworkWatcherConnectivityCheck.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1249,7 +1285,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetAzureReachabilityReport",
-        "x-ms-long-running-operation": true,
         "description": "Gets the relative latency score for internet service providers from a specified location to Azure regions.",
         "parameters": [
           {
@@ -1306,6 +1341,10 @@
           "Get Azure Reachability Report": {
             "$ref": "./examples/NetworkWatcherAzureReachabilityReportGet.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1315,7 +1354,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_ListAvailableProviders",
-        "x-ms-long-running-operation": true,
         "description": "Lists all available internet service providers for a specified Azure region.",
         "parameters": [
           {
@@ -1372,6 +1410,10 @@
           "Get Available Providers List": {
             "$ref": "./examples/NetworkWatcherAvailableProvidersListGet.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1381,7 +1423,6 @@
           "ConnectionMonitors"
         ],
         "operationId": "ConnectionMonitors_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
         "description": "Create or update a connection monitor.",
         "parameters": [
           {
@@ -1443,6 +1484,10 @@
         },
         "x-ms-examples": {
           "Create connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -1503,7 +1548,6 @@
           "ConnectionMonitors"
         ],
         "operationId": "ConnectionMonitors_Delete",
-        "x-ms-long-running-operation": true,
         "description": "Deletes the specified connection monitor.",
         "parameters": [
           {
@@ -1550,6 +1594,10 @@
         },
         "x-ms-examples": {
           "Delete connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorDelete.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1559,7 +1607,6 @@
           "ConnectionMonitors"
         ],
         "operationId": "ConnectionMonitors_Stop",
-        "x-ms-long-running-operation": true,
         "description": "Stops the specified connection monitor.",
         "parameters": [
           {
@@ -1606,6 +1653,10 @@
         },
         "x-ms-examples": {
           "Stop connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStop.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1615,7 +1666,6 @@
           "ConnectionMonitors"
         ],
         "operationId": "ConnectionMonitors_Start",
-        "x-ms-long-running-operation": true,
         "description": "Starts the specified connection monitor.",
         "parameters": [
           {
@@ -1662,6 +1712,10 @@
         },
         "x-ms-examples": {
           "Start connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorStart.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1671,7 +1725,6 @@
           "ConnectionMonitors"
         ],
         "operationId": "ConnectionMonitors_Query",
-        "x-ms-long-running-operation": true,
         "description": "Query a snapshot of the most recent connection states.",
         "parameters": [
           {
@@ -1724,6 +1777,10 @@
         },
         "x-ms-examples": {
           "Query connection monitor": { "$ref": "./examples/NetworkWatcherConnectionMonitorQuery.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1784,10 +1841,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetNetworkConfigurationDiagnostic",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "description": "Get network configuration diagnostic.",
         "parameters": [
           {
@@ -1842,6 +1895,10 @@
         },
         "x-ms-examples": {
           "Network configuration diagnostic": { "$ref": "./examples/NetworkWatcherNetworkConfigurationDiagnostic.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }

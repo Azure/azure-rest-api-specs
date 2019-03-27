@@ -79,7 +79,10 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -128,11 +131,6 @@
           "ApplicationGateways"
         ],
         "operationId": "ApplicationGateways_CreateOrUpdate",
-        "x-ms-examples": {
-          "Create Application Gateway": {
-            "$ref": "./examples/ApplicationGatewayCreate.json"
-          }
-        },
         "description": "Creates or updates the specified application gateway.",
         "parameters": [
           {
@@ -179,7 +177,15 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Create Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
@@ -349,7 +355,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/stop": {
@@ -394,7 +403,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth": {
@@ -449,7 +461,10 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables": {

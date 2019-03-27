@@ -77,7 +77,10 @@
         "x-ms-examples": {
           "Delete network interface": { "$ref": "./examples/NetworkInterfaceDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -180,7 +183,10 @@
         "x-ms-examples": {
           "Create network interface": { "$ref": "./examples/NetworkInterfaceCreate.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
@@ -345,7 +351,10 @@
         "x-ms-examples": {
           "Show network interface effective route tables": { "$ref": "./examples/NetworkInterfaceEffectiveRouteTableList.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups": {
@@ -391,7 +400,10 @@
         "x-ms-examples": {
           "List network interface effective network security groups": { "$ref": "./examples/NetworkInterfaceEffectiveNSGList.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/ipConfigurations": {
@@ -584,7 +596,10 @@
         {
           "Delete tap configuration": { "$ref": "./examples/NetworkInterfaceTapConfigurationDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -696,7 +711,10 @@
         {
           "Create Network Interface Tap Configurations": { "$ref": "./examples/NetworkInterfaceTapConfigurationCreate.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations": {

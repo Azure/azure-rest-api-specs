@@ -77,7 +77,10 @@
                         "description": "Delete successful."
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location"
+                }
             },
             "get": {
                 "tags": [
@@ -180,7 +183,10 @@
                         }
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "azure-async-operation"
+                }
             },
             "patch": {
                 "tags": [
@@ -352,7 +358,10 @@
                         "description": "Rule was deleted or not found."
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location"
+                }
             },
             "get": {
                 "tags": [
@@ -462,7 +471,10 @@
                         }
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "azure-async-operation"
+                }
             },
             "patch": {
                 "tags": [
@@ -676,7 +688,7 @@
                     },
                     "description": "Collection of RouteFilterRules contained within a route filter."
                 },
-                "peerings": {              
+                "peerings": {
                     "type": "array",
                     "items": {
                         "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
