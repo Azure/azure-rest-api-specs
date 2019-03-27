@@ -460,7 +460,7 @@
       "properties": {
         "ddosCustomPolicy": {
           "readOnly": false,
-          "$ref":"./network.json#/definitions/SubResource",          
+          "$ref":"./network.json#/definitions/SubResource",
           "description": "The DDoS custom policy associated with the public IP."
         },
         "protectionCoverage": {
@@ -468,8 +468,12 @@
           "type": "string",
           "enum": [
             "Basic",
-            "Standard"            
+            "Standard"
           ],
+          "x-ms-enum": {
+            "name": "DdosSettingsProtectionCoverage",
+            "modelAsString": true
+          },
           "description": "The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized."
         }
       },

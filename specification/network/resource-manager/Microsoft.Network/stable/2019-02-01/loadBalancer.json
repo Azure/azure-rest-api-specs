@@ -1539,13 +1539,17 @@
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }, 
         "protocol": {
-           "type": "string",
-           "description": "Protocol - TCP, UDP or All",
-           "enum": [
+          "type": "string",
+          "description": "The protocol for the outbound rule in load balancer. Possible values are: 'Tcp', 'Udp', and 'All'.",
+          "enum": [
             "Tcp",
-            "Udp", 
+            "Udp",
             "All"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerOutboundRuleProtocol",
+            "modelAsString": true
+          }
         },
         "enableTcpReset": {
            "type": "boolean",
