@@ -597,50 +597,50 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease": {
-      "post": {
-        "tags": [
-          "BlobContainers"
-        ],
-        "operationId": "BlobContainers_Lease",
-        "x-ms-examples": {
-          "ListContainers": {
-            "$ref": "./examples/BlobContainersLease.json"
-          }
-        },
-        "description": "The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
-        "parameters": [
-          {
-            "$ref": "./storage.json#/parameters/ResourceGroupName"
+      },
+      "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease": {
+        "post": {
+          "tags": [
+            "BlobContainers"
+          ],
+          "operationId": "BlobContainers_Lease",
+          "x-ms-examples": {
+            "ListContainers": {
+              "$ref": "./examples/BlobContainersLease.json"
+            }
           },
-          {
-            "$ref": "#/parameters/StorageAccountName"
-          },
-          {
-            "$ref": "#/parameters/ContainerName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/LeaseContainerRequest"
+          "description": "The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+          "parameters": [
+            {
+              "$ref": "./storage.json#/parameters/ResourceGroupName"
             },
-            "description": "Lease Container request body."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Lease Container operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LeaseContainerResponse"
+            {
+              "$ref": "#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "#/parameters/ContainerName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "schema": {
+                "$ref": "#/definitions/LeaseContainerRequest"
+              },
+              "description": "Lease Container request body."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- Lease Container operation completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/LeaseContainerResponse"
+              }
             }
           }
         }
