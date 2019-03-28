@@ -23,7 +23,7 @@
         "tags": [
           "RecoveryServices"
         ],
-        "summary": "API to check for resource name availability.\r\nA name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type\r\nor if one or more such resources exist, each of these must be GCed and their time of deletion be more than 24 Hours Ago",
+        "summary": "API to check for resource name availability.\r\nA name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type\r\nor if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago",
         "operationId": "RecoveryServices_CheckNameAvailability",
         "consumes": [
           "application/json"
@@ -62,7 +62,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ResourceNameAvailabilityResultResource"
+              "$ref": "#/definitions/CheckNameAvailabilityResultResource"
             }
           }
         },
@@ -519,6 +519,35 @@
     }
   },
   "definitions": {
+    "CheckNameAvailabilityResult": {
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResultResource": {
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CheckNameAvailabilityResult",
+          "description": "CheckNameAvailabilityResultResource properties"
+        }
+      }
+    },
     "ClientDiscoveryDisplay": {
       "description": "Localized display information of an operation.",
       "type": "object",
@@ -658,35 +687,6 @@
         "name": {
           "description": "Resource name for which availability needs to be checked",
           "type": "string"
-        }
-      }
-    },
-    "ResourceNameAvailabilityResult": {
-      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean"
-        },
-        "reason": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "ResourceNameAvailabilityResultResource": {
-      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ResourceNameAvailabilityResult",
-          "description": "ResourceNameAvailabilityResultResource properties"
         }
       }
     },
