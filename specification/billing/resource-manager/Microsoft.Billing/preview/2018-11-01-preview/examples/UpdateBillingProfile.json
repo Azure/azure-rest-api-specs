@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountId": "2000100",
+    "billingProfileId": "BillingProfileId1",
+    "parameters": {
+      "properties": {
+        "displayName": "BillingProfileName1",
+        "poNumber": "ABC12345",
+        "billingAddress": "One Microsoft Way",
+        "billingContact": "ronald@contoso.com",
+        "emailInvoice": true,
+        "isClassic": false
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "/providers/Microsoft.Billing/billingOperations/ed2975a8-8f77-43bb-a717-ace54326b14b?api-version=2018-05-31-preview",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
+        "name": "BillingProfileId1",
+        "type": "Microsoft.Billing/billingProfiles",
+        "properties": {
+          "displayName": "BillingProfileName1",
+          "poNumber": "ABC12345",
+          "address": {
+            "AddressLine1": "Test Address",
+            "AddressLine2": "Test Address",
+            "AddressLine3": "Test Address",
+            "City": "City",
+            "PostalCode": "00000",
+            "Region": "WA",
+            "Country": "US"
+          },
+          "invoiceEmailOptIn": true,
+          "isClassic": false,
+          "invoiceDay": 5,
+          "currency": "USD",
+          "enabledAzureSKUs": [
+            {
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Dev/Test"
+            },
+            {
+              "skuId": "0002",
+              "skuDescription": "Microsoft Azure Standard"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

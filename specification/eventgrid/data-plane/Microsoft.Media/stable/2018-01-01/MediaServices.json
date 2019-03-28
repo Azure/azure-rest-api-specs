@@ -23,7 +23,7 @@
             "Scheduled"
           ],
           "x-ms-enum": {
-            "name": "JobState",
+            "name": "MediaJobState",
             "values": [
               {
                 "value": "Canceled",
@@ -72,7 +72,7 @@
             "Scheduled"
           ],
           "x-ms-enum": {
-            "name": "JobState",
+            "name": "MediaJobState",
             "values": [
               {
                 "value": "Canceled",
@@ -108,8 +108,865 @@
           "description": "The new state of the Job.",
           "readOnly": true,
           "x-nullable": false
+        },
+        "correlationData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets the Job correlation data."
         }
       }
+    },
+    "MediaJobError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "ServiceError",
+            "ServiceTransientError",
+            "DownloadNotAccessible",
+            "DownloadTransientError",
+            "UploadNotAccessible",
+            "UploadTransientError",
+            "ConfigurationUnsupported",
+            "ContentMalformed",
+            "ContentUnsupported"
+          ],
+          "x-ms-enum": {
+            "name": "MediaJobErrorCode",
+            "values": [
+              {
+                "value": "ServiceError",
+                "description": "Fatal service error, please contact support."
+              },
+              {
+                "value": "ServiceTransientError",
+                "description": "Transient error, please retry, if retry is unsuccessful, please contact support."
+              },
+              {
+                "value": "DownloadNotAccessible",
+                "description": "While trying to download the input files, the files were not accessible, please check the availability of the source."
+              },
+              {
+                "value": "DownloadTransientError",
+                "description": "While trying to download the input files, there was an issue during transfer (storage service, network errors), see details and check your source."
+              },
+              {
+                "value": "UploadNotAccessible",
+                "description": "While trying to upload the output files, the destination was not reachable, please check the availability of the destination."
+              },
+              {
+                "value": "UploadTransientError",
+                "description": "While trying to upload the output files, there was an issue during transfer (storage service, network errors), see details and check your destination."
+              },
+              {
+                "value": "ConfigurationUnsupported",
+                "description": "There was a problem with the combination of input files and the configuration settings applied, fix the configuration settings and retry with the same input, or change input to match the configuration."
+              },
+              {
+                "value": "ContentMalformed",
+                "description": "There was a problem with the input content (for example: zero byte files, or corrupt/non-decodable files), check the input files."
+              },
+              {
+                "value": "ContentUnsupported",
+                "description": "There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "Error code describing the error.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable language-dependent representation of the error.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Service",
+            "Download",
+            "Upload",
+            "Configuration",
+            "Content"
+          ],
+          "x-ms-enum": {
+            "name": "MediaJobErrorCategory",
+            "values": [
+              {
+                "value": "Service",
+                "description": "The error is service related."
+              },
+              {
+                "value": "Download",
+                "description": "The error is download related."
+              },
+              {
+                "value": "Upload",
+                "description": "The error is upload related."
+              },
+              {
+                "value": "Configuration",
+                "description": "The error is configuration related."
+              },
+              {
+                "value": "Content",
+                "description": "The error is related to data in the input files."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "Helps with categorization of errors.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "retry": {
+          "type": "string",
+          "enum": [
+            "DoNotRetry",
+            "MayRetry"
+          ],
+          "x-ms-enum": {
+            "name": "MediaJobRetry",
+            "values": [
+              {
+                "value": "DoNotRetry",
+                "description": "Issue needs to be investigated and then the job resubmitted with corrections or retried once the underlying issue has been corrected."
+              },
+              {
+                "value": "MayRetry",
+                "description": "Issue may be resolved after waiting for a period of time and resubmitting the same Job."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaJobErrorDetail"
+          },
+          "description": "An array of details about specific errors that led to this reported error.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Details of JobOutput errors."
+    },
+    "MediaJobErrorDetail": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code describing the error detail.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Details of JobOutput errors."
+    },
+    "MediaJobOutput": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "error": {
+          "$ref": "#/definitions/MediaJobError",
+          "description": "Gets the Job output error."
+        },
+        "label": {
+          "type": "string",
+          "description": "Gets the Job output label."
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the Job output progress."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Canceled",
+            "Canceling",
+            "Error",
+            "Finished",
+            "Processing",
+            "Queued",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "MediaJobState",
+            "values": [
+              {
+                "value": "Canceled",
+                "description": "The job was canceled. This is a final state for the job."
+              },
+              {
+                "value": "Canceling",
+                "description": "The job is in the process of being canceled. This is a transient state for the job."
+              },
+              {
+                "value": "Error",
+                "description": "The job has encountered an error. This is a final state for the job."
+              },
+              {
+                "value": "Finished",
+                "description": "The job is finished. This is a final state for the job."
+              },
+              {
+                "value": "Processing",
+                "description": "The job is processing. This is a transient state for the job."
+              },
+              {
+                "value": "Queued",
+                "description": "The job is in a queued state, waiting for resources to become available. This is a transient state."
+              },
+              {
+                "value": "Scheduled",
+                "description": "The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "Gets the Job output state."
+        }
+      },
+      "type": "object",
+      "required": [
+        "progress",
+        "state"
+      ],
+      "description": "The event data for a Job output."
+    },
+    "MediaJobOutputAsset": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputAsset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutput"
+        }
+      ],
+      "properties": {
+        "assetName": {
+          "type": "string",
+          "description": "Gets the Job output asset name."
+        }
+      },
+      "type": "object",
+      "description": "The event data for a Job output asset."
+    },
+    "MediaJobOutputProgressEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputProgress",
+      "description": "Job Output Progress Event Data.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Gets the Job output label."
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the Job output progress."
+        },
+        "jobCorrelationData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets the Job correlation data."
+        }
+      }
+    },
+    "MediaJobOutputStateChangeEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.",
+      "type": "object",
+      "properties": {
+        "previousState": {
+          "type": "string",
+          "enum": [
+            "Canceled",
+            "Canceling",
+            "Error",
+            "Finished",
+            "Processing",
+            "Queued",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "MediaJobState",
+            "values": [
+              {
+                "value": "Canceled",
+                "description": "The job was canceled. This is a final state for the job."
+              },
+              {
+                "value": "Canceling",
+                "description": "The job is in the process of being canceled. This is a transient state for the job."
+              },
+              {
+                "value": "Error",
+                "description": "The job has encountered an error. This is a final state for the job."
+              },
+              {
+                "value": "Finished",
+                "description": "The job is finished. This is a final state for the job."
+              },
+              {
+                "value": "Processing",
+                "description": "The job is processing. This is a transient state for the job."
+              },
+              {
+                "value": "Queued",
+                "description": "The job is in a queued state, waiting for resources to become available. This is a transient state."
+              },
+              {
+                "value": "Scheduled",
+                "description": "The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states."
+              }
+            ],
+            "modelAsExtensible": true
+          },
+          "description": "The previous state of the Job.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "output": {
+          "$ref": "#/definitions/MediaJobOutput",
+          "description": "Gets the output."
+        },
+        "jobCorrelationData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets the Job correlation data."
+        }
+      }
+    },
+    "MediaJobScheduledEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobScheduled",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job scheduled event data"
+    },
+    "MediaJobProcessingEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobProcessing",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job processing event data"
+    },
+    "MediaJobCancelingEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobCanceling",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job canceling event data"
+    },
+    "MediaJobFinishedEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobFinished",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
+        }
+      ],
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaJobOutput"
+          },
+          "description": "Gets the Job outputs."
+        }
+      },
+      "type": "object",
+      "description": "Job finished event data"
+    },
+    "MediaJobCanceledEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobCanceled",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
+        }
+      ],
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaJobOutput"
+          },
+          "description": "Gets the Job outputs."
+        }
+      },
+      "type": "object",
+      "description": "Job canceled event data"
+    },
+    "MediaJobErroredEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobErrored",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobStateChangeEventData"
+        }
+      ],
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaJobOutput"
+          },
+          "description": "Gets the Job outputs."
+        }
+      },
+      "type": "object",
+      "description": "Job error state event data"
+    },
+    "MediaJobOutputCanceledEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputCanceled",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job output canceled event data"
+    },
+    "MediaJobOutputCancelingEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputCanceling",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job output canceling event data"
+    },
+    "MediaJobOutputErroredEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputErrored",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job output error event data"
+    },
+    "MediaJobOutputFinishedEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputFinished",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job output finished event data"
+    },
+    "MediaJobOutputProcessingEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputProcessing",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job output processing event data"
+    },
+    "MediaJobOutputScheduledEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputScheduled",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Job output scheduled event data"
+    },
+    "MediaLiveEventEncoderConnectedEventData": {
+      "properties": {
+        "ingestUrl": {
+          "type": "string",
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
+        },
+        "streamId": {
+          "type": "string",
+          "description": "Gets the stream Id.",
+          "readOnly": true
+        },
+        "encoderIp": {
+          "type": "string",
+          "description": "Gets the remote IP.",
+          "readOnly": true
+        },
+        "encoderPort": {
+          "type": "string",
+          "description": "Gets the remote port.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Encoder connect event data."
+    },
+    "MediaLiveEventConnectionRejectedEventData": {
+      "properties": {
+        "ingestUrl": {
+          "type": "string",
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
+        },
+        "streamId": {
+          "type": "string",
+          "description": "Gets the stream Id.",
+          "readOnly": true
+        },
+        "encoderIp": {
+          "type": "string",
+          "description": "Gets the remote IP.",
+          "readOnly": true
+        },
+        "encoderPort": {
+          "type": "string",
+          "description": "Gets the remote port.",
+          "readOnly": true
+        },
+        "resultCode": {
+          "type": "string",
+          "description": "Gets the result code.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Encoder connection rejected event data."
+    },
+    "MediaLiveEventEncoderDisconnectedEventData": {
+      "properties": {
+        "ingestUrl": {
+          "type": "string",
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
+        },
+        "streamId": {
+          "type": "string",
+          "description": "Gets the stream Id.",
+          "readOnly": true
+        },
+        "encoderIp": {
+          "type": "string",
+          "description": "Gets the remote IP.",
+          "readOnly": true
+        },
+        "encoderPort": {
+          "type": "string",
+          "description": "Gets the remote port.",
+          "readOnly": true
+        },
+        "resultCode": {
+          "type": "string",
+          "description": "Gets the result code.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Encoder disconnected event data."
+    },
+    "MediaLiveEventIncomingStreamReceivedEventData": {
+      "properties": {
+        "ingestUrl": {
+          "type": "string",
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
+        },
+        "trackType": {
+          "type": "string",
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
+        },
+        "trackName": {
+          "type": "string",
+          "description": "Gets the track name.",
+          "readOnly": true
+        },
+        "bitrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the bitrate of the track.",
+          "readOnly": true
+        },
+        "encoderIp": {
+          "type": "string",
+          "description": "Gets the remote IP.",
+          "readOnly": true
+        },
+        "encoderPort": {
+          "type": "string",
+          "description": "Gets the remote port.",
+          "readOnly": true
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Gets the first timestamp of the data chunk received.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "description": "Gets the duration of the first data chunk.",
+          "readOnly": true
+        },
+        "timescale": {
+          "type": "string",
+          "description": "Gets the timescale in which timestamp is represented.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Encoder connect event data."
+    },
+    "MediaLiveEventIncomingStreamsOutOfSyncEventData": {
+      "properties": {
+        "minLastTimestamp": {
+          "type": "string",
+          "description": "Gets the minimum last timestamp received.",
+          "readOnly": true
+        },
+        "typeOfStreamWithMinLastTimestamp": {
+          "type": "string",
+          "description": "Gets the type of stream with minimum last timestamp.",
+          "readOnly": true
+        },
+        "maxLastTimestamp": {
+          "type": "string",
+          "description": "Gets the maximum timestamp among all the tracks (audio or video).",
+          "readOnly": true
+        },
+        "typeOfStreamWithMaxLastTimestamp": {
+          "type": "string",
+          "description": "Gets the type of stream with maximum last timestamp.",
+          "readOnly": true
+        },
+        "timescaleOfMinLastTimestamp": {
+          "type": "string",
+          "description": "Gets the timescale in which \"MinLastTimestamp\" is represented.",
+          "readOnly": true
+        },
+        "timescaleOfMaxLastTimestamp": {
+          "type": "string",
+          "description": "Gets the timescale in which \"MaxLastTimestamp\" is represented.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Incoming streams out of sync event data."
+    },
+    "MediaLiveEventIncomingVideoStreamsOutOfSyncEventData": {
+      "properties": {
+        "firstTimestamp": {
+          "type": "string",
+          "description": "Gets the first timestamp received for one of the quality levels.",
+          "readOnly": true
+        },
+        "firstDuration": {
+          "type": "string",
+          "description": "Gets the duration of the data chunk with first timestamp.",
+          "readOnly": true
+        },
+        "secondTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp received for some other quality levels.",
+          "readOnly": true
+        },
+        "secondDuration": {
+          "type": "string",
+          "description": "Gets the duration of the data chunk with second timestamp.",
+          "readOnly": true
+        },
+        "timescale": {
+          "type": "string",
+          "description": "Gets the timescale in which both the timestamps and durations are represented.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Incoming video stream out of synch event data."
+    },
+    "MediaLiveEventIncomingDataChunkDroppedEventData": {
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "description": "Gets the timestamp of the data chunk dropped.",
+          "readOnly": true
+        },
+        "trackType": {
+          "type": "string",
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
+        },
+        "bitrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the bitrate of the track.",
+          "readOnly": true
+        },
+        "timescale": {
+          "type": "string",
+          "description": "Gets the timescale of the Timestamp.",
+          "readOnly": true
+        },
+        "resultCode": {
+          "type": "string",
+          "description": "Gets the result code for fragment drop operation.",
+          "readOnly": true
+        },
+        "trackName": {
+          "type": "string",
+          "description": "Gets the name of the track for which fragment is dropped.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Ingest fragment dropped event data."
+    },
+    "MediaLiveEventIngestHeartbeatEventData": {
+      "properties": {
+        "trackType": {
+          "type": "string",
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
+        },
+        "trackName": {
+          "type": "string",
+          "description": "Gets the track name.",
+          "readOnly": true
+        },
+        "bitrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the bitrate of the track.",
+          "readOnly": true
+        },
+        "incomingBitrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the incoming bitrate.",
+          "readOnly": true
+        },
+        "lastTimestamp": {
+          "type": "string",
+          "description": "Gets the last timestamp.",
+          "readOnly": true
+        },
+        "timescale": {
+          "type": "string",
+          "description": "Gets the timescale of the last timestamp.",
+          "readOnly": true
+        },
+        "overlapCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the fragment Overlap count.",
+          "readOnly": true
+        },
+        "discontinuityCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the fragment Discontinuity count.",
+          "readOnly": true
+        },
+        "nonincreasingCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets Non increasing count.",
+          "readOnly": true
+        },
+        "unexpectedBitrate": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether unexpected bitrate is present or not.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of the live event.",
+          "readOnly": true
+        },
+        "healthy": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether preview is healthy or not.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Ingest fragment dropped event data."
+    },
+    "MediaLiveEventTrackDiscontinuityDetectedEventData": {
+      "properties": {
+        "trackType": {
+          "type": "string",
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
+        },
+        "trackName": {
+          "type": "string",
+          "description": "Gets the track name.",
+          "readOnly": true
+        },
+        "bitrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the bitrate.",
+          "readOnly": true
+        },
+        "previousTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp of the previous fragment.",
+          "readOnly": true
+        },
+        "newTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp of the current fragment.",
+          "readOnly": true
+        },
+        "timescale": {
+          "type": "string",
+          "description": "Gets the timescale in which both timestamps and discontinuity gap are represented.",
+          "readOnly": true
+        },
+        "discontinuityGap": {
+          "type": "string",
+          "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Ingest track discontinuity detected event data."
     }
   }
 }

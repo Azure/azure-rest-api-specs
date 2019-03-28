@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for RecoveryServicesSiteRecovery.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for RecoveryServicesSiteRecovery, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for RecoveryServicesSiteRecovery, simply [Install AutoRest](htt
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2018-07
 ```
 
+
+### Tag: package-2018-07
+
+These settings apply only when `--tag=package-2018-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-07'
+input-file:
+  - Microsoft.RecoveryServices/stable/2018-07-10/service.json
+```
 ### Tag: package-2016-08
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -48,8 +57,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -61,19 +70,19 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_site_recovery']
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-```yaml $(csharp)
+``` yaml $(csharp)
 csharp:
   azure-arm: true
   payload-flattening-threshold: 0
@@ -85,41 +94,7 @@ csharp:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: siterecovery
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-01
-  - tag: package-2016-08
-```
-
-### Tag: package-2018-01 and go
-
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2018-01-10/siterecovery
-```
-
-### Tag: package-2016-08 and go
-
-These settings apply only when `--tag=package-2016-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-08' && $(go)
-output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2016-08-10/siterecovery
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -154,5 +129,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-

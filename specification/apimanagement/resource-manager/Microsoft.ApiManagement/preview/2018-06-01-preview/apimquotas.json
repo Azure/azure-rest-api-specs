@@ -46,14 +46,11 @@
           "description": "Document describing how to configure the quota policies."
         },
         "x-ms-examples": {
-          "ApiManagementGetQuotaCounteryKeys": {
-            "$ref": "./examples/ApiManagementGetQuotaCounteryKeys.json"
+          "ApiManagementGetQuotaCounterKeys": {
+            "$ref": "./examples/ApiManagementGetQuotaCounterKeys.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
@@ -61,10 +58,13 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -101,7 +101,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
             "name": "parameters",
@@ -144,14 +144,11 @@
           "description": "Document describing how to configure the quota policies."
         },
         "x-ms-examples": {
-          "ApiManagementGetQuotaCounteryKeysByQuotaPeriod": {
-            "$ref": "./examples/ApiManagementGetQuotaCounteryKeysByQuotaPeriod.json"
+          "ApiManagementGetQuotaCounterKeysByQuotaPeriod": {
+            "$ref": "./examples/ApiManagementGetQuotaCounterKeysByQuotaPeriod.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
@@ -159,13 +156,16 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
-            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaPeriodKeyParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -202,10 +202,10 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
-            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaPeriodKeyParameter"
           },
           {
             "name": "parameters",
@@ -320,22 +320,5 @@
       "description": "Quota counter value details."
     }
   },
-  "parameters": {
-    "QuotaCounterKeyParameter": {
-      "name": "quotaCounterKey",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key",
-      "x-ms-parameter-location": "method"
-    },
-    "QuotaPeriodKeyParameter": {
-      "name": "quotaPeriodKey",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Quota period key identifier.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": { }
 }
