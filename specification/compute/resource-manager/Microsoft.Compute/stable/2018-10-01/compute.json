@@ -5577,7 +5577,35 @@
         },
         "enableAutomaticUpdates": {
           "type": "boolean",
-          "description": "Indicates whether virtual machine is enabled for automatic updates."
+          "description": "Indicates whether virtual machine is enabled for automatic windows updates. <br> <br> Default behavior is true."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Specifies the time zone of the virtual machine. e.g. \"Pacific Standard Time\""
+        },
+        "additionalUnattendContent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalUnattendContent"
+          },
+          "description": "Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup."
+        },
+        "winRM": {
+          "$ref": "#/definitions/WinRMConfiguration",
+          "description": "Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell."
+        }
+      },
+      "description": "Specifies Windows operating system settings on the virtual machine."
+    },
+    "VirtualMachineScaleSetWindowsConfiguration": {
+      "properties": {
+        "provisionVMAgent": {
+          "type": "boolean",
+          "description": "Indicates whether virtual machine agent should be provisioned on the virtual machine. <br><br> When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later."
+        },
+        "enableAutomaticUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether Virtual Machine Scale Set virtual machine is enabled for automatic windows updates. <br><br> Default behavior is true. Updates to this property will take effect on OS reprovisioning."
         },
         "timeZone": {
           "type": "string",
@@ -6497,7 +6525,7 @@
           "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
         },
         "windowsConfiguration": {
-          "$ref": "#/definitions/WindowsConfiguration",
+          "$ref": "#/definitions/VirtualMachineScaleSetWindowsConfiguration",
           "description": "Specifies Windows operating system settings on the virtual machine."
         },
         "linuxConfiguration": {
@@ -6521,7 +6549,7 @@
           "description": "A base-64 encoded string of custom data."
         },
         "windowsConfiguration": {
-          "$ref": "#/definitions/WindowsConfiguration",
+          "$ref": "#/definitions/VirtualMachineScaleSetWindowsConfiguration",
           "description": "The Windows Configuration of the OS profile."
         },
         "linuxConfiguration": {
