@@ -3,6 +3,10 @@ import * as path from "path"
 import * as avocado from "@azure/avocado"
 import * as openApiMarkDown from "@azure/openapi-markdown"
 import * as yaml from "js-yaml"
+import * as util from "util"
+import * as childProcess from "child_process"
+
+const exec = util.promisify(childProcess.exec)
 
 async function main() {
   // console.log(`vars: ${JSON.stringify(process.env)}`)
@@ -10,6 +14,8 @@ async function main() {
   const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
+  const result = await exec(`git diff ${source}..${target} --name-status`)
+  console.log(result.stdout)
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
