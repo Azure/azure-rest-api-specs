@@ -5,7 +5,11 @@ import * as openApiMarkDown from "@azure/openapi-markdown"
 import * as yaml from "js-yaml"
 
 async function main() {
-  console.log(`vars: ${JSON.stringify(process.env)}`)
+  // console.log(`vars: ${JSON.stringify(process.env)}`)
+  const source = process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH
+  const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
+  console.log(`source: ${source}`)
+  console.log(`target: ${target}`)
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
