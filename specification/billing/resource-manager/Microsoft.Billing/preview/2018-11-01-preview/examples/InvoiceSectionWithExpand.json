@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "invoiceSectionId": "{invoiceSectionId}",
+    "$expand": "billingProfiles"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}",
+        "name": "{invoiceSectionId}",
+        "type": "Microsoft.Billing/invoiceSections",
+        "properties": {
+          "displayName": "invoiceSectionName1",
+          "billingProfiles": [
+            {
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
+              "name": "BillingProfileId1",
+              "type": "Microsoft.Billing/billingProfiles",
+              "properties": {
+                "displayName": "BillingProfileName1",
+                "poNumber": "ABC12345",
+                "billingAddress": {
+                  "AddressLine1": "Test Address",
+                  "AddressLine2": "Test Address",
+                  "AddressLine3": "Test Address",
+                  "City": "City",
+                  "PostalCode": "00000",
+                  "Region": "WA",
+                  "Country": "USA",
+                  "PhoneNumber": "000-000-0000"
+                },
+                "billingContact": "ronald@contoso.com",
+                "emailInvoice": true,
+                "isClassic": false,
+                "invoiceDay": "5th of the month",
+                "currency": "USD",
+                "enabledAzureSKUs": [
+                  {
+                    "skuId": "0001",
+                    "skuDescription": "Microsoft Azure Dev/Test"
+                  },
+                  {
+                    "skuId": "0002",
+                    "skuDescription": "Microsoft Azure Standard"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
+              "name": "BillingProfileId2",
+              "type": "Microsoft.Billing/billingProfiles",
+              "properties": {
+                "displayName": "BillingProfileName2",
+                "poNumber": "ABC12345",
+                "billingAddress": {
+                  "AddressLine1": "Test Address",
+                  "AddressLine2": "Test Address",
+                  "AddressLine3": "Test Address",
+                  "City": "City",
+                  "PostalCode": "00000",
+                  "Region": "WA",
+                  "Country": "USA",
+                  "PhoneNumber": "000-000-0000"
+                },
+                "billingContact": "ronald@contoso.com",
+                "emailInvoice": true,
+                "isClassic": false,
+                "invoiceDay": "5th of the month",
+                "currency": "USD",
+                "enabledAzureSKUs": [
+                  {
+                    "skuId": "0001",
+                    "skuDescription": "Microsoft Azure Dev/Test"
+                  },
+                  {
+                    "skuId": "0002",
+                    "skuDescription": "Microsoft Azure Standard"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -55,7 +55,20 @@ jobs:
   - script: 'node scripts/modelValidation.js'
     displayName: 'Model Validation'
 
+- job: "Avocado"
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  continueOnError: true
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: './node_modules/.bin/ts-node scripts/avocado.ts'
+    displayName: 'Avocado'
+
 - job: "BreakingChange"
+  condition: "not(variables['PRIVATE'])"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
@@ -69,6 +82,7 @@ jobs:
     displayName: 'Breaking Changes'
 
 - job: "LintDiff"
+  condition: "not(variables['PRIVATE'])"
   variables:
     NODE_OPTIONS: '--max-old-space-size=8192'
   pool:
@@ -107,6 +121,9 @@ jobs:
         AZURE_SDK_PARAMS: '-o latest'
   pool:
     vmImage: 'Ubuntu 16.04'
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
   steps:
+  - script: echo $(NODE_OPTIONS)
   - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
     displayName: "Swagger to SDK script"

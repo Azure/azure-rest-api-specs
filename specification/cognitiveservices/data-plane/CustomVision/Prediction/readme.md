@@ -4,11 +4,11 @@
 
 Configuration for generating Custom Vision Prediction SDK.
 
-The current release is `release_1_0`.
+The current release is `release_3_0`.
 
 ``` yaml
 
-tag: release_1_0
+tag: release_3_0
 openapi-type: data-plane
 ```
 # Releases
@@ -18,6 +18,13 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_1_0'
 input-file: stable/v2.0/Prediction.json
+```
+
+### Release 3.0
+These settings apply only when `--tag=release_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0'
+input-file: stable/v3.0/Prediction.json
 ```
 
 # Validation
@@ -45,6 +52,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_customvision_prediction']  
 ```
 
 ## CSharp Settings
