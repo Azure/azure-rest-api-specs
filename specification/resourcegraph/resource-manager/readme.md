@@ -69,6 +69,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 ## C#
@@ -84,3 +85,7 @@ csharp:
   output-folder: $(csharp-sdks-folder)/ResourceGraph/Management/Management.ResourceGraph/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
