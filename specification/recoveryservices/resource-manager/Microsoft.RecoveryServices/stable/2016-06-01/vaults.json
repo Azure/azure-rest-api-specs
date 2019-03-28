@@ -62,7 +62,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ResourceNameAvailabilityResponseResource"
+              "$ref": "#/definitions/ResourceNameAvailabilityResultResource"
             }
           }
         },
@@ -661,7 +661,7 @@
         }
       }
     },
-    "ResourceNameAvailabilityResponse": {
+    "ResourceNameAvailabilityResult": {
       "description": "Response for check name availability API. Resource provider will set availability as true | false.",
       "type": "object",
       "properties": {
@@ -676,7 +676,7 @@
         }
       }
     },
-    "ResourceNameAvailabilityResponseResource": {
+    "ResourceNameAvailabilityResultResource": {
       "description": "Response for check name availability API. Resource provider will set availability as true | false.",
       "allOf": [
         {
@@ -685,8 +685,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ResourceNameAvailabilityResponse",
-          "description": "ResourceNameAvailabilityResponseResource properties"
+          "$ref": "#/definitions/ResourceNameAvailabilityResult",
+          "description": "ResourceNameAvailabilityResultResource properties"
         }
       }
     },
