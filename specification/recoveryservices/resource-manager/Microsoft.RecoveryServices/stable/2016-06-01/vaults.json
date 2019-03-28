@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckResourceNameAvailability"
@@ -36,6 +36,9 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
             "$ref": "#/parameters/ApiVersion"
           },
           {
@@ -51,7 +54,7 @@
             "description": "Contains information about Resource type and Resource name",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceNameAvailabilityInput"
+              "$ref": "#/definitions/ResourceNameAvailabilityParameters"
             }
           }
         ],
@@ -644,14 +647,16 @@
       },
       "x-ms-azure-resource": true
     },
-    "ResourceNameAvailabilityInput": {
-      "description": "Resource information, as sent to the regional resource provider from Global RP.",
+    "ResourceNameAvailabilityParameters": {
+      "description": "Resource Name availability input parameters - Resource type and resource name",
       "type": "object",
       "properties": {
         "type": {
+          "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults",
           "type": "string"
         },
         "name": {
+          "description": "Resource name for which availability needs to be checked",
           "type": "string"
         }
       }
