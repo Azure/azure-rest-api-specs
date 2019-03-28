@@ -5,6 +5,8 @@ import * as openApiMarkDown from "@azure/openapi-markdown"
 import * as yaml from "js-yaml"
 
 async function main() {
+  console.log(`vars: ${process.env}`)
+
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
   const set = new Set<string>()
