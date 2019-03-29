@@ -54,7 +54,7 @@
             "description": "Contains information about Resource type and Resource name",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceNameAvailabilityParameters"
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
             }
           }
         ],
@@ -519,6 +519,20 @@
     }
   },
   "definitions": {
+    "CheckNameAvailabilityParameters": {
+      "description": "Resource Name availability input parameters - Resource type and resource name",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name for which availability needs to be checked",
+          "type": "string"
+        }
+      }
+    },
     "CheckNameAvailabilityResult": {
       "description": "Response for check name availability API. Resource provider will set availability as true | false.",
       "type": "object",
@@ -675,20 +689,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ResourceNameAvailabilityParameters": {
-      "description": "Resource Name availability input parameters - Resource type and resource name",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Describes the Resource type: Microsoft.RecoveryServices/Vaults",
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name for which availability needs to be checked",
-          "type": "string"
-        }
-      }
     },
     "Sku": {
       "description": "Identifies the unique system identifier for each Azure resource.",
