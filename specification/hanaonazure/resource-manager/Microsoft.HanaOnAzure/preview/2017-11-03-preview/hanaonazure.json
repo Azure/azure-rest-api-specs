@@ -195,52 +195,52 @@
                 }
             },
             "patch": {
-              "tags": [
-                  "HanaOnAzure"
-              ],
-              "operationId": "HanaInstances_Update",
-              "summary": "Patches the Tags field of a SAP HANA instance.",
-              "description": "Patches the Tags field of a SAP HANA instance for the specified subscription, resource group, and instance name.",
-              "x-ms-examples": {
-                  "Update Tags field of a HANA instance": {
-                      "$ref": "./examples/HanaInstances_PatchTags.json"
-                  },
-                  "Delete Tags field of a HANA instance": {
-                    "$ref": "./examples/HanaInstances_PatchTags_Delete.json"
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "HanaInstances_Update",
+                "summary": "Patches the Tags field of a SAP HANA instance.",
+                "description": "Patches the Tags field of a SAP HANA instance for the specified subscription, resource group, and instance name.",
+                "x-ms-examples": {
+                    "Update Tags field of a HANA instance": {
+                        "$ref": "./examples/HanaInstances_PatchTags.json"
+                    },
+                    "Delete Tags field of a HANA instance": {
+                        "$ref": "./examples/HanaInstances_PatchTags_Delete.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HanaInstanceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/TagsParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/HanaInstance"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
                 }
-              },
-              "parameters": [
-                  {
-                      "$ref": "#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref": "#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref": "#/parameters/ResourceGroupNameParameter"
-                  },
-                  {
-                      "$ref": "#/parameters/HanaInstanceNameParameter"
-                  },
-                  {
-                      "$ref": "#/parameters/TagsParameter"
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "OK",
-                      "schema": {
-                          "$ref": "#/definitions/HanaInstance"
-                      }
-                  },
-                  "default": {
-                      "description": "Error response describing why the operation failed.",
-                      "schema": {
-                          "$ref": "#/definitions/ErrorResponse"
-                      }
-                  }
-              }
-          }
+            }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/restart": {
             "post": {
@@ -273,6 +273,52 @@
                     },
                     {
                         "$ref": "#/parameters/HanaInstanceNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/monitoring": {
+            "post": {
+                "tags": [
+                    "HanaOnAzure"
+                ],
+                "operationId": "Monitoring_HanaInstances",
+                "x-ms-long-running-operation": true,
+                "description": "The operation to monitor a SAP HANA instance.",
+                "x-ms-examples": {
+                    "Monitor a HANA instance": {
+                        "$ref": "./examples/HanaInstances_Monitoring.json"
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HanaInstanceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/MonitoringParameter"
                     }
                 ],
                 "responses": {
@@ -393,14 +439,14 @@
                     "description": "Resource power state"
                 },
                 "proximityPlacementGroup": {
-                  "readOnly": true,
-                  "type": "string",
-                  "description": "Resource proximity placement group"
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource proximity placement group"
                 },
                 "hwRevision": {
-                  "readOnly": true,
-                  "type": "string",
-                  "description": "Hardware revision of a HANA instance"
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Hardware revision of a HANA instance"
                 }
             },
             "description": "Describes the properties of a HANA instance."
@@ -610,17 +656,67 @@
             }
         },
         "Tags": {
-          "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              },
-              "description": "Tags field of the HANA instance."
-            }
-          },
-          "description": "Tags field of the HANA instance."
+            "type": "object",
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Tags field of the HANA instance."
+                }
+            },
+            "description": "Tags field of the HANA instance."
+        },
+        "MonitoringDetails": {
+            "type": "object",
+            "properties": {
+                "hanaVnet": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "ARM ID of an Azure Vnet with access to the HANA instance."
+                },
+                "hanaHostname": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Hostname of the HANA Instance blade."
+                },
+                "hanaInstanceNum": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "A number between 00 and 99, stored as a string to maintain leading zero."
+                },
+                "dbContainer": {
+                  "readOnly": true,
+                  "type": "string",
+                  "enum": [
+                      "single",
+                      "multiple"
+                  ],
+                  "default": "single",
+                  "x-ms-enum": {
+                      "name": "HanaDatabaseContainersEnum",
+                      "modelAsString": true
+                  },
+                  "description": "Either single or multiple depending on the use of MDC(Multiple Database Containers)"
+                },
+                "hanaDatabase": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Name of the database itself.  It only needs to be specified if using MDC"
+                },
+                "hanaDbUsername": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Username for the HANA database to login to for monitoring"
+                },
+                "hanaDbPassword": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Password for the HANA database to login for monitoring"
+                }
+            },
+            "description": "Details needed to monitor a Hana Instance"
         }
     },
     "parameters": {
@@ -659,9 +755,19 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Tags"
+                "$ref": "#/definitions/Tags"
             },
             "description": "Request body that only contains the new Tags field",
+            "x-ms-parameter-location": "method"
+        },
+        "MonitoringParameter": {
+            "name": "monitoringParameter",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/MonitoringDetails"
+            },
+            "description": "Request body that only contains monitoring attributes",
             "x-ms-parameter-location": "method"
         }
     }
