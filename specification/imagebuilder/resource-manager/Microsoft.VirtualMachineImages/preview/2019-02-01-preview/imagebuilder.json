@@ -592,7 +592,7 @@
       ]
     },
     "ImageTemplateShellCustomizer": {
-      "description": "Runs a shell script during the customization phase (Linux)",
+      "description": "Runs a shell script during the customization phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'script' or 'inline' can be specified.",
       "x-ms-discriminator-value": "Shell",
       "allOf": [
         {
@@ -603,6 +603,13 @@
         "script": {
           "type": "string",
           "description": "The shell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of shell commands to execute",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -630,7 +637,7 @@
       }
     },
     "ImageTemplatePowerShellCustomizer": {
-      "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner",
+      "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'script' or 'inline' can be specified.",
       "x-ms-discriminator-value": "PowerShell",
       "allOf": [
         {
@@ -642,8 +649,16 @@
           "type": "string",
           "description": "The PowerShell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
         },
+        "inline": {
+          "type": "array",
+          "description": "Array of PowerShell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        },
         "validExitCodes" : {
           "type": "array",
+          "description": "Valid exit codes for the PowerShell script. [Default: 0]",
           "items": {
             "type": "integer"
           }
