@@ -134,14 +134,14 @@
             "description": "The namespace of the metrics been queried."
           },
           "value": {
-            "$ref": "#/definitions/MetricBaseline",
-            "description": "the properties of the baseline."
+            "$ref": "#/definitions/SingleMetricBaseline",
+            "description": "The baseline results of a single metric."
           }
         },
         "required": [ "timespan", "interval", "value" ],
         "description": "The response to a metric baselines query."
       },
-      "MetricBaseline": {
+      "SingleMetricBaseline": {
         "properties": {
           "id": {
             "type": "string",
@@ -164,7 +164,7 @@
           }
         },
         "required": [ "id", "type", "metricName", "baselines" ],
-        "description": "The baseline results of a specific metric."
+        "description": "The baseline results of a single metric."
       },
       "TimeSeriesBaseline": {
         "properties": {
