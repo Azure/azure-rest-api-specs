@@ -40,10 +40,10 @@
         "operationId": "Workbooks_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/CategoryParameter"
@@ -58,7 +58,7 @@
             "$ref": "#/parameters/CanFetchWorkbookContentParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -91,16 +91,16 @@
         "operationId": "Workbooks_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkbookResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -128,16 +128,16 @@
         "operationId": "Workbooks_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },                    
           {
             "$ref": "#/parameters/WorkbookResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -165,10 +165,10 @@
         "operationId": "Workbooks_CreateOrUpdate",
         "parameters": [          
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkbookResourceNameParameter"
@@ -177,7 +177,7 @@
             "$ref": "#/parameters/SourceIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "workbookProperties",
@@ -220,10 +220,10 @@
         "operationId": "Workbooks_Update",
         "parameters": [          
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkbookResourceNameParameter"
@@ -232,7 +232,7 @@
             "$ref": "#/parameters/SourceIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "WorkbookUpdateParameters",
@@ -480,28 +480,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "WorkbookResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
