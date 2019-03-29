@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Virtual Machine Image Builder.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Virtual Machine Image Builder, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,24 +15,32 @@ To build the SDK for Virtual Machine Image Builder, simply [Install AutoRest](ht
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Virtual Machine Image Builder API.
 
 ``` yaml
 title: ImageBuilderClient
 description: Azure Virtual Machine Image Builder Client
 openapi-type: arm
-tag: package-2019-02
+tag: package-preview-2019-05
 azure-arm: true
 ```
 
 
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
+```
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -52,7 +60,6 @@ input-file:
 ```
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -85,11 +92,13 @@ python:
   clear-output-folder: true
   package-version: 0.1.0
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-imagebuilder/azure/mgmt/imagebuilder
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -146,4 +155,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
