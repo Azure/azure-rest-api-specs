@@ -410,7 +410,47 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/appTemplates": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/applicationTemplates/{applicationTemplateId}": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Get a single application template.",
+        "operationId": "Apps_Template",
+        "x-ms-examples": {
+          "Apps_Template": {
+            "$ref": "./examples/Apps_Template.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/applicationTemplateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the filtered IoT Central application template.",
+            "schema": {
+              "$ref": "#/definitions/AppTemplate"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/applicationTemplates": {
       "get": {
         "tags": [
           "Apps"
@@ -816,7 +856,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of IoT Central description objects.",
+          "description": "The link used to get the next page of IoT Central application templates.",
           "type": "string"
         },
         "value": {
@@ -852,6 +892,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "applicationTemplateId": {
+      "name": "applicationTemplateId",
+      "in": "path",
+      "description": "The combination id of manifestId and manifestVersion of the IoT Central application template.",
+      "required": true,
+      "type": "string"
     },
     "resourceName": {
       "name": "resourceName",
