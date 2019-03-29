@@ -14,8 +14,12 @@ async function main() {
   const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
-  const result = await exec(`git diff ${target}..HEAD --name-status`)
-  console.log(result.stdout)
+  try {
+    const result = await exec(`git diff remotes/origin/${target}..HEAD --name-status`)
+    console.log(result.stdout)
+  } catch (e) {
+    console.error(e)
+  }
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
