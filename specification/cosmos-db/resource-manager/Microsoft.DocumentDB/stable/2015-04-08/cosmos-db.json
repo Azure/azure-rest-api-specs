@@ -1436,7 +1436,7 @@
           "201": {
             "description": "The SQL database create operation was successful.",
             "schema": {
-              "$ref": "#/definitions/SqlDatabaseResource"
+              "$ref": "#/definitions/SqlDatabase"
             }
           }
         }
@@ -1470,7 +1470,7 @@
           "200": {
             "description": "The SQL database property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlDatabaseResource"
+              "$ref": "#/definitions/SqlDatabase"
             }
           }
         }
@@ -1512,7 +1512,7 @@
           "200": {
             "description": "The SQL database update operation was successful.",
             "schema": {
-              "$ref": "#/definitions/SqlDatabaseResource"
+              "$ref": "#/definitions/SqlDatabase"
             }
           }
         }
@@ -1621,7 +1621,7 @@
           "201": {
             "description": "The SQL container create operation was successful",
             "schema": {
-              "$ref": "#/definitions/SqlContainerResource"
+              "$ref": "#/definitions/SqlContainer"
             }
           }
         }
@@ -1658,7 +1658,7 @@
           "200": {
             "description": "The SQL container property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlContainerResource"
+              "$ref": "#/definitions/SqlContainer"
             }
           }
         }
@@ -1703,7 +1703,7 @@
           "200": {
             "description": "The SQL container update operation was successful.",
             "schema": {
-              "$ref": "#/definitions/SqlContainerResource"
+              "$ref": "#/definitions/SqlContainer"
             }
           }
         }
@@ -1763,7 +1763,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlDatabaseResource"
+            "$ref": "#/definitions/SqlDatabase"
           },
           "description": "List of SQL databases and their properties."
         }
@@ -1776,7 +1776,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlContainerResource"
+            "$ref": "#/definitions/SqlContainer"
           },
           "description": "List of SQL containers and their properties."
         }
@@ -1875,7 +1875,7 @@
     },
     "Resource": {
       "type": "object",
-      "description": "A database account resource.",
+      "description": "The core properties of ARM resources.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1955,45 +1955,23 @@
         }
       }
     },
-    "ProxyResource": {
-      "type": "object",
-      "description": "The general properties associated with all API resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique resource identifier of the database account."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the database account."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of Azure resource."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SqlDatabaseResource":{
+    "SqlDatabase":{
       "description": "An Azure Cosmos DB SQL database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB SQL database",
-          "$ref": "#/definitions/SqlDatabaseResourceProperties"
+          "$ref": "#/definitions/SqlDatabaseProperties"
         }        
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
-    "SqlDatabaseResourceProperties": {
+    "SqlDatabaseProperties": {
       "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
       "properties": {
@@ -2008,30 +1986,30 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlDatabaseCreateUpdateResource"
+          "$ref": "#/definitions/SqlDatabaseResource"
         },
         {
           "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "SqlContainerResource":{
+    "SqlContainer":{
       "description": "An Azure Cosmos DB SQL container.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB SQL container",
-          "$ref": "#/definitions/SqlContainerResourceProperties"
+          "$ref": "#/definitions/SqlContainerProperties"
         }   
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
-    "SqlContainerResourceProperties": {
+    "SqlContainerProperties": {
       "description": "The properties of an Azure Cosmos DB SQL container",
       "type": "object",
       "properties": {
@@ -2058,7 +2036,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlContainerCreateUpdateResource"
+          "$ref": "#/definitions/SqlContainerResource"
         },
         {
           "$ref": "#/definitions/ExtendedResourceProperties"
@@ -2408,7 +2386,7 @@
       "properties": {
         "resource": {
           "description": "The standard JSON format of a SQL database",
-          "$ref": "#/definitions/SqlDatabaseCreateUpdateResource"
+          "$ref": "#/definitions/SqlDatabaseResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -2440,7 +2418,7 @@
       "properties": {
         "resource": {
           "description": "The standard JSON format of a SQL container",
-          "$ref": "#/definitions/SqlContainerCreateUpdateResource"
+          "$ref": "#/definitions/SqlContainerResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -2452,7 +2430,7 @@
         "options"
       ]
     },
-    "SqlDatabaseCreateUpdateResource": {
+    "SqlDatabaseResource": {
       "type": "object",
       "description": "Cosmos DB SQL database id object",
       "properties": {
@@ -2465,7 +2443,7 @@
         "id"
       ]
     },
-    "SqlContainerCreateUpdateResource": {
+    "SqlContainerResource": {
       "type": "object",
       "description": "Cosmos DB SQL container resource object",
       "properties": {
@@ -2480,6 +2458,14 @@
         "partitionKey": {
           "$ref": "#/definitions/PartitionKey",
           "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "description": "Default time to live"
+        },
+        "uniqueKeyPolicy": {
+          "$ref": "#/definitions/UniqueKeyPolicy",
+          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
         },
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
@@ -2612,6 +2598,32 @@
           "x-ms-enum": {
             "name": "PartitionKind",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "UniqueKeyPolicy": {
+      "type": "object",
+      "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service.",
+      "properties": {
+        "uniqueKeys": {
+          "description": "List of unique keys on that enforces uniqueness constraint on documents in the collection in the Azure Cosmos DB service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UniqueKey"
+          }
+        }
+      }
+    },
+    "UniqueKey": {
+      "type": "object",
+      "description": "The unique key on that enforces uniqueness constraint on documents in the collection in the Azure Cosmos DB service.",
+      "properties": {
+        "paths": {
+          "description": "List of paths must be unique for each document in the Azure Cosmos DB service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Path"
           }
         }
       }
