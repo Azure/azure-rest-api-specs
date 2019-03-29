@@ -48,6 +48,7 @@ input-file:
 - Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
 - Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
+
 ### Tag: package-2019-02
 
 These settings apply only when `--tag=package-2019-02` is specified on the command line.
