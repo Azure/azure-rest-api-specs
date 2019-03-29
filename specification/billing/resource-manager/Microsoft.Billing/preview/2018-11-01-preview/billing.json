@@ -421,19 +421,6 @@
               "$ref": "#/definitions/InvoiceSectionListResult"
             }
           },
-          "202": {
-            "description": "Accepted. InvoiceSection creation is in progress.",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -504,6 +491,45 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections": {
+      "get": {
+        "tags": [
+          "InvoiceSections"
+        ],
+        "x-ms-examples": {
+          "InvoiceSectionsListByBillingProfileName": {
+            "$ref": "./examples/InvoiceSectionsListByBillingProfileName.json"
+          }
+        },
+        "operationId": "InvoiceSections_ListByBillingProfileName",
+        "description": "Lists all invoice sections under a billing profile for a user which he has access to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
       "get": {
         "tags": [
@@ -539,19 +565,6 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/InvoiceSectionListResult"
-            }
-          },
-          "202": {
-            "description": "Accepted. InvoiceSection creation is in progress.",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -1898,6 +1911,36 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/elevate": {
+      "post": {
+        "description": "Elevates the caller's access to match their billing profile access.",
+        "operationId": "InvoiceSections_ElevateToBillingProfile",
+        "x-ms-examples": {
+          "Elevate": {
+            "$ref": "./examples/ElevateInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Elevated the caller's access to the invoice section."
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/initiateTransfer": {
       "post": {
         "description": "Initiates the request to transfer the GTM or legacy subscriptions or RIs to GTM.",
@@ -1917,9 +1960,6 @@
           {
             "$ref": "#/parameters/initiateTransferRequestParameter"
           }
-        ],
-        "tags": [
-          "AIPController"
         ],
         "responses": {
           "200": {
@@ -1957,9 +1997,6 @@
             "$ref": "#/parameters/transferNameParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of transfer.",
@@ -1994,9 +2031,6 @@
             "$ref": "#/parameters/transferNameParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of canceled transfer.",
@@ -2029,9 +2063,6 @@
           {
             "$ref": "#/parameters/invoiceSectionNameParameter"
           }
-        ],
-        "tags": [
-          "AIPController"
         ],
         "responses": {
           "200": {
@@ -2069,9 +2100,6 @@
             "$ref": "#/parameters/acceptTransferRequestParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of the accepted transfer.",
@@ -2101,9 +2129,6 @@
           {
             "$ref": "#/parameters/transferNameParameter"
           }
-        ],
-        "tags": [
-          "AIPController"
         ],
         "responses": {
           "200": {
@@ -2135,9 +2160,6 @@
             "$ref": "#/parameters/transferNameParameter"
           }
         ],
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "Details of the transfers with given Id.",
@@ -2163,9 +2185,6 @@
             "$ref": "./examples/ListRecipientTransfers.json"
           }
         },
-        "tags": [
-          "AIPController"
-        ],
         "responses": {
           "200": {
             "description": "List of transfers received by caller.",
@@ -3118,7 +3137,7 @@
       "description": "Details of the product to be transferred.",
       "properties": {
         "productType": {
-          "description": "Type of the prouct to be transferred.",
+          "description": "Type of the product to be transferred.",
           "$ref": "#/definitions/ProductType"
         },
         "productId": {
@@ -3234,7 +3253,7 @@
         },
         "invoiceSectionId": {
           "type": "string",
-          "description": "Target invoice setion Id.",
+          "description": "Target invoice section Id.",
           "readOnly": true
         },
         "billingAccountId": {
