@@ -682,6 +682,56 @@
             }
           }
         }
+      },
+      "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease": {
+        "post": {
+          "tags": [
+            "BlobContainers"
+          ],
+          "operationId": "BlobContainers_Lease",
+          "x-ms-examples": {
+            "Acquire a lease on a container": {
+              "$ref": "./examples/BlobContainersLease_Acquire.json"
+            },
+            "Break a lease on a container": {
+              "$ref": "./examples/BlobContainersLease_Break.json"
+            }
+          },
+          "description": "The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+          "parameters": [
+            {
+              "$ref": "./storage.json#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "./storage.json#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "#/parameters/ContainerName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "schema": {
+                "$ref": "#/definitions/LeaseContainerRequest"
+              },
+              "description": "Lease Container request body."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- Lease Container operation completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/LeaseContainerResponse"
+              }
+            }
+          }
+        }
       }
     },
     "definitions": {
@@ -1104,6 +1154,54 @@
           "allowedHeaders"
         ],
         "description": "Specifies a CORS rule for the Blob service."
+      },
+      "LeaseContainerRequest": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "Acquire",
+              "Renew",
+              "Change",
+              "Release",
+              "Break"
+            ],
+            "description": "Specifies the lease action. Can be one of the available actions."
+          },
+          "leaseId": {
+            "type": "string",
+            "description": "Identifies the lease. Can be specified in any valid GUID string format."
+          },
+          "breakPeriod": {
+            "type": "integer",
+            "description": "Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60."
+          },
+          "leaseDuration": {
+            "type": "integer",
+            "description": "Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires."
+          },
+          "proposedLeaseId": {
+            "type": "string",
+            "description": "Optional for acquire, required for change. Proposed lease ID, in a GUID string format."
+          }
+        },
+        "required": [
+          "action"
+        ],
+        "description": "Lease Container request schema."
+      },
+      "LeaseContainerResponse": {
+        "properties": {
+          "leaseId": {
+            "type": "string",
+            "description": "Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease."
+          },
+          "leaseTimeSeconds": {
+            "type": "string",
+            "description": "Approximate time remaining in the lease period, in seconds."
+          }
+        },
+        "description": "Lease Container response schema."
       }
     },
     "parameters": {
