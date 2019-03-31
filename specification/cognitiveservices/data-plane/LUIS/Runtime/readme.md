@@ -37,13 +37,15 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ### Runtime 2.0 - CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  override-client-name: LuisRuntimeAPI
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
@@ -64,31 +66,7 @@ directive:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: runtime
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: runtime_2_0
-```
-
-### Tag: runtime_2_0 and go
-
-These settings apply only when `--tag=runtime_2_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'runtime_2_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/luis/runtime
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -97,11 +75,12 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 java:
+  override-client-name: LuisRuntimeAPI
   azure-arm: true
   namespace: com.microsoft.azure.cognitiveservices.language.luis.runtime
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/language/luis/runtime
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/language/luis/runtime
   with-optional-parameters: true
   with-single-async-method: true
 ```

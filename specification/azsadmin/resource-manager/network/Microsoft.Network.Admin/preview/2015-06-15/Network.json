@@ -45,6 +45,36 @@
                     }
                 }
             }
+        },
+        "/providers/Microsoft.Network.Admin/operations": {
+            "get": {
+                "x-ms-examples": {
+                    "Returns the list of support REST operations.": {
+                        "$ref": "./examples/Operations/List.json"
+                    }
+                },
+                "description": "Returns the list of support REST operations.",
+                "tags": [
+                    "Network"
+                ],
+                "operationId": "Operations_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OperationList"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
         }
     },
     "definitions": {
@@ -81,6 +111,64 @@
                 }
             },
             "x-ms-azure-resource": true
+        },
+        "Operation": {
+            "description": "Describes the supported REST operation.",
+            "properties": {
+                "name": {
+                    "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "display": {
+                    "description": "Contains the localized display information for this particular operation / action.",
+                    "$ref": "#/definitions/Display",
+                    "readOnly": true
+                }
+            }
+        },
+        "Display": {
+            "description": "Contains the localized display information for this particular operation / action.",
+            "properties": {
+                "provider": {
+                    "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "resource": {
+                    "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "operation": {
+                    "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "description": {
+                    "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "OperationList": {
+            "description": "List of Operations",
+            "properties": {
+                "value": {
+                    "description": "Array of operations",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Operation"
+                    },
+                    "readOnly": true
+                },
+                "nextLink": {
+                    "description": "URI to the next page of operations.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
         },
         "ProvisionedResource": {
             "description": "Objects which have a provisioning state.",

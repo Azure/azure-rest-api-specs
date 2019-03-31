@@ -20,8 +20,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": "Get all App Service plans for a subcription.",
-        "description": "Get all App Service plans for a subcription.",
+        "summary": "Get all App Service plans for a subscription.",
+        "description": "Get all App Service plans for a subscription.",
         "operationId": "AppServicePlans_List",
         "parameters": [
           {
@@ -184,6 +184,12 @@
         "responses": {
           "200": {
             "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          "201": {
+            "description": "Created.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/AppServicePlan"
             }
@@ -709,8 +715,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": "Get metrics for an App Serice plan.",
-        "description": "Get metrics for an App Serice plan.",
+        "summary": "Get metrics for an App Service plan.",
+        "description": "Get metrics for an App Service plan.",
         "operationId": "AppServicePlans_ListMetrics",
         "parameters": [
           {
@@ -732,7 +738,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -784,7 +790,7 @@
           {
             "name": "softRestart",
             "in": "query",
-            "description": "Specify <code>true</code> to performa a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps",
+            "description": "Specify <code>true</code> to perform a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps",
             "type": "boolean"
           },
           {
@@ -870,8 +876,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": "Gets all selectable sku's for a given App Service Plan",
-        "description": "Gets all selectable sku's for a given App Service Plan",
+        "summary": "Gets all selectable SKUs for a given App Service Plan",
+        "description": "Gets all selectable SKUs for a given App Service Plan",
         "operationId": "AppServicePlans_GetServerFarmSkus",
         "parameters": [
           {
@@ -1528,10 +1534,6 @@
               "type": "string",
               "readOnly": true
             },
-            "adminSiteName": {
-              "description": "App Service plan administration site.",
-              "type": "string"
-            },
             "hostingEnvironmentProfile": {
               "$ref": "./CommonDefinitions.json#/definitions/HostingEnvironmentProfile",
               "description": "Specification for the App Service Environment to use for the App Service plan.",
@@ -1556,6 +1558,11 @@
               "default": false,
               "type": "boolean"
             },
+            "maximumElasticWorkerCount": {
+              "format": "int32",
+              "description": "Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan",
+              "type": "integer"
+            },
             "numberOfSites": {
               "format": "int32",
               "description": "Number of apps assigned to this App Service plan.",
@@ -1569,6 +1576,11 @@
             "spotExpirationTime": {
               "format": "date-time",
               "description": "The time when the server farm expires. Valid only if it is a spot server farm.",
+              "type": "string"
+            },
+            "freeOfferExpirationTime": {
+              "format": "date-time",
+              "description": "The time when the server farm free offer expires.",
               "type": "string"
             },
             "resourceGroup": {
@@ -1586,6 +1598,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
               "default": false,
               "type": "boolean",

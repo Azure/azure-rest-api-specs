@@ -40,6 +40,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -85,31 +86,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: newssearch
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_1_0
-```
-
-### Tag: release_1_0 and go
-
-These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/newssearch
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -122,7 +99,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.search.newssearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/search/bingnewssearch
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/search/bingnewssearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true

@@ -50,7 +50,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Vault Security Config": {
             "$ref": "./examples/Common/BackupResourceVaultConfigs_Get.json"
@@ -97,7 +96,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Update Vault Security Config": {
             "$ref": "./examples/Common/BackupResourceVaultConfigs_Patch.json"
@@ -151,7 +149,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSBackupEnginesQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -216,7 +213,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSBackupEngineQueryObject",
         "x-ms-examples": {
           "Get Dpm/AzureBackupServer/Lajolla Backup Engine Details": {
@@ -271,7 +267,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Azure Vm Discovery Operation Result": {
             "$ref": "./examples/Common/RefreshContainers_OperationResults.json"
@@ -284,7 +279,7 @@
         "tags": [
           "ProtectableContainers"
         ],
-        "description": "Lists the containers registered to Recovery Services Vault.",
+        "description": "Lists the containers that can be registered to Recovery Services Vault.",
         "operationId": "ProtectableContainers_List",
         "produces": [
           "application/json"
@@ -305,7 +300,6 @@
           {
             "name": "fabricName",
             "in": "path",
-            "description": "Fabric name associated with the container.",
             "required": true,
             "type": "string"
           },
@@ -325,7 +319,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSContainerQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -383,7 +376,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Protection Container Details": {
             "$ref": "./examples/AzureWorkload/ProtectionContainers_Get.json"
@@ -394,7 +386,7 @@
         "tags": [
           "ProtectionContainers"
         ],
-        "description": "Registers the container with Recovery Services vault.\r\n            This is an asynchronous operation. To track the operation status, use location header to call get latest status of the operation.",
+        "description": "Registers the container with Recovery Services vault.\r\nThis is an asynchronous operation. To track the operation status, use location header to call get latest status of\r\nthe operation.",
         "operationId": "ProtectionContainers_Register",
         "produces": [
           "application/json"
@@ -447,7 +439,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "RegisterAzure Storage ProtectionContainers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_Register.json"
@@ -458,7 +449,7 @@
         "tags": [
           "ProtectionContainers"
         ],
-        "description": "Unregisters the given container from your Recovery Services Vault.\r\n            This is an asynchronous operation. To determine whether the backend service has finished processing the request, call Get Container Operation Result API.",
+        "description": "Unregisters the given container from your Recovery Services Vault. This is an asynchronous operation. To determine\r\nwhether the backend service has finished processing the request, call Get Container Operation Result API.",
         "operationId": "ProtectionContainers_Unregister",
         "produces": [
           "application/json"
@@ -499,7 +490,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Unregister Protection Container": {
             "$ref": "./examples/AzureWorkload/ProtectionContainers_Unregister.json"
@@ -512,8 +502,8 @@
         "tags": [
           "ProtectionContainers"
         ],
-        "summary": "Inquires all the protectable item in the given container that can be protected.",
-        "description": "Inquires all the protectable items that are protectable under the given container.",
+        "summary": "Inquires all the protectable items under the given container.",
+        "description": "This is an async operation and the results should be tracked using location header or Azure-async-url.",
         "operationId": "ProtectionContainers_Inquire",
         "produces": [
           "application/json"
@@ -558,7 +548,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSContainersInquiryQueryObject",
         "x-ms-examples": {
           "Inquire Azure Storage Protection Containers": {
@@ -572,7 +561,7 @@
         "tags": [
           "BackupWorkloadItems"
         ],
-        "description": "Provides a pageable list of workload item of a specific container according to the query filter and the pagination parameters.",
+        "description": "Provides a pageable list of workload item of a specific container according to the query filter and the pagination\r\nparameters.",
         "operationId": "BackupWorkloadItems_List",
         "produces": [
           "application/json"
@@ -627,7 +616,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSWorkloadItemQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -698,7 +686,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Azure Storage Protection Container Operation Result": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_Inquire_Result.json"
@@ -711,7 +698,7 @@
         "tags": [
           "ProtectedItems"
         ],
-        "description": "Provides the details of the backed up item. This is an asynchronous operation. To know the status of the operation, call the GetItemOperationResult API.",
+        "description": "Provides the details of the backed up item. This is an asynchronous operation. To know the status of the operation,\r\ncall the GetItemOperationResult API.",
         "operationId": "ProtectedItems_Get",
         "produces": [
           "application/json"
@@ -766,7 +753,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/GetProtectedItemQueryObject",
         "x-ms-examples": {
           "Get Protected Classic Virtual Machine Details": {
@@ -781,7 +767,7 @@
         "tags": [
           "ProtectedItems"
         ],
-        "description": "Enables backup of an item or to modifies the backup policy information of an already backed up item. This is an asynchronous operation. To know the status of the operation, call the GetItemOperationResult API.",
+        "description": "Enables backup of an item or to modifies the backup policy information of an already backed up item. This is an\r\nasynchronous operation. To know the status of the operation, call the GetItemOperationResult API.",
         "operationId": "ProtectedItems_CreateOrUpdate",
         "produces": [
           "application/json"
@@ -831,14 +817,22 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemResource"
+            }
+          },
           "202": {
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Enable Protection on Azure IaasVm": {
             "$ref": "./examples/AzureIaasVm/ConfigureProtection.json"
+          },
+          "Stop Protection with retain data on Azure IaasVm": {
+            "$ref": "./examples/AzureIaasVm/StopProtection.json"
           }
         }
       },
@@ -846,7 +840,7 @@
         "tags": [
           "ProtectedItems"
         ],
-        "description": "Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the request, call the GetItemOperationResult API.",
+        "description": "Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the\r\nrequest, call the GetItemOperationResult API.",
         "operationId": "ProtectedItems_Delete",
         "produces": [
           "application/json"
@@ -894,7 +888,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Delete Protection from Azure Virtual Machine": {
             "$ref": "./examples/Common/ProtectedItem_Delete.json"
@@ -907,7 +900,7 @@
         "tags": [
           "Backups"
         ],
-        "description": "Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the operation, call GetProtectedItemOperationResult API.",
+        "description": "Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the\r\noperation, call GetProtectedItemOperationResult API.",
         "operationId": "Backups_Trigger",
         "produces": [
           "application/json"
@@ -961,7 +954,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Trigger Backup": {
             "$ref": "./examples/Common/TriggerBackup_Post.json"
@@ -1035,7 +1027,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Operation Results of Protected Vm": {
             "$ref": "./examples/AzureIaasVm/ProtectedItemOperationResults.json"
@@ -1048,7 +1039,7 @@
         "tags": [
           "ProtectedItemOperationStatuses"
         ],
-        "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of the operation. Some operations create jobs. This method returns the list of jobs associated with the operation.",
+        "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed\r\nor failed. You can refer to the OperationStatus enum for all the possible states of the operation. Some operations\r\ncreate jobs. This method returns the list of jobs associated with the operation.",
         "operationId": "ProtectedItemOperationStatuses_Get",
         "produces": [
           "application/json"
@@ -1103,7 +1094,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Operation Status of Protected Vm": {
             "$ref": "./examples/AzureIaasVm/ProtectedItemOperationStatus.json"
@@ -1171,7 +1161,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSRPQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1188,7 +1177,7 @@
         "tags": [
           "RecoveryPoints"
         ],
-        "description": "Provides the information of the backed up data identified using RecoveryPointID. This is an asynchronous operation. To know the status of the operation, call the GetProtectedItemOperationResult API.",
+        "description": "Provides the information of the backed up data identified using RecoveryPointID. This is an asynchronous operation.\r\nTo know the status of the operation, call the GetProtectedItemOperationResult API.",
         "operationId": "RecoveryPoints_Get",
         "produces": [
           "application/json"
@@ -1243,7 +1232,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Azure Vm Recovery Point Details": {
             "$ref": "./examples/AzureIaasVm/RecoveryPoints_Get.json"
@@ -1256,7 +1244,7 @@
         "tags": [
           "ItemLevelRecoveryConnections"
         ],
-        "description": "Provisions a script which invokes an iSCSI connection to the backup data. Executing this script opens a file explorer displaying all the recoverable files and folders. This is an asynchronous operation. To know the status of provisioning, call GetProtectedItemOperationResult API.",
+        "description": "Provisions a script which invokes an iSCSI connection to the backup data. Executing this script opens a file\r\nexplorer displaying all the recoverable files and folders. This is an asynchronous operation. To know the status of\r\nprovisioning, call GetProtectedItemOperationResult API.",
         "operationId": "ItemLevelRecoveryConnections_Provision",
         "produces": [
           "application/json"
@@ -1298,7 +1286,7 @@
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "Recovery point ID which represents backed up data. iSCSI connection will be provisioned for this backed up data.",
+            "description": "Recovery point ID which represents backed up data. iSCSI connection will be provisioned\r\nfor this backed up data.",
             "required": true,
             "type": "string"
           },
@@ -1317,7 +1305,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Provision Instant Item Level Recovery for Azure Vm": {
             "$ref": "./examples/AzureIaasVm/Provision_Ilr.json"
@@ -1330,7 +1317,7 @@
         "tags": [
           "Restores"
         ],
-        "description": "Restores the specified backed up data. This is an asynchronous operation. To know the status of this API call, use GetProtectedItemOperationResult API.",
+        "description": "Restores the specified backed up data. This is an asynchronous operation. To know the status of this API call, use\r\nGetProtectedItemOperationResult API.",
         "operationId": "Restores_Trigger",
         "produces": [
           "application/json"
@@ -1391,7 +1378,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Restore to New Azure IaasVm": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR.json"
@@ -1407,7 +1393,7 @@
         "tags": [
           "ItemLevelRecoveryConnections"
         ],
-        "description": "Revokes an iSCSI connection which can be used to download a script. Executing this script opens a file explorer displaying all recoverable files and folders. This is an asynchronous operation.",
+        "description": "Revokes an iSCSI connection which can be used to download a script. Executing this script opens a file explorer\r\ndisplaying all recoverable files and folders. This is an asynchronous operation.",
         "operationId": "ItemLevelRecoveryConnections_Revoke",
         "produces": [
           "application/json"
@@ -1449,7 +1435,7 @@
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "Recovery point ID which represents backed up data. iSCSI connection will be revoked for this backed up data.",
+            "description": "Recovery point ID which represents backed up data. iSCSI connection will be revoked for\r\nthis backed up data.",
             "required": true,
             "type": "string"
           }
@@ -1459,7 +1445,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Revoke Instant Item Level Recovery for Azure Vm": {
             "$ref": "./examples/AzureIaasVm/Revoke_Ilr.json"
@@ -1472,7 +1457,7 @@
         "tags": [
           "ProtectionContainers"
         ],
-        "description": "Discovers all the containers in the subscription that can be backed up to Recovery Services Vault. This is an asynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.",
+        "description": "Discovers all the containers in the subscription that can be backed up to Recovery Services Vault. This is an\r\nasynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.",
         "operationId": "ProtectionContainers_Refresh",
         "produces": [
           "application/json"
@@ -1510,7 +1495,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSRefreshContainersQueryObject",
         "x-ms-examples": {
           "Trigger Azure Vm Discovery": {
@@ -1524,7 +1508,7 @@
         "tags": [
           "JobCancellations"
         ],
-        "description": "Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call GetCancelOperationResult API.",
+        "description": "Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call\r\nGetCancelOperationResult API.",
         "operationId": "JobCancellations_Trigger",
         "produces": [
           "application/json"
@@ -1555,7 +1539,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Cancel Job": {
             "$ref": "./examples/Common/TriggerCancelJob.json"
@@ -1568,7 +1551,7 @@
         "tags": [
           "JobOperationResults"
         ],
-        "description": "Fetches the result of any operation.\r\n            the operation.",
+        "description": "Fetches the result of any operation.\r\nthe operation.",
         "operationId": "JobOperationResults_Get",
         "produces": [
           "application/json"
@@ -1612,7 +1595,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Cancel Job Operation Result": {
             "$ref": "./examples/Common/CancelJobOperationResult.json"
@@ -1625,7 +1607,7 @@
         "tags": [
           "BackupOperationResults"
         ],
-        "description": "Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the status code in the response would be Accepted. It will continue to be in this state till it reaches completion. On successful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is part of the Location header of the operation response.",
+        "description": "Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the\r\nstatus code in the response would be Accepted. It will continue to be in this state till it reaches completion. On\r\nsuccessful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is\r\npart of the Location header of the operation response.",
         "operationId": "BackupOperationResults_Get",
         "produces": [
           "application/json"
@@ -1662,7 +1644,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Result for Protected Item Delete Operation": {
             "$ref": "./examples/Common/ProtectedItem_Delete_OperationResult.json"
@@ -1675,7 +1656,7 @@
         "tags": [
           "BackupOperationStatuses"
         ],
-        "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs when the operation is complete.",
+        "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed\r\nor failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations\r\ncreate jobs. This method returns the list of jobs when the operation is complete.",
         "operationId": "BackupOperationStatuses_Get",
         "produces": [
           "application/json"
@@ -1709,7 +1690,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Protected Item Delete Operation Status": {
             "$ref": "./examples/Common/ProtectedItem_Delete_OperationStatus.json"
@@ -1722,7 +1702,7 @@
         "tags": [
           "ProtectionPolicies"
         ],
-        "description": "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous operation. Status of the operation can be fetched using GetPolicyOperationResult API.",
+        "description": "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous\r\noperation. Status of the operation can be fetched using GetPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_Get",
         "produces": [
           "application/json"
@@ -1756,7 +1736,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Azure IaasVm Protection Policy Details": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Get.json"
@@ -1767,7 +1746,7 @@
         "tags": [
           "ProtectionPolicies"
         ],
-        "description": "Creates or modifies a backup policy. This is an asynchronous operation. Status of the operation can be fetched using GetPolicyOperationResult API.",
+        "description": "Creates or modifies a backup policy. This is an asynchronous operation. Status of the operation can be fetched\r\nusing GetPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_CreateOrUpdate",
         "produces": [
           "application/json"
@@ -1813,7 +1792,6 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Create or Update Simple Azure Vm Protection Policy": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_CreateOrUpdate_Simple.json"
@@ -1830,7 +1808,7 @@
         "tags": [
           "ProtectionPolicies"
         ],
-        "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the operation can be fetched using GetPolicyOperationResult API.",
+        "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the\r\noperation can be fetched using GetPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_Delete",
         "produces": [
           "application/json"
@@ -1864,7 +1842,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Delete Azure Vm Protection Policy": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Delete.json"
@@ -1918,7 +1895,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Protection Policy Operation Results": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicyOperationResults_Get.json"
@@ -1931,7 +1907,7 @@
         "tags": [
           "ProtectionPolicyOperationStatuses"
         ],
-        "description": "Provides the status of the asynchronous operations like backup, restore. The status can be in progress, completed or failed. You can refer to the Operation Status enum for all the possible states of an operation. Some operations create jobs. This method returns the list of jobs associated with operation.",
+        "description": "Provides the status of the asynchronous operations like backup, restore. The status can be in progress, completed\r\nor failed. You can refer to the Operation Status enum for all the possible states of an operation. Some operations\r\ncreate jobs. This method returns the list of jobs associated with operation.",
         "operationId": "ProtectionPolicyOperationStatuses_Get",
         "produces": [
           "application/json"
@@ -1972,7 +1948,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Protection Policy Operation Status": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicyOperationStatuses_Get.json"
@@ -1985,7 +1960,7 @@
         "tags": [
           "BackupProtectableItems"
         ],
-        "description": "Provides a pageable list of protectable objects within your subscription according to the query filter and the pagination parameters.",
+        "description": "Provides a pageable list of protectable objects within your subscription according to the query filter and the\r\npagination parameters.",
         "operationId": "BackupProtectableItems_List",
         "produces": [
           "application/json"
@@ -2026,7 +2001,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSPOQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -2077,7 +2051,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSContainerQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -2121,7 +2094,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Vault Security Pin": {
             "$ref": "./examples/Common/BackupSecurityPin_Get.json"
@@ -2161,10 +2133,55 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Vault Storage Configuration": {
             "$ref": "./examples/Common/BackupStorageConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceStorageConfigs"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigs_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Put.json"
           }
         }
       },
@@ -2173,7 +2190,7 @@
           "BackupResourceStorageConfigs"
         ],
         "description": "Updates vault storage model type.",
-        "operationId": "BackupResourceStorageConfigs_Update",
+        "operationId": "BackupResourceStorageConfigs_Patch",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -2202,7 +2219,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Update Vault Storage Configuration": {
             "$ref": "./examples/Common/BackupStorageConfig_Patch.json"
@@ -2217,47 +2233,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/DpmContainer"
         }
       ],
-      "properties": {
-        "canReRegister": {
-          "description": "Specifies whether the container is re-registrable.",
-          "type": "boolean"
-        },
-        "containerId": {
-          "description": "ID of container.",
-          "type": "string"
-        },
-        "protectedItemCount": {
-          "format": "int64",
-          "description": "Number of protected items in the BackupEngine",
-          "type": "integer"
-        },
-        "dpmAgentVersion": {
-          "description": "Backup engine Agent version",
-          "type": "string"
-        },
-        "dpmServers": {
-          "description": "List of BackupEngines protecting the container",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "upgradeAvailable": {
-          "description": "To check if upgrade available",
-          "type": "boolean"
-        },
-        "protectionStatus": {
-          "description": "Protection status of the container.",
-          "type": "string"
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/DPMContainerExtendedInfo",
-          "description": "Extended Info of the container."
-        }
-      },
       "x-ms-discriminator-value": "AzureBackupServerContainer"
     },
     "AzureBackupServerEngine": {
@@ -2414,7 +2392,28 @@
       "properties": {
         "workLoadType": {
           "description": "Type of workload for the backup management",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         },
         "schedulePolicy": {
           "$ref": "#/definitions/SchedulePolicy",
@@ -2453,7 +2452,8 @@
           "description": "Contains Url to the snapshot of fileshare, if applicable",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureFileShareRecoveryPoint"
     },
     "AzureFileShareRestoreRequest": {
       "description": "AzureFileShare Restore Request",
@@ -2911,15 +2911,16 @@
         },
         "subinquireditemcount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present",
+          "description": "For instance or AG, indicates number of DBs present",
           "type": "integer"
         },
         "subWorkloadItemCount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected",
+          "description": "For instance or AG, indicates number of DBs to be protected",
           "type": "integer"
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureVmWorkloadItem"
     },
     "AzureVmWorkloadProtectableItem": {
       "description": "Azure VM workload-specific protectable item.",
@@ -2935,7 +2936,7 @@
           "type": "string"
         },
         "parentUniqueName": {
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\r\n            Only Applicable for data bases where the parent would be either Instance or a SQL AG.",
+          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\r\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG.",
           "type": "string"
         },
         "serverName": {
@@ -2946,21 +2947,26 @@
           "description": "Indicates if protectable item is auto-protectable",
           "type": "boolean"
         },
+        "isAutoProtected": {
+          "description": "Indicates if protectable item is auto-protected",
+          "type": "boolean"
+        },
         "subinquireditemcount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present",
+          "description": "For instance or AG, indicates number of DBs present",
           "type": "integer"
         },
         "subprotectableitemcount": {
           "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected",
+          "description": "For instance or AG, indicates number of DBs to be protected",
           "type": "integer"
         },
         "prebackupvalidation": {
           "$ref": "#/definitions/PreBackupValidation",
           "description": "Pre-backup validation for protectable objects"
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureVmWorkloadProtectableItem"
     },
     "AzureVmWorkloadProtectedItem": {
       "description": "Azure VM workload-specific protected item.",
@@ -3053,7 +3059,8 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
           "description": "Additional information for this backup item."
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
     },
     "AzureVmWorkloadProtectedItemExtendedInfo": {
       "description": "Additional information on Azure Workload for SQL specific backup item.",
@@ -3086,7 +3093,28 @@
       "properties": {
         "workLoadType": {
           "description": "Type of workload for the backup management",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
         },
         "settings": {
           "$ref": "#/definitions/Settings",
@@ -3102,8 +3130,58 @@
       },
       "x-ms-discriminator-value": "AzureWorkload"
     },
+    "AzureVmWorkloadSAPAseDatabaseProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing SAP ASE Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPAseDatabase"
+    },
+    "AzureVmWorkloadSAPAseDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing SAP ASE Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSAPAseDatabase"
+    },
+    "AzureVmWorkloadSAPAseDatabaseWorkloadItem": {
+      "description": "Azure VM workload-specific workload item representing SAP ASE Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPAseDatabase"
+    },
+    "AzureVmWorkloadSAPAseSystemProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing SAP ASE System.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPAseSystem"
+    },
+    "AzureVmWorkloadSAPAseSystemWorkloadItem": {
+      "description": "Azure VM workload-specific workload item representing SAP ASE System.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadItem"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPAseSystem"
+    },
     "AzureVmWorkloadSAPHanaDatabaseProtectableItem": {
-      "description": "Azure VM workload-specific protectable item representing SAP Hana Database.",
+      "description": "Azure VM workload-specific protectable item representing SAP HANA Database.",
       "type": "object",
       "allOf": [
         {
@@ -3113,7 +3191,7 @@
       "x-ms-discriminator-value": "SAPHanaDatabase"
     },
     "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
-      "description": "Azure VM workload-specific protected item representing SAP Hana Database.",
+      "description": "Azure VM workload-specific protected item representing SAP HANA Database.",
       "type": "object",
       "allOf": [
         {
@@ -3123,7 +3201,7 @@
       "x-ms-discriminator-value": "AzureVmWorkloadSAPHanaDatabase"
     },
     "AzureVmWorkloadSAPHanaDatabaseWorkloadItem": {
-      "description": "Azure VM workload-specific workload item representing SAP Hana Database.",
+      "description": "Azure VM workload-specific workload item representing SAP HANA Database.",
       "type": "object",
       "allOf": [
         {
@@ -3133,7 +3211,7 @@
       "x-ms-discriminator-value": "SAPHanaDatabase"
     },
     "AzureVmWorkloadSAPHanaSystemProtectableItem": {
-      "description": "Azure VM workload-specific protectable item representing SAP Hana System.",
+      "description": "Azure VM workload-specific protectable item representing SAP HANA System.",
       "type": "object",
       "allOf": [
         {
@@ -3143,7 +3221,7 @@
       "x-ms-discriminator-value": "SAPHanaSystem"
     },
     "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
-      "description": "Azure VM workload-specific workload item representing SAP Hana System.",
+      "description": "Azure VM workload-specific workload item representing SAP HANA System.",
       "type": "object",
       "allOf": [
         {
@@ -3177,93 +3255,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectedItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
         }
       ],
-      "properties": {
-        "friendlyName": {
-          "description": "Friendly name of the DB represented by this backup item.",
-          "type": "string"
-        },
-        "serverName": {
-          "description": "Host/Cluster Name for instance or AG",
-          "type": "string"
-        },
-        "parentName": {
-          "description": "Parent name of the DB such as Instance or Availability Group.",
-          "type": "string"
-        },
-        "parentType": {
-          "description": "Parent type of DB, SQLAG or StandAlone",
-          "type": "string"
-        },
-        "protectionStatus": {
-          "description": "Backup status of this backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "Backup state of this backup item.",
-          "enum": [
-            "Invalid",
-            "IRPending",
-            "Protected",
-            "ProtectionError",
-            "ProtectionStopped",
-            "ProtectionPaused"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProtectionState",
-            "modelAsString": true
-          }
-        },
-        "lastBackupStatus": {
-          "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
-          "enum": [
-            "Invalid",
-            "Healthy",
-            "Unhealthy",
-            "IRPending"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LastBackupStatus",
-            "modelAsString": true
-          }
-        },
-        "lastBackupTime": {
-          "format": "date-time",
-          "description": "Timestamp of the last backup operation on this backup item.",
-          "type": "string"
-        },
-        "lastBackupErrorDetail": {
-          "$ref": "#/definitions/ErrorDetail",
-          "description": "Error details in last backup"
-        },
-        "protectedItemDataSourceId": {
-          "description": "Data ID of the protected item.",
-          "type": "string"
-        },
-        "protectedItemHealthStatus": {
-          "description": "Health status of the backup item, evaluated based on last heartbeat received",
-          "enum": [
-            "Invalid",
-            "Healthy",
-            "Unhealthy",
-            "NotReachable",
-            "IRPending"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProtectedItemHealthStatus",
-            "modelAsString": true
-          }
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
-          "description": "Additional information for this backup item."
-        }
-      },
       "x-ms-discriminator-value": "AzureVmWorkloadSQLDatabase"
     },
     "AzureVmWorkloadSQLDatabaseWorkloadItem": {
@@ -3379,22 +3373,37 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "WorkloadType",
             "modelAsString": true
           }
+        },
+        "operationType": {
+          "description": "Re-Do Operation",
+          "enum": [
+            "Invalid",
+            "Register",
+            "Reregister"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadContainer"
     },
     "AzureWorkloadContainerExtendedInfo": {
       "description": "Extended information of the container.",
       "type": "object",
       "properties": {
         "hostServerName": {
-          "description": "Host Os Name in case of Stand Alone and \r\n            Cluster Name in case of distributed container.",
+          "description": "Host Os Name in case of Stand Alone and Cluster Name in case of distributed container.",
           "type": "string"
         },
         "inquiryInfo": {
@@ -3410,8 +3419,44 @@
         }
       }
     },
+    "AzureWorkloadPointInTimeRecoveryPoint": {
+      "description": "Recovery point specific to PointInTime",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
+        }
+      ],
+      "properties": {
+        "timeRanges": {
+          "description": "List of log ranges",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PointInTimeRange"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadPointInTimeRecoveryPoint"
+    },
+    "AzureWorkloadPointInTimeRestoreRequest": {
+      "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadPointInTimeRestoreRequest"
+    },
     "AzureWorkloadRecoveryPoint": {
-      "description": "Workload specific recoverypoint, specifcally encaspulates full/diff recoverypoint",
+      "description": "Workload specific recovery point, specifically encapsulates full/diff recovery point",
       "type": "object",
       "allOf": [
         {
@@ -3421,7 +3466,7 @@
       "properties": {
         "recoveryPointTimeInUTC": {
           "format": "date-time",
-          "description": "UTC time at which recoverypoint was created",
+          "description": "UTC time at which recovery point was created",
           "type": "string"
         },
         "type": {
@@ -3474,6 +3519,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "targetInfo": {
+          "$ref": "#/definitions/TargetRestoreInfo",
+          "description": "Details of target database"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
@@ -3483,18 +3532,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureWorkloadSAPHanaRecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
         }
       ],
-      "properties": {
-        "timeRanges": {
-          "description": "List of log ranges",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PointInTimeRange"
-          }
-        }
-      },
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
     },
     "AzureWorkloadSAPHanaPointInTimeRestoreRequest": {
@@ -3515,34 +3555,13 @@
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
     },
     "AzureWorkloadSAPHanaRecoveryPoint": {
-      "description": "SAPHana specific recoverypoint, specifcally encaspulates full/diff recoverypoints",
+      "description": "SAPHana specific recovery point, specifically encapsulates full/diff recovery points",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
         }
       ],
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "format": "date-time",
-          "description": "UTC time at which recoverypoint was created",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of restore point",
-          "enum": [
-            "Invalid",
-            "Full",
-            "Log",
-            "Differential"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RestorePointType",
-            "modelAsString": true
-          }
-        }
-      },
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRecoveryPoint"
     },
     "AzureWorkloadSAPHanaRestoreRequest": {
@@ -3550,40 +3569,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
       ],
-      "properties": {
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryType": {
-          "description": "OLR/ALR, RestoreDisks is invalid option",
-          "enum": [
-            "Invalid",
-            "OriginalLocation",
-            "AlternateLocation",
-            "RestoreDisks"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecoveryType",
-            "modelAsString": true
-          }
-        },
-        "sourceResourceId": {
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered.",
-          "type": "string"
-        },
-        "propertyBag": {
-          "description": "Workload specific property bag.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
     },
     "AzureWorkloadSQLPointInTimeRecoveryPoint": {
@@ -3623,7 +3611,7 @@
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
     },
     "AzureWorkloadSQLRecoveryPoint": {
-      "description": "SQL specific recoverypoint, specifcally encaspulates full/diff recoverypoint alongwith extended info",
+      "description": "SQL specific recovery point, specifically encapsulates full/diff recovery point along with extended info",
       "type": "object",
       "allOf": [
         {
@@ -3633,7 +3621,7 @@
       "properties": {
         "extendedInfo": {
           "$ref": "#/definitions/AzureWorkloadSQLRecoveryPointExtendedInfo",
-          "description": "Extended Info that provides data directory details. Will be populated in two cases:\r\n            When a specific recovery point is accessed using GetRecoveryPoint\r\n            Or when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter"
+          "description": "Extended Info that provides data directory details. Will be populated in two cases:\r\nWhen a specific recovery point is accessed using GetRecoveryPoint\r\nOr when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLRecoveryPoint"
@@ -3672,10 +3660,6 @@
         "isNonRecoverable": {
           "description": "SQL specific property where user can chose to set no-recovery when restore operation is tried",
           "type": "boolean"
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
         },
         "alternateDirectoryPaths": {
           "description": "Data directory details",
@@ -3765,7 +3749,7 @@
         },
         "extendedInfo": {
           "$ref": "#/definitions/BackupEngineExtendedInfo",
-          "description": "Extended info of the backupengine"
+          "description": "Extended info of the backup engine"
         }
       },
       "discriminator": "backupEngineType"
@@ -3827,12 +3811,12 @@
         },
         "usedDiskSpace": {
           "format": "double",
-          "description": "Diskspace used in the backup engine.",
+          "description": "Disk space used in the backup engine.",
           "type": "number"
         },
         "availableDiskSpace": {
           "format": "double",
-          "description": "Diskspace currently available in the backup engine.",
+          "description": "Disk space currently available in the backup engine.",
           "type": "number"
         },
         "refreshedAt": {
@@ -3855,7 +3839,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -4007,7 +3991,7 @@
       }
     },
     "BEKDetails": {
-      "description": "BEK is bitlocker encrpytion key.",
+      "description": "BEK is bitlocker encryption key.",
       "type": "object",
       "properties": {
         "secretUrl": {
@@ -4110,12 +4094,7 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer",
-            "SqlCluster",
-            "ExchangeDAG",
-            "SharepointFarm",
-            "HyperVCluster",
-            "WindowsClient"
+            "GenericContainer"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4180,7 +4159,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4229,7 +4209,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4342,7 +4323,9 @@
             "SQLInstance",
             "SQLDataBase",
             "SAPHanaSystem",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseSystem",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4366,7 +4349,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4412,7 +4396,7 @@
           "type": "string"
         },
         "scriptNameSuffix": {
-          "description": "Mandator suffix that should be added to the name of script that is given for download to user.\r\n            If its null or empty then , ignore it.",
+          "description": "Mandatory suffix that should be added to the name of script that is given for download to user.\r\nIf its null or empty then , ignore it.",
           "type": "string"
         }
       }
@@ -4494,7 +4478,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Status of this Node.\r\n            Failed | Succeeded",
+          "description": "Status of this Node.\r\nFailed | Succeeded",
           "type": "string"
         },
         "errorDetail": {
@@ -4590,7 +4574,7 @@
           "type": "string"
         },
         "protectionState": {
-          "description": "Protection state of the backupengine",
+          "description": "Protection state of the backup engine",
           "enum": [
             "Invalid",
             "IRPending",
@@ -4975,7 +4959,8 @@
           "description": "Fully qualified ARM ID of the virtual machine.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "IaaSVMProtectableItem"
     },
     "IaasVMRecoveryPoint": {
       "description": "IaaS VM workload specific backup copy.",
@@ -5073,11 +5058,11 @@
           "type": "string"
         },
         "targetVirtualMachineId": {
-          "description": "This is the complete ARM Id of the VM that will be created.\r\n            For e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}",
+          "description": "This is the complete ARM Id of the VM that will be created.\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}",
           "type": "string"
         },
         "targetResourceGroupId": {
-          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.\r\n            For e.g. /subscriptions/{subId}/resourcegroups/{rg}",
+          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}",
           "type": "string"
         },
         "storageAccountId": {
@@ -5085,15 +5070,15 @@
           "type": "string"
         },
         "virtualNetworkId": {
-          "description": "This is the virtual network Id of the vnet that will be attached to the virtual machine.\r\n            User will be validated for join action permissions in the linked access.",
+          "description": "This is the virtual network Id of the vnet that will be attached to the virtual machine.\r\nUser will be validated for join action permissions in the linked access.",
           "type": "string"
         },
         "subnetId": {
-          "description": "Subnet ID, is the subnet ID associated with the to be restored VM. For Classic VMs it would be {VnetID}/Subnet/{SubnetName} and, for the Azure Resource Manager VMs it would be ARM resource ID used to represent the subnet.",
+          "description": "Subnet ID, is the subnet ID associated with the to be restored VM. For Classic VMs it would be\r\n{VnetID}/Subnet/{SubnetName} and, for the Azure Resource Manager VMs it would be ARM resource ID used to represent\r\nthe subnet.",
           "type": "string"
         },
         "targetDomainNameId": {
-          "description": "Fully qualified ARM ID of the domain name to be associated to the VM being restored. This applies only to Classic Virtual Machines.",
+          "description": "Fully qualified ARM ID of the domain name to be associated to the VM being restored. This applies only to Classic\r\nVirtual Machines.",
           "type": "string"
         },
         "region": {
@@ -5105,7 +5090,7 @@
           "type": "string"
         },
         "createNewCloudService": {
-          "description": "Should a new cloud service be created while restoring the VM. If this is false, VM will be restored to the same cloud service as it was at the time of backup.",
+          "description": "Should a new cloud service be created while restoring the VM. If this is false, VM will be restored to the same\r\ncloud service as it was at the time of backup.",
           "type": "boolean"
         },
         "originalStorageAccountOption": {
@@ -5127,7 +5112,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -5152,7 +5137,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "description": "Inquiry Status for this container such as \r\n            InProgress | Failed | Succeeded",
+          "description": "Inquiry Status for this container such as\r\nInProgress | Failed | Succeeded",
           "type": "string"
         },
         "errorDetail": {
@@ -5160,7 +5145,7 @@
           "description": "Error Details if the Status is non-success."
         },
         "inquiryDetails": {
-          "description": "Inquiry Details which will have workload specific details. \r\n             For e.g. - For SQL and oracle this will contain different details.",
+          "description": "Inquiry Details which will have workload specific details.\r\nFor e.g. - For SQL and oracle this will contain different details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkloadInquiryDetails"
@@ -5214,7 +5199,7 @@
       }
     },
     "KeyAndSecretDetails": {
-      "description": "BEK is bitlocker key.\r\n            KEK is encryption key for BEK\r\n            If the VM was encrypted then we will store follwing details :\r\n            1. Secret(BEK) - Url + Backup Data + vaultId.\r\n            2. Key(KEK) - Url + Backup Data + vaultId.\r\n            3. EncryptionMechanism\r\n            BEK and KEK can potentiallty have different vault ids.",
+      "description": "BEK is bitlocker key.\r\nKEK is encryption key for BEK\r\nIf the VM was encrypted then we will store following details :\r\n1. Secret(BEK) - Url + Backup Data + vaultId.\r\n2. Key(KEK) - Url + Backup Data + vaultId.\r\n3. EncryptionMechanism\r\nBEK and KEK can potentially have different vault ids.",
       "type": "object",
       "properties": {
         "kekDetails": {
@@ -5223,7 +5208,7 @@
         },
         "bekDetails": {
           "$ref": "#/definitions/BEKDetails",
-          "description": "BEK is bitlocker encrpytion key."
+          "description": "BEK is bitlocker encryption key."
         },
         "encryptionMechanism": {
           "description": "Encryption mechanism: None/ SinglePass/ DoublePass",
@@ -5283,7 +5268,8 @@
         {
           "$ref": "#/definitions/SchedulePolicy"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "LongTermSchedulePolicy"
     },
     "MabContainer": {
       "description": "Container with items backed up using MAB backup engine.",
@@ -5355,7 +5341,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5527,10 +5514,6 @@
         }
       }
     },
-    "Object": {
-      "description": "Base of all objects.",
-      "type": "object"
-    },
     "OperationStatus": {
       "description": "Operation status.",
       "type": "object",
@@ -5600,7 +5583,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -5716,7 +5699,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the container.",
+          "description": "Type of backup management for the container.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5735,7 +5718,7 @@
           }
         },
         "protectableContainerType": {
-          "description": "Type of the container. The value of this property for\r\n            1. Compute Azure VM is Microsoft.Compute/virtualMachines\r\n            2. Classic Compute Azure VM is Microsoft.ClassicCompute/virtualMachines",
+          "description": "Type of the container. The value of this property for\r\n1. Compute Azure VM is Microsoft.Compute/virtualMachines\r\n2. Classic Compute Azure VM is Microsoft.ClassicCompute/virtualMachines",
           "enum": [
             "Invalid",
             "Unknown",
@@ -5751,12 +5734,7 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer",
-            "SqlCluster",
-            "ExchangeDAG",
-            "SharepointFarm",
-            "HyperVCluster",
-            "WindowsClient"
+            "GenericContainer"
           ],
           "type": "string",
           "readOnly": true,
@@ -5817,7 +5795,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the backed up item.",
+          "description": "Type of backup management for the backed up item.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5851,7 +5829,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5919,7 +5898,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the container.",
+          "description": "Type of backup management for the container.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -5946,7 +5925,7 @@
           "type": "string"
         },
         "containerType": {
-          "description": "Type of the container. The value of this property for: 1. Compute Azure VM is Microsoft.Compute/virtualMachines 2. Classic Compute Azure VM is Microsoft.ClassicCompute/virtualMachines 3. Windows machines (like MAB, DPM etc) is Windows 4. Azure SQL instance is AzureSqlContainer. 5. Storage containers is StorageContainer. 6. Azure workload Backup is VMAppContainer",
+          "description": "Type of the container. The value of this property for: 1. Compute Azure VM is Microsoft.Compute/virtualMachines 2.\r\nClassic Compute Azure VM is Microsoft.ClassicCompute/virtualMachines 3. Windows machines (like MAB, DPM etc) is\r\nWindows 4. Azure SQL instance is AzureSqlContainer. 5. Storage containers is StorageContainer. 6. Azure workload\r\nBackup is VMAppContainer",
           "enum": [
             "Invalid",
             "Unknown",
@@ -5962,12 +5941,7 @@
             "VMAppContainer",
             "SQLAGWorkLoadContainer",
             "StorageContainer",
-            "GenericContainer",
-            "SqlCluster",
-            "ExchangeDAG",
-            "SharepointFarm",
-            "HyperVCluster",
-            "WindowsClient"
+            "GenericContainer"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6023,7 +5997,7 @@
           "type": "integer"
         },
         "backupManagementType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6051,7 +6025,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6195,7 +6169,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6221,7 +6195,7 @@
       "properties": {
         "count": {
           "format": "int32",
-          "description": "Count of duration types. Retention duration is obtained by the counting the duration type Count times.\r\n            For example, when Count = 3 and DurationType = Weeks, retention duration will be three weeks.",
+          "description": "Count of duration types. Retention duration is obtained by the counting the duration type Count times.\r\nFor example, when Count = 3 and DurationType = Weeks, retention duration will be three weeks.",
           "type": "integer"
         },
         "durationType": {
@@ -6249,7 +6223,7 @@
       "type": "object",
       "properties": {
         "retentionPolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6263,7 +6237,7 @@
       "type": "object",
       "properties": {
         "schedulePolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -6282,7 +6256,7 @@
           "type": "boolean"
         },
         "isCompression": {
-          "description": "Workload compression flag. This has been added so that 'isSqlCompression'\r\n            will be deprecated once clients upgrade to consider this flag.",
+          "description": "Workload compression flag. This has been added so that 'isSqlCompression'\r\nwill be deprecated once clients upgrade to consider this flag.",
           "type": "boolean"
         }
       }
@@ -6425,7 +6399,18 @@
       "properties": {
         "policyType": {
           "description": "Type of backup policy type",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "Full",
+            "Differential",
+            "Log",
+            "CopyOnlyFull"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyType",
+            "modelAsString": true
+          }
         },
         "schedulePolicy": {
           "$ref": "#/definitions/SchedulePolicy",
@@ -6604,7 +6589,7 @@
       "type": "object",
       "properties": {
         "backupManagementType": {
-          "description": "Type of backup managemenent to backup an item.",
+          "description": "Type of backup management to backup an item.",
           "type": "string"
         },
         "workloadType": {
@@ -6674,7 +6659,7 @@
       "type": "object",
       "properties": {
         "backupManagementType": {
-          "description": "Type of backup managemenent to backup an item.",
+          "description": "Type of backup management to backup an item.",
           "type": "string"
         },
         "workloadType": {
@@ -6818,16 +6803,16 @@
       "in": "path",
       "description": "The name of the resource group where the recovery services vault is present.",
       "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "VaultName": {
       "name": "vaultName",
       "in": "path",
       "description": "The name of the recovery services vault.",
       "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersion": {
       "name": "api-version",

@@ -37,7 +37,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBIDedicated/capacities/{dedicatedCapacityName}": {
       "get": {
-        "description": "Gets details about the specified dedicated capacity.",       
+        "description": "Gets details about the specified dedicated capacity.",
         "x-ms-examples": {
           "Get details of a capacity": { "$ref": "./examples/getCapacity.json" }
         },
@@ -73,7 +73,7 @@
       },
       "put": {
         "description": "Provisions the specified Dedicated capacity based on the configuration specified in the request.",
-         "x-ms-examples": {
+        "x-ms-examples": {
           "Create capacity": { "$ref": "./examples/createCapacity.json" }
         },
         "tags": [ "Capacities" ],
@@ -121,7 +121,7 @@
       },
       "delete": {
         "description": "Deletes the specified Dedicated capacity.",
-          "x-ms-examples": {
+        "x-ms-examples": {
           "Get details of a capacity": { "$ref": "./examples/deleteCapacity.json" }
         },
         "tags": [ "Capacities" ],
@@ -435,7 +435,52 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBIDedicated/locations/{location}/checkNameAvailability": {
+     "post": {
+       "x-ms-examples": {
+        "Check name availability of a capacity": { "$ref": "./examples/checkNameAvailability.json" }
+      },
+      "tags": [
+        "Capacities"
+      ],
+      "operationId": "Capacities_CheckNameAvailability",
+      "description": "Check the name availability in the target location.",
+      "parameters": [
+        {
+          "name": "location",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The region name which the operation will lookup into."
+        },
+        {
+          "name": "capacityParameters",
+          "in": "body",
+          "required": true,
+          "schema":
+          {
+            "$ref": "#/definitions/CheckCapacityNameAvailabilityParameters"
+          },
+          "description": "The name of the capacity."
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/CheckCapacityNameAvailabilityResult"
+          }
+        }
+      }
     }
+   }
   },
   "definitions": {
     "OperationListResult": {
@@ -624,7 +669,7 @@
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "The current deployment state of PowerBI Dedicatedresource. The provisioningState is to indicate states for resource provisioning."
+          "description": "The current deployment state of PowerBI Dedicated resource. The provisioningState is to indicate states for resource provisioning."
         }
       },
       "allOf": [
@@ -713,7 +758,7 @@
         }
       }
     },
-    "ErrorResponse": {   
+    "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
@@ -724,6 +769,42 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "CheckCapacityNameAvailabilityParameters": {
+      "description": "Details of capacity name request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*$",
+          "minLength": 3,
+          "maxLength": 63,
+          "description": "Name for checking availability."
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.PowerBIDedicated/capacities",
+          "description": "The resource type of PowerBI dedicated."
+        }
+      }
+    },
+    "CheckCapacityNameAvailabilityResult": {
+      "description": "The checking result of capacity name availability.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicator of availability of the capacity name."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of unavailability."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed message of the request unavailability."
         }
       }
     }

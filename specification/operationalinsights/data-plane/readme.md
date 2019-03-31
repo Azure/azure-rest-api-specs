@@ -66,6 +66,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -80,17 +81,26 @@ csharp:
   output-folder: $(csharp-sdks-folder)/OperationalInsights/DataPlane/OperationalInsights/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 
 ``` yaml $(python)
 python-mode: create
 python:
+  override-client-name: LogAnalyticsDataClient
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.loganalytics
   package-name: azure-loganalytics
   package-version: 0.1.0
   clear-output-folder: true
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
@@ -105,31 +115,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: operationalinsights
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: v1
-```
-
-### Tag: v1 and go
-
-These settings apply only when `--tag=v1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='v1' && $(go)
-output-folder: $(go-sdk-folder)/services/operationalinsights/v1/operationalinsights
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -144,4 +130,8 @@ java:
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/loganalytics/data-plane
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items.type
+    transform: $ = "object"
   ```

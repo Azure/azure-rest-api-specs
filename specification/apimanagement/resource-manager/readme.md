@@ -28,7 +28,7 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-2018-06-preview
+tag: package-2018-01
 ```
 
 ### Tag: package-2018-06-preview
@@ -39,29 +39,36 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 input-file:
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimanagement.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimapis.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimapisByTags.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimauthorizationservers.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimbackends.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimcaches.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimcertificates.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimdeployment.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimdiagnostics.json
-- Microsoft.ApiManagement/preview/2018-06-01-preview/apimemailtemplate.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimemailtemplates.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimgroups.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimidentityprovider.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimissues.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimloggers.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnotifications.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimnetworkstatus.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimpolicies.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimpolicysnippets.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimportalsettings.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproducts.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimproductsByTags.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimproperties.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimquotas.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimregions.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimreports.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimsubscriptions.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimtagresources.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimtags.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimtenant.json
 - Microsoft.ApiManagement/preview/2018-06-01-preview/apimusers.json
-- Microsoft.ApiManagement/preview/2018-06-01-preview/apimversionsets.json
+- Microsoft.ApiManagement/preview/2018-06-01-preview/apimapiversionsets.json
 ```
 
 ## Suppression
@@ -81,31 +88,31 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.ApiManagement/preview/2018-01-01/apimanagement.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimapis.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimauthorizationservers.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimbackends.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimcertificates.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimdeployment.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimdiagnostics.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimemailtemplate.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimgroups.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimidentityprovider.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimloggers.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimnotifications.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimnetworkstatus.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimopenidconnectproviders.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimportalsettings.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimproducts.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimproperties.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimquotas.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimreports.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimsubscriptions.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimtagresources.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimtags.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimtenant.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimusers.json
-- Microsoft.ApiManagement/preview/2018-01-01/apimversionsets.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimanagement.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimapis.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimauthorizationservers.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimbackends.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimcertificates.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimdeployment.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimdiagnostics.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimemailtemplate.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimgroups.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimidentityprovider.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimloggers.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimnotifications.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimnetworkstatus.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimopenidconnectproviders.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimportalsettings.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimproducts.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimproperties.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimquotas.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimreports.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimsubscriptions.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimtagresources.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimtags.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimtenant.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimusers.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimversionsets.json
 ```
 
 ## Suppression
@@ -202,6 +209,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
     autorest_options:
       use: "@microsoft.azure/autorest.python@~3.0"
@@ -231,71 +239,7 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: apimanagement
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-06-preview
-  - tag: package-2018-01
-  - tag: package-2017-03
-  - tag: package-2016-10
-  - tag: package-2016-07
-```
-
-### Tag: package-2018-06-preview and go
-
-These settings apply only when `--tag=package-2018-06-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/apimanagement/mgmt/2018-06-01-preview/apimanagement
-```
-
-### Tag: package-2018-01 and go
-
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/apimanagement/mgmt/2018-01-01/apimanagement
-```
-
-### Tag: package-2017-03 and go
-
-These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(go)
-output-folder: $(go-sdk-folder)/services/apimanagement/mgmt/2017-03-01/apimanagement
-```
-
-### Tag: package-2016-10 and go
-
-These settings apply only when `--tag=package-2016-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-10' && $(go)
-output-folder: $(go-sdk-folder)/services/apimanagement/mgmt/2016-10-10/apimanagement
-```
-
-### Tag: package-2016-07 and go
-
-These settings apply only when `--tag=package-2016-07 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-07' && $(go)
-output-folder: $(go-sdk-folder)/services/apimanagement/mgmt/2016-07-07/apimanagement
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

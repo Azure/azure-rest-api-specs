@@ -1,20 +1,22 @@
 {
   "parameters": {
-    "AzureRegion": "westus",
+    "Endpoint": "{Endpoint}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "faceListId": "sample_face_list"
+    "faceListId": "sample_face_list",
+    "returnRecognitionModel": true
   },
   "responses": {
     "200": {
       "body": {
         "faceListId": "sample_list",
         "name": "list1",
-        "userData": "User-provided data attached to the face list",
+        "userData": "User-provided data attached to the face list.",
+        "recognitionModel": "recognition_01",
         "persistedFaces": [
           {
             "persistedFaceId": "B8D802CF-DD8F-4E61-B15C-9E6C5844CCBD",
-            "userData": "User-provided data attached to the face"
+            "userData": "User-provided data attached to the face."
           }
         ]
       }

@@ -47,9 +47,12 @@
           "Create a database as a point in time restore":{
               "$ref":"./examples/ServerCreatePointInTimeRestore.json"
           },
-          "Create a server as a geo restore ": { 
-            "$ref": "./examples/ServerCreateGeoRestoreMode.json" 
-          }
+          "Create a server as a geo restore ": {
+            "$ref": "./examples/ServerCreateGeoRestoreMode.json"
+          },
+          "Create a replica server": {
+            "$ref": "./examples/ServerCreateReplicaMode.json"
+          } 
         },
         "description": "Creates a new server, or will overwrite an existing server.",
         "parameters": [
@@ -281,6 +284,86 @@
         "x-ms-pageable": {
           "nextLinkName": null
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/Replicas": {
+      "get": {
+        "tags": [
+          "Replicas"
+        ],
+        "operationId": "Replicas_ListByServer",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/ReplicasListByServer.json"
+          }
+        },
+        "description": "List all the replicas for a given server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/restart": {
+      "post": {
+        "tags": [
+          "ServerRestart"
+        ],
+        "operationId": "Servers_Restart",
+        "x-ms-examples": {
+          "ServerRestart": { "$ref": "./examples/ServerRestart.json" }
+        },
+        "description": "Restarts a server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
@@ -644,7 +727,7 @@
           }
         }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
@@ -1216,7 +1299,10 @@
       "description": "The version of a server.",
       "enum": [
         "9.5",
-        "9.6"
+        "9.6",
+        "10",
+        "10.0",
+        "10.2"
       ],
       "x-ms-enum": {
         "name": "ServerVersion",
@@ -1319,6 +1405,20 @@
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
+        },
+        "replicationRole": {
+          "type": "string",
+          "description": "The replication role of the server."
+        },
+        "masterServerId": {
+          "type": "string",
+          "description": "The master server id of a replica server."
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The maximum number of replicas that a master server can have."
         }
       },
       "description": "The properties of a server."
@@ -1373,7 +1473,8 @@
           "enum": [
             "Default",
             "PointInTimeRestore",
-            "GeoRestore"
+            "GeoRestore",
+            "Replica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1448,6 +1549,24 @@
         "sourceServerId"
       ],
       "description": "The properties used to create a new server by restoring to a different region from a geo replicated backup."
+    },
+    "ServerPropertiesForReplica": {
+      "x-ms-discriminator-value": "Replica",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
+      "properties": {
+        "sourceServerId": {
+          "type": "string",
+          "description": "The master server id to create replica from."
+        }
+      },
+      "required": [
+        "sourceServerId"
+      ],
+      "description": "The properties to create a new replica."
     },
     "Sku": {
       "properties": {
@@ -1570,7 +1689,7 @@
           "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
-      "description": "Parameters allowd to update for a server."
+      "description": "Parameters allowed to update for a server."
     },
     "ServerListResult": {
       "properties": {
@@ -1700,7 +1819,7 @@
           "readOnly": true
         }
       }
-    },    
+    },
     "DatabaseProperties": {
       "properties": {
         "charset": {
@@ -2104,6 +2223,40 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
@@ -2152,7 +2305,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },    
+    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",

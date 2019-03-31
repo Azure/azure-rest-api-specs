@@ -3,7 +3,7 @@
   "info": {
     "title": "Content Moderator Client",
     "version": "1.0",
-    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue.\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com ."
+    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue."
   },
   "securityDefinitions": {
     "apim_key": {
@@ -18,17 +18,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{baseUrl}",
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/baseUrl"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces": {
       "post": {
@@ -2792,7 +2789,7 @@
           "type": "boolean"
         },
         "RacyClassificationScore": {
-          "description": "The racy classication score.",
+          "description": "The racy classification score.",
           "type": "number"
         },
         "IsImageRacyClassified": {
@@ -2916,18 +2913,9 @@
         "Metadata": {
           "description": "Image List Metadata.",
           "type": "object",
-
-          "properties": {
-            "Key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "Key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
-
         }
       }
     },
@@ -2949,15 +2937,8 @@
         "Metadata": {
           "description": "Term list metadata.",
           "type": "object",
-          "properties": {
-            "Key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "Key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -2990,15 +2971,8 @@
           "type": "array",
           "items": {
             "type": "object",
-            "properties": {
-              "Key One": {
-                "description": "Key parameter to describe advanced info.",
-                "type": "string"
-              },
-              "Key Two": {
-                "description": "Key parameter to describe advanced info.",
-                "type": "string"
-              }
+            "additionalProperties": {
+              "type": "string"
             }
           }
         },
@@ -3708,18 +3682,9 @@
           "Metadata": {
             "description": "Metadata of the list.",
             "type": "object",
-
-            "properties": {
-              "Key One": {
-                "description": "Optional key value pair to describe your list.",
-                "type": "string"
-              },
-              "Key Two": {
-                "description": "Optional key value pair to describe your list.",
-                "type": "string"
-              }
+            "additionalProperties": {
+              "type": "string"
             }
-
           }
         }
 
@@ -3843,34 +3808,14 @@
       "description": "The image file.",
       "x-ms-parameter-location": "method"
     },
-    "baseUrl": {
-      "name": "baseUrl",
-      "description": "Supported Azure regions for Content Moderator endpoints",
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
       "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-enum": {
-        "name": "azureRegionBaseUrl",
-        "modelAsString": true
-      },
-      "enum": [
-        "westus.api.cognitive.microsoft.com",
-        "westus2.api.cognitive.microsoft.com",
-        "eastus.api.cognitive.microsoft.com",
-        "eastus2.api.cognitive.microsoft.com",
-        "westcentralus.api.cognitive.microsoft.com",
-        "southcentralus.api.cognitive.microsoft.com",
-        "westeurope.api.cognitive.microsoft.com",
-        "northeurope.api.cognitive.microsoft.com",
-        "southeastasia.api.cognitive.microsoft.com",
-        "eastasia.api.cognitive.microsoft.com",
-        "australiaeast.api.cognitive.microsoft.com",
-        "brazilsouth.api.cognitive.microsoft.com",
-        "contentmoderatortest.azure-api.net"
-      ]
+      "x-ms-skip-url-encoding": true
     }
-
   }
 } 

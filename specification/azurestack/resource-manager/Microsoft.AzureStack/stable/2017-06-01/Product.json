@@ -48,9 +48,12 @@
                             "$ref": "#/definitions/ProductList"
                         }
                     },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
+                    "default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
@@ -93,9 +96,12 @@
                             "$ref": "#/definitions/Product"
                         }
                     },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
+                    "default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 }
             }
         },
@@ -217,7 +223,7 @@
             "type": "object",
             "properties": {
                 "computeRole": {
-                    "description": "Specifies kind of compute role inclided in the package.",
+                    "description": "Specifies kind of compute role included in the package.",
                     "$ref": "#/definitions/ComputeRole",
                     "readOnly": true
                 },

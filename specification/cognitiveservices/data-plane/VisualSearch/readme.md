@@ -37,12 +37,15 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-go
 ```
 
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
-``` yaml $(csharp) 
-csharp: 
+``` yaml $(csharp)
+csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.VisualSearch
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/VisualSearch
   sync-methods: none
@@ -77,30 +80,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: visualsearch
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_1_0
-```
-
-### Tag: release_1_0 and go
-
-These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v1.0/$(namespace)
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -113,7 +93,7 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.search.visualsearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/search/bingvisualsearch
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/search/bingvisualsearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true

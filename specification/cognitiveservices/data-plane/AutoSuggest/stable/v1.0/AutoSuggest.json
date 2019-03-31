@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AutoSuggest Search API",
-    "description": "The AutoSuggest Search API lets you send a search query to Bing and get back a list of news that are relevant to the search query. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the web for AutoSuggest](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-autosuggest-api-v7-reference).",
+    "title": "AutoSuggest Client",
+    "description": "Autosuggest supplies search terms derived from a root text sent to the service.  The terms Autosuggest supplies are related to the root text based on similarity and their frequency or ratings of usefulness in other searches. For examples that show how to use Autosuggest, see [Search using AutoSuggest](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/bing-autosuggest-api-v7-reference).",
     "version": "1.0"
   },
   "parameters": {
@@ -22,11 +22,20 @@
       ]
     }
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
+  },
   "host": "api.cognitive.microsoft.com",
+  "basePath": "/bing/v7.0",
   "schemes": [
     "https"
   ],
-  "basePath": "/bing/v7.0",
   "produces": [
     "application/json"
   ],
@@ -45,7 +54,7 @@
   "paths": {
     "/Suggestions": {
       "get": {
-        "summary": "The AutoSuggest API lets you send a search query to Bing and get back a list of suggestions. This section provides technical details about the query parameters and headers that you use to request suggestions and the JSON response objects that contain them.",
+        "summary": "The AutoSuggest API lets you send a search query to Bing and get back a list of query suggestions. This section provides technical details about the query parameters and headers that you use to request suggestions and the JSON response objects that contain them.",
         "operationId": "AutoSuggest",
         "tags": [
           "AutoSuggest"

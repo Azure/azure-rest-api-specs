@@ -7,7 +7,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-eventhub
-  package-version: 1.2.0-preview
   output-folder: $(node-sdks-folder)/lib/services/eventHubManagement
   generate-license-txt: true
   generate-package-json: true
