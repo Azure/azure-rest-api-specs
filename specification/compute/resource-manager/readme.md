@@ -111,6 +111,10 @@ directive:
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
+      - $.definitions.ProximityPlacementGroupUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
       - $.definitions.VirtualMachineExtensionUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
@@ -180,7 +184,7 @@ directive:
   - where:
       - $.definitions.ContainerService
     suppress:
-      - TrackedResourcePatchOperation
+      - TrackedResourcePatchOperation 
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
@@ -195,7 +199,7 @@ input-file:
 - Microsoft.Compute/stable/2019-03-01/runCommands.json
 - Microsoft.Compute/stable/2017-09-01/skus.json
 - Microsoft.Compute/stable/2018-09-30/disk.json
-- Microsoft.Compute/stable/2018-06-01/gallery.json
+- Microsoft.Compute/stable/2019-03-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
@@ -235,15 +239,6 @@ These settings apply only when `--tag=package-2018-10-01-only` is specified on t
 input-file:
 - Microsoft.Compute/stable/2018-10-01/compute.json
 - Microsoft.Compute/stable/2018-10-01/runCommands.json
-```
-
-### Tag: package-2018-09-30-only
-
-These settings apply only when `--tag=package-2018-09-30-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-09-30-only'
-input-file:
-- Microsoft.Compute/stable/2018-09-30/disk.json
 ```
 
 ### Tag: package-2018-06-exclude-gallery
