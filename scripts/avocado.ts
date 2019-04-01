@@ -33,6 +33,7 @@ async function main() {
   console.log(`target: ${target}`)
   const targetBranch = `remotes/origin/${target}`
   const { stdout } = await execWrap(`git diff ${targetBranch}..HEAD --name-status`)
+  console.log(stdout)
   await mkdir("../old")
 
   await execWrap(`git clone ${path.resolve(process.cwd())} --branch ${target} --single-branch`, "../old")
