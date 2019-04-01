@@ -1,0 +1,79 @@
+{
+    "parameters": {
+        "subscriptionId": "00000000-0000-0000-0000-000000000000",
+        "resourceGroupName": "testrg123",
+        "workspaceName": "workspaces123",
+        "workstationName": "workstation123",
+        "api-version": "2019-05-01",
+        "parameters": {
+            "location": "eastus",
+            "properties": {
+                "vmSize": "Standard_DS3_v2",
+                "osProfile": {
+                    "adminUserName": "username",
+                    "adminUserPassword": "password"
+                },
+                "networkProfile": {
+                    "subnetId": {
+                        "id": "subnet_resource_ID"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/workstations/workstation123",
+                "type": "Microsoft.MachineLearningServices/workspaces/workstations",
+                "name": "workstation123",
+                "location": "eastus",
+                "properties": {
+                    "vmSize": "Standard_DS3_v2",
+                    "osProfile": {
+                        "adminUserName": "admin"
+                    },
+                    "networkProfile": {
+                        "subnetId": {
+                            "id": "subnet_resource_ID"
+                        },
+                        "networkInterface": {
+                            "id": "network_interface_ID"
+                        }
+                    },
+                    "provisioningState": "Creating"
+                }
+            }
+        },
+        "201": {
+            "body": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/workstations/workstation123",
+                "type": "Microsoft.MachineLearningServices/workspaces/computes",
+                "name": "workstation123",
+                "location": "eastus",
+                "properties": {
+                    "vmSize": "Standard_DS3_v2",
+                    "osProfile": {
+                        "adminUserName": "foo"
+                    },
+                    "networkProfile": {
+                        "subnetId": {
+                            "id": "subnet_resource_ID"
+                        },
+                        "networkInterface": {
+                            "id": "network_interface_ID"
+                        }
+                    },
+                    "provisioningState": "Creating"
+                }
+            },
+            "headers": {
+                "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+            }
+        }
+    }
+}
+
+
+
+

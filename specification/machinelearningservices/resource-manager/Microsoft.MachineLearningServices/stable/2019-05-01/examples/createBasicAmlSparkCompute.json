@@ -1,0 +1,81 @@
+{
+    "parameters": {
+        "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+        "resourceGroupName": "testrg123",
+        "workspaceName": "workspaces123",
+        "computeName": "compute123",
+        "api-version": "2019-05-01",
+        "parameters": {
+            "location": "eastus",
+            "properties": {
+                "computeType": "AmlSpark",
+                "properties": {
+                    "sparkVersion":"2.3", 
+                    "pythonVersion": "3",
+                    "sparkConfigurations": [ 
+                        {
+                          "configName": "spark.speculation",
+                          "value": "true"
+                        },
+                        {
+                          "configName": "spark.streaming.ui.retainedBatches",
+                          "value": "5"
+                        }
+                     ],
+                     "environmentVariables": [
+                       {
+                          "name": "SPARK_WORKER_MEMORY",
+                          "value": "28000m"
+                       },
+                       {
+                          "name": "SPARK_LOCAL_DIRS",
+                          "value": "/local_disk0"
+                       }
+                    ],
+                    "driverSettings": {
+                        "vmSize":"Standard_DS2_v2"
+                    },
+                    "workerSettings": {
+                         "vmSize": "Standard_NC6",
+                         "vmPriority": "Dedicated",
+                         "scaleSettings": {
+                            "minNodeCount": 1,
+                            "maxNodeCount": 5,
+                            "nodeIdleSecondsBeforeScaleDown": 30
+                          }
+                    },
+                    "idleSecondsBeforeAutoTermination": 1200
+                }
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+                "type": "Microsoft.MachineLearningServices/workspaces/computes",
+                "name": "compute123",
+                "location": "eastus",
+                "properties": {
+                    "computeType": "AmlSpark",
+                    "provisioningState": "Creating"
+                }
+            }
+        },
+        "201": {
+            "body": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+                "type": "Microsoft.MachineLearningServices/workspaces/computes",
+                "name": "compute123",
+                "location": "eastus",
+                "properties": {
+                    "computeType": "AmlSpark",
+                    "provisioningState": "Creating"
+                }
+            },
+            "headers": {
+                "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+            }
+        }
+    }
+}

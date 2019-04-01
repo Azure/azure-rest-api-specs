@@ -537,6 +537,7 @@
         "description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.",
         "x-ms-examples": {
           "Get a AKS Compute": { "$ref": "./examples/getAKSCompute.json" },
+          "Get an AML Spark Compute": { "$ref": "./examples/getAmlSparkCompute.json" },
           "Get a AML Compute": { "$ref": "./examples/getAmlCompute.json" }
         },
         "parameters": [
@@ -582,6 +583,7 @@
         "x-ms-examples": {
           "Create a AML Compute": { "$ref": "./examples/createBasicAmlCompute.json" },
           "Create AKS Compute": { "$ref": "./examples/createBasicAKSCompute.json" },
+          "Create a AML Spark Compute": { "$ref": "./examples/createBasicAmlSparkCompute.json" },
           "Create a DataFactory Compute": { "$ref": "./examples/createBasicDataFactoryCompute.json" },
           "Update a AML Compute": { "$ref": "./examples/updateAmlCompute.json" },
           "Update a AKS Compute": { "$ref": "./examples/updateAKSCompute.json" }
@@ -642,6 +644,7 @@
         "description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Update a AmlSpark Compute": { "$ref": "./examples/patchAmlSparkCompute.json" },
           "Update a AmlCompute Compute": { "$ref": "./examples/patchAmlCompute.json" }
         },
         "parameters": [
@@ -786,6 +789,109 @@
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
             "$ref": "./examples/amlComputeListNodes.json"
+          },
+          "Get compute nodes information for a Spark compute": {
+            "$ref": "./examples/amlSparkComputeListNodes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/terminate": {
+      "post": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Terminate",
+        "description": "Terminate the running computer cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "Compute termination initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart": {
+      "post": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Restart",
+        "description": "Restart the terminated computer cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "Compute restart initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
           }
         }
       }
@@ -831,6 +937,329 @@
               "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations/{workstationName}": {
+      "put": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_CreateOrUpdate",
+        "description": "Creates or updates a workstation in the given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the workstation entity.",
+            "schema": {
+              "$ref": "#/definitions/Workstation"
+            }
+          },
+          "201": {
+            "description": "Compute creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/Workstation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a workstations": { "$ref": "./examples/createWorkstation.json" }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Delete",
+        "description": "Deletes a workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a workstation": { "$ref": "./examples/deleteWorkstation.json" }
+        }
+      },
+      "get": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Get",
+        "description": "Gets information about a Workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the workstation.",
+            "schema": {
+              "$ref": "#/definitions/Workstation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a workstation's information": {
+            "$ref": "./examples/getWorkstation.json"
+          }
+        }
+      },
+      "patch": {
+          "tags": [
+            "Workstation"
+          ],
+          "operationId": "Workstations_Update",
+          "description": "Updates properties of a Workstation. This call will overwrite a workstation if it exists. This is a nonrecoverable operation.",
+          "x-ms-examples": {
+            "Update a Workstation": { "$ref": "./examples/patchWorkstation.json" }
+          },
+          "parameters": [
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "$ref": "#/parameters/WorkstationNameParameter"
+            },
+            {
+              "$ref": "#/parameters/APIVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/WorkstationUpdateParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The operation was successful.",
+              "schema": {
+                "$ref": "#/definitions/Workstation"
+              }
+            },
+            "201": {
+              "description": "The update was initiated",
+              "schema": {
+                "$ref": "#/definitions/Workstation"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                  "$ref": "#/definitions/MachineLearningServiceError"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations/{workstationName}/deallocate": {
+      "post": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Deallocate",
+        "description": "Deallocates a workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deallocates a workstation": { "$ref": "./examples/deallocateWorkstation.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations/{workstationName}/start": {
+      "post": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_Start",
+        "description": "Starts a workstation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkstationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start a workstation": { "$ref": "./examples/startWorkstation.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/workstations": {
+      "get": {
+        "tags": [
+          "Workstation"
+        ],
+        "operationId": "Workstations_List",
+        "description": "Gets a list of workstations associated with the specified workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of workstations and their properties.",
+            "schema": {
+              "$ref": "#/definitions/WorkstationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workstations": { "$ref": "./examples/listWorkstationsByWorkspace.json" }
         }
       }
     }
@@ -931,7 +1360,35 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
-}
+    },
+    "WorkstationDefinitionParameter": {
+      "in": "body",
+      "name": "parameters",
+      "description": "Payload with workstation definition.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Workstation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WorkstationUpdateParameter": {
+      "in": "body",
+      "name": "parameters",
+      "description": "Payload with workstation update definition.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkstationUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WorkstationNameParameter": {
+      "name": "workstationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the workstation."
+    }
   },
   "definitions": {
     "Operation": {
@@ -1620,6 +2077,166 @@
       ],
       "x-ms-discriminator-value": "AmlCompute"
     },
+    "AmlSpark": {
+      "description": "An Azure Machine Learning Spark compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "AML Spark Compute properties",
+              "type": "object",
+              "properties": {
+                "sparkVersion": {
+                  "description": "The Spark version of the cluster. This property is mutually exclusive with containerSettings.",
+                  "type": "string"
+                },
+                "pythonVersion": {
+                  "description": "The Python version used for Spark. This property is mutually exclusive with containerSettings.",
+                  "type": "string",
+                  "enum": [
+                    "2",
+                    "3"
+                  ],
+                  "default": "3"
+                },
+                "containerSettings": {
+                  "title": "Container settings.",
+                  "description": "Custom docker container settings for the Spark cluster. This property is mutually exclusive with sparkVersion and pythonVersion.",
+                  "$ref": "#/definitions/ContainerSettings"
+                },
+                "sparkConfigurations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SparkConfiguration"
+                  },
+                  "title": "Environment variables.",
+                  "description": "A collection of user defined Spark configurations to be set for spark cluster."
+                },
+                "environmentVariables": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EnvironmentVariable"
+                  },
+                  "title": "Environment variables.",
+                  "description": "A collection of user defined environment variables to be set for spark cluster."
+                },
+                "driverSettings": {
+                  "title": "Spark driver settings.",
+                  "description": "Driver settings for Spark cluster.",
+                  "$ref": "#/definitions/SparkDriverSettings"
+                },
+                "workerSettings": {
+                  "title": "Spark worker settings.",
+                  "description": "Worker settings for Spark cluster.",
+                  "$ref": "#/definitions/SparkWorkerSettings"
+                },
+                "idleSecondsBeforeAutoTermination": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Deallocate nodes in the cluster after it is inactive for this time in seconds. If not set, nodes in this cluster will not be automatically deallocated"
+                },
+                "userAccountCredentials": {
+                  "title": "User account credentials.",
+                  "description": "Credentials for an administrator user account that will be created on each compute node.",
+                  "$ref": "#/definitions/UserAccountCredentials"
+                },
+                "subnet": {
+                    "title": "Subnet.",
+                    "description": "Virtual network subnet resource ID the compute nodes belong to.",
+                    "$ref": "#/definitions/ResourceId"
+                },
+                "workerAllocationState": {
+                  "type": "string",
+                  "readOnly": true,
+                  "title": "Allocation state of Spark workers.",
+                  "description": "Allocation state of Spark workers. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
+                  "enum": [
+                    "Steady",
+                    "Resizing"
+                  ],
+                  "x-ms-enum": {
+                    "name": "WorkerAllocationState",
+                    "modelAsString": true
+                  }
+                },
+                "workerAllocationStateTransitionTime": {
+                  "type": "string",
+                  "readOnly": true,
+                  "format": "date-time",
+                  "title": "Allocation state transition time of Spark workers.",
+                  "description": "The time at which Spark workers entered its current allocation state."
+                },
+                "clusterState": {
+                  "type": "string",
+                  "readOnly": true,
+                  "title": "State of Spark cluster.",
+                  "description": "State of Spark. Possible values are: Starting - Indicates that the cluster is in the process of being created. Running - Indicates that the cluster has been started and is ready for use. Terminating - Indicates that the cluster is in the process of being terminated. Terminated - Indicates that a cluster has been successfully terminated. Failed - Indicates that a cluster is unusable.",
+                  "enum": [
+                    "Starting",
+                    "Running",
+                    "Terminating",
+                    "Terminated",
+                    "Failed"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ClusterState",
+                    "modelAsString": true
+                  }
+                },
+                "errors": {
+                  "readOnly": true,
+                  "title": "Errors.",
+                  "description": "Collection of errors encountered by various compute nodes during node setup.",
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/MachineLearningServiceError"
+                  }
+                },
+                "currentWorkerNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Current worker node count.",
+                  "description": "The number of worker nodes currently assigned to the compute."
+                },
+                "targetWorkerNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Target worker node count.",
+                  "description": "The target number of Worker nodes for the compute."
+                },
+                "workerNodeStateCounts": {
+                  "title": "Node state counts.",
+                  "description": "Counts of various worker node states on the Spark cluster.",
+                  "readOnly": true,
+                  "$ref": "#/definitions/SparkNodeStateCounts"
+                },
+                "currentDriverNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Current driver node count.",
+                  "description": "The number of driver nodes currently assigned to the compute."
+                },
+                "targetDriverNodeCount": {
+                  "type": "integer",
+                  "readOnly": true,
+                  "format": "int32",
+                  "title": "Target driver node count.",
+                  "description": "The target number of driver nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation."
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AmlSpark"
+    },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
       "allOf": [
@@ -1856,7 +2473,7 @@
     },
     "ScaleSettings": {
       "type": "object",
-      "description": "scale settings for AML Compute",
+      "description": "scale settings for compute cluster.",
       "properties": {
         "maxNodeCount": {
           "description": "Max number of nodes to use",
@@ -1867,10 +2484,10 @@
           "type": "integer",
           "default": 0
         },
-        "nodeIdleTimeBeforeScaleDown": {
-          "type": "string",
-          "format": "duration",
-          "description": "Node Idle Time before scaling down amlCompute"
+        "nodeIdleSecondsBeforeScaleDown": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Node Idle Time in seconds before scaling down the compute cluster"
         }
       },
       "required": [
@@ -1924,14 +2541,89 @@
       },
       "description": "Counts of various compute node states on the amlCompute."
     },
-    "ClusterUpdateProperties": {
+    "SparkNodeStateCounts": {
       "properties": {
-        "scaleSettings": {
-          "$ref": "#/definitions/ScaleSettings",
-          "title": "Scale settings.",
-          "description": "Desired scale settings for the amlCompute."
+        "runningNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Running node count.",
+          "description": "Number of compute nodes which are running jobs."
+        },
+        "preparingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Preparing node count.",
+          "description": "Number of compute nodes which are being prepared."
+        },
+        "unusableNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Unusable node count.",
+          "description": "Number of compute nodes which are in unusable state."
+        },
+        "leavingNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Leaving node count.",
+          "description": "Number of compute nodes which are leaving the amlCompute."
+        },
+        "preemptedNodeCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Preempted node count.",
+          "description": "Number of compute nodes which are in preempted state."
         }
       },
+      "description": "Counts of various compute node states on the amlSpark."
+    },
+    "AmlComputeUpdateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpdateProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "scaleSettings": {
+              "$ref": "#/definitions/ScaleSettings",
+              "title": "Scale settings.",
+              "description": "Desired scale settings for the amlCompute."
+            }
+          }
+        }
+      ],
+      "description": "The properties of a amlCompute that need to be updated."
+    },
+    "AmlSparkUpdateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpdateProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "workerScaleSettings": {
+              "$ref": "#/definitions/ScaleSettings",
+              "title": "Scale settings.",
+              "description": "Desired scale settings for the Spark workers."
+            },
+            "idleSecondsBeforeAutoTermination": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Deallocate nodes in the cluster after it is inactive for this time in seconds. If not set, nodes in this cluster will not be automatically deallocated"
+            }
+          }
+        }
+      ],
+      "description": "The properties of a AML Spark Cluster that need to be updated."
+    },
+    "ClusterUpdateProperties": {
+      "discriminator": "computeType",
       "description": "The properties of a amlCompute that need to be updated."
     },
     "ClusterUpdateParameters": {
@@ -2006,9 +2698,105 @@
           "format": "int32",
           "title": "Port.",
           "description": "SSH port number of the node."
+        },
+        "nodeState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node State.",
+          "enum": [
+            "idle",
+            "running",
+            "preparing",
+            "unusable",
+            "leaving",
+            "preempted"
+          ],
+          "description": "State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.",
+          "x-ms-enum": {
+            "name": "NodeState",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "AmlCompute"
+    },
+    "AmlSparkNodesInformation": {
+      "description": "Compute node information related to an AmlSpark Compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeNodesInformation"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "nodes": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AmlSparkNodeInformation"
+              },
+              "description": "The collection of returned AML Compute nodes details."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AmlSpark"
+    },
+    "AmlSparkNodeInformation": {
+      "description": "Compute node information related to an AmlSpark Compute.",
+      "properties": {
+        "nodeId": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node ID.",
+          "description": "ID of the compute node."
+        },
+        "ipAddress": {
+          "readOnly": true,
+          "type": "string",
+          "title": "IP address.",
+          "description": "Public IP address of the compute node."
+        },
+        "port": {
+          "readOnly": true,
+          "type": "number",
+          "format": "int32",
+          "title": "Port.",
+          "description": "SSH port number of the node."
+        },
+        "nodeType": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node Type.",
+          "enum": [
+            "driver",
+            "worker"
+          ],
+          "description": "Type of the compute node. For Spark cluster, values are driver and worker.",
+          "x-ms-enum": {
+            "name": "NodeType",
+            "modelAsString": true
+          }
+        },
+        "nodeState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node State.",
+          "enum": [
+            "running",
+            "preparing",
+            "unusable",
+            "leaving",
+            "preempted"
+          ],
+          "description": "State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.",
+          "x-ms-enum": {
+            "name": "NodeState",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AmlSpark"
     },
     "VirtualMachineSshCredentials": {
       "type": "object",
@@ -2114,6 +2902,7 @@
       "enum": [
         "AKS",
         "AmlCompute",
+        "AmlSpark",
         "DataFactory",
         "VirtualMachine",
         "HDInsight",
@@ -2176,6 +2965,256 @@
       "required": [
         "code",
         "message"
+      ]
+    },
+    "WorkstationUpdate": {
+      "description": "An object that represents a workstation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/WorkstationUpdateProperties",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ]
+    },
+    "Workstation": {
+      "description": "An object that represents a workstation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkstationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkstationProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the workstation, which only appears in the response."
+        },
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/UserAccountCredentials"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile"
+        }
+      },
+      "required": [
+        "vmSize",
+        "osProfile"
+      ],
+      "description": "The properties of a workstation."
+    },
+    "WorkstationUpdateProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "vmSize": {
+          "type": "string",
+          "title": "VM size.",
+          "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
+        }
+      },
+      "description": "The update properties of a workstation."
+    },
+    "UpdateResource": {
+      "description": "The Update Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "WorkstationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workstation"
+          },
+          "description": "The collection of workstations."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the workstation list operation."
+    },
+    "NetworkProfile": {
+      "description": "Network profile for the workstation",
+      "properties": {
+        "subnetId": {
+          "description": "Subnet ID",
+          "$ref": "#/definitions/ResourceId"
+        },
+        "networkInterface": {
+          "description": "The network interface",
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
+        }
+      }
+    },
+    "SparkConfiguration": {
+      "properties": {
+        "configName": {
+          "type": "string",
+          "title": "Configuration Name.",
+          "description": "The key of the Spark configuration."
+        },
+        "value": {
+          "type": "string",
+          "title": "Value.",
+          "description": "The value of the Spark configuration."
+        }
+      },
+      "required": [
+        "configName",
+        "value"
+      ],
+      "description": "An environment variable definition."
+    },
+    "EnvironmentVariable": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name.",
+          "description": "The name of the environment variable."
+        },
+        "value": {
+          "type": "string",
+          "title": "Value.",
+          "description": "The value of the environment variable."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "An environment variable definition."
+    },
+    "SparkDriverSettings": {
+      "type": "object",
+      "description": "Driver settings for Spark cluster",
+      "properties": {
+        "vmSize": {
+          "description": "Virtual Machine Size",
+          "type": "string"
+        }
+      },
+      "required": [
+        "vmSize"
+      ]
+    },
+    "SparkWorkerSettings": {
+      "type": "object",
+      "description": "Worker settings for Spark cluster",
+      "properties": {
+        "vmSize": {
+          "description": "Virtual Machine Size",
+          "type": "string"
+        },
+        "vmPriority": {
+          "description": "Virtual Machine priority",
+          "type": "string",
+          "enum": [
+            "Dedicated",
+            "LowPriority"
+          ],
+          "x-ms-enum": {
+            "name": "VmPriority",
+            "modelAsString": true
+          }
+        },
+        "workerScaleSettings": {
+          "description": "Scale settings for workers in Spark cluster.",
+          "$ref": "#/definitions/ScaleSettings"
+        }
+      },
+      "required": [
+        "vmSize",
+        "workerScaleSettings"
+      ]
+    },
+    "ImageSourceRegistry": {
+      "properties": {
+        "serverUrl": {
+          "type": "string",
+          "title": "Server URL.",
+          "description": "URL for image repository."
+        },
+        "image": {
+          "type": "string",
+          "title": "Image.",
+          "description": "The name of the image in the image repository."
+        },
+        "credentials": {
+          "title": "Credentials.",
+          "description": "Credentials to access the private docker repository.",
+          "$ref": "#/definitions/PrivateRegistryCredentials"
+        }
+      },
+      "description": "Information about docker image for the job.",
+      "required": [
+        "image"
+      ]
+    },
+    "PrivateRegistryCredentials": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "User name.",
+          "description": "User name to login to the repository."
+        },
+        "password": {
+          "type": "string",
+          "title": "Password.",
+          "description": "User password to login to the docker repository. One of password or passwordSecretReference must be specified."
+        }
+      },
+      "description": "Credentials to access a container image in a private repository.",
+      "required": [
+        "username"
+      ]
+    },
+    "ContainerSettings": {
+      "properties": {
+        "imageSourceRegistry": {
+          "title": "Image source registry.",
+          "description": "Information about docker image and docker registry to download the container from.",
+          "$ref": "#/definitions/ImageSourceRegistry"
+        }
+      },
+      "description": "Docker container settings.",
+      "required": [
+        "imageSourceRegistry"
       ]
     }
   }
