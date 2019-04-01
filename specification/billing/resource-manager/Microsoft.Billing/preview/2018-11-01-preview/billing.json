@@ -113,9 +113,6 @@
           },
           "BillingAccountWithExpand": {
             "$ref": "./examples/BillingAccountWithExpand.json"
-          },
-          "BillingAccountsListWithExpandForEnrollmentDetails": {
-            "$ref": "./examples/BillingAccountsListWithExpandForEnrollmentDetails.json"
           }
         },
         "operationId": "BillingAccounts_Get",
@@ -421,19 +418,6 @@
               "$ref": "#/definitions/InvoiceSectionListResult"
             }
           },
-          "202": {
-            "description": "Accepted. InvoiceSection creation is in progress.",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -539,19 +523,6 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/InvoiceSectionListResult"
-            }
-          },
-          "202": {
-            "description": "Accepted. InvoiceSection creation is in progress.",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
             }
           },
           "default": {
