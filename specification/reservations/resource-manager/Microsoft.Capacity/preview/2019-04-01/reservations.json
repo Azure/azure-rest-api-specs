@@ -709,11 +709,11 @@
       "type" : "object",
       "properties" : {
         "properties" : {
-          "$ref" : "#/definitions/CalculateResponseProperties"
+          "$ref" : "#/definitions/CalculatePriceResponseProperties"
         }
       }
     },
-    "CalculateResponseProperties" : {
+    "CalculatePriceResponseProperties" : {
       "type" : "object",
       "properties" : {
         "billingCurrencyTotal" : {
@@ -722,7 +722,7 @@
             "currencyCode" : {
               "type" : "string"
             },
-            "estimatedTotal" : {
+            "amount" : {
               "type" : "number"
             }
           }
@@ -751,7 +751,7 @@
             "currencyCode" : {
               "type" : "string"
             },
-            "estimatedTotal" : {
+            "amount" : {
               "type" : "number"
             }
           }
@@ -872,8 +872,12 @@
         "appliedScopes" : {
           "$ref" : "#/definitions/AppliedScopes"
         },
-        "instanceFlexibility" : {
-          "$ref" : "#/definitions/InstanceFlexibility"
+        "advancedProperties" : {
+          "type" : "object",
+          "properties" : {
+            "instanceFlexibility" : null,
+            "$ref" : "#/definitions/InstanceFlexibility"
+          }
         }
       }
     },
@@ -1126,7 +1130,7 @@
     "InstanceFlexibility" : {
       "type" : "string",
       "description" : "Allows reservation discount to be applied across skus within the same AutofitGroup. Not all skus support instance size flexibility.",
-      "enum" : [ true, false, "NotSupported" ],
+      "enum" : [ true, false ],
       "x-ms-enum" : {
         "name" : "InstanceFlexibility",
         "modelAsString" : true
@@ -1162,7 +1166,7 @@
     "ReservedResourceType" : {
       "type" : "string",
       "description" : "The type of the resource that is being reserved.",
-      "enum" : [ "VirtualMachines", "SqlDatabases", "SuseLinux", "CosmosDb", "RedHat" ],
+      "enum" : [ "VirtualMachines", "SqlDatabases", "SuseLinux", "CosmosDb" ],
       "x-ms-enum" : {
         "name" : "ReservedResourceType",
         "modelAsString" : true
