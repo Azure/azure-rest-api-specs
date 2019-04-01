@@ -410,47 +410,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/applicationTemplates/{applicationTemplateId}": {
-      "get": {
-        "tags": [
-          "Apps"
-        ],
-        "description": "Get a single application template.",
-        "operationId": "Apps_Template",
-        "x-ms-examples": {
-          "Apps_Template": {
-            "$ref": "./examples/Apps_Template.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/applicationTemplateId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains the filtered IoT Central application template.",
-            "schema": {
-              "$ref": "#/definitions/AppTemplate"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/applicationTemplates": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/IoTAppTemplates": {
       "get": {
         "tags": [
           "Apps"
@@ -475,7 +435,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains all the of the filtered IoT Central application templates.",
+            "description": "The body contains all the IoT Central application templates.",
             "schema": {
               "$ref": "#/definitions/AppTemplatesResult"
             }
@@ -819,33 +779,50 @@
       "description": "IoT Central Application Template.",
       "type": "object",
       "properties": {
-        "manifestId": {
-          "description": "The ID of the template.",
-          "type": "string",
-          "readOnly": true
-        },
-        "manifestVersion": {
-          "description": "The version of the template.",
+        "id": {
+          "description": "The application template identifier.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "The name of the template.",
+          "description": "The application template name.",
           "type": "string",
           "readOnly": true
         },
-        "title": {
-          "description": "The title of the template.",
-          "type": "string",
-          "readOnly": true
+        "properties": {
+          "manifestId": {
+            "description": "The ID of the template.",
+            "type": "string",
+            "readOnly": true
+          },
+          "manifestVersion": {
+            "description": "The version of the template.",
+            "type": "string",
+            "readOnly": true
+          },
+          "appTemplateName": {
+            "description": "The name of the template.",
+            "type": "string",
+            "readOnly": true
+          },
+          "title": {
+            "description": "The title of the template.",
+            "type": "string",
+            "readOnly": true
+          },
+          "order": {
+            "description": "The order of the template in the templates list.",
+            "type": "number",
+            "readOnly": true
+          },
+          "description": {
+            "description": "The description of the template.",
+            "type": "string",
+            "readOnly": true
+          }
         },
-        "order": {
-          "description": "The order of the template in the templates list.",
-          "type": "number",
-          "readOnly": true
-        },
-        "description": {
-          "description": "The description of the template.",
+        "type": {
+          "description": "the resource type.",
           "type": "string",
           "readOnly": true
         }
@@ -889,14 +866,6 @@
       "name": "resourceGroupName",
       "in": "path",
       "description": "The name of the resource group that contains the IoT Central application.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "applicationTemplateId": {
-      "name": "applicationTemplateId",
-      "in": "path",
-      "description": "The combination id of manifestId and manifestVersion of the IoT Central application template.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
