@@ -18,7 +18,6 @@ type Result = {
 const execWrap = async (c: string, cwd?: string): Promise<Result> => {
   try {
     const result = await exec(c, { cwd })
-    console.log(result.stdout)
     return result
   } catch (e) {
     console.error(e)
@@ -34,10 +33,9 @@ async function main() {
   console.log(`target: ${target}`)
   const targetBranch = `remotes/origin/${target}`
   const { stdout } = await execWrap(`git diff ${targetBranch}..HEAD --name-status`)
-  console.log(stdout)
   await mkdir("../old")
 
-  await execWrap(`git clone ${path.resolve(process.cwd())} --branch ${targetBranch} --single-branch`, "../old")
+  await execWrap(`git clone ${path.resolve(process.cwd())} --branch ${target} --single-branch`, "../old")
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
