@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Machine Learning Services.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,29 @@ To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2019-05
 ```
 
 
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-05'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
+```
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
@@ -40,8 +48,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -55,7 +63,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
-
 
 ## C#
 
@@ -88,11 +95,13 @@ python:
   package-version: 0.1.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-machinelearningservices/azure/mgmt/machinelearningservices
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -136,5 +145,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
