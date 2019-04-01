@@ -145,6 +145,13 @@ csharp:
   namespace: Microsoft.Azure.Management.PolicyInsights
   output-folder: $(csharp-sdks-folder)/PolicyInsights/Management/Management.PolicyInsights/Generated
   clear-output-folder: true
+directive:
+  - from: swagger-document
+    where: $.definitions.ExpressionEvaluationDetails.properties.expressionValue
+    transform: $.type = "object"
+  - from: swagger-document
+    where: $.definitions.ExpressionEvaluationDetails.properties.targetValue
+    transform: $.type = "object"
 ```
 
 ## Python
@@ -162,6 +169,13 @@ python:
   namespace: azure.mgmt.policyinsights
   package-name: azure-mgmt-policyinsights
   clear-output-folder: true
+directive:
+  - from: swagger-document
+    where: $.definitions.ExpressionEvaluationDetails.properties.expressionValue
+    transform: $.type = "object"
+  - from: swagger-document
+    where: $.definitions.ExpressionEvaluationDetails.properties.targetValue
+    transform: $.type = "object"
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
@@ -190,6 +204,13 @@ namespace: com.microsoft.azure.management.policyinsights
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-policyinsights
+directive:
+  - from: swagger-document
+    where: $.definitions.ExpressionEvaluationDetails.properties.expressionValue
+    transform: $.type = "object"
+  - from: swagger-document
+    where: $.definitions.ExpressionEvaluationDetails.properties.targetValue
+    transform: $.type = "object"
 ```
 
 ### Java multi-api
