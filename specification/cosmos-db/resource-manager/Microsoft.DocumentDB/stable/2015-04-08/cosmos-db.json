@@ -2293,6 +2293,379 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListCassandraKeyspaces",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceList": { "$ref": "./examples/CosmosDBCassandraKeyspaceList.json" }
+        },
+        "description": "Lists the Cassandra keyspaces under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra keyspace properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateCassandraKeyspace",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceCreate": { "$ref": "./examples/CosmosDBCassandraKeyspaceCreate.json" }
+        },
+        "description": "Creates an Azure Cosmos DB Cassandra keyspace",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createCassandraKeyspaceParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspaceCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Cassandra keyspace."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The Cassandra keyspace create operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspace"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetCassandraKeyspace",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceGet": { "$ref": "./examples/CosmosDBCassandraKeyspaceGet.json" }
+        },
+        "description": "Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra keyspace property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspace"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateCassandraKeyspace",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceReplace": { "$ref": "./examples/CosmosDBCassandraKeyspaceReplace.json" }
+        },
+        "description": "Updates an existing Azure Cosmos DB Cassandra keyspace",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateCassandraKeyspaceParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspaceCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Cassandra keyspace."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra keyspace update operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspace"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteCassandraKeyspace",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceDelete": { "$ref": "./examples/CosmosDBCassandraKeyspaceDelete.json" }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Cassandra keyspace.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Cassandra keyspace delete operation was successful."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}/tables": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListCassandraTables",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableList": { "$ref": "./examples/CosmosDBCassandraTableList.json" }
+        },
+        "description": "Lists the Cassandra table under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra table properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraTableListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateCassandraTable",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableCreate": { "$ref": "./examples/CosmosDBCassandraTableCreate.json" }
+        },
+        "description": "Creates an Azure Cosmos DB Cassandra table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createCassandraTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraTableCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Cassandra table."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The Cassandra table create operation was successful",
+            "schema": {
+              "$ref": "#/definitions/CassandraTable"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}/tables/{tableRid}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetCassandraTable",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableGet": { "$ref": "./examples/CosmosDBCassandraTableGet.json" }
+        },
+        "description": "Gets the Cassandra table under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/tableRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra table property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraTable"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateCassandraTable",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableReplace": { "$ref": "./examples/CosmosDBCassandraTableReplace.json" }
+        },
+        "description": "Updates an existing Azure Cosmos DB Cassandra Table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/tableRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateCassandraTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraTableCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Cassandra Table."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra Table update operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/CassandraTable"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteCassandraTable",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableDelete": { "$ref": "./examples/CosmosDBCassandraTableDelete.json" }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Cassandra table.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceRidParameter"
+          },
+          {
+            "$ref": "#/parameters/tableRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Cassandra table delete operation was successful."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2373,6 +2746,32 @@
         }
       },
       "description": "The List operation response, that contains the Table and their properties."
+    },
+    "CassandraKeyspaceListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraKeyspace"
+          },
+          "description": "List of Cassandra keyspaces and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Cassandra keyspaces and their properties."
+    },
+    "CassandraTableListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraTable"
+          },
+          "description": "List of Cassandra tables and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Cassandra tables and their properties."
     },
     "ErrorResponse": {
       "properties": {
@@ -2706,6 +3105,56 @@
       "allOf": [
         {
           "$ref": "#/definitions/TableResource"
+        }
+      ]
+    },
+    "CassandraKeyspace": {
+      "description": "An Azure Cosmos DB Cassandra keyspace.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
+          "$ref": "#/definitions/CassandraKeyspaceProperties"
+        }        
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CassandraKeyspaceProperties": {
+      "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CassandraKeyspaceResource"
+        }
+      ]
+    },
+    "CassandraTable": {
+      "description": "An Azure Cosmos DB Cassandra table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Cassandra table",
+          "$ref": "#/definitions/CassandraTableProperties"
+        }        
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CassandraTableProperties": {
+      "description": "The properties of an Azure Cosmos DB Cassandra table",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CassandraTableResource"
         }
       ]
     },
@@ -3192,6 +3641,70 @@
         "options"
       ]
     },
+    "CassandraKeyspaceCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Cassandra keyspace.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Cassandra keyspace.",
+          "$ref": "#/definitions/CassandraKeyspaceCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CassandraKeyspaceCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Cassandra keyspace.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Cassandra keyspace",
+          "$ref": "#/definitions/CassandraKeyspaceResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "CassandraTableCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Cassandra table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+          "$ref": "#/definitions/CassandraTableCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CassandraTableCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Cassandra table",
+          "$ref": "#/definitions/CassandraTableResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
     "SqlDatabaseResource": {
       "type": "object",
       "description": "Cosmos DB SQL database id object",
@@ -3218,7 +3731,7 @@
           "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the SQL container"
         },
         "partitionKey": {
-          "$ref": "#/definitions/PartitionKey",
+          "$ref": "#/definitions/SqlPartitionKey",
           "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
         },
         "defaultTtl": {
@@ -3338,7 +3851,7 @@
         }
       }
     },
-    "PartitionKey": {
+    "SqlPartitionKey": {
       "type": "object",
       "description": "The configuration of the partition key to be used for partitioning data into multiple partitions",
       "properties": {
@@ -3518,6 +4031,105 @@
       "required": [
         "id"
       ]
+    },
+    "CassandraKeyspaceResource": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra keyspace id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra keyspace"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CassandraTableResource": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "description": "Time to live of the Cosmos DB Cassandra table"
+        },
+        "schema": {
+          "description": "Schema of the Cosmos DB Cassandra table",
+          "$ref": "#/definitions/CassandraSchema"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CassandraSchema": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table schema",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Column"
+          },
+          "description": "List of Cassandra table columns."
+        },
+        "partitionKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraPartitionKey"
+          },
+          "description": "List of partition key."
+        },
+        "clusterKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterKey"
+          },
+          "description": "List of cluster key."
+        }
+      }
+    },
+    "Column": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table column",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table column"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the Cosmos DB Cassandra table column"
+        }
+      }
+    },
+    "CassandraPartitionKey": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table partition key",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table partition key"
+        }
+      }
+    },
+    "ClusterKey": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table cluster key",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table cluster key"
+        },
+        "orderBy": {
+          "type": "string",
+          "description": "Order of the Cosmos DB Cassandra table cluster key, only support \"Asc\" and \"Desc\""
+        }
+      }
     },
     "CreateUpdateOptions": {
       "type": "object",
@@ -4107,6 +4719,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB table rid."
+    },
+    "keyspaceRidParameter": {
+      "name": "keyspaceRid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB keyspace rid."
     },
     "regionParameter": {
       "name": "region",
