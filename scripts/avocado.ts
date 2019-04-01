@@ -5,21 +5,39 @@ import * as openApiMarkDown from "@azure/openapi-markdown"
 import * as yaml from "js-yaml"
 import * as util from "util"
 import * as childProcess from "child_process"
+import * as fs from "fs"
 
 const exec = util.promisify(childProcess.exec)
+const mkdir = util.promisify(fs.mkdir)
+
+type Result = {
+  readonly stdout: string
+  readonly stderr: string
+}
+
+const execWrap = async (c: string, cwd?: string): Promise<Result> => {
+  try {
+    const result = await exec(c, { cwd })
+    console.log(result.stdout)
+    return result
+  } catch (e) {
+    console.error(e)
+    return { stdout: "", stderr: "" }
+  }
+}
 
 async function main() {
-  console.log(`vars: ${JSON.stringify(process.env)}`)
+  // console.log(`vars: ${JSON.stringify(process.env)}`)
   const source = process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH
   const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
-  try {
-    const result = await exec(`git diff remotes/origin/${target}..HEAD --name-status`)
-    console.log(result.stdout)
-  } catch (e) {
-    console.error(e)
-  }
+  const targetBranch = `remotes/origin/${target}`
+  const { stdout } = await execWrap(`git diff ${targetBranch}..HEAD --name-status`)
+  console.log(stdout)
+  await mkdir("../old")
+
+  await execWrap(`git clone ${path.resolve(process.cwd())} --branch ${targetBranch} --single-branch`, "../old")
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
