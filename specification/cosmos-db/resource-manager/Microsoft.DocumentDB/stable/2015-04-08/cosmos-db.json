@@ -2114,6 +2114,185 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListTables",
+        "x-ms-examples": {
+          "CosmosDBTableList": { "$ref": "./examples/CosmosDBTableList.json" }
+        },
+        "description": "Lists the Tables under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Table properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/TableListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateTable",
+        "x-ms-examples": {
+          "CosmosDBTableCreate": { "$ref": "./examples/CosmosDBTableCreate.json" }
+        },
+        "description": "Creates an Azure Cosmos DB Table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Table."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The Table create operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableRid}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetTable",
+        "x-ms-examples": {
+          "CosmosDBTableGet": { "$ref": "./examples/CosmosDBTableGet.json" }
+        },
+        "description": "Gets the Tables under an existing Azure Cosmos DB database account with the provided id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Table property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateTable",
+        "x-ms-examples": {
+          "CosmosDBTableReplace": { "$ref": "./examples/CosmosDBTableReplace.json" }
+        },
+        "description": "Updates an existing Azure Cosmos DB Table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Table."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Table update operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteTable",
+        "x-ms-examples": {
+          "CosmosDBTableDelete": { "$ref": "./examples/CosmosDBTableDelete.json" }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Table.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableRidParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Table delete operation was successful."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2181,6 +2360,19 @@
         }
       },
       "description": "The List operation response, that contains the Mongo collections and their properties."
+    },
+    "TableListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Table"
+          },
+          "description": "List of Table and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Table and their properties."
     },
     "ErrorResponse": {
       "properties": {
@@ -2489,6 +2681,31 @@
       "allOf": [
         {
           "$ref": "#/definitions/MongoCollectionResource"
+        }
+      ]
+    },
+    "Table": {
+      "description": "An Azure Cosmos DB Table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Table",
+          "$ref": "#/definitions/TableProperties"
+        }        
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "TableProperties": {
+      "description": "The properties of an Azure Cosmos Table",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TableResource"
         }
       ]
     },
@@ -2943,6 +3160,38 @@
         "options"
       ]
     },
+    "TableCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Table.",
+          "$ref": "#/definitions/TableCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "TableCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Table.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Table",
+          "$ref": "#/definitions/TableResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
     "SqlDatabaseResource": {
       "type": "object",
       "description": "Cosmos DB SQL database id object",
@@ -3256,6 +3505,19 @@
           "type": "boolean"
         }
       }
+    },
+    "TableResource": {
+      "type": "object",
+      "description": "Cosmos DB table id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB table"
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "CreateUpdateOptions": {
       "type": "object",
@@ -3837,6 +4099,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB container rid."
+    },
+    "tableRidParameter": {
+      "name": "tableRid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB table rid."
     },
     "regionParameter": {
       "name": "region",

@@ -66,6 +66,10 @@ directive:
     from: cosmos-db.json
     where: $.definitions.MongoCollection
     reason: The MongoCollection doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.Table
+    reason: The Table doesn't support Patch operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
