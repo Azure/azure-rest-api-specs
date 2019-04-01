@@ -238,7 +238,7 @@
              "name": "SearchMode",
              "modelAsString": false
             },
-            "x-nullable": false,            
+            "x-nullable": false,
             "description": "A value that specifies whether any or all of the search terms must be matched in order to count the document as a match.",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
@@ -341,7 +341,7 @@
         "tags": [
           "Documents"
         ],
-        "operationId": "Documents_Get",        
+        "operationId": "Documents_Get",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/lookup-document"
         },
@@ -392,7 +392,7 @@
         "operationId": "Documents_SuggestGet",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/suggestions"
-        },        
+        },
         "x-ms-examples": {
           "SearchIndexSuggestDocumentsGet": { "$ref": "./examples/SearchIndexSuggestDocumentsGet.json" }
         },
@@ -578,7 +578,7 @@
         },
         "x-ms-examples": {
           "SearchIndexIndexDocuments": { "$ref": "./examples/SearchIndexIndexDocuments.json" }
-        },        
+        },
         "description": "Sends a batch of document write actions to the Azure Search index.",
         "parameters": [
           {
@@ -664,6 +664,15 @@
              "modelAsString": false
             },
             "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteParameters"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "An OData expression that filters the completed terms returned as part of Autocomplete result.",
             "x-ms-parameter-grouping": {
               "name": "AutocompleteParameters"
             }
@@ -1180,6 +1189,13 @@
         "autocompleteMode": {
           "$ref": "#/definitions/AutocompleteMode",
           "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms."
+        },
+        "filter": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search"
+          },
+          "type": "string",
+          "description": "An OData expression that filters the terms returned as part of Autocomplete result."
         },
         "fuzzy": {
           "type": "boolean",
