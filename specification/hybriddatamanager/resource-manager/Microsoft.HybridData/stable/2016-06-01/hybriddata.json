@@ -272,6 +272,68 @@
             "$ref": "./examples/DataManagers_Delete_204-DELETE-example-41.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "DataManagers"
+        ],
+        "description": "Updates the properties of an existing data manager resource.",
+        "operationId": "DataManagers_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/dataManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the data manager resource on the server matches this value.",
+            "type": "string"
+          },
+          {
+            "name": "dataManagerUpdateParameter",
+            "in": "body",
+            "description": "Data manager resource details from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataManagerUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data Manager Resource object.",
+            "schema": {
+              "$ref": "#/definitions/DataManager"
+            }
+          },
+          "202": {
+            "description": "Data Manager Resource updated."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataManagers_Update_200PATCH41": {
+            "$ref": "./examples/DataManagers_Update_200-PATCH-example-41.json"
+          },
+          "DataManagers_Update_202PATCH41": {
+            "$ref": "./examples/DataManagers_Update_202-PATCH-example-41.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices": {
@@ -1677,6 +1739,23 @@
         }
       }
     },
+    "DataManagerUpdateParameter": {
+      "description": "The DataManagerUpdateParameter.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku type."
+        },
+        "tags": {
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource\r\n(across resource groups).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "DataService": {
       "description": "Data Service.",
       "required": [
@@ -1914,7 +1993,7 @@
       }
     },
     "DmsBaseObject": {
-      "description": "Base class for all objects under DataManager.",
+      "description": "Base class for all objects under DataManager Service",
       "type": "object",
       "properties": {
         "name": {
