@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for IotHub.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for IotHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for IotHub, simply [Install AutoRest](https://aka.ms/autorest/i
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-12-preview
+tag: package-preview-2019-03
 ```
 
+
+### Tag: package-preview-2019-03
+
+These settings apply only when `--tag=package-preview-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-03'
+input-file:
+  - Microsoft.Devices/preview/2019-03-22-preview/iothub.json
+```
 ### Tag: package-2018-12-preview
 
 These settings apply only when `--tag=package-2018-12-preview` is specified on the command line.
@@ -84,8 +93,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -103,7 +112,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
 ```
-
 
 ## C#
 
