@@ -26,6 +26,7 @@ const execWrap = async (c: string, cwd?: string): Promise<Result> => {
 }
 
 async function main() {
+  const current = path.resolve(process.cwd())
   // console.log(`vars: ${JSON.stringify(process.env)}`)
   const source = process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH
   const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
@@ -35,8 +36,8 @@ async function main() {
   const { stdout } = await execWrap(`git diff ${targetBranch}..HEAD --name-status`)
   console.log(stdout)
   await mkdir("../old")
-
-  await execWrap(`git clone ${path.resolve(process.cwd())} --branch ${target} --single-branch`, "../old")
+  const oldCwd = path.resolve(path.join(current, "../old"))
+  await execWrap(`git clone ${current}`, oldCwd)
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
