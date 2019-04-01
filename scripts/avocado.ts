@@ -33,11 +33,20 @@ async function main() {
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
   const targetBranch = `remotes/origin/${target}`
-  const { stdout } = await execWrap(`git diff ${targetBranch}..HEAD --name-status`)
-  console.log(stdout)
+  {
+    const { stdout } = await execWrap(`git diff ${targetBranch}..HEAD --name-status`)
+    console.log(stdout)
+  }
   await mkdir("../old")
   const oldCwd = path.resolve(path.join(current, "../old"))
-  await execWrap(`git clone ${current}`, oldCwd)
+  {
+    const { stdout } = await execWrap(`git clone ${current}`, oldCwd)
+    console.log(stdout)
+  }
+  {
+    const { stdout } = await execWrap(`git checkout -t ${targetBranch}`, oldCwd)
+    console.log(stdout)
+  }
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
