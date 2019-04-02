@@ -6,7 +6,6 @@ import * as yaml from "js-yaml"
 import * as util from "util"
 import * as childProcess from "child_process"
 import * as fs from "fs"
-import * as pfs from "@ts-common/fs"
 
 const exec = util.promisify(childProcess.exec)
 const mkdir = util.promisify(fs.mkdir)
