@@ -50,6 +50,17 @@ tag: package-2018-06-preview
        - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
  ```
 
+ ``` yaml
+directive:
+  - suppress: R3016 # to suppress (DefinitionsPropertiesNamesCamelCase)
+    from: cluster.json
+    reason: The casing of this property is not incorrect.
+    where:
+      - $..["restAuthCredential.isEnabled"]
+      - $..["restAuthCredential.username"]
+      - $..["restAuthCredential.password"]
+```
+
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.

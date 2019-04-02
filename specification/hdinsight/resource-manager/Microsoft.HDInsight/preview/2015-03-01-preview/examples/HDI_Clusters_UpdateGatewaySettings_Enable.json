@@ -5,15 +5,9 @@
         "api-version": "2015-03-01-preview",
         "subscriptionId": "subid",
         "parameters": {
-            "osProfile": {
-                "windowsOperatingSystemProfile": {
-                    "rdpSettings": {
-                        "username": "hadoop",
-                        "password": "**********",
-                        "expiryDate": "2017-02-28"
-                    }
-                }
-            }
+            "restAuthCredential.isEnabled": true,
+            "restAuthCredential.username": "hadoop",
+            "restAuthCredential.password": "**********"
         }
     },
     "responses": {
@@ -21,7 +15,6 @@
             "headers": {
                 "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
             }
-        },
-        "200": {}
+        }
     }
 }
