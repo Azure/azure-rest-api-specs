@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - preview/v1.0/VisualSearch.json
+require: ../../../../../profiles/readme.md
 ```

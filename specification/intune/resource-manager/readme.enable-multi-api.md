@@ -6,4 +6,5 @@
 input-file:
   - Microsoft.Intune/preview/2015-01-14-preview/intune.json
   - Microsoft.Intune/preview/2015-01-14-privatepreview/intune.json
+require: ../../../../profiles/readme.md
 ```

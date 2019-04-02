@@ -32,4 +32,5 @@ input-file:
   - Microsoft.Insights/stable/2016-03-01/metricDefinitions_API.json
   - Microsoft.Insights/stable/2016-09-01/metrics_API.json
   - Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
+require: ../../../../profiles/readme.md
 ```

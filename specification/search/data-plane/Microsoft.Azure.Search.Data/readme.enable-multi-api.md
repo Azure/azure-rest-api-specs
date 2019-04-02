@@ -10,4 +10,5 @@ input-file:
   - preview/2016-09-01/searchindex.json
   - preview/2015-02-28-preview/searchindex.json
   - preview/2015-02-28/searchindex.json
+require: ../../../../../profiles/readme.md
 ```

@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.NetApp/preview/2017-08-15/netapp.json
+require: ../../../../profiles/readme.md
 ```

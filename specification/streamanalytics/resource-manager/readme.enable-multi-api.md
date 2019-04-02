@@ -10,4 +10,5 @@ input-file:
   - Microsoft.StreamAnalytics/stable/2016-03-01/transformations.json
   - Microsoft.StreamAnalytics/stable/2016-03-01/functions.json
   - Microsoft.StreamAnalytics/stable/2016-03-01/subscriptions.json
+require: ../../../../profiles/readme.md
 ```

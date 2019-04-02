@@ -24,4 +24,5 @@ input-file:
   - Microsoft.Fabric.Admin/preview/2018-10-01/Drive.json
   - Microsoft.Fabric.Admin/preview/2018-10-01/StorageSubSystem.json
   - Microsoft.Fabric.Admin/preview/2018-10-01/Volume.json
+require: ../../../../../profiles/readme.md
 ```

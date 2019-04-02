@@ -10,4 +10,5 @@ input-file:
   - Microsoft.Devices/stable/2017-07-01/iothub.json
   - Microsoft.Devices/stable/2017-01-19/iothub.json
   - Microsoft.Devices/stable/2016-02-03/iothub.json
+require: ../../../../profiles/readme.md
 ```

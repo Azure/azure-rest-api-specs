@@ -10,4 +10,5 @@ input-file:
   - Microsoft.Network/stable/2017-09-01/dns.json
   - Microsoft.Network/stable/2016-04-01/dns.json
   - Microsoft.Network/preview/2015-05-04-preview/dns.json
+require: ../../../../profiles/readme.md
 ```

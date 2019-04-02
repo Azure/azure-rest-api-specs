@@ -11,4 +11,5 @@ input-file:
   - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
   - Microsoft.EventGrid/preview/2017-09-15-preview/EventGrid.json
   - Microsoft.EventGrid/preview/2017-06-15-preview/EventGrid.json
+require: ../../../../profiles/readme.md
 ```

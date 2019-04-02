@@ -103,4 +103,5 @@ input-file:
   - Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Tasks.json
   - Microsoft.DataMigration/preview/2017-11-15-preview/definitions/TasksCommon.json
   - Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrationValidation.json
+require: ../../../../profiles/readme.md
 ```

@@ -20,4 +20,5 @@ input-file:
   - Microsoft.Storage/stable/2016-01-01/storage.json
   - Microsoft.Storage/stable/2015-06-15/storage.json
   - Microsoft.Storage/preview/2015-05-01-preview/storage.json
+require: ../../../../profiles/readme.md
 ```

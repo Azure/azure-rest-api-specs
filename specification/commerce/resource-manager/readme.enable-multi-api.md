@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
+require: ../../../../profiles/readme.md
 ```

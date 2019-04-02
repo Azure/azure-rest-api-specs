@@ -6,4 +6,5 @@
 input-file:
   - Microsoft.OperationalInsights/stable/v1/OperationalInsights.json
   - Microsoft.OperationalInsights/preview/2017-10-01/swagger.json
+require: ../../../../profiles/readme.md
 ```

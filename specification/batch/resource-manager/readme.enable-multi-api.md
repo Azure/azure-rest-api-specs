@@ -9,4 +9,5 @@ input-file:
   - Microsoft.Batch/stable/2017-05-01/BatchManagement.json
   - Microsoft.Batch/stable/2017-01-01/BatchManagement.json
   - Microsoft.Batch/stable/2015-12-01/BatchManagement.json
+require: ../../../../profiles/readme.md
 ```

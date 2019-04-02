@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.StorSimple/stable/2017-06-01/storsimple.json
+require: ../../../../profiles/readme.md
 ```

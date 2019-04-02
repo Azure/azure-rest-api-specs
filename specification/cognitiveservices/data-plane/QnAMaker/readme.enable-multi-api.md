@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - stable/v4.0/QnAMaker.json
+require: ../../../../../profiles/readme.md
 ```

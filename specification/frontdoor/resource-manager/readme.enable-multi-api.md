@@ -10,4 +10,5 @@ input-file:
   - Microsoft.Network/preview/2018-08-01-preview/frontdoor.json
   - Microsoft.Network/preview/2018-08-01-preview/network.json
   - Microsoft.Network/preview/2018-08-01-preview/webapplicationfirewall.json
+require: ../../../../profiles/readme.md
 ```

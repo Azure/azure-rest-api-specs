@@ -8,4 +8,5 @@ input-file:
   - stable/v2.1/Training.json
   - stable/v2.2/Training.json
   - stable/v3.0/Training.json
+require: ../../../../../../profiles/readme.md
 ```

@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - stable/v2.0/LUIS-Authoring.json
+require: ../../../../../../profiles/readme.md
 ```

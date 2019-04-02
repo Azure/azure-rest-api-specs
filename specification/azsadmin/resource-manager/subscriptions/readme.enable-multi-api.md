@@ -14,4 +14,5 @@ input-file:
   - Microsoft.Subscriptions.Admin/preview/2015-11-01/OfferDelegation.json
   - Microsoft.Subscriptions.Admin/preview/2015-11-01/Plan.json
   - Microsoft.Subscriptions.Admin/preview/2015-11-01/Quota.json
+require: ../../../../../profiles/readme.md
 ```
