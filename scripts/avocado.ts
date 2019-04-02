@@ -42,7 +42,7 @@ async function main() {
   const parsedCurrent = path.parse(current)
   const oldCwd = path.resolve(path.join(current, "../old"))
   {
-    const { stdout } = await execWrap(`git clone ${current} -b ${target}`, oldCwd)
+    const { stdout } = await execWrap(`git clone ${current} -b ${targetBranch}`, oldCwd)
     console.log(stdout)
   }
   console.log(await pfs.readdir(oldCwd))
