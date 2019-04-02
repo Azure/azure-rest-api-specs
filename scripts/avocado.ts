@@ -38,11 +38,15 @@ async function main() {
     const { stdout } = await execWrap(`git diff ${targetBranch}..HEAD --name-status`)
     console.log(stdout)
   }
+  {
+    const { stdout } = await execWrap(`git branch -a`)
+    console.log(stdout)
+  }
   await mkdir("../old")
   const parsedCurrent = path.parse(current)
   const oldCwd = path.resolve(path.join(current, "../old"))
   {
-    const { stdout } = await execWrap(`git clone ${current} -b origin/${target}`, oldCwd)
+    const { stdout } = await execWrap(`git clone ${current}`, oldCwd)
     console.log(stdout)
   }
   console.log(await pfs.readdir(oldCwd))
