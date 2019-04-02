@@ -579,6 +579,55 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/generateCredentials": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Generate keys for a token of a specified container registry.",
+        "operationId": "Registries_GenerateKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "generateCredentialsParameters",
+            "in": "body",
+            "description": "The parameters for generating credentials.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateCredentialsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/GenerateCredentialsResult"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "RegistryGenerateCredentials": {
+            "$ref": "./examples/RegistryGenerateCredentials.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}": {
       "get": {
         "tags": [
@@ -1154,8 +1203,8 @@
           }
         },
         "x-ms-examples": {
-          "TokenGenerateKeys": {
-            "$ref": "./examples/TokenGenerateKeys.json"
+          "TokenDelete": {
+            "$ref": "./examples/TokenDelete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1251,58 +1300,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens/{tokenName}/generateKeys": {
-      "post": {
-        "tags": [
-          "Tokens"
-        ],
-        "description": "Generate keys for a token of a specified container registry.",
-        "operationId": "Tokens_GenerateKeys",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          },
-          {
-            "name": "generateKeysParameters",
-            "in": "body",
-            "description": "The parameters for generating keys.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenerateKeysParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/TokenNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/GenerateKeysResult"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
-          }
-        },
-        "x-ms-examples": {
-          "TokenGenerateKeys": {
-            "$ref": "./examples/TokenGenerateKeys.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}": {
@@ -2351,6 +2348,99 @@
         }
       }
     },
+    "GenerateCredentialsParameters": {
+      "description": "The parameters used to generate keys for a specified token or user of a container registry.",
+      "type": "object",
+      "properties": {
+        "tokenId": {
+          "description": "The resource ID of the token for which keys have to be generated.",
+          "type": "string"
+        },
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry date of the generated credentials after which the credentials become invalid.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Specifies name of the key which should be regenerated if any -- key1 or key2.",
+          "enum": [
+            "key1",
+            "key2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyName",
+            "modelAsString": false
+          }
+        },
+        "publicCertificateAsPEM": {
+          "description": "The public certificate in PEM format that will be used for authenticating the token.",
+          "type": "string"
+        }
+      }
+    },
+    "GenerateCredentialsResult": {
+      "description": "The response from the GenerateKeys operation.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username for a container registry.",
+          "type": "string"
+        },
+        "keys": {
+          "description": "The list of passwords for a container registry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenKey"
+          }
+        },
+        "certificate": {
+          "$ref": "#/definitions/TokenCertificate",
+          "description": "The public certificate that will be used for authenticating the token."
+        }
+      }
+    },
+    "TokenKey": {
+      "description": "The login password for the container registry.",
+      "type": "object",
+      "properties": {
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry datetime of the key.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The key name \"key1\" or \"key2\"",
+          "enum": [
+            "key1",
+            "key2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyName",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "description": "The key value.",
+          "type": "string"
+        }
+      }
+    },
+    "TokenCertificate": {
+      "type": "object",
+      "properties": {
+        "expiry": {
+          "format": "date-time",
+          "description": "The expiry datetime of the certificate.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "The thumbprint of the certificate.",
+          "type": "string"
+        }
+      }
+    },
     "Replication": {
       "description": "An object that represents a replication for a container registry.",
       "type": "object",
@@ -2601,6 +2691,10 @@
         "scopeMapId": {
           "description": "The resource ID of the scope map to which the token will be associated with.",
           "type": "string"
+        },
+        "objectId": {
+          "description": "The user/group/application object ID for which teh token has to be created.",
+          "type": "string"
         }
       }
     },
@@ -2628,72 +2722,6 @@
         },
         "nextLink": {
           "description": "The URI that can be used to request the next list of tokens.",
-          "type": "string"
-        }
-      }
-    },
-    "GenerateKeysParameters": {
-      "description": "The parameters used to generate keys for a specified token or user of a container registry.",
-      "type": "object",
-      "properties": {
-        "expiry": {
-          "description": "The expiry of the generated keys. Should be in the predefined format 1H, 1D , Never",
-          "type": "string"
-        },
-        "name": {
-          "description": "Specifies name of the password which should be regenerated if any -- password or password2.",
-          "enum": [
-            "password",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PasswordName",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "GenerateKeysResult": {
-      "description": "The response from the GenerateKeys operation.",
-      "type": "object",
-      "properties": {
-        "username": {
-          "description": "The username for a container registry.",
-          "type": "string"
-        },
-        "passwords": {
-          "description": "The list of passwords for a container registry.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TokenPassword"
-          }
-        }
-      }
-    },
-    "TokenPassword": {
-      "description": "The login password for the container registry.",
-      "type": "object",
-      "properties": {
-        "expiry": {
-          "format": "date-time",
-          "description": "The expiry time of the password.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The password name.",
-          "enum": [
-            "password",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PasswordName",
-            "modelAsString": false
-          }
-        },
-        "value": {
-          "description": "The password value.",
           "type": "string"
         }
       }
