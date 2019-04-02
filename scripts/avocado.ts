@@ -45,7 +45,7 @@ async function main() {
     const { stdout } = await execWrap(`git clone ${current}`, oldCwd)
     console.log(stdout)
   }
-  console.log(pfs.readdir(oldCwd))
+  console.log(await pfs.readdir(oldCwd))
   const oldRepoPath = path.join(oldCwd, parsedCurrent.base)
   console.log(oldRepoPath)
   {
