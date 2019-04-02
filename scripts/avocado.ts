@@ -49,6 +49,10 @@ async function main() {
   const oldRepoPath = path.join(oldCwd, parsedCurrent.base)
   console.log(oldRepoPath)
   {
+    const { stdout } = await execWrap(`git branch -a`, oldRepoPath)
+    console.log(stdout)
+  }
+  {
     const { stdout } = await execWrap(`git checkout -b ${target} ${targetBranch}`, oldRepoPath)
     console.log(stdout)
   }
