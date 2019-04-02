@@ -66,12 +66,10 @@ async function main() {
     const { stdout } = await execWrap(`git branch -a`, oldRepoPath)
     console.log(stdout)
   }
-  /*
   {
-    const { stdout } = await execWrap(`git checkout -b ${target} ${targetBranch}`, oldRepoPath)
+    const { stdout } = await execWrap(`git checkout -b ${targetBranchName} remotes/origin/${targetBranchName}`, oldRepoPath)
     console.log(stdout)
   }
-  */
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
