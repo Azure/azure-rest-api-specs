@@ -2978,7 +2978,9 @@
           "properties": {
             "properties": {
               "$ref": "#/definitions/WorkstationUpdateProperties",
-              "x-ms-client-flatten": true
+              "x-ms-client-flatten": true,
+              "title": "Workstation update properties",
+              "description": "The properties for a workstation update"
             }
           }
         }
@@ -2994,7 +2996,9 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/WorkstationProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "title": "Workstation update properties",
+          "description": "The properties for a workstation"
         }
       }
     },
@@ -3011,10 +3015,14 @@
           "description": "The size of the virtual machine for the workstation. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines."
         },
         "osProfile": {
-          "$ref": "#/definitions/UserAccountCredentials"
+          "$ref": "#/definitions/UserAccountCredentials",
+          "title": "OS profile",
+          "description": "The OS profile of a workstation"
         },
         "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile"
+          "$ref": "#/definitions/NetworkProfile",
+          "title": "Network profile",
+          "description": "The network profile of a workstation"
         }
       },
       "required": [
