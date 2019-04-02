@@ -41,11 +41,11 @@ tag: package-policy-2018-05
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2018-05
+tag: package-resources-2019-03
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2016-06
+tag: package-subscriptions-2018-06
 ```
 
 ``` yaml $(package-links)
@@ -164,6 +164,14 @@ input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
 ```
 
+### Tag: package-resources-2019-03
+These settings apply only when `--tag=package-resources-2019-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-03'
+input-file:
+- Microsoft.Resources/stable/2019-03-01/resources.json
+```
+
 ### Tag: package-resources-2018-05
 These settings apply only when `--tag=package-resources-2018-05` is specified on the command line.
 
@@ -218,6 +226,14 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 ``` yaml $(tag) == 'package-resources-2015-11'
 input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
+```
+
+### Tag: package-subscriptions-2018-06
+These settings apply only when `--tag=package-subscriptions-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2018-06'
+input-file:
+- Microsoft.Resources/stable/2018-06-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2016-06
@@ -396,11 +412,13 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2019-03
   - tag: package-resources-2018-05
   - tag: package-resources-2018-02
   - tag: package-resources-2017-05
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
+  - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
 ```
 
@@ -536,6 +554,17 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
 ```
 
+### Tag: package-resources-2019-11 and python
+
+These settings apply only when `--tag=package-resources-2019-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-11' && $(python)
+python:
+  namespace: azure.mgmt.resource.resources.v2019_11_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_11_01
+```
+
 ### Tag: package-resources-2018-05 and python
 
 These settings apply only when `--tag=package-resources-2018-05 --python` is specified on the command line.
@@ -591,6 +620,17 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
 ```
 
+### Tag: package-subscriptions-2018-06 and python
+
+These settings apply only when `--tag=package-subscriptions-2018-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2018-06' && $(python)
+python:
+  namespace: azure.mgmt.resource.subscriptions.v2018_06_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2018_06_01
+```
+
 ### Tag: package-subscriptions-2016-06 and python
 
 These settings apply only when `--tag=package-subscriptions-2016-06 --python` is specified on the command line.
@@ -631,8 +671,10 @@ batch:
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2019-03
   - tag: package-resources-2018-02
   - tag: package-resources-2016-09
+  - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
 ```
 
@@ -718,6 +760,19 @@ directive:
   transform: $['x-ms-client-name'] = 'scopeProperty'
 ```
 
+### Tag: package-resources-2019-03 and java
+
+These settings apply only when `--tag=package-resources-2019-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_03_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-resources-2018-02 and java
 
 These settings apply only when `--tag=package-resources-2018-02 --java` is specified on the command line.
@@ -740,6 +795,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.resources.v2016_09_01
   output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2016_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-subscriptions-2018-06 and java
+
+These settings apply only when `--tag=package-subscriptions-2018-06--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2018-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2018_06_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2018_06_01
 regenerate-manager: true
 generate-interface: true
 ```
