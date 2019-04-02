@@ -39,14 +39,17 @@ async function main() {
     console.log(stdout)
   }
   await mkdir("../old")
+  const parsedCurrent = path.parse(current)
   const oldCwd = path.resolve(path.join(current, "../old"))
   {
     const { stdout } = await execWrap(`git clone ${current}`, oldCwd)
     console.log(stdout)
   }
   console.log(pfs.readdir(oldCwd))
+  const oldRepoPath = path.join(oldCwd, parsedCurrent.base)
+  console.log(oldRepoPath)
   {
-    const { stdout } = await execWrap(`git checkout -t ${targetBranch}`, oldCwd)
+    const { stdout } = await execWrap(`git checkout -t ${targetBranch}`, oldRepoPath)
     console.log(stdout)
   }
 
