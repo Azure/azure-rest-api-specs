@@ -1,6 +1,6 @@
 import * as fs from "@ts-common/fs"
 import * as process from "process"
-import * as path from "path"
+import * as Path from "path"
 import * as cm from "@ts-common/commonmark-to-markdown"
 import * as it from "@ts-common/iterator"
 import * as yaml from "js-yaml"
@@ -16,7 +16,7 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
     const specs = [];  
     let foundMultiApiReadmes = false;
     for await (const file of list) {
-      const f = path.parse(file);
+      const f = Path.parse(file);
       if (f.base === "readme.enable-multi-api.md") {
         foundMultiApiReadmes = true;
         const content = (await fs.readFile(file)).toString();
@@ -35,7 +35,7 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
             } else if (it.isArray(y)) {
               for (const i of y) {
                 set.add(i);
-                specs.push(path.join(f.dir, i));
+                specs.push(Path.join(f.dir, i));
               }
             }
           }
@@ -49,7 +49,7 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
 
     const allPaths = await getPaths(specs);
     const profileData = getResources(allPaths);
-    const telemetryDir = path.join(profilesDirectory, 'crawl-telemetry.json')
+    const telemetryDir = Path.join(profilesDirectory, 'crawl-telemetry.json')
     fs.writeFile(telemetryDir, JSON.stringify(profileData, null, 2));
     console.log(`Telemetry written at ${telemetryDir}`);
     
@@ -77,7 +77,7 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
       }
     );
 
-    const latestProfileDir = path.join(profilesDirectory, 'latest-profile.md');
+    const latestProfileDir = Path.join(profilesDirectory, 'latest-profile.md');
     fs.writeFile(latestProfileDir, latestProfileMarkDown);
     console.log(`Latest profile written at ${latestProfileDir}`);
     console.log('DONE');    
@@ -86,15 +86,15 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
   }
 }
 
-async function getPaths(specHandles: Array<string>): Promise<Array<PathWithApiVersion>> {
+async function getPaths(specHandles: Array<string>): Promise<Array<PathMetadata>> {
   console.log(`Parsing specs`);
-  const result = new Array<PathWithApiVersion>();
+  const result = new Array<PathMetadata>();
   for (const specHandle of specHandles) {
     try {
       const spec = JSON.parse((await fs.readFile(specHandle)).toString());
       if (spec.swagger && spec.info.version) {
         for (const path of Object.entries(spec.paths)) {
-          result.push({path: path[0], apiVersion: spec.info.version});
+          result.push({path: path[0], apiVersion: spec.info.version, originalLocation: Path.relative(process.cwd(), specHandle).replace(/\\/g, '/')});
         }   
       }
     }  catch (e) {
@@ -105,12 +105,12 @@ async function getPaths(specHandles: Array<string>): Promise<Array<PathWithApiVe
   return result;   
 }
 
-function getResources(pathsWithVersion: Array<PathWithApiVersion>): {
-  invalidPaths: Array<PathWithApiVersion>;
+function getResources(pathsWithVersion: Array<PathMetadata>): {
+  invalidPaths: Array<PathMetadata>;
   resources: Array<Resource>;
 } {
   console.log(`Crawling paths for resources and getting telemetry ...`);
-  const result = { resources: new Array<Resource>(), invalidPaths: new Array<PathWithApiVersion>()};
+  const result = { resources: new Array<Resource>(), invalidPaths: new Array<PathMetadata>()};
   const providerNamePattern = `microsoft\.[a-z]+(?:\.[a-z]+)?`;
   const parameterPattern = `\{[a-z0-9]+\}`;
   const nonParameterPattern = `[a-z0-9]+`;
@@ -177,9 +177,10 @@ interface Resource {
   name: string;
 }
 
-interface PathWithApiVersion {
+interface PathMetadata {
   path: string;
   apiVersion: string;
+  originalLocation: string;
 }
 
 interface Profile {
@@ -188,4 +189,4 @@ interface Profile {
   };
 }
 
-main(path.join(process.cwd(), "specification"), path.join(process.cwd(), "profiles"));
+main(Path.join(process.cwd(), "specification"), Path.join(process.cwd(), "profiles"));
