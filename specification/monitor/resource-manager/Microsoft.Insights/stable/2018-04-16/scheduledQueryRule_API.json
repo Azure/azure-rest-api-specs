@@ -728,8 +728,11 @@
       ],
       "properties": {
         "criteria": {
-          "$ref": "#/definitions/Criteria",
-          "description": "Severity of the alert"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Criteria"
+          },
+          "description": "Criteria of Metric"
         }
       },
       "required": [
