@@ -1412,14 +1412,16 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/aggregations/{AggregationsName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/aggregations/{aggregationsName}": {
             "get": {
                 "x-ms-examples": {
                     "Get aggregative data for all cases under the defined workspace, between the time range if specified.": {
                         "$ref": "./examples/aggregations/GetCasesAggregations.json"
                     }
                 },
-                "tags": [],
+                "tags": [
+                    "Aggregations"
+                ],
                 "description": "Get aggregative result for the given resources under the defined workspace",
                 "operationId": "CasesAggregations_Get",
                 "parameters": [
