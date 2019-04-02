@@ -34,38 +34,20 @@ async function main() {
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
   const targetBranch = `remotes/origin/${target}`
-  const sourceBranchName = "source-branch"
-  const targetBranchName = "target-branch"
-  {
-    const { stdout } = await execWrap(`git branch ${sourceBranchName}`)
-    console.log(stdout)
-  }
-  {
-    const { stdout } = await execWrap(`git branch ${targetBranchName} ${targetBranch}`)
-    console.log(stdout)
-  }
+  const sourceBranchName = "source-731debc6-97f9-4d30-afb3-9abffc660325"
+  const targetBranchName = "target-731debc6-97f9-4d30-afb3-9abffc660325"
+  await execWrap(`git branch ${sourceBranchName}`)
+  await execWrap(`git branch ${targetBranchName} ${targetBranch}`)
   {
     const { stdout } = await execWrap(`git diff ${targetBranchName}..${sourceBranchName} --name-status`)
-    console.log(stdout)
-  }
-  {
-    const { stdout } = await execWrap(`git branch -a`)
     console.log(stdout)
   }
   await mkdir("../old")
   const parsedCurrent = path.parse(current)
   const oldCwd = path.resolve(path.join(current, "../old"))
-  {
-    const { stdout } = await execWrap(`git clone ${current} -s`, oldCwd)
-    console.log(stdout)
-  }
-  console.log(await pfs.readdir(oldCwd))
+  await execWrap(`git clone ${current} -s`, oldCwd)
   const oldRepoPath = path.join(oldCwd, parsedCurrent.base)
   console.log(oldRepoPath)
-  {
-    const { stdout } = await execWrap(`git branch -a`, oldRepoPath)
-    console.log(stdout)
-  }
   {
     const { stdout } = await execWrap(`git checkout -b ${targetBranchName} remotes/origin/${targetBranchName}`, oldRepoPath)
     console.log(stdout)
