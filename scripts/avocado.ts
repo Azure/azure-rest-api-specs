@@ -34,13 +34,18 @@ async function main() {
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
   const targetBranch = `remotes/origin/${target}`
-  const tempBranch = 'temporarybranch'
+  const sourceBranchName = "source-branch"
+  const targetBranchName = "target-branch"
   {
-    const { stdout } = await execWrap(`git branch ${tempBranch}`)
+    const { stdout } = await execWrap(`git branch ${sourceBranchName}`)
     console.log(stdout)
   }
   {
-    const { stdout } = await execWrap(`git diff ${targetBranch}..${tempBranch} --name-status`)
+    const { stdout } = await execWrap(`git branch ${targetBranchName} ${targetBranch}`)
+    console.log(stdout)
+  }
+  {
+    const { stdout } = await execWrap(`git diff ${targetBranchName}..${sourceBranchName} --name-status`)
     console.log(stdout)
   }
   {
