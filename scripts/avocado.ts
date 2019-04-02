@@ -42,7 +42,7 @@ async function main() {
   const parsedCurrent = path.parse(current)
   const oldCwd = path.resolve(path.join(current, "../old"))
   {
-    const { stdout } = await execWrap(`git clone ${current}`, oldCwd)
+    const { stdout } = await execWrap(`git clone ${current} -b ${target}`, oldCwd)
     console.log(stdout)
   }
   console.log(await pfs.readdir(oldCwd))
@@ -52,10 +52,12 @@ async function main() {
     const { stdout } = await execWrap(`git branch -a`, oldRepoPath)
     console.log(stdout)
   }
+  /*
   {
     const { stdout } = await execWrap(`git checkout -b ${target} ${targetBranch}`, oldRepoPath)
     console.log(stdout)
   }
+  */
 
   const swaggersToProcess = utils.getFilesChangedInPR();
   let errorNumbers = 0
