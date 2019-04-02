@@ -186,7 +186,7 @@
             }
           },
           "202" : {
-            "description" : "The request is accepted and is being processed",
+            "description" : "The request is accepted and is being processed. Operation result link is in location header.",
             "schema" : {
               "$ref" : "#/definitions/ReservationOrderResponse"
             }
@@ -718,6 +718,7 @@
       "properties" : {
         "billingCurrencyTotal" : {
           "type" : "object",
+          "description" : "Currency and amount that customer will be charged in customer's local currency. Tax is not included.",
           "properties" : {
             "currencyCode" : {
               "type" : "string"
@@ -727,26 +728,24 @@
             }
           }
         },
-        "isTaxIncluded" : {
-          "type" : "boolean"
-        },
-        "purchaseRequest" : {
-          "$ref" : "#/definitions/PurchaseRequest"
-        },
         "isBillingPartnerManaged" : {
           "type" : "boolean"
         },
         "reservationOrderId" : {
+          "description" : "GUID that represents reservation order that can be placed after calculating price",
           "type" : "string"
         },
         "skuTitle" : {
+          "description" : "Long name for the SKU that is being purchased",
           "type" : "string"
         },
         "skuDescription" : {
+          "description" : "Short name for the SKU that is being purchased",
           "type" : "string"
         },
         "pricingCurrencyTotal" : {
           "type" : "object",
+          "description" : "Amount that Microsoft uses for record. Used during refund for calculating refund limit. Tax is not included.",
           "properties" : {
             "currencyCode" : {
               "type" : "string"
@@ -872,8 +871,9 @@
         "appliedScopes" : {
           "$ref" : "#/definitions/AppliedScopes"
         },
-        "advancedProperties" : {
+        "reservedResourceProperties" : {
           "type" : "object",
+          "description" : "properties specific to each reserved resource type.",
           "properties" : {
             "instanceFlexibility" : {
               "$ref" : "#/definitions/InstanceFlexibility"
@@ -1130,7 +1130,7 @@
     },
     "InstanceFlexibility" : {
       "type" : "string",
-      "description" : "Allows reservation discount to be applied across skus within the same AutofitGroup. Not all skus support instance size flexibility.",
+      "description" : "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
       "enum" : [ true, false ],
       "x-ms-enum" : {
         "name" : "InstanceFlexibility",
