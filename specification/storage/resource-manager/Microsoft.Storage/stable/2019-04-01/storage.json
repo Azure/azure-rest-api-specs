@@ -1628,6 +1628,25 @@
           "x-ms-client-name": "FailoverInProgress",
           "description": "If the failover is in progress, the value will be true, otherwise, it will be null.",
           "readOnly": true
+        },
+        "minimumTLSVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "TLS version control on storage account in customer configuration, TLS v1.2 by default.",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTLSVersion",
+            "modelAsString": false
+          }
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Public access to a container is enabled if the value is true."
         }
       },
       "description": "Properties of the storage account."
