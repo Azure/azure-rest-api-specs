@@ -2016,14 +2016,14 @@
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "title": "The dedicated core quota for the Batch account."
+          "title": "The dedicated core quota for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is null."
         },
         "lowPriorityCoreQuota": {
           "readOnly": true,
           "x-nullable": false,
           "type": "integer",
           "format": "int32",
-          "title": "The low-priority core quota for the Batch account."
+          "title": "The low-priority core quota for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is null."
         },
         "dedicatedCoreQuotaPerVMFamily": {
           "readOnly": true,
@@ -2032,7 +2032,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
           },
-          "description": "A list of the dedicated core quota per Virtual Machine family for the Batch account."
+          "description": "A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is null."
         },
         "dedicatedCoreQuotaPerVMFamilyEnforced": {
           "readOnly": true,
