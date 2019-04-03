@@ -1,30 +1,29 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "2000100",
-    "billingProfileId": "BillingProfileId1"
+    "billingAccountName": "2000100",
+    "billingProfileName": "BillingProfileId1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/BillingProfileId1",
         "name": "BillingProfileId1",
         "type": "Microsoft.Billing/billingProfiles",
         "properties": {
           "displayName": "BillingProfileName1",
           "poNumber": "ABC12345",
-          "address": {
-            "AddressLine1": "Test Address",
-            "AddressLine2": "Test Address",
-            "AddressLine3": "Test Address",
-            "City": "City",
-            "PostalCode": "00000",
-            "Region": "WA",
-            "Country": "US"
+          "billingAddress": {
+            "addressLine1": "Test Address",
+            "addressLine2": "Test Address",
+            "addressLine3": "Test Address",
+            "city": "City",
+            "postalCode": "00000",
+            "region": "WA",
+            "country": "US"
           },
           "invoiceEmailOptIn": true,
           "isClassic": false,
-          "invoiceDay": 5,
           "currency": "USD",
           "enabledAzureSKUs": [
             {
