@@ -67,7 +67,7 @@
           "200": {
             "description": "Lists a collection of Identity Providers.",
             "schema": {
-              "$ref": "#/definitions/IdentityProviderList"
+              "$ref": "./definitions.json#/definitions/IdentityProviderList"
             }
           },
           "default": {
@@ -161,7 +161,7 @@
           "200": {
             "description": "The response body contains the specified IdentityProvider entity configuration details.",
             "schema": {
-              "$ref": "#/definitions/IdentityProviderContract"
+              "$ref": "./definitions.json#/definitions/IdentityProviderContract"
             },
             "headers": {
               "ETag": {
@@ -204,7 +204,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdentityProviderContract"
+              "$ref": "./definitions.json#/definitions/IdentityProviderContract"
             },
             "description": "Create parameters."
           },
@@ -228,7 +228,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/IdentityProviderContract"
+              "$ref": "./definitions.json#/definitions/IdentityProviderContract"
             }
           },
           "200": {
@@ -240,7 +240,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/IdentityProviderContract"
+              "$ref": "./definitions.json#/definitions/IdentityProviderContract"
             }
           },
           "default": {
@@ -277,7 +277,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdentityProviderUpdateParameters"
+              "$ref": "./definitions.json#/definitions/IdentityProviderUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -351,171 +351,6 @@
       }
     }
   },
-  "definitions": {
-    "IdentityProviderContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IdentityProviderContractProperties",
-          "description": "Identity Provider contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Identity Provider details."
-    },
-    "IdentityProviderContractProperties": {
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
-          "minLength": 1
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
-          "minLength": 1
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityProviderBaseParameters"
-        }
-      ],
-      "required": [
-        "clientId",
-        "clientSecret"
-      ],
-      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
-    },
-    "IdentityProviderList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IdentityProviderContract"
-          },
-          "description": "Identity Provider configuration values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "List of all the Identity Providers configured on the service instance."
-    },
-    "IdentityProviderUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IdentityProviderUpdateProperties",
-          "description": "Identity Provider update properties."
-        }
-      },
-      "description": "Parameters supplied to update Identity Provider"
-    },
-    "IdentityProviderUpdateProperties": {
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
-          "minLength": 1
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
-          "minLength": 1
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityProviderBaseParameters"
-        }
-      ],
-      "description": "Parameters supplied to the Update Identity Provider operation."
-    },
-    "IdentityProviderBaseParameters": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "facebook",
-            "google",
-            "microsoft",
-            "twitter",
-            "aad",
-            "aadB2C"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityProviderType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "facebook",
-                "description": "Facebook as Identity provider."
-              },
-              {
-                "value": "google",
-                "description": "Google as Identity provider."
-              },
-              {
-                "value": "microsoft",
-                "description": "Microsoft Live as Identity provider."
-              },
-              {
-                "value": "twitter",
-                "description": "Twitter as Identity provider."
-              },
-              {
-                "value": "aad",
-                "description": "Azure Active Directory as Identity provider."
-              },
-              {
-                "value": "aadB2C",
-                "description": "Azure Active Directory B2C as Identity provider."
-              }
-            ]
-          },
-          "description": "Identity Provider Type identifier."
-        },
-        "allowedTenants": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 32,
-          "description": "List of Allowed Tenants when configuring Azure Active Directory login."
-        },
-        "authority":{
-          "type": "string",
-          "description": "OpenID Connect discovery endpoint hostname for AAD or AAD B2C."
-        },
-        "signupPolicyName": {
-          "type": "string",
-          "description": "Signup Policy Name. Only applies to AAD B2C Identity Provider.",
-          "minLength": 1
-        },
-        "signinPolicyName": {
-          "type": "string",
-          "description": "Signin Policy Name. Only applies to AAD B2C Identity Provider.",
-          "minLength": 1
-        },
-        "profileEditingPolicyName": {
-          "type": "string",
-          "description": "Profile Editing Policy Name. Only applies to AAD B2C Identity Provider.",
-          "minLength": 1
-        },
-        "passwordResetPolicyName": {
-          "type": "string",
-          "description": "Password Reset Policy Name. Only applies to AAD B2C Identity Provider.",
-          "minLength": 1
-        }
-      },
-      "description": "Identity Provider Base Parameter Properties."
-    }
-  },
-  "parameters": {  }
+  "definitions": { },
+  "parameters": { }
 }

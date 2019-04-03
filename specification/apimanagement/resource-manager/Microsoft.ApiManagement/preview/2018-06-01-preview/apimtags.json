@@ -222,7 +222,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagCreateUpdateParameters"
+              "$ref": "./definitions.json#/definitions/TagCreateUpdateParameters"
             },
             "description": "Create parameters."
           },
@@ -295,7 +295,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagCreateUpdateParameters"
+              "$ref": "./definitions.json#/definitions/TagCreateUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -369,137 +369,6 @@
       }
     }
   },
-  "definitions": {
-    "TagCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "./apimtags.json#/definitions/TagContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Tag list representation."
-    },
-    "TagContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagContractProperties",
-          "description": "Tag entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Tag Contract details."
-    },
-    "TagContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Tag name.",
-          "maxLength": 160,
-          "minLength": 1
-        }
-      },
-      "required": [
-        "displayName"
-      ],
-      "description": "Tag contract Properties."
-    },
-    "TagCreateUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagContractProperties",
-          "description": "Properties supplied to Create Tag operation."
-        }
-      },
-      "description": "Parameters supplied to Create/Update Tag operations."
-    },
-    "TagDescriptionCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "./apimtags.json#/definitions/TagDescriptionContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged TagDescription list representation."
-    },
-    "TagDescriptionContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagDescriptionContractProperties",
-          "description": "TagDescription entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Contract details."
-    },
-    "TagDescriptionContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Tag name.",
-          "maxLength": 160,
-          "minLength": 1
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TagDescriptionBaseProperties"
-        }
-      ],
-      "description": "TagDescription contract Properties."
-    },
-    "TagDescriptionCreateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagDescriptionBaseProperties",
-          "description": "Properties supplied to Create TagDescription operation."
-        }
-      },
-      "description": "Parameters supplied to the Create TagDescription operation."
-    },
-    "TagDescriptionBaseProperties": {
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the Tag."
-        },
-        "externalDocsUrl": {
-          "type": "string",
-          "description": "Absolute URL of external resources describing the tag.",
-          "maxLength": 2000
-        },
-        "externalDocsDescription": {
-          "type": "string",
-          "description": "Description of the external resources describing the tag."
-        }
-      },
-      "description": "Parameters supplied to the Create TagDescription operation."
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

@@ -77,7 +77,7 @@
           "200": {
             "description": "Lists of all the OpenId Connect Providers.",
             "schema": {
-              "$ref": "#/definitions/OpenIdConnectProviderCollection"
+              "$ref": "./definitions.json#/definitions/OpenIdConnectProviderCollection"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
           "200": {
             "description": "The response body contains the specified OpenId Connect Provider entity.",
             "schema": {
-              "$ref": "#/definitions/OpenidConnectProviderContract"
+              "$ref": "./definitions.json#/definitions/OpenidConnectProviderContract"
             },
             "headers": {
               "ETag": {
@@ -215,7 +215,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OpenidConnectProviderContract"
+              "$ref": "./definitions.json#/definitions/OpenidConnectProviderContract"
             },
             "description": "Create parameters."
           },
@@ -239,7 +239,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/OpenidConnectProviderContract"
+              "$ref": "./definitions.json#/definitions/OpenidConnectProviderContract"
             }
           },
           "200": {
@@ -251,7 +251,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/OpenidConnectProviderContract"
+              "$ref": "./definitions.json#/definitions/OpenidConnectProviderContract"
             }
           },
           "default": {
@@ -288,7 +288,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OpenidConnectProviderUpdateContract"
+              "$ref": "./definitions.json#/definitions/OpenidConnectProviderUpdateContract"
             },
             "description": "Update parameters."
           },
@@ -362,105 +362,6 @@
       }
     }
   },
-  "definitions": {
-    "OpenIdConnectProviderCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OpenidConnectProviderContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged OpenIdProviders list representation."
-    },
-    "OpenidConnectProviderContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OpenidConnectProviderContractProperties",
-          "description": "OpenId Connect Provider contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "OpenId Connect Provider details."
-    },
-    "OpenidConnectProviderContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "User-friendly OpenID Connect Provider name.",
-          "maxLength": 50
-        },
-        "description": {
-          "type": "string",
-          "description": "User-friendly description of OpenID Connect Provider."
-        },
-        "metadataEndpoint": {
-          "type": "string",
-          "description": "Metadata endpoint URI."
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client ID of developer console which is the client application."
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client Secret of developer console which is the client application."
-        }
-      },
-      "required": [
-        "displayName",
-        "metadataEndpoint",
-        "clientId"
-      ],
-      "description": "OpenID Connect Providers Contract."
-    },
-    "OpenidConnectProviderUpdateContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OpenidConnectProviderUpdateContractProperties",
-          "description": "OpenId Connect Provider Update contract properties."
-        }
-      },
-      "description": "Parameters supplied to the Update OpenID Connect Provider operation."
-    },
-    "OpenidConnectProviderUpdateContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "User-friendly OpenID Connect Provider name.",
-          "maxLength": 50
-        },
-        "description": {
-          "type": "string",
-          "description": "User-friendly description of OpenID Connect Provider."
-        },
-        "metadataEndpoint": {
-          "type": "string",
-          "description": "Metadata endpoint URI."
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client ID of developer console which is the client application."
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client Secret of developer console which is the client application."
-        }
-      },
-      "description": "Parameters supplied to the Update OpenID Connect Provider operation."
-    }
-  },
+  "definitions": { },
   "parameters": { }
 }

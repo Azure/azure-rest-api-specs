@@ -82,7 +82,7 @@
           "200": {
             "description": "Lists a collection of User entities.",
             "schema": {
-              "$ref": "#/definitions/UserCollection"
+              "$ref": "./definitions.json#/definitions/UserCollection"
             }
           },
           "default": {
@@ -177,7 +177,7 @@
           "200": {
             "description": "Gets the specified user entity.",
             "schema": {
-              "$ref": "#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
             },
             "headers": {
               "ETag": {
@@ -220,7 +220,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserCreateParameters"
+              "$ref": "./definitions.json#/definitions/UserCreateParameters"
             },
             "description": "Create or update parameters."
           },
@@ -238,7 +238,7 @@
           "201": {
             "description": "User was successfully created.",
             "schema": {
-              "$ref": "#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
             },
             "headers": {
               "ETag": {
@@ -256,7 +256,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
             }
           },
           "default": {
@@ -293,7 +293,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserUpdateParameters"
+              "$ref": "./definitions.json#/definitions/UserUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -414,7 +414,7 @@
             "description": "The response body contains the single sign-on URL.",
             "schema": {
               "x-ms-client-flatten": true,
-              "$ref": "#/definitions/GenerateSsoUrlResult"
+              "$ref": "./definitions.json#/definitions/GenerateSsoUrlResult"
             }
           },
           "default": {
@@ -583,7 +583,7 @@
           "200": {
             "description": "Lists of User Identities.",
             "schema": {
-              "$ref": "#/definitions/UserIdentityCollection"
+              "$ref": "./definitions.json#/definitions/UserIdentityCollection"
             }
           },
           "default": {
@@ -625,7 +625,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserTokenParameters"
+              "$ref": "./definitions.json#/definitions/UserTokenParameters"
             },
             "description": "Create Authorization Token parameters."
           },
@@ -641,7 +641,7 @@
             "description": "The response body contains the authorization token for the user.",
             "schema": {
               "x-ms-client-flatten": true,
-              "$ref": "#/definitions/UserTokenResult"
+              "$ref": "./definitions.json#/definitions/UserTokenResult"
             }
           },
           "default": {
@@ -696,320 +696,6 @@
       }
     }
   },
-  "definitions": {
-    "GenerateSsoUrlResult": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Redirect Url containing the SSO URL value."
-        }
-      },
-      "description": "Generate SSO Url operations response details."
-    },
-    "UserCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Users list representation."
-    },
-    "UserContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserContractProperties",
-          "description": "User entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "User details."
-    },
-    "UserContractProperties": {
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First name."
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name."
-        },
-        "email": {
-          "type": "string",
-          "description": "Email address."
-        },
-        "registrationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        },
-        "groups": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "./apimgroups.json#/definitions/GroupContractProperties"
-          },
-          "description": "Collection of groups user is part of."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserEntityBaseParameters"
-        }
-      ],
-      "description": "User profile."
-    },
-    "UserCreateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserCreateParameterProperties",
-          "description": "User entity create contract properties."
-        }
-      },
-      "description": "User create details."
-    },
-    "UserCreateParameterProperties": {
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "Email address. Must not be empty and must be unique within the service instance.",
-          "minLength": 1,
-          "maxLength": 254
-        },
-        "firstName": {
-          "type": "string",
-          "description": "First name.",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name.",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "password": {
-          "type": "string",
-          "description": "User Password. If no value is provided, a default password is generated."
-        },
-        "confirmation": {
-          "type": "string",
-          "description": "Determines the type of confirmation e-mail that will be sent to the newly created user.",
-          "enum": [
-            "signup",
-            "invite"
-          ],
-          "x-ms-enum": {
-            "name": "Confirmation",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "signup",
-                "description": "Send an e-mail to the user confirming they have successfully signed up."
-              },
-              {
-                "value": "invite",
-                "description": "Send an e-mail inviting the user to sign-up and complete registration."
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserEntityBaseParameters"
-        }
-      ],
-      "required": [
-        "email",
-        "firstName",
-        "lastName"
-      ],
-      "description": "Parameters supplied to the Create User operation."
-    },
-    "UserEntityBaseParameters": {
-      "properties": {
-        "state": {
-          "type": "string",
-          "description": "Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.",
-          "enum": [
-            "active",
-            "blocked",
-            "pending",
-            "deleted"
-          ],
-          "default": "active",
-          "x-ms-enum": {
-            "name": "UserState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "active",
-                "description": "User state is active."
-              },
-              {
-                "value": "blocked",
-                "description": "User is blocked. Blocked users cannot authenticate at developer portal or call API."
-              },
-              {
-                "value": "pending",
-                "description": "User account is pending. Requires identity confirmation before it can be made active."
-              },
-              {
-                "value": "deleted",
-                "description": "User account is closed. All identities and related entities are removed."
-              }
-            ]
-          }
-        },
-        "note": {
-          "type": "string",
-          "description": "Optional note about a user set by the administrator."
-        },
-        "identities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserIdentityContract"
-          },
-          "description": "Collection of user identities."
-        }
-      },
-      "description": "User Entity Base Parameters set."
-    },
-    "UserIdentityCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserIdentityContract"
-          },
-          "description": "User Identity values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "List of Users Identity list representation."
-    },
-    "UserIdentityContract": {
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Identity provider name."
-        },
-        "id": {
-          "type": "string",
-          "description": "Identifier value within provider."
-        }
-      },
-      "description": "User identity details."
-    },
-    "UserTokenParameters": {
-      "properties": {
-        "keyType": {
-          "type": "string",
-          "description": "The Key to be used to generate token for user.",
-          "enum": [
-            "primary",
-            "secondary"
-          ],
-          "default": "primary",
-          "x-ms-enum": {
-            "name": "KeyType",
-            "modelAsString": false
-          }
-        },
-        "expiry": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        }
-      },
-      "required": [
-        "keyType",
-        "expiry"
-      ],
-      "description": "Parameters supplied to the Get User Token operation."
-    },
-    "UserTokenResult": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Shared Access Authorization token for the User."
-        }
-      },
-      "description": "Get User Token response details."
-    },
-    "UserUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserUpdateParametersProperties",
-          "description": "User entity update contract properties."
-        }
-      },
-      "description": "User update parameters."
-    },
-    "UserUpdateParametersProperties": {
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "Email address. Must not be empty and must be unique within the service instance.",
-          "minLength": 1,
-          "maxLength": 254
-        },
-        "password": {
-          "type": "string",
-          "description": "User Password."
-        },
-        "firstName": {
-          "type": "string",
-          "description": "First name.",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name.",
-          "minLength": 1,
-          "maxLength": 100
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserEntityBaseParameters"
-        }
-      ],
-      "description": "Parameters supplied to the Update User operation."
-    },
-    "CurrentUserIdentity": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "API Management service user id."
-        }
-      }
-    }
-  },
+  "definitions": { },
   "parameters": { }
 }

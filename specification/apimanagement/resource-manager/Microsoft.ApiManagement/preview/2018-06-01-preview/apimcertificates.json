@@ -77,7 +77,7 @@
           "200": {
             "description": "Returns a collection of Certificate entity.",
             "schema": {
-              "$ref": "#/definitions/CertificateCollection"
+              "$ref": "./definitions.json#/definitions/CertificateCollection"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
           "200": {
             "description": "The response body contains the specified Certificate entity.",
             "schema": {
-              "$ref": "#/definitions/CertificateContract"
+              "$ref": "./definitions.json#/definitions/CertificateContract"
             },
             "headers": {
               "ETag": {
@@ -219,7 +219,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CertificateCreateOrUpdateParameters"
+              "$ref": "./definitions.json#/definitions/CertificateCreateOrUpdateParameters"
             },
             "description": "Create or Update parameters."
           },
@@ -243,7 +243,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CertificateContract"
+              "$ref": "./definitions.json#/definitions/CertificateContract"
             }
           },
           "200": {
@@ -255,7 +255,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CertificateContract"
+              "$ref": "./definitions.json#/definitions/CertificateContract"
             }
           },
           "default": {
@@ -314,88 +314,6 @@
       }
     }
   },
-  "definitions": {
-    "CertificateCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CertificateContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Certificates list representation."
-    },
-    "CertificateContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CertificateContractProperties",
-          "description": "Certificate properties details."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Certificate details."
-    },
-    "CertificateContractProperties": {
-      "properties": {
-        "subject": {
-          "type": "string",
-          "description": "Subject attribute of the certificate."
-        },
-        "thumbprint": {
-          "type": "string",
-          "description": "Thumbprint of the certificate."
-        },
-        "expirationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        }
-      },
-      "required": [
-        "subject",
-        "thumbprint",
-        "expirationDate"
-      ],
-      "description": "Properties of the Certificate contract."
-    },
-    "CertificateCreateOrUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CertificateCreateOrUpdateProperties",
-          "description": "Certificate create or update properties details."
-        }
-      },
-      "description": "Certificate create or update details."
-    },
-    "CertificateCreateOrUpdateProperties": {
-      "properties": {
-        "data": {
-          "type": "string",
-          "description": "Base 64 encoded certificate using the application/x-pkcs12 representation."
-        },
-        "password": {
-          "type": "string",
-          "description": "Password for the Certificate"
-        }
-      },
-      "required": [
-        "data",
-        "password"
-      ],
-      "description": "Parameters supplied to the CreateOrUpdate certificate operation."
-    }
-  },
+  "definitions": { },
   "parameters": { }
 }

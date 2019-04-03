@@ -77,7 +77,7 @@
           "200": {
             "description": "Lists a collection of Api Version Set entities.",
             "schema": {
-              "$ref": "#/definitions/ApiVersionSetCollection"
+              "$ref": "./definitions.json#/definitions/ApiVersionSetCollection"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
           "200": {
             "description": "Gets the specified Api Version Set entity.",
             "schema": {
-              "$ref": "#/definitions/ApiVersionSetContract"
+              "$ref": "./definitions.json#/definitions/ApiVersionSetContract"
             },
             "headers": {
               "ETag": {
@@ -215,7 +215,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiVersionSetContract"
+              "$ref": "./definitions.json#/definitions/ApiVersionSetContract"
             },
             "description": "Create or update parameters."
           },
@@ -233,7 +233,7 @@
           "201": {
             "description": "Api Version Set was successfully created.",
             "schema": {
-              "$ref": "#/definitions/ApiVersionSetContract"
+              "$ref": "./definitions.json#/definitions/ApiVersionSetContract"
             },
             "headers": {
               "ETag": {
@@ -245,7 +245,7 @@
           "200": {
             "description": "Api Version Set was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ApiVersionSetContract"
+              "$ref": "./definitions.json#/definitions/ApiVersionSetContract"
             },
             "headers": {
               "ETag": {
@@ -288,7 +288,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiVersionSetUpdateParameters"
+              "$ref": "./definitions.json#/definitions/ApiVersionSetUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -362,160 +362,6 @@
       }
     }
   },
-  "definitions": {
-    "ApiVersionSetCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiVersionSetContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Api Version Set list representation."
-    },
-    "ApiVersionSetEntityBase": {
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of API Version Set."
-        },
-        "versionQueryName": {
-          "type": "string",
-          "description": "Name of query parameter that indicates the API Version if versioningScheme is set to `query`.",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "versionHeaderName": {
-          "type": "string",
-          "description": "Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.",
-          "minLength": 1,
-          "maxLength": 100
-        }
-      },
-      "description": "Api Version set base parameters"
-    },
-    "ApiVersionSetContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Name of API Version Set",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "versioningScheme": {
-          "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
-          "enum": [
-            "Segment",
-            "Query",
-            "Header"
-          ],
-          "x-ms-enum": {
-            "name": "versioningScheme",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Segment",
-                "description": "The API Version is passed in a path segment."
-              },
-              {
-                "value": "Query",
-                "description": "The API Version is passed in a query parameter."
-              },
-              {
-                "value": "Header",
-                "description": "The API Version is passed in a HTTP header."
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ApiVersionSetEntityBase"
-        }
-      ],
-      "required": [
-        "displayName",
-        "versioningScheme"
-      ],
-      "description": "Properties of an API Version Set."
-    },
-    "ApiVersionSetContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiVersionSetContractProperties",
-          "description": "Api VersionSet contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Api Version Set Contract details."
-    },
-    "ApiVersionSetUpdateParametersProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Name of API Version Set",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "versioningScheme": {
-          "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
-          "enum": [
-            "Segment",
-            "Query",
-            "Header"
-          ],
-          "x-ms-enum": {
-            "name": "versioningScheme",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Segment",
-                "description": "The API Version is passed in a path segment."
-              },
-              {
-                "value": "Query",
-                "description": "The API Version is passed in a query parameter."
-              },
-              {
-                "value": "Header",
-                "description": "The API Version is passed in a HTTP header."
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ApiVersionSetEntityBase"
-        }
-      ],
-      "description": "Properties used to create or update an API Version Set."
-    },
-    "ApiVersionSetUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiVersionSetUpdateParametersProperties",
-          "description": "Parameters to update or create an Api Version Set Contract."
-        }
-      },
-      "description": "Parameters to update or create an Api Version Set Contract."
-    }
-  },
-  "parameters": {
-  }
+  "definitions": { },
+  "parameters": { }
 }
