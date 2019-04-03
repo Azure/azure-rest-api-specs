@@ -7319,6 +7319,10 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
+        "doNotRunExtensionsOnOverprovisionedVMs":{
+          "type": "boolean",
+          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+        },
         "uniqueId": {
           "readOnly": true,
           "type": "string",
@@ -7800,10 +7804,6 @@
           "readOnly": true,
           "type": "boolean",
           "description": "Specifies whether the latest model has been applied to the virtual machine."
-        },
-        "protectFromScaleIn" : {
-          "type": "boolean",
-          "description": "Specifies whether the virtual machine instance shouldn't be considered for deletion during a scale-in operation"
         },
         "vmId": {
           "readOnly": true,

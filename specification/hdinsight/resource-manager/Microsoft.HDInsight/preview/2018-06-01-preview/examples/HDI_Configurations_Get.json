@@ -4,14 +4,13 @@
     "resourceGroupName": "rg1",
     "api-version": "2018-06-01-preview",
     "subscriptionId": "subid",
-    "configurationName": "gateway"
+    "configurationName": "core-site"
   },
   "responses": {
     "200": {
       "body": {
-        "restAuthCredential.isEnabled": "true",
-        "restAuthCredential.username": "hadoop",
-        "restAuthCredential.password": "**********"
+        "fs.defaultFS":"wasb://test.blob.core.windows.net",
+        "fs.azure.account.key.test.blob.core.windows.net":"accountKey"
       }
     }
   }

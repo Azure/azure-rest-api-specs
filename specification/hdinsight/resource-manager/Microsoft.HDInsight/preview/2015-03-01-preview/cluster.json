@@ -427,6 +427,100 @@
                 },
                 "x-ms-long-running-operation": true
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/getGatewaySettings": {
+            "post": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_GetGatewaySettings",
+                "description": "Gets the gateway settings for the specified cluster.",
+                "x-ms-examples": {
+                    "Get HTTP settings": {
+                        "$ref": "./examples/HDI_Clusters_GetGatewaySettings.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "OK response definition.",
+                        "schema": {
+                            "$ref": "#/definitions/GatewaySettings"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/updateGatewaySettings": {
+            "post": {
+                "tags": [
+                    "Clusters"
+                ],
+                "operationId": "Clusters_UpdateGatewaySettings",
+                "description": "Configures the gateway settings on the specified cluster.",
+                "x-ms-examples": {
+                    "Enable HTTP connectivity": {
+                        "$ref": "./examples/HDI_Clusters_UpdateGatewaySettings_Enable.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateGatewaySettingsParameters"
+                        },
+                        "description": "The cluster configurations."
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "./operations.json#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "OK response definition."
+                    },
+                    "202": {
+                        "description": "Accepted response definition"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
         }
     },
     "definitions": {
@@ -1227,6 +1321,50 @@
                     "description": "Resource ID of Managed Identity that is used to access the key vault."
                 }
             }
+        },
+        "UpdateGatewaySettingsParameters": {
+            "properties": {
+                "restAuthCredential.isEnabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "x-ms-client-name": "isCredentialEnabled",
+                    "description": "Indicates whether or not the gateway settings based authorization is enabled."
+                },
+                "restAuthCredential.username": {
+                    "type": "string",
+                    "x-ms-client-name": "userName",
+                    "description": "The gateway settings user name."
+                },
+                "restAuthCredential.password": {
+                    "type": "string",
+                    "x-ms-client-name": "password",
+                    "description": "The gateway settings user password."
+                }
+            },
+            "description": "The update gateway settings request parameters."
+        },
+        "GatewaySettings": {
+            "properties": {
+                "restAuthCredential.isEnabled": {
+                    "type": "string",
+                    "x-ms-client-name": "isCredentialEnabled",
+                    "description": "Indicates whether or not the gateway settings based authorization is enabled.",
+                    "readOnly": true
+                },
+                "restAuthCredential.username": {
+                    "type": "string",
+                    "x-ms-client-name": "userName",
+                    "description": "The gateway settings user name.",
+                    "readOnly": true
+                },
+                "restAuthCredential.password": {
+                    "type": "string",
+                    "x-ms-client-name": "password",
+                    "description": "The gateway settings user password.",
+                    "readOnly": true
+                }
+            },
+            "description": "Gateway settings."
         },
         "OperationResource": {
             "properties": {
