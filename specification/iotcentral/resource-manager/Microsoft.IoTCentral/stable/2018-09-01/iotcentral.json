@@ -775,6 +775,42 @@
         }
       }
     },
+    "AppTemplateProperties": {
+      "description": "IoT Central Application Template extra properties.",
+      "type": "object",
+      "properties": {
+        "manifestId": {
+          "description": "The ID of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "manifestVersion": {
+          "description": "The version of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "appTemplateName": {
+          "description": "The name of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "title": {
+          "description": "The title of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "order": {
+          "description": "The order of the template in the templates list.",
+          "type": "number",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the template.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "AppTemplate": {
       "description": "IoT Central Application Template.",
       "type": "object",
@@ -790,11 +826,7 @@
           "readOnly": true
         },
         "properties": {
-          "description": "The extra template properties.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/AppTemplateProperties"
         },
         "type": {
           "description": "the resource type.",
