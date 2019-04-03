@@ -1651,6 +1651,73 @@
         },
         "deprecated": false
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{iotHubName}/failover": {
+      "post": {
+        "tags": [
+          "POST"
+        ],
+        "operationId": "IotHub_CustomerInitiatedFailover",
+        "summary": "Customer Initiated Fail over",
+        "description": "Perform customer initiated fail over of given hub",
+        "x-ms-examples": {
+          "IotHubResource_TestRoute": {
+            "$ref": "./examples/IotHub_CustomerInitiatedFailover.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "iotHubName",
+            "description": "IotHub to fail over",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "failoverInput",
+            "description": "Region it will failover to",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerInitiatedFailoverInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "resource group which Iot Hub belongs to",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotHubDescription"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "definitions": {
@@ -3338,6 +3405,19 @@
       "required": [
         "inputBlobContainerUri",
         "outputBlobContainerUri"
+      ]
+    },
+    "CustomerInitiatedFailoverInput": {
+      "description": "Use to provide failover region when requesting Customer Initiated Fail over for a hub.",
+      "type": "object",
+      "properties": {
+        "FailoverRegion": {
+          "description": "Region the hub will be failed over to",
+          "type": "string"
+        }
+      },
+      "required": [
+        "FailoverRegion"
       ]
     }
   },
