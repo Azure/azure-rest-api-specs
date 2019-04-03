@@ -28,9 +28,9 @@ const execWrap = async (c: string, cwd?: string): Promise<Result> => {
 async function main() {
   const current = path.resolve(process.cwd())
   // console.log(`vars: ${JSON.stringify(process.env)}`)
-  const source = process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH
+  // const source = process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH
   const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
-  console.log(`source: ${source}`)
+  // console.log(`source: ${source}`)
   console.log(`target: ${target}`)
   // const sourceBranchName = "source-731debc6-97f9-4d30-afb3-9abffc660325"
   // const targetBranchName = "target-731debc6-97f9-4d30-afb3-9abffc660325"
