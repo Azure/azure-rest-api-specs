@@ -32,12 +32,12 @@ async function main() {
   const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
-  const sourceBranchName = "source-731debc6-97f9-4d30-afb3-9abffc660325"
-  const targetBranchName = "target-731debc6-97f9-4d30-afb3-9abffc660325"
-  await execWrap(`git branch ${sourceBranchName}`)
-  await execWrap(`git branch ${target}`)
+  // const sourceBranchName = "source-731debc6-97f9-4d30-afb3-9abffc660325"
+  // const targetBranchName = "target-731debc6-97f9-4d30-afb3-9abffc660325"
+  // await execWrap(`git branch ${sourceBranchName}`)
+  await execWrap(`git branch ${target} remotes/origin/${target}`)
   {
-    const { stdout } = await execWrap(`git diff ${targetBranchName}..${sourceBranchName} --name-status`)
+    const { stdout } = await execWrap(`git diff ${target}..HEAD --name-status`)
     console.log(stdout)
   }
   await mkdir("../old")
@@ -47,7 +47,7 @@ async function main() {
   const oldRepoPath = path.join(oldCwd, parsedCurrent.base)
   console.log(oldRepoPath)
   {
-    const { stdout } = await execWrap(`git checkout -b ${targetBranchName} remotes/origin/${targetBranchName}`, oldRepoPath)
+    const { stdout } = await execWrap(`git checkout -b ${target} remotes/origin/${target}`, oldRepoPath)
     console.log(stdout)
   }
 
