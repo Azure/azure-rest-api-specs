@@ -35,7 +35,7 @@ async function main() {
   const sourceBranchName = "source-731debc6-97f9-4d30-afb3-9abffc660325"
   const targetBranchName = "target-731debc6-97f9-4d30-afb3-9abffc660325"
   await execWrap(`git branch ${sourceBranchName}`)
-  await execWrap(`git checkout ${target}`)
+  await execWrap(`git branch ${target}`)
   {
     const { stdout } = await execWrap(`git diff ${targetBranchName}..${sourceBranchName} --name-status`)
     console.log(stdout)
