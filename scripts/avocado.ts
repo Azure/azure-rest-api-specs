@@ -37,17 +37,14 @@ async function main() {
   // await execWrap(`git branch ${sourceBranchName}`)
   await execWrap(`git branch ${target} remotes/origin/${target}`)
   {
-    const { stdout } = await execWrap(`git diff ${target}..HEAD --name-status`)
+    const { stdout } = await execWrap(`git diff --name-status ${target} HEAD`)
     console.log(stdout)
   }
-  await mkdir("../old")
-  const parsedCurrent = path.parse(current)
   const oldCwd = path.resolve(path.join(current, "../old"))
-  await execWrap(`git clone ${current} -s`, oldCwd)
-  const oldRepoPath = path.join(oldCwd, parsedCurrent.base)
-  console.log(oldRepoPath)
+  await mkdir(oldCwd)
+  await execWrap(`git clone ${current} .`, oldCwd)
   {
-    const { stdout } = await execWrap(`git checkout -b ${target} remotes/origin/${target}`, oldRepoPath)
+    const { stdout } = await execWrap(`git checkout ${target}`, oldCwd)
     console.log(stdout)
   }
 
