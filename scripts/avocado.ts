@@ -32,11 +32,10 @@ async function main() {
   const target = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH
   console.log(`source: ${source}`)
   console.log(`target: ${target}`)
-  const targetBranch = `remotes/origin/${target}`
   const sourceBranchName = "source-731debc6-97f9-4d30-afb3-9abffc660325"
   const targetBranchName = "target-731debc6-97f9-4d30-afb3-9abffc660325"
   await execWrap(`git branch ${sourceBranchName}`)
-  await execWrap(`git branch ${targetBranchName} ${targetBranch}`)
+  await execWrap(`git branch ${targetBranchName} ${target}`)
   {
     const { stdout } = await execWrap(`git diff ${targetBranchName}..${sourceBranchName} --name-status`)
     console.log(stdout)
