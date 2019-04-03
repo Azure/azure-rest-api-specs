@@ -104,7 +104,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ProductContract"
+        "x-ms-odata": "./definitions.json#/definitions/ProductContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}": {
@@ -428,7 +428,7 @@
           "200": {
             "description": "The response body contains a collection of Api entities in the product.",
             "schema": {
-              "$ref": "./apimapis.json#/definitions/ApiCollection"
+              "$ref": "./definitions.json#/definitions/ApiCollection"
             }
           },
           "default": {
@@ -441,7 +441,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimapis.json#/definitions/ApiContract"
+        "x-ms-odata": "./definitions.json#/definitions/ApiContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}": {
@@ -523,13 +523,13 @@
           "201": {
             "description": "The API was successfully added to the product.",
             "schema": {
-              "$ref": "./apimapis.json#/definitions/ApiContract"
+              "$ref": "./definitions.json#/definitions/ApiContract"
             }
           },
           "200": {
             "description": "The specified API is already added to the product.",
             "schema": {
-              "$ref": "./apimapis.json#/definitions/ApiContract"
+              "$ref": "./definitions.json#/definitions/ApiContract"
             }
           },
           "default": {
@@ -633,7 +633,7 @@
           "200": {
             "description": "Lists a collection of Group entities.",
             "schema": {
-              "$ref": "./apimgroups.json#/definitions/GroupCollection"
+              "$ref": "./definitions.json#/definitions/GroupCollection"
             }
           },
           "default": {
@@ -646,7 +646,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimgroups.json#/definitions/GroupContract"
+        "x-ms-odata": "./definitions.json#/definitions/GroupContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}": {
@@ -728,13 +728,13 @@
           "201": {
             "description": "The group was successfully associated with the product.",
             "schema": {
-              "$ref": "./apimgroups.json#/definitions/GroupContract"
+              "$ref": "./definitions.json#/definitions/GroupContract"
             }
           },
           "200": {
             "description": "The specified group is already associated with the product.",
             "schema": {
-              "$ref": "./apimgroups.json#/definitions/GroupContract"
+              "$ref": "./definitions.json#/definitions/GroupContract"
             }
           },
           "default": {
@@ -838,7 +838,7 @@
           "200": {
             "description": "Lists a collection of subscription entities.",
             "schema": {
-              "$ref": "./apimsubscriptions.json#/definitions/SubscriptionCollection"
+              "$ref": "./definitions.json#/definitions/SubscriptionCollection"
             }
           },
           "default": {
@@ -851,7 +851,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimsubscriptions.json#/definitions/SubscriptionContract"
+        "x-ms-odata": "./definitions.json#/definitions/SubscriptionContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies": {
@@ -887,7 +887,7 @@
           "200": {
             "description": "Product Policy information.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyCollection"
+              "$ref": "./definitions.json#/definitions/PolicyCollection"
             }
           },
           "default": {
@@ -984,7 +984,7 @@
           "200": {
             "description": "Product Policy information.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1033,7 +1033,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "description": "The policy contents to apply."
           },
@@ -1048,7 +1048,7 @@
           "201": {
             "description": "Product policy configuration was successfully created.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1060,7 +1060,7 @@
           "200": {
             "description": "Product policy configuration of the tenant was successfully updated.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1173,7 +1173,7 @@
           "200": {
             "description": "The operation returns a collection of tags associated with the Product entity.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagCollection"
+              "$ref": "./definitions.json#/definitions/TagCollection"
             }
           },
           "default": {
@@ -1186,7 +1186,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimtags.json#/definitions/TagContract"
+        "x-ms-odata": "./definitions.json#/definitions/TagContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}": {
@@ -1274,7 +1274,7 @@
           "200": {
             "description": "Gets the details of the tag specified by its identifier.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -1326,13 +1326,13 @@
           "201": {
             "description": "Tag was assigned to the Product.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             }
           },
           "200": {
             "description": "Tag is already assigned to the Product.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             }
           },
           "default": {

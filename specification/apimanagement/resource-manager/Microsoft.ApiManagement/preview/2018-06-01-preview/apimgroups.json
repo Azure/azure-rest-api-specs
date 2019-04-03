@@ -93,7 +93,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/GroupContract"
+        "x-ms-odata": "./definitions.json#/definitions/GroupContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}": {
@@ -413,7 +413,7 @@
           "200": {
             "description": "Lists a collection of user entities associated with the group.",
             "schema": {
-              "$ref": "./apimusers.json#/definitions/UserCollection"
+              "$ref": "./definitions.json#/definitions/UserCollection"
             }
           },
           "default": {
@@ -426,7 +426,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimusers.json#/definitions/UserContract"
+        "x-ms-odata": "./definitions.json#/definitions/UserContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}": {
@@ -511,13 +511,13 @@
           "201": {
             "description": "The user was successfully added to the group.",
             "schema": {
-              "$ref": "./apimusers.json#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
             }
           },
           "200": {
             "description": "The specified user is already a member of the specified group.",
             "schema": {
-              "$ref": "./apimusers.json#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
             }
           },
           "default": {

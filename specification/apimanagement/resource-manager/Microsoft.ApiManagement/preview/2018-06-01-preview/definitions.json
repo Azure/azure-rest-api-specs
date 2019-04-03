@@ -36,6 +36,24 @@
       },
       "description": "Tenant access information update parameters of the API Management service."
     },
+    "ApiCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Api list representation."
+    },
     "ApiContract": {
       "properties": {
         "properties": {
@@ -341,6 +359,24 @@
       },
       "description": "API Export result Blob Uri."
     },
+    "ApiReleaseCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiReleaseContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Api Revision list representation."
+    },
     "ApiReleaseContract": {
       "properties": {
         "properties": {
@@ -380,6 +416,24 @@
           "description": "Release Notes"
         }
       }
+    },
+    "ApiRevisionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiRevisionContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Api Revision list representation."
     },
     "ApiRevisionContract": {
       "properties": {
@@ -510,6 +564,22 @@
         }
       },
       "description": "API update contract details."
+    },
+    "ApiVersionSetCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersionSetContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Api Version Set list representation."
     },
     "ApiVersionSetContract": {
       "properties": {
@@ -693,6 +763,27 @@
         }
       },
       "description": "API Authentication Settings."
+    },
+    "AuthorizationServerCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationServerContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged OAuth2 Authorization Servers list representation."
     },
     "AuthorizationServerContract": {
       "properties": {
@@ -1036,6 +1127,22 @@
       },
       "description": "Backend entity base Parameter set."
     },
+    "BackendCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendContract"
+          },
+          "description": "Backend values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Backend list representation."
+    },
     "BackendContract": {
       "properties": {
         "properties": {
@@ -1325,6 +1432,22 @@
       },
       "description": "Body logging settings."
     },
+    "CacheCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CacheContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Caches list representation."
+    },
     "CacheContract": {
       "properties": {
         "properties": {
@@ -1392,6 +1515,22 @@
         }
       },
       "description": "Parameters supplied to the Update Cache operation."
+    },
+    "CertificateCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Certificates list representation."
     },
     "CertificateContract": {
       "properties": {
@@ -1482,6 +1621,22 @@
       ],
       "description": "Parameters supplied to the Deploy Configuration operation."
     },
+    "DiagnosticCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Diagnostic list representation."
+    },
     "DiagnosticContract": {
       "properties": {
         "properties": {
@@ -1541,6 +1696,22 @@
         "loggerId"
       ],
       "description": "Diagnostic Entity Properties"
+    },
+    "EmailTemplateCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailTemplateContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged email template list representation."
     },
     "EmailTemplateContract": {
       "properties": {
@@ -1671,6 +1842,22 @@
         }
       },
       "description": "Generate SSO Url operations response details."
+    },
+    "GroupCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Group list representation."
     },
     "GroupContract": {
       "properties": {
@@ -1995,6 +2182,24 @@
       ],
       "description": "Parameters supplied to the Update Identity Provider operation."
     },
+    "IssueAttachmentCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssueAttachmentContract"
+          },
+          "description": "Issue Attachment values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Issue Attachment list representation."
+    },
     "IssueAttachmentContract": {
       "properties": {
         "properties": {
@@ -2031,6 +2236,42 @@
         "content"
       ],
       "description": "Issue Attachment contract Properties."
+    },
+    "IssueCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssueContract"
+          },
+          "description": "Issue values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Issue list representation."
+    },
+    "IssueCommentCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssueCommentContract"
+          },
+          "description": "Issue Comment values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Issue Comment list representation."
     },
     "IssueCommentContract": {
       "properties": {
@@ -2194,6 +2435,27 @@
       ],
       "description": "Issue contract Update Properties."
     },
+    "LoggerCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggerContract"
+          },
+          "description": "Logger values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Logger list representation."
+    },
     "LoggerContract": {
       "properties": {
         "properties": {
@@ -2316,6 +2578,22 @@
       },
       "description": "Parameters supplied to the Update Logger operation."
     },
+    "NotificationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Notification list representation."
+    },
     "NotificationContract": {
       "properties": {
         "properties": {
@@ -2381,6 +2659,22 @@
         }
       },
       "description": "API OAuth2 Authentication settings details."
+    },
+    "OpenIdConnectProviderCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenidConnectProviderContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged OpenIdProviders list representation."
     },
     "OpenidConnectProviderContract": {
       "properties": {
@@ -2463,6 +2757,24 @@
         }
       },
       "description": "Parameters supplied to the Update OpenID Connect Provider operation."
+    },
+    "OperationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Operation list representation."
     },
     "OperationContract": {
       "properties": {
@@ -2749,6 +3061,22 @@
       },
       "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Gateway."
     },
+    "PolicyCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyContract"
+          },
+          "description": "Policy Contract value."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the list policy operation."
+    },
     "PolicyContract": {
       "properties": {
         "properties": {
@@ -2833,6 +3161,18 @@
         }
       },
       "description": "Policy snippet."
+    },
+    "PolicySnippetsCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySnippetContract"
+          },
+          "description": "Policy snippet value."
+        }
+      },
+      "description": "The response of the list policy snippets operation."
     },
     "PortalDelegationSettings": {
       "properties": {
@@ -2922,6 +3262,22 @@
         }
       },
       "description": "Sign-up settings contract properties."
+    },
+    "ProductCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Products list representation."
     },
     "ProductContract": {
       "properties": {
@@ -3046,6 +3402,22 @@
       ],
       "description": "Parameters supplied to the Update Product operation."
     },
+    "PropertyCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Property list representation."
+    },
     "PropertyContract": {
       "properties": {
         "properties": {
@@ -3138,6 +3510,27 @@
       },
       "description": "Property update Parameters."
     },
+    "QuotaCounterCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaCounterContract"
+          },
+          "description": "Quota counter values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Quota Counter list representation."
+    },
     "QuotaCounterContract": {
       "properties": {
         "counterKey": {
@@ -3198,6 +3591,22 @@
       },
       "description": "Quota counter value details."
     },
+    "RecipientEmailCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecipientEmailContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Recipient User list representation."
+    },
     "RecipientEmailContract": {
       "properties": {
         "properties": {
@@ -3241,6 +3650,22 @@
       },
       "description": "Notification Parameter contract."
     },
+    "RecipientUserCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecipientUserContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Recipient User list representation."
+    },
     "RecipientUserContract": {
       "properties": {
         "properties": {
@@ -3273,6 +3698,27 @@
         }
       },
       "description": "User registration delegation settings properties."
+    },
+    "ReportCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportRecordContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Report records list representation."
     },
     "ReportRecordContract": {
       "properties": {
@@ -3461,6 +3907,23 @@
       },
       "description": "Operation request details."
     },
+    "RequestReportCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestReportRecordContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        }
+      },
+      "description": "Paged Report records list representation."
+    },
     "RequestReportRecordContract": {
       "properties": {
         "apiId": {
@@ -3622,6 +4085,24 @@
       ],
       "description": "Parameters supplied to the Save Tenant Configuration operation."
     },
+    "SchemaCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaContract"
+          },
+          "description": "Api Schema Contract value.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "The response of the list schema operation."
+    },
     "SchemaContract": {
       "properties": {
         "properties": {
@@ -3662,6 +4143,22 @@
         }
       },
       "description": "Schema Document Properties."
+    },
+    "SubscriptionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Subscriptions list representation."
     },
     "SubscriptionContract": {
       "properties": {
@@ -3927,6 +4424,22 @@
       },
       "description": "Subscription update details."
     },
+    "TagCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Tag list representation."
+    },
     "TagContract": {
       "properties": {
         "properties": {
@@ -3984,6 +4497,22 @@
       },
       "description": "Parameters supplied to the Create TagDescription operation."
     },
+    "TagDescriptionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagDescriptionContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged TagDescription list representation."
+    },
     "TagDescriptionContract": {
       "properties": {
         "properties": {
@@ -4024,6 +4553,22 @@
         }
       },
       "description": "Parameters supplied to the Create TagDescription operation."
+    },
+    "TagResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagResourceContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Tag list representation."
     },
     "TagResourceContract": {
       "properties": {
@@ -4132,6 +4677,22 @@
         "value"
       ],
       "description": "OAuth acquire token request body parameter (www-url-form-encoded)."
+    },
+    "UserCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Users list representation."
     },
     "UserContract": {
       "properties": {
@@ -4300,6 +4861,27 @@
         }
       },
       "description": "User Entity Base Parameters set."
+    },
+    "UserIdentityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserIdentityContract"
+          },
+          "description": "User Identity values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "List of Users Identity list representation."
     },
     "UserIdentityContract": {
       "properties": {

@@ -107,7 +107,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ApiContract"
+        "x-ms-odata": "./definitions.json#/definitions/ApiContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}": {
@@ -488,7 +488,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ApiRevisionContract"
+        "x-ms-odata": "./definitions.json#/definitions/ApiRevisionContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases": {
@@ -550,7 +550,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ApiReleaseContract"
+        "x-ms-odata": "./definitions.json#/definitions/ApiReleaseContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}": {
@@ -901,7 +901,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/OperationContract"
+        "x-ms-odata": "./definitions.json#/definitions/OperationContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}": {
@@ -1226,7 +1226,7 @@
           "200": {
             "description": "Api Operations Policy Collection.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyCollection"
+              "$ref": "./definitions.json#/definitions/PolicyCollection"
             }
           },
           "default": {
@@ -1329,7 +1329,7 @@
           "200": {
             "description": "Api Operation Policy information.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1378,7 +1378,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "description": "The policy contents to apply."
           },
@@ -1396,7 +1396,7 @@
           "201": {
             "description": "Api Operation policy configuration was successfully created.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1408,7 +1408,7 @@
           "200": {
             "description": "Api Operation policy configuration of the tenant was successfully updated.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1527,7 +1527,7 @@
           "200": {
             "description": "The operation returns a collection of tags associated with the Operation entity.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagCollection"
+              "$ref": "./definitions.json#/definitions/TagCollection"
             }
           },
           "default": {
@@ -1540,7 +1540,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimtags.json#/definitions/TagContract"
+        "x-ms-odata": "./definitions.json#/definitions/TagContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/tags/{tagId}": {
@@ -1634,7 +1634,7 @@
           "200": {
             "description": "Gets the details of the tag specified by its identifier.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -1689,13 +1689,13 @@
           "201": {
             "description": "Tag was assigned to the Operation.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             }
           },
           "200": {
             "description": "Tag is already assigned to the Operation.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             }
           },
           "default": {
@@ -1802,7 +1802,7 @@
           "200": {
             "description": "The operation returns a collection of products which have the Api entity.",
             "schema": {
-              "$ref": "./apimproducts.json#/definitions/ProductCollection"
+              "$ref": "./definitions.json#/definitions/ProductCollection"
             }
           },
           "default": {
@@ -1815,7 +1815,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimproducts.json#/definitions/ProductContract"
+        "x-ms-odata": "./definitions.json#/definitions/ProductContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies": {
@@ -1851,7 +1851,7 @@
           "200": {
             "description": "Apis Policy Collection.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyCollection"
+              "$ref": "./definitions.json#/definitions/PolicyCollection"
             }
           },
           "default": {
@@ -1953,7 +1953,7 @@
           "200": {
             "description": "Api Policy information.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -2007,7 +2007,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "description": "The policy contents to apply."
           },
@@ -2025,7 +2025,7 @@
           "201": {
             "description": "Api policy configuration was successfully created.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -2037,7 +2037,7 @@
           "200": {
             "description": "Api policy configuration of the tenant was successfully updated.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -2446,7 +2446,7 @@
           "200": {
             "description": "Paged Result response of diagnostics for an API.",
             "schema": {
-              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticCollection"
+              "$ref": "./definitions.json#/definitions/DiagnosticCollection"
             }
           },
           "default": {
@@ -2459,7 +2459,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+        "x-ms-odata": "./definitions.json#/definitions/DiagnosticContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}": {
@@ -2547,7 +2547,7 @@
           "200": {
             "description": "The response body contains the specified Diagnostic entity.",
             "schema": {
-              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             },
             "headers": {
               "ETag": {
@@ -2593,7 +2593,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             },
             "description": "Create parameters."
           },
@@ -2611,7 +2611,7 @@
           "201": {
             "description": "Diagnostic was successfully created.",
             "schema": {
-              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             },
             "headers": {
               "ETag": {
@@ -2623,7 +2623,7 @@
           "200": {
             "description": "Diagnostic was successfully updated.",
             "schema": {
-              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             },
             "headers": {
               "ETag": {
@@ -2669,7 +2669,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimdiagnostics.json#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             },
             "description": "Diagnostic Update parameters."
           },
@@ -2811,7 +2811,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/IssueContract"
+        "x-ms-odata": "./definitions.json#/definitions/IssueContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}": {
@@ -3166,7 +3166,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/IssueCommentContract"
+        "x-ms-odata": "./definitions.json#/definitions/IssueCommentContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/comments/{commentId}": {
@@ -3471,7 +3471,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/IssueAttachmentContract"
+        "x-ms-odata": "./definitions.json#/definitions/IssueAttachmentContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/attachments/{attachmentId}": {
@@ -3760,7 +3760,7 @@
           "200": {
             "description": "The operation returns a collection of tagDescriptions associated with the Api entity.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagDescriptionCollection"
+              "$ref": "./definitions.json#/definitions/TagDescriptionCollection"
             }
           },
           "default": {
@@ -3773,7 +3773,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimtags.json#/definitions/TagDescriptionContract"
+        "x-ms-odata": "./definitions.json#/definitions/TagDescriptionContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tagDescriptions/{tagId}": {
@@ -3861,7 +3861,7 @@
           "200": {
             "description": "Gets the description of the tag specified by its identifier in scope if the Api.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagDescriptionContract"
+              "$ref": "./definitions.json#/definitions/TagDescriptionContract"
             },
             "headers": {
               "ETag": {
@@ -3907,7 +3907,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagDescriptionCreateParameters"
+              "$ref": "./definitions.json#/definitions/TagDescriptionCreateParameters"
             },
             "description": "Create parameters."
           },
@@ -3925,7 +3925,7 @@
           "201": {
             "description": "Tag Description was created for the Api.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagDescriptionContract"
+              "$ref": "./definitions.json#/definitions/TagDescriptionContract"
             },
             "headers": {
               "ETag": {
@@ -3937,7 +3937,7 @@
           "200": {
             "description": "Tag Description was updated for the Api.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagDescriptionContract"
+              "$ref": "./definitions.json#/definitions/TagDescriptionContract"
             },
             "headers": {
               "ETag": {
@@ -4050,7 +4050,7 @@
           "200": {
             "description": "The operation returns a collection of tags associated with the Api entity.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagCollection"
+              "$ref": "./definitions.json#/definitions/TagCollection"
             }
           },
           "default": {
@@ -4063,7 +4063,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimtags.json#/definitions/TagContract"
+        "x-ms-odata": "./definitions.json#/definitions/TagContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}": {
@@ -4151,7 +4151,7 @@
           "200": {
             "description": "Gets the details of the tag specified by its identifier.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -4203,7 +4203,7 @@
           "201": {
             "description": "Tag was assigned to the Api.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -4215,7 +4215,7 @@
           "200": {
             "description": "Tag is already assigned to the Api.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -4332,14 +4332,14 @@
           "200": {
             "description": "Lists a collection of TagResource entities.",
             "schema": {
-              "$ref": "./apimtagresources.json#/definitions/TagResourceCollection"
+              "$ref": "./definitions.json#/definitions/TagResourceCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimtagresources.json#/definitions/TagResourceContract"
+        "x-ms-odata": "./definitions.json#/definitions/TagResourceContract"
       }
     }
   },
