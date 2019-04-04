@@ -51,7 +51,7 @@ const main = async (specificationDir: string, profilesDir: string) => {
           ),
           cm.createCodeBlock(
             "yaml $(enable-multi-api)",
-            yaml.dump({ "input-file": it.toArray(set), "require": `${path.relative(file, profilesDir).replace(/\\/g, '/')}/readme.md` }, { lineWidth: 1000 })
+            yaml.dump({ "input-file": it.toArray(set), "require": `$(this-folder)/${path.relative(file, profilesDir).replace(/\\/g, '/')}/readme.md` }, { lineWidth: 1000 })
           )
         )
         const x = cm.markDownExToString({ markDown: readMeMulti })
