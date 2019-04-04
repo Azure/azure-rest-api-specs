@@ -1,0 +1,22 @@
+trigger: none
+pr:
+  branches:
+    include:
+      - network-*
+  paths:
+    include:
+    - specification/network/*
+
+pool:
+  vmImage: vs2017-win2016
+
+steps:
+  - powershell: |
+      & "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/sn.exe" -Vr *,31bf3856ad364e35
+    displayName: Bypass Strong Name validation
+  - task: NodeTool@0
+    inputs:
+      versionSpec: 10.x
+  - powershell: |
+      & "npm" install autorest -g
+    displayName: Install autorest
