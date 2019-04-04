@@ -25,5 +25,5 @@ input-file:
   - Microsoft.Media/preview/2018-06-01-preview/Encoding.json
   - Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/preview/2018-06-01-preview/streamingservice.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

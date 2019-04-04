@@ -6,5 +6,5 @@
 input-file:
   - Microsoft.ManagedIdentity/stable/2018-11-30/ManagedIdentity.json
   - Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

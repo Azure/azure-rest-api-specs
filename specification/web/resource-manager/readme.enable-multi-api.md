@@ -39,5 +39,5 @@ input-file:
   - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
   - Microsoft.Web/stable/2015-08-01/service.json
   - Microsoft.Web/preview/2015-08-01-preview/logicAppsManagementClient.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

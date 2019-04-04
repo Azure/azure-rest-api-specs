@@ -5,5 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.ManagementPartner/preview/2018-02-01/ManagementPartner.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

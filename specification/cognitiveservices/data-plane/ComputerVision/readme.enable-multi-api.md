@@ -6,5 +6,5 @@
 input-file:
   - stable/v2.0/ComputerVision.json
   - stable/v2.0/Ocr.json
-require: ../../../../../profiles/readme.md
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

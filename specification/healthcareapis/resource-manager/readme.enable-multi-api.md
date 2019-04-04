@@ -5,5 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

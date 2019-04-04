@@ -5,5 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.VisualStudio/preview/2014-04-01-preview/Csm.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

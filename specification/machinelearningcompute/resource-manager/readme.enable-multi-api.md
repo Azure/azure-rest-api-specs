@@ -6,5 +6,5 @@
 input-file:
   - Microsoft.MachineLearningCompute/preview/2017-08-01-preview/machineLearningCompute.json
   - Microsoft.MachineLearningCompute/preview/2017-06-01-preview/machineLearningCompute.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

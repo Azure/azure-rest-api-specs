@@ -6,5 +6,5 @@
 input-file:
   - Microsoft.KeyVault.Admin/preview/2017-02-01-preview/KeyVault.json
   - Microsoft.KeyVault.Admin/preview/2017-02-01-preview/Quotas.json
-require: ../../../../../profiles/readme.md
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

@@ -5,5 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - preview/v1.0/AnomalyDetector.json
-require: ../../../../../profiles/readme.md
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

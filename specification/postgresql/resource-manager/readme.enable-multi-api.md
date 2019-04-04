@@ -6,5 +6,5 @@
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
   - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

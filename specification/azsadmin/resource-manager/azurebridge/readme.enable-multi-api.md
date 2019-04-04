@@ -8,5 +8,5 @@ input-file:
   - Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
   - Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
   - Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
-require: ../../../../../profiles/readme.md
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

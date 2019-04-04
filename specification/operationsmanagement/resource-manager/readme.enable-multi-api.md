@@ -5,5 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.OperationsManagement/preview/2015-11-01-preview/OperationsManagement.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

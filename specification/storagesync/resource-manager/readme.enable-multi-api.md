@@ -9,5 +9,5 @@ input-file:
   - Microsoft.StorageSync/stable/2018-07-01/storagesync.json
   - Microsoft.StorageSync/stable/2018-04-02/storagesync.json
   - Microsoft.StorageSync/preview/2017-06-05-preview/storagesync.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

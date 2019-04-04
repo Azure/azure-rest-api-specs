@@ -10,5 +10,5 @@ input-file:
   - Microsoft.DataLakeAnalytics/stable/2016-11-01/job.json
   - Microsoft.DataLakeAnalytics/preview/2016-03-20-preview/job.json
   - Microsoft.DataLakeAnalytics/preview/2015-11-01-preview/job.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

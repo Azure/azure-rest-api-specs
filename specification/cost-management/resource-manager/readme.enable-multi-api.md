@@ -9,5 +9,5 @@ input-file:
   - Microsoft.CostManagement/stable/2018-05-31/costmanagement.json
   - Microsoft.CostManagement/preview/2018-08-01-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2018-12-01-preview/costmanagement.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

@@ -9,5 +9,5 @@ input-file:
   - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
   - Microsoft.RecoveryServices/stable/2016-06-01/recoveryservicesbackup.json
   - Microsoft.RecoveryServices/stable/2016-06-01/registeredIdentities.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

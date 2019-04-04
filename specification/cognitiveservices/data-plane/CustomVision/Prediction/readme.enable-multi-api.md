@@ -6,5 +6,5 @@
 input-file:
   - stable/v2.0/Prediction.json
   - stable/v3.0/Prediction.json
-require: ../../../../../../profiles/readme.md
+require: $(this-folder)/../../../../../../profiles/readme.md
 ```

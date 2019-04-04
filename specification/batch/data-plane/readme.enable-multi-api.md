@@ -14,5 +14,5 @@ input-file:
   - Microsoft.Batch/stable/2016-07-01.3.1/BatchService.json
   - Microsoft.Batch/stable/2016-02-01.3.0/BatchService.json
   - Microsoft.Batch/stable/2015-12-01.2.2/BatchService.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

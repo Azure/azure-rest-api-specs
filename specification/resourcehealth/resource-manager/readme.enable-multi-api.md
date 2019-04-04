@@ -6,5 +6,5 @@
 input-file:
   - Microsoft.ResourceHealth/stable/2017-07-01/resourcehealth.json
   - Microsoft.ResourceHealth/stable/2015-01-01/resourcehealth.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

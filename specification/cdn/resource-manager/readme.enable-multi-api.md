@@ -9,5 +9,5 @@ input-file:
   - Microsoft.Cdn/stable/2016-10-02/cdn.json
   - Microsoft.Cdn/stable/2016-04-02/cdn.json
   - Microsoft.Cdn/stable/2015-06-01/cdn.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

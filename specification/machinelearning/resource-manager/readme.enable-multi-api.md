@@ -8,5 +8,5 @@ input-file:
   - Microsoft.MachineLearning/preview/2016-05-01-preview/commitmentPlans.json
   - Microsoft.MachineLearning/stable/2016-04-01/workspaces.json
   - Microsoft.MachineLearning/preview/2016-05-01-preview/webservices.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

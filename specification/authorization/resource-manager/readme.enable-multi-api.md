@@ -14,5 +14,5 @@ input-file:
   - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
   - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
   - Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

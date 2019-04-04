@@ -15,5 +15,5 @@ input-file:
   - Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
   - Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
   - Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
-require: ../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

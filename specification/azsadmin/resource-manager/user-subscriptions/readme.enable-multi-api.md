@@ -6,5 +6,5 @@
 input-file:
   - Microsoft.Subscriptions/preview/2015-11-01/Subscriptions.json
   - Microsoft.Subscriptions/preview/2015-11-01/Offer.json
-require: ../../../../../profiles/readme.md
+require: $(this-folder)/../../../../../profiles/readme.md
 ```
