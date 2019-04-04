@@ -1,8 +1,37 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
+    "version": "2019-01-01",
+    "description": "A spec file containining all the definitions",
     "title": "Definitions file"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
   },
   "paths": {},
   "definitions": {
@@ -22,7 +51,7 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Tenant access information of the API Management service."
+          "description": "Determines whether direct access is enabled."
         }
       },
       "description": "Tenant access information contract of the API Management service."
@@ -31,10 +60,10 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Tenant access information of the API Management service."
+          "description": "Determines whether direct access is enabled."
         }
       },
-      "description": "Tenant access information update parameters of the API Management service."
+      "description": "Tenant access information update parameters of the API Management service"
     },
     "ApiCollection": {
       "properties": {
@@ -67,19 +96,23 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "API details."
+      "description": "Api details."
     },
     "ApiContractProperties": {
       "properties": {
+        "sourceApiId": {
+          "type": "string",
+          "description": "API identifier of the source API."
+        },
         "displayName": {
           "type": "string",
-          "description": "API name.",
+          "description": "API name. Must be 1 to 300 characters long.",
           "minLength": 1,
           "maxLength": 300
         },
         "serviceUrl": {
           "type": "string",
-          "description": "Absolute URL of the backend service implementing this API.",
+          "description": "Absolute URL of the backend service implementing this API. Cannot be more than 2000 characters long.",
           "minLength": 0,
           "maxLength": 2000
         },
@@ -105,6 +138,7 @@
           "description": "Describes on which protocols the operations in this API can be invoked."
         },
         "apiVersionSet": {
+          "description": "Version set details",
           "$ref": "#/definitions/ApiVersionSetContractDetails"
         }
       },
@@ -118,49 +152,6 @@
       ],
       "description": "Api Entity Properties"
     },
-    "ApiContractUpdateProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "API name.",
-          "minLength": 1,
-          "maxLength": 300
-        },
-        "serviceUrl": {
-          "type": "string",
-          "description": "Absolute URL of the backend service implementing this API.",
-          "minLength": 1,
-          "maxLength": 2000
-        },
-        "path": {
-          "type": "string",
-          "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.",
-          "minLength": 0,
-          "maxLength": 400
-        },
-        "protocols": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "http",
-              "https"
-            ],
-            "x-ms-enum": {
-              "name": "Protocol",
-              "modelAsString": false
-            }
-          },
-          "description": "Describes on which protocols the operations in this API can be invoked."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ApiEntityBaseContract"
-        }
-      ],
-      "description": "API update contract properties."
-    },
     "ApiCreateOrUpdateParameter": {
       "properties": {
         "properties": {
@@ -173,11 +164,11 @@
     },
     "ApiCreateOrUpdateProperties": {
       "properties": {
-        "contentValue": {
+        "value": {
           "type": "string",
           "description": "Content value when Importing an API."
         },
-        "contentFormat": {
+        "format": {
           "type": "string",
           "description": "Format of the Content in which the API is getting imported.",
           "enum": [
@@ -321,8 +312,7 @@
         },
         "isCurrent": {
           "type": "boolean",
-          "description": "Indicates if API revision is current api revision.",
-          "readOnly": true
+          "description": "Indicates if API revision is current api revision."
         },
         "isOnline": {
           "type": "boolean",
@@ -375,14 +365,14 @@
           "readOnly": true
         }
       },
-      "description": "Paged Api Revision list representation."
+      "description": "Paged ApiRelease list representation."
     },
     "ApiReleaseContract": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiReleaseContractProperties",
-          "description": "Properties of the Api Release Contract."
+          "description": "ApiRelease entity contract properties."
         }
       },
       "allOf": [
@@ -390,10 +380,9 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Api Release details."
+      "description": "ApiRelease details."
     },
     "ApiReleaseContractProperties": {
-      "description": "API Release details",
       "properties": {
         "apiId": {
           "type": "string",
@@ -415,7 +404,8 @@
           "type": "string",
           "description": "Release Notes"
         }
-      }
+      },
+      "description": "API Release details"
     },
     "ApiRevisionCollection": {
       "properties": {
@@ -565,6 +555,49 @@
       },
       "description": "API update contract details."
     },
+    "ApiContractUpdateProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "API name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "serviceUrl": {
+          "type": "string",
+          "description": "Absolute URL of the backend service implementing this API.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.",
+          "minLength": 0,
+          "maxLength": 400
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "http",
+              "https"
+            ],
+            "x-ms-enum": {
+              "name": "Protocol",
+              "modelAsString": false
+            }
+          },
+          "description": "Describes on which protocols the operations in this API can be invoked."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiEntityBaseContract"
+        }
+      ],
+      "description": "API update contract properties."
+    },
     "ApiVersionSetCollection": {
       "properties": {
         "value": {
@@ -602,6 +635,10 @@
         "id": {
           "type": "string",
           "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The display Name of the API Version Set."
         },
         "description": {
           "type": "string",
@@ -1596,14 +1633,6 @@
         "password"
       ],
       "description": "Parameters supplied to the CreateOrUpdate certificate operation."
-    },
-    "CurrentUserIdentity": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "API Management service user id."
-        }
-      }
     },
     "DeployConfigurationParameters": {
       "properties": {
@@ -3032,7 +3061,7 @@
         },
         "required": {
           "type": "boolean",
-          "description": "whether parameter is required or not."
+          "description": "Specifies whether parameter is required or not."
         },
         "values": {
           "type": "array",
@@ -3094,11 +3123,11 @@
     },
     "PolicyContractProperties": {
       "properties": {
-        "policyContent": {
+        "value": {
           "type": "string",
-          "description": "Json escaped Xml Encoded contents of the Policy."
+          "description": "Contents of the Policy as defined by the format."
         },
-        "contentFormat": {
+        "format": {
           "type": "string",
           "description": "Format of the policyContent.",
           "enum": [
@@ -3133,7 +3162,7 @@
         }
       },
       "required": [
-        "policyContent"
+        "value"
       ],
       "description": "Policy contract Properties."
     },

@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apiVersionSets": {
       "get": {
         "tags": [
-          "ApiVersionSets"
+          "ApiVersionSet"
         ],
         "operationId": "ApiVersionSet_ListByService",
         "description": "Lists a collection of API Version Sets in the specified service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n"
+            "description": "|   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -93,10 +93,10 @@
         "x-ms-odata": "./definitions.json#/definitions/ApiVersionSetContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets/{versionSetId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apiVersionSets/{versionSetId}": {
       "head": {
         "tags": [
-          "ApiVersionSets"
+          "ApiVersionSet"
         ],
         "operationId": "ApiVersionSet_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Api Version Set specified by its identifier.",
@@ -142,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "ApiVersionSets"
+          "ApiVersionSet"
         ],
         "operationId": "ApiVersionSet_Get",
         "description": "Gets the details of the Api Version Set specified by its identifier.",
@@ -191,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "ApiVersionSets"
+          "ApiVersionSet"
         ],
         "operationId": "ApiVersionSet_CreateOrUpdate",
         "description": "Creates or Updates a Api Version Set.",
@@ -264,7 +264,7 @@
       },
       "patch": {
         "tags": [
-          "ApiVersionSets"
+          "ApiVersionSet"
         ],
         "operationId": "ApiVersionSet_Update",
         "description": "Updates the details of the Api VersionSet specified by its identifier.",
