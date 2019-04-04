@@ -452,6 +452,70 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendHealthOnDemand": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_BackendHealthOnDemand",
+        "description": "Gets the backend health for given combination of backend pool and http setting of the specified application gateway in a resource group.",
+        "x-ms-examples": {
+          "Test Backend Health": {
+            "$ref": "./examples/ApplicationGatewayBackendHealthTest.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands BackendAddressPool and BackendHttpSettings referenced in backend health."
+          },
+          {
+            "name": "probeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayOnDemandProbe"
+            },
+            "description": "Request body for on-demand test probe operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayBackendHealthOnDemand"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables": {
       "get": {
         "tags": [
@@ -692,6 +756,65 @@
     }
   },
   "definitions": {
+    "ApplicationGatewayOnDemandProbe": {
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "The protocol used for the probe. Possible values are 'Http' and 'Https'.",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to send the probe to."
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path of probe. Valid path starts from '/'. Probe is sent to <Protocol>://<host>:<port><path>"
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds."
+        },
+        "pickHostNameFromBackendHttpSettings": {
+          "type": "boolean",
+          "description": "Whether the host header should be picked from the backend http settings. Default value is false."
+        },
+        "match": {
+          "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch",
+          "description": "Criterion for classifying a healthy probe response."
+        },
+        "backendPoolName": {
+          "type": "string",
+          "description": "Name of backend pool of application gateway to which probe request will be sent."
+        },
+        "backendHttpSettingName": {
+          "type": "string",
+          "description": "Name of backend http setting of application gateway to be used for test probe"
+        }
+      },
+      "description": "Details of on demand test probe request"
+    },
+    "ApplicationGatewayBackendHealthOnDemand": {
+      "properties": {
+        "backendAddressPool": {
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
+          "description": "Reference of an ApplicationGatewayBackendAddressPool resource."          
+        },
+        "backendHealthHttpSettings": {
+          "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings",
+          "description": "Application gateway BackendHealthHttp settings."          
+        }
+      },
+      "description": "Result of on demand test probe"
+    },
     "ApplicationGatewayBackendHealth": {
       "properties": {
         "backendAddressPools": {
