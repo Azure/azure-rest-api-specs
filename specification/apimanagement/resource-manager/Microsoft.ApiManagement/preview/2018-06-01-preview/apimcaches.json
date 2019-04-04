@@ -70,7 +70,7 @@
           "200": {
             "description": "Returns a collection of Cache entity.",
             "schema": {
-              "$ref": "#/definitions/CacheCollection"
+              "$ref": "./definitions.json#/definitions/CacheCollection"
             }
           },
           "default": {
@@ -83,7 +83,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/CacheContract"
+        "x-ms-odata": "./definitions.json#/definitions/CacheContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/caches/{cacheId}": {
@@ -165,7 +165,7 @@
           "200": {
             "description": "The response body contains the specified Cache entity.",
             "schema": {
-              "$ref": "#/definitions/CacheContract"
+              "$ref": "./definitions.json#/definitions/CacheContract"
             },
             "headers": {
               "ETag": {
@@ -212,7 +212,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CacheContract"
+              "$ref": "./definitions.json#/definitions/CacheContract"
             },
             "description": "Create or Update parameters."
           },
@@ -236,7 +236,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CacheContract"
+              "$ref": "./definitions.json#/definitions/CacheContract"
             }
           },
           "200": {
@@ -248,7 +248,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CacheContract"
+              "$ref": "./definitions.json#/definitions/CacheContract"
             }
           },
           "default": {
@@ -285,7 +285,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CacheUpdateParameters"
+              "$ref": "./definitions.json#/definitions/CacheUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -359,92 +359,7 @@
       }
     }
   },
-  "definitions": {
-    "CacheCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CacheContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Caches list representation."
-    },
-    "CacheContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CacheContractProperties",
-          "description": "Cache properties details."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Cache details."
-    },
-    "CacheContractProperties": {
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Cache description",
-          "maxLength": 2000
-        },
-        "connectionString": {
-          "type": "string",
-          "description": "Runtime connection string to cache",
-          "maxLength": 300
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Original uri of entity in external system cache points to",
-          "maxLength": 2000
-        }
-      },
-      "required": [
-        "connectionString"
-      ],
-      "description": "Properties of the Cache contract."
-    },
-    "CacheUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CacheUpdateProperties",
-          "description": "Cache update properties details."
-        }
-      },
-      "description": "Cache update details."
-    },
-    "CacheUpdateProperties": {
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Cache description",
-          "maxLength": 2000
-        },
-        "connectionString": {
-          "type": "string",
-          "description": "Runtime connection string to cache",
-          "maxLength": 300
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Original uri of entity in external system cache points to",
-          "maxLength": 2000
-        }
-      },
-      "description": "Parameters supplied to the Update Cache operation."
-    }
-  },
+  "definitions": {  },
   "parameters": {
   }
 }

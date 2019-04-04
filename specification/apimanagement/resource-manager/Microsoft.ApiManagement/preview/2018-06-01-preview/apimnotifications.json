@@ -70,7 +70,7 @@
           "200": {
             "description": "A Collection of the Notification for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/NotificationCollection"
+              "$ref": "./definitions.json#/definitions/NotificationCollection"
             }
           },
           "default": {
@@ -118,7 +118,7 @@
           "200": {
             "description": "The response body contains the specified Notification.",
             "schema": {
-              "$ref": "#/definitions/NotificationContract"
+              "$ref": "./definitions.json#/definitions/NotificationContract"
             }
           },
           "default": {
@@ -164,7 +164,7 @@
           "200": {
             "description": "Notification was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/NotificationContract"
+              "$ref": "./definitions.json#/definitions/NotificationContract"
             }
           },
           "default": {
@@ -209,7 +209,7 @@
           "200": {
             "description": "The response body contains the Recipient User collection for the notification.",
             "schema": {
-              "$ref": "#/definitions/RecipientUserCollection"
+              "$ref": "./definitions.json#/definitions/RecipientUserCollection"
             }
           },
           "default": {
@@ -300,13 +300,13 @@
           "201": {
             "description": "Recipient User was successfully added to the notification list.",
             "schema": {
-              "$ref": "#/definitions/RecipientUserContract"
+              "$ref": "./definitions.json#/definitions/RecipientUserContract"
             }
           },
           "200": {
             "description": "Recipient User is already part of the notification list.",
             "schema": {
-              "$ref": "#/definitions/RecipientUserContract"
+              "$ref": "./definitions.json#/definitions/RecipientUserContract"
             }
           },
           "default": {
@@ -397,7 +397,7 @@
           "200": {
             "description": "The response body contains the Recipient Email collection subscribed to the notification.",
             "schema": {
-              "$ref": "#/definitions/RecipientEmailCollection"
+              "$ref": "./definitions.json#/definitions/RecipientEmailCollection"
             }
           },
           "default": {
@@ -488,13 +488,13 @@
           "201": {
             "description": "Recipient Email was successfully added to the notification list.",
             "schema": {
-              "$ref": "#/definitions/RecipientEmailContract"
+              "$ref": "./definitions.json#/definitions/RecipientEmailContract"
             }
           },
           "200": {
             "description": "Recipient Email is already part of the notification list.",
             "schema": {
-              "$ref": "#/definitions/RecipientEmailContract"
+              "$ref": "./definitions.json#/definitions/RecipientEmailContract"
             }
           },
           "default": {
@@ -553,159 +553,6 @@
       }
     }
   },
-  "definitions": {
-    "NotificationCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NotificationContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Notification list representation."
-    },
-    "NotificationContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NotificationContractProperties",
-          "description": "Notification entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Notification details."
-    },
-    "NotificationContractProperties": {
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Title of the Notification.",
-          "minLength": 1,
-          "maxLength": 1000
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the Notification."
-        },
-        "recipients": {
-          "$ref": "#/definitions/RecipientsContractProperties",
-          "description": "Recipient Parameter values."
-        }
-      },
-      "required": [
-        "title"
-      ],
-      "description": "Notification Contract properties."
-    },
-    "RecipientsContractProperties": {
-      "properties": {
-        "emails": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of Emails subscribed for the notification."
-        },
-        "users": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of Users subscribed for the notification."
-        }
-      },
-      "description": "Notification Parameter contract."
-    },
-    "RecipientUserCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecipientUserContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Recipient User list representation."
-    },
-    "RecipientUserContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RecipientUsersContractProperties",
-          "description": "Recipient User entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Recipient User details."
-    },
-    "RecipientUsersContractProperties": {
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "API Management UserId subscribed to notification."
-        }
-      },
-      "description": "Recipient User Contract Properties."
-    },
-    "RecipientEmailCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecipientEmailContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Recipient User list representation."
-    },
-    "RecipientEmailContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RecipientEmailContractProperties",
-          "description": "Recipient Email contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Recipient Email details."
-    },
-    "RecipientEmailContractProperties": {
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "User Email subscribed to notification."
-        }
-      },
-      "description": "Recipient Email Contract Properties."
-    }
-  },
+  "definitions": { },
   "parameters": { }
 }

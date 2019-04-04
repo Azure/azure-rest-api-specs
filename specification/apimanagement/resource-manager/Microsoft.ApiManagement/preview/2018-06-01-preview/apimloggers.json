@@ -80,7 +80,7 @@
           "200": {
             "description": "Lists a collection of Logger entities.",
             "schema": {
-              "$ref": "#/definitions/LoggerCollection"
+              "$ref": "./definitions.json#/definitions/LoggerCollection"
             }
           },
           "default": {
@@ -93,7 +93,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/LoggerContract"
+        "x-ms-odata": "./definitions.json#/definitions/LoggerContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerId}": {
@@ -175,7 +175,7 @@
           "200": {
             "description": "The response body contains the specified Logger entity.",
             "schema": {
-              "$ref": "#/definitions/LoggerContract"
+              "$ref": "./definitions.json#/definitions/LoggerContract"
             },
             "headers": {
               "ETag": {
@@ -221,7 +221,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoggerContract"
+              "$ref": "./definitions.json#/definitions/LoggerContract"
             },
             "description": "Create parameters."
           },
@@ -239,7 +239,7 @@
           "201": {
             "description": "Logger was successfully created.",
             "schema": {
-              "$ref": "#/definitions/LoggerContract"
+              "$ref": "./definitions.json#/definitions/LoggerContract"
             },
             "headers": {
               "ETag": {
@@ -251,7 +251,7 @@
           "200": {
             "description": "The existing logger was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/LoggerContract"
+              "$ref": "./definitions.json#/definitions/LoggerContract"
             },
             "headers": {
               "ETag": {
@@ -294,7 +294,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoggerUpdateContract"
+              "$ref": "./definitions.json#/definitions/LoggerUpdateContract"
             },
             "description": "Update parameters."
           },
@@ -375,150 +375,6 @@
       }
     }
   },
-  "definitions": {
-    "LoggerCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LoggerContract"
-          },
-          "description": "Logger values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Logger list representation."
-    },
-    "LoggerContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LoggerContractProperties",
-          "description": "Logger entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Logger details."
-    },
-    "LoggerContractProperties": {
-      "properties": {
-        "loggerType": {
-          "type": "string",
-          "description": "Logger type.",
-          "enum": [
-            "azureEventHub",
-            "applicationInsights"
-          ],
-          "x-ms-enum": {
-            "name": "LoggerType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "azureEventHub",
-                "description": "Azure Event Hub as log destination."
-              },
-              {
-                "value": "applicationInsights",
-                "description": "Azure Application Insights as log destination."
-              }
-            ]
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "Logger description.",
-          "maxLength": 256
-        },
-        "credentials": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The name and SendRule connection string of the event hub for azureEventHub logger.\nInstrumentation key for applicationInsights logger.",
-          "example": {
-            "name": "apim",
-            "connectionString": "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
-          }
-        },
-        "isBuffered": {
-          "type": "boolean",
-          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource)."
-        }
-      },
-      "required": [
-        "loggerType",
-        "credentials"
-      ],
-      "description": "The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs."
-    },
-    "LoggerUpdateContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LoggerUpdateParameters",
-          "description": "Logger entity update contract properties."
-        }
-      },
-      "description": "Logger update contract."
-    },
-    "LoggerUpdateParameters": {
-      "properties": {
-        "loggerType": {
-          "type": "string",
-          "description": "Logger type.",
-          "enum": [
-            "azureEventHub",
-            "applicationInsights"
-          ],
-          "x-ms-enum": {
-            "name": "LoggerType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "azureEventHub",
-                "description": "Azure Event Hub as log destination."
-              },
-              {
-                "value": "applicationInsights",
-                "description": "Azure Application Insights as log destination."
-              }
-            ]
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "Logger description."
-        },
-        "credentials": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Logger credentials."
-        },
-        "isBuffered": {
-          "type": "boolean",
-          "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
-        }
-      },
-      "description": "Parameters supplied to the Update Logger operation."
-    }
-  },
+  "definitions": { },
   "parameters": { }
 }
