@@ -3143,6 +3143,95 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "x-ms-examples": {
+          "AgreementsListByBillingAccountName": {
+            "$ref": "./examples/AgreementsListByBillingAccountName.json"
+          }
+        },
+        "operationId": "Agreements_ListByBillingAccountName",
+        "description": "Lists all agreements for a billing account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the participants.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgreementListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "x-ms-examples": {
+          "AgreementByName": {
+            "$ref": "./examples/AgreementByName.json"
+          }
+        },
+        "operationId": "Agreements_Get",
+        "description": "Get the agreement by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/agreementNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the participants.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Agreement"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5141,6 +5230,95 @@
         }
       }
     },
+    "AgreementListResult": {
+      "description": "Result of listing agreements.",
+      "properties": {
+        "value": {
+          "description": "The list of agreements.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Agreement"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Agreement": {
+      "description": "An agreement resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "An agreement.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgreementProperties"
+        }
+      }
+    },
+    "AgreementProperties": {
+      "description": "The properties of the agreement.",
+      "properties": {
+        "agreementLink": {
+          "description": "The link to the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "description": "Effective date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Expiration date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "participants": {
+          "description": "Participants or signer of the agreement.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Participants"
+          }
+        },
+        "status": {
+          "description": "The agreement status",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Participants": {
+      "description": "Details about the participant or signer.",
+      "properties": {
+        "status": {
+          "description": "The signing status",
+          "type": "string",
+          "readOnly": true
+        },
+        "statusDate": {
+          "description": "The date when status got changed.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "email": {
+          "description": "The email address of the participant or signer.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Action": {
       "description": "the action the caller allowed to do",
       "type": "string",
@@ -5292,6 +5470,14 @@
       "schema": {
         "$ref": "#/definitions/AcceptTransferRequest"
       }
+    },
+    "agreementNameParameter": {
+      "name": "agreementName",
+      "in": "path",
+      "description": "Agreement Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "security": [
