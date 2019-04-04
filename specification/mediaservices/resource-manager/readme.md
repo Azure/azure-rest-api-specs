@@ -27,6 +27,8 @@ These are the global settings for the MediaServices API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-07
+opt-in-extensible-enums: true
+
 ```
 
 
@@ -117,7 +119,6 @@ csharp:
   namespace: Microsoft.Azure.Management.Media
   output-folder: $(csharp-sdks-folder)/Media/Management.Media/Generated
   clear-output-folder: true
-  opt-in-extensible-enums: true 
 ```
 
 ## Python
