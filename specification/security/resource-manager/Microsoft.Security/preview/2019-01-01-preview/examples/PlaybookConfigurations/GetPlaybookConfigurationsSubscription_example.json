@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/playbookConfigurations/myPlaybookConfigName",
+            "name": "myPlaybookConfigurationName",
+            "type": "Microsoft.Security/playbookConfigurations",
+            "properties": {
+              "description": "Alerts auto dismiss",
+              "isEnabled": true,
+              "metadata": {
+                "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
+                "createdBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72",
+                "lastUpdatedDateTimeUtc": "2019-03-28T08:43:54.5755094Z",
+                "lastUpdatedBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72"
+              },
+              "scopes": [
+                "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a",
+                "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+              ],
+              "sources": [
+                {
+                  "eventSource": "AscAlerts",
+                  "ruleSets": [
+                    {
+                      "rules": [
+                        {
+                          "propertyJPath": "AlertType",
+                          "propertyType": "System.String",
+                          "expectedValue": "customType",
+                          "conditions": "EqualsIgnoreCase"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "actions": [
+                "https://triggerUri1.com",
+                "https://triggerUri2.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
