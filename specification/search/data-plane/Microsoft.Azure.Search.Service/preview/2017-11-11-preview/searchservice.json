@@ -4738,7 +4738,13 @@
         "includeTypelessEntities": {
           "type": "boolean",
           "x-nullable": true,
-          "description": "Determines whether or not to include entities which are well known but don't conform to a type. If this configuration is not set (default), set to null or set to false, entities which don't have a type will not be surfaced."
+          "description": "Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
         }
       },
       "externalDocs": {
