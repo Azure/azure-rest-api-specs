@@ -14,4 +14,5 @@ input-file:
   - Microsoft.Storage.Admin/preview/2015-12-01/shares.json
   - Microsoft.Storage.Admin/preview/2015-12-01/storageaccounts.json
   - Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json
+require: ../../../../../profiles/readme.md
 ```

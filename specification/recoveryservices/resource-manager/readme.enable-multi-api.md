@@ -8,4 +8,5 @@ input-file:
   - Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
   - Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
+require: ../../../../profiles/readme.md
 ```

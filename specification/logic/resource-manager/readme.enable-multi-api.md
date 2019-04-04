@@ -8,4 +8,5 @@ input-file:
   - Microsoft.Logic/stable/2016-06-01/logic.json
   - Microsoft.Logic/preview/2015-08-01-preview/logic.json
   - Microsoft.Logic/preview/2015-02-01-preview/logic.json
+require: ../../../../profiles/readme.md
 ```

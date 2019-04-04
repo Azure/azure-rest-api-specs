@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+require: ../../../../profiles/readme.md
 ```

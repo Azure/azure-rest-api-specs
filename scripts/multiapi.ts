@@ -9,9 +9,9 @@ type Code = {
   readonly "input-file"?: ReadonlyArray<string>|string
 }
 
-const main = async (dir: string) => {
+const main = async (specificationDir: string, profilesDir: string) => {
   try {
-    const list = fs.recursiveReaddir(dir)
+    const list = fs.recursiveReaddir(specificationDir)
     for await (const file of list) {
       const f = path.parse(file)
       if (f.base === "readme.md") {
@@ -51,7 +51,7 @@ const main = async (dir: string) => {
           ),
           cm.createCodeBlock(
             "yaml $(enable-multi-api)",
-            yaml.dump({ "input-file": it.toArray(set) }, { lineWidth: 1000 })
+            yaml.dump({ "input-file": it.toArray(set), "require": `${path.relative(file, profilesDir).replace(/\\/g, '/')}/readme.md` }, { lineWidth: 1000 })
           )
         )
         const x = cm.markDownExToString({ markDown: readMeMulti })
@@ -63,4 +63,4 @@ const main = async (dir: string) => {
   }
 }
 
-main(path.join(process.cwd(), "specification"))
+main(path.join(process.cwd(), "specification"), path.join(process.cwd(), "profiles"))

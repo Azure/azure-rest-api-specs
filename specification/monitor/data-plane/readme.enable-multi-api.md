@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - preview/2018-09-01-preview/metricsCreate_API.json
+require: ../../../../profiles/readme.md
 ```

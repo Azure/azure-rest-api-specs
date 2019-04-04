@@ -14,4 +14,5 @@ input-file:
   - Microsoft.ContainerService/stable/2017-01-31/containerService.json
   - Microsoft.ContainerService/stable/2016-09-30/containerService.json
   - Microsoft.ContainerService/stable/2016-03-30/containerService.json
+require: ../../../../profiles/readme.md
 ```

@@ -6,4 +6,5 @@
 input-file:
   - Microsoft.VirtualMachineImages/preview/2018-02-01-preview/imagebuilder.json
   - Microsoft.VirtualMachineImages/preview/2019-02-01-preview/imagebuilder.json
+require: ../../../../profiles/readme.md
 ```

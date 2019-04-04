@@ -12,4 +12,5 @@ input-file:
   - Microsoft.ContainerInstance/preview/2017-12-01-preview/containerInstance.json
   - Microsoft.ContainerInstance/preview/2017-10-01-preview/containerInstance.json
   - Microsoft.ContainerInstance/preview/2017-08-01-preview/containerInstance.json
+require: ../../../../profiles/readme.md
 ```

@@ -6,4 +6,5 @@
 input-file:
   - Microsoft.Relay/stable/2017-04-01/relay.json
   - Microsoft.Relay/stable/2016-07-01/relay.json
+require: ../../../../profiles/readme.md
 ```

@@ -6,4 +6,5 @@
 input-file:
   - Microsoft.BotService/preview/2018-07-12/botservice.json
   - Microsoft.BotService/preview/2017-12-01/botservice.json
+require: ../../../../profiles/readme.md
 ```

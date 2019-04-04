@@ -6,4 +6,5 @@
 input-file:
   - Microsoft.CustomerInsights/stable/2017-04-26/customer-insights.json
   - Microsoft.CustomerInsights/stable/2017-01-01/customer-insights.json
+require: ../../../../profiles/readme.md
 ```

@@ -8,4 +8,5 @@ input-file:
   - Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json
   - Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
   - Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
+require: ../../../../profiles/readme.md
 ```

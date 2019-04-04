@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - stable/v1.0/CustomSearch.json
+require: ../../../../../profiles/readme.md
 ```

@@ -36,4 +36,5 @@ input-file:
   - Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
   - Microsoft.Automation/stable/2018-06-30/runbook.json
   - Microsoft.Automation/stable/2018-06-30/python2package.json
+require: ../../../../profiles/readme.md
 ```

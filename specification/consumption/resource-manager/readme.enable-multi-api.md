@@ -15,4 +15,5 @@ input-file:
   - Microsoft.Consumption/stable/2018-10-01/consumption.json
   - Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
   - Microsoft.Consumption/preview/2017-12-30-preview/consumption.json
+require: ../../../../profiles/readme.md
 ```

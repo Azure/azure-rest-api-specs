@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
+require: ../../../../profiles/readme.md
 ```

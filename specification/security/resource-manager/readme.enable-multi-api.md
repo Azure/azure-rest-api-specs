@@ -26,4 +26,5 @@ input-file:
   - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
   - Microsoft.Security/stable/2018-06-01/pricings.json
   - Microsoft.Security/stable/2019-01-01/alerts.json
+require: ../../../../profiles/readme.md
 ```

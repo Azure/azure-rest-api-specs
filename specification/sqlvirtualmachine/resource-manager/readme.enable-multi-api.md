@@ -5,4 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - Microsoft.SqlVirtualMachine/preview/2017-03-01-preview/sqlvm.json
+require: ../../../../profiles/readme.md
 ```

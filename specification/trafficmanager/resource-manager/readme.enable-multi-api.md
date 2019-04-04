@@ -11,4 +11,5 @@ input-file:
   - Microsoft.Network/stable/2017-05-01/trafficmanager.json
   - Microsoft.Network/stable/2017-03-01/trafficmanager.json
   - Microsoft.Network/stable/2015-11-01/trafficmanager.json
+require: ../../../../profiles/readme.md
 ```

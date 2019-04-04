@@ -6,4 +6,5 @@
 input-file:
   - Microsoft.DataFactory/stable/2018-06-01/datafactory.json
   - Microsoft.DataFactory/preview/2017-09-01-preview/datafactory.json
+require: ../../../../profiles/readme.md
 ```

@@ -22,4 +22,5 @@ input-file:
   - Microsoft.ApiManagement/preview/2017-03-01/apimsubscriptions.json
   - Microsoft.ApiManagement/preview/2017-03-01/apimtenant.json
   - Microsoft.ApiManagement/preview/2017-03-01/apimusers.json
+require: ../../../../profiles/readme.md
 ```

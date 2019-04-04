@@ -9,4 +9,5 @@ input-file:
   - Microsoft.Cache/stable/2017-02-01/redis.json
   - Microsoft.Cache/stable/2016-04-01/redis.json
   - Microsoft.Cache/stable/2015-08-01/redis.json
+require: ../../../../profiles/readme.md
 ```

@@ -8,4 +8,5 @@ input-file:
   - Microsoft.Update.Admin/preview/2016-05-01/Updates.json
   - Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json
   - Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json
+require: ../../../../../profiles/readme.md
 ```

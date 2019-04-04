@@ -106,4 +106,5 @@ input-file:
   - Microsoft.ApiManagement/stable/2016-10-10/apimusers.json
   - Microsoft.ApiManagement/stable/2016-07-07/apimanagement.json
   - Microsoft.ApiManagement/stable/2016-07-07/apimdeployment.json
+require: ../../../../profiles/readme.md
 ```
