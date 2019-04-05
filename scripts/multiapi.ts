@@ -28,10 +28,10 @@ const main = async (specificationDir: string, profilesDir: string) => {
           ) {
             const y = (yaml.load(c.literal) as Code)["input-file"]
             if (typeof y === "string") {
-              set.add(y)
+              set.add(`$(this-folder)/${y}`)
             } else if (it.isArray(y)) {
               for (const i of y) {
-                set.add(i)
+                set.add(`$(this-folder)/${i}`)
               }
             }
           }
@@ -51,7 +51,7 @@ const main = async (specificationDir: string, profilesDir: string) => {
           ),
           cm.createCodeBlock(
             "yaml $(enable-multi-api)",
-            yaml.dump({ "input-file": it.toArray(set), "require": `${path.relative(file, profilesDir).replace(/\\/g, '/')}/readme.md` }, { lineWidth: 1000 })
+            yaml.dump({ "input-file": it.toArray(set), "require": `$(this-folder)/${path.relative(file, profilesDir).replace(/\\/g, '/')}/readme.md` }, { lineWidth: 1000 })
           )
         )
         const x = cm.markDownExToString({ markDown: readMeMulti })

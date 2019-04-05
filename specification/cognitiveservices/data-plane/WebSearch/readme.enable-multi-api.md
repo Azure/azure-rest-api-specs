@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v1.0/WebSearch.json
-require: ../../../../../profiles/readme.md
+  - $(this-folder)/stable/v1.0/WebSearch.json
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

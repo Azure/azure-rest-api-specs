@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v1.0/ContentModerator.json
-require: ../../../../../profiles/readme.md
+  - $(this-folder)/stable/v1.0/ContentModerator.json
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

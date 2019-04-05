@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Intune/preview/2015-01-14-preview/intune.json
-  - Microsoft.Intune/preview/2015-01-14-privatepreview/intune.json
-require: ../../../../profiles/readme.md
+  - $(this-folder)/Microsoft.Intune/preview/2015-01-14-preview/intune.json
+  - $(this-folder)/Microsoft.Intune/preview/2015-01-14-privatepreview/intune.json
+require: $(this-folder)/../../../../profiles/readme.md
 ```

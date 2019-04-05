@@ -148,7 +148,7 @@ export function getLatestProfile(allResources: Array<Resource>): Profile {
 
   const latestResources: {[uid: string] : Resource } = {};
   for (const resource of allResources) {
-    const resourceUid = `${resource.provider}${resource.name}`;
+    const resourceUid = `${resource.provider.toLowerCase()}${resource.name.toLowerCase()}`;
     if (latestResources[resourceUid] === undefined) {
       latestResources[resourceUid] = { apiVersion: resource.apiVersion, name: resource.name, provider: resource.provider.toLowerCase(), path: resource.path  };
     }

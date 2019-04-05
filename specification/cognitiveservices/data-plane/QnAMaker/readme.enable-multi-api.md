@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v4.0/QnAMaker.json
-require: ../../../../../profiles/readme.md
+  - $(this-folder)/stable/v4.0/QnAMaker.json
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

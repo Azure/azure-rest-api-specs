@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
-require: ../../../../profiles/readme.md
+  - $(this-folder)/Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
+require: $(this-folder)/../../../../profiles/readme.md
 ```

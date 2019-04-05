@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
-require: ../../../../profiles/readme.md
+  - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
+require: $(this-folder)/../../../../profiles/readme.md
 ```

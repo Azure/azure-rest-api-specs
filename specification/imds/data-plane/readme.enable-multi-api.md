@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
-require: ../../../../profiles/readme.md
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
+require: $(this-folder)/../../../../profiles/readme.md
 ```

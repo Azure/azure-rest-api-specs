@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v3.0/TranslatorText.json
-require: ../../../../../profiles/readme.md
+  - $(this-folder)/stable/v3.0/TranslatorText.json
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

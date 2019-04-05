@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.GraphRbac/stable/1.6/graphrbac.json
-require: ../../../../profiles/readme.md
+  - $(this-folder)/Microsoft.GraphRbac/stable/1.6/graphrbac.json
+require: $(this-folder)/../../../../profiles/readme.md
 ```
