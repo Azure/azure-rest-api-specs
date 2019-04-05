@@ -65,15 +65,16 @@
           },
           "credentials": {
             "customRegistries": {
-              "jeburkedf.azure-test.io": {
-                "password": {
-                  "type": "Opaque",
-                  "value": "password"
-                },
+              "myregistry.azure-test.io": {
                 "userName": {
                   "type": "Opaque",
-                  "value": "jeanine"
-                }
+                  "value": "username"
+                },
+                "password": {
+                  "type": "Vaultsecret",
+                  "value":  "https://myacbvault.vault.azure.net/secrets/username"
+                },
+                "identity": "[system]"
               }
             },
             "sourceRegistry": null
