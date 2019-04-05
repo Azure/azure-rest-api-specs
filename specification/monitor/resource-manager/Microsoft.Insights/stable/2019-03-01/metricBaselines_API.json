@@ -49,6 +49,9 @@
               "$ref": "./examples/metricBaselines.json"
             }
           },
+          "x-ms-pageable": {
+              "nextLinkName": null
+          },
           "parameters": [
             {
               "$ref": "#/parameters/ResourceUriParameter"
@@ -125,10 +128,6 @@
                   "$ref": "#/definitions/SingleMetricBaseline"
               },
               "description": "The list of metric baselines."
-            },
-            "nextLink": {
-              "type": "string",
-              "description": "Provides the link to retrieve the next set of elements."
             }
           },
         "description": "A list of metric baselines."
@@ -144,15 +143,13 @@
             "description": "The resource type of the metric baseline resource."
           },  
           "name": {
-            "$ref": "#/definitions/LocalizableString",
-            "description": "The name and the display name of the metric, i.e. it is localizable string."
+            "type": "string",
+            "description": "The name of the metric for which the baselines were retrieved."
           },     
           "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/MetricBaselinesProperties",
-              "description": "The metric baseline properties of the metric."
-            }
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/MetricBaselinesProperties",
+            "description": "The metric baseline properties of the metric."
           }
         },
         "required": [ "id", "type", "name", "properties" ],
@@ -182,7 +179,7 @@
             "description": "The baseline for each time series that was queried."
           }
         },
-        "required": [ "timespan", "interval", "value" ],
+        "required": [ "timespan", "interval", "baselines" ],
         "description": "The response to a metric baselines query."
       },      
       "TimeSeriesBaseline": {
@@ -210,7 +207,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Baseline"
+              "$ref": "#/definitions/SingleBaseline"
             },
             "description": "The baseline values for each sensitivity."
           },
@@ -240,7 +237,7 @@
         "required": [ "name", "value" ],
         "description": "The metric dimension name and value."
       },
-      "Baseline": {
+      "SingleBaseline": {
         "type": "object",
         "properties": {
           "sensitivity": {
@@ -291,20 +288,6 @@
         },
         "required": [ "name", "value" ],
         "description": "Represents a baseline metadata value."
-      },
-      "LocalizableString": {
-        "required": [ "value" ],
-        "properties": {
-          "value": {
-            "type": "string",
-            "description": "The invariant value."
-          },
-          "localizedValue": {
-            "type": "string",
-            "description": "The locale specific value."
-          }
-        },
-        "description": "The localizable string class."
       }
     },
     "parameters": {
