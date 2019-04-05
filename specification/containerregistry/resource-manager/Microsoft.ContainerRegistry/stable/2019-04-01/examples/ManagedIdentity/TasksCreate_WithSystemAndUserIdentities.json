@@ -68,7 +68,6 @@
           "/subscriptions/f9d7ebed-adbd-4cb4-b973-aaf82c136138/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {}
         }
       },
-      "credentials": null,
       "tags": {
         "testkey": "value"
       }
@@ -129,6 +128,17 @@
         "name": "myTask",
         "type": "Microsoft.ContainerRegistry/registries/tasks",
         "location": "eastus",
+        "identity": {
+          "principalId": "fc99dc67-1ad9-45c8-9ebc-e438081c8e30",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/f9d7ebed-adbd-4cb4-b973-aaf82c136138/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {
+              "clientId": "e35621a5-f615-4a20-940e-de8a84b15abc",
+              "principalId": "e45e3m7c-176e-416a-b466-0c5ec8298f8a"
+            }
+          }
+        },
         "tags": {
           "testkey": "value"
         }
