@@ -118,6 +118,47 @@
         }
       },
       "MetricBaselinesResponse": {
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                  "$ref": "#/definitions/SingleMetricBaseline"
+              },
+              "description": "The list of metric baselines."
+            },
+            "nextLink": {
+              "type": "string",
+              "description": "Provides the link to retrieve the next set of elements."
+            }
+          },
+        "description": "A list of metric baselines."
+      },
+      "SingleMetricBaseline": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The metric baseline Id."
+          },
+          "type": {
+            "type": "string",
+            "description": "The resource type of the metric baseline resource."
+          },  
+          "name": {
+            "$ref": "#/definitions/LocalizableString",
+            "description": "The name and the display name of the metric, i.e. it is localizable string."
+          },     
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/MetricBaselinesProperties",
+              "description": "The metric baseline properties of the metric."
+            }
+          }
+        },
+        "required": [ "id", "type", "name", "properties" ],
+        "description": "The baseline results of a single metric."
+      },
+      "MetricBaselinesProperties": {
         "type": "object",
         "properties": {
           "timespan": {
@@ -133,31 +174,6 @@
             "type": "string",
             "description": "The namespace of the metrics been queried."
           },
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/SingleMetricBaseline"
-            },
-            "description": "The list of baseline results for each metric."
-          }
-        },
-        "required": [ "timespan", "interval", "value" ],
-        "description": "The response to a metric baselines query."
-      },
-      "SingleMetricBaseline": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The metric baseline Id."
-          },
-          "type": {
-            "type": "string",
-            "description": "The resource type of the metric baseline resource."
-          },  
-          "metricName": {
-            "type": "string",
-            "description": "The name of the metric."
-          },        
           "baselines": {
             "type": "array",
             "items": {
@@ -166,9 +182,9 @@
             "description": "The baseline for each time series that was queried."
           }
         },
-        "required": [ "id", "type", "metricName", "baselines" ],
-        "description": "The baseline results of a single metric."
-      },
+        "required": [ "timespan", "interval", "value" ],
+        "description": "The response to a metric baselines query."
+      },      
       "TimeSeriesBaseline": {
         "properties": {
           "aggregation": {
@@ -236,7 +252,7 @@
             ],
             "x-ms-enum": {
               "name": "Sensitivity",
-              "modelAsString": false
+              "modelAsString": true
             },
             "description": "the sensitivity of the baseline."
           },
@@ -275,6 +291,20 @@
         },
         "required": [ "name", "value" ],
         "description": "Represents a baseline metadata value."
+      },
+      "LocalizableString": {
+        "required": [ "value" ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The invariant value."
+          },
+          "localizedValue": {
+            "type": "string",
+            "description": "The locale specific value."
+          }
+        },
+        "description": "The localizable string class."
       }
     },
     "parameters": {
