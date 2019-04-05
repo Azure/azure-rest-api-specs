@@ -3,7 +3,7 @@
   "info": {
     "title": "ContainerServiceClient",
     "description": "The Container Service Client.",
-    "version": "2018-09-30-preview"
+    "version": "2019-04-30"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -444,11 +444,12 @@
         },
         "publicSubdomain": {
           "type": "string",
+          "readOnly": true,
           "description": "DNS subdomain for OpenShift router."
         },
         "fqdn": {
-          "readOnly": true,
           "type": "string",
+          "readOnly": true,
           "description": "Auto-allocated FQDN for the OpenShift router."
         }
       },
@@ -464,6 +465,10 @@
         "peerVnetId": {
           "type": "string",
           "description": "CIDR of the Vnet to peer."
+        },
+        "vnetId": {
+          "type": "string",
+          "description": "ID of the Vnet created for OSA cluster."
         }
       },
       "description": "Represents the OpenShift networking configuration"
@@ -640,11 +645,13 @@
         },
         "publicHostname": {
           "type": "string",
-          "description": "Optional user-specified FQDN for OpenShift API server."
+          "readOnly": true,
+          "description": "Service generated FQDN for OpenShift API server."
         },
         "fqdn": {
           "type": "string",
-          "description": "User-specified FQDN for OpenShift API server loadbalancer internal hostname."
+          "readOnly": true,
+          "description": "Service generated FQDN for OpenShift API server loadbalancer internal hostname."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
