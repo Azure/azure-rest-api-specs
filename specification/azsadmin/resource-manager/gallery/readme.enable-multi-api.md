@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Gallery.Admin/preview/2015-04-01/Gallery.json
-  - Microsoft.Gallery.Admin/preview/2015-04-01/GalleryItem.json
+  - $(this-folder)/Microsoft.Gallery.Admin/preview/2015-04-01/Gallery.json
+  - $(this-folder)/Microsoft.Gallery.Admin/preview/2015-04-01/GalleryItem.json
 require: $(this-folder)/../../../../../profiles/readme.md
 ```

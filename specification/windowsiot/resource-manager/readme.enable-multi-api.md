@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.WindowsIoT/preview/2018-02-16-preview/WindowsIotServices.json
+  - $(this-folder)/Microsoft.WindowsIoT/preview/2018-02-16-preview/WindowsIotServices.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

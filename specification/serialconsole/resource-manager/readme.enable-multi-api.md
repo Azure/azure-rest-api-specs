@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
+  - $(this-folder)/Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

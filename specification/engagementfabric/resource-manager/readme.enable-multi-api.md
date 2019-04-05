@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.EngagementFabric/preview/2018-09-01/EngagementFabric.json
+  - $(this-folder)/Microsoft.EngagementFabric/preview/2018-09-01/EngagementFabric.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

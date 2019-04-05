@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.HDInsight/preview/2018-11-01-preview/job.json
+  - $(this-folder)/Microsoft.HDInsight/preview/2018-11-01-preview/job.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

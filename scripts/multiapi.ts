@@ -28,10 +28,10 @@ const main = async (specificationDir: string, profilesDir: string) => {
           ) {
             const y = (yaml.load(c.literal) as Code)["input-file"]
             if (typeof y === "string") {
-              set.add(y)
+              set.add(`$(this-folder)/${y}`)
             } else if (it.isArray(y)) {
               for (const i of y) {
-                set.add(i)
+                set.add(`$(this-folder)/${i}`)
               }
             }
           }

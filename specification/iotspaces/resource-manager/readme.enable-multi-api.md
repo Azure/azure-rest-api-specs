@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.IoTSpaces/preview/2017-10-01-preview/iotspaces.json
+  - $(this-folder)/Microsoft.IoTSpaces/preview/2017-10-01-preview/iotspaces.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

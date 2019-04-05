@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Commerce.Admin/preview/2015-06-01-preview/Commerce.json
+  - $(this-folder)/Microsoft.Commerce.Admin/preview/2015-06-01-preview/Commerce.json
 require: $(this-folder)/../../../../../profiles/readme.md
 ```

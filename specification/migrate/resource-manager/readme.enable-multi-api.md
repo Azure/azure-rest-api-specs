@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Migrate/stable/2018-02-02/migrate.json
+  - $(this-folder)/Microsoft.Migrate/stable/2018-02-02/migrate.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

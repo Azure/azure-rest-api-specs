@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.MachineLearningExperimentation/preview/2017-05-01-preview/machineLearningExperimentation.json
+  - $(this-folder)/Microsoft.MachineLearningExperimentation/preview/2017-05-01-preview/machineLearningExperimentation.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

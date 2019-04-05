@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.OperationsManagement/preview/2015-11-01-preview/OperationsManagement.json
+  - $(this-folder)/Microsoft.OperationsManagement/preview/2015-11-01-preview/OperationsManagement.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

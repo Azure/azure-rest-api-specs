@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.DataCatalog/stable/2016-03-30/datacatalog.json
+  - $(this-folder)/Microsoft.DataCatalog/stable/2016-03-30/datacatalog.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

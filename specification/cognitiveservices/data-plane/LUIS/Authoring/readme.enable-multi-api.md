@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v2.0/LUIS-Authoring.json
+  - $(this-folder)/stable/v2.0/LUIS-Authoring.json
 require: $(this-folder)/../../../../../../profiles/readme.md
 ```

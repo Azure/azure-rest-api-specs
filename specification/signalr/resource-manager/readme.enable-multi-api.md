@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.SignalRService/stable/2018-10-01/signalr.json
-  - Microsoft.SignalRService/preview/2018-03-01-preview/signalr.json
+  - $(this-folder)/Microsoft.SignalRService/stable/2018-10-01/signalr.json
+  - $(this-folder)/Microsoft.SignalRService/preview/2018-03-01-preview/signalr.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

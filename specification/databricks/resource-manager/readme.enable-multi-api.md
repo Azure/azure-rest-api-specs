@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Databricks/stable/2018-04-01/databricks.json
+  - $(this-folder)/Microsoft.Databricks/stable/2018-04-01/databricks.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

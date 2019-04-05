@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

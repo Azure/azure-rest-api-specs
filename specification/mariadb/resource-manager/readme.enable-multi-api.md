@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
-  - Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
+  - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

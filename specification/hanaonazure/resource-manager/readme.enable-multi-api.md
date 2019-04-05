@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json
+  - $(this-folder)/Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v2.0/Prediction.json
-  - stable/v3.0/Prediction.json
+  - $(this-folder)/stable/v2.0/Prediction.json
+  - $(this-folder)/stable/v3.0/Prediction.json
 require: $(this-folder)/../../../../../../profiles/readme.md
 ```

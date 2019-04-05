@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Peering/preview/2019-03-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-03-01-preview/peering.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

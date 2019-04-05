@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v2.0/LUIS-Runtime.json
+  - $(this-folder)/stable/v2.0/LUIS-Runtime.json
 require: $(this-folder)/../../../../../../profiles/readme.md
 ```

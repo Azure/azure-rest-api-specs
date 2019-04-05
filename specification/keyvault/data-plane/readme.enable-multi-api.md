@@ -4,8 +4,8 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.KeyVault/stable/7.0/keyvault.json
-  - Microsoft.KeyVault/stable/2016-10-01/keyvault.json
-  - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.0/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/stable/2016-10-01/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

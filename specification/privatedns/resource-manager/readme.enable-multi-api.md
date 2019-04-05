@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Network/stable/2018-09-01/privatedns.json
+  - $(this-folder)/Microsoft.Network/stable/2018-09-01/privatedns.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

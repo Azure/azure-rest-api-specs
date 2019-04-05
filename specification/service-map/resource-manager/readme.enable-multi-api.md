@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2015-11-01-preview/arm-service-map.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

@@ -4,9 +4,9 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v2.0/Training.json
-  - stable/v2.1/Training.json
-  - stable/v2.2/Training.json
-  - stable/v3.0/Training.json
+  - $(this-folder)/stable/v2.0/Training.json
+  - $(this-folder)/stable/v2.1/Training.json
+  - $(this-folder)/stable/v2.2/Training.json
+  - $(this-folder)/stable/v3.0/Training.json
 require: $(this-folder)/../../../../../../profiles/readme.md
 ```

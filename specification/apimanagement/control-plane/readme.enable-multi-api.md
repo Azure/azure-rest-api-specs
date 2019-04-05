@@ -4,23 +4,23 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.ApiManagement/preview/2017-03-01/apimanagement.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimapis.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimauthorizationservers.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimbackends.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimcertificates.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimemailtemplate.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimgroups.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimidentityprovider.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimloggers.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimopenidconnectproviders.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimportalsettings.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimproducts.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimproperties.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimquotas.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimreports.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimsubscriptions.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimtenant.json
-  - Microsoft.ApiManagement/preview/2017-03-01/apimusers.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimanagement.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimapis.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimauthorizationservers.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimbackends.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimcertificates.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimemailtemplate.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimgroups.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimidentityprovider.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimloggers.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimopenidconnectproviders.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimportalsettings.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimproducts.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimproperties.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimquotas.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimreports.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimsubscriptions.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimtenant.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimusers.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

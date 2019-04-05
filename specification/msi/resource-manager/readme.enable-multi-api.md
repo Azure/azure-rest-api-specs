@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.ManagedIdentity/stable/2018-11-30/ManagedIdentity.json
-  - Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
+  - $(this-folder)/Microsoft.ManagedIdentity/stable/2018-11-30/ManagedIdentity.json
+  - $(this-folder)/Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

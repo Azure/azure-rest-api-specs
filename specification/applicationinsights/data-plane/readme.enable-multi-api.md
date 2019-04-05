@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Insights/preview/v1/AppInsights.json
-  - Microsoft.Insights/preview/2018-04-20/swagger.json
+  - $(this-folder)/Microsoft.Insights/preview/v1/AppInsights.json
+  - $(this-folder)/Microsoft.Insights/preview/2018-04-20/swagger.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

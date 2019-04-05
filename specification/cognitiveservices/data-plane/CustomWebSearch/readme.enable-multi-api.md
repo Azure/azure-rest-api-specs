@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - stable/v1.0/CustomSearch.json
+  - $(this-folder)/stable/v1.0/CustomSearch.json
 require: $(this-folder)/../../../../../profiles/readme.md
 ```

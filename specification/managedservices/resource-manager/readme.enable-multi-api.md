@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.ManagedServices/preview/2018-06-01-preview/managedservices.json
+  - $(this-folder)/Microsoft.ManagedServices/preview/2018-06-01-preview/managedservices.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

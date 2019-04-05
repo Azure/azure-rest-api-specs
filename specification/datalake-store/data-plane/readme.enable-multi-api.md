@@ -4,7 +4,7 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.DataLakeStore/stable/2016-11-01/filesystem.json
-  - Microsoft.DataLakeStore/preview/2015-10-01-preview/filesystem.json
+  - $(this-folder)/Microsoft.DataLakeStore/stable/2016-11-01/filesystem.json
+  - $(this-folder)/Microsoft.DataLakeStore/preview/2015-10-01-preview/filesystem.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

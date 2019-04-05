@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
+  - $(this-folder)/Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.ADHybridHealthService\stable\2014-01-01\ADHybridHealthService.json
+  - $(this-folder)/Microsoft.ADHybridHealthService\stable\2014-01-01\ADHybridHealthService.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

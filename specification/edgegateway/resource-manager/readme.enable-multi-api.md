@@ -4,6 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.DataBoxEdge/stable/2019-03-01/edgegateway.json
+  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/edgegateway.json
 require: $(this-folder)/../../../../profiles/readme.md
 ```

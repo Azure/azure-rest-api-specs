@@ -4,9 +4,9 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - Microsoft.Update.Admin/preview/2016-05-01/Update.json
-  - Microsoft.Update.Admin/preview/2016-05-01/Updates.json
-  - Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json
-  - Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json
+  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Update.json
+  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Updates.json
+  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json
+  - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json
 require: $(this-folder)/../../../../../profiles/readme.md
 ```
