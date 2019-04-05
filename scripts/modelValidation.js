@@ -26,6 +26,7 @@ async function main() {
       // run OAV as a separate process to avoid memory issues.
       const r = exec(`node node_modules/oav/dist/cli.js validate-example ${swagger} --pretty`)
       if (result === 0) {
+        console.error("errors!")
         result = r
       }
     } catch (e) {
@@ -34,7 +35,7 @@ async function main() {
       result = 1
     }
   }
-  return result
+  process.exitCode = result
 }
 
 main()
