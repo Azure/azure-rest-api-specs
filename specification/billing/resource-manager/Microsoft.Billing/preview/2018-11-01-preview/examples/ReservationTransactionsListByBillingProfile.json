@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "1234",
-    "billingProfileId": "42425",
+    "billingAccountName": "1234",
+    "billingProfileName": "42425",
     "startDate": "2018-04-01",
     "endDate": "2018-05-30",
     "$filter": "properties/kind eq 'Reservation'"
@@ -16,7 +16,7 @@
             "name": "transactionSummaryId1",
             "type": "Microsoft.Billing/transactions",
             "properties": {
-              "kind": "all",
+              "kind": "reservation",
               "date": "2018-04-23T00:00:00Z",
               "invoice": "2344233",
               "orderName": "Contoso Reserved",
@@ -30,7 +30,7 @@
               "quantity": 4,
               "invoiceSectionId": "123456",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "42425",
               "billingProfileName": "Contoso operations billing",
               "subscriptionId": "789456",
               "subscriptionName": "Contoso operations billing"
@@ -41,7 +41,7 @@
             "name": "transactionSummaryId2",
             "type": "Microsoft.Billing/transactions",
             "properties": {
-              "kind": "all",
+              "kind": "reservation",
               "date": "2018-05-05T00:00:00Z",
               "invoice": "Pending",
               "orderName": "MSFT Reserved",
@@ -55,7 +55,7 @@
               "quantity": 5,
               "invoiceSectionId": "123456",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "42425",
               "billingProfileName": "Contoso operations billing",
               "subscriptionId": "789456",
               "subscriptionName": "Contoso operations billing"

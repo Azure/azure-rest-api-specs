@@ -82,7 +82,7 @@
           "200": {
             "description": "Returns an array of Policy Snippets.",
             "schema": {
-              "$ref": "#/definitions/PolicySnippetsCollection"
+              "$ref": "./definitions.json#/definitions/PolicySnippetsCollection"
             }
           },
           "default": {
@@ -95,44 +95,6 @@
       }
     }
   },
-  "definitions": {
-    "PolicySnippetsCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PolicySnippetContract"
-          },
-          "description": "Policy snippet value."
-        }
-      },
-      "description": "The response of the list policy snippets operation."
-    },
-    "PolicySnippetContract": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Snippet name.",
-          "readOnly": true
-        },
-        "content": {
-          "type": "string",
-          "description": "Snippet content.",
-          "readOnly": true
-        },
-        "toolTip": {
-          "type": "string",
-          "description": "Snippet toolTip.",
-          "readOnly": true
-        },
-        "scope": {
-          "type": "integer",
-          "description": "Binary OR value of the Snippet scope.",
-          "readOnly": true
-        }
-      },
-      "description": "Policy snippet."
-    }
-  },
+  "definitions": { },
   "parameters": {}
 }

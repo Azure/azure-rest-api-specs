@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountName": "1234",
+    "invoiceSectionName": "42425",
+    "startDate": "2018-04-01",
+    "endDate": "2018-05-30"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/InvoiceSection/42425/transactions/transactionSummaryId1",
+            "name": "transactionSummaryId1",
+            "type": "Microsoft.Billing/transactions",
+            "properties": {
+              "kind": "all",
+              "date": "2018-05-01T00:00:00Z",
+              "invoice": "2344233",
+              "productTypeId": "A12345",
+              "productType": "Reserved VM Instance",
+              "productDescription": "Standard D1, US West 3",
+              "transactionType": "Purchase",
+              "transactionAmount": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "invoiceSectionId": "42425",
+              "invoiceSectionName": "Contoso operations invoiceSection",
+              "billingProfileId": "789456",
+              "billingProfileName": "Contoso operations billing"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/InvoiceSection/42425/transactions/transactionSummaryId2",
+            "name": "transactionSummaryId2",
+            "type": "Microsoft.Billing/transactions",
+            "properties": {
+              "kind": "all",
+              "date": "2018-04-01T00:00:00Z",
+              "invoice": "pending",
+              "productTypeId": "A12345",
+              "productType": "VM Instance",
+              "productDescription": "Standard Support",
+              "transactionType": "Cancel",
+              "transactionAmount": {
+                "currency": "USD",
+                "value": 50.00
+              },
+              "invoiceSectionId": "42425",
+              "invoiceSectionName": "Contoso operations invoiceSection",
+              "billingProfileId": "789456",
+              "billingProfileName": "Contoso operations billing"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
