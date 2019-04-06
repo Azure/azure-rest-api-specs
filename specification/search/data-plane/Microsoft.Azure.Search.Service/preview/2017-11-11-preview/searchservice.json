@@ -4385,7 +4385,10 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/EncryptionKey",
-          "description": "Encryption key used to encrypt the index."
+          "description": "The configuration for encryption with customer managed keys. On updates, the encryptionKey will stay unchanged if not specified. Encryption with customer managed keys is only available on paid services created after 01/01/2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          }
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
@@ -5168,7 +5171,10 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/EncryptionKey",
-          "description": "Encryption key used to encrypt the synonym map."
+          "description": "The configuration for encryption with customer managed keys. On updates, the encryptionKey will stay unchanged if not specified. Encryption with customer managed keys is only available on paid services created after 01/01/2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          }
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
@@ -5201,19 +5207,19 @@
       "properties": {
         "keyVaultKeyName": {
           "type": "string",
-          "description": "The name of the key vault key."
+          "description": "The name of the KeyVault key."
         },
         "keyVaultKeyVersion": {
           "type": "string",
-          "description": "The version of the key vault key."
+          "description": "The version of the KeyVault key."
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "The URI of the key vault."
+          "description": "The URI of the KeyVault."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
-          "description": "The credentials to use to authenticate to the provided key vault. Can be left null if MSI (Managed Service Identity) is to be used instead."
+          "description": "The credentials to use to authenticate to the provided KeyVault. Can be left unspecified if MSI (Managed Service Identity) is to be used instead."
         }
       },
       "required": [
@@ -5221,7 +5227,7 @@
         "keyVaultKeyVersion",
         "keyVaultUri"
       ],
-      "description": "Represents an encryption key in Azure Search."
+      "description": "The configuration to use encryption with customer managed keys."
     },
     "AzureActiveDirectoryApplicationCredentials": {
       "properties": {
@@ -5233,7 +5239,8 @@
           "type": "string",
           "description": "The application secret."
         }
-      }
+      },
+      "description" : "Credentials to be used to authenticate as an Azure Active Directory Application."
     },
     "ServiceStatistics": {
       "properties": {
