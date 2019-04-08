@@ -69,7 +69,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Gets all alert rules.",
+                "description": "Gets all scheduled alert rules.",
                 "operationId": "AlertRules_List",
                 "parameters": [
                     {
@@ -92,7 +92,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AlertRulesList"
+                            "$ref": "#/definitions/ScheduledAlertRulesList"
                         }
                     },
                     "default": {
@@ -117,7 +117,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Gets the alert rule.",
+                "description": "Gets the scheduled alert rule.",
                 "operationId": "AlertRules_Get",
                 "parameters": [
                     {
@@ -143,7 +143,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AlertRule"
+                            "$ref": "#/definitions/ScheduledAlertRule"
                         }
                     },
                     "default": {
@@ -163,7 +163,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Creates or updates the alert rule.",
+                "description": "Creates or updates the scheduled alert rule.",
                 "operationId": "AlertRules_CreateOrUpdate",
                 "parameters": [
                     {
@@ -185,20 +185,20 @@
                         "$ref": "#/parameters/RuleId"
                     },
                     {
-                        "$ref": "#/parameters/AlertRule"
+                        "$ref": "#/parameters/ScheduledAlertRule"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AlertRule"
+                            "$ref": "#/definitions/ScheduledAlertRule"
                         }
                     },
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/AlertRule"
+                            "$ref": "#/definitions/ScheduledAlertRule"
                         }
                     },
                     "default": {
@@ -1580,7 +1580,7 @@
                 }
             }
         },
-        "AlertRuleKind": {
+		"AlertRuleKind": {
             "type": "object",
             "description": "Describes an Azure resource with kind.",
             "properties": {
@@ -1602,7 +1602,27 @@
                 }
             }
         },
-        "ScheduledAlertRule": {
+        "ScheduledAlertRulesList": {
+            "description": "List all the schdeuled alert rules.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of scheduled alert rules.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of scheduled alert rules.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ScheduledAlertRule"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+		"ScheduledAlertRule": {
             "x-ms-discriminator-value": "Scheduled",
             "type": "object",
             "description": "Represents scheduled alert rule.",
@@ -1813,7 +1833,7 @@
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "description": "Case properties",
+					"description": "Case properties",
                     "$ref": "#/definitions/CaseProperties"
                 }
             }
@@ -1822,47 +1842,47 @@
             "type": "object",
             "description": "Describes case properties",
             "properties": {
-                "lastUpdatedTimeUtc": {
+                "LastUpdatedTimeUtc": {
                     "type": "string",
                     "format": "date-time",
                     "description": "The last time the case was updated"
                 },
-                "createdTimeUtc": {
+                "CreatedTimeUtc": {
                     "type": "string",
                     "format": "date-time",
                     "description": "The time the case was created"
                 },
-                "endTimeUtc": {
+                "EndTimeUtc": {
                     "type": "string",
                     "format": "date-time",
                     "description": "The end time of the case"
                 },
-                "startTimeUtc": {
+                "StartTimeUtc": {
                     "type": "string",
                     "format": "date-time",
                     "description": "The start time of the case"
                 },
-                "labels": {
+                "Labels": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Label"
                     },
                     "description": "List of labels relevant to this case"
                 },
-                "description": {
+                "Description": {
                     "type": "string",
                     "description": "The description of the case"
                 },
-                "title": {
+                "Title": {
                     "type": "string",
                     "description": "The title of the case"
                 },
-                "assignedTo": {
+                "AssignedTo": {
                     "type": "object",
                     "description": "Describes a user that the case is assigned to",
                     "$ref": "#/definitions/UserInfo"
                 },
-                "severity": {
+                "Severity": {
                     "type": "string",
                     "description": "The severity of the case",
                     "enum": [
@@ -1899,7 +1919,7 @@
                         ]
                     }
                 },
-                "status": {
+                "Status": {
                     "type": "string",
                     "description": "The status of the case",
                     "enum": [
@@ -1931,7 +1951,7 @@
                         ]
                     }
                 },
-                "closeReason": {
+                "CloseReason": {
                     "type": "string",
                     "description": "The reason the case was closed",
                     "enum": [
@@ -2940,6 +2960,16 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/AlertRule"
+            },
+            "x-ms-parameter-location": "method"
+        },
+		"ScheduledAlertRule": {
+            "name": "scheduledAlertRule",
+            "in": "body",
+            "description": "The scheduled alert rule",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ScheduledAlertRule"
             },
             "x-ms-parameter-location": "method"
         },
