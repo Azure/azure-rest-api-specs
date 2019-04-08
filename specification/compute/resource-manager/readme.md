@@ -195,7 +195,7 @@ input-file:
 - Microsoft.Compute/stable/2019-03-01/runCommands.json
 - Microsoft.Compute/stable/2017-09-01/skus.json
 - Microsoft.Compute/stable/2018-09-30/disk.json
-- Microsoft.Compute/stable/2018-06-01/gallery.json
+- Microsoft.Compute/stable/2019-03-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
