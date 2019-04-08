@@ -8,5 +8,5 @@ input-file:
   - $(this-folder)/Microsoft.Logic/stable/2016-06-01/logic.json
   - $(this-folder)/Microsoft.Logic/preview/2015-08-01-preview/logic.json
   - $(this-folder)/Microsoft.Logic/preview/2015-02-01-preview/logic.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

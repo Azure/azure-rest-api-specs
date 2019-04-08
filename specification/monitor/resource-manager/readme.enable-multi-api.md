@@ -32,5 +32,5 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/metricDefinitions_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-09-01/metrics_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

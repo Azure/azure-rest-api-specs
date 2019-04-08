@@ -11,5 +11,5 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2017-05-01/trafficmanager.json
   - $(this-folder)/Microsoft.Network/stable/2017-03-01/trafficmanager.json
   - $(this-folder)/Microsoft.Network/stable/2015-11-01/trafficmanager.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -5,5 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - $(this-folder)/Microsoft.ImportExport/stable/2016-11-01/storageimportexport.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

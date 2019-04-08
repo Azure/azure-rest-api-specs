@@ -7,5 +7,5 @@ input-file:
   - $(this-folder)/stable/v2.0/TextAnalytics.json
   - $(this-folder)/stable/v2.1/TextAnalytics.json
   - $(this-folder)/preview/v2.1/TextAnalytics.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

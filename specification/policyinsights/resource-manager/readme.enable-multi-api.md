@@ -15,5 +15,5 @@ input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

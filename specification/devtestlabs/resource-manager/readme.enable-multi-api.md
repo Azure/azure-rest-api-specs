@@ -7,5 +7,5 @@ input-file:
   - $(this-folder)/Microsoft.DevTestLab/stable/2018-09-15/DTL.json
   - $(this-folder)/Microsoft.DevTestLab/stable/2016-05-15/DTL.json
   - $(this-folder)/Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

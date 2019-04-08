@@ -20,5 +20,5 @@ input-file:
   - $(this-folder)/Microsoft.Insights/preview/2017-10-01/eaSubscriptionMigration_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
   - $(this-folder)/Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.AAD/stable/2017-06-01/domainservices.json
   - $(this-folder)/Microsoft.AAD/stable/2017-01-01/domainservices.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

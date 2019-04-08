@@ -22,5 +22,5 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimsubscriptions.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimtenant.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimusers.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

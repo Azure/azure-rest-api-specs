@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.Search/stable/2015-08-19/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-02-28/search.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

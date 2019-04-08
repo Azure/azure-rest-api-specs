@@ -8,5 +8,5 @@ input-file:
   - $(this-folder)/Microsoft.EventHub/stable/2015-08-01/EventHub.json
   - $(this-folder)/Microsoft.EventHub/stable/2014-09-01/EventHub.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/EventHub-preview.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

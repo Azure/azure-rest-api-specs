@@ -5,5 +5,5 @@
 ``` yaml $(enable-multi-api)
 input-file:
   - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/databox.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

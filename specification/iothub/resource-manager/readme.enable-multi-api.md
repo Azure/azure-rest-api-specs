@@ -10,5 +10,5 @@ input-file:
   - $(this-folder)/Microsoft.Devices/stable/2017-07-01/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2017-01-19/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2016-02-03/iothub.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -8,5 +8,5 @@ input-file:
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/Product.json
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/Registration.json
   - $(this-folder)/Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -414,5 +414,5 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2015-06-15/virtualNetworkGateway.json
   - $(this-folder)/Microsoft.Network/stable/2015-06-15/vmssNetworkInterface.json
   - $(this-folder)/Microsoft.Network/preview/2015-05-01-preview/network.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

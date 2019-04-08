@@ -14,5 +14,5 @@ input-file:
   - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/shares.json
   - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/storageaccounts.json
   - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

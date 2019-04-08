@@ -36,5 +36,5 @@ input-file:
   - $(this-folder)/Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
   - $(this-folder)/Microsoft.Automation/stable/2018-06-30/runbook.json
   - $(this-folder)/Microsoft.Automation/stable/2018-06-30/python2package.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

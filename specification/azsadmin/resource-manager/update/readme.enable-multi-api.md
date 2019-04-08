@@ -8,5 +8,5 @@ input-file:
   - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Updates.json
   - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json
   - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

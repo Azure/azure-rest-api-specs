@@ -24,5 +24,5 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/Drive.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/StorageSubSystem.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/Volume.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

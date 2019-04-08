@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.StorageDataLake/stable/2018-11-09/DataLakeStorage.json
   - $(this-folder)/Microsoft.StorageDataLake/preview/2018-06-17/DataLakeStorage.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -7,5 +7,5 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.2/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.3/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.4/servicefabric.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

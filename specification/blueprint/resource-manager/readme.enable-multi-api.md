@@ -9,5 +9,5 @@ input-file:
   - $(this-folder)/Microsoft.Blueprint/preview/2018-11-01-preview/blueprintDefinition.json
   - $(this-folder)/Microsoft.Blueprint/preview/2018-11-01-preview/blueprintAssignment.json
   - $(this-folder)/Microsoft.Blueprint/preview/2018-11-01-preview/assignmentOperation.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -14,5 +14,5 @@ input-file:
   - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/OfferDelegation.json
   - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Plan.json
   - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Quota.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```
