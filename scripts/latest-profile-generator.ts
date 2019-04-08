@@ -31,11 +31,12 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
           ) {
             const y = (yaml.load(c.literal) as Code)["input-file"];
             if (typeof y === "string") {
-              set.add(y);
+              set.add(y.replace('$(this-folder)', ''));
             } else if (it.isArray(y)) {
               for (const i of y) {
-                set.add(i);
-                specs.push(Path.join(f.dir, i));
+                let cleanFilePath = i.replace('$(this-folder)', '');
+                set.add(cleanFilePath);
+                specs.push(Path.join(f.dir, cleanFilePath));
               }
             }
           }
