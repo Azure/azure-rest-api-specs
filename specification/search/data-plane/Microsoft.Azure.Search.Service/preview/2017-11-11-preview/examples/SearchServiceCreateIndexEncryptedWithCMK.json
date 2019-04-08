@@ -1,0 +1,88 @@
+{
+    "parameters": {
+        "searchServiceName": "myservice",
+        "searchDnsSuffix": "search.windows.net",
+        "api-version": "2017-11-11-Preview",
+        "index": {
+            "name": "hotels",
+            "fields": [
+                {
+                    "name": "hotelId",
+                    "type": "Edm.String",
+                    "key": true,
+                    "searchable": false
+                },
+                {
+                    "name": "description",
+                    "type": "Edm.String",
+                    "filterable": false,
+                    "sortable": false,
+                    "facetable": false
+                }
+            ],
+            "encryptionKey": {
+                "keyVaultKeyName": "myKeyName",
+                "keyVaultKeyVersion": "myKeyVersion",
+                "keyVaultUri": "https://myKeyVault.vault.azure.net",
+                "accessCredentials": {
+                    "applicationId": "00000000-0000-0000-0000-000000000000",
+                    "applicationSecret": "myApplicationSecret"
+                }
+            }
+        }
+    },
+    "responses": {
+        "201": {
+            "body": {
+                "name": "hotels",
+                "fields": [
+                    {
+                        "name": "id",
+                        "type": "Edm.String",
+                        "searchable": true,
+                        "filterable": true,
+                        "retrievable": true,
+                        "sortable": true,
+                        "facetable": true,
+                        "key": true,
+                        "indexAnalyzer": null,
+                        "searchAnalyzer": null,
+                        "analyzer": null,
+                        "synonymMaps": []
+                    },
+                    {
+                        "name": "name",
+                        "type": "Edm.String",
+                        "searchable": true,
+                        "filterable": true,
+                        "retrievable": true,
+                        "sortable": true,
+                        "facetable": true,
+                        "key": false,
+                        "indexAnalyzer": null,
+                        "searchAnalyzer": null,
+                        "analyzer": "en.lucene",
+                        "synonymMaps": []
+                    }
+                ],
+                "scoringProfiles": [],
+                "defaultScoringProfile": null,
+                "suggesters": [],
+                "analyzers": [],
+                "tokenizers": [],
+                "tokenFilters": [],
+                "charFilters": [],
+                "corsOptions": null,
+                "encryptionKey": {
+                    "keyVaultKeyName": "myKeyName",
+                    "keyVaultKeyVersion": "myKeyVersion",
+                    "keyVaultUri": "https://myKeyVault.vault.azure.net",
+                    "accessCredentials": {
+                        "applicationId": "00000000-0000-0000-0000-000000000000",
+                        "applicationSecret": "myApplicationSecret"
+                    }
+                }
+            }
+        }
+    }
+}
