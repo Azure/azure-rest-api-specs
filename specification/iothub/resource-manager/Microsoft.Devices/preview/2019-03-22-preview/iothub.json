@@ -1657,12 +1657,12 @@
         "tags": [
           "POST"
         ],
-        "operationId": "IotHub_CustomerInitiatedFailover",
-        "summary": "Customer Initiated Fail over",
-        "description": "Perform customer initiated fail over of given hub",
+        "operationId": "IotHub_ManualFailover",
+        "summary": "Manual Failover Fail over",
+        "description": "Perform manual fail over of given hub",
         "x-ms-examples": {
-          "IotHubResource_TestRoute": {
-            "$ref": "./examples/IotHub_CustomerInitiatedFailover.json"
+          "IotHub_ManualFailover": {
+            "$ref": "./examples/IotHub_ManualFailover.json"
           }
         },
         "consumes": [
@@ -1681,11 +1681,11 @@
           },
           {
             "name": "failoverInput",
-            "description": "Region it will failover to",
+            "description": "Region to failover to. Must be a azure DR pair",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/failoverInput"
+              "$ref": "#/definitions/FailoverInput"
             }
           },
           {
@@ -1715,8 +1715,7 @@
               "$ref": "#/definitions/ErrorDetails"
             }
           }
-        },
-        "deprecated": false
+        }
       }
     }
   },
@@ -3407,8 +3406,8 @@
         "outputBlobContainerUri"
       ]
     },
-    "failoverInput": {
-      "description": "Use to provide failover region when requesting Customer Initiated Fail over for a hub.",
+    "FailoverInput": {
+      "description": "Use to provide failover region when requesting manual Failover for a hub.",
       "type": "object",
       "properties": {
         "failoverRegion": {
