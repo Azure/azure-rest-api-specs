@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01-01-preview
+tag: package-2018-09-01-preview
 ```
 
 ## Suppression
@@ -91,7 +91,27 @@ These settings apply only when `--tag=package-2018-01-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2018-01-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+```
+
+### Tag: package-2018-07-01-preview-only
+
+These settings apply only when `--tag=package-2018-07-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+```
+
+### Tag: package-2018-09-01-preview-only
+
+These settings apply only when `--tag=package-2018-09-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview
@@ -112,7 +132,35 @@ These settings apply only when `--tag=package-2018-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+```
+
+### Tag: package-2018-07-01-preview
+
+These settings apply only when `--tag=package-2018-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+```
+
+### Tag: package-2018-09-01-preview
+
+These settings apply only when `--tag=package-2018-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
 ---
@@ -132,6 +180,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
@@ -139,50 +188,7 @@ swagger-to-sdk:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: authorization
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-07
-  - tag: package-2017-10-01-preview
-  - tag: package-2018-01-01-preview
-```
-
-### Tag: package-2015-07 and go
-
-These settings apply only when `--tag=package-2015-07 --go` is specified on he command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-07' && $(go)
-output-folder: $(go-sdk-folder)/services/authorization/mgmt/2015-07-01/authorization
-```
-
-### Tag: package-2017-10-01-preview and go
-
-These settings apply only when `--tag=package-2017-10-01-preview --go` is specified on he command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/authorization/mgmt/2017-10-01-preview/authorization
-```
-
-### Tag: package-2018-01-01-preview and go
-
-These settings apply only when `--tag=package-2018-01-01-preview --go` is specified on he command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/authorization/mgmt/2018-01-01-preview/authorization
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -203,6 +209,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-authorization
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2015-07
+  - tag: package-2018-09-01-preview
+```
+
+### Tag: package-2018-09-01-preview and java
+
+These settings apply only when `--tag=package-2018-09-01-preview --java` is specified on he command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-09-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.authorization.v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_09_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2015-07 and java

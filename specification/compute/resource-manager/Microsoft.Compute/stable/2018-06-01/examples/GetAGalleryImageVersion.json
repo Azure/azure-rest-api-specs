@@ -10,7 +10,16 @@
       "location": "West US",
       "properties": {
         "publishingProfile": {
-          "regions": ["West US", "East US"],
+          "targetRegions": [ 
+            {
+              "name": "West US",
+              "regionalReplicaCount": 1
+            }, 
+            {
+              "name": "East US",
+              "regionalReplicaCount": 2
+            }
+          ],
           "source": {
             "managedImage": {
               "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
@@ -25,13 +34,22 @@
       "body": {
         "properties": {
           "publishingProfile": {
-            "regions": ["West US", "East US"],
+            "targetRegions": [ 
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1
+              }, 
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2
+              }
+            ],
             "source": {
               "managedImage": {
                 "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
               }
             },
-            "scaleTier": "S30",
+            "replicaCount": 1,
             "publishedDate": "2018-01-01T00:00:00Z"
           },
           "storageProfile": {

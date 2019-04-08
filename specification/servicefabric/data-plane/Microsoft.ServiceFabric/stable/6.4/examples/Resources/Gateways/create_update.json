@@ -1,0 +1,193 @@
+{
+  "operationId": "MeshGateway_CreateOrUpdate",
+  "description": "This example shows how to create or update a gateway resource.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "gatewayResourceName": "sampleGateway",
+    "gatewayResourceDescription": {
+      "name": "sampleGateway",      
+      "properties": {
+        "description": "Service Fabric Mesh sample gateway.",
+        "sourceNetwork": {
+          "name": "Open"
+        },
+        "destinationNetwork": {
+          "name": "helloWorldNetwork"
+        },
+        "tcp": [
+          {
+            "name": "web",
+            "port": 80,
+            "destination": {
+              "applicationName": "helloWorldApp",
+              "serviceName": "helloWorldService",
+              "endpointName": "helloWorldListener"
+            }
+          }
+        ],
+        "http": [
+          {
+            "name": "contosoWebsite",
+            "port": 8081,
+            "hosts": [
+              {
+                "name": "contoso.com",
+                "routes": [
+                  {
+                    "name": "index",
+                    "match": {
+                      "path": {
+                        "value": "/index",
+                        "rewrite": "/",
+                        "type": "prefix"
+                      },
+                      "headers": [
+                        {
+                          "name": "accept",
+                          "value": "application/json",
+                          "type": "exact"
+                        }
+                      ]
+                    },
+                    "destination": {
+                      "applicationName": "httpHelloWorldApp",
+                      "serviceName": "indexService",
+                      "endpointName": "indexHttpEndpoint"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleGateway",
+        "properties": {
+          "description": "Service Fabric Mesh sample gateway.",
+          "sourceNetwork": {
+            "name": "Open"
+          },
+          "destinationNetwork": {
+            "name": "helloWorldNetwork"
+          },
+          "tcp": [
+            {
+              "name": "web",
+              "port": 80,
+              "destination": {
+                "applicationName": "helloWorldApp",
+                "serviceName": "helloWorldService",
+                "endpointName": "helloWorldListener"
+              }
+            }
+          ],
+          "http": [
+            {
+              "name": "contosoWebsite",
+              "port": 8081,
+              "hosts": [
+                {
+                  "name": "contoso.com",
+                  "routes": [
+                    {
+                      "name": "index",
+                      "match": {
+                        "path": {
+                          "value": "/index",
+                          "rewrite": "/",
+                          "type": "prefix"
+                        },
+                        "headers": [
+                          {
+                            "name": "accept",
+                            "value": "application/json",
+                            "type": "exact"
+                          }
+                        ]
+                      },
+                      "destination": {
+                        "applicationName": "httpHelloWorldApp",
+                        "serviceName": "indexService",
+                        "endpointName": "indexHttpEndpoint"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "Ready",
+          "ipAddress": "192.168.1.1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sampleGateway",
+        "properties": {
+          "description": "Service Fabric Mesh Hello World sample gateway.",
+          "sourceNetwork": {
+            "name": "Open"
+          },
+          "destinationNetwork": {
+            "name": "helloWorldNetwork"
+          },
+          "tcp": [
+            {
+              "name": "web",
+              "port": 80,
+              "destination": {
+                "applicationName": "helloWorldApp",
+                "serviceName": "helloWorldService",
+                "endpointName": "helloWorldListener"
+              }
+            }
+          ],
+          "http": [
+            {
+              "name": "contosoWebsite",
+              "port": 8081,
+              "hosts": [
+                {
+                  "name": "contoso.com",
+                  "routes": [
+                    {
+                      "name": "index",
+                      "match": {
+                        "path": {
+                          "value": "/index",
+                          "rewrite": "/",
+                          "type": "prefix"
+                        },
+                        "headers": [
+                          {
+                            "name": "accept",
+                            "value": "application/json",
+                            "type": "exact"
+                          }
+                        ]
+                      },
+                      "destination": {
+                        "applicationName": "httpHelloWorldApp",
+                        "serviceName": "indexService",
+                        "endpointName": "indexHttpEndpoint"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "Creating",
+          "ipAddress":  ""
+        }
+      }
+    },
+    "202": {}
+  }
+}

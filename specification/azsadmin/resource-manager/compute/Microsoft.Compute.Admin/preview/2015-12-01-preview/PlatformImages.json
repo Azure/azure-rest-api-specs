@@ -45,9 +45,6 @@
                         "schema": {
                             "$ref": "#/definitions/PlatformImageList"
                         }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
                     }
                 }
             }
@@ -63,7 +60,7 @@
                     "PlatformImages"
                 ],
                 "summary": "Returns the requested platform image.",
-                "description": "Returns the requested platform image.",
+                "description": "Returns the specific platform image matching publisher, offer, skus and version.",
                 "operationId": "PlatformImages_Get",
                 "parameters": [
                     {
@@ -94,9 +91,6 @@
                         "schema": {
                             "$ref": "#/definitions/PlatformImage"
                         }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
                     }
                 }
             },
@@ -109,7 +103,7 @@
                 "tags": [
                     "PlatformImages"
                 ],
-                "description": "Creates a new platform image.",
+                "description": "Creates a new platform image with given publisher, offer, skus and version.",
                 "summary": "Creates a platform image.",
                 "operationId": "PlatformImages_Create",
                 "parameters": [
@@ -156,9 +150,6 @@
                         "schema": {
                             "$ref": "#/definitions/PlatformImage"
                         }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -172,7 +163,7 @@
                 "tags": [
                     "PlatformImages"
                 ],
-                "summary": "Deletes a platform image",
+                "summary": "Deletes a platform image matching publisher, offer, skus and version",
                 "description": "Delete a platform image",
                 "operationId": "PlatformImages_Delete",
                 "parameters": [
@@ -201,9 +192,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
                     }
                 }
             }

@@ -278,6 +278,9 @@
             "$ref": "./examples/getDscConfigurationContent.json"
           }
         },
+        "produces": [
+          "text/powershell"
+        ],
         "parameters": [
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
@@ -303,7 +306,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
@@ -533,7 +536,7 @@
         },
         "isMandatory": {
           "type": "boolean",
-          "description": "Gets or sets a Boolean value to indicate whether the parameter is madatory or not."
+          "description": "Gets or sets a Boolean value to indicate whether the parameter is mandatory or not."
         },
         "position": {
           "type": "integer",

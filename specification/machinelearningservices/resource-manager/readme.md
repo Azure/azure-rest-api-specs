@@ -1,5 +1,5 @@
 # MachineLearningServices
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Machine Learning Services.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Machine Learning Services.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Machine Learning Services API.
 
 ``` yaml
@@ -52,10 +52,12 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -99,31 +101,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: services
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03-preview
-```
-
-### Tag: package-2018-03-preview and go
-
-These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2018-03-01-preview/services
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

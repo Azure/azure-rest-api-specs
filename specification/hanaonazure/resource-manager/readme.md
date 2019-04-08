@@ -7,7 +7,7 @@ This is the AutoRest configuration file for HanaOnAzure.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for HanaOnAzure, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -55,6 +55,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## Python
@@ -85,32 +87,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-hanaonazure
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: hanaonazure
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-11
-```
-
-### Tag: package-2017-11
-
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/hanaonazure/mgmt/2017-11-03-preview/hanaonazure
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

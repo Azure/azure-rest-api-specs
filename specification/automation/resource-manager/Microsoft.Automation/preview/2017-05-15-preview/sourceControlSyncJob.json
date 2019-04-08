@@ -234,11 +234,11 @@
           "items": {
             "$ref": "#/definitions/SourceControlSyncJob"
           },
-          "description": "Gets a list of source control sync jobs."
+          "description": "The list of source control sync jobs."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the next link."
+          "description": "The next link."
         }
       },
       "description": "The response model for the list source control sync jobs operation."
@@ -248,7 +248,7 @@
         "properties": {
           "$ref": "#/definitions/SourceControlSyncJobCreateProperties",
           "x-ms-client-flatten": true,
-          "description": "Sets the properties of the source control sync job."
+          "description": "The properties of the source control sync job."
         }
       },
       "required": [
@@ -260,41 +260,45 @@
       "properties": {
         "commitId": {
           "type": "string",
-          "description": "Sets the commit id of the source control sync job."
+          "description": "The commit id of the source control sync job. If not syncing to a commitId, enter an empty string.",
+          "minLength": 0
         }
       },
+      "required": [
+        "commitId"
+      ],
       "description": "Definition of create source control sync job properties."
     },
     "SourceControlSyncJobById": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets the id of the job."
+          "description": "The id of the job."
         },
         "properties": {
           "$ref": "#/definitions/SourceControlSyncJobByIdProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets the properties of the source control sync job."
+          "description": "The properties of the source control sync job."
         }
       },
       "description": "Definition of the source control sync job."
     },
     "SourceControlSyncJobByIdProperties": {
       "properties": {
-        "syncJobId": {
+        "sourceControlSyncJobId": {
           "type": "string",
-          "description": "Gets the source control sync job id."
+          "description": "The source control sync job id."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
           "x-nullable": false,
           "readOnly": true,
-          "description": "Gets the creation time of the job."
+          "description": "The creation time of the job."
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets the provisioning state of the job.",
+          "description": "The provisioning state of the job.",
           "enum": [
             "Completed",
             "Failed",
@@ -310,30 +314,30 @@
           "format": "date-time",
           "x-nullable": true,
           "readOnly": true,
-          "description": "Gets the start time of the job."
+          "description": "The start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "x-nullable": true,
           "readOnly": true,
-          "description": "Gets the end time of the job."
+          "description": "The end time of the job."
         },
-        "startType": {
+        "syncType": {
           "type": "string",
-          "description": "Gets the type of start for the sync job.",
+          "description": "The sync type.",
           "enum": [
-            "AutoSync",
-            "ManualSync"
+            "PartialSync",
+            "FullSync"
           ],
           "x-ms-enum": {
-            "name": "startType",
+            "name": "syncType",
             "modelAsString": true
           }
         },
         "exception": {
           "type": "string",
-          "description": "Gets the exceptions that occured while running the sync job."
+          "description": "The exceptions that occurred while running the sync job."
         }
       },
       "description": "Definition of source control sync job properties."
@@ -358,27 +362,27 @@
         "properties": {
           "$ref": "#/definitions/SourceControlSyncJobProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets the properties of the source control sync job."
+          "description": "The properties of the source control sync job."
         }
       },
       "description": "Definition of the source control sync job."
     },
     "SourceControlSyncJobProperties": {
       "properties": {
-        "syncJobId": {
+        "sourceControlSyncJobId": {
           "type": "string",
-          "description": "Gets the source control sync job id."
+          "description": "The source control sync job id."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
           "x-nullable": false,
           "readOnly": true,
-          "description": "Gets the creation time of the job."
+          "description": "The creation time of the job."
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets the provisioning state of the job.",
+          "description": "The provisioning state of the job.",
           "enum": [
             "Completed",
             "Failed",
@@ -394,24 +398,24 @@
           "format": "date-time",
           "x-nullable": true,
           "readOnly": true,
-          "description": "Gets the start time of the job."
+          "description": "The start time of the job."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "x-nullable": true,
           "readOnly": true,
-          "description": "Gets the end time of the job."
+          "description": "The end time of the job."
         },
-        "startType": {
+        "syncType": {
           "type": "string",
-          "description": "Gets the type of start for the sync job.",
+          "description": "The sync type.",
           "enum": [
-            "AutoSync",
-            "ManualSync"
+            "PartialSync",
+            "FullSync"
           ],
           "x-ms-enum": {
-            "name": "startType",
+            "name": "syncType",
             "modelAsString": true
           }
         }

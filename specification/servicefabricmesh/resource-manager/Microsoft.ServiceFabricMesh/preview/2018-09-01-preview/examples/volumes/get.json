@@ -1,0 +1,31 @@
+{
+  "operationId": "Volume_Get",
+  "description": "This example shows how to get a volume resource. If the volume resource exists, its description is returned along with an OK (200) status code. If the volume resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "volumeResourceName": "sampleVolume"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/volumes",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/volumes/sampleVolume",
+        "name": "sampleVolume",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Service Fabric Mesh sample volume.",
+          "azureFileParameters": {
+            "accountName": "sbzdemoaccount",
+            "shareName": "sharel"
+          },
+          "provider": "SFAzureFile",
+          "status": "Ready"
+        }
+      }
+    }
+  }
+}

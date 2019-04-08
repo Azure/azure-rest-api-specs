@@ -7,7 +7,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-servicemap
-  package-version: 2.0.0
   output-folder: $(node-sdks-folder)/lib/services/serviceMapManagement
   override-client-name: ServicemapManagementClient
   generate-license-txt: true

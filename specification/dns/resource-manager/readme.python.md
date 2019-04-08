@@ -18,8 +18,20 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2018-05
   - tag: package-2018-03-preview
   - tag: package-2016-04
+```
+
+### Tag: package-2018-05 and python
+
+These settings apply only when `--tag=package-2018-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-05' && $(python)
+python:
+  namespace: azure.mgmt.dns.v2018_05_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-dns/azure/mgmt/dns/v2018_05_01
 ```
 
 ### Tag: package-2018-03-preview and python

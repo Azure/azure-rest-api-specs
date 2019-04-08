@@ -295,7 +295,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
+            "description": "The return format. Return the response in particular format without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -359,7 +359,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "Gets the number of failures that occured in this stage."
+          "description": "Gets the number of failures that occurred in this stage."
         },
         "maxVertexDataRead": {
           "type": "integer",
@@ -737,7 +737,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "Gets the specific line number in the job where the error occured."
+          "description": "Gets the specific line number in the job where the error occurred."
         },
         "message": {
           "type": "string",
@@ -890,6 +890,11 @@
           "format": "int32",
           "description": "Gets or sets the degree of parallelism used for this job. This must be greater than 0."
         },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job."
+        },
         "priority": {
           "type": "integer",
           "format": "int32",
@@ -956,6 +961,11 @@
             "$ref": "#/definitions/JobStateAuditRecord"
           },
           "description": "Gets the job state audit records, indicating when various operations have been performed on this job."
+        },
+        "hierarchyQueueNode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of hierarchy queue node this job is assigned to, null if job has not been assigned yet or the account doesn't have hierarchy queue."
         },
         "properties": {
           "$ref": "#/definitions/JobProperties",

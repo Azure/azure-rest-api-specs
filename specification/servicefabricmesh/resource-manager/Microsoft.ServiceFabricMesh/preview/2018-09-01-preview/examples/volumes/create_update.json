@@ -1,0 +1,64 @@
+{
+  "operationId": "Volume_Create",
+  "description": "This example shows how to create or update a volume resource.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "volumeResourceName": "sampleVolume",
+    "volumeResourceDescription": {
+      "properties": {
+        "description": "Service Fabric Mesh sample volume.",
+        "azureFileParameters": {
+          "accountName": "sbzdemoaccount",
+          "accountKey": "provide-account-key-here",
+          "shareName": "sharel"
+        },
+        "provider": "SFAzureFile"
+      },
+      "tags": {},
+      "location": "EastUS"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/volumes",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/volumes/sampleVolume",
+        "name": "sampleVolume",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Service Fabric Mesh sample volume.",
+          "azureFileParameters": {
+            "accountName": "sbzdemoaccount",
+            "shareName": "sharel"
+          },
+          "provider": "SFAzureFile",
+          "status": "Ready"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/volumes",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/volumes/sampleVolume",
+        "name": "sampleVolume",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Updating",
+          "description": "Service Fabric Mesh sample volume.",
+          "azureFileParameters": {
+            "accountName": "sbzdemoaccount",
+            "shareName": "sharel"
+          },
+          "provider": "SFAzureFile",
+          "status": "Creating"
+        }
+      }
+    },
+    "202": {}
+  }
+}

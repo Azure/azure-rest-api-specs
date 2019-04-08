@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for Cost Management.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Cost Management, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,19 +15,39 @@ To build the SDK for Cost Management, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05
+tag: package-2019-01
+azure-validator: true
 ```
 
 ---
+
+### Tag: package-2019-01
+
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-01'
+input-file:
+  - Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
+```
+### Tag: package-preview-2019-03
+
+These settings apply only when `--tag=package-preview-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-03'
+input-file:
+  - Microsoft.CostManagement/preview/2019-03-01-preview/costmanagement.json
+```
 ### Tag: package-2018-05
 
 These settings apply only when `--tag=package-2018-05` is specified on the command line.
@@ -35,7 +57,49 @@ input-file:
 - Microsoft.CostManagement/stable/2018-05-31/costmanagement.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R2059
+    from: costmanagement.json
+    where: $.paths
+    reason: We are extending Microsoft.Billing RP in some scenarios
+  - suppress: R3023
+    from: costmanagement.json
+    where: $.paths
+    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
+```
+
+### Tag: package-2018-08-preview
+
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08-preview'
+input-file:
+- Microsoft.CostManagement/preview/2018-08-01-preview/costmanagement.json
+```
+
+### Tag: package-2018-12-preview
+
+These settings apply only when `--tag=package-2018-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12-preview'
+input-file:
+- Microsoft.CostManagement/preview/2018-12-01-preview/costmanagement.json
+```
+
+### Tag: package-2019-01
+
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-01'
+input-file:
+- Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
+```
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -84,11 +148,13 @@ python:
   package-version: 1.2.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-costmanagement/azure/mgmt/costmanagement
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -97,28 +163,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: costmanagement
-  clear-output-folder: true
-```
-
-### Go multi-api
-``` yaml $(go) && $(multiapi)
-batch:
-   - tag: package-2018-05
-```
-
-### Tag: package-2018-05 and go
-These settings apply only when `--tag=package-2018-05 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-05' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-05-31/$(namespace)
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -139,6 +184,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-costmanagement
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-05
+  - tag: package-2018-08-preview
+  - tag: package-2019-01
 ```
 
 ### Tag: package-2018-05 and java
@@ -150,6 +197,45 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2018_05_31
   output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_05_31
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-08-preview and java
+
+These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.costmanagement.v2018_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_08_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-12-preview and java
+
+These settings apply only when `--tag=package-2018-12-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.costmanagement.v2018_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_12_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-01 and java
+
+These settings apply only when `--tag=package-2019-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.costmanagement.v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```

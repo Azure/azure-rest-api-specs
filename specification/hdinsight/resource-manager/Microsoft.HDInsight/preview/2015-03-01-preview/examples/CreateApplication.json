@@ -6,34 +6,36 @@
         "api-version": "2015-03-01-preview",
         "subscriptionId": "subid",
         "parameters": {
-            "computeProfile": {
-                "roles": [{
-                    "name": "edgenode",
-                    "targetInstanceCount": 1,
-                    "hardwareProfile": {
-                        "vmSize": "Standard_D12_v2"
-                    }
-                }]
-            },
-            "installScriptActions": [{
-                "name": "app-install-app1",
-                "uri": "https://.../install.sh",
-                "parameters": "-version latest -port 20000",
-                "roles": [
-                    "edgenode"
-                ]
-            }],
-            "uninstallScriptActions": [],
-            "httpsEndpoints": [{
-                "subDomainSuffix": "dss",
-                "destinationPort": 20000,
-                "accessModes": [
-                    "WebPage"
-                ]
-            }],
-            "provisioningState": "",
-            "applicationType": "CustomApplication",
-            "errors": []
+            "properties": {
+                "computeProfile": {
+                    "roles": [{
+                        "name": "edgenode",
+                        "targetInstanceCount": 1,
+                        "hardwareProfile": {
+                            "vmSize": "Standard_D12_v2"
+                        }
+                    }]
+                },
+                "installScriptActions": [{
+                    "name": "app-install-app1",
+                    "uri": "https://.../install.sh",
+                    "parameters": "-version latest -port 20000",
+                    "roles": [
+                        "edgenode"
+                    ]
+                }],
+                "uninstallScriptActions": [],
+                "httpsEndpoints": [{
+                    "subDomainSuffix": "dss",
+                    "destinationPort": 20000,
+                    "accessModes": [
+                        "WebPage"
+                    ]
+                }],
+                "provisioningState": "",
+                "applicationType": "CustomApplication",
+                "errors": []
+            }
         }
     },
     "responses": {

@@ -2,15 +2,15 @@
 
 > see https://aka.ms/autorest
 
-``` yaml 
+``` yaml
 batch:
     output-folder: c:/work/github/azure-resource-manager-schemas/generated
     override-info:
       title: $(name)
 
-    azureresourceschema: 
+    azureresourceschema:
       note: This generates all the Azure Resource Schemas into the specified folder (merging as it goes)
-``` 
+```
 
 ## Specifications
 
@@ -18,7 +18,7 @@ This should include every single REST-API specification for every Azure Resource
 
 ``` yaml
 batch:
-    input-file: 
+    input-file:
       - ../specification/customer-insights/resource-manager/Microsoft.CustomerInsights/2017-01-01/customer-insights.json
       - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/account.json
       - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/certificate.json
@@ -38,7 +38,7 @@ batch:
       - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/schedule.json
       - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/variable.json
       - ../specification/automation/resource-manager/Microsoft.Automation/2015-10-31/webhook.json
-    
+
       - ../specification/advisor/resource-manager/Microsoft.Advisor/2016-07-12-preview/advisor.json
       - ../specification/advisor/resource-manager/Microsoft.Advisor/2017-03-31/advisor.json
       - ../specification/advisor/resource-manager/Microsoft.Advisor/2017-04-19/advisor.json
@@ -93,7 +93,7 @@ batch:
       - ../specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/2016-06-27-preview/containerregistry.json
       - ../specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/2017-03-01/containerregistry.json
       - ../specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/2017-06-01-preview/containerregistry.json
-      
+
       - ../specification/datalake-analytics/resource-manager/Microsoft.DataLakeAnalytics/2015-10-01-preview/account.json
       - ../specification/datalake-analytics/resource-manager/Microsoft.DataLakeAnalytics/2015-10-01-preview/catalog.json
       - ../specification/datalake-analytics/resource-manager/Microsoft.DataLakeAnalytics/2015-11-01-preview/job.json
@@ -243,6 +243,7 @@ batch:
       - ../specification/scheduler/resource-manager/Microsoft.Scheduler/2016-03-01/scheduler.json
       - ../specification/search/resource-manager/Microsoft.Search/2015-02-28/search.json
       - ../specification/search/resource-manager/Microsoft.Search/2015-08-19/search.json
+      - ../specification/serialconsole/resource-manager/Microsoft.SerialConsole/2018-05-01/serialconsole.json
       - ../specification/servermanagement/resource-manager/Microsoft.ServerManagement/2015-07-01-preview/servermanagement.json
       - ../specification/servermanagement/resource-manager/Microsoft.ServerManagement/2016-07-01-preview/servermanagement.json
       - ../specification/service-map/resource-manager/Microsoft.OperationalInsights/2015-11-01-preview/arm-service-map.json
@@ -268,7 +269,7 @@ batch:
       - ../specification/storage/resource-manager/Microsoft.Storage/2016-12-01/storage.json
       - ../specification/storageimportexport/resource-manager/Microsoft.ImportExport/2016-11-01/storageimportexport.json
       - ../specification/storsimple8000series/resource-manager/Microsoft.StorSimple/2017-06-01/storsimple.json
-      
+
       - ../specification/trafficmanager/resource-manager/Microsoft.Network/2015-11-01/trafficmanager.json
       - ../specification/trafficmanager/resource-manager/Microsoft.Network/2017-03-01/trafficmanager.json
       - ../specification/web/resource-manager/Microsoft.CertificateRegistration/2015-08-01/AppServiceCertificateOrders.json
@@ -284,7 +285,8 @@ batch:
       - ../specification/web/resource-manager/Microsoft.Web/2016-08-01/WebApps.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServiceEnvironments.json
       - ../specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServicePlans.json
-      
+      - ../specification/kusto/resource-manager/Microsoft.Kusto/2017-09-07-privatepreview/kusto.json
+
       # some invalid swagger
       # - ../specification/timeseriesinsights/resource-manager/Microsoft.TimeSeriesInsights/2017-02-28-preview/timeseriesinsights.json
-```  
+```

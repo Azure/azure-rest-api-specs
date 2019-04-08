@@ -1,0 +1,25 @@
+{
+  "operationId": "MeshVolume_Get",
+  "description": "This example shows how to get a volume resource. If the volume resource exists, its description is returned along with an OK (200) status code. If the volume resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "volumeResourceName": "sampleVolume"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleVolume",
+        "properties": {
+          "description": "Service Fabric Mesh sample volume.",
+          "provider": "SFAzureFile",
+          "azureFileParameters": {
+            "accountName": "sbzdemoaccount",
+            "accountKey": null,
+            "shareName": "sharel"
+          },          
+          "status": "Ready"
+        }
+      }
+    }
+  }
+}

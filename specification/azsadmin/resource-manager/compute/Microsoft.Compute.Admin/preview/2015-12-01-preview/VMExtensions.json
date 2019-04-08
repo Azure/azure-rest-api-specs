@@ -20,7 +20,7 @@
                     "VMExtensions"
                 ],
                 "summary": "Returns requested Virtual Machine Extension Image.",
-                "description": "Returns requested Virtual Machine Extension Image.",
+                "description": "Returns requested Virtual Machine Extension Image matching publisher, type, version.",
                 "operationId": "VMExtensions_Get",
                 "consumes": [
                     "application/json"
@@ -54,9 +54,6 @@
                         "schema": {
                             "$ref": "#/definitions/VMExtension"
                         }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
                     }
                 }
             },
@@ -70,7 +67,7 @@
                     "VMExtensions"
                 ],
                 "summary": "Create a Virtual Machine Extension Image.",
-                "description": "Create a Virtual Machine Extension Image.",
+                "description": "Create a Virtual Machine Extension Image with publisher, version.",
                 "operationId": "VMExtensions_Create",
                 "consumes": [
                     "application/json"
@@ -171,8 +168,8 @@
                 "tags": [
                     "VMExtensions"
                 ],
-                "summary": "Returns a list of all Virtual Machine Extension Image.",
-                "description": "Returns a list of all Virtual Machine Extension Image.",
+                "summary": "Returns a list of all Virtual Machine Extension Images.",
+                "description": "List of all Virtual Machine Extension Images for the current location are returned.",
                 "operationId": "VMExtensions_List",
                 "consumes": [
                     "application/json"
@@ -197,9 +194,6 @@
                         "schema": {
                             "$ref": "#/definitions/VMExtensionList"
                         }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
                     }
                 }
             }

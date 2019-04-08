@@ -15,15 +15,15 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiApi)
+``` yaml $(csharp) && !$(multiapi) && !$(profile)
 namespace: Microsoft.Azure.Management.WebSites
 output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
 ```
 
 ## Batch settings
-These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
+These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
-``` yaml $(MultiApi)
+``` yaml $(multiapi)
 namespace: Microsoft.Azure.Management.WebSites.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
@@ -31,4 +31,11 @@ batch:
 #For WebSite 2016-08-01, you use the below tag
   - tag: package-2016-09
     ApiVersionName: Api2016_08_01
+```
+
+```yaml $(profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).WebSites
+output-folder: $(csharp-sdks-folder)/$(profile)/Websites/Management.Websites/Generated
+batch:
+  - tag: package-2018-03-01-hybrid-csharp
 ```

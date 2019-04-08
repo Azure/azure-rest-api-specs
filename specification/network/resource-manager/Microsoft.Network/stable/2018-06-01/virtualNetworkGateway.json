@@ -362,6 +362,49 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/resetvpnclientsharedkey": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_ResetVpnClientSharedKey",
+        "description": "Resets the VPN client shared key of the virtual network gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation reset the vpn client shared key of the virtual network gateway."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously"
+          }
+        },
+        "x-ms-examples": {
+          "ResetVpnClientSharedKey": { "$ref": "./examples/VirtualNetworkGatewayResetVpnClientSharedKey.json" }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
       "post": {
         "tags": [
@@ -752,7 +795,7 @@
             "description": "Accepted and the operation will complete asynchronously."
           },
           "200": {
-            "description": "Request successful. The operation sets the specificed vpnclient ipsec parameters for P2S client of the virtual network gateway.",
+            "description": "Request successful. The operation sets the specified vpnclient ipsec parameters for P2S client of the virtual network gateway.",
             "schema": {
               "$ref": "#/definitions/VpnClientIPsecParameters"
             }
@@ -803,8 +846,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Get VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json" } 
-        }               
+          "Get VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json" }
+        }
 
       }
     },
@@ -1723,7 +1766,7 @@
             "$ref": "#/definitions/IpsecPolicy"
           },
           "description": "VpnClientIpsecPolicies for virtual network gateway P2S client."
-        },		
+        },
         "radiusServerAddress": {
           "type": "string",
           "description": "The radius server address property of the VirtualNetworkGateway resource for vpn client connection."
@@ -2076,7 +2119,7 @@
         },
         "connectionType": {
           "type": "string",
-          "description": "Gateway connection type. Possible values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
+          "description": "Gateway connection type. Possible values are: 'IPsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
           "enum": [
             "IPsec",
             "Vnet2Vnet",
@@ -2348,7 +2391,7 @@
             "ECP384",
             "PFS24",
             "PFS14",
-            "PFSMM"		
+            "PFSMM"
           ],
           "x-ms-enum": {
             "name": "PfsGroup",
@@ -2497,7 +2540,7 @@
         "pfsGroup"
       ],
       "description": "An IPSec parameters for a virtual network gateway P2S connection."
-    },	
+    },
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
@@ -2595,7 +2638,7 @@
         },
         "connectionType": {
           "type": "string",
-          "description": "Gateway connection type. Possible values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
+          "description": "Gateway connection type. Possible values are: 'IPsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
           "enum": [
             "IPsec",
             "Vnet2Vnet",

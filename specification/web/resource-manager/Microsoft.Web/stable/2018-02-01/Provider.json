@@ -30,7 +30,9 @@
             "type": "string",
             "enum": [
               "Windows",
-              "Linux"
+              "Linux",
+              "WindowsFunctions",
+              "LinuxFunctions"
             ]
           },
           {
@@ -108,7 +110,9 @@
             "type": "string",
             "enum": [
               "Windows",
-              "Linux"
+              "Linux",
+              "WindowsFunctions",
+              "LinuxFunctions"
             ]
           },
           {
@@ -214,6 +218,10 @@
           "items": {
             "$ref": "#/definitions/StackMinorVersion"
           }
+        },
+        "applicationInsights": {
+          "description": "<code>true</code> if this supports Application Insights; otherwise, <code>false</code>.",
+          "type": "boolean"
         }
       }
     },
@@ -231,6 +239,10 @@
         },
         "isDefault": {
           "description": "<code>true</code> if this is the default minor version; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "isRemoteDebuggingEnabled": {
+          "description": "<code>true</code> if this supports Remote Debugging, otherwise <code>false</code>.",
           "type": "boolean"
         }
       }

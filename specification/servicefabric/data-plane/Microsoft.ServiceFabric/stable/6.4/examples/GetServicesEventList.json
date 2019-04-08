@@ -1,0 +1,51 @@
+{
+  "operationId": "GetServicesEventList",
+  "description": "This example shows how to get all services-related events during a certain time window.",
+  "parameters": {
+    "api-version": "6.4",
+    "StartTimeUtc": "2018-04-03T18:00:00Z",
+    "EndTimeUtc": "2018-04-04T18:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": [
+        {
+          "Kind": "ServiceCreated",
+          "ServiceTypeName": "Svc1Type",
+          "ApplicationName": "fabric:/app1",
+          "ApplicationTypeName": "App1Type",
+          "ServiceInstance": 131672605579916062,
+          "IsStateful": true,
+          "PartitionCount": 2,
+          "TargetReplicaSetSize": 3,
+          "MinReplicaSetSize": 2,
+          "ServicePackageVersion": "1.0:1.0",
+          "PartitionId": "bd936249-183d-4e29-94ab-2e198e4e2e87",
+          "ServiceId": "app1/svc1",
+          "EventInstanceId": "8ba26506-4a93-4b8c-ae14-29a2841b3003",
+          "TimeStamp": "2018-04-03T20:22:38.0560496Z",
+          "HasCorrelatedEvents": false
+        },
+        {
+          "Kind": "ServiceCreated",
+          "ServiceTypeName": "Svc2Type",
+          "ApplicationName": "fabric:/app1",
+          "ApplicationTypeName": "App1Type",
+          "ServiceInstance": 131672605579916062,
+          "IsStateful": true,
+          "PartitionCount": 2,
+          "TargetReplicaSetSize": 3,
+          "MinReplicaSetSize": 2,
+          "ServicePackageVersion": "1.0:1.0",
+          "PartitionId": "87413d64-0134-4b23-a439-c2692c4e3ec3",
+          "ServiceId": "app1/svc2",
+          "EventInstanceId": "03246d3b-77f5-4ca2-b065-7b8671711318",
+          "TimeStamp": "2018-04-03T20:22:38.056197Z",
+          "HasCorrelatedEvents": false
+        }
+      ]
+    }
+  }
+}

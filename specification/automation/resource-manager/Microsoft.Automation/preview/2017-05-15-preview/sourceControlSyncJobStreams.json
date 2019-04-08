@@ -182,12 +182,12 @@
           "items": {
             "$ref": "#/definitions/SourceControlSyncJobStream"
           },
-          "description": "Gets a list of source control sync job streams."
+          "description": "The list of source control sync job streams."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets or sets the next link."
+          "description": "The next link."
         }
       },
       "description": "The response model for the list source control sync job streams operation."
@@ -202,31 +202,31 @@
         "properties": {
           "$ref": "#/definitions/SourceControlSyncJobStreamProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets the properties of the source control sync job stream."
+          "description": "The properties of the source control sync job stream."
         }
       },
       "description": "Definition of the source control sync job stream."
     },
     "SourceControlSyncJobStreamProperties": {
       "properties": {
-        "syncJobStreamId": {
+        "sourceControlSyncJobStreamId": {
           "type": "string",
-          "description": "Gets the sync job stream id."
+          "description": "The sync job stream id."
         },
         "summary": {
           "type": "string",
-          "description": "Gets the summary of the sync job stream."
+          "description": "The summary of the sync job stream."
         },
         "time": {
           "type": "string",
           "format": "date-time",
           "x-nullable": true,
           "readOnly": true,
-          "description": "Gets the time of the sync job stream."
+          "description": "The time of the sync job stream."
         },
         "streamType": {
           "type": "string",
-          "description": "Gets the type of the sync job stream.",
+          "description": "The type of the sync job stream.",
           "enum": [
             "Error",
             "Output"
@@ -249,31 +249,31 @@
         "properties": {
           "$ref": "#/definitions/SourceControlSyncJobStreamByIdProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets the properties of the source control sync job stream."
+          "description": "The properties of the source control sync job stream."
         }
       },
       "description": "Definition of the source control sync job stream by id."
     },
     "SourceControlSyncJobStreamByIdProperties": {
       "properties": {
-        "syncJobStreamId": {
+        "sourceControlSyncJobStreamId": {
           "type": "string",
-          "description": "Gets the sync job stream id."
+          "description": "The sync job stream id."
         },
         "summary": {
           "type": "string",
-          "description": "Gets the summary of the sync job stream."
+          "description": "The summary of the sync job stream."
         },
         "time": {
           "type": "string",
           "format": "date-time",
           "x-nullable": true,
           "readOnly": true,
-          "description": "Gets the time of the sync job stream."
+          "description": "The time of the sync job stream."
         },
         "streamType": {
           "type": "string",
-          "description": "Gets the type of the sync job stream.",
+          "description": "The type of the sync job stream.",
           "enum": [
             "Error",
             "Output"
@@ -285,11 +285,14 @@
         },
         "streamText": {
           "type": "string",
-          "description": "Gets the text of the sync job stream."
+          "description": "The text of the sync job stream."
         },
         "value": {
-          "type": "string",
-          "description": "Gets the value of the sync job stream."
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "The values of the job stream."
         }
       },
       "description": "Definition of source control sync job stream by id properties."

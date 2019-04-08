@@ -48,9 +48,12 @@
                             "$ref": "#/definitions/CustomerSubscriptionList"
                         }
                     },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
+                    "default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
@@ -93,9 +96,12 @@
                             "$ref": "#/definitions/CustomerSubscription"
                         }
                     },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
+                    "default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
+						}
+					}
                 }
             },
             "delete": {
@@ -179,7 +185,7 @@
     },
     "definitions": {
         "CustomerSubscription": {
-            "description": "Customer subcription.",
+            "description": "Customer subscription.",
             "type": "object",
             "properties": {
                 "properties": {

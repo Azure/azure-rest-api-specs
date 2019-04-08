@@ -77,38 +77,60 @@ exports.getTargetBranch = function getTargetBranch() {
 /**
  * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
  */
-exports.doOnBranch = async function doOnBranch(ref, func) {
-  const currentDir = process.cwd();
-  const branchSha = execSync(`git rev-parse origin/${ref}`, { encoding: 'utf8' }).trim();
+exports.doOnBranch = async function doOnBranch(branch, func) {
+  exports.fetchBranch(branch);
+  const branchSha = exports.resolveRef(`origin/${branch}`);
   const tmpDir = path.join(os.tmpdir(), branchSha);
 
-  exports.checkoutBranch(ref, tmpDir);
-  console.log(`Changing directory and executing the function...`)
-  process.chdir(tmpDir);
+  const currentDir = process.cwd();
+  exports.checkoutBranch(branch, tmpDir);
 
+  console.log(`Changing directory and executing the function...`);
+  process.chdir(tmpDir);
   const result = await func();
 
-  console.log(`Restoring previous directory and deleting secondary working tree...`)
+  console.log(`Restoring previous directory and deleting secondary working tree...`);
   process.chdir(currentDir);
-  execSync(`rm -rf ${tmpDir}`)
-  
+  execSync(`rm -rf ${tmpDir}`);
+
   return result;
+}
+
+/**
+ * Resolve a ref to its commit hash
+ */
+exports.resolveRef = function resolveRef(ref) {
+  let cmd = `git rev-parse ${ref}`;
+  console.log(`> ${cmd}`);
+  return execSync(cmd, { encoding: 'utf8' }).trim();
+}
+
+/**
+ * Fetch ref for a branch from the origin
+ */
+exports.fetchBranch = function fetchBranch(branch) {
+  let cmds = [
+    `git remote -vv`,
+    `git branch --all`,
+    `git remote set-branches origin --add ${branch}`,
+    `git fetch origin ${branch}`
+  ];
+
+  console.log(`Fetching branch ${branch} from origin...`);
+  for (let cmd of cmds) {
+    console.log(`> ${cmd}`);
+    execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
+  }
 }
 
 /**
  * Checkout a copy of branch to location
  */
 exports.checkoutBranch = function checkoutBranch(ref, location) {
-  let cmds = [`git remote -vv`, `git branch --all`,
-    `git remote set-branches origin --add ${ref}`,
-    `git fetch origin ${ref}`,
-    `git worktree add -f ${location} origin/${ref}`];
-
+  let cmd = `git worktree add -f ${location} origin/${ref}`;
   console.log(`Checking out a copy of branch ${ref} to ${location}...`);
-  for (let cmd of cmds) {
-    console.log(cmd);
-    execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
-  }
+  console.log(`> ${cmd}`);
+  execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
 }
 
 /**
