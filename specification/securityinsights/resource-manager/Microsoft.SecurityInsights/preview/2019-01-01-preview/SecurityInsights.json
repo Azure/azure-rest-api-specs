@@ -69,7 +69,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Gets all alert rules.",
+                "description": "Gets all scheduled alert rules.",
                 "operationId": "AlertRules_List",
                 "parameters": [
                     {
@@ -92,7 +92,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AlertRulesList"
+                            "$ref": "#/definitions/ScheduledAlertRulesList"
                         }
                     },
                     "default": {
@@ -117,7 +117,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Gets the alert rule.",
+                "description": "Gets the scheduled alert rule.",
                 "operationId": "AlertRules_Get",
                 "parameters": [
                     {
@@ -143,7 +143,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AlertRule"
+                            "$ref": "#/definitions/ScheduledAlertRule"
                         }
                     },
                     "default": {
@@ -163,7 +163,7 @@
                 "tags": [
                     "Alert Rules"
                 ],
-                "description": "Creates or updates the alert rule.",
+                "description": "Creates or updates the scheduled alert rule.",
                 "operationId": "AlertRules_CreateOrUpdate",
                 "parameters": [
                     {
@@ -185,20 +185,20 @@
                         "$ref": "#/parameters/RuleId"
                     },
                     {
-                        "$ref": "#/parameters/AlertRule"
+                        "$ref": "#/parameters/ScheduledAlertRule"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AlertRule"
+                            "$ref": "#/definitions/ScheduledAlertRule"
                         }
                     },
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/AlertRule"
+                            "$ref": "#/definitions/ScheduledAlertRule"
                         }
                     },
                     "default": {
@@ -1580,7 +1580,7 @@
                 }
             }
         },
-        "AlertRuleKind": {
+		"AlertRuleKind": {
             "type": "object",
             "description": "Describes an Azure resource with kind.",
             "properties": {
@@ -1602,7 +1602,27 @@
                 }
             }
         },
-        "ScheduledAlertRule": {
+        "ScheduledAlertRulesList": {
+            "description": "List all the schdeuled alert rules.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of scheduled alert rules.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of scheduled alert rules.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ScheduledAlertRule"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+		"ScheduledAlertRule": {
             "x-ms-discriminator-value": "Scheduled",
             "type": "object",
             "description": "Represents scheduled alert rule.",
@@ -2940,6 +2960,16 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/AlertRule"
+            },
+            "x-ms-parameter-location": "method"
+        },
+		"ScheduledAlertRule": {
+            "name": "scheduledAlertRule",
+            "in": "body",
+            "description": "The scheduled alert rule",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ScheduledAlertRule"
             },
             "x-ms-parameter-location": "method"
         },
