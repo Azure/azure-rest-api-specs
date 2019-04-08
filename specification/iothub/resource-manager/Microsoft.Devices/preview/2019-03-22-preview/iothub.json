@@ -2267,7 +2267,7 @@
           "$ref": "#/definitions/FallbackRouteProperties"
         },
         "enrichments": {
-          "description": "The list of user-provided enrichments that the IoT hub applies to messages to be delivered to built-in and custom endpoints. A maximum of 10 enrichments are allowed for paid hubs and a maximum of 2 enrichments are allowed for free hubs.",
+          "description": "The list of user-provided enrichments that the IoT hub applies to messages to be delivered to built-in and custom endpoints. See: https://aka.ms/telemetryoneventgrid",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnrichmentProperties"
@@ -2542,11 +2542,11 @@
       ]
     },
     "EnrichmentProperties": {
-      "description": "The properties of an enrichment that your IoT hub applies to messages to endpoints.",
+      "description": "The properties of an enrichment that your IoT hub applies to messages delivered to endpoints.",
       "type": "object",
       "properties": {
         "key": {
-          "description": "The key for the enrichment property.",
+          "description": "The key or name for the enrichment property.",
           "type": "string"
         },
         "value": {
@@ -2554,7 +2554,7 @@
           "type": "string"
         },
         "endpointNames": {
-          "description": "The list of endpoints for which the enrichment property is applied to the message if the message satisfies the routing rules for those endpoints.",
+          "description": "The list of endpoints for which the enrichment is applied to the message.",
           "minItems": 1,
           "type": "array",
           "items": {
