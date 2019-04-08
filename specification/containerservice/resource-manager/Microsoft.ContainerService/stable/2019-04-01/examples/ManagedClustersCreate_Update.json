@@ -31,6 +31,9 @@
             ]
           }
         },
+        "networkProfile":{
+          "loadBalancerSku": "basic"
+        },
         "windowsProfile": {
           "adminUsername": "azureuser",
           "adminPassword": "replacePassword1234$"
@@ -94,6 +97,7 @@
           "enablePodSecurityPolicy": true,
           "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
           "networkProfile": {
+            "loadBalancerSku": "basic",
             "networkPlugin": "kubenet",
             "podCidr": "10.244.0.0/16",
             "serviceCidr": "10.0.0.0/16",
@@ -149,6 +153,7 @@
           "enableRBAC": true,
           "enablePodSecurityPolicy": true,
           "networkProfile": {
+            "loadBalancerSku": "basic",
             "networkPlugin": "kubenet",
             "podCidr": "10.244.0.0/16",
             "serviceCidr": "10.0.0.0/16",
