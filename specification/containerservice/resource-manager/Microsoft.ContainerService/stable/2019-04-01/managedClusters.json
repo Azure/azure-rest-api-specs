@@ -1599,6 +1599,18 @@
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
           "default": "172.17.0.1/16",
           "description": "A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range."
+        },
+        "loadBalancerSku":{
+          "type": "string",
+          "enum": [
+            "standard",
+            "basic"
+          ],
+          "x-ms-enum": {
+            "name": "loadBalancerSku",
+            "modelAsString": true
+          },
+          "description": "The load balancer sku for the managed cluster."
         }
       },
       "description": "Profile of network configuration."
