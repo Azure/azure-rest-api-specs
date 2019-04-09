@@ -319,7 +319,7 @@ function postProcessing() {
             }
         });
 
-        let afterErrorsAndWarningsArray = jsonData['files'][fileName]['after'];
+        let afterErrorsAndWarningsArray = jsonData.files[fileName].after;
         afterErrorsAndWarningsArray.forEach(afterErrorOrWarning => {
             if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {

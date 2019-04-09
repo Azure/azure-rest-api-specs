@@ -16,9 +16,9 @@ let linterCmd = `npx autorest --validation --azure-validator --message-format=js
 var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
 var finalResult = {
-    "pullRequest": pullRequestNumber,
-    "repositoryUrl": utils.getRepoUrl(),
-    finalResult: "files",
+    pullRequest: pullRequestNumber,
+    repositoryUrl: utils.getRepoUrl(),
+    files: {},
 }
 
 // Creates and returns path to the logging directory
@@ -98,13 +98,13 @@ async function runTools(swagger, beforeOrAfter) {
 
 // Updates final result json to be written to the output file
 async function updateResult(spec, errors, beforeOrAfter) {
-    if (!finalResult['files'][spec]) {
-        finalResult['files'][spec] = {};
+    if (!finalResult.files[spec]) {
+        finalResult.files[spec] = {};
     }
-    if (!finalResult['files'][spec][beforeOrAfter]) {
-        finalResult['files'][spec][beforeOrAfter] = {};
+    if (!finalResult.files[spec][beforeOrAfter]) {
+        finalResult.files[spec][beforeOrAfter] = {};
     }
-    finalResult['files'][spec][beforeOrAfter] = errors;
+    finalResult.files[spec][beforeOrAfter] = errors;
 }
 
 // main function
