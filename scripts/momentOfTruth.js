@@ -13,10 +13,11 @@ let pullRequestNumber = utils.getPullRequestNumber();
 let linterCmd = `npx autorest --validation --azure-validator --message-format=json `;
 var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
-var finalResult = {};
-finalResult["pullRequest"] = pullRequestNumber;
-finalResult["repositoryUrl"] = utils.getRepoUrl();
-finalResult["files"] = {};
+var finalResult = {
+    "pullRequest": pullRequestNumber,
+    "repositoryUrl": utils.getRepoUrl(),
+    finalResult: "files",
+}
 
 // Creates and returns path to the logging directory
 function getLogDir() {
