@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 'use strict';
-var assert = require("assert"),
+const
   os = require('os'),
   fs = require('fs-extra'),
   glob = require('glob'),

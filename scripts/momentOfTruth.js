@@ -3,6 +3,8 @@
 
 'use strict';
 
+const avocado = require("@azure/avocado")
+
 const exec = require('child_process').exec,
     path = require('path'),
     utils = require('../test/util/utils'),
@@ -111,6 +113,13 @@ async function runScript() {
     console.log(configsToProcess);
     createLogFile();
     console.log(`The results will be logged here: "${logFilepath}".`)
+
+    const cwd = path.resolve("./")
+    console.log(`cwd: ${cwd}`)
+    const p = avocado.createPullRequestProperties({ cwd, env: process.env})
+    if (p === undefined) {
+        console.error(`not a PR`)
+    }
 
     if (configsToProcess.length > 0) {
         for (const configFile of configsToProcess) {
