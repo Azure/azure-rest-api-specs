@@ -119,6 +119,8 @@ async function runScript() {
     const p = avocado.createPullRequestProperties({ cwd, env: process.env})
     if (p === undefined) {
         console.error(`not a PR`)
+    } else {
+        console.log(p)
     }
 
     if (configsToProcess.length > 0) {
