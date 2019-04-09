@@ -116,23 +116,31 @@ async function runScript() {
 
     const cwd = path.resolve("./")
     console.log(`cwd: ${cwd}`)
-    const p = avocado.createPullRequestProperties({ cwd, env: process.env})
+    const p = await avocado.createPullRequestProperties({ cwd, env: process.env})
     if (p === undefined) {
         console.error(`not a PR`)
-    } else {
-        console.log(p)
+        return
     }
 
     if (configsToProcess.length > 0) {
+        process.chdir(p.workingDir)
+
+        p.checkout(p.sourceBranch)
         for (const configFile of configsToProcess) {
             await runTools(configFile, 'after');
         }
 
+        p.checkout(p.sourceBranch)
+        for (const configFile of configsToProcess) {
+            await runTools(configFile, 'before');
+        }
+        /*
         await utils.doOnBranch(utils.getTargetBranch(), async () => {
             for (const configFile of configsToProcess) {
                 await runTools(configFile, 'before');
             }
         });
+        */
     }
 
     writeContent(JSON.stringify(finalResult, null, 2));
