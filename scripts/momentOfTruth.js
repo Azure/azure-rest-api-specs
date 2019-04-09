@@ -107,7 +107,7 @@ async function updateResult(spec, errors, beforeOrAfter) {
     finalResult['files'][spec][beforeOrAfter] = errors;
 }
 
-//main function
+// main function
 async function runScript() {
     console.log('Processing configs:');
     console.log(configsToProcess);
