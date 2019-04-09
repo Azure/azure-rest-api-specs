@@ -123,6 +123,7 @@ async function runScript() {
     }
 
     if (configsToProcess.length > 0) {
+        console.log(`p.workingDir ${p.workingDir}`)
         process.chdir(p.workingDir)
 
         p.checkout(p.sourceBranch)
