@@ -140,7 +140,7 @@ function iconFor(type, num = undefined) {
     if (num === 0) {
         return ':white_check_mark:';
     }
-    
+
     if (type.toLowerCase().includes('error')) {
         return ':x:';
     } else {
@@ -290,6 +290,7 @@ function postProcessing() {
         return;
     }
 
+    console.log(jsonData)
     const configFiles = Object.keys(jsonData['files']);
     configFiles.sort();
 
@@ -397,7 +398,7 @@ function postProcessing() {
     const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
     const armSummary = getSummaryBlock("ARM-related validation Errors / Warnings", armFileSummaries, armContactMessage);
     const text = `${sdkSummary}<br><br>\n\n${armSummary}<br><br>\n\n${githubFooter}`;
-    
+
     const [title, summary] = getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount);
     const output = {
         title,
