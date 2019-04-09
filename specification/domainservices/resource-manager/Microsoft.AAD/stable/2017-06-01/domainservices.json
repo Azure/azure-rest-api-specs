@@ -147,18 +147,14 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           },
           {
-            "name": "properties",
+            "name": "domainService",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainServiceProperties"
+              "$ref": "#/definitions/DomainService"
             },
             "description": "Properties supplied to the Create or Update a Domain Service operation."
           }
@@ -208,11 +204,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           }
         ],
         "responses": {
@@ -247,11 +239,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           }
         ],
         "responses": {
@@ -290,18 +278,14 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "domainServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the domain service in the specified subscription and resource group."
+            "$ref": "#/parameters/DomainServiceNameParameter"
           },
           {
-            "name": "properties",
+            "name": "domainService",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DomainServicePatchProperties"
+              "$ref": "#/definitions/DomainService"
             },
             "description": "Properties supplied to the Update a Domain Service operation."
           }
@@ -365,9 +349,6 @@
           "description": "Resource etag"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "DomainService": {
@@ -489,35 +470,6 @@
           "readOnly": true,
           "type": "string",
           "description": "the current deployment or provisioning state, which only appears in the response."
-        }
-      }
-    },
-    "DomainServicePatchProperties": {
-      "description": "Update Properties of the Domain Service.",
-      "properties": {
-        "ldapsSettings": {
-          "$ref": "#/definitions/LdapsSettings",
-          "description": "Secure LDAP Settings"
-        },
-        "notificationSettings": {
-          "$ref": "#/definitions/NotificationSettings",
-          "description": "Notification Settings"
-        },
-        "domainSecuritySettings": {
-          "$ref": "#/definitions/DomainSecuritySettings",
-          "description": "DomainSecurity Settings"
-        },
-        "filteredSync": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "description": "Enabled or Disabled flag to turn on Group-based filtered sync",
-          "x-ms-enum": {
-            "name": "filteredSync",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -802,6 +754,14 @@
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "DomainServiceNameParameter": {
+      "name": "domainServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the domain service.",
       "x-ms-parameter-location": "method"
     }
   }

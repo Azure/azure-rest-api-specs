@@ -2,7 +2,7 @@
 First, thank you for contributing to Azure specs repository! Swagger specs are the basis for generating Azure SDKs in multiple different languages, Azure CLIs for interacting with the services, and can provide documentation for these services.
 
 ## Basics
-If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
+If you're a spec author looking for information about all of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
 
 ## Table of Contents
 [Before starting](#before-starting)
@@ -86,7 +86,7 @@ Use the git tools you have available to you, such as amend, rebase, etc.
 
 
 ## Review process
-We review spec PRs to maintain a high bar of quality for all products that will be generated from these specs (including SDKs in all languages, CLIs and documentation). It's critical that spec files are both sytactically and semantically correct, as well as conform to common patterns that make it possible to generate SDKs and CLIs that are usable for customers. Since specs are the base input for all of these products, the review process starts with PRs to this repository. Please refer to [Swagger Review Process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Review-Process) for more details.
+We review spec PRs to maintain a high bar of quality for all products that will be generated from these specs (including SDKs in all languages, CLIs and documentation). It's critical that spec files are both syntactically and semantically correct, as well as conform to common patterns that make it possible to generate SDKs and CLIs that are usable for customers. Since specs are the base input for all of these products, the review process starts with PRs to this repository. Please refer to [Swagger Review Process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Review-Process) for more details.
 
 The expectation is that every spec in a PR will be correct JSON, syntactically correct, will semantically agree with the service it applies to, and will follow the recommended patterns.
 
@@ -95,7 +95,7 @@ A spec file must be valid JSON, according to the [JSON specification](https://to
 
 #### Semantic correctness
 Your spec file must correctly represent your service. Even if a spec passes all of the rules listed above, it might not accurately describe the service that it is intended to describe. This could include 
-- Incorrect schemas for responses or requests (both missing and superfluous properities)
+- Incorrect schemas for responses or requests (both missing and superfluous properties)
 - Missing operations
 - Missing parameters (especially required ones)
 - etc (this list is not comprehensive)

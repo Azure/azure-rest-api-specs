@@ -63,6 +63,7 @@ try {
     console.log(`Failed to read diff results from file ${logFilepath}`);
     console.log("File content:");
     console.log(data);
+    process.exit(1)
 }
 
 function compareJsonRef(beforeJsonRef, afterJsonRef) {

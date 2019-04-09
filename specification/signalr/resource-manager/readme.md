@@ -26,9 +26,31 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-01-preview
+tag: package-2018-10-01
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.NameAvailability.properties.nameAvailable
+    reason:  The boolean properties 'nameAvailable' is actually boolean value defined by Azure API spec
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.Dimension.properties.toBeExportedForShoebox
+    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+```
+
+### Tag: package-2018-10-01
+
+These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10-01'
+input-file:
+- Microsoft.SignalRService/stable/2018-10-01/signalr.json
+```
 
 ### Tag: package-2018-03-01-preview
 
@@ -112,6 +134,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-signalr
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-03-01-preview
+  - tag: package-2018-10-01
+```
+
+### Tag: package-2018-10-01 and java
+
+These settings apply only when `--tag=package-2018-10-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-10-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.signalr.v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/signalr/resource-manager/v2018_10_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-03-01-preview and java
