@@ -126,12 +126,12 @@ async function runScript() {
         console.log(`p.workingDir ${p.workingDir}`)
         process.chdir(p.workingDir)
 
-        p.checkout(p.sourceBranch)
+        await p.checkout(p.sourceBranch)
         for (const configFile of configsToProcess) {
             await runTools(configFile, 'after');
         }
 
-        p.checkout(p.sourceBranch)
+        await p.checkout(p.sourceBranch)
         for (const configFile of configsToProcess) {
             await runTools(configFile, 'before');
         }
