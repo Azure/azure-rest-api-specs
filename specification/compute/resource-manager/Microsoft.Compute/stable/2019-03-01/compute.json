@@ -2000,6 +2000,14 @@
             "description": "The name of the virtual machine."
           },
           {
+            "name": "skipShutdown",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "description": "The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -2969,6 +2977,14 @@
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
             },
             "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "name": "skipShutdown",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+	          "default": false,
+            "description": "The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3983,6 +3999,14 @@
             "required": true,
             "type": "string",
             "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "skipShutdown",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+	          "default": false,
+            "description": "The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -7319,6 +7343,10 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
+        "doNotRunExtensionsOnOverprovisionedVMs":{
+          "type": "boolean",
+          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+        },
         "uniqueId": {
           "readOnly": true,
           "type": "string",
@@ -7969,7 +7997,7 @@
       },
       "description": "The instance view of a virtual machine scale set VM."
     },
-	"VirtualMachineScaleSetVMNetworkProfileConfiguration": {
+	  "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
       "properties": {
         "networkInterfaceConfigurations": {
            "type": "array",
