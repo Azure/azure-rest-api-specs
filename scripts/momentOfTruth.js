@@ -131,7 +131,7 @@ async function runScript() {
             await runTools(configFile, 'after');
         }
 
-        await p.checkout(p.sourceBranch)
+        await p.checkout(p.targetBranch)
         for (const configFile of configsToProcess) {
             await runTools(configFile, 'before');
         }
