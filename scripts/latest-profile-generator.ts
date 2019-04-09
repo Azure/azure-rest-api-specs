@@ -4,7 +4,7 @@ import * as Path from "path"
 import * as cm from "@ts-common/commonmark-to-markdown"
 import * as it from "@ts-common/iterator"
 import * as yaml from "js-yaml"
-import {  values } from '@ts-common/string-map';
+import {  values, keys } from '@ts-common/string-map';
 
 type Code = {
   readonly "input-file"?: ReadonlyArray<string>|string
@@ -49,12 +49,12 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
     }
 
     const allPaths = await getPaths(specs);
-    const profileData = getResources(allPaths);
+    const crawlResult = getCrawlData(allPaths);
     const telemetryDir = Path.join(profilesDirectory, 'crawl-telemetry.json')
-    fs.writeFile(telemetryDir, JSON.stringify(profileData, null, 2));
+    fs.writeFile(telemetryDir, JSON.stringify(crawlResult, null, 2));
     console.log(`Telemetry written at ${telemetryDir}`);
     
-    const latestProfile = getLatestProfile(profileData.resources);
+    const latestProfile = getLatestProfile(crawlResult);
     const latestProfileMarkDown = cm.markDownExToString(
       { 
         markDown: cm.createNode(
@@ -95,7 +95,7 @@ async function getPaths(specHandles: Array<string>): Promise<Array<PathMetadata>
       const spec = JSON.parse((await fs.readFile(specHandle)).toString());
       if (spec.swagger && spec.info.version) {
         for (const path of Object.entries(spec.paths)) {
-          result.push({path: path[0], apiVersion: spec.info.version, originalLocation: Path.relative(process.cwd(), specHandle).replace(/\\/g, '/')});
+          result.push({endpoint: path[0], apiVersion: spec.info.version, originalLocation: Path.relative(process.cwd(), specHandle).replace(/\\/g, '/')});
         }   
       }
     }  catch (e) {
@@ -106,23 +106,31 @@ async function getPaths(specHandles: Array<string>): Promise<Array<PathMetadata>
   return result;   
 }
 
-function getResources(pathsWithVersion: Array<PathMetadata>): {
-  invalidPaths: Array<PathMetadata>;
-  resources: Array<Resource>;
-} {
+function getCrawlData(paths: Array<PathMetadata>): CrawlResult {
   console.log(`Crawling paths for resources and getting telemetry ...`);
-  const result = { resources: new Array<Resource>(), invalidPaths: new Array<PathMetadata>()};
+  const result: CrawlResult = {resources: new Array<Resource>(), operations: {}};
   const providerNamePattern = `microsoft\.[a-z]+(?:\.[a-z]+)?`;
   const parameterPattern = `\{[a-z0-9]+\}`;
   const nonParameterPattern = `[a-z0-9]+`;
-  const validPathRegex = new RegExp(`(.*)(\/providers\/${providerNamePattern}(:?\/${nonParameterPattern}|\/${parameterPattern})+\/?$)`, 'gi');
-  for (const pathWithVersion of pathsWithVersion) {      
-    if (pathWithVersion.path.match(validPathRegex)) {
-      const resource = { path: pathWithVersion.path, apiVersion: pathWithVersion.apiVersion, provider: '', name: ''};
+  const resourcePathRegex = new RegExp(`(.*)(\/providers\/${providerNamePattern}(:?\/${nonParameterPattern}|\/${parameterPattern})+\/?$)`, 'gi');
+  for (const p of paths) {      
+    if (p.endpoint.match(resourcePathRegex)) {
+      const resource = { path: p.endpoint, apiVersion: p.apiVersion, providerNamespace: '', name: ''};
       
       // get last /provider/microsoft.<provider>... section. Also, get rid of any possible trailing slash '/'
-      const scopedProviderSection =  resource.path.replace(/\/*$/, '').replace(validPathRegex, '$2').split('/');
-      resource.provider = scopedProviderSection[2].toLowerCase();
+      const scopedProviderSection =  resource.path.replace(/\/*$/, '').replace(resourcePathRegex, '$2').split('/');
+      resource.providerNamespace = scopedProviderSection[2].toLowerCase();
+
+      // for now, only provider-namespaces ending with admin are blacklisted
+      if (resource.providerNamespace.endsWith('admin')){
+        if (result.blackListedPaths === undefined) {
+          result.blackListedPaths = [];
+        }
+
+        result.blackListedPaths.push(p);
+        continue;
+      } 
+
       const resourcesSection = `/${scopedProviderSection.slice(3).join('/')}`;
       const resourceRegex = new RegExp(`\/${nonParameterPattern}\/${nonParameterPattern}|\/${nonParameterPattern}\/${parameterPattern}|^\/${nonParameterPattern}$`, 'gi');
       const resourceMatches = resourcesSection.match(resourceRegex); 
@@ -133,7 +141,11 @@ function getResources(pathsWithVersion: Array<PathMetadata>): {
 
       result.resources.push(resource);
     } else {
-      result.invalidPaths.push(pathWithVersion);
+      if (result.operations[p.endpoint] === undefined){
+        result.operations[p.endpoint] = [];
+      }
+
+      result.operations[p.endpoint].push({apiVersion:p.apiVersion, originalLocation: p.originalLocation})
     }    
   }
 
@@ -141,53 +153,110 @@ function getResources(pathsWithVersion: Array<PathMetadata>): {
 }
 
 
-export function getLatestProfile(allResources: Array<Resource>): Profile { 
+export function getLatestProfile(crawlData: CrawlResult): Profile { 
+  const latestProfile: Profile = {resources:{}, operations: {}};
+  const allResources = crawlData.resources;
+  const allOperations = crawlData.operations;
+  const compareVersions = require('compare-versions');
   console.log('Constructing latest profile ...')
-  allResources.sort((a, b) => {
-    return (a.apiVersion > b.apiVersion) ? -1 : (a.apiVersion < b.apiVersion) ? 1 : 0;
+
+  // --- Process Resources ---
+  crawlData.resources.sort((a, b) => {
+    try{
+      return compareVersions(getSemverEquivalent(b.apiVersion), getSemverEquivalent(a.apiVersion));
+    } catch {
+      const dummy = '';
+      console.log(dummy);
+    }
+    
   });
 
   const latestResources: {[uid: string] : Resource } = {};
   for (const resource of allResources) {
-    const resourceUid = `${resource.provider.toLowerCase()}${resource.name.toLowerCase()}`;
+    const resourceUid = `${resource.providerNamespace.toLowerCase()}${resource.name.toLowerCase()}`;
     if (latestResources[resourceUid] === undefined) {
-      latestResources[resourceUid] = { apiVersion: resource.apiVersion, name: resource.name, provider: resource.provider.toLowerCase(), path: resource.path  };
+      latestResources[resourceUid] = { apiVersion: resource.apiVersion, name: resource.name, providerNamespace: resource.providerNamespace.toLowerCase(), path: resource.path  };
     }
   }
 
-  const latestProfile: Profile = {};
+ 
   for (const resource of values(latestResources)) {
-    latestProfile[resource.provider] = latestProfile[resource.provider] || {};
-    latestProfile[resource.provider][resource.apiVersion] = latestProfile[resource.provider][resource.apiVersion] || [];
-    latestProfile[resource.provider][resource.apiVersion].push(resource.name);
+    latestProfile.resources[resource.providerNamespace] = latestProfile.resources[resource.providerNamespace] || {};
+    latestProfile.resources[resource.providerNamespace][resource.apiVersion] = latestProfile.resources[resource.providerNamespace][resource.apiVersion] || [];
+    latestProfile.resources[resource.providerNamespace][resource.apiVersion].push(resource.name);
   }
 
-  for (const apiVersion of values(latestProfile)) {
+  for (const apiVersion of values(latestProfile.resources)) {
     for (const resources of values(apiVersion)) {
       resources.sort();
     }
   }
 
+  // --- Process Operations ---
+  for (const operation of values(allOperations)) {
+    operation.sort((a, b) => {
+      return compareVersions(getSemverEquivalent(b.apiVersion), getSemverEquivalent(a.apiVersion));
+    });
+  }
+
+  for (const operation of keys(allOperations)) {
+      latestProfile.operations[operation] = allOperations[operation][0].apiVersion;
+  } 
+
   return latestProfile;
+}
+
+// azure rest specs mostly uses versioning of the form yyyy-mm-dd
+// To take into consideration this we convert to an equivalent of
+// semver for comparisons.
+function getSemverEquivalent(version: string) {
+  let result = '';
+  for (const i of version.split(/[\.\-]/g)) {
+    if (!result) {
+      result = i;
+      continue;
+    }
+    result = Number.isNaN(Number.parseInt(i)) ? `${result}-${i}` : `${result}.${Number(i)}`;
+  }
+  
+  const semver = require('semver');
+
+  return semver.valid(semver.coerce(result));
 }
 
 interface Resource {
   path: string;
   apiVersion: string;
-  provider: string;
+  providerNamespace: string;
   name: string;
 }
 
+interface CrawlResult {
+  operations: {
+    [operation:string]: Array<{
+      apiVersion: string;
+      originalLocation: string; 
+    }>;
+  },
+  resources: Array<Resource>,
+  blackListedPaths?: Array<PathMetadata>;
+}
+
 interface PathMetadata {
-  path: string;
+  endpoint: string;
   apiVersion: string;
   originalLocation: string;
 }
 
 interface Profile {
-  [resourceProvider: string]: {
-    [apiVersion: string]: Array<string>;
-  };
+  resources: {
+    [providerNamespace: string]: {
+      [apiVersion: string]: Array<string>;
+    };
+  },
+  operations: {
+    [path: string]: string;
+  }
 }
 
 main(Path.join(process.cwd(), "specification"), Path.join(process.cwd(), "profiles"));
