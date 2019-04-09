@@ -1,0 +1,260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContosoManagementClient",
+    "description": "Contoso provider",
+    "version": "2019-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.contoso/employees/{employeeName}": {
+      "get": {
+        "description": "Returns employee resource for a given name.",
+        "operationId": "Employees_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee details.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmployeeDetailsGet": {
+            "$ref": "./examples/EmployeeDetailsGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update employee resource.",
+        "operationId": "Employees_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "EmployeeProperties",
+            "description": "Properties that need to be specified to update current pricing plan for an Application Insights component.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentPricingPlanUpdate": {
+            "$ref": "./examples/CurrentPricingPlanCreateAndUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update current pricing plan for an Application Insights component.",
+        "operationId": "ComponentCurrentPricingPlan_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "EmployeeProperties",
+            "description": "Properties that need to be specified to update current pricing plan for an Application Insights component.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentPricingPlanUpdate": {
+            "$ref": "./examples/CurrentPricingPlanUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ApplicationInsightsComponentPricingPlan": {
+      "description": "An Application Insights component pricing plan",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EmployeeProperties",
+          "description": "The properties of the suppression.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EmployeeProperties": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap",
+      "properties": {
+        "fullname": {
+          "type": "string",
+          "description": "Employee full name."
+        },
+        "city": {
+          "type": "string",
+          "description": "city."
+        },
+        "organization": {
+          "type": "string",
+          "readOnly": true,
+          "description": "org like ARM, Cosine, Bing, Office etc..."
+        },
+        "building": {
+          "type": "integer",
+          "description": "building number like 41."
+        },
+        "transportation": {
+          "type": "string",
+          "description": "Gets or sets the deployment mode.",
+          "enum": [
+            "CarPool",
+            "PublicTransport",
+			"Personal",
+			"Bike",
+			"Walk"
+          ],
+          "x-ms-enum": {
+            "name": "transportation",
+            "modelAsString": false
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "EmployeeNameParameter": {
+      "name": "employeeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name employee resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
