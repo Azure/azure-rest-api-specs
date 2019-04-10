@@ -70,6 +70,39 @@
         }
       }
     },
+    "/providers/Microsoft.EventHub/availableClusters": {
+      "post": {
+        "tags": [
+          "Event Hubs Clusters"
+        ],
+        "operationId": "Clusters_ListAvailableClusters",
+        "x-ms-examples": {
+          "ListAvailableClusters": {
+            "$ref": "./examples/Clusters/ListAvailableClustersPost.json"
+          }
+        },
+        "description": "List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available clusters listed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableClustersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why available clusters could not be successfully listed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters": {
       "get": {
         "tags": [
@@ -312,7 +345,7 @@
         "tags": [
           "Event Hubs Namespace Enumeration in Cluster"
         ],
-        "operationId": "Clusters_NamespaceList",
+        "operationId": "Clusters_ListNamespaces",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1291,6 +1324,18 @@
         }
       ],
       "description": "Single Event Hubs Cluster resource in List or Get operations."
+    },
+    "AvailableClustersList": {
+      "properties": {
+        "availableClusters": {
+          "description": "Pre-provisioned Event Hubs Cluster count per region with such clusters available.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      },
+      "description": "Enumeration of the pre-provisioned Event Hubs Cluster count per region with clusters readily available."
     },
     "ClusterListResult": {
       "properties": {
