@@ -199,7 +199,7 @@ exports.getTimeStamp = function getTimeStamp() {
 
 /**
  * Retrieves list of swagger files to be processed for linting
- * @returns {Array} list of files to be processed for linting
+ * @returns {Promise<string[]>} list of files to be processed for linting
  */
 exports.getConfigFilesChangedInPR = async function getConfigFilesChangedInPR(pr) {
   if (exports.prOnly === 'true') {
@@ -239,8 +239,8 @@ exports.getConfigFilesChangedInPR = async function getConfigFilesChangedInPR(pr)
 
 /**
  * Retrieves list of swagger files to be processed for linting
- * @returns {Array} list of files to be processed for linting
- * @param {avocado.PullRequestProperties}
+ * @returns {Promise<string[]>} list of files to be processed for linting
+ * @param {avocado.PullRequestProperties} pr
  */
 exports.getFilesChangedInPR = async function getFilesChangedInPR(pr) {
   let result = exports.swaggers;
@@ -249,20 +249,20 @@ exports.getFilesChangedInPR = async function getFilesChangedInPR(pr) {
     try {
       const filesChanged = await pr.diff()
       console.log('>>>>> Files changed in this PR are as follows:')
-      console.log(filesChanged);
-      swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
+      console.log(filesChanged)
+      swaggerFilesInPR = filesChanged.filter(function (item) {
         if (item.match(/.*(json|yaml)$/ig) == null || item.match(/.*specification.*/ig) == null) {
-          return false;
+          return false
         }
         if (item.match(/.*\/examples\/*/ig) !== null) {
-          return false;
+          return false
         }
         if (item.match(/.*\/quickstart-templates\/*/ig) !== null) {
-          return false;
+          return false
         }
-        return true;
-      });
-      console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
+        return true
+      })
+      console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`)
 
       var deletedFiles = swaggerFilesInPR.filter(function (swaggerFile) {
         return !fs.existsSync(swaggerFile);
@@ -282,7 +282,7 @@ exports.getFilesChangedInPR = async function getFilesChangedInPR(pr) {
 
 /**
  * Downloads the remote schemas and initializes the validator with remote references.
- * @returns {Object} context Provides the schemas in json format and the validator.
+ * @returns {Promise<{}>} context Provides the schemas in json format and the validator.
  */
 exports.initializeValidator = async function initializeValidator() {
   const context = {
