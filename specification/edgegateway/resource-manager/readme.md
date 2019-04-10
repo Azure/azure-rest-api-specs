@@ -68,7 +68,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.EdgeGateway
-  payload-flattening-threshold: 2
+  payload-flattening-threshold: 0
   output-folder: $(csharp-sdks-folder)/EdgeGateway/Management.EdgeGateway/Generated
   clear-output-folder: true
 ```
