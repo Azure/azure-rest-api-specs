@@ -4,7 +4,6 @@
 'use strict';
 const
   avocado = require('@azure/avocado'),
-  os = require('os'),
   fs = require('fs-extra'),
   glob = require('glob'),
   path = require('path'),

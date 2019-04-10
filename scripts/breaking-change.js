@@ -129,11 +129,6 @@ async function runScript() {
     process.chdir(p.workingDir)
     newSwaggers = swaggersToProcess.filter(s => !fs.existsSync(s))
     process.chdir(cwd)
-    /*
-    newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
-      return swaggersToProcess.filter(s => !fs.existsSync(s))
-    });
-    */
   }
 
   console.log('Processing via AutoRest...');
