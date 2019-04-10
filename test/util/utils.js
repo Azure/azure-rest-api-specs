@@ -76,30 +76,6 @@ exports.getTargetBranch = function getTargetBranch() {
 };
 
 /**
- * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
- */
-/*
-exports.doOnBranch = async function doOnBranch(branch, func) {
-  exports.fetchBranch(branch);
-  const branchSha = exports.resolveRef(`origin/${branch}`);
-  const tmpDir = path.join(os.tmpdir(), branchSha);
-
-  const currentDir = process.cwd();
-  exports.checkoutBranch(branch, tmpDir);
-
-  console.log(`Changing directory and executing the function...`);
-  process.chdir(tmpDir);
-  const result = await func();
-
-  console.log(`Restoring previous directory and deleting secondary working tree...`);
-  process.chdir(currentDir);
-  execSync(`rm -rf ${tmpDir}`);
-
-  return result;
-}
-*/
-
-/**
  * Resolve a ref to its commit hash
  */
 exports.resolveRef = function resolveRef(ref) {
@@ -107,26 +83,6 @@ exports.resolveRef = function resolveRef(ref) {
   console.log(`> ${cmd}`);
   return execSync(cmd, { encoding: 'utf8' }).trim();
 }
-
-/**
- * Fetch ref for a branch from the origin
- */
-/*
-exports.fetchBranch = function fetchBranch(branch) {
-  let cmds = [
-    `git remote -vv`,
-    `git branch --all`,
-    `git remote set-branches origin --add ${branch}`,
-    `git fetch origin ${branch}`
-  ];
-
-  console.log(`Fetching branch ${branch} from origin...`);
-  for (let cmd of cmds) {
-    console.log(`> ${cmd}`);
-    execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
-  }
-}
-*/
 
 /**
  * Checkout a copy of branch to location
@@ -247,17 +203,10 @@ exports.getTimeStamp = function getTimeStamp() {
  */
 exports.getConfigFilesChangedInPR = async function getConfigFilesChangedInPR(pr) {
   if (exports.prOnly === 'true') {
-    let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
-      /*
-      targetBranch = exports.getTargetBranch();
-      execSync(`git fetch origin ${targetBranch}`);
-      cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
-      filesChanged = execSync(cmd, { encoding: 'utf8' }).split('\n');
+      let filesChanged = await pr.diff()
       console.log('>>>>> Files changed in this PR are as follows:');
       console.log(filesChanged);
-      */
-      filesChanged = await pr.diff()
       // traverse up to readme.md files
       const configFiles = new Set();
       for (let fileChanged of filesChanged) {
@@ -296,14 +245,8 @@ exports.getConfigFilesChangedInPR = async function getConfigFilesChangedInPR(pr)
 exports.getFilesChangedInPR = async function getFilesChangedInPR(pr) {
   let result = exports.swaggers;
   if (exports.prOnly === 'true') {
-    let targetBranch, cmd, filesChanged, swaggerFilesInPR;
+    let swaggerFilesInPR;
     try {
-      /*
-      targetBranch = exports.getTargetBranch();
-      execSync(`git fetch origin ${targetBranch}`);
-      cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
-      filesChanged = execSync(cmd, { encoding: 'utf8' });
-      */
       const filesChanged = await pr.diff()
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
