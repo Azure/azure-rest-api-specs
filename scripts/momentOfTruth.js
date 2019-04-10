@@ -10,7 +10,7 @@ const exec = require('child_process').exec,
     utils = require('../test/util/utils'),
     fs = require('fs');
 
-let configsToProcess = utils.getConfigFilesChangedInPR();
+// let configsToProcess = await utils.getConfigFilesChangedInPR();
 let pullRequestNumber = utils.getPullRequestNumber();
 let linterCmd = `npx autorest --validation --azure-validator --message-format=json `;
 var filename = `${pullRequestNumber}.json`;
@@ -110,13 +110,15 @@ async function updateResult(spec, errors, beforeOrAfter) {
 // main function
 async function runScript() {
     console.log('Processing configs:');
+    const cwd = path.resolve("./")
+    const p = await avocado.createPullRequestProperties({ cwd, env: process.env})
+    let configsToProcess = await utils.getConfigFilesChangedInPR(p);
+
     console.log(configsToProcess);
     createLogFile();
     console.log(`The results will be logged here: "${logFilepath}".`)
 
-    const cwd = path.resolve("./")
     console.log(`cwd: ${cwd}`)
-    const p = await avocado.createPullRequestProperties({ cwd, env: process.env})
     if (p === undefined) {
         console.error(`not a PR`)
         return

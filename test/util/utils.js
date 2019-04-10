@@ -3,6 +3,7 @@
 
 'use strict';
 const
+  avocado = require('@azure/avocado'),
   os = require('os'),
   fs = require('fs-extra'),
   glob = require('glob'),
@@ -110,6 +111,7 @@ exports.resolveRef = function resolveRef(ref) {
 /**
  * Fetch ref for a branch from the origin
  */
+/*
 exports.fetchBranch = function fetchBranch(branch) {
   let cmds = [
     `git remote -vv`,
@@ -124,6 +126,7 @@ exports.fetchBranch = function fetchBranch(branch) {
     execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
   }
 }
+*/
 
 /**
  * Checkout a copy of branch to location
@@ -242,17 +245,19 @@ exports.getTimeStamp = function getTimeStamp() {
  * Retrieves list of swagger files to be processed for linting
  * @returns {Array} list of files to be processed for linting
  */
-exports.getConfigFilesChangedInPR = function getConfigFilesChangedInPR() {
+exports.getConfigFilesChangedInPR = async function getConfigFilesChangedInPR(pr) {
   if (exports.prOnly === 'true') {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
+      /*
       targetBranch = exports.getTargetBranch();
       execSync(`git fetch origin ${targetBranch}`);
       cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
       filesChanged = execSync(cmd, { encoding: 'utf8' }).split('\n');
       console.log('>>>>> Files changed in this PR are as follows:');
       console.log(filesChanged);
-
+      */
+      filesChanged = await pr.diff()
       // traverse up to readme.md files
       const configFiles = new Set();
       for (let fileChanged of filesChanged) {
@@ -286,16 +291,20 @@ exports.getConfigFilesChangedInPR = function getConfigFilesChangedInPR() {
 /**
  * Retrieves list of swagger files to be processed for linting
  * @returns {Array} list of files to be processed for linting
+ * @param {avocado.PullRequestProperties}
  */
-exports.getFilesChangedInPR = function getFilesChangedInPR() {
+exports.getFilesChangedInPR = async function getFilesChangedInPR(pr) {
   let result = exports.swaggers;
   if (exports.prOnly === 'true') {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
+      /*
       targetBranch = exports.getTargetBranch();
       execSync(`git fetch origin ${targetBranch}`);
       cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
       filesChanged = execSync(cmd, { encoding: 'utf8' });
+      */
+      const filesChanged = await pr.diff()
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
       swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {

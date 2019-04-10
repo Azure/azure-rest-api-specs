@@ -108,9 +108,11 @@ async function processViaAutoRest(swaggerPath) {
 async function runScript() {
   // See whether script is in Travis CI context
   console.log(`isRunningInTravisCI: ${isRunningInTravisCI}`);
+  const cwd = path.resolve("./")
+  const p = await avocado.createPullRequestProperties({ cwd, env: process.env})
 
   let targetBranch = utils.getTargetBranch();
-  let swaggersToProcess = utils.getFilesChangedInPR();
+  let swaggersToProcess = await utils.getFilesChangedInPR(p);
 
   console.log('Processing swaggers:');
   console.log(swaggersToProcess);
@@ -118,7 +120,6 @@ async function runScript() {
   console.log('Finding new swaggers...')
   let newSwaggers = [];
   if (isRunningInTravisCI && swaggersToProcess.length > 0) {
-    const cwd = path.resolve("./")
     const p = await avocado.createPullRequestProperties({ cwd, env: process.env})
     if (p === undefined) {
         console.error(`not a PR`)
