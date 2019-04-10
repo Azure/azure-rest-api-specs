@@ -976,19 +976,67 @@
             "type": "boolean"
           },
           {
-            "name": "dateTime",
-            "in": "query",
-            "description": "The date and time to return time zone information for. It allows  the service to decide whether Daylight Saving Time time zone should  be used or not. It must conform to  [RFC-3339](https://www.ietf.org/rfc/rfc3339.txt).\n\nExamples:\n* 2017-12-19T16:39:57\n* 2017-12-19T16:39:57-08:00",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
             "name": "returnMatchType",
             "in": "query",
             "description": "Include information on the type of match the geocoder achieved in the response.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/en-us/rest/api/maps/search/getsearchpolygon) API.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Country",
+              "CountrySubdivision",
+              "CountrySecondarySubdivision",
+              "CountryTertiarySubdivision",
+              "Municipality",
+              "MunicipalitySubdivision",
+              "Neighbourhood",
+              "PostalCodeArea"
+            ],
+            "x-ms-enum": {
+              "name": "EntityType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "Country",
+                  "description": "Country name"
+                },
+                {
+                  "value": "CountrySubdivision",
+                  "description": "State or Province"
+                },
+                {
+                  "value": "CountrySecondarySubdivision",
+                  "description": "County"
+                },
+                {
+                  "value": "CountryTertiarySubdivision",
+                  "description": "Named Area"
+                },
+                {
+                  "value": "Municipality",
+                  "description": "City / Town"
+                },
+                {
+                  "value": "MunicipalitySubdivision",
+                  "description": "Sub / Super City"
+                },
+                {
+                  "value": "Neighbourhood",
+                  "description": "Neighbourhood"
+                },
+                {
+                  "value": "PostalCodeArea",
+                  "description": "Postal Code / Zip Code"
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -1822,9 +1870,7 @@
           "readOnly": true
         },
         "entityType": {
-          "description": "Optional section. Only present if type == Geography. Supported entity types:\n* County\n* CountrySubdivision\n* CountrySecondarySubdivision\n* CountryTertiarySubdivision\n* Municipality\n* MunicipalitySubdivision\n* Neighbourhood\n* PostalCodeArea",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/EntityType"
         },
         "poi": {
           "$ref": "#/definitions/SearchResultPoi"
@@ -1940,9 +1986,7 @@
           "readOnly": true
         },
         "entityType": {
-          "description": "Entity Type property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/EntityType"
         },
         "poi": {
           "$ref": "#/definitions/SearchResultPoi"
@@ -2154,9 +2198,7 @@
           "readOnly": true
         },
         "entityType": {
-          "description": "Entity Type property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/EntityType"
         },
         "poi": {
           "$ref": "#/definitions/SearchResultPoi"
@@ -2558,9 +2600,7 @@
           "readOnly": true
         },
         "entityType": {
-          "description": "Entity Type property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/EntityType"
         },
         "poi": {
           "$ref": "#/definitions/SearchResultPoi"
@@ -2665,9 +2705,7 @@
           "readOnly": true
         },
         "entityType": {
-          "description": "Entity Type property",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/EntityType"
         },
         "poi": {
           "$ref": "#/definitions/SearchResultPoi"
@@ -2987,6 +3025,58 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "EntityType": {
+      "description": "Defines geography entity types.",
+      "type": "string",
+      "enum": [
+        "Country",
+        "CountrySubdivision",
+        "CountrySecondarySubdivision",
+        "CountryTertiarySubdivision",
+        "Municipality",
+        "MunicipalitySubdivision",
+        "Neighbourhood",
+        "PostalCodeArea"
+      ],
+      "x-ms-enum": {
+        "name": "EntityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Country",
+            "description": "Country name"
+          },
+          {
+            "value": "CountrySubdivision",
+            "description": "State or Province"
+          },
+          {
+            "value": "CountrySecondarySubdivision",
+            "description": "County"
+          },
+          {
+            "value": "CountryTertiarySubdivision",
+            "description": "Named Area"
+          },
+          {
+            "value": "Municipality",
+            "description": "City / Town"
+          },
+          {
+            "value": "MunicipalitySubdivision",
+            "description": "Sub / Super City"
+          },
+          {
+            "value": "Neighbourhood",
+            "description": "Neighbourhood"
+          },
+          {
+            "value": "PostalCodeArea",
+            "description": "Postal Code / Zip Code"
+          }
+        ]
       }
     }
   }
