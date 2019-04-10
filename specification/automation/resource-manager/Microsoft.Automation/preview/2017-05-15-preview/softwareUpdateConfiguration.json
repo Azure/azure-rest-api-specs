@@ -801,8 +801,31 @@
             "type": "object",
             "$ref": "#/definitions/AzureQueryProperties"
           }
+        },
+        "nonAzureQueries":{
+          "description": "List of non Azure queries in the software update configuration.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/NonAzureQueryProperties"
+          }
         }
       }
+    },
+    "NonAzureQueryProperties":{
+      "type": "object",
+      "description": "Non Azure query for the update configuration.",
+      "properties":{
+        "functionAlias" :{
+          "type": "string",
+          "description": "Log Analytics Saved Search name."
+        },
+        "workspaceId" :{
+          "type": "string",
+          "description": "Workspace Id for Log Analytics in which the saved Search is resided."
+        }
+      }
+     
     },
     "AzureQueryProperties": {
       "type": "object",

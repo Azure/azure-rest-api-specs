@@ -26,7 +26,7 @@ These settings apply only when `--tag=package-2018-12-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-12-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/iothub/mgmt/2018-12-01-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/iothub/mgmt/2018-12-01-preview/$(namespace)
 ```
 
 ### Tag: package-2018-04 and go

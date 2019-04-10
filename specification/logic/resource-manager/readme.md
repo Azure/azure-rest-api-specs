@@ -55,6 +55,18 @@ directive:
   - suppress: R3016
     reason: Existing properties, can't be changed without breaking API.
     #where:
+    #  - $.definitions.AS2ErrorSettings.properties.resendIfMDNNotReceived
+    #  - $.definitions.AS2MdnSettings.properties.needMDN
+    #  - $.definitions.AS2MdnSettings.properties.signMDN
+    #  - $.definitions.AS2MdnSettings.properties.sendMDNAsynchronously
+    #  - $.definitions.AS2MdnSettings.properties.signOutboundMDNIfOptional
+    #  - $.definitions.AS2MdnSettings.properties.sendInboundMDNToMessageBox
+    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForInboundEncodedMessages
+    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForInboundDecodedMessages
+    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForOutboundMDN
+    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForOutboundEncodedMessages
+    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForOutboundDecodedMessages
+    #  - $.definitions.AS2SecuritySettings.properties.enableNRRForInboundMDN
     #  - $.definitions.EdifactValidationSettings.properties.validateEDITypes
     #  - $.definitions.EdifactValidationSettings.properties.validateXSDTypes
     #  - $.definitions.EdifactValidationOverride.properties.validateEDITypes

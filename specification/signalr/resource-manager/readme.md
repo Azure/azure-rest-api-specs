@@ -29,6 +29,20 @@ openapi-type: arm
 tag: package-2018-10-01
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.NameAvailability.properties.nameAvailable
+    reason:  The boolean properties 'nameAvailable' is actually boolean value defined by Azure API spec
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.Dimension.properties.toBeExportedForShoebox
+    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+```
+
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.

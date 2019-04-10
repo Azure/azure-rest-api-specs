@@ -156,6 +156,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_GetFeatureValue",
+        "x-ms-examples": {
+          "ExposureControl_GetFeatureValue": {
+            "$ref": "./examples/ExposureControl_GetFeatureValue.json"
+          }
+        },
+        "description": "Get exposure control feature for specific location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "The exposure control request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -2221,6 +2269,22 @@
             "x-ms-parameter-location": "method"
           },
           {
+            "name": "isRecovery",
+            "description": "Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "startActivityName",
+            "description": "In recovery mode, the rerun will start from this activity. If not specified, all activities will run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "name": "parameters",
             "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
             "in": "body",
@@ -4045,7 +4109,9 @@
             "ActivityRunEnd",
             "ActivityType",
             "TriggerName",
-            "TriggerRunTimestamp"
+            "TriggerRunTimestamp",
+            "RunGroupId",
+            "LatestOnly"
           ],
           "x-ms-enum": {
             "name": "RunQueryFilterOperand",
@@ -4148,6 +4214,16 @@
         "runId": {
           "description": "Identifier of a run.",
           "type": "string",
+          "readOnly": true
+        },
+        "runGroupId": {
+          "description": "Identifier that correlates all the recovery runs of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isLatest": {
+          "description": "Indicates if the recovered pipeline run is the latest in its group.",
+          "type": "boolean",
           "readOnly": true
         },
         "pipelineName": {
@@ -4691,6 +4767,36 @@
         "error": {
           "type": "string",
           "description": "The operation error message."
+        }
+      }
+    },
+    "ExposureControlRequest": {
+      "type": "object",
+      "description": "The exposure control request.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name."
+        },
+        "featureType": {
+          "type": "string",
+          "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlResponse": {
+      "type": "object",
+      "description": "The exposure control response.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "The feature value.",
+          "readOnly": true
         }
       }
     }

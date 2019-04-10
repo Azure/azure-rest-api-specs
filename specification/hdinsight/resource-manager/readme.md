@@ -50,19 +50,30 @@ tag: package-2018-06-preview
        - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
  ```
 
+ ``` yaml
+directive:
+  - suppress: R3016 # to suppress (DefinitionsPropertiesNamesCamelCase)
+    from: cluster.json
+    reason: The casing of this property is not incorrect.
+    where:
+      - $..["restAuthCredential.isEnabled"]
+      - $..["restAuthCredential.username"]
+      - $..["restAuthCredential.password"]
+```
+
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- Microsoft.HDInsight/preview/2018-06-01-preview/cluster.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/applications.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/locations.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/configurations.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/extensions.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/scriptActions.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/operations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/applications.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/configurations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
 ```
 
 
