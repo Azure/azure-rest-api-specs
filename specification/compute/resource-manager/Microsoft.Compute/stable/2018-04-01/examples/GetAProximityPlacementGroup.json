@@ -2,12 +2,10 @@
    "parameters":{
       "subscriptionId":"{subscription-id}",
       "resourceGroupName":"myResourceGroup",
-      "api-version":"2018-06-01",
+      "api-version":"2018-04-01",
       "proximityPlacementGroupName":"myProximityPlacementGroup",
       "parameters":{
-         "tags":{
-            "additionalProp1":"string"
-         }
+
       }
    },
    "responses":{
@@ -15,7 +13,22 @@
          "body":{
             "name":"myProximityPlacementGroup",
             "properties":{
-               "proximityPlacementGroupType":"Standard"
+               "proximityPlacementGroupType":"Standard",
+               "virtualMachines":[
+                  {
+                     "id":"string"
+                  }
+               ],
+               "virtualMachineScaleSets":[
+                  {
+                     "id":"string"
+                  }
+               ],
+               "availabilitySets":[
+                  {
+                     "id":"string"
+                  }
+               ]
             },
             "location":"westus",
             "type":"Microsoft.Compute/proximityPlacementGroups",
