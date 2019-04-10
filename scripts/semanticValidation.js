@@ -13,7 +13,12 @@ async function main() {
   //   return (item.match(/.*Microsoft.Logic.*2016-06-01.*/ig) !== null);
   // });
   for (const swagger of swaggersToProcess) {
-    await oav.validateSpec(swagger, {consoleLogLevel: 'error', pretty: true});
+    try {
+      await oav.validateSpec(swagger, {consoleLogLevel: 'error', pretty: true});
+    } catch (e) {
+      console.error("error: ")
+      console.error(e)
+    }
   }
 }
 

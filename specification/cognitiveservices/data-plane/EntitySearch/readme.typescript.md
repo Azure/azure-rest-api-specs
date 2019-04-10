@@ -7,7 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   package-name: "@azure/cognitiveservices-entitysearch"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-entitysearch"
-  override-client-name: EntitySearchAPIClient
   azure-arm: false
   generate-metadata: true
 ```

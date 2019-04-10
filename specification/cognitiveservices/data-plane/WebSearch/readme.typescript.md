@@ -7,7 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   package-name: "@azure/cognitiveservices-websearch"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-websearch"
-  override-client-name: WebSearchAPIClient
   azure-arm: false
   generate-metadata: true
 ```

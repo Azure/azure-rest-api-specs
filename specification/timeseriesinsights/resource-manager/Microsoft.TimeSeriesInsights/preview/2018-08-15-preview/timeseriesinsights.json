@@ -111,7 +111,7 @@
             }
           },
           "201": {
-            "description": "The environment create request was accepted. Environment provisioning is an asynchroneous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.",
+            "description": "The environment create request was accepted. Environment provisioning is an asynchronous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/EnvironmentResource"
             }
@@ -203,7 +203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchroneously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchroneously, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
+            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchronously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchronous, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/EnvironmentResource"
             }
@@ -1420,7 +1420,7 @@
           "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource."
+      "description": "An environment is a set of time-series data available for query, and is the top level Azure Time Series Insights resource."
     },
     "StandardEnvironmentResource": {
       "x-ms-discriminator-value": "Standard",
@@ -1438,7 +1438,7 @@
           "$ref": "#/definitions/EnvironmentResource"
         }
       ],
-      "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource. Standard environments have data retention limits."
+      "description": "An environment is a set of time-series data available for query, and is the top level Azure Time Series Insights resource. Standard environments have data retention limits."
     },
     "LongTermEnvironmentResource": {
       "x-ms-discriminator-value": "LongTerm",
@@ -1456,7 +1456,7 @@
           "$ref": "#/definitions/EnvironmentResource"
         }
       ],
-      "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource. LongTerm environments do not have set data retention limits."
+      "description": "An environment is a set of time-series data available for query, and is the top level Azure Time Series Insights resource. LongTerm environments do not have set data retention limits."
     },
     "StandardEnvironmentCreationProperties": {
       "properties": {
@@ -1685,7 +1685,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Contains the code that represents the reason of an environment being in a particular state. Can be used to programatically handle specific cases."
+          "description": "Contains the code that represents the reason of an environment being in a particular state. Can be used to programmatically handle specific cases."
         },
         "message": {
           "type": "string",
@@ -2313,7 +2313,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases."
+          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
         },
         "message": {
           "type": "string",

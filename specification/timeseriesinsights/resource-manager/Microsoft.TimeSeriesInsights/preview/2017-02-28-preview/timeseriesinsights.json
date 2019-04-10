@@ -111,7 +111,7 @@
             }
           },
           "201": {
-            "description": "The environment create request was accepted. Environment provisioning is an asynchroneous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.",
+            "description": "The environment create request was accepted. Environment provisioning is an asynchronous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/EnvironmentResource"
             }
@@ -200,7 +200,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchroneously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchroneously, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
+            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchronously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchronously, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/EnvironmentResource"
             }
@@ -1267,7 +1267,7 @@
           "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource."
+      "description": "An environment is a set of time-series data available for query, and is the top level Azure Time Series Insights resource."
     },
     "EnvironmentCreationProperties": {
       "properties": {
@@ -1649,7 +1649,7 @@
       "type": "object",
       "properties": {
         "format": {
-          "description": "An enum that represents the format of the local timestamp property that needs to be set.", 
+          "description": "An enum that represents the format of the local timestamp property that needs to be set.",
           "type": "string",
           "enum": [
             "Embedded",
@@ -1667,7 +1667,7 @@
           "properties": {
             "propertyName": {
               "type": "string",
-              "description":  "The event property that will be contain the offset information to calculate the local timestamp. When the LocalTimestampFormat is Iana, the property name will contain the name of the column which contains IANA Timezone Name (eg: Americas/Los Angeles). When LocalTimestampFormat is Timespan, it contains the name of property which contains values representing the offset (eg: P1D or 1.00:00:00)" 
+              "description":  "The event property that will be contain the offset information to calculate the local timestamp. When the LocalTimestampFormat is Iana, the property name will contain the name of the column which contains IANA Timezone Name (eg: Americas/Los Angeles). When LocalTimestampFormat is Timespan, it contains the name of property which contains values representing the offset (eg: P1D or 1.00:00:00)"
             }
           }
         }
@@ -1941,7 +1941,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases."
+          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
         },
         "message": {
           "type": "string",

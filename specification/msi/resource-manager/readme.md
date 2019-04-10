@@ -31,7 +31,7 @@ These settings apply only when `--tag=package-2018-11-30` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-11-30'
 input-file:
-- Microsoft.ManagedIdentity/2018-11-30/ManagedIdentity.json
+- Microsoft.ManagedIdentity/stable/2018-11-30/ManagedIdentity.json
 ```
 
 ### Tag: package-2015-08-31-preview
