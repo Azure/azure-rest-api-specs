@@ -127,3 +127,33 @@ jobs:
   - script: echo $(NODE_OPTIONS)
   - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
     displayName: "Swagger to SDK script"
+
+- job: "[Experimental] BreakingChange"
+  continueOnError: true
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - script: 'scripts/install-dotnet.sh'
+    displayName: 'Insall .Net'
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'node scripts/breaking-change.js'
+    displayName: 'Breaking Changes'
+
+- job: "[Experimental] LintDiff"
+  continueOnError: true
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'scripts/install-dotnet.sh'
+    displayName: 'install .Net'
+  - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
+    displayName: 'LintDiff'
