@@ -32,5 +32,5 @@ input-file:
   - $(this-folder)/Microsoft.Solutions/stable/2018-06-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2017-09-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

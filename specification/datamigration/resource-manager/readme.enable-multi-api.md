@@ -103,5 +103,5 @@ input-file:
   - $(this-folder)/Microsoft.DataMigration/preview/2017-11-15-preview/definitions/Tasks.json
   - $(this-folder)/Microsoft.DataMigration/preview/2017-11-15-preview/definitions/TasksCommon.json
   - $(this-folder)/Microsoft.DataMigration/preview/2017-11-15-preview/definitions/MigrationValidation.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

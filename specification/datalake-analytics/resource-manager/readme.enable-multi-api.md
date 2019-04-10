@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.DataLakeAnalytics/stable/2016-11-01/account.json
   - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/account.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

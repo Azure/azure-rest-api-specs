@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.KeyVault.Admin/preview/2017-02-01-preview/KeyVault.json
   - $(this-folder)/Microsoft.KeyVault.Admin/preview/2017-02-01-preview/Quotas.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

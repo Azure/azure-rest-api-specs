@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.Intune/preview/2015-01-14-preview/intune.json
   - $(this-folder)/Microsoft.Intune/preview/2015-01-14-privatepreview/intune.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

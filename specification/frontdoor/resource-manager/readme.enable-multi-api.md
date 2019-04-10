@@ -10,5 +10,5 @@ input-file:
   - $(this-folder)/Microsoft.Network/preview/2018-08-01-preview/frontdoor.json
   - $(this-folder)/Microsoft.Network/preview/2018-08-01-preview/network.json
   - $(this-folder)/Microsoft.Network/preview/2018-08-01-preview/webapplicationfirewall.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

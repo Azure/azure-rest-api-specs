@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.Gallery.Admin/preview/2015-04-01/Gallery.json
   - $(this-folder)/Microsoft.Gallery.Admin/preview/2015-04-01/GalleryItem.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

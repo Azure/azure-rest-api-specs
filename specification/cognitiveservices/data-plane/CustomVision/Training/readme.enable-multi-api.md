@@ -8,5 +8,5 @@ input-file:
   - $(this-folder)/stable/v2.1/Training.json
   - $(this-folder)/stable/v2.2/Training.json
   - $(this-folder)/stable/v3.0/Training.json
-require: $(this-folder)/../../../../../../profiles/readme.md
+require: $(this-folder)/../../../../../profiles/readme.md
 ```

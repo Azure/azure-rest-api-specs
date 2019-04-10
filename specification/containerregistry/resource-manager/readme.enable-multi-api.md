@@ -10,5 +10,5 @@ input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2017-06-01-preview/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2017-03-01/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2016-06-27-preview/containerregistry.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

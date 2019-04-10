@@ -18,5 +18,5 @@ input-file:
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

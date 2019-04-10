@@ -15,5 +15,5 @@ input-file:
   - $(this-folder)/Microsoft.Consumption/stable/2018-10-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/preview/2017-04-24-preview/consumption.json
   - $(this-folder)/Microsoft.Consumption/preview/2017-12-30-preview/consumption.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

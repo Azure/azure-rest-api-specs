@@ -11,5 +11,5 @@ input-file:
   - $(this-folder)/Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
   - $(this-folder)/Microsoft.EventGrid/preview/2017-09-15-preview/EventGrid.json
   - $(this-folder)/Microsoft.EventGrid/preview/2017-06-15-preview/EventGrid.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

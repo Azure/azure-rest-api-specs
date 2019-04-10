@@ -10,5 +10,5 @@ input-file:
   - $(this-folder)/Microsoft.StreamAnalytics/stable/2016-03-01/transformations.json
   - $(this-folder)/Microsoft.StreamAnalytics/stable/2016-03-01/functions.json
   - $(this-folder)/Microsoft.StreamAnalytics/stable/2016-03-01/subscriptions.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

@@ -26,5 +26,5 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
   - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/alerts.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

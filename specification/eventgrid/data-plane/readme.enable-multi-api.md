@@ -14,5 +14,5 @@ input-file:
   - $(this-folder)/Microsoft.Media/stable/2018-01-01/MediaServices.json
   - $(this-folder)/Microsoft.Maps/stable/2018-01-01/Maps.json
   - $(this-folder)/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

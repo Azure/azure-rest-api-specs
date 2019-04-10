@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.BotService/preview/2018-07-12/botservice.json
   - $(this-folder)/Microsoft.BotService/preview/2017-12-01/botservice.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

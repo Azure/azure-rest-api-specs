@@ -9,5 +9,5 @@ input-file:
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/Quotas.json
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

@@ -9,5 +9,5 @@ input-file:
   - $(this-folder)/Microsoft.KeyVault/stable/2016-10-01/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2016-10-01/providers.json
   - $(this-folder)/Microsoft.KeyVault/stable/2015-06-01/keyvault.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

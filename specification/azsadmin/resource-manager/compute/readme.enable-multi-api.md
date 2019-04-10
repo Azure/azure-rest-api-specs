@@ -10,5 +10,5 @@ input-file:
   - $(this-folder)/Microsoft.Compute.Admin/preview/2015-12-01-preview/VMExtensions.json
   - $(this-folder)/Microsoft.Compute.Admin/preview/2018-07-30-preview/Disks.json
   - $(this-folder)/Microsoft.Compute.Admin/preview/2018-07-30-preview/DiskMigrationJobs.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

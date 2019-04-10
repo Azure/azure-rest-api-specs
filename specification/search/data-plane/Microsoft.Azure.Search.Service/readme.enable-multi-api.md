@@ -10,5 +10,5 @@ input-file:
   - $(this-folder)/preview/2016-09-01/searchservice.json
   - $(this-folder)/preview/2015-02-28-preview/searchservice.json
   - $(this-folder)/preview/2015-02-28/searchservice.json
-require: $(this-folder)/../../../../../profiles/readme.md
+require: $(this-folder)/../../../../profiles/readme.md
 ```

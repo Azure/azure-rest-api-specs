@@ -9,5 +9,5 @@ input-file:
   - $(this-folder)/Microsoft.Cache/stable/2017-02-01/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2016-04-01/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2015-08-01/redis.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

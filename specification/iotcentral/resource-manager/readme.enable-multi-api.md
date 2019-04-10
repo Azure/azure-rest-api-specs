@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json
   - $(this-folder)/Microsoft.IoTCentral/preview/2017-07-01-privatepreview/iotcentral.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

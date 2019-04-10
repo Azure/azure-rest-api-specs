@@ -14,5 +14,5 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2016-09-30/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2016-03-30/containerService.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

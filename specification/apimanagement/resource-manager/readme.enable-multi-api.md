@@ -106,5 +106,5 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/stable/2016-10-10/apimusers.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2016-07-07/apimanagement.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2016-07-07/apimdeployment.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

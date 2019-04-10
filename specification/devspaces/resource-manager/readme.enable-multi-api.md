@@ -6,5 +6,5 @@
 input-file:
   - $(this-folder)/Microsoft.DevSpaces/preview/2019-01-01-preview/devspaces.json
   - $(this-folder)/Microsoft.DevSpaces/preview/2018-06-01-preview/devspaces.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```

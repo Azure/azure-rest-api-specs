@@ -165,5 +165,5 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/sql.core.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/tableAuditing.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/usages.json
-require: $(this-folder)/../../../../profiles/readme.md
+require: $(this-folder)/../../../profiles/readme.md
 ```
