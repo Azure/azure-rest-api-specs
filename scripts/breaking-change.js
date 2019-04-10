@@ -7,7 +7,8 @@ const utils = require('../test/util/utils'),
   fs = require('fs-extra'),
   os = require('os'),
   exec = require('util').promisify(require('child_process').exec),
-  oad = require('@azure/oad');
+  oad = require('@azure/oad'),
+  avocado = require('@azure/avocado');
 
 // This map is used to store the mapping between files resolved and stored location
 var resolvedMapForNewSpecs = {};
@@ -65,7 +66,7 @@ async function runOad(oldSpec, newSpec) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
+  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn' });
   console.log(result);
 
   if (!result) {
@@ -117,9 +118,21 @@ async function runScript() {
   console.log('Finding new swaggers...')
   let newSwaggers = [];
   if (isRunningInTravisCI && swaggersToProcess.length > 0) {
+    const cwd = path.resolve("./")
+    const p = await avocado.createPullRequestProperties({ cwd, env: process.env})
+    if (p === undefined) {
+        console.error(`not a PR`)
+        return
+    }
+    await p.checkout(p.targetBranch)
+    process.chdir(p.workingDir)
+    newSwaggers = swaggersToProcess.filter(s => !fs.existsSync(s))
+    process.chdir(cwd)
+    /*
     newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
       return swaggersToProcess.filter(s => !fs.existsSync(s))
     });
+    */
   }
 
   console.log('Processing via AutoRest...');

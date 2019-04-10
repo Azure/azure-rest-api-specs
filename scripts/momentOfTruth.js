@@ -135,13 +135,6 @@ async function runScript() {
         for (const configFile of configsToProcess) {
             await runTools(configFile, 'before');
         }
-        /*
-        await utils.doOnBranch(utils.getTargetBranch(), async () => {
-            for (const configFile of configsToProcess) {
-                await runTools(configFile, 'before');
-            }
-        });
-        */
     }
 
     writeContent(JSON.stringify(finalResult, null, 2));

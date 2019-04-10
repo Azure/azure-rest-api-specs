@@ -77,6 +77,7 @@ exports.getTargetBranch = function getTargetBranch() {
 /**
  * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
  */
+/*
 exports.doOnBranch = async function doOnBranch(branch, func) {
   exports.fetchBranch(branch);
   const branchSha = exports.resolveRef(`origin/${branch}`);
@@ -95,6 +96,7 @@ exports.doOnBranch = async function doOnBranch(branch, func) {
 
   return result;
 }
+*/
 
 /**
  * Resolve a ref to its commit hash
