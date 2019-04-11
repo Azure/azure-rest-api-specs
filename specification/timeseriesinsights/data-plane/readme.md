@@ -1,39 +1,43 @@
 
-# Azure Time Series Insights Data Plane API
+# TimeSeriesInsights
 
-## Getting Started 
+> see https://aka.ms/autorest
 
-To build the SDKs for Azure Time Series Insights Data Plane API, simply [Install AutoRest](#Installing-AutoRest) and run:
-> `Autorest.exe readme.md`
+This is the AutoRest configuration file for Azure Time Series Insights Data Plane API.
+
+---
+
+## Getting Started
+
+To build the SDK for Azure Time Series Insights Data Plane API, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+> `autorest`
 
 To see additional help and options, run:
-> `Autorest.exe help readme.md`
 
-### Installing AutoRest
+> `autorest --help`
+---
 
-AutoRest is most easily installed via the Node JS package `autorest`:
-> npm install -g autorest 
+## Configuration
 
-For other options on installation see [Installing AutoRest](https://aka.ms/installing-autorest.md) on the AutoRest github page.
+### Basic Information
 
-## AutoRest configuration
+These are the global settings for Azure Time Series Insights Data Plane API.
 
 ``` yaml
-input-file: 
-	- Microsoft.TimeSeriesInsights\preview\2018-11-01-preview\timeseriesinsights.json
-
-azure-validator: true
-model-validator: true
-semantic-validator: true
-add-credentials: true
 openapi-type: data-plane
+add-credentials: true
 license-header: MICROSOFT_MIT
-sync-methods: none
+tag: package-2018-11-01-preview
+```
 
-csharp:
-  namespace: Microsoft.Azure.TimeSeriesInsights
-  output-folder: Generated/CSharp
+### Tag: package-2018-11-01-preview
 
+These settings apply only when `--tag=package-2018-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11-01-preview'
+input-file:
+- Microsoft.TimeSeriesInsights/preview/2018-11-01-preview/timeseriesinsights.json
 ```
 
 ## Suppression
@@ -48,4 +52,21 @@ directive:
 directive:
   - suppress: R3017
     reason: GUIDs are required to enforce referential constraints and reduce number of updates.
+```
+
+---
+# Code Generation
+
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  sync-methods: none
+  azure-arm: false
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.TimeSeriesInsights
+  output-folder: $(csharp-sdks-folder)/TimeSeriesInsights/DataPlane.TimeSeriesInsights/Generated
 ```
