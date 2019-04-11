@@ -44,7 +44,7 @@ typescript:
 ```yaml $(typescript) && $(package-links)
 typescript:
   package-name: "@azure/arm-links"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-links"
+  output-folder: "$(typescript-sdks-folder)/sdk/links/arm-links"
 ```
 
 ```yaml $(typescript) && $(package-managedapplications)
