@@ -128,7 +128,7 @@ jobs:
   - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
     displayName: "Swagger to SDK script"
 
-- job: "[Experimental] BreakingChange"
+- job: "ExperimentalBreakingChange"
   continueOnError: true
   pool:
     vmImage: 'Ubuntu 16.04'
@@ -142,7 +142,7 @@ jobs:
   - script: './node_modules/.bin/ts-node scripts/breaking-change2.ts'
     displayName: 'Breaking Changes'
 
-- job: "[Experimental] LintDiff"
+- job: "ExperimentalLintDiff"
   continueOnError: true
   variables:
     NODE_OPTIONS: '--max-old-space-size=8192'
