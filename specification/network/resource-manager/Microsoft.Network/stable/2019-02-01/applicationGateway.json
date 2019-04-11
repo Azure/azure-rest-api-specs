@@ -816,11 +816,7 @@
           "description": "Ssl protocols to be disabled on application gateway.",
           "items": {
             "type": "string",
-            "$ref": "#/definitions/ProtocolsEnum",
-            "x-ms-enum": {
-              "name": "ApplicationGatewaySslProtocol",
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/ProtocolsEnum"
           }
         },
         "policyType": {
@@ -1735,11 +1731,7 @@
         "redirectType": {
           "type": "string",
           "$ref": "#/definitions/RedirectTypeEnum",
-          "description": "Supported http redirection types - Permanent, Temporary, Found, SeeOther.",
-          "x-ms-enum": {
-            "name": "ApplicationGatewayRedirectType",
-            "modelAsString": true
-          }
+          "description": "HTTP redirection type."
         },
         "targetListener": {
           "$ref": "./network.json#/definitions/SubResource",
