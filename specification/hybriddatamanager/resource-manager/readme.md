@@ -1,4 +1,4 @@
-#HybridDataManager
+# HybridDataManager
 
 > see https://aka.ms/autorest
 
@@ -95,3 +95,6 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybriddatamanager
 ```
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
