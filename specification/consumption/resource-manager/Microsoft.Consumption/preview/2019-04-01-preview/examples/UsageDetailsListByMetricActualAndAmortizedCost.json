@@ -1,7 +1,8 @@
 {
   "parameters": {
     "api-version": "2019-04-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "metric": "ActualAndAmortizedCost"
   },
   "responses": {
     "200": {
@@ -45,8 +46,9 @@
               "offerId": "Offer Id 1",
               "isAzureCreditEligible": false,
               "chargeType": "AsCharged-Usage",
-              "isAmortizedCost" : false,
-              "isActualCost" : true
+              "isAmortizedCost" : true,
+              "isActualCost" : true,
+              "frequency" : "UsageBased"
             }
           }
         ]
