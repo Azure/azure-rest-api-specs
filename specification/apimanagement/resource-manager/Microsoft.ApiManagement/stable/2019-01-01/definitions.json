@@ -58,6 +58,16 @@
     },
     "AccessInformationUpdateParameters": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessInformationUpdateParameterProperties",
+          "description": "Tenant access information update parameter properties."
+        }
+      },
+      "description": "Tenant access information update parameters."
+    },
+    "AccessInformationUpdateParameterProperties": {
+      "properties": {
         "enabled": {
           "type": "boolean",
           "description": "Determines whether direct access is enabled."
@@ -342,12 +352,59 @@
     },
     "ApiExportResult": {
       "properties": {
-        "link": {
+        "id": {
           "type": "string",
-          "description": "Link to the Storage Blob containing the result of the export operation. The Blob Uri is only valid for 5 minutes."
+          "description": "ResourceId of the API which was exported."
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "swagger-link-json",
+            "wadl-link-json",
+            "wsdl-link+xml",
+            "openapi-link"
+          ],
+          "x-ms-client-name": "ExportResultFormat",
+          "x-ms-enum": {
+            "name": "ExportResultFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "swagger-link-json",
+                "description": "The Api Definition is exported in OpenApi Specification 2.0 format to the Storage Blob.",
+                "name": "Swagger"
+              },
+              {
+                "value": "wsdl-link+xml",
+                "description": "The Api Definition is exported in WSDL Schema to Storage Blob. This is only supported for APIs of Type `soap`",
+                "name": "Wsdl"
+              },
+              {
+                "value": "wadl-link-json",
+                "description": "Export the Api Definition in WADL Schema to Storage Blob.",
+                "name": "Wadl"
+              },
+              {
+                "value": "openapi-link",
+                "description": "Export the Api Definition in OpenApi Specification 3.0 to Storage Blob.",
+                "name": "OpenApi"
+              }
+            ]
+          },
+          "description": "Format in which the Api Details are exported to the Storage Blob with Sas Key valid for 5 minutes."
+        },
+        "value": {
+          "type": "object",
+          "description": "The object defining the schema of the exported Api Detail",
+          "properties": {
+            "link": {
+              "type": "string",
+              "description": "Link to the Storage Blob containing the result of the export operation. The Blob Uri is only valid for 5 minutes."
+            }
+          }
         }
       },
-      "description": "API Export result Blob Uri."
+      "description": "API Export result."
     },
     "ApiReleaseCollection": {
       "properties": {
@@ -636,9 +693,9 @@
           "type": "string",
           "description": "Identifier for existing API Version Set. Omit this value to create a new Version Set."
         },
-        "name" : {
-          "type" : "string",
-          "description" : "The display Name of the API Version Set."
+        "name": {
+          "type": "string",
+          "description": "The display Name of the API Version Set."
         },
         "description": {
           "type": "string",
@@ -1635,6 +1692,16 @@
       "description": "Parameters supplied to the CreateOrUpdate certificate operation."
     },
     "DeployConfigurationParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeployConfigurationParameterProperties",
+          "description": "Deploy Configuration Parameter contract properties."
+        }
+      },
+      "description": "Deploy Tenant Configuration Contract."
+    },
+    "DeployConfigurationParameterProperties": {
       "properties": {
         "branch": {
           "type": "string",
@@ -4100,6 +4167,16 @@
     },
     "SaveConfigurationParameter": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SaveConfigurationParameterProperties",
+          "description": "Properties of the Save Configuration Parameters."
+        }
+      },
+      "description": "Save Tenant Configuration Contract details."
+    },
+    "SaveConfigurationParameterProperties": {
+      "properties": {
         "branch": {
           "type": "string",
           "description": "The name of the Git branch in which to commit the current configuration snapshot."
@@ -4926,6 +5003,16 @@
       "description": "User identity details."
     },
     "UserTokenParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UserTokenParameterProperties",
+          "description": "User Token Parameter contract properties."
+        }
+      },
+      "description": "Get User Token parameters."
+    },
+    "UserTokenParameterProperties": {
       "properties": {
         "keyType": {
           "type": "string",
