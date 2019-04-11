@@ -71,14 +71,14 @@
       }
     },
     "/providers/Microsoft.EventHub/availableClusters": {
-      "post": {
+      "get": {
         "tags": [
           "Event Hubs Clusters"
         ],
         "operationId": "Clusters_ListAvailableClusters",
         "x-ms-examples": {
           "ListAvailableClusters": {
-            "$ref": "./examples/Clusters/ListAvailableClustersPost.json"
+            "$ref": "./examples/Clusters/ListAvailableClustersGet.json"
           }
         },
         "description": "List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.",
@@ -341,7 +341,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
-      "post": {
+      "get": {
         "tags": [
           "Event Hubs Namespace Enumeration in Cluster"
         ],
@@ -362,8 +362,8 @@
         ],
         "description": "List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.",
         "x-ms-examples": {
-          "NamespaceInClusterList": {
-            "$ref": "./examples/Clusters/ListNamespaceInClusterPost.json"
+          "ListNamespacesInCluster": {
+            "$ref": "./examples/Clusters/ListNamespacesInClusterGet.json"
           }
         },
         "responses": {
