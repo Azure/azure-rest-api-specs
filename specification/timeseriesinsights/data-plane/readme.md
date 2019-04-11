@@ -20,7 +20,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/insta
 
 ``` yaml
 input-file: 
-	- .\Spec\Microsoft.TimeSeriesInsights\preview\2018-11-01-preview\timeseriesinsights.json
+	- Microsoft.TimeSeriesInsights\preview\2018-11-01-preview\timeseriesinsights.json
 
 azure-validator: true
 model-validator: true
