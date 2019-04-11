@@ -26,7 +26,7 @@ typescript:
 ```yaml $(typescript) && $(package-locks)
 typescript:
   package-name: "@azure/arm-locks"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-locks"
+  output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks"
 ```
 
 ```yaml $(typescript) && $(package-policy)
