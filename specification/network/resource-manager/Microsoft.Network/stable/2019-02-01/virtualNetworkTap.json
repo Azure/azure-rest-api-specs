@@ -74,11 +74,13 @@
                     "description": "Request successful. Resource does not exist."
                 }
             },
-            "x-ms-examples": 
-            {
+            "x-ms-examples": {
                 "Delete Virtual Network Tap resource": { "$ref": "./examples/VirtualNetworkTapDelete.json" }
             },
-            "x-ms-long-running-operation": true
+            "x-ms-long-running-operation": true,
+            "x-ms-long-running-operation-options": {
+                "final-state-via": "location"
+            }
         },
         "get": {
             "tags": [
@@ -116,8 +118,7 @@
                     }
                 }
             },
-            "x-ms-examples": 
-            {
+            "x-ms-examples": {
                 "Get Virtual Network Tap": { "$ref": "./examples/VirtualNetworkTapGet.json" }
             }
         },
@@ -172,11 +173,13 @@
                     }
                 }
             },
-            "x-ms-examples": 
-            {
+            "x-ms-examples": {
                 "Create Virtual Network Tap": { "$ref": "./examples/VirtualNetworkTapCreate.json" }
             },
-            "x-ms-long-running-operation": true
+            "x-ms-long-running-operation": true,
+            "x-ms-long-running-operation-options": {
+                "final-state-via": "azure-async-operation"
+            }
         },
         "patch": {
             "tags": [
@@ -298,7 +301,7 @@
             }
         }
     }
-},     
+},
 "definitions": {
     "VirtualNetworkTap": {
         "properties": {
@@ -370,7 +373,7 @@
             }
         },
         "description": "Response for ListVirtualNetworkTap API service call."
-    } 
+    }
 },
 "parameters": {
     "SubscriptionIdParameter": {
@@ -387,5 +390,5 @@
         "type": "string",
         "description": "Client API version."
     }
- } 
+ }
 }

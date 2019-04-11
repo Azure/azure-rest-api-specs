@@ -77,7 +77,10 @@
           "x-ms-examples": {
             "Delete public IP prefix": { "$ref": "./examples/PublicIpPrefixDelete.json" }
           },
-          "x-ms-long-running-operation": true
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location"
+          }
         },
         "get": {
           "tags": [
@@ -181,7 +184,10 @@
             "Create public IP prefix defaults": { "$ref": "./examples/PublicIpPrefixCreateDefaults.json" },
             "Create public IP prefix allocation method": { "$ref": "./examples/PublicIpPrefixCreateCustomizedValues.json" }
           },
-          "x-ms-long-running-operation": true
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location"
+          }
         },
         "patch": {
           "tags": [

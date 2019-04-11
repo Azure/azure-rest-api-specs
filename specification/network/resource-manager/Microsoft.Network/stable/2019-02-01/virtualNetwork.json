@@ -75,6 +75,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete virtual network": { "$ref": "./examples/VirtualNetworkDelete.json" }
         }
@@ -180,6 +183,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create virtual network": { "$ref": "./examples/VirtualNetworkCreate.json" },
           "Create virtual network with subnet": { "$ref": "./examples/VirtualNetworkCreateSubnet.json" },
@@ -358,7 +364,10 @@
         "x-ms-examples": {
           "Delete subnet": { "$ref": "./examples/SubnetDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -474,6 +483,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create subnet": { "$ref": "./examples/SubnetCreate.json" },
           "Create subnet with service endpoints": { "$ref": "./examples/SubnetCreateServiceEndpoint.json" },
@@ -532,6 +544,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Prepare Network Policies": { "$ref": "./examples/SubnetPrepareNetworkPolicies.json" }
         }
@@ -632,7 +647,10 @@
         "x-ms-examples": {
           "Delete peering": { "$ref": "./examples/VirtualNetworkPeeringDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -742,7 +760,10 @@
         "x-ms-examples": {
           "Create peering": { "$ref": "./examples/VirtualNetworkPeeringCreate.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings": {

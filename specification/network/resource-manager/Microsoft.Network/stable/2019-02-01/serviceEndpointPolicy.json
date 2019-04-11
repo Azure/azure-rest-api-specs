@@ -77,7 +77,10 @@
         "x-ms-examples": {
           "Delete service endpoint policy": { "$ref": "./examples/ServiceEndpointPolicyDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -181,7 +184,10 @@
           "Create service endpoint policy": { "$ref": "./examples/ServiceEndpointPolicyCreate.json" },
           "Create service endpoint policy with definition": { "$ref": "./examples/ServiceEndpointPolicyCreateWithDefinition.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
@@ -353,7 +359,10 @@
         "x-ms-examples": {
           "Delete service endpoint policy definitions from service endpoint policy": { "$ref": "./examples/ServiceEndpointPolicyDefinitionDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -463,7 +472,10 @@
         "x-ms-examples": {
           "Create service endpoint policy definition": { "$ref": "./examples/ServiceEndpointPolicyDefinitionCreate.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions": {

@@ -78,7 +78,10 @@
         "x-ms-examples": {
           "Delete load balancer": { "$ref": "./examples/LoadBalancerDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -182,7 +185,10 @@
           "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" },
           "Create load balancer with inbound nat pool": { "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
@@ -587,7 +593,10 @@
         "x-ms-examples": {
           "InboundNatRuleDelete": { "$ref": "./examples/InboundNatRuleDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -702,6 +711,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "InboundNatRuleCreate": { "$ref": "./examples/InboundNatRuleCreate.json" }
         }
@@ -1537,7 +1549,7 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
-        }, 
+        },
         "protocol": {
           "type": "string",
           "description": "The protocol for the outbound rule in load balancer. Possible values are: 'Tcp', 'Udp', and 'All'.",

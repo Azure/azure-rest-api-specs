@@ -77,7 +77,10 @@
         "x-ms-examples": {
           "Delete public IP address": { "$ref": "./examples/PublicIpAddressDelete.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -182,7 +185,10 @@
           "Create public IP address allocation method": { "$ref": "./examples/PublicIpAddressCreateCustomizedValues.json" },
           "Create public IP address DNS": { "$ref": "./examples/PublicIpAddressCreateDns.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
