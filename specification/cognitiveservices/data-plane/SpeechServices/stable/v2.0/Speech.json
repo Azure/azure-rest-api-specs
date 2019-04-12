@@ -256,6 +256,23 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "description": "The limit of requests for the resource.",
+                "type": "integer"
+              },
+              "X-RateLimit-Remaining": {
+                "description": "The remaining number of requests until the rate limit is reached.",
+                "type": "integer"
+              },
+              "X-RateLimit-Reset": {
+                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
+                "type": "string"
+              }
+            }
+          },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
@@ -1989,7 +2006,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the location of the operation as header.",
             "headers": {
               "Location": {
@@ -2391,7 +2408,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the location of the operation as header.",
             "headers": {
               "Location": {
@@ -3589,7 +3606,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the id of the endpoint data export task.",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
@@ -4433,7 +4450,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the location of the operation as header.",
             "headers": {
               "Location": {
@@ -9040,7 +9057,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the location of the operation as header.",
             "headers": {
               "Location": {
@@ -9791,7 +9808,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the location of the operation as header.",
             "headers": {
               "Location": {
@@ -10874,7 +10891,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the location of the operation as header.",
             "headers": {
               "Location": {
@@ -12083,7 +12100,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "201": {
             "description": "The response contains the location of the operation as header.",
             "headers": {
               "Location": {
