@@ -57,9 +57,6 @@
           "UsageDetailsExpand": {
             "$ref": "./examples/UsageDetailsExpand.json"
           },
-          "UsageDetailsListByMetricActualAndAmortizedCost" : {
-            "$ref": "./examples/UsageDetailsListByMetricActualAndAmortizedCost.json"
-          },
           "UsageDetailsListByMetricActualCost" : {
             "$ref": "./examples/UsageDetailsListByMetricActualCost.json"
           },
@@ -1530,16 +1527,6 @@
         "planName": {
           "description": "Plan Name.",
           "type": "string",
-          "readOnly": true
-        },
-        "isAmortizedCost": {
-          "description": "Indicates if the record represents amortized costs. A record may be actual and amortized, if amortization is not applicable (e.g. non-reservation usage) or not supported (e.g. Marketplace purchases).",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isActualCost": {
-          "description": "Indicates if the record represents actual, billed charges (as opposed to an amortized cost). A record may be actual and amortized, if amortization is not applicable (e.g. non-reservation usage) or not supported (e.g. Marketplace purchases).",
-          "type": "boolean",
           "readOnly": true
         },
         "chargeType": {
@@ -3150,7 +3137,7 @@
     "metricParameter": {
       "name": "metric",
       "in": "query",
-      "description": "Allows to select different type of cost/usage records. Allowed values: Usage, ActualCost, AmortizedCost, ActualAndAmortizedCost. Default is ActualCost.",
+      "description": "Allows to select different type of cost/usage records. Allowed values: Usage, ActualCost, AmortizedCost. Default is ActualCost.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
