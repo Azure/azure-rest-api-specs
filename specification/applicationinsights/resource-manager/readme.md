@@ -274,6 +274,7 @@ These settings apply only when `--tag=package-2018-06-17-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-06-17-preview'
 input-file:
+- Microsoft.Insights/preview/2018-06-17-preview/workbookOperations_API.json
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 
