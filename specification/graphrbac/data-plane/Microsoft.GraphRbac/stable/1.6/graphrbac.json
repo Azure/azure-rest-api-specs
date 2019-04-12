@@ -183,6 +183,41 @@
         }
       }
     },
+    "/{tenantID}/applications/{objectId}/addPassword": {
+      "post": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_AddPassword",
+        "description": "Add a password",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/deletedApplications/{objectId}/restore": {
       "post": {
         "tags": [
