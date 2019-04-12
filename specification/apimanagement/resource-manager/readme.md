@@ -141,6 +141,7 @@ input-file:
 - Microsoft.ApiManagement/stable/2018-01-01/apimemailtemplate.json
 - Microsoft.ApiManagement/stable/2018-01-01/apimgroups.json
 - Microsoft.ApiManagement/stable/2018-01-01/apimidentityprovider.json
+- Microsoft.ApiManagement/stable/2018-01-01/apimissues.json
 - Microsoft.ApiManagement/stable/2018-01-01/apimloggers.json
 - Microsoft.ApiManagement/stable/2018-01-01/apimnotifications.json
 - Microsoft.ApiManagement/stable/2018-01-01/apimnetworkstatus.json
