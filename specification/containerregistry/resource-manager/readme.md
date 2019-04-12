@@ -172,7 +172,7 @@ batch:
 
 ### Tag: package-2019-04 and java
 
-These settings apply only when `--tag=package-2018-09 --java` is specified on the command line.
+These settings apply only when `--tag=package-2019-04 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2019-04' && $(java) && $(multiapi)

@@ -7776,6 +7776,13 @@
             "$ref": "#/definitions/A2AProtectedDiskDetails"
           }
         },
+		"unprotectedDisks": {
+          "description": "The list of unprotected disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AUnprotectedDiskDetails"
+          }
+        },
         "protectedManagedDisks": {
           "description": "The list of protected managed disks.",
           "type": "array",
@@ -7986,7 +7993,18 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
-    "A2AUpdateContainerMappingInput": {
+     "A2AUnprotectedDiskDetails": {
+      "description": "A2A unprotected disk details.",
+      "type": "object",
+      "properties": {
+        "diskLunId": {
+          "format": "int32",
+          "description": "The source lun Id for the data disk.",
+          "type": "integer"
+        }
+      }
+    },
+	"A2AUpdateContainerMappingInput": {
       "description": "A2A update protection container mapping.",
       "type": "object",
       "allOf": [
