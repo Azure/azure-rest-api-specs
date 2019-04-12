@@ -201,9 +201,9 @@ input-file:
 
 ### Tag: package-2019-03-01-only
 
-These settings apply only when `--tag=package-2019-03-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-03-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-03-only'
+``` yaml $(tag) == 'package-2019-03-01-only'
 input-file:
 - Microsoft.Compute/stable/2019-03-01/compute.json
 - Microsoft.Compute/stable/2019-03-01/runCommands.json
