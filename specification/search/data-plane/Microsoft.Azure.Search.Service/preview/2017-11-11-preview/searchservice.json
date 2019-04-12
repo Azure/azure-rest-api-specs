@@ -4385,7 +4385,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/EncryptionKey",
-          "description": "The configuration for encryption with customer managed keys. On updates, the encryptionKey will stay unchanged if not specified. Encryption with customer managed keys is only available on paid services created after 01/01/2019.",
+          "description": "The configuration to use when you want to encrypt the index with your own encryption key (customer-managed key). On updates, the encryption key configuration will stay unchanged if not specified or null. Encryption with customer-managed keys is not available for free services. For paid services, it is only available for services created on or after 2019-01-1.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           }
@@ -5171,7 +5171,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/EncryptionKey",
-          "description": "The configuration for encryption with customer managed keys. On updates, the encryptionKey will stay unchanged if not specified. Encryption with customer managed keys is only available on paid services created after 01/01/2019.",
+          "description": "The configuration to use when you want to encrypt the synonym map with your own encryption key (customer-managed key). On updates, the encryption key configuration will stay unchanged if not specified or null. Encryption with customer-managed keys is not available for free services. For paid services, it is only available for services created on or after 2019-01-1.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           }
@@ -5207,15 +5207,15 @@
       "properties": {
         "keyVaultKeyName": {
           "type": "string",
-          "description": "The name of the KeyVault key."
+          "description": "The name of the key, from your Azure KeyVault, you wish to use to protect your data. "
         },
         "keyVaultKeyVersion": {
           "type": "string",
-          "description": "The version of the KeyVault key."
+          "description": "The specific version of the key, from your Azure KeyVault, you wish to use to protect your data."
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "The URI of the KeyVault."
+          "description": "The URI of the Azure KeyVault where you created the key you want to use to protect your data. This value is also sometime referred to as the KeyVault DNS Name. An example value would be : https://your-keyvault-name.vault.azure.net."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
@@ -5230,20 +5230,20 @@
         "keyVaultKeyVersion",
         "keyVaultUri"
       ],
-      "description": "The configuration to use encryption with customer managed keys."
+      "description": "The configuration to use encryption with customer managed keys. This information will be used to encrypt or decrypt the data you have protected using your own keys."
     },
     "AzureActiveDirectoryApplicationCredentials": {
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "The application id."
+          "description": "The is the ID of the Azure Active Directory Application that will be used to authenticate to your KeyVault. The Application ID is not to be confused with the Object ID of your Azure Active Directory Application."
         },
         "applicationSecret": {
           "type": "string",
-          "description": "The application secret."
+          "description": "The application secret, also sometime refered to as the authentication key value. This will be used to authenticate to your KeyVault."
         }
       },
-      "description" : "Credentials to be used to authenticate as an Azure Active Directory Application."
+      "description" : "The credentials of the Azure Active Directory Application identity we are going to use to authenticate to your KeyVault when we need to access your encryption keys."
     },
     "ServiceStatistics": {
       "properties": {
