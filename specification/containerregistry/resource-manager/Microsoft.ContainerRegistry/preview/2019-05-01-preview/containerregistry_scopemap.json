@@ -64,7 +64,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps{scopeMapName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scopeMaps/{scopeMapName}": {
       "get": {
         "tags": [
           "ScopeMaps"
@@ -289,7 +289,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens{tokenName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tokens/{tokenName}": {
       "get": {
         "tags": [
           "Tokens"
@@ -531,7 +531,7 @@
           "type": "string"
         },
         "name": {
-          "description": "Specifies name of the password which should be regenerated if any -- password or password1.",
+          "description": "Specifies name of the password which should be regenerated if any -- password or password2.",
           "enum": [
             "password",
             "password2"
@@ -539,7 +539,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PasswordName",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "publicCertificateAsPEM": {
@@ -579,7 +579,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The password name \"password\" or \"password1\"",
+          "description": "The password name \"password\" or \"password2\"",
           "enum": [
             "password",
             "password2"
@@ -587,7 +587,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PasswordName",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "value": {
@@ -615,7 +615,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -729,7 +729,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -814,27 +814,6 @@
           "type": "string"
         }
       }
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -880,7 +859,6 @@
       "type": "string",
       "maxLength": 50,
       "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     },
     "TokenNameParameter": {
@@ -891,7 +869,6 @@
       "type": "string",
       "maxLength": 50,
       "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     }
   },
