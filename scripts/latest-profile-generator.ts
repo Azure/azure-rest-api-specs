@@ -50,7 +50,7 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
 
     const allPaths = await getPaths(specs);
     const crawlResult = getCrawlData(allPaths);
-    const telemetryDir = Path.join(profilesDirectory, 'crawl-telemetry.json')
+    const telemetryDir = Path.join(profilesDirectory, 'crawl-log.json')
     fs.writeFile(telemetryDir, JSON.stringify(crawlResult, null, 2));
     console.log(`Telemetry written at ${telemetryDir}`);
     
@@ -132,7 +132,7 @@ function getCrawlData(paths: Array<PathMetadata>): CrawlResult {
       } 
 
       const resourcesSection = `/${scopedProviderSection.slice(3).join('/')}`;
-      const resourceRegex = new RegExp(`\/${nonParameterPattern}\/${nonParameterPattern}|\/${nonParameterPattern}\/${parameterPattern}|^\/${nonParameterPattern}$`, 'gi');
+      const resourceRegex = new RegExp(`\/${nonParameterPattern}\/${nonParameterPattern}|\/${nonParameterPattern}\/${parameterPattern}|\/${nonParameterPattern}$`, 'gi');
       const resourceMatches = resourcesSection.match(resourceRegex); 
       if (resourceMatches !== null) {
         const resourceNames = resourceMatches.map(each => each.split('/')[1]);    
