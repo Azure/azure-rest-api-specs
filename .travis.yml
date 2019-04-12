@@ -47,7 +47,7 @@ script:
     if [[ $MODE == 'BreakingChange' ]]; then
       scripts/install-dotnet.sh
       npm install
-      node -- scripts/breaking-change.js
+      ./node_modules/.bin/ts-node scripts/breaking-change.ts
     fi
   - >-
     if [[ $MODE == 'lintdiff' ]]; then

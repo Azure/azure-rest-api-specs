@@ -78,7 +78,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
-  - script: 'node scripts/breaking-change.js'
+  - script: './node_modules/.bin/ts_node scripts/breaking-change.ts'
     displayName: 'Breaking Changes'
 
 - job: "LintDiff"
