@@ -1166,14 +1166,14 @@
               "type": "array"
             },
             "provisioningState": {
-              "description": "see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+              "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
               "enum":[
                 "Succeeded",
                 "Failed",
                 "Cancelled",
                 "Creating",
-                "Configuring",
-                "Booting"
+                "Deleting",
+                "Updating"
               ],
               "x-ms-enum": {
                 "name": "ProvisioningStateType",
@@ -1207,7 +1207,7 @@
       "type": "object"
     },
     "CacheHealth": {
-      "description": "An indication of cache health.",
+      "description": "An indication of cache health.  Gives more information about health than just that related to provisioning.",
       "properties": {
         "state": {
           "description": "List of cache health states.",
@@ -1441,6 +1441,22 @@
               },
               "type": "string"
             },
+            "provisioningState": {
+              "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+              "enum":[
+                "Succeeded",
+                "Failed",
+                "Cancelled",
+                "Creating",
+                "Deleting",
+                "Updating"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string"
+            },
             "nfs3": {
               "description": "Properties when nfs3 target.",
               "$ref": "#/definitions/Nfs3Target"
@@ -1498,13 +1514,19 @@
       "properties": {
         "display": {
           "description": "Localized information describing this usage model.",
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "String to display for this usage model.",
+              "type": "string"
+            }
+          }
         },
-        "name": {
+        "modelName": {
           "description": "Non localized keyword naming this usage model.",
           "type": "string"
         },
-        "type": {
+        "targetType": {
           "description": "The type of Storage Target to which this model is applicable (only nfs for now)",
           "type": "string"
         }
