@@ -4385,7 +4385,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/EncryptionKey",
-          "description": "The configuration to use when you want to encrypt the index with your own encryption key (customer-managed key). On updates, the encryption key configuration will stay unchanged if not specified or null. Encryption with customer-managed keys is not available for free services. For paid services, it is only available for services created on or after 2019-01-1.",
+          "description": "The configuration to use when you want to encrypt the index with your own encryption key (customer-managed key). On updates, the encryption key configuration will stay unchanged if not specified or null. Encryption with customer-managed keys is not available for free services. For paid services, it is only available for services created on or after 2019-01-01.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           }
@@ -5207,19 +5207,19 @@
       "properties": {
         "keyVaultKeyName": {
           "type": "string",
-          "description": "The name of the key, from your Azure KeyVault, you wish to use to protect your data. "
+          "description": "The name of a user-managed encryption key created in Azure Key Vault used for data-at-rest encryption."
         },
         "keyVaultKeyVersion": {
           "type": "string",
-          "description": "The specific version of the key, from your Azure KeyVault, you wish to use to protect your data."
+          "description": "The version of a key that you create in Azure Key Vault that will be used to encrypt your data at rest."
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "The URI of the Azure KeyVault where you created the key you want to use to protect your data. This value is also sometime referred to as the KeyVault DNS Name. An example value would be : https://your-keyvault-name.vault.azure.net."
+          "description": "The URI of the Azure Key Vault resource providing the encryption key. This value is also referred to as the Key Vault DNS Name. An example URI might be https://my-keyvault-name.vault.azure.net."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
-          "description": "The credentials to use to authenticate to the provided KeyVault. Can be left unspecified if MSI (Managed Service Identity) is enabled for the service.",
+          "description": "Azure Active Directory credentials used for Azure Search authentication to Azure Key Vault when accessing encryption keys. Credentials are required when you create a security principal for Azure Search. Omit this value if you are using a managed identity instead.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-msi"
           }
@@ -5230,20 +5230,23 @@
         "keyVaultKeyVersion",
         "keyVaultUri"
       ],
-      "description": "The configuration to use encryption with customer-managed keys. This information will be used to encrypt or decrypt the data you have protected using your own keys."
+      "description": "A fully-specified, user-defined encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Search, such as indexes and synonym maps."
     },
     "AzureActiveDirectoryApplicationCredentials": {
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "The is the ID of the Azure Active Directory Application that will be used to authenticate to your KeyVault. The Application ID is not to be confused with the Object ID of your Azure Active Directory Application."
+          "description": "The Application ID of an Azure Search service, when registered as an Azure Active Directory application, for the purpose of serving as a security principle for authentication to Azure Key Vault. The Application ID should not be confused with the Object ID for your application. Both IDs are GUIDs but have different purposes. The Application ID uniquely identifies the app on protocol transactions."
         },
         "applicationSecret": {
           "type": "string",
-          "description": "The application secret, also sometime refered to as the authentication key value. This will be used to authenticate to your KeyVault."
+          "description": "The application secret, also referred to as the authentication key value. This is the actual key used to authenticate to Azure Key Vault. When creating a key for a registered application, this is the string that is given when you save the key. This value is not visible in the portal after you leave the blade."
         }
       },
-      "description" : "The credentials of the Azure Active Directory Application identity we are going to use to authenticate to your KeyVault when we need to access your encryption keys."
+      "required": [
+        "applicationId"
+      ],
+      "description" : "Credentials of a registered application created for your Azure Search service, used for authenticated access to the encryption keys stored in Azure Key Vault."
     },
     "ServiceStatistics": {
       "properties": {
