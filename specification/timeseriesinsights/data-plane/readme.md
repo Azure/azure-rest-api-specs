@@ -45,7 +45,7 @@ input-file:
 ``` yaml
 directive:
   - suppress: R2001
-    reason: Adding flattening does not improve the code - array of properties is not supported by flattening.
+    reason: Adding flattening does not improve the code - array of properties is not supported by flattening. See https://github.com/Azure/oav/issues/416
 ```
 
 ``` yaml
