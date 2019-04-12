@@ -50,5 +50,5 @@ typescript:
 ```yaml $(typescript) && $(package-managedapplications)
 typescript:
   package-name: "@azure/arm-managedapplications"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-managedapplications"
+  output-folder: "$(typescript-sdks-folder)/sdk/managedapplications/arm-managedapplications"
 ```
