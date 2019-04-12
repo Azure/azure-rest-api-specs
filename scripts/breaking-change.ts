@@ -238,7 +238,7 @@ async function runScript() {
 }
 
 // magic starts here
-runScript().then(success => {
+runScript().then(() => {
   console.log(`Thanks for using breaking change tool to review.`);
   console.log(`If you encounter any issue(s), please open issue(s) at https://github.com/Azure/openapi-diff/issues .`);
 }).catch(err => {
