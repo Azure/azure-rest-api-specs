@@ -32,7 +32,7 @@ typescript:
 ```yaml $(typescript) && $(package-policy)
 typescript:
   package-name: "@azure/arm-policy"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-policy"
+  output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy"
 ```
 
 ```yaml $(typescript) && $(package-resources)
