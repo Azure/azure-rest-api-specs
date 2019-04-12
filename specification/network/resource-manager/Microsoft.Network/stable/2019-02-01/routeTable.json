@@ -532,19 +532,8 @@
           "description": "The destination CIDR to which the route applies."
         },
         "nextHopType": {
-          "type": "string",
-          "description": "The type of Azure hop the packet should be sent to. Possible values are: 'VirtualNetworkGateway', 'VnetLocal', 'Internet', 'VirtualAppliance', and 'None'",
-          "enum": [
-            "VirtualNetworkGateway",
-            "VnetLocal",
-            "Internet",
-            "VirtualAppliance",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "RouteNextHopType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RouteNextHopType",
+          "description": "The type of Azure hop the packet should be sent to."
         },
         "nextHopIpAddress": {
           "type": "string",
@@ -661,6 +650,21 @@
         }
       },
       "description": "Response for the ListRoute API service call"
+    },
+    "RouteNextHopType": {
+      "type": "string",
+      "description": "The type of Azure hop the packet should be sent to.",
+      "enum": [
+        "VirtualNetworkGateway",
+        "VnetLocal",
+        "Internet",
+        "VirtualAppliance",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "RouteNextHopType",
+        "modelAsString": true
+      }
     }
   }
 }

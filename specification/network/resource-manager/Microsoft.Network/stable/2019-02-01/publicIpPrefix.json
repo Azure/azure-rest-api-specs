@@ -330,16 +330,8 @@
       "PublicIPPrefixPropertiesFormat": {
         "properties": {
           "publicIPAddressVersion": {
-            "type": "string",
-            "description": "The public IP address version. Possible values are: 'IPv4' and 'IPv6'.",
-            "enum": [
-              "IPv4",
-              "IPv6"
-            ],
-            "x-ms-enum": {
-              "name": "IPVersion",
-              "modelAsString": true
-            }
+            "$ref": "./network.json#/definitions/IPVersion",
+            "description": "The public IP address version."
           },
           "ipTags": {
             "type": "array",

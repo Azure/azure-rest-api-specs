@@ -756,18 +756,8 @@
           "description": "The ExpressRouteCircuit"
         },
         "serviceProviderProvisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the circuit in the connectivity provider system. Possible values are 'NotProvisioned', 'Provisioning', 'Provisioned'.",
-          "enum": [
-            "NotProvisioned",
-            "Provisioning",
-            "Provisioned",
-            "Deprovisioning"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceProviderProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "./expressRouteCircuit.json#/definitions/ServiceProviderProvisioningState",
+          "description": "The provisioning state of the circuit in the connectivity provider system."
         },
         "serviceProviderNotes": {
           "type": "string",

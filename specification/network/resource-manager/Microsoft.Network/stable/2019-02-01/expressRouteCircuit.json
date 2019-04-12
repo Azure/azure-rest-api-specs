@@ -1751,18 +1751,9 @@
           "description": "The authorization key."
         },
         "circuitConnectionStatus": {
-          "type": "string",
-          "description": "Express Route Circuit Connection State. Possible values are: 'Connected' and 'Disconnected'.",
-          "enum": [
-            "Connected",
-            "Connecting",
-            "Disconnected"
-          ],
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "CircuitConnectionStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CircuitConnectionStatus",
+          "description": "Express Route Circuit connection state."
         },
         "provisioningState": {
           "type": "string",
@@ -1827,18 +1818,9 @@
           "description": "/29 IP address space to carve out Customer addresses for tunnels."
         },
         "circuitConnectionStatus": {
-          "type": "string",
-          "description": "Express Route Circuit Connection State. Possible values are: 'Connected' and 'Disconnected'.",
-          "enum": [
-            "Connected",
-            "Connecting",
-            "Disconnected"
-          ],
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "circuitConnectionStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CircuitConnectionStatus",
+          "description": "Express Route Circuit connection state."
         },
         "connectionName": {
           "type": "string",
@@ -1960,18 +1942,8 @@
           "description": "The CircuitProvisioningState state of the resource."
         },
         "serviceProviderProvisioningState": {
-          "type": "string",
-          "description": "The ServiceProviderProvisioningState state of the resource. Possible values are 'NotProvisioned', 'Provisioning', 'Provisioned', and 'Deprovisioning'.",
-          "enum": [
-            "NotProvisioned",
-            "Provisioning",
-            "Provisioned",
-            "Deprovisioning"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceProviderProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ServiceProviderProvisioningState",
+          "description": "The ServiceProviderProvisioningState state of the resource."
         },
         "authorizations": {
           "type": "array",
@@ -2258,6 +2230,33 @@
         }
       },
       "description": "Response for the ListExpressRouteServiceProvider API service call."
+    },
+    "CircuitConnectionStatus": {
+      "type": "string",
+      "description": "Express Route Circuit connection state.",
+      "enum": [
+        "Connected",
+        "Connecting",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "CircuitConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "ServiceProviderProvisioningState": {
+      "type": "string",
+      "description": "The ServiceProviderProvisioningState state of the resource.",
+      "enum": [
+        "NotProvisioned",
+        "Provisioning",
+        "Provisioned",
+        "Deprovisioning"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceProviderProvisioningState",
+        "modelAsString": true
+      }
     }
   }
 }

@@ -332,28 +332,12 @@
     "PublicIPAddressPropertiesFormat": {
       "properties": {
         "publicIPAllocationMethod": {
-          "type": "string",
-          "description": "The public IP allocation method. Possible values are: 'Static' and 'Dynamic'.",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The public IP address allocation method."
         },
         "publicIPAddressVersion": {
-          "type": "string",
-          "description": "The public IP address version. Possible values are: 'IPv4' and 'IPv6'.",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
-          "x-ms-enum": {
-            "name": "IPVersion",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/IPVersion",
+          "description": "The public IP address version."
         },
         "ipConfiguration": {
           "readOnly": true,

@@ -701,16 +701,8 @@
           "description": "The destination port ranges."
         },
         "access": {
-          "type": "string",
-          "description": "The network traffic is allowed or denied. Possible values are: 'Allow' and 'Deny'.",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityRuleAccess",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecurityRuleAccess",
+          "description": "The network traffic is allowed or denied."
         },
         "priority": {
           "type": "integer",
@@ -718,16 +710,8 @@
           "description": "The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
         },
         "direction": {
-          "type": "string",
-          "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are: 'Inbound' and 'Outbound'.",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityRuleDirection",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecurityRuleDirection",
+          "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
         },
         "provisioningState": {
           "type": "string",
@@ -857,6 +841,30 @@
         }
       },
       "description": "Response for ListNetworkSecurityGroups API service call."
+    },
+    "SecurityRuleAccess": {
+      "type": "string",
+      "description": "Whether network traffic is allowed or denied.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityRuleAccess",
+        "modelAsString": true
+      }
+    },
+    "SecurityRuleDirection": {
+      "type": "string",
+      "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityRuleDirection",
+        "modelAsString": true
+      }
     }
   }
 }
