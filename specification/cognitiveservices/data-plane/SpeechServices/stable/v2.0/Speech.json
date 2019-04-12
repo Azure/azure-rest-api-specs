@@ -20,7 +20,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Gets the list of accuracy tests for the authenticated subscription.",
-        "operationId": "GetAccuracyTests",
+        "operationId": "AccuracyTests_List",
         "consumes": [],
         "produces": [
           "application/json"
@@ -235,7 +235,11 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Creates a new accuracy test.",
-        "operationId": "CreateAccuracyTest",
+        "operationId": "AccuracyTest_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -372,7 +376,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Gets the accuracy test identified by the given ID.",
-        "operationId": "GetAccuracyTest",
+        "operationId": "AccuracyTest_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -621,7 +625,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Deletes the accuracy test identified by the given ID.",
-        "operationId": "DeleteAccuracyTest",
+        "operationId": "AccuracyTest_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -744,7 +748,7 @@
           "Custom Speech accuracy tests:"
         ],
         "summary": "Updates the mutable details of the test identified by its id.",
-        "operationId": "UpdateAccuracyTest",
+        "operationId": "AccuracyTest_Update",
         "consumes": [
           "application/json"
         ],
@@ -1054,7 +1058,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets a list of datasets for the authenticated subscription.",
-        "operationId": "GetDatasets",
+        "operationId": "Datasets_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -1224,7 +1228,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets the dataset identified by the given ID.",
-        "operationId": "GetDataset",
+        "operationId": "Dataset_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -1398,7 +1402,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Deletes the specified dataset.",
-        "operationId": "DeleteDataset",
+        "operationId": "Dataset_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -1547,7 +1551,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Updates the mutable details of the dataset identified by its ID.",
-        "operationId": "UpdateDataset",
+        "operationId": "Dataset_Update",
         "consumes": [
           "application/json"
         ],
@@ -1782,7 +1786,7 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Gets a list of supported locales for data imports.",
-        "operationId": "GetSupportedLocalesForDatasets",
+        "operationId": "SupportedLocalesForDatasets_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -1792,7 +1796,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IReadOnlyDictionary`2"
+              "$ref": "#/definitions/IReadOnlyDictionary"
             },
             "headers": {
               "X-RateLimit-Limit": {
@@ -1917,7 +1921,11 @@
           "Custom Speech datasets for model adaptation:"
         ],
         "summary": "Uploads data and creates a new dataset.",
-        "operationId": "UploadDataset",
+        "operationId": "Dataset_Upload",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "multipart/form-data"
         ],
@@ -2156,7 +2164,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the list of endpoints for the authenticated subscription.",
-        "operationId": "GetEndpoints",
+        "operationId": "Endpoints_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -2362,7 +2370,11 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Creates a new endpoint.",
-        "operationId": "CreateEndpoint",
+        "operationId": "Endpoint_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -2580,7 +2592,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the endpoint identified by the given ID.",
-        "operationId": "GetEndpoint",
+        "operationId": "Endpoint_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -2820,7 +2832,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Deletes the endpoint identified by the given ID.",
-        "operationId": "DeleteEndpoint",
+        "operationId": "Endpoint_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -2943,7 +2955,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Updates the metadata of the endpoint identified by the given ID.",
-        "operationId": "UpdateEndpoint",
+        "operationId": "Endpoint_Update",
         "consumes": [
           "application/json"
         ],
@@ -3244,7 +3256,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets a list of supported locales for endpoint creations.",
-        "operationId": "GetSupportedLocalesForEndpoints",
+        "operationId": "SupportedLocalesForEndpoints_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -3374,7 +3386,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the list of endpoint data export tasks for the authenticated user.",
-        "operationId": "GetEndpointDataExports",
+        "operationId": "EndpointDataExports_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -3548,7 +3560,11 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Create a new endpoint data export task.",
-        "operationId": "CreateEndpointDataExport",
+        "operationId": "EndpointDataExport_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -3750,7 +3766,7 @@
         ],
         "summary": "Deletes the transcriptions and captured audio files associated with the endpoint identified by the given ID.",
         "description": "Deletion will happen in the background and can take up to a day.",
-        "operationId": "DeleteEndpointData",
+        "operationId": "EndpointData_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -3875,7 +3891,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Gets the specified endpoint data export task for the authenticated user.",
-        "operationId": "GetEndpointDataExport",
+        "operationId": "EndpointDataExport_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -4048,7 +4064,7 @@
           "Custom Speech endpoints:"
         ],
         "summary": "Deletes the endpoint data export task identified by the given ID.",
-        "operationId": "DeleteEndpointDataExport",
+        "operationId": "EndpointDataExport_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -4207,7 +4223,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the list of models for the authenticated subscription.",
-        "operationId": "GetModels",
+        "operationId": "Models_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -4396,7 +4412,11 @@
           "Custom Speech models:"
         ],
         "summary": "Creates a new model.",
-        "operationId": "CreateModel",
+        "operationId": "Model_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -4588,7 +4608,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets the model identified by the given ID.",
-        "operationId": "GetModel",
+        "operationId": "Model_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -4785,7 +4805,7 @@
           "Custom Speech models:"
         ],
         "summary": "Deletes the model identified by the given ID.",
-        "operationId": "DeleteModel",
+        "operationId": "Model_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -4934,7 +4954,7 @@
           "Custom Speech models:"
         ],
         "summary": "Updates the metadata of the model identified by the given ID.",
-        "operationId": "UpdateModel",
+        "operationId": "Model_Update",
         "consumes": [
           "application/json"
         ],
@@ -5192,7 +5212,7 @@
           "Custom Speech models:"
         ],
         "summary": "Gets a list of supported locales for model adaptation.",
-        "operationId": "GetSupportedLocalesForModels",
+        "operationId": "SupportedLocalesForModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -5202,7 +5222,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IReadOnlyDictionary`2"
+              "$ref": "#/definitions/IReadOnlyDictionary"
             },
             "headers": {
               "X-RateLimit-Limit": {
@@ -5324,7 +5344,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets a list of transcriptions for the authenticated subscription.",
-        "operationId": "GetTranscriptions",
+        "operationId": "Transcriptions_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -5534,7 +5554,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Creates a new transcription.",
-        "operationId": "CreateTranscription",
+        "operationId": "Transcription_Create",
         "consumes": [
           "application/json"
         ],
@@ -5752,7 +5772,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets the transcription identified by the given ID.",
-        "operationId": "GetTranscription",
+        "operationId": "Transcription_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -5996,7 +6016,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Deletes the specified transcription task.",
-        "operationId": "DeleteTranscription",
+        "operationId": "Transcription_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -6148,7 +6168,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Updates the mutable details of the transcription identified by its ID.",
-        "operationId": "UpdateTranscription",
+        "operationId": "Transcription_Update",
         "consumes": [
           "application/json"
         ],
@@ -6453,7 +6473,7 @@
           "Custom Speech transcriptions:"
         ],
         "summary": "Gets a list of supported locales for offline transcriptions.",
-        "operationId": "GetSupportedLocalesForTranscriptions",
+        "operationId": "SupportedLocalesForTranscriptions_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -6583,7 +6603,7 @@
           "Language Generation Endpoints:"
         ],
         "summary": "Gets all language generation endpoint of a subscription.",
-        "operationId": "GetLanguageGenerationEndpoints",
+        "operationId": "LanguageGenerationEndpoints_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -6752,7 +6772,11 @@
           "Language Generation Endpoints:"
         ],
         "summary": "Creates a new language generation endpoint.",
-        "operationId": "CreateLanguageGenerationEndpoint",
+        "operationId": "LanguageGenerationEndpoint_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -6934,7 +6958,7 @@
           "Language Generation Endpoints:"
         ],
         "summary": "Gets the specified deployed language generation endpoint.",
-        "operationId": "GetLanguageGenerationEndpoint",
+        "operationId": "LanguageGenerationEndpoint_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -7110,7 +7134,7 @@
           "Language Generation Endpoints:"
         ],
         "summary": "Deletes the language generation model endpoint with the given id.",
-        "operationId": "DeleteLanguageGenerationEndpoint",
+        "operationId": "LanguageGenerationEndpoint_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -7259,7 +7283,7 @@
           "Language Generation Endpoints:"
         ],
         "summary": "Updates the mutable details of the language generation endpoint identified by its id.",
-        "operationId": "UpdateLanguageGenerationEndpoint",
+        "operationId": "LanguageGenerationEndpoint_Update",
         "consumes": [
           "application/json"
         ],
@@ -7497,7 +7521,7 @@
           "Language Generation Endpoints:"
         ],
         "summary": "Gets a list of supported locales for language generation endpoint creation.",
-        "operationId": "GetSupportedLocalesForLanguageGenerationEndpoints",
+        "operationId": "SupportedLocalesForLanguageGenerationEndpoints_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -7627,7 +7651,7 @@
           "Language Generation Models:"
         ],
         "summary": "Gets all language generation model of a subscription.",
-        "operationId": "GetLanguageGenerationModels",
+        "operationId": "LanguageGenerationModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -7779,7 +7803,11 @@
           "Language Generation Models:"
         ],
         "summary": "Creates a new language generation model.",
-        "operationId": "CreateLanguageGenerationModel",
+        "operationId": "LanguageGenerationModel_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -7961,7 +7989,7 @@
           "Language Generation Models:"
         ],
         "summary": "Gets the specified language generation model.",
-        "operationId": "GetLanguageGenerationModel",
+        "operationId": "LanguageGenerationModel_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -8120,7 +8148,7 @@
           "Language Generation Models:"
         ],
         "summary": "Deletes the language generation model with the given id.",
-        "operationId": "DeleteLanguageGenerationModel",
+        "operationId": "LanguageGenerationModel_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -8269,7 +8297,7 @@
           "Language Generation Models:"
         ],
         "summary": "Updates the mutable details of the language generation model identified by its id.",
-        "operationId": "UpdateLanguageGenerationModel",
+        "operationId": "LanguageGenerationModel_Update",
         "consumes": [
           "application/json"
         ],
@@ -8490,7 +8518,7 @@
           "Language Generation Models:"
         ],
         "summary": "Gets a list of supported locales for language generation model creation.",
-        "operationId": "GetSupportedLocalesForLanguageGenerationModels",
+        "operationId": "SupportedLocalesForLanguageGenerationModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -8620,7 +8648,7 @@
           "Service health:"
         ],
         "summary": "The action returns the health of the different components of the serivce.",
-        "operationId": "GetHealthStatus",
+        "operationId": "HealthStatus_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -8678,7 +8706,7 @@
           "Voice datasets:"
         ],
         "summary": "Gets all voice datasets of a user.",
-        "operationId": "GetVoiceDatasets",
+        "operationId": "VoiceDatasets_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -8820,7 +8848,7 @@
           "Voice datasets:"
         ],
         "summary": "Gets a list of supported locales for custom voice data imports.",
-        "operationId": "GetSupportedLocalesForVoiceDatasets",
+        "operationId": "SupportedLocalesForVoiceDatasets_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -8950,7 +8978,11 @@
           "Voice datasets:"
         ],
         "summary": "Uploads data and creates a new voice data object.",
-        "operationId": "UploadVoiceDataset",
+        "operationId": "VoiceDataset_Upload",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "multipart/form-data"
         ],
@@ -9183,7 +9215,7 @@
           "Voice datasets:"
         ],
         "summary": "Deletes the voice dataset with the given id.",
-        "operationId": "DeleteVoiceDataset",
+        "operationId": "VoiceDataset_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -9332,7 +9364,7 @@
           "Voice datasets:"
         ],
         "summary": "Updates the mutable details of the voice dataset identified by its ID.",
-        "operationId": "UpdateVoiceDataset",
+        "operationId": "VoiceDataset_Update",
         "consumes": [
           "application/json"
         ],
@@ -9567,7 +9599,7 @@
           "Voice endpoints:"
         ],
         "summary": "Gets a list of voice endpoint details.",
-        "operationId": "GetVoiceDeployments",
+        "operationId": "VoiceDeployments_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -9739,7 +9771,11 @@
           "Voice endpoints:"
         ],
         "summary": "Creates a new voice endpoint object.",
-        "operationId": "CreateVoiceDeployment",
+        "operationId": "VoiceDeployment_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -9904,7 +9940,7 @@
           "Voice endpoints:"
         ],
         "summary": "Gets the details of a Custom Voice endpoint.",
-        "operationId": "GetVoiceDeployment",
+        "operationId": "VoiceDeployment_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -10083,7 +10119,7 @@
           "Voice endpoints:"
         ],
         "summary": "Delete the specified voice endpoint.",
-        "operationId": "DeleteDeployment",
+        "operationId": "Deployment_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -10232,7 +10268,7 @@
           "Voice endpoints:"
         ],
         "summary": "Updates the name and description of the endpoint identified by the given ID.",
-        "operationId": "UpdateVoiceEndpoint",
+        "operationId": "VoiceEndpoint_Update",
         "consumes": [
           "application/json"
         ],
@@ -10533,7 +10569,7 @@
           "Voice endpoints:"
         ],
         "summary": "Gets a list of supported locales for custom voice Endpoints.",
-        "operationId": "GetSupportedLocalesForVoiceEndpoints",
+        "operationId": "SupportedLocalesForVoiceEndpoints_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -10663,7 +10699,7 @@
           "Voice models:"
         ],
         "summary": "Gets a list of voice model details.",
-        "operationId": "GetVoiceModels",
+        "operationId": "VoiceModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -10818,7 +10854,11 @@
           "Voice models:"
         ],
         "summary": "Creates a new voice model object.",
-        "operationId": "CreateVoiceModel",
+        "operationId": "VoiceModel_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -10983,7 +11023,7 @@
           "Voice models:"
         ],
         "summary": "Gets specified voice model details.",
-        "operationId": "GetVoiceModel",
+        "operationId": "VoiceModel_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -11145,7 +11185,7 @@
           "Voice models:"
         ],
         "summary": "Deletes the voice model with the given id.",
-        "operationId": "DeleteVoiceModel",
+        "operationId": "VoiceModel_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -11294,7 +11334,7 @@
           "Voice models:"
         ],
         "summary": "Updates the metadata of the voice model identified by the given ID.",
-        "operationId": "UpdateVoiceModel",
+        "operationId": "VoiceModel_Update",
         "consumes": [
           "application/json"
         ],
@@ -11544,7 +11584,7 @@
           "Voice models:"
         ],
         "summary": "Gets a list of supported locales for custom voice Models.",
-        "operationId": "GetSupportedLocalesForVoiceModels",
+        "operationId": "SupportedLocalesForVoiceModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -11674,7 +11714,7 @@
           "Voice tests:"
         ],
         "summary": "Gets detail of the specified voice test.",
-        "operationId": "GetVoiceTest",
+        "operationId": "VoiceTest_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -11846,7 +11886,7 @@
           "Voice tests:"
         ],
         "summary": "Deletes the specified voice test.",
-        "operationId": "DeleteVoiceTest",
+        "operationId": "VoiceTest_Delete",
         "consumes": [],
         "produces": [],
         "parameters": [
@@ -12023,7 +12063,11 @@
           "Voice tests:"
         ],
         "summary": "Creates a new voice test.",
-        "operationId": "CreateVoiceTest",
+        "operationId": "VoiceTest_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "azure-async-operation"
+        },
         "consumes": [
           "application/json"
         ],
@@ -12184,8 +12228,7 @@
     }
   },
   "definitions": {
-    "IReadOnlyDictionary`2": {
-    "title": "IReadOnlyDictionary`2",
+    "IReadOnlyDictionary": {
     "type": "object",
     "properties": {
       "none": {
@@ -12195,30 +12238,35 @@
         }
       },
       "language": {
+        "description" :"language data information",
         "type": "array",
         "items": {
           "type": "string"
         }
       },
       "acoustic": {
+        "description" :"acoustic data information",
         "type": "array",
         "items": {
           "type": "string"
         }
       },
       "pronunciation": {
+        "description" :"pronunciation data information",
         "type": "array",
         "items": {
           "type": "string"
         }
       },
       "customVoice": {
+        "description" :"voice data information",
         "type": "array",
         "items": {
           "type": "string"
         }
       },
       "languageGeneration": {
+        "description" :"language information",
         "type": "array",
         "items": {
           "type": "string"
