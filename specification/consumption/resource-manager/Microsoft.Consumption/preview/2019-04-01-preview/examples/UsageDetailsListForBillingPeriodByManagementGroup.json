@@ -2,14 +2,15 @@
   "parameters": {
     "api-version": "2019-04-01-preview",
     "managementGroupId": "managementGroupForTest",
-    "billingPeriodName": "201903"
+    "billingPeriodName": "201903",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20190301/providers/Microsoft.Consumption/usageDetails/usageDetails_Id1",
+            "id": "/scope/providers/Microsoft.Billing/billingPeriods/billingPeriodName/providers/Microsoft.Consumption/usageDetails/usageDetails_Id1",
             "name": "usageDetails_Id1",
             "type": "Microsoft.Consumption/usageDetails",
             "tags": {
@@ -51,7 +52,7 @@
             }
           },
 		  {
-            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Billing/billingPeriods/20190301/providers/Microsoft.Consumption/usageDetails/usageDetails_Id2",
+            "id": "/scope/providers/Microsoft.Billing/billingPeriods/billingPeriodName/providers/Microsoft.Consumption/usageDetails/usageDetails_Id2",
             "name": "usageDetails_Id2",
             "type": "Microsoft.Consumption/usageDetails",
             "tags": {
@@ -66,7 +67,7 @@
                 "billingProfileId": "xxxxxxxx",
                 "billingProfileName": "Account Name 2",
                 "accountName": "Account Name 2",
-                "subscriptionId": "11111111-1111-1111-1111-111111111111",
+                "subscriptionId": "00000000-0000-0000-0000-000000000000",
                 "subscriptionName": "Subscription Name 2",
                 "date": "2019-03-30T00:00:00.0000000Z",
                 "product": "Product Name 2",
@@ -80,7 +81,7 @@
                 "billingCurrency": "CAD",
                 "resourceLocation": "USEast",
                 "consumedService": "Microsoft.Storage",
-                "resourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/Resource Group 2/providers/Microsoft.Storage/storageAccounts/Resource Name 2",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Resource Group 2/providers/Microsoft.Storage/storageAccounts/Resource Name 2",
                 "resourceName": "Resource Name 2",
                 "invoiceSection": "Invoice Section 2",
                 "costCenter": "DEV",
