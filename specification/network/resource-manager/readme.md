@@ -53,6 +53,7 @@ input-file:
   - Microsoft.Network/stable/2019-02-01/expressRoutePort.json
   - Microsoft.Network/stable/2019-02-01/interfaceEndpoint.json
   - Microsoft.Network/stable/2019-02-01/loadBalancer.json
+  - Microsoft.Network/stable/2019-02-01/natGateway.json
   - Microsoft.Network/stable/2019-02-01/network.json
   - Microsoft.Network/stable/2019-02-01/networkInterface.json
   - Microsoft.Network/stable/2019-02-01/networkProfile.json
@@ -875,6 +876,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: natGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkInterface.json
