@@ -140,7 +140,7 @@ function iconFor(type, num = undefined) {
     if (num === 0) {
         return ':white_check_mark:';
     }
-    
+
     if (type.toLowerCase().includes('error')) {
         return ':x:';
     } else {
@@ -224,7 +224,11 @@ function getFileSummary(issueType, fileName, existingWarnings, existingErrors, n
     let fileSummary = "";
 
     if (newErrors.length > 0) {
-        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
+        fileSummary += fileSummaryNewTemplate(
+            `${issueType} Error`,
+            newErrors.length,
+            getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown)
+        );
     }
 
     if (existingErrors.length > 0) {
@@ -365,7 +369,9 @@ function postProcessing() {
         if (newSDKErrors.length > 0) {
             console.log(`Potential new SDK errors`)
             console.log("========================");
-            console.log(getFileSummaryTable(newSDKErrors, "", potentialNewWarningErrorSummaryPlain));
+            console.log(getFileSummaryTable(
+                newSDKErrors, "", potentialNewWarningErrorSummaryPlain
+            ));
         }
         if (newSDKWarnings.length > 0) {
             console.log(`Potential new SDK warnings`)
@@ -397,7 +403,7 @@ function postProcessing() {
     const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
     const armSummary = getSummaryBlock("ARM-related validation Errors / Warnings", armFileSummaries, armContactMessage);
     const text = `${sdkSummary}<br><br>\n\n${armSummary}<br><br>\n\n${githubFooter}`;
-    
+
     const [title, summary] = getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount);
     const output = {
         title,

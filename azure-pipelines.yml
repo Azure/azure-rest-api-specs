@@ -155,5 +155,5 @@ jobs:
       verbose: false
   - script: 'scripts/install-dotnet.sh'
     displayName: 'install .Net'
-  - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
+  - script: './node_modules/.bin/ts-node scripts/momentOfTruth2.ts && ./node_modules/.bin/ts-node scripts/momentOfTruthPostProcessing2.ts'
     displayName: 'LintDiff'

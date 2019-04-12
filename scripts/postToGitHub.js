@@ -13,17 +13,15 @@ if(token != undefined) {
     });
 }
 
-module.exports = {
-    postGithubComment: function(owner, repository, prNumber, commentBody) {
-        octokit.issues.createComment({
-            "owner": owner,
-            "repo": repository,
-            "number": prNumber,
-            "body": commentBody
-        }).then(data => {
-            console.log("Comment has been posted");
-        }). catch(err => {
-            console.log(err);
-        });
-    }
+export function postGithubComment(owner, repository, prNumber, commentBody) {
+    octokit.issues.createComment({
+        "owner": owner,
+        "repo": repository,
+        "number": prNumber,
+        "body": commentBody
+    }).then(data => {
+        console.log("Comment has been posted");
+    }).catch(err => {
+        console.log(err);
+    });
 }
