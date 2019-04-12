@@ -187,6 +187,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName":  "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at subscription scope": { "$ref": "./examples/PolicyStates_QuerySubscriptionScope.json" },
           "Time range; sort, select and limit": { "$ref": "./examples/PolicyStates_TimeRangeSortSelectTop.json" },
@@ -296,6 +299,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at resource group scope": { "$ref": "./examples/PolicyStates_QueryResourceGroupScope.json" }
         }
@@ -402,6 +408,9 @@
               "$ref": "#/definitions/QueryFailure"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         },
         "x-ms-examples": {
           "Query all policy states at resource scope": { "$ref": "./examples/PolicyStates_QueryResourceScope.json" },
@@ -513,6 +522,9 @@
               "$ref": "#/definitions/QueryFailure"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         },
         "x-ms-examples": {
           "Query latest at subscription level policy set definition scope": { "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicySetDefinitionScope.json" }
@@ -627,6 +639,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
         "x-ms-examples": {
           "Query latest at subscription level policy definition scope": { "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicyDefinitionScope.json" }
         }
@@ -739,6 +754,9 @@
               "$ref": "#/definitions/QueryFailure"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         },
         "x-ms-examples": {
           "Query latest at subscription level policy assignment scope": { "$ref": "./examples/PolicyStates_QuerySubscriptionLevelPolicyAssignmentScope.json" }
@@ -855,6 +873,9 @@
               "$ref": "#/definitions/QueryFailure"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         },
         "x-ms-examples": {
           "Query latest at resource group level policy assignment scope": { "$ref": "./examples/PolicyStates_QueryResourceGroupLevelPolicyAssignmentScope.json" }
@@ -999,6 +1020,10 @@
           "items": {
             "$ref": "#/definitions/PolicyState"
           }
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "desrciption": "Odata next link, used to get the next set of records."
         }
       }
     },
