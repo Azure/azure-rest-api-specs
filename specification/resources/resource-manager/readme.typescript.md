@@ -38,7 +38,7 @@ typescript:
 ```yaml $(typescript) && $(package-resources)
 typescript:
   package-name: "@azure/arm-resources"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-resources"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources"
 ```
 
 ```yaml $(typescript) && $(package-links)
