@@ -13,7 +13,7 @@ batch:
     output-folder: $(typescript-sdks-folder)/packages/@azure/arm-commitmentplans
   - package-webservices: true
     package-name: "@azure/arm-webservices"
-    output-folder: $(typescript-sdks-folder)/packages/@azure/arm-webservices
+    output-folder: $(typescript-sdks-folder)/sdk/webservices/arm-webservices
   - package-workspaces: true
     package-name: "@azure/arm-workspaces"
     output-folder: $(typescript-sdks-folder)/packages/@azure/arm-workspaces
