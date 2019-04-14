@@ -7,7 +7,8 @@
     "PlaybookConfiguration": {
       "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/playbookConfigurations/myPlaybookConfigName",
       "name": "myPlaybookConfigName",
-      "type": "Microsoft.Security/playbookConfigurations",
+      "type": "Microsoft.Security/playbookConfigurations",      
+      "tags": {},
       "properties": {
         "description": "Alerts auto dismiss",
         "isEnabled": true,
@@ -18,8 +19,14 @@
           "lastUpdatedBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72"
         },
         "scopes": [
-          "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a",
-          "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+          {
+            "description": "Some custom description",
+            "scopePath": "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a"
+          },
+          {
+            "description": "Some custom description",
+            "scopePath": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+          }
         ],
         "sources": [
           {
@@ -28,10 +35,10 @@
               {
                 "rules": [
                   {
-                    "propertyJPath": "AlertType",
+                    "propertyJPath": "$.type",
                     "propertyType": "System.String",
                     "expectedValue": "customType",
-                    "conditions": "EqualsIgnoreCase"
+                    "operator": "EqualsIgnoreCase"
                   }
                 ]
               }
@@ -39,8 +46,16 @@
           }
         ],
         "actions": [
-          "https://triggerUri1.com",
-          "https://triggerUri2.com"
+          {
+            "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
+            "resourceProviderNamespace": "Microsoft.Logic",
+            "uri": "https://triggerUri1.com"
+          },
+          {
+            "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest2",
+            "resourceProviderNamespace": "Microsoft.Logic",
+            "uri": "https://triggerUri2.com"
+          }
         ]
       }
     }

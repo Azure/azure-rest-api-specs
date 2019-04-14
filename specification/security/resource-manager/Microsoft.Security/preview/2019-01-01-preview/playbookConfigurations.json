@@ -11,9 +11,7 @@
   "produces": [ "application/json" ],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": [ "user_impersonation" ]
     }
   ],
   "securityDefinitions": {
@@ -37,7 +35,7 @@
         },
         "tags": [ "PlaybookConfigurations" ],
         "description": "Get all playbook configurations in a subscription.",
-        "operationId": "PlaybookConfigurations_ListBySubscription",
+        "operationId": "PlaybookConfigurations_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -108,7 +106,7 @@
         },
         "tags": [ "PlaybookConfigurations" ],
         "description": "Get the details of a playbook configuration.",
-        "operationId": "PlaybookConfigurations_GetByResourceGroup",
+        "operationId": "PlaybookConfigurations_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -146,7 +144,7 @@
         },
         "tags": [ "PlaybookConfigurations" ],
         "description": "Create or update a playbook configuration. If a playbook configuration is already created and a subsequent create request is issued with different properties, the playbook configuration properties will be updated.",
-        "operationId": "PlaybookConfigurations_CreateOrUpdateByResourceGroup",
+        "operationId": "PlaybookConfigurations_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -161,12 +159,7 @@
             "$ref": "#/parameters/PlaybookConfigurationName"
           },
           {
-            "in":"body",
-            "name":"PlaybookConfiguration",
-            "description":"",
-            "schema":{
-            "$ref": "#/definitions/PlaybookConfiguration"
-            }
+            "$ref": "#/parameters/PlaybookConfigurationInBody"
           }
         ],
         "responses": {
@@ -189,7 +182,7 @@
             }
           }
         }
-      },      
+      },
       "delete": {
         "x-ms-examples": {
           "Delete a single playbook configuration": {
@@ -197,7 +190,7 @@
           }
         },
         "tags": [ "PlaybookConfigurations" ],
-        "operationId": "PlaybookConfigurations_DeleteByResourceGroup",
+        "operationId": "PlaybookConfigurations_Delete",
         "description": "Delete a playbook configuration.",
         "parameters": [
           {
@@ -250,10 +243,7 @@
             "$ref": "#/parameters/PlaybookConfigurationName"
           },
           {
-            "in":"body",
-            "name":"PlaybookConfiguration",
-            "description":"",
-            "schema":{"$ref": "#/definitions/PlaybookConfiguration"}
+            "$ref": "#/parameters/PlaybookConfigurationInBody"
           }
         ],
         "responses": {
@@ -276,9 +266,7 @@
   "definitions": {
     "PlaybookConfigurationList": {
       "description": "List of playbook configurations response.",
-      "required": [
-        "value"
-      ],
+      "required": [ "value" ],
       "properties": {
         "value": {
           "type": "array",
@@ -306,7 +294,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -329,10 +317,9 @@
         },
         "scopes": {
           "type": "array",
-          "description": "A collection of the resources scopes on which the playbook configurations logic is applied.",
+          "description": "A collection of the subscription's resources  scopes on which the playbook configurations logic is applied.",
           "items": {
-            "type": "string",
-            "description": "The resources scope."
+            "$ref": "#/definitions/PlaybookConfigurationScope"
           }
         },
         "sources": {
@@ -344,7 +331,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "A collection of the actions which are triggered upon true evaluation of the configured rule sets.",
+          "description": "A collection of the actions which are triggered if all the configured rule set evaluation is true.",
           "items": {
             "$ref": "#/definitions/PlaybookConfigurationAction"
           }
@@ -364,7 +351,7 @@
         "createdBy": {
           "readOnly": true,
           "type": "string",
-          "description": "The AAD object id that created the playbook configuration."
+          "description": "The AAD object ID of the entity that created the playbook configuration."
         },
         "lastUpdatedDateTimeUtc": {
           "readOnly": true,
@@ -375,7 +362,7 @@
         "lastUpdatedBy": {
           "readOnly": true,
           "type": "string",
-          "description": "The AAD object id that last updated the playbook configuration."
+          "description": "The AAD object ID of the entity that last updated the playbook configuration."
         }
       }
     },
@@ -396,10 +383,38 @@
         }
       }
     },
+    "PlaybookConfigurationScope": {
+      "type": "object",
+      "description": "The subscription's resources scope",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The resources scope description."
+        },
+        "scopePath": {
+          "type": "string",
+          "description": "The resources scope path."
+        }
+      }
+    },
     "PlaybookConfigurationAction": {
-      "type": "string",
-      "description": "The uri that should be triggered.",
-      "format": "uri"
+      "type": "object",
+      "description": "The action that should be triggered.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The triggered resource id."
+        },
+        "resourceProviderNamespace": {
+          "type": "string",
+          "description": "The resource provider name."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The uri that should be triggered by an Http GET request.",
+          "format": "uri"
+        }
+      }
     },
     "PlaybookConfigurationRuleSet": {
       "type": "object",
@@ -427,9 +442,9 @@
           "type": "string",
           "description": "The expected value."
         },
-        "conditions": {
+        "operator": {
           "type": "string",
-          "description": "A valid comparer operator to use."          
+          "description": "A valid comparer operator to use."
         }
       }
     },
@@ -456,6 +471,15 @@
       "type": "string",
       "description": "The playbook Configuration name.",
       "x-ms-parameter-location": "method"
+    },
+    "PlaybookConfigurationInBody": {
+      "name": "PlaybookConfiguration",
+      "in": "body",
+      "required": true,
+      "description": "The playbook configuration resource",
+      "schema": {
+        "$ref": "#/definitions/PlaybookConfiguration"
+      }
     }
   }
 }
