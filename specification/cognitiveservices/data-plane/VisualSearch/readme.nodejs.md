@@ -10,5 +10,5 @@ nodejs:
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
-  generate-readme-md: false
+  generate-readme-md: true
 ```

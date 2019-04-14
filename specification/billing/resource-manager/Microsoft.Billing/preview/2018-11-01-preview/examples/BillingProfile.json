@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountName": "2000100",
+    "billingProfileName": "BillingProfileId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/BillingProfileId1",
+        "name": "BillingProfileId1",
+        "type": "Microsoft.Billing/billingProfiles",
+        "properties": {
+          "displayName": "BillingProfileName1",
+          "poNumber": "ABC12345",
+          "billingAddress": {
+            "addressLine1": "Test Address",
+            "addressLine2": "Test Address",
+            "addressLine3": "Test Address",
+            "city": "City",
+            "postalCode": "00000",
+            "region": "WA",
+            "country": "US"
+          },
+          "invoiceEmailOptIn": true,
+          "isClassic": false,
+          "currency": "USD",
+          "enabledAzureSKUs": [
+            {
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Dev/Test"
+            },
+            {
+              "skuId": "0002",
+              "skuDescription": "Microsoft Azure Standard"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
