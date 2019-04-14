@@ -179,4 +179,8 @@ directive:
     from: OperationalInsights.json
     where: $.definitions.IntelligencePack.properties.enabled
     reason: 'Not related to my change and this is a code constraint. '
+  - suppress: DescriptionAndTitleMissing
+    from: OperationalInsights.json
+    where: $.definitions.DataSource.properties.kind
+    reason: This is a false positive. The description is derived from reference to DataSourceKind entity.
 ```
