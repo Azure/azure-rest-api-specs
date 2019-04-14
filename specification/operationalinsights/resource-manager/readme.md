@@ -183,4 +183,8 @@ directive:
     from: OperationalInsights.json
     where: $.definitions.DataSource.properties.kind
     reason: This is a false positive. The description is derived from reference to DataSourceKind entity.
+  - suppress: DescriptionAndTitleMissing
+    from: OperationalInsights.json
+    where: $.definitions.DataSourceFilter.properties.kind
+    reason: False positive. Description inherited from reference.
 ```
