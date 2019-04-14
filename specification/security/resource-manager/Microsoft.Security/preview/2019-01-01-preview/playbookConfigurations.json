@@ -436,7 +436,18 @@
         },
         "propertyType": {
           "type": "string",
-          "description": "The data type of the compared operands."
+          "description": "The data type of the compared operands.",
+          "enum": [
+            "System.String",
+            "System.Boolean",
+            "System.Byte",
+            "System.Int16",
+            "System.Int32",
+            "System.Single",
+            "System.Double",
+            "System.Char"
+
+          ]
         },
         "expectedValue": {
           "type": "string",
@@ -444,7 +455,20 @@
         },
         "operator": {
           "type": "string",
-          "description": "A valid comparer operator to use."
+          "description": "A valid comparer operator to use.",
+          "enum": [
+            "Equals",
+            "EqualsIgnoreCase",
+            "GreaterThan",
+            "GreaterThanOrEqualTo",
+            "LesserThan",
+            "LesserThanOrEqualTo",
+            "NotEquals",
+            "NotEqualsIgnoreCase",
+            "Contains",
+            "StartsWith",
+            "EndsWith"
+          ]
         }
       }
     },
