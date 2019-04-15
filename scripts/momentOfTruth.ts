@@ -3,11 +3,10 @@
 
 import * as stringMap from '@ts-common/string-map'
 import * as tsUtils from './ts-utils'
-
-const exec = require('child_process').exec,
-    path = require('path'),
-    utils = require('../test/util/utils'),
-    fs = require('fs');
+import { exec } from 'child_process'
+import * as path from 'path'
+import * as utils from '../test/util/utils'
+import * as fs from 'fs'
 
 let configsToProcess = utils.getConfigFilesChangedInPR();
 let pullRequestNumber = utils.getPullRequestNumber();

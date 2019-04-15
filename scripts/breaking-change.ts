@@ -3,13 +3,15 @@
 
 import * as stringMap from '@ts-common/string-map'
 import * as tsUtils from './ts-utils'
+import * as utils from '../test/util/utils'
+import * as path from 'path'
+import * as fs from 'fs-extra'
+import * as os from 'os'
+import * as childProcess from 'child_process'
+import * as oad from '@azure/oad'
+import * as util from 'util'
 
-const utils = require('../test/util/utils'),
-  path = require('path'),
-  fs = require('fs-extra'),
-  os = require('os'),
-  exec = require('util').promisify(require('child_process').exec),
-  oad = require('@azure/oad');
+const exec = util.promisify(childProcess.exec)
 
 // This map is used to store the mapping between files resolved and stored location
 var resolvedMapForNewSpecs: stringMap.MutableStringMap<string> = {};
@@ -34,7 +36,7 @@ function iconFor(type: unknown) {
   }
 }
 
-function shortName(filePath: unknown) {
+function shortName(filePath: string) {
   return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
 }
 
@@ -45,7 +47,7 @@ type Diff = {
   readonly message: unknown
 }
 
-function tableLine(filePath: unknown, diff: Diff) {
+function tableLine(filePath: string, diff: Diff) {
   return `|${iconFor(diff['type'])}|[${diff['type']} ${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)|[${shortName(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|\n`;
 }
 
@@ -74,7 +76,7 @@ async function runOad(oldSpec: string, newSpec: string) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
+  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn' });
   console.log(result);
 
   if (!result) {
@@ -124,10 +126,10 @@ async function runScript() {
   console.log(swaggersToProcess);
 
   console.log('Finding new swaggers...')
-  let newSwaggers = [];
+  let newSwaggers: unknown[] = [];
   if (isRunningInTravisCI && swaggersToProcess.length > 0) {
     newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
-      return swaggersToProcess.filter((s: unknown) => !fs.existsSync(s))
+      return swaggersToProcess.filter((s: string) => !fs.existsSync(s))
     });
   }
 

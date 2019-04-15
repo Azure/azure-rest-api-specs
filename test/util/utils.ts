@@ -3,20 +3,18 @@
 
 import * as tsUtils from '../../scripts/ts-utils'
 import * as stringMap from '@ts-common/string-map'
+import * as os from 'os'
+import * as fs from 'fs-extra'
+import * as glob from 'glob'
+import * as path from 'path'
+const z = require('z-schema')
+import * as YAML from 'js-yaml'
+import request = require('request')
+import * as util from 'util'
+import { execSync } from 'child_process'
 
-var
-  os = require('os'),
-  fs = require('fs-extra'),
-  glob = require('glob'),
-  path = require('path'),
-  z = require('z-schema'),
-  YAML = require('js-yaml'),
-  request = require('request'),
-  util = require('util'),
-  execSync = require('child_process').execSync;
-
-const asyncJsonRequest = (url: unknown) => new Promise<unknown>((res, rej) => request(
-  { url: url, json: true },
+const asyncJsonRequest = (url: string) => new Promise<unknown>((res, rej) => request(
+  { url, json: true },
   (error: unknown, _: unknown, body: unknown) => error ? rej(error) : res(body)
 ));
 
@@ -53,7 +51,7 @@ export const stripBOM = function(content: Buffer|string) {
  * Parses the json from the given filepath
  * @returns {string} clr command
  */
-export const parseJsonFromFile = async function(filepath: unknown) {
+export const parseJsonFromFile = async function(filepath: string) {
   const data = await fs.readFile(filepath, { encoding: 'utf8' });
   try {
     return YAML.safeLoad(stripBOM(data));
@@ -80,7 +78,7 @@ export const getTargetBranch = function() {
 /**
  * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
  */
-export const doOnBranch = async function(branch: unknown, func: () => Promise<unknown>) {
+export const doOnBranch = async function<T>(branch: unknown, func: () => Promise<T>) {
   fetchBranch(branch);
   const branchSha = resolveRef(`origin/${branch}`);
   const tmpDir = path.join(os.tmpdir(), branchSha);
@@ -313,13 +311,13 @@ export const getFilesChangedInPR = function() {
       });
       console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
 
-      var deletedFiles = swaggerFilesInPR.filter(function (swaggerFile: unknown) {
+      var deletedFiles = swaggerFilesInPR.filter(function (swaggerFile: string) {
         return !fs.existsSync(swaggerFile);
       });
       console.log('>>>>> Files deleted in this PR are as follows:')
       console.log(deletedFiles);
       // Remove files that have been deleted in the PR
-      swaggerFilesInPR = swaggerFilesInPR.filter(function (x: unknown) { return deletedFiles.indexOf(x) < 0 });
+      swaggerFilesInPR = swaggerFilesInPR.filter(function (x: string) { return deletedFiles.indexOf(x) < 0 });
 
       result = swaggerFilesInPR;
     } catch (err) {
