@@ -53,5 +53,5 @@ script:
     if [[ $MODE == 'lintdiff' ]]; then
       scripts/install-dotnet.sh
       npm install
-      node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js
+      ./node_modules/.bin/ts-node scripts/momentOfTruth.ts && node scripts/momentOfTruthPostProcessing.js
     fi

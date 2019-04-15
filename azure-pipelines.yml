@@ -94,7 +94,7 @@ jobs:
       verbose: false
   - script: 'scripts/install-dotnet.sh'
     displayName: 'install .Net'
-  - script: 'node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
+  - script: './node_modules/.bin/ts-node scripts/momentOfTruth.ts && node scripts/momentOfTruthPostProcessing.js'
     displayName: 'LintDiff'
 
 - job: "SDK"

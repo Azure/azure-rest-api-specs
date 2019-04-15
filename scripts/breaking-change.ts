@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 import * as stringMap from '@ts-common/string-map'
+import * as tsUtils from './ts-utils'
 
 const utils = require('../test/util/utils'),
   path = require('path'),
@@ -9,8 +10,6 @@ const utils = require('../test/util/utils'),
   os = require('os'),
   exec = require('util').promisify(require('child_process').exec),
   oad = require('@azure/oad');
-
-const asNonUndefined = <T>(v: T|undefined) => v as T
 
 // This map is used to store the mapping between files resolved and stored location
 var resolvedMapForNewSpecs: stringMap.MutableStringMap<string> = {};
@@ -200,7 +199,7 @@ async function runScript() {
 
       diffFileNames.sort();
       for (const swagger of diffFileNames) {
-        const diffs = asNonUndefined(diffFiles[swagger]);
+        const diffs = tsUtils.asNonUndefined(diffFiles[swagger]);
         diffs.sort((a, b) => {
           if (a.type === b.type) {
             return a.id.localeCompare(b.id);
