@@ -4,8 +4,7 @@
 import * as tsUtils from '../../scripts/ts-utils'
 import * as stringMap from '@ts-common/string-map'
 
-'use strict';
-var assert = require("assert"),
+var
   os = require('os'),
   fs = require('fs-extra'),
   glob = require('glob'),
@@ -21,28 +20,26 @@ const asyncJsonRequest = (url: unknown) => new Promise<unknown>((res, rej) => re
   (error: unknown, _: unknown, body: unknown) => error ? rej(error) : res(body)
 ));
 
-exports = module.exports;
+export const extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
+export const swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
+export const swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
+export const schemaUrl = "http://json-schema.org/draft-04/schema";
+export const exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json";
+export const compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json";
 
-exports.extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
-exports.swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
-exports.swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
-exports.schemaUrl = "http://json-schema.org/draft-04/schema";
-exports.exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json";
-exports.compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json";
+export const isWindows = (process.platform.lastIndexOf('win') === 0);
+export const prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 
-exports.isWindows = (process.platform.lastIndexOf('win') === 0);
-exports.prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
-
-exports.globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
-exports.swaggers = glob.sync(exports.globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
-exports.exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
-exports.examples = glob.sync(exports.exampleGlobPath);
-exports.readmes = glob.sync(path.join(__dirname, '../', '../', '/specification/**/readme.md'));
+export const globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
+export const swaggers = glob.sync(globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
+export const exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
+export const examples = glob.sync(exampleGlobPath);
+export const readmes = glob.sync(path.join(__dirname, '../', '../', '/specification/**/readme.md'));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
 // translates it to FEFF, the UTF-16 BOM.
-exports.stripBOM = function stripBOM(content: Buffer|string) {
+export const stripBOM = function(content: Buffer|string) {
   if (Buffer.isBuffer(content)) {
     content = content.toString();
   }
@@ -56,10 +53,10 @@ exports.stripBOM = function stripBOM(content: Buffer|string) {
  * Parses the json from the given filepath
  * @returns {string} clr command
  */
-exports.parseJsonFromFile = async function parseJsonFromFile(filepath: unknown) {
+export const parseJsonFromFile = async function(filepath: unknown) {
   const data = await fs.readFile(filepath, { encoding: 'utf8' });
   try {
-    return YAML.safeLoad(exports.stripBOM(data));
+    return YAML.safeLoad(stripBOM(data));
   } catch (error) {
     throw new Error(`swagger "${filepath}" is an invalid JSON.\n${util.inspect(error, { depth: null })}`);
   }
@@ -72,7 +69,7 @@ exports.parseJsonFromFile = async function parseJsonFromFile(filepath: unknown) 
  * If the environment variable is undefined then the method returns 'master' as the default value.
  * @returns {string} branchName The target branch name.
  */
-exports.getTargetBranch = function getTargetBranch() {
+export const getTargetBranch = function() {
   console.log(`@@@@@ process.env['TRAVIS_BRANCH'] - ${process.env['TRAVIS_BRANCH']}`);
   let result = process.env['TRAVIS_BRANCH'] || 'master';
   result = result.trim();
@@ -83,13 +80,13 @@ exports.getTargetBranch = function getTargetBranch() {
 /**
  * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
  */
-exports.doOnBranch = async function doOnBranch(branch: unknown, func: () => Promise<unknown>) {
-  exports.fetchBranch(branch);
-  const branchSha = exports.resolveRef(`origin/${branch}`);
+export const doOnBranch = async function(branch: unknown, func: () => Promise<unknown>) {
+  fetchBranch(branch);
+  const branchSha = resolveRef(`origin/${branch}`);
   const tmpDir = path.join(os.tmpdir(), branchSha);
 
   const currentDir = process.cwd();
-  exports.checkoutBranch(branch, tmpDir);
+  checkoutBranch(branch, tmpDir);
 
   console.log(`Changing directory and executing the function...`);
   process.chdir(tmpDir);
@@ -105,7 +102,7 @@ exports.doOnBranch = async function doOnBranch(branch: unknown, func: () => Prom
 /**
  * Resolve a ref to its commit hash
  */
-exports.resolveRef = function resolveRef(ref: unknown) {
+export const resolveRef = function(ref: unknown) {
   let cmd = `git rev-parse ${ref}`;
   console.log(`> ${cmd}`);
   return execSync(cmd, { encoding: 'utf8' }).trim();
@@ -114,7 +111,7 @@ exports.resolveRef = function resolveRef(ref: unknown) {
 /**
  * Fetch ref for a branch from the origin
  */
-exports.fetchBranch = function fetchBranch(branch: unknown) {
+export const fetchBranch = function(branch: unknown) {
   let cmds = [
     `git remote -vv`,
     `git branch --all`,
@@ -132,7 +129,7 @@ exports.fetchBranch = function fetchBranch(branch: unknown) {
 /**
  * Checkout a copy of branch to location
  */
-exports.checkoutBranch = function checkoutBranch(ref: unknown, location: unknown) {
+export const checkoutBranch = function(ref: unknown, location: unknown) {
   let cmd = `git worktree add -f ${location} origin/${ref}`;
   console.log(`Checking out a copy of branch ${ref} to ${location}...`);
   console.log(`> ${cmd}`);
@@ -143,7 +140,7 @@ exports.checkoutBranch = function checkoutBranch(ref: unknown, location: unknown
  * Gets the name of the source branch from which the PR is sent.
  * @returns {string} branchName The source branch name.
  */
-exports.getSourceBranch = function getSourceBranch() {
+export const getSourceBranch = function() {
   let cmd = 'git rev-parse --abbrev-ref HEAD';
   let result = process.env['TRAVIS_PULL_REQUEST_BRANCH'];
   console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST_BRANCH'] - ${process.env['TRAVIS_PULL_REQUEST_BRANCH']}`);
@@ -165,7 +162,7 @@ exports.getSourceBranch = function getSourceBranch() {
  * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
  * @returns {string} PR number or 'undefined'.
  */
-exports.getPullRequestNumber = function getPullRequestNumber() {
+export const getPullRequestNumber = function() {
   let result = process.env['TRAVIS_PULL_REQUEST'];
   console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST'] - ${process.env['TRAVIS_PULL_REQUEST']}`);
 
@@ -182,7 +179,7 @@ exports.getPullRequestNumber = function getPullRequestNumber() {
  * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
  * @returns {string} repo name or 'undefined'.
  */
-exports.getRepoName = function getRepoName() {
+export const getRepoName = function() {
   let result = process.env['TRAVIS_REPO_SLUG'];
   console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${result}`);
 
@@ -195,7 +192,7 @@ exports.getRepoName = function getRepoName() {
  * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
  * @returns {string} repo name or 'undefined'.
  */
-exports.getSourceRepoName = function getSourceRepoName() {
+export const getSourceRepoName = function() {
   let result = process.env['TRAVIS_PULL_REQUEST_SLUG'];
   console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST_SLUG'] - ${result}`);
 
@@ -207,8 +204,8 @@ exports.getSourceRepoName = function getSourceRepoName() {
  * Gets the repo URL
  * @returns {string} repo URL or 'undefined'
  */
-exports.getRepoUrl = function getRepoUrl() {
-  let repoName = exports.getRepoName();
+export const getRepoUrl = function() {
+  let repoName = getRepoName();
   return `https://github.com/${repoName}`;
 };
 
@@ -217,12 +214,12 @@ exports.getRepoUrl = function getRepoUrl() {
  * Gets the repo URL from where the PR originated
  * @returns {string} repo URL or 'undefined'
  */
-exports.getSourceRepoUrl = function getSourceRepoUrl() {
-  let repoName = exports.getSourceRepoName();
+export const getSourceRepoUrl = function() {
+  let repoName = getSourceRepoName();
   return `https://github.com/${repoName}`;
 };
 
-exports.getTimeStamp = function getTimeStamp() {
+export const getTimeStamp = function() {
   // We pad each value so that sorted directory listings show the files in chronological order
   function pad(number: any): any {
     if (number < 10) {
@@ -246,11 +243,11 @@ exports.getTimeStamp = function getTimeStamp() {
  * Retrieves list of swagger files to be processed for linting
  * @returns {Array} list of files to be processed for linting
  */
-exports.getConfigFilesChangedInPR = function getConfigFilesChangedInPR() {
-  if (exports.prOnly === 'true') {
-    let targetBranch, cmd, filesChanged, swaggerFilesInPR;
+export const getConfigFilesChangedInPR = function() {
+  if (prOnly === 'true') {
+    let targetBranch, cmd, filesChanged;
     try {
-      targetBranch = exports.getTargetBranch();
+      targetBranch = getTargetBranch();
       execSync(`git fetch origin ${targetBranch}`);
       cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
       filesChanged = execSync(cmd, { encoding: 'utf8' }).split('\n');
@@ -283,7 +280,7 @@ exports.getConfigFilesChangedInPR = function getConfigFilesChangedInPR() {
       throw err;
     }
   } else {
-    return exports.swaggers;
+    return swaggers;
   }
 };
 
@@ -291,12 +288,12 @@ exports.getConfigFilesChangedInPR = function getConfigFilesChangedInPR() {
  * Retrieves list of swagger files to be processed for linting
  * @returns {Array} list of files to be processed for linting
  */
-exports.getFilesChangedInPR = function getFilesChangedInPR() {
-  let result = exports.swaggers;
-  if (exports.prOnly === 'true') {
+export const getFilesChangedInPR = function() {
+  let result = swaggers;
+  if (prOnly === 'true') {
     let targetBranch, cmd, filesChanged, swaggerFilesInPR;
     try {
-      targetBranch = exports.getTargetBranch();
+      targetBranch = getTargetBranch();
       execSync(`git fetch origin ${targetBranch}`);
       cmd = `git diff --name-only HEAD $(git merge-base HEAD FETCH_HEAD)`;
       filesChanged = execSync(cmd, { encoding: 'utf8' });
@@ -336,17 +333,17 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
  * Downloads the remote schemas and initializes the validator with remote references.
  * @returns {Object} context Provides the schemas in json format and the validator.
  */
-exports.initializeValidator = async function initializeValidator() {
+export const initializeValidator = async function() {
   const context: stringMap.MutableStringMap<unknown> = {
-    extensionSwaggerSchema: await asyncJsonRequest(exports.extensionSwaggerSchemaUrl),
-    swaggerSchema: await asyncJsonRequest(exports.swaggerSchemaAltUrl),
-    exampleSchema: await asyncJsonRequest(exports.exampleSchemaUrl),
-    compositeSchema: await asyncJsonRequest(exports.compositeSchemaUrl)
+    extensionSwaggerSchema: await asyncJsonRequest(extensionSwaggerSchemaUrl),
+    swaggerSchema: await asyncJsonRequest(swaggerSchemaAltUrl),
+    exampleSchema: await asyncJsonRequest(exampleSchemaUrl),
+    compositeSchema: await asyncJsonRequest(compositeSchemaUrl)
   };
   let validator = new z({ breakOnFirstError: false });
-  validator.setRemoteReference(exports.swaggerSchemaUrl, context.swaggerSchema);
-  validator.setRemoteReference(exports.exampleSchemaUrl, context.exampleSchema);
-  validator.setRemoteReference(exports.compositeSchemaUrl, context.compositeSchema);
+  validator.setRemoteReference(swaggerSchemaUrl, context.swaggerSchema);
+  validator.setRemoteReference(exampleSchemaUrl, context.exampleSchema);
+  validator.setRemoteReference(compositeSchemaUrl, context.compositeSchema);
   context.validator = validator;
   return context;
 };
