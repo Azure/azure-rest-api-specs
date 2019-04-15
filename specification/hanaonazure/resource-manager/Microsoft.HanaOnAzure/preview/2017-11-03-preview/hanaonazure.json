@@ -672,22 +672,18 @@
             "type": "object",
             "properties": {
                 "hanaVnet": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "ARM ID of an Azure Vnet with access to the HANA instance."
                 },
                 "hanaHostname": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "Hostname of the HANA Instance blade."
                 },
                 "hanaInstanceNum": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "A number between 00 and 99, stored as a string to maintain leading zero."
                 },
                 "dbContainer": {
-                  "readOnly": true,
                   "type": "string",
                   "enum": [
                       "single",
@@ -701,17 +697,14 @@
                   "description": "Either single or multiple depending on the use of MDC(Multiple Database Containers)"
                 },
                 "hanaDatabase": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "Name of the database itself.  It only needs to be specified if using MDC"
                 },
                 "hanaDbUsername": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "Username for the HANA database to login to for monitoring"
                 },
                 "hanaDbPassword": {
-                    "readOnly": true,
                     "type": "string",
                     "description": "Password for the HANA database to login for monitoring"
                 }
