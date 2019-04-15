@@ -1,16 +1,20 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License in the project root for license information.
 
-'use strict';
-const utils = require('../test/util/utils'),
-  path = require('path'),
-  fs = require('fs-extra'),
-  os = require('os'),
-  exec = require('util').promisify(require('child_process').exec),
-  oad = require('@azure/oad');
+import * as stringMap from '@ts-common/string-map'
+import * as tsUtils from './ts-utils'
+import * as utils from '../test/util/utils'
+import * as path from 'path'
+import * as fs from 'fs-extra'
+import * as os from 'os'
+import * as childProcess from 'child_process'
+import * as oad from '@azure/oad'
+import * as util from 'util'
+
+const exec = util.promisify(childProcess.exec)
 
 // This map is used to store the mapping between files resolved and stored location
-var resolvedMapForNewSpecs = {};
+var resolvedMapForNewSpecs: stringMap.MutableStringMap<string> = {};
 let outputFolder = path.join(os.tmpdir(), "resolved");
 // Used to enable running script outside TravisCI for debugging
 let isRunningInTravisCI = process.env.TRAVIS === 'true';
@@ -20,7 +24,7 @@ const headerText = `
 |-|------|----------|---------|
 `;
 
-function iconFor(type) {
+function iconFor(type: unknown) {
   if (type === 'Error') {
     return ':x:';
   } else if (type === 'Warning') {
@@ -32,26 +36,33 @@ function iconFor(type) {
   }
 }
 
-function shortName(filePath) {
+function shortName(filePath: string) {
   return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
 }
 
-function tableLine(filePath, diff) {
+type Diff = {
+  readonly type: unknown
+  readonly id: string
+  readonly code: unknown
+  readonly message: unknown
+}
+
+function tableLine(filePath: string, diff: Diff) {
   return `|${iconFor(diff['type'])}|[${diff['type']} ${diff['id']} - ${diff['code']}](https://github.com/Azure/openapi-diff/blob/master/docs/rules/${diff['id']}.md)|[${shortName(filePath)}](${blobHref(filePath)} "${filePath}")|${diff['message']}|\n`;
 }
 
-function blobHref(file) {
+function blobHref(file: unknown) {
   return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
 }
 
 /**
  * Compares old and new specifications for breaking change detection.
  *
- * @param {string} oldSpec Path to the old swagger specification file.
+ * @param oldSpec Path to the old swagger specification file.
  *
- * @param {string} newSpec Path to the new swagger specification file.
+ * @param newSpec Path to the new swagger specification file.
  */
-async function runOad(oldSpec, newSpec) {
+async function runOad(oldSpec: string, newSpec: string) {
   if (oldSpec === null || oldSpec === undefined || typeof oldSpec.valueOf() !== 'string' || !oldSpec.trim().length) {
     throw new Error('oldSpec is a required parameter of type "string" and it cannot be an empty string.');
   }
@@ -65,7 +76,7 @@ async function runOad(oldSpec, newSpec) {
   console.log(`New Spec: "${newSpec}"`);
   console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>`);
 
-  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn', json: true });
+  let result = await oad.compare(oldSpec, newSpec, { consoleLogLevel: 'warn' });
   console.log(result);
 
   if (!result) {
@@ -81,9 +92,9 @@ async function runOad(oldSpec, newSpec) {
 /**
  * Processes the given swagger and stores the resolved swagger on to disk
  *
- * @param {string} swaggerPath Path to the swagger specification file.
+ * @param swaggerPath Path to the swagger specification file.
  */
-async function processViaAutoRest(swaggerPath) {
+async function processViaAutoRest(swaggerPath: string) {
   if (swaggerPath === null || swaggerPath === undefined || typeof swaggerPath.valueOf() !== 'string' || !swaggerPath.trim().length) {
     throw new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.');
   }
@@ -115,10 +126,10 @@ async function runScript() {
   console.log(swaggersToProcess);
 
   console.log('Finding new swaggers...')
-  let newSwaggers = [];
+  let newSwaggers: unknown[] = [];
   if (isRunningInTravisCI && swaggersToProcess.length > 0) {
     newSwaggers = await utils.doOnBranch(utils.getTargetBranch(), async () => {
-      return swaggersToProcess.filter(s => !fs.existsSync(s))
+      return swaggersToProcess.filter((s: string) => !fs.existsSync(s))
     });
   }
 
@@ -133,7 +144,7 @@ async function runScript() {
   console.dir(resolvedMapForNewSpecs);
 
   let errors = 0, warnings = 0;
-  const diffFiles = {};
+  const diffFiles: stringMap.MutableStringMap<Diff[]> = {};
   const newFiles = [];
 
   for (const swagger of swaggersToProcess) {
@@ -144,8 +155,9 @@ async function runScript() {
       continue;
     }
 
-    if (resolvedMapForNewSpecs[swagger]) {
-      const diffs = await runOad(swagger, resolvedMapForNewSpecs[swagger]);
+    const resolved = resolvedMapForNewSpecs[swagger]
+    if (resolved) {
+      const diffs = await runOad(swagger, resolved);
       if (diffs) {
         diffFiles[swagger] = diffs;
         for (const diff of diffs) {
@@ -189,7 +201,7 @@ async function runScript() {
 
       diffFileNames.sort();
       for (const swagger of diffFileNames) {
-        const diffs = diffFiles[swagger];
+        const diffs = tsUtils.asNonUndefined(diffFiles[swagger]);
         diffs.sort((a, b) => {
           if (a.type === b.type) {
             return a.id.localeCompare(b.id);
@@ -227,7 +239,7 @@ async function runScript() {
 }
 
 // magic starts here
-runScript().then(success => {
+runScript().then(() => {
   console.log(`Thanks for using breaking change tool to review.`);
   console.log(`If you encounter any issue(s), please open issue(s) at https://github.com/Azure/openapi-diff/issues .`);
 }).catch(err => {
