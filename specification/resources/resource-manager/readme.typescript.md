@@ -20,7 +20,7 @@ batch:
 ```yaml $(typescript) && $(package-features)
 typescript:
   package-name: "@azure/arm-features"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-features"
+  output-folder: "$(typescript-sdks-folder)/sdk/features/arm-features"
 ```
 
 ```yaml $(typescript) && $(package-locks)

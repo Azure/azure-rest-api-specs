@@ -91,7 +91,7 @@
           "200": {
             "description": "A Collection of the Product entities for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/ProductCollection"
+              "$ref": "./definitions.json#/definitions/ProductCollection"
             }
           },
           "default": {
@@ -104,7 +104,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ProductContract"
+        "x-ms-odata": "./definitions.json#/definitions/ProductContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}": {
@@ -186,7 +186,7 @@
           "200": {
             "description": "The response body contains the specified Product entity.",
             "schema": {
-              "$ref": "#/definitions/ProductContract"
+              "$ref": "./definitions.json#/definitions/ProductContract"
             },
             "headers": {
               "ETag": {
@@ -229,7 +229,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProductContract"
+              "$ref": "./definitions.json#/definitions/ProductContract"
             },
             "description": "Create or update parameters."
           },
@@ -247,7 +247,7 @@
           "201": {
             "description": "Product was successfully created.",
             "schema": {
-              "$ref": "#/definitions/ProductContract"
+              "$ref": "./definitions.json#/definitions/ProductContract"
             },
             "headers": {
               "ETag": {
@@ -259,7 +259,7 @@
           "200": {
             "description": "Product was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ProductContract"
+              "$ref": "./definitions.json#/definitions/ProductContract"
             },
             "headers": {
               "ETag": {
@@ -302,7 +302,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProductUpdateParameters"
+              "$ref": "./definitions.json#/definitions/ProductUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -428,7 +428,7 @@
           "200": {
             "description": "The response body contains a collection of Api entities in the product.",
             "schema": {
-              "$ref": "./apimapis.json#/definitions/ApiCollection"
+              "$ref": "./definitions.json#/definitions/ApiCollection"
             }
           },
           "default": {
@@ -441,7 +441,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimapis.json#/definitions/ApiContract"
+        "x-ms-odata": "./definitions.json#/definitions/ApiContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}": {
@@ -523,13 +523,13 @@
           "201": {
             "description": "The API was successfully added to the product.",
             "schema": {
-              "$ref": "./apimapis.json#/definitions/ApiContract"
+              "$ref": "./definitions.json#/definitions/ApiContract"
             }
           },
           "200": {
             "description": "The specified API is already added to the product.",
             "schema": {
-              "$ref": "./apimapis.json#/definitions/ApiContract"
+              "$ref": "./definitions.json#/definitions/ApiContract"
             }
           },
           "default": {
@@ -633,7 +633,7 @@
           "200": {
             "description": "Lists a collection of Group entities.",
             "schema": {
-              "$ref": "./apimgroups.json#/definitions/GroupCollection"
+              "$ref": "./definitions.json#/definitions/GroupCollection"
             }
           },
           "default": {
@@ -646,7 +646,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimgroups.json#/definitions/GroupContract"
+        "x-ms-odata": "./definitions.json#/definitions/GroupContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}": {
@@ -728,13 +728,13 @@
           "201": {
             "description": "The group was successfully associated with the product.",
             "schema": {
-              "$ref": "./apimgroups.json#/definitions/GroupContract"
+              "$ref": "./definitions.json#/definitions/GroupContract"
             }
           },
           "200": {
             "description": "The specified group is already associated with the product.",
             "schema": {
-              "$ref": "./apimgroups.json#/definitions/GroupContract"
+              "$ref": "./definitions.json#/definitions/GroupContract"
             }
           },
           "default": {
@@ -838,7 +838,7 @@
           "200": {
             "description": "Lists a collection of subscription entities.",
             "schema": {
-              "$ref": "./apimsubscriptions.json#/definitions/SubscriptionCollection"
+              "$ref": "./definitions.json#/definitions/SubscriptionCollection"
             }
           },
           "default": {
@@ -851,7 +851,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimsubscriptions.json#/definitions/SubscriptionContract"
+        "x-ms-odata": "./definitions.json#/definitions/SubscriptionContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies": {
@@ -887,7 +887,7 @@
           "200": {
             "description": "Product Policy information.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyCollection"
+              "$ref": "./definitions.json#/definitions/PolicyCollection"
             }
           },
           "default": {
@@ -984,7 +984,7 @@
           "200": {
             "description": "Product Policy information.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1033,7 +1033,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "description": "The policy contents to apply."
           },
@@ -1048,7 +1048,7 @@
           "201": {
             "description": "Product policy configuration was successfully created.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1060,7 +1060,7 @@
           "200": {
             "description": "Product policy configuration of the tenant was successfully updated.",
             "schema": {
-              "$ref": "./apimpolicies.json#/definitions/PolicyContract"
+              "$ref": "./definitions.json#/definitions/PolicyContract"
             },
             "headers": {
               "ETag": {
@@ -1173,7 +1173,7 @@
           "200": {
             "description": "The operation returns a collection of tags associated with the Product entity.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagCollection"
+              "$ref": "./definitions.json#/definitions/TagCollection"
             }
           },
           "default": {
@@ -1186,7 +1186,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimtags.json#/definitions/TagContract"
+        "x-ms-odata": "./definitions.json#/definitions/TagContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}": {
@@ -1274,7 +1274,7 @@
           "200": {
             "description": "Gets the details of the tag specified by its identifier.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             },
             "headers": {
               "ETag": {
@@ -1326,13 +1326,13 @@
           "201": {
             "description": "Tag was assigned to the Product.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             }
           },
           "200": {
             "description": "Tag is already assigned to the Product.",
             "schema": {
-              "$ref": "./apimtags.json#/definitions/TagContract"
+              "$ref": "./definitions.json#/definitions/TagContract"
             }
           },
           "default": {
@@ -1391,123 +1391,6 @@
       }
     }
   },
-  "definitions": {
-    "ProductCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Products list representation."
-    },
-    "ProductContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProductContractProperties",
-          "description": "Product entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Product details."
-    },
-    "ProductContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Product name.",
-          "minLength": 1,
-          "maxLength": 300
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProductEntityBaseParameters"
-        }
-      ],
-      "required": [
-        "displayName"
-      ],
-      "description": "Product profile."
-    },
-    "ProductEntityBaseParameters": {
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Product description. May include HTML formatting tags.",
-          "minLength": 1,
-          "maxLength": 1000
-        },
-        "terms": {
-          "type": "string",
-          "description": "Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process."
-        },
-        "subscriptionRequired": {
-          "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.",
-          "type": "boolean"
-        },
-        "approvalRequired": {
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
-          "type": "boolean"
-        },
-        "subscriptionsLimit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
-        },
-        "state": {
-          "type": "string",
-          "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.",
-          "enum": [
-            "notPublished",
-            "published"
-          ],
-          "x-ms-enum": {
-            "name": "ProductState",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Product Entity Base Parameters"
-    },
-    "ProductUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProductUpdateProperties",
-          "description": "Product entity Update contract properties."
-        }
-      },
-      "description": "Product Update parameters."
-    },
-    "ProductUpdateProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Product name.",
-          "maxLength": 300,
-          "minLength": 1
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProductEntityBaseParameters"
-        }
-      ],
-      "description": "Parameters supplied to the Update Product operation."
-    }
-  },
+  "definitions": { },
   "parameters": { }
 }
