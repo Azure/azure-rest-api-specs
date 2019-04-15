@@ -1,6 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License in the project root for license information.
 
+import * as tsUtils from '../../scripts/ts-utils'
+import * as stringMap from '@ts-common/string-map'
+
 'use strict';
 var assert = require("assert"),
   os = require('os'),
@@ -13,7 +16,10 @@ var assert = require("assert"),
   util = require('util'),
   execSync = require('child_process').execSync;
 
-const asyncJsonRequest = url => new Promise((res, rej) => request({ url: url, json: true }, (error, _, body) => error ? rej(error) : res(body)));
+const asyncJsonRequest = (url: unknown) => new Promise<unknown>((res, rej) => request(
+  { url: url, json: true },
+  (error: unknown, _: unknown, body: unknown) => error ? rej(error) : res(body)
+));
 
 exports = module.exports;
 
@@ -36,7 +42,7 @@ exports.readmes = glob.sync(path.join(__dirname, '../', '../', '/specification/*
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
 // translates it to FEFF, the UTF-16 BOM.
-exports.stripBOM = function stripBOM(content) {
+exports.stripBOM = function stripBOM(content: Buffer|string) {
   if (Buffer.isBuffer(content)) {
     content = content.toString();
   }
@@ -50,7 +56,7 @@ exports.stripBOM = function stripBOM(content) {
  * Parses the json from the given filepath
  * @returns {string} clr command
  */
-exports.parseJsonFromFile = async function parseJsonFromFile(filepath) {
+exports.parseJsonFromFile = async function parseJsonFromFile(filepath: unknown) {
   const data = await fs.readFile(filepath, { encoding: 'utf8' });
   try {
     return YAML.safeLoad(exports.stripBOM(data));
@@ -77,7 +83,7 @@ exports.getTargetBranch = function getTargetBranch() {
 /**
  * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
  */
-exports.doOnBranch = async function doOnBranch(branch, func) {
+exports.doOnBranch = async function doOnBranch(branch: unknown, func: () => Promise<unknown>) {
   exports.fetchBranch(branch);
   const branchSha = exports.resolveRef(`origin/${branch}`);
   const tmpDir = path.join(os.tmpdir(), branchSha);
@@ -99,7 +105,7 @@ exports.doOnBranch = async function doOnBranch(branch, func) {
 /**
  * Resolve a ref to its commit hash
  */
-exports.resolveRef = function resolveRef(ref) {
+exports.resolveRef = function resolveRef(ref: unknown) {
   let cmd = `git rev-parse ${ref}`;
   console.log(`> ${cmd}`);
   return execSync(cmd, { encoding: 'utf8' }).trim();
@@ -108,7 +114,7 @@ exports.resolveRef = function resolveRef(ref) {
 /**
  * Fetch ref for a branch from the origin
  */
-exports.fetchBranch = function fetchBranch(branch) {
+exports.fetchBranch = function fetchBranch(branch: unknown) {
   let cmds = [
     `git remote -vv`,
     `git branch --all`,
@@ -126,7 +132,7 @@ exports.fetchBranch = function fetchBranch(branch) {
 /**
  * Checkout a copy of branch to location
  */
-exports.checkoutBranch = function checkoutBranch(ref, location) {
+exports.checkoutBranch = function checkoutBranch(ref: unknown, location: unknown) {
   let cmd = `git worktree add -f ${location} origin/${ref}`;
   console.log(`Checking out a copy of branch ${ref} to ${location}...`);
   console.log(`> ${cmd}`);
@@ -148,7 +154,7 @@ exports.getSourceBranch = function getSourceBranch() {
       console.log(`An error occurred while getting the current branch ${util.inspect(err, { depth: null })}.`);
     }
   }
-  result = result.trim();
+  result = tsUtils.asNonUndefined(result).trim();
   console.log(`>>>>> The source branch is: "${result}".`);
   return result;
 };
@@ -218,7 +224,7 @@ exports.getSourceRepoUrl = function getSourceRepoUrl() {
 
 exports.getTimeStamp = function getTimeStamp() {
   // We pad each value so that sorted directory listings show the files in chronological order
-  function pad(number) {
+  function pad(number: any): any {
     if (number < 10) {
       return '0' + number;
     }
@@ -296,7 +302,7 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       filesChanged = execSync(cmd, { encoding: 'utf8' });
       console.log('>>>>> Files changed in this PR are as follows:')
       console.log(filesChanged);
-      swaggerFilesInPR = filesChanged.split('\n').filter(function (item) {
+      swaggerFilesInPR = filesChanged.split('\n').filter(function (item: string) {
         if (item.match(/.*(json|yaml)$/ig) == null || item.match(/.*specification.*/ig) == null) {
           return false;
         }
@@ -310,13 +316,13 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
       });
       console.log(`>>>> Number of swaggers found in this PR: ${swaggerFilesInPR.length}`);
 
-      var deletedFiles = swaggerFilesInPR.filter(function (swaggerFile) {
+      var deletedFiles = swaggerFilesInPR.filter(function (swaggerFile: unknown) {
         return !fs.existsSync(swaggerFile);
       });
       console.log('>>>>> Files deleted in this PR are as follows:')
       console.log(deletedFiles);
       // Remove files that have been deleted in the PR
-      swaggerFilesInPR = swaggerFilesInPR.filter(function (x) { return deletedFiles.indexOf(x) < 0 });
+      swaggerFilesInPR = swaggerFilesInPR.filter(function (x: unknown) { return deletedFiles.indexOf(x) < 0 });
 
       result = swaggerFilesInPR;
     } catch (err) {
@@ -331,7 +337,7 @@ exports.getFilesChangedInPR = function getFilesChangedInPR() {
  * @returns {Object} context Provides the schemas in json format and the validator.
  */
 exports.initializeValidator = async function initializeValidator() {
-  const context = {
+  const context: stringMap.MutableStringMap<unknown> = {
     extensionSwaggerSchema: await asyncJsonRequest(exports.extensionSwaggerSchemaUrl),
     swaggerSchema: await asyncJsonRequest(exports.swaggerSchemaAltUrl),
     exampleSchema: await asyncJsonRequest(exports.exampleSchemaUrl),
