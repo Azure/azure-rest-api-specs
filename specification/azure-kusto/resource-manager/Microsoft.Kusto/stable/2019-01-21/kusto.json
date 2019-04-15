@@ -1073,6 +1073,60 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoDatabaseCheckNameAvailability": {
+            "$ref": "./examples/KustoDataConnectionsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the data connection name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionCheckNameRequest"
+            },
+            "description": "The name of the data connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the Kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections/{dataConnectionName}": {
       "get": {
         "tags": [
@@ -2002,6 +2056,31 @@
       ],
       "description": "The result returned from a database check name availability request."
     },
+	"DataConnectionCheckNameRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Data Connection name."
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Microsoft.Kusto/clusters/databases/dataConnections"
+                    ],
+                    "x-ms-enum": {
+                        "name": "Type",
+                        "modelAsString": false
+                    },
+                    "description": "The type of resource, Microsoft.Kusto/clusters/databases/dataConnections."
+                }
+            },
+            "required": [
+                "name",
+                "type"
+            ],
+            "description": "The result returned from a data connections check name availability request."
+        },
     "CheckNameResult": {
       "type": "object",
       "properties": {
@@ -2031,6 +2110,32 @@
         }
       }
     },
+	"CheckNameAvailabilityResult": {
+            "type": "object",
+            "properties": {
+                "nameAvailable": {
+                    "type": "string",
+                    "enum": [
+                        "Available",
+                        "NotAvailable"
+                    ],
+                    "x-ms-enum": {
+                        "name": "nameAvailable",
+                        "modelAsString": true
+                    },
+                    "description": "Specifies whether or not the name is available."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name that was checked."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+                }
+            },
+            "description": "The result returned from a check name availability request."
+	},
     "ListSkusResult": {
       "description": "List of available SKUs for a new Kusto Cluster.",
       "type": "object",
