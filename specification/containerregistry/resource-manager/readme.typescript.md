@@ -10,6 +10,6 @@ input-file:
 typescript:
   azure-arm: true
   package-name: "@azure/arm-containerregistry"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-containerregistry"
+  output-folder: "$(typescript-sdks-folder)/sdk/containerregistry/arm-containerregistry"
   generate-metadata: true
 ```
