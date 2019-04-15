@@ -1116,7 +1116,7 @@
                 "$ref": "#/definitions/Workstation"
               }
             },
-            "201": {
+            "202": {
               "description": "The update was initiated",
               "schema": {
                 "$ref": "#/definitions/Workstation"
@@ -3023,11 +3023,31 @@
           "$ref": "#/definitions/NetworkProfile",
           "title": "Network profile",
           "description": "The network profile of a workstation"
+        },
+        "assignedUsers": {
+          "$ref": "#/definitions/AssignedUsers",
+          "title": "Assigned users",
+          "description": "A list of usernames the workstation is assigned to."
+        },
+        "powerState": {
+          "title": "Power state",
+          "description": "The power state of the workstation.",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "running",
+            "stopped"
+          ],
+          "x-ms-enum": {
+            "name": "powerState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "vmSize",
-        "osProfile"
+        "osProfile",
+        "assignedUsers"
       ],
       "description": "The properties of a workstation."
     },
@@ -3045,6 +3065,18 @@
         }
       },
       "description": "The update properties of a workstation."
+    },
+    "AssignedUsers": {
+      "properties": {
+        "adminUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The collection of admin users for a workstation."
+        }
+      },
+      "description": "The assigned users for a workstation."
     },
     "UpdateResource": {
       "description": "The Update Resource model definition.",
