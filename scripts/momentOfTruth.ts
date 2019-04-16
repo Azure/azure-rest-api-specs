@@ -1,22 +1,30 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-'use strict';
-
-const exec = require('child_process').exec,
-    path = require('path'),
-    utils = require('../test/util/utils'),
-    fs = require('fs');
+import * as stringMap from '@ts-common/string-map'
+import * as tsUtils from './ts-utils'
+import { exec } from 'child_process'
+import * as path from 'path'
+import * as utils from '../test/util/utils'
+import * as fs from 'fs'
 
 let configsToProcess = utils.getConfigFilesChangedInPR();
 let pullRequestNumber = utils.getPullRequestNumber();
 let linterCmd = `npx autorest --validation --azure-validator --message-format=json `;
 var filename = `${pullRequestNumber}.json`;
 var logFilepath = path.join(getLogDir(), filename);
-var finalResult = {};
-finalResult["pullRequest"] = pullRequestNumber;
-finalResult["repositoryUrl"] = utils.getRepoUrl();
-finalResult["files"] = {};
+
+type FinalResult = {
+    readonly pullRequest: unknown,
+    readonly repositoryUrl: unknown,
+    readonly files: stringMap.MutableStringMap<stringMap.MutableStringMap<unknown>>
+}
+
+var finalResult: FinalResult = {
+    pullRequest: pullRequestNumber,
+    repositoryUrl: utils.getRepoUrl(),
+    files: {}
+}
 
 // Creates and returns path to the logging directory
 function getLogDir() {
@@ -39,12 +47,12 @@ function createLogFile() {
 }
 
 //appends the content to the log file
-function writeContent(content) {
+function writeContent(content: unknown) {
     fs.writeFileSync(logFilepath, content);
 }
 
 // Executes linter on given swagger path and returns structured JSON of linter output
-async function getLinterResult(swaggerPath) {
+async function getLinterResult(swaggerPath: string|null|undefined) {
     if (swaggerPath === null || swaggerPath === undefined || typeof swaggerPath.valueOf() !== 'string' || !swaggerPath.trim().length) {
         throw new Error('swaggerPath is a required parameter of type "string" and it cannot be an empty string.');
     }
@@ -56,7 +64,7 @@ async function getLinterResult(swaggerPath) {
     let cmd = "npx autorest --reset && " + linterCmd + swaggerPath;
     console.log(`Executing: ${cmd}`);
     const { err, stdout, stderr } = await new Promise(res => exec(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 64 },
-        (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
+        (err: unknown, stdout: unknown, stderr: unknown) => res({ err: err, stdout: stdout, stderr: stderr })));
 
     if (err && stderr.indexOf("Process() cancelled due to exception") !== -1) {
         console.error(`AutoRest exited with code ${err.code}`);
@@ -86,7 +94,7 @@ async function getLinterResult(swaggerPath) {
 };
 
 // Run linter tool
-async function runTools(swagger, beforeOrAfter) {
+async function runTools(swagger: string, beforeOrAfter: string) {
     console.log(`Processing "${swagger}":`);
     const linterErrors = await getLinterResult(swagger);
     console.log(linterErrors);
@@ -94,14 +102,16 @@ async function runTools(swagger, beforeOrAfter) {
 };
 
 // Updates final result json to be written to the output file
-async function updateResult(spec, errors, beforeOrAfter) {
-    if (!finalResult['files'][spec]) {
-        finalResult['files'][spec] = {};
+async function updateResult(spec: string, errors: unknown, beforeOrAfter: string) {
+    const files = finalResult['files']
+    if (!files[spec]) {
+        files[spec] = {};
     }
-    if (!finalResult['files'][spec][beforeOrAfter]) {
-        finalResult['files'][spec][beforeOrAfter] = {};
+    const filesSpec = tsUtils.asNonUndefined(files[spec])
+    if (!filesSpec[beforeOrAfter]) {
+        filesSpec[beforeOrAfter] = {};
     }
-    finalResult['files'][spec][beforeOrAfter] = errors;
+    filesSpec[beforeOrAfter] = errors;
 }
 
 //main function
