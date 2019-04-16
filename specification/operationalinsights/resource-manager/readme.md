@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for OperationalInsights.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for OperationalInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for OperationalInsights, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
 
-### Basic Information
 
+
+### Basic Information
 These are the global settings for the OperationalInsights API.
 
 ``` yaml
@@ -30,6 +30,7 @@ description: Operational Insights Client
 openapi-type: arm
 tag: package-2015-11-preview
 ```
+
 
 ### Tag: package-2015-11-preview
 
@@ -50,8 +51,8 @@ input-file:
 ```
 
 ---
-
 # Code Generation
+
 
 ## Swagger to SDK
 
@@ -69,12 +70,13 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
 ```
 
+
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   # last generated using AutoRest.1.0.0-Nightly20170126
   azure-arm: true
@@ -103,13 +105,11 @@ python:
   description: The Log Analytics Client.
   clear-output-folder: true
 ```
-
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-loganalytics/azure/mgmt/loganalytics
 ```
-
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -133,6 +133,8 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-operationalinsights
 ```
+
+
 
 ### Java multi-api
 
@@ -168,15 +170,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+
 ## Suppression
 
 ``` yaml
 directive:
   - from: OperationalInsights.json
-    suppress: R3006
+    suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
-  - suppress: EnumInsteadOfBoolean
-    from: OperationalInsights.json
-    where: $.definitions.IntelligencePack.properties.enabled
-    reason: 'Not related to my change and this is a code constraint. '
 ```
