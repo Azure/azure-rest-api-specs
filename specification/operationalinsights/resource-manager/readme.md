@@ -187,8 +187,4 @@ directive:
     from: OperationalInsights.json
     where: $.definitions.DataSourceFilter.properties.kind
     reason: False positive. Description inherited from reference.
-  - suppress: EnumInsteadOfBoolean
-    from: OperationalInsights.json
-    where: $.definitions.ManagementGroupProperties.properties.isGateway
-    reason: This validation error cannot be removed due to technical constraints on your service side.
 ```
