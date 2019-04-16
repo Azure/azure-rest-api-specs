@@ -5207,19 +5207,19 @@
       "properties": {
         "keyVaultKeyName": {
           "type": "string",
-          "description": "The name of a user-managed encryption key created in Azure Key Vault used for data-at-rest encryption."
+          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultKeyVersion": {
           "type": "string",
-          "description": "The version of a key that you create in Azure Key Vault that will be used to encrypt your data at rest."
+          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultUri": {
           "type": "string",
-          "description": "The URI of the Azure Key Vault resource providing the encryption key. This value is also referred to as the Key Vault DNS Name. An example URI might be https://my-keyvault-name.vault.azure.net."
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
-          "description": "Azure Active Directory credentials used for Azure Search authentication to Azure Key Vault when accessing encryption keys. Credentials are required when you create a security principal for Azure Search. Omit this value if you are using a managed identity instead.",
+          "description": "Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-msi"
           }
@@ -5230,17 +5230,17 @@
         "keyVaultKeyVersion",
         "keyVaultUri"
       ],
-      "description": "A fully-specified, user-defined encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Search, such as indexes and synonym maps."
+      "description": "A user-defined encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Search, such as indexes and synonym maps."
     },
     "AzureActiveDirectoryApplicationCredentials": {
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "The Application ID of an Azure Search service, when registered as an Azure Active Directory application, for the purpose of serving as a security principle for authentication to Azure Key Vault. The Application ID should not be confused with the Object ID for your application. Both IDs are GUIDs but have different purposes. The Application ID uniquely identifies the app on protocol transactions."
+          "description": "An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application."
         },
         "applicationSecret": {
           "type": "string",
-          "description": "The application secret, also referred to as the authentication key value. This is the actual key used to authenticate to Azure Key Vault. When creating a key for a registered application, this is the string that is given when you save the key. This value is not visible in the portal after you leave the blade."
+          "description": "The authentication key of the specified AAD application."
         }
       },
       "required": [
