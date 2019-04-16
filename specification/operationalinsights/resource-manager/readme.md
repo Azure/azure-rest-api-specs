@@ -191,8 +191,4 @@ directive:
     from: OperationalInsights.json
     where: $.definitions.ManagementGroupProperties.properties.isGateway
     reason: This validation error cannot be removed due to technical constraints on your service side.
-  - suppress: AvoidNestedProperties
-    from: OperationalInsights.json
-    where: $.definitions.DataSource.properties.properties
-    reason: False positive. Parent 'Properties' is swagger's
 ```
