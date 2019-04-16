@@ -36,22 +36,26 @@ script:
   - >-
     if [[ $MODE == 'semantic' ]]; then
       npm install
+      npm run tsc
       node scripts/semanticValidation.js
     fi
   - >-
     if [[ $MODE == 'model' ]]; then
       npm install
+      npm run tsc
       node scripts/modelValidation.js
     fi
   - >-
     if [[ $MODE == 'BreakingChange' ]]; then
       scripts/install-dotnet.sh
       npm install
-      node -- scripts/breaking-change.js
+      npm run tsc
+      node scripts/breaking-change.ts
     fi
   - >-
     if [[ $MODE == 'lintdiff' ]]; then
       scripts/install-dotnet.sh
       npm install
+      npm run tsc
       node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js
     fi
