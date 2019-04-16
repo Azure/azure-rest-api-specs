@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
 - Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
-- Microsoft.ResourceGraph/preview/2019-03-01-preview/savedquery.json
+- Microsoft.ResourceGraph/preview/2018-09-01-preview/savedquery.json
 ```
 
 # Code Generation
