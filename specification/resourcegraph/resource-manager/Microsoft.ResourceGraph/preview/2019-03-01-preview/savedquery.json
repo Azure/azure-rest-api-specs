@@ -290,13 +290,10 @@
           "readOnly": true,
           "description": "Azure resource type"
         },
-        "location": {
+        "eTag": {
           "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "readOnly": true,
+          "description": "This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict."
         },
         "tags": {
           "type": "object",
@@ -306,9 +303,6 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
@@ -383,6 +377,11 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "eTag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict."
         },
         "properties": {
           "x-ms-client-flatten": true,
