@@ -1,69 +1,18 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "1234"
+    "billingAccountName": "1234",
+    "productName": "productSummaryId1",
+    "body": {
+      "autoRenew": "false"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/products/productSummaryId1",
-            "name": "productSummaryId1",
-            "type": "Microsoft.Consumption/products",
-            "properties": {
-              "productTypeId": "A12345",
-              "productType": "Reservation",
-              "displayName": "Eng Reservation (1a13s21awe)",
-              "status": "Active",
-              "EndDate": "2018-05-01",
-              "purchaseDate": "2018-05-01",
-              "lastCharge": {
-                "currency": "USD",
-                "value": 5000.00
-              },
-              "lastChargeDate": "2018-06-15",
-              "quantity": 4,
-              "skuId": "0001",
-              "skuDescription": "Enterprise Agreement Development",
-              "availabilityId": "AvailabilityId1",
-              "billingFrequency": "OneTime",
-              "parentProductId": "eligibleOffer2",
-              "invoiceSectionId": "42425",
-              "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
-              "billingProfileName": "Contoso operations billing"
-            }
-          },
-          {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/products/productSummaryId2",
-            "name": "productSummaryId2",
-            "type": "Microsoft.Consumption/products",
-            "properties": {
-              "productTypeId": "A12345",
-              "productType": "Azure subscription",
-              "displayName": "Engineering Email",
-              "status": "Active",
-              "EndDate": "2018-05-01",
-              "purchaseDate": "2018-04-01",
-              "lastCharge": {
-                "currency": "USD",
-                "value": 5000.00
-              },
-              "lastChargeDate": "2018-06-15",
-              "quantity": 4,
-              "skuId": "0001",
-              "skuDescription": "Enterprise Agreement Development",
-              "availabilityId": "AvailabilityId1",
-              "billingFrequency": "Monthly",
-              "parentProductId": "eligibleOffer2",
-              "invoiceSectionId": "456789",
-              "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
-              "billingProfileName": "Contoso operations billing"
-            }
-          }
-        ]
+        "properties": {
+          "endDate": "2018-05-01T17:32:28Z"
+        }
       }
     }
   }

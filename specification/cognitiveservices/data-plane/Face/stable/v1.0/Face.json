@@ -683,7 +683,7 @@
     },
     "/persongroups": {
       "get": {
-        "description": "List person groups’s personGroupId, name, userData and recognitionModel.<br />\n* Person groups are stored in alphabetical order of personGroupId.\n* \"start\" parameter (string, optional) is a user-provided personGroupId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last retuned entry’s Id of the current call.\n<br />\nFor example, total 5 person groups: \"group1\", ..., \"group5\".\n<br /> \"start=&top=\" will return all 5 groups.\n<br /> \"start=&top=2\" will return \"group1\", \"group2\".\n<br /> \"start=group2&top=3\" will return \"group3\", \"group4\", \"group5\".\n",
+        "description": "List person groups’ personGroupId, name, userData and recognitionModel.<br />\n* Person groups are stored in alphabetical order of personGroupId.\n* \"start\" parameter (string, optional) is a user-provided personGroupId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 person groups: \"group1\", ..., \"group5\".\n<br /> \"start=&top=\" will return all 5 groups.\n<br /> \"start=&top=2\" will return \"group1\", \"group2\".\n<br /> \"start=group2&top=3\" will return \"group3\", \"group4\", \"group5\".\n",
         "operationId": "PersonGroup_List",
         "parameters": [
           {
@@ -1601,7 +1601,7 @@
     },
     "/largepersongroups": {
       "get": {
-        "description": "List all existing large person groups’s largePersonGroupId, name, userData and recognitionModel.<br />\n* Large person groups are stored in alphabetical order of largePersonGroupId.\n* \"start\" parameter (string, optional) is a user-provided largePersonGroupId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last retuned entry’s Id of the current call.\n<br />\nFor example, total 5 large person groups: \"group1\", ..., \"group5\".\n<br /> \"start=&top=\" will return all 5 groups.\n<br /> \"start=&top=2\" will return \"group1\", \"group2\".\n<br /> \"start=group2&top=3\" will return \"group3\", \"group4\", \"group5\".\n",
+        "description": "List all existing large person groups’ largePersonGroupId, name, userData and recognitionModel.<br />\n* Large person groups are stored in alphabetical order of largePersonGroupId.\n* \"start\" parameter (string, optional) is a user-provided largePersonGroupId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 large person groups: \"group1\", ..., \"group5\".\n<br /> \"start=&top=\" will return all 5 groups.\n<br /> \"start=&top=2\" will return \"group1\", \"group2\".\n<br /> \"start=group2&top=3\" will return \"group3\", \"group4\", \"group5\".\n",
         "operationId": "LargePersonGroup_List",
         "parameters": [
           {
@@ -1903,7 +1903,7 @@
     },
     "/largefacelists": {
       "get": {
-        "description": "List large face lists’ information of largeFaceListId, name, userData and recognitionModel. <br /> \nTo get face information inside largeFaceList use [LargeFaceList Face - Get](/docs/services/563879b61984550e40cbbe8d/operations/5a158cf2d2de3616c086f2d5)<br />\n* Large face lists are stored in alphabetical order of largeFaceListId.\n* \"start\" parameter (string, optional) is a user-provided largeFaceListId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last retuned entry’s Id of the current call.\n<br />\nFor example, total 5 large person lists: \"list1\", ..., \"list5\".\n<br /> \"start=&top=\" will return all 5 lists.\n<br /> \"start=&top=2\" will return \"list1\", \"list2\".\n<br /> \"start=list2&top=3\" will return \"list3\", \"list4\", \"list5\".\n",
+        "description": "List large face lists’ information of largeFaceListId, name, userData and recognitionModel. <br /> \nTo get face information inside largeFaceList use [LargeFaceList Face - Get](/docs/services/563879b61984550e40cbbe8d/operations/5a158cf2d2de3616c086f2d5)<br />\n* Large face lists are stored in alphabetical order of largeFaceListId.\n* \"start\" parameter (string, optional) is a user-provided largeFaceListId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 large person lists: \"list1\", ..., \"list5\".\n<br /> \"start=&top=\" will return all 5 lists.\n<br /> \"start=&top=2\" will return \"list1\", \"list2\".\n<br /> \"start=list2&top=3\" will return \"list3\", \"list4\", \"list5\".\n",
         "operationId": "LargeFaceList_List",
         "parameters": [
           {
@@ -4229,7 +4229,7 @@
         "recognition_01",
         "recognition_02"
       ]
-    },    
+    },
     "returnRecognitionModel": {
       "name": "returnRecognitionModel",
       "description": "A value indicating whether the operation should return 'recognitionModel' in response.",

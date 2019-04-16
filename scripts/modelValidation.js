@@ -34,7 +34,7 @@ async function main() {
       result = 1
     }
   }
-  return result
+  process.exitCode = result
 }
 
 main()

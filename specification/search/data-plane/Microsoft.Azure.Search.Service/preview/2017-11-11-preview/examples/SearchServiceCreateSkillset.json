@@ -10,11 +10,12 @@
 			"description": "Extract entities, detect language and extract key-phrases",
 			"skills": [
 				{
-					"@odata.type": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
+					"@odata.type": "#Microsoft.Skills.Text.EntityRecognitionSkill",
 					"categories": [
 						"organization"
 					],
 					"defaultLanguageCode": "en",
+					"minimumPrecision": 0.7,
 					"inputs": [
 						{
 							"name": "text",
@@ -94,7 +95,7 @@
 				"description": "Extract entities, detect language and extract key-phrases",
 				"skills": [
 					{
-						"@odata.type": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
+						"@odata.type": "#Microsoft.Skills.Text.EntityRecognitionSkill",
 						"description": null,
 						"context": null,
 						"inputs": [
@@ -113,7 +114,7 @@
 							"organization"
 						],
 						"defaultLanguageCode": "en",
-						"minimumPrecision": null
+						"minimumPrecision": 0.7
 					},
 					{
 						"@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",

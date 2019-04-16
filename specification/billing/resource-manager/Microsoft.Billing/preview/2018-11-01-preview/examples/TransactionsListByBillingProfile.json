@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "1234",
-    "billingProfileId": "42425",
+    "billingAccountName": "1234",
+    "billingProfileName": "42425",
     "startDate": "2018-04-01",
     "endDate": "2018-05-30"
   },
@@ -15,11 +15,11 @@
             "name": "transactionSummaryId1",
             "type": "Microsoft.Billing/transactions",
             "properties": {
-              "kind": "reservation",
+              "kind": "all",
               "date": "2018-05-01T00:00:00Z",
               "invoice": "2344233",
               "productTypeId": "A12345",
-              "productType": "Reservered VM Instance",
+              "productType": "VM Instance",
               "productDescription": "Standard D1, US West 3",
               "transactionType": "Purchase",
               "transactionAmount": {
@@ -28,7 +28,7 @@
               },
               "invoiceSectionId": "123456",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "42425",
               "billingProfileName": "Contoso operations billing"
             }
           },
@@ -37,11 +37,11 @@
             "name": "transactionSummaryId2",
             "type": "Microsoft.Billing/transactions",
             "properties": {
-              "kind": "reservation",
+              "kind": "all",
               "date": "2018-04-01T00:00:00Z",
               "invoice": "pending",
               "productTypeId": "A12345",
-              "productType": "Reservered VM Instance",
+              "productType": "VM Instance",
               "productDescription": "Standard Support",
               "transactionType": "Cancel",
               "transactionAmount": {
@@ -50,7 +50,7 @@
               },
               "invoiceSectionId": "123456",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "42425",
               "billingProfileName": "Contoso operations billing"
             }
           }
