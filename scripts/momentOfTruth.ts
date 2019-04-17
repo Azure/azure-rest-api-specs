@@ -4,8 +4,8 @@
 import * as scripts from '@azure/rest-api-specs-scripts'
 
 // magic starts here
-scripts.momentOfTruth().then(_ => {
+scripts.momentOfTruth().then(() => {
   process.exit(0);
-}).catch(_ => {
+}).catch(() => {
   process.exit(1);
 })

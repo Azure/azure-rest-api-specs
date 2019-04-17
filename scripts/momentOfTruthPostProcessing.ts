@@ -1,11 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import * as tsUtils from '@azure/rest-api-specs-scripts/src/ts-utils'
-import * as momentOfTruthUtils from '@azure/rest-api-specs-scripts/src/momentOfTruthUtils'
+import { tsUtils, momentOfTruthUtils, utils } from '@azure/rest-api-specs-scripts'
 
 import * as fs from 'fs'
-import * as utils from '@azure/rest-api-specs-scripts/src/utils'
 import * as path from 'path'
 import * as gitHubPost from './postToGitHub'
 
