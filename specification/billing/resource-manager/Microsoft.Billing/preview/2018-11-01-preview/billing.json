@@ -3668,7 +3668,13 @@
         },
         "company": {
           "description": "Company Name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "description": "Country Name.",
+          "type": "string",
+          "readOnly": true
         },
         "invoiceSections": {
           "description": "The invoice sections associated to the billing account. By default this is not populated, unless it's specified in $expand.",
@@ -3729,11 +3735,6 @@
     "BillingPropertySummary": {
       "description": "The billing property.",
       "properties": {
-        "productId": {
-          "description": "Product Id.",
-          "type": "string",
-          "readOnly": true
-        },
         "billingTenantId": {
           "description": "Billing tenant Id.",
           "type": "string",
@@ -3759,6 +3760,11 @@
           "type": "string",
           "readOnly": true
         },
+        "costCenter": {
+          "description": "Cost center name.",
+          "type": "string",
+          "readOnly": true
+        },
         "invoiceSectionId": {
           "description": "Invoice Section Id.",
           "type": "string",
@@ -3766,6 +3772,16 @@
         },
         "invoiceSectionName": {
           "description": "Invoice Section name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productId": {
+          "description": "Product Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productName": {
+          "description": "Product name.",
           "type": "string",
           "readOnly": true
         },
