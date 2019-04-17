@@ -1290,6 +1290,13 @@
       "description": "The properties of a trigger.",
       "type": "object",
       "properties": {
+        "schedulerTriggers": {
+          "description": "The collection of scheduler triggers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchedulerTrigger"
+          }
+        },
         "sourceTriggers": {
           "description": "The collection of triggers based on source code repository.",
           "type": "array",
@@ -1350,6 +1357,36 @@
         },
         "digest": {
           "description": "The sha256-based digest of the image manifest.",
+          "type": "string"
+        }
+      }
+    },
+    "SchedulerTrigger": {
+      "description": "The properties of a scheduler trigger.",
+      "required": [
+        "schedule",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "description": "The CRON expression for the task schedule",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of trigger.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the trigger.",
           "type": "string"
         }
       }
@@ -1711,6 +1748,13 @@
       "description": "The properties for updating triggers.",
       "type": "object",
       "properties": {
+        "schedulerTriggers": {
+          "description": "The collection of scheduler triggers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchedulerTrigger"
+          }
+        },
         "sourceTriggers": {
           "description": "The collection of triggers based on source code repository.",
           "type": "array",

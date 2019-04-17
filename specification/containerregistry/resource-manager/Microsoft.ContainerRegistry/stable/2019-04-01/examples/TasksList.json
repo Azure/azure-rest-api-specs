@@ -39,9 +39,17 @@
                 ]
               },
               "trigger": {
+                "schedulerTriggers": [
+                  {
+                    "name": "mySchedulerTrigger",
+                    "status": "Enabled",
+                    "schedule": "0 30 9 * * 1-5"
+                  }
+                ],
                 "sourceTriggers": [
                   {
                     "name": "mySourceTrigger",
+                    "status": "Enabled",
                     "sourceRepository": {
                       "sourceControlType": "Github",
                       "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
@@ -54,6 +62,7 @@
                 ],
                 "baseImageTrigger": {
                   "name": "myBaseImageTrigger",
+                  "status": "Enabled",
                   "baseImageTriggerType": "Runtime"
                 }
               },
