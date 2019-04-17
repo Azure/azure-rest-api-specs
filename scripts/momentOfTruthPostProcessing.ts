@@ -1,6 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import * as tsUtils from './ts-utils'
+import * as stringMap from '@ts-common/string-map'
+
 const fs = require('fs'),
       utils = require('../test/util/utils'),
       path = require('path'),
@@ -54,7 +57,7 @@ let potentialNewWarningErrorSummaryMarkdown = (
     `${warning_error_message}|\n`;
 
 let potentialNewWarningErrorSummaryPlain = (
-    count: unknown,
+    _count: unknown,
     warning_error_id: unknown,
     warning_error_code: unknown,
     warning_error_file: unknown,
@@ -69,8 +72,15 @@ let sdkContactMessage = "These errors are reported by the SDK team's validation 
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
 
+type JsonData = {
+    readonly files: stringMap.StringMap<{
+        readonly before: readonly Issue[]
+        readonly after: readonly Issue[]
+    }>
+}
+
 let data = undefined;
-let jsonData: unknown = undefined;
+let jsonData: JsonData|undefined = undefined;
 try {
     data = fs.readFileSync(logFilepath, 'utf8');
     jsonData = JSON.parse(data);
@@ -129,11 +139,11 @@ function getSummaryBlock(summaryTitle: unknown, fileSummaries: unknown, contactM
 }
 
 type Issue = {
-    readonly type: unknown
+    readonly type?: string
     readonly code: unknown
     readonly message: unknown
-    readonly id: unknown
-    readonly validationCategory: unknown
+    readonly id: string
+    readonly validationCategory: string
     readonly providerNamespace: unknown
     readonly resourceType: unknown
     readonly sources: readonly unknown[]
@@ -197,7 +207,7 @@ function pluralize(word: unknown, num: unknown) {
     return num !== 1 ? `${word}s` : word;
 }
 
-function getLine(jsonRef: string): number {
+function getLine(jsonRef: string): number|undefined {
     try {
         return parseInt(jsonRef.substr(jsonRef.indexOf(".json:") + 6).split(':')[0]);
     } catch (error) {
@@ -222,7 +232,16 @@ function blobHref(file: unknown) {
     return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
 }
 
-function getFileSummaryTable(issues: MutableIssue[], header: unknown, formatter: unknown) {
+type Formatter = (
+    count: unknown,
+    id: unknown,
+    code: unknown,
+    filePath: unknown,
+    lineNumber: unknown,
+    message: unknown
+) => string
+
+function getFileSummaryTable(issues: MutableIssue[], header: unknown, formatter: Formatter) {
     let potentialNewIssues = header;
 
     issues.sort((a, b) => {
@@ -233,7 +252,7 @@ function getFileSummaryTable(issues: MutableIssue[], header: unknown, formatter:
 
         if (!b.filePath) {
             b.filePath = getFile(b.jsonref) || "";
-            b.lineNumber = getLine(b.jsonref) || "1";
+            b.lineNumber = getLine(b.jsonref) || 1;
         }
 
         const comparison = a.filePath.localeCompare(b.filePath);
@@ -249,7 +268,7 @@ function getFileSummaryTable(issues: MutableIssue[], header: unknown, formatter:
     issues.forEach(function (issue, count) {
         if (!issue.filePath) {
             issue.filePath = getFile(issue.jsonref) || "";
-            issue.lineNumber = getLine(issue.jsonref) || "1";
+            issue.lineNumber = getLine(issue.jsonref) || 1;
         }
 
         potentialNewIssues += formatter(
@@ -265,7 +284,14 @@ function getFileSummaryTable(issues: MutableIssue[], header: unknown, formatter:
     return potentialNewIssues;
 }
 
-function getFileSummary(issueType, fileName, existingWarnings, existingErrors, newWarnings, newErrors) {
+function getFileSummary(
+    issueType: unknown,
+    fileName: unknown,
+    existingWarnings: MutableIssue[],
+    existingErrors: MutableIssue[],
+    newWarnings: MutableIssue[],
+    newErrors: MutableIssue[]
+) {
     let fileSummary = "";
 
     if (newErrors.length > 0) {
@@ -295,7 +321,7 @@ function getFileSummary(issueType, fileName, existingWarnings, existingErrors, n
     }
 }
 
-function emailLink(title, addr, subject = "", body = "") {
+function emailLink(title: unknown, addr: unknown, subject = "", body = "") {
     let link = `<a href='mailto:${addr}`;
     let sep = "?";
     if (subject && subject.length > 0) {
@@ -335,16 +361,28 @@ function postProcessing() {
         return;
     }
 
-    const configFiles = Object.keys(jsonData['files']);
+    const configFiles = Object.keys(jsonData.files);
     configFiles.sort();
 
     for (const fileName of configFiles) {
-        let beforeErrorsSDKArray = [], beforeWarningsSDKArray = [], beforeErrorsARMArray = [], beforeWarningsARMArray = [];
-        let afterErrorsSDKArray = [], afterWarningsSDKArray = [], afterErrorsARMArray = [], afterWarningsARMArray = [];
-        let newSDKErrors = [], newSDKWarnings = [], newARMErrors = [], newARMWarnings = [];
-        let existingSDKErrors = [], existingSDKWarnings = [], existingARMErrors = [], existingARMWarnings = [];
+        let beforeErrorsSDKArray: Issue[] = []
+        let beforeWarningsSDKArray: Issue[] = []
+        let beforeErrorsARMArray: Issue[] = []
+        let beforeWarningsARMArray: Issue[] = []
+        let afterErrorsSDKArray: Issue[] = []
+        let afterWarningsSDKArray: Issue[] = []
+        let afterErrorsARMArray: Issue[] = []
+        let afterWarningsARMArray: Issue[] = [];
+        let newSDKErrors: MutableIssue[] = []
+        let newSDKWarnings: MutableIssue[] = []
+        let newARMErrors: MutableIssue[] = []
+        let newARMWarnings: MutableIssue[] = []
+        let existingSDKErrors: MutableIssue[] = []
+        let existingSDKWarnings: MutableIssue[] = []
+        let existingARMErrors: MutableIssue[] = []
+        let existingARMWarnings: MutableIssue[] = []
 
-        let beforeErrorsAndWarningsArray = jsonData['files'][fileName]['before'];
+        let beforeErrorsAndWarningsArray = tsUtils.asNonUndefined(jsonData.files[fileName]).before;
         beforeErrorsAndWarningsArray.forEach(beforeErrorOrWarning => {
             if(beforeErrorOrWarning.type != undefined && beforeErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(beforeErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {
@@ -363,7 +401,7 @@ function postProcessing() {
             }
         });
 
-        let afterErrorsAndWarningsArray = jsonData['files'][fileName]['after'];
+        let afterErrorsAndWarningsArray = tsUtils.asNonUndefined(jsonData.files[fileName]).after;
         afterErrorsAndWarningsArray.forEach(afterErrorOrWarning => {
             if(afterErrorOrWarning.type != undefined && afterErrorOrWarning.type.toLowerCase() == 'warning'){
                 if(afterErrorOrWarning.validationCategory.toLowerCase() == 'sdkviolation') {

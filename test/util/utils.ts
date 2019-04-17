@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License in the project root for license information.
 
-import * as tsUtils from '../../scripts/ts-utils'
 import * as stringMap from '@ts-common/string-map'
 import * as fs from 'fs-extra'
 import * as glob from 'glob'
