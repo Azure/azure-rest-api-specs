@@ -3,7 +3,6 @@
 
 import * as tsUtils from '../../scripts/ts-utils'
 import * as stringMap from '@ts-common/string-map'
-import * as os from 'os'
 import * as fs from 'fs-extra'
 import * as glob from 'glob'
 import * as path from 'path'
@@ -18,26 +17,23 @@ const asyncJsonRequest = (url: string) => new Promise<unknown>((res, rej) => req
   (error: unknown, _: unknown, body: unknown) => error ? rej(error) : res(body)
 ));
 
-export const extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
-export const swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
-export const swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
-export const schemaUrl = "http://json-schema.org/draft-04/schema";
-export const exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json";
-export const compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json";
+const extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
+const swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
+const swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
+const exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json";
+const compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json";
 
-export const isWindows = (process.platform.lastIndexOf('win') === 0);
 export const prOnly = undefined !== process.env['PR_ONLY'] ? process.env['PR_ONLY'] : 'false';
 
-export const globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
+const globPath = path.join(__dirname, '../', '../', '/specification/**/*.json');
 export const swaggers = glob.sync(globPath, { ignore: ['**/examples/**/*.json', '**/quickstart-templates/*.json', '**/schema/*.json'] });
-export const exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
+const exampleGlobPath = path.join(__dirname, '../', '../', '/specification/**/examples/**/*.json');
 export const examples = glob.sync(exampleGlobPath);
-export const readmes = glob.sync(path.join(__dirname, '../', '../', '/specification/**/readme.md'));
 
 // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
 // because the buffer-to-string conversion in `fs.readFile()`
 // translates it to FEFF, the UTF-16 BOM.
-export const stripBOM = function(content: Buffer|string) {
+const stripBOM = function(content: Buffer|string) {
   if (Buffer.isBuffer(content)) {
     content = content.toString();
   }
@@ -76,85 +72,6 @@ export const getTargetBranch = function() {
 };
 
 /**
- * Check out a copy of a branch to a temporary location, execute a function, and then restore the previous state
- */
-export const doOnBranch = async function<T>(branch: unknown, func: () => Promise<T>) {
-  fetchBranch(branch);
-  const branchSha = resolveRef(`origin/${branch}`);
-  const tmpDir = path.join(os.tmpdir(), branchSha);
-
-  const currentDir = process.cwd();
-  checkoutBranch(branch, tmpDir);
-
-  console.log(`Changing directory and executing the function...`);
-  process.chdir(tmpDir);
-  const result = await func();
-
-  console.log(`Restoring previous directory and deleting secondary working tree...`);
-  process.chdir(currentDir);
-  execSync(`rm -rf ${tmpDir}`);
-
-  return result;
-}
-
-/**
- * Resolve a ref to its commit hash
- */
-export const resolveRef = function(ref: unknown) {
-  let cmd = `git rev-parse ${ref}`;
-  console.log(`> ${cmd}`);
-  return execSync(cmd, { encoding: 'utf8' }).trim();
-}
-
-/**
- * Fetch ref for a branch from the origin
- */
-export const fetchBranch = function(branch: unknown) {
-  let cmds = [
-    `git remote -vv`,
-    `git branch --all`,
-    `git remote set-branches origin --add ${branch}`,
-    `git fetch origin ${branch}`
-  ];
-
-  console.log(`Fetching branch ${branch} from origin...`);
-  for (let cmd of cmds) {
-    console.log(`> ${cmd}`);
-    execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
-  }
-}
-
-/**
- * Checkout a copy of branch to location
- */
-export const checkoutBranch = function(ref: unknown, location: unknown) {
-  let cmd = `git worktree add -f ${location} origin/${ref}`;
-  console.log(`Checking out a copy of branch ${ref} to ${location}...`);
-  console.log(`> ${cmd}`);
-  execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
-}
-
-/**
- * Gets the name of the source branch from which the PR is sent.
- * @returns {string} branchName The source branch name.
- */
-export const getSourceBranch = function() {
-  let cmd = 'git rev-parse --abbrev-ref HEAD';
-  let result = process.env['TRAVIS_PULL_REQUEST_BRANCH'];
-  console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST_BRANCH'] - ${process.env['TRAVIS_PULL_REQUEST_BRANCH']}`);
-  if (!result) {
-    try {
-      result = execSync(cmd, { encoding: 'utf8' });
-    } catch (err) {
-      console.log(`An error occurred while getting the current branch ${util.inspect(err, { depth: null })}.`);
-    }
-  }
-  result = tsUtils.asNonUndefined(result).trim();
-  console.log(`>>>>> The source branch is: "${result}".`);
-  return result;
-};
-
-/**
  * Gets the PR number. We are using the environment
  * variable provided by travis-ci. It is called TRAVIS_PULL_REQUEST. More info can be found here:
  * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
@@ -170,72 +87,6 @@ export const getPullRequestNumber = function() {
 
   return result;
 };
-
-/**
- * Gets the Repo name. We are using the environment
- * variable provided by travis-ci. It is called TRAVIS_REPO_SLUG. More info can be found here:
- * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
- * @returns {string} repo name or 'undefined'.
- */
-export const getRepoName = function() {
-  let result = process.env['TRAVIS_REPO_SLUG'];
-  console.log(`@@@@@ process.env['TRAVIS_REPO_SLUG'] - ${result}`);
-
-  return result;
-};
-
-/**
- * Gets the source repo name for PR's. We are using the environment
- * variable provided by travis-ci. It is called TRAVIS_PULL_REQUEST_SLUG. More info can be found here:
- * https://docs.travis-ci.com/user/environment-variables/#Convenience-Variables
- * @returns {string} repo name or 'undefined'.
- */
-export const getSourceRepoName = function() {
-  let result = process.env['TRAVIS_PULL_REQUEST_SLUG'];
-  console.log(`@@@@@ process.env['TRAVIS_PULL_REQUEST_SLUG'] - ${result}`);
-
-  return result;
-};
-
-// Retrieves Git Repository Url
-/**
- * Gets the repo URL
- * @returns {string} repo URL or 'undefined'
- */
-export const getRepoUrl = function() {
-  let repoName = getRepoName();
-  return `https://github.com/${repoName}`;
-};
-
-// Retrieves the source Git Repository Url
-/**
- * Gets the repo URL from where the PR originated
- * @returns {string} repo URL or 'undefined'
- */
-export const getSourceRepoUrl = function() {
-  let repoName = getSourceRepoName();
-  return `https://github.com/${repoName}`;
-};
-
-export const getTimeStamp = function() {
-  // We pad each value so that sorted directory listings show the files in chronological order
-  function pad(number: any): any {
-    if (number < 10) {
-      return '0' + number;
-    }
-
-    return number;
-  }
-
-  var now = new Date();
-  return now.getFullYear()
-    + pad(now.getMonth() + 1)
-    + pad(now.getDate())
-    + "_"
-    + pad(now.getHours())
-    + pad(now.getMinutes())
-    + pad(now.getSeconds());
-}
 
 /**
  * Retrieves list of swagger files to be processed for linting

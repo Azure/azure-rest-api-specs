@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-'use strict';
-
 const fs = require('fs'),
       utils = require('../test/util/utils'),
       path = require('path'),
@@ -18,7 +16,8 @@ function getLogDir() {
     return logDir;
 }
 
-let githubTemplate = (title, contact_message, file_summaries) => `# AutoRest linter results for ${title}\n${contact_message}\n\n${file_summaries}`;
+let githubTemplate = (title: unknown, contact_message: unknown, file_summaries: unknown) =>
+    `# AutoRest linter results for ${title}\n${contact_message}\n\n${file_summaries}`;
 
 let tooManyResults = "# Result limit exceeded, check build output\n" +
     "The linter diff produced too many results to display here. Please view the build output to see the results. " +
@@ -31,21 +30,37 @@ let githubFooter = `[AutoRest Linter Guidelines](https://github.com/Azure/azure-
     `Send ${emailLink("feedback", "azure-swag-tooling@microsoft.com", "Feedback | AutoRest Linter Diff Tool")}` +
     `\n\nThanks for your co-operation.`;
 
-let fileSummaryHeader = (file_name, file_href) => `## Config file: [${file_name}](${file_href})\n`;
-let fileSummaryNewTemplate = (issue_type, issue_count, issue_table) => `<details><summary><h3 style="display: inline"><a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}</h3></summary><br>\n\n${issue_table}\n</details>`;
-let fileSummaryExistingTemplate = (issue_type, issue_count, issue_table) => `<details><summary>${iconFor(issue_type)} ${issue_count} existing ${pluralize(issue_type, issue_count)}</summary><br>\n\n${issue_table}\n</details>\n\n`;
+let fileSummaryHeader = (file_name: unknown, file_href: unknown) => `## Config file: [${file_name}](${file_href})\n`;
+let fileSummaryNewTemplate = (issue_type: string, issue_count: unknown, issue_table: unknown) =>
+    `<details><summary><h3 style="display: inline"><a name="${issue_type.replace(/\s/g, "-")}s"></a>${iconFor(issue_type)} ${issue_count} new ${pluralize(issue_type, issue_count)}</h3></summary><br>\n\n${issue_table}\n</details>`;
+let fileSummaryExistingTemplate = (issue_type: string, issue_count: unknown, issue_table: unknown) =>
+    `<details><summary>${iconFor(issue_type)} ${issue_count} existing ${pluralize(issue_type, issue_count)}</summary><br>\n\n${issue_table}\n</details>\n\n`;
 
 let potentialNewWarningErrorSummaryHeader = `
 | | Rule | Location | Message |
 |-|------|----------|---------|
 `;
 
-let potentialNewWarningErrorSummaryMarkdown = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
+let potentialNewWarningErrorSummaryMarkdown = (
+    count: unknown,
+    warning_error_id: unknown,
+    warning_error_code: unknown,
+    warning_error_file: unknown,
+    warning_error_line: unknown,
+    warning_error_message: unknown
+) =>
     `|${count}|[${warning_error_id} - ${warning_error_code}](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#${warning_error_id})|` +
     `[${shortName(warning_error_file)}:${warning_error_line}](${blobHref(warning_error_file)}#L${warning_error_line} "${warning_error_file}")|` +
     `${warning_error_message}|\n`;
 
-let potentialNewWarningErrorSummaryPlain = (count, warning_error_id, warning_error_code, warning_error_file, warning_error_line, warning_error_message) =>
+let potentialNewWarningErrorSummaryPlain = (
+    count: unknown,
+    warning_error_id: unknown,
+    warning_error_code: unknown,
+    warning_error_file: unknown,
+    warning_error_line: unknown,
+    warning_error_message: unknown
+) =>
     `${warning_error_id} - ${warning_error_code}\n` +
     `${warning_error_message}\n` +
     `  at ${warning_error_file}:${warning_error_line}\n\n`;
@@ -55,7 +70,7 @@ let armContactMessage = "These errors are reported by the ARM team's validation 
 let sdkFileSummaries = '', armFileSummaries = '';
 
 let data = undefined;
-let jsonData = undefined;
+let jsonData: unknown = undefined;
 try {
     data = fs.readFileSync(logFilepath, 'utf8');
     jsonData = JSON.parse(data);
@@ -66,14 +81,19 @@ try {
     process.exit(1)
 }
 
-function compareJsonRef(beforeJsonRef, afterJsonRef) {
+function compareJsonRef(beforeJsonRef: string, afterJsonRef: string) {
     beforeJsonRef = beforeJsonRef.replace(/.*\.json:\d+:\d+/, '')
     afterJsonRef = afterJsonRef.replace(/.*\.json:\d+:\d+/, '')
 
     return (beforeJsonRef == afterJsonRef);
 }
 
-function getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount) {
+function getOutputMessages(
+    newSDKErrorsCount: number,
+    newARMErrorsCount: number,
+    newSDKWarningsCount: number,
+    newARMWarningsCount: number
+) {
     const totalNewErrors = newSDKErrorsCount + newARMErrorsCount;
     const totalNewWarnings = newSDKWarningsCount + newARMWarningsCount;
 
@@ -87,7 +107,7 @@ function getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsC
     return [title, summary];
 }
 
-function formatSummaryLine(issueType, count) {
+function formatSummaryLine(issueType: string, count: number) {
     let line = `&nbsp;&nbsp;&nbsp;${iconFor(issueType, count)}&nbsp;&nbsp;&nbsp;`;
     if (count > 0) {
         line += '[';
@@ -100,7 +120,7 @@ function formatSummaryLine(issueType, count) {
     return line;
 }
 
-function getSummaryBlock(summaryTitle, fileSummaries, contactMessage) {
+function getSummaryBlock(summaryTitle: unknown, fileSummaries: unknown, contactMessage: unknown) {
     return githubTemplate(
         summaryTitle,
         contactMessage,
@@ -108,7 +128,32 @@ function getSummaryBlock(summaryTitle, fileSummaries, contactMessage) {
     );
 }
 
-function compareBeforeAfterArrays(afterArray, beforeArray, existingArray, newArray) {
+type Issue = {
+    readonly type: unknown
+    readonly code: unknown
+    readonly message: unknown
+    readonly id: unknown
+    readonly validationCategory: unknown
+    readonly providerNamespace: unknown
+    readonly resourceType: unknown
+    readonly sources: readonly unknown[]
+    readonly jsonref: string
+    readonly filePath: string
+    readonly lineNumber: number
+}
+
+type Mutable<T extends object> = {
+    -readonly [K in keyof T]: T[K]
+}
+
+type MutableIssue = Mutable<Issue>
+
+function compareBeforeAfterArrays(
+    afterArray: readonly Issue[],
+    beforeArray: readonly Issue[],
+    existingArray: unknown[],
+    newArray: unknown[]
+) {
     if(afterArray.length > beforeArray.length){
         afterArray.forEach(afterValue => {
             let errorFound = false;
@@ -136,11 +181,11 @@ function compareBeforeAfterArrays(afterArray, beforeArray, existingArray, newArr
     }
 }
 
-function iconFor(type, num = undefined) {
+function iconFor(type: string, num: unknown = undefined) {
     if (num === 0) {
         return ':white_check_mark:';
     }
-    
+
     if (type.toLowerCase().includes('error')) {
         return ':x:';
     } else {
@@ -148,19 +193,19 @@ function iconFor(type, num = undefined) {
     }
 }
 
-function pluralize(word, num) {
+function pluralize(word: unknown, num: unknown) {
     return num !== 1 ? `${word}s` : word;
 }
 
-function getLine(jsonRef) {
+function getLine(jsonRef: string): number {
     try {
-        return jsonRef.substr(jsonRef.indexOf(".json:") + 6).split(':')[0];
+        return parseInt(jsonRef.substr(jsonRef.indexOf(".json:") + 6).split(':')[0]);
     } catch (error) {
         return undefined;
     }
 }
 
-function getFile(jsonRef) {
+function getFile(jsonRef: string) {
     try {
         const start = jsonRef.indexOf("specification");
         return jsonRef.substr(start, (jsonRef.indexOf(".json") + 5) - start);
@@ -169,21 +214,21 @@ function getFile(jsonRef) {
     }
 }
 
-function shortName(filePath) {
+function shortName(filePath: unknown) {
     return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
 }
 
-function blobHref(file) {
+function blobHref(file: unknown) {
     return `https://github.com/${process.env.TRAVIS_PULL_REQUEST_SLUG}/blob/${process.env.TRAVIS_PULL_REQUEST_SHA}/${file}`;
 }
 
-function getFileSummaryTable(issues, header, formatter) {
+function getFileSummaryTable(issues: MutableIssue[], header: unknown, formatter: unknown) {
     let potentialNewIssues = header;
 
     issues.sort((a, b) => {
         if (!a.filePath) {
             a.filePath = getFile(a.jsonref) || "";
-            a.lineNumber = getLine(a.jsonref) || "1";
+            a.lineNumber = getLine(a.jsonref) || 1;
         }
 
         if (!b.filePath) {
@@ -397,7 +442,7 @@ function postProcessing() {
     const sdkSummary = getSummaryBlock("SDK-related validation Errors / Warnings", sdkFileSummaries, sdkContactMessage);
     const armSummary = getSummaryBlock("ARM-related validation Errors / Warnings", armFileSummaries, armContactMessage);
     const text = `${sdkSummary}<br><br>\n\n${armSummary}<br><br>\n\n${githubFooter}`;
-    
+
     const [title, summary] = getOutputMessages(newSDKErrorsCount, newARMErrorsCount, newSDKWarningsCount, newARMWarningsCount);
     const output = {
         title,
