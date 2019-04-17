@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Resource Graph Saved Query",
-    "description": "Azure Resource Graph Saved Query API Reference",
+    "title": "Azure Resource Graph Query",
+    "description": "Azure Resource Graph Query API Reference",
     "version": "2018-09-01-preview"
   },
   "host": "management.azure.com",
@@ -36,8 +36,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries": {
       "get": {
-        "description": "Get all saved query defined within a specified subscription and resource group.",
-        "operationId": "SavedQuery_List",
+        "description": "Get all graph queries defined within a specified subscription and resource group.",
+        "operationId": "GraphQuery_List",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -51,15 +51,15 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more saved queries.",
+            "description": "A list containing 0 or more graph queries.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryListResult"
+              "$ref": "#/definitions/GraphQueryListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryError"
+              "$ref": "#/definitions/GraphQueryError"
             }
           }
         },
@@ -67,16 +67,16 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "Get a list of Saved Queries": {
-            "$ref": "./examples/SavedQueryList.json"
+          "Get a list of Graph Queries": {
+            "$ref": "./examples/GraphQueryList.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries/{resourceName}": {
       "get": {
-        "description": "Get a single saved query by its resourceName.",
-        "operationId": "SavedQuery_Get",
+        "description": "Get a single graph query by its resourceName.",
+        "operationId": "GraphQuery_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -85,7 +85,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -93,27 +93,27 @@
         ],
         "responses": {
           "200": {
-            "description": "A saved query definition.",
+            "description": "A graph query definition.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryResource"
+              "$ref": "#/definitions/GraphQueryResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryError"
+              "$ref": "#/definitions/GraphQueryError"
             }
           }
         },
         "x-ms-examples": {
-          "Get Saved Query": {
-            "$ref": "./examples/SavedQueryGet.json"
+          "Get Graph Query": {
+            "$ref": "./examples/GraphQueryGet.json"
           }
         }
       },
       "delete": {
-        "description": "Delete a saved query.",
-        "operationId": "SavedQuery_Delete",
+        "description": "Delete a graph query.",
+        "operationId": "GraphQuery_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -122,7 +122,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -130,7 +130,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The saved query has been successfully deleted."
+            "description": "The graph query has been successfully deleted."
           },
           "204": {
             "description": "The resource doesn't exist."
@@ -138,19 +138,19 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryError"
+              "$ref": "#/definitions/GraphQueryError"
             }
           }
         },
         "x-ms-examples": {
-          "Delete Saved Query": {
-            "$ref": "./examples/SavedQueryDelete.json"
+          "Delete Graph Query": {
+            "$ref": "./examples/GraphQueryDelete.json"
           }
         }
       },
       "put": {
-        "description": "Create a new saved query.",
-        "operationId": "SavedQuery_CreateOrUpdate",
+        "description": "Create a new graph query.",
+        "operationId": "GraphQuery_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -159,44 +159,44 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "properties",
-            "description": "Properties that need to be specified to create a new saved query.",
+            "description": "Properties that need to be specified to create a new graph query.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SavedQueryResource"
+              "$ref": "#/definitions/GraphQueryResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The newly created saved query.",
+            "description": "The newly created graph query.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryResource"
+              "$ref": "#/definitions/GraphQueryResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryError"
+              "$ref": "#/definitions/GraphQueryError"
             }
           }
         },
         "x-ms-examples": {
-          "Create Saved Query": {
-            "$ref": "./examples/SavedQueryAdd.json"
+          "Create Graph Query": {
+            "$ref": "./examples/GraphQueryAdd.json"
           }
         }
       },
       "patch": {
-        "description": "Updates a saved query that has already been added.",
-        "operationId": "SavedQuery_Update",
+        "description": "Updates a graph query that has already been added.",
+        "operationId": "GraphQuery_Update",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -205,38 +205,38 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SavedQueryResourceNameParameter"
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
-            "description": "Properties that need to be specified to create a new saved query.",
+            "description": "Properties that need to be specified to create a new graph query.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SavedQueryUpdateParameters"
+              "$ref": "#/definitions/GraphQueryUpdateParameters"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The saved query definition updated.",
+            "description": "The graph query definition updated.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryResource"
+              "$ref": "#/definitions/GraphQueryResource"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/SavedQueryError"
+              "$ref": "#/definitions/GraphQueryError"
             }
           }
         },
         "x-ms-examples": {
-          "Update Saved Query": {
-            "$ref": "./examples/SavedQueryUpdate.json"
+          "Update Graph Query": {
+            "$ref": "./examples/GraphQueryUpdate.json"
           }
         }
       }
@@ -306,21 +306,21 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "SavedQueryListResult": {
+    "GraphQueryListResult": {
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SavedQueryResource"
+            "$ref": "#/definitions/GraphQueryResource"
           },
-          "description": "An array of saved queries."
+          "description": "An array of graph queries."
         }
       },
-      "description": "Saved query list result."
+      "description": "Graph query list result."
     },
-    "SavedQueryResource": {
-      "description": "Saved Query entity definition.",
+    "GraphQueryResource": {
+      "description": "Graph Query entity definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -329,32 +329,32 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Metadata describing a saved query for an Azure resource.",
-          "$ref": "#/definitions/SavedQueryProperties"
+          "description": "Metadata describing a graph query for an Azure resource.",
+          "$ref": "#/definitions/GraphQueryProperties"
         }
       }
     },
-    "SavedQueryProperties": {
-      "description": "Properties that contain a saved query.",
+    "GraphQueryProperties": {
+      "description": "Properties that contain a graph query.",
       "required": [
         "query"
       ],
       "properties": {
         "timeModified": {
           "type": "string",
-          "description": "Date and time in UTC of the last modification that was made to this saved query definition.",
+          "description": "Date and time in UTC of the last modification that was made to this graph query definition.",
           "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "The description of a saved query."
+          "description": "The description of a graph query."
         },
         "query": {
           "type": "string",
-          "description": "KQL query that will be saved."
+          "description": "KQL query that will be graph."
         },
         "resultKind": {
-          "description": "Enum indicating a type of saved query.",
+          "description": "Enum indicating a type of graph query.",
           "readOnly": true,
           "default": "basic",
           "type": "string",
@@ -369,7 +369,7 @@
         }
       }
     },
-    "SavedQueryUpdateParameters": {
+    "GraphQueryUpdateParameters": {
       "properties": {
         "tags": {
           "type": "object",
@@ -385,25 +385,25 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Metadata describing a saved query for an Azure resource.",
-          "$ref": "#/definitions/SavedQueryPropertiesUpdateParameters"
+          "description": "Metadata describing a graph query for an Azure resource.",
+          "$ref": "#/definitions/GraphQueryPropertiesUpdateParameters"
         }
       },
       "description": "The parameters that can be provided when updating workbook properties properties."
     },
-    "SavedQueryPropertiesUpdateParameters": {
+    "GraphQueryPropertiesUpdateParameters": {
       "description": "Properties that contain a workbook for PATCH operation.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of a saved query."
+          "description": "The description of a graph query."
         },
         "query": {
           "type": "string",
-          "description": "KQL query that will be saved."
+          "description": "KQL query that will be graph."
         },
         "resultKind": {
-          "description": "Enum indicating a type of saved query.",
+          "description": "Enum indicating a type of graph query.",
           "default": "basic",
           "type": "string",
           "enum": [
@@ -434,7 +434,7 @@
       },
       "description": "Error Field contract."
     },
-    "SavedQueryError": {
+    "GraphQueryError": {
       "properties": {
         "code": {
           "type": "string",
@@ -524,12 +524,12 @@
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
-    "SavedQueryResourceNameParameter": {
+    "GraphQueryResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Saved Query resource.",
+      "description": "The name of the Graph Query resource.",
       "x-ms-parameter-location": "method"
     }
   }
