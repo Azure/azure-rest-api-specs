@@ -3557,6 +3557,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_ConvertToSinglePlacementGroup",
+        "description": "Converts SinglePlacementGroup property to false for a existing virtual machine scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetConvertToSinglePlacementGroupInput"
+            },
+            "description": "The input object for ConvertToSinglePlacementGroup API."
+          },
+          {
+                "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage": {
       "post": {
         "tags": [
@@ -8394,7 +8436,15 @@
         }
       },
       "description": "LogAnalytics output properties"
-    }
+    },
+    "VMScaleSetConvertToSinglePlacementGroupInput": {
+      "properties":{
+        "activePlacementGroupId": {
+            "type": "string",
+            "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."
+          }
+        }
+      }
   },
   "parameters": {
     "SubscriptionIdParameter": {
