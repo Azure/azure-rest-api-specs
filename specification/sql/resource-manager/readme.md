@@ -1,4 +1,4 @@
-﻿# Sql
+# Sql
 
 > see https://aka.ms/autorest
 

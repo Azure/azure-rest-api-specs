@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2019-03-01-only
   - tag: package-2018-10-01-only
   - tag: package-2018-09-30-only
   - tag: package-compute-only-2018-06
@@ -28,6 +29,17 @@ batch:
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
+```
+
+### Tag: package-2019-03-01-only and python
+
+These settings apply only when `--tag=package-2019-03-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-03-01-only' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2019_03_01
+  output-folder: $(python-sdks-folder)/azure-mgmt-compute/azure/mgmt/compute/v2019_03_01
 ```
 
 ### Tag: package-2018-10-01-only and python

@@ -162,6 +162,9 @@
           "ResourceGroupQuery": {
             "$ref": "./examples/ResourceGroupQuery.json"
           },
+            "ResourceGroupQueryGrouping": {
+            "$ref": "./examples/ResourceGroupQueryGrouping.json"
+          },
           "BillingAccountQuery": {
             "$ref": "./examples/BillingAccountQuery.json"
           },
@@ -252,7 +255,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeQueryParameter"
+            "$ref": "#/parameters/scopeExportsParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -300,7 +303,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeQueryParameter"
+            "$ref": "#/parameters/scopeExportsParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -352,7 +355,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeQueryParameter"
+            "$ref": "#/parameters/scopeExportsParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -419,7 +422,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeQueryParameter"
+            "$ref": "#/parameters/scopeExportsParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -470,7 +473,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeQueryParameter"
+            "$ref": "#/parameters/scopeExportsParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -521,7 +524,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeQueryParameter"
+            "$ref": "#/parameters/scopeExportsParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -830,12 +833,14 @@
           "type": "string",
           "enum": [
             "WeekToDate",
-            "MonthToDate",
+            "MonthToDate",            
             "YearToDate",
             "TheLastWeek",
-            "TheLastMonth",
+            "TheLastMonth",          
             "TheLastYear",
-            "Custom"
+            "Custom",
+            "BillingMonthToDate",
+            "TheLastBillingMonth"
           ],
           "x-ms-enum": {
             "name": "TimeframeType",
@@ -1344,7 +1349,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope..",
+      "description": "The scope associated with query operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope..",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeExportsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with export operations. This includes '/subscriptions/{subscriptionId}' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
