@@ -1751,7 +1751,6 @@
           "description": "The authorization key."
         },
         "circuitConnectionStatus": {
-          "readOnly": true,
           "$ref": "#/definitions/CircuitConnectionStatus",
           "description": "Express Route Circuit connection state."
         },
@@ -1818,7 +1817,6 @@
           "description": "/29 IP address space to carve out Customer addresses for tunnels."
         },
         "circuitConnectionStatus": {
-          "readOnly": true,
           "$ref": "#/definitions/CircuitConnectionStatus",
           "description": "Express Route Circuit connection state."
         },
@@ -2233,6 +2231,7 @@
     },
     "CircuitConnectionStatus": {
       "type": "string",
+      "readOnly": true,
       "description": "Express Route Circuit connection state.",
       "enum": [
         "Connected",
