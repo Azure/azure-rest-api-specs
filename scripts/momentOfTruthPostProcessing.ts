@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import * as tsUtils from '@azure/rest-api-specs-scripts/src/ts-utils'
-import * as stringMap from '@ts-common/string-map'
+import * as momentOfTruthUtils from '@azure/rest-api-specs-scripts/src/momentOfTruthUtils'
 
 import * as fs from 'fs'
 import * as utils from '@azure/rest-api-specs-scripts/src/utils'
@@ -72,15 +72,8 @@ let sdkContactMessage = "These errors are reported by the SDK team's validation 
 let armContactMessage = "These errors are reported by the ARM team's validation tools, reach out to [ARM RP API Review](mailto:armrpapireview@microsoft.com) directly for any questions or concerns.";
 let sdkFileSummaries = '', armFileSummaries = '';
 
-type JsonData = {
-    readonly files: stringMap.StringMap<{
-        readonly before: readonly Issue[]
-        readonly after: readonly Issue[]
-    }>
-}
-
 let data = undefined;
-let jsonData: JsonData|undefined = undefined;
+let jsonData: momentOfTruthUtils.FinalResult|undefined = undefined;
 try {
     data = fs.readFileSync(logFilepath, 'utf8');
     jsonData = JSON.parse(data);
@@ -138,29 +131,15 @@ function getSummaryBlock(summaryTitle: unknown, fileSummaries: unknown, contactM
     );
 }
 
-type Issue = {
-    readonly type?: string
-    readonly code: unknown
-    readonly message: unknown
-    readonly id: string
-    readonly validationCategory: string
-    readonly providerNamespace: unknown
-    readonly resourceType: unknown
-    readonly sources: readonly unknown[]
-    readonly jsonref: string
-    readonly filePath: string
-    readonly lineNumber: number
-}
-
 type Mutable<T extends object> = {
     -readonly [K in keyof T]: T[K]
 }
 
-type MutableIssue = Mutable<Issue>
+type MutableIssue = Mutable<momentOfTruthUtils.Issue>
 
 function compareBeforeAfterArrays(
-    afterArray: readonly Issue[],
-    beforeArray: readonly Issue[],
+    afterArray: readonly momentOfTruthUtils.Issue[],
+    beforeArray: readonly momentOfTruthUtils.Issue[],
     existingArray: unknown[],
     newArray: unknown[]
 ) {
@@ -369,14 +348,14 @@ function postProcessing() {
     configFiles.sort();
 
     for (const fileName of configFiles) {
-        let beforeErrorsSDKArray: Issue[] = []
-        let beforeWarningsSDKArray: Issue[] = []
-        let beforeErrorsARMArray: Issue[] = []
-        let beforeWarningsARMArray: Issue[] = []
-        let afterErrorsSDKArray: Issue[] = []
-        let afterWarningsSDKArray: Issue[] = []
-        let afterErrorsARMArray: Issue[] = []
-        let afterWarningsARMArray: Issue[] = [];
+        let beforeErrorsSDKArray: momentOfTruthUtils.Issue[] = []
+        let beforeWarningsSDKArray: momentOfTruthUtils.Issue[] = []
+        let beforeErrorsARMArray: momentOfTruthUtils.Issue[] = []
+        let beforeWarningsARMArray: momentOfTruthUtils.Issue[] = []
+        let afterErrorsSDKArray: momentOfTruthUtils.Issue[] = []
+        let afterWarningsSDKArray: momentOfTruthUtils.Issue[] = []
+        let afterErrorsARMArray: momentOfTruthUtils.Issue[] = []
+        let afterWarningsARMArray: momentOfTruthUtils.Issue[] = [];
         let newSDKErrors: MutableIssue[] = []
         let newSDKWarnings: MutableIssue[] = []
         let newARMErrors: MutableIssue[] = []
