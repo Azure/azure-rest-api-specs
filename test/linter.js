@@ -4,7 +4,7 @@
 'use strict';
 var
   execSync = require('child_process').execSync,
-  utils = require('./util/utils'),
+  utils = require('@azure/rest-api-specs-scripts/src/utils'),
   fs = require('fs'),
   literate = require('@microsoft.azure/literate'),
   async_io_1 = require("@microsoft.azure/async-io"),
@@ -59,7 +59,7 @@ async function getTagsFromConfig(config) {
 
   // filter the tags
   if (utils.prOnly) {
-    // get path to the modified files relative to their corresponding md file, need to do this since 
+    // get path to the modified files relative to their corresponding md file, need to do this since
     // config files have relative paths to the input files
     let allModifiedFiles = utils.getFilesChangedInPR();
     allModifiedFiles = allModifiedFiles.map(mfile => {
@@ -96,7 +96,7 @@ function execLinterCommand(args) {
 
 describe('AutoRest Linter validation:', function () {
   if (utils.prOnly) {
-    // Useful when debugging a test for a particular swagger. 
+    // Useful when debugging a test for a particular swagger.
     // Just update the regex. That will return an array of filtered items.
     // configsToProcess = ['specification/sql/resource-manager/readme.md'];
     let configsToProcess = utils.getConfigFilesChangedInPR();
@@ -108,10 +108,10 @@ describe('AutoRest Linter validation:', function () {
 
         let errorsFound = false;
 
-        // if no tags found to process, run with the defaults    
+        // if no tags found to process, run with the defaults
         if (tagsToProcess === null || tagsToProcess.length === 0) {
           // no tags found
-          // this means we need to run validator against the individual 
+          // this means we need to run validator against the individual
           // json files included in the PR
           // but in the same directory tree as the config file
           const filesChangedInPR = utils.getFilesChangedInPR();
@@ -141,10 +141,10 @@ describe('AutoRest Linter validation:', function () {
     }
   }
   else {
-    // we are not handling pr_only=false case today, 
+    // we are not handling pr_only=false case today,
     // to enable, we need to write logic to calculate
-    // all config files in the repo and run linter with 
-    // every tag in the md file; we can get tags each 
+    // all config files in the repo and run linter with
+    // every tag in the md file; we can get tags each
     // config file from getTagsFromCinfig file
     console.warn('Cannot run linter in pr_only false mode');
   }

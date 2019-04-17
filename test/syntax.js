@@ -3,16 +3,14 @@
 
 'use strict';
 var assert = require("assert"),
-  fs = require('fs'),
-  path = require('path'),
   RefParser = require('json-schema-ref-parser'),
   util = require('util'),
-  utils = require('./util/utils');
+  utils = require('@azure/rest-api-specs-scripts/src/utils');
 
 var context;
 
 
-// Useful when debugging a test for a particular swagger. 
+// Useful when debugging a test for a particular swagger.
 // Just update the regex. That will return an array of filtered items.
 // utils.swaggers = utils.swaggers.filter(function(item) {
 //   return (item.match(/.*Microsoft.Logic.*2016-06-01.*/ig) !== null);
@@ -28,7 +26,7 @@ describe('Azure swagger schema validation:', function () {
       context = result;
       done();
     });
-    
+
   });
 
   for (const swagger of utils.swaggers) {

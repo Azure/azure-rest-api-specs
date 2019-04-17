@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License in the project root for license information.
 'use strict';
 
-const utils = require('../test/util/utils')
-const cp = require("child_process")
+const utils = require('@azure/rest-api-specs-scripts/src/utils')
+const cp = require('child_process')
 
 const exec = (cmd, options) => {
   const result = cp.spawnSync(

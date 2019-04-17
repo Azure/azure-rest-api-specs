@@ -5,7 +5,7 @@ import * as tsUtils from '@azure/rest-api-specs-scripts/src/ts-utils'
 import * as stringMap from '@ts-common/string-map'
 
 const fs = require('fs'),
-      utils = require('../test/util/utils'),
+      utils = require('@azure/rest-api-specs-scripts/src/utils'),
       path = require('path'),
       gitHubPost = require('./postToGitHub');
 
