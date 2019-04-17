@@ -1,16 +1,15 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountName": "1234",
-    "invoiceSectionName": "42425",
-    "$expand": "subscriptions"
+    "billingAccountName": "{billingAccountName}",
+    "invoiceSectionName": "22000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/products/productSummaryId1",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/products/productSummaryId1",
             "name": "productSummaryId1",
             "type": "Microsoft.Consumption/products",
             "properties": {
@@ -30,14 +29,14 @@
               "skuDescription": "Enterprise Agreement Development",
               "availabilityId": "AvailabilityId1",
               "parentProductId": "eligibleOffer2",
-              "invoiceSectionId": "42425",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
               "billingProfileName": "Contoso operations billing"
             }
           },
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/products/productSummaryId2",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/products/productSummaryId2",
             "name": "productSummaryId2",
             "type": "Microsoft.Consumption/products",
             "properties": {
@@ -57,9 +56,9 @@
               "skuDescription": "Enterprise Agreement Development",
               "availabilityId": "AvailabilityId1",
               "parentProductId": "eligibleOffer2",
-              "invoiceSectionId": "42425",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
               "billingProfileName": "Contoso operations billing"
             }
           }

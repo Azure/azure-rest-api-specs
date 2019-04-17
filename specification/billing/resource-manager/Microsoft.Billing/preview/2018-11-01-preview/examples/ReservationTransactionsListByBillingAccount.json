@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountName": "1234",
+    "billingAccountName": "{billingAccountName}",
     "startDate": "2018-04-01",
     "endDate": "2018-05-30",
     "$filter": "properties/kind eq 'Reservation'"
@@ -11,7 +11,7 @@
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/transactions/transactionSummaryId1",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/transactions/transactionSummaryId1",
             "name": "transactionSummaryId1",
             "type": "Microsoft.Billing/transactions",
             "properties": {
@@ -29,16 +29,16 @@
                 }
               ,
               "quantity": 4,
-              "invoiceSectionId": "123456",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
               "billingProfileName": "Contoso operations billing",
-              "subscriptionId": "789456",
+              "subscriptionId": "7800000000-0000-0000-0000-0000000000009456",
               "subscriptionName": "Contoso operations billing"
             }
           },
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/transactions/transactionSummaryId2",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/transactions/transactionSummaryId2",
             "name": "transactionSummaryId2",
             "type": "Microsoft.Billing/transactions",
             "properties": {
@@ -56,11 +56,11 @@
                 }
               ,
               "quantity": 5,
-              "invoiceSectionId": "123456",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
               "invoiceSectionName": "Contoso operations invoiceSection",
-              "billingProfileId": "789456",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
               "billingProfileName": "Contoso operations billing",
-              "subscriptionId": "789456",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
               "subscriptionName": "Contoso operations billing"
             }
           }
