@@ -86,6 +86,8 @@ csharp:
   payload-flattening-threshold: 3
 ```
 
+## Python
+
 ``` yaml $(python)
 python-mode: create
 python:
