@@ -4,10 +4,10 @@
 import * as tsUtils from '@azure/rest-api-specs-scripts/src/ts-utils'
 import * as stringMap from '@ts-common/string-map'
 
-const fs = require('fs'),
-      utils = require('@azure/rest-api-specs-scripts/src/utils'),
-      path = require('path'),
-      gitHubPost = require('./postToGitHub');
+import * as fs from 'fs'
+import * as utils from '@azure/rest-api-specs-scripts/src/utils'
+import * as path from 'path'
+import * as gitHubPost from './postToGitHub'
 
 let pullRequestNumber = utils.getPullRequestNumber();
 let targetBranch = utils.getTargetBranch();
@@ -48,7 +48,7 @@ let potentialNewWarningErrorSummaryMarkdown = (
     count: unknown,
     warning_error_id: unknown,
     warning_error_code: unknown,
-    warning_error_file: unknown,
+    warning_error_file: string,
     warning_error_line: unknown,
     warning_error_message: unknown
 ) =>
@@ -224,7 +224,7 @@ function getFile(jsonRef: string) {
     }
 }
 
-function shortName(filePath: unknown) {
+function shortName(filePath: string) {
     return `${path.basename(path.dirname(filePath))}/&#8203;<strong>${path.basename(filePath)}</strong>`;
 }
 
@@ -236,7 +236,7 @@ type Formatter = (
     count: unknown,
     id: unknown,
     code: unknown,
-    filePath: unknown,
+    filePath: string,
     lineNumber: unknown,
     message: unknown
 ) => string
@@ -295,7 +295,11 @@ function getFileSummary(
     let fileSummary = "";
 
     if (newErrors.length > 0) {
-        fileSummary += fileSummaryNewTemplate(`${issueType} Error`, newErrors.length, getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown));
+        fileSummary += fileSummaryNewTemplate(
+            `${issueType} Error`,
+            newErrors.length,
+            getFileSummaryTable(newErrors, potentialNewWarningErrorSummaryHeader, potentialNewWarningErrorSummaryMarkdown)
+        );
     }
 
     if (existingErrors.length > 0) {
