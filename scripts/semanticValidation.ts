@@ -1,12 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License in the project root for license information.
-'use strict';
 
-const utils = require('@azure/rest-api-specs-scripts/src/utils')
-const oav = require('oav');
+import { utils } from '@azure/rest-api-specs-scripts'
+import * as oav from 'oav'
+import * as avocado from '@azure/avocado';
 
 async function main() {
-  const swaggersToProcess = utils.getFilesChangedInPR();
+  const pr = await avocado.createPullRequestProperties(avocado.defaultConfig())
+  const swaggersToProcess = await utils.getFilesChangedInPR(pr);
   // Useful when debugging a test for a particular swagger.
   // Just update the regex. That will return an array of filtered items.
   // swaggersToProcess = swaggersToProcess.filter(function(item) {
