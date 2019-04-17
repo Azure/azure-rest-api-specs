@@ -3666,6 +3666,10 @@
           "description": "The address associated with billing account.",
           "$ref": "#/definitions/Address"
         },
+        "company": {
+          "description": "Company Name.",
+          "type": "string"
+        },
         "invoiceSections": {
           "description": "The invoice sections associated to the billing account. By default this is not populated, unless it's specified in $expand.",
           "type": "array",
@@ -3707,6 +3711,22 @@
       }
     },
     "BillingProperty": {
+      "description": "A billing property resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingPropertySummary"
+        }
+      }
+    },
+    "BillingPropertySummary": {
       "description": "The billing property.",
       "properties": {
         "productId": {
