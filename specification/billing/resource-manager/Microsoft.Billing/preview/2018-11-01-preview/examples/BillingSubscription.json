@@ -2,15 +2,15 @@
   "parameters": {
     "api-version": "2018-11-01-preview",
     "billingAccountName": "{billingAccountName}",
-    "invoiceSectionName": "12345",
-    "billingSubscriptionName": "billingSubscriptionId1",
+    "invoiceSectionName": "{invoiceSectionName}",
+    "billingSubscriptionName": "{billingSubscriptionName}",
     "$expand": "billingProfile"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000/billingSubscriptions/billinSubscriptionId1",
-        "name": "billingSubscriptionId1",
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}",
+        "name": "{billingSubscriptionName}",
         "type": "Microsoft.Billing/billingSubscriptions",
         "properties": {
           "displayName": "My Subscription",
@@ -24,7 +24,7 @@
             "currency": "USD",
             "value": 600
           },
-          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}",
           "invoiceSectionName": "Contoso operations invoiceSection",
           "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
           "billingProfileName": "Contoso operations billing",
