@@ -18,7 +18,7 @@
         }
     ],
     "x-ms-parameterized-host": {
-        "hostTemplate": "{Endpoint}/FormRecognizer/v1.0",
+        "hostTemplate": "{Endpoint}/FormRecognizer/v1.0/custom",
         "useSchemePrefix": false,
         "parameters": [
             {
@@ -30,8 +30,8 @@
         "/train": {
             "post": {
                 "summary": "Train a model to analyze using a set of documents of supported types.",
-                "description": "The train request must include a 'Source' parameter that is\r\n            either a Azure Storage Blob Container SAS Uri or a path to a locally mounted\r\n            drive. When local paths are specified, they must always follow the Linux/Unix style\r\n            absolute path convention and be rooted to the {Mounts:Input}\r\n            configuration setting value.",
-                "operationId": "Formrecognizer_Train",
+                "description": "The train request must include a 'Source' parameter that is             either a Azure Storage Blob Container SAS Uri or a path to a locally mounted             drive. When local paths are specified, they must always follow the Linux/Unix style             absolute path convention and be rooted to the {Mounts:Input}             configuration setting value.",
+                "operationId": "FormRecognizer_CustomTrain",
                 "consumes": [
                     "application/json-patch+json",
                     "application/json",
@@ -105,8 +105,8 @@
         "/model/{id}/keys": {
             "get": {
                 "summary": "Get keys of a model.",
-                "description": "<para>Use the API to retrieve the keys that were\r\n            extracted by the specified model.</para>",
-                "operationId": "Formrecognizer_GetKeysByModelId",
+                "description": "<para>Use the API to retrieve the keys that were             extracted by the specified model.</para>",
+                "operationId": "FormRecognizer_CustomGetKeysByModelId",
                 "consumes": [],
                 "produces": [],
                 "parameters": [
@@ -161,10 +161,10 @@
                 }
             }
         },
-        "/model/{id}": {
+        "/model/{id}/": {
             "get": {
                 "summary": "Get information about a model.",
-                "operationId": "Formrecognizer_GetModelById",
+                "operationId": "FormRecognizer_CustomGetModelById",
                 "consumes": [],
                 "produces": [],
                 "parameters": [
@@ -212,12 +212,10 @@
                     "$ref": "./examples/GetModelById.json"
                   }
                 }
-            }
-        },
-        "/model/{id}": {
+            },
             "delete": {
                 "summary": "Delete a model and all associated pre-processing data.",
-                "operationId": "Formrecognizer_DeleteModelById",
+                "operationId": "FormRecognizer_CustomDeleteModelById",
                 "consumes": [],
                 "produces": [],
                 "parameters": [
@@ -260,9 +258,9 @@
         },
         "/model/{id}/analyze": {
             "post": {
-                "summary": "Analyze a document to extract key-value pairs and table\r\ninformation.",
-                "description": "<para>The document to analyze must be must be of expected\r\n            media type - currently supported types are application/pdf, image/jpg or image/png.</para>",
-                "operationId": "Formrecognizer_Analyze",
+                "summary": "Analyze a document to extract key-value pairs and table information.",
+                "description": "<para>The document to analyze must be must be of expected             media type - currently supported types are application/pdf, image/jpg or image/png.</para>",
+                "operationId": "FormRecognizer_CustomAnalyze",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -422,25 +420,6 @@
                   "Get Model from id": {
                     "$ref": "./examples/Analyze.json"
                   }
-                }
-            }
-        },
-        "/status": {
-            "get": {
-                "operationId": "StatusGet",
-                "consumes": [],
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/ContainerStatus"
-                        }
-                    }
                 }
             }
         }
