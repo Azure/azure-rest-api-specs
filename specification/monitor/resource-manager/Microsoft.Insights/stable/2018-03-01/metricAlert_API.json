@@ -680,7 +680,7 @@
         }
       },
       "required": [ "criterionType", "name", "metricName", "timeAggregation" ],
-      "description": "The types of conditions for a multi resource alert"
+      "description": "The types of conditions for a multi resource alert."
     },
     "DynamicMetricCriteria" : {	 
       "x-ms-discriminator-value": "DynamicThresholdCriterion",
@@ -706,7 +706,7 @@
             "name": "DynamicThresholdOperator",
             "modelAsString": true
           },
-          "description": "The condition used to compare the metric value against the threshold"
+          "description": "The operator used to compare the metric value against the threshold."
         },
         "alertSensitivity": {
           "enum" : [
@@ -718,17 +718,17 @@
             "name" : "DynamicThresholdSensitivity",
             "modelAsString": true
           },
-          "description": "The sensitivity of the threshold"
+          "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern."
         },
         "failingPeriods" : {
           "type" : "object",
           "$ref"  : "#/definitions/DynamicThresholdFailingPeriods",
-          "description" : "Select minimum number of violations within the selected lookback time window required to raise an alert"
+          "description" : "The minimum number of violations required within the selected lookback time window required to raise an alert."
         },
         "ignoreDataBefore" : {
           "type" : "string",
           "format": "date-time",
-          "description" :"Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds"
+          "description" :"Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
         }
       },
       "description": "Criterion for dynamic threshold."
@@ -741,14 +741,14 @@
       "properties": {
         "numberOfEvaluationPeriods": {
           "type": "number",
-          "description": "Select how many t the lookback time window, "
+          "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points."
         },
         "minFailingPeriodsToAlert": {
           "type": "number",
-          "description": "The least number of violations"
+          "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods."
         }
       },
-      "description": "Select minimum number of violations within the selected lookback time window required to raise an alert"
+      "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
     }
   },
   "parameters": {
