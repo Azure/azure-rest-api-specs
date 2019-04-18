@@ -236,6 +236,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SignalR_RegenerateKey": {
             "$ref": "./examples/SignalR_RegenerateKey.json"
@@ -319,6 +322,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SignalR_CreateOrUpdate": {
             "$ref": "./examples/SignalR_CreateOrUpdate.json"
@@ -354,6 +360,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SignalR_Delete": {
             "$ref": "./examples/SignalR_Delete.json"
@@ -401,6 +410,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SignalR_Update": {
             "$ref": "./examples/SignalR_Update.json"
@@ -438,6 +450,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "SignalR_Restart": {
             "$ref": "./examples/SignalR_Restart.json"
@@ -777,18 +792,18 @@
       "x-ms-azure-resource": true
     },
     "ResourceSku": {
-      "description": "The billing information of the resource.(e.g. basic vs. standard)",
+      "description": "The billing information of the SignalR resource.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the SKU. This is typically a letter + number code, such as A0 or P3.  Required (if sku is specified)",
+          "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1",
           "type": "string"
         },
         "tier": {
-          "description": "Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead.",
+          "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead.",
           "enum": [
             "Free",
             "Basic",
@@ -802,16 +817,16 @@
           }
         },
         "size": {
-          "description": "Optional, string. When the name field is the combination of tier and some other value, this would be the standalone code.",
+          "description": "Optional string. For future use.",
           "type": "string"
         },
         "family": {
-          "description": "Optional, string. If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "description": "Optional string. For future use.",
           "type": "string"
         },
         "capacity": {
           "format": "int32",
-          "description": "Optional, integer. If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not \r\npossible for the resource this may be omitted.",
+          "description": "Optional, integer. The unit count of SignalR resource. 1 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free: 1\r\n    Standard: 1,2,5,10,20,50,100",
           "type": "integer"
         }
       }
@@ -880,6 +895,48 @@
         "hostNamePrefix": {
           "description": "Prefix for the hostName of the SignalR service. Retained for future use.\r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.service.signalr.net.",
           "type": "string"
+        },
+        "features": {
+          "description": "List of SignalR featureFlags. e.g. ServiceMode.\r\n\r\nWhen updating featureFlags, if certain featureFlag is not included in parameters, SignalR service will remain it unchanged.\r\nAnd when you GET a SignalR resource, the response will include only those featureFlags explicitly set by you. For other featureFlags,\r\nSignalR service will use its globally default value. Note that, default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRFeature"
+          }
+        }
+      }
+    },
+    "SignalRFeature": {
+      "description": "Feature of a SignalR resource, which controls the SignalR runtime behavior.",
+      "required": [
+        "flag",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "flag": {
+          "description": "Name of the feature. Required.",
+          "enum": [
+            "ServiceMode"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeatureFlags",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/en-us/azure/azure-signalr/ for allowed values.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "properties": {
+          "description": "Optional properties related to this feature.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-flatten": false
         }
       }
     },
@@ -1029,11 +1086,7 @@
       "in": "query",
       "description": "Client Api Version.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2018-03-01-preview",
-        "2018-10-01"
-      ]
+      "type": "string"
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
