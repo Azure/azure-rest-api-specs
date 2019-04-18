@@ -3902,23 +3902,28 @@
           "description": "List of paths to include in the indexing",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IncludedPaths"
+            "$ref": "#/definitions/IncludedPath"
           }
         },
         "excludedPaths": {
           "description": "List of paths to exclude from indexing",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Path"
+            "$ref": "#/definitions/ExcludedPath"
           }
         }
       }
     },
-    "Path": {
-      "type": "string",
-      "description": "A path. These typically start with root (/path)"
+    "ExcludedPath": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        }
+      }
     },
-    "IncludedPaths": {
+    "IncludedPath": {
       "type": "object",
       "description": "The paths that are included in indexing",
       "properties": {
@@ -4001,6 +4006,10 @@
           }
         }
       }
+    },
+    "Path": {
+      "type": "string",
+      "description": "A path. These typically start with root (/path)"
     },
     "UniqueKeyPolicy": {
       "type": "object",
