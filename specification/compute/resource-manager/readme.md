@@ -111,6 +111,10 @@ directive:
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
+      - $.definitions.ProximityPlacementGroupUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
       - $.definitions.VirtualMachineExtensionUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
