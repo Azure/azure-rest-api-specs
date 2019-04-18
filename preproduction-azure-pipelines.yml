@@ -1,4 +1,4 @@
-name: "Azure OpenAPI"
+name: "Preproduction CI for Azure Rest API speciications"
 
 trigger: none
 
@@ -30,6 +30,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
+  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
   - script: 'npm test -- test/syntax.js'
     displayName: 'Syntax validation'
 
@@ -41,6 +42,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
+  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
   - script: 'npm run tsc && node scripts/semanticValidation.js'
     displayName: 'Semantic Validation'
 
@@ -52,6 +54,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
+  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
   - script: 'npm run tsc && node scripts/modelValidation.js'
     displayName: 'Model Validation'
 
@@ -78,6 +81,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
+  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
   - script: 'npm run tsc && node scripts/breaking-change.js'
     displayName: 'Breaking Changes'
 
@@ -94,6 +98,7 @@ jobs:
       verbose: false
   - script: 'scripts/install-dotnet.sh'
     displayName: 'install .Net'
+  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
   - script: 'npm run tsc && node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
     displayName: 'LintDiff'
 
