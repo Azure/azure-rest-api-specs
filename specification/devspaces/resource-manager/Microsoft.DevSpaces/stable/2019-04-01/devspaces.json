@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-      "version": "2019-01-01-preview",
+      "version": "2019-04-01",
       "title": "DevSpacesManagement",
       "description": "Dev Spaces REST API"
     },
@@ -51,8 +51,19 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {}
+              "description": "The request was successful; response contains the container host mapping.",
+              "schema": {
+                "$ref": "#/definitions/ContainerHostMapping"
+              }
+            },
+            "204": {
+              "description": "The request was successful; container host mapping does not exist."
+            },
+            "default": {
+              "description": "Error response describing the reason for operation failure. 400 - BadRequest(Invalid container host resource ID.)",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           },
           "x-ms-examples": {
@@ -174,7 +185,7 @@
               }
             },
             "default": {
-              "description": "Error response describing the reason for operation failure. 404 - NotFound(Azure Dev Spaces Controller doesn't exist.), 400 - BadRequest(One or more creation parameters are invalid.)",
+              "description": "Error response describing the reason for operation failure. 400 - BadRequest(One or more creation parameters are invalid.), 409 - Conflict(Target container host is not in a supported state.)",
               "schema": {
                 "$ref": "#/definitions/ErrorResponse"
               }
@@ -219,7 +230,7 @@
               "description": "The request was successful; Azure Dev Spaces Controller does not exist."
             },
             "default": {
-              "description": "Error response describing the reason for operation failure. 409 - Conflict(Azure Dev Spaces Controller is already getting deleted.)",
+              "description": "Error response describing the reason for operation failure. 409 - Conflict(Azure Dev Spaces Controller is in a non-terminal state due to an ongoing operation.)",
               "schema": {
                 "$ref": "#/definitions/ErrorResponse"
               }
@@ -386,6 +397,15 @@
             },
             {
               "$ref": "#/parameters/NameParameter"
+            },
+            {
+              "name": "listConnectionDetailsParameters",
+              "in": "body",
+              "description": "Parameters for listing connection details of Azure Dev Spaces Controller.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ListConnectionDetailsParameters"
+              }
             }
           ],
           "responses": {
@@ -631,6 +651,18 @@
           }
         }
       },
+      "ListConnectionDetailsParameters": {
+        "description": "Parameters for listing connection details of an Azure Dev Spaces Controller.",
+        "required": [
+          "targetContainerHostResourceId"
+        ],
+        "properties": {
+          "targetContainerHostResourceId": {
+            "description": "Resource ID of the target container host mapped to the Azure Dev Spaces Controller.",
+            "type": "string"
+          }
+        }
+      },
       "ControllerConnectionDetailsList": {
         "properties": {
           "connectionDetailsList": {
@@ -644,11 +676,6 @@
       },
       "ControllerConnectionDetails": {
         "properties": {
-          "authKey": {
-            "description": "Authentication key for communicating with services.",
-            "type": "string",
-            "readOnly": true
-          },
           "orchestratorSpecificConnectionDetails": {
             "$ref": "#/definitions/OrchestratorSpecificConnectionDetails"
           }
