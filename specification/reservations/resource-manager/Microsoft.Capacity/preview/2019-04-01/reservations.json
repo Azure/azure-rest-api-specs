@@ -156,39 +156,6 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/reservations" : {
-      "get" : {
-        "summary" : "Get all `Reservation Purchase`s.",
-        "description" : "List of all the `Reservation`s that the user has access to in the current tenant.",
-        "operationId" : "Reservations_List",
-        "x-ms-examples" : {
-          "ReservationList" : {
-            "$ref" : "./examples/GetReservations.json"
-           }
-        },
-        "x-ms-pageable" : {
-          "nextLinkName" : "nextLink"
-        },
-        "parameters" : [ {
-          "$ref": "#/parameters/ApiVersionParameter"
-        } ],
-        "tags" : [ "Reservation" ],
-        "responses" : {
-          "200" : {
-            "description" : "List of `Reservation`s",
-            "schema" : {
-              "$ref" : "#/definitions/ReservationList"
-            }
-          },
-          "default" : {
-            "description" : "Unexpected error",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}" : {
       "put" : {
         "summary" : "Purchase `ReservationOrder`",
