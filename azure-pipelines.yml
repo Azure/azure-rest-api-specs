@@ -127,3 +127,18 @@ jobs:
   - script: echo $(NODE_OPTIONS)
   - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
     displayName: "Swagger to SDK script"
+
+- job: "Spellcheck"
+  condition: "not(variables['PRIVATE'])"
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  continueOnError: true
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'npm run spellcheck'
+    displayName: 'Run cSpell'
