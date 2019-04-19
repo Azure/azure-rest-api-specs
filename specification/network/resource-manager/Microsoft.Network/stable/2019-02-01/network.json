@@ -218,6 +218,54 @@
         "name":"ProvisioningState",
         "modelAsString":true
       }
+    },
+    "Access": {
+      "type": "string",
+      "description": "Access to be allowed or denied.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "Access",
+        "modelAsString": true
+      }
+    },
+    "AuthenticationMethod": {
+      "type": "string",
+      "description": "VPN client authentication method.",
+      "enum": [
+        "EAPTLS",
+        "EAPMSCHAPv2"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMethod",
+        "modelAsString": true
+      }
+    },
+    "IPAllocationMethod": {
+      "type": "string",
+      "description": "IP address allocation method.",
+      "enum": [
+        "Static",
+        "Dynamic"
+      ],
+      "x-ms-enum": {
+        "name": "IPAllocationMethod",
+        "modelAsString": true
+      }
+    },
+    "IPVersion": {
+      "type": "string",
+      "description": "IP address version.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IPVersion",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {

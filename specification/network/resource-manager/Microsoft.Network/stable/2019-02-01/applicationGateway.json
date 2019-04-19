@@ -1173,16 +1173,8 @@
           "description": "PrivateIPAddress of the network interface IP Configuration."
         },
         "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "PrivateIP allocation method.",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
         },
         "subnet": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -1338,16 +1330,8 @@
           "description": "The destination port on the backend."
         },
         "protocol": {
-          "type": "string",
-          "description": "The protocol used to communicate with the backend. Possible values are 'Http' and 'Https'.",
-          "enum": [
-            "Http",
-            "Https"
-          ],
-          "x-ms-enum": {
-            "name": "ApplicationGatewayProtocol",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApplicationGatewayProtocol",
+          "description": "The protocol used to communicate with the backend."
         },
         "cookieBasedAffinity": {
           "type": "string",
@@ -1453,16 +1437,8 @@
           "description": "Frontend port resource of an application gateway."
         },
         "protocol": {
-          "type": "string",
-          "description": "Protocol of the HTTP listener. Possible values are 'Http' and 'Https'.",
-          "enum": [
-            "Http",
-            "Https"
-          ],
-          "x-ms-enum": {
-            "name": "ApplicationGatewayProtocol",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApplicationGatewayProtocol",
+          "description": "Protocol of the HTTP listener."
         },
         "hostName": {
           "type": "string",
@@ -1579,16 +1555,8 @@
     "ApplicationGatewayProbePropertiesFormat": {
       "properties": {
         "protocol": {
-          "type": "string",
-          "description": "The protocol used for the probe. Possible values are 'Http' and 'Https'.",
-          "enum": [
-            "Http",
-            "Https"
-          ],
-          "x-ms-enum": {
-            "name": "ApplicationGatewayProtocol",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApplicationGatewayProtocol",
+          "description": "The protocol used for the probe."
         },
         "host": {
           "type": "string",
@@ -2679,6 +2647,18 @@
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewayRedirectType",
+        "modelAsString": true
+      }
+    },
+    "ApplicationGatewayProtocol": {
+      "type": "string",
+      "description": "Application Gateway protocol.",
+      "enum": [
+        "Http",
+        "Https"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayProtocol",
         "modelAsString": true
       }
     }

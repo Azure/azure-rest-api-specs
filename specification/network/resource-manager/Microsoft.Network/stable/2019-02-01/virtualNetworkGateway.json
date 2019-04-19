@@ -1578,16 +1578,8 @@
     "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "The private IP allocation method. Possible values are: 'Static' and 'Dynamic'.",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
         },
         "subnet": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -2045,16 +2037,8 @@
           }
         },
         "authenticationMethod": {
-          "type": "string",
-          "description": "VPN client Authentication Method. Possible values are: 'EAPTLS' and 'EAPMSCHAPv2'.",
-          "enum": [
-            "EAPTLS",
-            "EAPMSCHAPv2"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/AuthenticationMethod",
+          "description": "VPN client authentication method."
         },
         "radiusServerAuthCertificate": {
           "type": "string",
@@ -2120,18 +2104,8 @@
         },
         "connectionStatus": {
           "readOnly": true,
-          "type": "string",
-          "description": "Virtual network Gateway connection status",
-          "enum": [
-            "Unknown",
-            "Connecting",
-            "Connected",
-            "NotConnected"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionStatus",
+          "description": "Virtual Network Gateway connection status"
         },
         "ingressBytesTransferred": {
           "readOnly": true,
@@ -2172,18 +2146,8 @@
           "description": "The reference to local network gateway resource."
         },
         "connectionType": {
-          "type": "string",
-          "description": "Gateway connection type. Possible values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
-          "enum": [
-            "IPsec",
-            "Vnet2Vnet",
-            "ExpressRoute",
-            "VPNClient"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkGatewayConnectionType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionType",
+          "description": "Gateway connection type."
         },
         "connectionProtocol": {
           "$ref":  "#/definitions/ConnectionProtocol",
@@ -2200,18 +2164,8 @@
         },
         "connectionStatus": {
           "readOnly": true,
-          "type": "string",
-          "description": "Virtual network Gateway connection status. Possible values are 'Unknown', 'Connecting', 'Connected' and 'NotConnected'.",
-          "enum": [
-            "Unknown",
-            "Connecting",
-            "Connected",
-            "NotConnected"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionStatus",
+          "description": "Virtual Network Gateway connection status."
         },
         "tunnelConnectionStatus": {
           "readOnly": true,
@@ -2356,109 +2310,28 @@
           "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for a site to site VPN tunnel."
         },
         "ipsecEncryption": {
-          "type": "string",
-          "description": "The IPSec encryption algorithm (IKE phase 1).",
-          "enum": [
-            "None",
-            "DES",
-            "DES3",
-            "AES128",
-            "AES192",
-            "AES256",
-            "GCMAES128",
-            "GCMAES192",
-            "GCMAES256"
-          ],
-          "x-ms-enum": {
-            "name": "IpsecEncryption",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IpsecEncryption",
+          "description": "The IPSec encryption algorithm (IKE phase 1)."
         },
         "ipsecIntegrity": {
-          "type": "string",
-          "description": "The IPSec integrity algorithm (IKE phase 1).",
-          "enum": [
-            "MD5",
-            "SHA1",
-            "SHA256",
-            "GCMAES128",
-            "GCMAES192",
-            "GCMAES256"
-          ],
-          "x-ms-enum": {
-            "name": "IpsecIntegrity",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IpsecIntegrity",
+          "description": "The IPSec integrity algorithm (IKE phase 1)."
         },
         "ikeEncryption": {
-          "type": "string",
-          "description": "The IKE encryption algorithm (IKE phase 2).",
-          "enum": [
-            "DES",
-            "DES3",
-            "AES128",
-            "AES192",
-            "AES256",
-            "GCMAES256",
-            "GCMAES128"
-          ],
-          "x-ms-enum": {
-            "name": "IkeEncryption",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IkeEncryption",
+          "description": "The IKE encryption algorithm (IKE phase 2)."
         },
         "ikeIntegrity": {
-          "type": "string",
-          "description": "The IKE integrity algorithm (IKE phase 2).",
-          "enum": [
-            "MD5",
-            "SHA1",
-            "SHA256",
-            "SHA384",
-            "GCMAES256",
-            "GCMAES128"
-          ],
-          "x-ms-enum": {
-            "name": "IkeIntegrity",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IkeIntegrity",
+          "description": "The IKE integrity algorithm (IKE phase 2)."
         },
         "dhGroup": {
-          "type": "string",
-          "description": "The DH Groups used in IKE Phase 1 for initial SA.",
-          "enum": [
-            "None",
-            "DHGroup1",
-            "DHGroup2",
-            "DHGroup14",
-            "DHGroup2048",
-            "ECP256",
-            "ECP384",
-            "DHGroup24"
-          ],
-          "x-ms-enum": {
-            "name": "DhGroup",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DhGroup",
+          "description": "The DH Group used in IKE Phase 1 for initial SA."
         },
         "pfsGroup": {
-          "type": "string",
-          "description": "The Pfs Groups used in IKE Phase 2 for new child SA.",
-          "enum": [
-            "None",
-            "PFS1",
-            "PFS2",
-            "PFS2048",
-            "ECP256",
-            "ECP384",
-            "PFS24",
-            "PFS14",
-            "PFSMM"
-          ],
-          "x-ms-enum": {
-            "name": "PfsGroup",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PfsGroup",
+          "description": "The Pfs Group used in IKE Phase 2 for new child SA."
         }
       },
       "required": [
@@ -2498,109 +2371,28 @@
           "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for P2S client.."
         },
         "ipsecEncryption": {
-          "type": "string",
-          "description": "The IPSec encryption algorithm (IKE phase 1).",
-          "enum": [
-            "None",
-            "DES",
-            "DES3",
-            "AES128",
-            "AES192",
-            "AES256",
-            "GCMAES128",
-            "GCMAES192",
-            "GCMAES256"
-          ],
-          "x-ms-enum": {
-            "name": "IpsecEncryption",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IpsecEncryption",
+          "description": "The IPSec encryption algorithm (IKE phase 1)."
         },
         "ipsecIntegrity": {
-          "type": "string",
-          "description": "The IPSec integrity algorithm (IKE phase 1).",
-          "enum": [
-            "MD5",
-            "SHA1",
-            "SHA256",
-            "GCMAES128",
-            "GCMAES192",
-            "GCMAES256"
-          ],
-          "x-ms-enum": {
-            "name": "IpsecIntegrity",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IpsecIntegrity",
+          "description": "The IPSec integrity algorithm (IKE phase 1)."
         },
         "ikeEncryption": {
-          "type": "string",
-          "description": "The IKE encryption algorithm (IKE phase 2).",
-          "enum": [
-            "DES",
-            "DES3",
-            "AES128",
-            "AES192",
-            "AES256",
-            "GCMAES256",
-            "GCMAES128"
-          ],
-          "x-ms-enum": {
-            "name": "IkeEncryption",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IkeEncryption",
+          "description": "The IKE encryption algorithm (IKE phase 2)."
         },
         "ikeIntegrity": {
-          "type": "string",
-          "description": "The IKE integrity algorithm (IKE phase 2).",
-          "enum": [
-            "MD5",
-            "SHA1",
-            "SHA256",
-            "SHA384",
-            "GCMAES256",
-            "GCMAES128"
-          ],
-          "x-ms-enum": {
-            "name": "IkeIntegrity",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IkeIntegrity",
+          "description": "The IKE integrity algorithm (IKE phase 2)."
         },
         "dhGroup": {
-          "type": "string",
-          "description": "The DH Groups used in IKE Phase 1 for initial SA.",
-          "enum": [
-            "None",
-            "DHGroup1",
-            "DHGroup2",
-            "DHGroup14",
-            "DHGroup2048",
-            "ECP256",
-            "ECP384",
-            "DHGroup24"
-          ],
-          "x-ms-enum": {
-            "name": "DhGroup",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DhGroup",
+          "description": "The DH Group used in IKE Phase 1 for initial SA."
         },
         "pfsGroup": {
-          "type": "string",
-          "description": "The Pfs Groups used in IKE Phase 2 for new child SA.",
-          "enum": [
-            "None",
-            "PFS1",
-            "PFS2",
-            "PFS2048",
-            "ECP256",
-            "ECP384",
-            "PFS24",
-            "PFS14",
-            "PFSMM"
-          ],
-          "x-ms-enum": {
-            "name": "PfsGroup",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PfsGroup",
+          "description": "The Pfs Group used in IKE Phase 2 for new child SA."
         }
       },
       "required": [
@@ -2711,18 +2503,8 @@
           "description": "The reference to local network gateway resource."
         },
         "connectionType": {
-          "type": "string",
-          "description": "Gateway connection type. Possible values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
-          "enum": [
-            "IPsec",
-            "Vnet2Vnet",
-            "ExpressRoute",
-            "VPNClient"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkGatewayConnectionType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionType",
+          "description": "Gateway connection type."
         },
         "connectionProtocol": {
             "$ref":  "#/definitions/ConnectionProtocol",
@@ -2739,18 +2521,8 @@
         },
         "connectionStatus": {
           "readOnly": true,
-          "type": "string",
-          "description": "Virtual network Gateway connection status. Possible values are 'Unknown', 'Connecting', 'Connected' and 'NotConnected'.",
-          "enum": [
-            "Unknown",
-            "Connecting",
-            "Connected",
-            "NotConnected"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionStatus",
+          "description": "Virtual Network Gateway connection status."
         },
         "tunnelConnectionStatus": {
           "readOnly": true,
@@ -2866,6 +2638,139 @@
         }
       },
       "description": "Vpn device configuration script generation parameters"
+    },
+    "DhGroup": {
+      "type": "string",
+      "description": "The DH Groups used in IKE Phase 1 for initial SA.",
+      "enum": [
+        "None",
+        "DHGroup1",
+        "DHGroup2",
+        "DHGroup14",
+        "DHGroup2048",
+        "ECP256",
+        "ECP384",
+        "DHGroup24"
+      ],
+      "x-ms-enum": {
+        "name": "DhGroup",
+        "modelAsString": true
+      }
+    },
+    "IkeEncryption": {
+      "type": "string",
+      "description": "The IKE encryption algorithm (IKE phase 2).",
+      "enum": [
+        "DES",
+        "DES3",
+        "AES128",
+        "AES192",
+        "AES256",
+        "GCMAES256",
+        "GCMAES128"
+      ],
+      "x-ms-enum": {
+        "name": "IkeEncryption",
+        "modelAsString": true
+      }
+    },
+    "IkeIntegrity": {
+      "type": "string",
+      "description": "The IKE integrity algorithm (IKE phase 2).",
+      "enum": [
+        "MD5",
+        "SHA1",
+        "SHA256",
+        "SHA384",
+        "GCMAES256",
+        "GCMAES128"
+      ],
+      "x-ms-enum": {
+        "name": "IkeIntegrity",
+        "modelAsString": true
+      }
+    },
+    "IpsecEncryption": {
+      "type": "string",
+      "description": "The IPSec encryption algorithm (IKE phase 1).",
+      "enum": [
+        "None",
+        "DES",
+        "DES3",
+        "AES128",
+        "AES192",
+        "AES256",
+        "GCMAES128",
+        "GCMAES192",
+        "GCMAES256"
+      ],
+      "x-ms-enum": {
+        "name": "IpsecEncryption",
+        "modelAsString": true
+      }
+    },
+    "IpsecIntegrity": {
+      "type": "string",
+      "description": "The IPSec integrity algorithm (IKE phase 1).",
+      "enum": [
+        "MD5",
+        "SHA1",
+        "SHA256",
+        "GCMAES128",
+        "GCMAES192",
+        "GCMAES256"
+      ],
+      "x-ms-enum": {
+        "name": "IpsecIntegrity",
+        "modelAsString": true
+      }
+    },
+    "PfsGroup": {
+      "type": "string",
+      "description": "The Pfs Groups used in IKE Phase 2 for new child SA.",
+      "enum": [
+        "None",
+        "PFS1",
+        "PFS2",
+        "PFS2048",
+        "ECP256",
+        "ECP384",
+        "PFS24",
+        "PFS14",
+        "PFSMM"
+      ],
+      "x-ms-enum": {
+        "name": "PfsGroup",
+        "modelAsString": true
+      }
+    },
+    "VirtualNetworkGatewayConnectionStatus": {
+      "type": "string",
+      "description": "Virtual Network Gateway connection status.",
+      "enum": [
+        "Unknown",
+        "Connecting",
+        "Connected",
+        "NotConnected"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkGatewayConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "VirtualNetworkGatewayConnectionType": {
+      "type": "string",
+      "description": "Gateway connection type.",
+      "enum": [
+        "IPsec",
+        "Vnet2Vnet",
+        "ExpressRoute",
+        "VPNClient"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkGatewayConnectionType",
+        "modelAsString": true
+      }
     }
   }
 }

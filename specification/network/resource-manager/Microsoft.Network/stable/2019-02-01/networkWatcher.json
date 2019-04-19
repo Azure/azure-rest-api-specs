@@ -1935,18 +1935,7 @@
     "NetworkWatcherPropertiesFormat": {
       "properties": {
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Updating",
-            "Deleting",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
+          "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         }
       },
@@ -2076,15 +2065,7 @@
           "description": "The ID of the target resource to perform next-hop on."
         },
         "direction": {
-          "type": "string",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "x-ms-enum": {
-            "name": "Direction",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/Direction",
           "description": "The direction of the packet represented as a 5-tuple."
         },
         "protocol": {
@@ -2125,15 +2106,7 @@
       "description": "Results of IP flow verification on the target resource.",
       "properties": {
         "access": {
-          "type": "string",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "x-ms-enum": {
-            "name": "Access",
-            "modelAsString": true
-          },
+          "$ref": "./network.json#/definitions/Access",
           "description": "Indicates whether the traffic is allowed or denied."
         },
         "ruleName": {
@@ -2439,17 +2412,7 @@
     "PacketCaptureResultProperties": {
       "properties": {
         "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Updating",
-            "Deleting",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
+          "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the packet capture session."
         }
       },
@@ -3417,17 +3380,7 @@
     "ConnectionMonitorResultProperties": {
       "properties": {
         "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Updating",
-            "Deleting",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
+          "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the connection monitor."
         },
         "startTime": {
@@ -3585,16 +3538,8 @@
       ],
       "properties": {
         "direction": {
-          "type": "string",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "x-ms-enum": {
-            "name": "Direction",
-            "modelAsString": true
-          },
-          "description": "The direction of the traffic. Accepted values are 'Inbound' and 'Outbound'."
+          "$ref": "#/definitions/Direction",
+          "description": "The direction of the traffic."
         },
         "protocol": {
           "type": "string",
@@ -3644,16 +3589,8 @@
       "description": "Network configuration diagnostic result corresponded provided traffic query.",
       "properties": {
         "securityRuleAccessResult": {
-          "type": "string",
-          "description": "The network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'.",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityRuleAccess",
-            "modelAsString": true
-          }
+          "$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleAccess",
+          "description": "The network traffic is allowed or denied."
         },
         "evaluatedNetworkSecurityGroups": {
           "readOnly": true,
@@ -3730,6 +3667,18 @@
           "type": "boolean",
           "description": "Value indicating whether destination port is matched."
         }
+      }
+    },
+    "Direction": {
+      "type": "string",
+      "description": "The direction of the traffic.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "Direction",
+        "modelAsString": true
       }
     }
   }

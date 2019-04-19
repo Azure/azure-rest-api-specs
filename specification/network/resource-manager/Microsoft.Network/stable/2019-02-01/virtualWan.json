@@ -2938,18 +2938,6 @@
         "modelAsString": true
       }
     },
-    "Access": {
-      "type": "string",
-      "description": "Access to be allowed or denied.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "Access",
-        "modelAsString": true
-      }
-    },
     "OfficeTrafficCategory": {
       "type": "string",
       "description": "The office traffic category.",
@@ -3365,16 +3353,8 @@
     "P2SVpnProfileParameters": {
       "properties": {
         "authenticationMethod": {
-          "type": "string",
-          "description": "VPN client Authentication Method. Possible values are: 'EAPTLS' and 'EAPMSCHAPv2'.",
-          "enum": [
-            "EAPTLS",
-            "EAPMSCHAPv2"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/AuthenticationMethod",
+          "description": "VPN client authentication method."
         }
       },
       "description": "Vpn Client Parameters for package generation"

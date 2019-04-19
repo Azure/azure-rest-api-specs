@@ -841,28 +841,12 @@
           "description": "Private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "Defines how a private IP address is assigned. Possible values are: 'Static' and 'Dynamic'.",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
         },
         "privateIPAddressVersion": {
-          "type": "string",
-          "description": "Available from Api-Version 2016-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
-          "x-ms-enum": {
-            "name": "IPVersion",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/IPVersion",
+          "description": "Available from Api-Version 2016-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4."
         },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
@@ -1222,16 +1206,8 @@
           "description": "Expanded destination address prefix."
         },
         "access": {
-          "type": "string",
-          "description": "Whether network traffic is allowed or denied. Possible values are: 'Allow' and 'Deny'.",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityRuleAccess",
-            "modelAsString": true
-          }
+          "$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleAccess",
+          "description": "Whether network traffic is allowed or denied."
         },
         "priority": {
           "type": "integer",
@@ -1239,16 +1215,8 @@
           "description": "The priority of the rule."
         },
         "direction": {
-          "type": "string",
-          "description": "The direction of the rule. Possible values are: 'Inbound and Outbound'.",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityRuleDirection",
-            "modelAsString": true
-          }
+          "$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleDirection",
+          "description": "The direction of the rule."
         }
       },
       "description": "Effective network security rules."
@@ -1321,19 +1289,8 @@
           "description": "The IP address of the next hop of the effective route."
         },
         "nextHopType": {
-          "type": "string",
-          "description": "The type of Azure hop the packet should be sent to. Possible values are: 'VirtualNetworkGateway', 'VnetLocal', 'Internet', 'VirtualAppliance', and 'None'.",
-          "enum": [
-            "VirtualNetworkGateway",
-            "VnetLocal",
-            "Internet",
-            "VirtualAppliance",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "RouteNextHopType",
-            "modelAsString": true
-          }
+          "$ref": "./routeTable.json#/definitions/RouteNextHopType",
+          "description": "The type of Azure hop the packet should be sent to."
         }
       },
       "description": "Effective Route"
@@ -1362,16 +1319,8 @@
           "description": "The private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "The private IP allocation method. Possible values are 'Static' and 'Dynamic'.",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true
-          }
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The private IP adress allocation method."
         },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
