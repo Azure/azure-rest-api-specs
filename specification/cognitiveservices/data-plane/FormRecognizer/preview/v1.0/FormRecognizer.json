@@ -21,7 +21,7 @@
         "/train": {
             "post": {
                 "summary": "Train Model",
-                "description": "The train request must include a 'Source' parameter that is             either a Azure Storage Blob Container SAS Uri or a path to a locally mounted             drive. When local paths are specified, they must always follow the Linux/Unix style             absolute path convention and be rooted to the {Mounts:Input}             configuration setting value.",
+                "description": "The train request must include a 'Source' parameter that is\r\n            an Azure Storage blob container Uri that is that is accessible externally\r\n            (preferably a Shared Access Signature Uri) or valid path to data in a locally mounted drive.\r\n            When local paths are specified, they must follow the Linux/Unix path format and\r\n            absolute path convention rooted to the input mount configuration setting value.\r\n            Models are trained using documents that are of the following\r\n            content type - 'application/pdf', 'image/jpeg' and 'image/png'.",
                 "operationId": "FormRecognizer_CustomTrain",
                 "consumes": [
                     "application/json-patch+json",
@@ -68,7 +68,7 @@
         "/model/{id}/keys": {
             "get": {
                 "summary": "Get Keys",
-                "description": "<para>Use the API to retrieve the keys that were             extracted by the specified model.</para>",
+                "description": "<para>Use the API to retrieve the keys that were\r\n            extracted by the specified model.</para>",
                 "operationId": "FormRecognizer_CustomGetKeysByModelId",
                 "consumes": [],
                 "produces": [
@@ -105,7 +105,7 @@
         "/model/{id}/": {
             "get": {
                 "summary": "Get Model",
-				        "description": "Get information about a model.",
+                "description": "Get information about a model.",
                 "operationId": "FormRecognizer_CustomGetModelById",
                 "consumes": [],
                 "produces": [
@@ -140,7 +140,7 @@
             },
             "delete": {
                 "summary": "Delete Model",
-				        "description": "Delete model artifacts.",
+                "description": "Delete model artifacts.",
                 "operationId": "FormRecognizer_CustomDeleteModelById",
                 "consumes": [],
                 "produces": [
@@ -177,7 +177,7 @@
         "/model/{id}/analyze": {
             "post": {
                 "summary": "Analyze Form",
-                "description": "<para>The document to analyze must be must be of expected             media type - currently supported types are application/pdf, image/jpg or image/png.</para>",
+                "description": "<para>The document to analyze must be of a supported\r\n            content type - content type - 'application/pdf', 'image/jpeg' and 'image/png'.</para>",
                 "operationId": "FormRecognizer_CustomAnalyze",
                 "consumes": [
                     "multipart/form-data"
