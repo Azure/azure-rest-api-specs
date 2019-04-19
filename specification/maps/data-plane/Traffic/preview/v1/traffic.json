@@ -204,7 +204,7 @@
           },
           {
             "value": "pbf",
-            "description": "Vector graphic in the pbf format. Supports zoom levels 0 through 20."
+            "description": "Vector graphic in the pbf format. Supports zoom levels 0 through 22."
           }
         ]
       },
@@ -348,7 +348,6 @@
           }
         },
         "produces": [
-          "image/png",
           "application/json"
         ]
       }
@@ -571,7 +570,10 @@
           "500": {
             "$ref": "#/responses/500"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/traffic/incident/detail/{format}": {
@@ -890,37 +892,37 @@
           "readOnly": true,
           "properties": {
             "frc": {
-              "description": "FRC property",
+              "description": "Functional Road Class. This indicates the road type:\n  0: Motorway, freeway or other major road.\n  1: Major road, less important than a motorway.\n  2: Other major road.\n  3: Secondary road.\n  4: Local connecting road.\n  5: Local road of high importance.\n  6: Local road.",
               "type": "string",
               "readOnly": true
             },
             "currentSpeed": {
-              "description": "Current Speed property",
+              "description": "The current average speed at the selected point, in the units requested. This is calculated from the currentTravelTime and the length of the selected segment.",
               "type": "integer",
               "readOnly": true
             },
             "freeFlowSpeed": {
-              "description": "Free Flow Speed property",
+              "description": "The free flow speed expected under ideal conditions, expressed in the units requested. This is related to the freeFlowTravelTime.",
               "type": "integer",
               "readOnly": true
             },
             "currentTravelTime": {
-              "description": "Current Travel Time property",
+              "description": "Current travel time in seconds based on fused real-time measurements between the defined locations in the specified direction.",
               "type": "integer",
               "readOnly": true
             },
             "freeFlowTravelTime": {
-              "description": "Free Flow Travel Time property",
+              "description": "The travel time in seconds which would be expected under ideal free flow conditions.",
               "type": "integer",
               "readOnly": true
             },
             "confidence": {
-              "description": "Confidence property",
+              "description": "The confidence is a measure of the quality of the provided travel time and speed. A value of 1 means full confidence, that the response contains the highest quality data.  Lower values indicate the degree that the response may vary from the actual conditions on the road. Any value greater than 0.6 means the information was based on real-time probe input. A value of 0.5 means the reported speed is based on historical info.   A value between 0.5 and 0.6 has a calculated weighted average between historical and live speeds.",
               "type": "number",
               "readOnly": true
             },
             "coordinates": {
-              "description": "Coordinates of the result",
+              "description": "Includes the coordinates describing the shape of the segment. Coordinates are shifted from the road depending on the zoom level to support high quality visualization in every scale.",
               "type": "object",
               "properties": {
                 "coordinate": {
@@ -934,7 +936,7 @@
               }
             },
             "@version": {
-              "description": "@Version property",
+              "description": "This indicates the software version that generated the response.",
               "type": "string",
               "readOnly": true
             },
