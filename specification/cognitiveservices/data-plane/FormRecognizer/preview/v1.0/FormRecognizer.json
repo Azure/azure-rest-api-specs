@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-      "version": "v1",
+      "version": "v1.0-preview",
       "title": "Cognitive Service Form Recognizer API V1 (Preview)",
       "description": "Extracts information from forms and images into structured data based on a model created by a set of representative training forms."
     },
@@ -38,7 +38,7 @@
                         "name": "trainRequest",
                         "in": "body",
                         "description": "Request object for training.",
-                        "required": false,
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/TrainRequest"
                         }
@@ -49,40 +49,12 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/TrainResponse"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "modelId": "e390d2c0-0d6a-4a65-8277-597c0e863997",
-                                "trainingDocuments": [
-                                    {
-                                        "pages": 1,
-                                        "errors": [],
-                                        "status": "success"
-                                    }
-                                ],
-                                "errors": [
-                                    {
-                                        "errorMessage": "Could not use 0.pdf for training."
-                                    }
-                                ]
-                            }
                         }
                     },
                     "default": {
                         "description": "Response entity accompanying non-successful responses containing additional details about the error.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "error": {
-                                    "code": "BadArgument",
-                                    "innerError": {
-                                        "requestId": "00000000-0000-0000-0000-000000000000"
-                                    },
-                                    "message": "Request body is invalid."
-                                }
-                            }
                         }
                     }
                 },
@@ -99,7 +71,10 @@
                 "description": "<para>Use the API to retrieve the keys that were             extracted by the specified model.</para>",
                 "operationId": "FormRecognizer_CustomGetKeysByModelId",
                 "consumes": [],
-                "produces": [],
+                "produces": [
+                  "application/json",
+                  "text/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -111,37 +86,12 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success",
-                        "examples": {
-                            "application/json": {
-                                "clusters": {
-                                    "0": [
-                                        "Invoice",
-                                        "123112313"
-                                    ],
-                                    "1": [
-                                        "Please remit payment to:",
-                                        "Microsoft"
-                                    ]
-                                }
-                            }
-                        }
+                        "description": "Success"
                     },
                     "default": {
                         "description": "Response entity accompanying non-successful responses containing additional details about the error.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "error": {
-                                    "code": "BadArgument",
-                                    "innerError": {
-                                        "requestId": "00000000-0000-0000-0000-000000000000"
-                                    },
-                                    "message": "Request body is invalid."
-                                }
-                            }
                         }
                     }
                 },
@@ -155,10 +105,13 @@
         "/model/{id}/": {
             "get": {
                 "summary": "Get Model",
-				"description": "Get information about a model.",
+				        "description": "Get information about a model.",
                 "operationId": "FormRecognizer_CustomGetModelById",
                 "consumes": [],
-                "produces": [],
+                "produces": [
+                  "application/json",
+                  "text/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -170,32 +123,12 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success",
-                        "examples": {
-                            "application/json": {
-                                "modelId": "708846bd-1fb2-49e1-a12f-9306e97bd473",
-                                "version": "1",
-                                "status": "ready",
-                                "createdDateTime": "2019-04-17T16:04:35.4859654Z",
-                                "lastUpdatedDateTime": "0001-01-01T00:00:00"
-                            }
-                        }
+                        "description": "Success"
                     },
                     "default": {
                         "description": "Response entity accompanying non-successful responses containing additional details about the error.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "error": {
-                                    "code": "BadArgument",
-                                    "innerError": {
-                                        "requestId": "00000000-0000-0000-0000-000000000000"
-                                    },
-                                    "message": "Request body is invalid."
-                                }
-                            }
                         }
                     }
                 },
@@ -207,10 +140,13 @@
             },
             "delete": {
                 "summary": "Delete Model",
-				"description": "Delete a model and all associated pre-processing data.",
+				        "description": "Delete model artifacts.",
                 "operationId": "FormRecognizer_CustomDeleteModelById",
                 "consumes": [],
-                "produces": [],
+                "produces": [
+                  "application/json",
+                  "text/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -222,23 +158,12 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Success"
+                        "description": "Successfully removed model artifacts."
                     },
                     "default": {
                         "description": "Response entity accompanying non-successful responses containing additional details about the error.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "error": {
-                                    "code": "BadArgument",
-                                    "innerError": {
-                                        "requestId": "00000000-0000-0000-0000-000000000000"
-                                    },
-                                    "message": "Request body is invalid."
-                                }
-                            }
                         }
                     }
                 },
@@ -251,7 +176,7 @@
         },
         "/model/{id}/analyze": {
             "post": {
-                "summary": "Analyze document",
+                "summary": "Analyze Form",
                 "description": "<para>The document to analyze must be must be of expected             media type - currently supported types are application/pdf, image/jpg or image/png.</para>",
                 "operationId": "FormRecognizer_CustomAnalyze",
                 "consumes": [
@@ -284,7 +209,7 @@
                     {
                         "name": "form",
                         "in": "formData",
-                        "description": "Upload image or pdf content for processing.",
+                        "description": "Upload content of type 'application/pdf', 'image/jpeg' or 'image/png' for processing.",
                         "required": false,
                         "type": "file"
                     }
@@ -294,118 +219,12 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/AnalyzeResponse"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "status": "success",
-                                "pages": [
-                                    {
-                                        "number": 1,
-                                        "height": 800,
-                                        "width": 600,
-                                        "clusterId": 0,
-                                        "keyValuePairs": [
-                                            {
-                                                "key": [
-                                                    {
-                                                        "text": "Address:",
-                                                        "boundingBox": [
-                                                            57.4,
-                                                            683.1,
-                                                            100.5,
-                                                            683.1,
-                                                            100.5,
-                                                            673.7,
-                                                            57.4,
-                                                            673.7
-                                                        ]
-                                                    }
-                                                ],
-                                                "value": [
-                                                    {
-                                                        "text": "1 Microsoft Way",
-                                                        "boundingBox": [
-                                                            57.4,
-                                                            672.2,
-                                                            126.6,
-                                                            672.2,
-                                                            126.6,
-                                                            658.9,
-                                                            57.4,
-                                                            658.9
-                                                        ],
-                                                        "confidence": 0.9
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "tables": [
-                                            {
-                                                "id": "table_0",
-                                                "columns": [
-                                                    {
-                                                        "header": [
-                                                            {
-                                                                "text": "InvoiceNumber",
-                                                                "boundingBox": [
-                                                                    38.5,
-                                                                    585.2,
-                                                                    113.4,
-                                                                    585.2,
-                                                                    113.4,
-                                                                    575.8,
-                                                                    38.5,
-                                                                    575.8
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "entries": [
-                                                            [
-                                                                {
-                                                                    "text": "38772349",
-                                                                    "boundingBox": [
-                                                                        305.6,
-                                                                        692.1,
-                                                                        403.5,
-                                                                        692.1,
-                                                                        403.5,
-                                                                        684.2,
-                                                                        305.6,
-                                                                        684.2
-                                                                    ],
-                                                                    "confidence": 0.9
-                                                                }
-                                                            ]
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "errors": [
-                                    {
-                                        "errorMessage": "Page1: Field not extracted"
-                                    }
-                                ]
-                            }
                         }
                     },
                     "default": {
                         "description": "Response entity accompanying non-successful responses containing additional details about the error.",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "error": {
-                                    "code": "BadArgument",
-                                    "innerError": {
-                                        "requestId": "00000000-0000-0000-0000-000000000000"
-                                    },
-                                    "message": "Request body is invalid."
-                                }
-                            }
                         }
                     }
                 },
@@ -629,10 +448,10 @@
             "description": "Extraction information about a table\r\ncontained in a page.",
             "type": "object",
             "properties": {
-                "id": {
-                    "description": "Table identifier.",
-                    "type": "string"
-                },
+              "id": {
+                "description": "Table identifier.",
+                "type": "string"
+              },
                 "columns": {
                     "description": "List of columns contained in the table.",
                     "uniqueItems": false,
