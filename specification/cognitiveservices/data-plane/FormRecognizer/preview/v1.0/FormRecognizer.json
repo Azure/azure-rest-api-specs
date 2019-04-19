@@ -21,7 +21,7 @@
         "/train": {
             "post": {
                 "summary": "Train Model",
-                "description": "The train request must include a 'Source' parameter that is\r\n            an Azure Storage blob container Uri that is that is accessible externally\r\n            (preferably a Shared Access Signature Uri) or valid path to data in a locally mounted drive.\r\n            When local paths are specified, they must follow the Linux/Unix path format and\r\n            absolute path convention rooted to the input mount configuration setting value.\r\n            Models are trained using documents that are of the following\r\n            content type - 'application/pdf', 'image/jpeg' and 'image/png'.",
+                "description": "The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value. For e.g., if {Mounts:Input} configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained are expected to be under the source. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'. Other content is ignored when training a model.",
                 "operationId": "FormRecognizer_CustomTrain",
                 "consumes": [
                     "application/json-patch+json",
