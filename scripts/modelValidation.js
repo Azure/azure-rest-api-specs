@@ -37,4 +37,4 @@ async function main() {
   process.exitCode = result
 }
 
-main()
+main().catch(e => { console.log(e); process.exit(1); })
