@@ -777,16 +777,8 @@
     "ApplicationGatewayOnDemandProbe": {
       "properties": {
         "protocol": {
-          "type": "string",
-          "description": "The protocol used for the probe. Possible values are 'Http' and 'Https'.",
-          "enum": [
-            "Http",
-            "Https"
-          ],
-          "x-ms-enum": {
-            "name": "ApplicationGatewayProtocol",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApplicationGatewayProtocol",
+          "description": "The protocol used for the probe."
         },
         "host": {
           "type": "string",
