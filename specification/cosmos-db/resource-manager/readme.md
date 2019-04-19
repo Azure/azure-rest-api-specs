@@ -50,10 +50,78 @@ directive:
     from: cosmos-db.json
     where: $.definitions.DatabaseAccountCreateUpdateParameters
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.SqlDatabase
+    reason: The SqlDatabase doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.Container
+    reason: The Container doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.MongoDatabase
+    reason: The MongoDatabase doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.MongoCollection
+    reason: The MongoCollection doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.Table
+    reason: The Table doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.CassandraKeyspace
+    reason: The CassandraKeyspace doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.CassandraTable
+    reason: The CassandraTable doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabase
+    reason: The GremlinDatabase doesn't support Patch operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
-    reason: The Metrics API has has a property name with a leading underscore character
+    reason: The Metrics API has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._rid
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._ts
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._self
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._etag
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.SqlDatabaseProperties.properties._colls
+    reason: The database has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.SqlDatabaseProperties.properties._users
+    reason: The database has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabaseProperties.properties._rid
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabaseProperties.properties._ts
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabaseProperties.properties._etag
+    reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P10
