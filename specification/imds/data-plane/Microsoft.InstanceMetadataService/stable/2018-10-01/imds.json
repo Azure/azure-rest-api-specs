@@ -1,4 +1,4 @@
-{   
+{
     "swagger": "2.0",
     "info": {
         "title": "InstanceMetadataClient",
@@ -45,7 +45,7 @@
                     },
                     {
                         "$ref": "#/parameters/MetadataParameter"
-                    }   
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -105,7 +105,7 @@
                 },
                 "x-ms-examples": {
                     "Get Instance Metadata for the VM": {
-                        "$ref": "./examples/getinstancemetadata.json"
+                        "$ref": "./examples/getInstanceMetadata.json"
                     }
                 }
             }
@@ -127,7 +127,7 @@
                     },
                     {
                         "$ref": "#/parameters/MetadataParameter"
-                    } 
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -187,7 +187,7 @@
                 },
                 "x-ms-examples": {
                     "Get Attested Data for the VM": {
-                        "$ref": "./examples/getattesteddata.json"
+                        "$ref": "./examples/getAttestedData.json"
                     }
                 }
             }
@@ -305,7 +305,7 @@
                 },
                 "x-ms-examples": {
                     "Get Identity Token for the VM": {
-                        "$ref": "./examples/getidentitytoken.json"
+                        "$ref": "./examples/getIdentityToken.json"
                     }
                 }
             }
@@ -374,7 +374,7 @@
                 },
                 "x-ms-examples": {
                     "Get Identity Info for the VM": {
-                        "$ref": "./examples/getidentityinfo.json"
+                        "$ref": "./examples/getIdentityInfo.json"
                     }
                 }
             }
@@ -435,7 +435,7 @@
                 "publisher": {
                     "type": "string",
                     "description": "This is the publisher of the VM image."
-                },          
+                },
                 "resourceGroupName": {
                     "type": "string",
                     "description": "This is the resource group for the VM."
@@ -443,7 +443,7 @@
                 "sku": {
                     "type": "string",
                     "description": "This is the specific SKU for the VM image."
-                },          
+                },
                 "subscriptionId": {
                     "type": "string",
                     "description": "This is the Azure subscription for the VM."
@@ -460,7 +460,7 @@
                     "type": "string",
                     "description": "This is the unique identifier for the VM."
                 },
-                "vmScaleSetName": { 
+                "vmScaleSetName": {
                     "type": "string",
                     "description": "This is the resource name of the VMSS."
                 },
@@ -472,7 +472,7 @@
                     "type":"string",
                     "description":"This is the availability zone of the VM."
                 }
-            }, 
+            },
             "description": "Compute Metadata"
         },
         "Network": {
@@ -485,7 +485,7 @@
                         "type": "object",
                         "$ref": "#/definitions/NetworkInterface"
                     }
-                }            
+                }
             },
             "description": "Network Metadata"
         },
@@ -496,8 +496,8 @@
                 "ipv4": {
                     "type":"object",
                     "description": "This contains the IPv4 address.",
-                    "properties": { 
-                        "ipAddress": { 
+                    "properties": {
+                        "ipAddress": {
                             "type":"array",
                             "description": "This is the IP address",
                             "items": {
@@ -520,8 +520,8 @@
                 "ipv6": {
                     "type":"object",
                     "description": "This contains the IPv6 address.",
-                    "properties": { 
-                        "ipAddress": { 
+                    "properties": {
+                        "ipAddress": {
                             "type":"array",
                             "description": "This is the IP address",
                             "items": {
@@ -573,12 +573,12 @@
         "Ipv4Properties": {
             "type": "object",
             "description": "This contains the IPv4 properties.",
-            "properties": { 
+            "properties": {
                 "privateIpAddress": {
                     "type":"string",
                     "description":"This is the private IP address assigned to the interface."
                  },
-                "publicIpAddress": { 
+                "publicIpAddress": {
                     "type":"string",
                     "description":"This is the public IP address assigned to the interface."
                 }
@@ -587,7 +587,7 @@
         "Ipv6Properties": {
             "type": "object",
             "description": "This contains the IPv6 properties.",
-            "properties": { 
+            "properties": {
                 "privateIpAddress": {
                     "type":"string",
                     "description":"This is the private IPv6 address assigned to the interface."
@@ -597,12 +597,12 @@
         "SubnetProperties": {
             "type": "object",
             "description": "This contains the properties of the subnet.",
-            "properties": { 
+            "properties": {
                 "address": {
                     "type":"string",
                     "description":"This is the address range of the subnet."
                 },
-                "prefix": { 
+                "prefix": {
                     "type":"string",
                     "description":"This is the prefix of the subnet."
                 }
@@ -618,7 +618,7 @@
                 },
                 "network": {
                     "$ref": "#/definitions/Network",
-                    "description": "Network Metadata" 
+                    "description": "Network Metadata"
                 }
             }
         },
@@ -632,7 +632,7 @@
                 },
                 "encoding": {
                     "type": "string",
-                    "description": "This is the encoding scheme of the signature."               
+                    "description": "This is the encoding scheme of the signature."
                 }
             }
         },
@@ -732,7 +732,7 @@
                     "type": "string",
                     "description": "This is the AAD tenantId of the identity of the caller."
                 }
-            }           
+            }
         }
     },
     "parameters": {

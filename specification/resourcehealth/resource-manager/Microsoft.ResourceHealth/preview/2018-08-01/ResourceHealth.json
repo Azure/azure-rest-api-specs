@@ -462,13 +462,26 @@
             },
             "level": {
               "type": "string",
-              "description": "Level of event.",
+              "description": "Level of insight.",
               "enum": [
                 "Critical",
                 "Warning"
               ],
               "x-ms-enum": {
                 "name": "LevelValues",
+                "modelAsString": true
+              }
+            },
+            "eventLevel": {
+              "type": "string",
+              "description": "Level of event.",
+              "enum": [
+                "Critical",
+                "Warning",
+                "Informational"
+              ],
+              "x-ms-enum": {
+                "name": "EventLevelValues",
                 "modelAsString": true
               }
             },
@@ -510,11 +523,7 @@
               "type": "object",
               "description": "Recommended actions of event.",
               "properties": {
-                "groupId": {
-                  "type": "integer",
-                  "description": "Recommended action group Id for the service health event."
-                },
-                "title": {
+                "message": {
                   "type": "string",
                   "description": "Recommended action title for the service health event."
                 },
@@ -522,8 +531,18 @@
                   "type": "array",
                   "description": "Recommended actions for the service health event.",
                   "items": {
-                    "type": "string",
-                    "description": "Recommended action for the service health event."
+                    "type": "object",
+                    "description": "Recommended action for the service health event.",
+                    "properties": {
+                      "groupId": {
+                        "type": "integer",
+                        "description": "Recommended action group Id for the service health event."
+                      },
+                      "actionText": {
+                        "type": "string",
+                        "description": "Recommended action text"
+                      }
+                    }
                   }
                 },
                 "localeCode": {
@@ -538,6 +557,31 @@
               "items": {
                 "$ref": "#/definitions/faq"
               }
+            },
+            "isHIR": {
+              "type": "boolean",
+              "description": "It provides information if the event is High incident rate event or not."
+            },
+            "enableMicrosoftSupport": {
+              "type": "boolean",
+              "description": "Tells if we want to enable or disable Microsoft Support for this event."
+            },
+            "enableChatWithUs": {
+              "type": "boolean",
+              "description": "Tells if we want to enable or disable Microsoft Support for this event."
+            },
+            "priority": {
+              "type": "integer",
+              "description": "Priority level of the event."
+            },
+            "lastUpdateTime": {
+              "type": "string",
+              "description": "It provides the Timestamp for when the health impacting event was last updated.",
+              "format": "date-time"
+            },
+            "hirStage": {
+              "type": "string",
+              "description": "Stage for HIR Document"
             }
           }
         }
