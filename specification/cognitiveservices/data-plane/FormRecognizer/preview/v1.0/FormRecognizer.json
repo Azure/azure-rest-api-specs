@@ -21,7 +21,7 @@
         "/train": {
             "post": {
                 "summary": "Train Model",
-                "description": "The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value. For e.g., if {Mounts:Input} configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained are expected to be under the source. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'. Other content is ignored when training a model.",
+                "description": "The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value. For e.g., if {Mounts:Input} configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained are expected to be under the source. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'. Other content is ignored when training a model. The response contains information about documents that were used in training the model along with document level information of errors that were encountered that might have prevented them from being used in model generation. A separate list of errors is also returned to indicate if any error occurred during the operation itself.",
                 "operationId": "FormRecognizer_CustomTrain",
                 "consumes": [
                     "application/json-patch+json",
@@ -177,7 +177,7 @@
         "/model/{id}/analyze": {
             "post": {
                 "summary": "Analyze Form",
-                "description": "<para>The document to analyze must be of a supported\r\n            content type - content type - 'application/pdf', 'image/jpeg' and 'image/png'.</para>",
+                "description": "The document to analyze must be of a supported content type - 'application/pdf', 'image/jpeg' or 'image/png'. The response contains not just the extracted information of the analyzed form but also information about content that was not extracted along with a reason.",
                 "operationId": "FormRecognizer_CustomAnalyze",
                 "consumes": [
                     "multipart/form-data"
