@@ -30,7 +30,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
-  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
+  - script: 'npm install -D @azure/rest-api-specs-scripts@0.2.13'
   - script: 'npm test -- test/syntax.js'
     displayName: 'Syntax validation'
 
@@ -42,7 +42,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
-  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
+  - script: 'npm install -D @azure/rest-api-specs-scripts@0.2.13'
   - script: 'npm run tsc && node scripts/semanticValidation.js'
     displayName: 'Semantic Validation'
 
@@ -54,7 +54,7 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
-  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
+  - script: 'npm install -D @azure/rest-api-specs-scripts@0.2.13'
   - script: 'npm run tsc && node scripts/modelValidation.js'
     displayName: 'Model Validation'
 
@@ -71,7 +71,6 @@ jobs:
     displayName: 'Avocado'
 
 - job: "BreakingChange"
-  condition: "not(variables['PRIVATE'])"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
@@ -81,12 +80,11 @@ jobs:
     displayName: 'npm install'
     inputs:
       verbose: false
-  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
+  - script: 'npm install -D @azure/rest-api-specs-scripts@0.2.13'
   - script: 'npm run tsc && node scripts/breaking-change.js'
     displayName: 'Breaking Changes'
 
 - job: "LintDiff"
-  condition: "not(variables['PRIVATE'])"
   variables:
     NODE_OPTIONS: '--max-old-space-size=8192'
   pool:
@@ -98,7 +96,7 @@ jobs:
       verbose: false
   - script: 'scripts/install-dotnet.sh'
     displayName: 'install .Net'
-  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/diff'
+  - script: 'npm install -D @azure/rest-api-specs-scripts@0.2.13'
   - script: 'npm run tsc && node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
     displayName: 'LintDiff'
 
