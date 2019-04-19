@@ -3,10 +3,10 @@
 
 import { utils } from '@azure/rest-api-specs-scripts'
 import * as oav from 'oav'
-import * as avocado from '@azure/avocado';
+import { devOps, cli } from '@azure/avocado';
 
 async function main() {
-  const pr = await avocado.createPullRequestProperties(avocado.defaultConfig())
+  const pr = await devOps.createPullRequestProperties(cli.defaultConfig())
   const swaggersToProcess = await utils.getFilesChangedInPR(pr);
   // Useful when debugging a test for a particular swagger.
   // Just update the regex. That will return an array of filtered items.
