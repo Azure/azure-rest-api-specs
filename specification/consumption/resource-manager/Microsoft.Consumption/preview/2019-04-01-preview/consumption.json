@@ -152,7 +152,7 @@
       }
     },
     "/{scope}/providers/Microsoft.Consumption/usageDetails/download": {
-      "get": {
+      "post": {
         "tags": [
           "UsageDetails"
         ],
@@ -1565,7 +1565,7 @@
           "type": "string",
           "readOnly": true
         },
-        "expiryTime": {
+        "validTill": {
           "description": "The time in UTC at which this download URL will expire.",
           "type": "string",
           "readOnly": true
@@ -3137,10 +3137,35 @@
     "metricParameter": {
       "name": "metric",
       "in": "query",
-      "description": "Allows to select different type of cost/usage records. Allowed values: Usage, ActualCost, AmortizedCost. Default is ActualCost.",
+      "description": "Allows to select different type of cost/usage records.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "daily",
+        "monthly"
+      ],
+      "x-ms-enum": {
+        "name": "metrictype",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "usage",
+            "description": "Usage data.",
+            "name": "UsageMetricType"
+          },
+          {
+            "value": "actualcost",
+            "description": "Actual cost data.",
+            "name": "ActualCostMetricType"
+          },
+          {
+            "value": "amortizedcost",
+            "description": "Amortized cost data.",
+            "name": "AmortizedCostMetricType"
+          }
+        ]
+      }
     }
   }
 }
