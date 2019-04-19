@@ -24,7 +24,6 @@ script:
     if [[ $MODE == 'BreakingChange' ]]; then
       scripts/install-dotnet.sh
       npm install
-      npm install -D Azure/rest-api-specs-scripts#sergey/diff
       npm run tsc
       node scripts/breaking-change.js
     fi
