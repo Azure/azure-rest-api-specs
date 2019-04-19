@@ -45,7 +45,7 @@ csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.Vision.formrecognizer
+  namespace: Microsoft.Azure.CognitiveServices.Vision.FormRecognizer
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/FormRecognizer/Generated
   clear-output-folder: true
 ```
