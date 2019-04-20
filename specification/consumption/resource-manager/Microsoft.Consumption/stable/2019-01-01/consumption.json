@@ -157,6 +157,67 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Consumption/usageDetails/download": {
+      "post": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "x-ms-examples": {
+          "UsageDetailsDownload": {
+            "$ref": "./examples/UsageDetailsDownload.json"
+          }
+        },
+        "operationId": "UsageDetailsList_Download",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Download usage details data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsDownloadResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "To get the progress of the operation, call GET operation on the URL in Azure-AsyncOperation header field.",
+                "type": "string"
+              },
+              "OData-EntityId": {
+                "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
         "tags": [
@@ -1405,6 +1466,37 @@
         },
         "additionalProperties": {
           "description": "Additional details of this usage item. By default this is not populated, unless it's specified in $expand.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UsageDetailsDownloadResponse": {
+      "description": "Download response of Usage Details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DownloadUrl",
+          "title": "Download url properties."
+        }
+      }
+    },
+    "DownloadUrl": {
+      "description": "A secure URL that can be used to download a an entity until the URL expires.",
+      "properties": {
+        "downloadUrl": {
+          "description": "The URL to the csv file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "validTill": {
+          "description": "The time in UTC at which this download URL will expire.",
           "type": "string",
           "readOnly": true
         }
