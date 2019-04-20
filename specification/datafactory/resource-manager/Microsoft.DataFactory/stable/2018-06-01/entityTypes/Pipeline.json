@@ -277,7 +277,7 @@
           "description": "Redirect incompatible row settings when EnableSkipIncompatibleRow is true.",
           "$ref": "#/definitions/RedirectIncompatibleRowSettings"
         },
-        "preserveRules":{
+        "preserveRules": {
           "type": "array",
           "items": {
             "type": "object",
@@ -3219,6 +3219,53 @@
         "activities"
       ]
     },
+    "ValidationActivity": {
+      "x-ms-discriminator-value": "Validation",
+      "description": "This activity verifies that an external resource exists.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Validation activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ValidationActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ValidationActivityTypeProperties": {
+      "description": "Validation activity properties.",
+      "properties": {
+        "timeout": {
+          "type": "object",
+          "description": "Specifies the timeout for the activity to run. If there is no value specified, it takes the value of TimeSpan.FromDays(7) which is 1 week as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "sleep": {
+          "type": "object",
+          "description": "A delay in seconds between validation attempts. If no value is specified, 10 seconds will be used as the default. Type: integer (or Expression with resultType integer)."
+        },
+        "minimumSize": {
+          "type": "object",
+          "description": "Can be used if dataset points to a file. The file must be greater than or equal in size to the value specified. Type: integer (or Expression with resultType integer)."
+        },
+        "childItems": {
+          "type": "object",
+          "description": "Can be used if dataset points to a folder. If set to true, the folder must have at least one file. If set to false, the folder must be empty. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dataset": {
+          "description": "Validation activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
+      ]
+    },
     "FilterActivity": {
       "x-ms-discriminator-value": "Filter",
       "description": "Filter and return results from input array based on the conditions.",
@@ -3528,6 +3575,69 @@
       "required": [
         "method",
         "functionName"
+      ]
+    },
+    "WebHookActivity": {
+      "x-ms-discriminator-value": "WebHook",
+      "description": "WebHook activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "WebHook activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WebHookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "WebHookActivityMethod": {
+      "description": "The list of HTTP methods supported by a WebHook activity.",
+      "type": "string",
+      "enum": [
+        "POST"
+      ],
+      "x-ms-enum": {
+        "name": "WebHookActivityMethod",
+        "modelAsString": true
+      }
+    },
+    "WebHookActivityTypeProperties": {
+      "description": "WebHook activity type properties.",
+      "properties": {
+        "method": {
+          "description": "Rest API method for target endpoint.",
+          "$ref": "#/definitions/WebHookActivityMethod"
+        },
+        "url": {
+          "type": "object",
+          "description": "WebHook activity target endpoint and path. Type: string (or Expression with resultType string)."
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The timeout within which the webhook should be called back. If there is no value specified, it defaults to 10 minutes. Type: string. Pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "headers": {
+          "type": "object",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+        },
+        "body": {
+          "type": "object",
+          "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "description": "Authentication method used for calling the endpoint.",
+          "$ref": "#/definitions/WebActivityAuthentication"
+        }
+      },
+      "required": [
+        "method",
+        "url"
       ]
     }
   }

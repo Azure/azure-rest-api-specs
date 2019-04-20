@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-09-01"
+  },
+  "responses": {
+    "200": {
+      "description": "Returns the application templates details",
+      "headers": {
+        "code": "200"
+      },
+      "body": {
+        "value": [
+          {
+            "manifestId": "iotc-default",
+            "manifestVersion": "1.0.0",
+            "appTemplateName": "IoT Central Application template",
+            "title": "IoT Central Application template",
+            "order": 1,
+            "description": "Description for IoT Central Application template"
+          }
+        ],
+        "nextLink": null
+      },
+      "default": {
+        "description": "Error message returned for an unexpected response",
+        "headers": {},
+        "body": {
+          "error": {
+            "code": "Error code",
+            "message": "Error message",
+            "target": "Error target"
+          }
+        }
+      }
+    }
+  }
+}

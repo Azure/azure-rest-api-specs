@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Virtual Machine Image Builder.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Virtual Machine Image Builder, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,24 +15,32 @@ To build the SDK for Virtual Machine Image Builder, simply [Install AutoRest](ht
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Virtual Machine Image Builder API.
 
 ``` yaml
 title: ImageBuilderClient
 description: Azure Virtual Machine Image Builder Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-preview-2019-05
 azure-arm: true
 ```
 
 
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
+```
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -42,8 +50,16 @@ input-file:
 - Microsoft.VirtualMachineImages/preview/2018-02-01-preview/imagebuilder.json
 ```
 
-# Code Generation
+### Tag: package-2019-02
 
+These settings apply only when `--tag=package-2019-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02'
+input-file:
+- Microsoft.VirtualMachineImages/preview/2019-02-01-preview/imagebuilder.json
+```
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -74,13 +90,15 @@ python:
   namespace: azure.mgmt.imagebuilder
   package-name: azure-mgmt-imagebuilder
   clear-output-folder: true
-  package-version: 0.1.0
+  package-version: 0.2.0
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-imagebuilder/azure/mgmt/imagebuilder
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -109,7 +127,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-imagebuilder
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-02
+  - tag: package-2019-02
 ```
 
 ### Tag: package-2018-02 and java
@@ -125,4 +143,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2019-02 and java
 
+These settings apply only when `--tag=package-2019-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.imagebuilder.v2019_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/imagebuilder/resource-manager/v2019_02_01_preview
+regenerate-manager: true
+generate-interface: true
+```

@@ -103,18 +103,37 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Service/Generated
 
 directive: 
-  # TODO: remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.
+  # TODO: Remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.
   - from: source-file-csharp
     where: $
-    transform: >
-      if ( $.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") || 
+    transform: >-
+      if ($.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") || 
         $.includes("class IndexesOperations") ||  $.includes("class SynonymMapsOperations") ||
-        $.includes("class SkillsetsOperations") ) 
+        $.includes("class SkillsetsOperations")) 
         
         return $.
-          replace(/this.SearchServiceName/g,"Client.SearchServiceName").
-          replace(/this.SearchDnsSuffix/g,"Client.SearchDnsSuffix").
-          replace(/\"Client.SearchServiceName\"/g,"\"this.Client.SearchServiceName\"").
-          replace(/\"Client.SearchDnsSuffix\"/g,"\"this.Client.SearchDnsSuffix\"");
+          replace( /this.SearchServiceName/g, "Client.SearchServiceName" ).
+          replace( /this.SearchDnsSuffix/g, "Client.SearchDnsSuffix" ).
+          replace( /\"Client.SearchServiceName\"/g, "\"this.Client.SearchServiceName\"" ).
+          replace( /\"Client.SearchDnsSuffix\"/g, "\"this.Client.SearchDnsSuffix\"" );
       return $;  
+####
+  # The following regex are required to make the generated Field class conform to the needs of the custom implementation
+  # that we've had in the Azure Search .NET SDK since it was first released. We've decided to keep the custom behavior of
+  # Field just for .NET for the sake of backward compatibility, but for other languages the client behavior will conform
+  # to the REST API.
+  # 
+  # To achieve this, we need to make the generated constructors internal, as well as some of the generated properties.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+        return $.
+          replace( /public (Field\(\))/g, "internal $1" ).
+          replace( /public (Field\(string name,)/g, "internal $1" ).
+          replace( /public (bool\? Key { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Retrievable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Searchable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Filterable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Sortable { get; set; })/g, "internal $1" ).
+          replace( /public (bool\? Facetable { get; set; })/g, "internal $1" );
 ```

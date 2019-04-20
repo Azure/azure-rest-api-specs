@@ -725,6 +725,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/revokeUserDelegationKeys": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_RevokeUserDelegationKeys",
+        "description": "Revoke user delegation keys.",
+        "x-ms-examples": {
+          "StorageAccountRevokeUserDelegationKeys": {
+            "$ref": "./examples/StorageAccountRevokeUserDelegationKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "maxLength": 24,
+            "minLength": 3
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- revoke user delegation keys succeeded."
+          }
+        }
+      }
     }
   },
   "definitions": {

@@ -4,11 +4,11 @@
 
 Configuration for generating Custom Vision Training SDK.
 
-The current release is `release_2_2`.
+The current release is `release_3_0`.
 
 ``` yaml
 
-tag: release_2_2
+tag: release_3_0
 openapi-type: data-plane
 ```
 # Releases
@@ -33,6 +33,14 @@ These settings apply only when `--tag=release_2_2` is specified on the command l
 ``` yaml $(tag) == 'release_2_2'
 input-file: stable/v2.2/Training.json
 ```
+
+### Release 3.0
+These settings apply only when `--tag=release_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0'
+input-file: stable/v3.0/Training.json
+```
+
 # Validation
 
 ## Suppression
@@ -58,6 +66,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_customvision_training']
 ```
 
 ## CSharp Settings
