@@ -62,46 +62,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/listBillingAccountsWithCreateInvoiceSectionPermission": {
-      "get": {
-        "tags": [
-          "BillingAccounts"
-        ],
-        "x-ms-examples": {
-          "BillingAccountsListWithCreateInvoiceSectionPermission": {
-            "$ref": "./examples/BillingAccountsListWithCreateInvoiceSectionPermission.json"
-          }
-        },
-        "operationId": "BillingAccountsWithCreateInvoiceSectionPermission_List",
-        "description": "Lists all billing accounts with create invoiceSection permission for a user.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the invoiceSections and billingProfiles.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingAccountListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}": {
       "get": {
         "tags": [
@@ -113,9 +73,6 @@
           },
           "BillingAccountWithExpand": {
             "$ref": "./examples/BillingAccountWithExpand.json"
-          },
-          "BillingAccountsListWithExpandForEnrollmentDetails": {
-            "$ref": "./examples/BillingAccountsListWithExpandForEnrollmentDetails.json"
           }
         },
         "operationId": "BillingAccounts_Get",
@@ -1162,7 +1119,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfile/{billingProfileName}/billingSubscriptions": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions": {
       "get": {
         "tags": [
           "BillingSubscriptions"
@@ -1636,7 +1593,7 @@
         "tags": [
           "Transactions"
         ],
-        "operationId": "TransactionsByBillingProfile",
+        "operationId": "TransactionsByBillingProfile_List",
         "description": "Lists the transactions by billingProfileName for given start date and end date.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1655,6 +1612,72 @@
           },
           {
             "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by transaction kind. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/transactions": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "operationId": "TransactionsByInvoiceSection_List",
+        "description": "Lists the transactions by invoiceSectionName for given start date and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "TransactionsListByInvoiceSection": {
+            "$ref": "./examples/TransactionsListByInvoiceSection.json"
+          },
+          "ReservationTransactionsListByInvoiceSection": {
+            "$ref": "./examples/ReservationTransactionsListByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3080,6 +3103,95 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "x-ms-examples": {
+          "AgreementsListByBillingAccountName": {
+            "$ref": "./examples/AgreementsListByBillingAccountName.json"
+          }
+        },
+        "operationId": "Agreements_ListByBillingAccountName",
+        "description": "Lists all agreements for a billing account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the participants.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgreementListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "x-ms-examples": {
+          "AgreementByName": {
+            "$ref": "./examples/AgreementByName.json"
+          }
+        },
+        "operationId": "Agreements_Get",
+        "description": "Get the agreement by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/agreementNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the participants.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Agreement"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3429,7 +3541,7 @@
     "TransferProductRequestProperties": {
       "description": "The properties of the product to initiate a transfer.",
       "properties": {
-        "destinationInvoiceSectionName": {
+        "destinationInvoiceSectionId": {
           "description": "Destination invoice section id.",
           "type": "string"
         }
@@ -3471,9 +3583,9 @@
       "type": "object",
       "description": "Request parameters to transfer billing subscription.",
       "properties": {
-        "destinationInvoiceSectionName": {
+        "destinationInvoiceSectionId": {
           "type": "string",
-          "description": "The destination invoiceSectionName."
+          "description": "The destination invoice section id."
         }
       }
     },
@@ -3541,11 +3653,6 @@
           "type": "string",
           "readOnly": true
         },
-        "company": {
-          "description": "The Company this billing account belongs to.",
-          "type": "string",
-          "readOnly": true
-        },
         "accountType": {
           "description": "The billing account Type.",
           "type": "string",
@@ -3559,20 +3666,25 @@
           "description": "The address associated with billing account.",
           "$ref": "#/definitions/Address"
         },
+        "company": {
+          "description": "Company Name.",
+          "type": "string",
+          "readOnly": true
+        },
         "country": {
-          "description": "The country associated with billing account..",
+          "description": "Country Name.",
           "type": "string",
           "readOnly": true
         },
         "invoiceSections": {
-          "description": "The invoice sections associated to the billing account.",
+          "description": "The invoice sections associated to the billing account. By default this is not populated, unless it's specified in $expand.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InvoiceSection"
           }
         },
         "billingProfiles": {
-          "description": "The billing profiles associated to the billing account.",
+          "description": "The billing profiles associated to the billing account. By default this is not populated, unless it's specified in $expand.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BillingProfile"
@@ -3596,17 +3708,33 @@
           "items": {
             "$ref": "#/definitions/EnrollmentAccount"
           }
+        },
+        "hasReadAccess": {
+          "description": "Specifies whether the user has read access on billing account.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
     "BillingProperty": {
+      "description": "A billing property resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingPropertySummary"
+        }
+      }
+    },
+    "BillingPropertySummary": {
       "description": "The billing property.",
       "properties": {
-        "productId": {
-          "description": "Product Id.",
-          "type": "string",
-          "readOnly": true
-        },
         "billingTenantId": {
           "description": "Billing tenant Id.",
           "type": "string",
@@ -3632,6 +3760,11 @@
           "type": "string",
           "readOnly": true
         },
+        "costCenter": {
+          "description": "Cost center name.",
+          "type": "string",
+          "readOnly": true
+        },
         "invoiceSectionId": {
           "description": "Invoice Section Id.",
           "type": "string",
@@ -3639,6 +3772,16 @@
         },
         "invoiceSectionName": {
           "description": "Invoice Section name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productId": {
+          "description": "Product Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productName": {
+          "description": "Product name.",
           "type": "string",
           "readOnly": true
         },
@@ -3901,7 +4044,7 @@
           "description": "Purchase order number.",
           "type": "string"
         },
-        "billingAddress": {
+        "address": {
           "description": "Billing address.",
           "$ref": "#/definitions/Address"
         },
@@ -4037,11 +4180,12 @@
       }
     },
     "EnabledAzureSKUs": {
-      "description": "Details about the product.",
+      "description": "Details about the enabled azure sku.",
       "properties": {
         "skuId": {
           "description": "The sku id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "skuDescription": {
           "description": "The sku description.",
@@ -4217,13 +4361,13 @@
           "format": "date-time",
           "readOnly": true
         },
-        "billingProfile": {
-          "description": "The profile id which invoice belongs to.",
+        "billingProfileId": {
+          "description": "The billing profile id this invoice belongs to.",
           "type": "string",
           "readOnly": true
         },
         "billingProfileName": {
-          "description": "The profile name which invoice belongs to.",
+          "description": "The profile name this invoice belongs to.",
           "type": "string",
           "readOnly": true
         },
@@ -4518,11 +4662,6 @@
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
-        "enrollmentAccountContext": {
-          "description": "The enrollment account context.",
-          "$ref": "#/definitions/EnrollmentAccountContext",
-          "readOnly": true
-        },
         "billingProfileId": {
           "description": "Billing Profile id to which this product belongs.",
           "type": "string",
@@ -4530,6 +4669,16 @@
         },
         "billingProfileName": {
           "description": "Billing Profile name to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice section id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice section name to which this product belongs.",
           "type": "string",
           "readOnly": true
         },
@@ -4637,6 +4786,11 @@
           "type": "string",
           "readOnly": true
         },
+        "productFamily": {
+          "description": "The product family.",
+          "type": "string",
+          "readOnly": true
+        },
         "productTypeId": {
           "description": "The product type id.",
           "type": "string",
@@ -4725,12 +4879,16 @@
     "PolicyProperties": {
       "description": "The properties of policy.",
       "properties": {
+        "marketplacePurchasesAllowed": {
+          "description": "The marketplacePurchasesAllowed flag.",
+          "type": "boolean"
+        },
         "reservationPurchasesAllowed": {
           "description": "The reservationPurchasesAllowed flag.",
           "type": "boolean"
         },
-        "marketplacePurchasesAllowed": {
-          "description": "The marketplacePurchasesAllowed flag.",
+        "subscriptionOwnerCanViewCharges": {
+          "description": "The subscriptionOwnerCanViewCharges flag.",
           "type": "boolean"
         }
       }
@@ -4813,7 +4971,7 @@
     "PaymentMethodProperties": {
       "description": "The properties of the payment method.",
       "properties": {
-        "methodType": {
+        "paymentMethodType": {
           "description": "Payment method type.",
           "type": "string",
           "enum": [
@@ -5078,6 +5236,95 @@
         }
       }
     },
+    "AgreementListResult": {
+      "description": "Result of listing agreements.",
+      "properties": {
+        "value": {
+          "description": "The list of agreements.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Agreement"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Agreement": {
+      "description": "An agreement resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "An agreement.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgreementProperties"
+        }
+      }
+    },
+    "AgreementProperties": {
+      "description": "The properties of the agreement.",
+      "properties": {
+        "agreementLink": {
+          "description": "The link to the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "description": "Effective date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Expiration date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "participants": {
+          "description": "Participants or signer of the agreement.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Participants"
+          }
+        },
+        "status": {
+          "description": "The agreement status",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Participants": {
+      "description": "Details about the participant or signer.",
+      "properties": {
+        "status": {
+          "description": "The signing status",
+          "type": "string",
+          "readOnly": true
+        },
+        "statusDate": {
+          "description": "The date when status got changed.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "email": {
+          "description": "The email address of the participant or signer.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Action": {
       "description": "the action the caller allowed to do",
       "type": "string",
@@ -5229,6 +5476,14 @@
       "schema": {
         "$ref": "#/definitions/AcceptTransferRequest"
       }
+    },
+    "agreementNameParameter": {
+      "name": "agreementName",
+      "in": "path",
+      "description": "Agreement Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "security": [

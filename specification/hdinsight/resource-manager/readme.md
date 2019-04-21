@@ -67,13 +67,13 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- Microsoft.HDInsight/preview/2018-06-01-preview/cluster.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/applications.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/locations.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/configurations.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/extensions.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/scriptActions.json
-- Microsoft.HDInsight/preview/2018-06-01-preview/operations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/applications.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/configurations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
 ```
 
 
