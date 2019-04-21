@@ -48,7 +48,7 @@
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/TrainResponse"
+                            "$ref": "#/definitions/TrainResult"
                         }
                     },
                     "default": {
@@ -68,7 +68,7 @@
         "/model/{id}/keys": {
             "get": {
                 "summary": "Get Keys",
-                "description": "<para>Use the API to retrieve the keys that were\r\n            extracted by the specified model.</para>",
+                "description": "Use the API to retrieve the keys that were\r\n extracted by the specified model.",
                 "operationId": "FormRecognizer_CustomGetKeysByModelId",
                 "consumes": [],
                 "produces": [
@@ -210,7 +210,7 @@
                         "name": "form",
                         "in": "formData",
                         "description": "Upload content of type 'application/pdf', 'image/jpeg' or 'image/png' for processing.",
-                        "required": false,
+                        "required": true,
                         "type": "file"
                     }
                 ],
@@ -218,7 +218,7 @@
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/AnalyzeResponse"
+                            "$ref": "#/definitions/AnalyzeResult"
                         }
                     },
                     "default": {
@@ -252,7 +252,7 @@
                 }
             }
         },
-        "TrainResponse": {
+        "TrainResult": {
             "description": "Response of the Train API call.",
             "type": "object",
             "properties": {
@@ -349,8 +349,8 @@
                 }
             }
         },
-        "AnalyzeResponse": {
-            "description": "Analyze API response.",
+        "AnalyzeResult": {
+            "description": "Analyze API call result.",
             "type": "object",
             "properties": {
                 "status": {
@@ -412,12 +412,12 @@
                         "$ref": "#/definitions/KeyValuePair"
                     }
                 },
-                "tables": {
+                "extractedtables": {
                     "description": "List of Tables and their information extracted from the page.",
                     "uniqueItems": false,
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Table"
+                        "$ref": "#/definitions/ExtractedTable"
                     }
                 }
             }
@@ -444,7 +444,7 @@
                 }
             }
         },
-        "Table": {
+        "ExtractedTable": {
             "description": "Extraction information about a table\r\ncontained in a page.",
             "type": "object",
             "properties": {
@@ -457,7 +457,7 @@
                     "uniqueItems": false,
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/TableColumn"
+                        "$ref": "#/definitions/ExtractedTableColumn"
                     }
                 }
             }
@@ -486,7 +486,7 @@
                 }
             }
         },
-        "TableColumn": {
+        "ExtractedTableColumn": {
             "description": "Extraction information of a column in\r\na table.",
             "type": "object",
             "properties": {
