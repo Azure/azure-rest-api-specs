@@ -57,126 +57,118 @@
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/playbookConfigurations/myPlaybookConfigName",
-            "name": "myPlaybookConfigName",
-            "type": "Microsoft.Security/playbookConfigurations",
-            "location": "Central US",            
-            "tags": {},
-            "properties": {
-              "description": "Alerts auto dismiss",
-              "isEnabled": true,
-              "metadata": {
-                "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
-                "createdBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72",
-                "lastUpdatedDateTimeUtc": "2019-03-28T08:43:54.5755094Z",
-                "lastUpdatedBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72"
-              },
-              "scopes": [
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/playbookConfigurations/myPlaybookConfigName",
+        "name": "myPlaybookConfigName",
+        "type": "Microsoft.Security/playbookConfigurations",
+        "location": "Central US",
+        "tags": {},
+        "properties": {
+          "description": "Alerts auto dismiss",
+          "isEnabled": true,
+          "metadata": {
+            "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
+            "createdBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72",
+            "lastUpdatedDateTimeUtc": "2019-03-28T08:43:54.5755094Z",
+            "lastUpdatedBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72"
+          },
+          "scopes": [
+            {
+              "description": "Some custom description",
+              "scopePath": "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a"
+            },
+            {
+              "description": "Some custom description",
+              "scopePath": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+            }
+          ],
+          "sources": [
+            {
+              "eventSource": "AscAlerts",
+              "ruleSets": [
                 {
-                  "description": "Some custom description",
-                  "scopePath": "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a"
-                },
-                {
-                  "description": "Some custom description",
-                  "scopePath": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
-                }
-              ],
-              "sources": [
-                {
-                  "eventSource": "AscAlerts",
-                  "ruleSets": [
+                  "rules": [
                     {
-                      "rules": [
-                        {
-                          "propertyJPath": "$.type",
-                          "propertyType": "System.String",
-                          "expectedValue": "customType",
-                          "operator": "EqualsIgnoreCase"
-                        }
-                      ]
+                      "propertyJPath": "$.type",
+                      "propertyType": "System.String",
+                      "expectedValue": "customType",
+                      "operator": "EqualsIgnoreCase"
                     }
                   ]
                 }
-              ],
-              "actions": [
-                {
-                  "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
-                  "resourceProviderNamespace": "Microsoft.Logic",
-                  "uri": "https://triggerUri1.com"
-                },
-                {
-                  "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest2",
-                  "resourceProviderNamespace": "Microsoft.Logic",
-                  "uri": "https://triggerUri2.com"
-                }
               ]
             }
-          }
-        ]
+          ],
+          "actions": [
+            {
+              "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
+              "resourceProviderNamespace": "Microsoft.Logic",
+              "uri": "https://triggerUri1.com"
+            },
+            {
+              "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest2",
+              "resourceProviderNamespace": "Microsoft.Logic",
+              "uri": "https://triggerUri2.com"
+            }
+          ]
+        }
       }
     },
     "201": {
       "body": {
-        "value": [
-          {
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/playbookConfigurations/myPlaybookConfigName",
-            "name": "myPlaybookConfigName",
-            "type": "Microsoft.Security/playbookConfigurations",
-            "location": "Central US",            
-            "tags": {},
-            "properties": {
-              "description": "Alerts auto dismiss",
-              "isEnabled": true,
-              "metadata": {
-                "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
-                "createdBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72",
-                "lastUpdatedDateTimeUtc": "2019-03-28T08:43:54.5755094Z",
-                "lastUpdatedBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72"
-              },
-              "scopes": [
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/playbookConfigurations/myPlaybookConfigName",
+        "name": "myPlaybookConfigName",
+        "type": "Microsoft.Security/playbookConfigurations",
+        "location": "Central US",
+        "tags": {},
+        "properties": {
+          "description": "Alerts auto dismiss",
+          "isEnabled": true,
+          "metadata": {
+            "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
+            "createdBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72",
+            "lastUpdatedDateTimeUtc": "2019-03-28T08:43:54.5755094Z",
+            "lastUpdatedBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72"
+          },
+          "scopes": [
+            {
+              "description": "Some custom description",
+              "scopePath": "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a"
+            },
+            {
+              "description": "Some custom description",
+              "scopePath": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+            }
+          ],
+          "sources": [
+            {
+              "eventSource": "AscAlerts",
+              "ruleSets": [
                 {
-                  "description": "Some custom description",
-                  "scopePath": "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a"
-                },
-                {
-                  "description": "Some custom description",
-                  "scopePath": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
-                }
-              ],
-              "sources": [
-                {
-                  "eventSource": "AscAlerts",
-                  "ruleSets": [
+                  "rules": [
                     {
-                      "rules": [
-                        {
-                          "propertyJPath": "$.type",
-                          "propertyType": "System.String",
-                          "expectedValue": "customType",
-                          "operator": "EqualsIgnoreCase"
-                        }
-                      ]
+                      "propertyJPath": "$.type",
+                      "propertyType": "System.String",
+                      "expectedValue": "customType",
+                      "operator": "EqualsIgnoreCase"
                     }
                   ]
                 }
-              ],
-              "actions": [
-                {
-                  "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
-                  "resourceProviderNamespace": "Microsoft.Logic",
-                  "uri": "https://triggerUri1.com"
-                },
-                {
-                  "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest2",
-                  "resourceProviderNamespace": "Microsoft.Logic",
-                  "uri": "https://triggerUri2.com"
-                }
               ]
             }
-          }
-        ]
+          ],
+          "actions": [
+            {
+              "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
+              "resourceProviderNamespace": "Microsoft.Logic",
+              "uri": "https://triggerUri1.com"
+            },
+            {
+              "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest2",
+              "resourceProviderNamespace": "Microsoft.Logic",
+              "uri": "https://triggerUri2.com"
+            }
+          ]
+        }
       }
     }
   }
