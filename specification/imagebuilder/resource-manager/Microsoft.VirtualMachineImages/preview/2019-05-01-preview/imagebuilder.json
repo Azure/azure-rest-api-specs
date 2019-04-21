@@ -914,7 +914,9 @@
         },
         "buildTimeoutInMinutes": {
           "type": "integer",
-          "description": "Maximum duration to wait while building the image template. Default is 60 minutes."
+          "minimum": 0,
+          "maximum": 960,
+          "description": "Maximum duration to wait while building the image template. Omit or specify 0 to use the default (60 minutes)."
         }
       },
       "required": [
