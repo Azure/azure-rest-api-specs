@@ -1,105 +1,699 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-03-01-preview",
-    "title": "azuredata",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "azuredataClient"
-    }
+    "version": "2.0",
+    "title": "AzureDataManagementClient",
+    "description": "The AzureData management API provides a RESTful set of web APIs to manage Azure Data Resources. For example, register, delete and retrieve a SQL Server, SQL Server registration."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [
-    {
-      "azure_auth": ["user_impersonation"]
-    }
+  "schemes": [
+    "https"
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations/{sqlServerRegistrationName}": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Gets a SQL Server registration.",
+        "operationId": "SqlServerRegistrations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the SQL Server registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out."
+          }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "x-ms-examples": {
+          "Gets a SQL Server registration.": {
+            "$ref": "./examples/GetSqlServerRegistration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Creates or updates a SQL Server registration.",
+        "operationId": "SqlServerRegistrations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server registration to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL Server registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 SqlVmGroupUpdateFailVmAttached - SQL Server registration cannot be updated as it has attached a SQL Server.\n\n * 400 InvalidSqlImageOffer - Provided SQL image offer is invalid.\n\n * 400 InvalidSqlSku - Provided SQL sku is invalid.\n\n * 400 OuPathAndDomainMismatch - OU path is not within the domain provided.\n\n * 400 InvalidAccountNameFormat - Account name format is invalid.\n\n * 400 CloudWitnessUnsupported - For Windows Server 2012R2 setup cloud witness is not allowed.\n\n * 400 FileShareWitnessDisAllowed - For Windows Server 2016 and beyond setup, file share witness is not allowed.\n\n * 400 InvalidStorageAccountUrl - Invalid storage account url.\n\n * 400 SqlVmGroupNameTooLong - SQL Server registration name cannot exceed 15 characters.\n\n * 400 InvalidSqlVmGroupName - Invalid SQL Server registration name.\n\n * 400 SqlVmGroupNotEmpty - SQL Server registration is not empty.\n\n * 400 SqlVmGroupUpdateNotAllowed - Update to SQL Server registration is not allowed.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out."
+          },
+          "201": {
+            "description": "Successfully created the SQL Server registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates a SQL Server registration.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerRegistration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Deletes a SQL Server registration.",
+        "operationId": "SqlServerRegistrations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server registration."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 SqlVmGroupUpdateFailVmAttached - SQL Server registration cannot be updated as it has attached a SQL Server.\n\n * 400 InvalidSqlImageOffer - Provided SQL image offer is invalid.\n\n * 400 InvalidSqlSku - Provided SQL sku is invalid.\n\n * 400 OuPathAndDomainMismatch - OU path is not within the domain provided.\n\n * 400 InvalidAccountNameFormat - Account name format is invalid.\n\n * 400 CloudWitnessUnsupported - For Windows Server 2012R2 setup cloud witness is not allowed.\n\n * 400 FileShareWitnessDisAllowed - For Windows Server 2016 and beyond setup, file share witness is not allowed.\n\n * 400 InvalidStorageAccountUrl - Invalid storage account url.\n\n * 400 SqlVmGroupNameTooLong - SQL Server registration name cannot exceed 15 characters.\n\n * 400 InvalidSqlVmGroupName - Invalid SQL Server registration name.\n\n * 400 SqlVmGroupNotEmpty - SQL Server registration is not empty.\n\n * 400 SqlVmGroupUpdateNotAllowed - Update to SQL Server registration is not allowed.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out."
+          },
+          "202": {
+            "description": "Deleting the SQL Server registration."
+          },
+          "204": {
+            "description": "The specified SQL Server registration does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a SQL Server registration.": {
+            "$ref": "./examples/DeleteSqlServerRegistration.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Updates SQL Server Registration tags.",
+        "operationId": "SqlServerRegistrations_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server Registration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistrationUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL Server Registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates a SQL Server Registration tags.": {
+            "$ref": "./examples/UpdateSqlServerRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations": {
+      "get": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Gets all SQL Server registrations in a resource group.",
+        "operationId": "SqlServerRegistrations_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all SQL Server registrations in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server registrations in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlServerRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlServerRegistrations": {
+      "get": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Gets all SQL Server registrations in a subscription.",
+        "operationId": "SqlServerRegistrations_List",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "Successfully retrieved all SQL Server registrations in the subscription.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/SqlServerRegistrationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server registrations in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlServerRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations/{SqlServerRegistrationName}/sqlServers/{sqlServerName}": {
+      "get": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Gets a SQL Server.",
+        "operationId": "SqlServers_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "SqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlServerName",
+            "in": "path",
+            "description": "Name of the SQL Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the SQL Server.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/SqlServer"
             }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SQL Server.": {
+            "$ref": "./examples/GetSqlServer.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Creates or updates a SQL Server.",
+        "operationId": "SqlServers_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "SqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlServerName",
+            "in": "path",
+            "description": "Name of the SQL Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServer"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL Server.",
+            "schema": {
+              "$ref": "#/definitions/SqlServer"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVmResourceIdChange - Server resource id property cannot be updated.\n\n * 400 SqlVmAlreadyIncludedInGroup - SQL Server cannot be moved from one group to another in same operation.\n\n * 400 SqlVmCannotRemoveFromGroup - SQL Server cannot be removed from group.\n\n * 400 VmLocationMismatch - VM location does not match that of SQL Server.\n\n * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL Server registration does not match that of the SQL Server.\n\n * 400 VmInsufficientPermission - Insufficient permission to Vm.\n\n * 400 SingleNicOnVmAllowed - Only Single NIC Servers are allowed.\n\n * 400 InvalidSqlVmGroupResourceIdParameterValue - SQL Server registration resource id is not in correct format.\n\n * 400 MismatchVmGroupSubscription - Subscription id for SQL Server and SQL Server registration are different.\n\n * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for domain credentials property.\n\n * 400 BYOLChangeToPAYGNotSupported - The conversion from AHUB to PAYG is not supported for BYOL images\n\n * 400 InvalidVmResourceIdParameterValue - Provided Server resource id is not valid.\n\n * 400 MismatchInSqlVmAndVmResourceIdSubscription - Mismatch in subscription id for SQL Server and Server resource id property.\n\n * 400 MismatchSqlVmAndVmName - SQL Server name is not same as the Server name provided on ServerResourceId property.\n\n * 400 MismatchSqlVmAndVmRgName - SQL Server resource group name is not same as the Server resource group name provided on ServerResourceId property.\n\n * 400 NotSupportedSqlVmOSVersion - Server OS type is not Windows. Only Windows OS versions are supported\n\n * 400 VmNotRunning - The VM is not in running state.\n\n * 400 VmAgentNotRunning - The VM agent is not installed or in running state.\n\n * 400 SqlExtNotInstalled - Sql Iaas Extension is not installed on Server.\n\n * 400 PAYGNotSupportedForNonGalleryVM - License type PAYG is invalid for this Server as this was not created from Azure marketplace image.\n\n * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL Server registration.\n\n * 400 VmOSVersionMismatchWithGroup - OS version mismatch with group.\n\n * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as auto backup setting.\n\n * 400 BackupScheduleTypeNotSet - Backup schedule type needs to be set.\n\n * 400 BackupStorageCredentialsNotSpecified - Backup storage credentials are not specified.\n\n * 400 KeyVaultCredentialsNotSpecified - Key vault credentials not specified.\n\n * 400 SqlCredentialsNotSpecified - SQL Server credentials are not specified.\n\n * 400 IncompleteAutoPatchingSettings - Incomplete auto patching settings specified.\n\n * 400 IncompleteAutoBackupSettings - Incomplete auto backup settings specified.\n\n * 400 IncompleteSqlStorageSettings - Incomplete SQL storage settings specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 404 SubscriptionDoesNotHaveSqlVMInResourceGroup - Subscription does not have SQL Server Instance in resource group.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out."
+          },
+          "201": {
+            "description": "Successfully created the SQL Server.",
+            "schema": {
+              "$ref": "#/definitions/SqlServer"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates a SQL Server in a Registration group.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerWithRegistrationGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Deletes a SQL Server.",
+        "operationId": "SqlServers_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "SqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlServerName",
+            "in": "path",
+            "description": "Name of the SQL Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVmResourceIdChange - Server resource id property cannot be updated.\n\n * 400 SqlVmAlreadyIncludedInGroup - SQL Server cannot be moved from one group to another in same operation.\n\n * 400 SqlVmCannotRemoveFromGroup - SQL Server cannot be removed from group.\n\n * 400 VmLocationMismatch - VM location does not match that of SQL Server.\n\n * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL Server registration does not match that of the SQL Server.\n\n * 400 VmInsufficientPermission - Insufficient permission to Vm.\n\n * 400 SingleNicOnVmAllowed - Only Single NIC Servers are allowed.\n\n * 400 InvalidSqlVmGroupResourceIdParameterValue - SQL Server registration resource id is not in correct format.\n\n * 400 MismatchVmGroupSubscription - Subscription id for SQL Server and SQL Server registration are different.\n\n * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for domain credentials property.\n\n * 400 BYOLChangeToPAYGNotSupported - The conversion from AHUB to PAYG is not supported for BYOL images\n\n * 400 InvalidVmResourceIdParameterValue - Provided Server resource id is not valid.\n\n * 400 MismatchInSqlVmAndVmResourceIdSubscription - Mismatch in subscription id for SQL Server and Server resource id property.\n\n * 400 MismatchSqlVmAndVmName - SQL Server name is not same as the Server name provided on ServerResourceId property.\n\n * 400 MismatchSqlVmAndVmRgName - SQL Server resource group name is not same as the Server resource group name provided on ServerResourceId property.\n\n * 400 NotSupportedSqlVmOSVersion - Server OS type is not Windows. Only Windows OS versions are supported\n\n * 400 VmNotRunning - The VM is not in running state.\n\n * 400 VmAgentNotRunning - The VM agent is not installed or in running state.\n\n * 400 SqlExtNotInstalled - Sql Iaas Extension is not installed on Server.\n\n * 400 PAYGNotSupportedForNonGalleryVM - License type PAYG is invalid for this Server as this was not created from Azure marketplace image.\n\n * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL Server registration.\n\n * 400 VmOSVersionMismatchWithGroup - OS version mismatch with group.\n\n * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as auto backup setting.\n\n * 400 BackupScheduleTypeNotSet - Backup schedule type needs to be set.\n\n * 400 BackupStorageCredentialsNotSpecified - Backup storage credentials are not specified.\n\n * 400 KeyVaultCredentialsNotSpecified - Key vault credentials not specified.\n\n * 400 SqlCredentialsNotSpecified - SQL Server credentials are not specified.\n\n * 400 IncompleteAutoPatchingSettings - Incomplete auto patching settings specified.\n\n * 400 IncompleteAutoBackupSettings - Incomplete auto backup settings specified.\n\n * 400 IncompleteSqlStorageSettings - Incomplete SQL storage settings specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotHaveSqlVMGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 404 SubscriptionDoesNotHaveSqlVMInResourceGroup - Subscription does not have SQL Server Instance in resource group.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out."
+          },
+          "202": {
+            "description": "Deleting the SQL Server."
+          },
+          "204": {
+            "description": "The specified SQL Server does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a SQL Server.": {
+            "$ref": "./examples/DeleteSqlServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations/{sqlServerRegistrationName}/sqlServers": {
+      "get": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Gets all SQL Servers in a SQL Server Registration.",
+        "operationId": "SqlServers_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all SQL Servers in the SQL Server Registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Servers in a SQL Server Registration.": {
+            "$ref": "./examples/ListByResourceGroupSqlServer.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
-      "properties": {
-        "sampleProperty": {
-          "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
+    "SqlServerRegistrationProperties": {
+      "description": "The properties of a SQL Server registration.",
+      "type": "object",
+      "properties": {}
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+        "id": {
+          "description": "Resource ID.",
           "type": "string",
           "readOnly": true
         },
-        "message": {
-          "description": "Description of the error.",
+        "name": {
+          "description": "Resource name.",
           "type": "string",
           "readOnly": true
         },
-        "details": {
-          "description": "Internal error details.",
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlServerRegistration": {
+      "description": "A SQL server registration.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerRegistrationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlServerRegistrationUpdate": {
+      "description": "An update to a SQL Server Registration.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlServerRegistrationListResult": {
+      "description": "Server.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+            "$ref": "#/definitions/SqlServerRegistration"
           },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerProperties": {
+      "description": "The SQL server properties.",
+      "type": "object",
+      "properties": {
+        "sqlServerCores": {
+          "format": "int32",
+          "description": "Cores of the Sql Server.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "sqlServerVersion": {
+          "description": "Version of the Sql Server.",
+          "type": "string"
+        },
+        "sqlServerCollation": {
+          "description": "Sql Server Collation.",
+          "type": "string"
+        },
+        "sqlServerOsProfile": {
+          "description": "Sql Server OS Profile.",
+          "type": "string"
+        },
+        "sqlServerEndOfSupportDate": {
+          "format": "date-time",
+          "description": "Sql Server End of Supoort date.",
+          "type": "string"
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "SqlServer": {
+      "description": "A SQL server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlServerListResult": {
+      "description": "A list of SQL servers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServer"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -109,24 +703,53 @@
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
+      "description": "Subscription ID that identifies an Azure subscription.",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
+      "description": "API version to use for the request.",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlServerNameParameter": {
+      "name": "SqlServerName",
+      "in": "path",
+      "description": "Name of the Sql Server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlServerRegistrationNameParameter": {
+      "name": "SqlServerRegistrationNameParameter",
+      "in": "path",
+      "description": "Name of the Sql Server registration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
