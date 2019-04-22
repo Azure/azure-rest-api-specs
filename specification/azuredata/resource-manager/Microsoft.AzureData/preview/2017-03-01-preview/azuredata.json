@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.0",
+    "version": "2017-03-01-preview",
     "title": "AzureDataManagementClient",
     "description": "The AzureData management API provides a RESTful set of web APIs to manage Azure Data Resources. For example, register, delete and retrieve a SQL Server, SQL Server registration."
   },
@@ -16,6 +16,39 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.AzureData/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available SQL Server Registration API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists all of the available SQL Server Registration API operations.": {
+            "$ref": "./examples/ListOperation.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations/{sqlServerRegistrationName}": {
       "get": {
         "tags": [
@@ -515,6 +548,89 @@
     }
   },
   "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list SQL operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "SQL REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation / action.",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "user",
+            "system"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "description": "Additional descriptions for the operation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Display metadata associated with the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized friendly form of the resource type related to this action/operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized friendly description for the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SqlServerRegistrationProperties": {
       "description": "The properties of a SQL Server registration.",
       "type": "object",
