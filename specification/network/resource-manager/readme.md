@@ -72,13 +72,14 @@ input-file:
   - Microsoft.Network/stable/2018-12-01/virtualWan.json
   - Microsoft.Network/stable/2018-12-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-12-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2018-12-01/webapplicationfirewall.json
 ```
 
 ### Tag: package-2018-12-only
 
 These settings apply only when `--tag=package-2018-12-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-12-only'
+``` yaml $(tag) == 'package-2018-12-only'
 input-file:
   - Microsoft.Network/stable/2018-12-01/applicationGateway.json
   - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
@@ -918,6 +919,9 @@ directive:
   - suppress: BodyTopLevelProperties
     from: virtualNetworkGateway.json
     reason: shipped. fixing this causes breaking change in resource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: webapplicationfirewall.json
+    reason: name, id and type properties are inherited from the upper level
 ```
 
 ---

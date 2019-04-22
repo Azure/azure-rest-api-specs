@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
-    "version": "2017-09-01-preview"
+    "version": "2018-06-01"
   },
   "paths": {},
   "definitions": {
@@ -23,6 +23,13 @@
           "$ref": "#/definitions/TriggerRuntimeState",
           "description": "Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.",
           "readOnly": true
+        },
+        "annotations": {
+          "description": "List of tags that can be used for describing the trigger.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         }
       },
       "additionalProperties": {
@@ -275,8 +282,7 @@
         "typeProperties"
       ]
     },
-    "BlobEventsTrigger":
-    {
+    "BlobEventsTrigger": {
       "description": "Trigger that runs every time a Blob event occurs.",
       "type": "object",
       "allOf": [
@@ -285,8 +291,7 @@
         }
       ],
       "properties": {
-        "typeProperties":
-        {
+        "typeProperties": {
           "description": "Blob Events Trigger properties.",
           "x-ms-client-flatten": true,
           "properties": {
