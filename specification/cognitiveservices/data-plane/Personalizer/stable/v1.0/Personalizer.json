@@ -1,0 +1,1148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.0",
+    "title": "Personalizer Client",
+    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns your content in a ranked list. As rewards are sent in response to the ranked list, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
+  },
+  "paths": {
+    "/personalizer/v1.0/configurations/service": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get the service configuration.",
+        "operationId": "GetServiceConfiguration",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            },
+            "examples": {
+              "application/json": {
+                "rewardWaitTime": "00:10:00",
+                "defaultReward": 0.0,
+                "rewardAggregation": "earliest",
+                "explorationPercentage": 0.2,
+                "modelExportFrequency": "00:05:00",
+                "logRetentionDays": 7
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Update the service configuration.",
+        "operationId": "UpdateServiceConfiguration",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "config",
+            "in": "body",
+            "description": "The personalizer service configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            },
+            "examples": {
+              "application/json": {
+                "rewardWaitTime": "00:10:00",
+                "defaultReward": 0.0,
+                "rewardAggregation": "earliest",
+                "explorationPercentage": 0.2,
+                "modelExportFrequency": "00:05:00",
+                "logRetentionDays": 7
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid argument"
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/configurations/policy": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get the policy configuration.",
+        "operationId": "GetPolicy",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            },
+            "examples": {
+              "application/json": {
+                "name": "myPersonalizer",
+                "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Update the policy configuration.",
+        "operationId": "UpdatePolicy",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "policy",
+            "in": "body",
+            "description": "The policy configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            },
+            "examples": {
+              "application/json": {
+                "name": "myPersonalizer",
+                "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid argument"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Delete the current policy.",
+        "operationId": "DeletePolicy",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            },
+            "examples": {
+              "application/json": {
+                "name": "myPersonalizer",
+                "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/evaluations": {
+      "get": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "List all submitted evaluations.",
+        "operationId": "GetEvaluations",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Evaluation"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "id": "b58c6d92-b727-48c1-9487-4be2782c9e0a",
+                  "name": "myFirstEvaluation",
+                  "startTime": "2018-11-19T00:00:00Z",
+                  "endTime": "2018-12-19T00:00:00Z",
+                  "status": "pending",
+                  "policyResults": [
+                    {
+                      "name": "Custom Policy 1",
+                      "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+                    }
+                  ]
+                },
+                {
+                  "id": "21d03972-9130-4be9-8c8b-8ac3ec9b9dd1",
+                  "name": "mySecondEvaluation",
+                  "startTime": "2018-12-19T00:00:00Z",
+                  "endTime": "2019-01-19T00:00:00Z",
+                  "status": "pending",
+                  "policyResults": []
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "Submit a new evaluation.",
+        "operationId": "CreateEvaluation",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "The evaluation job definition.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EvaluationContract"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid arguments"
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            },
+            "examples": {
+              "application/json": {
+                "id": "b58c6d92-b727-48c1-9487-4be2782c9e0a",
+                "name": "myFirstEvaluation",
+                "startTime": "2018-12-19T00:00:00Z",
+                "endTime": "2019-01-19T00:00:00Z",
+                "status": "completed",
+                "policyResults": [
+                  {
+                    "name": "Custom Policy 1",
+                    "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/evaluations/{evaluationId}": {
+      "get": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "Get the evaluation associated with the ID.",
+        "operationId": "GetEvaluation",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "description": "ID of the evaluation in question.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Evaluation not found."
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            },
+            "examples": {
+              "application/json": {
+                "id": "b58c6d92-b727-48c1-9487-4be2782c9e0a",
+                "name": "myFirstEvaluation",
+                "startTime": "2018-12-19T00:00:00Z",
+                "endTime": "2019-01-19T00:00:00Z",
+                "status": "completed",
+                "policyResults": [
+                  {
+                    "name": "Custom Policy 1",
+                    "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5",
+                    "summary": [
+                      {
+                        "timeStamp": "2018-12-19T00:00:00Z",
+                        "ipsEstimatorNumerator": 0.0,
+                        "ipsEstimatorDenominator": 170.0,
+                        "snipsEstimatorDenominator": 308.25,
+                        "aggregateTimeWindow": "00:00:00",
+                        "nonZeroProbability": 64.0,
+                        "confidenceInterval": 0.0,
+                        "sumOfSquares": 0.0
+                      },
+                      {
+                        "timeStamp": "2018-12-19T00:05:00Z",
+                        "ipsEstimatorNumerator": 2.2,
+                        "ipsEstimatorDenominator": 196.0,
+                        "snipsEstimatorDenominator": 193.761,
+                        "aggregateTimeWindow": "00:00:00",
+                        "nonZeroProbability": 68.0,
+                        "confidenceInterval": 1.1009,
+                        "sumOfSquares": 2.424
+                      }
+                    ],
+                    "totalSummary": {
+                      "timeStamp": "2019-01-19T00:00:00Z",
+                      "ipsEstimatorNumerator": 22.2,
+                      "ipsEstimatorDenominator": 1906.0,
+                      "snipsEstimatorDenominator": 1993.761,
+                      "aggregateTimeWindow": "00:00:00",
+                      "nonZeroProbability": 68.0,
+                      "confidenceInterval": 1.1209,
+                      "sumOfSquares": 2.484
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "Delete the evaluation associated with the ID.",
+        "operationId": "DeleteEvaluation",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "description": "ID of the evaluation to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/events/{eventId}/reward": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Report reward to allocate to the top ranked action for the specified event.",
+        "operationId": "Reward",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The event id this reward applies to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reward",
+            "in": "body",
+            "description": "The reward should be a floating point number.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RewardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid arguments"
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/events/{eventId}/activate": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Report that the specified event was actually displayed to the user and a reward should be expected for it.",
+        "operationId": "Activate",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The event ID this activation applies to.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid arguments"
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/logs": {
+      "delete": {
+        "tags": [
+          "Logs"
+        ],
+        "summary": "Deletes all the logs.",
+        "operationId": "DeleteLogs",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IActionResult"
+            }
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/logs/properties": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "summary": "Gets logs properties.",
+        "operationId": "GetLogsProperties",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogsProperties"
+            },
+            "examples": {
+              "application/json": {
+                "dateRange": {
+                  "from": "2019-04-11T23:28:18.8431495-07:00",
+                  "to": "2019-04-15T23:28:18.8431502-07:00"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No properties found."
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/model": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get current model.",
+        "operationId": "GetModel",
+        "consumes": [],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Resets the model.",
+        "operationId": "DeleteModel",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IActionResult"
+            }
+          },
+          "400": {
+            "description": "Model reset failed."
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/model/properties": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get model properties.",
+        "operationId": "GetModelProperties",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelProperties"
+            },
+            "examples": {
+              "application/json": {
+                "creationTime": "2019-01-18T16:00:00-08:00",
+                "lastModifiedTime": "2019-01-18T16:00:00-08:00"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/personalizer/v1.0/rank": {
+      "post": {
+        "tags": [
+          "Ranking"
+        ],
+        "summary": "A personalization rank request.",
+        "operationId": "Rank",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "personalizationRequest",
+            "in": "body",
+            "description": "A personalization request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RankRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RankResponse"
+            },
+            "examples": {
+              "application/json": {
+                "ranking": [
+                  {
+                    "id": "EntertainmentArticle",
+                    "probability": 0.8
+                  },
+                  {
+                    "id": "SportsArticle",
+                    "probability": 0.0
+                  },
+                  {
+                    "id": "NewsArticle",
+                    "probability": 0.2
+                  }
+                ],
+                "eventId": "75269AD0-BFEE-4598-8196-C57383D38E10",
+                "rewardActionId": "EntertainmentArticle"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid argument"
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "operationId": "StatusGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContainerStatus"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceConfiguration": {
+      "required": [
+        "rewardWaitTime",
+        "defaultReward",
+        "rewardAggregation",
+        "explorationPercentage",
+        "modelExportFrequency",
+        "logRetentionDays"
+      ],
+      "type": "object",
+      "properties": {
+        "rewardWaitTime": {
+          "type": "string"
+        },
+        "defaultReward": {
+          "format": "float",
+          "type": "number"
+        },
+        "rewardAggregation": {
+          "type": "string"
+        },
+        "explorationPercentage": {
+          "format": "float",
+          "maximum": 1,
+          "minimum": -1,
+          "type": "number"
+        },
+        "modelExportFrequency": {
+          "type": "string"
+        },
+        "logRetentionDays": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "example": {
+        "rewardWaitTime": "00:10:00",
+        "defaultReward": 0.0,
+        "rewardAggregation": "earliest",
+        "explorationPercentage": 0.2,
+        "modelExportFrequency": "00:05:00",
+        "logRetentionDays": 7
+      }
+    },
+    "PolicyContract": {
+      "required": [
+        "name",
+        "arguments"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "myPersonalizer",
+        "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+      }
+    },
+    "EvaluationContract": {
+      "required": [
+        "name",
+        "startTime",
+        "endTime",
+        "policies"
+      ],
+      "type": "object",
+      "properties": {
+        "enableOfflineExperimentation": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "policies": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyContract"
+          }
+        }
+      },
+      "example": {
+        "enableOfflineExperimentation": true,
+        "name": "myFirstEvaluation",
+        "startTime": "2018-12-19T00:00:00Z",
+        "endTime": "2019-01-19T00:00:00Z",
+        "policies": [
+          {
+            "name": "Custom Policy 1",
+            "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+          }
+        ]
+      }
+    },
+    "Evaluation": {
+      "required": [
+        "id",
+        "name",
+        "startTime",
+        "endTime"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "pending",
+            "failed",
+            "notSubmitted"
+          ],
+          "type": "string"
+        },
+        "policyResults": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyResult"
+          }
+        }
+      }
+    },
+    "PolicyResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "string"
+        },
+        "summary": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyResultSummary"
+          }
+        },
+        "totalSummary": {
+          "$ref": "#/definitions/PolicyResultSummary"
+        }
+      }
+    },
+    "PolicyResultSummary": {
+      "required": [
+        "timeStamp",
+        "ipsEstimatorNumerator",
+        "ipsEstimatorDenominator",
+        "snipsEstimatorDenominator",
+        "aggregateTimeWindow"
+      ],
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ipsEstimatorNumerator": {
+          "format": "float",
+          "type": "number"
+        },
+        "ipsEstimatorDenominator": {
+          "format": "float",
+          "type": "number"
+        },
+        "snipsEstimatorDenominator": {
+          "format": "float",
+          "type": "number"
+        },
+        "aggregateTimeWindow": {
+          "type": "string"
+        },
+        "nonZeroProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "confidenceInterval": {
+          "format": "float",
+          "type": "number"
+        },
+        "sumOfSquares": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
+    "RewardRequest": {
+      "description": "Reward given to a rank response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "float",
+          "description": "Reward to be assigned to an action. Value must be between -1 and 1 inclusive.",
+          "type": "number"
+        }
+      },
+      "example": {
+        "value": 1.0
+      }
+    },
+    "IActionResult": {
+      "type": "object",
+      "properties": {}
+    },
+    "LogsProperties": {
+      "type": "object",
+      "properties": {
+        "dateRange": {
+          "$ref": "#/definitions/DateRange"
+        }
+      }
+    },
+    "DateRange": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "to": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ModelProperties": {
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "RankRequest": {
+      "description": "Request a set of actions to be ranked by the personalization service.",
+      "required": [
+        "actions"
+      ],
+      "type": "object",
+      "properties": {
+        "contextFeatures": {
+          "description": "Features of the context used for personalization as a\r\ndictionary of dictionaries. This depends on the application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, data about time and date, etc.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "actions": {
+          "description": "The set of actions the Personalization Service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RankableAction"
+          }
+        },
+        "excludedActions": {
+          "description": "The set of action ids to exclude from ranking.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eventId": {
+          "description": "Optionally pass an eventId that uniquely identifies this Rank event. \r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a personalization call.",
+          "type": "string"
+        },
+        "deferActivation": {
+          "description": "Send false if the user will see the rank results, therefore\r\nPersonalization will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the\r\nrank results, because the page is rendering later, or the Rank results may be\r\noverriden by code further downstream.",
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "example": {
+        "contextFeatures": [
+          {
+            "timeOfDay": "Morning"
+          }
+        ],
+        "actions": [
+          {
+            "id": "NewsArticle",
+            "features": [
+              {
+                "type": "News"
+              }
+            ]
+          },
+          {
+            "id": "SportsArticle",
+            "features": [
+              {
+                "type": "Sports"
+              }
+            ]
+          },
+          {
+            "id": "EntertainmentArticle",
+            "features": [
+              {
+                "type": "Entertainment"
+              }
+            ]
+          }
+        ],
+        "excludedActions": [
+          "SportsArticle"
+        ],
+        "eventId": "75269AD0-BFEE-4598-8196-C57383D38E10",
+        "deferActivation": false
+      }
+    },
+    "RankableAction": {
+      "description": "An action with it's associated features used for ranking.",
+      "required": [
+        "id",
+        "features"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the action.",
+          "type": "string"
+        },
+        "features": {
+          "description": "List of dictionaries containing features.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "RankResponse": {
+      "description": "A resulting ordered list of actions that result from a rank request.",
+      "type": "object",
+      "properties": {
+        "ranking": {
+          "description": "The calculated ranking for the current request.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RankedAction"
+          }
+        },
+        "eventId": {
+          "description": "The eventId for the round trip from request to response.",
+          "type": "string"
+        },
+        "rewardActionId": {
+          "description": "The action chosen by the Personalization service. This is the action for which to report the reward. This might not be the \r\nfirst found in 'ranking' if an action in the request in first position was part of the excluded ids.",
+          "type": "string"
+        }
+      }
+    },
+    "RankedAction": {
+      "description": "A ranked action with its resulting probability.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the action",
+          "type": "string"
+        },
+        "probability": {
+          "format": "float",
+          "description": "Probability of the action",
+          "type": "number"
+        }
+      }
+    },
+    "ContainerStatus": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string"
+        },
+        "apiStatus": {
+          "type": "string"
+        },
+        "apiStatusMessage": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "type": "apiKey"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Evaluations",
+      "description": "Manages counterfactual evaluation operations."
+    },
+    {
+      "name": "Model",
+      "description": "Manages reinforement learning configuration operations."
+    },
+    {
+      "name": "Configuration",
+      "description": "Manages configuration operations."
+    },
+    {
+      "name": "Events",
+      "description": "Manages event operations."
+    },
+    {
+      "name": "Logs",
+      "description": "Manages reinforcement learning logs."
+    },
+    {
+      "name": "Ranking",
+      "description": "Manages ranking operations."
+    }
+  ]
+}
