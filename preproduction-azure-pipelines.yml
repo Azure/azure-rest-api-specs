@@ -75,12 +75,12 @@ jobs:
     vmImage: 'Ubuntu 16.04'
   steps:
   - script: 'scripts/install-dotnet.sh'
-    displayName: 'Insall .Net'
+    displayName: 'Install .Net'
   - task: Npm@1
     displayName: 'npm install'
     inputs:
       verbose: false
-  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/autorest @azure/oad@0.6.1'
+  - script: 'npm install -D Azure/rest-api-specs-scripts#sergey/autorest @azure/oad@0.6.2'
   - script: 'npm run tsc && node scripts/breaking-change.js'
     displayName: 'Breaking Changes'
 
