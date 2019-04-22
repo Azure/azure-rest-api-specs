@@ -102,6 +102,35 @@
                 }
             }
         },
+        "/models": {
+            "get": {
+                "summary": "Get Models",
+                "description": "Get information about all trained models",
+                "operationId": "FormRecognizer_CustomGetModels",
+                "consumes": [],
+                "produces": [
+                  "application/json",
+                  "text/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                  "Get Model from id": {
+                    "$ref": "./examples/GetModels.json"
+                  }
+                }
+            },
+        },
         "/model/{id}/": {
             "get": {
                 "summary": "Get Model",
@@ -141,7 +170,7 @@
             "delete": {
                 "summary": "Delete Model",
                 "description": "Delete model artifacts.",
-                "operationId": "FormRecognizer_CustomDeleteModelById",
+                "operationId": "FormRecognizer_CustomModelDeleteById",
                 "consumes": [],
                 "produces": [
                   "application/json",
@@ -258,7 +287,9 @@
             "properties": {
                 "modelId": {
                     "description": "Identifier of the model.",
-                    "type": "string"
+                    "type": "string",
+                    "format": "uuid",
+                    "x-nullable": false
                 },
                 "trainingDocuments": {
                     "description": "List of documents used to train the model and the\r\ntrain operation error reported by each.",
@@ -509,20 +540,6 @@
                             "$ref": "#/definitions/Token"
                         }
                     }
-                }
-            }
-        },
-        "ContainerStatus": {
-            "type": "object",
-            "properties": {
-                "service": {
-                    "type": "string"
-                },
-                "apiStatus": {
-                    "type": "string"
-                },
-                "apiStatusMessage": {
-                    "type": "string"
                 }
             }
         }
