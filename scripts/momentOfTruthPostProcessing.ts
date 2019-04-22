@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { tsUtils, momentOfTruthUtils, utils } from '@azure/rest-api-specs-scripts'
+import { tsUtils, momentOfTruthUtils, utils, postToGitHub as gitHubPost } from '@azure/rest-api-specs-scripts'
 
 import * as fs from 'fs'
 import * as path from 'path'
-import * as gitHubPost from './postToGitHub'
 
 let pullRequestNumber = utils.getPullRequestNumber();
 let targetBranch = utils.getTargetBranch();
@@ -476,7 +475,7 @@ function postProcessing() {
     if(process.env.TRAVIS_REPO_SLUG != undefined && process.env.TRAVIS_REPO_SLUG.endsWith("-pr")) {
         let slug = process.env.TRAVIS_REPO_SLUG;
         slug = slug.split("/")[1];
-        gitHubPost.postGithubComment("Azure", slug, pullRequestNumber, output.text);
+        gitHubPost.postGithubComment("Azure", slug, parseInt(pullRequestNumber), output.text);
     }
 
     if (newSDKErrorsCount > 0 || newARMErrorsCount > 0) {
