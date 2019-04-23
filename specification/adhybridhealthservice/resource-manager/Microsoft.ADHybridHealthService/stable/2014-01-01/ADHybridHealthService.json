@@ -3276,7 +3276,7 @@
             "description": "The name of the service.",
             "required": true,
             "type": "string"
-          },          
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -3311,7 +3311,7 @@
             "description": "The name of the service.",
             "required": true,
             "type": "string"
-          },          
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -3326,6 +3326,55 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}":
+    {
+      "get": {
+        "tags": ["Metrics"],
+        "description": "Gets the list of connectors and run profile names.",
+        "x-ms-examples": {
+          "serviceMembers_getConnectorMetadata": {
+            "$ref": "./examples/ConnectorMetadata.json"
+          }
+        },
+        "operationId": "serviceMembers_getConnectorMetadata",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The service member id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+		  {
+            "name": "metricName",
+            "in": "path",
+            "description": "The name of the metric.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description":
+              "Gets the list of connectors and run profile names for the given service and service member.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorMetadata"
+            }
+          }
         }
       }
     }
@@ -4234,6 +4283,40 @@
           "items": {
             "$ref": "#/definitions/ConnectorConnectionError"
           }
+        }
+      }
+    },
+    "ConnectorMetadata": {
+      "description": "Gets the list of connectors and run profile names.",
+      "type": "object",
+      "properties": {
+        "connectors": {
+          "description": "The list of connectors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorMetadataDetails"
+          }
+        },
+        "runProfileNames": {
+          "description": "The list of run profile names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConnectorMetadataDetails": {
+      "description": "Details of the connector.",
+      "type": "object",
+      "properties": {
+        "connectorId": {
+          "description": "The Connector Id.",
+          "type": "string"
+        },
+        "connectorDisplayName": {
+          "description": "The Connector Display Name",
+          "type": "string"
         }
       }
     },
@@ -5808,7 +5891,7 @@
           "type": "string"
         },
         "blobCreateDateTime": {
-          "description": "Time at which the the new Risky IP report was requested.",
+          "description": "Time at which the new Risky IP report was requested.",
           "type": "string",
           "format": "date-time"
         },
@@ -6458,29 +6541,29 @@
       }
     }
   },
-  "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The version of the API to be used with the client request.",
-      "required": true,
-      "type": "string"
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
+    "parameters": {
+      "apiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "description": "The version of the API to be used with the client request.",
+        "required": true,
+        "type": "string"
       }
-    }
-  },
-  "security": [
-    {
-      "azure_auth": [ "user_impersonation" ]
-    }
-  ]
-}
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow.",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "security": [
+      {
+        "azure_auth": [ "user_impersonation" ]
+      }
+    ]
+  }

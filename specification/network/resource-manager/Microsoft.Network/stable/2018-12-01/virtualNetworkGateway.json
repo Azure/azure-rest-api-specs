@@ -449,12 +449,18 @@
             "schema": {
               "type": "string"
             }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
           }
         },
         "x-ms-examples": {
           "GenerateVPNClientPackage": { "$ref": "./examples/VirtualNetworkGatewayGenerateVpnClientPackage.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile": {
@@ -509,7 +515,9 @@
         "x-ms-examples": {
           "GenerateVirtualNetworkGatewayVPNProfile": { "$ref": "./examples/VirtualNetworkGatewayGenerateVpnProfile.json" }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl": {
@@ -2625,7 +2633,7 @@
       },
       "description": "Response for ListLocalNetworkGateways API service call."
     },
-    "virtualNetworkConnectionGatewayReference": {
+    "VirtualNetworkConnectionGatewayReference": {
       "properties": {
         "id": {
           "type": "string",
@@ -2644,15 +2652,15 @@
           "description": "The authorizationKey."
         },
         "virtualNetworkGateway1": {
-          "$ref": "#/definitions/virtualNetworkConnectionGatewayReference",
+          "$ref": "#/definitions/VirtualNetworkConnectionGatewayReference",
           "description": "The reference to virtual network gateway resource."
         },
         "virtualNetworkGateway2": {
-          "$ref": "#/definitions/virtualNetworkConnectionGatewayReference",
+          "$ref": "#/definitions/VirtualNetworkConnectionGatewayReference",
           "description": "The reference to virtual network gateway resource."
         },
         "localNetworkGateway2": {
-          "$ref": "#/definitions/virtualNetworkConnectionGatewayReference",
+          "$ref": "#/definitions/VirtualNetworkConnectionGatewayReference",
           "description": "The reference to local network gateway resource."
         },
         "connectionType": {

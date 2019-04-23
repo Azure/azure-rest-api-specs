@@ -1,4 +1,4 @@
-﻿# Swagger Checklist for Microsoft Azure #
+# Swagger Checklist for Microsoft Azure #
 
 ## Introduction ##
 
