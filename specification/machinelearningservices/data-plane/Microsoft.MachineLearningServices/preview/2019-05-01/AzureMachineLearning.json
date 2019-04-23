@@ -6988,29 +6988,7 @@
         "summary": "Cancel a run.",
         "tags": [
           "Execution"
-        ],
-        "x-ms-examples": {
-          "Cancel a run": {
-            "parameters": {
-              "experimentName": "demo_experiment",
-              "parameters": {
-                "runId": "demorun_15501234342_0",
-                "target": "local"
-              },
-              "resourceGroupName": "demo_resource_group",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/localRun": {
@@ -7112,23 +7090,7 @@
         "summary": "Start a run on a local machine.",
         "tags": [
           "Execution"
-        ],
-        "x-ms-examples": {
-          "Start a local run": {
-            "parameters": {
-              "experimentName": "demo_experiment",
-              "files": "multipart-form-data",
-              "resourceGroupName": "demo_resource_group",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {}
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/run": {
@@ -7227,63 +7189,7 @@
         "summary": "Start a run on a remote compute target.",
         "tags": [
           "Execution"
-        ],
-        "x-ms-examples": {
-          "Start a run": {
-            "parameters": {
-              "definition": {
-                "Configuration": {
-                  "Arguments": [
-                    "234"
-                  ],
-                  "Communicator": "None",
-                  "Environment": {
-                    "Docker": {
-                      "BaseImage": "mcr.microsoft.com/azureml/base:0.2.2"
-                    },
-                    "Python": {
-                      "CondaDependencies": {
-                        "dependencies": [
-                          "python=3.6.2",
-                          {
-                            "pip": [
-                              "azureml-defaults"
-                            ]
-                          }
-                        ],
-                        "name": "project_environment"
-                      },
-                      "InterpreterPath": "python",
-                      "UserManagedDependencies": false
-                    }
-                  },
-                  "Framework": "Python",
-                  "History": {
-                    "OutputCollection": true
-                  },
-                  "MaxRunDurationSeconds": 1200,
-                  "NodeCount": 1,
-                  "Script": "findsquare.py",
-                  "SourceDirectoryDataStore": null,
-                  "Target": "batchai"
-                },
-                "SnapshotId": "00000000-0000-0000-0000-000000000000"
-              },
-              "experimentName": "demo_experiment",
-              "resourceGroupName": "demo_resource_group",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runId/{runId}/cancel": {
@@ -7373,26 +7279,7 @@
         "summary": "Cancel a run.",
         "tags": [
           "Execution"
-        ],
-        "x-ms-examples": {
-          "Cancel a run with URI": {
-            "parameters": {
-              "experimentName": "demo_experiment",
-              "resourceGroupName": "demo_resource_group",
-              "runId": "demorun_15501234342_0",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/snapshotRun": {
@@ -7499,26 +7386,7 @@
         "summary": "Start a run from a snapshot on a remote compute target.",
         "tags": [
           "Execution"
-        ],
-        "x-ms-examples": {
-          "Start a snapshot run": {
-            "parameters": {
-              "experimentName": "demo_experiment",
-              "files": "multipart-form-data",
-              "resourceGroupName": "demo_resource_group",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments": {
