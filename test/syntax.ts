@@ -52,7 +52,7 @@ describe('Azure swagger schema validation:', function () {
   }
 
   describe('Azure x-ms-example schema validation:', function () {
-    for (const example of utils.examples) {
+    for (const example of utils.getExamples()) {
       it('x-ms-examples: ' + example + ' should be a valid x-ms-example.', function (done) {
         utils.parseJsonFromFile(example).then((parsedData: unknown) => {
           var valid = syntaxContext.validator.validate(parsedData, syntaxContext.exampleSchema);
@@ -69,7 +69,7 @@ describe('Azure swagger schema validation:', function () {
 });
 
 describe('External file or url references ("$ref") in a swagger spec:', function () {
-  for (const swagger of utils.swaggers) {
+  for (const swagger of utils.getSwaggers()) {
     it(swagger + ' should be completely resolvable.', function (done) {
       RefParser.bundle(swagger, function (bundleErr: { readonly message: unknown }, _bundleResult: unknown) {
         if (bundleErr) {
