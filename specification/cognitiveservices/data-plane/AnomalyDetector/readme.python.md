@@ -12,6 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.cognitiveservices.anomalydetector
   package-name: azure-cognitiveservices-anomalydetector
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

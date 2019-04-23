@@ -1,0 +1,44 @@
+{
+  "title": "Properties Query",
+  "description": "A query accessing one of the resource properties.",
+  "parameters": {
+    "api-version": "2019-04-01",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by tostring(properties.storageProfile.osDisk.osType)"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 2,
+        "count": 2,
+        "resultTruncated": "false",
+        "data": {
+          "columns": [
+            {
+              "name": "properties_storageProfile_osDisk_osType",
+              "type": "string"
+            },
+            {
+              "name": "count_",
+              "type": "integer"
+            }
+          ],
+          "rows": [
+            [
+              "Linux",
+              7
+            ],
+            [
+              "Windows",
+              23
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

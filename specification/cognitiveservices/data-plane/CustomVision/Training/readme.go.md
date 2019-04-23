@@ -16,6 +16,7 @@ batch:
   - tag: release_1_0
   - tag: release_2_1
   - tag: release_2_2
+  - tag: release_3_0
 ```
 
 ### Tag: release_1_0 and go
