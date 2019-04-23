@@ -23,9 +23,15 @@ These are the global settings for the Serial Console API.
 openapi-type: arm
 azure-arm: true
 tag: package-2018-05
+```
+
+### Tag: package-2018-05
+
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05'
 input-file:
 - Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
-output-folder: ./Generated
 ```
 
 ---
