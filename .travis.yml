@@ -8,8 +8,8 @@ services:
 env:
   matrix:
     - MODE=branchStrategy
+    - MODE=semantic PR_ONLY=true CHECK_NAME="Semantic Validator"
     - MODE=model PR_ONLY=true CHECK_NAME="Model Validator"
-    - MODE=BreakingChange PR_ONLY=true CHECK_NAME="Breaking Changes"
 matrix:
   fast_finish: true
   allow_failures:
