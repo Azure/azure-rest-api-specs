@@ -37,7 +37,7 @@ describe('Azure swagger schema validation:', function () {
 
   });
 
-  for (const swagger of utils.swaggers) {
+  for (const swagger of utils.getSwaggers()) {
     it(swagger + ' should be a valid Swagger document.', function (done) {
       utils.parseJsonFromFile(swagger).then((parsedData: unknown)=> {
         var valid = syntaxContext.validator.validate(parsedData, syntaxContext.extensionSwaggerSchema);
