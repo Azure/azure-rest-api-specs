@@ -53,9 +53,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_appconfiguration']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_app_configuration']
 ```
 
 ## C#
@@ -70,9 +70,9 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Node
+## Ruby
 
-See configuration in [readme.node.md](./readme.node.md)
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## Suppression
 
