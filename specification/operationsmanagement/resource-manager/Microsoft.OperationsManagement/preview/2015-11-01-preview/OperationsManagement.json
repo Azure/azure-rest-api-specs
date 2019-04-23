@@ -33,7 +33,7 @@
             }
         }
     },
-    "paths": {       
+    "paths": {
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationsManagement/solutions/{solutionName}": {
             "put": {
                 "tags": [
@@ -52,7 +52,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
@@ -101,7 +101,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },                   
+                    },
                     {
                         "$ref": "#/parameters/SolutionNameParameter"
                     },
@@ -124,7 +124,7 @@
             "get": {
                 "tags": [
                     "Solution"
-                ],                
+                ],
                 "operationId": "Solutions_Get",
                  "x-ms-examples": {
                      "SolutionGet": { "$ref": "./examples/SolutionGet.json" }
@@ -137,7 +137,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/SolutionNameParameter"
                     },
@@ -165,7 +165,7 @@
             "get": {
                 "tags": [
                     "Solution"
-                ],                
+                ],
                 "operationId": "Solutions_ListByResourceGroup",
                  "x-ms-examples": {
                      "SolutionList": { "$ref": "./examples/SolutionList.json" }
@@ -203,7 +203,7 @@
             "get": {
                 "tags": [
                     "Solution"
-                ],                
+                ],
                 "operationId": "Solutions_ListBySubscription",
                  "x-ms-examples": {
                      "SolutionList": { "$ref": "./examples/SolutionListForSubscription.json" }
@@ -213,7 +213,7 @@
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
@@ -238,17 +238,17 @@
             "get": {
                 "tags": [
                     "ManagementAssociation"
-                ],                
+                ],
                 "operationId": "ManagementAssociations_ListBySubscription",
                  "x-ms-examples": {
                      "SolutionList": { "$ref": "./examples/ManagementAssociationListForSubscription.json" }
                 },
-                "summary": "Retrieves the ManagementAssociatons list for the subscription",
-                "description": "Retrieves the ManagementAssociatons list.",
+                "summary": "Retrieves the ManagementAssociations list for the subscription",
+                "description": "Retrieves the ManagementAssociations list.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
@@ -286,7 +286,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
@@ -352,7 +352,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceNameParameter"
-                    },                
+                    },
                     {
                         "$ref": "#/parameters/ManagementAssociationNameParameter"
                     },
@@ -375,7 +375,7 @@
             "get": {
                 "tags": [
                     "ManagementAssociation"
-                ],                
+                ],
                 "operationId": "ManagementAssociations_Get",
                  "x-ms-examples": {
                      "SolutionGet": { "$ref": "./examples/ManagementAssociationGet.json" }
@@ -397,7 +397,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceNameParameter"
-                    },                 
+                    },
                     {
                         "$ref": "#/parameters/ManagementAssociationNameParameter"
                     },
@@ -425,7 +425,7 @@
             "get": {
                 "tags": [
                     "ManagementConfiguration"
-                ],                
+                ],
                 "operationId": "ManagementConfigurations_ListBySubscription",
                  "x-ms-examples": {
                      "SolutionList": { "$ref": "./examples/ManagementConfigurationListForSubscription.json" }
@@ -435,7 +435,7 @@
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     }
@@ -473,7 +473,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
@@ -521,7 +521,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },                   
+                    },
                     {
                         "$ref": "#/parameters/ManagementConfigurationNameParameter"
                     },
@@ -544,7 +544,7 @@
             "get": {
                 "tags": [
                     "ManagementConfiguration"
-                ],                
+                ],
                 "operationId": "ManagementConfigurations_Get",
                  "x-ms-examples": {
                      "SolutionGet": { "$ref": "./examples/ManagementConfigurationGet.json" }
@@ -557,7 +557,7 @@
                     },
                     {
                         "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },                    
+                    },
                     {
                         "$ref": "#/parameters/ManagementConfigurationNameParameter"
                     },
@@ -607,7 +607,7 @@
                 "x-ms-pageable": {
                 "nextLinkName": null
                 }
-            }                
+            }
         }
     },
     "definitions": {
@@ -624,7 +624,7 @@
             }
         },
         "Operation": {
-            "description": "Supported operation of OperationsManagement resource provider.",      
+            "description": "Supported operation of OperationsManagement resource provider.",
             "properties": {
                 "name": {
                     "description": "Operation name: {provider}/{resource}/{operation}",
@@ -667,7 +667,7 @@
                       "type":"string",
                       "description":"the azure resourceId of the resource."
                     },
-                    "description": "The azure resources that will be contained within the solutions. They will be locked and gets deleted automatically when the solution is deleted."                    
+                    "description": "The azure resources that will be contained within the solutions. They will be locked and gets deleted automatically when the solution is deleted."
                 },
                 "referencedResources": {
                     "type": "array",
@@ -675,7 +675,7 @@
                       "type":"string",
                       "description":"the azure resourceId of the resource."
                     },
-                    "description": "The resources that will be referenced from this solution. Deleting any of those solution out of band will break the solution."                    
+                    "description": "The resources that will be referenced from this solution. Deleting any of those solution out of band will break the solution."
                 }
             },
             "required": [
@@ -689,7 +689,7 @@
                 "applicationId": {
                     "type": "string",
                     "description": "The applicationId of the appliance for this association."
-                }            
+                }
             },
             "required": [
                 "applicationId"
@@ -738,7 +738,7 @@
               "items":{
                 "$ref":"#/definitions/Solution"
               },
-              "description":"List of solution properites within the subscription."
+              "description":"List of solution properties within the subscription."
             }
           },
           "description":"the list of solution response"
@@ -750,7 +750,7 @@
               "items":{
                 "$ref":"#/definitions/ManagementAssociation"
               },
-              "description":"List of Management Association properites within the subscription."
+              "description":"List of Management Association properties within the subscription."
             }
           },
           "description":"the list of ManagementAssociation response"
@@ -762,7 +762,7 @@
               "items":{
                 "$ref":"#/definitions/ManagementConfiguration"
               },
-              "description":"List of Management Configuration properites within the subscription."
+              "description":"List of Management Configuration properties within the subscription."
             }
           },
           "description":"the list of ManagementConfiguration response"
@@ -810,14 +810,14 @@
                     "description": "Resource location"
                 },
                 "plan":{
-                  "description": "Plan for solution object supported by the OperationsManagement resource provider.",               
+                  "description": "Plan for solution object supported by the OperationsManagement resource provider.",
                   "$ref":"#/definitions/SolutionPlan"
                 },
                 "properties": {
-                    "description": "Properties for solution object supported by the OperationsManagement resource provider.",   
-                    "$ref": "#/definitions/SolutionProperties"                    
-                }   
-            },  
+                    "description": "Properties for solution object supported by the OperationsManagement resource provider.",
+                    "$ref": "#/definitions/SolutionProperties"
+                }
+            },
             "description": "The container for solution.",
             "x-ms-azure-resource": true
         },
@@ -841,12 +841,12 @@
                 "location": {
                     "type": "string",
                     "description": "Resource location"
-                },                
+                },
                 "properties": {
-                    "description": "Properties for ManagementAssociation object supported by the OperationsManagement resource provider.",   
-                    "$ref": "#/definitions/ManagementAssociationProperties"                    
-                }   
-            },  
+                    "description": "Properties for ManagementAssociation object supported by the OperationsManagement resource provider.",
+                    "$ref": "#/definitions/ManagementAssociationProperties"
+                }
+            },
             "description": "The container for solution.",
             "x-ms-azure-resource": true
         },
@@ -870,12 +870,12 @@
                 "location": {
                     "type": "string",
                     "description": "Resource location"
-                },                
+                },
                 "properties": {
-                    "description": "Properties for ManagementConfiguration object supported by the OperationsManagement resource provider.",   
-                    "$ref": "#/definitions/ManagementConfigurationProperties"                    
-                }   
-            },  
+                    "description": "Properties for ManagementConfiguration object supported by the OperationsManagement resource provider.",
+                    "$ref": "#/definitions/ManagementConfigurationProperties"
+                }
+            },
             "description": "The container for solution.",
             "x-ms-azure-resource": true
         },
@@ -910,7 +910,7 @@
                 }
             },
             "description": "The error body contract."
-        }      
+        }
     },
     "parameters": {
         "SubscriptionIdParameter": {
@@ -985,6 +985,6 @@
             "type": "string",
             "description": "Parent resource name.",
             "x-ms-parameter-location": "client"
-        }         
+        }
     }
 }

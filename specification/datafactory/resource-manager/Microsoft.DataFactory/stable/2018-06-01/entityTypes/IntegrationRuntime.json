@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
-    "version": "2017-09-01-preview"
+    "version": "2018-06-01"
   },
   "paths": {},
   "definitions": {
@@ -955,6 +955,61 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "SsisObjectMetadataListResponse": {
+      "type": "object",
+      "description": "A list of SSIS object metadata.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SSIS object metadata.",
+          "items": {
+            "$ref": "#/definitions/SsisObjectMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results, if any remaining results exist."
+        }
+      }
+    },
+    "SsisObjectMetadata": {
+      "type": "object",
+      "description": "SSIS object metadata.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "Type of metadata.",
+          "$ref": "#/definitions/SsisObjectMetadataType"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Metadata id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Metadata name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Metadata description."
+        }
+      }
+    },
+    "SsisObjectMetadataType": {
+      "description": "The type of SSIS object metadata.",
+      "type": "string",
+      "enum": [
+        "Folder",
+        "Project",
+        "Package",
+        "Environment"
+      ],
+      "x-ms-enum": {
+        "name": "SsisObjectMetadataType",
+        "modelAsString": true
       }
     }
   }
