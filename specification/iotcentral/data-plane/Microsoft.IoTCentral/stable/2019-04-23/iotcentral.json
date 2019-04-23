@@ -1,0 +1,1124 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Azure IoT Central",
+    "description": "",
+    "termsOfService": ""
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Applications"
+    },
+    {
+      "name": "ApplicationDisplay"
+    }
+  ],
+  "paths": {
+    "/applications/{application_id}/actions/": {
+      "get": {
+        "operationId": "Actions_List",
+        "tags": [
+          "Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ActionCollection"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "x-ms-pageable": {},
+        "summary": "Get the list of actions in an application"
+      },
+      "post": {
+        "operationId": "Actions_Create",
+        "tags": [
+          "Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "description": "Create an action which triggers when a rule is fired in IoT Central.",
+        "summary": "When a rule is fired"
+      },
+      "options": {
+        "operationId": "Actions_Schema",
+        "tags": [
+          "Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "Allow": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        }
+      }
+    },
+    "/applications/{application_id}/actions/{action_id}": {
+      "get": {
+        "operationId": "Actions_Get",
+        "tags": [
+          "Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/ActionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "summary": "Get an action by ID"
+      },
+      "delete": {
+        "operationId": "Actions_Remove",
+        "tags": [
+          "Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/ActionId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "summary": "Delete an action"
+      }
+    },
+    "/applications/{application_id}/devices/{device_id}/commands/{device_command_id}": {
+      "post": {
+        "operationId": "DeviceCommands_Run",
+        "tags": [
+          "DeviceCommands"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/DeviceCommandId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/DeviceTemplateDisplayId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "description": "Run a command by ID on a device.",
+        "summary": "Run a command"
+      }
+    },
+    "/applications/{application_id}/devices/": {
+      "get": {
+        "operationId": "Devices_List",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceCollection"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "x-ms-pageable": {},
+        "summary": "Get the list of devices in an application"
+      },
+      "post": {
+        "operationId": "Devices_Create",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          {
+            "$ref": "#/parameters/DeviceTemplateDisplayId"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "description": "Create a new real or simulated device of a specified device template.",
+        "summary": "Create a device"
+      },
+      "options": {
+        "operationId": "Devices_Schema",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DeviceTemplateDisplayId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "Allow": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        }
+      }
+    },
+    "/applications/{application_id}/devices/{device_id}": {
+      "get": {
+        "operationId": "Devices_Get",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/DeviceTemplateDisplayId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "description": "Get details about an existing device by device ID.",
+        "summary": "Get a device"
+      },
+      "patch": {
+        "operationId": "Devices_Update",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/DeviceTemplateDisplayId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "description": "Update an existing device by device ID.",
+        "summary": "Update a device"
+      },
+      "delete": {
+        "operationId": "Devices_Remove",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "description": "Delete an existing device by device ID.",
+        "summary": "Delete a device"
+      },
+      "options": {
+        "operationId": "Devices_Definition",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/DeviceTemplateDisplayId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "Allow": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        }
+      }
+    },
+    "/applications/{application_id}/dps/": {
+      "get": {
+        "operationId": "Dps_Details",
+        "tags": [
+          "Dps"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DpsEnvironment"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "summary": "Get the DPS environment"
+      }
+    },
+    "/applications/{application_id}/rules/": {
+      "get": {
+        "operationId": "Rules_List",
+        "tags": [
+          "Rules"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RuleCollection"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "x-ms-pageable": {},
+        "summary": "Get the list of rules in an application"
+      }
+    },
+    "/applications/{application_id}/rules/{rule_id}": {
+      "get": {
+        "operationId": "Rules_Get",
+        "tags": [
+          "Rules"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "summary": "Get a rule by ID"
+      }
+    },
+    "/applications/": {
+      "get": {
+        "operationId": "Applications_List",
+        "tags": [
+          "Applications"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ApplicationCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {},
+        "summary": "Get the list of applications accessible to the signed-in user"
+      }
+    },
+    "/applications/{application_id}": {
+      "get": {
+        "operationId": "Applications_Get",
+        "tags": [
+          "Applications"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "400": {
+            "description": "Missing required parameter"
+          }
+        },
+        "summary": "Get an application by ID"
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "Unique ID of the action.",
+          "type": "string"
+        },
+        "ruleId": {
+          "description": "Unique ID of the rule that is tied to the action.",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "email",
+            "webhook"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType"
+          },
+          "description": "Type of the action.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ruleId",
+        "type"
+      ],
+      "discriminator": "type",
+      "type": "object"
+    },
+    "ActionCollection": {
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "DeviceCommandParameters": {
+      "type": "object",
+      "properties": {}
+    },
+    "DeviceTemplateReference": {
+      "properties": {
+        "id": {
+          "description": "Unique ID of the device template.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the device template.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "type": "object"
+    },
+    "DeviceProperties": {
+      "properties": {
+        "device": {
+          "readOnly": true,
+          "additionalProperties": {},
+          "type": "object"
+        },
+        "cloud": {
+          "additionalProperties": {},
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "DeviceSettings": {
+      "properties": {
+        "device": {
+          "additionalProperties": {},
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "DeviceMeasurements": {
+      "properties": {
+        "telemetry": {
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        "events": {
+          "readOnly": true,
+          "additionalProperties": {},
+          "type": "object"
+        },
+        "states": {
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    },
+    "Device": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "Unique ID of the device in IoT Central.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name of the device.",
+          "type": "string"
+        },
+        "simulated": {
+          "default": false,
+          "description": "Simulated flag of the device. True if device is simulated.",
+          "type": "boolean"
+        },
+        "deviceId": {
+          "description": "ID used for device connectivity.",
+          "type": "string"
+        },
+        "deviceTemplate": {
+          "$ref": "#/definitions/DeviceTemplateReference"
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties"
+        },
+        "settings": {
+          "$ref": "#/definitions/DeviceSettings"
+        },
+        "measurements": {
+          "$ref": "#/definitions/DeviceMeasurements"
+        }
+      },
+      "required": [
+        "name",
+        "deviceTemplate"
+      ],
+      "type": "object"
+    },
+    "DeviceCollection": {
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/Device"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "DeviceTemplateReferenceUpdate": {
+      "properties": {
+        "id": {
+          "description": "Unique ID of the device template.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the device template.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DevicePropertiesUpdate": {
+      "properties": {
+        "cloud": {
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "DeviceSettingsUpdate": {
+      "properties": {
+        "device": {
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "DeviceUpdate": {
+      "properties": {
+        "name": {
+          "description": "Display name of the device.",
+          "type": "string"
+        },
+        "simulated": {
+          "description": "Simulated flag of the device. True if device is simulated.",
+          "type": "boolean"
+        },
+        "deviceId": {
+          "description": "ID used for device connectivity.",
+          "type": "string"
+        },
+        "deviceTemplate": {
+          "$ref": "#/definitions/DeviceTemplateReferenceUpdate"
+        },
+        "properties": {
+          "$ref": "#/definitions/DevicePropertiesUpdate"
+        },
+        "settings": {
+          "$ref": "#/definitions/DeviceSettingsUpdate"
+        }
+      },
+      "type": "object"
+    },
+    "TPM": {
+      "properties": {
+        "endorsementKey": {
+          "type": "string"
+        },
+        "storageRootKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "endorsementKey"
+      ],
+      "type": "object"
+    },
+    "CaReferences": {
+      "properties": {
+        "primary": {
+          "type": "string"
+        },
+        "secondary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "primary"
+      ],
+      "type": "object"
+    },
+    "X509": {
+      "properties": {
+        "caReferences": {
+          "$ref": "#/definitions/CaReferences"
+        }
+      },
+      "required": [
+        "caReferences"
+      ],
+      "type": "object"
+    },
+    "SymmetricKey": {
+      "properties": {
+        "primaryKey": {
+          "type": "string"
+        },
+        "secondaryKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "primaryKey",
+        "secondaryKey"
+      ],
+      "type": "object"
+    },
+    "Attestation": {
+      "properties": {
+        "type": {
+          "enum": [
+            "tpm",
+            "x509",
+            "symmetricKey"
+          ],
+          "type": "string"
+        },
+        "tpm": {
+          "$ref": "#/definitions/TPM"
+        },
+        "x509": {
+          "$ref": "#/definitions/X509"
+        },
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKey"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
+    "EnrollmentGroup": {
+      "properties": {
+        "enrollmentGroupId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningStatus": {
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string"
+        },
+        "attestation": {
+          "$ref": "#/definitions/Attestation"
+        }
+      },
+      "required": [
+        "enrollmentGroupId",
+        "attestation"
+      ],
+      "type": "object"
+    },
+    "DpsEnvironment": {
+      "properties": {
+        "idScope": {
+          "type": "string"
+        },
+        "deviceProvisioningHostName": {
+          "type": "string"
+        },
+        "enrollmentGroups": {
+          "items": {
+            "$ref": "#/definitions/EnrollmentGroup"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "idScope",
+        "deviceProvisioningHostName",
+        "enrollmentGroups"
+      ],
+      "type": "object"
+    },
+    "Rule": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "Unique ID of the rule.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name of the rule.",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enabled flag of the rule. True if rule is enabled.",
+          "type": "boolean"
+        },
+        "deviceTemplate": {
+          "$ref": "#/definitions/DeviceTemplateReference"
+        }
+      },
+      "required": [
+        "name",
+        "deviceTemplate"
+      ],
+      "type": "object"
+    },
+    "RuleCollection": {
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "Application": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "Unique ID of the application.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name of the application.",
+          "type": "string"
+        },
+        "subdomain": {
+          "description": "Subdomain of the application.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "subdomain"
+      ],
+      "type": "object"
+    },
+    "ApplicationCollection": {
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "WebhookAction": {
+      "x-ms-discriminator-value": "webhook",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Display name of the action.",
+              "type": "string"
+            },
+            "url": {
+              "format": "url",
+              "description": "Callback URL of the webhook.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "url"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "EmailAction": {
+      "x-ms-discriminator-value": "email",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "Display name of the action.",
+              "type": "string"
+            },
+            "email": {
+              "items": {
+                "format": "email",
+                "type": "string"
+              },
+              "description": "Email addresses to send to.",
+              "type": "array"
+            }
+          },
+          "required": [
+            "name",
+            "email"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "WebhookActionBody": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "Unique ID of the action.",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "Time when the rule was triggered (UTC format).",
+          "type": "string"
+        },
+        "rule": {
+          "$ref": "#/definitions/Rule"
+        },
+        "device": {
+          "$ref": "#/definitions/Device"
+        },
+        "application": {
+          "$ref": "#/definitions/Application"
+        }
+      },
+      "required": [
+        "timestamp",
+        "rule",
+        "device",
+        "application"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "ApplicationId": {
+      "in": "path",
+      "name": "application_id",
+      "type": "string",
+      "required": true,
+      "description": "Unique ID of the application.",
+      "x-ms-parameter-location": "method"
+    },
+    "ActionId": {
+      "in": "path",
+      "name": "action_id",
+      "type": "string",
+      "required": true,
+      "description": "Unique ID of the action.",
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceId": {
+      "in": "path",
+      "name": "device_id",
+      "type": "string",
+      "required": true,
+      "description": "Unique ID of the device.",
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceCommandId": {
+      "in": "path",
+      "name": "device_command_id",
+      "type": "string",
+      "required": true,
+      "description": "ID of the command.",
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceTemplateDisplayId": {
+      "name": "deviceTemplateDisplayId",
+      "in": "query",
+      "required": false,
+      "description": "Device template associated with this device.",
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "RuleId": {
+      "in": "path",
+      "name": "rule_id",
+      "type": "string",
+      "required": true,
+      "description": "Unique ID of the rule.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "host": "api.azureiotcentral.com",
+  "basePath": "/v1-beta",
+  "schemes": [
+    "https"
+  ]
+}
