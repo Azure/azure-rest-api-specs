@@ -1290,11 +1290,11 @@
       "description": "The properties of a trigger.",
       "type": "object",
       "properties": {
-        "schedulerTriggers": {
+        "timerTriggers": {
           "description": "The collection of scheduler triggers.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SchedulerTrigger"
+            "$ref": "#/definitions/TimerTrigger"
           }
         },
         "sourceTriggers": {
@@ -1361,8 +1361,8 @@
         }
       }
     },
-    "SchedulerTrigger": {
-      "description": "The properties of a scheduler trigger.",
+    "TimerTrigger": {
+      "description": "The properties of a timer trigger.",
       "required": [
         "schedule",
         "name"
@@ -1375,6 +1375,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1421,6 +1422,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1459,6 +1461,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1748,11 +1751,11 @@
       "description": "The properties for updating triggers.",
       "type": "object",
       "properties": {
-        "schedulerTriggers": {
+        "timerTriggers": {
           "description": "The collection of scheduler triggers.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SchedulerTrigger"
+            "$ref": "#/definitions/TimerTriggerUpdateParameters"
           }
         },
         "sourceTriggers": {
@@ -1765,6 +1768,36 @@
         "baseImageTrigger": {
           "$ref": "#/definitions/BaseImageTriggerUpdateParameters",
           "description": "The trigger based on base image dependencies."
+        }
+      }
+    },
+    "TimerTriggerUpdateParameters": {
+      "description": "The properties for updating a timer trigger.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "description": "The CRON expression for the task schedule",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the trigger.",
+          "type": "string"
         }
       }
     },
@@ -1796,6 +1829,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1833,6 +1867,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
