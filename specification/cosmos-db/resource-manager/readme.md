@@ -82,6 +82,10 @@ directive:
     from: cosmos-db.json
     where: $.definitions.GremlinDatabase
     reason: The GremlinDatabase doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.GremlinGraph
+    reason: The GremlinGraph doesn't support Patch operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
