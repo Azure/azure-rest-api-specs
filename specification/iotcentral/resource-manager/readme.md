@@ -56,6 +56,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -76,6 +77,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/IotCentral/Management.IotCentral/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

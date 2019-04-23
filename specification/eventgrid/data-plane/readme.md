@@ -52,6 +52,8 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 - Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
 - Microsoft.Media/stable/2018-01-01/MediaServices.json
+- Microsoft.Maps/stable/2018-01-01/Maps.json
+- Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
 ```
 
 ---
@@ -67,6 +69,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -119,31 +122,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: eventgrid
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-01
-```
-
-### Tag: package-2018-01 and go
-
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/eventgrid/2018-01-01/eventgrid
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -155,24 +134,5 @@ azure-arm: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-eventgrid
+output-folder: $(azure-libraries-for-java-folder)/eventgrid/data-plane
 ```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-01
-```
-
-### Tag: package-2018-01 and java
-
-These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.eventgrid.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/data-plane/v2018_01_01
-```
-

@@ -185,6 +185,7 @@
           "Create virtual network with subnet": { "$ref": "./examples/VirtualNetworkCreateSubnet.json" },
           "Create virtual network with subnet containing address prefixes": { "$ref": "./examples/VirtualNetworkCreateSubnetWithAddressPrefixes.json" },
           "Create virtual network with service endpoints": { "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json" },
+          "Create virtual network with service endpoints and service endpoint policy": { "$ref": "./examples/VirtualNetworkCreateServiceEndpointPolicy.json" },
           "Create virtual network with delegated subnets": { "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json" }
         }
       },
@@ -740,13 +741,6 @@
         "description": "Checks whether a private IP address is available for use.",
         "parameters": [
           {
-            "name": "ipAddress",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The private IP address to be verified."
-          },
-          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
@@ -759,6 +753,13 @@
             "required": true,
             "type": "string",
             "description": "The name of the virtual network."
+          },
+          {
+            "name": "ipAddress",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The private IP address to be verified."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"

@@ -1,0 +1,706 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on Subscription entity associated with your Azure API Management deployment. The Subscription entity represents the association between a user and a product in API Management. Products contain one or more APIs, and once a product is published, developers can subscribe to the product and begin to use the product’s APIs.",
+    "version": "2018-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_List",
+        "description": "Lists all subscriptions of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementListSubscriptions": {
+            "$ref": "./examples/ApiManagementListSubscriptions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of the Subscription entities for the specified API Management service instance.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/SubscriptionContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}": {
+      "head": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadSubscription": {
+            "$ref": "./examples/ApiManagementHeadSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified apimanagement subscription entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_Get",
+        "description": "Gets the specified Subscription entity.",
+        "x-ms-examples": {
+          "ApiManagementGetSubscription": {
+            "$ref": "./examples/ApiManagementGetSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Subscription entity.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_CreateOrUpdate",
+        "description": "Creates or updates the subscription of specified user to the specified product.",
+        "x-ms-examples": {
+          "ApiManagementCreateSubscription": {
+            "$ref": "./examples/ApiManagementCreateSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreateParameters"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "#/parameters/NotifySubscriptionStateChangeParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The user was successfully subscribed to the product.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionContract"
+            }
+          },
+          "200": {
+            "description": "The user already subscribed to the product.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_Update",
+        "description": "Updates the details of a subscription specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateSubscription": {
+            "$ref": "./examples/ApiManagementUpdateSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionUpdateParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "$ref": "#/parameters/NotifySubscriptionStateChangeParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The subscription details were successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_Delete",
+        "description": "Deletes the specified subscription.",
+        "x-ms-examples": {
+          "ApiManagementDeleteSubscription": {
+            "$ref": "./examples/ApiManagementDeleteSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subscription details were successfully deleted."
+          },
+          "204": {
+            "description": "The subscription details were successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regeneratePrimaryKey": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_RegeneratePrimaryKey",
+        "description": "Regenerates primary key of existing subscription of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementSubscriptionRegenerateKey": {
+            "$ref": "./examples/ApiManagementSubscriptionRegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The primary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regenerateSecondaryKey": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_RegenerateSecondaryKey",
+        "description": "Regenerates secondary key of existing subscription of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementSubscriptionRegenerateKey": {
+            "$ref": "./examples/ApiManagementSubscriptionRegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The secondary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SubscriptionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Subscriptions list representation."
+    },
+    "SubscriptionContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionContractProperties",
+          "description": "Subscription contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Subscription details."
+    },
+    "SubscriptionContractProperties": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier."
+        },
+        "productId": {
+          "type": "string",
+          "description": "The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the subscription, or null if the subscription has no name.",
+          "minLength": 0,
+          "maxLength": 100
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "suspended",
+            "active",
+            "expired",
+            "submitted",
+            "rejected",
+            "cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when subscription was cancelled or expired. The setting is for audit purposes only and the subscription is not automatically cancelled. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "notificationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Subscription primary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Subscription secondary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "Optional subscription comment added by an administrator."
+        }
+      },
+      "required": [
+        "userId",
+        "productId",
+        "state",
+        "primaryKey",
+        "secondaryKey"
+      ],
+      "description": "Subscription details."
+    },
+    "SubscriptionCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionCreateParameterProperties",
+          "description": "Subscription contract properties."
+        }
+      },
+      "description": "Subscription create details."
+    },
+    "SubscriptionCreateParameterProperties": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User (user id path) for whom subscription is being created in form /users/{uid}"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product (product id path) for which subscription is being created in form /products/{productId}"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Subscription name.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "state": {
+          "type": "string",
+          "description": "Initial subscription state. If no value is specified, subscription is created with Submitted state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "suspended",
+            "active",
+            "expired",
+            "submitted",
+            "rejected",
+            "cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "userId",
+        "productId",
+        "displayName"
+      ],
+      "description": "Parameters supplied to the Create subscription operation."
+    },
+    "SubscriptionUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionUpdateParameterProperties",
+          "description": "Subscription Update contract properties."
+        }
+      },
+      "description": "Subscription update details."
+    },
+    "SubscriptionUpdateParameterProperties": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User identifier path: /users/{uid}"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product identifier path: /products/{productId}"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Subscription name."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary subscription key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary subscription key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "suspended",
+            "active",
+            "expired",
+            "submitted",
+            "rejected",
+            "cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "Comments describing subscription state change by the administrator."
+        }
+      },
+      "description": "Parameters supplied to the Update subscription operation."
+    }
+  },
+  "parameters": {
+    "SubscriptionEntityIdParameter": {
+      "name": "sid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription entity Identifier. The entity represents the association between a user and a product in API Management.",
+      "maxLength": 80,
+      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
+      "x-ms-parameter-location": "method"
+    },
+    "NotifySubscriptionStateChangeParameter": {
+      "name": "notify",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Notify change in Subscription State. \n - If false, do not send any email notification for change of state of subscription \n - If true, send email notification of change of state of subscription ",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

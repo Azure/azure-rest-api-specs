@@ -26,7 +26,7 @@ These settings apply only when `--tag=package-2018-03-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/dns/mgmt/2018-03-01-preview/dns
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-03-01-preview/$(namespace)
 ```
 
 ### Tag: package-2017-10 and go
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2017-10 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-10' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2017-10-01/dns
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-10-01/$(namespace)
 ```
 
 ### Tag: package-2017-09 and go
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2017-09 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-09' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2017-09-01/dns
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-09-01/$(namespace)
 ```
 
 ### Tag: package-2016-04 and go
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2016-04 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-04' && $(go)
-output-folder: $(go-sdk-folder)/services/dns/mgmt/2016-04-01/dns
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2016-04-01/$(namespace)
 ```
 
 ### Tag: package-2015-05-preview and go
@@ -62,5 +62,5 @@ These settings apply only when `--tag=package-2015-05-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/dns/mgmt/2015-05-04-preview/dns
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2015-05-04-preview/$(namespace)
 ```

@@ -28,17 +28,27 @@ These are the global settings for the MariaDB API.
 title: MariaDBManagementClient
 description: MariaDB Client
 openapi-type: arm
-tag: package-2018-06-01-preview
+tag: package-2018-06-01
 ```
 
-### Tag: package-2018-06-01-preview 
+### Tag: package-2018-06-01-preview
 
-These settings apply only when `--tag=package-2018-06-01-preview` is specified on the command line. 
+These settings apply only when `--tag=package-2018-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-01-preview' 
-input-file: 
-- Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json 
-``` 
+``` yaml $(tag) == 'package-2018-06-01-preview'
+input-file:
+- Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
+```
+
+
+### Tag: package-2018-06-01
+
+These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-01'
+input-file:
+- Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
+```
 
 
 ---
@@ -55,6 +65,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -101,6 +112,10 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -119,18 +134,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mariadb
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-06-01-preview
+  - tag: package-2018-06-01
 ```
 
-### Tag: package-2018-06-01-preview and java
+### Tag: package-2018-06-01 and java
 
-These settings apply only when `--tag=package-2018-06-01-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-06-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-06-01-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-06-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.mariadb.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/mariadb/resource-manager/v2018_06_01_preview
+  namespace: com.microsoft.azure.management.mariadb.v2018_06_01
+  output-folder: $(azure-libraries-for-java-folder)/mariadb/resource-manager/v2018_06_01
 regenerate-manager: true
 generate-interface: true
 ```

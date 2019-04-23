@@ -19,36 +19,36 @@ batch:
 
 ```yaml $(typescript) && $(package-features)
 typescript:
-  package-name: arm-features
-  output-folder: $(typescript-sdks-folder)/packages/arm-features
+  package-name: "@azure/arm-features"
+  output-folder: "$(typescript-sdks-folder)/sdk/features/arm-features"
 ```
 
 ```yaml $(typescript) && $(package-locks)
 typescript:
-  package-name: arm-locks
-  output-folder: $(typescript-sdks-folder)/packages/arm-locks
+  package-name: "@azure/arm-locks"
+  output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks"
 ```
 
 ```yaml $(typescript) && $(package-policy)
 typescript:
-  package-name: arm-policy
-  output-folder: $(typescript-sdks-folder)/packages/arm-policy
+  package-name: "@azure/arm-policy"
+  output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy"
 ```
 
 ```yaml $(typescript) && $(package-resources)
 typescript:
-  package-name: arm-resources
-  output-folder: $(typescript-sdks-folder)/packages/arm-resources
+  package-name: "@azure/arm-resources"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources"
 ```
 
 ```yaml $(typescript) && $(package-links)
 typescript:
-  package-name: arm-links
-  output-folder: $(typescript-sdks-folder)/packages/arm-links
+  package-name: "@azure/arm-links"
+  output-folder: "$(typescript-sdks-folder)/sdk/links/arm-links"
 ```
 
 ```yaml $(typescript) && $(package-managedapplications)
 typescript:
-  package-name: arm-managedapplications
-  output-folder: $(typescript-sdks-folder)/packages/arm-managedapplications
+  package-name: "@azure/arm-managedapplications"
+  output-folder: "$(typescript-sdks-folder)/sdk/managedapplications/arm-managedapplications"
 ```
