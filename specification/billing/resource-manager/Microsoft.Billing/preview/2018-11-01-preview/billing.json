@@ -2324,7 +2324,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/billingPermissions": {
       "get": {
         "tags": [
-          "billingPermissions"
+          "BillingPermissions"
         ],
         "x-ms-examples": {
           "InvoiceSectionPermissionsList": {
@@ -2332,7 +2332,7 @@
           }
         },
         "operationId": "BillingPermissions_ListByInvoiceSections",
-        "description": "Lists all billing permissions for the caller under Invoice Section.",
+        "description": "Lists all billing permissions for the caller under invoice section.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2363,14 +2363,14 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Billing/billingPermissions": {
       "get": {
         "tags": [
-          "billingPermissions"
+          "BillingPermissions"
         ],
         "x-ms-examples": {
           "BillingProfilePermissionsList": {
             "$ref": "./examples/BillingProfilePermissionsList.json"
           }
         },
-        "operationId": "BillingProfileBillingPermissions_List",
+        "operationId": "BillingPermissions_ListByBillingProfile",
         "description": "Lists all billingPermissions for the caller has for a billing account.",
         "parameters": [
           {
@@ -5236,12 +5236,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/BillingPermissions"
+            "$ref": "#/definitions/BillingPermissionsProperties"
           }
         }
       }
     },
-    "BillingPermissions": {
+    "BillingPermissionsProperties": {
       "description": "The set of allowed action and not allowed actions a caller has on a billing account",
       "type": "object",
       "properties": {
