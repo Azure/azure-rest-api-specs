@@ -20,7 +20,7 @@ const asyncJsonRequest = (url: string) => new Promise<unknown>((res, rej) => req
 
 export const extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
 export const swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
-export const swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
+export const swaggerSchemaAltUrl = "http://23.22.16.221/v2/schema.json";
 export const schemaUrl = "http://json-schema.org/draft-04/schema";
 export const exampleSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json";
 export const compositeSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json";

@@ -11715,7 +11715,7 @@
       },
       "required": [ "commandLine" ],
       "title": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.",
-      "description": "Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some form of checkpointing."
+      "description": "Batch will retry tasks when a recovery operation is triggered on a compute node. Examples of recovery operations include (but are not limited to) when an unhealthy compute node is rebooted or a compute node disappeared due to host failure. Retries due to recovery operations are independent of and are not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to a recovery operation may occur. Because of this, all tasks should be idempotent. This means tasks need to tolerate being interrupted and restarted without causing any corruption or duplicate data. The best practice for long running tasks is to use some form of checkpointing. In some cases the start task may be re-run even though the node was not rebooted. Special care should be taken to avoid start tasks which create breakaway process or install/launch services from the start task working directory, as this will block Batch from being able to re-run the start task."
     },
     "CertificateReference": {
       "properties": {
@@ -11836,11 +11836,12 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
-          "description": "The default value is 1. The maximum value of this setting depends on the size of the compute nodes in the pool (the vmSize setting)."
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
-          "title": "How tasks are distributed across compute nodes in a pool."
+          "title": "How tasks are distributed across compute nodes in a pool.",
+          "description": "If not specified, the default is spread."
         },
         "resizeTimeout": {
           "type": "string",
@@ -11902,7 +11903,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "The list of application packages to be installed on each compute node in the pool."
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool."
         },
         "applicationLicenses": {
           "type": "array",
@@ -12910,7 +12912,7 @@
         "osFamily": {
           "type": "string",
           "title": "The Azure Guest OS family to be installed on the virtual machines in the pool.",
-          "description": "Possible values are:\n2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1.\n3 - OS Family 3, equivalent to Windows Server 2012.\n4 - OS Family 4, equivalent to Windows Server 2012 R2.\n5 - OS Family 5, equivalent to Windows Server 2016. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases)."
+          "description": "Possible values are:\n2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1.\n3 - OS Family 3, equivalent to Windows Server 2012.\n4 - OS Family 4, equivalent to Windows Server 2012 R2.\n5 - OS Family 5, equivalent to Windows Server 2016.\n6 - OS Family 6, equivalent to Windows Server 2019. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases)."
         },
         "osVersion": {
           "type": "string",
@@ -13367,7 +13369,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "The list of application packages to be installed on each compute node in the pool."
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool."
         },
         "applicationLicenses": {
           "type": "array",
@@ -13380,11 +13383,13 @@
         "maxTasksPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool."
+          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
-          "title": "How tasks are distributed across compute nodes in a pool."
+          "title": "How tasks are distributed across compute nodes in a pool.",
+          "description": "If not specified, the default is spread."
         },
         "userAccounts": {
           "type": "array",
@@ -13496,7 +13501,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "The list of application packages to be installed on each compute node in the pool."
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool."
         },
         "applicationLicenses": {
           "type": "array",
@@ -13510,11 +13516,12 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
-          "description": "The default value is 1. The maximum value of this setting depends on the size of the compute nodes in the pool (the vmSize setting)."
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
-          "title": "How tasks are distributed across compute nodes in a pool."
+          "title": "How tasks are distributed across compute nodes in a pool.",
+          "description": "If not specified, the default is spread."
         },
         "userAccounts": {
           "type": "array",
@@ -14982,8 +14989,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "A list of application packages to be installed on each compute node in the pool.",
-          "description": "The list replaces any existing application package references on the pool. Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. If omitted, or if you specify an empty collection, any existing application packages references are removed from the pool."
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "The list replaces any existing application package references on the pool. Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool. If omitted, or if you specify an empty collection, any existing application packages references are removed from the pool."
         },
         "metadata": {
           "type": "array",
@@ -15017,8 +15024,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "A list of application packages to be installed on each compute node in the pool.",
-          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. If this element is present, it replaces any existing application package references. If you specify an empty collection, then all application package references are removed from the pool. If omitted, any existing application package references are left unchanged."
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "The list replaces any existing application package references on the pool. Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool. If omitted, any existing application package references are left unchanged."
         },
         "metadata": {
           "type": "array",
