@@ -20,7 +20,6 @@
     "https"
   ],
   "tags": [],
-  "basePath": "/",
   "definitions": {
     "ACIServiceCreateRequest": {
       "allOf": [
@@ -146,7 +145,7 @@
       "properties": {},
       "type": "object"
     },
-    "AKSReplicatStatus": {
+    "AKSReplicaStatus": {
       "properties": {
         "availableReplicas": {
           "description": "The number of available replicas.",
@@ -284,11 +283,11 @@
               "description": "Details of the data collection options specified."
             },
             "deploymentStatus": {
-              "$ref": "#/definitions/AKSReplicatStatus",
+              "$ref": "#/definitions/AKSReplicaStatus",
               "description": "The deployment status."
             },
             "imageDetails": {
-              "$ref": "#/definitions/DockerImageResponse",
+              "$ref": "#/definitions/ImageResponseBase",
               "description": "The Docker Image details."
             },
             "imageId": {
@@ -548,7 +547,7 @@
           "type": "string"
         },
         "resourceLocation": {
-          "description": "The resource created/updated by the asycn operation.",
+          "description": "The resource created/updated by the async operation.",
           "type": "string"
         },
         "state": {
@@ -984,6 +983,30 @@
       },
       "type": "object"
     },
+    "BatchEventCommandDto": {
+      "properties": {
+        "events": {
+          "items": {
+            "$ref": "#/definitions/BaseEventDto"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
+    "BatchEventCommandResultDto": {
+      "properties": {
+        "errors": {
+          "items": {
+            "$ref": "#/definitions/KeyValuePair`2"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
     "BatchMetricDto": {
       "properties": {
         "values": {
@@ -1110,6 +1133,11 @@
           "example": "4",
           "format": "double",
           "type": "number"
+        },
+        "fpga": {
+          "description": "The number of FPGA cores in the container.",
+          "format": "int32",
+          "type": "integer"
         },
         "gpu": {
           "description": "The number of GPU cores in the container.",
@@ -1960,7 +1988,7 @@
       "type": "object"
     },
     "ImageRequestBase": {
-      "description": "Requst to create an Azure Machine Learning Image.",
+      "description": "Request to create an Azure Machine Learning Image.",
       "discriminator": "imageRequestBaseTypeDiscriminator",
       "properties": {
         "description": {
@@ -1975,7 +2003,8 @@
             "BatchContainer",
             "IoTContainer",
             "BrainwavePackage",
-            "AccelContainer"
+            "AccelContainer",
+            "BrainwaveContainer"
           ],
           "example": "WebApiContainer",
           "type": "string",
@@ -2096,7 +2125,8 @@
             "BatchContainer",
             "IoTContainer",
             "BrainwavePackage",
-            "AccelContainer"
+            "AccelContainer",
+            "BrainwaveContainer"
           ],
           "example": "WebApiContainer",
           "type": "string",
@@ -2204,18 +2234,36 @@
       "type": "object"
     },
     "JsonPatchOperation": {
+      "description": "The Json Patch definition.",
       "properties": {
         "from": {
+          "description": "The source location.",
           "type": "string"
         },
         "op": {
+          "description": "The operation.",
           "type": "string"
         },
         "path": {
+          "description": "The target location.",
           "type": "string"
         },
         "value": {
+          "description": "The value.",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "KeyValuePair`2": {
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/BaseEventDto",
+          "readOnly": true
+        },
+        "value": {
+          "$ref": "#/definitions/ErrorResponse",
+          "readOnly": true
         }
       },
       "type": "object"
@@ -2589,6 +2637,23 @@
       },
       "type": "object"
     },
+    "PaginatedDataStoreDtoList": {
+      "description": "A paginated list of objects.",
+      "properties": {
+        "continuationToken": {
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type T.",
+          "items": {
+            "$ref": "#/definitions/DataStoreDto"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
     "PaginatedExperimentDtoList": {
       "description": "A paginated list of objects.",
       "properties": {
@@ -2653,51 +2718,6 @@
           "description": "An array of objects of type T.",
           "items": {
             "$ref": "#/definitions/ProfileResponseBase"
-          },
-          "type": "array",
-          "uniqueItems": false
-        }
-      },
-      "type": "object"
-    },
-    "PaginatedResult[ArtifactContentInformationDto]": {
-      "properties": {
-        "continuationToken": {
-          "type": "string"
-        },
-        "value": {
-          "items": {
-            "$ref": "#/definitions/ArtifactContentInformationDto"
-          },
-          "type": "array",
-          "uniqueItems": false
-        }
-      },
-      "type": "object"
-    },
-    "PaginatedResult[ArtifactDto]": {
-      "properties": {
-        "continuationToken": {
-          "type": "string"
-        },
-        "value": {
-          "items": {
-            "$ref": "#/definitions/ArtifactDto"
-          },
-          "type": "array",
-          "uniqueItems": false
-        }
-      },
-      "type": "object"
-    },
-    "PaginatedResult[DataStoreDto]": {
-      "properties": {
-        "continuationToken": {
-          "type": "string"
-        },
-        "value": {
-          "items": {
-            "$ref": "#/definitions/DataStoreDto"
           },
           "type": "array",
           "uniqueItems": false
@@ -4464,7 +4484,7 @@
           "200": {
             "description": "The Batch is ingested using shared access signature successfully.",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[ArtifactDto]"
+              "$ref": "#/definitions/PaginatedArtifactDtoList"
             }
           },
           "401": {
@@ -4495,7 +4515,10 @@
         "summary": "Batch ingest using shared access signature.",
         "tags": [
           "Artifact"
-        ]
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "continuationToken"
+        }
       }
     },
     "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/batch/metadata": {
@@ -5614,11 +5637,11 @@
         ]
       }
     },
-    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/origins/{origin}/containers/{container}": {
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/prefix/contentinfo/storageuri/{origin}/{container}": {
       "get": {
         "consumes": [],
-        "description": "Get Artifacts metadata in a specific container or path.",
-        "operationId": "Artifact_ListInContainer",
+        "description": "Get storage Uri for Artifacts in a specific path.",
+        "operationId": "Artifact_ListStorageUriByPrefix",
         "parameters": [
           {
             "description": "The Azure subscription Id.",
@@ -5685,9 +5708,119 @@
         ],
         "responses": {
           "200": {
-            "description": "The details of the Artifacts are returned successfully.",
+            "description": "The Artifact storage uri is returned successfully.",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[ArtifactDto]"
+              "$ref": "#/definitions/PaginatedArtifactContentInformationDtoList"
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "404": {
+            "description": "The requested resource could not be found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "429": {
+            "description": "Too many Requests. Please try again later."
+          },
+          "500": {
+            "description": "An internal error has occurred and the request cannot be completed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "504": {
+            "description": "Gateway Timeout."
+          }
+        },
+        "summary": "Get storage Uri for Artifacts in a path.",
+        "tags": [
+          "Artifact"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "continuationToken"
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/prefix/contentinfo/{origin}/{container}": {
+      "get": {
+        "consumes": [],
+        "description": "Get shared access signature for an Artifact in specific path.",
+        "operationId": "Artifact_ListSasByPrefix",
+        "parameters": [
+          {
+            "description": "The Azure subscription Id.",
+            "format": "uuid",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of resource group in which the workspace is located.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the workspace.",
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The origin of the Artifact.",
+            "in": "path",
+            "name": "origin",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The container name.",
+            "in": "path",
+            "name": "container",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The Artifact Path.",
+            "in": "query",
+            "name": "path",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The continuation token.",
+            "in": "query",
+            "name": "continuationToken",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The authorization bearer token. The value should follow the pattern: 'Bearer XXXXXXX'.",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact writable shared access signature is returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedArtifactContentInformationDtoList"
             }
           },
           "400": {
@@ -5721,10 +5854,13 @@
             "description": "Gateway Timeout."
           }
         },
-        "summary": "Get Artifacts metadata in a container or path.",
+        "summary": "Get shared access signature for an Artifact",
         "tags": [
           "Artifact"
-        ]
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "continuationToken"
+        }
       }
     },
     "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/storageuri/batch/metadata": {
@@ -5999,7 +6135,7 @@
           "200": {
             "description": "The details of the Artifacts are returned successfully.",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[ArtifactDto]"
+              "$ref": "#/definitions/PaginatedArtifactDtoList"
             }
           },
           "400": {
@@ -6036,7 +6172,10 @@
         "summary": "Get Artifacts metadata in a container or path.",
         "tags": [
           "Artifact"
-        ]
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "continuationToken"
+        }
       }
     },
     "/datastore/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
@@ -6138,6 +6277,14 @@
             "type": "integer"
           },
           {
+            "default": true,
+            "description": "Whether to include the datastore secret in the response.",
+            "in": "query",
+            "name": "includeSecret",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "description": "The Azure subscription Id.",
             "in": "path",
             "name": "subscriptionId",
@@ -6175,7 +6322,7 @@
           "200": {
             "description": "The list of Datastores are returned successfully.",
             "schema": {
-              "$ref": "#/definitions/PaginatedResult[DataStoreDto]"
+              "$ref": "#/definitions/PaginatedDataStoreDtoList"
             }
           },
           "400": {
@@ -6209,7 +6356,10 @@
         "summary": "Get Datastores list.",
         "tags": [
           "DataStore"
-        ]
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "continuationToken"
+        }
       },
       "post": {
         "consumes": [
@@ -7645,6 +7795,103 @@
         ]
       }
     },
+    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/batch/events": {
+      "post": {
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "description": "Post event data to a specific Run Id.",
+        "operationId": "Events_BatchPost",
+        "parameters": [
+          {
+            "description": "The Azure subscription Id.",
+            "format": "uuid",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of resource group in which the workspace is located.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the workspace.",
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The experiment name.",
+            "in": "path",
+            "name": "experimentName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The batch of Event details.",
+            "in": "body",
+            "name": "batchEventCommand",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BatchEventCommandDto"
+            }
+          },
+          {
+            "description": "The authorization bearer token. The value should follow the pattern: 'Bearer XXXXXXX'.",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The batch of Events is posted successfully.",
+            "schema": {
+              "$ref": "#/definitions/BatchEventCommandResultDto"
+            }
+          },
+          "400": {
+            "description": "The request had missing or invalid values.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "404": {
+            "description": "The requested resource could not be found."
+          },
+          "500": {
+            "description": "An internal error has occurred and the request cannot be completed."
+          },
+          "504": {
+            "description": "Gateway Timeout."
+          }
+        },
+        "summary": "Batch post event data.",
+        "tags": [
+          "Events"
+        ]
+      }
+    },
     "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/batch/runs": {
       "patch": {
         "consumes": [
@@ -8845,91 +9092,6 @@
         ]
       }
     },
-    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/artifacturi/{path}": {
-      "get": {
-        "consumes": [],
-        "description": "Get URI of an Artifact for a specific Run Id.",
-        "operationId": "RunArtifact_GetSasUri",
-        "parameters": [
-          {
-            "description": "The Azure subscription Id.",
-            "format": "uuid",
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of resource group in which the workspace is located.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of the workspace.",
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The experiment name.",
-            "in": "path",
-            "name": "experimentName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The identifier of the Run.",
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The Artifact Path.",
-            "in": "path",
-            "name": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The authorization bearer token. The value should follow the pattern: 'Bearer XXXXXXX'.",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "504": {
-            "description": "Gateway Timeout."
-          }
-        },
-        "summary": "Get URI of an Artifact.",
-        "tags": [
-          "RunArtifacts"
-        ]
-      }
-    },
     "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/batch/metadata": {
       "post": {
         "consumes": [
@@ -9107,91 +9269,6 @@
         ]
       }
     },
-    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/contentinfo/{path}": {
-      "get": {
-        "consumes": [],
-        "description": "Get Artifact content information for give Run Id.",
-        "operationId": "RunArtifact_GetContentInformation",
-        "parameters": [
-          {
-            "description": "The Azure subscription Id.",
-            "format": "uuid",
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of resource group in which the workspace is located.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of the workspace.",
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The experiment name.",
-            "in": "path",
-            "name": "experimentName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The identifier of the Run.",
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The Artifact Path.",
-            "in": "path",
-            "name": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The authorization bearer token. The value should follow the pattern: 'Bearer XXXXXXX'.",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "The Artifact content information is returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArtifactContentInformationDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "504": {
-            "description": "Gateway Timeout."
-          }
-        },
-        "summary": "Get Artifact content information.",
-        "tags": [
-          "RunArtifacts"
-        ]
-      }
-    },
     "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/metadata": {
       "get": {
         "consumes": [],
@@ -9239,91 +9316,6 @@
             "in": "query",
             "name": "path",
             "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The authorization bearer token. The value should follow the pattern: 'Bearer XXXXXXX'.",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ArtifactDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "504": {
-            "description": "Gateway Timeout."
-          }
-        },
-        "summary": "Get Artifact by Id.",
-        "tags": [
-          "RunArtifacts"
-        ]
-      }
-    },
-    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/metadata/{path}": {
-      "get": {
-        "consumes": [],
-        "description": "Get Artifact for a specific Id.",
-        "operationId": "RunArtifact_GetById",
-        "parameters": [
-          {
-            "description": "The Azure subscription Id.",
-            "format": "uuid",
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of resource group in which the workspace is located.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of the workspace.",
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The experiment name.",
-            "in": "path",
-            "name": "experimentName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The identifier of the Run.",
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The Artifact Path.",
-            "in": "path",
-            "name": "path",
-            "required": true,
             "type": "string"
           },
           {
@@ -9457,101 +9449,6 @@
         }
       }
     },
-    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/path/{path}": {
-      "get": {
-        "consumes": [],
-        "description": "Get Artifacts in the provided path for a specific Run Id.",
-        "operationId": "RunArtifact_ListInPath",
-        "parameters": [
-          {
-            "description": "The Azure subscription Id.",
-            "format": "uuid",
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of resource group in which the workspace is located.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of the workspace.",
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The experiment name.",
-            "in": "path",
-            "name": "experimentName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The identifier of the Run.",
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The Artifact Path.",
-            "in": "path",
-            "name": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The Continuation Token.",
-            "in": "query",
-            "name": "continuationToken",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The authorization bearer token. The value should follow the pattern: 'Bearer XXXXXXX'.",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedArtifactDtoList"
-            }
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "504": {
-            "description": "Gateway Timeout."
-          }
-        },
-        "summary": "Get Artifacts in the provided path.",
-        "tags": [
-          "RunArtifacts"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "continuationToken"
-        }
-      }
-    },
     "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/prefix/contentinfo": {
       "get": {
         "consumes": [],
@@ -9599,101 +9496,6 @@
             "in": "query",
             "name": "path",
             "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The Continuation Token.",
-            "in": "query",
-            "name": "continuationToken",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The authorization bearer token. The value should follow the pattern: 'Bearer XXXXXXX'.",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PaginatedArtifactContentInformationDtoList"
-            }
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "504": {
-            "description": "Gateway Timeout."
-          }
-        },
-        "summary": "Get SAS of an Artifact.",
-        "tags": [
-          "RunArtifacts"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "continuationToken"
-        }
-      }
-    },
-    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/artifacts/prefix/contentinfo/{path}": {
-      "get": {
-        "consumes": [],
-        "description": "Get SAS of an Artifact in the specified path.",
-        "operationId": "RunArtifact_ListSasByPrefix",
-        "parameters": [
-          {
-            "description": "The Azure subscription Id.",
-            "format": "uuid",
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of resource group in which the workspace is located.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of the workspace.",
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The experiment name.",
-            "in": "path",
-            "name": "experimentName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The identifier of the Run.",
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The Artifact Path.",
-            "in": "path",
-            "name": "path",
-            "required": true,
             "type": "string"
           },
           {
@@ -12926,5 +12728,5 @@
       },
       "type": "oauth2"
     }
-  }
+  },
 }
