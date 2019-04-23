@@ -1135,7 +1135,7 @@
           "type": "number"
         },
         "fpga": {
-          "description": "The number of FPGA cores in the container.",
+          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
           "format": "int32",
           "type": "integer"
         },
@@ -2228,7 +2228,7 @@
         },
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse",
-          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innererrors” and choose the deepest one that they understand."
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
         }
       },
       "type": "object"
@@ -2378,7 +2378,7 @@
       "type": "object"
     },
     "Model": {
-      "description": "An Azure Machine Learnging Model.",
+      "description": "An Azure Machine Learning Model.",
       "properties": {
         "createdTime": {
           "description": "The Model creation time (UTC).",
@@ -2445,7 +2445,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The Model preperty dictionary. Properties are immutable.",
+          "description": "The Model property dictionary. Properties are immutable.",
           "type": "object"
         },
         "runId": {
@@ -2786,7 +2786,7 @@
       "type": "object"
     },
     "ProfileRequestBase": {
-      "description": "The request for createing a profile.",
+      "description": "The request for creating a profile.",
       "properties": {
         "description": {
           "description": "The profile description.",
@@ -2883,7 +2883,7 @@
           "type": "number"
         },
         "recommendedMemoryInGB": {
-          "description": "The recommended amout of memory to allocate in GB.",
+          "description": "The recommended amount of memory to allocate in GB.",
           "format": "double",
           "type": "number"
         },
@@ -2993,10 +2993,10 @@
         },
         "debugInfo": {
           "$ref": "#/definitions/DebugInfoResponse",
-          "description": "An internal repesentation of the error. May be null for non-AzureML services."
+          "description": "An internal representation of the error. May be null for non-AzureML services."
         },
         "details": {
-          "description": "The related errors that occurred during the rquest.",
+          "description": "The related errors that occurred during the request.",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
@@ -3005,7 +3005,7 @@
         },
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse",
-          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innererrors” and choose the deepest one that they understand."
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
         },
         "message": {
           "description": "A human-readable representation of the error.",
@@ -3117,7 +3117,7 @@
         },
         "mpi": {
           "$ref": "#/definitions/MpiConfiguration",
-          "description": "The attribute is used to configure the distributed MPI job parameters.\r\nThis attribute takes effect only when the framework is set to Python, and the communicator to OpenMpi or IntelMpi.\r\nAmlComppute is the only supported compute type for this configuration."
+          "description": "The attribute is used to configure the distributed MPI job parameters.\r\nThis attribute takes effect only when the framework is set to Python, and the communicator to OpenMpi or IntelMpi.\r\nAmlCompute is the only supported compute type for this configuration."
         },
         "nodeCount": {
           "description": "Number of compute nodes to run the job on. Only applies to AMLCompute.",
@@ -3140,7 +3140,7 @@
           "description": "When the platform is set to Pyspark, The spark configuration is used to set the default sparkconf for the submitted job."
         },
         "target": {
-          "description": "Target refers to compute where the job is scheduled for execution. The default target is \"local\" refering to the local machine.",
+          "description": "Target refers to compute where the job is scheduled for execution. The default target is \"local\" referring to the local machine.",
           "example": "amlcompute",
           "type": "string"
         },
@@ -4304,7 +4304,7 @@
         ]
       }
     },
-    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/batch/copy/filesas/{origin}/{container}": {
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/batch/copy/fileSas/{origin}/{container}": {
       "post": {
         "consumes": [
           "application/json-patch+json",
@@ -4411,7 +4411,7 @@
         ]
       }
     },
-    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/batch/ingest/containersas/{origin}/{container}": {
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/batch/ingest/containerSas/{origin}/{container}": {
       "post": {
         "consumes": [
           "application/json-patch+json",
@@ -5139,7 +5139,7 @@
         ]
       }
     },
-    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/contentinfo/storageuri/{origin}/{container}": {
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/contentInfo/storageUri/{origin}/{container}": {
       "get": {
         "consumes": [],
         "description": "Get storage content information of an Artifact.",
@@ -5239,7 +5239,7 @@
         ]
       }
     },
-    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/contentinfo/{origin}/{container}": {
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/contentInfo/{origin}/{container}": {
       "get": {
         "consumes": [],
         "description": "Get content information of an Artifact.",
@@ -5863,7 +5863,7 @@
         }
       }
     },
-    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/storageuri/batch/metadata": {
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/storageUri/batch/metadata": {
       "post": {
         "consumes": [
           "application/json-patch+json",
@@ -6432,7 +6432,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Datastore is created/updated succesfully."
+            "description": "The Datastore is created/updated successfully."
           },
           "400": {
             "description": "The request had missing or invalid values.",
@@ -6704,7 +6704,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Datastore is created/updated succesfully."
+            "description": "The Datastore is created/updated successfully."
           },
           "400": {
             "description": "The request had missing or invalid values.",
@@ -6958,7 +6958,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The run was succesfully cancelled.",
+            "description": "The run was successfully cancelled.",
             "schema": {
               "$ref": "#/definitions/RunStatus"
             }
@@ -7013,7 +7013,7 @@
         }
       }
     },
-    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/localrun": {
+    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/localRun": {
       "post": {
         "consumes": [
           "multipart/form-data"
@@ -7082,7 +7082,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A run was succesfully started.",
+            "description": "A run was successfully started.",
             "schema": {
               "$ref": "#/definitions/FileStreamResult"
             }
@@ -7200,7 +7200,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A run was succesfully started.",
+            "description": "A run was successfully started.",
             "schema": {
               "$ref": "#/definitions/RunStatus"
             }
@@ -7343,7 +7343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The run was succesfully cancelled.",
+            "description": "The run was successfully cancelled.",
             "schema": {
               "$ref": "#/definitions/RunStatus"
             }
@@ -7395,7 +7395,7 @@
         }
       }
     },
-    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/snapshotrun": {
+    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/snapshotRun": {
       "post": {
         "consumes": [
           "application/json-patch+json",
@@ -7466,7 +7466,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A snapshot run was succesfully started.",
+            "description": "A snapshot run was successfully started.",
             "schema": {
               "$ref": "#/definitions/RunStatus"
             }
@@ -8276,7 +8276,7 @@
             "type": "string"
           },
           {
-            "description": "Query Prameters for data sorting and filtering.",
+            "description": "Query Parameters for data sorting and filtering.",
             "in": "body",
             "name": "queryParams",
             "required": false,
@@ -10700,7 +10700,7 @@
             "description": "Unauthorized"
           }
         },
-        "summary": "Retreive a Docker file and build context.",
+        "summary": "Retrieve a Docker file and build context.",
         "tags": [
           "Image"
         ]
