@@ -4687,6 +4687,18 @@
       },
       "description": "Describes the properties of a Compute Operation Value Display."
     },
+    "HyperVGenerationType": {
+      "type": "string",
+      "description": "Specifies the HyperVGeneration Type for the Virtual Machine created from the image",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVGenerationTypes",
+        "modelAsString": true
+      }
+    },
     "InstanceViewStatus": {
       "properties": {
         "code": {
@@ -6804,6 +6816,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state."
+        },
+        "hyperVGeneration": {
+          "$ref": "#/definitions/HyperVGenerationType",
+          "description": "Gets the HyperVGenerationType of the VirtualMachine created from the image"
         }
       },
       "description": "Describes the properties of an Image."
