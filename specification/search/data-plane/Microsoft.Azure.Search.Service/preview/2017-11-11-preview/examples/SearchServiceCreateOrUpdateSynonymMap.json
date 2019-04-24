@@ -8,7 +8,13 @@
         "synonymMap": {
             "name": "mysynonymmap",
             "format": "solr",
-            "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA"
+            "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
+            "encryptionKey": {
+                "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+                "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+                "keyVaultUri": "https://myKeyVault.vault.azure.net",
+                "accessCredentials": null
+            }
         }
     },
     "responses": {
@@ -16,14 +22,26 @@
             "body": {
                 "name": "mysynonymmap",
                 "format": "solr",
-                "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA"
+                "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
+                "encryptionKey": {
+                    "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+                    "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+                    "keyVaultUri": "https://myKeyVault.vault.azure.net",
+                    "accessCredentials": null
+                }
             }
         },
         "201": {
             "body": {
                 "name": "mysynonymmap",
                 "format": "solr",
-                "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA"
+                "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
+                "encryptionKey": {
+                    "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+                    "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+                    "keyVaultUri": "https://myKeyVault.vault.azure.net",
+                    "accessCredentials": null
+                }
             }
         }
     }

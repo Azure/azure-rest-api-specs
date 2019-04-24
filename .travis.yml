@@ -1,3 +1,4 @@
+dist: xenial
 language: node_js
 node_js:
   - '10'
@@ -7,18 +8,13 @@ services:
 env:
   matrix:
     - MODE=branchStrategy
-    - MODE=syntax CHECK_NAME="Syntax Validator"
     - MODE=semantic PR_ONLY=true CHECK_NAME="Semantic Validator"
-    - MODE=semantic PR_ONLY=false
     - MODE=model PR_ONLY=true CHECK_NAME="Model Validator"
-    # - MODE=model PR_ONLY=false
     - MODE=BreakingChange PR_ONLY=true CHECK_NAME="Breaking Changes"
     - MODE=lintdiff PR_ONLY=true CHECK_NAME="Linter Diff" NODE_OPTIONS=--max-old-space-size=8192
 matrix:
   fast_finish: true
   allow_failures:
-    - env: MODE=semantic PR_ONLY=false
-    - env: MODE=model PR_ONLY=false
     - env: MODE=model PR_ONLY=true CHECK_NAME="Model Validator"
     - env: MODE=BreakingChange PR_ONLY=true CHECK_NAME="Breaking Changes"
 install: true
@@ -29,29 +25,28 @@ script:
       ! [[ $TRAVIS_PULL_REQUEST != 'false' && $TRAVIS_REPO_SLUG == 'Azure/azure-rest-api-specs-pr' && $TRAVIS_BRANCH == 'master' ]]
     fi
   - >-
-    if [[ $MODE == 'syntax' ]]; then
-      npm install
-      npm test -- test/syntax.js
-    fi
-  - >-
     if [[ $MODE == 'semantic' ]]; then
       npm install
+      npm run tsc
       node scripts/semanticValidation.js
     fi
   - >-
     if [[ $MODE == 'model' ]]; then
       npm install
+      npm run tsc
       node scripts/modelValidation.js
     fi
   - >-
     if [[ $MODE == 'BreakingChange' ]]; then
       scripts/install-dotnet.sh
       npm install
-      node -- scripts/breaking-change.js
+      npm run tsc
+      node scripts/breaking-change.js
     fi
   - >-
     if [[ $MODE == 'lintdiff' ]]; then
       scripts/install-dotnet.sh
       npm install
+      npm run tsc
       node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js
     fi

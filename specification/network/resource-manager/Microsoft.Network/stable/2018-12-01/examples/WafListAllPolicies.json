@@ -23,69 +23,65 @@
                 "enabledState": "Enabled",
                 "mode": "Prevention"
               },
-              "customRules": {
-                "rules": [
-                  {
+              "customRules": [
+                {
                     "name": "Rule1",
                     "priority": 1,
                     "ruleType": "MatchRule",
                     "matchConditions": [
-                      {
-                        "matchVariables": [
-                          {
-                            "name": "RemoteAddr",
-                            "selector": null
-                          }
-                        ],
-                        "operator": "IPMatch",
-                        "negateCondition": false,
-                        "matchValues": [
-                          "192.168.1.0/24",
-                          "10.0.0.0/24"
-                        ],
-                        "transforms": []
-                      }
+                        {
+                            "matchVariables": [
+                                {
+                                    "variableName": "RemoteAddr",
+                                    "selector": null
+                                }
+                            ],
+                            "operator": "IPMatch",
+                            "negationConditon": false,
+                            "matchValues": [
+                                "192.168.1.0/24",
+                                "10.0.0.0/24"
+                            ],
+                            "transforms": []
+                        }
                     ],
                     "action": "Block"
-                  },
-                  {
-                    "name": "Rule2",
-                    "priority": 2,
-                    "ruleType": "MatchRule",
-                    "matchConditions": [
-                      {
-                        "matchVariables": [
-                          {
-                            "name": "RemoteAddr",
-                            "selector": null
-                          }
-                        ],
-                        "operator": "IPMatch",
-                        "negateCondition": false,
-                        "matchValues": [
-                          "10.0.0.0/24"
-                        ],
-                        "transforms": []
-                      },
-                      {
-                        "matchVariables": [
-                          {
-                            "name": "RequestHeader",
-                            "selector": "UserAgent"
-                          }
-                        ],
-                        "operator": "Contains",
-                        "negateCondition": false,
-                        "matchValues": [
-                          "Windows"
-                        ],
-                        "transforms": []
-                      }
-                    ],
-                    "action": "Block"
-                  }
-                ]
-              }
+                },
+                {
+                  "name": "Rule2",
+                  "priority": 2,
+                  "ruleType": "MatchRule",
+                  "matchConditions": [
+                    {
+                      "matchVariables": [
+                        {
+                          "variableName": "RemoteAddr",
+                          "selector": null
+                        }
+                      ],
+                      "operator": "IPMatch",
+                      "negationConditon": false,
+                      "matchValues": [
+                        "192.168.1.0/24"
+                      ]
+                    },
+                    {
+                      "matchVariables": [
+                        {
+                          "variableName": "RequestHeader",
+                          "selector": "UserAgent"
+                        }
+                      ],
+                      "operator": "Contains",
+                      "negationConditon": false,
+                      "matchValues": [
+                        "Windows"
+                      ]
+                    }
+                  ],
+                  "action": "Block"
+                }
+              ]
             }
           }
         ]

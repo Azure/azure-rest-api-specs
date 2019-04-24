@@ -1,32 +1,26 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "billingAccountId",
-    "invoiceSectionId": "invoiceSectionId",
-    "subscriptionId": "subscriptionId",
-    "body": {
-      "properties": {
-        "destinationInvoiceSectionId": "destinationInvoiceSectionId"
-      }
+    "billingAccountName": "{billingAccountName}",
+    "invoiceSectionName": "{invoiceSectionName}",
+    "billingSubscriptionName": "{billingSubscriptionName}",
+    "parameters": {
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{newInvoiceSectionName}"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/billingAccountId/invoiceSections/invoiceSectionId/billingSubscriptions/subscriptionId/transfer/operationResults/operationId",
-        "type": "Microsoft.Billing/transferOperationSummary",
-        "name": "operationId",
-        "properties": {
-          "AzureSubscriptionId": "subscriptionId",
-          "InvoiceSectionId": "destinationInvoiceSectionId"
+        "properties" : {
+          "billingSubscriptionName": "Test subscription"
         }
       }
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/billingAccountId/invoiceSections/invoiceSectionId/billingSubscriptions/subscriptionId/transfer/operationResults/84ae600f-763c-4a66-a8f0-4c497fc58d98?api-version=2018-11-01-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}/transfer/operationResults/10000000-0000-0000-0000-000000000001?api-version=2018-11-01-preview",
         "Retry-After": "30",
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/billingAccountId/invoiceSections/invoiceSectionId/billingSubscriptions/subscriptionId/transfer/operationStatus/84ae600f-763c-4a66-a8f0-4c497fc58d98?api-version=2018-11-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}/transfer/operationStatus/10000000-0000-0000-0000-000000000001?api-version=2018-11-01-preview"
       }
     }
   }

@@ -738,6 +738,12 @@
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -7813,7 +7819,7 @@
         }
       }
     }
-  }, 
+  },
   "definitions": {
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
@@ -8937,7 +8943,8 @@
         "Prebuilt Entity Extractor",
         "Intent Classifier",
         "Pattern.Any Entity Extractor",
-        "Regular Expression Entity Extractor"
+        "Closed List Entity Extractor",
+        "Regex Entity Extractor"
       ]
     },
     "HierarchicalEntityExtractor": {

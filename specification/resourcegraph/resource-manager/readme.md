@@ -41,7 +41,6 @@ model-validator: true
 message-format: json
 ```
 
-
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
@@ -50,6 +49,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
   - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
 ```
+
 ### Tag: package-2018-09-preview
 
 These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
@@ -69,6 +69,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
 ```
@@ -87,6 +88,27 @@ csharp:
   clear-output-folder: true
 ```
 
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ListInOperationName
+    from: resourcegraph.json
+    where: '$.paths["/providers/Microsoft.ResourceGraph/resourceChanges"].post.operationId'
+    reason: |-
+      1. Is this rule applicable? R1003 ListInOperationName says: "Per ARM SDK guidelines, each 'GET' operation on a resource should have "list" in the name...". However, this is POST, not GET.
+
+      2. If the rule is applicable anyway, how should we fix it? Renaming it to ResourceChanges_List causes another warning:
+              "OperationId should contain the verb: 'resourcechanges' in:'ResourceChanges_List'. Consider updating the operationId"
+      Renaming it to ResourceChanges_ListResourceChanges causes yet another warning:
+              "Per the Noun_Verb convention for Operation Ids, the noun 'ResourceChanges' should not appear after the underscore."
+      Renaming it to ResourceChanges_Listresourcechanges seems to get rid of warnings, but the result looks very strange.
+```

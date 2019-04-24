@@ -1,23 +1,50 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "{billingAccountId}",
-    "invoiceSectionId": "{invoiceSectionId1}",
-    "productName": "product1",
+    "billingAccountName": "{billingAccountName}",
+    "invoiceSectionName": "{invoiceSectionName}",
+    "productName": "{productName}",
     "parameters": {
-      "request": {
-        "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/5660ed6e-7824-4795-a579-c0037e6c8da4/invoiceSections/2b2ff7ea-559c-41c0-adea-2550293e11e5"
-      }
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{newInvoiceSectionName}"
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Location": "https://management.azure.com/providers/Microsoft.Billing/operationResults/84ae600f-763c-4a66-a8f0-4c497fc58d98?api-version=2018-11-01-preview",
-        "Retry-After": "60",
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/operationStatus/84ae600f-763c-4a66-a8f0-4c497fc58d98?api-version=2018-11-01-preview",
-        "OData-EntityId": "84ae600f-763c-4a66-a8f0-4c497fc58d98"
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/products/{productName}",
+        "name": "{productName}",
+        "type": "Microsoft.Billing/products",
+        "properties": {
+          "productTypeId": "A12345",
+          "productType": "Subscription",
+          "displayName": "Test Product",
+          "status": "Active",
+          "purchaseDate": "2018-05-01T17:32:28Z",
+          "lastCharge": {
+            "currency": "USD",
+            "value": 5000.00
+          },
+          "lastChargeDate": "2018-06-15T17:32:28Z",
+          "billingFrequency": "Monthly",
+          "quantity": 4,
+          "skuId": "0001",
+          "skuDescription": "Enterprise Agreement Development",
+          "availabilityId": "AvailabilityId1",
+          "parentProductId": "45000000-0000-0000-0000-0000000001242",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{newInvoiceSectionName}",
+          "invoiceSectionName": "Contoso operations invoiceSection",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+          "billingProfileName": "Contoso operations billing"
+        }
+      }
+    },
+      "202": {
+        "headers": {
+          "Location": "https://management.azure.com/providers/Microsoft.Billing/operationResults/44000000-0000-0000-0000-000000000000?api-version=2018-11-01-preview",
+          "Retry-After": "60",
+          "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/operationStatus/44000000-0000-0000-0000-000000000000?api-version=2018-11-01-preview",
+          "OData-EntityId": "44000000-0000-0000-0000-000000000000"
+        }
       }
     }
   }
-}
