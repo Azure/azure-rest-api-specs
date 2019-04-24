@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.AzureData
-  output-folder: $(csharp-sdks-folder)/azuredata/management/Microsoft.AzureData/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/azuredata/management/Microsoft.AzureData/Generated
 ```
