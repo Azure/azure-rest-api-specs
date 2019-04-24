@@ -4,6 +4,8 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ApplicationOperationResults.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ComputeOperationResults.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/Fabric.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGateway.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGatewayPool.json
@@ -18,9 +20,11 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/Volume.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/LogicalSubnet.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/MacAddressPool.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/NetworkOperationResults.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnit.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnitNode.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/SlbMuxInstance.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/StorageOperationResults.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/Drive.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/StorageSubSystem.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/Volume.json

@@ -4,7 +4,6 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - $(this-folder)/Microsoft.NetApp/stable/2019-05-01/netapp.json
-  - $(this-folder)/Microsoft.NetApp/preview/2017-08-15/netapp.json
+  - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-11-01-preview/timeseriesinsights.json
 require: $(this-folder)/../../../profiles/readme.md
 ```

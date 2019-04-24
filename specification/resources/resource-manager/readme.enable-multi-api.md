@@ -19,6 +19,7 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-03-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2018-05-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2018-02-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2017-05-10/resources.json
@@ -26,6 +27,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2016-02-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2018-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-09-01/links.json

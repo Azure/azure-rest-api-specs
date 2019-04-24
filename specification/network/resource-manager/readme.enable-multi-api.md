@@ -4,6 +4,42 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/applicationGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/applicationSecurityGroup.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/availableDelegations.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/azureFirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/azureFirewallFqdnTag.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/checkDnsAvailability.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/ddosCustomPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/ddosProtectionPlan.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/endpointService.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/expressRouteCircuit.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/expressRouteCrossConnection.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/expressRouteGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/expressRoutePort.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/interfaceEndpoint.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/loadBalancer.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/natGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/networkInterface.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/networkProfile.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/networkSecurityGroup.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/networkWatcher.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/operation.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/publicIpAddress.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/publicIpPrefix.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/routeFilter.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/routeTable.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/serviceCommunity.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/serviceEndpointPolicy.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/usage.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/virtualNetwork.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/virtualNetworkGateway.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/virtualNetworkTap.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/virtualWan.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/vmssNetworkInterface.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/vmssPublicIpAddress.json
+  - $(this-folder)/Microsoft.Network/stable/2019-02-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2018-12-01/applicationGateway.json
   - $(this-folder)/Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2018-12-01/availableDelegations.json

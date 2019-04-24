@@ -4,12 +4,15 @@
 
 ``` yaml $(enable-multi-api)
 input-file:
-  - $(this-folder)/Microsoft.Compute/stable/2018-10-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-10-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-03-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-03-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2017-09-01/skus.json
   - $(this-folder)/Microsoft.Compute/stable/2018-09-30/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-06-01/gallery.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-03-01/gallery.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.Compute/stable/2018-10-01/compute.json
+  - $(this-folder)/Microsoft.Compute/stable/2018-10-01/runCommands.json
+  - $(this-folder)/Microsoft.Compute/stable/2018-06-01/gallery.json
   - $(this-folder)/Microsoft.Compute/stable/2018-06-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2018-06-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2018-06-01/runCommands.json
