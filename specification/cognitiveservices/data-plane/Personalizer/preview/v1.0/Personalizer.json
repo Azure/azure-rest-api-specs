@@ -5,8 +5,9 @@
     "title": "Personalizer Client",
     "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns your content in a ranked list. As rewards are sent in response to the ranked list, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
   },
+  "basePath": "/personalizer/v1.0",
   "paths": {
-    "/personalizer/v1.0/configurations/service": {
+    "/configurations/service": {
       "get": {
         "tags": [
           "Configuration"
@@ -15,8 +16,7 @@
         "operationId": "GetServiceConfiguration",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [],
         "responses": {
@@ -38,21 +38,17 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Configuration"
         ],
         "summary": "Update the service configuration.",
         "operationId": "UpdateServiceConfiguration",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -88,7 +84,7 @@
         }
       }
     },
-    "/personalizer/v1.0/configurations/policy": {
+    "/configurations/policy": {
       "get": {
         "tags": [
           "Configuration"
@@ -97,8 +93,7 @@
         "operationId": "GetPolicy",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [],
         "responses": {
@@ -116,21 +111,43 @@
           }
         }
       },
-      "put": {
+      "delete": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Delete the current policy.",
+        "operationId": "DeletePolicy",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            },
+            "examples": {
+              "application/json": {
+                "name": "myPersonalizer",
+                "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
         "tags": [
           "Configuration"
         ],
         "summary": "Update the policy configuration.",
         "operationId": "UpdatePolicy",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -160,36 +177,9 @@
             "description": "Invalid argument"
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Configuration"
-        ],
-        "summary": "Delete the current policy.",
-        "operationId": "DeletePolicy",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PolicyContract"
-            },
-            "examples": {
-              "application/json": {
-                "name": "myPersonalizer",
-                "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
-              }
-            }
-          }
-        }
       }
     },
-    "/personalizer/v1.0/evaluations": {
+    "/evaluations": {
       "get": {
         "tags": [
           "Evaluations"
@@ -198,8 +188,7 @@
         "operationId": "GetEvaluations",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [],
         "responses": {
@@ -247,14 +236,10 @@
         "summary": "Submit a new evaluation.",
         "operationId": "CreateEvaluation",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -295,7 +280,7 @@
         }
       }
     },
-    "/personalizer/v1.0/evaluations/{evaluationId}": {
+    "/evaluations/{evaluationId}": {
       "get": {
         "tags": [
           "Evaluations"
@@ -304,8 +289,7 @@
         "operationId": "GetEvaluation",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -399,7 +383,7 @@
         }
       }
     },
-    "/personalizer/v1.0/events/{eventId}/reward": {
+    "/events/{eventId}/reward": {
       "post": {
         "tags": [
           "Events"
@@ -407,10 +391,7 @@
         "summary": "Report reward to allocate to the top ranked action for the specified event.",
         "operationId": "Reward",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [],
         "parameters": [
@@ -441,7 +422,7 @@
         }
       }
     },
-    "/personalizer/v1.0/events/{eventId}/activate": {
+    "/events/{eventId}/activate": {
       "post": {
         "tags": [
           "Events"
@@ -469,7 +450,7 @@
         }
       }
     },
-    "/personalizer/v1.0/logs": {
+    "/logs": {
       "delete": {
         "tags": [
           "Logs"
@@ -478,8 +459,7 @@
         "operationId": "DeleteLogs",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [],
         "responses": {
@@ -492,7 +472,7 @@
         }
       }
     },
-    "/personalizer/v1.0/logs/properties": {
+    "/logs/properties": {
       "get": {
         "tags": [
           "Logs"
@@ -501,8 +481,7 @@
         "operationId": "GetLogsProperties",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [],
         "responses": {
@@ -514,8 +493,8 @@
             "examples": {
               "application/json": {
                 "dateRange": {
-                  "from": "2019-04-11T23:28:18.8431495-07:00",
-                  "to": "2019-04-15T23:28:18.8431502-07:00"
+                  "from": "2019-04-19T18:17:05.1657694-07:00",
+                  "to": "2019-04-23T18:17:05.1657703-07:00"
                 }
               }
             }
@@ -526,7 +505,7 @@
         }
       }
     },
-    "/personalizer/v1.0/model": {
+    "/model": {
       "get": {
         "tags": [
           "Model"
@@ -555,8 +534,7 @@
         "operationId": "DeleteModel",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [],
         "responses": {
@@ -572,7 +550,7 @@
         }
       }
     },
-    "/personalizer/v1.0/model/properties": {
+    "/model/properties": {
       "get": {
         "tags": [
           "Model"
@@ -581,8 +559,7 @@
         "operationId": "GetModelProperties",
         "consumes": [],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [],
         "responses": {
@@ -601,28 +578,24 @@
         }
       }
     },
-    "/personalizer/v1.0/rank": {
+    "/rank": {
       "post": {
         "tags": [
           "Ranking"
         ],
-        "summary": "A personalization rank request.",
+        "summary": "A Personalizer rank request.",
         "operationId": "Rank",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "personalizationRequest",
+            "name": "rankRequest",
             "in": "body",
-            "description": "A personalization request.",
+            "description": "A Personalizer request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RankRequest"
@@ -658,28 +631,6 @@
           },
           "400": {
             "description": "Invalid argument"
-          }
-        }
-      }
-    },
-    "/status": {
-      "get": {
-        "tags": [
-          "Status"
-        ],
-        "operationId": "StatusGet",
-        "consumes": [],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ContainerStatus"
-            }
           }
         }
       }
@@ -954,14 +905,14 @@
       }
     },
     "RankRequest": {
-      "description": "Request a set of actions to be ranked by the personalization service.",
+      "description": "Request a set of actions to be ranked by the Personalizer service.",
       "required": [
         "actions"
       ],
       "type": "object",
       "properties": {
         "contextFeatures": {
-          "description": "Features of the context used for personalization as a\r\ndictionary of dictionaries. This depends on the application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, data about time and date, etc.",
+          "description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This depends on the application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, data about time and date, etc.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -969,7 +920,7 @@
           }
         },
         "actions": {
-          "description": "The set of actions the Personalization Service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.",
+          "description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -985,11 +936,11 @@
           }
         },
         "eventId": {
-          "description": "Optionally pass an eventId that uniquely identifies this Rank event. \r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a personalization call.",
+          "description": "Optionally pass an eventId that uniquely identifies this Rank event. \r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a Personalizer call.",
           "type": "string"
         },
         "deferActivation": {
-          "description": "Send false if the user will see the rank results, therefore\r\nPersonalization will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the\r\nrank results, because the page is rendering later, or the Rank results may be\r\noverriden by code further downstream.",
+          "description": "Send false if the user will see the rank results, therefore\r\nPersonalizer will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the\r\nrank results, because the page is rendering later, or the Rank results may be\r\noverriden by code further downstream.",
           "default": false,
           "type": "boolean"
         }
@@ -1072,7 +1023,7 @@
           "type": "string"
         },
         "rewardActionId": {
-          "description": "The action chosen by the Personalization service. This is the action for which to report the reward. This might not be the \r\nfirst found in 'ranking' if an action in the request in first position was part of the excluded ids.",
+          "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in 'ranking' if an action in the request in first position was part of the excluded ids.",
           "type": "string"
         }
       }
@@ -1105,6 +1056,17 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "in": "path",
+      "description": "Supported Cognitive Services endpoint.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
@@ -1144,5 +1106,14 @@
       "name": "Ranking",
       "description": "Manages ranking operations."
     }
-  ]
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
 }
