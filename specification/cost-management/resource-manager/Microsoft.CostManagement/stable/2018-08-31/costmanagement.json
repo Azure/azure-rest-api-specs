@@ -33,364 +33,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/reportconfigs": {
-      "get": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_List",
-        "description": "Lists all report configs for a subscription.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ReportConfigList": {
-            "$ref": "./examples/ReportConfigList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfigListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/reportconfigs": {
-      "get": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_ListByResourceGroupName",
-        "description": "Lists all report configs for a resource group under a subscription.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ReportConfigList": {
-            "$ref": "./examples/ReportConfigList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfigListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/reportconfigs/{reportConfigName}": {
-      "get": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_Get",
-        "description": "Gets the report config for a subscription by report config name.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "Report": {
-            "$ref": "./examples/ReportConfig.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/reportConfigNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_CreateOrUpdate",
-        "description": "The operation to create or update a report config. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "CreateOrUpdateReport": {
-            "$ref": "./examples/ReportConfigCreateOrUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/reportConfigNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            }
-          },
-          "201": {
-            "description": "Created.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_Delete",
-        "description": "The operation to delete a report.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "DeleteReport": {
-            "$ref": "./examples/ReportConfigDelete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/reportConfigNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/reportconfigs/{reportConfigName}": {
-      "get": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_GetByResourceGroupName",
-        "description": "Gets the report config for a resource group under a subscription by report config name.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ReportConfig": {
-            "$ref": "./examples/ReportConfig.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/reportConfigNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_CreateOrUpdateByResourceGroupName",
-        "description": "The operation to create or update a report config. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "CreateOrUpdateReport": {
-            "$ref": "./examples/ReportConfigCreateOrUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/reportConfigNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            }
-          },
-          "201": {
-            "description": "Created.",
-            "schema": {
-              "$ref": "#/definitions/ReportConfig"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Reports"
-        ],
-        "operationId": "ReportConfig_DeleteByResourceGroupName",
-        "description": "The operation to delete a report config.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "DeleteReport": {
-            "$ref": "./examples/ReportConfigDelete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/reportConfigNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions": {
       "get": {
         "tags": [
@@ -429,7 +71,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -511,7 +153,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -593,7 +235,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -672,7 +314,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -745,7 +387,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -821,7 +463,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -875,6 +517,9 @@
         "x-ms-examples": {
           "SubscriptionQuery": {
             "$ref": "./examples/SubscriptionQuery.json"
+          },
+           "SubscriptionQueryGrouping": {
+            "$ref": "./examples/SubscriptionQueryGrouping.json"
           }
         },
         "parameters": [
@@ -926,6 +571,9 @@
         "x-ms-examples": {
           "ResourceGroupQuery": {
             "$ref": "./examples/ResourceGroupQuery.json"
+          },
+          "ResourceGroupQueryGrouping": {
+            "$ref": "./examples/ResourceGroupQueryGrouping.json"
           }
         },
         "parameters": [
@@ -980,6 +628,9 @@
         "x-ms-examples": {
           "BillingAccountQuery": {
             "$ref": "./examples/BillingAccountQuery.json"
+          },
+          "BillingAccountQueryGrouping": {
+            "$ref": "./examples/BillingAccountQueryGrouping.json"
           }
         },
         "parameters": [
@@ -1031,6 +682,9 @@
         "x-ms-examples": {
           "EnrollmentAccountQuery": {
             "$ref": "./examples/EnrollmentAccountQuery.json"
+          },
+          "EnrollmentAccountQueryGrouping": {
+            "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
           }
         },
         "parameters": [
@@ -1071,7 +725,7 @@
           "nextLinkName": null
         }
       }
-    },    
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Query": {
       "post": {
         "tags": [
@@ -1085,6 +739,9 @@
         "x-ms-examples": {
           "DepartmentQuery": {
             "$ref": "./examples/DepartmentQuery.json"
+          },
+          "DepartmentQueryGrouping": {
+            "$ref": "./examples/DepartmentQueryGrouping.json"
           }
         },
         "parameters": [
@@ -1132,13 +789,16 @@
           "Query"
         ],
         "operationId": "Query_UsageByManagmentGroup",
-        "description": "Lists the usage data for managment group.",
+        "description": "Lists the usage data for management group.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "ManagmentGroupQuery": {
+          "ManagementGroupQuery": {
             "$ref": "./examples/ManagementGroupQuery.json"
+          },
+          "ManagementGroupQueryGrouping": {
+            "$ref": "./examples/ManagementGroupQueryGrouping.json"
           }
         },
         "parameters": [
@@ -1264,118 +924,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "ReportConfigListResult": {
-      "description": "Result of listing report configs. It contains a list of available report configurations in the scope provided.",
-      "properties": {
-        "value": {
-          "description": "The list of report configs.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ReportConfig"
-          }
-        }
-      }
-    },
-    "ReportConfig": {
-      "description": "A report config resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReportConfigProperties",
-          "title": "Report config properties"
-        }
-      }
-    },
-    "ReportConfigProperties": {
-      "description": "The properties of the report config.",
-      "properties": {
-        "schedule": {
-          "description": "Has schedule information for the report config.",
-          "$ref": "#/definitions/ReportConfigSchedule"
-        },
-        "format": {
-          "description": "The format of the report being delivered.",
-          "type": "string",
-          "enum": [
-            "Csv"
-          ],
-          "x-ms-enum": {
-            "name": "FormatType",
-            "modelAsString": true
-          }
-        },
-        "deliveryInfo": {
-          "description": "Has delivery information for the report config.",
-          "$ref": "#/definitions/ReportConfigDeliveryInfo"
-        },
-        "definition": {
-          "description": "Has definition for the report config.",
-          "$ref": "#/definitions/ReportConfigDefinition"
-        }
-      },
-      "required": [
-        "deliveryInfo",
-        "definition"
-      ]
-    },
-    "ReportConfigSchedule": {
-      "description": "The schedule associated with a report config.",
-      "properties": {
-        "status": {
-          "description": "The status of the schedule. Whether active or not. If inactive, the report's scheduled execution is paused.",
-          "type": "string",
-          "enum": [
-            "Active",
-            "Inactive"
-          ],
-          "x-ms-enum": {
-            "name": "StatusType",
-            "modelAsString": true
-          }
-        },
-        "recurrence": {
-          "description": "The schedule recurrence.",
-          "type": "string",
-          "enum": [
-            "Daily",
-            "Weekly",
-            "Monthly",
-            "Annually"
-          ],
-          "x-ms-enum": {
-            "name": "RecurrenceType",
-            "modelAsString": true
-          }
-        },
-        "recurrencePeriod": {
-          "description": "Has start and end date of the recurrence. The start date must be in future. If present, the end date must be greater than start date.",
-          "$ref": "#/definitions/ReportConfigRecurrencePeriod"
-        }
-      },
-      "required": [
-        "recurrence",
-        "recurrencePeriod"
-      ]
-    },
-    "ReportConfigDeliveryInfo": {
-      "description": "The delivery information associated with a report config.",
-      "properties": {
-        "destination": {
-          "description": "Has destination for the report being delivered.",
-          "$ref": "#/definitions/ReportConfigDeliveryDestination"
-        }
-      },
-      "required": [
-        "destination"
-      ]
-    },
     "ReportConfigDefinition": {
       "description": "The definition of a report config.",
       "properties": {
@@ -1418,45 +966,6 @@
         "timeframe"
       ]
     },
-    "ReportConfigRecurrencePeriod": {
-      "description": "The start and end date for recurrence schedule.",
-      "properties": {
-        "from": {
-          "description": "The start date of recurrence.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "to": {
-          "description": "The end date of recurrence. If not provided, we default this to 10 years from the start date.",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "from"
-      ]
-    },
-    "ReportConfigDeliveryDestination": {
-      "description": "The destination information for the delivery of the report.",
-      "properties": {
-        "resourceId": {
-          "description": "The resource id of the storage account where reports will be delivered.",
-          "type": "string"
-        },
-        "container": {
-          "description": "The name of the container where reports will be uploaded.",
-          "type": "string"
-        },
-        "rootFolderPath": {
-          "description": "The name of the directory where reports will be uploaded.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "resourceId",
-        "container"
-      ]
-    },
     "ReportConfigTimePeriod": {
       "description": "The start and end date for pulling data for the report.",
       "properties": {
@@ -1496,7 +1005,7 @@
         },
         "aggregation": {
           "type": "object",
-          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
           "additionalProperties": {
             "type": "object",
             "$ref": "#/definitions/ReportConfigAggregation"
@@ -1504,12 +1013,19 @@
           "maxItems": 2
         },
         "grouping": {
-          "description": "Array of group by expression to use in the report. Report can have upto 2 group by clauses.",
+          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigGrouping"
           },
           "maxItems": 2
+        },
+        "sorting": {
+          "description": "Array of order by expression to use in the report.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigSorting"
+          }
         },
         "filter": {
           "type": "object",
@@ -1554,10 +1070,30 @@
         "function"
       ]
     },
+    "ReportConfigSorting": {
+      "description": "The order by expression to be used in the report.",
+      "properties": {
+        "direction": {
+          "description": "Direction of sort.",
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        "name": {
+          "description": "The name of the column to sort.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "ReportConfigGrouping": {
       "description": "The group by expression to be used in the report.",
       "properties": {
-        "columnType": {
+        "type": {
           "description": "Has type of the column to group.",
           "$ref": "#/definitions/ReportConfigColumnType"
         },
@@ -1567,7 +1103,7 @@
         }
       },
       "required": [
-        "columnType",
+        "type",
         "name"
       ]
     },
@@ -1575,7 +1111,7 @@
       "description": "The filter expression to be used in the report.",
       "properties": {
         "and": {
-          "description": "The logical \"AND\" expression. Must have atleast 2 items.",
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
@@ -1583,7 +1119,7 @@
           "minItems": 2
         },
         "or": {
-          "description": "The logical \"OR\" expression. Must have atleast 2 items.",
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportConfigFilter"
@@ -1620,7 +1156,7 @@
       "description": "The comparison expression to be used in the report.",
       "properties": {
         "name": {
-          "description": "The name of the column to use in comaprison.",
+          "description": "The name of the column to use in comparison.",
           "type": "string"
         },
         "operator": {
@@ -1880,14 +1416,6 @@
       "name": "enrollmentAccountId",
       "in": "path",
       "description": "Enrollment Account ID",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "reportConfigNameParameter": {
-      "name": "reportConfigName",
-      "in": "path",
-      "description": "Report Config Name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

@@ -25,7 +25,7 @@ These settings apply only when `--tag=package-2018-07-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2018-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/logic/mgmt/2018-07-01-preview/logic
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-07-01-preview/$(namespace)
 ```
 
 ### Tag: package-2016-06 and go
@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2016-06 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2016-06' && $(go)
-output-folder: $(go-sdk-folder)/services/logic/mgmt/2016-06-01/logic
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2016-06-01/$(namespace)
 ```
 
 ### Tag: package-2015-08-preview and go
@@ -43,7 +43,7 @@ These settings apply only when `--tag=package-2015-08-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/logic/mgmt/2015-08-01-preview/logic
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2015-08-01-preview/$(namespace)
 ```
 
 ### Tag: package-2015-02-preview and go
@@ -52,5 +52,5 @@ These settings apply only when `--tag=package-2015-02-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2015-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/logic/mgmt/2015-02-01-preview/logic
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2015-02-01-preview/$(namespace)
 ```

@@ -4,7 +4,9 @@
   },
   "responses": {
     "200": {
-      "headers": {},
+      "headers": {
+        "code": "200"
+      },
       "body": {
         "value": [
           {
@@ -52,7 +54,19 @@
               "description": "Gets all the available operations on IoT Central Applications"
             }
           }
-        ]
+        ],
+        "nextLink": null
+      }
+    },
+    "default": {
+      "description": "Error message returned for an unexpected response",
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "target": "Error target"
+        }
       }
     }
   }

@@ -9,7 +9,7 @@ The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
@@ -34,8 +34,39 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2018-11
 ```
+
+### Tag: package-2018-11
+
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11'
+input-file:
+- Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2018-11-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
+- Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
+- Microsoft.Web/stable/2018-02-01/Diagnostics.json
+- Microsoft.Web/stable/2018-02-01/Provider.json
+- Microsoft.Web/stable/2018-02-01/Recommendations.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/WebApps.json
+- Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+- Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3019 error
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+```
+
 
 ### Tag: package-2018-02
 
@@ -66,7 +97,6 @@ directive:
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
 ```
-
 
 ### Tag: package-2016-09
 
@@ -319,55 +349,6 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-web
 ```
 
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: web
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-02
-  - tag: package-2016-09
-  - tag: package-2015-08-preview
-```
-
-### Tag: package-2018-02 and go
-
-These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(go)
-output-folder: $(go-sdk-folder)/services/web/mgmt/2018-02-01/web
-```
-
-### Tag: package-2016-09 and go
-
-These settings apply only when `--tag=package-2016-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-09' && $(go)
-output-folder: $(go-sdk-folder)/services/web/mgmt/2016-09-01/web
-```
-
-### Tag: package-2015-08-preview and go
-
-These settings apply only when `--tag=package-2015-08-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/web/mgmt/2015-08-preview/web
-```
-
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -380,6 +361,10 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.web
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 
 ## Java
@@ -463,4 +448,21 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2016_09_01
 regenerate-manager: true
 generate-interface: true
+```
+
+### Tag: package-2018-03-01-hybrid
+
+These settings apply only when `--tag=package-2018-03-01-hybrid` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile for csharp code generation.
+
+``` yaml $(tag) == 'package-2018-03-01-hybrid'
+input-file:
+- Microsoft.Web/stable/2016-03-01/Certificates.json
+- Microsoft.Web/stable/2016-03-01/CommonDefinitions.json
+- Microsoft.Web/stable/2016-08-01/WebApps.json
+- Microsoft.Web/stable/2016-03-01/ResourceProvider.json
+- Microsoft.Web/stable/2016-03-01/Provider.json
+- Microsoft.Web/stable/2016-03-01/Recommendations.json
+- Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2016-09-01/AppServicePlans.json
 ```

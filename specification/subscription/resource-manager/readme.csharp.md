@@ -17,19 +17,26 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiApi)
+``` yaml $(csharp) && !$(multiapi) && !$(profile)
 namespace: Microsoft.Azure.Management.Subscription
 output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
 ```
 
 ## Batch settings
-These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
+These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
-``` yaml $(multiApi)
+``` yaml $(multiapi)
 namespace: Microsoft.Azure.Management.Subscription.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
 batch:
    - tag: package-2018-03-preview
      ApiVersionName: Api2018_03_01
+```
+
+```yaml $(profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Subscription
+output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscription/Generated
+batch:
+  - tag: package-2017-11-preview
 ```

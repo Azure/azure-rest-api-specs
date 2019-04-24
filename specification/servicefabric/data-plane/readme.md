@@ -25,7 +25,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.3'
+tag: '6.4'
 ```
 
 ### Suppression
@@ -37,11 +37,11 @@ directive:
   - suppress: ListInOperationName
     reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
   - suppress: GetInOperationName
-    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.    
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
   - suppress: PutInOperationName
     reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
   - suppress: HttpsSupportedScheme
-    reason: Service Fabric clusters are owned by the users and they can be configured to have a secure or un-secure client connection endpoint.    
+    reason: Service Fabric clusters are owned by the users and they can be configured to have a secure or un-secure client connection endpoint.
   - suppress: LongRunningOperationsWithLongRunningExtension
     reason: Service Fabric platform has already established pattern for paged responses based on ContinuationToken parameter.
   - suppress: SecurityDefinitionsStructure
@@ -53,7 +53,7 @@ directive:
   - suppress: APIVersionPattern
     reason: The URL scheme for Service Fabric does not follow Azure Service rules. Service Fabric supports various functions on different entities that are modeled using POST.
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The property names for Service Fabric follow the naming scheme of existing property names in our client SDK and concepts. 
+    reason: The property names for Service Fabric follow the naming scheme of existing property names in our client SDK and concepts.
   - suppress: GuidUsage
     reason: The IDs of the service partition in Service Fabric are GUIDs.
   - suppress: EnumInsteadOfBoolean
@@ -85,6 +85,16 @@ input-file:
 
 ```
 
+### Tag: 6.4
+
+These settings apply only when `--tag=6.4` is specified on the command line.
+
+``` yaml $(tag) == '6.4'
+input-file:
+- Microsoft.ServiceFabric/stable/6.4/servicefabric.json
+
+```
+
 ---
 # Code Generation
 
@@ -98,6 +108,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -114,7 +125,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.servicefabric
   package-name: azure-servicefabric
-  package-version: 6.3.0.0
+  package-version: 6.4.0.0
   add-credentials: true
   clear-output-folder: true
 ```
@@ -129,42 +140,9 @@ python:
   output-folder: $(python-sdks-folder)/azure-servicefabric
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: servicefabric
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: "6.2"
-  - tag: "6.3"
-```
-
-### Tag: 6.2 and go
-
-These settings apply only when `--tag=6.2 --go` is specified on the command line.
-
-``` yaml $(tag) == '6.2' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.2/servicefabric
-```
-
-
-### Tag: 6.3 and go
-
-These settings apply only when `--tag=6.3 --go` is specified on the command line.
-
-``` yaml $(tag) == '6.2' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.3/servicefabric
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

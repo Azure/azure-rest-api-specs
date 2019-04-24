@@ -12,6 +12,7 @@
   "consumes": [
     "application/json"
   ],
+
   "produces": [
     "application/json"
   ],
@@ -179,6 +180,8 @@
         },
         "x-ms-examples": {
           "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" },
+          "Create load balancer with Standard SKU": { "$ref": "./examples/LoadBalancerCreateStandardSku.json" },
+          "Create load balancer with Frontend IP in Zone 1": { "$ref": "./examples/LoadBalancerCreateWithZones.json" },
           "Create load balancer with inbound nat pool": { "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json" }
         },
         "x-ms-long-running-operation": true
@@ -797,6 +800,100 @@
         },
         "x-ms-examples": {
           "LoadBalancerLoadBalancingRuleGet": { "$ref": "./examples/LoadBalancerLoadBalancingRuleGet.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerOutboundRules_List",
+        "description": "Gets all the outbound rules in a load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer OutboundRule resources.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerOutboundRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LoadBalancerOutboundRuleList": { "$ref": "./examples/LoadBalancerOutboundRuleList.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerOutboundRules_Get",
+        "description": "Gets the specified load balancer outbound rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "outboundRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the outbound rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting OutboundRule resource.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerOutboundRuleGet": { "$ref": "./examples/LoadBalancerOutboundRuleGet.json" }
         }
       }
     },
@@ -1439,13 +1536,13 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
-        }, 
+        },
         "protocol": {
            "type": "string",
            "description": "Protocol - TCP, UDP or All",
            "enum": [
             "Tcp",
-            "Udp", 
+            "Udp",
             "All"
           ]
         },
@@ -1657,6 +1754,23 @@
         }
       },
       "description": "Response for ListLoadBalancingRule API service call."
+    },
+    "LoadBalancerOutboundRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundRule"
+          },
+          "description": "A list of outbound rules in a load balancer."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListOutboundRule API service call."
     },
     "LoadBalancerProbeListResult": {
       "properties": {

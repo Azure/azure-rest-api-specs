@@ -716,7 +716,9 @@
           "description": "The type of run.",
           "enum": [
             "QuickBuild",
-            "AutoBuild"
+            "QuickRun",
+            "AutoBuild",
+            "AutoRun"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -740,7 +742,7 @@
           "type": "string"
         },
         "outputImages": {
-          "description": "The list of all images that were generated from the run. This is applicable if the run is of type Build.",
+          "description": "The list of all images that were generated from the run. This is applicable if the run generates base image dependencies.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDescriptor"
@@ -752,16 +754,11 @@
         },
         "imageUpdateTrigger": {
           "$ref": "#/definitions/ImageUpdateTrigger",
-          "description": "The image update trigger that caused the run. This is applicable if the task is of build type."
+          "description": "The image update trigger that caused the run. This is applicable if the task has base image trigger configured."
         },
         "sourceTrigger": {
           "$ref": "#/definitions/SourceTriggerDescriptor",
           "description": "The source trigger that caused the run."
-        },
-        "isArchiveEnabled": {
-          "description": "The value that indicates whether archiving is enabled or not.",
-          "default": false,
-          "type": "boolean"
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
@@ -770,6 +767,22 @@
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
           "description": "The machine configuration of the run agent."
+        },
+        "sourceRegistryAuth": {
+          "description": "The scope of the credentials that were used to login to the source registry during this run.",
+          "type": "string"
+        },
+        "customRegistries": {
+          "description": "The list of custom registries that were logged in during this run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runErrorMessage": {
+          "description": "The error message received from backend systems after the run is scheduled.",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The provisioning state of a run.",
@@ -786,6 +799,11 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "isArchiveEnabled": {
+          "description": "The value that indicates whether archiving is enabled or not.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
@@ -968,7 +986,9 @@
           "description": "The type of run.",
           "enum": [
             "QuickBuild",
-            "AutoBuild"
+            "QuickRun",
+            "AutoBuild",
+            "AutoRun"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1056,7 +1076,7 @@
       }
     },
     "Task": {
-      "description": "The task that has the ARM resource and task properties. \r\nThe  task will have all information to schedule a run against it.",
+      "description": "The task that has the ARM resource and task properties. \r\nThe task will have all information to schedule a run against it.",
       "type": "object",
       "allOf": [
         {
@@ -1137,6 +1157,10 @@
         "trigger": {
           "$ref": "#/definitions/TriggerProperties",
           "description": "The properties that describe all triggers for the task."
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
         }
       }
     },
@@ -1165,12 +1189,20 @@
             "$ref": "#/definitions/BaseImageDependency"
           },
           "readOnly": true
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
+        },
+        "contextAccessToken": {
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step.",
+          "type": "string"
         }
       },
       "discriminator": "type"
     },
     "TriggerProperties": {
-      "description": "The properties of a build trigger.",
+      "description": "The properties of a trigger.",
       "type": "object",
       "properties": {
         "sourceTriggers": {
@@ -1183,6 +1215,23 @@
         "baseImageTrigger": {
           "$ref": "#/definitions/BaseImageTrigger",
           "description": "The trigger based on base image dependencies."
+        }
+      }
+    },
+    "Credentials": {
+      "description": "The parameters that describes a set of credentials that will be used when a run is invoked.",
+      "type": "object",
+      "properties": {
+        "sourceRegistry": {
+          "$ref": "#/definitions/SourceRegistryCredentials",
+          "description": "Describes the credential parameters for accessing the source registry."
+        },
+        "customRegistries": {
+          "description": "Describes the credential parameters for accessing other custom registries. The key\r\nfor the dictionary item will be the registry login server (myregistry.azurecr.io) and\r\nthe value of the item will be the registry credentials for accessing the registry.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CustomRegistryCredentials"
+          }
         }
       }
     },
@@ -1238,7 +1287,8 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit"
+              "commit",
+              "pullrequest"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1248,7 +1298,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1286,7 +1336,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1300,6 +1350,38 @@
         "name": {
           "description": "The name of the trigger.",
           "type": "string"
+        }
+      }
+    },
+    "SourceRegistryCredentials": {
+      "description": "Describes the credential parameters for accessing the source registry.",
+      "type": "object",
+      "properties": {
+        "loginMode": {
+          "description": "The authentication mode which determines the source registry login scope. The credentials for the source registry\r\nwill be generated using the given scope. These credentials will be used to login to\r\nthe source registry during the run.",
+          "enum": [
+            "None",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceRegistryLoginMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CustomRegistryCredentials": {
+      "description": "Describes the credentials that will be used to access a custom registry during a run.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "$ref": "#/definitions/SecretObject",
+          "description": "The username for logging into the custom registry."
+        },
+        "password": {
+          "$ref": "#/definitions/SecretObject",
+          "description": "The password for logging into the custom registry. The password is a secret \r\nobject that allows multiple ways of providing the value for it."
         }
       }
     },
@@ -1324,7 +1406,7 @@
           }
         },
         "repositoryUrl": {
-          "description": "The full URL to the source code respository",
+          "description": "The full URL to the source code repository",
           "type": "string"
         },
         "branch": {
@@ -1334,6 +1416,27 @@
         "sourceControlAuthProperties": {
           "$ref": "#/definitions/AuthInfo",
           "description": "The authorization properties for accessing the source code repository and to set up\r\nwebhooks for notifications."
+        }
+      }
+    },
+    "SecretObject": {
+      "description": "Describes the properties of a secret object value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value of the secret. The format of this value will be determined\r\nbased on the type of the secret object. If the type is Opaque, the value will be\r\nused as is without any modification.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the secret object which determines how the value of the secret object has to be\r\ninterpreted.",
+          "enum": [
+            "Opaque"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecretObjectType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1430,6 +1533,10 @@
         "trigger": {
           "$ref": "#/definitions/TriggerUpdateParameters",
           "description": "The properties for updating trigger properties."
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The parameters that describes a set of credentials that will be used when this run is invoked."
         }
       }
     },
@@ -1494,12 +1601,20 @@
             "name": "StepType",
             "modelAsString": true
           }
+        },
+        "contextPath": {
+          "description": "The URL(absolute or relative) of the source context for the task step.",
+          "type": "string"
+        },
+        "contextAccessToken": {
+          "description": "The token (git PAT or SAS token of storage account blob) associated with the context for a step.",
+          "type": "string"
         }
       },
       "discriminator": "type"
     },
     "TriggerUpdateParameters": {
-      "description": "The properties for updating build triggers.",
+      "description": "The properties for updating triggers.",
       "type": "object",
       "properties": {
         "sourceTriggers": {
@@ -1531,7 +1646,8 @@
           "type": "array",
           "items": {
             "enum": [
-              "commit"
+              "commit",
+              "pullrequest"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1541,7 +1657,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1578,7 +1694,7 @@
           }
         },
         "status": {
-          "description": "The current status of build trigger.",
+          "description": "The current status of trigger.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1612,7 +1728,7 @@
           }
         },
         "repositoryUrl": {
-          "description": "The full URL to the source code respository",
+          "description": "The full URL to the source code repository",
           "type": "string"
         },
         "branch": {
@@ -1725,7 +1841,6 @@
       "required": [
         "type",
         "dockerFilePath",
-        "sourceLocation",
         "platform"
       ],
       "type": "object",
@@ -1756,6 +1871,10 @@
           "description": "The Docker file path relative to the source location.",
           "type": "string"
         },
+        "target": {
+          "description": "The name of the target build stage for the docker build.",
+          "type": "string"
+        },
         "arguments": {
           "description": "The collection of override arguments to be used when executing the run.",
           "type": "array",
@@ -1763,13 +1882,9 @@
             "$ref": "#/definitions/Argument"
           }
         },
-        "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
-          "type": "string"
-        },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1777,11 +1892,19 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
         }
       },
       "x-ms-discriminator-value": "DockerBuildRequest"
@@ -1814,7 +1937,6 @@
       "required": [
         "type",
         "taskFilePath",
-        "sourceLocation",
         "platform"
       ],
       "type": "object",
@@ -1839,13 +1961,9 @@
             "$ref": "#/definitions/SetValue"
           }
         },
-        "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
-          "type": "string"
-        },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1853,11 +1971,19 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
         }
       },
       "x-ms-discriminator-value": "FileTaskRunRequest"
@@ -1943,7 +2069,7 @@
         },
         "timeout": {
           "format": "int32",
-          "description": "Build timeout in seconds.",
+          "description": "Run timeout in seconds.",
           "default": 3600,
           "maximum": 28800,
           "minimum": 300,
@@ -1951,11 +2077,19 @@
         },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
-          "description": "The platform properties against which the build will happen."
+          "description": "The platform properties against which the run has to happen."
         },
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
-          "description": "The machine configuration of the build agent."
+          "description": "The machine configuration of the run agent."
+        },
+        "sourceLocation": {
+          "description": "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "The properties that describes a set of credentials that will be used when this run is invoked."
         }
       },
       "x-ms-discriminator-value": "EncodedTaskRunRequest"
@@ -1993,16 +2127,16 @@
           "description": "The Docker file path relative to the source context.",
           "type": "string"
         },
+        "target": {
+          "description": "The name of the target build stage for the docker build.",
+          "type": "string"
+        },
         "arguments": {
           "description": "The collection of override arguments to be used when executing this build step.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Argument"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Docker"
@@ -2033,10 +2167,6 @@
           "items": {
             "$ref": "#/definitions/SetValue"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "FileTask"
@@ -2106,8 +2236,8 @@
             "$ref": "#/definitions/Argument"
           }
         },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
+        "target": {
+          "description": "The name of the target build stage for the docker build.",
           "type": "string"
         }
       },
@@ -2136,10 +2266,6 @@
           "items": {
             "$ref": "#/definitions/SetValue"
           }
-        },
-        "contextPath": {
-          "description": "The URL(absolute or relative) of the source context for the build task.\r\nIf it is relative, the context will be relative to the source repository URL of the build task.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "FileTask"
@@ -2186,6 +2312,7 @@
       "description": "The name of the resource group to which the container registry belongs.",
       "required": true,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "RegistryNameParameter": {

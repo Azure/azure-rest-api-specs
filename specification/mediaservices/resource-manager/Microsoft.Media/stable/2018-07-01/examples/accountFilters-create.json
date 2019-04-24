@@ -1,0 +1,171 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "filterName": "newAccountFilter",
+    "api-version": "2018-07-01",
+    "parameters": {
+      "properties": {
+        "presentationTimeRange": {
+          "startTimestamp": 0,
+          "endTimestamp": 170000000,
+          "presentationWindowDuration": 9223372036854775807,
+          "liveBackoffDuration": 0,
+          "timescale": 10000000,
+          "forceEndTimestamp": false
+        },
+        "firstQuality": {
+          "bitrate": 128000
+        },
+        "tracks": [
+          {
+            "trackSelections": [
+              {
+                "property": "Type",
+                "operation": "Equal",
+                "value": "Audio"
+              },
+              {
+                "property": "Language",
+                "operation": "NotEqual",
+                "value": "en"
+              },
+              {
+                "property": "FourCC",
+                "operation": "NotEqual",
+                "value": "EC-3"
+              }
+            ]
+          },
+          {
+            "trackSelections": [
+              {
+                "property": "Type",
+                "operation": "Equal",
+                "value": "Video"
+              },
+              {
+                "property": "Bitrate",
+                "operation": "Equal",
+                "value": "3000000-5000000"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "newAccountFilter",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/accountFilters/newAccountFilter",
+        "type": "Microsoft.Media/mediaservices/accountFilters",
+        "properties": {
+          "presentationTimeRange": {
+            "startTimestamp": 0,
+            "endTimestamp": 170000000,
+            "presentationWindowDuration": 9223372036854775807,
+            "liveBackoffDuration": 0,
+            "timescale": 10000000,
+            "forceEndTimestamp": false
+          },
+          "firstQuality": {
+            "bitrate": 128000
+          },
+          "tracks": [
+            {
+              "trackSelections": [
+                {
+                  "property": "Type",
+                  "value": "Audio",
+                  "operation": "Equal"
+                },
+                {
+                  "property": "Language",
+                  "value": "en",
+                  "operation": "NotEqual"
+                },
+                {
+                  "property": "FourCC",
+                  "value": "EC-3",
+                  "operation": "NotEqual"
+                }
+              ]
+            },
+            {
+              "trackSelections": [
+                {
+                  "property": "Type",
+                  "value": "Video",
+                  "operation": "Equal"
+                },
+                {
+                  "property": "Bitrate",
+                  "value": "3000000-5000000",
+                  "operation": "Equal"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "newAccountFilter",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/accountFilters/newAccountFilter",
+        "type": "Microsoft.Media/mediaservices/accountFilters",
+        "properties": {
+          "presentationTimeRange": {
+            "startTimestamp": 0,
+            "endTimestamp": 170000000,
+            "presentationWindowDuration": 9223372036854775807,
+            "liveBackoffDuration": 0,
+            "timescale": 10000000,
+            "forceEndTimestamp": false
+          },
+          "firstQuality": {
+            "bitrate": 128000
+          },
+          "tracks": [
+            {
+              "trackSelections": [
+                {
+                  "property": "Type",
+                  "value": "Audio",
+                  "operation": "Equal"
+                },
+                {
+                  "property": "Language",
+                  "value": "en",
+                  "operation": "NotEqual"
+                },
+                {
+                  "property": "FourCC",
+                  "value": "EC-3",
+                  "operation": "NotEqual"
+                }
+              ]
+            },
+            {
+              "trackSelections": [
+                {
+                  "property": "Type",
+                  "value": "Video",
+                  "operation": "Equal"
+                },
+                {
+                  "property": "Bitrate",
+                  "value": "3000000-5000000",
+                  "operation": "Equal"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

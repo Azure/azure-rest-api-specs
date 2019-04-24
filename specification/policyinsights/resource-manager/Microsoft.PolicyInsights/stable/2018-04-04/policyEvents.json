@@ -675,7 +675,7 @@
           "type": "string"
         },
         "managementGroupIds": {
-          "description": "Comma seperated list of management group IDs, which represent the hierarchy of the management groups the resource is under.",
+          "description": "Comma separated list of management group IDs, which represent the hierarchy of the management groups the resource is under.",
           "type": "string"
         },
         "policyDefinitionReferenceId": {
@@ -703,11 +703,13 @@
           "properties": {
             "code": {
               "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "message": {
               "description": "Description of the error.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }

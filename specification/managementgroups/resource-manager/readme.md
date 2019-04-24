@@ -1,5 +1,5 @@
 # Management Groups
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Management Groups.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Management Groups.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Management Groups, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the API.
 
 ``` yaml
@@ -72,9 +72,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -117,60 +119,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: managementgroups
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03
-  - tag: package-2018-01
-  - tag: package-2017-11
-  - tag: package-2017-08
-```
-
-### Tag: package-2018-03 and go
-
-These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-03' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2018-03-01-preview/management
-```
-
-### Tag: package-2018-01 and go
-
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2018-01-01-preview/management
-```
-
-### Tag: package-2017-11 and go
-
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2017-11-01-preview/management
-```
-
-### Tag: package-2017-08 and go
-
-These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2017-08-31-preview/management
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

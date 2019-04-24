@@ -15,59 +15,35 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiApi)
+``` yaml $(csharp) && !$(multiapi) && !$(profile)
 namespace: Microsoft.Azure.Management.Authorization
 output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/Generated
 ```
 
-
-
-
-
-
-
-
-
-
-
 ## Batch settings
-These settings are for batch mode only: (ie, add `--MultiApi` to the command line )
+These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
-``` yaml $(multiApi)
-namespace: Microsoft.Azure.Management.Authorization.$(ApiVersionName)
-output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
+``` yaml $(multiapi)
+profile: hybrid_2018_03_01
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
 
 batch:
-- tag: package-2015-07-AzStk
-  ApiVersionName: Api2015_07_01
-#- tag: package-2017-10-AzStk
-#  ApiVersionName: Api2017_10_01
-```
+ - tag: package-2015-07
+ ```
 
-## Tag: Packages for Azure Stack
+ ``` yaml $(profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
 
-### Tag: package-2015-07-AzStk
+batch:
+ - tag: package-2015-07
+ ```
 
-These settings apply only when `--tag=package-2015-07-AzStk` is specified on the command line.
+ ``` yaml $(profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
 
-``` yaml $(tag) == 'package-2015-07-AzStk'
-input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization.json
-#- ../../resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json
-#- ../../resources/resource-manager/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
-#override-info:
-#    title: AuthorizationManagementClient
-```
-
-### Tag: package-2017-10-AzStk
-
-These settings apply only when `--tag=package-2017-10-AzStk` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-10-AzStk'
-input-file:
-- Microsoft.Authorization\preview\2017-10-01-preview\authorization-RACalls.json
-- ../../resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
-- ../../resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
-override-info:
-    title: AuthorizationManagementClient
-```
+batch:
+ - tag: package-2015-07-authorization-only
+ ```
