@@ -3,7 +3,7 @@
         "api-version": "2019-05-05-preview",
         "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
 		"resourceGroup": "alertscorrelationrg",
-		"actionRuleName": "DailySuppression",
+		"actionRuleName": "DiagnosticsRule",
 		"actionRule": {
 			"location": "Global",
             "tags": {},
@@ -19,29 +19,14 @@
 					},
 					"monitorService": {
 						"operator": "Equals",
-						"values":[ "Platform", "Application Insights" ]
-					},
-					"monitorCondition": {
-						"operator": "Equals",
-						"values":[ "Fired" ]
-					},
-					"targetResourceType": {
-						"operator": "NotEquals",
-						"values":[ "Microsoft.Compute/VirtualMachines" ]
-					}
-				},
-				"suppressionConfig": {
-					"recurrenceType" : "Daily",
-					"schedule": {
-						"startDate": "12/09/2018",
-						"endDate": "12/18/2018",
-						"startTime": "06:00:00",
-						"endTime": "14:00:00"
+						"values":[ "Platform" ]
 					},
 				},
-				"description": "Action rule on resource group for daily suppression",
+				"type": "Diagnostics",
+				},
+				"description": "Action rule on resource group for diagnnostics",
 				"resourceGroup": "alertscorrelationrg",
-				"status": "enabled"
+				"status": "Enabled"
 			}
 		}
     },
@@ -60,41 +45,26 @@
 						},
 						"monitorService": {
 							"operator": "Equals",
-							"values":[ "Platform", "Application Insights" ]
-						},
-						"monitorCondition": {
-							"operator": "Equals",
-							"values":[ "Fired" ]
-						},
-						"targetResourceType": {
-							"operator": "NotEquals",
-							"values":[ "Microsoft.Compute/VirtualMachines" ]
+							"values":[ "Platform" ]
 						}
 					},
-					"suppressionConfig": {
-						"recurrenceType" : "Daily",
-						"schedule": {
-							"startDate": "12/09/2018",
-							"endDate": "12/18/2018",
-							"startTime": "06:00:00",
-							"endTime": "14:00:00"
-						}
+					"type": "Diagnostics",
 					},
-					"description": "Action rule on resource group for daily suppression",
+					"description": "Action rule on resource group for diagnnostics",
 					"resourceGroup": "alertscorrelationrg",
-					"status": "enabled",
+					"status": "Enabled",
 					"startDateTime":"2018-06-12T22:05:09Z",
 					"lastModifiedDateTime":"2018-06-12T22:05:09Z",
 					"createdUserName":"abc@microsoft.com",
 					"lastModifiedUserName":"xyz@microsoft.com"
 				},
-				"id":"/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
+				"id":"/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DiagnosticsRule",
 				"type":"Microsoft.AlertsManagement/actionRules",
-				"name":"DailySuppression",
+				"name":"DiagnosticsRule",
 				"location": "Global",
+				"status": "Enabled",
 				"tags": {}	
 			}
 		}	
 	}
 }
-

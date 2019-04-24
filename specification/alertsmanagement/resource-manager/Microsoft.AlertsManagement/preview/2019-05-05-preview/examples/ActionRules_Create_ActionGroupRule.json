@@ -1,0 +1,86 @@
+{
+	"parameters": {
+        "api-version": "2019-05-05-preview",
+        "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
+		"resourceGroup": "alertscorrelationrg",
+		"actionRuleName": "ActionGroupRule",
+		"actionRule": {
+			"location": "Global",
+            "tags": {},
+			"properties": {
+				"scope": {
+					"type": "ResourceGroup",
+					"values": ["/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"]
+				},
+				"conditions": {
+					"severity": {
+						"operator": "Equals",
+						"values": [ "Sev0", "Sev2" ]
+					},
+					"monitorService": {
+						"operator": "Equals",
+						"values":[ "Log Analytics", "Application Insights" ]
+					},
+					"monitorCondition": {
+						"operator": "Equals",
+						"values":[ "Fired" ]
+					},
+					"alertContext": {
+						"operator": "DoesNotContain",
+						"values":[ "server1" ]
+					}
+				},
+				"type": "ActionGroup",
+				"actionGroup": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsot.insights/actionGroups/EmailAction",
+				},
+				"description": "Action rule on resource group for triggering actions",
+				"resourceGroup": "alertscorrelationrg",
+				"status": "Enabled"
+			}
+		}
+    },
+	"responses": {
+		"200": {
+			"body": {
+				"properties":{
+					"scope": {
+						"type": "ResourceGroup",
+						"values": ["/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"]
+					},
+					"conditions": {
+						"severity": {
+							"operator": "Equals",
+							"values": [ "Sev0", "Sev2" ]
+						},
+						"monitorService": {
+							"operator": "Equals",
+							"values":[ "Log Analytics", "Application Insights" ]
+						},
+						"monitorCondition": {
+							"operator": "Equals",
+							"values":[ "Fired" ]
+						},
+						"alertContext": {
+							"operator": "DoesNotContain",
+							"values":[ "server1" ]
+						}
+					},
+					"type": "ActionGroup",
+					"actionGroup": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsot.insights/actionGroups/EmailAction",
+					"description": "Action rule on resource group for triggering actions",
+					"resourceGroup": "alertscorrelationrg",
+					"status": "Enabled",
+					"startDateTime":"2018-06-12T22:05:09Z",
+					"lastModifiedDateTime":"2018-06-12T22:05:09Z",
+					"createdUserName":"abc@microsoft.com",
+					"lastModifiedUserName":"xyz@microsoft.com"
+				},
+				"id":"/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/ActionGroupRule",
+				"type":"Microsoft.AlertsManagement/actionRules",
+				"name":"ActionGroupRule",
+				"location": "Global",
+				"tags": {}	
+			}
+		}	
+	}
+}
