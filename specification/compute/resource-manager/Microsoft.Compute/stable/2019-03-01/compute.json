@@ -7649,10 +7649,6 @@
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
-        },
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
           "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
@@ -7769,6 +7765,10 @@
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7790,6 +7790,10 @@
         "singlePlacementGroup": {
           "type": "boolean",
           "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
