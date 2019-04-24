@@ -72,19 +72,31 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
         ),
           cm.createCodeBlock(
             "yaml ",
-            yaml.dump({ "profiles":{"latest": latestProfile} }, { lineWidth: 1000 })
+            yaml.dump({ "profiles":{[`latest-${getFormattedDate()}`]: latestProfile} }, { lineWidth: 1000 })
           )
         )
       }
     );
 
-    const latestProfileDir = Path.join(profilesDirectory, 'latest-profile.md');
+    const latestProfileDir = Path.join(profilesDirectory, `${getFormattedDate()}-profile.md`);
     fs.writeFile(latestProfileDir, latestProfileMarkDown);
     console.log(`Latest profile written at ${latestProfileDir}`);
     console.log('DONE');    
   } catch (e) {
     console.error(e);
   }
+}
+
+function getFormattedDate(): string {
+  const today = new Date();
+  const monthNumber = today.getMonth() + 1; 
+  const dayNumber = today.getDate();
+
+  const yyyy = String(today.getFullYear());
+  const mm = (monthNumber < 10) ? `0${monthNumber}` : String(monthNumber);
+  const dd = (dayNumber < 10) ? `0${dayNumber}`  : String(dayNumber);
+  
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 async function getPaths(specHandles: Array<string>): Promise<Array<PathMetadata>> {
