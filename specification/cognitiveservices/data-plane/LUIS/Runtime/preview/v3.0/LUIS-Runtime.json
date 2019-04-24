@@ -1,0 +1,494 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0-preview",
+    "title": "LUIS Runtime Client"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/luis/v3.0-preview",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/apps/{appId}/versions/{versionId}/predict": {
+      "get": {
+        "description": "Gets the predictions for an application version.",
+        "operationId": "Prediction_GetVersionPredictionsGET",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          },
+          {
+            "$ref": "#/parameters/Verbose"
+          },
+          {
+            "$ref": "#/parameters/ShowAllIntents"
+          },
+          {
+            "$ref": "#/parameters/Log"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Version Predictions From Endpoint Via Get request": {
+            "$ref": "./examples/prediction/SuccessfulGetVersionPredictionsFromEndpointViaGetRequest.json"
+          }
+        }
+      },
+      "post": {
+        "description": "Gets the predictions for an application version.",
+        "operationId": "Prediction_GetVersionPredictions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/Verbose"
+          },
+          {
+            "$ref": "#/parameters/ShowAllIntents"
+          },
+          {
+            "$ref": "#/parameters/Log"
+          },
+          {
+            "$ref": "#/parameters/PredictionRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Version Predictions From Endpoint Via Post request": {
+            "$ref": "./examples/prediction/SuccessfulGetVersionPredictionsFromEndpointViaPostRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/slots/{slotName}/predict": {
+      "get": {
+        "description": "Gets the predictions for an application slot.",
+        "operationId": "Prediction_GetSlotPredictionsGET",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SlotNameInPath"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          },
+          {
+            "$ref": "#/parameters/Verbose"
+          },
+          {
+            "$ref": "#/parameters/ShowAllIntents"
+          },
+          {
+            "$ref": "#/parameters/Log"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Slot Predictions From Endpoint Via Get request": {
+            "$ref": "./examples/prediction/SuccessfulGetSlotPredictionsFromEndpointViaGetRequest.json"
+          }
+        }
+      },
+      "post": {
+        "description": "Gets the predictions for an application slot.",
+        "operationId": "Prediction_GetSlotPredictions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SlotNameInPath"
+          },
+          {
+            "$ref": "#/parameters/Verbose"
+          },
+          {
+            "$ref": "#/parameters/ShowAllIntents"
+          },
+          {
+            "$ref": "#/parameters/Log"
+          },
+          {
+            "$ref": "#/parameters/PredictionRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The prediction for the supplied query",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Slot Predictions From Endpoint Via Post request": {
+            "$ref": "./examples/prediction/SuccessfulGetSlotPredictionsFromEndpointViaPostRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PredictionRequest": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "description": "The query to predict",
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/RequestOptions"
+        },
+        "externalEntities": {
+          "description": "The externally predicted entities for this request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalEntity"
+          }
+        },
+        "dynamicEntities": {
+          "description": "The dynamically created list entities for this request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DynamicEntity"
+          }
+        }
+      }
+    },
+    "RequestOptions": {
+      "type": "object",
+      "properties": {
+        "timezoneOffset": {
+          "type": "string"
+        },
+        "overridePredictions": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PredictionResponse": {
+      "type": "object",
+      "required": [
+        "query",
+        "prediction"
+      ],
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "prediction": {
+          "$ref": "#/definitions/PredictionObject"
+        }
+      }
+    },
+    "PredictionObject": {
+      "type": "object",
+      "required": [
+        "normalizedQuery",
+        "topIntent",
+        "intents",
+        "entities"
+      ],
+      "properties": {
+        "normalizedQuery": {
+          "type": "string"
+        },
+        "alteredQuery": {
+          "type": "string"
+        },
+        "topIntent": {
+          "type": "string"
+        },
+        "intents": {
+          "$ref": "#/definitions/IntentsObject"
+        },
+        "entities": {},
+        "sentiment": {
+          "$ref": "#/definitions/SentimentObject"
+        }
+      }
+    },
+    "IntentsObject": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/IntentObject"
+      }
+    },
+    "IntentObject": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "number"
+        },
+        "childApp": {
+          "$ref": "#/definitions/PredictionObject"
+        }
+      }
+    },
+    "SentimentObject": {
+      "type": "object",
+      "required": [
+        "score"
+      ],
+      "properties": {
+        "score": {
+          "type": "number"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "ExternalEntity": {
+      "type": "object",
+      "required": [
+        "entityName",
+        "startIndex",
+        "entityLength"
+      ],
+      "properties": {
+        "entityName": {
+          "type": "string"
+        },
+        "startIndex": {
+          "type": "integer"
+        },
+        "entityLength": {
+          "type": "integer"
+        },
+        "resolution": {}
+      }
+    },
+    "DynamicEntity": {
+      "type": "object",
+      "required": [
+        "listEntityName",
+        "requestLists"
+      ],
+      "properties": {
+        "listEntityName": {
+          "type": "string"
+        },
+        "requestLists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sublist"
+          }
+        }
+      }
+    },
+    "Sublist": {
+      "type": "object",
+      "required": [
+        "name",
+        "canonicalForm",
+        "synonyms"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "canonicalForm": {
+          "type": "string"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorBody"
+        }
+      }
+    },
+    "ErrorBody": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AppIdInPath": {
+      "name": "appId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "description": "The application ID.",
+      "x-ms-parameter-location": "method"
+    },
+    "VersionIdInPath": {
+      "name": "versionId",
+      "in": "path",
+      "description": "The application version ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SlotNameInPath": {
+      "name": "slotName",
+      "in": "path",
+      "description": "The application slot name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Query": {
+      "name": "query",
+      "in": "query",
+      "description": "The query to predict",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Verbose": {
+      "name": "verbose",
+      "in": "query",
+      "description": "Indicates whether to get extra metadata for the entities predictions or not.",
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "ShowAllIntents": {
+      "name": "showAllIntents",
+      "in": "query",
+      "description": "Indicates whether to return all the intents in the response or just the top intent.",
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "Log": {
+      "name": "log",
+      "in": "query",
+      "description": "Indicates whether to log the endpoint query or not.",
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "PredictionRequest": {
+      "name": "predictionRequest",
+      "in": "body",
+      "description": "The prediction request body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PredictionRequest"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
