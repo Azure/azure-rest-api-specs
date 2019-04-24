@@ -1703,6 +1703,10 @@
               "description": "Properties of a managed cluster.",
               "$ref": "#/definitions/ManagedClusterProperties",
               "x-ms-client-flatten": true
+            },
+            "identity": {
+              "$ref": "#/definitions/ManagedClusterIdentity",
+              "description": "The identity of the managed cluster, if configured."
             }
           }
         }
@@ -1790,6 +1794,33 @@
         }
       },
       "description": "Properties of the managed cluster."
+    },
+    "ManagedClusterIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the system assigned identity which is used by master components."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of the system assigned identity which is used by master components."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the managed cluster. Type 'SystemAssigned' will use an implicityly created identity in master components and an auto-created user assigned identity in MC_ resource group in agent nodes. Type 'None' will not use MSI for the managed cluster, service principal will be used instead.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the managed cluster."
     },
     "OrchestratorProfile": {
       "properties": {
