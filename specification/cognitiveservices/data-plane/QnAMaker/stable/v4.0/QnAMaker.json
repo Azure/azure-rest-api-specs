@@ -682,7 +682,6 @@
     "UpdateContextDTO": {
       "type": "object",
       "description": "Update Body schema to represent context to be updated",
-      "additionalProperties": false,
       "properties": {
         "promptsToDelete": {
           "type": "array",
@@ -918,7 +917,6 @@
     "ContextDTO": {
       "type": "object",
       "description": "Context associated with Qna.",
-      "additionalProperties": false,
       "properties": {
         "isContextOnly": {
           "type": "boolean",
@@ -927,7 +925,7 @@
         "prompts": {
           "type": "array",
           "description": "List of prompts associated with the answer.",
-          "maxLength": 20,
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/PromptDTO"
           }
