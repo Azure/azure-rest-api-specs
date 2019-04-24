@@ -505,6 +505,21 @@
           },
           {
             "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/impactedScope"
+          },
+          {
+            "$ref": "#/parameters/description"
+          },
+          {
+            "$ref": "#/parameters/alertRuleId"
+          },
+          {
+            "$ref": "#/parameters/actionGroup"
+          },
+		  {
+            "$ref": "#/parameters/actionRuleName"
           }
         ],
         "responses": {
@@ -555,6 +570,21 @@
           },
           {
             "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/impactedScope"
+          },
+          {
+            "$ref": "#/parameters/description"
+          },
+          {
+            "$ref": "#/parameters/alertRuleId"
+          },
+          {
+            "$ref": "#/parameters/actionGroup"
+          },
+		  {
+            "$ref": "#/parameters/actionRuleName"
           }
         ],
         "responses": {
@@ -870,12 +900,52 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
+    "description": {
+      "description": "filter by alert rule description",
+      "name": "description",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "alertRuleId": {
+      "description": "filter by alert rule id",
+      "name": "alertRuleId",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "actionGroup": {
+      "description": "filter by action group configured as part of action rule",
+      "name": "actionGroup",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "actionRuleName": {
+      "description": "filter by action rule name",
+      "name": "name",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
     "smartGroupId": {
       "description": "Smart Group Id",
       "name": "smartGroupId",
       "type": "string",
       "in": "path",
       "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "impactedScope": {
+      "description": "filter by impacted/target scope (provide comma separated list for multiple scopes). The value should be an well constructed ARM id of the scope.",
+      "name": "impactedScope",
+      "type": "string",
+      "in": "query",
+      "required": false,
       "x-ms-parameter-location": "method"
     },
     "newState": {
@@ -1957,15 +2027,6 @@
         "monitorCondition": {
           "$ref": "#/definitions/condition"
         },
-        "signalType": {
-          "$ref": "#/definitions/condition"
-        },
-        "targetResource": {
-          "$ref": "#/definitions/condition"
-        },
-        "targetResourceGroup": {
-          "$ref": "#/definitions/condition"
-        },
         "targetResourceType": {
           "$ref": "#/definitions/condition"
         },
@@ -1975,10 +2036,7 @@
         "description": {
           "$ref": "#/definitions/condition"
         },
-        "logAnalyticsSearchResults": {
-          "$ref": "#/definitions/condition"
-        },
-        "applicationInsightsSearchResults": {
+        "alertContext": {
           "$ref": "#/definitions/condition"
         }
       }
@@ -2055,6 +2113,10 @@
     },
     "actionRuleProperties": {
       "description": "Action rule properties defining scope, conditions, suppression logic for action rule",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
       "properties": {
         "scope": {
           "$ref": "#/definitions/scope"
@@ -2062,17 +2124,9 @@
         "conditions": {
           "$ref": "#/definitions/conditions"
         },
-        "suppressionConfig": {
-          "$ref": "#/definitions/suppressionConfig"
-        },
         "description": {
           "type": "string",
           "description": "Description of action rule"
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "Resource group where action rule is stored",
-          "readOnly": true
         },
         "createdAt": {
           "type": "string",
@@ -2100,15 +2154,81 @@
           "type": "string",
           "description": "Indicates if the given action rule is enabled or disabled",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "ActionRuleStatus",
             "modelAsString": true
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Indicates type of action rule",
+          "enum": [
+            "Suppression",
+            "ActionGroup",
+            "Diagnostics"
+          ],
+          "x-ms-enum": {
+            "name": "ActionRuleType",
+            "modelAsString": true
+          }
         }
       }
+    },
+    "Suppression": {
+      "title": "Suppression based Action Rule",
+      "description": "Action rule with suppression configuration",
+      "required": [
+        "suppressionConfig"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/actionRuleProperties"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "suppressionConfig": {
+          "$ref": "#/definitions/suppressionConfig"
+        }
+      }
+    },
+    "ActionGroup": {
+      "title": "Action Group based Action Rule",
+      "description": "Action rule with action group configuration",
+      "required": [
+        "actionGroupId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/actionRuleProperties"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "actionGroupId": {
+          "type": "string",
+          "description": "Action group to trigger if action rule matches"
+        }
+      }
+    },
+    "Diagnostics": {
+      "title": "Diagnostics based Action Rule",
+      "description": "Action rule with diagnostics configuration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/actionRuleProperties"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "actionRulesList": {
       "description": "List of action rules",
