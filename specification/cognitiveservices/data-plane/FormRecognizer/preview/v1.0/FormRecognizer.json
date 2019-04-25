@@ -133,7 +133,9 @@
           "200": {
             "description": "Success",
             "schema": {
-                "$ref": "#/definitions/ModelInfoList"
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/ModelResult" }
             }
           },
           "default": {
@@ -174,7 +176,7 @@
           "200": {
             "description": "Success",
             "schema": {
-                "$ref": "#/definitions/ModelInfo"
+                "$ref": "#/definitions/ModelResult"
             }
           },
           "default": {
@@ -337,58 +339,44 @@
       }
     },
     "KeysResult": {
-      "description": "Response of the Keys API call.",
+      "description": "Result of an operation to get\r\nthe keys extracted by a model.",
       "type": "object",
       "properties": {
-        "clusters" : {
-          "description": "Cluster of keys",
-          "type": "object"
+        "clusters": {
+          "description": "Object mapping ClusterIds to Key lists.",
+          "type": "object",
+          "additionalProperties": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": { "type": "string" }
+          }
         }
       }
     },
-    "ModelInfo": {
-      "description": "Response of the Model API call.",
+    "ModelResult": {
+      "description": "Result of a model status query operation.",
       "type": "object",
       "properties": {
         "modelId": {
-          "description": "Identifier of the model.",
-          "type": "string",
-          "format": "uuid",
-          "x-nullable": false
-        },
-        "version": {
-          "description": "Version of model.",
-          "type": "integer",
-          "minimum": 1
+          "description": "Get or set model identifier.",
+          "type": "string"
         },
         "status": {
-          "description": "Status of model.",
-          "type": "string",
-          "enum": [
-                "Created", 
-                "Ready", 
-                "Invalid"
-          ]
+          "description": "Get or set the status of model.",
+          "enum": [ "created", "ready", "invalid" ],
+          "type": "string"
         },
         "createdDateTime": {
-          "description": "Date and Time model is created.",
-          "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Get or set the created date time of the model.",
+          "type": "string"
         },
         "lastUpdatedDateTime": {
-          "description": "Date and Time model is last updated.",
-          "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Get or set the model last updated datetime.",
+          "type": "string"
         }
-      } 
-    },
-    "ModelInfoList": {
-      "description": "List of all the models created.",
-      "uniqueItems": true,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ModelInfo"
-      } 
+      }
     },
     "FormDocumentReport": {
       "type": "object",
