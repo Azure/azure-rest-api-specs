@@ -228,7 +228,7 @@
             "name": "evaluation",
             "in": "body",
             "description": "The evaluation job definition.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/EvaluationContract"
             }
@@ -313,7 +313,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           }
         },
@@ -349,7 +349,7 @@
             "name": "reward",
             "in": "body",
             "description": "The reward should be a floating point number.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RewardRequest"
             }
@@ -651,14 +651,6 @@
           "description": "Number of days historical logs are to be maintained.",
           "type": "integer"
         }
-      },
-      "example": {
-        "rewardWaitTime": "00:10:00",
-        "defaultReward": 0.0,
-        "rewardAggregation": "earliest",
-        "explorationPercentage": 0.2,
-        "modelExportFrequency": "00:05:00",
-        "logRetentionDays": 7
       }
     },
     "PolicyContract": {
@@ -677,10 +669,6 @@
           "description": "Arguments of the Policy.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "myPersonalizer",
-        "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
       }
     },
     "EvaluationContract": {
@@ -717,18 +705,6 @@
             "$ref": "#/definitions/PolicyContract"
           }
         }
-      },
-      "example": {
-        "enableOfflineExperimentation": true,
-        "name": "myFirstEvaluation",
-        "startTime": "2018-12-19T00:00:00Z",
-        "endTime": "2019-01-19T00:00:00Z",
-        "policies": [
-          {
-            "name": "Custom Policy 1",
-            "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
-          }
-        ]
       }
     },
     "Evaluation": {
@@ -850,9 +826,6 @@
           "description": "Reward to be assigned to an action. Value must be between -1 and 1 inclusive.",
           "type": "number"
         }
-      },
-      "example": {
-        "value": 1.0
       }
     },
     "IActionResult": {
@@ -932,44 +905,6 @@
           "default": false,
           "type": "boolean"
         }
-      },
-      "example": {
-        "contextFeatures": [
-          {
-            "timeOfDay": "Morning"
-          }
-        ],
-        "actions": [
-          {
-            "id": "NewsArticle",
-            "features": [
-              {
-                "type": "News"
-              }
-            ]
-          },
-          {
-            "id": "SportsArticle",
-            "features": [
-              {
-                "type": "Sports"
-              }
-            ]
-          },
-          {
-            "id": "EntertainmentArticle",
-            "features": [
-              {
-                "type": "Entertainment"
-              }
-            ]
-          }
-        ],
-        "excludedActions": [
-          "SportsArticle"
-        ],
-        "eventId": "75269AD0-BFEE-4598-8196-C57383D38E10",
-        "deferActivation": false
       }
     },
     "RankableAction": {
