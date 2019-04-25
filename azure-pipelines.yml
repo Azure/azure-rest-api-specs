@@ -58,7 +58,6 @@ jobs:
 - job: "Avocado"
   pool:
     vmImage: 'Ubuntu 16.04'
-  continueOnError: true
   steps:
   - task: Npm@1
     displayName: 'npm install'
@@ -68,12 +67,11 @@ jobs:
     displayName: 'Avocado'
 
 - job: "BreakingChange"
-  condition: "not(variables['PRIVATE'])"
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
   - script: 'scripts/install-dotnet.sh'
-    displayName: 'Insall .Net'
+    displayName: 'Install .Net'
   - task: Npm@1
     displayName: 'npm install'
     inputs:
@@ -82,7 +80,6 @@ jobs:
     displayName: 'Breaking Changes'
 
 - job: "LintDiff"
-  condition: "not(variables['PRIVATE'])"
   variables:
     NODE_OPTIONS: '--max-old-space-size=8192'
   pool:

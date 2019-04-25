@@ -482,6 +482,43 @@
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
+    "PolicyExportFormat": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Policy Export Format.",
+      "enum": [
+        "xml",
+        "xml-link",
+        "rawxml",
+        "rawxml-link"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyExportFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "xml",
+            "description": "The contents are inline and Content type is an XML document."
+          },
+          {
+            "value": "xml-link",
+            "description": "The policy XML document is exported to a storage blob with SAS key valid for 5 minutes."
+          },
+          {
+            "value": "rawxml",
+            "description": "The contents are inline and Content type is a non XML encoded policy document."
+          },
+          {
+            "value": "rawxml-link",
+            "description": "The policy document is not XML encoded is exported to a storage blob with SAS Key valid for 5 minutes."
+          }
+        ]
+      },
+      "default": "xml",
+      "x-ms-parameter-location": "method"
+    },
     "PolicyIdParameter": {
       "name": "policyId",
       "in": "path",
