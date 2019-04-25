@@ -549,7 +549,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/actionRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
         "summary": "Get all action rules created in a resource group",
         "operationId": "ActionRules_GetAllByResourceGroup",
@@ -559,7 +559,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/resourceGroup"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
             "$ref": "#/parameters/targetResourceGroup"
@@ -619,7 +619,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/actionRules/{actionRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{actionRuleName}": {
       "get": {
         "summary": "Get action rule by name",
         "operationId": "ActionRules_GetByName",
@@ -629,7 +629,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/resourceGroup"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
             "name": "actionRuleName",
@@ -674,7 +674,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/resourceGroup"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
             "name": "actionRuleName",
@@ -728,7 +728,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/resourceGroup"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
             "name": "actionRuleName",
@@ -773,7 +773,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/resourceGroup"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
             "name": "actionRuleName",
@@ -828,8 +828,8 @@
       "in": "path",
       "required": true
     },
-    "resourceGroup": {
-      "name": "resourceGroup",
+    "resourceGroupName": {
+      "name": "resourceGroupName",
       "description": "Resource group name where the resource is created.",
       "type": "string",
       "in": "path",
@@ -2080,7 +2080,6 @@
     },
     "suppressionConfig": {
       "type": "object",
-      "discriminator": "recurrenceType",
       "description": "Suppression logic for a given action rule",
       "required": [
         "recurrenceType"
