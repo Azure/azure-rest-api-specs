@@ -156,6 +156,76 @@
           }
         ]
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Subscription/createSubscription": {
+      "post": {
+        "description": "Creates an Azure subscription on behalf of a customer",
+        "operationId": "SubscriptionFactory_CustomerCreateSubscription",
+        "x-ms-examples": {
+          "createSubscription": {
+            "$ref": "./examples/customerCreateSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The name of the commerce root billing account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerName",
+            "in": "path",
+            "description": "The customer for which the subscription is to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The subscription creation parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerSubscriptionCreationParameters"
+            }
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -191,12 +261,29 @@
           "description": "rbac owner of the subscription",
           "$ref": "#/definitions/AdPrincipal"
         },
-        "additionalParameters": {  
+        "additionalParameters": {
           "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
           "type": "object",
-          "additionalProperties": {  
+          "additionalProperties": {
             "type": "object"
           }
+        }
+      }
+    },
+    "CustomerSubscriptionCreationParameters": {
+      "description": "Subscription Creation Parameters required to create a new Azure subscription on behalf of a customer.",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the subscription.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The commerce id of the sku.",
+          "type": "string"
+        },
+        "serviceProviderId": {
+          "description": "The id of the provider",
+          "type": "string"
         }
       }
     },
