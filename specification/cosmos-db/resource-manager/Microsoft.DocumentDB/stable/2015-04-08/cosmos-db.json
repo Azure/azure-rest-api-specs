@@ -1403,13 +1403,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetSqlDatabase",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseGet": { "$ref": "./examples/CosmosDBSqlDatabaseGet.json" }
         },
-        "description": "Gets the SQL databases under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the SQL databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1421,7 +1421,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1454,7 +1454,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1499,7 +1499,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1515,7 +1515,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}/containers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers": {
       "get": {
         "operationId": "DatabaseAccounts_ListSqlContainers",
         "x-ms-examples": {
@@ -1533,7 +1533,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1552,7 +1552,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}/containers/{containerRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetSqlContainer",
         "x-ms-examples": {
@@ -1570,10 +1570,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/containerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1606,10 +1606,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/containerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1654,10 +1654,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/containerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1707,13 +1707,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetMongoDatabase",
         "x-ms-examples": {
           "CosmosDBMongoDatabaseGet": { "$ref": "./examples/CosmosDBMongoDatabaseGet.json" }
         },
-        "description": "Gets the Mongo databases under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the Mongo databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1725,7 +1725,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1758,7 +1758,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1803,7 +1803,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1819,7 +1819,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseRid}/collections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseName}/collections": {
       "get": {
         "operationId": "DatabaseAccounts_ListMongoCollections",
         "x-ms-examples": {
@@ -1837,7 +1837,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1856,7 +1856,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseRid}/collections/{collectionRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseName}/collections/{collectionName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetMongoCollection",
         "x-ms-examples": {
@@ -1874,10 +1874,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1910,10 +1910,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1958,10 +1958,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2011,13 +2011,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetTable",
         "x-ms-examples": {
           "CosmosDBTableGet": { "$ref": "./examples/CosmosDBTableGet.json" }
         },
-        "description": "Gets the Tables under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the Tables under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2029,7 +2029,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2062,7 +2062,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2107,7 +2107,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2157,13 +2157,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetCassandraKeyspace",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceGet": { "$ref": "./examples/CosmosDBCassandraKeyspaceGet.json" }
         },
-        "description": "Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2175,7 +2175,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2208,7 +2208,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2253,7 +2253,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2269,7 +2269,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}/tables": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables": {
       "get": {
         "operationId": "DatabaseAccounts_ListCassandraTables",
         "x-ms-examples": {
@@ -2287,7 +2287,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2306,7 +2306,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}/tables/{tableRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables/{tableName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetCassandraTable",
         "x-ms-examples": {
@@ -2324,10 +2324,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2360,10 +2360,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2408,10 +2408,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2461,13 +2461,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetGremlinDatabase",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseGet": { "$ref": "./examples/CosmosDBGremlinDatabaseGet.json" }
         },
-        "description": "Gets the Gremlin databases under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the Gremlin databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2479,7 +2479,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2512,7 +2512,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2557,7 +2557,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2573,7 +2573,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseRid}/graphs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs": {
       "get": {
         "operationId": "DatabaseAccounts_ListGremlinGraphs",
         "x-ms-examples": {
@@ -2591,7 +2591,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2610,7 +2610,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseRid}/graphs/{graphRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs/{graphName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetGremlinGraph",
         "x-ms-examples": {
@@ -2628,10 +2628,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/graphRidParameter"
+            "$ref": "#/parameters/graphNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2664,10 +2664,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/graphRidParameter"
+            "$ref": "#/parameters/graphNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2712,10 +2712,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/graphRidParameter"
+            "$ref": "#/parameters/graphNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -4950,37 +4950,53 @@
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB collection rid."
     },
-    "containerRidParameter": {
-      "name": "containerRid",
+    "databaseNameParameter": {
+      "name": "databaseName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB container rid."
+      "description": "Cosmos DB database name."
     },
-    "tableRidParameter": {
-      "name": "tableRid",
+    "containerNameParameter": {
+      "name": "containerName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB table rid."
+      "description": "Cosmos DB container name."
     },
-    "keyspaceRidParameter": {
-      "name": "keyspaceRid",
+    "tableNameParameter": {
+      "name": "tableName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB keyspace rid."
+      "description": "Cosmos DB table name."
     },
-    "graphRidParameter": {
-      "name": "graphRid",
+    "collectionNameParameter": {
+      "name": "collectionName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB graph rid."
+      "description": "Cosmos DB collection name."
+    },
+    "keyspaceNameParameter": {
+      "name": "keyspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB keyspace name."
+    },
+    "graphNameParameter": {
+      "name": "graphName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB graph name."
     },
     "regionParameter": {
       "name": "region",
