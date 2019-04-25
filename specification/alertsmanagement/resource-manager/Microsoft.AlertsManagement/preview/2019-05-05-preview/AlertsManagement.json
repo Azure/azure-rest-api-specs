@@ -518,7 +518,7 @@
           {
             "$ref": "#/parameters/actionGroup"
           },
-		  {
+          {
             "$ref": "#/parameters/actionRuleName"
           }
         ],
@@ -540,6 +540,11 @@
             "schema": {
               "$ref": "#/definitions/errorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetActionRulesSubscriptionWide": {
+            "$ref": "./examples/ActionRules_List_Subscription.json"
           }
         }
       }
@@ -583,7 +588,7 @@
           {
             "$ref": "#/parameters/actionGroup"
           },
-		  {
+          {
             "$ref": "#/parameters/actionRuleName"
           }
         ],
@@ -605,6 +610,11 @@
             "schema": {
               "$ref": "#/definitions/errorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetActionRulesResourceGroupWide": {
+            "$ref": "./examples/ActionRules_List_ResourceGroup.json"
           }
         }
       }
@@ -647,6 +657,11 @@
             "schema": {
               "$ref": "#/definitions/errorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetActionRuleById": {
+            "$ref": "./examples/ActionRules_GetById.json"
           }
         }
       },
@@ -697,6 +712,11 @@
               "$ref": "#/definitions/errorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PutActionRule": {
+            "$ref": "./examples/ActionRules_Create_SuppressionRule.json"
+          }
         }
       },
       "delete": {
@@ -733,6 +753,11 @@
             "schema": {
               "$ref": "#/definitions/errorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteActionRule": {
+            "$ref": "./examples/ActionRules_Delete.json"
           }
         }
       },
@@ -779,6 +804,11 @@
             "schema": {
               "$ref": "#/definitions/errorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PatchActionRule": {
+            "$ref": "./examples/ActionRules_Patch.json"
           }
         }
       }
@@ -852,6 +882,7 @@
       "type": "string",
       "in": "query",
       "required": false,
+      "x-ms-parameter-location": "method",
       "enum": [
         "Platform",
         "Application Insights",
