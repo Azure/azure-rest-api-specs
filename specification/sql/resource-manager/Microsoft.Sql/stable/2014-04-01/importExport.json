@@ -304,7 +304,7 @@
                 },
                 "edition": {
                     "type": "string",
-                    "description": "The edition for the database being created.",
+                    "description": "The edition for the database being created.\n\nTo determine the editions that are available to your subscription in an Azure location, use the `Capabilities_ListByLocation` REST API or one of the following commands:\n\n```azurecli\naz sql db list-editions -l <location> -o table\n````\n\n```powershell\nGet-AzSqlServerServiceObjective -Location <location>\n````",
                     "enum": [
                         "Web",
                         "Business",
@@ -316,7 +316,10 @@
                         "Stretch",
                         "DataWarehouse",
                         "System",
-                        "System2"
+                        "System2",
+                        "GeneralPurpose",
+                        "BusinessCritical",
+                        "Hyperscale"
                     ],
                     "x-ms-enum": {
                         "name": "DatabaseEdition",
