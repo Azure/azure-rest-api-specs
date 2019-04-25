@@ -31,19 +31,6 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-## Supression
-
-``` yaml
-directive:
-  - suppress: AvoidNestedProperties
-    reason: Client defined properties dictionaries should not be flattened.
-  - suppress: GuidUsage
-    reason: Existing properties; cannot change without breaking API
-  - suppress: DeleteMustNotHaveRequestBody
-    reason: Existing API for batch deletion
-  - suppress: LROStatusCodesReturnTypeSchema
-    reason: Not a Long Running Operation
-```
 
 ### Tag: package-2019-05-preview
 
