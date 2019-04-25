@@ -250,7 +250,8 @@
             "in": "path",
             "description": "Model Identifier to analyze the document with.",
             "required": true,
-            "type": "string"
+            "type": "string",
+			"format": "uuid"
           },
           {
             "name": "keys",
@@ -512,7 +513,7 @@
             "$ref": "#/definitions/ExtractedKeyValuePair"
           }
         },
-        "extractedtables": {
+        "tables": {
           "description": "List of Tables and their information extracted from the page.",
           "uniqueItems": false,
           "type": "array",
