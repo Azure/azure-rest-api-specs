@@ -486,7 +486,7 @@
       "get": {
         "summary": "Get all action rule in a given subscription",
         "description": "List all action rules of the subscription and given input filters",
-        "operationId": "ActionRules_GetAll_Subscription",
+        "operationId": "ActionRules_GetAllBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -552,7 +552,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
         "summary": "Get all action rules created in a resource group",
-        "operationId": "ActionRules_GetAll_ResourceGroup",
+        "operationId": "ActionRules_GetAllByResourceGroup",
         "description": "List all action rules of the subscription, created in given resource group and given input filters",
         "parameters": [
           {
@@ -2277,20 +2277,28 @@
         }
       }
     },
-    "patchObject": {
-      "description": "Properties supported by patch",
+    "patchProperties": {
+      "description": "Action rule properties supported by patch",
       "properties": {
         "status": {
           "type": "string",
           "description": "Indicates if the given action rule is enabled or disabled",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "ActionRuleStatus",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "patchObject": {
+      "description": "Data contract for patch",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/patchProperties"
         },
         "tags": {
           "type": "object",
