@@ -1,547 +1,639 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "v1.0-preview",
-      "title": "Cognitive Service Form Recognizer API V1 (Preview)",
-      "description": "Extracts information from forms and images into structured data based on a model created by a set of representative training forms."
-    },
-    "securityDefinitions": {
-      "apim_key": {
-          "type": "apiKey",
-          "name": "Ocp-Apim-Subscription-Key",
-          "in": "header"
-      }
-    },
-    "security": [
-      {
-          "apim_key": []
-      }
-    ],
-    "paths": {
-        "/train": {
-            "post": {
-                "summary": "Train Model",
-                "description": "The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value. For e.g., if {Mounts:Input} configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained are expected to be under the source. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'. Other content is ignored when training a model. The response contains information about documents that were used in training the model along with document level information of errors that were encountered that might have prevented them from being used in model generation. A separate list of errors is also returned to indicate if any error occurred during the operation itself.",
-                "operationId": "FormRecognizer_CustomTrain",
-                "consumes": [
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "trainRequest",
-                        "in": "body",
-                        "description": "Request object for training.",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/TrainRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/TrainResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                  "Train new model example": {
-                    "$ref": "./examples/Train.json"
-                  }
-                },
-            }
-        },
-        "/model/{id}/keys": {
-            "get": {
-                "summary": "Get Keys",
-                "description": "Use the API to retrieve the keys that were\r\n extracted by the specified model.",
-                "operationId": "FormRecognizer_CustomGetKeysByModelId",
-                "consumes": [],
-                "produces": [
-                  "application/json",
-                  "text/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Model identifier.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "default": {
-                        "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                  "Get Keys from Model": {
-                    "$ref": "./examples/GetKeys.json"
-                  }
-                }
-            }
-        },
-        "/models": {
-            "get": {
-                "summary": "Get Models",
-                "description": "Get information about all trained models",
-                "operationId": "FormRecognizer_CustomGetModels",
-                "consumes": [],
-                "produces": [
-                  "application/json",
-                  "text/json"
-                ],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "default": {
-                        "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                  "Get Model from id": {
-                    "$ref": "./examples/GetModels.json"
-                  }
-                }
-            },
-        },
-        "/model/{id}/": {
-            "get": {
-                "summary": "Get Model",
-                "description": "Get information about a model.",
-                "operationId": "FormRecognizer_CustomGetModelById",
-                "consumes": [],
-                "produces": [
-                  "application/json",
-                  "text/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Model identifier.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "default": {
-                        "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                  "Get Model from id": {
-                    "$ref": "./examples/GetModelById.json"
-                  }
-                }
-            },
-            "delete": {
-                "summary": "Delete Model",
-                "description": "Delete model artifacts.",
-                "operationId": "FormRecognizer_CustomModelDeleteById",
-                "consumes": [],
-                "produces": [
-                  "application/json",
-                  "text/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The identifier of the model to delete.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Successfully removed model artifacts."
-                    },
-                    "default": {
-                        "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                  "Get Model from id": {
-                    "$ref": "./examples/DeleteModelById.json"
-                  }
-                }
-            }
-        },
-        "/model/{id}/analyze": {
-            "post": {
-                "summary": "Analyze Form",
-                "description": "The document to analyze must be of a supported content type - 'application/pdf', 'image/jpeg' or 'image/png'. The response contains not just the extracted information of the analyzed form but also information about content that was not extracted along with a reason.",
-                "operationId": "FormRecognizer_CustomAnalyze",
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Identifier of the model to analyze the document with.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "keys",
-                        "in": "query",
-                        "description": "An optional list of known keys to extract the values for.",
-                        "required": false,
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "collectionFormat": "multi",
-                        "uniqueItems": false
-                    },
-                    {
-                        "name": "form",
-                        "in": "formData",
-                        "description": "Upload content of type 'application/pdf', 'image/jpeg' or 'image/png' for processing.",
-                        "required": true,
-                        "type": "file"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/AnalyzeResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                  "Get Model from id": {
-                    "$ref": "./examples/Analyze.json"
-                  }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "TrainRequest": {
-            "description": "Contract to initiate a train request.",
-            "required": [
-                "source"
-            ],
-            "type": "object",
-            "properties": {
-                "source": {
-                    "description": "Get or set source path.",
-                    "maxLength": 2048,
-                    "minLength": 0,
-                    "type": "string"
-                }
-            }
-        },
-        "TrainResult": {
-            "description": "Response of the Train API call.",
-            "type": "object",
-            "properties": {
-                "modelId": {
-                    "description": "Identifier of the model.",
-                    "type": "string",
-                    "format": "uuid",
-                    "x-nullable": false
-                },
-                "trainingDocuments": {
-                    "description": "List of documents used to train the model and the\r\ntrain operation error reported by each.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FormDocumentReport"
-                    }
-                },
-                "errors": {
-                    "description": "Errors returned during the training operation.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FormOperationError"
-                    }
-                }
-            }
-        },
-        "FormDocumentReport": {
-            "type": "object",
-            "properties": {
-                "documentName": {
-                    "description": "Reference to the data that the report is for.",
-                    "type": "string"
-                },
-                "pages": {
-                    "format": "int32",
-                    "description": "Total number of pages trained on.",
-                    "type": "integer"
-                },
-                "errors": {
-                    "description": "List of errors per page.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "status": {
-                    "description": "Status of the training operation.",
-                    "enum": [
-                        "success",
-                        "partialSuccess",
-                        "failure"
-                    ],
-                    "type": "string"
-                }
-            }
-        },
-        "FormOperationError": {
-            "description": "Error reported during an operation.",
-            "type": "object",
-            "properties": {
-                "errorMessage": {
-                    "description": "Message reported during the train operation.",
-                    "type": "string"
-                }
-            }
-        },
-        "ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "$ref": "#/definitions/ErrorInformation"
-                }
-            }
-        },
-        "ErrorInformation": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "innerError": {
-                    "$ref": "#/definitions/InnerError"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "InnerError": {
-            "type": "object",
-            "properties": {
-                "requestId": {
-                    "type": "string"
-                }
-            }
-        },
-        "AnalyzeResult": {
-            "description": "Analyze API call result.",
-            "type": "object",
-            "properties": {
-                "status": {
-                    "description": "Status of the analyze operation.",
-                    "enum": [
-                        "success",
-                        "partialSuccess",
-                        "failure"
-                    ],
-                    "type": "string"
-                },
-                "pages": {
-                    "description": "Page level information extracted in the analyzed\r\ndocument.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Page"
-                    }
-                },
-                "errors": {
-                    "description": "List of errors reported during the analyze\r\noperation.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FormOperationError"
-                    }
-                }
-            }
-        },
-        "Page": {
-            "description": "Extraction information of a single page in a\r\nwith a document.",
-            "type": "object",
-            "properties": {
-                "number": {
-                    "format": "int32",
-                    "description": "Page number.",
-                    "type": "integer"
-                },
-                "height": {
-                    "format": "int32",
-                    "description": "Height of the page (in pixels).",
-                    "type": "integer"
-                },
-                "width": {
-                    "format": "int32",
-                    "description": "Width of the page (in pixels).",
-                    "type": "integer"
-                },
-                "clusterId": {
-                    "format": "int32",
-                    "description": "Cluster identifier.",
-                    "type": "integer"
-                },
-                "keyValuePairs": {
-                    "description": "List of Key-Value pairs extracted from the page.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/KeyValuePair"
-                    }
-                },
-                "extractedtables": {
-                    "description": "List of Tables and their information extracted from the page.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ExtractedTable"
-                    }
-                }
-            }
-        },
-        "KeyValuePair": {
-            "description": "Representation of a key-value pair as a list\r\nof key and value tokens.",
-            "type": "object",
-            "properties": {
-                "key": {
-                    "description": "List of tokens for the extracted key in a key-value pair.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Token"
-                    }
-                },
-                "value": {
-                    "description": "List of tokens for the extracted value in a key-value pair.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Token"
-                    }
-                }
-            }
-        },
-        "ExtractedTable": {
-            "description": "Extraction information about a table\r\ncontained in a page.",
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Table identifier.",
-                "type": "string"
-              },
-                "columns": {
-                    "description": "List of columns contained in the table.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ExtractedTableColumn"
-                    }
-                }
-            }
-        },
-        "Token": {
-            "description": "Canonical representation of single extracted text.",
-            "type": "object",
-            "properties": {
-                "text": {
-                    "description": "String value of the extracted text.",
-                    "type": "string"
-                },
-                "boundingBox": {
-                    "description": "Bounding box of the extracted text. Represents the\r\nlocation of the extracted text as a pair of\r\ncartesian co-ordinates. The co-ordinate pairs are arranged by\r\ntop-left, top-right, bottom-right and bottom-left endpoints box\r\nwith origin reference from the bottom-left of the page.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "format": "double",
-                        "type": "number"
-                    }
-                },
-                "confidence": {
-                    "format": "double",
-                    "description": "A measure of accuracy of the extracted text.",
-                    "type": "number"
-                }
-            }
-        },
-        "ExtractedTableColumn": {
-            "description": "Extraction information of a column in\r\na table.",
-            "type": "object",
-            "properties": {
-                "header": {
-                    "description": "List of extracted tokens for the column header.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Token"
-                    }
-                },
-                "entries": {
-                    "description": "Extracted text for each cell of a column. Each cell\r\nin the column can have a list of one or more tokens.",
-                    "uniqueItems": false,
-                    "type": "array",
-                    "items": {
-                        "uniqueItems": false,
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/Token"
-                        }
-                    }
-                }
-            }
-        }
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.0-preview",
+    "title": "Cognitive Service Form Recognizer API V1 (Preview)",
+    "description": "Extracts information from forms and images into structured data based on a model created by a set of representative training forms."
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
     }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/formrecognizer/v1.0-preview/custom",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/train": {
+      "post": {
+        "summary": "Train Model",
+        "description": "The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration\r\n setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained are expected to be under the source. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'.\"\r\n Other content is ignored when training a model.",
+        "operationId": "TrainCustomModel",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "trainRequest",
+            "in": "body",
+            "description": "Request object for training.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TrainResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Train new model example": {
+            "$ref": "./examples/Train.json"
+          }
+        }
+      }
+    },
+    "/model/{id}/keys": {
+      "get": {
+        "summary": "Get Keys",
+        "description": "Use the API to retrieve the keys that were\r\n extracted by the specified model.",
+        "operationId": "GetExtractedKeysByCustomModelId",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Model identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/KeysResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Keys from Model": {
+            "$ref": "./examples/GetKeys.json"
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "Get Models",
+        "description": "Get information about all trained models",
+        "operationId": "GetListOfCustomModels",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+                "$ref": "#/definitions/ModelInfoList"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/GetModels.json"
+          }
+        }
+      }
+    },
+    "/model/{id}/": {
+      "get": {
+        "summary": "Get Model",
+        "description": "Get information about a model.",
+        "operationId": "GetCustomModelById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Model identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+                "$ref": "#/definitions/ModelInfo"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/GetModelById.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Model",
+        "description": "Delete model artifacts.",
+        "operationId": "DeleteCustomModelById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier of the model to delete.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully removed model artifacts."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/DeleteModelById.json"
+          }
+        }
+      }
+    },
+    "/model/{id}/analyze": {
+      "post": {
+        "summary": "Analyze Form",
+        "description": "The document to analyze must be of a supported content type - 'application/pdf', 'image/jpeg' or 'image/png'. The response contains not just the extracted information of the analyzed form but also information about content that was not extracted along with a reason.",
+        "operationId": "AnalyzeCustomModel",
+        "consumes": [
+          "application/pdf",
+          "image/jpeg",
+          "image/png",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Model Identifier to analyze the document with.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keys",
+            "in": "query",
+            "description": "An optional list of known keys to extract the values for.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
+          },  
+          {
+            "name": "form_stream",
+            "in": "formData",
+            "description": "Upload content of type 'application/pdf', 'image/jpeg' or 'image/png' for processing.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/Analyze.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TrainRequest": {
+      "description": "Contract to initiate a train request.",
+      "required": [
+        "source"
+      ],
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Get or set source path.",
+          "maxLength": 2048,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "TrainResult": {
+      "description": "Response of the Train API call.",
+      "type": "object",
+      "properties": {
+        "modelId": {
+          "description": "Identifier of the model.",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": false
+        },
+        "trainingDocuments": {
+          "description": "List of documents used to train the model and the\r\ntrain operation error reported by each.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormDocumentReport"
+          }
+        },
+        "errors": {
+          "description": "Errors returned during the training operation.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormOperationError"
+          }
+        }
+      }
+    },
+    "KeysResult": {
+      "description": "Response of the Keys API call.",
+      "type": "object",
+      "properties": {
+        "clusters" : {
+          "description": "Cluster of keys",
+          "type": "object"
+        }
+      }
+    },
+    "ModelInfo": {
+      "description": "Response of the Model API call.",
+      "type": "object",
+      "properties": {
+        "modelId": {
+          "description": "Identifier of the model.",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": false
+        },
+        "version": {
+          "description": "Version of model.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "description": "Status of model.",
+          "type": "string",
+          "enum": [
+                "Created", 
+                "Ready", 
+                "Invalid"
+          ]
+        },
+        "createdDateTime": {
+          "description": "Date and Time model is created.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedDateTime": {
+          "description": "Date and Time model is last updated.",
+          "type": "string",
+          "format": "date-time"
+        }
+      } 
+    },
+    "ModelInfoList": {
+      "description": "List of all the models created.",
+      "uniqueItems": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ModelInfo"
+      } 
+    },
+    "FormDocumentReport": {
+      "type": "object",
+      "properties": {
+        "documentName": {
+          "description": "Reference to the data that the report is for.",
+          "type": "string"
+        },
+        "pages": {
+          "format": "int32",
+          "description": "Total number of pages trained on.",
+          "type": "integer"
+        },
+        "errors": {
+          "description": "List of errors per page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "Status of the training operation.",
+          "enum": [
+            "success",
+            "partialSuccess",
+            "failure"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "FormOperationError": {
+      "description": "Error reported during an operation.",
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "description": "Message reported during the train operation.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorInformation"
+        }
+      }
+    },
+    "ErrorInformation": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "InnerError": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalyzeResult": {
+      "description": "Analyze API call result.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the analyze operation.",
+          "enum": [
+            "success",
+            "partialSuccess",
+            "failure"
+          ],
+          "type": "string"
+        },
+        "pages": {
+          "description": "Page level information extracted in the analyzed\r\ndocument.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedPage"
+          }
+        },
+        "errors": {
+          "description": "List of errors reported during the analyze\r\noperation.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormOperationError"
+          }
+        }
+      }
+    },
+    "ExtractedPage": {
+      "description": "Extraction information of a single page in a\r\nwith a document.",
+      "type": "object",
+      "properties": {
+        "number": {
+          "format": "int32",
+          "description": "Page number.",
+          "type": "integer"
+        },
+        "height": {
+          "format": "int32",
+          "description": "Height of the page (in pixels).",
+          "type": "integer"
+        },
+        "width": {
+          "format": "int32",
+          "description": "Width of the page (in pixels).",
+          "type": "integer"
+        },
+        "clusterId": {
+          "format": "int32",
+          "description": "Cluster identifier.",
+          "type": "integer"
+        },
+        "keyValuePairs": {
+          "description": "List of Key-Value pairs extracted from the page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedKeyValuePair"
+          }
+        },
+        "extractedtables": {
+          "description": "List of Tables and their information extracted from the page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedTable"
+          }
+        }
+      }
+    },
+    "ExtractedKeyValuePair": {
+      "description": "Representation of a key-value pair as a list\r\nof key and value tokens.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "List of tokens for the extracted key in a key-value pair.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedToken"
+          }
+        },
+        "value": {
+          "description": "List of tokens for the extracted value in a key-value pair.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedToken"
+          }
+        }
+      }
+    },
+    "ExtractedTable": {
+      "description": "Extraction information about a table\r\ncontained in a page.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Table identifier.",
+          "type": "string"
+        },
+        "columns": {
+          "description": "List of columns contained in the table.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedTableColumn"
+          }
+        }
+      }
+    },
+    "ExtractedToken": {
+      "description": "Canonical representation of single extracted text.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "String value of the extracted text.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "description": "Bounding box of the extracted text. Represents the\r\nlocation of the extracted text as a pair of\r\ncartesian co-ordinates. The co-ordinate pairs are arranged by\r\ntop-left, top-right, bottom-right and bottom-left endpoints box\r\nwith origin reference from the bottom-left of the page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "confidence": {
+          "format": "double",
+          "description": "A measure of accuracy of the extracted text.",
+          "type": "number"
+        }
+      }
+    },
+    "ExtractedTableColumn": {
+      "description": "Extraction information of a column in\r\na table.",
+      "type": "object",
+      "properties": {
+        "header": {
+          "description": "List of extracted tokens for the column header.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedToken"
+          }
+        },
+        "entries": {
+          "description": "Extracted text for each cell of a column. Each cell\r\nin the column can have a list of one or more tokens.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ExtractedToken"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }
