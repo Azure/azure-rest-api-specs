@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License in the project root for license information.
-'use strict';
 
-const utils = require('../test/util/utils')
-const cp = require("child_process")
+import { devOps, cli } from '@azure/avocado'
+import { utils } from '@azure/rest-api-specs-scripts'
+import * as cp from 'child_process'
 
-const exec = (cmd, options) => {
+const exec = (cmd: string, options?: cp.SpawnSyncOptions) => {
   const result = cp.spawnSync(
     cmd,
     {
@@ -18,7 +18,8 @@ const exec = (cmd, options) => {
 }
 
 async function main() {
-  const swaggersToProcess = utils.getFilesChangedInPR();
+  const pr = await devOps.createPullRequestProperties(cli.defaultConfig())
+  const swaggersToProcess = await utils.getFilesChangedInPR(pr);
   let result = 0
   for (const swagger of swaggersToProcess) {
     try {
