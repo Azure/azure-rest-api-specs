@@ -785,6 +785,16 @@
           "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "The name and tier of the SKU.",
           "readOnly": true
+        },
+        "autoPauseDelay": {
+          "format": "int32",
+          "description": "Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled",
+          "type": "integer"
+        },
+        "minCapacity": {
+          "format": "double",
+          "description": "Minimal capacity that database will always have allocated, if not paused",
+          "type": "number"
         }
       }
     },
