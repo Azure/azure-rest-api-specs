@@ -489,8 +489,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Stream",
-              "type": "object"
+              "type": "file"
             }
           }
         },
@@ -856,44 +855,6 @@
           "format": "date-time",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "Stream": {
-      "type": "object",
-      "properties": {
-        "canRead": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canSeek": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canTimeout": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canWrite": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "length": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "position": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "readTimeout": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "writeTimeout": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
