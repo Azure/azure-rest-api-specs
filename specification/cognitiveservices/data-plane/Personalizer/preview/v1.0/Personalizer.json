@@ -1,0 +1,1052 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.0",
+    "title": "Personalizer Client",
+    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns your content in a ranked list. As rewards are sent in response to the ranked list, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
+  },
+  "basePath": "/personalizer/v1.0",
+  "paths": {
+    "/configurations/service": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Get the service configuration.",
+        "operationId": "ServiceConfiguration_Get",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful ServiceConfiguration_Get request": {
+            "$ref": "./examples/ServiceConfiguration_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Update the service configuration.",
+        "operationId": "ServiceConfiguration_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "config",
+            "in": "body",
+            "description": "The personalizer service configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful ServiceConfiguration_Update request": {
+            "$ref": "./examples/ServiceConfiguration_Update.json"
+          }
+        }
+      }
+    },
+    "/configurations/policy": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Get the policy configuration.",
+        "operationId": "Policy_Get",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Policy_Get request": {
+            "$ref": "./examples/Policy_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Delete the current policy.",
+        "operationId": "Policy_Delete",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Policy_Delete request": {
+            "$ref": "./examples/Policy_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Update the policy configuration.",
+        "operationId": "Policy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "policy",
+            "in": "body",
+            "description": "The policy configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Policy_Update request": {
+            "$ref": "./examples/Policy_Update.json"
+          }
+        }
+      }
+    },
+    "/evaluations": {
+      "get": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "List all submitted evaluations.",
+        "operationId": "Evaluations_List",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Evaluation"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_List request": {
+            "$ref": "./examples/Evaluations_List.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "Submit a new evaluation.",
+        "operationId": "Evaluations_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "The evaluation job definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationContract"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_Create request": {
+            "$ref": "./examples/Evaluations_Create.json"
+          }
+        }
+      }
+    },
+    "/evaluations/{evaluationId}": {
+      "get": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "Get the evaluation associated with the ID.",
+        "operationId": "Evaluations_Get",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "description": "ID of the evaluation in question.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_Get request": {
+            "$ref": "./examples/Evaluations_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Evaluations"
+        ],
+        "summary": "Delete the evaluation associated with the ID.",
+        "operationId": "Evaluations_Delete",
+        "consumes": [
+          
+        ],
+        "produces": [
+          
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "description": "ID of the evaluation to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluations_Delete request": {
+            "$ref": "./examples/Evaluations_Delete.json"
+          }
+        }
+      }
+    },
+    "/events/{eventId}/reward": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Report reward to allocate to the top ranked action for the specified event.",
+        "operationId": "Events_Reward",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The event id this reward applies to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reward",
+            "in": "body",
+            "description": "The reward should be a floating point number.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RewardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Events_Reward request": {
+            "$ref": "./examples/Events_Reward.json"
+          }
+        }
+      }
+    },
+    "/events/{eventId}/activate": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Report that the specified event was actually displayed to the user and a reward should be expected for it.",
+        "operationId": "Events_Activate",
+        "consumes": [
+          
+        ],
+        "produces": [
+          
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The event ID this activation applies to.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Events_Activate request": {
+            "$ref": "./examples/Events_Activate.json"
+          }
+        }
+      }
+    },
+    "/logs": {
+      "delete": {
+        "tags": [
+          "Logs"
+        ],
+        "summary": "Deletes all the logs.",
+        "operationId": "Log_Delete",
+        "consumes": [
+          
+        ],
+        "produces": [
+          
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Successful Log_Delete request": {
+            "$ref": "./examples/Log_Delete.json"
+          }
+        }
+      }
+    },
+    "/logs/properties": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "summary": "Gets logs properties.",
+        "operationId": "Log_GetProperties",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogsProperties"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Log_GetProperties request": {
+            "$ref": "./examples/Log_GetProperties.json"
+          }
+        }
+      }
+    },
+    "/model": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get current model.",
+        "operationId": "Model_Get",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Model_Get request": {
+            "$ref": "./examples/Model_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Resets the model.",
+        "operationId": "Model_Delete",
+        "consumes": [
+          
+        ],
+        "produces": [
+          
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Model_Delete request": {
+            "$ref": "./examples/Model_Delete.json"
+          }
+        }
+      }
+    },
+    "/model/properties": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get model properties.",
+        "operationId": "Model_GetProperties",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelProperties"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Model_GetProperties request": {
+            "$ref": "./examples/Model_GetProperties.json"
+          }
+        }
+      }
+    },
+    "/rank": {
+      "post": {
+        "tags": [
+          "Ranking"
+        ],
+        "summary": "A Personalizer rank request.",
+        "operationId": "Events_Rank",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "rankRequest",
+            "in": "body",
+            "description": "A Personalizer request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RankRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RankResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+          }
+        },
+        "x-ms-examples": {
+          "Successful Events_Rank request": {
+            "$ref": "./examples/Events_Rank.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServiceConfiguration": {
+      "description": "The configuration of the service.",
+      "required": [
+        "rewardWaitTime",
+        "defaultReward",
+        "rewardAggregation",
+        "explorationPercentage",
+        "modelExportFrequency",
+        "logRetentionDays"
+      ],
+      "type": "object",
+      "properties": {
+        "rewardWaitTime": {
+          "description": "The time span waited until a request is marked with the default reward.",
+          "type": "string"
+        },
+        "defaultReward": {
+          "format": "float",
+          "description": "The reward given if a reward is not received within the specified wait time.",
+          "maximum": 1,
+          "minimum": -1,
+          "type": "number"
+        },
+        "rewardAggregation": {
+          "description": "The function used to process rewards.",
+          "type": "string"
+        },
+        "explorationPercentage": {
+          "format": "float",
+          "description": "The percentage of rank responses that will use exploration.",
+          "type": "number"
+        },
+        "modelExportFrequency": {
+          "description": "The time delay between exporting trained models.",
+          "type": "string"
+        },
+        "logRetentionDays": {
+          "format": "int32",
+          "description": "Number of days historical logs are to be maintained.",
+          "type": "integer"
+        }
+      }
+    },
+    "PolicyContract": {
+      "description": "Policy specifying how to train the model.",
+      "required": [
+        "name",
+        "arguments"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Policy.",
+          "type": "string"
+        },
+        "arguments": {
+          "description": "Arguments of the Policy.",
+          "type": "string"
+        }
+      }
+    },
+    "EvaluationContract": {
+      "description": "A counterfactual evaluation.",
+      "required": [
+        "name",
+        "startTime",
+        "endTime",
+        "policies"
+      ],
+      "type": "object",
+      "properties": {
+        "enableOfflineExperimentation": {
+          "description": "True if the evaluation should explore for a more optimal policy.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "The name of the evaluation.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the evaluation.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "policies": {
+          "description": "Additional policies to evaluate.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyContract"
+          }
+        }
+      }
+    },
+    "Evaluation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "pending",
+            "failed",
+            "notSubmitted"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EvaluationJobStatus",
+            "modelAsString": true
+          }
+        },
+        "policyResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyResult"
+          }
+        }
+      }
+    },
+    "PolicyResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "arguments": {
+          "type": "string",
+          "readOnly": true
+        },
+        "summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyResultSummary"
+          },
+          "readOnly": true
+        },
+        "totalSummary": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PolicyResultSummary"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyResultSummary": {
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipsEstimatorNumerator": {
+          "format": "float",
+          "type": "number",
+          "readOnly": true
+        },
+        "ipsEstimatorDenominator": {
+          "format": "float",
+          "type": "number",
+          "readOnly": true
+        },
+        "snipsEstimatorDenominator": {
+          "format": "float",
+          "type": "number",
+          "readOnly": true
+        },
+        "aggregateTimeWindow": {
+          "type": "string",
+          "readOnly": true
+        },
+        "nonZeroProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "confidenceInterval": {
+          "format": "float",
+          "type": "number",
+          "readOnly": true
+        },
+        "sumOfSquares": {
+          "format": "float",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "RewardRequest": {
+      "description": "Reward given to a rank response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "float",
+          "description": "Reward to be assigned to an action. Value must be between -1 and 1 inclusive.",
+          "type": "number"
+        }
+      }
+    },
+    "LogsProperties": {
+      "type": "object",
+      "properties": {
+        "dateRange": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DateRange"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "DateRange": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "to": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModelProperties": {
+      "type": "object",
+      "properties": {
+        "creationTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RankRequest": {
+      "description": "Request a set of actions to be ranked by the Personalizer service.",
+      "required": [
+        "actions"
+      ],
+      "type": "object",
+      "properties": {
+        "contextFeatures": {
+          "description": "Features of the context used for Personalizer as a\r\ndictionary of dictionaries. This depends on the application, and\r\ntypically includes features about the current user, their\r\ndevice, profile information, data about time and date, etc.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "actions": {
+          "description": "The set of actions the Personalizer service can pick from.\r\nThe set should not contain more than 50 actions.\r\nThe order of the actions does not affect the rank result but the order\r\nshould match the sequence your application would have used to display them.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RankableAction"
+          }
+        },
+        "excludedActions": {
+          "description": "The set of action ids to exclude from ranking.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eventId": {
+          "description": "Optionally pass an eventId that uniquely identifies this Rank event. \r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a Personalizer call.",
+          "type": "string"
+        },
+        "deferActivation": {
+          "description": "Send false if the user will see the rank results, therefore\r\nPersonalizer will expect a Reward call, otherwise it will assign the default\r\nReward to the event. Send true if it is possible the user will not see the\r\nrank results, because the page is rendering later, or the Rank results may be\r\noverridden by code further downstream.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "RankableAction": {
+      "description": "An action with it\u0027s associated features used for ranking.",
+      "required": [
+        "id",
+        "features"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the action.",
+          "type": "string"
+        },
+        "features": {
+          "description": "List of dictionaries containing features.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "RankResponse": {
+      "description": "A resulting ordered list of actions that result from a rank request.",
+      "type": "object",
+      "properties": {
+        "ranking": {
+          "description": "The calculated ranking for the current request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RankedAction"
+          },
+          "readOnly": true
+        },
+        "eventId": {
+          "description": "The eventId for the round trip from request to response.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rewardActionId": {
+          "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in \u0027ranking\u0027 if an action in the request in first position was part of the excluded ids.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RankedAction": {
+      "description": "A ranked action with its resulting probability.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the action",
+          "type": "string",
+          "readOnly": true
+        },
+        "probability": {
+          "format": "float",
+          "description": "Probability of the action",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerStatus": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string"
+        },
+        "apiStatus": {
+          "type": "string"
+        },
+        "apiStatusMessage": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "in": "path",
+      "description": "Supported Cognitive Services endpoint.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "type": "apiKey"
+    }
+  },
+  "security": [
+    {
+      "apim_key": [
+        
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Evaluations",
+      "description": "Manages counterfactual evaluation operations."
+    },
+    {
+      "name": "Model",
+      "description": "Manages reinforcement learning configuration operations."
+    },
+    {
+      "name": "Configurations",
+      "description": "Manages configuration operations."
+    },
+    {
+      "name": "Events",
+      "description": "Manages event operations."
+    },
+    {
+      "name": "Logs",
+      "description": "Manages reinforcement learning logs."
+    },
+    {
+      "name": "Ranking",
+      "description": "Manages ranking operations."
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}
