@@ -1675,11 +1675,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases": {
       "get": {
-        "operationId": "DatabaseAccounts_ListMongodbDatabases",
+        "operationId": "DatabaseAccounts_ListMongoDBDatabases",
         "x-ms-examples": {
-          "CosmosDBMongodbDatabaseList": { "$ref": "./examples/CosmosDBMongodbDatabaseList.json" }
+          "CosmosDBMongoDBDatabaseList": { "$ref": "./examples/CosmosDBMongoDBDatabaseList.json" }
         },
-        "description": "Lists the Mongodb databases under an existing Azure Cosmos DB database account.",
+        "description": "Lists the MongoDB databases under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1696,9 +1696,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongodb database properties were retrieved successfully.",
+            "description": "The MongoDB database properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongodbDatabaseListResult"
+              "$ref": "#/definitions/MongoDBDatabaseListResult"
             }
           }
         },
@@ -1709,11 +1709,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongodbDatabase",
+        "operationId": "DatabaseAccounts_GetMongoDBDatabase",
         "x-ms-examples": {
-          "CosmosDBMongodbDatabaseGet": { "$ref": "./examples/CosmosDBMongodbDatabaseGet.json" }
+          "CosmosDBMongoDBDatabaseGet": { "$ref": "./examples/CosmosDBMongoDBDatabaseGet.json" }
         },
-        "description": "Gets the Mongodb databases under an existing Azure Cosmos DB database account with the provided name.",
+        "description": "Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1733,19 +1733,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongodb database property was retrieved successfully.",
+            "description": "The MongoDB database property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongodbDatabase"
+              "$ref": "#/definitions/MongoDBDatabase"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateMongodbDatabase",
+        "operationId": "DatabaseAccounts_CreateUpdateMongoDBDatabase",
         "x-ms-examples": {
-          "CosmosDBMongodbDatabaseCreateUpdate": { "$ref": "./examples/CosmosDBMongodbDatabaseCreateUpdate.json" }
+          "CosmosDBMongoDBDatabaseCreateUpdate": { "$ref": "./examples/CosmosDBMongoDBDatabaseCreateUpdate.json" }
         },
-        "description": "Create or updates Azure Cosmos DB Mongodb database",
+        "description": "Create or updates Azure Cosmos DB MongoDB database",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1764,33 +1764,33 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createUpdateMongodbDatabaseParameters",
+            "name": "createUpdateMongoDBDatabaseParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MongodbDatabaseCreateUpdateParameters"
+              "$ref": "#/definitions/MongoDBDatabaseCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current Mongodb database."
+            "description": "The parameters to provide for the current MongoDB database."
           }
         ],
         "responses": {
           "202": {
-            "description": "The Mongodb database create or update operation will complete asynchronously."
+            "description": "The MongoDB database create or update operation will complete asynchronously."
           },
           "200": {
-            "description": "The Mongodb database create or update operation was completed successfully.",
+            "description": "The MongoDB database create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongodbDatabase"
+              "$ref": "#/definitions/MongoDBDatabase"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteMongodbDatabase",
+        "operationId": "DatabaseAccounts_DeleteMongoDBDatabase",
         "x-ms-examples": {
-          "CosmosDBMongodbDatabaseDelete": { "$ref": "./examples/CosmosDBMongodbDatabaseDelete.json" }
+          "CosmosDBMongoDBDatabaseDelete": { "$ref": "./examples/CosmosDBMongoDBDatabaseDelete.json" }
         },
-        "description": "Deletes an existing Azure Cosmos DB Mongodb database.",
+        "description": "Deletes an existing Azure Cosmos DB MongoDB database.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1811,21 +1811,21 @@
         ],
         "responses": {
           "202": {
-            "description": "The Mongodb database delete operation will complete asynchronously."
+            "description": "The MongoDB database delete operation will complete asynchronously."
           },
           "204": {
-            "description": "The Mongodb database delete operation was completed successfully."
+            "description": "The MongoDB database delete operation was completed successfully."
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections": {
       "get": {
-        "operationId": "DatabaseAccounts_ListMongodbCollections",
+        "operationId": "DatabaseAccounts_ListMongoDBCollections",
         "x-ms-examples": {
-          "CosmosDBMongodbCollectionList": { "$ref": "./examples/CosmosDBMongodbCollectionList.json" }
+          "CosmosDBMongoDBCollectionList": { "$ref": "./examples/CosmosDBMongoDBCollectionList.json" }
         },
-        "description": "Lists the Mongodb collection under an existing Azure Cosmos DB database account.",
+        "description": "Lists the MongoDB collection under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1845,9 +1845,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongodb collection properties were retrieved successfully.",
+            "description": "The MongoDB collection properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongodbCollectionListResult"
+              "$ref": "#/definitions/MongoDBCollectionListResult"
             }
           }
         },
@@ -1858,11 +1858,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections/{collectionName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongodbCollection",
+        "operationId": "DatabaseAccounts_GetMongoDBCollection",
         "x-ms-examples": {
-          "CosmosDBMongodbCollectionGet": { "$ref": "./examples/CosmosDBMongodbCollectionGet.json" }
+          "CosmosDBMongoDBCollectionGet": { "$ref": "./examples/CosmosDBMongoDBCollectionGet.json" }
         },
-        "description": "Gets the Mongodb collection under an existing Azure Cosmos DB database account.",
+        "description": "Gets the MongoDB collection under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1885,19 +1885,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongodb collection property was retrieved successfully.",
+            "description": "The MongoDB collection property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongodbCollection"
+              "$ref": "#/definitions/MongoDBCollection"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateMongodbCollection",
+        "operationId": "DatabaseAccounts_CreateUpdateMongoDBCollection",
         "x-ms-examples": {
-          "CosmosDBMongodbCollectionCreateUpdate": { "$ref": "./examples/CosmosDBMongodbCollectionCreateUpdate.json" }
+          "CosmosDBMongoDBCollectionCreateUpdate": { "$ref": "./examples/CosmosDBMongoDBCollectionCreateUpdate.json" }
         },
-        "description": "Create or update an Azure Cosmos DB Mongodb Collection",
+        "description": "Create or update an Azure Cosmos DB MongoDB Collection",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1919,33 +1919,33 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createUpdateMongodbCollectionParameters",
+            "name": "createUpdateMongoDBCollectionParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MongodbCollectionCreateUpdateParameters"
+              "$ref": "#/definitions/MongoDBCollectionCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current Mongodb Collection."
+            "description": "The parameters to provide for the current MongoDB Collection."
           }
         ],
         "responses": {
           "202": {
-            "description": "The Mongodb Collection create or update operation will complete asynchronously."
+            "description": "The MongoDB Collection create or update operation will complete asynchronously."
           },
           "200": {
-            "description": "The Mongodb Collection create or update operation was completed successfully.",
+            "description": "The MongoDB Collection create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongodbCollection"
+              "$ref": "#/definitions/MongoDBCollection"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteMongodbCollection",
+        "operationId": "DatabaseAccounts_DeleteMongoDBCollection",
         "x-ms-examples": {
-          "CosmosDBMongodbCollectionDelete": { "$ref": "./examples/CosmosDBMongodbCollectionDelete.json" }
+          "CosmosDBMongoDBCollectionDelete": { "$ref": "./examples/CosmosDBMongoDBCollectionDelete.json" }
         },
-        "description": "Deletes an existing Azure Cosmos DB Mongodb Collection.",
+        "description": "Deletes an existing Azure Cosmos DB MongoDB Collection.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1969,10 +1969,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The Mongodb collection delete operation will complete asynchronously."
+            "description": "The MongoDB collection delete operation will complete asynchronously."
           },
           "204": {
-            "description": "The Mongodb collection delete operation was completed successfully."
+            "description": "The MongoDB collection delete operation was completed successfully."
           }
         }
       }
@@ -2772,31 +2772,31 @@
       },
       "description": "The List operation response, that contains the containers and their properties."
     },
-    "MongodbDatabaseListResult": {
+    "MongoDBDatabaseListResult": {
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MongodbDatabase"
+            "$ref": "#/definitions/MongoDBDatabase"
           },
-          "description": "List of Mongodb databases and their properties."
+          "description": "List of MongoDB databases and their properties."
         }
       },
-      "description": "The List operation response, that contains the Mongodb databases and their properties."
+      "description": "The List operation response, that contains the MongoDB databases and their properties."
     },
-    "MongodbCollectionListResult": {
+    "MongoDBCollectionListResult": {
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MongodbCollection"
+            "$ref": "#/definitions/MongoDBCollection"
           },
-          "description": "List of Mongodb collections and their properties."
+          "description": "List of MongoDB collections and their properties."
         }
       },
-      "description": "The List operation response, that contains the Mongodb collections and their properties."
+      "description": "The List operation response, that contains the MongoDB collections and their properties."
     },
     "TableListResult": {
       "properties": {
@@ -3094,14 +3094,14 @@
         }
       ]
     },
-    "MongodbDatabase": {
-      "description": "An Azure Cosmos DB Mongodb database.",
+    "MongoDBDatabase": {
+      "description": "An Azure Cosmos DB MongoDB database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "The properties of an Azure Cosmos DB Mongodb database",
-          "$ref": "#/definitions/MongodbDatabaseProperties"
+          "description": "The properties of an Azure Cosmos DB MongoDB database",
+          "$ref": "#/definitions/MongoDBDatabaseProperties"
         }
       },
       "allOf": [
@@ -3110,23 +3110,23 @@
         }
       ]
     },
-    "MongodbDatabaseProperties": {
-      "description": "The properties of an Azure Cosmos DB Mongodb database",
+    "MongoDBDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB database",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/MongodbDatabaseResource"
+          "$ref": "#/definitions/MongoDBDatabaseResource"
         }
       ]
     },
-    "MongodbCollection": {
-      "description": "An Azure Cosmos DB Mongodb collection.",
+    "MongoDBCollection": {
+      "description": "An Azure Cosmos DB MongoDB collection.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "The properties of an Azure Cosmos DB Mongodb collection",
-          "$ref": "#/definitions/MongodbCollectionProperties"
+          "description": "The properties of an Azure Cosmos DB MongoDB collection",
+          "$ref": "#/definitions/MongoDBCollectionProperties"
         }
       },
       "allOf": [
@@ -3135,12 +3135,12 @@
         }
       ]
     },
-    "MongodbCollectionProperties": {
-      "description": "The properties of an Azure Cosmos DB Mongodb collection",
+    "MongoDBCollectionProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB collection",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/MongodbCollectionResource"
+          "$ref": "#/definitions/MongoDBCollectionResource"
         }
       ]
     },
@@ -3672,27 +3672,27 @@
         "options"
       ]
     },
-    "MongodbDatabaseCreateUpdateParameters": {
-      "description": "Parameters to create and update Cosmos DB Mongodb database.",
+    "MongoDBDatabaseCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB MongoDB database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB Mongodb database.",
-          "$ref": "#/definitions/MongodbDatabaseCreateUpdateProperties"
+          "description": "Properties to create and update Azure Cosmos DB MongoDB database.",
+          "$ref": "#/definitions/MongoDBDatabaseCreateUpdateProperties"
         }
       },
       "required": [
         "properties"
       ]
     },
-    "MongodbDatabaseCreateUpdateProperties": {
-      "description": "Properties to create and update Azure Cosmos DB Mongodb database.",
+    "MongoDBDatabaseCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB MongoDB database.",
       "type": "object",
       "properties": {
         "resource": {
-          "description": "The standard JSON format of a Mongodb database",
-          "$ref": "#/definitions/MongodbDatabaseResource"
+          "description": "The standard JSON format of a MongoDB database",
+          "$ref": "#/definitions/MongoDBDatabaseResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -3704,27 +3704,27 @@
         "options"
       ]
     },
-    "MongodbCollectionCreateUpdateParameters": {
-      "description": "Parameters to create and update Cosmos DB Mongodb collection.",
+    "MongoDBCollectionCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB MongoDB collection.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB Mongodb collection.",
-          "$ref": "#/definitions/MongodbCollectionCreateUpdateProperties"
+          "description": "Properties to create and update Azure Cosmos DB MongoDB collection.",
+          "$ref": "#/definitions/MongoDBCollectionCreateUpdateProperties"
         }
       },
       "required": [
         "properties"
       ]
     },
-    "MongodbCollectionCreateUpdateProperties": {
-      "description": "Properties to create and update Azure Cosmos DB Mongodb collection.",
+    "MongoDBCollectionCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB MongoDB collection.",
       "type": "object",
       "properties": {
         "resource": {
-          "description": "The standard JSON format of a Mongodb collection",
-          "$ref": "#/definitions/MongodbCollectionResource"
+          "description": "The standard JSON format of a MongoDB collection",
+          "$ref": "#/definitions/MongoDBCollectionResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -4163,26 +4163,26 @@
         }
       }
     },
-    "MongodbDatabaseResource": {
+    "MongoDBDatabaseResource": {
       "type": "object",
-      "description": "Cosmos DB Mongodb database id object",
+      "description": "Cosmos DB MongoDB database id object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Name of the Cosmos DB Mongodb database"
+          "description": "Name of the Cosmos DB MongoDB database"
         }
       },
       "required": [
         "id"
       ]
     },
-    "MongodbCollectionResource": {
+    "MongoDBCollectionResource": {
       "type": "object",
-      "description": "Cosmos DB Mongodb collection resource object",
+      "description": "Cosmos DB MongoDB collection resource object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Name of the Cosmos DB Mongodb collection"
+          "description": "Name of the Cosmos DB MongoDB collection"
         },
         "shardKey": {
           "description": "A key-value pair of shard keys to be applied for the request.",
@@ -4209,24 +4209,24 @@
     },
     "MongoIndex": {
       "type": "object",
-      "description": "Cosmos DB Mongodb collection index key",
+      "description": "Cosmos DB MongoDB collection index key",
       "properties": {
         "key": {
-          "description": "Cosmos DB Mongodb collection index keys",
+          "description": "Cosmos DB MongoDB collection index keys",
           "$ref": "#/definitions/MongoIndexKeys"
         },
         "options": {
-          "description": "Cosmos DB Mongodb collection index key options",
+          "description": "Cosmos DB MongoDB collection index key options",
           "$ref": "#/definitions/MongoIndexOptions"
         }
       }
     },
     "MongoIndexKeys": {
       "type": "object",
-      "description": "Cosmos DB Mongodb collection resource object",
+      "description": "Cosmos DB MongoDB collection resource object",
       "properties": {
         "keys": {
-          "description": "List of keys for each Mongodb collection in the Azure Cosmos DB service",
+          "description": "List of keys for each MongoDB collection in the Azure Cosmos DB service",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Key"
@@ -4240,7 +4240,7 @@
     },
     "MongoIndexOptions": {
       "type": "object",
-      "description": "Cosmos DB Mongodb collection index options",
+      "description": "Cosmos DB MongoDB collection index options",
       "properties": {
         "expireAfterSeconds": {
           "description": "Expire after seconds",

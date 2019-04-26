@@ -60,12 +60,12 @@ directive:
     reason: The Container doesn't support Patch operation
   - suppress: TrackedResourcePatchOperation
     from: cosmos-db.json
-    where: $.definitions.MongodbDatabase
-    reason: The MongodbDatabase doesn't support Patch operation
+    where: $.definitions.MongoDBDatabase
+    reason: The MongoDBDatabase doesn't support Patch operation
   - suppress: TrackedResourcePatchOperation
     from: cosmos-db.json
-    where: $.definitions.MongodbCollection
-    reason: The MongodbCollection doesn't support Patch operation
+    where: $.definitions.MongoDBCollection
+    reason: The MongoDBCollection doesn't support Patch operation
   - suppress: TrackedResourcePatchOperation
     from: cosmos-db.json
     where: $.definitions.Table
