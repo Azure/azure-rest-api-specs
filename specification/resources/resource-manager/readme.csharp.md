@@ -340,6 +340,7 @@ input-file:
 ``` yaml $(tag) == 'pkg-2019-05-Az-polD'
 input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
 
 ```yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  

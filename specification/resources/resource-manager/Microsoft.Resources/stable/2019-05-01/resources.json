@@ -72,14 +72,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to delete.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -106,14 +99,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to check.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -140,14 +126,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -189,14 +168,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -225,14 +197,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to cancel.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -257,14 +222,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -307,14 +265,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment from which to get the template.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -384,14 +335,7 @@
         "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to delete.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -418,14 +362,7 @@
         "description": "Checks whether the deployment exists.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to check.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -452,14 +389,7 @@
         "description": "You can provide the template and parameters directly in the request or link to JSON files.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -501,14 +431,7 @@
         "description": "Gets a deployment.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -537,14 +460,7 @@
         "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to cancel.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -569,14 +485,7 @@
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -619,14 +528,7 @@
         "description": "Exports the template used for specified deployment.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment from which to get the template.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -709,14 +611,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to delete.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -753,14 +648,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to check.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -797,14 +685,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -864,14 +745,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -910,14 +784,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to cancel.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -952,14 +819,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -1012,14 +872,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment from which to get the template.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2493,14 +2346,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "operationId",
@@ -2535,14 +2381,7 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment with the operation to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "$top",
@@ -2578,14 +2417,7 @@
         "description": "Gets a deployments operation.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "operationId",
@@ -2620,14 +2452,7 @@
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment with the operation to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "$top",
@@ -2676,14 +2501,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "operationId",
@@ -2728,14 +2546,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment with the operation to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "$top",
@@ -2782,11 +2593,11 @@
           "type": "string",
           "description": "The resource type."
         },
-        "tagname": {
+        "tagName": {
           "type": "string",
           "description": "The tag name."
         },
-        "tagvalue": {
+        "tagValue": {
           "type": "string",
           "description": "The tag value."
         }
@@ -3885,7 +3696,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the deployment to delete.",
+      "description": "The management group ID.",
       "minLength": 1,
       "maxLength": 90
     },
@@ -3895,6 +3706,16 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription."
+    },
+    "DeploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the deployment."
     },
     "ApiVersionParameter": {
       "name": "api-version",
