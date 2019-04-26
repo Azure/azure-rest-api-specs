@@ -717,21 +717,26 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "startTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "endTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "jobId": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "status": {
           "enum": [
@@ -741,6 +746,7 @@
             "notSubmitted"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "EvaluationJobStatus",
             "modelAsString": true
@@ -758,19 +764,27 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "arguments": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "summary": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PolicyResultSummary"
-          }
+          },
+          "readOnly": true
         },
         "totalSummary": {
-          "$ref": "#/definitions/PolicyResultSummary"
+          "allOf": [
+            {
+              "$ref": "#/definitions/PolicyResultSummary"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -786,22 +800,27 @@
       "properties": {
         "timeStamp": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "ipsEstimatorNumerator": {
           "format": "float",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "ipsEstimatorDenominator": {
           "format": "float",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "snipsEstimatorDenominator": {
           "format": "float",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "aggregateTimeWindow": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "nonZeroProbability": {
           "format": "float",
@@ -809,11 +828,13 @@
         },
         "confidenceInterval": {
           "format": "float",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "sumOfSquares": {
           "format": "float",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         }
       }
     },
@@ -838,7 +859,12 @@
       "type": "object",
       "properties": {
         "dateRange": {
-          "$ref": "#/definitions/DateRange"
+          "allOf": [
+            {
+              "$ref": "#/definitions/DateRange"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -847,11 +873,13 @@
       "properties": {
         "from": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "to": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -860,11 +888,13 @@
       "properties": {
         "creationTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "lastModifiedTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -937,7 +967,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RankedAction"
-          }
+          },
+          "readOnly": true
         },
         "eventId": {
           "description": "The eventId for the round trip from request to response.",
@@ -946,7 +977,8 @@
         },
         "rewardActionId": {
           "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in \u0027ranking\u0027 if an action in the request in first position was part of the excluded ids.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
