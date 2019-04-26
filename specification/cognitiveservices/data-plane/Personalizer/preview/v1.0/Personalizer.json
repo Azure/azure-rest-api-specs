@@ -10,7 +10,7 @@
     "/configurations/service": {
       "get": {
         "tags": [
-          "Configuration"
+          "Configurations"
         ],
         "summary": "Get the service configuration.",
         "operationId": "ServiceConfiguration_Get",
@@ -39,7 +39,7 @@
       },
       "patch": {
         "tags": [
-          "Configuration"
+          "Configurations"
         ],
         "summary": "Update the service configuration.",
         "operationId": "ServiceConfiguration_Update",
@@ -81,7 +81,7 @@
     "/configurations/policy": {
       "get": {
         "tags": [
-          "Configuration"
+          "Configurations"
         ],
         "summary": "Get the policy configuration.",
         "operationId": "Policy_Get",
@@ -110,7 +110,7 @@
       },
       "delete": {
         "tags": [
-          "Configuration"
+          "Configurations"
         ],
         "summary": "Delete the current policy.",
         "operationId": "Policy_Delete",
@@ -139,7 +139,7 @@
       },
       "patch": {
         "tags": [
-          "Configuration"
+          "Configurations"
         ],
         "summary": "Update the policy configuration.",
         "operationId": "Policy_Update",
@@ -184,7 +184,7 @@
           "Evaluations"
         ],
         "summary": "List all submitted evaluations.",
-        "operationId": "Evaluation_List",
+        "operationId": "Evaluations_List",
         "consumes": [
           
         ],
@@ -206,8 +206,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Evaluation_List request": {
-            "$ref": "./examples/Evaluation_List.json"
+          "Successful Evaluations_List request": {
+            "$ref": "./examples/Evaluations_List.json"
           }
         }
       },
@@ -216,7 +216,7 @@
           "Evaluations"
         ],
         "summary": "Submit a new evaluation.",
-        "operationId": "Evaluation_Create",
+        "operationId": "Evaluations_Create",
         "consumes": [
           "application/json"
         ],
@@ -246,8 +246,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Evaluation_Create request": {
-            "$ref": "./examples/Evaluation_Create.json"
+          "Successful Evaluations_Create request": {
+            "$ref": "./examples/Evaluations_Create.json"
           }
         }
       }
@@ -258,7 +258,7 @@
           "Evaluations"
         ],
         "summary": "Get the evaluation associated with the ID.",
-        "operationId": "Evaluation_Get",
+        "operationId": "Evaluations_Get",
         "consumes": [
           
         ],
@@ -286,8 +286,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Evaluation_Get request": {
-            "$ref": "./examples/Evaluation_Get.json"
+          "Successful Evaluations_Get request": {
+            "$ref": "./examples/Evaluations_Get.json"
           }
         }
       },
@@ -296,7 +296,7 @@
           "Evaluations"
         ],
         "summary": "Delete the evaluation associated with the ID.",
-        "operationId": "Evaluation_Delete",
+        "operationId": "Evaluations_Delete",
         "consumes": [
           
         ],
@@ -318,8 +318,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Evaluation_Delete request": {
-            "$ref": "./examples/Evaluation_Delete.json"
+          "Successful Evaluations_Delete request": {
+            "$ref": "./examples/Evaluations_Delete.json"
           }
         }
       }
@@ -330,7 +330,7 @@
           "Events"
         ],
         "summary": "Report reward to allocate to the top ranked action for the specified event.",
-        "operationId": "Event_Reward",
+        "operationId": "Events_Reward",
         "consumes": [
           "application/json"
         ],
@@ -364,8 +364,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Event_Reward request": {
-            "$ref": "./examples/Event_Reward.json"
+          "Successful Events_Reward request": {
+            "$ref": "./examples/Events_Reward.json"
           }
         }
       }
@@ -376,7 +376,7 @@
           "Events"
         ],
         "summary": "Report that the specified event was actually displayed to the user and a reward should be expected for it.",
-        "operationId": "Event_Activate",
+        "operationId": "Events_Activate",
         "consumes": [
           
         ],
@@ -401,8 +401,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Event_Activate request": {
-            "$ref": "./examples/Event_Activate.json"
+          "Successful Events_Activate request": {
+            "$ref": "./examples/Events_Activate.json"
           }
         }
       }
@@ -566,13 +566,13 @@
         }
       }
     },
-    "/events/rank": {
+    "/rank": {
       "post": {
         "tags": [
           "Ranking"
         ],
         "summary": "A Personalizer rank request.",
-        "operationId": "Event_Rank",
+        "operationId": "Events_Rank",
         "consumes": [
           "application/json"
         ],
@@ -602,8 +602,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Event_Rank request": {
-            "$ref": "./examples/Event_Rank.json"
+          "Successful Events_Rank request": {
+            "$ref": "./examples/Events_Rank.json"
           }
         }
       }
@@ -651,14 +651,6 @@
           "description": "Number of days historical logs are to be maintained.",
           "type": "integer"
         }
-      },
-      "example": {
-        "rewardWaitTime": "00:10:00",
-        "defaultReward": 0.0,
-        "rewardAggregation": "earliest",
-        "explorationPercentage": 0.2,
-        "modelExportFrequency": "00:05:00",
-        "logRetentionDays": 7
       }
     },
     "PolicyContract": {
@@ -677,10 +669,6 @@
           "description": "Arguments of the Policy.",
           "type": "string"
         }
-      },
-      "example": {
-        "name": "myPersonalizer",
-        "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
       }
     },
     "EvaluationContract": {
@@ -717,18 +705,6 @@
             "$ref": "#/definitions/PolicyContract"
           }
         }
-      },
-      "example": {
-        "enableOfflineExperimentation": true,
-        "name": "myFirstEvaluation",
-        "startTime": "2018-12-19T00:00:00Z",
-        "endTime": "2019-01-19T00:00:00Z",
-        "policies": [
-          {
-            "name": "Custom Policy 1",
-            "arguments": "--cb_explore_adf --epsilon 0.2 --dsjson --cb_type ips -l 0.5 --l1 1E-07 --power_t 0.5"
-          }
-        ]
       }
     },
     "Evaluation": {
@@ -850,9 +826,6 @@
           "description": "Reward to be assigned to an action. Value must be between -1 and 1 inclusive.",
           "type": "number"
         }
-      },
-      "example": {
-        "value": 1.0
       }
     },
     "IActionResult": {
@@ -932,44 +905,6 @@
           "default": false,
           "type": "boolean"
         }
-      },
-      "example": {
-        "contextFeatures": [
-          {
-            "timeOfDay": "Morning"
-          }
-        ],
-        "actions": [
-          {
-            "id": "NewsArticle",
-            "features": [
-              {
-                "type": "News"
-              }
-            ]
-          },
-          {
-            "id": "SportsArticle",
-            "features": [
-              {
-                "type": "Sports"
-              }
-            ]
-          },
-          {
-            "id": "EntertainmentArticle",
-            "features": [
-              {
-                "type": "Entertainment"
-              }
-            ]
-          }
-        ],
-        "excludedActions": [
-          "SportsArticle"
-        ],
-        "eventId": "75269AD0-BFEE-4598-8196-C57383D38E10",
-        "deferActivation": false
       }
     },
     "RankableAction": {
@@ -1006,7 +941,8 @@
         },
         "eventId": {
           "description": "The eventId for the round trip from request to response.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "rewardActionId": {
           "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in \u0027ranking\u0027 if an action in the request in first position was part of the excluded ids.",
@@ -1020,12 +956,14 @@
       "properties": {
         "id": {
           "description": "Id of the action",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "probability": {
           "format": "float",
           "description": "Probability of the action",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         }
       }
     },
@@ -1079,7 +1017,7 @@
       "description": "Manages reinforcement learning configuration operations."
     },
     {
-      "name": "Configuration",
+      "name": "Configurations",
       "description": "Manages configuration operations."
     },
     {
