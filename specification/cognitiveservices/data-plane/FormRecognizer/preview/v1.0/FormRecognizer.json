@@ -77,7 +77,7 @@
         }
       }
     },
-    "/model/{id}/keys": {
+    "/models/{id}/keys": {
       "get": {
         "summary": "Get Keys",
         "description": "Use the API to retrieve the keys that were\r\n extracted by the specified model.",
@@ -152,7 +152,7 @@
         }
       }
     },
-    "/model/{id}/": {
+    "/models/{id}/": {
       "get": {
         "summary": "Get Model",
         "description": "Get information about a model.",
@@ -229,7 +229,7 @@
         }
       }
     },
-    "/model/{id}/analyze": {
+    "/models/{id}/analyze": {
       "post": {
         "summary": "Analyze Form",
         "description": "The document to analyze must be of a supported content type - 'application/pdf', 'image/jpeg' or 'image/png'. The response contains not just the extracted information of the analyzed form but also information about content that was not extracted along with a reason.",
@@ -251,7 +251,7 @@
             "description": "Model Identifier to analyze the document with.",
             "required": true,
             "type": "string",
-			"format": "uuid"
+            "format": "uuid"
           },
           {
             "name": "keys",
@@ -360,7 +360,9 @@
       "properties": {
         "modelId": {
           "description": "Get or set model identifier.",
-          "type": "string"
+          "type": "string",
+          "format": uuid,
+          "x-nullable": false
         },
         "status": {
           "description": "Get or set the status of model.",
