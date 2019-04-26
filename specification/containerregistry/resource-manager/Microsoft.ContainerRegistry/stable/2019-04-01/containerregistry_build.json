@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-09-01",
+    "version": "2019-04-01",
     "title": "ContainerRegistryManagementClient"
   },
   "host": "management.azure.com",
@@ -515,6 +515,15 @@
         "x-ms-examples": {
           "Tasks_Create": {
             "$ref": "./examples/TasksCreate.json"
+          },
+          "Tasks_Create_WithSystemAndUserIdentities": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemAndUserIdentities.json"
+          },
+          "Tasks_Create_WithUserIdentities_WithSystemIdentity": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemIdentity.json"
+          },
+          "Tasks_Create_WithUserIdentities": {
+            "$ref": "./examples/ManagedIdentity/TasksCreate_WithUserIdentities.json"
           }
         }
       },
@@ -615,6 +624,15 @@
         "x-ms-examples": {
           "Tasks_Update": {
             "$ref": "./examples/TasksUpdate.json"
+          },
+          "Tasks_Update_WithKeyVaultCustomCredentials": {
+            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithKeyVaultCustomCredentials.json"
+          },
+          "Tasks_Update_WithMSICustomCredentials": {
+            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithMSICustomCredentials.json"
+          },
+          "Tasks_Update_WithOpaqueCustomCredentials": {
+            "$ref": "./examples/TasksUpdate_WithOpaqueCustomCredentials.json"
           }
         }
       }
@@ -1099,10 +1117,49 @@
         }
       ],
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
         "properties": {
           "$ref": "#/definitions/TaskProperties",
           "description": "The properties of a task.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentityProperties": {
+      "description": "Managed identity for the resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of resource identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
         }
       }
     },
@@ -1179,6 +1236,19 @@
         }
       }
     },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string"
+        }
+      }
+    },
     "TaskStepProperties": {
       "description": "Base properties for any task step.",
       "type": "object",
@@ -1220,6 +1290,13 @@
       "description": "The properties of a trigger.",
       "type": "object",
       "properties": {
+        "timerTriggers": {
+          "description": "The collection of timer triggers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimerTrigger"
+          }
+        },
         "sourceTriggers": {
           "description": "The collection of triggers based on source code repository.",
           "type": "array",
@@ -1284,6 +1361,37 @@
         }
       }
     },
+    "TimerTrigger": {
+      "description": "The properties of a timer trigger.",
+      "required": [
+        "schedule",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "description": "The CRON expression for the task schedule",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the trigger.",
+          "type": "string"
+        }
+      }
+    },
     "SourceTrigger": {
       "description": "The properties of a source based trigger.",
       "required": [
@@ -1314,6 +1422,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1352,6 +1461,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1397,6 +1507,10 @@
         "password": {
           "$ref": "#/definitions/SecretObject",
           "description": "The password for logging into the custom registry. The password is a secret \r\nobject that allows multiple ways of providing the value for it."
+        },
+        "identity": {
+          "description": "Indicates the managed identity assigned to the custom credential. If a user-assigned identity\r\nthis value is the Client ID. If a system-assigned identity, the value will be `system`. In\r\nthe case of a system-assigned identity, the Client ID will be determined by the runner. This\r\nidentity may be used to authenticate to key vault to retrieve credentials or it may be the only \r\nsource of authentication used for accessing the registry.",
+          "type": "string"
         }
       }
     },
@@ -1445,7 +1559,8 @@
         "type": {
           "description": "The type of the secret object which determines how the value of the secret object has to be\r\ninterpreted.",
           "enum": [
-            "Opaque"
+            "Opaque",
+            "Vaultsecret"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1498,6 +1613,10 @@
       "description": "The parameters for updating a task.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
         "properties": {
           "$ref": "#/definitions/TaskPropertiesUpdateParameters",
           "description": "The properties for updating a task.",
@@ -1632,6 +1751,13 @@
       "description": "The properties for updating triggers.",
       "type": "object",
       "properties": {
+        "timerTriggers": {
+          "description": "The collection of timer triggers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimerTriggerUpdateParameters"
+          }
+        },
         "sourceTriggers": {
           "description": "The collection of triggers based on source code repository.",
           "type": "array",
@@ -1642,6 +1768,36 @@
         "baseImageTrigger": {
           "$ref": "#/definitions/BaseImageTriggerUpdateParameters",
           "description": "The trigger based on base image dependencies."
+        }
+      }
+    },
+    "TimerTriggerUpdateParameters": {
+      "description": "The properties for updating a timer trigger.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "description": "The CRON expression for the task schedule",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the trigger.",
+          "type": "string"
         }
       }
     },
@@ -1673,6 +1829,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1710,6 +1867,7 @@
         },
         "status": {
           "description": "The current status of trigger.",
+          "default": "Enabled",
           "enum": [
             "Disabled",
             "Enabled"
