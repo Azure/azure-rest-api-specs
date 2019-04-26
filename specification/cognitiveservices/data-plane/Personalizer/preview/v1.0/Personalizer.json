@@ -489,6 +489,7 @@
           "200": {
             "description": "Success",
             "schema": {
+              "$ref": "#/definitions/Stream",
               "type": "file"
             }
           }
@@ -509,17 +510,14 @@
           
         ],
         "produces": [
-          "application/json"
+          
         ],
         "parameters": [
           
         ],
         "responses": {
           "204": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Stream"
-            }
+            "description": "Success"
           },
           "default": {
             "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
