@@ -48,5 +48,6 @@ csharp:
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Personalizer
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Personalizer/Generated
+  sync-methods: all
   clear-output-folder: true
 ```
