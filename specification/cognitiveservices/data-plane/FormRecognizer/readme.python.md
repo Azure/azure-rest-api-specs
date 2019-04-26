@@ -10,17 +10,17 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.vision.formrecognizer
-  package-name: azure-cognitiveservices-vision-formrecognizer
+  namespace: azure.cognitiveservices.formrecognizer
+  package-name: azure-cognitiveservices-formrecognizer
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-formrecognizer/azure/cognitiveservices/vision/formrecognizer
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-formrecognizer/azure/cognitiveservices/formrecognizer
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-formrecognizer
+  output-folder: $(python-sdks-folder)/azure-cognitiveservices-formrecognizer
 ```

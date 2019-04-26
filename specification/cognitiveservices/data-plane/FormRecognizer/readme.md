@@ -45,7 +45,7 @@ csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.Vision.FormRecognizer
+  namespace: Microsoft.Azure.CognitiveServices.FormRecognizer
   output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/FormRecognizer/Generated
   clear-output-folder: true
 ```
@@ -62,7 +62,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.vision.formrecognizer
+  namespace: com.microsoft.azure.cognitiveservices.formrecognizer
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/formrecognizer
