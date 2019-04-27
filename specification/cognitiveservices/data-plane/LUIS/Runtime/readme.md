@@ -33,8 +33,8 @@ input-file: preview/v3.0/LUIS-Runtime.json
 
 # remove the GET APIs from code-generation (since the POST and GET operations are functionally identical)
 directive:
-  - remove-operation: Prediction_GetSlotPredictionsGET
-  - remove-operation: Prediction_GetVersionPredictionsGET
+  - remove-operation: Prediction_GetSlotPredictionGET
+  - remove-operation: Prediction_GetVersionPredictionGET
 ```
 
 ---

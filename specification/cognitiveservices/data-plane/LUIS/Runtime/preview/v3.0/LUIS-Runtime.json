@@ -29,7 +29,7 @@
     "/apps/{appId}/versions/{versionId}/predict": {
       "get": {
         "description": "Gets the predictions for an application version.",
-        "operationId": "Prediction_GetVersionPredictionsGET",
+        "operationId": "Prediction_GetVersionPredictionGET",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -75,7 +75,7 @@
       },
       "post": {
         "description": "Gets the predictions for an application version.",
-        "operationId": "Prediction_GetVersionPredictions",
+        "operationId": "Prediction_GetVersionPrediction",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -123,7 +123,7 @@
     "/apps/{appId}/slots/{slotName}/predict": {
       "get": {
         "description": "Gets the predictions for an application slot.",
-        "operationId": "Prediction_GetSlotPredictionsGET",
+        "operationId": "Prediction_GetSlotPredictionGET",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -169,7 +169,7 @@
       },
       "post": {
         "description": "Gets the predictions for an application slot.",
-        "operationId": "Prediction_GetSlotPredictions",
+        "operationId": "Prediction_GetSlotPrediction",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -218,6 +218,7 @@
   "definitions": {
     "PredictionRequest": {
       "type": "object",
+      "description": "Represents the prediction request parameters.",
       "required": [
         "query"
       ],
@@ -227,7 +228,8 @@
           "type": "string"
         },
         "options": {
-          "$ref": "#/definitions/RequestOptions"
+          "description": "The custom options defined for this request.",
+          "$ref": "#/definitions/PredictionRequestOptions"
         },
         "externalEntities": {
           "description": "The externally predicted entities for this request",
@@ -236,44 +238,51 @@
             "$ref": "#/definitions/ExternalEntity"
           }
         },
-        "dynamicEntities": {
+        "dynamicLists": {
           "description": "The dynamically created list entities for this request",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DynamicEntity"
+            "$ref": "#/definitions/DynamicList"
           }
         }
       }
     },
-    "RequestOptions": {
+    "PredictionRequestOptions": {
       "type": "object",
+      "description": "The custom options for the prediction request.",
       "properties": {
         "datetimeReference": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The reference DateTime used for predicting datetime entities."
         },
         "overridePredictions": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Whether to make the external entities resolution override the predictions if an overlap occurs."
         }
       }
     },
     "PredictionResponse": {
       "type": "object",
+      "description": "Represents the prediction response.",
       "required": [
         "query",
         "prediction"
       ],
       "properties": {
         "query": {
-          "type": "string"
+          "type": "string",
+          "description": "The query used in the prediction."
         },
         "prediction": {
-          "$ref": "#/definitions/PredictionObject"
+          "description": "The prediction of the requested query.",
+          "$ref": "#/definitions/Prediction"
         }
       }
     },
-    "PredictionObject": {
+    "Prediction": {
       "type": "object",
+      "description": "Represents the prediction of a query.",
       "required": [
         "normalizedQuery",
         "topIntent",
@@ -282,56 +291,69 @@
       ],
       "properties": {
         "normalizedQuery": {
-          "type": "string"
+          "type": "string",
+          "description": "The query after pre-processing and normalization."
         },
         "alteredQuery": {
-          "type": "string"
+          "type": "string",
+          "description": "The query after spell checking. Only set if spell check was enabled and a spelling mistake was found."
         },
         "topIntent": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the top scoring intent."
         },
         "intents": {
-          "$ref": "#/definitions/IntentsObject"
+          "type": "object",
+          "description": "A dictionary representing the intents that fired.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Intent"
+          }
         },
-        "entities": {},
+        "entities": {
+          "type": "object",
+          "description": "The dictionary representing the entities that fired.",
+          "additionalProperties": {}
+        },
         "sentiment": {
-          "$ref": "#/definitions/SentimentObject"
+          "description": "The result of the sentiment analysis.",
+          "$ref": "#/definitions/Sentiment"
         }
       }
     },
-    "IntentsObject": {
+    "Intent": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/IntentObject"
-      }
-    },
-    "IntentObject": {
-      "type": "object",
+      "description": "Represents an intent prediction.",
       "properties": {
         "score": {
-          "type": "number"
+          "type": "number",
+          "description": "The score of the fired intent."
         },
         "childApp": {
-          "$ref": "#/definitions/PredictionObject"
+          "description": "The prediction of the dispatched application.",
+          "$ref": "#/definitions/Prediction"
         }
       }
     },
-    "SentimentObject": {
+    "Sentiment": {
       "type": "object",
+      "description": "The result of the sentiment analaysis.",
       "required": [
         "score"
       ],
       "properties": {
         "score": {
-          "type": "number"
+          "type": "number",
+          "description": "The sentiment score of the query."
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "description": "The label of the sentiment analysis result."
         }
       }
     },
     "ExternalEntity": {
       "type": "object",
+      "description": "Defines a user perdicted entity that extends an already existing one.",
       "required": [
         "entityName",
         "startIndex",
@@ -339,51 +361,61 @@
       ],
       "properties": {
         "entityName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the entity to extend."
         },
         "startIndex": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The start character index of the predicted entity."
         },
         "entityLength": {
-          "type": "integer"
+          "type": "integer",
+          "description": "The length of the predicted entity."
         },
-        "resolution": {}
+        "resolution": {
+          "description": "A user supplied custom resolution to return as the entity's prediction."
+        }
       }
     },
-    "DynamicEntity": {
+    "DynamicList": {
       "type": "object",
+      "description": "Defines an extension for a list entity.",
       "required": [
         "listEntityName",
         "requestLists"
       ],
       "properties": {
         "listEntityName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the list entity to extend."
         },
         "requestLists": {
           "type": "array",
+          "description": "The lists to append on the extended list entity.",
           "items": {
-            "$ref": "#/definitions/Sublist"
+            "$ref": "#/definitions/RequestList"
           }
         }
       }
     },
-    "Sublist": {
+    "RequestList": {
       "type": "object",
+      "description": "Defines a sub-list to append to an existing list entity.",
       "required": [
-        "name",
-        "canonicalForm",
-        "synonyms"
+        "canonicalForm"
       ],
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the sub-list."
         },
         "canonicalForm": {
-          "type": "string"
+          "type": "string",
+          "description": "The canonical form of the sub-list."
         },
         "synonyms": {
           "type": "array",
+          "description": "The synonyms of the canonical form.",
           "items": {
             "type": "string"
           }
@@ -392,6 +424,7 @@
     },
     "Error": {
       "type": "object",
+      "description": "Represents the error that occurred.",
       "required": [
         "error"
       ],
@@ -403,16 +436,19 @@
     },
     "ErrorBody": {
       "type": "object",
+      "description": "Represents the definition of the error that occurred.",
       "required": [
         "code",
         "message"
       ],
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "The error code."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "The error message."
         }
       }
     }
@@ -446,7 +482,7 @@
     "Query": {
       "name": "query",
       "in": "query",
-      "description": "The query to predict",
+      "description": "The query to predict.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -459,7 +495,7 @@
       "x-ms-parameter-location": "method"
     },
     "ShowAllIntents": {
-      "name": "showAllIntents",
+      "name": "show-all-intents",
       "in": "query",
       "description": "Indicates whether to return all the intents in the response or just the top intent.",
       "type": "boolean",
@@ -475,7 +511,7 @@
     "PredictionRequest": {
       "name": "predictionRequest",
       "in": "body",
-      "description": "The prediction request body",
+      "description": "The prediction request parameters.",
       "required": true,
       "schema": {
         "$ref": "#/definitions/PredictionRequest"
