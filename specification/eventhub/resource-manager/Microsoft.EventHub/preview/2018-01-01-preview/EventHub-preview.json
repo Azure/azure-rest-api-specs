@@ -70,7 +70,7 @@
         }
       }
     },
-    "/providers/Microsoft.EventHub/availableClusters": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/availableClusters": {
       "get": {
         "tags": [
           "Event Hubs Clusters"
@@ -83,6 +83,9 @@
         },
         "description": "List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.",
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -1469,15 +1472,20 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EHNamespaceId"
+            "$ref": "#/definitions/EHNamespaceIdContainer"
           },
           "description": "Result of the List Namespace IDs operation"
         }
       },
       "description": "The response of the List Namespace IDs operation"
     },
-    "EHNamespaceId": {
-      "type": "string",
+    "EHNamespaceIdContainer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
       "description": "The full ARM ID of an Event Hubs Namespace"
     },
     "EHNamespaceListResult": {
