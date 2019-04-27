@@ -133,9 +133,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": { "$ref": "#/definitions/ModelResult" }
+              "$ref": "#/definitions/ModelsResult"
             }
           },
           "default": {
@@ -361,7 +359,7 @@
         "modelId": {
           "description": "Get or set model identifier.",
           "type": "string",
-          "format": uuid,
+          "format": "uuid",
           "x-nullable": false
         },
         "status": {
@@ -378,6 +376,20 @@
           "format": "date-time",
           "description": "Get or set the model last updated datetime.",
           "type": "string"
+        }
+      }
+    },
+    "ModelsResult": {
+      "description": "Result of query operation to fetch multiple models.",
+      "type": "object",
+      "properties": {
+        "models": {
+          "description": "Collection of models.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelResult"
+          }
         }
       }
     },
