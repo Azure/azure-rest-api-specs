@@ -18,7 +18,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/formrecognizer/v1.0-preview/custom",
+    "hostTemplate": "{Endpoint}/formrecognizer/v1.0-preview",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -30,7 +30,7 @@
     "https"
   ],
   "paths": {
-    "/train": {
+    "/custom/train": {
       "post": {
         "summary": "Train Model",
         "description": "The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration\r\n setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained are expected to be under the source. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'.\"\r\n Other content is ignored when training a model.",
@@ -77,7 +77,7 @@
         }
       }
     },
-    "/models/{id}/keys": {
+    "/custom/models/{id}/keys": {
       "get": {
         "summary": "Get Keys",
         "description": "Use the API to retrieve the keys that were\r\n extracted by the specified model.",
@@ -118,7 +118,7 @@
         }
       }
     },
-    "/models": {
+    "/custom/models": {
       "get": {
         "summary": "Get Models",
         "description": "Get information about all trained models",
@@ -150,7 +150,7 @@
         }
       }
     },
-    "/models/{id}/": {
+    "/custom/models/{id}/": {
       "get": {
         "summary": "Get Model",
         "description": "Get information about a model.",
@@ -190,7 +190,7 @@
           }
         }
       },
-      "delete": {
+      "/custom/delete": {
         "summary": "Delete Model",
         "description": "Delete model artifacts.",
         "operationId": "DeleteCustomModelById",
@@ -227,7 +227,7 @@
         }
       }
     },
-    "/models/{id}/analyze": {
+    "/custom/models/{id}/analyze": {
       "post": {
         "summary": "Analyze Form",
         "description": "The document to analyze must be of a supported content type - 'application/pdf', 'image/jpeg' or 'image/png'. The response contains not just the extracted information of the analyzed form but also information about content that was not extracted along with a reason.",
