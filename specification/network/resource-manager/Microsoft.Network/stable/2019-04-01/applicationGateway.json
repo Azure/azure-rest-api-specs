@@ -1593,8 +1593,10 @@
          "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from http settings will be used. This propery is valid for Standard_v2 and WAF_v2 only."
-        },
+          "description": "Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from http settings will be used. This property is valid for Standard_v2 and WAF_v2 only."
+          "minimum": 1
+          "maximum": 65535
+        }
       },
       "description": "Properties of probe of an application gateway."
     },
