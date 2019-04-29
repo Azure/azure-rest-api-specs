@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 import * as fs from "@ts-common/fs"
 import * as process from "process"
 import * as path from "path"
@@ -12,9 +9,9 @@ type Code = {
   readonly "input-file"?: ReadonlyArray<string>|string
 }
 
-const main = async (dir: string) => {
+const main = async (specificationDir: string, profilesDir: string) => {
   try {
-    const list = fs.recursiveReaddir(dir)
+    const list = fs.recursiveReaddir(specificationDir)
     for await (const file of list) {
       const f = path.parse(file)
       if (f.base === "readme.md") {
@@ -31,14 +28,15 @@ const main = async (dir: string) => {
           ) {
             const y = (yaml.load(c.literal) as Code)["input-file"]
             if (typeof y === "string") {
-              set.add(y)
+              set.add(`$(this-folder)/${y}`)
             } else if (it.isArray(y)) {
               for (const i of y) {
-                set.add(i)
+                set.add(`$(this-folder)/${i}`)
               }
             }
           }
         }
+
         const readMeMulti = cm.createNode(
           "document",
           cm.createNode(
@@ -54,7 +52,7 @@ const main = async (dir: string) => {
           ),
           cm.createCodeBlock(
             "yaml $(enable-multi-api)",
-            yaml.dump({ "input-file": it.toArray(set) }, { lineWidth: 1000 })
+            yaml.dump({ "input-file": it.toArray(set), "require": `$(this-folder)/${path.relative(f.dir, profilesDir).replace(/\\/g, '/')}/readme.md` }, { lineWidth: 1000 })
           )
         )
         const x = cm.markDownExToString({ markDown: readMeMulti })
@@ -66,4 +64,4 @@ const main = async (dir: string) => {
   }
 }
 
-main(path.join(process.cwd(), "specification"))
+main(path.join(process.cwd(), "specification"), path.join(process.cwd(), "profiles"))
