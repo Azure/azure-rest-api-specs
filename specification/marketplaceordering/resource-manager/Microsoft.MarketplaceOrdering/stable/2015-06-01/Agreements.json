@@ -155,6 +155,156 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
+      "post": {
+        "operationId": "MarketplaceAgreements_Sign",
+        "description": "Sign marketplace terms.",
+        "x-ms-examples": {
+          "SetMarketplaceTerms": {
+            "$ref": "./examples/SignMarketplaceTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishersParameter"
+          },
+          {
+            "$ref": "#/parameters/OffersParameter"
+          },
+          {
+            "$ref": "#/parameters/PlansParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request was successfully processed and the terms were accepted.",
+            "schema": {
+              "$ref": "#/definitions/AgreementTerms"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
+      "post": {
+        "operationId": "MarketplaceAgreements_Cancel",
+        "description": "Cancel marketplace terms.",
+        "x-ms-examples": {
+          "SetMarketplaceTerms": {
+            "$ref": "./examples/CancelMarketplaceTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishersParameter"
+          },
+          {
+            "$ref": "#/parameters/OffersParameter"
+          },
+          {
+            "$ref": "#/parameters/PlansParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request was successfully processed and the terms were rejected.",
+            "schema": {
+              "$ref": "#/definitions/AgreementTerms"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
+      "get": {
+        "operationId": "MarketplaceAgreements_GetAgreement",
+        "description": "Get marketplace agreement.",
+        "x-ms-examples": {
+          "SetMarketplaceTerms": {
+            "$ref": "./examples/GetAgreementMarketplaceTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishersParameter"
+          },
+          {
+            "$ref": "#/parameters/OffersParameter"
+          },
+          {
+            "$ref": "#/parameters/PlansParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Terms returned successfully",
+            "schema": {
+              "$ref": "#/definitions/AgreementTerms"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements": {
+      "get": {
+        "operationId": "MarketplaceAgreements_List",
+        "description": "List marketplace agreements in the subscription.",
+        "x-ms-examples": {
+          "SetMarketplaceTerms": {
+            "$ref": "./examples/ListMarketplaceTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Terms returned successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgreementTerms"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -267,7 +417,7 @@
       "description": "Agreement Terms definition"
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "error": {

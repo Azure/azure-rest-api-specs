@@ -25,6 +25,18 @@ directive:
   remove-operation: Prediction_Resolve2
 ```
 
+## Runtime 3.0-preview
+These settings apply only when `--tag=runtime_3_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'runtime_3_0_preview'
+input-file: preview/v3.0/LUIS-Runtime.json
+
+# remove the GET APIs from code-generation (since the POST and GET operations are functionally identical)
+directive:
+  - remove-operation: Prediction_GetSlotPredictionGET
+  - remove-operation: Prediction_GetVersionPredictionGET
+```
+
 ---
 # Code Generation
 

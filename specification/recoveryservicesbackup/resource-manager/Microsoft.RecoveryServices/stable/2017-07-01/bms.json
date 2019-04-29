@@ -23,7 +23,7 @@
         "tags": [
           "ProtectionIntent"
         ],
-        "summary": "It will validate followings\r\n            1. Vault capacity\r\n            2. VM is already protected\r\n            3. Any VM related configuration passed in properties.",
+        "summary": "It will validate followings\r\n1. Vault capacity\r\n2. VM is already protected\r\n3. Any VM related configuration passed in properties.",
         "operationId": "ProtectionIntent_Validate",
         "produces": [
           "application/json"
@@ -56,7 +56,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Validate Enable Protection on Azure Vm": {
             "$ref": "./examples/AzureIaasVm/ProtectionIntent_Validate.json"
@@ -102,7 +101,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Azure Virtual Machine Backup Status": {
             "$ref": "./examples/AzureIaasVm/GetBackupStatus.json"
@@ -148,7 +146,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Check Azure Vm Backup Feature Support": {
             "$ref": "./examples/AzureIaasVm/BackupFeature_Validate.json"
@@ -161,7 +158,7 @@
         "tags": [
           "ProtectionIntent"
         ],
-        "description": "Provides the details of the protection intent up item. This is an asynchronous operation. To know the status of the operation,\r\n            call the GetItemOperationResult API.",
+        "description": "Provides the details of the protection intent up item. This is an asynchronous operation. To know the status of the operation,\r\ncall the GetItemOperationResult API.",
         "operationId": "ProtectionIntent_Get",
         "produces": [
           "application/json"
@@ -202,7 +199,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get ProtectionIntent for an item": {
             "$ref": "./examples/AzureWorkload/BackupProtectionIntent_Get.json"
@@ -263,7 +259,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Create or Update Azure Vm Protection Intent": {
             "$ref": "./examples/AzureIaasVm/ProtectionIntent_CreateOrUpdate.json"
@@ -312,7 +307,6 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Delete Protection intent from item": {
             "$ref": "./examples/AzureWorkload/BackupProtectionIntent_Delete.json"
@@ -366,7 +360,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/JobQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -389,7 +382,7 @@
         "tags": [
           "JobDetails"
         ],
-        "description": "Gets exteded information associated with the job.",
+        "description": "Gets extended information associated with the job.",
         "operationId": "JobDetails_Get",
         "produces": [
           "application/json"
@@ -423,7 +416,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Get Job Details": {
             "$ref": "./examples/Common/GetJobDetails.json"
@@ -436,7 +428,7 @@
         "tags": [
           "ExportJobsOperationResults"
         ],
-        "description": "Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also\r\n            contains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.",
+        "description": "Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also\r\ncontains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.",
         "operationId": "ExportJobsOperationResults_Get",
         "produces": [
           "application/json"
@@ -476,7 +468,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Export Jobs Operation Results": {
             "$ref": "./examples/Common/ExportJobsOperationResult.json"
@@ -520,11 +511,10 @@
             "description": "Accepted"
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/JobQueryObject",
         "x-ms-examples": {
           "Export Jobs": {
-            "$ref": "./examples/Common/TriggerExoprtJobs.json"
+            "$ref": "./examples/Common/TriggerExportJobs.json"
           }
         }
       }
@@ -534,7 +524,7 @@
         "tags": [
           "BackupPolicies"
         ],
-        "description": "Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch\r\n            scoped results.",
+        "description": "Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch\r\nscoped results.",
         "operationId": "BackupPolicies_List",
         "produces": [
           "application/json"
@@ -568,7 +558,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/ProtectionPolicyQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -629,7 +618,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/ProtectedItemQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -687,7 +675,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/ProtectionIntentQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -745,7 +732,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-odata": "#/definitions/BMSBackupSummariesQueryObject",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -801,7 +787,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-examples": {
           "Validate Operation": {
             "$ref": "./examples/AzureIaasVm/ValidateOperation_RestoreDisk.json"
@@ -929,7 +914,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1094,7 +1080,7 @@
       }
     },
     "AzureIaaSVMJob": {
-      "description": "Azure IaaS VM workload-specifc job object.",
+      "description": "Azure IaaS VM workload-specific job object.",
       "type": "object",
       "allOf": [
         {
@@ -1218,7 +1204,7 @@
           "type": "number"
         },
         "taskExecutionDetails": {
-          "description": "Details about execution of the task.\r\n            eg: number of bytes transfered etc",
+          "description": "Details about execution of the task.\r\neg: number of bytes transferred etc",
           "type": "string"
         }
       }
@@ -1519,7 +1505,8 @@
           "$ref": "#/definitions/AzureStorageJobExtendedInfo",
           "description": "Additional information about the job."
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureStorageJob"
     },
     "AzureStorageJobExtendedInfo": {
       "description": "Azure Storage workload-specific additional information for job.",
@@ -1691,7 +1678,8 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
           "description": "Additional information for this backup item."
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
     },
     "AzureVmWorkloadProtectedItemExtendedInfo": {
       "description": "Additional information on Azure Workload for SQL specific backup item.",
@@ -1738,7 +1726,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1760,8 +1749,18 @@
       },
       "x-ms-discriminator-value": "AzureWorkload"
     },
+    "AzureVmWorkloadSAPAseDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing SAP ASE Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSAPAseDatabase"
+    },
     "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
-      "description": "Azure VM workload-specific protected item representing SAP Hana Database.",
+      "description": "Azure VM workload-specific protected item representing SAP HANA Database.",
       "type": "object",
       "allOf": [
         {
@@ -1775,93 +1774,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectedItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
         }
       ],
-      "properties": {
-        "friendlyName": {
-          "description": "Friendly name of the DB represented by this backup item.",
-          "type": "string"
-        },
-        "serverName": {
-          "description": "Host/Cluster Name for instance or AG",
-          "type": "string"
-        },
-        "parentName": {
-          "description": "Parent name of the DB such as Instance or Availability Group.",
-          "type": "string"
-        },
-        "parentType": {
-          "description": "Parent type of DB, SQLAG or StandAlone",
-          "type": "string"
-        },
-        "protectionStatus": {
-          "description": "Backup status of this backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "Backup state of this backup item.",
-          "enum": [
-            "Invalid",
-            "IRPending",
-            "Protected",
-            "ProtectionError",
-            "ProtectionStopped",
-            "ProtectionPaused"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProtectionState",
-            "modelAsString": true
-          }
-        },
-        "lastBackupStatus": {
-          "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
-          "enum": [
-            "Invalid",
-            "Healthy",
-            "Unhealthy",
-            "IRPending"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LastBackupStatus",
-            "modelAsString": true
-          }
-        },
-        "lastBackupTime": {
-          "format": "date-time",
-          "description": "Timestamp of the last backup operation on this backup item.",
-          "type": "string"
-        },
-        "lastBackupErrorDetail": {
-          "$ref": "#/definitions/ErrorDetail",
-          "description": "Error details in last backup"
-        },
-        "protectedItemDataSourceId": {
-          "description": "Data ID of the protected item.",
-          "type": "string"
-        },
-        "protectedItemHealthStatus": {
-          "description": "Health status of the backup item, evaluated based on last heartbeat received",
-          "enum": [
-            "Invalid",
-            "Healthy",
-            "Unhealthy",
-            "NotReachable",
-            "IRPending"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProtectedItemHealthStatus",
-            "modelAsString": true
-          }
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
-          "description": "Additional information for this backup item."
-        }
-      },
       "x-ms-discriminator-value": "AzureVmWorkloadSQLDatabase"
     },
     "AzureWorkloadAutoProtectionIntent": {
@@ -1949,7 +1864,8 @@
           "$ref": "#/definitions/AzureWorkloadJobExtendedInfo",
           "description": "Additional information about the job."
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadJob"
     },
     "AzureWorkloadJobExtendedInfo": {
       "description": "Azure VM workload-specific additional information for job.",
@@ -1989,6 +1905,23 @@
         }
       }
     },
+    "AzureWorkloadPointInTimeRestoreRequest": {
+      "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadPointInTimeRestoreRequest"
+    },
     "AzureWorkloadRestoreRequest": {
       "description": "AzureWorkload-specific restore.",
       "type": "object",
@@ -2022,6 +1955,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "targetInfo": {
+          "$ref": "#/definitions/TargetRestoreInfo",
+          "description": "Details of target database"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
@@ -2048,40 +1985,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
       ],
-      "properties": {
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryType": {
-          "description": "OLR/ALR, RestoreDisks is invalid option",
-          "enum": [
-            "Invalid",
-            "OriginalLocation",
-            "AlternateLocation",
-            "RestoreDisks"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecoveryType",
-            "modelAsString": true
-          }
-        },
-        "sourceResourceId": {
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered.",
-          "type": "string"
-        },
-        "propertyBag": {
-          "description": "Workload specific property bag.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
     },
     "AzureWorkloadSQLAutoProtectionIntent": {
@@ -2100,7 +2006,9 @@
             "SQLInstance",
             "SQLDataBase",
             "SAPHanaSystem",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseSystem",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2144,10 +2052,6 @@
         "isNonRecoverable": {
           "description": "SQL specific property where user can chose to set no-recovery when restore operation is tried",
           "type": "boolean"
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
         },
         "alternateDirectoryPaths": {
           "description": "Data directory details",
@@ -2237,7 +2141,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2273,6 +2178,10 @@
             "name": "ProtectionStatus",
             "modelAsString": true
           }
+        },
+        "vaultId": {
+          "description": "Specifies the arm resource id of the vault",
+          "type": "string"
         },
         "fabricName": {
           "description": "Specifies the fabric name - Azure or AD",
@@ -2395,7 +2304,7 @@
       }
     },
     "DpmJob": {
-      "description": "DPM workload-specifc job object.",
+      "description": "DPM workload-specific job object.",
       "type": "object",
       "allOf": [
         {
@@ -2525,7 +2434,7 @@
           "type": "string"
         },
         "protectionState": {
-          "description": "Protection state of the backupengine",
+          "description": "Protection state of the backup engine",
           "enum": [
             "Invalid",
             "IRPending",
@@ -2811,11 +2720,11 @@
           "type": "string"
         },
         "targetVirtualMachineId": {
-          "description": "This is the complete ARM Id of the VM that will be created.\r\n            For e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}",
+          "description": "This is the complete ARM Id of the VM that will be created.\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}",
           "type": "string"
         },
         "targetResourceGroupId": {
-          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.\r\n            For e.g. /subscriptions/{subId}/resourcegroups/{rg}",
+          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}",
           "type": "string"
         },
         "storageAccountId": {
@@ -2823,15 +2732,15 @@
           "type": "string"
         },
         "virtualNetworkId": {
-          "description": "This is the virtual network Id of the vnet that will be attached to the virtual machine.\r\n            User will be validated for join action permissions in the linked access.",
+          "description": "This is the virtual network Id of the vnet that will be attached to the virtual machine.\r\nUser will be validated for join action permissions in the linked access.",
           "type": "string"
         },
         "subnetId": {
-          "description": "Subnet ID, is the subnet ID associated with the to be restored VM. For Classic VMs it would be\r\n            {VnetID}/Subnet/{SubnetName} and, for the Azure Resource Manager VMs it would be ARM resource ID used to represent\r\n            the subnet.",
+          "description": "Subnet ID, is the subnet ID associated with the to be restored VM. For Classic VMs it would be\r\n{VnetID}/Subnet/{SubnetName} and, for the Azure Resource Manager VMs it would be ARM resource ID used to represent\r\nthe subnet.",
           "type": "string"
         },
         "targetDomainNameId": {
-          "description": "Fully qualified ARM ID of the domain name to be associated to the VM being restored. This applies only to Classic\r\n            Virtual Machines.",
+          "description": "Fully qualified ARM ID of the domain name to be associated to the VM being restored. This applies only to Classic\r\nVirtual Machines.",
           "type": "string"
         },
         "region": {
@@ -2843,7 +2752,7 @@
           "type": "string"
         },
         "createNewCloudService": {
-          "description": "Should a new cloud service be created while restoring the VM. If this is false, VM will be restored to the same\r\n            cloud service as it was at the time of backup.",
+          "description": "Should a new cloud service be created while restoring the VM. If this is false, VM will be restored to the same\r\ncloud service as it was at the time of backup.",
           "type": "boolean"
         },
         "originalStorageAccountOption": {
@@ -2910,7 +2819,7 @@
           "type": "string"
         },
         "jobType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -2938,7 +2847,7 @@
           }
         },
         "backupManagementType": {
-          "description": "Type of backup managmenent for the job.",
+          "description": "Type of backup management for the job.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -3074,7 +2983,8 @@
         {
           "$ref": "#/definitions/SchedulePolicy"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "LongTermSchedulePolicy"
     },
     "MabErrorInfo": {
       "description": "MAB workload-specific error information.",
@@ -3230,7 +3140,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3378,10 +3289,6 @@
         }
       }
     },
-    "Object": {
-      "description": "Base of all objects.",
-      "type": "object"
-    },
     "OperationResultInfo": {
       "description": "Operation result info.",
       "type": "object",
@@ -3409,7 +3316,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -3503,7 +3410,7 @@
       }
     },
     "PreValidateEnableBackupRequest": {
-      "description": "Contract to validate if backup can be enabled on the given resource in a given vault and given configuration.\r\n            It will validate followings\r\n            1. Vault capacity\r\n            2. VM is already protected\r\n            3. Any VM related configuration passed in properties.",
+      "description": "Contract to validate if backup can be enabled on the given resource in a given vault and given configuration.\r\nIt will validate followings\r\n1. Vault capacity\r\n2. VM is already protected\r\n3. Any VM related configuration passed in properties.",
       "type": "object",
       "properties": {
         "resourceType": {
@@ -3522,7 +3429,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3532,6 +3440,10 @@
         },
         "resourceId": {
           "description": "ARM Virtual Machine Id",
+          "type": "string"
+        },
+        "vaultId": {
+          "description": "Specifies the arm resource id of the vault",
           "type": "string"
         },
         "properties": {
@@ -3570,7 +3482,7 @@
           "type": "string"
         },
         "containerName": {
-          "description": "Specifies the product specific container name. E.g. iaasvmcontainer;iaasvmcontainer;rgname;vmname. This is required\r\n            for portal",
+          "description": "Specifies the product specific container name. E.g. iaasvmcontainer;iaasvmcontainer;rgname;vmname. This is required\r\nfor portal",
           "type": "string"
         },
         "protectedItemName": {
@@ -3588,7 +3500,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the backed up item.",
+          "description": "Type of backup management for the backed up item.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -3622,7 +3534,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3720,7 +3633,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3795,7 +3709,7 @@
           "type": "string"
         },
         "backupManagementType": {
-          "description": "Type of backup managemenent for the backed up item.",
+          "description": "Type of backup management for the backed up item.",
           "enum": [
             "Invalid",
             "AzureIaasVM",
@@ -3934,7 +3848,7 @@
           "type": "integer"
         },
         "backupManagementType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -3983,7 +3897,8 @@
             "GenericDataSource",
             "SQLDataBase",
             "AzureFileShare",
-            "SAPHanaDatabase"
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4098,7 +4013,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -4110,7 +4025,7 @@
       "properties": {
         "count": {
           "format": "int32",
-          "description": "Count of duration types. Retention duration is obtained by the counting the duration type Count times.\r\n            For example, when Count = 3 and DurationType = Weeks, retention duration will be three weeks.",
+          "description": "Count of duration types. Retention duration is obtained by the counting the duration type Count times.\r\nFor example, when Count = 3 and DurationType = Weeks, retention duration will be three weeks.",
           "type": "integer"
         },
         "durationType": {
@@ -4138,7 +4053,7 @@
       "type": "object",
       "properties": {
         "retentionPolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -4152,7 +4067,7 @@
       "type": "object",
       "properties": {
         "schedulePolicyType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -4171,7 +4086,7 @@
           "type": "boolean"
         },
         "isCompression": {
-          "description": "Workload compression flag. This has been added so that 'isSqlCompression'\r\n            will be deprecated once clients upgrade to consider this flag.",
+          "description": "Workload compression flag. This has been added so that 'isSqlCompression'\r\nwill be deprecated once clients upgrade to consider this flag.",
           "type": "boolean"
         }
       }
@@ -4369,7 +4284,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -4574,8 +4489,8 @@
       "in": "path",
       "description": "Azure region to hit Api",
       "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersion": {
       "name": "api-version",
@@ -4589,16 +4504,16 @@
       "in": "path",
       "description": "The name of the resource group where the recovery services vault is present.",
       "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "VaultName": {
       "name": "vaultName",
       "in": "path",
       "description": "The name of the recovery services vault.",
       "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

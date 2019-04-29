@@ -9,6 +9,4 @@ typescript:
   package-name: "@azure/keyvault"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/keyvault"
   generate-metadata: true
-  generate-readme-md: false
-  generate-package-json: false
 ```

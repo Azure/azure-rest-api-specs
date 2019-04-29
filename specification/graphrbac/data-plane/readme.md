@@ -36,7 +36,19 @@ These settings apply only when `--tag=1.6` is specified on the command line.
 
 ``` yaml $(tag) == '1.6'
 input-file:
-- stable/1.6/graphrbac.json
+- Microsoft.GraphRbac/stable/1.6/graphrbac.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: D5001
+    reason: this spec never has examples. It is owned by the SDK group and we already have CLI commands testing it
+  - suppress: R2058
+    reason: existing since the spec started
+  - suppress: R3016
+    reason: existing since the spec started
 ```
 
 ---

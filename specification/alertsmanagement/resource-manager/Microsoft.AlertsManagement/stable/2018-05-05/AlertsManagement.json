@@ -5,6 +5,7 @@
     "title": "Azure Alerts Management Service Resource Provider",
     "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor."
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -40,7 +41,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Succesfully retrieved operations list.",
+            "description": "OK. Successfully retrieved operations list.",
             "schema": {
               "$ref": "#/definitions/operationsList"
             }
@@ -119,7 +120,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Succesfully listed alert objects.",
+            "description": "OK. Successfully listed alert objects.",
             "schema": {
               "$ref": "#/definitions/alertsList"
             }
@@ -176,7 +177,7 @@
         },
         "x-ms-examples": {
           "GetById": {
-            "$ref": "./examples/Alerts_GetbyId.json"
+            "$ref": "./examples/Alerts_GetById.json"
           }
         }
       }
@@ -437,7 +438,7 @@
         },
         "x-ms-examples": {
           "Get": {
-            "$ref": "./examples/SmartGroups_GetbyId.json"
+            "$ref": "./examples/SmartGroups_GetById.json"
           }
         }
       }
@@ -607,7 +608,7 @@
       }
     },
     "severity": {
-      "description": "Filter by severity.  Defaut value is select all.",
+      "description": "Filter by severity.  Default value is select all.",
       "name": "severity",
       "type": "string",
       "in": "query",
@@ -850,7 +851,7 @@
       ]
     },
     "select": {
-      "description": "This filter allows to selection of the fields(comma seperated) which would  be part of the the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
+      "description": "This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
       "name": "select",
       "type": "string",
       "in": "query",

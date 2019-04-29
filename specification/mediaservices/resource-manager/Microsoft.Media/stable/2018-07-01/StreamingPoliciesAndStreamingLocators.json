@@ -47,7 +47,7 @@
                 "description": "Track FourCC"
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "Track property type"
         },
@@ -69,7 +69,7 @@
                 "description": "Equal operation"
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "Track property condition operation"
         },
@@ -154,7 +154,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys."
+          "description": "Template for the URL of the custom service delivering licenses to end user players.  Not required when using Azure Media Services for issuing licenses.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested."
         },
         "playReadyCustomAttributes": {
           "type": "string",
@@ -168,7 +168,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys."
+          "description": "Template for the URL of the custom service delivering licenses to end user players.  Not required when using Azure Media Services for issuing licenses.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested."
         }
       },
       "type": "object",
@@ -178,7 +178,7 @@
       "properties": {
         "customLicenseAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys."
+          "description": "Template for the URL of the custom service delivering licenses to end user players.  Not required when using Azure Media Services for issuing licenses.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested."
         },
         "allowPersistentLicense": {
           "type": "boolean",
@@ -280,7 +280,7 @@
         },
         "customKeyAcquisitionUrlTemplate": {
           "type": "string",
-          "description": "KeyAcquistionUrlTemplate is used to point to user specified service to delivery content keys"
+          "description": "Template for the URL of the custom service delivering keys to end user players.  Not required when using Azure Media Services for issuing keys.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested."
         }
       },
       "type": "object",
@@ -414,7 +414,7 @@
                 "description": "Envelope Encryption"
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "Encryption type of Content Key",
           "readOnly": true,
@@ -426,7 +426,7 @@
         },
         "value": {
           "type": "string",
-          "description": "Value of  of Content Key"
+          "description": "Value of Content Key"
         },
         "policyName": {
           "type": "string",
@@ -478,7 +478,7 @@
                 "description": "Download protocol"
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "Streaming protocol"
         },
@@ -510,7 +510,7 @@
                 "description": "CommonEncryptionCbcs scheme"
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "Encryption scheme"
         },
@@ -575,6 +575,13 @@
         "alternativeMediaId": {
           "type": "string",
           "description": "Alternative Media ID of this Streaming Locator"
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of asset or account filters which apply to this streaming locator"
         }
       },
       "type": "object",
@@ -754,7 +761,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Specifies the the key by which the result collection should be ordered."
+            "description": "Specifies the key by which the result collection should be ordered."
           }
         ],
         "x-ms-pageable": {
@@ -980,7 +987,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Specifies the the key by which the result collection should be ordered."
+            "description": "Specifies the key by which the result collection should be ordered."
           }
         ],
         "x-ms-pageable": {
