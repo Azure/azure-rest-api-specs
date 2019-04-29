@@ -262,7 +262,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "resourcegraph.json#/definitions/OperationListResult"
             }
           }
         },
@@ -457,56 +457,6 @@
         }
       },
       "description": "Error message body that will indicate why the operation failed."
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Resource Graph operations supported by the Resource Graph resource provider."
-        },
-				"nextLink": {
-					"description": "The link used to get the next page of results.",
-					"type": "string"
-				}
-      }
-    },
-    "Operation": {
-      "description": "Resource Graph REST API operation definition.",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft Resource Graph.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of operation: get, read, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description for the operation.",
-              "type": "string"
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "description": "The origin of operations."
-        }
-      }
     }
   },
   "parameters": {
