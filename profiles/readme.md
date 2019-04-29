@@ -12,4 +12,6 @@ require:
   - $(this-folder)/stable-2019-01.md  
   - $(this-folder)/2019-04-01-profile.md  
   - $(this-folder)/2019-04-24-profile.md 
+  - $(this-folder)/2019-04-29-profile.md 
+
 ```
