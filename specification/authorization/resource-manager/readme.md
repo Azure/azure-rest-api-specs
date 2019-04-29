@@ -237,3 +237,16 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+### Tag: profile-2019-03-01-hybrid
+
+These settings apply only when `--tag=profile-2019-03-01-hybrid` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-2019-03-01-hybrid'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+- Microsoft.Authorization/stable/2015-07-01/authorization.json
+```

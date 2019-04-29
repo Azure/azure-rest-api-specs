@@ -337,3 +337,13 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+### Tag: profile-2019-03-01-hybrid
+
+These settings apply only when `--tag=profile-2019-03-01-hybrid` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-2019-03-01-hybrid'
+input-file:
+- Microsoft.Storage/stable/2017-10-01/storage.json
+```

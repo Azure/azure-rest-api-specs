@@ -393,3 +393,18 @@ directive:
   - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
 ```
+
+### Tag: profile-2019-03-01-hybrid
+
+These settings apply only when `--tag=profile-2019-03-01-hybrid` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-2019-03-01-hybrid'
+input-file:
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
+```
