@@ -238,12 +238,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: profile-2019-03-01-hybrid
+### Tag: profile-hybrid-2019-03-01
 
-These settings apply only when `--tag=profile-2019-03-01-hybrid` is specified on the command line.
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile.
 
-``` yaml $(tag) == 'profile-2019-03-01-hybrid'
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
 - Microsoft.Authorization/stable/2016-09-01/locks.json
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
