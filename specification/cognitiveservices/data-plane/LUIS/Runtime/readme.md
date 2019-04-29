@@ -5,12 +5,12 @@
 Configuration for generating LUIS Runtime SDK.
 
 ``` yaml
-tag: runtime_2_0
+tag: runtime_3_0_preview
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Runtime Endpoint is `runtime_2_0`.
+The current release for the Runtime Endpoint is `runtime_3_0_preview`.
 
 # Releases
 
@@ -54,7 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
 ```
 
-### Runtime 2.0 - CSharp Settings
+### CSharp
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
