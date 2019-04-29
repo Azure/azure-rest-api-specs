@@ -1821,23 +1821,6 @@
       },
       "description": "Identity for the managed cluster."
     },
-    "OrchestratorProfile": {
-      "properties": {
-        "orchestratorType": {
-          "type": "string",
-          "description": "Orchestrator type."
-        },
-        "orchestratorVersion": {
-          "type": "string",
-          "description": "Orchestrator version (major, minor, patch)."
-        }
-      },
-      "required": [
-        "orchestratorType",
-        "orchestratorVersion"
-      ],
-      "description": "Contains information about orchestrator."
-    },
     "ManagedClusterAccessProfile": {
       "allOf": [
         {
@@ -1892,7 +1875,17 @@
         "upgrades": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "kubernetesVersion": {
+                "type": "string",
+                "description": "Kubernetes version (major, minor, patch)."
+              },
+              "isPreview": {
+                "type": "boolean",
+                "description": "Whether Kubernetes version is currently in preview."
+              }
+            }
           },
           "description": "List of orchestrator types and versions available for upgrade."
         }
