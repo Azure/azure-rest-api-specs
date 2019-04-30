@@ -72,7 +72,7 @@ batch:
 
 ### Profile: hybrid_2018_03_01
 
-These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+These settings apply only when `--csharp-profile=hybrid_2018_03_01` is specified on the command line.
 
  ``` yaml $(csharp-profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
@@ -100,7 +100,7 @@ batch:
 
  ### Profile: hybrid_2019_03_01
 
-These settings apply only when `--profile=hybrid_2019_03_01` is specified on the command line.
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
 
  ``` yaml $(csharp-profile)=='hybrid_2019_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization

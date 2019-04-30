@@ -12,7 +12,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 csharp:
   azure-arm: true
   payload-flattening-threshold: 1
@@ -21,14 +21,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated
   clear-output-folder: true
 ```
-
-``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
-namespace: Microsoft.Azure.Management.Monitor
-output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated
-```
-
-## Batch settings
-These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
 ### Profile: hybrid_2019_03_01
 
