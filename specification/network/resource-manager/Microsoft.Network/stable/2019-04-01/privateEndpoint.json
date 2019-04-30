@@ -72,6 +72,12 @@
           },
           "200": {
             "description": "Delete successful."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -263,7 +269,6 @@
     "PrivateEndpoint": {
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateEndpointProperties",
           "description": "Properties of the private endpoint."
         },
@@ -281,14 +286,6 @@
     },
     "PrivateEndpointProperties": {
       "properties": {
-        "fqdn": {
-          "type": "string",
-          "description": "A first-party service's FQDN that is mapped to the private IP allocated via this private endpoint."
-        },
-        "endpointService": {
-          "$ref": "#/definitions/EndpointService",
-          "description": "A reference to the service being brought into the virtual network."
-        },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "The ID of the subnet from which the private IP will be allocated."
@@ -301,18 +298,101 @@
           },
           "description": "Gets an array of references to the network interfaces created for this private endpoint."
         },
-        "owner": {
-          "type": "string",
-          "readOnly": true,
-          "description": "A read-only property that identifies who created this private endpoint."
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state of the private endpoint. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        },
+        "privateLinkServiceConnections": {
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/PrivateLinkServiceConnection",
+              "description": "A grouping of information about the connection to the remote resource."
+            }
+          },
+          "description": "A grouping of information about the connection to the remote resource."
+        },
+        "manualPrivateLinkServiceConnections": {
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/PrivateLinkServiceConnection",
+              "description": "A grouping of information about the connection to the remote resource."
+            }
+          },
+          "description": "A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource."
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "description": "Properties of the private endpoint."
+    },
+    "PrivateLinkServiceConnection": {
+      "properties": {
+        "properties": {
+            "$ref": "#/definitions/PrivateLinkServiceConnectionProperties",
+            "description": "Properties of the private link service connection"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "PrivateLinkServiceConnectionProperties": {
+      "properties": {
+        "privateLinkServiceId": {
+          "type":"string",
+          "description": ""
+        },
+        "groupIds": {
+          "type":"string",
+          "items": {
+            "type":"string"
+          },
+          "description": "The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to."
+        },
+        "requestMessage": {
+          "type":"string",
+          "description": "A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars."
+        },
+        "privateLinkServiceConnectionState": {
+          "properties": {
+            "properties":{
+              "x-ms-client-flatten": true,
+              "$ref":"#/definitions/PrivateLinkServiceConnectionState",
+              "description": "A collection of read-only information about the state of the connection to the remote resource."
+            }
+          }
+        }
+      },
+      "description": "Properties of the PrivateLinkServiceConnection"
+    },
+    "PrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "type":"string",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the remote resource."
+        },
+        "description": {
+          "type":"string",
+          "description": "Additional information to supplement the status."
+        },
+        "actionRequired": {
+          "type":"string",
+          "description": "A message indicating if changes on the remote resource require any updates on the private endpoint."
+        }
+      },
+      "description": "A collection of read-only information about the state of the connection to the remote resource."
     },
     "EndpointService": {
       "properties": {
