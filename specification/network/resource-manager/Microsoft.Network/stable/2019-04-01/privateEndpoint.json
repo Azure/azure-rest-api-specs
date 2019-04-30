@@ -304,22 +304,16 @@
           "description": "The provisioning state of the private endpoint. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         },
         "privateLinkServiceConnections": {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/PrivateLinkServiceConnection",
-              "description": "A grouping of information about the connection to the remote resource."
-            }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
           },
           "description": "A grouping of information about the connection to the remote resource."
         },
         "manualPrivateLinkServiceConnections": {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/PrivateLinkServiceConnection",
-              "description": "A grouping of information about the connection to the remote resource."
-            }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
           },
           "description": "A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource."
         }
@@ -355,7 +349,7 @@
           "description": ""
         },
         "groupIds": {
-          "type":"string",
+          "type":"array",
           "items": {
             "type":"string"
           },
@@ -390,6 +384,22 @@
         "actionRequired": {
           "type":"string",
           "description": "A message indicating if changes on the remote resource require any updates on the private endpoint."
+        },
+        "groupConnectivityInformation":{
+          "type":"array",
+          "items": {
+            "properties": {
+              "groupId":{
+                "type":"string",
+                "description":"e.g. cassandra"
+              },
+              "memberName": {
+                "type":"string",
+                "description":"e.g. cassandra_r1"
+              }
+            }
+          },
+          "description": "internal property"
         }
       },
       "description": "A collection of read-only information about the state of the connection to the remote resource."
