@@ -87,7 +87,7 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
     const definitionsRelativePaths = [];
     for await (const file of definitions){
       const f = Path.parse(file);
-      definitionsRelativePaths.push(`$(this-folder)/${f.base}`);
+      definitionsRelativePaths.push(`$(this-folder)/definitions/${f.base}`);
     }
 
     const profilesReadme = cm.markDownExToString(
