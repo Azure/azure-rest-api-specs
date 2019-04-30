@@ -10,6 +10,8 @@ go:
   
 ```
 
+### Go multi-api
+
 ```yaml $(go) && $(multiapi)
 batch:
   - tag: release_1_0
