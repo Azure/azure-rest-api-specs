@@ -711,7 +711,7 @@
         },
         "destination": {
           "type": "string",
-          "description": "The absolute path (with existing directory structure) where the file will be uploaded to in the VM"
+          "description": "The absolute path to a file (with nested directory structures already created) where the file (from sourceUri) will be uploaded to in the VM"
         }
       }
     },
@@ -727,7 +727,7 @@
         "runOutputName": {
           "type": "string",
           "description": "The name to be used for the associated RunOutput.",
-          "pattern": "^[A-Za-z0-9-_]{1,64}$"
+          "pattern": "^[A-Za-z0-9-_.]{1,64}$"
         },
         "artifactTags": {
           "type": "object",
@@ -914,7 +914,9 @@
         },
         "buildTimeoutInMinutes": {
           "type": "integer",
-          "description": "Maximum duration to wait while building the image template. Default is 60 minutes."
+          "minimum": 0,
+          "maximum": 960,
+          "description": "Maximum duration to wait while building the image template. Omit or specify 0 to use the default (60 minutes)."
         }
       },
       "required": [
@@ -1235,7 +1237,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the image Template",
-      "pattern": "^[A-Za-z0-9-_]{1,64}$",
+      "pattern": "^[A-Za-z0-9-_.]{1,64}$",
       "x-ms-parameter-location": "method"
     },
     "RunOutputNameParameter": {
@@ -1244,7 +1246,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the run output",
-      "pattern": "^[A-Za-z0-9-_]{1,64}$",
+      "pattern": "^[A-Za-z0-9-_.]{1,64}$",
       "x-ms-parameter-location": "method"
     },
     "LocationParameter": {

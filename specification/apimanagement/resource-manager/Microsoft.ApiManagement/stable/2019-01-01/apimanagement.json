@@ -482,6 +482,33 @@
       "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
+    "PolicyExportFormat": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Policy Export Format.",
+      "enum": [
+        "xml",
+        "rawxml"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyExportFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "xml",
+            "description": "The contents are inline and Content type is an XML document."
+          },
+          {
+            "value": "rawxml",
+            "description": "The contents are inline and Content type is a non XML encoded policy document."
+          }
+        ]
+      },
+      "default": "xml",
+      "x-ms-parameter-location": "method"
+    },
     "PolicyIdParameter": {
       "name": "policyId",
       "in": "path",
