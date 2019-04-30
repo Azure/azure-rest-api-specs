@@ -1121,3 +1121,21 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Network/stable/2017-10-01/loadBalancer.json
+- Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-10-01/network.json
+- Microsoft.Network/stable/2017-10-01/networkInterface.json
+- Microsoft.Network/stable/2017-10-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/operation.json
+- Microsoft.Network/stable/2017-10-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-10-01/routeTable.json
+- Microsoft.Network/stable/2017-10-01/virtualNetwork.json
+```
