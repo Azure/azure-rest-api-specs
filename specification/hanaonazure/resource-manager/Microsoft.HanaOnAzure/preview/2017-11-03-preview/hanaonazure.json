@@ -671,34 +671,21 @@
     "MonitoringDetails": {
       "type": "object",
       "properties": {
-        "hanaVnet": {
+        "hanaSubnet": {
           "type": "string",
-          "description": "ARM ID of an Azure Vnet with access to the HANA instance."
+          "description": "ARM ID of an Azure Subnet with access to the HANA instance."
         },
         "hanaHostname": {
           "type": "string",
           "description": "Hostname of the HANA Instance blade."
         },
-        "hanaInstanceNum": {
+        "hanaDbName": {
           "type": "string",
-          "description": "A number between 00 and 99, stored as a string to maintain leading zero."
+          "description": "Name of the database itself."
         },
-        "dbContainer": {
-          "type": "string",
-          "enum": [
-            "single",
-            "multiple"
-          ],
-          "default": "single",
-          "x-ms-enum": {
-            "name": "HanaDatabaseContainersEnum",
-            "modelAsString": true
-          },
-          "description": "Either single or multiple depending on the use of MDC(Multiple Database Containers)"
-        },
-        "hanaDatabase": {
-          "type": "string",
-          "description": "Name of the database itself.  It only needs to be specified if using MDC"
+        "hanaDbSqlPort": {
+          "type": "integer",
+          "description": "The port number of the tenant DB. Used to connect to the DB."
         },
         "hanaDbUsername": {
           "type": "string",
