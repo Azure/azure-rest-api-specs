@@ -51,7 +51,7 @@ const main = async (specificationDir: string, profilesDir: string) => {
             )
           ),
           cm.createCodeBlock(
-            "yaml $(enable-multi-api)",
+            "yaml",
             yaml.dump({ "input-file": it.toArray(set), "require": `$(this-folder)/${path.relative(f.dir, profilesDir).replace(/\\/g, '/')}/readme.md` }, { lineWidth: 1000 })
           )
         )
