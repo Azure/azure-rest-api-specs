@@ -17,7 +17,7 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !$(profile)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Network
 output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated
 ```
@@ -41,9 +41,9 @@ batch:
 
 These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
 
-```yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Network
-output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Generated
+```yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Network
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Network/Management.Network/Generated
 batch:
   - tag: package-2017-10
 ```
@@ -52,10 +52,22 @@ batch:
 
 These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
 
-``` yaml $(profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Network
-output-folder: $(csharp-sdks-folder)/$(profile)/Network/Management.Network/Generated
+``` yaml $(csharp-profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Network
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Network/Management.Network/Generated
 
 batch:
  - tag: package-2015-06split
+ ```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Network
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Network/Management.Network/Generated
+
+batch:
+ - tag: profile-hybrid-2019-03-01
  ```
