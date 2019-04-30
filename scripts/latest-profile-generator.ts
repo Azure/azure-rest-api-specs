@@ -77,10 +77,51 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
         )
       }
     );
+    const latestProfileDir = Path.join(profilesDirectory, `definitions/`);
+    const latestProfileLocation = Path.join(latestProfileDir, `${getFormattedDate()}-profile.md`);
+    fs.writeFile(latestProfileLocation, latestProfileMarkDown);
+    console.log(`Latest profile written at ${latestProfileLocation}`);
+    
+    // now get all the profile definitions and generate the readme.
+    const definitions = fs.recursiveReaddir(latestProfileDir);
+    const definitionsRelativePaths = [];
+    for await (const file of definitions){
+      const f = Path.parse(file);
+      definitionsRelativePaths.push(`$(this-folder)/${f.base}`);
+    }
 
-    const latestProfileDir = Path.join(profilesDirectory, `${getFormattedDate()}-profile.md`);
-    fs.writeFile(latestProfileDir, latestProfileMarkDown);
-    console.log(`Latest profile written at ${latestProfileDir}`);
+    const profilesReadme = cm.markDownExToString(
+      { 
+        markDown: cm.createNode(
+          "document",
+          cm.createNode(
+            'heading',
+            cm.createText("Azure Profiles")
+          ),
+          cm.createNode(
+            "block_quote",
+            cm.createNode(
+              "paragraph",
+              cm.createText("see https://aka.ms/autorest")
+            )
+          ),
+          cm.createNode(
+            "block_quote",
+            cm.createNode(
+              "paragraph",
+              cm.createText("The files under this directory are the profile definitions used by autorest.")
+            )
+          ),
+          cm.createCodeBlock(
+            "yaml",
+            yaml.dump({ "require": definitionsRelativePaths })
+          )
+        )
+      }
+    );
+
+    fs.writeFile(Path.join(profilesDirectory, "readme.md"), profilesReadme);
+    console.log(`Regenerated profiles readme.md at ${profilesDirectory}`);
     console.log('DONE');    
   } catch (e) {
     console.error(e);
