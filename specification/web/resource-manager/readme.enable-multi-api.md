@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
   - $(this-folder)/Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json

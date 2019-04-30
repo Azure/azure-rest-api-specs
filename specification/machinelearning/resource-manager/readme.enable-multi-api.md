@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.MachineLearning/stable/2017-01-01/webservices.json
   - $(this-folder)/Microsoft.MachineLearning/preview/2016-05-01-preview/commitmentPlans.json

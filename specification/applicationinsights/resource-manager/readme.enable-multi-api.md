@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json

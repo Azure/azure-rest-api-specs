@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/2018-02-01/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json

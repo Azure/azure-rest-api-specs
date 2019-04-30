@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/runCommands.json

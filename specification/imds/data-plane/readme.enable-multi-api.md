@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
 require: $(this-folder)/../../../profiles/readme.md

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-04-01/operations_API.json

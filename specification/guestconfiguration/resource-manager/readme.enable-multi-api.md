@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration.json
   - $(this-folder)/Microsoft.GuestConfiguration/preview/2018-06-30-preview/guestconfiguration.json

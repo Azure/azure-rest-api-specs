@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.BatchAI/preview/2017-09-01-preview/BatchAI.json
   - $(this-folder)/Microsoft.BatchAI/stable/2018-03-01/BatchAI.json

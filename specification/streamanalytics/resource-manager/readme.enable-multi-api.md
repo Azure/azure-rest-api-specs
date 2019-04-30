@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.StreamAnalytics/stable/2016-03-01/streamingjobs.json
   - $(this-folder)/Microsoft.StreamAnalytics/stable/2016-03-01/inputs.json

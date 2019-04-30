@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.DataMigration/stable/2018-04-19/datamigration.json
   - $(this-folder)/Microsoft.DataMigration/stable/2018-04-19/definitions/Commands.json

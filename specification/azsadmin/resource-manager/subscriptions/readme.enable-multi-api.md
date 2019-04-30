@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/Subscriptions.json
   - $(this-folder)/Microsoft.Subscriptions.Admin/preview/2015-11-01/AcquiredPlan.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-11-01-preview/timeseriesinsights.json
 require: $(this-folder)/../../../profiles/readme.md

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
   - $(this-folder)/Microsoft.VirtualMachineImages/preview/2018-02-01-preview/imagebuilder.json

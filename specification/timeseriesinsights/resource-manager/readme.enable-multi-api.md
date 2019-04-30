@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json

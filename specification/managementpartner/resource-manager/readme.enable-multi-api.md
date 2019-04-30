@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.ManagementPartner/preview/2018-02-01/ManagementPartner.json
 require: $(this-folder)/../../../profiles/readme.md

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
 require: $(this-folder)/../../../profiles/readme.md

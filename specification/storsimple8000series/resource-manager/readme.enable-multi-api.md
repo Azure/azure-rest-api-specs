@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.StorSimple/stable/2017-06-01/storsimple.json
 require: $(this-folder)/../../../profiles/readme.md

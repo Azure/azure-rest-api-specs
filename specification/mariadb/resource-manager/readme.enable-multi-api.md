@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json

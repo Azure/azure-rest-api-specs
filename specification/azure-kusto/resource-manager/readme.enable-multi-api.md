@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Kusto/stable/2019-01-21/kusto.json
   - $(this-folder)/Microsoft.Kusto/preview/2018-09-07-preview/kusto.json

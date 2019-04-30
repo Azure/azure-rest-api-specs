@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.StorageSync/stable/2019-02-01/storagesync.json
   - $(this-folder)/Microsoft.StorageSync/stable/2018-10-01/storagesync.json

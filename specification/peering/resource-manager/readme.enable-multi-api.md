@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Peering/preview/2019-03-01-preview/peering.json
 require: $(this-folder)/../../../profiles/readme.md

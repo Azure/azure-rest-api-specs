@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.NotificationHubs/stable/2017-04-01/notificationhubs.json
   - $(this-folder)/Microsoft.NotificationHubs/stable/2016-03-01/notificationhubs.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/stable/v1.0/WebSearch.json
 require: $(this-folder)/../../../../profiles/readme.md

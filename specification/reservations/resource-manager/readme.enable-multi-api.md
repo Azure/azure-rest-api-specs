@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Capacity/preview/2019-04-01/reservations.json
   - $(this-folder)/Microsoft.Capacity/preview/2018-06-01/reservations.json

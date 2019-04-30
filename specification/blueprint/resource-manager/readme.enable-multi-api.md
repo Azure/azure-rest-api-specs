@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Blueprint/preview/2017-11-11-preview/blueprintDefinition.json
   - $(this-folder)/Microsoft.Blueprint/preview/2017-11-11-preview/blueprintAssignment.json

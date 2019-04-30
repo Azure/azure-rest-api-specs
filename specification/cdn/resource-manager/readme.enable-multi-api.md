@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Cdn/stable/2017-10-12/cdn.json
   - $(this-folder)/Microsoft.Cdn/stable/2017-04-02/cdn.json

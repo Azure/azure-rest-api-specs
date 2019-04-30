@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.EventGrid/preview/2019-02-01-preview/EventGrid.json
   - $(this-folder)/Microsoft.EventGrid/stable/2019-01-01/EventGrid.json

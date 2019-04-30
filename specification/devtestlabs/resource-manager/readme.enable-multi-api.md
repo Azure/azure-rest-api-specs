@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.DevTestLab/stable/2018-09-15/DTL.json
   - $(this-folder)/Microsoft.DevTestLab/stable/2016-05-15/DTL.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimanagement.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2017-03-01/apimapis.json
