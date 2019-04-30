@@ -41,7 +41,7 @@
             ],
             "operationId": "AzureFirewallFqdnTags_ListAll",
             "description":"Gets all the Azure Firewall FQDN Tags in a subscription.",
-            "parameters":[  
+            "parameters":[
                {
                   "$ref":"#/parameters/ApiVersionParameter"
                },
@@ -49,20 +49,20 @@
                   "$ref":"#/parameters/SubscriptionIdParameter"
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"Success. The operation returns a list of Azure Firewall FQDN Tag resources.",
-                  "schema":{  
+                  "schema":{
                      "$ref":"#/definitions/AzureFirewallFqdnTagListResult"
                   }
                }
             },
-            "x-ms-examples":{  
-               "List all Azure Firewall FQDN Tags for a given subscription":{  
+            "x-ms-examples":{
+               "List all Azure Firewall FQDN Tags for a given subscription":{
                   "$ref":"./examples/AzureFirewallFqdnTagsListBySubscription.json"
                }
             },
-            "x-ms-pageable":{  
+            "x-ms-pageable":{
                "nextLinkName":"nextLink"
             }
          }
@@ -104,16 +104,16 @@
          ],
          "description": "Azure Firewall FQDN Tag Resource"
       },
-      "AzureFirewallFqdnTagListResult":{  
-         "properties":{  
-            "value":{  
+      "AzureFirewallFqdnTagListResult":{
+         "properties":{
+            "value":{
                "type":"array",
-               "items":{  
+               "items":{
                   "$ref":"#/definitions/AzureFirewallFqdnTag"
                },
                "description":"List of Azure Firewall FQDN Tags in a resource group."
             },
-            "nextLink":{  
+            "nextLink":{
                "type":"string",
                "description":"URL to get the next set of results."
             }
