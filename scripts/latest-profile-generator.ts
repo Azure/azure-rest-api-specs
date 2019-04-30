@@ -78,7 +78,7 @@ const main = async (specificationsDirectory: string, profilesDirectory: string) 
       }
     );
     const latestProfileDir = Path.join(profilesDirectory, `definitions/`);
-    const latestProfileLocation = Path.join(latestProfileDir, `${getFormattedDate()}-profile.md`);
+    const latestProfileLocation = Path.join(latestProfileDir, `latest-${getFormattedDate()}.md`);
     fs.writeFile(latestProfileLocation, latestProfileMarkDown);
     console.log(`Latest profile written at ${latestProfileLocation}`);
     
