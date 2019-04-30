@@ -1138,5 +1138,4 @@ input-file:
 - Microsoft.Network/stable/2017-10-01/publicIpAddress.json
 - Microsoft.Network/stable/2017-10-01/routeTable.json
 - Microsoft.Network/stable/2017-10-01/virtualNetwork.json
-- Microsoft.Network/stable/2016-04-01/dns.json
 ```
