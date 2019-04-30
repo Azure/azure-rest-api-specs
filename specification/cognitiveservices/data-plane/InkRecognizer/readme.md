@@ -25,16 +25,16 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the InkRecognizer.
 
 ```yaml
-tag: package-1.0
+tag: release_1_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
-### Tag: package-1.0
+### Tag: release_1_0
 
-These settings apply only when `--tag=package-1.0` is specified on the command line.
+These settings apply only when `--tag=release_1_0` is specified on the command line.
 
-```yaml $(tag) == 'package-1.0'
+```yaml $(tag) == 'release_1_0'
 input-file:
   - preview/v1.0/InkRecognizer.json
 ```
