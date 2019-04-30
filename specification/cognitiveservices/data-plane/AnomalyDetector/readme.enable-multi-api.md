@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/preview/v1.0/AnomalyDetector.json
 require: $(this-folder)/../../../../profiles/readme.md

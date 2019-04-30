@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/preview/2018-09-01-preview/metricsCreate_API.json
 require: $(this-folder)/../../../profiles/readme.md

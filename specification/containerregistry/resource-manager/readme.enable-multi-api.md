@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Migrate/stable/2018-02-02/migrate.json
 require: $(this-folder)/../../../profiles/readme.md

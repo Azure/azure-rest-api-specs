@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/applications.json

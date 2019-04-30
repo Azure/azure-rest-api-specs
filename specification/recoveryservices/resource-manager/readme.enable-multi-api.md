@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json

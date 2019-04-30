@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backups.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json

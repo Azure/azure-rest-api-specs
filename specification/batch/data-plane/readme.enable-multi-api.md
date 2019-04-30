@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2018-08-01.7.0/BatchService.json

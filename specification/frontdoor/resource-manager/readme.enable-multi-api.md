@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-04-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-04-01/network.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/preview/2019-03-01-preview/costmanagement.json

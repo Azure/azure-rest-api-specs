@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/storage.json
   - $(this-folder)/Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json

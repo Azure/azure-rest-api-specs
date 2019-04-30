@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.KeyVault/stable/2018-02-14/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-02-14/providers.json

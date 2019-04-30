@@ -2,8 +2,9 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
+  - $(this-folder)/stable/2019-05-06/searchindex.json
   - $(this-folder)/preview/2017-11-11-preview/searchindex.json
   - $(this-folder)/preview/2017-11-11/searchindex.json
   - $(this-folder)/preview/2016-09-01-preview/searchindex.json

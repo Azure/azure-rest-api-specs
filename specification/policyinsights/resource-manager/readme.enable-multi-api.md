@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json

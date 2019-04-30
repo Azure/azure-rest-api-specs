@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Billing/preview/2018-11-01-preview/billing.json
   - $(this-folder)/Microsoft.Billing/preview/2018-03-01-preview/billing.json

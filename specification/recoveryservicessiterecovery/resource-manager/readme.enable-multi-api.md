@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.RecoveryServices/stable/2018-07-10/service.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2018-01-10/service.json

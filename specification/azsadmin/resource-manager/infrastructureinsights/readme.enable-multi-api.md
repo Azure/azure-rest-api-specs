@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/InfrastructureInsights.json
   - $(this-folder)/Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/Alert.json

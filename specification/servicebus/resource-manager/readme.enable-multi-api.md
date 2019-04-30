@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.ServiceBus/preview/2018-01-01-preview/servicebus-preview.json
   - $(this-folder)/Microsoft.ServiceBus/stable/2017-04-01/servicebus.json

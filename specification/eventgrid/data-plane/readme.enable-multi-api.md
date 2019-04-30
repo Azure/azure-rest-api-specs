@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Storage/stable/2018-01-01/Storage.json
   - $(this-folder)/Microsoft.EventHub/stable/2018-01-01/EventHub.json

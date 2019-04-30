@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Consumption/preview/2018-11-01-preview/consumption.json
   - $(this-folder)/Microsoft.Consumption/stable/2019-01-01/consumption.json

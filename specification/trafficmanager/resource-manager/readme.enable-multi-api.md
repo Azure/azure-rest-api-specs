@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Network/stable/2018-04-01/trafficmanager.json
   - $(this-folder)/Microsoft.Network/stable/2018-03-01/trafficmanager.json

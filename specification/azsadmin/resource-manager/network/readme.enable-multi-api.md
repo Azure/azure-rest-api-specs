@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/Network.json
   - $(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/LoadBalancers.json

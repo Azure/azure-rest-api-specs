@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.ImportExport/stable/2016-11-01/storageimportexport.json
 require: $(this-folder)/../../../profiles/readme.md

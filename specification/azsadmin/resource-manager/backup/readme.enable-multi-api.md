@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Backup.Admin/preview/2018-09-01/Backup.json
   - $(this-folder)/Microsoft.Backup.Admin/preview/2018-09-01/BackupLocations.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json

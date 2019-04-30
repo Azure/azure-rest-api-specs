@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ApplicationOperationResults.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ComputeOperationResults.json

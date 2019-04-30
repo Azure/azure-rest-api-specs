@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.VisualStudio/preview/2014-04-01-preview/Csm.json
 require: $(this-folder)/../../../profiles/readme.md

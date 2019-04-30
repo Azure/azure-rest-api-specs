@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Devices/preview/2019-03-22-preview/iothub.json
   - $(this-folder)/Microsoft.Devices/preview/2018-12-01-preview/iothub.json

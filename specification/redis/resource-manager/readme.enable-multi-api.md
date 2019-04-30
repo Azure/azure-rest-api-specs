@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Cache/stable/2018-03-01/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2017-10-01/redis.json

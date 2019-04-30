@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Scheduler/stable/2016-03-01/scheduler.json
   - $(this-folder)/Microsoft.Scheduler/stable/2016-01-01/scheduler.json

@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-02-01/applicationGateway.json
   - $(this-folder)/Microsoft.Network/stable/2019-02-01/applicationSecurityGroup.json

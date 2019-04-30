@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-``` yaml $(enable-multi-api)
+``` yaml
 input-file:
   - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Update.json
   - $(this-folder)/Microsoft.Update.Admin/preview/2016-05-01/Updates.json
