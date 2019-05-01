@@ -1,0 +1,158 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-01-01",
+    "subscriptionId": "subid",
+    "apiId": "swagger-petstore-extensive",
+    "schemaId": "5cc9cf67e6ed3b1154e638bd",
+    "parameters": {
+      "properties": {
+        "contentType": "application/vnd.ms-azure-apim.swagger.definitions+json",
+        "document": {
+          "value": "{\r\n            \"pet\": {\r\n                \"required\": [\"id\",\r\n                \"name\"],\r\n                \"externalDocs\": {\r\n                    \"description\": \"findmoreinfohere\",\r\n                    \"url\": \"https: //helloreverb.com/about\"\r\n                },\r\n                \"properties\": {\r\n                    \"id\": {\r\n                        \"type\": \"integer\",\r\n                        \"format\": \"int64\"\r\n                    },\r\n                    \"name\": {\r\n                        \"type\": \"string\"\r\n                    },\r\n                    \"tag\": {\r\n                        \"type\": \"string\"\r\n                    }\r\n                }\r\n            },\r\n            \"newPet\": {\r\n                \"allOf\": [{\r\n                    \"$ref\": \"pet\"\r\n                },\r\n                {\r\n                    \"required\": [\"name\"],\r\n                    \"id\": {\r\n                        \"properties\": {\r\n                            \"type\": \"integer\",\r\n                            \"format\": \"int64\"\r\n                        }\r\n                    }\r\n                }]\r\n            },\r\n            \"errorModel\": {\r\n                \"required\": [\"code\",\r\n                \"message\"],\r\n                \"properties\": {\r\n                    \"code\": {\r\n                        \"type\": \"integer\",\r\n                        \"format\": \"int32\"\r\n                    },\r\n                    \"message\": {\r\n                        \"type\": \"string\"\r\n                    }\r\n                }\r\n            }\r\n        }"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/swagger-petstore-extensive/schemas/5cc9cf67e6ed3b1154e638bd",
+        "type": "Microsoft.ApiManagement/service/apis/schemas",
+        "name": "5cc9cf67e6ed3b1154e638bd",
+        "properties": {
+          "contentType": "application/vnd.ms-azure-apim.swagger.definitions+json",
+          "document": {
+            "definitions": {
+              "pet": {
+                "required": [
+                  "id",
+                  "name"
+                ],
+                "externalDocs": {
+                  "description": "findmoreinfohere",
+                  "url": "https: //helloreverb.com/about"
+                },
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "tag": {
+                    "type": "string"
+                  }
+                }
+              },
+              "newPet": {
+                "allOf": [
+                  {
+                    "$ref": "pet"
+                  },
+                  {
+                    "required": [
+                      "name"
+                    ],
+                    "id": {
+                      "properties": {
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    }
+                  }
+                ]
+              },
+              "errorModel": {
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/swagger-petstore-extensive/schemas/5cc9cf67e6ed3b1154e638bd",
+        "type": "Microsoft.ApiManagement/service/apis/schemas",
+        "name": "5cc9cf67e6ed3b1154e638bd",
+        "properties": {
+          "contentType": "application/vnd.ms-azure-apim.swagger.definitions+json",
+          "document": {
+            "definitions": {
+              "pet": {
+                "required": [
+                  "id",
+                  "name"
+                ],
+                "externalDocs": {
+                  "description": "findmoreinfohere",
+                  "url": "https: //helloreverb.com/about"
+                },
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "tag": {
+                    "type": "string"
+                  }
+                }
+              },
+              "newPet": {
+                "allOf": [
+                  {
+                    "$ref": "pet"
+                  },
+                  {
+                    "required": [
+                      "name"
+                    ],
+                    "id": {
+                      "properties": {
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    }
+                  }
+                ]
+              },
+              "errorModel": {
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
