@@ -23,6 +23,7 @@ To see additional help and options, run:
 ``` yaml
 directive:
   - suppress: R2059
+  - suppress: R3023
 ```
 
 
