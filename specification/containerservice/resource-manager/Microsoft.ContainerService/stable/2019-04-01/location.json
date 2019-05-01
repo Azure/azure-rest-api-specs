@@ -3,7 +3,7 @@
   "info": {
     "title": "ContainerServiceClient",
     "description": "The Container Service Client.",
-    "version": "2017-09-30"
+    "version": "2019-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,7 +41,7 @@
         ],
         "operationId": "ContainerServices_ListOrchestrators",
         "summary": "Gets a list of supported orchestrators in the specified subscription.",
-        "description": "Gets a list of supported orchestrators in the specified subscription. The operation returns properties of each orchestrator including version and available upgrades.",
+        "description": "Gets a list of supported orchestrators in the specified subscription. The operation returns properties of each orchestrator including version, available upgrades and whether that version or upgrades are in preview.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -82,11 +82,16 @@
         "orchestratorVersion": {
           "type": "string",
           "description": "Orchestrator version (major, minor, patch)."
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Whether Kubernetes version is currently in preview."
         }
       },
       "required": [
         "orchestratorType",
-        "orchestratorVersion"
+        "orchestratorVersion",
+        "isPreview"
       ],
       "description": "Contains information about orchestrator."
     },
@@ -104,6 +109,10 @@
           "type": "boolean",
           "description": "Installed by default if version is not specified."
         },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Whether Kubernetes version is currently in preview."
+        },
         "upgrades": {
           "type": "array",
           "items": {
@@ -116,7 +125,8 @@
         "orchestratorVersion",
         "orchestratorType",
         "upgrades",
-        "default"
+        "default",
+        "isPreview"
       ],
       "description": "The profile of an orchestrator and its available versions."
     },
