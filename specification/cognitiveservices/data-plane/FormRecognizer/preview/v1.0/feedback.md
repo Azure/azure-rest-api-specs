@@ -1,6 +1,6 @@
 Form Recognizer: API Review Feedback
 
-PR Link: https://github.com/Azure/azure-rest-api-specs/pull/568
+PR Link: https://github.com/Azure/azure-rest-api-specs/pull/5684
 
 Feedback:
 ---------
