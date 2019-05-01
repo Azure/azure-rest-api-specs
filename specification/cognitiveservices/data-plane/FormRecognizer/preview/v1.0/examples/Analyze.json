@@ -5,13 +5,14 @@
     "Ocp-Apim-Subscription-Key": "{API key}",
     "id": "{Model Id}",
     "body": {
-        "formData": "{Image or Pdf file stream}"
+        "formData": {
+            "form_stream": "{Image or Pdf file stream}"
+        }
     }
   },
   "responses": {
     "200": {
-      "body": [
-        {
+      "body":{
           "status": "success",
           "pages": [
             {
@@ -104,7 +105,6 @@
             }
           ]
         }
-      ]
     }
   }
 }
