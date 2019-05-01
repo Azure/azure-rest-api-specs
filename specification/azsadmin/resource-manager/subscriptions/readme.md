@@ -78,6 +78,7 @@ input-file:
     - Microsoft.Subscriptions.Admin/preview/2015-11-01/DelegatedProviderOffer.json
     - Microsoft.Subscriptions.Admin/preview/2015-11-01/DirectoryTenant.json
     - Microsoft.Subscriptions.Admin/preview/2015-11-01/Location.json
+    - Microsoft.Subscriptions.Admin/preview/2015-11-01/Manifest.json
     - Microsoft.Subscriptions.Admin/preview/2015-11-01/Offer.json
     - Microsoft.Subscriptions.Admin/preview/2015-11-01/OfferDelegation.json
     - Microsoft.Subscriptions.Admin/preview/2015-11-01/Plan.json
