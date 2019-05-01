@@ -52,7 +52,7 @@ input-file:
 - ../../resources/resource-manager/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !$(profile)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Authorization
 output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/Generated
 ```
@@ -62,8 +62,8 @@ These settings are for batch mode only: (ie, add `--multiapi` to the command lin
 
 ``` yaml $(multiapi)
 profile: hybrid_2018_03_01
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
-output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
 
 batch:
  - tag: package-2015-07
@@ -72,11 +72,11 @@ batch:
 
 ### Profile: hybrid_2018_03_01
 
-These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+These settings apply only when `--csharp-profile=hybrid_2018_03_01` is specified on the command line.
 
- ``` yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
-output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
+ ``` yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
 
 batch:
  - tag: package-2015-07
@@ -86,14 +86,26 @@ batch:
 
 ### Profile: profile_2017_03_09
 
-These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
+These settings apply only when `--csharp-profile=profile_2017_03_09` is specified on the command line.
 
- ``` yaml $(profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Authorization
-output-folder: $(csharp-sdks-folder)/$(profile)/Authorization/Management.Authorization/Generated
+ ``` yaml $(csharp-profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
 
 batch:
  - tag: package-2015-07-authorization-only
  - tag: package-locks-2015-01
  - tag: package-policy-2015-10-01-preview
+ ```
+
+ ### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+ ``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
+
+batch:
+ - tag: profile-hybrid-2019-03-01
  ```
