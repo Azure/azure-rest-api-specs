@@ -553,6 +553,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/ResourceNavigationLinks": {
+      "get": {
+        "operationId": "ResourceNavigationLinks_Get",
+        "description": "Gets a list of resource navigation links for a subnet.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the subnet."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of resource navigation links for the subnet.",
+            "schema": {
+              "$ref": "#/definitions/ResourceNavigationLinksListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/ServiceAssociationLinks": {
+      "get": {
+        "operationId": "ServiceAssociationLinks_Get",
+        "description": "Gets a list of service association links for a subnet.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the subnet."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of service association links for the subnet.",
+            "schema": {
+              "$ref": "#/definitions/ServiceAssociationLinksListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets": {
       "get": {
         "tags": [
@@ -1253,6 +1339,38 @@
         }
       },
       "description": "Response for ListSubnets API service callRetrieves all subnet that belongs to a virtual network"
+    },
+    "ResourceNavigationLinksListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceNavigationLink"
+          },
+          "description": "The resource navigation links in a subnet."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ResourceNavigationLinks_Get operation."
+    },
+    "ServiceAssociationLinksListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceAssociationLink"
+          },
+          "description": "The service association links in a subnet."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ServiceAssociationLinks_Get operation."
     },
     "VirtualNetworkPeeringListResult": {
       "properties": {
