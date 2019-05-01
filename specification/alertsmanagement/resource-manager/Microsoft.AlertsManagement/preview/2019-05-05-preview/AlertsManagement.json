@@ -337,8 +337,7 @@
           "200": {
             "description": "OK. Returns list of all smartGroups.",
             "schema": {
-              "$ref": "#/definitions/smartGroupsList",
-              "description": "List of smart groups in value property."
+              "$ref": "#/definitions/smartGroupsList"
             }
           },
           "default": {
@@ -486,7 +485,7 @@
       "get": {
         "summary": "Get all action rule in a given subscription",
         "description": "List all action rules of the subscription and given input filters",
-        "operationId": "ActionRules_GetAllBySubscription",
+        "operationId": "ActionRules_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -542,6 +541,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "GetActionRulesSubscriptionWide": {
             "$ref": "./examples/ActionRules_List_Subscription.json"
@@ -552,7 +554,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
         "summary": "Get all action rules created in a resource group",
-        "operationId": "ActionRules_GetAllByResourceGroup",
+        "operationId": "ActionRules_ListByResourceGroup",
         "description": "List all action rules of the subscription, created in given resource group and given input filters",
         "parameters": [
           {
@@ -611,6 +613,9 @@
               "$ref": "#/definitions/errorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GetActionRulesResourceGroupWide": {
@@ -767,7 +772,7 @@
       "patch": {
         "summary": "Patch action rule",
         "description": "Update enabled flag and/or tags for the given action rule",
-        "operationId": "ActionRules_Patch",
+        "operationId": "ActionRules_Update",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2057,24 +2062,31 @@
       "description": "Conditions in alert instance to be matched for a given action rule. Default value is all. Multiple values could be provided with comma separation.",
       "properties": {
         "severity": {
+          "description": "filter alerts by severity",
           "$ref": "#/definitions/condition"
         },
         "monitorService": {
+          "description": "filter alerts by monitor service",
           "$ref": "#/definitions/condition"
         },
         "monitorCondition": {
+          "description": "filter alerts by monitor condition",
           "$ref": "#/definitions/condition"
         },
         "targetResourceType": {
+          "description": "filter alerts by target resource type",
           "$ref": "#/definitions/condition"
         },
         "alertRuleId": {
+          "description": "filter alerts by alert rule id",
           "$ref": "#/definitions/condition"
         },
         "description": {
+          "description": "filter alerts by slert rule description",
           "$ref": "#/definitions/condition"
         },
         "alertContext": {
+          "description": "filter alerts by alert context (payload)",
           "$ref": "#/definitions/condition"
         }
       }
@@ -2102,6 +2114,7 @@
           }
         },
         "schedule": {
+          "description": "suppression schedule configuration",
           "$ref": "#/definitions/suppressionSchedule"
         }
       }
@@ -2144,6 +2157,8 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "description": "action rule properties",
           "$ref": "#/definitions/actionRuleProperties"
         }
       }
@@ -2156,9 +2171,11 @@
       ],
       "properties": {
         "scope": {
+          "description": "scope on which action rule will apply",
           "$ref": "#/definitions/scope"
         },
         "conditions": {
+          "description": "conditions on which alerts will be filtered",
           "$ref": "#/definitions/conditions"
         },
         "description": {
@@ -2230,6 +2247,7 @@
       ],
       "properties": {
         "suppressionConfig": {
+          "description": "suppression configuration for the action rule",
           "$ref": "#/definitions/suppressionConfig"
         }
       }
@@ -2304,6 +2322,8 @@
       "description": "Data contract for patch",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "description": "properties supported by patch operation",
           "$ref": "#/definitions/patchProperties"
         },
         "tags": {
