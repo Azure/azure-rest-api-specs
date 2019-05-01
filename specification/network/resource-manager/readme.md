@@ -41,6 +41,7 @@ input-file:
   - Microsoft.Network/stable/2019-04-01/applicationGateway.json
   - Microsoft.Network/stable/2019-04-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-04-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-04-01/availablePrivateEndpointTypes.json
   - Microsoft.Network/stable/2019-04-01/azureFirewall.json
   - Microsoft.Network/stable/2019-04-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2019-04-01/checkDnsAvailability.json

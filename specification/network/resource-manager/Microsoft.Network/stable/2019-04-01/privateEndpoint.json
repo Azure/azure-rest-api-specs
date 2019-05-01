@@ -129,6 +129,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpoint"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -184,6 +190,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpoint"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -223,6 +235,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointListResult"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -253,6 +271,12 @@
             "description": "Request successful. The operation returns a list of PrivateEndpoint resources.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
             }
           }
         },
@@ -346,7 +370,7 @@
       "properties": {
         "privateLinkServiceId": {
           "type":"string",
-          "description": ""
+          "description": "resource name/id."
         },
         "groupIds": {
           "type":"array",
