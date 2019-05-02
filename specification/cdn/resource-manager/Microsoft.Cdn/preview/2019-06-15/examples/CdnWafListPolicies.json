@@ -1,0 +1,360 @@
+{
+  "parameters": {
+    "api-version": "2019-02-14",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+          "name": "MicrosoftWafPolicy",
+          "id":
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/WebApplicationFirewallPolicies/MicrosoftWafPolicy",
+          "type": "Microsoft.Cdn/webapplicationfirewallpolicies",
+          "tags": {
+            "key1": "value1",
+            "key2": "value2"
+          },
+          "location": "Global",
+          "sku": "Standard_Microsoft",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "policySettings": {
+              "enabled": true,
+              "defaultAction": {
+                "actionType": "Block",
+                "customBlockResponse": "You have been blocked by the mighty Azure CDN WAF"
+              }
+            },
+            "rateLimitRules": [
+              {
+                "name": "RateLimitRule1",
+                "priority": 1,
+                "enabled": true,
+                "rateLimitThreshold": 500,
+                "rateLimitDurationInMinutes": 1,
+                "matchConditions": [
+                  {
+                    "matchVariable": "Country",
+                    "selector": null,
+                    "operator": "Equals",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "USA"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Equals",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "/badbot"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Block"
+                }
+              },
+              {
+                "name": "RateLimitRule2",
+                "priority": 2,
+                "enabled": true,
+                "rateLimitThreshold": 200,
+                "rateLimitDurationInMinutes": 5,
+                "matchConditions": [
+                  {
+                    "matchVariable": "IPAddress",
+                    "selector": null,
+                    "operator": "Any",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Redirect",
+                  "redirectUrl": "www.mysite.com/error.html"
+                }
+              }
+            ],
+            "customRules": [
+              {
+                "name": "CustomRule1",
+                "priority": 1,
+                "enabled": true,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RequestUri",
+                    "selector": null,
+                    "operator": "StartsWith",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "mySite"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "Windows"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Allow"
+                }
+              },
+              {
+                "name": "CustomRule2",
+                "priority": 5,
+                "enabled": false,
+                "matchConditions": [
+                  {
+                    "matchVariable": "Country",
+                    "selector": null,
+                    "operator": "Any",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "US",
+                      "CN"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Log"
+                }
+              }
+            ],
+            "managedRules": [
+              {
+                "priority": 1,
+                "ruleSetType": "AzureManagedRuleSet",
+                "ruleSetVersion": "2018-08-1",
+                "anomalyScore": 0,
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "SqlInjection",
+                    "enabled": true,
+                    "ruleOverrides": [
+                      {
+                        "ruleId": "110045",
+                        "enabled": false
+                      },
+                      {
+                        "ruleId": "110056",
+                        "enabled": false
+                      }
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "XSS",
+                    "enabled": false
+                  }
+                ]
+              },
+              {
+                "priority": 1,
+                "ruleSetType": "BotDetection",
+                "ruleSetVersion": "2019-03-1",
+                "anomalyScore": 0,
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "Bot_DetectionRule1",
+                    "enabled": true,
+                    "ruleOverrides": [
+                      {
+                        "ruleId": "110045",
+                        "enabled": false
+                      },
+                      {
+                        "ruleId": "110056",
+                        "enabled": false
+                      }
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "BotRule2",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "linkedEndpoints": [
+              {
+                "id": "subscriptions/69a6fc35-ba80-41d3-9563-b47b64652493/resourcegroups/cdnwaftest1/providers/Microsoft.Cdn/profiles/cdnwaftest1-microsoft/endpoints/cdnwaftestendpoint1-1-microsoft"
+              },
+              {
+                "id": "subscriptions/69a6fc35-ba80-41d3-9563-b47b64652493/resourcegroups/cdnwaftest1/providers/Microsoft.Cdn/profiles/cdnwaftest1-microsoft/endpoints/cdnwaftestendpoint1-2-microsoft"
+              },
+              {
+                "id": "subscriptions/69a6fc35-ba80-41d3-9563-b47b64652493/resourcegroups/cdnwaftest2/providers/Microsoft.Cdn/profiles/cdnwaftest2-microsoft/endpoints/cdnwaftestendpoint2-1-microsoft"
+              }
+            ] 
+          }
+        },
+          {
+            "name": "VerizonWafPolicy",
+            "id":
+              "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/WebApplicationFirewallPolicies/VerizonWafPolicy",
+            "type": "Microsoft.Cdn/webapplicationfirewallpolicies",
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "location": "Global",
+            "sku": "Standard_Verizon",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "policySettings": {
+                "enabled": true,
+                "defaultAction": {
+                  "actionType": "Custom Response",
+                  "customResponseBody": "Please retry your request later",
+                  "customResponseHttpStatusCode": "499"
+                }
+              },
+              "rateLimitRules": [
+                {
+                  "name": "RateLimitRule1",
+                  "priority": 1,
+                  "enabled": true,
+                  "rateLimitThreshold": 500,
+                  "rateLimitDurationInMinutes": 1,
+                  "matchConditions": [
+                    {
+                      "matchVariable": "Country",
+                      "selector": null,
+                      "operator": "Equals",
+                      "negateCondition": false,
+                      "matchValue": [
+                        "USA"
+                      ]
+                    },
+                    {
+                      "matchVariable": "RequestHeader",
+                      "selector": "UserAgent",
+                      "operator": "Equals",
+                      "negateCondition": false,
+                      "matchValue": [
+                        "/badbot"
+                      ]
+                    }
+                  ],
+                  "action": {
+                    "actionType": "Block"
+                  }
+                },
+                {
+                  "name": "RateLimitRule2",
+                  "priority": 2,
+                  "enabled": true,
+                  "rateLimitThreshold": 200,
+                  "rateLimitDurationInMinutes": 5,
+                  "matchConditions": [
+                    {
+                      "matchVariable": "IPAddress",
+                      "selector": null,
+                      "operator": "Any",
+                      "negateCondition": false,
+                      "matchValue": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ]
+                    }
+                  ],
+                  "action": {
+                    "actionType": "CustomResposne",
+                    "customResponseStatusCode": "503",
+                    "customResponseBody": "Request quota exceeded, please retry later"
+                  }
+                }
+              ],
+              "customRules": [
+                {
+                  "name": "CustomRule1",
+                  "priority": 1,
+                  "enabled": true,
+                  "matchConditions": [
+                    {
+                      "matchVariable": "RequestHeader",
+                      "selector": "UserAgent",
+                      "operator": "Equals",
+                      "negateCondition": false,
+                      "matchValue": [
+                        "/Mozilla"
+                      ]
+                    }
+                  ],
+                  "action": {
+                    "actionType": "Allow"
+                  }
+                },
+                {
+                  "name": "CustomRule2",
+                  "priority": 5,
+                  "enabled": false,
+                  "matchConditions": [
+                    {
+                      "matchVariable": "Country",
+                      "selector": null,
+                      "operator": "Any",
+                      "negateCondition": false,
+                      "matchValue": [
+                        "US",
+                        "CN"
+                      ]
+                    }
+                  ],
+                  "action": {
+                    "actionType": "Log"
+                  }
+                }
+              ],
+              "managedRules": [
+                {
+                  "priority": 1,
+                  "ruleSetType": "ECRS",
+                  "ruleSetVersion": "2018-11-2",
+                  "anomalyScore": 6,
+                  "ruleGroupOverrides": [
+                    {
+                      "ruleGroupName": "Http Attack",
+                      "enabled": true,
+                      "ruleOverrides": [
+                        {
+                          "ruleId": "921110",
+                          "enabled": false
+                        },
+                        {
+                          "ruleId": "921112",
+                          "enabled": false
+                        }
+                      ]
+                    },
+                    {
+                      "ruleGroupName": "Scanner Detection",
+                      "enabled": false
+                    }
+                  ]
+                }
+              ],
+              "linkedEndpoints": [
+                {
+                  "id": "subscriptions/69a6fc35-ba80-41d3-9563-b47b64652493/resourcegroups/cdnwaftest1/providers/Microsoft.Cdn/profiles/cdnwaftest1-verizon/endpoints/cdnwaftestendpoint1-1-verizon"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
