@@ -1,0 +1,803 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-02-14",
+    "title": "AzureCdnWebApplicationFirewallManagement",
+    "description": "APIs to manage web application firewall rules for Azure CDN"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/WebApplicationFirewallPolicies": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Lists all of the cdn waf policies within a resource group.",
+        "operationId": "Policies_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CdnWafPolicyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Policies in a Resource Group": {
+            "$ref": "./examples/CdnWafListPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/WebApplicationFirewallPolicies/{policyName}": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Retrieve cdn waf policy with specified name within a resource group.",
+        "operationId": "Policies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CdnWafPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Policy": {
+            "$ref": "./examples/CdnWafPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Create or update cdn waf policy with specified ruleset name within a resource group.",
+        "operationId": "Policies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Cdn Waf Policy to be created.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdnWafPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CdnWafPolicy"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new protection policy has been created.",
+            "schema": {
+              "$ref": "#/definitions/CdnWafPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates specific policy": {
+            "$ref": "./examples/CdnWafPolicyCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Deletes Policy",
+        "operationId": "Policies_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the policy was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Delete protection policy": {
+            "$ref": "./examples/CdnWafPolicyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/WebApplicationFirewallManagedRuleSets": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallManagedRuleSets"
+        ],
+        "description": "Lists all available managed rule sets.",
+        "operationId": "ManagedRuleSets_List",
+        "parameters": [
+          {
+            "name": "ruleSetType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter by target rule set type."
+          },
+          {
+            "name": "ruleSetVersion",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter by target rule set version."
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter by target rule set provider."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedRuleSetDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Policies in a Resource Group": {
+            "$ref": "./examples/WafListManagedRuleSets.json"
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "CdnWafPolicyList": {
+      "description": "Defines a list of cdn waf policies. It contains a list of CdnWafPolicy objects and a URL link to get the the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CdnWafPolicy"
+          },
+          "description": "List of Cdn Waf policies within a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Cdn Waf policies objects if there are any."
+        }
+      }
+    },
+    "CdnWafPolicy": {
+      "description": "Defines web application firewall policy.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the web application firewall policy.",
+          "$ref": "#/definitions/CdnWafPolicyProperties"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        },
+        "sku": {
+          "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.",
+          "$ref": "#/definitions/Sku"
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/Resource"
+        }
+      ]
+    },
+
+    "Sku": {
+      "description": "The pricing tier (defines a CDN WAF provider, feature list and rate) of the CDN waf policy.",
+      "properties": {
+        "name": {
+          "description": "Name of the pricing tier.",
+          "enum": [
+            "Standard_Verizon",
+            "Premium_Verizon",
+            "Standard_Akamai",
+            "Standard_Microsoft"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        }
+      },
+      "type": "object"
+    },
+
+    "CdnWafPolicyProperties": {
+      "description": "Defines CDN web application firewall policy properties.",
+      "properties": {
+        "policySettings": {
+          "description": "Describes  policySettings for policy",
+          "$ref": "#/definitions/policySettings"
+        },
+        "rateLimitRules": {
+          "description": "Describes the list of rate limit rules inside the policy",
+          "items": {
+            "$ref": "#/definitions/RateLimitRule"
+          }
+        },
+        "customRules": {
+          "description": "Describes the list of custom rules inside the policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRule"
+          }
+        },
+        "managedRuleSets": {
+          "description": "Describes the list of managed rules sets included in the policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          }
+        },
+        "linkedEndpoints": {
+          "description": "Describes Frontend Endpoints associated with this Web Application Firewall policy.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/LinkedEndpoint"
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the WebApplicationFirewallPolicy."
+        }
+      }
+    },
+
+    "policySettings": {
+      "description": "Defines contents of a web application firewall global configuration",
+      "properties": {
+        "enabledState": {
+          "description": "describes if the policy is in enabled state or disabled state",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "enabledState",
+            "modelAsString": true
+          }
+        },
+        "mode": {
+          "description": "Describes if it is in detection mode or prevention mode at policy level.",
+          "type": "string",
+          "enum": [
+            "Prevention",
+            "Detection"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyMode",
+            "modelAsString": true
+          }
+        },
+        "defaultAction": {
+          "description": "Describes the policy level default action to be applied when managed rules trigger. Allow action will not supported ",
+          "$ref": "#/definitions/Action"
+        }
+      }
+    },
+
+    "Endpoints": {
+      "description": "Defines the Resource ID for the linked endpoints",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
+
+    "CustomRule": {
+      "description": "Defines the common attributes for a custom rule that can be included in a waf policy",
+      "type": "object",
+      "required": [
+        "name",
+        "priority",
+        "matchConditions",
+        "action"
+      ],
+      "name": {
+        "description": "Defines the name of the custom rule",
+        "type": "string"
+      },
+      "enabled": {
+        "description": "Defines wheather the rule is enabled or not (defaults to true)",
+        "type": "boolean"
+      },
+      "priority": {
+        "description": "Defines in what order this rule be evaluated in the overall list of custom rules",
+        "type": "integer"
+      },
+      "matchConditions": {
+        "description": "List of match conditions.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MatchCondition"
+        }
+      },
+      "action": {
+        "description": "Describes what action to be applied when rule matches",
+        "$ref": "#/definitions/Action"
+      }
+    },
+
+    "RateLimitRule": {
+      "description": "Defines a rate limiting rule that can be included in a waf policy",
+      "type": "object",
+      "required": [
+        "rateLimitThreshold",
+        "rateLimitDurationInMinutes"
+      ],
+      "properties": {
+        "rateLimitThreshold": {
+          "description": "Defines rate limit threshold.",
+          "type": "integer"
+        },
+        "rateLimitDurationInMinutes": {
+          "description": "Defines rate limit duration. Default is 1 minute.",
+          "type": "integer"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomRule"
+        }
+      ]
+    },
+
+    "MatchCondition": {
+      "description": "Define match conditions",
+      "required": [
+        "matchVariable",
+        "operator",
+        "matchValues"
+      ],
+      "properties": {
+        "matchVariable": {
+          "description": "Match variable to compare against.",
+          "type": "string",
+          "enum": [
+            "IPAddreess",
+            "Country",
+            "RequestMethod",
+            "RequestHeader",
+            "RequestUri",
+            "FileExtension",
+            "QueryString",
+            "RequestBody",
+            "Cookies"
+          ],
+          "x-ms-enum": {
+            "name": "MatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "description": "Selector can used to match a specific key for QueryString, RequestUri, RequestHeaders or RequestBody.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "LessThan",
+            "GreaterThan",
+            "LessThanOrEqual",
+            "GreaterThanOrEqual",
+            "BeginsWith",
+            "EndsWith",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "operator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if the result of this condition should be negated.",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "List of possible match values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+
+    "ManagedRuleSet": {
+      "type": "object",
+      "description": "Defines a managed rule set.",
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ],
+      "properties": {
+        "priority": {
+          "description": "Describes priority order of the rule set. Rule sets with a lower value will be evaluated before rules with a higher value.",
+          "type": "integer"
+        },
+        "ruleSetType": {
+          "description": "Defines the rule set type to use.",
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "description": "Defines the version of the rule set to use.",
+          "type": "string"
+        },
+        "anomalyScore": {
+          "description": "Verizon only : If the rule set supports anomaly detection mode, this descibes the threshold for blocking requests.",
+          "type": "integer"
+        },
+        "ruleGroupOverrides": {
+          "description": "Defines the rule overrides to apply to the rule set.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupOverride"
+          }
+        }
+      }
+    },
+
+    "ManagedRuleGroupOverride": {
+      "description": "Defines a managed rule group override setting.",
+      "required": [
+        "ruleGroupName"
+      ],
+      "properties": {
+        "ruleGroupName": {
+          "description": "Describes the managed rule group within the rule set to override",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Describes if the managed rule group and all its rules should be enabled or disabled in the managed rule set",
+          "type": "boolean"
+        },
+        "ruleOverrides": {
+          "description": "If the ruleGroup is enabled, defines which rules within the rule group are overriden",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleOverride"
+          }
+        }
+      }
+    },
+
+    "ManagedRuleOverride": {
+      "description": "Describes a managed rule override setting",
+      "required": [
+        "ruleId"
+      ],
+      "properties": {
+        "ruleId": {
+          "description": "The id of the rule that is being overriden",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Describes if the managed rule should be enabled",
+          "type": "boolean"
+        },
+        "action": {
+          "description": "MS only : Custom action for the rule",
+          "$ref": "#/definitions/Action"
+        }
+      }
+    },
+
+    "ManagedRuleSetDefinitionList": {
+      "description": "Defines a list of managed rule set definitions.",
+      "properties": {
+        "ruleSets": {
+          "description": "List of managed rule set definitions.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetDefinition"
+          }
+        }
+      }
+    },
+
+    "ManagedRuleSetDefinition": {
+      "description": "Defines a managed rule set definition.",
+      "properties": {
+        "ruleSetType": {
+          "description": "Defines the type of the managed rule set.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "description": "Defines the version of the managed rule set.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sku": {
+          "description": "Describes the sku this ruleset belongs to",
+          "$ref": "#/definitions/Sku"
+        },
+        "ruleGroupDefinitions": {
+          "description": "Describes the list of rule groups contained in this rule set",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupDefinition"
+          }
+        }
+      }
+    },
+
+    "ManagedRuleGroupDefinition": {
+      "description": "Defines a managed rule group definition.",
+      "properties": {
+        "name": {
+          "description": "Defines the name of the managed rule group",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "Describes the functionality of the managed rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "ruleDefinitions": {
+          "description": "Describes the list of managed rules contained in this rule group",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleDefinition"
+          }
+        }
+      }
+    },
+
+    "ManagedRuleDefinition": {
+      "description": "Defines a managed rule definition.",
+      "properties": {
+        "ruleId": {
+          "description": "Defines the id of the managed rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "Describes the functionality of the managed rule.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+
+    "Action": {
+      "description": "Defines the action to take on rule match.",
+      "required": [
+        "actionType"
+      ],
+      "properties": {
+        "actionType": {
+          "description": "Describes type of action.",
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Block",
+            "Log",
+            "Redirect",
+            "CustomResponse"
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
+        },
+        "redirectUrl": {
+          "description": "If action type is redirect, this field represents URL to be re-directed.",
+          "type": "string"
+        },
+        "customBlockResponseStatusCode": {
+          "description": "If the action type is block, customer can override the response status code.",
+          "type": "integer"
+        },
+        "customBlockResponseBody": {
+          "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
+          "type": "string",
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates that Cdn Waf service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2017-04-02."
+    },
+    "policyNameParameter": {
+      "name": "policyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 128,
+      "description": "The name of the CdnWafPolicy."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    }
+  }
+}
