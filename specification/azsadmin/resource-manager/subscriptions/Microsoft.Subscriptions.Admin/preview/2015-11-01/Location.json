@@ -115,6 +115,51 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}/operationsStatus/{operationsStatusName}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get the specified operation status.": {
+                        "$ref": "./examples/Location/GetOperationsStatus.json"
+                    }
+                },
+                "description": "Get the operation status.",
+                "tags": [
+                    "Locations"
+                ],
+                "operationId": "Locations_GetOperationsStatus",
+                "parameters": [
+                    {
+                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "Subscriptions.json#/parameters/LocationParameter"
+                    },
+                    {
+                        "$ref": "Subscriptions.json#/parameters/OperationsStatusParameter"
+                    },
+                    {
+                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OperationsStatus"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "Not Content"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -152,6 +197,104 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Location"
+                    }
+                },
+                "nextLink": {
+                    "description": "URI to next page.",
+                    "type": "string"
+                }
+            }
+        },
+        "OperationsStatus": {
+            "description": "A long running operation status.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The operation status identifier.",
+                    "$ref": "#/definitions/OperationsStatusIdentifier"
+                },
+                "status": {
+                    "description": "The status of the operation.",
+                    "type": "string"
+                },
+                "startTime": {
+                    "description": "The start time of the operation.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "endTime": {
+                    "description": "The end time of the operation.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "percentComplete": {
+                    "description": "The completion percentage of the operation.",
+                    "type": "number"
+                },
+                "properties": {
+                    "description": "The internal operation properties.",
+                    "type": "object"
+                },
+                "error": {
+                    "description": "The operation error.",
+                    "$ref": "#/definitions/ExtendedErrorInfo"
+                },
+                "retryAfter": {
+                    "description": "The amount of time clients should wait..",
+                    "type": "string"
+                },
+                "terminalHttpStatusCode": {
+                    "description": "The terminal http status code for the operation.",
+                    "type": "string"
+                },
+                "responseContent": {
+                    "description": "The content of the response.",
+                    "type": "object"
+                }
+            }
+        },
+        "OperationsStatusIdentifier": {
+            "description": "The admin offer identifier for the location wide SubscriptionsAdminResourceTypes.OperationsStatus resource type.",
+            "properties": {
+                "location": {
+                    "description": "The location of the operations status.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the operations status.",
+                    "type": "string"
+                },
+                "subscriptionId": {
+                    "description": "The subscription identifier..",
+                    "type": "string"
+                }
+            }
+        },
+        "ExtendedErrorInfo": {
+            "description": "The extended error information.",
+            "properties": {
+                "code": {
+                    "description": "The error code.",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "The error message.",
+                    "type": "string"
+                },
+                "details": {
+                    "description": "The detailed error message details.",
+                    "$ref": "#/definitions/ExtendedErrorInfoList"
+                }
+            }
+        },
+        "ExtendedErrorInfoList": {
+            "description": "List of the extended error information.",
+            "properties": {
+                "value": {
+                    "description": "List of the extended error information.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExtendedErrorInfo"
                     }
                 },
                 "nextLink": {
