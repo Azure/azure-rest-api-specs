@@ -136,9 +136,9 @@
                     "description": "The linked notification rules.",
                     "$ref": "#/definitions/FanoutLinkedNotificationRuleList"
                 },
-                "manifestProvisioningState": {
+                "provisioningState": {
                     "description": "The provisioning state.",
-                    "$ref": "#/definitions/ManifestProvisioningState"
+                    "$ref": "#/definitions/ProvisioningState"
                 },
                 "resourceGroupName": {
                     "description": "The name of the resource group.",
@@ -863,17 +863,52 @@
                 }
             }
         },
-        "ManifestProvisioningState": {
+        "ProvisioningState": {
             "description": "The provisioning state.",
-            "properties": {
-                "state": {
-                    "description": "The state.",
-                    "type": "string"
-                },
-                "isTerminal": {
-                    "description": "A value indicates whether the state is a terminal state.",
-                    "type": "boolean"
-                }
+            "type": "string",
+            "enum": [
+                "Accepted",
+                "Creating",
+                "Deleting",
+                "Moving",
+                "Failed",
+                "Succeeded"
+            ],
+            "x-ms-enum": {
+                "name": "MetricPrimaryAggregationType",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "description": "The accepted provisioning state.",
+                        "name": "Accepted",
+                        "value": "Accepted"
+                    },
+                    {
+                        "description": "The creating provisioning state.",
+                        "name": "Creating",
+                        "value": "Creating"
+                    },
+                    {
+                        "description": "The deleting provisioning state.",
+                        "name": "Deleting",
+                        "value": "Deleting"
+                    },
+                    {
+                        "description": "The moving provisioning state.",
+                        "name": "Moving",
+                        "value": "Moving"
+                    },
+                    {
+                        "description": "The failed provisioning state.",
+                        "name": "Failed",
+                        "value": "Failed"
+                    },
+                    {
+                        "description": "The succeeded provisioning state.",
+                        "name": "Succeeded",
+                        "value": "Succeeded"
+                    }
+                ]
             }
         }
     },
