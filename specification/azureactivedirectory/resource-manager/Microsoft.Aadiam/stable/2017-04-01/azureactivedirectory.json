@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2017-04-01",
-    "title": "azureactivedirectory",
+    "title": "AzureActiveDirectoryClient",
     "description": "Description of the new service",
     "x-ms-code-generation-settings": {
       "name": "azureactivedirectoryClient"
@@ -29,31 +29,79 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Aadiam/operations": {
+    "/{resourceUri}/providers/microsoft.aadiam/diagnosticSettings": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "DiagnosticSettings"
+        ],
+        "operationId": "DiagnosticSettings_List",
+        "description": "Gets the active diagnostic settings list for AadIam.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error, request for AadIam diagnostic settings has failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about AadIam diagnostic settings",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResourceCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic setting": {
+            "$ref": "./examples/listDiagnosticSettings.json"
+          }
+        } 
+      }
+    },
+    "/{resourceUri}/providers/microsoft.aadiam/diagnosticSettings/{name}": {
+      "put": {
+        "tags": ["DiagnosticSettings"],
+        "operationId": "DiagnosticSettings_CreateOrUpdate",
+        "x-ms-examples": {
+          "BatchAccountDelete": { "$ref": "./examples/createOrUpdateDiagnosticSetting.json" }
+        },
+        "description": "Creates or updates diagnostic settings for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "Successful request to create AadIam diagnostic setting.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/DiagnosticSettingsResource"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error. The request to create diagnostic setting has failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -63,14 +111,170 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "ProxyOnlyResource": {
       "properties": {
-        "sampleProperty": {
+        "id": {
           "type": "string",
-          "description": "Sample property of type string"
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource location"
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource kind"
+        },
+        "tags": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource tags"
+        },
+        "identity": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource identity"
         }
-      }
+      },
+      "x-ms-azure-resource": true,
+      "description": "A proxy only azure resource object."
+    },
+    "RetentionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "A value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The number of days for the retention in days. A value of 0 will retain the events indefinitely."
+        }
+      },
+      "required": [ "enabled", "days" ],
+      "description": "Specifies the retention policy for the log."
+    },
+    "MetricSettings": {
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "format": "duration",
+          "description": "The timegrain of the metric in ISO8601 format."
+        },
+        "category": {
+          "type": "string",
+          "description": "Name of a Diagnostic Metric category for a resource type this setting is applied to. To obtain the list of Diagnostic metric categories for a resource, first perform a GET diagnostic settings operation."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "A value indicating whether this category is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "The retention policy for this category."
+        }
+      },
+      "required": [ "enabled" ],
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
+    },
+    "LogSettings": {
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "A value indicating whether this log is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "The retention policy for this log."
+        }
+      },
+      "required": [ "enabled" ],
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
+    },
+    "DiagnosticSettings": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "The service bus rule Id of the diagnostic setting. This is here to maintain backwards compatibility."
+        },
+        "eventHubAuthorizationRuleId": {
+          "type": "string",
+          "description": "The resource Id for the event hub authorization rule."
+        },
+        "eventHubName": {
+          "type": "string",
+          "description": "The name of the event hub. If none is specified, the default event hub will be selected."
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSettings"
+          },
+          "description": "The list of metric settings."
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSettings"
+          },
+          "description": "The list of logs settings."
+        },
+        "logAnalyticsDestinationType": {
+          "type": "string",
+          "description": "The type of log analyitics destination."
+        }
+      },
+      "description": "The diagnostic settings."
+    },
+    "DiagnosticSettingsResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticSettings",
+          "description": "Properties of a Diagnostic Settings Resource."
+        }
+      },
+      "description": "The diagnostic setting resource."
+    },
+    "DiagnosticSettingsResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticSettingsResource"
+          },
+          "description": "The collection of diagnostic settings resources."
+        }
+      },
+      "description": "Represents a collection of alert rule resources."
     },
     "ErrorResponse": {
       "description": "Error response.",
@@ -106,27 +310,28 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "Client Api Version."
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "NameParameter": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the diagnostic setting.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

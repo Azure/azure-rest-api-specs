@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "resourceUri": "providers/microsoft.aadiam/diagnosticSettings/mysetting",
+    "name": "mysetting",
+    "api-version": "2017-05-01-preview",
+    "parameters": {
+      "properties": {
+        "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+        "workspaceId":"",
+        "eventHubAuthorizationRuleId":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/eventhubs/myeventhub/authorizationrules/myrule",
+        "eventHubName": "myeventhub",
+        "metrics": [
+          {
+            "category":"WorkflowMetrics",
+            "enabled":true,
+            "retentionPolicy": {
+              "enabled":false,
+              "days":0
+            }
+          }
+        ],
+        "logs": [
+          {
+            "category":"WorkflowRuntime",
+            "enabled":true,
+            "retentionPolicy": {
+              "enabled":false,
+              "days":0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id":"providers/microsoft.aadiam/diagnosticSettings/mysetting",
+        "type":"",
+        "name":"mysetting",
+        "location": "",
+        "kind": "",
+        "tags": "",
+        "properties": {
+          "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+          "workspaceId":"",
+          "eventHubAuthorizationRuleId":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/eventhubs/myeventhub/authorizationrules/myrule",
+          "eventHubName": "myeventhub",
+          "metrics": [
+            {
+              "category":"WorkflowMetrics",
+              "enabled":true,
+              "retentionPolicy": {
+                "enabled":false,
+                "days":0
+              }
+            }
+          ],
+          "logs": [
+            {
+              "category":"WorkflowRuntime",
+              "enabled":true,
+              "retentionPolicy": {
+                "enabled":false,
+                "days":0
+              }
+            }
+          ],
+          "logAnalyticsDestinationType": ""
+        },
+        "identity": ""
+      }
+    }
+  }
+}
