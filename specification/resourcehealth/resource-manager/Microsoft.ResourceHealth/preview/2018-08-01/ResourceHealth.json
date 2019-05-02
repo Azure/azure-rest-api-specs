@@ -1,51 +1,4 @@
 {
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN",
-      "x-ms-parameter-location": "method"
-    },
-    "ExpandParameter": {
-      "name": "$expand",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Setting $expand=recommendedactions in url query expands the recommendedactions in the response.",
-      "x-ms-parameter-location": "method"
-    },
-    "EventIdParameter": {
-      "name": "eventId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "EventId for the Service health event"
-    }
-  },
   "swagger": "2.0",
   "info": {
     "version": "2018-07-01-preview",
@@ -78,6 +31,75 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.ResourceHealth/metadata/{name}": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Gets the metadata entity.",
+        "operationId": "Metadata_Get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of metadata entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntity"
+            }
+          },
+          "404": {
+            "description": "Client sent unknown metadata name",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/GetMetadataEntity.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/metadata": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Gets the list of metadata entities.",
+        "operationId": "Metadata_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/ListMetadata.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events": {
       "get": {
         "tags": [
@@ -423,75 +445,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.ResourceHealth/metadata/{name}": {
-      "get": {
-        "tags": [
-          "Metadata"
-        ],
-        "summary": "Gets the metadata entity.",
-        "operationId": "Metadata_Get",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of metadata entity.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved metadata entities",
-            "schema": {
-              "$ref": "#/definitions/MetadataEntity"
-            }
-          },
-          "404": {
-            "description": "Client sent unknown metadata name",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "GetMetadata": {
-            "$ref": "./examples/GetMetadataEntity.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.ResourceHealth/metadata": {
-      "get": {
-        "tags": [
-          "Metadata"
-        ],
-        "summary": "Gets the list of metadata entities.",
-        "operationId": "Metadata_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved metadata entities",
-            "schema": {
-              "$ref": "#/definitions/MetadataEntityListResult"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "GetMetadata": {
-            "$ref": "./examples/ListMetadata.json"
           }
         }
       }
@@ -1206,19 +1159,6 @@
         }
       }
     },
-    "MetadataEntityListResult": {
-      "description": "The list of metadata entities",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of metadata entities.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetadataEntity"
-          }
-        }
-      }
-    },
     "MetadataEntity": {
       "description": "The metadata entity contract.",
       "type": "object",
@@ -1279,6 +1219,53 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN",
+      "x-ms-parameter-location": "method"
+    },
+    "ExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Setting $expand=recommendedactions in url query expands the recommendedactions in the response.",
+      "x-ms-parameter-location": "method"
+    },
+    "EventIdParameter": {
+      "name": "eventId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "EventId for the Service health event"
     }
   }
 }
