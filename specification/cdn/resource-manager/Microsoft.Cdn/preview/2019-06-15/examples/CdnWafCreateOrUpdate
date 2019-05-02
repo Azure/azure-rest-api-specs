@@ -1,0 +1,299 @@
+{
+  "parameters": {
+    "api-version": "2019-02-14",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "policyName": "MicrosoftWafPolicy",
+    "parameters": {
+      "properties": {
+        "rateLimitRules": [
+          {
+            "name": "RateLimitRule1",
+            "priority": 1,
+            "enabled": true,
+            "rateLimitThreshold": 500,
+            "rateLimitDurationInMinutes": 1,
+            "matchConditions": [
+              {
+                "matchVariable": "Country",
+                "selector": null,
+                "operator": "Equals",
+                "negateCondition": false,
+                "matchValue": [
+                  "USA"
+                ]
+              },
+              {
+                "matchVariable": "RequestHeader",
+                "selector": "UserAgent",
+                "operator": "Equals",
+                "negateCondition": false,
+                "matchValue": [
+                  "/badbot"
+                ]
+              }
+            ],
+            "action": {
+              "actionType": "Block"
+            }
+          },
+          {
+            "name": "RateLimitRule2",
+            "priority": 2,
+            "enabled": true,
+            "rateLimitThreshold": 200,
+            "rateLimitDurationInMinutes": 5,
+            "matchConditions": [
+              {
+                "matchVariable": "IPAddress",
+                "selector": null,
+                "operator": "Any",
+                "negateCondition": false,
+                "matchValue": [
+                  "192.168.1.0/24",
+                  "10.0.0.0/24"
+                ]
+              }
+            ],
+            "action": {
+              "actionType": "Redirect",
+              "redirectUrl": "www.mysite.com/error.html"
+            }
+          }
+        ],
+        "customRules": [
+          {
+            "name": "CustomRule1",
+            "priority": 1,
+            "enabled": true,
+            "matchConditions": [
+              {
+                "matchVariable": "RequestUri",
+                "selector": null,
+                "operator": "StartsWith",
+                "negateCondition": false,
+                "matchValue": [
+                  "mySite"
+                ]
+              },
+              {
+                "matchVariable": "RequestHeader",
+                "selector": "UserAgent",
+                "operator": "Contains",
+                "negateCondition": false,
+                "matchValue": [
+                  "Windows"
+                ]
+              }
+            ],
+            "action": {
+              "actionType": "Allow"
+            }
+          },
+          {
+            "name": "CustomRule2",
+            "priority": 5,
+            "enabled": false,
+            "matchConditions": [
+              {
+                "matchVariable": "Country",
+                "selector": null,
+                "operator": "Any",
+                "negateCondition": false,
+                "matchValue": [
+                  "US",
+                  "CN"
+                ]
+              }
+            ],
+            "action": {
+              "actionType": "Log"
+            }
+          }
+        ],
+        "managedRules": [
+          {
+            "priority": 1,
+            "ruleSetType": "AzureManagedRuleSet",
+            "ruleSetVersion": "2018-08-1",
+            "ruleGroupOverrides": [
+              {
+                "ruleGroupName": "SqlInjection",
+                "enabled": true,
+                "ruleOverrides": [
+                  {
+                    "ruleId": "110045",
+                    "enabled": false
+                  },
+                  {
+                    "ruleId": "110056",
+                    "enabled": false
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "XSS",
+                "enabled": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "value": {
+          "name": "MicrosoftWafPolicy",
+          "id":
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/WebApplicationFirewallPolicies/MicrosoftWafPolicy",
+          "type": "Microsoft.Cdn/webapplicationfirewallpolicies",
+          "tags": {
+            "key1": "value1",
+            "key2": "value2"
+          },
+          "location": "Global",
+          "sku": "Standard_Microsoft",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "enabled": true,
+            "rateLimitRules": [
+              {
+                "name": "RateLimitRule1",
+                "priority": 1,
+                "enabled": true,
+                "rateLimitThreshold": 500,
+                "rateLimitDurationInMinutes": 1,
+                "matchConditions": [
+                  {
+                    "matchVariable": "Country",
+                    "selector": null,
+                    "operator": "Equals",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "USA"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Equals",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "/badbot"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Block"
+                }
+              },
+              {
+                "name": "RateLimitRule2",
+                "priority": 2,
+                "enabled": true,
+                "rateLimitThreshold": 200,
+                "rateLimitDurationInMinutes": 5,
+                "matchConditions": [
+                  {
+                    "matchVariable": "IPAddress",
+                    "selector": null,
+                    "operator": "Any",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Redirect",
+                  "redirectUrl": "www.mysite.com/error.html"
+                }
+              }
+            ],
+            "customRules": [
+              {
+                "name": "CustomRule1",
+                "priority": 1,
+                "enabled": true,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RequestUri",
+                    "selector": null,
+                    "operator": "StartsWith",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "mySite"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "Windows"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Allow"
+                }
+              },
+              {
+                "name": "CustomRule2",
+                "priority": 5,
+                "enabled": false,
+                "matchConditions": [
+                  {
+                    "matchVariable": "Country",
+                    "selector": null,
+                    "operator": "Any",
+                    "negateCondition": false,
+                    "matchValue": [
+                      "US",
+                      "CN"
+                    ]
+                  }
+                ],
+                "action": {
+                  "actionType": "Log"
+                }
+              }
+            ],
+            "managedRules": [
+              {
+                "priority": 1,
+                "ruleSetType": "AzureManagedRuleSet",
+                "ruleSetVersion": "2018-08-1",
+                "anomalyScore": 0,
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "SqlInjection",
+                    "enabled": true,
+                    "ruleOverrides": [
+                      {
+                        "ruleId": "110045",
+                        "enabled": false
+                      },
+                      {
+                        "ruleId": "110056",
+                        "enabled": false
+                      }
+                    ]
+                  },
+                  {
+                    "ruleGroupName": "XSS",
+                    "enabled": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
