@@ -12,7 +12,7 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !$(profile)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.KeyVault
 output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Generated
 ```
@@ -31,11 +31,11 @@ batch:
 
 ### Profile: hybrid_2018_03_01
 
-These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+These settings apply only when `--csharp-profile=hybrid_2018_03_01` is specified on the command line.
 
-```yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).KeyVault
-output-folder: $(csharp-sdks-folder)/$(profile)/KeyVault/Management.KeyVault/Generated
+```yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).KeyVault
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/KeyVault/Management.KeyVault/Generated
 
 batch:
   - tag: package-2016-10
@@ -44,12 +44,24 @@ batch:
 
 ### Profile: profile_2017_03_09
 
-These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
+These settings apply only when `--csharp-profile=profile_2017_03_09` is specified on the command line.
 
-``` yaml $(profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).KeyVault
-output-folder: $(csharp-sdks-folder)/$(profile)/KeyVault/Management.KeyVault/Generated
+``` yaml $(csharp-profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).KeyVault
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/KeyVault/Management.KeyVault/Generated
 
 batch:
  - tag: package-2016-10
+ ```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).KeyVault
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/KeyVault/Management.KeyVault/Generated
+
+batch:
+ - tag: profile-hybrid-2019-03-01
  ```
