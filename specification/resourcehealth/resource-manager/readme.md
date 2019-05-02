@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2018-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- Microsoft.ResourceHealth/preview/2018-08-01/resourcehealth.json
+- Microsoft.ResourceHealth/preview/2018-08-01/ResourceHealth.json
 ```
 
 
