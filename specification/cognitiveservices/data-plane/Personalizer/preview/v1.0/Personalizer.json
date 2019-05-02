@@ -134,6 +134,17 @@
     }
   },
   "definitions": {
+    "RewardRequest": {
+      "description": "Reward given to a rank response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "float",
+          "description": "Reward to be assigned to an action. Value must be between -1 and 1 inclusive.",
+          "type": "number"
+        }
+      }
+    },
     "RankRequest": {
       "description": "Request a set of actions to be ranked by the Personalizer service.",
       "required": [
