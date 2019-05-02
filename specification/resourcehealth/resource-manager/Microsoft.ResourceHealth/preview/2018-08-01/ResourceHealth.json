@@ -1183,24 +1183,17 @@
       "description": "The metadata entity contract.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource Id of the configuration resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the configuration resource.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the configuration resource.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/MetadataEntityProperties",
           "description": "The metadata entity properties.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "MetadataEntityProperties": {
       "description": "The metadata entity properties",
