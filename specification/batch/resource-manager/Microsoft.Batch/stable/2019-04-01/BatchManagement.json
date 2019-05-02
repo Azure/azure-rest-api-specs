@@ -2013,7 +2013,7 @@
         },
         "dedicatedCoreQuota": {
           "readOnly": true,
-          "x-nullable": false,
+          "x-nullable": true,
           "type": "integer",
           "format": "int32",
           "title": "The dedicated core quota for the Batch account.",
@@ -2021,7 +2021,7 @@
         },
         "lowPriorityCoreQuota": {
           "readOnly": true,
-          "x-not-returnable": false,
+          "x-nullable": true,
           "type": "integer",
           "format": "int32",
           "title": "The low-priority core quota for the Batch account.",
@@ -2772,11 +2772,13 @@
         "maxTasksPerNode": {
           "type": "integer",
           "format": "int32",
-          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool."
+          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool.",
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
-          "title": "How tasks are distributed across compute nodes in a pool."
+          "title": "How tasks are distributed across compute nodes in a pool.",
+          "description": "If not specified, the default is spread."
         },
         "userAccounts": {
           "type": "array",
@@ -2812,7 +2814,7 @@
             "$ref": "#/definitions/ApplicationPackageReference"
           },
           "title": "The list of application packages to be installed on each compute node in the pool.",
-          "description": "Changes to application packages affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged."
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool."
         },
         "applicationLicenses": {
           "type": "array",
@@ -3404,7 +3406,8 @@
           "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
         }
       },
-      "title": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged."
+      "title": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.",
+      "description": "In some cases the start task may be re-run even though the node was not rebooted. Due to this, start tasks should be idempotent and exit gracefully if the setup they're performing has already been done. Special care should be taken to avoid start tasks which create breakaway process or install/launch services from the start task working directory, as this will block Batch from being able to re-run the start task."
     },
     "TaskContainerSettings": {
       "properties": {
@@ -3620,7 +3623,7 @@
         "osFamily": {
           "type": "string",
           "title": "The Azure Guest OS family to be installed on the virtual machines in the pool.",
-          "description": "Possible values are: 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 - OS Family 3, equivalent to Windows Server 2012. 4 - OS Family 4, equivalent to Windows Server 2012 R2. 5 - OS Family 5, equivalent to Windows Server 2016. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases)."
+          "description": "Possible values are: 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 - OS Family 3, equivalent to Windows Server 2012. 4 - OS Family 4, equivalent to Windows Server 2012 R2. 5 - OS Family 5, equivalent to Windows Server 2016. 6 - OS Family 6, equivalent to Windows Server 2019. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases)."
         },
         "osVersion": {
           "type": "string",

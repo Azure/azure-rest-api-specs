@@ -1,6 +1,6 @@
 {
   "parameters" : {
-    "api-version": "2018-06-01",
+    "api-version": "2018-11-01",
     "subscriptionId" : "subid",
     "resourceGroupName" : "vnetTest",
     "virtualNetworkName" : "vnet1",
@@ -20,11 +20,17 @@
                 {
                   "service": "Microsoft.Storage"
                 }
+              ],
+              "serviceEndpointPolicies": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/serviceEndpointPolicies/ServiceEndpointPolicy1"
+                }
               ]
             }
           }
         ]
-      }
+      },
+      "location": "eastus"
     }
   },
   "responses" : {
@@ -33,46 +39,7 @@
         "name" : "vnet1",
         "id" : "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1",
         "type" : "Microsoft.Network/virtualNetworks",
-        "location" : "westus",
-        "properties" : {
-          "provisioningState" : "Succeeded",
-          "addressSpace" : {
-            "addressPrefixes" : [
-              "10.0.0.0/16"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "test-1",
-              "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/test-1",
-              "properties": {
-                "addressPrefix": "10.0.0.0/16",
-                "ipConfigurations": [],
-                "resourceNavigationLinks": [],
-                "serviceEndpoints": [
-                  {
-                    "provisioningState": "Succeeded",
-                    "service": "Microsoft.Storage",
-                    "locations": [
-                      "eastus2(stage)",
-                      "usnorth(stage)"
-                    ]
-                  }
-                ],
-                "provisioningState": "Succeeded"
-              }
-            }
-          ],
-          "virtualNetworkPeerings" : []
-        }
-      }
-    },
-    "201" : {
-      "body" : {
-        "name" : "vnet1",
-        "id" : "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1",
-        "type" : "Microsoft.Network/virtualNetworks",
-        "location" : "westus",
+        "location" : "eastus",
         "properties" : {
           "provisioningState" : "Succeeded",
           "addressSpace" : {
@@ -100,12 +67,51 @@
                 ],
                 "serviceEndpointPolicies": [
                   {
+                    "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/serviceEndpointPolicies/ServiceEndpointPolicy1"
+                  }
+                ],
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "virtualNetworkPeerings" : []
+        }
+      }
+    },
+    "201" : {
+      "body" : {
+        "name" : "vnet1",
+        "id" : "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1",
+        "type" : "Microsoft.Network/virtualNetworks",
+        "location" : "eastus",
+        "properties" : {
+          "provisioningState" : "Succeeded",
+          "addressSpace" : {
+            "addressPrefixes" : [
+              "10.0.0.0/16"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "test-1",
+              "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/test-1",
+              "properties": {
+                "addressPrefix": "10.0.0.0/16",
+                "ipConfigurations": [],
+                "resourceNavigationLinks": [],
+                "serviceEndpoints": [
+                  {
                     "provisioningState": "Succeeded",
                     "service": "Microsoft.Storage",
                     "locations": [
                       "eastus2(stage)",
                       "usnorth(stage)"
                     ]
+                  }
+                ],
+                "serviceEndpointPolicies": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/serviceEndpointPolicies/ServiceEndpointPolicy1"
                   }
                 ],
                 "provisioningState": "Succeeded"
