@@ -1439,10 +1439,6 @@
             "type": "string"
           },
           "description": "(PREVIEW) Availability zones for nodes. Must use VirtualMachineScaleSets AgentPoolType."
-        },
-        "enableNodePublicIP": {
-          "type": "boolean",
-          "description": "Enable public IP for nodes"
         }
       },
       "required": [
@@ -1765,7 +1761,6 @@
           "description": "Profile of managed cluster add-on."
         },
         "nodeResourceGroup": {
-          "readOnly": true,
           "type": "string",
           "description": "Name of the resource group containing agent pool nodes."
         },
@@ -1809,7 +1804,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the managed cluster. Type 'SystemAssigned' will use an implicityly created identity in master components and an auto-created user assigned identity in MC_ resource group in agent nodes. Type 'None' will not use MSI for the managed cluster, service principal will be used instead.",
+          "description": "The type of identity used for the managed cluster. Type 'SystemAssigned' will use an implicitly created identity in master components and an auto-created user assigned identity in MC_ resource group in agent nodes. Type 'None' will not use MSI for the managed cluster, service principal will be used instead.",
           "enum": [
             "SystemAssigned",
             "None"
@@ -1821,23 +1816,6 @@
         }
       },
       "description": "Identity for the managed cluster."
-    },
-    "OrchestratorProfile": {
-      "properties": {
-        "orchestratorType": {
-          "type": "string",
-          "description": "Orchestrator type."
-        },
-        "orchestratorVersion": {
-          "type": "string",
-          "description": "Orchestrator version (major, minor, patch)."
-        }
-      },
-      "required": [
-        "orchestratorType",
-        "orchestratorVersion"
-      ],
-      "description": "Contains information about orchestrator."
     },
     "ManagedClusterAccessProfile": {
       "allOf": [
@@ -1893,7 +1871,17 @@
         "upgrades": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "kubernetesVersion": {
+                "type": "string",
+                "description": "Kubernetes version (major, minor, patch)."
+              },
+              "isPreview": {
+                "type": "boolean",
+                "description": "Whether Kubernetes version is currently in preview."
+              }
+            }
           },
           "description": "List of orchestrator types and versions available for upgrade."
         }

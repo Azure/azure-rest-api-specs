@@ -27,7 +27,16 @@ These are the global settings for the DevSpaces API.
 title: DevSpacesManagementClient
 description: Dev Spaces Client
 openapi-type: arm
-tag: package-2019-01-01-preview
+tag: package-2019-04-01
+```
+
+### Tag: package-2019-04-01
+
+These settings apply only when `--tag=package-2019-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04-01'
+input-file:
+- Microsoft.DevSpaces/stable/2019-04-01/devspaces.json
 ```
 
 ### Tag: package-2019-01-01-preview

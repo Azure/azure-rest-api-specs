@@ -971,10 +971,10 @@
           "$ref": "#/definitions/Tsx"
         },
         "projectedProperties": {
-          "description": "Projected properties is an array of property names which you want to project. These properties must appear in the events.",
+          "description": "Projected properties is an array of properties which you want to project. These properties must appear in the events; otherwise, they are not returned.",
           "type": "array",
           "items": {
-            "type": "string"
+	          "$ref": "#/definitions/EventProperty"
           }
         }
       },
@@ -1284,10 +1284,7 @@
       "properties": {
         "get": {
           "description": "Time series IDs or names of time series instances to return.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesId"
-          }
+          "$ref": "#/definitions/InstancesRequestBatchGetOrDelete"
         },
         "put": {
           "description": "Time series instances to be created or updated.",
@@ -1305,10 +1302,7 @@
         },
         "delete": {
           "description": "Time series IDs or names of time series instances to delete.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesId"
-          }
+          "$ref": "#/definitions/InstancesRequestBatchGetOrDelete"
         }
       }
     },
@@ -1320,8 +1314,7 @@
           "description": "List of time series IDs of the time series instances to return or delete.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/definitions/TimeSeriesId"
           }
         },
         "names": {

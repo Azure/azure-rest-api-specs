@@ -25,10 +25,21 @@ To see additional help and options, run:
 These are the global settings for the Azure NetApp Files API.
 
 ``` yaml
+title: NetAppManagementClient
+description: Microsoft NetApp Azure Resource Provider specification
 openapi-type: arm
-tag: package-2017-08-15
+tag: package-netapp-2019-05-01
 ```
 
+
+### Tag: package-netapp-2019-05-01
+
+These settings apply only when `--tag=package-netapp-2019-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2019-05-01'
+input-file:
+- Microsoft.NetApp/stable/2019-05-01/netapp.json
+```
 
 ### Tag: package-2017-08-15
 
