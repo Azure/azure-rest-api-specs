@@ -31,6 +31,7 @@
                   }
                 }
               ],
+              "manualPrivateLinkServiceConnections": [],
               "subnet": {
                 "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
               },
@@ -48,17 +49,18 @@
             "location": "eastus",
             "properties" : {
               "provisioningState" : "Succeeded",
-              "privateLinkServiceConnections": [
+              "privateLinkServiceConnections": [],
+              "manualPrivateLinkServiceConnections": [
                 {
                   "properties": {
                     "privateLinkServiceId":"/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls2",
                     "groupIds": [
                       "groupIdFromResource"
                     ],
-                    "requestMessage": "Please approve my connection for pe2.",
+                    "requestMessage": "Please manually approve my connection for pe2.",
                     "privateLinkServiceConnectionState" : {
-                      "status": "Approved",
-                      "description": "Auto-approved",
+                      "status": "Pending",
+                      "description": "Awaiting approval",
                       "actionRequired": "None"
                     }
                   }
