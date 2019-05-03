@@ -26,7 +26,31 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-11
+tag: package-2019-04
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04'
+input-file:
+- Microsoft.Storage/stable/2019-04-01/storage.json
+- Microsoft.Storage/stable/2019-04-01/blob.json
+
+directive:
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+
 ```
 
 ### Tag: package-2018-11
@@ -312,4 +336,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/storage/resource-manager/v2016_01_01
 regenerate-manager: true
 generate-interface: true
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Storage/stable/2017-10-01/storage.json
 ```
