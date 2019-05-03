@@ -180,6 +180,8 @@
         },
         "x-ms-examples": {
           "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" },
+          "Create load balancer with Standard SKU": { "$ref": "./examples/LoadBalancerCreateStandardSku.json" },
+          "Create load balancer with Frontend IP in Zone 1": { "$ref": "./examples/LoadBalancerCreateWithZones.json" },
           "Create load balancer with inbound nat pool": { "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json" }
         },
         "x-ms-long-running-operation": true
@@ -1534,13 +1536,13 @@
         "provisioningState": {
           "type": "string",
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
-        }, 
+        },
         "protocol": {
            "type": "string",
            "description": "Protocol - TCP, UDP or All",
            "enum": [
             "Tcp",
-            "Udp", 
+            "Udp",
             "All"
           ]
         },

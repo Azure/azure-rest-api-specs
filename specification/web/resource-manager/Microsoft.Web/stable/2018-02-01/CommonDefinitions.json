@@ -1308,7 +1308,9 @@
           "description": "Type of managed service identity.",
           "enum": [
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2990,7 +2992,6 @@
               "readOnly": true
             },
             "certBlob": {
-              "format": "byte",
               "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \nPoint-To-Site VPN connection.",
               "type": "string"
             },

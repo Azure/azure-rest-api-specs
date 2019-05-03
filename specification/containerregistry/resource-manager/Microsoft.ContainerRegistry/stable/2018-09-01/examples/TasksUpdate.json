@@ -16,8 +16,8 @@
           "imageNames": [
             "azurerest:testtag1"
           ],
-          "dockerFilePath": "src/DockerFile"
-        },
+          "dockerFilePath": "subfolder/Dockerfile"
+      },
         "trigger":{
           "sourceTriggers": [
             {
@@ -30,7 +30,8 @@
               },
               "sourceTriggerEvents":[
                 "commit"
-              ]
+              ],
+              "status": "Enabled"
             }
           ]
         }
@@ -59,8 +60,8 @@
             "imageNames": [
               "azurerest:testtag1"
             ],
-            "dockerFilePath": "src/DockerFile",
-            "contextPath": "src",
+            "dockerFilePath": "subfolder/Dockerfile",
+            "contextPath": "dockerfiles",
             "isPushEnabled": true,
             "noCache": false,
             "arguments": [
@@ -82,7 +83,8 @@
                 },
                 "sourceTriggerEvents":[
                   "commit"
-                ]
+                ],
+                "status": "Enabled"
               }
             ],
             "baseImageTrigger": {
@@ -118,8 +120,8 @@
             "imageNames": [
               "azurerest:testtag1"
             ],
-            "dockerFilePath": "src/DockerFile",
-            "contextPath": "src",
+            "dockerFilePath": "subfolder/Dockerfile",
+            "contextPath": "dockerfiles",
             "isPushEnabled": true,
             "noCache": false,
             "arguments": [
@@ -141,7 +143,8 @@
                 },
                 "sourceTriggerEvents":[
                   "commit"
-                ]
+                ],
+                "status": "Enabled"
               }
             ],
             "baseImageTrigger": {
