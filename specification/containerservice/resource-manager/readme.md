@@ -134,7 +134,6 @@ These settings apply only when `--tag=package-2019-04-only` is specified on the 
 input-file:
 - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
 - Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
-- Microsoft.ContainerService/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2019-02-only
@@ -184,7 +183,7 @@ multi-api operation group for now.
 ``` yaml $(tag) == 'package-2017-07-only-extended'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
-- Microsoft.ContainerService/stable/2017-09-30/location.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2017-08-only
