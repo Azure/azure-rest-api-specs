@@ -134,6 +134,7 @@ These settings apply only when `--tag=package-2019-04-only` is specified on the 
 input-file:
 - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
 - Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2019-02-only
