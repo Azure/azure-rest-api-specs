@@ -49,6 +49,18 @@ input-file:
 - Microsoft.ContainerService/stable/2019-04-01/location.json
 ```
 
+### Tag: package-2019-04-30
+
+These settings apply only when `--tag=package-2019-04-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-04-30'
+input-file:
+- Microsoft.ContainerService/preview/2019-04-30/openShiftManagedClusters.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
+```
+
 ### Tag: package-2019-02
 
 These settings apply only when `--tag=package-2019-02` is specified on the command line.
