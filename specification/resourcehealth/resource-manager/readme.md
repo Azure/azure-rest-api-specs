@@ -77,7 +77,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-ruby
-   after_scripts:
+    after_scripts:
     - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcehealth']
 ```
 
