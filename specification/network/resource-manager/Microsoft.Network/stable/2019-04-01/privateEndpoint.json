@@ -365,7 +365,7 @@
       "properties": {
         "privateLinkServiceId": {
           "type":"string",
-          "description": "resource name/id."
+          "description": "resource id of private link service."
         },
         "groupIds": {
           "type":"array",
@@ -379,53 +379,11 @@
           "description": "A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars."
         },
         "privateLinkServiceConnectionState": {
-          "$ref":"#/definitions/PrivateLinkServiceConnectionState",
+          "$ref":"./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of read-only information about the state of the connection to the remote resource."
         }
       },
       "description": "Properties of the PrivateLinkServiceConnection"
-    },
-    "PrivateLinkServiceConnectionState": {
-      "properties": {
-        "status": {
-          "type":"string",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the remote resource."
-        },
-        "description": {
-          "type":"string",
-          "description": "Additional information to supplement the status."
-        },
-        "actionRequired": {
-          "type":"string",
-          "description": "A message indicating if changes on the remote resource require any updates on the private endpoint."
-        },
-        "groupConnectivityInformation":{
-          "type":"array",
-          "items": {
-            "properties": {
-              "groupId":{
-                "type":"string",
-                "description":"e.g. cassandra"
-              },
-              "memberName": {
-                "type":"string",
-                "description":"e.g. cassandra_r1"
-              }
-            }
-          },
-          "description": "internal property"
-        }
-      },
-      "description": "A collection of read-only information about the state of the connection to the remote resource."
-    },
-    "EndpointService": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier of the service being referenced by the private endpoint."
-        }
-      },
-      "description": "Identifies the service being brought into the virtual network."
     },
     "PrivateEndpointListResult": {
       "properties": {
