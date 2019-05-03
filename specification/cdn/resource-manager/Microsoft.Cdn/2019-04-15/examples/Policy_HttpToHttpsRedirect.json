@@ -1,0 +1,46 @@
+{
+    "location": "WestUs",
+    "properties": {
+        "origins": [
+            {
+                "name": "www-bing-com",
+                "properties": {
+                    "hostName": "www.bing.com",
+                    "httpPort": 80,
+                    "httpsPort": 443
+                }
+            }
+        ],
+        "deliveryPolicy": {
+            "description": "Http to Https redirect",
+            "rules": [
+                {
+                    "Name" : "rule1",
+                    "order": "1",
+                    "conditions": [
+                        {
+                            "name": "RequestScheme",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestSchemeConditionParameters",
+                                "operator": "Equal",
+                                "matchValues": [
+                                    "HTTP"
+                                ]
+                            }
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "name": "UrlRedirect",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRedirectActionParameters",
+                                "redirectType": "Moved",
+                                "destinationProtocol": "Https"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

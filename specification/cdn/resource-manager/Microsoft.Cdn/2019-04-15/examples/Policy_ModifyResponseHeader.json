@@ -1,0 +1,36 @@
+{
+    "location": "WestUs",
+    "properties": {
+        "origins": [
+            {
+                "name": "www-bing-com",
+                "properties": {
+                    "hostName": "www.bing.com",
+                    "httpPort": 80,
+                    "httpsPort": 443
+                }
+            }
+        ],
+        "deliveryPolicy": {
+            "description": "Add CORS header",
+            "rules": [
+                {
+                    "Name" : "rule1",
+                    "order": "0",
+                    "conditions": [],
+                    "actions": [
+                        {
+                            "name": "ModifyResponseHeader",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                                "headerAction": "Overwrite",
+                                "headerName": "Access-Control-Allow-Origin",
+                                "value": "*"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

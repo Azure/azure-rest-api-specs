@@ -1,0 +1,163 @@
+{
+    "location": "WestUs",
+    "properties": {
+        "origins": [
+            {
+                "name": "www-bing-com",
+                "properties": {
+                    "hostName": "www.bing.com",
+                    "httpPort": 80,
+                    "httpsPort": 443
+                }
+            }
+        ],
+        "deliveryPolicy": {
+            "description": "Example Rule",
+            "rules": [
+                {
+                    "Name" : "rule1",
+                    "order": "1",
+                    "conditions": [
+                        {
+                            "name": "RemoteAddress",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters",
+                                "operator": "IPMatch",
+                                "negateCondition": false,
+                                "matchValues": [
+                                    "192.168.1.0/24",
+                                    "10.0.0.0/24"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "RequestMethod",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestMethodConditionParameters",
+                                "operator": "Equal",
+                                "negateCondition": true,
+                                "matchValues": [
+                                    "GET"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "QueryString",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleQueryStringConditionParameters",
+                                "operator": "Equal",
+                                "negateCondition": false,
+                                "matchValues": [
+                                    "randomString"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "PostArgs",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRulePostArgsConditionParameters",
+                                "operator": "All",
+                                "negateCondition": false,
+                                "matchValues": []
+                            }
+                        },
+                        {
+                            "name": "RequestUri",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestUriConditionParameters",
+                                "operator": "Contains",
+                                "negateCondition": false,
+                                "matchValues": [
+                                    "randomString"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "RequestHeader",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHeaderConditionParameters",
+                                "operator": "Contains",
+                                "selector": "Accept-Encoding",
+                                "negateCondition": false,
+                                "matchValues": [
+                                    "gzip"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "RequestBody",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestBodyConditionParameters",
+                                "operator": "Equal",
+                                "matchValues": [
+                                    "test"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "UrlPath",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlPathConditionParameters",
+                                "operator": "BeginsWith",
+                                "matchValues": [
+                                    "abc"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "UrlFileExtension",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFileExtensionConditionParameters",
+                                "operator": "EndsWith",
+                                "matchValues": [
+                                    ".txt"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "UrlFileName",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFileNameConditionParameters",
+                                "operator": "BeginsWith",
+                                "matchValues": [
+                                    "abc"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "RequestScheme",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestSchemeConditionParameters",
+                                "operator": "Equal",
+                                "matchValues": [
+                                    "HTTP"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "HostName",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHostNameConditionParameters",
+                                "operator": "Contains",
+                                "matchValues": [
+                                    "abc"
+                                ]
+                            }
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "name": "CacheExpiration",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters",
+                                "cacheBehavior": "BypassCache",
+                                "cacheDuration": null,
+                                "cacheType": "All"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

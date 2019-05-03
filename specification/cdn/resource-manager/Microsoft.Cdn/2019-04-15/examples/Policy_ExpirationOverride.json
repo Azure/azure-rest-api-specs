@@ -1,0 +1,36 @@
+{
+    "location": "WestUs",
+    "properties": {
+        "origins": [
+            {
+                "name": "www-bing-com",
+                "properties": {
+                    "hostName": "www.bing.com",
+                    "httpPort": 80,
+                    "httpsPort": 443
+                }
+            }
+        ],
+        "deliveryPolicy": {
+            "description": "Override Cache Expiration to 10 seconds",
+            "rules": [
+                {
+                    "Name" : "rule1",
+                    "order": "0",
+                    "conditions": [],
+                    "actions": [
+                        {
+                            "name": "CacheExpiration",
+                            "parameters": {
+                                "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters",
+                                "cacheBehavior": "Override",
+                                "cacheDuration": "00:00:10",
+                                "cacheType": "All"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
