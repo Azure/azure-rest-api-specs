@@ -322,7 +322,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateLinkService"
             },
             "description": "Parameters supplied to approve or reject the private end point connection."
           },
@@ -386,6 +386,12 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Delete successful."
+          },
           "200": {
             "description": "Delete successful."
           },

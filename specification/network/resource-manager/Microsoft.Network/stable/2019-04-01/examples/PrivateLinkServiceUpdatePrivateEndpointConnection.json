@@ -7,13 +7,17 @@
     "peConnectionName":"testPlePeConnection",
     "parameters": {
       "properties": {
-        "privateEndpoint": {
-          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
-        },
-        "PrivateLinkServiceConnectionState": {
-          "status": "Approved",
-          "description": "approved it for some reason."
-        }
+        "privateEndpointConnections": [
+          {
+            "privateEndpoint": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
+            },
+            "PrivateLinkServiceConnectionState": {
+              "status": "Approved",
+              "description": "approved it for some reason."
+            }
+          }
+        ]
       }
     }
   },
