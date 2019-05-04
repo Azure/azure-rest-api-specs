@@ -7,11 +7,28 @@
     "endpointName": "endpoint1",
     "originName": "www-someDomain-net",
     "originUpdateProperties": {
-      "httpPort": 42,
-      "httpsPort": 43
+      "properties": {
+        "httpPort": 42,
+        "httpsPort": 43
+      }
     }
   },
   "responses": {
+    "200": {
+      "body": {
+          "name": "www-someDomain-net",
+          "location": "WestUs",
+          "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
+          "type": "Microsoft.Cdn/profiles/endpoints/origins",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "resourceState": "Active",
+            "hostName": "www.someDomain.net",
+            "httpPort": 42,
+            "httpsPort": 43
+        }
+      }   
+    },
     "202": {
       "body": {
           "name": "www-someDomain-net",
