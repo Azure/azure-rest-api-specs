@@ -86,7 +86,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.KeyVault
   sync-methods: None
-  output-folder: $(csharp-sdks-folder)/KeyVault/dataPlane/Microsoft.Azure.KeyVault/Generated
+  output-folder: $(csharp-sdks-folder)/keyvault/Microsoft.Azure.KeyVault/src/Generated
   clear-output-folder: true
 ```
 
