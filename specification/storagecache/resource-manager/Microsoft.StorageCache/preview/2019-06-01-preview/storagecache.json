@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage caches.",
-    "title": "Microsoft.StorageCache resource provider.",
+    "title": "Storage Cache Mgmt Client",
     "version": "2019-06-01-preview"
   },
   "host": "management.azure.com",
@@ -175,10 +175,7 @@
           "200": {
             "description": "A list of Cache objects.  Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
-              "items": {
-                "$ref": "#/definitions/Cache"
-              },
-              "type": "array"
+              "$ref": "#/definitions/CachesListResult"
             }
           },
           "default": {
@@ -187,6 +184,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Caches_List": {
@@ -224,10 +224,7 @@
           "200": {
             "description": "A list of Cache objects.  Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
-              "items": {
-                "$ref": "#/definitions/Cache"
-              },
-              "type": "array"
+              "$ref": "#/definitions/CachesListResult"
             }
           },
           "default": {
@@ -241,6 +238,9 @@
           "Caches_ListByResourceGroup": {
             "$ref": "./examples/Caches_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "tags": [
           "Caches"
@@ -1204,6 +1204,23 @@
         }
       },
       "x-ms-azure-resource": true,      
+      "type": "object"
+    },
+    "CachesListResult": {
+      "description": "Result of the request to list caches. It contains a list of caches and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of cache list results if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of caches.",
+          "items": {
+            "$ref": "#/definitions/Cache"
+          },
+          "type": "array"
+        }
+      },
       "type": "object"
     },
     "CacheHealth": {
