@@ -1147,6 +1147,57 @@
         }
       }
     },
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageByExternalBillingAccount",
+        "description": "Forecast the usage data for external billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountForecast": {
+            "$ref": "./examples/ExternalBillingAccountForecast.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalBillingAccountIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -1695,6 +1746,14 @@
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "externalBillingAccountIdParameter": {
+      "name": "externalBillingAccountId",
+      "in": "path",
+      "description": "External BillingAccount ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
