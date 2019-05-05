@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2017-04-01",
-    "title": "AzureActiveDirectoryClient",
-    "description": "Description of the new service",
+    "title": "azureactivedirectory",
+    "description": "Azure Active Directory Client.",
     "x-ms-code-generation-settings": {
       "name": "azureactivedirectoryClient"
     }
@@ -29,7 +29,36 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.aadiam/diagnosticSettings": {
+    "/providers/Microsoft.Aadiam/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Gets the operations": { "$ref": "./examples/listOperations.json" }
+        },
+        "description": "Operation to return the list of available operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get list of AadIam operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationsDiscoveryCollection"
+            }
+          },
+          "default": {
+            "description": "Error, failed to get list of AadIam operations.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Aadiam/diagnosticSettings": {
       "get": {
         "tags": [
           "DiagnosticSettings"
@@ -37,9 +66,6 @@
         "operationId": "DiagnosticSettings_List",
         "description": "Gets the active diagnostic settings list for AadIam.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -65,7 +91,7 @@
         } 
       }
     },
-    "/{resourceUri}/providers/microsoft.aadiam/diagnosticSettings/{name}": {
+    "/providers/Microsoft.Aadiam/diagnosticSettings/{name}": {
       "put": {
         "tags": ["DiagnosticSettings"],
         "operationId": "DiagnosticSettings_CreateOrUpdate",
@@ -74,9 +100,6 @@
         },
         "description": "Creates or updates diagnostic settings for AadIam.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -219,6 +242,10 @@
           "type": "string",
           "description": "The service bus rule Id of the diagnostic setting. This is here to maintain backwards compatibility."
         },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+        },
         "eventHubAuthorizationRuleId": {
           "type": "string",
           "description": "The resource Id for the event hub authorization rule."
@@ -307,6 +334,68 @@
           "readOnly": true
         }
       }
+    },
+    "OperationsDiscoveryProperties": {
+      "description": "ClientDiscovery properties.",
+      "type": "object",
+      "properties": {}
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action. These value will be used by several clients for (1) custom role definitions for RBAC; (2) complex query filters for the event service; and (3) audit history / records for management operations.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The provider. The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource. The localized friendly form of the resource related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent’s display.resource field). e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\"",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The operation. The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing. Prescriptive guidance: Read Create or Update Delete 'ActionName'",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description. The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views. Prescriptive guidance for namespaces: Read any 'display.provider' resource Create or Update any 'display.provider' resource Delete any 'display.provider' resource Perform any other action on any 'display.provider' resource Prescriptive guidance for namespaces: Read any 'display.resource' Create or Update any 'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsDiscovery": {
+      "description": "Operations discovery class.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the API. The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service. Examples of operations include: * Microsoft.Compute/virtualMachine/capture/action * Microsoft.Compute/virtualMachine/restart/action * Microsoft.Compute/virtualMachine/write * Microsoft.Compute/virtualMachine/read * Microsoft.Compute/virtualMachine/delete Each action should include, in order: (1) Resource Provider Namespace (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL Azure database) (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH on a collection or named value, Write should be used. If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it is a POST, Action should be used.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Object type"
+        },
+        "origin": {
+          "description": "Origin. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is \"user,system\"",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationsDiscoveryProperties",
+          "description": "Properties. Reserved for future use."
+        }
+      }
+    },
+    "OperationsDiscoveryCollection": {
+      "description": "Collection of ClientDiscovery details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The ClientDiscovery details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationsDiscovery"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -316,14 +405,6 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    },
-    "ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The identifier of the resource.",
-      "x-ms-parameter-location": "method"
     },
     "NameParameter": {
       "name": "name",
