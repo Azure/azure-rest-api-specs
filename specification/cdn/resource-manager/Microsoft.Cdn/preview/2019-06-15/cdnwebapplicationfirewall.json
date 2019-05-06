@@ -193,10 +193,10 @@
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -447,28 +447,30 @@
         "matchConditions",
         "action"
       ],
-      "name": {
-        "description": "Defines the name of the custom rule",
-        "type": "string"
-      },
-      "enabled": {
-        "description": "Defines wheather the rule is enabled or not (defaults to true)",
-        "type": "boolean"
-      },
-      "priority": {
-        "description": "Defines in what order this rule be evaluated in the overall list of custom rules",
-        "type": "integer"
-      },
-      "matchConditions": {
-        "description": "List of match conditions.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/MatchCondition"
+      "properties": {
+        "name": {
+          "description": "Defines the name of the custom rule",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Defines wheather the rule is enabled or not (defaults to true)",
+          "type": "boolean"
+        },
+        "priority": {
+          "description": "Defines in what order this rule be evaluated in the overall list of custom rules",
+          "type": "integer"
+        },
+        "matchConditions": {
+          "description": "List of match conditions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchCondition"
+          }
+        },
+        "action": {
+          "description": "Describes what action to be applied when rule matches",
+          "$ref": "#/definitions/ActionType"
         }
-      },
-      "action": {
-        "description": "Describes what action to be applied when rule matches",
-        "$ref": "#/definitions/ActionType"
       }
     },
     "RateLimitRuleList": {
