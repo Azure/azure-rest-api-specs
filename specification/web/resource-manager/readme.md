@@ -466,3 +466,20 @@ input-file:
 - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
 ```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Web/stable/2018-02-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
+- Microsoft.Web/stable/2018-02-01/WebApps.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+- Microsoft.Web/stable/2016-03-01/Provider.json
+- Microsoft.Web/stable/2016-03-01/ResourceProvider.json
+- Microsoft.Web/stable/2016-03-01/Recommendations.json
+```

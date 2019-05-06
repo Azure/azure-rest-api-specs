@@ -56,6 +56,12 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Successful completion of the asynchronous operation",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
           "202": {
             "description": "Accepted. Subscription update is in progress.",
             "headers": {
@@ -67,12 +73,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "integer"
               }
-            }
-          },
-          "200": {
-            "description": "Successful completion of the asynchronous operation",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionCreationResult"
             }
           }
         },
@@ -191,10 +191,10 @@
           "description": "rbac owner of the subscription",
           "$ref": "#/definitions/AdPrincipal"
         },
-        "additionalParameters": {  
+        "additionalParameters": {
           "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
           "type": "object",
-          "additionalProperties": {  
+          "additionalProperties": {
             "type": "object"
           }
         }
@@ -306,7 +306,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2015-06-01"
+      "description": "Version of the API to be used with the client request. Current version is 2018-11-01-preview"
     }
   },
   "security": [

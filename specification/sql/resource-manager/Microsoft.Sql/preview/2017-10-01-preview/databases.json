@@ -200,14 +200,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Creates a VCore database by specifying service objective name.": {
+            "$ref": "./examples/CreateVCoreDatabaseByServiceObjective.json"
+          },
+          "Creates a VCore database by specifying sku name and capacity.": {
+            "$ref": "./examples/CreateVCoreDatabaseBySkuNameCapacity.json"
+          },
+          "Creates a data warehouse by specifying service objective name.": {
+            "$ref": "./examples/CreateDwDatabaseByServiceObjective.json"
+          },
           "Creates a database with minimum number of parameters.": {
             "$ref": "./examples/CreateDatabaseMin.json"
-          },
-          "Creates a VCore database with minimum number of parameters.": {
-            "$ref": "./examples/CreateVCoreDatabase.json"
-          },
-          "Creates a database from restore with database deletion time.": {
-            "$ref": "./examples/CreateDatabaseRestoreMode.json"
           },
           "Creates a database with default mode.": {
             "$ref": "./examples/CreateDatabaseDefaultMode.json"
@@ -215,14 +218,17 @@
           "Creates a database as a copy.": {
             "$ref": "./examples/CreateDatabaseCopyMode.json"
           },
-          "Creates a database from restore with restorableDroppedDatabaseId.": {
-            "$ref": "./examples/CreateDatabaseRestoreMode2.json"
+          "Creates a database as an on-line secondary.": {
+            "$ref": "./examples/CreateDatabaseSecondaryMode.json"
           },
           "Creates a database from PointInTimeRestore.": {
             "$ref": "./examples/CreateDatabasePITRMode.json"
           },
-          "Creates a database as an on-line secondary.": {
-            "$ref": "./examples/CreateDatabaseSecondaryMode.json"
+          "Creates a database from restore with database deletion time.": {
+            "$ref": "./examples/CreateDatabaseRestoreMode.json"
+          },
+          "Creates a database from restore with restorableDroppedDatabaseId.": {
+            "$ref": "./examples/CreateDatabaseRestoreMode2.json"
           },
           "Creates a database from recoverableDatabaseId.": {
             "$ref": "./examples/CreateDatabaseRecoveryMode.json"
@@ -636,7 +642,9 @@
             "Pausing",
             "Paused",
             "Resuming",
-            "Scaling"
+            "Scaling",
+            "OfflineChangingDwPerformanceTiers",
+            "OnlineChangingDwPerformanceTiers"
           ],
           "type": "string",
           "readOnly": true,
@@ -812,7 +820,7 @@
       "properties": {
         "sku": {
           "$ref": "../../../common/v1/types.json#/definitions/Sku",
-          "description": "The name and tier of the SKU."
+          "description": "The database SKU.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:\r\n\r\n```azurecli\r\naz sql db list-editions -l <location> -o table\r\n````\r\n\r\n```powershell\r\nGet-AzSqlServerServiceObjective -Location <location>\r\n````\r\n"
         },
         "kind": {
           "description": "Kind of database. This is metadata used for the Azure portal experience.",
