@@ -261,6 +261,10 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```
 
+### Profile: hybrid_2018_03_01
+
+These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+
 ```yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
 output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
@@ -274,6 +278,10 @@ batch:
   - tag: package-resources-2016-09
   - tag: package-subscriptions-2016-06
 ```
+
+### Profile: profile_2017_03_09
+
+These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
 
 ``` yaml $(profile)=='profile_2017_03_09'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  

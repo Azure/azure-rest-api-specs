@@ -816,11 +816,11 @@
       "properties": {
         "backendAddressPool": {
           "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
-          "description": "Reference of an ApplicationGatewayBackendAddressPool resource."          
+          "description": "Reference of an ApplicationGatewayBackendAddressPool resource."
         },
         "backendHealthHttpSettings": {
           "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings",
-          "description": "Application gateway BackendHealthHttp settings."          
+          "description": "Application gateway BackendHealthHttp settings."
         }
       },
       "description": "Result of on demand test probe"
@@ -1589,6 +1589,13 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        },
+         "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from http settings will be used. This property is valid for Standard_v2 and WAF_v2 only.",
+          "minimum": 1,
+          "maximum": 65535
         }
       },
       "description": "Properties of probe of an application gateway."
@@ -2310,21 +2317,21 @@
       ],
       "description": "Allows to disable rules within a rule group or an entire rule group."
     },
-	  "ApplicationGatewayAvailableServerVariablesResult": {
+      "ApplicationGatewayAvailableServerVariablesResult": {
       "type": "array",
       "items": {
         "type": "string"
       },
       "description": "Response for ApplicationGatewayAvailableServerVariables API service call."
     },
-	  "ApplicationGatewayAvailableRequestHeadersResult": {
+      "ApplicationGatewayAvailableRequestHeadersResult": {
       "type": "array",
       "items": {
         "type": "string"
       },
       "description": "Response for ApplicationGatewayAvailableRequestHeaders API service call."
     },
-	  "ApplicationGatewayAvailableResponseHeadersResult": {
+      "ApplicationGatewayAvailableResponseHeadersResult": {
       "type": "array",
       "items": {
         "type": "string"
@@ -2546,7 +2553,7 @@
       },
       "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
     },
-	"ApplicationGatewayCustomError": {
+    "ApplicationGatewayCustomError": {
       "properties": {
         "statusCode": {
           "type": "string",
