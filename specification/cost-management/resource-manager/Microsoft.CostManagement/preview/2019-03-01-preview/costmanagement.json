@@ -1146,7 +1146,7 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/Forecast": {
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/Forecast": {
       "post": {
         "tags": [
           "Forecast"
@@ -1166,7 +1166,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/externalBillingAccountIdParameter"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
             "name": "parameters",
@@ -3138,14 +3138,6 @@
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "externalBillingAccountIdParameter": {
-      "name": "externalBillingAccountId",
-      "in": "path",
-      "description": "External BillingAccount ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
