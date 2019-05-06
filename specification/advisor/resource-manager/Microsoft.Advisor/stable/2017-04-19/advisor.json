@@ -45,7 +45,7 @@
           "404": {
             "description": "Client sent unknown metadata name",
             "schema": {
-              "$ref": "#/definitions/ARMErrorResponseBody"
+              "$ref": "#/definitions/ARMErrorResponse"
             }
           }
         },
@@ -779,6 +779,14 @@
           "additionalProperties": {
             "type": "object"
           }
+        }
+      }
+    },
+    "ARMErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ARMErrorResponseBody"
         }
       }
     },
