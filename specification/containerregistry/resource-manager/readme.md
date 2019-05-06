@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2019-05-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-05-preview'
 input-file:
 - Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
-- Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
 - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
