@@ -535,7 +535,7 @@
     "ScopeMapProperties": {
       "description": "The properties of a scope map.",
       "required": [
-        "Actions"
+        "actions"
       ],
       "type": "object",
       "properties": {
@@ -736,7 +736,7 @@
           "description": "The thumbprint of the certificate.",
           "type": "string"
         },
-        "encodedPEMCertificate": {
+        "encodedPemCertificate": {
           "description": "Base 64 encoded string of the public certificate1 in PEM format that will be used for authenticating the token.",
           "type": "string"
         }
@@ -764,7 +764,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "PasswordName",
+            "name": "TokenPasswordName",
             "modelAsString": true
           }
         },
@@ -878,7 +878,7 @@
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
       "properties": {
         "id": {
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "description": "The resource ID.",
           "type": "string",
           "readOnly": true
         },
@@ -888,7 +888,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+          "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
         }
