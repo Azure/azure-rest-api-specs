@@ -17,6 +17,11 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storage
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2019-04
+  - tag: package-2018-07
+  - tag: package-2018-03
+  - tag: package-2018-02
+  - tag: package-2017-10
+  - tag: package-2016-01
 ```
 
 ### Tag: package-2019-04 and java
