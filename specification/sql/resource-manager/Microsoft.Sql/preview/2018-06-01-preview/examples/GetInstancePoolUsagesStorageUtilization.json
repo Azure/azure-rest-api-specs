@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "instancePoolName": "testIP",
+    "usageName": "storage_utilization",
+    "api-version": "2018-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/instancePools/testIP/usages/storage_utilization",
+        "name": "storage_utilization",
+        "type": "Microsoft.Sql/instancePools/usages",
+        "properties": {
+          "unit": "Gigabytes",
+          "displayName": "Storage utilization",
+          "currentValue": 384,
+          "currentLimit": 8196,
+          "requestedLimit": null,
+          "managedInstanceUtilizations": [
+            {
+              "managedInstanceName": "mi1",
+              "currentValue": null,
+              "currentLimit": 128,
+              "requestedLimit": null
+            },
+            {
+              "managedInstanceName": "mi2",
+              "currentValue": null,
+              "currentLimit": 128,
+              "requestedLimit": 256
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "instancePoolName": "testIP",
+    "usageName": "vcore_utilization",
+    "api-version": "2018-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/instancePools/testIP/usages/vcore_utilization",
+        "name": "vcore_utilization",
+        "type": "Microsoft.Sql/instancePools/usages",
+        "properties": {
+          "unit": "VCores",
+          "displayName": "VCore utilization",
+          "currentValue": 12,
+          "currentLimit": 16,
+          "requestedLimit": null,
+          "managedInstanceUtilizations": [
+            {
+              "managedInstanceName": "mi1",
+              "currentValue": null,
+              "currentLimit": 4,
+              "requestedLimit": null
+            },
+            {
+              "managedInstanceName": "mi2",
+              "currentValue": null,
+              "currentLimit": 4,
+              "requestedLimit": 8
+            }
+          ]
+        }
+      }
+    }
+  }
+}

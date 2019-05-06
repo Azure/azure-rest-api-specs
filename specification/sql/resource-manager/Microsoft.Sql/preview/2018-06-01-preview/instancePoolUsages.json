@@ -1,0 +1,343 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-06-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/usages": {
+      "get": {
+        "tags": [
+          "InstancePoolUsages"
+        ],
+        "description": "Gets all instance pool usage metrics",
+        "operationId": "InstancePoolUsages_ListByInstancePool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the instance pool usages.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolUsageListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InstancePoolWrongUsageName - Request for an instance pool's usage has an unsupported usage name\n\n * 400 InstancePoolManagedInstanceInfoUnavailable - Information for managed instances inside this instance pool is not available\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List instance pool usages.": {
+            "$ref": "./examples/InstancePoolUsageListByInstancePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/usages/{usageName}": {
+      "get": {
+        "tags": [
+          "InstancePoolUsages"
+        ],
+        "description": "Gets an instance pool usage metric.",
+        "operationId": "InstancePoolUsages_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usageName",
+            "in": "path",
+            "description": "Name of usage to return.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "vcore_utilization",
+              "storage_utilization",
+              "database_utilization"
+            ],
+            "x-ms-enum": {
+              "name": "InstancePoolUsages",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the instance pool usage.",
+            "schema": {
+              "$ref": "#/definitions/InstancePoolUsage"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InstancePoolWrongUsageName - Request for an instance pool's usage has an unsupported usage name\n\n * 400 InstancePoolManagedInstanceInfoUnavailable - Information for managed instances inside this instance pool is not available\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
+          }
+        },
+        "x-ms-examples": {
+          "Gets the instance pool vCore usage.": {
+            "$ref": "./examples/GetInstancePoolUsagesVCoreUtilization.json"
+          },
+          "Gets the instance pool storage usage.": {
+            "$ref": "./examples/GetInstancePoolUsagesStorageUtilization.json"
+          },
+          "Gets the instance pool database usage.": {
+            "$ref": "./examples/GetInstancePoolUsagesDatabaseUtilization.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InstancePoolUsageListResult": {
+      "description": "A list of instance pool usages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstancePoolUsage"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InstancePoolUsageProperties": {
+      "description": "Properties of an instance pool usage.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "User-readable name of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit of the metric",
+          "enum": [
+            "VCores",
+            "Gigabytes"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InstancePoolUsageUnit",
+            "modelAsString": true
+          }
+        },
+        "currentValue": {
+          "format": "int32",
+          "description": "Instance pool current value.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "currentLimit": {
+          "format": "int32",
+          "description": "Instance pool current limit.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "requestedLimit": {
+          "format": "int32",
+          "description": "Instance pool requested limit.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "managedInstanceUtilizations": {
+          "description": "Utilizations of managed instances inside the instance pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstancePoolManagedInstanceUtilization"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InstancePoolManagedInstanceUtilization": {
+      "description": "A managed instance in an instance pool usage info.",
+      "type": "object",
+      "properties": {
+        "managedInstanceName": {
+          "description": "Name of the managed instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentValue": {
+          "format": "int32",
+          "description": "The current value.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "currentLimit": {
+          "format": "int32",
+          "description": "The current limit.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "requestedLimit": {
+          "format": "int32",
+          "description": "The requested limit.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "InstancePoolUsage": {
+      "description": "A instance pool's usage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InstancePoolUsageProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
