@@ -125,7 +125,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting PrivateLinService resource.",
+            "description": "Request successful. The operation returns the resulting PrivateLinkService resource.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkService"
             }
@@ -436,7 +436,7 @@
           "items": {
             "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration"
           },
-          "description": "An array of id references to the load balancer IP configurations."
+          "description": "An array of references to the load balancer IP configurations."
         },
         "ipConfigurations": {
           "type": "array",
@@ -451,7 +451,7 @@
           "items": {
             "$ref": "./networkInterface.json#/definitions/NetworkInterface"
           },
-          "description": "Gets an array of id references to the network interfaces created for this private link service."
+          "description": "Gets an array of references to the network interfaces created for this private link service."
         },
         "provisioningState": {
           "readOnly": true,
@@ -489,7 +489,7 @@
       "properties": {
         "privateEndpoint": {
           "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint",
-          "description": "resource of private end point."
+          "description": "The resource of private end point."
         },
         "privateLinkServiceConnectionState": {
           "$ref":"#/definitions/PrivateLinkServiceConnectionState",
@@ -506,7 +506,7 @@
         },
         "description": {
           "type":"string",
-          "description": "reason for approval/rejection of the connection."
+          "description": "The reason for approval/rejection of the connection."
         },
         "actionRequired": {
           "type":"string",
