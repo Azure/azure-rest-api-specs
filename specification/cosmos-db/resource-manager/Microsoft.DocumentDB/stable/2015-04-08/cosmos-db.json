@@ -1403,13 +1403,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetSqlDatabase",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseGet": { "$ref": "./examples/CosmosDBSqlDatabaseGet.json" }
         },
-        "description": "Gets the SQL databases under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the SQL databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1421,7 +1421,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1454,7 +1454,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1499,7 +1499,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1515,7 +1515,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}/containers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers": {
       "get": {
         "operationId": "DatabaseAccounts_ListSqlContainers",
         "x-ms-examples": {
@@ -1533,7 +1533,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1543,7 +1543,7 @@
           "200": {
             "description": "The SQL container properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/ContainerListResult"
+              "$ref": "#/definitions/SqlContainerListResult"
             }
           }
         },
@@ -1552,7 +1552,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseRid}/containers/{containerRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetSqlContainer",
         "x-ms-examples": {
@@ -1570,10 +1570,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/containerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1583,7 +1583,7 @@
           "200": {
             "description": "The SQL container property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Container"
+              "$ref": "#/definitions/SqlContainer"
             }
           }
         }
@@ -1606,10 +1606,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/containerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1619,7 +1619,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ContainerCreateUpdateParameters"
+              "$ref": "#/definitions/SqlContainerCreateUpdateParameters"
             },
             "description": "The parameters to provide for the current SQL container."
           }
@@ -1631,7 +1631,7 @@
           "200": {
             "description": "The SQL container create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Container"
+              "$ref": "#/definitions/SqlContainer"
             }
           }
         }
@@ -1654,10 +1654,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/containerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1673,13 +1673,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases": {
       "get": {
-        "operationId": "DatabaseAccounts_ListMongoDatabases",
+        "operationId": "DatabaseAccounts_ListMongoDBDatabases",
         "x-ms-examples": {
-          "CosmosDBMongoDatabaseList": { "$ref": "./examples/CosmosDBMongoDatabaseList.json" }
+          "CosmosDBMongoDBDatabaseList": { "$ref": "./examples/CosmosDBMongoDBDatabaseList.json" }
         },
-        "description": "Lists the Mongo databases under an existing Azure Cosmos DB database account.",
+        "description": "Lists the MongoDB databases under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1696,9 +1696,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongo database properties were retrieved successfully.",
+            "description": "The MongoDB database properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoDatabaseListResult"
+              "$ref": "#/definitions/MongoDBDatabaseListResult"
             }
           }
         },
@@ -1707,13 +1707,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongoDatabase",
+        "operationId": "DatabaseAccounts_GetMongoDBDatabase",
         "x-ms-examples": {
-          "CosmosDBMongoDatabaseGet": { "$ref": "./examples/CosmosDBMongoDatabaseGet.json" }
+          "CosmosDBMongoDBDatabaseGet": { "$ref": "./examples/CosmosDBMongoDBDatabaseGet.json" }
         },
-        "description": "Gets the Mongo databases under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1725,7 +1725,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1733,19 +1733,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongo database property was retrieved successfully.",
+            "description": "The MongoDB database property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoDatabase"
+              "$ref": "#/definitions/MongoDBDatabase"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateMongoDatabase",
+        "operationId": "DatabaseAccounts_CreateUpdateMongoDBDatabase",
         "x-ms-examples": {
-          "CosmosDBMongoDatabaseCreateUpdate": { "$ref": "./examples/CosmosDBMongoDatabaseCreateUpdate.json" }
+          "CosmosDBMongoDBDatabaseCreateUpdate": { "$ref": "./examples/CosmosDBMongoDBDatabaseCreateUpdate.json" }
         },
-        "description": "Create or updates Azure Cosmos DB Mongo database",
+        "description": "Create or updates Azure Cosmos DB MongoDB database",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1758,39 +1758,39 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createUpdateMongoDatabaseParameters",
+            "name": "createUpdateMongoDBDatabaseParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MongoDatabaseCreateUpdateParameters"
+              "$ref": "#/definitions/MongoDBDatabaseCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current Mongo database."
+            "description": "The parameters to provide for the current MongoDB database."
           }
         ],
         "responses": {
           "202": {
-            "description": "The Mongo database create or update operation will complete asynchronously."
+            "description": "The MongoDB database create or update operation will complete asynchronously."
           },
           "200": {
-            "description": "The Mongo database create or update operation was completed successfully.",
+            "description": "The MongoDB database create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoDatabase"
+              "$ref": "#/definitions/MongoDBDatabase"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteMongoDatabase",
+        "operationId": "DatabaseAccounts_DeleteMongoDBDatabase",
         "x-ms-examples": {
-          "CosmosDBMongoDatabaseDelete": { "$ref": "./examples/CosmosDBMongoDatabaseDelete.json" }
+          "CosmosDBMongoDBDatabaseDelete": { "$ref": "./examples/CosmosDBMongoDBDatabaseDelete.json" }
         },
-        "description": "Deletes an existing Azure Cosmos DB Mongo database.",
+        "description": "Deletes an existing Azure Cosmos DB MongoDB database.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1803,7 +1803,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1811,21 +1811,21 @@
         ],
         "responses": {
           "202": {
-            "description": "The Mongo database delete operation will complete asynchronously."
+            "description": "The MongoDB database delete operation will complete asynchronously."
           },
           "204": {
-            "description": "The Mongo database delete operation was completed successfully."
+            "description": "The MongoDB database delete operation was completed successfully."
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseRid}/collections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections": {
       "get": {
-        "operationId": "DatabaseAccounts_ListMongoCollections",
+        "operationId": "DatabaseAccounts_ListMongoDBCollections",
         "x-ms-examples": {
-          "CosmosDBMongoCollectionList": { "$ref": "./examples/CosmosDBMongoCollectionList.json" }
+          "CosmosDBMongoDBCollectionList": { "$ref": "./examples/CosmosDBMongoDBCollectionList.json" }
         },
-        "description": "Lists the Mongo collection under an existing Azure Cosmos DB database account.",
+        "description": "Lists the MongoDB collection under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1837,7 +1837,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1845,9 +1845,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongo collection properties were retrieved successfully.",
+            "description": "The MongoDB collection properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoCollectionListResult"
+              "$ref": "#/definitions/MongoDBCollectionListResult"
             }
           }
         },
@@ -1856,13 +1856,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongo/databases/{databaseRid}/collections/{collectionRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections/{collectionName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongoCollection",
+        "operationId": "DatabaseAccounts_GetMongoDBCollection",
         "x-ms-examples": {
-          "CosmosDBMongoCollectionGet": { "$ref": "./examples/CosmosDBMongoCollectionGet.json" }
+          "CosmosDBMongoDBCollectionGet": { "$ref": "./examples/CosmosDBMongoDBCollectionGet.json" }
         },
-        "description": "Gets the Mongo collection under an existing Azure Cosmos DB database account.",
+        "description": "Gets the MongoDB collection under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1874,10 +1874,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1885,19 +1885,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The Mongo collection property was retrieved successfully.",
+            "description": "The MongoDB collection property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoCollection"
+              "$ref": "#/definitions/MongoDBCollection"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateMongoCollection",
+        "operationId": "DatabaseAccounts_CreateUpdateMongoDBCollection",
         "x-ms-examples": {
-          "CosmosDBMongoCollectionCreateUpdate": { "$ref": "./examples/CosmosDBMongoCollectionCreateUpdate.json" }
+          "CosmosDBMongoDBCollectionCreateUpdate": { "$ref": "./examples/CosmosDBMongoDBCollectionCreateUpdate.json" }
         },
-        "description": "Create or update an Azure Cosmos DB Mongo Collection",
+        "description": "Create or update an Azure Cosmos DB MongoDB Collection",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1910,42 +1910,42 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createUpdateMongoCollectionParameters",
+            "name": "createUpdateMongoDBCollectionParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MongoCollectionCreateUpdateParameters"
+              "$ref": "#/definitions/MongoDBCollectionCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current Mongo Collection."
+            "description": "The parameters to provide for the current MongoDB Collection."
           }
         ],
         "responses": {
           "202": {
-            "description": "The Mongo Collection create or update operation will complete asynchronously."
+            "description": "The MongoDB Collection create or update operation will complete asynchronously."
           },
           "200": {
-            "description": "The Mongo Collection create or update operation was completed successfully.",
+            "description": "The MongoDB Collection create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoCollection"
+              "$ref": "#/definitions/MongoDBCollection"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteMongoCollection",
+        "operationId": "DatabaseAccounts_DeleteMongoDBCollection",
         "x-ms-examples": {
-          "CosmosDBMongoCollectionDelete": { "$ref": "./examples/CosmosDBMongoCollectionDelete.json" }
+          "CosmosDBMongoDBCollectionDelete": { "$ref": "./examples/CosmosDBMongoDBCollectionDelete.json" }
         },
-        "description": "Deletes an existing Azure Cosmos DB Mongo Collection.",
+        "description": "Deletes an existing Azure Cosmos DB MongoDB Collection.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1958,10 +1958,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/collectionRidParameter"
+            "$ref": "#/parameters/collectionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1969,10 +1969,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The Mongo collection delete operation will complete asynchronously."
+            "description": "The MongoDB collection delete operation will complete asynchronously."
           },
           "204": {
-            "description": "The Mongo collection delete operation was completed successfully."
+            "description": "The MongoDB collection delete operation was completed successfully."
           }
         }
       }
@@ -2011,13 +2011,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetTable",
         "x-ms-examples": {
           "CosmosDBTableGet": { "$ref": "./examples/CosmosDBTableGet.json" }
         },
-        "description": "Gets the Tables under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the Tables under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2029,7 +2029,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2062,7 +2062,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2107,7 +2107,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2157,13 +2157,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetCassandraKeyspace",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceGet": { "$ref": "./examples/CosmosDBCassandraKeyspaceGet.json" }
         },
-        "description": "Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2175,7 +2175,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2208,7 +2208,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2253,7 +2253,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2269,7 +2269,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}/tables": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables": {
       "get": {
         "operationId": "DatabaseAccounts_ListCassandraTables",
         "x-ms-examples": {
@@ -2287,7 +2287,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2306,7 +2306,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceRid}/tables/{tableRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables/{tableName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetCassandraTable",
         "x-ms-examples": {
@@ -2324,10 +2324,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2360,10 +2360,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2408,10 +2408,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/keyspaceRidParameter"
+            "$ref": "#/parameters/keyspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/tableRidParameter"
+            "$ref": "#/parameters/tableNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2461,13 +2461,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}": {
       "get": {
         "operationId": "DatabaseAccounts_GetGremlinDatabase",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseGet": { "$ref": "./examples/CosmosDBGremlinDatabaseGet.json" }
         },
-        "description": "Gets the Gremlin databases under an existing Azure Cosmos DB database account with the provided id.",
+        "description": "Gets the Gremlin databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2479,7 +2479,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2512,7 +2512,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2557,7 +2557,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2573,13 +2573,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseRid}/containers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs": {
       "get": {
-        "operationId": "DatabaseAccounts_ListGremlinContainers",
+        "operationId": "DatabaseAccounts_ListGremlinGraphs",
         "x-ms-examples": {
-          "CosmosDBGremlinContainerList": { "$ref": "./examples/CosmosDBGremlinContainerList.json" }
+          "CosmosDBGremlinGraphList": { "$ref": "./examples/CosmosDBGremlinGraphList.json" }
         },
-        "description": "Lists the Gremlin container under an existing Azure Cosmos DB database account.",
+        "description": "Lists the Gremlin graph under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2591,7 +2591,7 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2599,9 +2599,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The Gremlin container properties were retrieved successfully.",
+            "description": "The Gremlin graph properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/ContainerListResult"
+              "$ref": "#/definitions/GremlinGraphListResult"
             }
           }
         },
@@ -2610,13 +2610,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseRid}/containers/{containerRid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs/{graphName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetGremlinContainer",
+        "operationId": "DatabaseAccounts_GetGremlinGraph",
         "x-ms-examples": {
-          "CosmosDBGremlinContainerGet": { "$ref": "./examples/CosmosDBGremlinContainerGet.json" }
+          "CosmosDBGremlinGraphGet": { "$ref": "./examples/CosmosDBGremlinGraphGet.json" }
         },
-        "description": "Gets the Gremlin container under an existing Azure Cosmos DB database account.",
+        "description": "Gets the Gremlin graph under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2628,10 +2628,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/graphNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2639,19 +2639,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The Gremlin container property was retrieved successfully.",
+            "description": "The Gremlin graph property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Container"
+              "$ref": "#/definitions/GremlinGraph"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateGremlinContainer",
+        "operationId": "DatabaseAccounts_CreateUpdateGremlinGraph",
         "x-ms-examples": {
-          "CosmosDBGremlinContainerCreateUpdate": { "$ref": "./examples/CosmosDBGremlinContainerCreateUpdate.json" }
+          "CosmosDBGremlinGraphCreateUpdate": { "$ref": "./examples/CosmosDBGremlinGraphCreateUpdate.json" }
         },
-        "description": "Create or update an Azure Cosmos DB Gremlin container",
+        "description": "Create or update an Azure Cosmos DB Gremlin graph",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -2664,42 +2664,42 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/graphNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createUpdateGremlinContainerParameters",
+            "name": "createUpdateGremlinGraphParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ContainerCreateUpdateParameters"
+              "$ref": "#/definitions/GremlinGraphCreateUpdateParameters"
             },
-            "description": "The parameters to provide for the current Gremlin container."
+            "description": "The parameters to provide for the current Gremlin graph."
           }
         ],
         "responses": {
           "202": {
-            "description": "The Gremlin container create or update operation will complete asynchronously."
+            "description": "The Gremlin graph create or update operation will complete asynchronously."
           },
           "200": {
-            "description": "The Gremlin container create or update operation was completed successfully.",
+            "description": "The Gremlin graph create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Container"
+              "$ref": "#/definitions/GremlinGraph"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteGremlinContainer",
+        "operationId": "DatabaseAccounts_DeleteGremlinGraph",
         "x-ms-examples": {
-          "CosmosDBGremlinContainerDelete": { "$ref": "./examples/CosmosDBGremlinContainerDelete.json" }
+          "CosmosDBGremlinGraphDelete": { "$ref": "./examples/CosmosDBGremlinGraphDelete.json" }
         },
-        "description": "Deletes an existing Azure Cosmos DB Gremlin container.",
+        "description": "Deletes an existing Azure Cosmos DB Gremlin graph.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -2712,10 +2712,10 @@
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/databaseRidParameter"
+            "$ref": "#/parameters/databaseNameParameter"
           },
           {
-            "$ref": "#/parameters/containerRidParameter"
+            "$ref": "#/parameters/graphNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2723,10 +2723,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The Gremlin container delete operation will complete asynchronously."
+            "description": "The Gremlin graph delete operation will complete asynchronously."
           },
           "204": {
-            "description": "The Gremlin container delete operation was completed successfully."
+            "description": "The Gremlin graph delete operation was completed successfully."
           }
         }
       }
@@ -2759,44 +2759,44 @@
       },
       "description": "The List operation response, that contains the SQL databases and their properties."
     },
-    "ContainerListResult": {
+    "SqlContainerListResult": {
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Container"
+            "$ref": "#/definitions/SqlContainer"
           },
           "description": "List of containers and their properties."
         }
       },
       "description": "The List operation response, that contains the containers and their properties."
     },
-    "MongoDatabaseListResult": {
+    "MongoDBDatabaseListResult": {
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MongoDatabase"
+            "$ref": "#/definitions/MongoDBDatabase"
           },
-          "description": "List of Mongo databases and their properties."
+          "description": "List of MongoDB databases and their properties."
         }
       },
-      "description": "The List operation response, that contains the Mongo databases and their properties."
+      "description": "The List operation response, that contains the MongoDB databases and their properties."
     },
-    "MongoCollectionListResult": {
+    "MongoDBCollectionListResult": {
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MongoCollection"
+            "$ref": "#/definitions/MongoDBCollection"
           },
-          "description": "List of Mongo collections and their properties."
+          "description": "List of MongoDB collections and their properties."
         }
       },
-      "description": "The List operation response, that contains the Mongo collections and their properties."
+      "description": "The List operation response, that contains the MongoDB collections and their properties."
     },
     "TableListResult": {
       "properties": {
@@ -2849,6 +2849,19 @@
         }
       },
       "description": "The List operation response, that contains the Gremlin databases and their properties."
+    },
+    "GremlinGraphListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GremlinGraph"
+          },
+          "description": "List of graphs and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the graphs and their properties."
     },
     "ErrorResponse": {
       "properties": {
@@ -3053,52 +3066,14 @@
         }
       ]
     },
-    "GremlinDatabase": {
-      "description": "An Azure Cosmos DB Gremlin database.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The properties of an Azure Cosmos DB SQL database",
-          "$ref": "#/definitions/GremlinDatabaseProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "GremlinDatabaseProperties": {
-      "description": "The properties of an Azure Cosmos DB SQL database",
-      "type": "object",
-      "properties": {
-        "_rid": {
-          "type": "string",
-          "description": "A system generated property. A unique identifier."
-        },
-        "_ts": {
-          "description": "A system generated property that denotes the last updated timestamp of the resource."
-        },
-        "_etag": {
-          "type": "string",
-          "description": "A system generated property representing the resource etag required for optimistic concurrency control."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GremlinDatabaseResource"
-        }
-      ]
-    },
-    "Container":{
+    "SqlContainer":{
       "description": "An Azure Cosmos DB container.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB container",
-          "$ref": "#/definitions/ContainerProperties"
+          "$ref": "#/definitions/SqlContainerProperties"
         }
       },
       "allOf": [
@@ -3107,26 +3082,26 @@
         }
       ]
     },
-    "ContainerProperties": {
+    "SqlContainerProperties": {
       "description": "The properties of an Azure Cosmos DB container",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ContainerResource"
+          "$ref": "#/definitions/SqlContainerResource"
         },
         {
           "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "MongoDatabase": {
-      "description": "An Azure Cosmos DB Mongo database.",
+    "MongoDBDatabase": {
+      "description": "An Azure Cosmos DB MongoDB database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "The properties of an Azure Cosmos DB Mongo database",
-          "$ref": "#/definitions/MongoDatabaseProperties"
+          "description": "The properties of an Azure Cosmos DB MongoDB database",
+          "$ref": "#/definitions/MongoDBDatabaseProperties"
         }
       },
       "allOf": [
@@ -3135,23 +3110,23 @@
         }
       ]
     },
-    "MongoDatabaseProperties": {
-      "description": "The properties of an Azure Cosmos DB Mongo database",
+    "MongoDBDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB database",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/MongoDatabaseResource"
+          "$ref": "#/definitions/MongoDBDatabaseResource"
         }
       ]
     },
-    "MongoCollection": {
-      "description": "An Azure Cosmos DB Mongo collection.",
+    "MongoDBCollection": {
+      "description": "An Azure Cosmos DB MongoDB collection.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "The properties of an Azure Cosmos DB Mongo collection",
-          "$ref": "#/definitions/MongoCollectionProperties"
+          "description": "The properties of an Azure Cosmos DB MongoDB collection",
+          "$ref": "#/definitions/MongoDBCollectionProperties"
         }
       },
       "allOf": [
@@ -3160,12 +3135,12 @@
         }
       ]
     },
-    "MongoCollectionProperties": {
-      "description": "The properties of an Azure Cosmos DB Mongo collection",
+    "MongoDBCollectionProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB collection",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/MongoCollectionResource"
+          "$ref": "#/definitions/MongoDBCollectionResource"
         }
       ]
     },
@@ -3241,6 +3216,72 @@
       "allOf": [
         {
           "$ref": "#/definitions/CassandraTableResource"
+        }
+      ]
+    },
+    "GremlinDatabase": {
+      "description": "An Azure Cosmos DB Gremlin database.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB SQL database",
+          "$ref": "#/definitions/GremlinDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "GremlinDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL database",
+      "type": "object",
+      "properties": {
+        "_rid": {
+          "type": "string",
+          "description": "A system generated property. A unique identifier."
+        },
+        "_ts": {
+          "description": "A system generated property that denotes the last updated timestamp of the resource."
+        },
+        "_etag": {
+          "type": "string",
+          "description": "A system generated property representing the resource etag required for optimistic concurrency control."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GremlinDatabaseResource"
+        }
+      ]
+    },
+    "GremlinGraph":{
+      "description": "An Azure Cosmos DB Gremlin graph.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Gremlin graph",
+          "$ref": "#/definitions/GremlinGraphProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "GremlinGraphProperties": {
+      "description": "The properties of an Azure Cosmos DB Gremlin graph",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GremlinGraphResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
@@ -3599,27 +3640,27 @@
         "options"
       ]
     },
-    "ContainerCreateUpdateParameters": {
+    "SqlContainerCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB container.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties to create and update Azure Cosmos DB container.",
-          "$ref": "#/definitions/ContainerCreateUpdateProperties"
+          "$ref": "#/definitions/SqlContainerCreateUpdateProperties"
         }
       },
       "required": [
         "properties"
       ]
     },
-    "ContainerCreateUpdateProperties": {
+    "SqlContainerCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB container.",
       "type": "object",
       "properties": {
         "resource": {
           "description": "The standard JSON format of a container",
-          "$ref": "#/definitions/ContainerResource"
+          "$ref": "#/definitions/SqlContainerResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -3631,27 +3672,27 @@
         "options"
       ]
     },
-    "MongoDatabaseCreateUpdateParameters": {
-      "description": "Parameters to create and update Cosmos DB Mongo database.",
+    "MongoDBDatabaseCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB MongoDB database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB Mongo database.",
-          "$ref": "#/definitions/MongoDatabaseCreateUpdateProperties"
+          "description": "Properties to create and update Azure Cosmos DB MongoDB database.",
+          "$ref": "#/definitions/MongoDBDatabaseCreateUpdateProperties"
         }
       },
       "required": [
         "properties"
       ]
     },
-    "MongoDatabaseCreateUpdateProperties": {
-      "description": "Properties to create and update Azure Cosmos DB Mongo database.",
+    "MongoDBDatabaseCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB MongoDB database.",
       "type": "object",
       "properties": {
         "resource": {
-          "description": "The standard JSON format of a Mongo database",
-          "$ref": "#/definitions/MongoDatabaseResource"
+          "description": "The standard JSON format of a MongoDB database",
+          "$ref": "#/definitions/MongoDBDatabaseResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -3663,27 +3704,27 @@
         "options"
       ]
     },
-    "MongoCollectionCreateUpdateParameters": {
-      "description": "Parameters to create and update Cosmos DB Mongo collection.",
+    "MongoDBCollectionCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB MongoDB collection.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties to create and update Azure Cosmos DB Mongo collection.",
-          "$ref": "#/definitions/MongoCollectionCreateUpdateProperties"
+          "description": "Properties to create and update Azure Cosmos DB MongoDB collection.",
+          "$ref": "#/definitions/MongoDBCollectionCreateUpdateProperties"
         }
       },
       "required": [
         "properties"
       ]
     },
-    "MongoCollectionCreateUpdateProperties": {
-      "description": "Properties to create and update Azure Cosmos DB Mongo collection.",
+    "MongoDBCollectionCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB MongoDB collection.",
       "type": "object",
       "properties": {
         "resource": {
-          "description": "The standard JSON format of a Mongo collection",
-          "$ref": "#/definitions/MongoCollectionResource"
+          "description": "The standard JSON format of a MongoDB collection",
+          "$ref": "#/definitions/MongoDBCollectionResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -3823,6 +3864,38 @@
         "options"
       ]
     },
+    "GremlinGraphCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Gremlin graph.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Gremlin graph.",
+          "$ref": "#/definitions/GremlinGraphCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GremlinGraphCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Gremlin graph.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Gremlin graph",
+          "$ref": "#/definitions/GremlinGraphResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
     "SqlDatabaseResource": {
       "type": "object",
       "description": "Cosmos DB SQL database id object",
@@ -3836,13 +3909,13 @@
         "id"
       ]
     },
-    "ContainerResource": {
+    "SqlContainerResource": {
       "type": "object",
-      "description": "Cosmos DB container resource object",
+      "description": "Cosmos DB SQL container resource object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Name of the Cosmos DB container"
+          "description": "Name of the Cosmos DB SQL container"
         },
         "indexingPolicy": {
           "$ref": "#/definitions/IndexingPolicy",
@@ -3863,6 +3936,39 @@
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
           "description": "The conflict resolution policy for the container."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "GremlinGraphResource": {
+      "type": "object",
+      "description": "Cosmos DB Gremlin graph resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Gremlin graph"
+        },
+        "indexingPolicy": {
+          "$ref": "#/definitions/IndexingPolicy",
+          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the graph"
+        },
+        "partitionKey": {
+          "$ref": "#/definitions/ContainerPartitionKey",
+          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "description": "Default time to live"
+        },
+        "uniqueKeyPolicy": {
+          "$ref": "#/definitions/UniqueKeyPolicy",
+          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
+        },
+        "conflictResolutionPolicy": {
+          "$ref": "#/definitions/ConflictResolutionPolicy",
+          "description": "The conflict resolution policy for the graph."
         }
       },
       "required": [
@@ -4057,26 +4163,26 @@
         }
       }
     },
-    "MongoDatabaseResource": {
+    "MongoDBDatabaseResource": {
       "type": "object",
-      "description": "Cosmos DB Mongo database id object",
+      "description": "Cosmos DB MongoDB database id object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Name of the Cosmos DB Mongo database"
+          "description": "Name of the Cosmos DB MongoDB database"
         }
       },
       "required": [
         "id"
       ]
     },
-    "MongoCollectionResource": {
+    "MongoDBCollectionResource": {
       "type": "object",
-      "description": "Cosmos DB Mongo collection resource object",
+      "description": "Cosmos DB MongoDB collection resource object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Name of the Cosmos DB Mongo collection"
+          "description": "Name of the Cosmos DB MongoDB collection"
         },
         "shardKey": {
           "description": "A key-value pair of shard keys to be applied for the request.",
@@ -4103,24 +4209,24 @@
     },
     "MongoIndex": {
       "type": "object",
-      "description": "Cosmos DB Mongo collection index key",
+      "description": "Cosmos DB MongoDB collection index key",
       "properties": {
         "key": {
-          "description": "Cosmos DB Mongo collection index keys",
+          "description": "Cosmos DB MongoDB collection index keys",
           "$ref": "#/definitions/MongoIndexKeys"
         },
         "options": {
-          "description": "Cosmos DB Mongo collection index key options",
+          "description": "Cosmos DB MongoDB collection index key options",
           "$ref": "#/definitions/MongoIndexOptions"
         }
       }
     },
     "MongoIndexKeys": {
       "type": "object",
-      "description": "Cosmos DB Mongo collection resource object",
+      "description": "Cosmos DB MongoDB collection resource object",
       "properties": {
         "keys": {
-          "description": "List of keys for each Mongo collection in the Azure Cosmos DB service",
+          "description": "List of keys for each MongoDB collection in the Azure Cosmos DB service",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Key"
@@ -4134,7 +4240,7 @@
     },
     "MongoIndexOptions": {
       "type": "object",
-      "description": "Cosmos DB Mongo collection index options",
+      "description": "Cosmos DB MongoDB collection index options",
       "properties": {
         "expireAfterSeconds": {
           "description": "Expire after seconds",
@@ -4844,29 +4950,53 @@
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB collection rid."
     },
-    "containerRidParameter": {
-      "name": "containerRid",
+    "databaseNameParameter": {
+      "name": "databaseName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB container rid."
+      "description": "Cosmos DB database name."
     },
-    "tableRidParameter": {
-      "name": "tableRid",
+    "containerNameParameter": {
+      "name": "containerName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB table rid."
+      "description": "Cosmos DB container name."
     },
-    "keyspaceRidParameter": {
-      "name": "keyspaceRid",
+    "tableNameParameter": {
+      "name": "tableName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB keyspace rid."
+      "description": "Cosmos DB table name."
+    },
+    "collectionNameParameter": {
+      "name": "collectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB collection name."
+    },
+    "keyspaceNameParameter": {
+      "name": "keyspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB keyspace name."
+    },
+    "graphNameParameter": {
+      "name": "graphName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB graph name."
     },
     "regionParameter": {
       "name": "region",

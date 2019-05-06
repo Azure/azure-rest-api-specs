@@ -197,10 +197,19 @@ These settings apply only when `--tag=package-2019-03-01` is specified on the co
 input-file:
 - Microsoft.Compute/stable/2019-03-01/compute.json
 - Microsoft.Compute/stable/2019-03-01/runCommands.json
-- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
 - Microsoft.Compute/stable/2018-09-30/disk.json
 - Microsoft.Compute/stable/2019-03-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2019-04-01-only
+
+These settings apply only when `--tag=package-2019-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04-01-only'
+input-file:
+- Microsoft.Compute/stable/2019-04-01/skus.json
 ```
 
 ### Tag: package-2019-03-01-only
