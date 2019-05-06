@@ -1572,7 +1572,55 @@
           "nextLinkName": "nextLink"
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientconnectionhealth": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetVpnclientConnectionHealth",
+        "description": "Get VPN client connection health detail per P2S client connection of the virtual network gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },          
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of VPN client connection health details.",
+            "schema": {
+              "$ref": "#/definitions/VpnClientConnectionHealthDetailListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayVpnclientConnectionHealth": { "$ref": "./examples/VirtualNetworkGatewayGetVpnclientConnectionHealth.json" }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }    
   },
   "definitions": {
     "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
@@ -2775,6 +2823,90 @@
         "name": "VirtualNetworkGatewayConnectionType",
         "modelAsString": true
       }
+    },
+    "VpnClientConnectionHealthDetailListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnClientConnectionHealthDetail"
+          },
+          "description": "List of vpn client connection health"
+        }
+      },
+      "description": "List of virtual network gateway vpn client connection health"
+    },
+    "VpnClientConnectionHealthDetail": {
+      "properties": {
+        "vpnConnectionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The gateway's local address"
+        },
+        "vpnConnectionDuration": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The route's network prefix"
+        },
+        "vpnConnectionTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's next hop"
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The peer this route was learned from"
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The source this route was learned from"
+        },
+        "vpnUserName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's AS path sequence"
+        },
+        "maxBandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The route's weight"
+        },
+        "egressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The route's weight"
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The route's weight"
+        },
+        "ingressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The route's weight"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The route's weight"
+        },
+        "maxPacketsPerSecond": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The route's weight"
+        }
+      },
+      "description": "VPN client connection health detail"
     }
   }
 }
