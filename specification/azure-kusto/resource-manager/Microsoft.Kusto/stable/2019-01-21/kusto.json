@@ -1115,7 +1115,7 @@
           "200": {
             "description": "OK -- Operation to check the Kusto resource name availability was successful.",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
+              "$ref": "#/definitions/CheckNameResult"
             }
           },
           "default": {
@@ -2081,24 +2081,36 @@
             ],
             "description": "The result returned from a data connections check name availability request."
         },
-    "CheckNameResult": {
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Specifies a Boolean value that indicates if the name is available."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name that was checked."
-        },
-        "message": {
-          "type": "string",
-          "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
-        }
-      },
-      "description": "The result returned from a check name availability request."
-    },
+	"CheckNameResult": {
+		"type": "object",
+		"properties": {
+		  "nameAvailable": {
+			"type": "boolean",
+			"description": "Specifies a Boolean value that indicates if the name is available."
+		  },
+		  "name": {
+			"type": "string",
+			"description": "The name that was checked."
+		  },
+		  "message": {
+			"type": "string",
+			"description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+		  },
+		  "reason": {
+			"type": "string",
+			"enum": [
+			  "Invalid",
+			  "AlreadyExists"
+			],
+			"x-ms-enum": {
+			  "name": "reason",
+			  "modelAsString": true
+			},
+			"description": "Message providing the reason why the given name is invalid."
+			}
+		  },
+		"description": "The result returned from a check name availability request."
+	},
     "ListResourceSkusResult": {
       "description": "List of available SKUs for an existing Kusto Cluster.",
       "type": "object",
@@ -2110,32 +2122,6 @@
         }
       }
     },
-	"CheckNameAvailabilityResult": {
-            "type": "object",
-            "properties": {
-                "nameAvailable": {
-                    "type": "string",
-                    "enum": [
-                        "Available",
-                        "NotAvailable"
-                    ],
-                    "x-ms-enum": {
-                        "name": "nameAvailable",
-                        "modelAsString": true
-                    },
-                    "description": "Specifies whether or not the name is available."
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name that was checked."
-                },
-                "message": {
-                    "type": "string",
-                    "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
-                }
-            },
-            "description": "The result returned from a check name availability request."
-	},
     "ListSkusResult": {
       "description": "List of available SKUs for a new Kusto Cluster.",
       "type": "object",
