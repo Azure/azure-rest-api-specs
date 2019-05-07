@@ -32,15 +32,15 @@ azure-validator: true
 
 ---
 
-
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-05'
+``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
   - Microsoft.CostManagement/preview/2019-05-01-preview/costmanagement.json
 ```
+
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
@@ -80,6 +80,10 @@ directive:
     from: costmanagement.json
     where: $.paths
     reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.Notification.properties.enabled
+    reason: 'false alarm '
 ```
 
 ### Tag: package-2018-08-preview
